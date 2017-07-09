@@ -1,0 +1,73 @@
+#!/bin/sh
+set -e
+
+if ! getent passwd knot-resolver > /dev/null; then
+	adduser --quiet --system --group --no-create-home --home /run/knot-resolver knot-resolver
+fi
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/kresd.conf >/dev/null || true
+	fi
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/kresd.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/kresd" ]; then
+		update-rc.d kresd defaults >/dev/null || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/knot-resolver 1.1.0-3~ knot-resolver -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/default/knot-resolver 1.1.0-3~ knot-resolver -- "$@"
+# End automatically added section
+
+
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask kresd.socket kresd-control.socket kresd-tls.socket kresd.service >/dev/null || true
+
+for service in kresd.socket kresd-control.socket kresd-tls.socket kresd.service; do
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled $service; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable $service >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state $service >/dev/null || true
+	fi
+done
+
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+        if [ -n "$2" ]; then
+	    if dpkg --compare-versions "$2" le "1.1.0-7~"; then
+		_dh_action=restart
+	    else
+		_dh_action=try-restart
+	    fi
+	else
+	    _dh_action=start
+	fi
+
+	# make extra sure that kresd.service is not running
+	deb-systemd-invoke stop kresd.service >/dev/null || true
+	deb-systemd-invoke $_dh_action kresd.socket kresd-control.socket kresd-tls.socket >/dev/null || true
+fi
+
+exit 0

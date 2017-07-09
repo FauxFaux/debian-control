@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+# Prepare to remove a no-longer used conffile
+prep_rm_conffile()
+{
+    PKGNAME="$1"
+    CONFFILE="$2"
+
+    if [ -e "$CONFFILE" ]; then
+        md5sum="$( md5sum $CONFFILE | sed -e 's/ .*//' )"
+        old_md5sum="$( dpkg-query -W -f='${Conffiles}' $PKGNAME | sed -n -e "\' $CONFFILE ' { s/ obsolete$//; s/.* //; p }" )"
+        if [ "$md5sum" != "$old_md5sum" ]; then
+            echo "Obsolete conffile $CONFFILE has been modified by you, renaming to .dpkg-bak"
+            mv -f "$CONFFILE" "$CONFFILE".dpkg-bak
+        else
+            mv -f "$CONFFILE" "$CONFFILE".dpkg-obsolete
+        fi
+    fi
+}
+
+case "$1" in
+    install|upgrade)
+    	# Upgrade from intrepid
+	if dpkg --compare-versions "$2" lt "3.2.2-12ubuntu2"; then
+	    prep_rm_conffile apmd /etc/apm/scripts.d/hwclock
+	fi
+	;;
+esac
+
+
+exit 0

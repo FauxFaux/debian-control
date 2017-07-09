@@ -1,0 +1,58 @@
+#!/bin/sh
+# $Id: postinst,v 1.7 2003/09/08 18:09:03 agx Exp $
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+PS_DEFAULT="/etc/default/portsentry"
+if [ "$1" = "configure" -a ! -e $PS_DEFAULT ]; then
+    # copy over the settings from /e/portsentry/startup.conf
+    # when upgrading from versions < 1.0-2
+    if [ -n "$2" ] && dpkg --compare-versions $2 lt 1.0-2 ; then
+       if [ -e /etc/portsentry/startup.conf ]; then
+    	    . /etc/portsentry/startup.conf
+	fi
+    # create /e/d/portsentry if it doesn't exist on first time installs
+    elif [ -z "$2" ]; then
+    	TCP_MODE=tcp
+	UDP_MODE=udp
+    fi
+    if [ -n "$TCP_MODE" -o -n "$UDP_MODE" ]; then
+        cat >$PS_DEFAULT <<EOF
+# $PS_DEFAULT
+#  
+# This file is read by /etc/init.d/portsentry. See the portsentry.8 
+# manpage for details.
+#
+# The options in this file refer to commandline arguments (all in lowercase)
+# of portsentry. Use only one tcp and udp mode at a time.
+#
+TCP_MODE="$TCP_MODE"
+UDP_MODE="$UDP_MODE"
+EOF
+	chown root:root $PS_DEFAULT
+	chmod 644 $PS_DEFAULT
+   fi
+fi
+
+# this is not a very nice way to do things, but it's the safest one
+if [ "`pidof /usr/sbin/portsentry`" ]; then
+    echo -n "Stopping anti portscan daemon: "
+    kill `pidof /usr/sbin/portsentry`
+    echo "portsentry."
+fi
+
+# until portsentry is fixed:
+db_stop
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/portsentry" ]; then
+		update-rc.d portsentry defaults 99 >/dev/null
+		invoke-rc.d portsentry start || exit $?
+	fi
+fi
+# End automatically added section
+

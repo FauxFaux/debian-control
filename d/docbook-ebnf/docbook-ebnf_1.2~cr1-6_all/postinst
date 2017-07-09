@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installxmlcatalogs
+if [ "$1" = "configure" ]; then
+	update-xmlcatalog --sort --add --type system --id "http://www.oasis-open.org/docbook/xml/ebnf/1.0/dbebnf.dtd" --package docbook-ebnf --local /usr/share/xml/docbook/custom/ebnf/catalog.xml
+	update-xmlcatalog --sort --add --type system --id "http://docbook.org/xml/ebnf/1.0/dbebnf.dtd" --package docbook-ebnf --local /usr/share/xml/docbook/custom/ebnf/catalog.xml
+	update-xmlcatalog --sort --add --type public --id "-//OASIS//DTD DocBook EBNF Module V1.0//EN" --package docbook-ebnf --local /usr/share/xml/docbook/custom/ebnf/catalog.xml
+	update-xmlcatalog --sort --add --type system --id "http://www.oasis-open.org/docbook/xml/ebnf/1.1CR1/dbebnf.dtd" --package docbook-ebnf --local /usr/share/xml/docbook/custom/ebnf/catalog.xml
+	update-xmlcatalog --sort --add --type system --id "http://docbook.org/xml/ebnf/1.1CR1/dbebnf.dtd" --package docbook-ebnf --local /usr/share/xml/docbook/custom/ebnf/catalog.xml
+	update-xmlcatalog --sort --add --type public --id "-//OASIS//DTD DocBook EBNF Module V1.1CR1//EN" --package docbook-ebnf --local /usr/share/xml/docbook/custom/ebnf/catalog.xml
+	update-xmlcatalog --sort --add --type system --id "http://www.oasis-open.org/docbook/xml/ebnf/1.2CR1/dbebnf.dtd" --package docbook-ebnf --local /usr/share/xml/docbook/custom/ebnf/catalog.xml
+	update-xmlcatalog --sort --add --type system --id "http://docbook.org/xml/ebnf/1.2CR1/dbebnf.dtd" --package docbook-ebnf --local /usr/share/xml/docbook/custom/ebnf/catalog.xml
+	update-xmlcatalog --sort --add --type public --id "-//OASIS//DTD DocBook EBNF Module V1.2CR1//EN" --package docbook-ebnf --local /usr/share/xml/docbook/custom/ebnf/catalog.xml
+	update-xmlcatalog --sort --add --type system --id "http://www.oasis-open.org/docbook/xml/ebnf/1.2b1/dbebnf.dtd" --package docbook-ebnf --local /usr/share/xml/docbook/custom/ebnf/catalog.xml
+	update-xmlcatalog --sort --add --type system --id "http://docbook.org/xml/ebnf/1.2b1/dbebnf.dtd" --package docbook-ebnf --local /usr/share/xml/docbook/custom/ebnf/catalog.xml
+	update-xmlcatalog --sort --add --type public --id "-//OASIS//DTD DocBook EBNF Module V1.2b1//EN" --package docbook-ebnf --local /usr/share/xml/docbook/custom/ebnf/catalog.xml
+
+	update-xmlcatalog --sort --add --type public --id "-//OASIS//DTD DocBook EBNF Module" --package docbook-ebnf --root
+	update-xmlcatalog --sort --add --type system --id "http://www.oasis-open.org/docbook/xml/ebnf/" --package docbook-ebnf --root
+	update-xmlcatalog --sort --add --type system --id "http://docbook.org/xml/ebnf/" --package docbook-ebnf --root
+
+fi
+# End automatically added section

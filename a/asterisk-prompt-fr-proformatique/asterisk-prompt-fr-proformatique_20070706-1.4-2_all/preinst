@@ -1,0 +1,49 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    upgrade)
+	if dpkg --compare-versions "$2" lt 20070706-1.4-1; then
+	    # We are upgrading from a version that has the old
+	    # symlinks and file locations.
+	    for d in dictate digits letters phonetic; do
+		if [ -L "/usr/share/asterisk/sounds/${d}/fr" ] && \
+		   [ "$(readlink "/usr/share/asterisk/sounds/${d}/fr")" = "../fr/${d}" ]; then
+		    rm "/usr/share/asterisk/sounds/${d}/fr"
+		fi
+	    done
+	elif dpkg --compare-versions "$2" lt 20070706-1.4-2; then
+	    # We are upgrading from a version that may or may not have
+	    # symlinks, and files in old or new location (because of
+	    # how dpkg treats symlinks on upgrades).
+
+	    # First, cleanup spurious empty directories some
+	    # install/upgrade/purge scenarios leave behind.
+	    for d in dictate digits letters phonetic; do
+		for e in "/usr/share/asterisk/sounds/${d}/fr" "/usr/share/asterisk/sounds/fr/${d}"; do
+		    if ! [ -L "${e}" ] && [ -d "${e}" ]; then
+			rmdir --ignore-fail-on-non-empty "${e}"
+		    fi
+		done
+	    done
+
+	    # Next, remove old symlinks if present and move files to
+	    # their dpkg-known location.
+	    for d in dictate digits letters phonetic; do
+		if [ -L "/usr/share/asterisk/sounds/${d}/fr" ] && \
+		   [ "$(readlink "/usr/share/asterisk/sounds/${d}/fr")" = "../fr/${d}" ]; then
+		    rm "/usr/share/asterisk/sounds/${d}/fr"
+		fi
+		if ! [ -e "/usr/share/asterisk/sounds/${d}/fr" ] && \
+		   [ -d "/usr/share/asterisk/sounds/fr/${d}" ]; then
+		    mv "/usr/share/asterisk/sounds/fr/${d}" "/usr/share/asterisk/sounds/${d}/fr"
+		fi
+	    done
+	fi
+	;;
+esac
+
+
+
+exit 0

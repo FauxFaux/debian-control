@@ -1,0 +1,34 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/lava-server" ]; then
+	invoke-rc.d lava-server stop || exit $?
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/lava-publisher" ]; then
+	invoke-rc.d lava-publisher stop || exit $?
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/lava-server-gunicorn" ]; then
+	invoke-rc.d lava-server-gunicorn stop || exit $?
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/lava-master" ]; then
+	invoke-rc.d lava-master stop || exit $?
+fi
+# End automatically added section
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p lava-server 
+else
+	dpkg -L lava-server | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section

@@ -1,0 +1,26 @@
+#! /bin/sh
+set -e
+
+
+#
+# remove empty dir on purge
+#
+if [ "$1" = "purge" ]; then
+    if [ -d /usr/share/dh-python/dhpython/__pycache__ ]; then
+	rmdir --ignore-fail-on-non-empty  /usr/share/dh-python/dhpython/__pycache__
+    fi
+    if [ -d /usr/share/dh-python/dhpython/build/__pycache__ ]; then
+	rmdir --ignore-fail-on-non-empty  /usr/share/dh-python/dhpython/build/__pycache__
+    fi
+    if [ -d /usr/share/dh-python/dhpython/build ]; then
+	rmdir --ignore-fail-on-non-empty  /usr/share/dh-python/dhpython/build
+    fi
+    if [ -d /usr/share/dh-python/dhpython ]; then
+	rmdir --ignore-fail-on-non-empty  /usr/share/dh-python/dhpython
+    fi
+    if [ -d /usr/share/dh-python ]; then
+	rmdir --ignore-fail-on-non-empty  /usr/share/dh-python
+    fi
+fi
+
+

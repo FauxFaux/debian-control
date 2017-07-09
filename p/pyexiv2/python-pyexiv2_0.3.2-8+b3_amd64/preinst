@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+# Switch from pycentral to pysupport
+if [ "$1" = upgrade ] && dpkg --compare-versions "$2" lt 0.1.3-1 ; then
+    pycentral pkgremove python-pyexiv2
+fi
+
+
+
+exit 0

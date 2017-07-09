@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" ]; then
+    update-rc.d elida remove >/dev/null
+#   rm -fr /usr/src/elida
+fi
+
+exit 0 

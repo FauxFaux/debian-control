@@ -1,0 +1,52 @@
+#!/bin/sh -e
+
+# create new ftn user and group 64000.64000
+if [ "$1" = configure ] && ! id ftn > /dev/null 2>&1; then
+  adduser --system --home /var/spool/ftn --uid 64000 --group \
+    --disabled-password --gecos Fidonet ftn
+  chsh -s /bin/bash ftn
+fi
+
+if [ -x /usr/sbin/update-inetd ]; then
+  update-inetd --add 'binkp\t\tstream\ttcp\tnowait\tftn\t/usr/sbin/tcpd\t/usr/sbin/binkd -i -s -q /etc/binkd/binkd.cfg'
+fi
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask binkd.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled binkd.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable binkd.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state binkd.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/binkd.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/binkd" ]; then
+		update-rc.d binkd defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d binkd $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+
+

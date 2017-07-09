@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+
+# Rodolfo García Peñas (kix) <kix@kix.es>:
+
+# Remove the old kill-uswsusp-image file if exists.
+# This was added in 0.6 version and is hold for backward
+# compatibility. See bug #410860
+KILLFILE=kill-uswsusp-image
+
+if [ -f /etc/init.d/$KILLFILE ]; then
+	rm -f /etc/init.d/$KILLFILE
+fi
+
+update-rc.d $KILLFILE remove 1> /dev/null 2>&1
+
+

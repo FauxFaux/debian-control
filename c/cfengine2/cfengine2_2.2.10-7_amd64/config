@@ -1,0 +1,33 @@
+#! /bin/sh
+
+set -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+DEFAULT=/etc/default/cfengine2
+
+zeroone_to_falsetrue () {
+    # Converts 1 to 'true' and 0 to 'false'
+    case "$1" in
+	0) echo "false";;
+	1) echo "true";;
+	*) return 1
+    esac
+}
+
+if [ -e $DEFAULT ]; then
+    . $DEFAULT || true
+
+    db_set cfengine2/run_cfservd $(zeroone_to_falsetrue $RUN_CFSERVD)
+    db_set cfengine2/run_cfexecd $(zeroone_to_falsetrue $RUN_CFEXECD)
+    db_set cfengine2/run_cfenvd $(zeroone_to_falsetrue $RUN_CFENVD)
+fi
+
+db_input medium cfengine2/run_cfservd || true
+db_input medium cfengine2/run_cfexecd || true
+db_input medium cfengine2/run_cfenvd || true
+
+db_go || true
+db_stop || true

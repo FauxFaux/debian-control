@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+if [ -f /usr/lib/monodoc/monodoc.index ]; then
+	rm /usr/lib/monodoc/monodoc.index
+	rmdir /usr/lib/monodoc 2> /dev/null || true
+fi
+
+if [ -d /usr/lib/monodoc/search_index ]; then
+	rm -r /usr/lib/monodoc/search_index
+	rmdir /usr/lib/monodoc 2> /dev/null || true
+fi
+
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+
+
+exit 0

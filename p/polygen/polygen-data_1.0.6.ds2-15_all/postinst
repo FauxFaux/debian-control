@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+#set +C # turn off noclobber
+if [ ! -e /usr/share/polygen/ita/polygen.grm.o ]
+then
+	echo -n "Generating grammar objects..."
+	# Set the right umask
+	umask 0022
+	find /usr/share/polygen/ -type f -iname '*.grm' ! -iname '*.grm.o' -exec polygen "{}" \; > /dev/null
+	echo "done."
+fi
+
+

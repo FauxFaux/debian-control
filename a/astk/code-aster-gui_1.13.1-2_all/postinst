@@ -1,0 +1,44 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "configure" ] ; then
+       if [ -z "$2" ]; then
+               mkdir -p /etc/codeaster/astkrc
+               cp -a /usr/share/codeaster/astkrc/config_serveurs \
+                       /usr/share/codeaster/astkrc/prefs \
+		       /usr/share/codeaster/astkrc/outils \
+		       /usr/share/codeaster/astkrc/ASTKRC_INFO.txt \
+                       /etc/codeaster/astkrc/
+       fi
+
+	db_get astk/servername || true
+	servername=${RET}
+	perl -pi -le "s|serveur : .*|serveur : $servername|" /etc/codeaster/astkrc/config_serveurs
+	
+	db_get astk/domainname || true
+	domainname=${RET}
+	perl -pi -le "s|nom_domaine : .*|nom_domaine : $domainname|" /etc/codeaster/astkrc/prefs
+	perl -pi -le "s|nom_complet : .*|nom_complet : $servername\.$domainname|" /etc/codeaster/astkrc/config_serveurs
+	
+	db_get astk/EDITOR || true
+	editor=${RET}
+	perl -pi -le "s|editeur : .*|editeur : $editor|" /etc/codeaster/astkrc/prefs
+	perl -pi -le "s|editeur : .*|editeur : $editor|" /etc/codeaster/astkrc/config_serveurs
+	
+	db_get astk/TERMINAL || true
+	terminal=${RET}
+	perl -pi -le "s|xterm : .*|xterm : $terminal|" /etc/codeaster/astkrc/prefs
+	perl -pi -le "s|xterm : .*|xterm : $terminal|" /etc/codeaster/astkrc/config_serveurs
+	
+fi
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

@@ -1,0 +1,40 @@
+#!/bin/sh -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+if [ -e /var/lib/lyskom-server/lyskomd-data ]; then exit 0; fi
+
+# Select initial database language.
+db_input medium lyskom-server/language || true
+db_go
+
+match=""
+
+while [ ! "$match" ]; do
+    db_input high lyskom-server/admin-password || true
+    db_go || true
+
+    db_get lyskom-server/admin-password
+    password1="$RET"
+
+    if [ -n "$password1" ]; then
+	db_input high lyskom-server/admin-password-repeat || true
+	db_go || true
+
+	db_get lyskom-server/admin-password-repeat
+	password2="$RET"
+
+	if [ "$password1" = "$password2" ]; then
+	    match=1
+	else
+	    db_input critical lyskom-server/password-mismatch || true
+	    db_go || true
+	    db_fset lyskom-server/admin-password seen false
+	    db_fset lyskom-server/admin-password-repeat seen false
+	fi
+    else
+	match=1
+    fi
+done
+

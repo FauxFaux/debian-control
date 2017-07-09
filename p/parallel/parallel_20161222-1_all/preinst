@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "install" ]; then
+    dpkg-divert --package parallel --add --rename \
+                --divert /usr/bin/parallel.moreutils \
+                /usr/bin/parallel
+    dpkg-divert --package parallel --add --rename \
+                --divert /usr/share/man/man1/parallel.moreutils.1.gz \
+                /usr/share/man/man1/parallel.1.gz
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/parallel/config 20120422-1 -- "$@"
+# End automatically added section
+
+
+exit 0

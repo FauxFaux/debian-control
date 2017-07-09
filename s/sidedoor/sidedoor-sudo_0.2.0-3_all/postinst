@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/sudoers.d/sudoers 0.2~ -- "$@"
+# End automatically added section
+
+
+SOURCE=/usr/share/sidedoor-sudo/sudoers
+SUDOERS=/etc/sudoers.d/sidedoor
+
+if [ "$1" = configure ]; then
+  ucf "$SOURCE" "$SUDOERS"
+  chmod 0440 "$SUDOERS"  # for extra peace of mind
+  ucfr sidedoor-sudo "$SUDOERS"
+fi

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+
+
+
+if [ "$1" != "remove" -a "$1" != "purge" ]; then
+	exit 0
+fi
+
+if [ -e /etc/apache2/apache2.conf ]; then
+	a2dismod iipsrv || true
+	rm /var/log/iipsrv.log
+fi
+
+if [ -e /etc/lighttpd/lighttpd.conf ]; then
+	lighty-disable-mod iipsrv || true
+	rm /var/log/iipsrv.log
+fi
+
+exit 0

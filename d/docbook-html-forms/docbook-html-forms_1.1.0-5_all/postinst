@@ -1,0 +1,19 @@
+#! /bin/sh
+# postinst script for docbook-html-forms
+# Maintainer: Mark Johnson <mrj@debian.org>
+
+set -e
+
+
+# do symlinks manually, til I figure out the problem
+if [ "$1" = configure ]; then
+    rm -rf /usr/share/sgml/docbook/custom/html-forms
+    cd /usr/share/sgml/docbook/custom
+    ln -s ../../../xml/docbook/custom/html-forms html-forms
+fi
+
+
+
+exit 0
+
+

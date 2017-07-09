@@ -1,0 +1,27 @@
+#!/bin/sh -e
+set -e
+
+#version 20160621-1 -> 20160720-1
+#symlink renamed from /etc/service/dqcache-run_dqcache -> /etc/service/dqcache
+if [ -e /etc/service/dqcache-run_dqcache ]; then
+  cd /etc/service/dqcache-run_dqcache
+  rm -f /etc/service/dqcache-run_dqcache
+  svc -dx . log || :
+fi
+
+#version 20160720-1 -> 20161210-1
+#service moved from /etc/dqcache/service -> /var/lib/dqcache/service/dqcache
+if [ -e /etc/service/dqcache -a x"`readlink /etc/service/dqcache`" = x/etc/dqcache/service/dqcache ]; then
+  cd /etc/service/dqcache
+  rm -f /etc/service/dqcache
+  svc -dx . log || :
+  rm -rf /etc/dqcache/service
+fi
+#root moved from /etc/dqcache/root -> /var/lib/dqcache/root
+if [ -d /etc/dqcache/root ]; then
+  mkdir -p /var/lib/dqcache/root
+  cp -pr /etc/dqcache/root/* /var/lib/dqcache/root/
+  rm -rf /etc/dqcache/root
+fi
+
+

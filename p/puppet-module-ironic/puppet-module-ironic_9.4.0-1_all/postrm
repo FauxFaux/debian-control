@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "remove" ] || [ "ironic" = "disappear" ]; then
+	update-alternatives --remove puppet-module-ironic /usr/share/puppet/modules.available/ironic
+fi
+
+
+
+exit 0

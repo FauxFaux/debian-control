@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+install)
+	;;
+
+upgrade)
+	start-stop-daemon --stop --quiet --exec /usr/sbin/rplayd || true
+	;;
+
+abort-upgrade)
+	;;
+
+*)
+	echo "preinst called with unknown argument \`$1'" >&2
+	exit 0
+	;;
+esac
+
+if [ ! -x /etc/init.d/rplay ]; then
+    exit 0
+fi
+
+

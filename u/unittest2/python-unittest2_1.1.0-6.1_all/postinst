@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/unit2 unit2 /usr/bin/python2-unit2 300
+fi
+
+
+# Automatically added by dhpython:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-unittest2 
+fi
+
+# End automatically added section
+
+
+exit 0

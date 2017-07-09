@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+OLD_ALT_NAME="ttf-japanese-mincho"
+OLD_FONT_ENTRY="/usr/share/fonts/truetype/hanazono/hanazono.ttf"
+
+if [ "$1" = "install" ] || [ "$1" = "upgrade" ]; then
+	if dpkg --compare-versions "$2" lt-nl "20120421-1.1~"; then
+		update-alternatives --remove $OLD_ALT_NAME.ttf $OLD_FONT_ENTRY
+	fi
+fi
+
+

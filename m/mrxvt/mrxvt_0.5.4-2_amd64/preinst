@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if test ! -h /usr/share/doc/mrxvt; then
+	if test -d /usr/share/doc/mrxvt; then
+		rm -f /usr/share/doc/mrxvt/*
+		rmdir /usr/share/doc/mrxvt/
+	fi
+fi
+
+

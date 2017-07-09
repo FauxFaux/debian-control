@@ -1,0 +1,10 @@
+#! /bin/sh
+
+set -e
+
+if [ "$1" != "upgrade" ] ; then
+    update-alternatives --remove guile \
+                        /usr/lib/x86_64-linux-gnu/guile-2.0/bin/guile
+fi
+
+

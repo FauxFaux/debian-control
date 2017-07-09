@@ -1,0 +1,22 @@
+#! /bin/sh
+                                                                                
+case "$1" in
+  purge|remove)
+    if dpkg-statoverride --list /usr/games/geki3 >/dev/null; then
+      dpkg-statoverride --remove /usr/games/geki3
+    fi
+    rm -f /var/games/geki3.scores
+    ;;
+  upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+  *)
+    echo "postrm called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+                                                                                
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+
+

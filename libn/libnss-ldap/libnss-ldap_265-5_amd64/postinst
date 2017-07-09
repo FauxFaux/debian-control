@@ -1,0 +1,202 @@
+#!/bin/sh
+
+set -e
+
+PACKAGE=libnss-ldap
+CONFFILE="/etc/libnss-ldap.conf"
+PASSWDFILE="/etc/libnss-ldap.secret"
+
+#### BEGIN the following is shared between libnss-ldap and libpam-ldap ####
+
+add_missing()
+{
+  # FIXME: it would be nice to get the prototype from a template.
+  parameter=$1
+  value=$2
+  echo "$parameter $value" >> $CONFFILE
+}
+
+change_value()
+{
+  parameter=$1
+  value=$2
+  commented=0
+  notthere=0
+
+  egrep -i -q "^$parameter " $CONFFILE || notthere=1
+  if [ "$notthere" = "1" ]; then
+    if ( egrep -i -q "^# *$parameter" $CONFFILE ); then
+      notthere=0
+      commented=1
+    fi
+  fi
+
+  if [ "$notthere" = "1" ]; then
+    add_missing $parameter $value
+  else
+    # i really need a better way to do this...
+    # currently we replace only the first match, we need a better
+    # way of dealing with multiple hits.
+    if [ "$commented" = "1" ]; then
+      value="$value" \
+      parameter="$parameter" \
+      perl -i -p -e 's/^# *\Q$ENV{"parameter"}\E .*/$ENV{"parameter"} $ENV{"value"}/i
+        and $match=1 unless ($match)' $CONFFILE
+    else
+      value="$value" \
+      parameter="$parameter" \
+      perl -i -p -e 's/^\Q$ENV{"parameter"}\E .*/$ENV{"parameter"} $ENV{"value"}/i
+        and $match=1 unless ($match)' $CONFFILE
+    fi
+  fi
+}
+
+disable_param()
+{
+  parameter=$1
+  enabled=0
+  egrep -q "^$parameter " $CONFFILE && enabled=1
+  if [ "$enabled" = "1" ]; then
+    perl -i -p -e "s/^($parameter .*)/#\$1/i" $CONFFILE
+  fi
+}
+
+# create the configuration from template if it's not there.
+ensure_configfile()
+{
+  templatefile=/usr/share/$PACKAGE/ldap.conf
+  if [ ! -e $CONFFILE -a -e $templatefile ]; then
+    cat > $CONFFILE << EOM
+###DEBCONF###
+# The configuration of this file will be done by debconf as long as the
+# first line of the file says '###DEBCONF###'.
+#
+# You should use dpkg-reconfigure $PACKAGE to configure this file.
+#
+EOM
+    cat $templatefile >> $CONFFILE
+    chmod 0644 $CONFFILE
+    db_set $PACKAGE/override true
+  fi
+}
+
+# add the ###DEBCONF### header to the configuration file if needed
+ensure_managed()
+{
+  if ( head -1 $CONFFILE | grep -q -v '^###DEBCONF###$' ); then
+    mv $CONFFILE $CONFFILE.tmp
+    cat > $CONFFILE << EOM
+###DEBCONF###
+EOM
+    cat $CONFFILE.tmp >> $CONFFILE
+    rm -f $CONFFILE.tmp
+    chmod 0644 $CONFFILE
+  fi
+}
+
+#### END the section that is shared between libnss-ldap and libpam-ldap ####
+
+# Set up configuration file
+if [ "$1" = "configure" ]; then
+
+  . /usr/share/debconf/confmodule
+
+  # lets create the configuration from template if it's not there.
+  ensure_configfile
+
+  db_get libnss-ldap/override
+  if [ "$RET" = "true" ]; then
+
+    ensure_managed
+
+    db_get shared/ldapns/ldap-server
+    if echo $RET | egrep -q '^ldap[is]?://'; then
+      disable_param host
+      change_value uri "$RET"
+    else
+      disable_param uri
+      change_value host "$RET"
+    fi
+
+    db_get shared/ldapns/base-dn
+    change_value base "$RET"
+
+    db_get shared/ldapns/ldap_version
+    change_value ldap_version "$RET"
+
+    db_get libnss-ldap/dbrootlogin
+    if [ "$RET" = "true" ]; then
+      # user wants to log in to the database, so be it.
+      db_get libnss-ldap/rootbinddn
+      change_value rootbinddn "$RET"
+
+      db_get libnss-ldap/rootbindpw
+      if [ "$RET" != "" ]; then
+        rm -f $PASSWDFILE
+        echo $RET > $PASSWDFILE
+        chmod 0600 $PASSWDFILE
+        db_set libnss-ldap/rootbindpw ''
+      fi
+    else
+      # ok, so the user refused to use this feature, better make
+      # sure it's really off.
+      disable_param rootbinddn
+      rm -f $PASSWDFILE
+    fi
+
+    db_get libnss-ldap/dblogin
+    if [ "$RET" = "true" ]; then
+      # user wants to log in to the database, so be it.
+      db_get libnss-ldap/binddn
+      change_value binddn "$RET"
+
+      db_get libnss-ldap/bindpw
+      if [ "$RET" != "" ]; then
+        change_value bindpw "$RET"
+        db_set libnss-ldap/bindpw ''
+      fi
+    else
+      # once again, user didn't.. lets make sure we dont.
+      disable_param binddn
+      disable_param bindpw
+    fi
+
+    db_get libnss-ldap/confperm
+    if [ "$RET" = "true" ]; then
+      # FIXME: we need a way to check if the file
+      #        was 0700 and we removed the flag.
+      chmod 0600 $CONFFILE
+    else
+      # ICK! ugly hack, but i didn't get anything
+      # better to work.
+      find $CONFFILE -perm 0600 -exec chmod 0644 {} \;
+    fi
+  fi
+  db_stop
+fi
+
+# Use ldap.secret file if it is present
+if [ -e /etc/ldap.secret -a ! -e /etc/libnss-ldap.secret ]; then
+  cp -p /etc/ldap.secret /etc/libnss-ldap.secret
+fi
+
+# Restart (u)nscd to have it load the new NSS module
+if [ -s /etc/init.d/nscd ]; then
+  if pidof nscd > /dev/null; then
+    if which invoke-rc.d >/dev/null 2>&1; then
+      invoke-rc.d nscd restart || true
+    else
+      /etc/init.d/nscd restart || true
+    fi
+  fi
+elif [ -s /etc/init.d/unscd ]; then
+  if pidof nscd > /dev/null; then
+    if which invoke-rc.d >/dev/null 2>&1; then
+      invoke-rc.d unscd restart || true
+    else
+      /etc/init.d/unscd restart || true
+    fi
+  fi
+fi
+
+

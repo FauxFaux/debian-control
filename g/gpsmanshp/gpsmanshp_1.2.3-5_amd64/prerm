@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -eu
+
+PKGIDX="/usr/lib/tcl/pkgIndex.tcl"
+
+cd /usr/lib/tcl
+
+COUNT=""
+
+if [ "$(sed /gpsmanshp/d ${PKGIDX} | sed /^#/d | wc -w)" = 0 ]
+then
+	rm $PKGIDX
+else 
+	sed -i /gpsmanshp/d ${PKGIDX}
+fi
+
+

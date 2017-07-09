@@ -1,0 +1,78 @@
+#!/bin/sh
+
+set -e
+
+if [ "$BANDWIDTHD_PACKAGE_DEBUG" != "" ]; then
+	echo "bandwidthd-pgsql.postrm: $*"
+fi
+
+if [ -f /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+fi
+if [ -f /usr/share/dbconfig-common/dpkg/postrm ]; then
+	. /usr/share/dbconfig-common/dpkg/postrm
+	dbc_go bandwidthd-pgsql $@
+fi
+
+# take care of config file move for new apache 2.4 location
+dpkg-maintscript-helper mv_conffile \
+	/etc/apache2/conf.d/bandwidthd /etc/apache2/conf-available/bandwidthd.conf 2.0.1+cvs20090917-6~ bandwidthd-pgsql -- "$@"
+
+if [ "$1" = "purge" ] ; then
+
+	CONF="/etc/bandwidthd/bandwidthd.conf"
+	PHPDB="/etc/bandwidthd/debian-db.php"
+	CRONPSQLCONF="/etc/bandwidthd/.pgpass"
+
+	for FILE in $CONF $PHPDB $CRONPSQLCONF
+	do
+		if which ucf > /dev/null 2>&1; then
+			ucf --purge $FILE
+		fi
+
+		if [ -f $FILE ]; then
+			rm -f $FILE
+		fi
+	done
+
+	# From http://wiki.debian.org/Apache/PackagingFor24 :
+	# "Likewise, in postrm do upon purge and simple removals"
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		apache2_invoke disconf bandwidthd.conf
+	fi
+
+	# reload apache2 config for uninstalled /bandwidthd alias.
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		apache2_reload
+	fi
+
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d bandwidthd remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+

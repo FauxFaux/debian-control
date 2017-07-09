@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1"  = "remove" ]; then
+    FWSNORT_CHAINS=$(iptables -L -n | fgrep 'Chain FWSNORT' | awk '{print $2}')
+    if [ -n "${FWSNORT_CHAINS}" ]; then
+        # Remove all fwsnort generated firewall rules
+        fwsnort --ipt-flush
+
+        # --ipt-flush doesn't remove the additional chains of fwsnort, but
+        # --ipt-revert is not recommended for cleaning up according to
+        # the man page. So do that manually. *sigh*
+
+        # Remove all potential leftover references in other chains
+        iptables -D INPUT   ! -i lo -j FWSNORT_INPUT   || true
+        iptables -D FORWARD ! -i lo -j FWSNORT_FORWARD || true
+        iptables -D OUTPUT  ! -o lo -j FWSNORT_OUTPUT  || true
+
+        # Remove remaining chains
+        for fwsnort_chain in ${FWSNORT_CHAINS} ; do
+            iptables -X "${fwsnort_chain}"
+        done
+    fi
+fi
+
+
+exit 0

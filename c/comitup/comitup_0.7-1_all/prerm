@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ]; then
+	deb-systemd-invoke stop comitup-web.service comitup.service >/dev/null
+fi
+# End automatically added section
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p comitup 
+else
+	dpkg -L comitup | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section

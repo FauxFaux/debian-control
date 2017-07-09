@@ -1,0 +1,49 @@
+#!/bin/sh
+set -e
+
+dpkg-maintscript-helper rm_conffile /etc/default/knot 1.3.0~rc3-2~ -- "$@"
+
+if test "$1" = "purge"; then
+    spool=/var/lib/knot
+    rm -f $spool/*.db $spool/*.db.crc
+    rmdir $spool 2>/dev/null || true
+
+    dpkg-statoverride --remove /var/lib/knot >/dev/null 2>/dev/null || true
+    dpkg-statoverride --remove /etc/knot/knot.conf >/dev/null 2>/dev/null || true
+    dpkg-statoverride --remove /etc/knot >/dev/null 2>/dev/null || true
+
+    deluser --quiet knot > /dev/null || true
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init/knot.conf 2.0.0-1~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d knot remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask knot.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge knot.service >/dev/null
+		deb-systemd-helper unmask knot.service >/dev/null
+	fi
+fi
+# End automatically added section
+
+
+exit 0

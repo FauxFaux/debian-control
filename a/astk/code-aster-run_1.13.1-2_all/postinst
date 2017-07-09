@@ -1,0 +1,43 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+TEMPLATE=/usr/share/codeaster/asrun
+ASRUN=/etc/codeaster/asrun
+ASTER_TEMPLATE=/usr/share/codeaster/aster.template
+ASTER=/etc/codeaster/aster
+
+if [ "$1" = "configure" ]; then
+       if [ -z "$2" ]; then # first install of pacakge
+               mkdir -p /etc/codeaster/astkrc
+               if [ "$(getconf LONG_BIT)" = 64 ]; then
+                       platform=LINUX64
+               else
+                       platform=LINUX
+               fi
+               node=$(hostname -s 2>/dev/null)
+
+               sed -e "s|^plate-forme : .*|plate-forme : $platform|;s|noeud : .*|noeud : $node|" < $TEMPLATE > $ASRUN
+
+               cp $ASTER_TEMPLATE $ASTER
+       fi
+
+       db_get astk/EDITOR || true
+       editor=${RET}
+
+       db_get astk/TERMINAL || true
+       terminal=${RET}
+
+       sed -i -e "s|editor : .*|editor : $editor|;s|terminal : .*|terminal : $terminal|" $ASRUN
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p code-aster-run 
+fi
+
+# End automatically added section
+

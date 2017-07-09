@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+
+
+if [ ! -c /dev/cpu/0/cpuid -a -x /dev/MAKEDEV ]; then
+	(cd /dev ; ./MAKEDEV cpu )
+fi

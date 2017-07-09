@@ -1,0 +1,53 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+case "$1" in
+    configure)
+      ant_home="/usr/share/ant"
+      biomaj_root="/usr/share/biomaj"
+      jdk_home=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")      
+      db_type="MySQL"
+      db_get biomaj/mysql_host
+      db_host="$RET"
+      db_url="jdbc:mysql://$RET/biomaj_log"
+      db_get biomaj/mysql_login
+      db_login="$RET"
+      db_get biomaj/mysql_passwd
+      db_passwd="$RET"
+
+      tomcat_port="0"
+
+      cd $biomaj_root
+
+      if [ ! -e /etc/biomaj/db_properties/global.properties ]; then
+        # If no configuration file exits, create one with template and debconf configuration
+        cp /usr/share/biomaj/global.properties.tpl  /etc/biomaj/db_properties/global.properties
+      fi
+      java -cp $biomaj_root/bin Configurator java_home:=$jdk_home ant_home:=$ant_home biomaj_root:=$biomaj_root db_type:=$db_type db_url:=$db_url db_login:=$db_login db_passwd:=$db_passwd
+
+        if [ ! -e /usr/share/biomaj/sql/migration ]; then
+          ln -s /var/lib/biomaj/migration /usr/share/biomaj/sql/migration
+        fi
+        # Database and scripts install and upgrades
+        if [ "$DEBIAN_FRONTEND" != "noninteractive" ]; then
+            perl /var/lib/biomaj/migration/update.pl  -dbuser $db_login -dbpwd $db_passwd -db mysql -dbhost $db_host
+        fi
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+

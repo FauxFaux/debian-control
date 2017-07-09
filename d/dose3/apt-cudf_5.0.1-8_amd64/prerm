@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+# Clean up EDSP (i.e. APT external) solvers which have been generated for CUDF
+# solvers. They will be added back upon (re-)installation of apt-cudf.
+#
+update-cudf-solvers --remove
+
+
+
+exit 0

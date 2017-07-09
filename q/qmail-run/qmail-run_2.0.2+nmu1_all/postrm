@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+test "$1" != 'purge' ||
+  exec rm -rf /etc/qmail/qmail-smtpd /etc/qmail/qmail-send \
+    /etc/qmail/tcp.smtp.cdb
+
+test "$1" = 'remove' || exit 0
+
+update-service --remove /etc/qmail/qmail-send || :
+update-service --remove /etc/qmail/qmail-smtpd || :
+update-service --remove /etc/qmail/qmail-verify || :

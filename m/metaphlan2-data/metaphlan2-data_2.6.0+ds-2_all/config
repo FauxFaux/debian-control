@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+conffile=/etc/metaphlan2/metaphlan2-data.conf
+
+. /usr/share/debconf/confmodule
+
+if [ -f $conffile ] ; then
+       . $conffile
+       if [ yes = "$CREATENOW" ] ; then
+               CREATENOW=true
+       else
+               CREATENOW=false
+       fi
+       db_set metaphlan2-data/createnow "$CREATENOW"
+fi
+
+db_input high metaphlan2-data/createnow || [ $? -eq 30 ]
+db_go || true

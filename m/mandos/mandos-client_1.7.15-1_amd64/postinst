@@ -1,0 +1,117 @@
+#!/bin/sh
+# This script can be called in the following ways:
+#
+# After the package was installed:
+#       <postinst> configure <old-version>
+#
+#
+# If prerm fails during upgrade or fails on failed upgrade:
+#       <old-postinst> abort-upgrade <new-version>
+#
+# If prerm fails during deconfiguration of a package:
+#       <postinst> abort-deconfigure in-favour <new-package> <version>
+#                  removing <old-package> <version>
+#
+# If prerm fails during replacement due to conflict:
+#       <postinst> abort-remove in-favour <new-package> <version>
+
+set -e
+
+# Update the initial RAM file system image
+update_initramfs()
+{
+    update-initramfs -u -k all
+    
+    if dpkg --compare-versions "$2" lt-nl "1.0.10-1"; then
+        # Make old initrd.img files unreadable too, in case they were
+        # created with mandos-client 1.0.8 or older.
+	find /boot -maxdepth 1 -type f -name "initrd.img-*.bak" \
+	    -print0 | xargs --null --no-run-if-empty chmod o-r
+    fi
+}
+
+# Add user and group
+add_mandos_user(){
+    # Rename old "mandos" user and group
+    if dpkg --compare-versions "$2" lt "1.0.3-1"; then
+	case "`getent passwd mandos`" in
+	    *:Mandos\ password\ system,,,:/nonexistent:/bin/false)
+		usermod --login _mandos mandos
+		groupmod --new-name _mandos mandos
+		return
+		;;
+	esac
+    fi
+    # Create new user and group
+    if ! getent passwd _mandos >/dev/null; then
+	adduser --system --force-badname --quiet --home /nonexistent \
+	    --no-create-home --group --disabled-password \
+	    --gecos "Mandos password system" _mandos
+    fi
+}
+
+# Create client key pair
+create_key(){
+    if [ -r /etc/keys/mandos/pubkey.txt \
+	-a -r /etc/keys/mandos/seckey.txt ]; then
+	return 0
+    fi
+    mandos-keygen
+    gpg-connect-agent KILLAGENT /bye || :
+}
+
+create_dh_params(){
+    if [ -r /etc/keys/mandos/dhparams.pem ]; then
+	return 0
+    fi
+    # Create a Diffe-Hellman parameters file
+    DHFILE="`mktemp -t mandos-client-dh-parameters.XXXXXXXXXX.pem`"
+    # First try certtool from GnuTLS
+    if ! certtool --generate-dh-params --sec-param high \
+	 --outfile "$DHFILE"; then
+	# Otherwise try OpenSSL
+	if ! openssl genpkey -genparam -algorithm DH -out "$DHFILE" \
+	     -pkeyopt dh_paramgen_prime_len:3072; then
+	    # None of the commands succeded; give up
+	    rm -- "$DHFILE"
+	    return 1
+	fi
+    fi
+    sed --in-place --expression='0,/^-----BEGIN DH PARAMETERS-----$/d' \
+	"$DHFILE"
+    sed --in-place --expression='1i-----BEGIN DH PARAMETERS-----' \
+	    "$DHFILE"
+    cp --archive "$DHFILE" /etc/keys/mandos/dhparams.pem
+    rm -- "$DHFILE"
+}
+
+case "$1" in
+    configure)
+	add_mandos_user "$@"
+	create_key "$@"
+	create_dh_params "$@" || :
+	update_initramfs "$@"
+	if dpkg --compare-versions "$2" lt-nl "1.7.10-1"; then
+	    PLUGINHELPERDIR=/usr/lib/$(dpkg-architecture -qDEB_HOST_MULTIARCH 2>/dev/null)/mandos/plugin-helpers
+	    if ! dpkg-statoverride --list "$PLUGINHELPERDIR" \
+		 >/dev/null 2>&1; then
+		chmod u=rwx,go= -- "$PLUGINHELPERDIR"
+	    fi
+	    if ! dpkg-statoverride --list /etc/mandos/plugin-helpers \
+		 >/dev/null 2>&1; then
+		chmod u=rwx,go= -- /etc/mandos/plugin-helpers
+	    fi
+	fi
+	;;
+    abort-upgrade|abort-deconfigure|abort-remove)
+	;;
+
+    *)
+	echo "$0 called with unknown argument '$1'" 1>&2
+	exit 1
+	;;
+esac
+
+
+
+exit 0

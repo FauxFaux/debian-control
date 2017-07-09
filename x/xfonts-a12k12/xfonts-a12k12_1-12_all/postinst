@@ -1,0 +1,31 @@
+#!/bin/sh
+# Debian xfonts-a12k12 package post-installation script
+# based on xfonts-cjk's
+# Copyright 1998, 1999 Branden Robinson.  Licensed under the GNU GPL.
+# Acknowlegements to Stephen Early, Mark Eichin, and Manoj Srivastava.
+
+set -e
+
+#trap "echo ;\
+#      echo 'Received signal.  Aborting configuration of xfonts-a12k12 package.' ;\
+#      echo ;\
+#      exit 1" 1 2 3 15
+
+case "$1" in
+  configure) ;;
+  abort-upgrade|abort-remove|abort-deconfigure)
+    exit 0 ;;
+  *)
+    echo "ERROR: xfonts-a12k12 postinst called with unknown argument \"$1\"."
+    echo "Aborting configuration of xfonts-a12k12 package."
+    exit 1 ;;
+esac
+
+# Automatically added by dh_installxfonts
+if which update-fonts-dir >/dev/null 2>&1; then
+	update-fonts-dir --x11r7-layout misc;update-fonts-alias --include /etc/X11/fonts/misc/xfonts-a12k12.alias misc
+fi
+# End automatically added section
+
+
+exit

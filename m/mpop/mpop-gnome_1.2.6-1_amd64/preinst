@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+# Divert mpop to mpop.orig so the binary from mpop-gnome can replace it.
+
+if [ "$1" = install ] || [ "$1" = upgrade ] ; then
+    dpkg-divert --add --package mpop-gnome --rename \
+	--divert /usr/bin/mpop.orig /usr/bin/mpop
+fi
+
+
+
+exit 0

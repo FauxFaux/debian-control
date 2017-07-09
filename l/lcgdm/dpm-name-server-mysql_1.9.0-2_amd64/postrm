@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "purge" ] ; then
+	update-alternatives --display dpnsdaemon > /dev/null || \
+		update-rc.d dpnsdaemon remove >/dev/null || exit $?
+fi
+
+

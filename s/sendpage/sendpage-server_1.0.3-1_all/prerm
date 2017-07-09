@@ -1,0 +1,20 @@
+#!/bin/sh -e
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/sendpage-server" ]; then
+	if [ -x "`which invoke-rc.d 2>/dev/null`" ]; then
+		invoke-rc.d sendpage-server stop || exit $?
+	else
+		/etc/init.d/sendpage-server stop || exit $?
+	fi
+fi
+# End automatically added section
+
+
+# Clean up empty queue directories.  Since prerm doesn't get a "purge" call,
+# we can do this on "remove", especially since sendpage re-creates these
+# directories when it needs them.
+if [ "$1" = "remove" ]; then
+    find /var/spool/sendpage/* -maxdepth 0 -type d -print0 2>/dev/null | \
+        xargs -r0 rmdir || true
+fi

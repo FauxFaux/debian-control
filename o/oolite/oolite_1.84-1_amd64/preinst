@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+
+RESOURCES=/usr/lib/GNUstep/Applications/oolite.app/Resources
+# The content of this directory is arch-independant, so it has been
+# moved to the /usr/share directory of the oolite-data package and
+# replaced with a symbolic link (1.76.1-3 in unstable, 1.77.1-1 in
+# experimental). But dpkg does not replace directories with symlinks
+# or vice versa, so we need to remove the previous directory. See
+# https://wiki.debian.org/MissingCopyrightFile and #728790.
+
+case "$1" in
+    install|upgrade)
+        if test -d $RESOURCES -a ! -h $RESOURCES ; then
+          rm -rf $RESOURCES || true
+        fi
+    ;;
+    abort-upgrade)
+    ;;
+    *)
+        echo "preinst called with unknown argument '$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

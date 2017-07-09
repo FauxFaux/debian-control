@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/circusd" ]; then
+	invoke-rc.d circusd stop || exit $?
+fi
+# End automatically added section
+
+# Automatically added by dhpython:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p circus 
+else
+	dpkg -L circus | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section

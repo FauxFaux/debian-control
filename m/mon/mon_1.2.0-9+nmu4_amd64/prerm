@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# Author: Dario Minnucci <midget@debian.org>
+# Date:   Fri, 29 Jun 2007 00:43:09 +0200
+#       ###  Username availability is checked on install step.
+#
+
+set -e
+
+##echo "----------------------------------------------"
+##echo " debian/prerm: $1"
+##echo "----------------------------------------------"
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/mon" ]; then
+	invoke-rc.d mon stop || exit $?
+fi
+# End automatically added section
+
+

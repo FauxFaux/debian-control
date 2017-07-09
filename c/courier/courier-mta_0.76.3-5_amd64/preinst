@@ -1,0 +1,12 @@
+#! /bin/sh -e
+
+if [ "$1" = "install" ]; then
+    dpkg-divert --package courier-mta --add --rename \
+		--divert /usr/bin/addcr.ucspi-tcp /usr/bin/addcr
+    dpkg-divert --package courier-mta --add --rename \
+		--divert /usr/share/man/man1/addcr.ucspi-tcp.1.gz /usr/share/man/man1/addcr.1.gz
+fi
+
+
+
+exit 0

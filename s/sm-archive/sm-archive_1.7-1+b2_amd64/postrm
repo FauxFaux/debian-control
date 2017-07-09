@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+if [ "$1" = "purge" ]; then
+  if id -u sm-archive > /dev/null 2>&1; then
+    userdel sm-archive
+  fi
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d sm-archive remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0

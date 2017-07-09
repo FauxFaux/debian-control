@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/sahara puppet-module-sahara /usr/share/puppet/modules.available/sahara 500
+fi
+
+
+
+exit 0

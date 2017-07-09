@@ -1,0 +1,18 @@
+#! /bin/sh
+
+set -e
+
+
+
+EDUTHEME="lines"
+
+case "$1" in
+	configure)
+		update-debian-edu-artwork-$EDUTHEME configure
+	;;
+	triggered)
+                if readlink /usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/20-desktop-base-edu.js | grep $EDUTHEME ; then
+		    update-debian-edu-artwork-$EDUTHEME configure
+		fi
+	;;
+esac

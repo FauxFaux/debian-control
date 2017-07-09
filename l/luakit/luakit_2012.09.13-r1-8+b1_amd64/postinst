@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+case "$1" in
+  (configure)
+  update-alternatives --install /usr/bin/x-www-browser \
+    x-www-browser /usr/bin/luakit 10
+  ;;
+  (abort-upgrade|abort-remove|abort-deconfigure)
+  ;;
+  (*)
+  echo "postinst called with unknown argument \`$1'" >&2
+  ;;
+esac
+
+if [ -x /usr/bin/update-menus ] ; then update-menus ; fi
+
+exit 0

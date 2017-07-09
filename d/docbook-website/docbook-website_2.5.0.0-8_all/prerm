@@ -1,0 +1,20 @@
+#! /bin/sh
+# prerm script for docbook-website
+# Maintainer: Mark Johnson <mrj@debian.org>
+set -e
+
+
+# Automatically added by dh_installxmlcatalogs
+if [ "$1" = "remove" ] || [ "$1" = "upgrade" ]; then
+	update-xmlcatalog --del --type public --id "-//Norman Walsh//DTD Website" --root || true
+	update-xmlcatalog --del --type system --id "http://docbook.sourceforge.net/release/website" --root || true
+
+	update-xmlcatalog --del --type public --id "-//Norman Walsh//DTD Website" --package docbook-website || true
+	update-xmlcatalog --del --type system --id "http://docbook.sourceforge.net/release/website" --package docbook-website || true
+
+fi
+# End automatically added section
+
+
+
+exit 0

@@ -1,0 +1,88 @@
+#!/bin/sh
+
+set -e
+
+#
+# Skip, if we are not in "remove" or "purge" state
+# 
+if [ "$1" != "remove" ] && [ "$1" != "purge" ]; then
+    exit 0
+fi
+
+## Source debconf library
+. /usr/share/debconf/confmodule
+db_version 2.0
+# source dbconfig-common stuff
+if [ -f /usr/share/dbconfig-common/dpkg/postrm.mysql ]; then
+    . /usr/share/dbconfig-common/dpkg/postrm.mysql
+    dbc_go cacti $@
+fi
+
+
+# update the webserver, if needed
+# apache2
+if [ -e /etc/apache2/conf.d/cacti.conf -o -e /etc/apache2/conf-enabled/cacti.conf ]; then
+#   Sniplet adjusted from http://wiki.debian.org/Apache/PackagingFor24
+    if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+	. /usr/share/apache2/apache2-maintscript-helper
+	apache2_invoke disconf cacti
+    elif  dpkg-query -f '${Version}'  -W 'apache2.2-common' > /dev/null 2>&1 ; then
+	[ -h /etc/apache2/conf.d/cacti.conf ] && rm /etc/apache2/conf.d/cacti.conf
+	invoke-rc.d apache2 reload || true
+    fi
+fi
+# lighttpd
+if which lighty-disable-mod >/dev/null 2>&1 ; then
+    lighty-disable-mod cacti || true
+#   We need to take care: bug #446324
+    invoke-rc.d lighttpd reload 3>/dev/null || true
+fi
+
+#
+# remove or purge the whole package
+#
+case "$1" in
+    purge)
+	# cleanup some unsed directores
+	[ -d "/var/log/cacti" ] && rm -rf /var/log/cacti
+	[ -d "/var/cache/cacti" ] && rm -rf /var/cache/cacti
+	[ -d "/var/lib/cacti" ] && rm -rf /var/lib/cacti
+
+	# get rid of configuration files and ucf entries
+	for config_file in \
+	    /etc/cacti/debian.php \
+	    /etc/cacti/apache.conf \
+	    /etc/cacti/lighttpd.conf \
+	    /etc/apache2/conf-available/cacti.conf \
+	    /etc/lighttpd/conf-available/cacti.conf \
+	    /etc/lighttpd/conf-available/20-cacti.conf
+	do
+	    if which ucf >/dev/null 2>&1; then
+		ucf --purge $config_file
+	    fi
+            if [ -x "`which ucfr 2>/dev/null`" ]; then
+		ucfr --purge cacti $config_file
+            fi
+            for ext in .ucf-new .ucf-old .ucf-dist ""; do
+		rm -f "$config_file$ext"
+            done
+	done
+	;;
+
+    remove)
+	;;
+
+esac
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper dir_to_symlink /usr/share/cacti/site/include/js/themes /usr/share/javascript/jstree/themes 0.8.8h+ds1-10~ cacti -- "$@"
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+exit 0
+

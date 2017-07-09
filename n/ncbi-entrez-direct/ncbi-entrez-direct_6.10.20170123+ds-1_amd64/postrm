@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+
+
+if [ "$1" = "remove" ]; then
+   for x in efetch einfo; do
+       dpkg-divert --package ncbi-entrez-direct --remove --rename /usr/bin/$x
+       dpkg-divert --package ncbi-entrez-direct --remove --rename \
+		   /usr/share/man/man1/$x.1.gz
+   done
+fi

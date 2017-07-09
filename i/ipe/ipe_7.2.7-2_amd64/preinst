@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+# Prior to version X, $docdir was a directory; now it is a symlink
+docdir=/usr/share/doc/ipe/doc
+
+
+if [ "$1" = "upgrade" ]; then
+    if [ -d $docdir ]; then rm -rf $docdir; fi
+fi
+
+

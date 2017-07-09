@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  configure)
+
+        if ! getent passwd siproxd > /dev/null ; then
+	    echo 'Adding system-user for siproxd' 1>&2
+	    adduser --system --group --home /var/run/siproxd --no-create-home \
+		--disabled-login --force-badname siproxd > /dev/null
+        fi
+
+	if dpkg --compare-versions "$2" le "0.57.snap040720-2"; then
+	    [ -e /etc/siproxd.conf -a -e /etc/siproxd_passwd.cfg ] && chown root:siproxd /etc/siproxd.conf /etc/siproxd_passwd.cfg
+	    [ -e /etc/siproxd_passwd.cfg ] && chmod 600 /etc/siproxd_passwd.cfg 
+	fi
+	;;
+	
+esac
+
+# Create directories for log etc
+# install also fixes permissions.
+# Bad naming f0llowing the exim4 example ;)
+install -d -o siproxd -g siproxd /var/lib/siproxd/var/lib/siproxd
+chown -R siproxd:siproxd /var/lib/siproxd
+mkdir -p /var/run/siproxd
+chown siproxd:siproxd /var/run/siproxd
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/siproxd" ]; then
+		update-rc.d siproxd defaults >/dev/null
+		invoke-rc.d siproxd start || exit $?
+	fi
+fi
+# End automatically added section
+

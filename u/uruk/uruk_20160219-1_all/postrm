@@ -1,0 +1,10 @@
+#! /bin/sh
+
+# uruk postrm
+
+set -e
+
+if test "$1" = purge
+then
+    update-rc.d uruk remove >/dev/null
+fi

@@ -1,0 +1,31 @@
+#!/bin/sh -e
+
+set -e 
+
+
+
+FLAVOR=".nox"
+
+case "$1" in
+    (remove|deconfigure)
+        update-alternatives --remove ssr-aap /usr/bin/ssr-aap${FLAVOR}
+        update-alternatives --remove ssr-binaural /usr/bin/ssr-binaural${FLAVOR}
+        update-alternatives --remove ssr-brs /usr/bin/ssr-brs${FLAVOR}
+        update-alternatives --remove ssr-generic /usr/bin/ssr-generic${FLAVOR}
+        update-alternatives --remove ssr-nfc-hoa /usr/bin/ssr-nfc-hoa${FLAVOR}
+        update-alternatives --remove ssr-vbap /usr/bin/ssr-vbap${FLAVOR}
+        update-alternatives --remove ssr-wfs /usr/bin/ssr-wfs${FLAVOR}
+    ;;
+    (upgrade)
+    ;;
+
+    (failed-upgrade)
+    ;;
+
+    (*)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+exit 0

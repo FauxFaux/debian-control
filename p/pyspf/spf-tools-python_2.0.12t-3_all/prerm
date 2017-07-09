@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+mode=$1
+
+source_package=pyspf
+
+case "$mode" in
+  remove )
+    update-alternatives --remove spfquery /usr/bin/spfquery.$source_package
+    ;;
+esac
+
+

@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+OLD=/var/lib/games/xbill/scores
+OLD2=/var/lib/games/xbill.scores
+SCORES=/var/games/xbill.scores
+
+if [ -e $OLD ]; then
+  mv $OLD $SCORES
+  rmdir /var/lib/games/xbill
+elif  [ -e $OLD2 ]; then
+  mv $OLD2 $SCORES
+else
+  if [ ! -e $SCORES ]; then
+    cp $SCORES.default $SCORES
+  fi
+fi
+
+chown root:games $SCORES
+chmod 0664 $SCORES
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+

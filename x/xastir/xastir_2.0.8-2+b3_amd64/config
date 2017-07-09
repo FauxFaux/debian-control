@@ -1,0 +1,16 @@
+#! /bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+# We only care about installing setuid on Linux, as kFreeBSD/Hurd do not have
+# native AX.25 interfaces that libax25 can use.
+
+if [ `uname` = Linux ]; then
+  db_input high xastir/install-setuid || true
+  db_go
+fi
+
+exit 0
+

@@ -1,0 +1,63 @@
+#!/bin/sh
+# Copyright © 2003, 2006  Recai Oktaş <roktas@omu.edu.tr>
+#
+# Licensed under the GNU General Public License, version 2.
+# See the file `http://www.gnu.org/copyleft/gpl.txt'.
+
+set -e
+
+if [ "$1" != "purge" ]; then
+	# Silently exit if this is not a purge.
+	exit 0
+fi
+
+# Elog root.
+SRVDIR=/var/lib/elog
+
+# Safe function to produce a nonempty line count.
+count_nonempty_lines()
+{
+	arg=`echo "$1" | sed '/^[ 	]*$/d'`
+	if [ -z "$arg" ]; then
+		echo 0
+	else
+		echo "$arg" | wc -l | awk '{ print $1 }'
+	fi
+}
+
+# Remove the welcome message if it exists.
+(
+	logs=`find $SRVDIR/logbooks/demo -maxdepth 1 -type f 2>/dev/null`
+	if [ `count_nonempty_lines "$logs"` -eq 1 ]; then
+		records=`grep '[$]@MID@[$]' $logs`
+		if [ `count_nonempty_lines "$records"` -eq 1 ] \
+		   && grep -q "^Author: ELOG maintainer" $logs; then
+			rm -f $logs
+		fi
+	fi
+) || true
+
+# Remove empty crafts.
+rmdir -p $SRVDIR/logbooks/demo 2>/dev/null ||
+rmdir -p $SRVDIR/logbooks 2>/dev/null || true
+
+if [ -d $SRVDIR ] ; then
+	echo ""
+	echo "There are ELOG logs in '$SRVDIR' which need to be removed manually." >&2
+fi
+
+if getent passwd elog >/dev/null 2>&1; then
+	deluser --quiet elog  2>/dev/null || true
+fi
+
+# manually added here: rmoval of init script links
+if [ "$1" = "purge" ] ; then
+        update-rc.d elog remove >/dev/null
+fi
+
+
+
+
+exit 0
+
+# vim:ai:sts=8:sw=8:

@@ -1,0 +1,22 @@
+#!/bin/sh
+#$Id: config,v 1.4 2001/07/11 23:12:55 agx Exp $
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# location of startup.conf moved in 1.0-2
+# to /etc/default/portsentry
+if [ -n "$2" ] && dpkg --compare-versions $2 lt 1.0-2 ; then
+    if [ -e /etc/portsentry/startup.conf -a ! -e /etc/default/portsentry ]; then
+        db_input high portsentry/startup_conf_obsolete || true
+	db_go 
+    fi
+fi
+
+# show no_block message only upon first installation
+if [ "$1" = "configure"  -a -z "$2"  ]; then
+	    db_input high portsentry/warn_no_block || true
+	    db_go
+fi

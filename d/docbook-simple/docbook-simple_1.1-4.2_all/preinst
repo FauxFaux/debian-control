@@ -1,0 +1,25 @@
+#! /bin/sh
+# preinst script for docbook-simple
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# workaround the lack of good solution to migrate a directory to a
+# compat symlink
+if [ -d /usr/share/sgml/docbook/custom/simple ]
+then
+    rm -rf /usr/share/sgml/docbook/custom/simple
+fi
+
+# Automatically added by dh_installcatalogs
+if test -f /etc/sgml/docbook-simple.cat -a "(" "$1" = "upgrade" -o "$1" = "install" -a -n "$2" ")" && 
+		! dpkg-query -S /etc/sgml/docbook-simple.cat >/dev/null 2>&1; then
+	# If the dpkg-query command returns non-zero, the central catalog is
+	# not owned by any package. This is due to an old behaviour of
+	# debhelper. Now that file becomes a conffile. In order to avoid a
+	# question during installation, we remove the old non-conffile.
+	mv /etc/sgml/docbook-simple.cat /etc/sgml/docbook-simple.cat.old
+fi
+# End automatically added section
+

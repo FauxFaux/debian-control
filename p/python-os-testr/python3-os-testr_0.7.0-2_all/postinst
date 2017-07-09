@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/ostestr ostestr /usr/bin/python3-ostestr 200
+	update-alternatives --install /usr/bin/subunit-trace subunit-trace /usr/bin/python3-subunit-trace 200
+	update-alternatives --install /usr/bin/subunit2html subunit2html /usr/bin/python3-subunit2html 200
+	update-alternatives --install /usr/bin/generate-subunit generate-subunit /usr/bin/python3-generate-subunit 200
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-os-testr 
+fi
+
+# End automatically added section
+
+
+exit 0

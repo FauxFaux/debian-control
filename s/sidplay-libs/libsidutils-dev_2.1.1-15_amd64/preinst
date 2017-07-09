@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+# handle symlink to directory conversion (#700786)
+DOCDIR=/usr/share/doc/libsidutils-dev
+if [ -L $DOCDIR ] ; then
+  rm $DOCDIR
+fi
+
+

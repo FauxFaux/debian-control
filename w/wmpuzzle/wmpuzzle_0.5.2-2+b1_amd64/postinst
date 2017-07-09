@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+if [ -x /usr/bin/update-menus -a "$1" = configure ]; then
+	update-menus
+fi
+
+exit 0

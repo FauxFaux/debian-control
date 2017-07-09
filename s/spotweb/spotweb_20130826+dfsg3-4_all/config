@@ -1,0 +1,22 @@
+#!/bin/sh
+# config maintainer script for spotweb
+
+set -e
+
+# source debconf stuff
+. /usr/share/debconf/confmodule
+
+# source dbconfig-common shell library, and call the hook function
+if [ -f /usr/share/dbconfig-common/dpkg/config.mysql ]; then
+        . /usr/share/dbconfig-common/dpkg/config.mysql 
+        dbc_dbtypes="mysql"
+        dbc_install='true'
+        dbc_upgrade='true'
+        dbc_remove='true'
+        dbc_go spotweb $@
+fi
+
+db_go || true
+
+
+

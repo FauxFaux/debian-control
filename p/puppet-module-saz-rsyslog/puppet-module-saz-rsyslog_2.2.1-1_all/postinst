@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/saz-rsyslog puppet-module-rsyslog /usr/share/puppet/modules.available/saz-rsyslog 500
+fi
+
+
+
+exit 0

@@ -1,0 +1,28 @@
+#! /bin/sh
+
+set -e
+
+## Source debconf library.
+. /usr/share/debconf/confmodule
+
+## Set default dictionary
+
+if [ "$1" = "configure" ]; then
+    db_get wnorwegian/whichvariant
+	cd /etc/dictionaries-common && ln -sf /usr/share/dict/"$RET" norsk
+fi
+
+# Automatically added by installdeb-wordlist
+. /usr/share/debconf/confmodule
+SCRIPT="update-default-wordlist"
+
+if [ "$1" = "configure" ] ; then
+    if which $SCRIPT > /dev/null 2>&1; then
+	$SCRIPT  --rebuild
+    else
+	echo "Error: $SCRIPT not present or executable. Missing dependency on dictionaries-common?" >&2
+	exit 1
+    fi
+fi
+# End automatically added section
+

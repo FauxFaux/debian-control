@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+case "$1" in
+    configure)
+        update-alternatives \
+            --install /usr/bin/x-www-browser \
+            x-www-browser /usr/bin/midori 50 \
+            --slave /usr/share/man/man1/x-www-browser.1.gz \
+            x-www-browser.1.gz /usr/share/man/man1/midori.1.gz
+        ;;
+esac
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/xdg/midori/extensions/libadblock.so/config /etc/xdg/midori/extensions/adblock/config 0.4.1-2 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/xdg/midori/extensions/libadblock.so 0.4.1-2 -- "$@"
+# End automatically added section
+
+exit 0

@@ -1,0 +1,67 @@
+#! /bin/sh
+
+set -e
+
+prevver="$2"
+
+add_system_user() {
+    if ! getent passwd mailping >/dev/null; then
+	adduser --group --system --no-create-home --home /var/lib/mailping mailping
+    fi	
+}
+
+fixperms() {
+    chown -R mailping:mailping \
+	/var/lib/mailping/state \
+	/var/lib/mailping/Maildir
+}
+
+init_plugins() {
+    if [ -z "$prevver" ]; then
+	RELOAD=0
+	echo -n "Initializing plugins.."
+	for plugin in success latency; do
+	    if [ ! -e "/etc/munin/plugins/mailping-$plugin" ]; then
+		RELOAD=1
+		echo -n " '$plugin'"
+		ln -s "/usr/share/mailping/munin-plugins/mailping-$plugin" "/etc/munin/plugins/mailping-$plugin"
+	    fi
+	done
+	echo "."
+	if [ "$RELOAD" = "1" ]; then
+	    invoke-rc.d munin-node force-reload
+        fi
+    fi
+}
+
+create_forward() {
+    FORWARD=/var/lib/mailping/.forward
+    if [ ! -e /var/lib/mailping/do-not-touch-forward -a ! -e "$FORWARD" ]; then
+	install -m0644 /usr/share/mailping/dot-forward "$FORWARD"
+    fi
+}
+
+case "$1" in
+    configure)
+	add_system_user
+	fixperms
+	create_forward
+	init_plugins
+	;;
+    abort-upgrade|abort-deconfigure|abort-remove)
+	:
+	;;
+    *)
+	echo "Called with unknown argument $1, bailing out."
+	exit 1
+	;;
+esac
+
+
+# Automatically added by dhpython:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p mailping 
+fi
+
+# End automatically added section
+

@@ -1,0 +1,55 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+	configure|reconfigure)
+
+	. /usr/share/debconf/confmodule
+	db_version 2.0
+	db_get "fts/tftppath"
+	tftppath="$RET"
+	
+	# Create user
+        if ! getent passwd tftpd >/dev/null; then
+            adduser --disabled-password \
+                    --quiet --system \
+                    --home $tftppath \
+                    --no-create-home \
+                    --gecos "TFTP account" \
+                    --group tftpd
+        fi
+
+	# Create pxelinux.cfg path
+	[ ! -d "$tftppath/pxelinux.cfg" ] && mkdir -p "$tftppath/pxelinux.cfg"
+	
+	# Create pxelinux.static path
+	[ ! -d "$tftppath/pxelinux.static" ] && mkdir -p "$tftppath/pxelinux.static"
+
+	# Create a safe default file
+	#if [ ! -f "$tftppath/pxelinux.static/default" ]; then
+	# 	echo "localboot 0" > "$tftppath/pxelinux.static/default"
+	#fi
+
+	# Apply to config
+	sed -e "s~^path\s*=\s*/.*$~path = $tftppath/pxelinux.cfg~" \
+		-e "s~^static-path\s*=\s*/.*$~static-path = $tftppath/pxelinux.static~" /usr/share/fts/config > /etc/fts/config.debconf-tmp
+	ucf --three-way --debconf-ok /etc/fts/config.debconf-tmp /etc/fts/config
+	ucfr fts /etc/fts/config
+	rm -f /etc/fts/config.debconf-tmp || true
+	;;
+esac
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p fts 
+fi
+
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/fts" ]; then
+	update-rc.d fts defaults >/dev/null
+	invoke-rc.d fts start || exit $?
+fi
+# End automatically added section
+

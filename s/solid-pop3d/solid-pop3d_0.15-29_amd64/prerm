@@ -1,0 +1,19 @@
+#!/bin/sh
+# pre-removal script for Solid POP3
+
+set -e
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/solid-pop3d" ]; then
+	invoke-rc.d solid-pop3d stop || exit $?
+fi
+# End automatically added section
+
+
+case "X$1" in 
+	Xupgrade|Xremove)
+		update-inetd --disable pop3
+		;;
+	*)
+		;;
+esac

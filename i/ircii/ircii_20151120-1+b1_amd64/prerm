@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+update-alternatives --remove irc /usr/bin/ircII
+
+rm -f /etc/irc/script/local.old /etc/irc/script/local.debian
+
+if [ \( "$1" = "upgrade" -o "$1" = "remove" \) -a -L /usr/doc/ircii ]; then
+	rm -f /usr/doc/ircii
+fi
+
+

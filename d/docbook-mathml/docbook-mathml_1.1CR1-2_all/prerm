@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installxmlcatalogs
+if [ "$1" = "remove" ] || [ "$1" = "upgrade" ]; then
+	update-xmlcatalog --del --type system --id "http://www.oasis-open.org/docbook/xml/mathml/" --root || true
+	update-xmlcatalog --del --type public --id "-//OASIS//DTD DocBook MathML" --root || true
+
+	update-xmlcatalog --del --type system --id "http://www.oasis-open.org/docbook/xml/mathml/" --package docbook-mathml || true
+	update-xmlcatalog --del --type public --id "-//OASIS//DTD DocBook MathML//EN" --package docbook-mathml || true
+	update-xmlcatalog --del --type system --id "http://www.oasis-open.org/docbook/xml/mathml/1.0/dbmathml.dtd" --package docbook-mathml || true
+	update-xmlcatalog --del --type public --id "-//OASIS//DTD DocBook MathML Module V1.0//EN" --package docbook-mathml || true
+	update-xmlcatalog --del --type system --id "http://www.oasis-open.org/docbook/xml/mathml/1.1b1/dbmathml.dtd" --package docbook-mathml || true
+	update-xmlcatalog --del --type public --id "-//OASIS//DTD DocBook MathML Module V1.1b1//EN" --package docbook-mathml || true
+	update-xmlcatalog --del --type system --id "http://www.oasis-open.org/docbook/xml/mathml/1.1CR1/dbmathml.dtd" --package docbook-mathml || true
+	update-xmlcatalog --del --type public --id "-//OASIS//DTD DocBook MathML Module V1.1CR1//EN" --package docbook-mathml || true
+
+fi
+# End automatically added section

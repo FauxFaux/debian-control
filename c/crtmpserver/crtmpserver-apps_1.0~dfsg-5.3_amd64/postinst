@@ -1,0 +1,41 @@
+#! /bin/sh
+
+set -e
+
+APPLICATIONS="admin applestreamingclient appselector flvplayback proxypublish samplefactory stresstest vptests"
+
+case "$1" in
+	configure)
+		# Copy application config if not exists
+		for app in $APPLICATIONS; do
+			if [ ! -f /etc/crtmpserver/applications/${app}.lua ]; then
+				cp /usr/share/crtmpserver-apps/${app}.lua \
+					/etc/crtmpserver/applications/${app}.lua
+				chmod 644 /etc/crtmpserver/applications/${app}.lua
+			fi
+		done
+
+		# copy users sample file if not exists
+		if [ ! -f /etc/crtmpserver/conf.d/users.lua ]; then
+			cp /usr/share/crtmpserver-apps/conf.d/users.lua \
+				/etc/crtmpserver/conf.d/users.lua
+			chmod 640 /etc/crtmpserver/conf.d/users.lua
+		fi
+
+		# Add all application as part of default install
+		if [ ! -f /etc/crtmpserver/enabled_applications.conf ]; then
+			cp /usr/share/crtmpserver-apps/enabled_applications.conf \
+				/etc/crtmpserver
+			chmod 644 /etc/crtmpserver/enabled_applications.conf
+		fi
+
+		;;
+	abort-upgrade|abort-remove|abort-deconfigure)
+		;;
+	*)
+		exit 0
+		;;
+esac
+
+
+

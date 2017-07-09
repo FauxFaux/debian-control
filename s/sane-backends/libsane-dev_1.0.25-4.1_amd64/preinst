@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+
+
+case "$1" in
+    install|upgrade|abort-upgrade)
+#
+# remove obsolete files
+#
+	rm -f /usr/bin/sane-config.*
+	if [ -h /usr/bin/sane-config ] ; then
+	    rm -f /usr/bin/sane-config
+	fi
+	;;
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+	;;
+esac
+
+
+

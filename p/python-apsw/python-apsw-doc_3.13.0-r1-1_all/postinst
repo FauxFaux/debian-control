@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -eu
+
+if dpkg-maintscript-helper supports symlink_to_dir; then
+    dpkg-maintscript-helper \
+        symlink_to_dir \
+        /usr/share/doc/python-apsw-doc /usr/share/doc/python-apsw \
+        3.7.14-r1-1 python-apsw-doc -- "$@"
+fi
+
+

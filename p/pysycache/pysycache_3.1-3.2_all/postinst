@@ -1,0 +1,41 @@
+#! /bin/sh
+# postinst script for pysycache
+set -e
+
+case "$1" in
+    configure)
+	chown -R :games /var/games/pysycache
+	chmod -R 775 /var/games/pysycache
+    chown root:games /usr/share/games/pysycache/game.sh
+    chmod 2755 /usr/share/games/pysycache/game.sh   
+    chown root:games /usr/share/games/pysycache/pysycache.py
+    chmod 2755 /usr/share/games/pysycache/pysycache.py
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+# Automatically added by dhpython:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p pysycache /usr/share/games/pysycache
+fi
+
+# End automatically added section
+
+
+exit 0
+
+

@@ -1,0 +1,119 @@
+#!/usr/bin/perl -w
+#
+# debconf config script for lsh-server
+#
+# Copyright (c) 2000, 2001, 2002 Timshel Knoll <timshel@debian.org>
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#  
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#  
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+# On Debian systems, see /usr/share/common-licenses/GPL for the GNU GPL.
+#
+use strict;
+use Debconf::Client::ConfModule ':all';
+
+
+sub ask_whether_to_purge_hostkey {
+   &input ("medium", "lsh-server/purge_hostkey");
+   my @ret = &go ();
+
+   return ($ret[0] == 30 ? -1 : 1);
+}
+
+
+sub get_lshd_port {
+   &input ("medium", "lsh-server/lshd_port");
+   my @ret = &go ();
+
+   my $port = &get ("lsh-server/lshd_port");
+   
+   if ($port and $port !~ m/^\d+$/) {
+      $port = (getservbyname ($port, "tcp"))[2];
+   }  
+      
+   unless ($port) {
+      # invalid service entered: wasn't a number, and
+      # getservbyname failed, try again ...
+      # FIXME: try putting some sort of error message here?
+      &reset ("lsh-server/lshd_port");
+      return 0;
+   }
+
+   return ($ret[0] == 30 ? -1 : 1);
+}
+
+
+
+sub ask_whether_to_enable_sftp {
+   &input ("medium", "lsh-server/sftp");
+   my @ret = &go ();
+
+   return ($ret[0] == 30 ? -1 : 1);
+}
+
+
+sub configure () {
+   my $state = 0;
+
+   # The list of things to do, in order
+   # Aren't really long, descriptive function names fun ;-)
+   my @states = (
+      \&ask_whether_to_purge_hostkey,
+      \&get_lshd_port,
+      \&ask_whether_to_enable_sftp
+   );
+
+   # This is 1 or -1, depending on whether we're going forward or backward
+   # Required because otherwise when we back up to a question doesn't need
+   # to be asked, the engine will go forward again :-(
+   my $step = 1;
+
+   until ($state > $#states) {
+      if ($state < 0) {
+         $state = 0;
+         # We may have got here because of "backing up" to a question which
+         # was skipped, so make sure we're going forward from here to avoid
+         # an infinite loop
+         $step = 1;
+      }
+
+      $step = &{ $states[$state] } ($step);
+
+      $state += $step;
+   }
+}
+
+
+
+die "Syntax error: no argument" if (@ARGV <= 0);
+
+version ('2.0');
+
+my $capb = &capb ('backup');
+
+system {'sh'} 'sh', '-c', <<'EOF';
+[ -e /etc/default/lsh-server ] || exit 0
+. /etc/default/lsh-server
+. /usr/share/debconf/confmodule
+
+db_set lsh-server/lshd_port "$LSHD_PORT" || true
+db_set lsh-server/sftp "$ENABLE_SFTP" || true
+db_set lsh-server/extra_args "$EXTRA_ARGS" || true
+EOF
+
+if ($ARGV[0] eq "configure" || $ARGV[0] eq "reconfigure") {
+   &configure ();
+}
+
+
+

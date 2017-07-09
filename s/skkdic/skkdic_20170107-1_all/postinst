@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = configure ]; then
+    update-alternatives --install /usr/share/skk/SKK-JISYO \
+	SKK-JISYO /usr/share/skk/SKK-JISYO.L 60
+fi
+if which update-skkdic-yaskkserv >/dev/null 2>&1; then
+    update-skkdic-yaskkserv
+fi
+
+

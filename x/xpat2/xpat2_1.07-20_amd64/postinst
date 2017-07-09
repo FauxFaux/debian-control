@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e
+
+if [ -d /var/lib/games/xpat2 ] ; then
+	chmod 2775 /var/lib/games/xpat2
+fi
+
+# In older versions, /var/lib/games/xpat2/xpat was -rw-r--r-- games.root
+
+if [ -f /var/lib/games/xpat2/xpat.log ]; then
+    chown root:games /var/lib/games/xpat2/xpat.log
+    chmod 664 /var/lib/games/xpat2/xpat.log
+fi
+
+# /var/lib/games/xpat2 changed location to /var/games/xpat2.
+
+if [ -f /var/lib/games/xpat2/xpat.log ]; then
+    mv -f /var/lib/games/xpat2/xpat.log /var/games/xpat2
+    rm -rf /var/lib/games/xpat2
+fi
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

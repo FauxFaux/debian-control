@@ -1,0 +1,43 @@
+#!/bin/sh -e
+
+# Move a conffile without triggering a dpkg question
+# http://www.dpkg.org/dpkg/ConffileHandling
+mv_conffile() {
+    OLDCONFFILE="$1"
+    NEWCONFFILE="$2"
+
+    if [ -e "$OLDCONFFILE" ]; then
+        echo "Preserving user changes to $NEWCONFFILE ..."
+        mv -f "$NEWCONFFILE" "$NEWCONFFILE".dpkg-new
+        mv -f "$OLDCONFFILE" "$NEWCONFFILE"
+    fi
+}
+
+case "$1" in
+configure)
+    if dpkg --compare-versions "$2" le "2.11b-3"; then
+        mv_conffile "/etc/emacs/site-start.d/50nowebm.el" "/etc/emacs/site-start.d/50noweb.el"
+    fi
+esac
+
+# Automatically added by dh_installtex
+##
+## postinst-tex
+##
+## postinst snippets for everything TeX related
+## simply call update-texmf-config triggers
+##
+## Authors:
+##       Norbert Preining <preining@logic.at>
+##
+#
+
+case "$1" in
+    configure|abort-upgrade|abort-remove|abort-deconfigure)
+        update-texmf-config 
+    ;;
+esac
+
+# End automatically added section
+
+

@@ -1,0 +1,53 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+anon='off'
+prefix='#<off>#'
+dir='/home/ftp'
+inetdentry='kermit      stream  tcp     nowait  root    /usr/sbin/tcpd  /usr/sbin/iksd'
+iksd_args='-A --initfile:/etc/kermit/iksd-anon.conf --dbfile:/var/run/iksd.db --syslog:5'
+
+if [ "$1" = "configure" ]
+then
+    gotinetd=0
+    if [ -x "`which update-inetd 2>/dev/null`" ]; then
+	gotinetd=1
+    fi
+
+    db_get ckermit/iksd || true
+    if [ "$RET" = true ]
+    then
+	if [ $gotinetd -eq 0 ]; then
+	    db_fset ckermit/iksd seen false || true
+	    db_input critical ckermit/iksd-no-inetd || true
+	    db_go || true
+	else
+            prefix=""
+            db_get ckermit/iksd-anon || true
+            if [ "$RET" = true ]
+            then
+		anon="on"
+		db_get ckermit/iksd-anondir || true
+		dir="$RET"
+	    fi
+        fi
+    fi
+
+    if [ $gotinetd -eq 1 ]; then
+	iksd_args="$iksd_args --root:$dir --anonymous:$anon"
+	update-inetd --remove "kermit"
+	update-inetd --add "$prefix$inetdentry $iksd_args"
+    fi
+fi
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,20 @@
+#! /bin/sh
+set -e
+
+
+DOCDIR=/usr/share/doc/python3-sip-dbg
+DOCLINK=python3-sip
+
+if [ -d $DOCDIR ] && [ ! -L $DOCDIR ]; then
+    rmdir $DOCDIR
+    ln -s $DOCLINK $DOCDIR
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-sip-dbg -V 3.0-
+fi
+
+# End automatically added section
+

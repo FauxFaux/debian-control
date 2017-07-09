@@ -1,0 +1,30 @@
+#!/bin/sh
+# prerm script for prewikka
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# source debconf stuff
+. /usr/share/debconf/confmodule
+# source dbconfig-common stuff
+. /usr/share/dbconfig-common/dpkg/prerm
+dbc_go prewikka $@
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p prewikka 
+else
+	dpkg -L prewikka | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+
+exit 0
+
+

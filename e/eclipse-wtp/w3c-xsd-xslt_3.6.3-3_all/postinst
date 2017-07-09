@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installxmlcatalogs
+if [ "$1" = "configure" ]; then
+	update-xmlcatalog --sort --add --type uri --id "http://www.w3.org/1999/XSL/Transform" --package w3c-xsd-xslt --local /usr/share/xml/xslt/catalog.xml
+	update-xmlcatalog --sort --add --type uri --id "http://www.w3.org/2001/XInclude" --package w3c-xsd-xslt --local /usr/share/xml/xslt/catalog.xml
+
+	update-xmlcatalog --sort --add --type uri --id "http://www.w3.org/1999/XSL/Transform" --package w3c-xsd-xslt --root
+	update-xmlcatalog --sort --add --type uri --id "http://www.w3.org/2001/XInclude" --package w3c-xsd-xslt --root
+
+fi
+# End automatically added section

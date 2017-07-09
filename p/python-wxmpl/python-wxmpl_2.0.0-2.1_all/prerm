@@ -1,0 +1,19 @@
+#! /bin/sh -e
+
+if [ "$1" = "remove" ]; then
+	update-alternatives --remove mx-plot /usr/lib/mx/plotgnu.plotit
+fi
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p python-wxmpl 
+else
+	dpkg -L python-wxmpl | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+

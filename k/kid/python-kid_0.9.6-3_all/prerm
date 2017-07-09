@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+
+# Automatically added by dhpython:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p python-kid 
+else
+	dpkg -L python-kid | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+

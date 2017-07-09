@@ -1,0 +1,30 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+	remove|deconfigure)
+		gconf-schemas --unregister guake.schemas
+		;;
+	
+
+       upgrade|purge)
+
+        ;;
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+esac
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p guake 
+else
+	dpkg -L guake | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+

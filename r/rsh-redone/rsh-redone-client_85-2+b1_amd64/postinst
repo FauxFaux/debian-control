@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+update-alternatives --install /usr/bin/rsh rsh /usr/bin/rsh-redone-rsh 150 \
+	--slave /usr/share/man/man1/rsh.1.gz rsh.1.gz /usr/share/man/man1/rsh-redone-rsh.1.gz
+update-alternatives --install /usr/bin/rlogin rlogin /usr/bin/rsh-redone-rlogin 150 \
+	--slave /usr/share/man/man1/rlogin.1.gz rlogin.1.gz /usr/share/man/man1/rsh-redone-rlogin.1.gz
+
+

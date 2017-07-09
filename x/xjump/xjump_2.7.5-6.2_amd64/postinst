@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ]; then
+  if test -f /var/lib/games/xjump/record; then
+    echo -n "Moving xjump record file to /var/games/xjump... "
+    mv /var/lib/games/xjump/record /var/games/xjump/
+    rmdir /var/lib/games/xjump/ 2> /dev/null || true
+    echo "done."
+  elif ! test -f /var/games/xjump/record; then
+    touch /var/games/xjump/record
+  fi
+  chmod 660 /var/games/xjump/record
+  chgrp games /var/games/xjump/record
+fi
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

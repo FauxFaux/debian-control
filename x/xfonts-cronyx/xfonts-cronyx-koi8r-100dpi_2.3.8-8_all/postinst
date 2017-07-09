@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ]; then
+    fontdirs="koi8-r.misc koi8-r.75dpi koi8-r.100dpi"
+    for currentdir in $fontdirs; do
+	longdir=/usr/lib/X11/fonts/$currentdir
+	if [ -d $longdir ]; then
+	    if [ $(find $longdir| egrep -v '/(fonts.dir|fonts.alias|encodings.dir)$'| wc -l) -eq 1 ]; then
+		rm $longdir/fonts.dir 2>/dev/null || true
+		rm $longdir/fonts.alias 2>/dev/null || true
+		rm $longdir/encodings.dir 2>/dev/null || true
+		rmdir $longdir
+	    fi
+	fi
+    done
+fi
+
+# Automatically added by dh_installxfonts
+if which update-fonts-dir >/dev/null 2>&1; then
+	update-fonts-dir --x11r7-layout 100dpi
+fi
+# End automatically added section
+

@@ -1,0 +1,20 @@
+#!/bin/sh -e
+
+action="$1"
+oldversion="$2"
+
+if test "$action" = upgrade && dpkg --compare-versions "$oldversion" lt-nl 20090807; then
+  . /usr/share/debconf/confmodule
+  db_get crm114/forceupgrade
+  if [ "$RET" != true ]; then
+    db_reset crm114/cssupgrade
+    db_input critical crm114/cssupgrade || true
+    db_go || true
+    db_get crm114/cssupgrade
+    if [ "$RET" != true ]; then
+      exit 1
+    fi
+  fi
+fi
+
+

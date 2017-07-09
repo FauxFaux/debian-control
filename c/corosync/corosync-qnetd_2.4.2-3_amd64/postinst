@@ -1,0 +1,44 @@
+#!/bin/sh
+
+set -e
+
+dir=/etc/corosync/qnetd
+user=coroqnetd
+
+if [ "$1" = configure ]; then
+    adduser --system --group --quiet --home "$dir" \
+        --no-create-home --disabled-login "$user"
+
+    if ! [ -f "$dir/nssdb/cert8.db" ]; then
+        corosync-qnetd-certutil -i
+    fi
+
+    # Upstream default is too permissive
+    chmod -R g-w "$dir/nssdb"
+    chgrp "$user" "$dir/nssdb" "$dir/nssdb/cert8.db" "$dir/nssdb/key3.db"
+fi
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask corosync-qnetd.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled corosync-qnetd.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable corosync-qnetd.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state corosync-qnetd.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/corosync-qnetd" ]; then
+		update-rc.d corosync-qnetd defaults >/dev/null
+		invoke-rc.d corosync-qnetd start || exit $?
+	fi
+fi
+# End automatically added section
+

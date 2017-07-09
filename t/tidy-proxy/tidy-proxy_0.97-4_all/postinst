@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/tidy-proxy" ]; then
+	update-rc.d tidy-proxy stop 20 0 1 6 . >/dev/null || exit $?
+fi
+# End automatically added section

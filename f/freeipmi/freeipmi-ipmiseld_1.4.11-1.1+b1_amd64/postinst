@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ] && dpkg --compare-versions "$2" "lt" "1.4.4-1.1"; then
+    DOCDIR=/usr/share/doc/freeipmi-ipmiseld
+    DOCLINK=/usr/share/doc/freeipmi-common
+
+    if [ -d $DOCDIR ] && [ ! -L $DOCDIR ] ; then
+        rmdir $DOCDIR
+        ln -s $DOCLINK $DOCDIR
+    fi
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/ipmiseld" ]; then
+		update-rc.d ipmiseld defaults >/dev/null
+		invoke-rc.d ipmiseld start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,64 @@
+#!/bin/sh -e
+
+. /usr/share/debconf/confmodule
+
+TOKEN=/etc/nixstats-token.ini
+
+db_get nixstatsagent/api_host
+[ -n "$RET" ] && APIHOST="$RET"
+db_get nixstatsagent/api_path
+[ -n "$RET" ] && APIPATH="$RET"
+db_get nixstatsagent/user
+[ -n "$RET" ] && USERID="$RET"
+db_get nixstatsagent/server
+[ -n "$RET" ] && SERVERID="$RET"
+db_get nixstatsagent/server_auto
+[ -n "$RET" ] && SERVERAUTO="$RET"
+
+
+if [ "$SERVERAUTO" = "true" -a -n "$USERID" -a ! -f $TOKEN ]; then
+    if [ -z "$APIHOST" -a -z "$APIPATH" ]; then
+        nixstatshello "$USERID" $TOKEN
+    else
+        echo 'Generic "hello" is not implemented'
+    fi
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p nixstatsagent 
+fi
+
+# End automatically added section
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask nixstatsagent.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled nixstatsagent.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable nixstatsagent.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state nixstatsagent.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/nixstatsagent" ]; then
+		update-rc.d nixstatsagent defaults >/dev/null
+		invoke-rc.d nixstatsagent start || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	deb-systemd-invoke start nixstatsagent.service >/dev/null || true
+fi
+# End automatically added section
+
+

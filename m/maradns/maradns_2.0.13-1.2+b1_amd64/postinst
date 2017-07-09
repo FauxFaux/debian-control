@@ -1,0 +1,27 @@
+#!/bin/sh -e
+
+set -e
+
+if ! id -u maradns >/dev/null 2>&1 ; then
+
+    echo "creating MaraDNS system user..."
+    adduser --quiet --system --group --no-create-home --home /etc/maradns maradns
+
+fi
+
+mkdir -p /etc/maradns/logger
+echo "WARNING: "
+echo "The config has changed: please use maradns_user = \"maradns\" from now on,"
+echo "or manually set maradns_uid and maradns_gid"
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/maradns" ]; then
+		update-rc.d maradns defaults >/dev/null
+		invoke-rc.d maradns start || exit $?
+	fi
+fi
+# End automatically added section
+
+exit 0
+

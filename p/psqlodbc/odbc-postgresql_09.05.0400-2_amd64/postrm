@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+case $1 in
+	remove)
+		if test -x /usr/bin/odbcinst ; then
+			odbcinst -u -d -n 'PostgreSQL ANSI'
+			odbcinst -u -d -n 'PostgreSQL Unicode'
+		fi ;;
+esac
+
+

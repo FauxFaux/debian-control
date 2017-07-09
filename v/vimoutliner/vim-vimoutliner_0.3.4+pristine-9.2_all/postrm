@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+
+# update vim-tags on removal
+[ "$1" = remove ] && helpztags /usr/share/vim/addons/doc >/dev/null || :
+
+exit 0

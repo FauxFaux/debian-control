@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/X11/fonts/75dpi/xfonts-baekmuk.alias 2.2-6~ xfonts-baekmuk -- "$@"
+# End automatically added section
+# Automatically added by dh_installxfonts
+if [ -x "`which update-fonts-dir 2>/dev/null`" ]; then
+	update-fonts-dir --x11r7-layout 75dpi
+fi
+# End automatically added section

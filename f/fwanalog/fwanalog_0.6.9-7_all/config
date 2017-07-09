@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+STATE=1
+while true; do
+	case "$STATE" in
+	1)
+		db_input medium fwanalog/language || true
+		db_input medium fwanalog/cron || true
+	;;
+	2)
+		db_get fwanalog/cron
+		if [ "$RET" = "true" ]; then
+			db_input medium fwanalog/mailto || true
+		fi	
+	;;
+	*)
+		break
+	;;
+	esac
+	if db_go; then
+		STATE=$(($STATE + 1 ))
+	else
+		STATE=$(($STATE - 1 ))
+	fi
+done
+
+if [ "$STATE" -eq 1 ]; then
+	exit 10
+fi

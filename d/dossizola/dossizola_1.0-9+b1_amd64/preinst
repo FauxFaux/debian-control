@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+# workaround dpkg bug
+if [ -d /usr/share/doc/dossizola ]
+then
+    rm -rf /usr/share/doc/dossizola
+fi
+
+

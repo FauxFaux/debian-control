@@ -1,0 +1,11 @@
+#! /bin/bash
+
+set -e
+
+if [ -x /var/lib/texmf/web2c/mktexupd ]; then
+  /var/lib/texmf/web2c/mktexupd /usr/share/texmf/tex/plain/litprog cwebcmac.tex
+  /var/lib/texmf/web2c/mktexupd /usr/share/texmf/tex/plain/litprog cwebhmac.tex
+  /var/lib/texmf/web2c/mktexupd /usr/share/texmf/tex/plain/litprog cwebxmac.tex
+fi
+
+

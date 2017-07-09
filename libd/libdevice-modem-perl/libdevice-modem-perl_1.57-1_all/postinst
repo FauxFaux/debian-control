@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+configure)
+    mkdir -p /var/log/modem/
+    touch /var/log/modem/modem.log
+    chgrp dialout /var/log/modem/ /var/log/modem/modem.log
+    chmod 664 /var/log/modem/modem.log
+    ;;
+abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+*)
+    echo "postinst called with unknown argument '$1'"
+    exit 1
+    ;;
+esac
+
+
+exit 0

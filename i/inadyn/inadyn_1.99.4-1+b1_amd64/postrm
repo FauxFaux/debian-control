@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -e
+
+NAME=inadyn
+RUNDIR=/run/$NAME
+LOGDIR=/var/log/$NAME
+CONF=/etc/$NAME.conf
+
+if [ "$1" = "purge" ]
+then
+	if [ -d $RUNDIR ]; then
+	    rm -rf $RUNDIR
+	fi
+	rm -rf $LOGDIR
+	for i in $LOGDIR $CONF
+	do
+		dpkg-statoverride --remove $i 2>/dev/null || true
+	done
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d inadyn remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,27 @@
+#! /bin/sh
+# postinst script for zoom-player
+#
+# see: dh_installdeb(1)
+
+set -e
+
+case "$1" in
+    configure)
+	update-alternatives --install /usr/games/zcode-interpreter zcode-interpreter /usr/games/zoom 60 --slave /usr/share/man/man6/zcode-interpreter.6.gz zcode-interpreter-man-gz /usr/share/man/man6/zoom.6.gz
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+
+
+exit 0
+
+

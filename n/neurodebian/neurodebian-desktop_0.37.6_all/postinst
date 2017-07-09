@@ -1,0 +1,49 @@
+#!/bin/bash -e
+
+# taken from gnome-icon-theme package postinst
+write_cache()
+{
+if [ -x /usr/bin/gtk-update-icon-cache ]; then
+    if ! gtk-update-icon-cache --force --quiet /usr/share/icons/gnome; then
+        echo "WARNING: icon cache generation failed"
+    fi
+fi
+}
+
+if [ "$1" = "triggered" ]; then
+    write_cache
+    exit 0
+fi
+
+
+if [ "$1" = "configure" -o "$1" = "abort-upgrade" ]; then
+    # Alternatives for the background (use higher priority than desktop-base
+    update-alternatives --install \
+        /usr/share/images/desktop-base/desktop-background \
+        desktop-background \
+        /usr/share/backgrounds/neurodebian.png 100
+
+    # /usr/share/icons/gnome/scalable/places
+    # For now disabled override of start-here since generally there is no alternative,
+    # and we must not change content of other packages under /usr. Eventually
+    # we might divert original files and add them as alternatives, or hack up our own
+    # theme "overlay"
+    for d in ; do
+        # For the future - we might adjust for other themes as well
+        [ -e $d ] || continue
+        # push SVG icon and pixmaps for all relevant sizes
+        SIZES=$(ls ${d//scalable/*} | sed -rn 's,^.*/([0-9]+)x[0-9]+/.*$,\1,p')
+        command="update-alternatives --install $d/start-here.svg start-here.svg /usr/share/pixmaps/neurodebian.svg 100"
+        for s in $SIZES; do
+          command="$command --slave ${d//scalable/${s}x${s}}/start-here.png start-here-${s}.png /usr/share/pixmaps/neurodebian.png"
+        done
+        $command
+        break
+    done
+
+    # let GTK know about the change
+    write_cache
+fi
+
+
+

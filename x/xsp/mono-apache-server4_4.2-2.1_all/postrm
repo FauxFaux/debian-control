@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "purge" ]; then
+	rm -f /etc/mono-server4/debian.webapp
+	rm -f /etc/mono-server4/mono-server4-hosts.conf
+	# remove default file created in postinst
+	rm -f /etc/default/mono-apache-server4
+fi
+
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

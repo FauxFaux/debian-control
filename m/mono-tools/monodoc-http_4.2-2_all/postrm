@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installxsp
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+    if [ -x /usr/sbin/mono-xsp4-update ]; then
+	/usr/sbin/mono-xsp4-update || true
+    fi
+    if [ -x /usr/sbin/mono-server4-update ]; then
+	/usr/sbin/mono-server4-update || true
+    fi
+fi
+# End automatically added section
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section

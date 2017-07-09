@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" ]; then
+
+    # Legacy code: old versions
+
+    [ ! -f /var/lib/games/xonix.scores ] || rm -f /var/lib/games/xonix.scores
+    [ ! -d /var/lib/games/xonix ] || rm -rf /var/lib/games/xonix
+    [ ! -d /var/games ] || rmdir /var/games || :
+
+    if [ -d /var/cache/xonix ]; then
+	rm -rf /var/cache/xonix
+    fi
+fi
+
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+

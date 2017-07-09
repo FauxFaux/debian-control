@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure|reconfigure)
+        if [ -e /usr/share/debconf/confmodule ]
+        then
+            . /usr/share/debconf/confmodule
+            db_input low mlmmj/remove-on-purge || true
+            db_go || true
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+exit 0

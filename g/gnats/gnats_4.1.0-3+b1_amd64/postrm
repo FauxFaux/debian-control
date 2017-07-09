@@ -1,0 +1,50 @@
+#!/bin/sh
+#
+# Gnats installation script -- written by Brian White <bcwhite@pobox.com>
+# (This was my very first attempt at learning perl... please forgive me!)
+#
+# Forgiving -- rewritten to bash :-) by Milan Zamazal <pdm@debian.org>.
+# ...and streamlined with SED by Chad Walstrom <chewie@debian.org>
+
+set -e
+
+###############################################################################
+#
+# Utility functions
+#
+
+# Call arguments and never return error
+protect () { "$@" || true; }
+
+###############################################################################
+#
+# Common initialization for install scripts
+#
+if [ -f /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+fi
+
+###############################################################################
+#
+# Purging actions
+#
+
+if [ "$1" = purge ]; then
+  # Purge gnats database
+  protect rm -rf /var/lib/gnats/gnats-db /var/lib/gnats/gnats-db.old
+
+  # Remove the inetd setting when purging this package.
+  if [ -e "/usr/sbin/update-inetd" ] ; then
+  	update-inetd --remove "#?support.*"
+  fi
+
+  # Remove debconf templates and data
+  db_purge || true
+fi
+
+###############################################################################
+#
+# Automatically added debhelper stuff
+#
+
+

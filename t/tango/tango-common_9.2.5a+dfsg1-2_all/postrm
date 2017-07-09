@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" ]; then
+    rm -f /etc/tangorc
+    if which ucf >/dev/null 2>&1; then
+	ucf --purge /etc/tangorc
+    fi
+    if which ucfr >/dev/null; then
+	ucfr --purge tango-common /etc/tangorc
+    fi 
+fi
+
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

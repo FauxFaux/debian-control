@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ "$1" = configure ]; then
+	db_get xringd/modem-device 
+	if [ ! -f /etc/xringd.conf -a "echo "$RET" | grep -Eq '(tty|modem)'" ]; then
+			cat /usr/share/xringd/xringd.conf | sed "s&/dev/ttyS0&$RET&" > /etc/xringd.conf
+	else
+        MODDEV=$(grep -E '^-m ' /etc/xringd.conf | cut -d\  -f2)
+		if [ "$RET" != "$MODDEV" -a "echo "$RET" | grep -Eq '(tty|modem)'" ]; then
+            TMPFILE=$(mktemp /tmp/$p.XXXXXX)
+				cat /etc/xringd.conf | \
+				sed "s@^-m.*$MODDEV@-m $RET@" > $TMPFILE 
+				mv /etc/xringd.conf /etc/xringd.conf.bak
+				mv $TMPFILE /etc/xringd.conf
+		fi
+	fi
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/xringd" ]; then
+		update-rc.d xringd defaults >/dev/null
+		invoke-rc.d xringd start || exit $?
+	fi
+fi
+# End automatically added section
+
+

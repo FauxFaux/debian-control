@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] && dpkg --compare-versions "$2" lt-nl 2.1.0-1; then
+    if [ -L /usr/share/doc/python-spyderlib/html ]; then
+        rm -f /usr/share/doc/python-spyderlib/html
+    fi
+fi
+

@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+db_input medium jwchat/ApacheServerName || true
+db_go || true
+db_get jwchat/ApacheServerName
+if [ "$RET" != "none" ]; then
+  db_input low jwchat/JabberAddress || true
+fi
+db_go || true
+

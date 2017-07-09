@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        # Load debconf library.
+        . /usr/share/debconf/confmodule
+
+        db_get lyskom-elisp-client/server-list-query
+        if [ "$RET" = "true" ]; then
+            foo=english
+        else
+            foo=full
+        fi
+        ln -sf ${foo}serverlist.el /usr/share/emacs/site-lisp/lyskom-elisp-client/serverlist.el
+
+        /usr/lib/emacsen-common/emacs-package-install lyskom-elisp-client
+        ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+        exit 0
+        ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 0
+        ;;
+esac
+
+
+

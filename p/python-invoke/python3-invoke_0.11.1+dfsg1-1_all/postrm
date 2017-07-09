@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "disappear" ]; then
+	update-alternatives --remove invoke /usr/bin/python3-invoke
+	update-alternatives --remove inv /usr/bin/python3-inv
+fi
+
+
+
+exit 0
+

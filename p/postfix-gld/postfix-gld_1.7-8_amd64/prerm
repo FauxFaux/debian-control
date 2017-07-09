@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+case "$1" in
+  upgrade|remove|deconfigure)
+    if [ -x /etc/init.d/gld ]; then
+      invoke-rc.d gld stop
+    fi
+    ;;
+esac

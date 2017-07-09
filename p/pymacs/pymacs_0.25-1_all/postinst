@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installemacsen
+if [ "$1" = "configure" ] && [ -e /var/lib/emacsen-common/state/package/installed/emacsen-common ]
+then
+	/usr/lib/emacsen-common/emacs-package-install --postinst pymacs
+fi
+# End automatically added section
+
+# Automatically added by dhpython:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p pymacs 
+fi
+
+# End automatically added section

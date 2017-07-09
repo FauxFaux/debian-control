@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+case "$1" in
+    triggered | configure)
+    # We don't print a status message here, as dpkg already said
+    # "Processing triggers for libomxil-bellagio...".
+    # we don't want to regenerate registry under /root
+	env -u HOME OMX_BELLAGIO_REGISTRY=/var/lib/libomxil-bellagio0/registry omxregister-bellagio
+	exit 0
+	;;
+    *)
+	;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,94 @@
+#! /bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+# We can back up.
+db_capb backup
+
+# To make backing up easier, we do a lot of the logic outside the state
+# machine.
+
+question1=no
+question2=no
+
+# Useful system information.
+hostname=`hostname --fqdn 2>/dev/null || true`
+domainname=`dnsdomainname 2>/dev/null || true`
+
+# Default news server.
+if [ ! -s /etc/news/server ]; then
+    db_get shared/news/server
+    nntpserver="$RET"
+    if [ -z "$nntpserver" ]; then
+	# Try to guess a good value for the NNTP server.
+	if [ -n "$domainname" ]; then
+	    nntpserver="news.$domainname"
+	else
+	    nntpserver="$hostname"
+	fi
+    fi
+    db_set shared/news/server "$nntpserver"
+    question1=yes
+fi
+
+# Default mail name.
+if [ ! -s /etc/mailname ]; then
+    db_get knews/mail-name
+    mailname="$RET"
+    if [ -z "$mailname" ]; then
+	mailname="$hostname"
+    fi
+    db_set knews/mail-name "$mailname"
+    question2=yes
+fi
+
+# From here on should be fairly generic; copying and pasting this with
+# reference to the above should get you a state machine supporting backing
+# up and unused questions.
+
+state=1
+action=forward
+
+nextstate ()
+{
+    if [ $action = forward ]; then
+	state=$(($state + 1))
+    else
+	state=$(($state - 1))
+    fi
+}
+
+while :; do
+    case $state in
+    1)
+	# "What news server should be used for reading and posting news?"
+	if [ "$question1" = no ]; then nextstate; continue; fi
+	db_input medium shared/news/server || true
+	;;
+    2)
+	# "What is your system's mail name?"
+	if [ "$question2" = no ]; then nextstate; continue; fi
+	db_input medium knews/mail-name || true
+	;;
+    *)
+	break
+	;;
+    esac
+
+    if db_go; then
+	action=forward
+    else
+	action=back
+    fi
+    nextstate
+done
+
+if [ $state = 0 ]; then
+    exit 1
+else
+    exit 0
+fi

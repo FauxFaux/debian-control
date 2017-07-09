@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+  chown www-data:www-data /var/lib/apache2/fcgid
+fi
+
+# Automatically added by dh_apache2
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in fcgid  ; do
+			apache2_invoke enmod $conf  || exit $?
+		done
+	fi
+fi
+# End automatically added section
+

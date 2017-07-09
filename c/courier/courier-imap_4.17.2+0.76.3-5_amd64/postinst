@@ -1,0 +1,100 @@
+#! /bin/sh -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+add_override() {
+    if ! dpkg-statoverride --list $4 >/dev/null; then
+	dpkg-statoverride --update --add $1 $2 $3 $4
+    fi
+}
+
+if [ "$1" = "configure" ]; then
+    if [ ! -f /etc/courier/imapd.pem ]; then
+	mkimapdcert
+	chmod 0640 /etc/courier/imapd.pem
+	chown root:courier /etc/courier/imapd.pem
+    fi
+
+    # generate configuration directories if necessary
+    db_get courier-base/webadmin-configmode
+    if [ "$RET" = true ]; then
+	for dir in imapaccess; do
+	    mkdir -p /etc/courier/$dir
+	    chmod 0750 /etc/courier/$dir
+	    chown root:courier /etc/courier/$dir
+	done
+    fi
+
+    IMAPACCESSFILE=$(sh -c '. /etc/courier/imapd; echo $IMAPACCESSFILE')
+
+    if [ -z "$IMAPACCESSFILE" ]; then
+	cat <<EOF
+ERROR: Mandatory option IMAPACCESSFILE=\${sysconfdir}/imapaccess missing
+ERROR: Aborting installation, either configure it yourself or run:
+
+echo 'IMAPACCESSFILE=\${sysconfdir}/imapaccess' >> /etc/courier/imapd
+dpkg --configure courier-imapd
+
+EOF
+	exit 1
+    fi
+    
+    # run makeimapaccess
+    makeimapaccess
+
+    add_override root courier 0640 /etc/courier/imapd.cnf
+fi
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask courier-imap.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled courier-imap.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable courier-imap.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state courier-imap.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/courier-imap.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/courier-imap" ]; then
+		update-rc.d courier-imap defaults >/dev/null
+		invoke-rc.d courier-imap start || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/courier-imap.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/courier-imap-ssl" ]; then
+		update-rc.d courier-imap-ssl defaults >/dev/null
+		invoke-rc.d courier-imap-ssl start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

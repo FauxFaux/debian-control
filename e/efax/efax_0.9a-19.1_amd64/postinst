@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+# purge templates we dropped in 1:0.9a-15
+if [ "$1" = configure ]  &&\
+  dpkg --compare-versions "$2" lt-nl "1:0.9a-15" && \
+  [ -e /usr/share/debconf/confmodule ]; then
+    . /usr/share/debconf/confmodule
+    db_purge
+fi
+
+

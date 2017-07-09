@@ -1,0 +1,42 @@
+#! /bin/sh
+# postinst script for bastet
+
+set -e
+
+scores=/var/games/bastet.scores2
+oldscores=/var/games/bastet.scores
+
+deal_with_old_score_file () 
+{
+  if [ "$1" = "remove" ] ; then
+    rm $oldscores
+  fi
+}
+
+# old version of bastet (< 0.41-6) will remove high score file
+# on upgrade, so rescue it
+if $(dpkg --compare-versions "$2" lt-nl 0.41-6) && [ -e "$oldscores.tmp" ] ; then
+  mv "$oldscores.tmp" "$oldscores"
+fi
+if [ ! -e "$scores" ] ; then
+
+  touch "$scores"
+  chgrp games "$scores"
+  chmod 664 "$scores"
+fi
+
+. /usr/share/debconf/confmodule
+
+if [ -e "$oldscores" ] ; then
+  db_get bastet/score_file_compatibility
+  deal_with_old_score_file $RET
+fi
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+exit 0

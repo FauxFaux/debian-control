@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+# In older versions, /var/lib/games/xsok/* were -rw-r--r-- games.root
+
+if [ -d /var/lib/games/xsok ] ; then
+    chown root:games /var/lib/games/xsok /var/lib/games/xsok/*
+    chmod 2775 /var/lib/games/xsok
+    chmod 664 /var/lib/games/xsok/*
+fi
+
+# /var/lib/games/xsok changed location to /var/games/xsok.
+
+if [ -d /var/lib/games/xsok ]; then
+    rm -rf /var/games/xsok
+    cp -a /var/lib/games/xsok /var/games
+    rm -rf /var/lib/games/xsok
+fi
+
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

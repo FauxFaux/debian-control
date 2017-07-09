@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+if dpkg-maintscript-helper supports mv_conffile 2>/dev/null; then
+	dpkg-maintscript-helper mv_conffile /etc/apache2/mods-available/mod-evasive.load /etc/apache2/mods-available/evasive.load 1.10.1-1 -- "$@"
+fi
+
+# Automatically added by dh_apache2
+if [ "$1" = "purge" ] ; then
+	if true; then
+		if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+			. /usr/share/apache2/apache2-maintscript-helper
+
+			for conf in evasive  ; do
+				apache2_invoke dismod $conf  || exit $?
+			done
+		fi
+	fi
+fi
+# End automatically added section
+
+
+

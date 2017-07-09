@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "reconfigure" ] || [ "$DEBCONF_RECONFIGURE" = "1" ] ; then
+    exit 0
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/apache2/conf.d/apache2 /etc/apache2/conf-available/smb2www.conf 980804-41~ -- "$@"
+# End automatically added section
+
+
+oldf=/etc/apache2/conf.d/apache2 # this was a bug that smb2www used such a file name
+newd=/etc/apache2/conf-available
+newf="$newd/smb2www.conf"
+
+# Work-around for dpkg bug #711598
+if [ -f "$oldf" ] && [ ! -e "$newf" ] &&  [ "$1" = "install" -o "$1" = "upgrade" ] &&
+   dpkg --compare-versions "$2" le-nl "980804-41~"; then
+   [ -d "$newd" ] || mkdir -p "$newd"
+   mv "$oldf" "$newf"
+fi
+
+exit 0
+# vim: et ts=4

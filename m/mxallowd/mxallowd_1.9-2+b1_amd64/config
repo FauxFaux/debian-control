@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -e
+
+parse_conffile ()
+{
+	unset FAKE_SERVERS
+	unset REAL_SERVERS
+	while read key value rest
+	do
+		case "$key" in
+		fake-mailserver)
+			FAKE_SERVERS="${FAKE_SERVERS} $value"
+		;;
+		real-mailserver)
+			REAL_SERVERS="${REAL_SERVERS} $value"
+		;;
+		esac
+	done < /etc/mxallowd.conf
+}
+
+. /usr/share/debconf/confmodule
+
+if [ -f /etc/mxallowd.conf ]
+then
+    parse_conffile
+    [ -z "$REAL_SERVERS" ] || db_set mxallowd/real_mailservers "$REAL_SERVERS"
+    [ -z "$FAKE_SERVERS" ] || db_set mxallowd/fake_mailservers "$FAKE_SERVERS"
+fi
+
+db_title "mxallowd"
+db_input high mxallowd/real_mailservers || true
+db_go || true
+
+db_input high mxallowd/fake_mailservers || true
+db_go || true

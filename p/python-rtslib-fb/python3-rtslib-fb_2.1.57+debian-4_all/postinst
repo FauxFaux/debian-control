@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/targetctl targetctl /usr/bin/targetctl-python3 200
+	if [ ! -d /etc/rtslib-fb-target ] ; then
+		mkdir -p /etc/rtslib-fb-target
+	fi
+	# If file doesn't exist or is of size zero, write it...
+	if [ ! -s /etc/rtslib-fb-target/saveconfig.json ] ; then
+		echo "{
+  \"fabric_modules\": [],
+  \"storage_objects\": [],
+  \"targets\": []
+}" >/etc/rtslib-fb-target/saveconfig.json
+	fi
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-rtslib-fb 
+fi
+
+# End automatically added section
+

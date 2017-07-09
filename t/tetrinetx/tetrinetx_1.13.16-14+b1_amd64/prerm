@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+
+ACTION=$1 ; shift
+
+case "$ACTION" in
+  failed-upgrade)
+    VERSION=$1 ; shift
+    DEBVER=`echo $VERSION | cut -d- -f2`
+    if [ "$DEBVER" -lt "5" ]; then
+      # dont try to stop -> do nothing and return success.
+      echo -n "Version prior to 5 are not daemonized correctly: "
+      echo    "Not running tetrinetx init script."
+      exit 0
+    fi
+    # else let the debhelper stuff acting.
+esac
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/tetrinetx" ]; then
+	invoke-rc.d tetrinetx stop || exit $?
+fi
+# End automatically added section
+

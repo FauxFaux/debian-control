@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "configure" ] || [ "$1" = "reconfigure" ]; then
+
+    # Do you want to download snort rules
+    db_input medium fwsnort/download || true
+    db_go
+
+fi
+
+exit 0

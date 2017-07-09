@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+if [ "$1" = "purge" ]; then
+  if which update-inetd >/dev/null 2>&1; then
+    update-inetd --remove "^tfido.*/usr/lib/ifmail/ifcico"
+    update-inetd --comment-chars "#disabled#" --enable tfido
+    update-inetd --remove "^fido.*/usr/lib/ifmail/ifcico"
+    update-inetd --comment-chars "#disabled#" --enable fido
+  fi
+  rm -rf /var/spool/ftn/nl.d/index.dir \
+  /var/spool/ftn/nl.d/index.pag  >/dev/null
+elif which update-inetd >/dev/null 2>&1; then
+  update-inetd --disable "^tfido.*/usr/lib/ifmail/ifcico"
+  update-inetd --disable "^fido.*/usr/lib/ifmail/ifcico"
+fi
+
+
+

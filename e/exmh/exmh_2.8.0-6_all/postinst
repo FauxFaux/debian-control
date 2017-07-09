@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+if [ -x /usr/bin/update-menus ] ; then update-menus ; fi
+
+tclsh <<FOO
+puts "Updating tclIndex for tcl v.[info tclversion]"
+auto_mkindex /usr/lib/exmh *.tcl
+FOO

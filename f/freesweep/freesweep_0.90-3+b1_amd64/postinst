@@ -1,0 +1,16 @@
+#! /bin/sh
+# postinst script for freesweep
+
+set -e
+
+scores=/var/games/sweeptimes
+if [ ! -e $scores ] ; then
+  touch $scores
+  chown root:games $scores
+  chmod 0664 $scores
+fi
+
+
+
+exit 0
+

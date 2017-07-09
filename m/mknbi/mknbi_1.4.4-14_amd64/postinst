@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ] && dpkg --compare-versions "$2" lt-nl "1.4.4-14~"
+then
+	# remove leftover diversions dating back to lenny
+	dpkg-divert --package mknbi --remove --rename --divert /usr/bin/mknbi-linux.netboot /usr/bin/mknbi-linux
+	dpkg-divert --package mknbi --remove --rename --divert /usr/bin/mknbi-dos.netboot /usr/bin/mknbi-dos
+	dpkg-divert --package mknbi --remove --rename --divert /usr/bin/mknbi-mgl.netboot /usr/bin/mknbi-mgl
+fi
+
+

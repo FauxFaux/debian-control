@@ -1,0 +1,39 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+
+case "$1" in
+    upgrade)
+    ;;
+    remove|deconfigure)
+    # Remove post installation created files
+
+    # Remove admin credentials
+    if [ -e /usr/share/biomaj/.bmajwatcherpasswd ]; then
+      rm /usr/share/biomaj/.bmajwatcherpasswd
+    fi
+    # Installation logs
+    if [ -e /usr/share/biomaj/install_log.log ]; then
+       rm /usr/share/biomaj/install_log.log
+    fi
+    # Configurator
+    if [ -e /usr/share/biomaj/bin/Configurator.class ]; then
+       rm  /usr/share/biomaj/bin/Configurator.class
+    fi
+    ;;
+
+    failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+

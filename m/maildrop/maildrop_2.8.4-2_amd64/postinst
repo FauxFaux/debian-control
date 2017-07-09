@@ -1,0 +1,31 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ]; then
+# first remove some ancient crap
+  update-alternatives --remove maildirmake /usr/lib/maildrop/bin/maildirmake
+  update-alternatives --remove deliverquota /usr/lib/maildrop/bin/deliverquota
+  update-alternatives --remove deliverquota /usr/lib/maildrop/deliverquota
+  update-alternatives --remove dotlock /usr/lib/maildrop/bin/dotlock
+
+# install new stuff
+  update-alternatives --install /usr/bin/maildirmake maildirmake /usr/bin/maildirmake.maildrop 5 \
+                      --slave /usr/share/man/man1/maildirmake.1.gz maildirmake.1.gz /usr/share/man/man1/maildirmake.maildrop.1.gz
+
+  update-alternatives --install /usr/sbin/deliverquota deliverquota /usr/sbin/deliverquota.maildrop 10 \
+                      --slave /usr/share/man/man8/deliverquota.8.gz deliverquota.8.gz /usr/share/man/man8/deliverquota.maildrop.8.gz
+
+  update-alternatives --install /usr/bin/lockmail lockmail /usr/bin/lockmail.maildrop 5 \
+                      --slave /usr/share/man/man1/lockmail.1.gz lockmail.1.gz /usr/share/man/man1/lockmail.maildrop.1.gz
+
+  update-alternatives --install /usr/share/man/man5/maildir.5.gz maildir.5.gz /usr/share/man/man5/maildir.maildrop.5.gz 5
+
+  update-alternatives --install /usr/share/man/man7/maildirquota.7.gz maildirquota.7.gz /usr/share/man/man7/maildirquota.maildrop.7.gz 5
+
+  update-alternatives --install /usr/bin/makedat makedat /usr/bin/makedat.maildrop 5 \
+                      --slave /usr/share/man/man1/makedat.1.gz makedat.1.gz /usr/share/man/man1/makedat.maildrop.1.gz
+
+fi
+
+
+
+exit 0

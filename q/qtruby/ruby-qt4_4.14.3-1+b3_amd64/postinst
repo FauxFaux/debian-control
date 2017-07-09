@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+# clean up obsolete diversions dating back to libqt4-ruby1.8/lenny
+# perform the cleanup here in the "successor" ruby-qt4 since the
+# transitional package libqt4-ruby1.8 may already have been removed
+if [ "$1" = "configure" ]; then
+	if [ -n "$(dpkg-divert --listpackage /usr/bin/rbqtapi)" ]; then
+		dpkg-divert --remove --rename --package libqt4-ruby1.8 \
+			--divert /usr/bin/rbqtapi.qt3 /usr/bin/rbqtapi
+	fi
+	if [ -n "$(dpkg-divert --listpackage /usr/share/man/man1/rbqtapi.1.gz)" ]; then
+		dpkg-divert --remove --rename --package libqt4-ruby1.8 \
+			--divert /usr/share/man/man1/rbqtapi.qt3.1.gz \
+			/usr/share/man/man1/rbqtapi.1.gz 
+	fi
+fi
+
+

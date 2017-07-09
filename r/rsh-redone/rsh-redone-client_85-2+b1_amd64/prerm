@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+if [ "$1" = remove ] || [ "$1" = deconfigure ]; then
+	update-alternatives --remove rsh /usr/bin/rsh-redone-rsh
+	update-alternatives --remove rlogin /usr/bin/rsh-redone-rlogin
+fi
+
+
+

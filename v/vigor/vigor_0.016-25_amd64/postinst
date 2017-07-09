@@ -1,0 +1,26 @@
+#! /bin/sh
+
+set -e
+
+install_alternative () {
+    update-alternatives --install /usr/bin/$1 $1 /usr/bin/vigor -150 \
+			--slave /usr/share/man/man1/$1.1.gz $1.1.gz \
+				/usr/share/man/man1/vigor.1.gz
+}
+
+case $1 in
+    configure|abort-deconfigure|abort-remove)
+	install_alternative vi
+	install_alternative view
+	install_alternative editor
+	;;
+esac
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+exit 0

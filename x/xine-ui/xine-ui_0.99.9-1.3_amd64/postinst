@@ -1,0 +1,27 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+  triggered|configure)
+    if test -x /usr/bin/xine-list-1.2; then
+      {
+	sed -e '/^MimeType=/ d' </usr/share/xine/xine.desktop
+	echo -n 'MimeType='
+	/usr/bin/xine-list-1.2
+	echo
+      } >/var/lib/xine/xine.desktop.new
+      echo "Updated the MIME types in xine's menu file."
+      mv /var/lib/xine/xine.desktop.new /var/lib/xine/xine.desktop
+    else
+      echo "Not updating the MIME types in xine's menu file."
+    fi
+    ;;
+esac
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

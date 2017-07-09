@@ -1,0 +1,32 @@
+#!/bin/sh
+# debian/config script for the gitolite package
+# Copyright 2010-2011 by Gerfried Fuchs <rhonda@debian.org>
+# Licenced under WTFPLv2
+
+set -e
+
+
+pkg=gitolite3
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+action=$1
+version=$2
+
+if [ "$action" = "configure" -o ! -f /etc/$pkg/gitolite.rc ]; then
+    # ask for user to create
+    db_input medium $pkg/gituser || true
+    db_go
+
+    # ask for repository root directory to use
+    db_input medium $pkg/gitdir || true
+    db_go
+
+    # ask for key of admin user (either file or direct input)
+    db_input high $pkg/adminkey || true
+    db_go
+fi
+
+
+exit 0

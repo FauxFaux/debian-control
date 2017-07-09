@@ -1,0 +1,46 @@
+#!/bin/sh
+
+set -e
+
+umask 0022
+
+do_didiwiki_adduser () {
+    if ! getent passwd didiwiki >/dev/null; then
+        adduser --quiet --system  --no-create-home --home /var/lib/didiwiki \
+        --gecos "DidiWiki" --group didiwiki
+    fi
+    chown -R didiwiki:didiwiki /var/lib/didiwiki
+}
+
+do_didiwiki_css () {
+    ln -s /etc/didiwiki/styles.css /var/lib/didiwiki/styles.css \
+    2>/dev/null || true
+}
+
+case "$1" in
+    configure)
+        do_didiwiki_adduser
+        do_didiwiki_css
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/didiwiki" ]; then
+		update-rc.d didiwiki defaults >/dev/null
+		invoke-rc.d didiwiki start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

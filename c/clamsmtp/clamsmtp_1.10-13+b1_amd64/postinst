@@ -1,0 +1,202 @@
+#!/bin/sh
+#
+# postinst -- clamsmtp post-installation configuration script
+#
+set -e
+
+if [ ${DEBUG} ] ; then set -x ; fi
+
+CUSER=clamsmtp
+CGROUP=clamsmtp
+CONFFILE=/etc/clamsmtpd.conf
+DEFFILE=/etc/default/clamsmtp
+RUNDIR=/var/run/clamsmtp
+SPOOLDIR=/var/spool/clamsmtp
+
+# If this is an upgrade, get current configuration
+if [ -n "$2" ] ; then
+    # Set up environment -- I know.  Hackery, but useful.
+    if [ -f ${CONFFILE} ] ; then
+        eval `sed -e '
+# Delete comments
+/^#.*/d
+
+# Delete blank lines
+/^[[:space:]]*$/d
+
+# Replace first ": " with "=" and surround with quotes
+s/^\([a-zA-Z]*\):[[:space:]]*\(.*\)$/\1\="\2";/
+' < ${CONFFILE}` || true
+    fi
+
+    # Pull in config file settings if available
+    # Set default variables
+    RUNDIR=`dirname ${Pidfile:-"/var/run/clamsmtp/clamsmtpd.pid"}`
+    SPOOLDIR=${TempDirectory}
+    CUSER=${User}
+
+    # Read the defaults file
+    if [ -f ${DEFFILE} ] ; then
+        . ${DEFFILE}
+    fi
+fi
+
+#
+# NOTE: I can't place the debconf source at the top of the file because I'm
+# using sed to grab configuration information.  Weirdness happens otherwise and
+# postinst hangs.
+#
+if [ -f /usr/share/debconf/confmodule ]; then
+    . /usr/share/debconf/confmodule
+fi
+
+# Fix directory permissions
+fixperms () {
+    if (getent passwd ${CUSER}>/dev/null) && \
+            (getent group ${CGROUP}>/dev/null) ; then
+		    # Spool directory: Don't touch /tmp or /var/tmp
+		    if [ "x${SPOOLDIR}" != "x/tmp" -a "x${SPOOLDIR}" != "x/var/tmp" ] ; then
+			chown ${CUSER}':'${CGROUP} ${SPOOLDIR} || return 1
+			chmod 750 ${SPOOLDIR} || return 1
+		    fi
+    fi
+
+  return 0
+}
+
+# Create directories if new installation configure step
+install_dirs() {
+    # Build the spool directory if it doesn't exist
+    if [ ! -d ${SPOOLDIR} ] ; then
+        install -m 750 -d ${SPOOLDIR} || return 1
+	fixperms
+    fi
+
+    return 0
+}
+
+# Add the clamsmtp user and group
+add_user_group() {
+    if (getent passwd ${CUSER}>/dev/null) && \
+            (getent group ${CGROUP}>/dev/null) ; then
+        return 1
+    fi
+
+    adduser --system --group \
+        --disabled-login --disabled-password \
+        --shell /bin/false --home ${SPOOLDIR} ${CUSER} || return 2
+
+    fixperms
+
+    return 0
+}
+
+add_clamav2group() {
+    # Add the clamav user to the clamsmtp group -- we can assume clamav exists
+    # because of the dependency on clamav-daemon
+    if ! (getent group ${CGROUP} | grep -q clamav>/dev/null) ; then
+        adduser clamav ${CGROUP} || return $?
+
+        # We need to restart the clamav-daemon process to use the new
+        # permissions.  Although currently the restart functionality of
+        # the clamav-daemon init script simply calls start/stop, we
+        # cannot count on that for the future.
+        invoke-rc.d clamav-daemon stop && \
+            invoke-rc.d clamav-daemon start
+   fi
+
+    return 0
+}
+
+# Add CUSER to mail aliases if it isn't there
+add_mail_alias () {
+    AFILE=/etc/aliases
+    # Add clamsmtp alias for root
+    if [ ! -f ${AFILE} -o ! -L ${AFILE} ]; then
+        return 1
+    fi
+
+    if ! grep -qi "^${CUSER}" ${AFILE}; then
+        echo "${CUSER}: root" >> ${AFILE}
+        newal=`which newaliases` || true
+        if [ $newal ] && [ -x $newal ]; then
+            newaliases || return 2
+        fi
+    fi
+
+    return 0
+}
+
+# Update the configuration file with CUSER
+update_config () {
+    if (egrep -q "^User: ${CUSER}" ${CONFFILE}); then
+        # config file is correct
+        return 0
+    fi
+
+    TMP=`tempfile` || return 1
+    cat ${CONFFILE} > ${TMP} || return 2
+    sed -e "s/^\(User:\).*/\1 ${CUSER}/" < ${TMP} > ${CONFFILE} || return 3
+
+    return 0
+}
+
+case $1 in
+    configure)
+        # Create new clamsmtp system user/group?
+        db_get clamsmtp/addusergroup
+        if [ "${RET}" = "true" ] ; then
+            CUSER=clamsmtp
+            CGROUP=clamsmtp
+
+            # Add the clamsmtp user and group
+            if (add_user_group) ; then
+                # Make sure it only happens once
+                db_set clamsmtp/addusergroup false || true
+                # set do-fixperms true
+                db_set clamsmtp/do-fixperms true
+            else
+                # We couldn't add clamsmtp for some reason
+                db_set clamsmtp/do-fixperms false
+            fi
+
+            # Add clamav to group
+            add_clamav2group
+            
+            # Add clamsmtp to aliases file
+            add_mail_alias || true
+
+            # Update configuration file
+            update_config
+
+        fi
+
+        # New installation
+        if [ -z "$2" ] ; then
+            install_dirs
+        # Upgrade
+        else
+            # Should we fix permissions?
+            db_get clamsmtp/do-fixperms
+            if [ "${RET}" = "true" ] ; then
+                fixperms
+                db_set clamsmtp/do-fixperms false
+            fi # END do-fixperms
+        fi
+    ;;
+esac
+
+# Stop debconf before the init.d script starts -- uses sed again
+db_stop
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/clamsmtp" ]; then
+		update-rc.d clamsmtp defaults >/dev/null
+		invoke-rc.d clamsmtp start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

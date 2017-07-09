@@ -1,0 +1,74 @@
+#!/bin/sh -e
+
+if [ "$1" = remove ]; then
+    rm -rf /var/lib/unbound
+    deluser --quiet unbound >/dev/null || true
+fi
+
+if [ "$1" = purge ]; then
+    rm -f /etc/unbound/unbound_control.key \
+        /etc/unbound/unbound_control.pem \
+        /etc/unbound/unbound_server.key \
+        /etc/unbound/unbound_server.pem
+    rm -f /var/lib/unbound/root.key
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/default/unbound 1.5.7-2~ -- "$@"
+# End automatically added section
+# Automatically added by dh_apparmor
+if [ "$1" = "purge" ] && ! [ -e "/etc/apparmor.d/usr.sbin.unbound" ] ; then
+    rm -f "/etc/apparmor.d/disable/usr.sbin.unbound" || true
+    rm -f "/etc/apparmor.d/force-complain/usr.sbin.unbound" || true
+    rm -f "/etc/apparmor.d/local/usr.sbin.unbound" || true
+    rmdir /etc/apparmor.d/disable 2>/dev/null || true
+    rmdir /etc/apparmor.d/local   2>/dev/null || true
+    rmdir /etc/apparmor.d         2>/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d unbound remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask unbound-resolvconf.service unbound.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge unbound-resolvconf.service unbound.service >/dev/null
+		deb-systemd-helper unmask unbound-resolvconf.service unbound.service >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask unbound.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge unbound.service >/dev/null
+		deb-systemd-helper unmask unbound.service >/dev/null
+	fi
+fi
+# End automatically added section
+

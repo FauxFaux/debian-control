@@ -1,0 +1,22 @@
+#!/bin/bash
+
+package=namazu2
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_title "Configuring Namazu package"
+
+PLACE=""
+
+if [ -f /etc/namazu/cgidirs ]; then
+	PLACE=`cat /etc/namazu/cgidirs`
+fi
+
+#if [ ! -z $PLACE -o ! "x$PLACE" = "x" ]; then
+db_set $package/install "$PLACE"
+#fi
+
+db_input medium $package/install || true
+db_go || true

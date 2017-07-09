@@ -1,0 +1,40 @@
+#!/bin/sh
+set -e
+
+OLDCONFFILES="docbook/html/gtk docbook/html/ldp docbook/html/nwalsh docbook/print/ldp docbook/print/nwalsh"
+
+OLDCONFDIR=/etc/sgml/sgml2x
+NEWCONFDIR=/etc/sgml/sgml2x/styles
+
+# move conffiles from old location to new
+
+for i in ${OLDCONFFILES}
+do
+    if [ -r ${OLDCONFDIR}/$i ]
+    then
+	if [ -r ${NEWCONFDIR}/$i ]
+	then
+	    echo >&2 "WARNING: old sgml2x conffile ${OLDCONFDIR}/$i not moved to ${NEWCONFDIR}/$i"
+	    echo >&2 "  because there is a new file in that location.  Please fix by hand."
+	else
+	    printf >&2 "Note: moving old sgml2x conffile: "
+	    mkdir -p `dirname ${NEWCONFDIR}/$i`
+	    mv --verbose ${OLDCONFDIR}/$i ${NEWCONFDIR}/$i
+	fi
+    fi
+done
+
+# remove empty old confdirs if any
+rmdir -p ${OLDCONFDIR}/*/* 2> /dev/null || true
+
+# Automatically added by dh_installcatalogs
+if test -f /etc/sgml/sgml2x.cat -a "(" "$1" = "upgrade" -o "$1" = "install" -a -n "$2" ")" && 
+		! dpkg-query -S /etc/sgml/sgml2x.cat >/dev/null 2>&1; then
+	# If the dpkg-query command returns non-zero, the central catalog is
+	# not owned by any package. This is due to an old behaviour of
+	# debhelper. Now that file becomes a conffile. In order to avoid a
+	# question during installation, we remove the old non-conffile.
+	mv /etc/sgml/sgml2x.cat /etc/sgml/sgml2x.cat.old
+fi
+# End automatically added section
+

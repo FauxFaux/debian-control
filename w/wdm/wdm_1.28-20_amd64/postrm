@@ -1,0 +1,68 @@
+#!/bin/sh
+# Debian wdm package post-removal script
+# Copyright 1998 Marcelo Magallon. Licensed under the GNU GPL.
+# Acknowlegements to Branden Robinson, Stephen Early, Mark Eichin and Manoj Srivastava.
+
+set -e
+
+log_file=/var/log/wdm-errors
+pid_file=/var/run/wdm.pid
+DEFAULT_DISPLAY_MANAGER_FILE=/etc/X11/default-display-manager
+
+case "$1" in
+  remove)
+    for file_to_remove in $log_file $pid_file ; do
+      rm -f $file_to_remove
+    done
+    ;;
+  purge)
+    if [ -e /usr/share/debconf/confmodule ]; then
+      . /usr/share/debconf/confmodule
+      db_purge
+      # Remove default display manager file if question not present
+      if ! db_get shared/default-x-display-manager; then
+	if [ -f $DEFAULT_DISPLAY_MANAGER_FILE ]; then
+	  echo "wdm.postrm: Removing file $DEFAULT_DISPLAY_MANAGER_FILE" >&2
+	  rm -f $DEFAULT_DISPLAY_MANAGER_FILE
+	fi
+      fi
+    fi
+    rmdir /etc/X11/wdm > /dev/null 2>&1 || true
+    rmdir /var/lib/wdm/authdir/authfiles || true
+    rmdir /var/lib/wdm/authdir || true
+    rmdir /var/lib/wdm || true
+    rm -f /etc/X11/wdm/wdm.wmlist
+    update-rc.d wdm remove >/dev/null
+
+    # Remove run time files and GNUStep symlink.
+    rm -rf /var/run/wdm
+    ;;
+  upgrade|failed-upgrade)
+    ;;
+  abort-install)
+    ;;
+  abort-upgrade)
+    ;;
+  disappear)
+    ;;
+esac
+
+exit 0
+
+# This is here just to make lintian happy.
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+
+# vim:set ai et sts=2 sw=2 tw=0:
+
+# Local Variables:
+# mode: shell-script
+# sh-indentation: 2
+# sh-basic-offset: 2
+# End:

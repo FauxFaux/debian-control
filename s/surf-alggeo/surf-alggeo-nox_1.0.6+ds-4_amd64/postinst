@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+update-alternatives \
+	--install /usr/bin/surf-alggeo surf-alggeo /usr/bin/surf-alggeo-nox 10 \
+	--slave /usr/share/man/man1/surf-alggeo.1.gz surf-alggeo.1.gz /usr/share/man/man1/surf-alggeo-nox.1.gz
+
+exit 0

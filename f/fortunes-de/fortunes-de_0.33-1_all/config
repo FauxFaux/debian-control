@@ -1,0 +1,22 @@
+#!/bin/sh -e
+# fortunes-de configuration script
+
+# Source debconf library -- we have a Depends line
+# to make sure it is there...
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+if [ "$1" = configure -o "$1" = reconfigure ] ; then
+        if dpkg --compare-versions "$2" lt-nl 0.21; then
+		db_fget fortunes-de/fortunes_to_install upgradeto0.21
+		if [ "$RET"  = false ]; then
+			db_fset fortunes-de/fortunes_to_install upgradeto0.21 true
+	                db_fset fortunes-de/fortunes_to_install seen false
+		fi
+        fi
+fi
+
+db_input medium fortunes-de/fortunes_to_install || true
+db_go
+
+exit 0

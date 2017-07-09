@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/salt-api" ]; then
+	invoke-rc.d salt-api stop || exit $?
+fi
+# End automatically added section

@@ -1,0 +1,12 @@
+#!/bin/sh
+# -*- shell-script -*-
+set -e
+
+if test -x /usr/bin/update-menus; then
+  update-menus
+fi
+
+cat<<EOF
+Run \`magicfilterconfig' if you want to have your printcap automatically
+generated or edit it by hand.
+EOF

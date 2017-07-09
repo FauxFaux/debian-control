@@ -1,0 +1,71 @@
+#!/bin/sh
+# based on arpwatch.postinst: v11 2004/09/15 KELEMEN Peter <fuji@debian.org>
+# postinst: v1 2006/01/12 Jan Wagner <waja@cyconet.org>
+
+set -e
+
+NUSER="postfw"
+NGROUP="postfw"
+NHOME="/var/lib/$NUSER"
+NGECOS="postfwd user"
+
+case "$1" in
+	configure)
+		# Take care of group.
+		if NGROUP_ENTRY=`getent group $NGROUP`; then
+			# group exists
+			:
+		else
+			# group does not exist yet
+			addgroup --quiet --system $NGROUP
+		fi
+
+		# Take care of user.
+		if NUSER_ENTRY=`getent passwd $NUSER`; then
+			# user exists
+			adduser --quiet $NUSER $NGROUP
+			# 
+		else
+			# user does not exist yet
+			adduser --quiet --system	\
+				--ingroup $NGROUP	\
+				--gecos "$NGECOS"	\
+				--home $NHOME		\
+				--no-create-home	\
+				--shell /bin/sh		\
+				--disabled-login	\
+				--disabled-password	\
+				--shell /bin/false	\
+				$NUSER
+		fi
+
+		# Set up home directory.
+		if [ -d $NHOME ]; then
+			chown -R ${NUSER}:${NGROUP} $NHOME
+			chmod -R o-rwX $NHOME
+		fi
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+		;;
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+		;;
+esac
+
+update-alternatives --install /usr/sbin/postfwd postfwd /usr/sbin/postfwd1 100 \
+                    --slave /usr/share/man/man1/postfwd.1.gz postfwd.1.gz \
+                    /usr/share/man/man1/postfwd1.1.gz
+update-alternatives --install /usr/sbin/postfwd postfwd /usr/sbin/postfwd2 120 \
+                    --slave /usr/share/man/man1/postfwd.2.gz postfwd.2.gz \
+                    /usr/share/man/man1/postfwd2.1.gz
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/postfwd" ]; then
+		update-rc.d postfwd defaults 19 21 >/dev/null
+		invoke-rc.d postfwd start || exit $?
+	fi
+fi
+# End automatically added section
+

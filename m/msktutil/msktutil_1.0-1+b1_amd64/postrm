@@ -1,0 +1,32 @@
+#!/bin/sh
+set -e
+
+
+
+CONFFILE=/etc/default/msktutil
+
+case "$1" in
+    remove)
+        # Nothing to do here
+    ;;
+
+    purge)
+        # ignore errors during purge
+        set +e
+        if [ -x "/usr/bin/ucf" ]; then
+            ucf --purge $CONFFILE
+        fi
+        rm -rf $CONFFILE
+
+        set -e
+    ;;
+
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+        # Nothing to do here
+    ;;
+
+    *)
+        echo "$0 called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac

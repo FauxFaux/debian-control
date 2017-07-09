@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -e
+
+PYTHONVER=2
+ALT_NAME1=SL
+ALT_LINK1="/usr/bin/${ALT_NAME1}"
+ALT_PATH1="/usr/lib/python${PYTHONVER}-softlayer/${ALT_NAME1}"
+ALT_NAME2=slcli
+ALT_LINK2="/usr/bin/${ALT_NAME2}"
+ALT_PATH2="/usr/lib/python${PYTHONVER}-softlayer/${ALT_NAME2}"
+
+case "$1" in
+    upgrade)
+        ;;
+    remove|failed-upgrade|deconfigure)
+        update-alternatives --remove "${ALT_NAME1}" "${ALT_PATH1}"
+        update-alternatives --remove "${ALT_NAME2}" "${ALT_PATH2}"
+        ;;
+esac
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p python-softlayer 
+else
+	dpkg -L python-softlayer | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+
+exit 0

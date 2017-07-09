@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+STD_PLUGINS="breeze disk-smb dns flexlm fping games hppjd ifstatus ldap mailq mrtg mysql netware nt pgsql radius rpc-nfs snmp"
+
+if [ "$1" = "purge" ]; then
+	if which ucf >/dev/null 2>&1; then
+		have_ucf="yes"
+	fi
+	for f in $STD_PLUGINS; do
+		rm -f /etc/nagios-plugins/config/${f}.cfg
+		if [ "$have_ucf" = "yes" ]; then
+			ucf --purge /etc/nagios-plugins/config/${f}.cfg
+		fi
+	done 
+fi
+
+

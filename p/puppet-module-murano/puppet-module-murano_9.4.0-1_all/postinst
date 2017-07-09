@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/murano puppet-module-murano /usr/share/puppet/modules.available/murano 500
+fi
+
+
+
+exit 0

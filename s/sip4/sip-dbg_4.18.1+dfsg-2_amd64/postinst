@@ -1,0 +1,13 @@
+#! /bin/sh
+set -e
+
+
+DOCDIR=/usr/share/doc/sip-dbg
+DOCLINK=sip-dev
+
+if [ -d $DOCDIR ] && [ ! -L $DOCDIR ]; then
+    rmdir $DOCDIR
+    ln -s $DOCLINK $DOCDIR
+fi
+
+

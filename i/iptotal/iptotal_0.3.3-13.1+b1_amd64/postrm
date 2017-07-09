@@ -1,0 +1,30 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/iptotal/apache.conf /etc/apache2/conf-available/iptotal.conf 0.3.3-13.1~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d iptotal remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_apache2
+if [ "$1" = "purge" ] ; then
+	if true; then
+		if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+			. /usr/share/apache2/apache2-maintscript-helper
+
+			for conf in iptotal  ; do
+				apache2_invoke disconf $conf  || exit $?
+			done
+		fi
+	fi
+fi
+# End automatically added section

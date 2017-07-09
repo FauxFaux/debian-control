@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" != "upgrade" ]; then
+    update-alternatives --remove gnuplot /usr/bin/gnuplot-nox
+    update-alternatives --remove gnuplot5 /usr/bin/gnuplot-nox
+    update-alternatives --remove gnuplot /usr/bin/gnuplot4-nox
+    update-alternatives --remove gnuplot4 /usr/bin/gnuplot4-nox
+fi
+
+

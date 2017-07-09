@@ -1,0 +1,278 @@
+#! /bin/sh
+# postinst script for monotone-server
+#
+# This script attempts to perform any db migrations neccessary during an
+# upgrade.
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+
+# source debconf stuff
+. /usr/share/debconf/confmodule
+
+MTN=/usr/bin/mtn
+
+monotone_check_minimum_previous_version ()
+{
+    if dpkg --compare-versions "$MTN_VERSION" lt "0.17"; then
+	# monotone version to old to automatically upgrade
+	echo "Cannot automatically upgrade from monotone version $2." >&2
+	echo "Please see UPGRADE and README.changesets in /usr/share/doc/monotone for" >&2
+	echo "information on manually upgrading your database." >&2
+	false
+    else
+	true
+    fi
+}
+
+monotone_migrate ()
+{
+    if dpkg --compare-versions "$MTN_VERSION" lt "0.99-1"; then
+	# upgradable version of monotone
+	echo "Attempting to migrate monotone database.  This may take a while..." >&2
+	echo "A backup named '`basename $MTN_DB~`' will be created in $MTN_HOME." >&2
+
+	cp $MTN_DB $MTN_DB~
+
+	if $MTN --db=$MTN_DB db migrate --rcfile=$MTN_CONFDIR/serverrc \
+	    --no-standard-rcfiles --keydir=$MTN_KEYDIR --confdir=$MTN_CONFDIR \
+	    >&2; then
+	    echo "Database successfully migrated." >&2
+	    true
+	else
+	    echo "*** Error migrating database. ***" >&2
+	    echo "Please see UPGRADE and README.changesets in /usr/share/doc/monotone for" >&2
+	    echo "information on manually upgrading your database." >&2
+	    false
+	fi
+    else
+	true
+    fi
+}
+
+monotone_rosterify ()
+{
+    if dpkg --compare-versions "$MTN_VERSION" lt "0.26"; then
+	# now we need to rosterify
+	echo "Attempting to rosterify monotone database..." >&2
+
+	if $MTN --db=$MTN_DB db rosterify --rcfile=$MTN_CONFDIR/serverrc \
+	    --no-standard-rcfiles --keydir=$MTN_KEYDIR --confdir=$MTN_CONFDIR \
+	    >&2; then
+	    echo "Database successfully rosterified." >&2
+	    true
+	else
+	    echo "*** Error rosterifying database. ***" >&2
+	    echo "Please see UPGRADE and README.changesets in /usr/share/doc/monotone for" >&2
+	    echo "information on manually upgrading your database." >&2
+	    false
+	fi
+    else
+	true
+    fi
+}
+
+monotone_regenerate_caches ()
+{
+    if dpkg --compare-versions "$MTN_VERSION" lt "0.31-90.1"; then
+	# now we need to regenerate caches
+	echo "Attempting to regenerate caches..." >&2
+
+	if $MTN --db=$MTN_DB db regenerate_caches --rcfile=$MTN_CONFDIR/serverrc \
+	    --no-standard-rcfiles --keydir=$MTN_KEYDIR --confdir=$MTN_CONFDIR \
+	    >&2; then
+	    echo "Caches successfully regenerated." >&2
+	    true
+	else
+	    echo "*** Error regenerating roster. ***" >&2
+	    echo "Please see UPGRADE and README.changesets in /usr/share/doc/monotone for" >&2
+	    echo "information on manually upgrading your database." >&2
+	    false
+	fi
+    else
+	true
+    fi
+}
+
+case "$1" in
+    configure)
+
+        # directory turned into symlink; give dpkg a hand
+	if [ ! -L /usr/share/doc/monotone-server ] && \
+	   [ -e /usr/share/doc/monotone-server ]; then
+            rmdir /usr/share/doc/monotone-server
+	    ln -sf monotone /usr/share/doc/monotone-server
+	fi
+
+       MTN_HOME=/var/lib/monotone
+       MTN_DB=$MTN_HOME/default.mtn
+       MTN_CONFDIR=/etc/monotone
+       MTN_KEYDIR=$MTN_HOME/keys
+
+       ucf --debconf-ok /usr/share/monotone/write-permissions.base $MTN_CONFDIR/write-permissions
+       ucf --debconf-ok /usr/share/monotone/read-permissions.base $MTN_CONFDIR/read-permissions
+       if [ -f $MTN_CONFDIR/hooks.lua -a ! -f $MTN_CONFDIR/serverrc ]; then
+	   ucf --debconf-ok /usr/share/monotone/serverrc.base $MTN_CONFDIR/hooks.lua
+	   mv  $MTN_CONFDIR/hooks.lua $MTN_CONFDIR/serverrc
+           # mimic dpkg and remove backups too
+           for ext in '' '~' '%' .bak .ucf-new .ucf-old .ucf-dist; do
+               rm -f $MTN_CONFDIR/hooks.lua$ext || true
+           done
+	   ucfr --purge monotone-server $MTN_CONFDIR/hooks.lua
+       else
+	   ucf --debconf-ok /usr/share/monotone/serverrc.base $MTN_CONFDIR/serverrc
+       fi
+
+       if [ ! -f $MTN_CONFDIR/hooks.d/get_passphrase_from_file.lua ]; then
+	   ln -s /usr/share/monotone/hooks/get_passphrase_from_file.lua $MTN_CONFDIR/hooks.d/
+       fi
+
+       ucfr monotone-server $MTN_CONFDIR/write-permissions
+       ucfr monotone-server $MTN_CONFDIR/read-permissions
+       ucfr monotone-server $MTN_CONFDIR/serverrc
+
+       # if this is our first install give config files correct permissions
+       if [ -z "$2" ]; then
+           # create monotone user and fix permissions of files
+           if [ -z "`id -u monotone 2>/dev/null`" ]; then
+	       adduser --system --group --home $MTN_HOME \
+	       --no-create-home --disabled-password --quiet        \
+	       --gecos "Monotone" monotone
+           fi
+
+           chown monotone:monotone $MTN_HOME
+           chown monotone:monotone $MTN_CONFDIR
+           chown monotone:monotone $MTN_KEYDIR
+           chown monotone:monotone /var/log/monotone
+
+           chmod 0750 $MTN_HOME
+           chmod 0750 $MTN_CONFDIR
+           chmod 0750 $MTN_KEYDIR
+
+           chown monotone:monotone $MTN_CONFDIR/write-permissions
+           chown monotone:monotone $MTN_CONFDIR/read-permissions
+           chown monotone:monotone $MTN_CONFDIR/serverrc
+           chmod 0640 $MTN_CONFDIR/write-permissions
+           chmod 0640 $MTN_CONFDIR/read-permissions
+           chmod 0640 $MTN_CONFDIR/serverrc
+       fi
+
+       db_get monotone-server/manage-db
+       if [ "$RET" = "true" ]; then
+           db_get monotone-server/key
+           MTN_KEY=$RET
+
+           # read our passphrase from a file
+           if [ -e "$MTN_CONFDIR/passphrases" ]; then
+               db_set monotone-server/passphrase "`grep "$MTN_KEY" $MTN_CONFDIR/passphrases | cut -f2 -d"\\""`"
+           fi
+
+           db_get monotone-server/passphrase
+           MTN_KEY_PASSWD=$RET
+
+           MTN_VERSION="$2"
+
+           # Since we are configuring, we should check if we are upgrading.  If we are
+           # upgrading, we should run the proper db migrate commands if necessary.
+
+           if [ -z "$2" ]; then
+              # not upgrading, fresh install
+
+              # if there is no database, create one
+              if [ ! -e $MTN_DB ]; then
+                  echo "Creating Monotone database..." >&2
+                  $MTN --db=$MTN_DB db init \
+                     --no-standard-rcfiles --keydir=$MTN_KEYDIR \
+                     --confdir=$MTN_CONFDIR
+
+                  chmod 0600 $MTN_DB
+                  chown monotone:monotone $MTN_DB
+
+                  echo "Creating Monotone server keypair..." >&2
+
+                  yes "$MTN_KEY_PASSWD" |
+                     $MTN --db=$MTN_DB genkey $MTN_KEY --quiet \
+                     --no-standard-rcfiles --keydir=$MTN_KEYDIR \
+                     --confdir=$MTN_CONFDIR
+
+                  chown monotone:monotone $MTN_HOME/keys/*
+
+                  echo "Monotone database created successfully." >&2
+              fi
+	   else
+	      set +e
+	      monotone_check_minimum_previous_version && \
+		 monotone_migrate && \
+		 monotone_rosterify && \
+		 monotone_regenerate_caches
+	      set -e
+           fi
+
+           echo "$MTN_KEY \"$MTN_KEY_PASSWD\"" > $MTN_CONFDIR/passphrases
+           chown monotone:monotone $MTN_CONFDIR/passphrases
+           chmod 0400 $MTN_CONFDIR/passphrases
+           db_set monotone-server/passphrase ""
+       fi
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# stop debconf
+db_stop
+
+# Those using dependency based boot sequencing and installing
+# monotone before version 0.44-2 would miss the runlevel 2 symlink.
+# Recover from this.  Try not to mess with local configuration --
+# look for the specific combination of S and K links that we
+# know was wrong.
+
+if [ "$1" = "configure" ] && dpkg --compare-versions "$2" le "0.44-2" \
+   && [ -L /etc/rc0.d/K[0-9][0-9]monotone ] \
+   && [ -L /etc/rc1.d/K[0-9][0-9]monotone ] \
+   && [ -L /etc/rc2.d/[SK][0-9][0-9]monotone ] \
+   && [ -L /etc/rc3.d/S[0-9][0-9]monotone ] \
+   && [ -L /etc/rc4.d/S[0-9][0-9]monotone ] \
+   && [ -L /etc/rc5.d/S[0-9][0-9]monotone ] \
+   && [ -L /etc/rc6.d/K[0-9][0-9]monotone ]
+then
+   update-rc.d -f monotone remove
+fi
+
+# dh_installdeb will replace this with shell code automatically
+# generated by other debhelper scripts.
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/monotone" ]; then
+		update-rc.d monotone defaults >/dev/null
+		invoke-rc.d monotone start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0
+
+

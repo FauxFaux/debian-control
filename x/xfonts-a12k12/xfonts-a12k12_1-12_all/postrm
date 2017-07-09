@@ -1,0 +1,31 @@
+#!/bin/sh
+# Debian xfonts-a12k12 package post-removal script
+# based on xfont-cjk's
+# Copyright 1998, 1999 Branden Robinson.  Licensed under the GNU GPL.
+# Acknowlegements to Stephen Early, Mark Eichin, and Manoj Srivastava.
+
+set -e
+
+#trap "echo ;\
+#      echo 'Received signal.  Aborting removal of xfonts-a12k12 package.' ;\
+#      echo ;\
+#      exit 1" 1 2 3 15
+
+case "$1" in
+  remove) ;;
+  purge) ;;
+  upgrade|failed-upgrade|abort-install|abort-upgrade|disappear) exit 0 ;;
+  *) 
+    echo "ERROR: xfonts-a12k12 postrm called with unknown argument \"$1\"."
+    echo "Aborting removal of xfonts-a12k12 package."
+    exit 1 ;;
+esac
+
+# Automatically added by dh_installxfonts
+if [ -x "`which update-fonts-dir 2>/dev/null`" ]; then
+	update-fonts-dir --x11r7-layout misc;update-fonts-alias --exclude /etc/X11/fonts/misc/xfonts-a12k12.alias misc
+fi
+# End automatically added section
+
+
+exit

@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+movecfgfile () {
+  if [ -e "/etc/$1" ] ; then
+    echo -n "Moving $1"
+    mv "/etc/$1" "/etc/proxy-suite/"
+    echo
+  fi
+}
+
+# If we are upgrading we might need to move configfiles
+if [ "$1" = "upgrade" ] ;  then
+  if [ ! -d /etc/proxy-suite ] ; then
+    echo "Moving configuration files to /etc/proxy-suite."
+    mkdir /etc/proxy-suite
+    chmod 755 /etc/proxy-suite
+    movecfgfile ftp-proxy.conf
+  fi
+fi
+
+
+
+exit 0

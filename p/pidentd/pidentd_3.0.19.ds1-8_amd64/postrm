@@ -1,0 +1,40 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+abort-install | remove | abort-upgrade | upgrade | failed-upgrade | disappear)
+	;;
+purge)
+	rm -f /etc/identd.key
+	if [ ! -x identd -a -x userdel ]; then
+		if id -u identd >/dev/null 2>&1; then
+			userdel -r identd
+		fi
+		# If netbase is not installed, then we don't need to do the
+		# remove.
+		#if command -v update-inetd >/dev/null 2>&1; then
+		if test -x update-inetd >/dev/null 2>&1; then
+			update-inetd --remove \
+				"ident	.*	/usr/sbin/identd"
+		fi
+	fi
+	;;
+*)
+	echo "$0: incorrect arguments: $*" >&2
+	exit 1
+	;;
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d pidentd remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+

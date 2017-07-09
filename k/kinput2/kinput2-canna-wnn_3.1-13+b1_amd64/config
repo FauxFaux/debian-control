@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+. /usr/share/debconf/confmodule
+
+if [ -e "$XRESOURCE".new ]; then
+    rm -f "$XRESOURCE".new
+fi
+
+db_input low shared/kinput2/wnn/keybindings || true
+db_go
+

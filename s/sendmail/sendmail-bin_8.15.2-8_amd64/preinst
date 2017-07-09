@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e;
+
+# do we have debconf?
+if [ -f /usr/share/debconf/confmodule ]; then
+	DEBCONF=true;
+	. /usr/share/debconf/confmodule;
+else
+	DEBCONF='';
+	fi;
+
+if [ "$1" = "upgrade" ]; then
+		# Prevent cronjob from running during upgrade...
+		if [ -f /etc/cron.d/sendmail ]; then
+			echo "#preinst" > /etc/cron.d/sendmail;
+			fi;
+fi
+
+

@@ -1,0 +1,34 @@
+#!/bin/sh -e
+
+TCPCRYPT_USER=debian-tcpcryptd
+
+case $1 in
+    configure)
+	# add a debian-tcpcryptd user if one does not already exist
+	if ! getent passwd "$TCPCRYPT_USER" >/dev/null ; then
+	    echo "adding tcpcryptd user..."
+	    adduser --quiet --system --no-create-home --group \
+		--home "/var/run/tcpcryptd" \
+		--shell '/bin/false' \
+		--gecos 'tcpcrypt user,,,' \
+		"$TCPCRYPT_USER"
+	fi        
+        ;;
+esac
+
+# Automatically added by dh_systemd_enable
+if deb-systemd-helper debian-installed tcpcryptd.service; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask tcpcryptd.service >/dev/null || true
+
+	if deb-systemd-helper --quiet was-enabled tcpcryptd.service; then
+		# Create new symlinks, if any.
+		deb-systemd-helper enable tcpcryptd.service >/dev/null || true
+	fi
+fi
+
+# Update the statefile to add new symlinks (if any), which need to be cleaned
+# up on purge. Also remove old symlinks.
+deb-systemd-helper update-state tcpcryptd.service >/dev/null || true
+# End automatically added section
+

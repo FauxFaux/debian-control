@@ -1,0 +1,10 @@
+#!/bin/sh
+# dpkg does not replace symlinks with directories and vice versa, therefore
+# maintainer scripts need to be used.
+set -e
+
+if [ -L /usr/share/doc/wing ] ; then
+    rm -f /usr/share/doc/wing
+fi
+
+

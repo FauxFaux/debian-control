@@ -1,0 +1,25 @@
+#! /bin/sh
+# prerm script for isdnlog
+
+set -e
+
+case "$1" in
+    remove)
+        if [ -x /etc/init.d/isdnutils-base ]; then
+            invoke-rc.d isdnutils-base stop isdnlog
+        fi
+        ;;
+    upgrade|deconfigure)
+#       install-info --quiet --remove /usr/info/isdnutils.info.gz
+        ;;
+    failed-upgrade)
+        ;;
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# pre remove script for Debian GNU/Linux rbootd package
+
+set -e
+
+if which invoke-rc.d >/dev/null 2>&1; then
+  invoke-rc.d rbootd stop
+else
+  /etc/init.d/rbootd stop
+fi
+
+## Remove the local files dir if emtpy -- leave alone o/w
+test ! -d /usr/local/lib/rbootd || rmdir /usr/local/lib/rbootd || true
+
+
+## Remove the old doc directory
+if [ \( "$1" = "upgrade" -o "$1" = "remove" \) -a -L /usr/doc/rbootd ]; then
+        rm -f /usr/doc/rbootd
+fi
+

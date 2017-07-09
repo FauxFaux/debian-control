@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+	remove)
+		rm -f /etc/pekwm/debian-menu
+		;;
+esac
+
+# Automatically added by dh_installwm
+if [ "$1" = "remove" ]; then
+	update-alternatives --remove x-window-manager /usr/bin/pekwm
+fi
+# End automatically added section
+

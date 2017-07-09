@@ -1,0 +1,16 @@
+#! /bin/sh
+
+set -e
+
+alts() {
+    update-alternatives --remove rt /usr/bin/rt-4
+    update-alternatives --remove rt-mailgate /usr/bin/rt-mailgate-4
+}
+
+case "$1" in
+    remove)
+        alts
+	;;
+esac
+
+

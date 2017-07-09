@@ -1,0 +1,52 @@
+#! /bin/sh
+# postinst script for zope-common
+
+set -e
+
+zopeuser=zope
+zopegroup=$zopeuser
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+    configure)
+        if ! getent group zope > /dev/null 2>&1 ; then
+	    addgroup --system --quiet $zopegroup
+        fi
+        if ! getent passwd zope > /dev/null 2>&1 ; then
+	    adduser --quiet \
+		--system --disabled-login --ingroup $zopegroup \
+                --home /var/lib/zope --no-create-home \
+                $zopeuser
+        fi
+	if [ ! -d /var/lib/zope/dzhandle ]; then
+		mkdir -p /var/lib/zope/dzhandle
+		chown $zopeuse:$zopegroup /var/lib/zope/dzhandle
+	fi
+
+    LOCALDIR=/usr/local/share/zope
+    if [ ! -d $LOCALDIR ]; then
+        if mkdir $LOCALDIR 2>/dev/null ; then
+            mkdir $LOCALDIR/Products
+            mkdir $LOCALDIR/Extensions
+            chmod 2775 $LOCALDIR -R
+            chown root:$zopegroup $LOCALDIR -R
+        fi
+    fi
+
+	;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+	;;
+esac
+
+
+
+exit 0
+

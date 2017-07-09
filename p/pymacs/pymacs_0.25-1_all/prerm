@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installemacsen
+if [ -e /var/lib/emacsen-common/state/package/installed/emacsen-common ] ; then
+	/usr/lib/emacsen-common/emacs-package-remove --prerm pymacs
+fi
+# End automatically added section
+
+# Automatically added by dhpython:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p pymacs 
+else
+	dpkg -L pymacs | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section

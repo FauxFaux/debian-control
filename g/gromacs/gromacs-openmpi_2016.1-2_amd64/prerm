@@ -1,0 +1,22 @@
+#! /bin/sh
+# prerm script for gromacs-openmpi
+
+set -e
+
+case "$1" in
+    upgrade)
+        ;;
+    remove|deconfigure|failed-upgrade)
+        update-alternatives --remove mdrun_mpi /usr/bin/mdrun_mpi.openmpi
+        ;;
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0
+
+

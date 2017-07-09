@@ -1,0 +1,45 @@
+#!/bin/sh
+
+set -e
+
+#
+# Skip, if we are not in "configure" state
+#
+if [ "$1" != "configure" ]; then
+        echo "I: Skipping configuration"
+        exit 0
+fi
+
+# source debconf stuff
+. /usr/share/debconf/confmodule
+db_version 2.0
+# source dbconfig-common stuff
+. /usr/share/dbconfig-common/dpkg/postinst.mysql
+dbc_first_version="0.6.1-1"
+dbc_generate_include="perl:/etc/simba/simba-db.cfg"
+dbc_generate_include_perms="0640"
+dbc_generate_include_args="-f template -o template_infile=/usr/share/doc/simba/simba-cfg.template"
+
+# See if we have some host/port values, and it not, fill them in with some defaults
+db_get simba/remote/host && host="$RET"
+db_get simba/remote/port && port="$RET"
+
+if [ ! "$host" ]; then
+    db_set simba/remote/host "localhost"
+fi
+
+if [ ! "$port" ]; then
+    db_set simba/remote/port "3306"
+fi
+
+dbc_go simba $@
+
+# set some permissions
+chown root:www-data /etc/simba/simba*.cfg
+chmod 640 /etc/simba/simba*.cfg
+touch /var/log/simba.log
+chown root:www-data /var/log/simba.log
+chmod 660 /var/log/simba.log
+
+
+exit 0

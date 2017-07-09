@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+  configure)
+	/usr/share/jed/compile/jed-extra install
+	;;
+
+  abort-upgrade|abort-remove|abort-deconfigure)
+  	;;
+
+  *)
+	echo "unknown argument --> \"$1"\" >&2
+	exit 0
+	;;
+esac
+
+

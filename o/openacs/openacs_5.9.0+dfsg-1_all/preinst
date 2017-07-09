@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+
+install|upgrade)
+    # If we're upgrading from 5.7.0+dfsg-1 or earlier, we have to
+    # deal with config.tcl which was marked as a conffile and 
+    # modified by postinst script.
+    # 
+    # If the file was not modified by the user, then we can restore
+    # it to its initial state (before running postinst and modify it
+    # with debconf values) by deleting the modified lines.
+    #
+    # See Bug #663356
+    #  
+    if dpkg --compare-versions "$2" le-nl "5.7.0+dfsg-1"
+    then
+        # First, make a copy so dbconfig-common can get the old config
+        cp /etc/openacs/config.tcl /etc/openacs/config.tcl.old_version
+        # Reset config.tcl to its primordial state
+        sed -i '/set db_host/,/set db_user/d' /etc/openacs/config.tcl
+    fi
+    ;;
+
+abort-upgrade)
+    ;;
+
+*)
+    echo "preinst called with unknown argument '$1'" >&2
+    exit 1
+    ;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,13 @@
+#! /bin/sh
+# postrm script for freesweep
+
+set -e
+
+if [ "$1" = purge ] ; then
+  rm -f /var/games/sweeptimes
+fi
+
+
+
+exit 0
+

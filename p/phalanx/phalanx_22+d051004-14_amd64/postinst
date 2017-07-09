@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+LEARNFILE=/var/games/phalanx.learn
+OLDLEARNFILE=/var/lib/games/phalanx.learn
+
+if test "$1" != configure; then
+  exit 0
+fi
+
+# Create the learning file
+
+db_get phalanx/learning_file_erase
+if [ "$RET" = true ]; then
+  db_get phalanx/learning_file_size
+  ITEMS="$RET"
+  dd if=/dev/zero of="$LEARNFILE" bs=8 count=$ITEMS >/dev/null 2>&1
+  chown root:games "$LEARNFILE"
+  chmod 664 "$LEARNFILE"
+fi
+
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

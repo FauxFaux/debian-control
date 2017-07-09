@@ -1,0 +1,11 @@
+#!/bin/sh
+
+action=$1
+version=$2
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_input high sinfo/cgi || true
+db_go

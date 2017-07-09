@@ -1,0 +1,43 @@
+#!/bin/sh
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+
+set -e
+
+
+
+
+if [ `grep -c '\/etc\/sysprofile' /etc/profile` = 0 ]; then
+    echo ""
+    echo "      There is no entry for '/etc/sysprofile'"
+    echo "      in this system's '/etc/profile' file."
+    echo "      "
+    echo "      If you want /etc/sysprofile be sourced"
+    echo "      by default, append these lines to" 
+    echo "      /etc/profile for login shells:"
+    echo ""
+    echo "          if [ -f /etc/sysprofile ]; then"
+    echo "               . /etc/sysprofile"
+    echo "          fi"
+    echo ""
+    echo "      Example files for /etc/sysprofile.d/ can be found in"
+    echo "      \"/usr/share/doc/sysprofile/examples/\"."
+    echo ""
+fi
+
+if [ `grep -c '\/etc\/sysprofile' /etc/bash.bashrc` = 0 ]; then
+    echo ""
+    echo "      There is no entry for '/etc/sysprofile'"
+    echo "      in this system's '/etc/bash.bashrc' file."
+    echo "      "
+    echo "      If you want /etc/sysprofile be sourced for"
+    echo "      non-login bash shells by default as well," 
+    echo "      append these lines to /etc/bash.bashrc:"
+    echo ""
+    echo "          if [ -f /etc/sysprofile ]; then"
+    echo "               . /etc/sysprofile"
+    echo "          fi"
+    echo ""
+    echo "      Example files for /etc/sysprofile.d/ can be found in"
+    echo "      \"/usr/share/doc/sysprofile/examples/\"."
+    echo ""
+fi

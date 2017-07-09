@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+# This is in case we upgrade from dcmtk version < 3.5.4
+if [ -x "/etc/init.d/imagectn" ]; then
+    if which invoke-rc.d ; then
+        invoke-rc.d --quiet imagectn stop 
+    else
+        /etc/init.d/imagectn stop 
+    fi
+fi
+
+if [ -x "/etc/init.d/dcmqrscp" ]; then
+    if which invoke-rc.d ; then
+        invoke-rc.d --quiet dcmqrscp stop
+    else
+        /etc/init.d/dcmqrscp stop
+    fi
+fi
+
+
+
+exit 0

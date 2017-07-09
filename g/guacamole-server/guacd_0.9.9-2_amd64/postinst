@@ -1,0 +1,65 @@
+#!/bin/sh
+#
+# Simple postinst script for guacd which creates a "guacd" user and group
+# and sets the permissions and ownership of /var/run/guacd (the location
+# of the guacd.pid file).
+#
+
+
+# Exit on errors
+set -e
+
+GUACD_USER="guacd"              # guacd username
+GUACD_GROUP="guacd"             # guacd group
+GUACD_HOME="/var/run/guacd"     # guacd home directory
+
+# Convenience function for error conditions.
+fail() {
+    echo "$1" >&2
+    exit 1
+}
+
+# Create guacd group if it does not exist
+groupadd -fr "$GUACD_GROUP" ||\
+    fail "Could not create group \"$GUACD_GROUP\""
+
+# Create guacd user if it does not exist
+useradd -g "$GUACD_GROUP" -d "$GUACD_HOME" -s /bin/false -r "$GUACD_USER" || (
+    if [ "$?" != "9" ]
+    then
+        fail "Could not create user \"$GUACD_USER\""
+    fi
+)
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask guacd.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled guacd.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable guacd.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state guacd.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/guacd" ]; then
+		update-rc.d guacd defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d guacd $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+
+
+# Exit successfully
+exit 0

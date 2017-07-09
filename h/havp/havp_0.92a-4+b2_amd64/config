@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+CONFIGFILE=/etc/default/havp
+
+. /usr/share/debconf/confmodule
+
+# Load config file, if it exists. 
+if [ -e $CONFIGFILE ]; then 
+    . $CONFIGFILE || true
+    db_set havp/loopback_mount $USE_LOOPBACK
+fi
+
+db_input medium havp/loopback_mount || true
+
+db_go || true
+
+db_get havp/loopback_mount
+if [ "$RET" = "true" ]; then
+    # may do something like this in the future to find a good default
+     
+    #havp_partition=$havp_dir
+    #until [ "`df -h | grep \" \"$havp_partition\"$\"`" ]; do
+    #  havp_partition=`dirname $havp_partition`;
+    #done
+
+    #havp_loopsize=`df | grep " "$havp_partition"$" | awk '{print $4/2}' | sed 's/\..*//'`
+
+    db_input medium havp/loopback_size || true
+    db_go || true
+fi

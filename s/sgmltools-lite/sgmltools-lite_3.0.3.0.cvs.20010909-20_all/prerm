@@ -1,0 +1,24 @@
+#! /bin/sh
+# prerm script for sgmltools-lite
+
+set -e
+
+PACKAGE=sgmltools-lite
+#CENTRALCAT=/etc/sgml/${PACKAGE}.cat
+
+case "$1" in
+    remove|upgrade|deconfigure)
+
+        # remove runtime compiled files
+	find /usr/share/sgml/misc/sgmltools -name '*.pyc' 2>/dev/null|xargs rm -f
+
+        ;;
+    failed-upgrade)
+        ;;
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+exit 0

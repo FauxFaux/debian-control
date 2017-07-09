@@ -1,0 +1,64 @@
+#! /bin/sh
+# postrm script for lurker
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# debhelper stuff
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+case "$1" in
+  remove)
+
+    CONF="lurker"
+    COMMON_STATE=$(dpkg-query -f '${Status}' -W 'apache2.2-common' 2>/dev/null | awk '{print $3}' || true)
+
+    if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+      . /usr/share/apache2/apache2-maintscript-helper
+      apache2_invoke disconf $CONF || exit $?
+    elif [ "$COMMON_STATE" = "installed" ] || [ "$COMMON_STATE" = "unpacked" ] ; then
+      [ ! -L /etc/apache2/conf.d/$CONF.conf ] || rm /etc/apache2/conf.d/$CONF.conf
+    fi
+  ;;
+
+  purge)
+    # remove the systemgroup lurker
+    LURKER_GROUP=lurker
+    if [ -x $(command -v delgroup) ]; then
+      echo -n "Removing $LURKER_GROUP group .."
+      delgroup --quiet --system $LURKER_GROUP > /dev/null || true
+      echo "..done"
+    else
+      echo >&2 "not removing $LURKER_GROUP system group because delgroup command was not found."
+    fi
+
+    echo "Removing lurker configuration and database."
+
+    # remove the configuration file itself
+    rm -f /etc/lurker/lurker.conf
+
+    # and finally clear it out from the ucf database
+    if [ -x /usr/bin/ucf ]; then
+      ucf --purge /etc/lurker/lurker.conf
+    fi
+    
+    rm -rf /var/lib/lurker
+  ;;
+  
+  upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+  ;;
+  
+  *)
+    echo "postrm called with unknown argument \`$1'" >&2
+    exit 0
+  ;;
+esac
+
+exit 0

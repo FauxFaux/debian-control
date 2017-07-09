@@ -1,0 +1,22 @@
+#!/bin/sh
+# prerm script for frotz
+
+set -e
+
+case "$1" in
+    remove|upgrade|deconfigure|failed-upgrade)
+        update-alternatives --remove zcode-interpreter /usr/games/frotz-launcher
+        ;;
+
+    upgrade)
+        ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 0
+        ;;
+esac
+
+
+
+exit 0

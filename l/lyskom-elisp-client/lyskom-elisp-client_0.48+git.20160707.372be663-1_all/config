@@ -1,0 +1,7 @@
+#! /bin/sh -e
+
+. /usr/share/debconf/confmodule
+
+db_title 'LysKOM Emacs Lisp Client Configuration'
+db_input medium lyskom-elisp-client/server-list-query || true
+db_go

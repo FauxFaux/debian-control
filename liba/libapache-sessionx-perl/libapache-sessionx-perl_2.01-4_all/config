@@ -1,0 +1,409 @@
+#! /usr/bin/perl -w
+
+package Debconf::Client::ConfModuleX;
+
+#
+# Add the error checking behaviour that I think
+# Debconf::Client::ConfModule should have anyway
+#
+
+use Debconf::Client::ConfModule;
+
+use base qw(Exporter);
+
+BEGIN {
+  *EXPORT_OK = \@Debconf::Client::ConfModule::EXPORT_OK;
+  *EXPORT_TAGS = \%Debconf::Client::ConfModule::EXPORT_TAGS;
+}
+
+sub AUTOLOAD {
+  my $cmd = our $AUTOLOAD;
+  $cmd =~ s|.*:||;
+
+  my ($ret, $text) = &{"Debconf::Client::ConfModule::$cmd"}(@_);
+  if ($ret == 0 or $ret >= 30 && $ret < 100) {
+    # expected return values
+    return wantarray ? ($ret, $text) : $text;
+  }
+
+  $cmd = uc $cmd;
+  my $msg = $text ? "$text ($ret)" : "code $ret";
+
+  require Carp;
+  if ($ret < 10 || $ret >= 110) {
+    Carp::confess("Debconf $cmd returned reserved error code? $msg");
+  } elsif ($ret < 20) {
+    # Dump @_ ?
+    Carp::croak("Debconf $cmd: invalid parameters: $msg");
+  } elsif ($ret < 30) {
+    Carp::confess("Debconf $cmd: syntax error: $msg");
+  } else { # $ret < 110
+    Carp::confess("Debconf $cmd: debconf internal error: $msg");
+  }
+}
+
+1;
+
+
+
+package main;
+
+#use Debconf::Client::ConfModuleX qw(:all);
+BEGIN { Debconf::Client::ConfModuleX->import(qw(:all)) }
+
+use strict;
+
+use subs qw(new_store newkey delkey);
+
+
+# ** Keys must match list in libapache-sessionx-perl/store_type:Choices **
+# ** and mixed-case entries match values in postinst:%Store             **
+my %types = (File => [name => 'store_name',
+		      Directory => 'store_file_directory',
+		     ],
+	     FileFile => [name => 'store_name',
+			  Directory => 'store_file_directory',
+			  LockDirectory => 'store_file_lockdirectory',
+			 ],
+	     DB_File => [name => 'store_name',
+			 FileName => 'store_dbfile_filename',
+			 LockDirectory => 'store_file_lockdirectory',
+			],
+	     Mysql => [name => 'store_name',
+		       [DataSource => 'store_mysql_datasource',
+			UserName => 'store_mysql_username',
+			Password => 'store_mysql_password'],
+		      ],
+	     MysqlMysql => [name => 'store_name',
+			    [DataSource => 'store_mysql_datasource',
+			     UserName => 'store_mysql_username',
+			     Password => 'store_mysql_password'],
+			    [LockDataSource => 'store_mysql_lockdatasource',
+			     LockUserName => 'store_mysql_lockusername',
+			     LockPassword => 'store_mysql_lockpassword'],
+			   ],
+	     Oracle => [name => 'store_name',
+			[DataSource => 'store_oracle_datasource',
+			 UserName => 'store_oracle_username',
+			 Password => 'store_oracle_password'],
+		       ],
+	     Sybase => [name => 'store_name',
+			[DataSource => 'store_sybase_datasource',
+			 UserName => 'store_sybase_username',
+			 Password => 'store_sybase_password'],
+		       ],
+	     Postgres => [name => 'store_name',
+			  [DataSource => 'store_postgres_datasource',
+			   UserName => 'store_postgres_username',
+			   Password => 'store_postgres_password'],
+			 ],
+	    );
+sub mkquestions {
+  my $key = shift;
+  my $opts = shift;
+  my @res = ();
+  while (my $arg = shift) {
+    if (ref($arg)) {
+      $opts->{beginblock}->() if $opts->{beginblock};
+      push @res, mkquestions($key, $opts, @$arg);
+      $opts->{endblock}->() if $opts->{endblock};
+    } else {
+      my $tmpl = shift;
+      my $lcarg = lc $arg;
+      my $q = "libapache-sessionx-perl/store_${key}_${lcarg}";
+
+      $opts->{question}->($q, $tmpl) if $opts->{question};
+
+      push @res, $q;
+    }
+  }
+  @res;
+}
+
+
+my $debug = $ENV{DEBIAN_APACHE_SESSIONX_DEBUG};
+
+title 'Apache::SessionX Configuration';
+
+my ($ret) = version '2.0';
+die "debconf too old\n" if $ret == 30;
+
+my %capb = ();
+$capb{$_} = 1 foreach capb('backup');
+#die "frontend doesn't support multiselect\n" unless $capb{multiselect};
+
+my @stores = map {
+  my $name = get "libapache-sessionx-perl/store_${_}_name";
+  my $type = get "libapache-sessionx-perl/store_${_}_type";
+  { key => $_, name => $name, type => $type };
+} split /,/, get 'libapache-sessionx-perl/priv_keys';
+
+unless (@stores) {
+  # no keys -> create default file stores
+  new_store 'File',
+    type => 'File',
+    Directory => '/var/lib/libapache-sessionx-perl/File';
+  new_store 'FileFile',
+    type => 'FileFile',
+    Directory => '/var/lib/libapache-sessionx-perl/FileFile',
+    LockDirectory => '/var/lib/libapache-sessionx-perl/FileFile/locks';
+  new_store 'DB_File',
+    type => 'DB_File',
+    FileName => '/var/lib/libapache-sessionx-perl/DB_File/sessions.db',
+    LockDirectory => '/var/lib/libapache-sessionx-perl/DB_File';
+  set 'libapache-sessionx-perl/default_store', 'File';
+  fset 'libapache-sessionx-perl/default_store', seen => 'false';
+}
+
+my @history = ();
+my $state;
+
+my $store;			# FIXME: put this in @history
+
+STATE:
+while (1) {
+  $state ||= 'main';
+  my $thisstate = $state;
+
+  if ($debug) {
+    warn "state is $state. history is ", join(',', @history);
+    require Data::Dumper;
+    warn "stores are: ", Data::Dumper::Dumper(\@stores);
+  }
+
+  if ($state eq 'main') {
+
+    my $q = 'libapache-sessionx-perl/action';
+
+    set $q, 'Finished';		# avoid really bad loops
+    subst $q, stores => join(', ', map($_->{name}, @stores));
+    input medium => $q;
+
+    my ($ret) = go;
+    if ($ret == 30) { $state = pop @history; next STATE }
+
+    my $action = get $q;
+    if ($action eq 'Finished') {
+      $state = 'default';
+    } elsif ($action eq 'Add New') {
+      $state = 'new';
+    } else {
+      # find $store called $action
+      foreach (@stores) {
+	if ($action eq $_->{name}) {
+	  $store = $_;
+	  last;
+	}
+      }
+      $state = 'modify_delete';
+    }
+
+  } elsif ($state eq 'new') {
+
+    my $key = newkey;		# FIXME: what about if we reached here by going back?
+    $store = $stores[-1];
+
+    my $q = "libapache-sessionx-perl/store_${key}_type";
+
+    register 'libapache-sessionx-perl/store_type', $q;
+    input critical => $q;
+
+    my ($ret) = go;
+    if ($ret == 30) {
+      delkey $key;
+      unregister $q;
+      $state = pop @history;
+      next STATE
+    }
+
+    $store->{type} = get $q;
+
+    $state = 'configure_store';
+
+  } elsif ($state eq 'configure_store') {
+
+    my $type = $store->{type};
+    my $key = $store->{key};
+
+    # seed questions for $type
+    my @qs = mkquestions($key, {question => sub {
+				  register "libapache-sessionx-perl/$_[1]", $_[0];
+				  input high => $_[0];
+				},
+				beginblock => \&beginblock,
+				endblock => \&endblock,
+			       },
+			 @{$types{$type}});
+
+    my ($ret) = go;
+    if ($ret == 30) {
+      unregister($_) foreach @qs;
+      $state = pop @history; next STATE;
+    }
+
+    $store->{name} = get "libapache-sessionx-perl/store_${key}_name";
+
+    # most likely, we want the store we just configured ..
+    set 'libapache-sessionx-perl/default_store', $store->{name};
+    #  .. but we might not
+    fset 'libapache-sessionx-perl/default_store', seen => 'false';
+
+    $state = 'main';
+
+  } elsif ($state eq 'default') {
+
+    my $q = 'libapache-sessionx-perl/default_store';
+
+    if (@stores == 0) {
+      # skip question altogether
+      $state = 'last';
+      next STATE;
+
+    } elsif (@stores == 1) {
+      # skip question altogether, after choosing the only option
+      set $q, $stores[0]{name};
+      $state = 'last';
+      next STATE;
+
+    } else {
+      my $found;
+      if (my $default = get $q) {
+	foreach (@stores) {
+	  if ($_->{name} eq $default) {
+	    $found = 1; last;
+	  }
+	}
+      }
+
+      unless ($found) {
+	# existing default not found, reset and ask again
+	fset $q, seen => 'false';
+	reset $q;
+      }
+
+      subst $q,	stores => join(', ', map($_->{name}, @stores));
+
+      input medium => $q;
+
+      my ($ret) = go;
+      if ($ret == 30) { $state = pop @history; next STATE }
+
+      # exit main loop
+      $state = 'last';
+    }
+
+  } elsif ($state eq 'modify_delete') {
+
+    my $q = 'libapache-sessionx-perl/store_action';
+
+    reset $q;
+    subst $q, store => $store->{name};
+    input critical => $q;
+
+    my ($ret) = go;
+    if ($ret == 30) { $state = pop @history; next STATE }
+
+    my $action = get $q;
+    if ($action eq 'Modify') {
+      $state = 'modify_store';
+    } elsif ($action eq 'Delete') {
+      delkey $store->{key};
+      @history = ();		# FIXME: can't go back now..
+      $state = 'main';
+      next STATE;		# avoid pushing current state onto history
+    } else {
+      require Carp;
+      Carp::confess("unknown action: $action");
+    }
+
+  } elsif ($state eq 'modify_store') {
+
+    my $type = $store->{type};
+    my $key = $store->{key};
+
+    # seed questions for $type
+    my @qs = mkquestions($key, {question => sub {
+				  fset $_[0], seen => 'false'; # reask
+				  input high => $_[0];
+				},
+				beginblock => \&beginblock,
+				endblock => \&endblock,
+			       },
+			 @{$types{$type}});
+
+    my ($ret) = go;
+    if ($ret == 30) { $state = pop @history; next STATE }
+
+    $store->{name} = get "libapache-sessionx-perl/store_${key}_name";
+
+    $state = 'main';
+
+  } elsif ($state eq 'last') {
+
+    # break out of loop
+    last STATE;
+
+  } else {
+
+    require Carp;
+    Carp::confess("unknown state: $state");
+
+  }
+
+  push @history, $thisstate;
+}
+
+sub new_store {
+  my ($name, %args) = @_;
+
+  #FIXME: probably better to decide on a case
+  foreach (keys %args) {
+    my $lc = lc;
+    $args{$lc} = $args{$_} if $lc ne $_;
+  }
+
+  my $key = newkey;
+
+  my $type = $args{type};
+  $args{name} = $name;
+
+  mkquestions $key,
+    {question => sub {
+       my ($q, $tmpl) = @_;
+       register "libapache-sessionx-perl/$tmpl", $q;
+       $q =~ m,/store_${key}_(.*)$,;
+       set $q, $args{$1};
+     },
+    },
+    (type => 'store_type',
+     name => 'store_name',
+     @{$types{$type}},
+    );
+
+  my $store = $stores[-1];
+  $store->{name} = $name;
+  $store->{type} = $type;
+  $store;
+}
+
+sub newkey {
+  my $next = @stores ? $stores[-1]{key} + 1 : 1;
+  push @stores, {key => $next};
+  set 'libapache-sessionx-perl/priv_keys',
+    join(',', map($_->{key}, @stores));
+  $next;
+}
+
+sub delkey {
+  my $key = shift;
+  for (my $i = 0; $i < @stores; $i++) {
+    if ($stores[$i]{key} == $key) {
+      # found -> delete
+      unregister($_) foreach mkquestions $key;
+      splice @stores, $i, 1;
+      set 'libapache-sessionx-perl/priv_keys',
+	join(',', map($_->{key}, @stores));
+      last;
+    }
+  }
+}

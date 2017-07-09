@@ -1,0 +1,30 @@
+#!/bin/sh
+# Copyright 2001 Alberto Gonzalez Iniesta <agi@agi.as>
+# Licensed under the GNU General Public License, version 2.  See the file
+# /usr/share/common-licenses/GPL or <http://www.gnu.org/copyleft/gpl.txt>.
+# 
+set -e
+test $DEBIAN_SCRIPT_DEBUG && set -v -x
+
+# fwlogwatch versions previous to 0.4-3 had fwlw_notify & fwlw_respond in /usr/sbin
+# Move them to /etc if the old-version ($2) is older than 0.4-3
+case "$1" in
+    upgrade)
+
+    if `dpkg --compare-versions $2 lt 0.4-3`
+    then
+        if [ -d /etc/fwlogwatch -a -f /usr/sbin/fwlw_respond -a -f /usr/sbin/fwlw_notify ]
+        then
+            echo Moving fwlw_notify \& fwlw_respond to /etc/fwlogwatch 
+	    mv /usr/sbin/fwlw_respond /etc/fwlogwatch
+	    mv /usr/sbin/fwlw_notify /etc/fwlogwatch
+        fi
+    fi
+
+    ;;
+
+esac
+
+
+
+exit 0

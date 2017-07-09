@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+	if dpkg --compare-versions "$2" lt 20070706-1.4-2; then
+	    for d in dictate digits letters phonetic; do
+		for e in "/usr/share/asterisk/sounds/${d}/fr" "/usr/share/asterisk/sounds/fr/${d}"; do
+		    if ! [ -L "${e}" ] && [ -d "${e}" ]; then
+			rmdir --ignore-fail-on-non-empty "${e}"
+		    fi
+		done
+	    done
+	    for d in dictate digits letters phonetic; do
+		if ! [ -e "/usr/share/asterisk/sounds/fr/${d}" ]; then
+		    ln -s "../${d}/fr" "/usr/share/asterisk/sounds/fr/${d}"
+		fi
+	    done
+	fi
+	;;
+esac
+
+
+
+exit 0

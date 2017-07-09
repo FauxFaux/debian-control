@@ -1,0 +1,28 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+
+	echo
+	echo Remember that before using autodns-dhcp you must configure
+	echo the dhcp and bind servers as well as the package itself.
+	echo To know how to do this have a look at the documentation of
+	echo the package at /usr/share/doc/autodns-dhcp/
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+	echo "postinst called with unknown argument \$1'" >&2
+	exit 0
+    ;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+
+
+# upgrade backups
+if [ "$1" = "configure" ]; then
+    configs=`run-parts --list /etc/storebackup.d/`
+    targets=`sed -ne 's/^targetDir=\(.*\)/\1/p' /dev/null $configs`
+    for dir in $targets
+    do
+	storeBackupConvertBackup "$dir"
+    done
+    if dpkg --compare-versions 1.16.1 gt-nl "$2"; then
+	for dir in $targets
+	do
+	    echo Fixing .md5CheckSums.info in "$dir"
+	    perl -pe 's/^\s*uncompress=bzip2\s*$/uncompress=bzip2 -d\n/' \
+		    -i "$dir"/*/.md5CheckSums.info
+	done
+    fi 
+fi

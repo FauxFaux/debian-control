@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] ; then
+    # If downgrading to version older than 2.6.0-2 stop service first. In this
+    # version init scripts was rewritten and swift-init support was dropped
+    if dpkg --compare-versions "$2" lt "2.6.0-2" ; then
+        echo "Downgrading to < 2.6.0-2, need to stop services first"
+
+        invoke-rc.d swift-account stop || true
+        invoke-rc.d swift-account-auditor stop || true
+        invoke-rc.d swift-account-reaper stop || true
+        invoke-rc.d swift-account-replicator stop || true
+    fi
+fi
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/swift-account" ] && [ "$1" = remove ]; then
+	invoke-rc.d swift-account stop || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/swift-account-replicator" ] && [ "$1" = remove ]; then
+	invoke-rc.d swift-account-replicator stop || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/swift-account-reaper" ] && [ "$1" = remove ]; then
+	invoke-rc.d swift-account-reaper stop || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/swift-account-auditor" ] && [ "$1" = remove ]; then
+	invoke-rc.d swift-account-auditor stop || true
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,20 @@
+#!/bin/sh
+# config script for abook
+# copyright 2012 by Rhonda D'Vine <rhonda@debian.org>
+# Licenced under WTFPLv2
+
+set -e
+
+action=$1
+version=$2
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+db_unregister abook/files_moved || true
+
+# create the /etc/Muttrc.d/ snippet?
+db_input medium abook/muttrc.d || true
+db_go
+
+exit 0

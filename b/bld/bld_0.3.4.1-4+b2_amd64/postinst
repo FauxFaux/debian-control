@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# Inspired by openssh-3.8.1p1/debian/postinst
+# Cyril Bouthors <cyril@bouthors.org>
+# Thu Dec 30 18:17:23 EAT 2004
+
+set -e 
+
+user=bld
+
+if ! getent passwd $user >/dev/null
+then
+    adduser --quiet --system --no-create-home --home /var/run/$user --group $user
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/bld" ]; then
+		update-rc.d bld defaults >/dev/null
+		invoke-rc.d bld start || exit $?
+	fi
+fi
+# End automatically added section
+

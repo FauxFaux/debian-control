@@ -1,0 +1,60 @@
+#!/bin/sh
+# postinst script for openssh-known-hosts
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <postinst> `abort-remove'
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+
+case "$1" in
+	configure|abort-upgrade|abort-remove|abort-deconfigure)
+		kh_link=/etc/ssh/ssh_known_hosts
+		kh_dest=/var/lib/openssh-known-hosts/ssh_known_hosts
+		[ -L $kh_link ] || [ -e $kh_link ] || ln -s $kh_dest $kh_link
+		if [ "`readlink $kh_link`" != $kh_dest ]; then
+			echo "$kh_link already exists, please set up the link to"
+			echo "$kh_dest yourself or point to it"
+			echo "with GlobalKnownHostsFile in ssh_config(5)."
+		fi
+		;;
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+		;;
+esac
+
+# Automatically added by dh_usrlocal
+if [ "$1" = configure ]; then
+(
+	while read line; do
+		set -- $line
+		dir="$1"; mode="$2"; user="$3"; group="$4"
+		if [ ! -e "$dir" ]; then
+			if mkdir "$dir" 2>/dev/null; then
+				chown "$user":"$group" "$dir"
+				chmod "$mode" "$dir"
+			fi
+		fi
+	done
+) << DATA
+/usr/local/share 2775 root staff
+/usr/local/share/openssh-known-hosts 2775 root staff
+/usr/local/share/openssh-known-hosts/plugins 2775 root staff
+DATA
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove arm-linux-gnueabi-gcc /usr/bin/arm-linux-gnueabi-gcc-6
+    update-alternatives --quiet --remove arm-linux-gnueabi-gcov /usr/bin/arm-linux-gnueabi-gcov-6
+fi
+
+
+
+exit 0

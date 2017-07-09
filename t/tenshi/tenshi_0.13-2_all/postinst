@@ -1,0 +1,47 @@
+#! /bin/sh
+# postinst script for tenshi
+
+set -e
+
+case "$1" in
+    configure)
+      if ! getent passwd tenshi 2>&1 >/dev/null; then
+         # the account doesn't exist... time to create it
+         echo "Adding tenshi system user ..."
+         adduser --quiet --system --group --home /var/lib/tenshi tenshi
+         adduser --quiet tenshi adm
+         chown tenshi:root /var/lib/tenshi
+      elif getent passwd tenshi | grep "/var/run/tenshi" 2>&1 >/dev/null; then
+         # change the user's home directory to /var/lib/tenshi on 
+         # previous installations
+         echo "Updating tenshi user's home directory ... "
+         usermod -d /var/lib/tenshi tenshi
+         chown tenshi:root /var/lib/tenshi
+      fi
+
+      chown tenshi:root /etc/tenshi/tenshi.conf
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/tenshi" ]; then
+	update-rc.d tenshi defaults >/dev/null
+	invoke-rc.d tenshi start || exit $?
+fi
+# End automatically added section
+
+#
+
+exit 0
+
+

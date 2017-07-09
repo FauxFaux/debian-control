@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] && dpkg --compare-versions "$2" lt-nl 2.3.1-0.1; then
+	if [ -L /usr/share/doc/latex2rtf-doc/html ]; then
+		rm -f /usr/share/doc/latex2rtf-doc/html
+	fi
+fi
+
+

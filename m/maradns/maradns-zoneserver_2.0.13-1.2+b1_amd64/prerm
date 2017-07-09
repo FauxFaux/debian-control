@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/maradns-zoneserver" ]; then
+	invoke-rc.d maradns-zoneserver stop || exit $?
+fi
+# End automatically added section

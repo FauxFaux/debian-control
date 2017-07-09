@@ -1,0 +1,115 @@
+#! /bin/sh
+
+set -e
+
+prevver="$2"
+
+initperms() {
+	chown munin:adm /var/log/munin
+	chmod 755 /var/log/munin
+	
+	chown root:munin /etc/munin/plugin-conf.d
+	chmod 750 /etc/munin/plugin-conf.d
+}
+
+fixoverrides() {
+	# even though we don't use /var/lib/munin/(plugin-state) anymore we should still remove old overrides
+        overrides="
+/etc/munin/plugin-conf.d
+/var/lib/munin
+/var/lib/munin/plugin-state
+/var/log/munin
+"
+
+        for override in $overrides; do
+                if dpkg-statoverride --list $override >/dev/null; then
+                        dpkg-statoverride --remove $override
+                fi
+        done
+}
+
+init_plugins() {
+	TMPFILE=`mktemp /tmp/munin-node.configure.XXXXXXXXXX`
+	TMPFILE_STDERR=`mktemp /tmp/munin-node.configure.err.XXXXXXXXXX`
+	MUNIN_NODE_CONF_LOG="/var/log/munin/munin-node-configure.log"
+	if [ "$prevver" ]; then
+		MUNIN_NODE_CMD="munin-node-configure --shell --newer "${prevver%-*}""    
+		echo -n "Initializing new plugins.."
+	else
+		MUNIN_NODE_CMD="munin-node-configure --shell"
+		echo -n "Initializing plugins.."
+    fi
+
+	# munin-node-conf returns 1 if case of partial plugin autoconf
+	# errors. We need to ignore these errors as even one plugin
+	# can fail the entire process. See Debian bug #539886 for details.
+	$MUNIN_NODE_CMD 2>$TMPFILE_STDERR >$TMPFILE || true
+	if [ -f $TMPFILE ]; then
+		DATE=`date '+%b %d %T'`
+		echo "$DATE - Starting $MUNIN_NODE_CMD" >> $MUNIN_NODE_CONF_LOG
+		cat $TMPFILE >> $MUNIN_NODE_CONF_LOG
+        if [ -s $TMPFILE_STDERR ]; then
+			echo "The following errors were reported by $MUNIN_NODE_CMD" \
+			>> $MUNIN_NODE_CONF_LOG 
+			cat $TMPFILE_STDERR >> $MUNIN_NODE_CONF_LOG
+        fi
+		sh < $TMPFILE
+	else 
+		echo "failed."
+	fi
+	echo "done."
+	rm -f $TMPFILE $TMPFILE_STDERR
+	echo -n "Restarting munin-node.."
+	invoke-rc.d munin-node restart
+}
+
+case "$1" in
+	configure)
+		# after wheezy / squeeze-sloppy-backports this and fixoverrides() can be removed completly
+		if dpkg --compare-versions "$2" le "2.0~rc5-1"; then
+			fixoverrides
+		fi
+		# after wheezy / squeeze-sloppy-backports just test for [ "$2" = 0 ]
+		if dpkg --compare-versions "$2" le "2.0.0-1" ; then
+			initperms
+		fi
+		init_plugins
+		;;
+        triggered)
+		if [ "$2" = "perl-major-upgrade" ]; then
+			invoke-rc.d munin-node restart
+		fi
+		;;
+	abort-upgrade|abort-deconfigure|abort-remove)
+		:
+		;;
+	*)
+		echo "Called with unknown argument $1, bailing out."
+		exit 1
+		;;
+esac
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask munin-node.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled munin-node.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable munin-node.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state munin-node.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/munin-node" ]; then
+		update-rc.d munin-node defaults >/dev/null
+		invoke-rc.d munin-node start || exit $?
+	fi
+fi
+# End automatically added section
+

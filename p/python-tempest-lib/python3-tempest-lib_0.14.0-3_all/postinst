@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/skip-tracker skip-tracker /usr/bin/python3-skip-tracker 200
+	update-alternatives --install /usr/bin/check-uuid check-uuid /usr/bin/python3-check-uuid 200
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-tempest-lib 
+fi
+
+# End automatically added section
+
+
+exit 0
+

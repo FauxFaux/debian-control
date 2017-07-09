@@ -1,0 +1,45 @@
+#!/bin/sh
+
+set -e
+
+CONFIG=/etc/webfsd.conf
+
+if [ "$1" = "purge" ]; then
+	rm -Rf /var/log/webfs/*
+	if dpkg-statoverride --list /var/log/webfs >/dev/null 2>&1
+	then
+		dpkg-statoverride --remove /var/log/webfs
+	fi
+
+	# Erase the registration of the only config file,
+	# and the file itself as well as intermediary files.
+	for ext in .ucf-new .ucf-old .ucf-dist
+	do
+		rm -f $CONFIG$ext
+	done
+	rm -f $CONFIG
+	test -x /usr/bin/ucfr && \
+		ucfr --purge webfs $CONFIG
+	test -x /usr/bin/ucf && \
+		ucf --purge $CONFIG
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d webfs remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

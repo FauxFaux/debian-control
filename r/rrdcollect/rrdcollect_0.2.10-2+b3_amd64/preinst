@@ -1,0 +1,12 @@
+#!/bin/bash -e
+
+if [ "$1" = "upgrade" ]; then
+    if [ -x /usr/sbin/invoke-rc.d ]; then
+        invoke-rc.d rrdcollect stop || true
+    else
+        /etc/init.d/rrdcollect stop || true
+    fi
+fi
+
+##
+

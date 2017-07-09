@@ -1,0 +1,21 @@
+#! /bin/sh -e
+#
+# sample prerm script for Debian python packages.
+# Written 1998 by Gregor Hoffleit <flight@debian.org>.
+#
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p xmldiff 
+else
+	dpkg -L xmldiff | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+
+exit 0

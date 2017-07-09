@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "purge" ] ; then
+	update-alternatives --display dpmcopyd > /dev/null || \
+		update-rc.d dpmcopyd remove >/dev/null || exit $?
+fi
+
+

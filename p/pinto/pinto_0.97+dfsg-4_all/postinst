@@ -1,0 +1,79 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+defaultRepositoryPath='/var/lib/pinto/repository/default'
+
+if [ "$1" = configure ]; then
+    getent group pinto >/dev/null 2>&1 || addgroup --system pinto
+    getent passwd pinto >/dev/null 2>&1 ||
+    adduser \
+        --system \
+        --home /var/lib/pinto \
+        --disabled-password \
+        --ingroup pinto \
+        pinto
+
+    if [ ! -e "$defaultRepositoryPath" ] ; then
+        pinto -r $defaultRepositoryPath init
+        chown -R pinto:pinto $defaultRepositoryPath
+    else
+        echo "Cannot create a new repository to $defaultRepositoryPath."
+        echo "$defaultRepositoryPath already exist."
+        echo "To create a new repository, remove $defaultRepositoryPath."
+        echo "and exec /usr/bin/pinto -r $defaultRepositoryPath init."
+    fi
+
+    if [ ! -d /var/log/pinto ] ; then
+        mkdir -p /var/log/pinto
+        chown pinto:adm /var/log/pinto
+        chmod 0750 /var/log/pinto
+    fi
+
+    if [ ! -e /var/log/pinto/access.log ] ; then
+        touch /var/log/pinto/access.log
+        chown pinto:adm /var/log/pinto/access.log
+        chmod 0640 /var/log/pinto/access.log
+    fi
+
+    if [ ! -e /var/log/pinto/error.log ] ; then
+        touch /var/log/pinto/error.log
+        chown pinto:adm /var/log/pinto/error.log
+        chmod 0640 /var/log/pinto/error.log
+    fi
+
+    if [ ! -d /etc/pinto ] ; then
+        mkdir -p /etc/pinto
+        chown pinto:pinto /etc/pinto
+        chmod 0700 /etc/pinto
+    fi
+
+    db_get pinto/adminpassword
+    admpass="$RET"
+    htpw='/etc/pinto/htpasswd.users'
+
+    if [ -n "$admpass" ]; then
+        touch "$htpw"
+        echo "$admpass"|htpasswd -i "$htpw" pintoadmin
+        chown pinto:pinto "$htpw"
+        chmod 0400 "$htpw"
+    fi
+
+    db_set pinto/adminpassword ""
+    db_set pinto/adminpassword-repeat ""
+fi
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/pinto" ]; then
+	update-rc.d pinto defaults >/dev/null
+	invoke-rc.d pinto start || exit $?
+fi
+# End automatically added section
+
+
+db_stop
+
+exit 0
+

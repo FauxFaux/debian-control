@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+#
+# Skip, if we are not in "configure" state
+#
+if [ "$1" != "configure" ]; then
+        echo "I: Skipping configuration"
+        exit 0
+fi
+
+#
+#  Handle obsolete directories.
+#
+if [ -d "/etc/xen-tools/xen-create-image.d" ]; then
+	rmdir "/etc/xen-tools/xen-create-image.d" 2>/dev/null || 
+	         echo "The directory /etc/xen-tools/xen-create-image.d is no longer used. You can safely remove it."
+fi
+
+#
+#  1.x -> 2.x
+#
+if [ -d "/etc/xen-tools/hook.d" ]; then
+	rmdir "/etc/xen-tools/hook.d" 2>/dev/null || 
+	         echo "The directory /etc/xen-tools/hook.d is no longer used. You can safely remove it."
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/bash_completion.d/xen-tools 4.6.1-1~ -- "$@"
+# End automatically added section
+
+exit 0

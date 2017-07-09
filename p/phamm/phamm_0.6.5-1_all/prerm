@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_apache2
+if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ] ; then
+	if true; then
+		if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+			. /usr/share/apache2/apache2-maintscript-helper
+
+			for conf in phamm  ; do
+				apache2_invoke disconf $conf  || exit $?
+			done
+		fi
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/phamm/apache.conf /etc/apache2/conf-available/phamm.conf 0.6.2-1.1~ -- "$@"
+# End automatically added section

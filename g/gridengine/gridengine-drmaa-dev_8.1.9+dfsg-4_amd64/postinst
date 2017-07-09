@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+update-alternatives \
+        --install /usr/lib/libdrmaa.so libdrmaa.so /usr/lib/gridengine-drmaa/lib/libdrmaa.so 20 \
+	--slave /usr/include/drmaa.h drmaa.h /usr/lib/gridengine-drmaa/include/drmaa.h
+
+
+
+exit 0

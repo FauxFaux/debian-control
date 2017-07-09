@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e 
+
+if [ ! -e /usr/local/lib/luarocks/rocks/manifest ]; then
+	mkdir -p /usr/local/lib/luarocks/rocks/
+	luarocks-admin make_manifest
+fi
+
+

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+# In older openarena-dbg this was a symlink to openarena-server; dpkg won't
+# replace existing symlinks with directories
+if [ -h /usr/share/doc/openarena-dbg ]
+then
+  rm -f /usr/share/doc/openarena-dbg
+fi
+
+

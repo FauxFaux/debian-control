@@ -1,0 +1,50 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+	configure)
+		update-alternatives --quiet --install /usr/share/apache-icons/default apache-icons /usr/share/apache2/icons 1000
+		update-alternatives --quiet --install /usr/share/apache-icons/default apache-icons /usr/share/apache-icons/tango-png 2000 \
+			--slave /usr/share/apache-icons/default.conf apache-icons.conf /usr/share/apache-icons/tango-png.conf
+		update-alternatives --quiet --install /usr/share/apache-icons/default apache-icons /usr/share/apache-icons/tango-svg 3000 \
+			--slave /usr/share/apache-icons/default.conf apache-icons.conf /usr/share/apache-icons/tango-svg.conf
+		update-alternatives --quiet --install /usr/share/apache-icons/default apache-icons /usr/share/apache-icons/awesome-png 4000 \
+			--slave /usr/share/apache-icons/default.conf apache-icons.conf /usr/share/apache-icons/awesome-png.conf
+		update-alternatives --quiet --install /usr/share/apache-icons/default apache-icons /usr/share/apache-icons/awesome-svg 5000 \
+			--slave /usr/share/apache-icons/default.conf apache-icons.conf /usr/share/apache-icons/awesome-svg.conf
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+# Automatically added by dh_apache2
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in 000-apache-icons  ; do
+			apache2_invoke enmod $conf  || exit $?
+		done
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_apache2
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in 000-apache-icons  ; do
+			apache2_invoke enconf $conf  || exit $?
+		done
+	fi
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,71 @@
+#!/bin/sh
+
+set -e
+
+if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+	# Needs to be run outside of functions to have access to parameters
+	. /usr/share/apache2/apache2-maintscript-helper
+fi
+
+
+setup_empty_conf() {
+	mkdir -p /etc/dolibarr
+	touch /etc/dolibarr/conf.php
+	chown root:www-data /etc/dolibarr/conf.php
+	chmod 664 /etc/dolibarr/conf.php
+}
+
+is_new_upstream_version() {
+	# $1 can be empty (not installed) and will result in a true value
+	# for the check
+	old_version=$(echo "$1" | sed -e 's/-[^-]*$//' -e 's/^[0-9]*://')
+	new_version=$(dpkg-query -f '${Version}' -W dolibarr | \
+		  sed -e 's/-[^-]*$//' -e 's/^[0-9]*://')
+	test "$old_version" != "$new_version"
+}
+
+enable_install_upgrade_wizard() {
+    rm -f /var/lib/dolibarr/documents/install.lock
+}
+
+setup_httpd() {
+	# Apache 2 setup
+	if which a2enmod >/dev/null 2>&1 ;then
+		a2enmod alias
+	fi
+	if which a2enconf >/dev/null 2>&1 ;then
+	    a2enconf javascript-common
+	fi
+	COMMON_STATE=$(dpkg-query -f '${Status}' -W 'apache2.2-common' 2>/dev/null \
+                   | awk '{print $3}' || true)
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		apache2_invoke enconf dolibarr || exit $?
+	elif [ "$COMMON_STATE" = "installed" ] || [ "$COMMON_STATE" = "unpacked" ] ; then
+		[ -d /etc/apache2/conf.d/ ] && \
+		[ ! -e /etc/apache2/conf.d/dolibarr.conf ] && \
+		ln -s ../conf-available/dolibarr.conf /etc/apache2/conf.d/dolibarr.conf
+	fi
+	# Lighttpd setup
+	if which lighty-enable-mod >/dev/null 2>&1 ; then
+		lighty-enable-mod dolibarr fastcgi-php || true
+	fi
+}
+
+
+case "$1" in
+	configure)
+	if [ -z "$2" ]; then
+		setup_empty_conf
+	fi
+	setup_httpd
+	if is_new_upstream_version "$2"; then
+		enable_install_upgrade_wizard
+	fi
+	;;
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+esac
+
+
+
+exit 0

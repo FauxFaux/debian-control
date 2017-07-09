@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+
+
+# Switch directory to symlink
+if dpkg-maintscript-helper supports dir_to_symlink 2>/dev/null; then
+  dpkg-maintscript-helper dir_to_symlink \
+    /usr/lib/x86_64-linux-gnu/perl5/5.24/PDL/HtmlDocs/PDL /var/lib/pdl/html 1:2.016-1~exp3~ -- "$@"
+fi

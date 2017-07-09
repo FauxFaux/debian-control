@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+# handle symlink to directory conversion
+DOCDIR=/usr/share/doc/libdirectfb-extra
+if [ -L $DOCDIR ] ; then
+  rm $DOCDIR
+fi
+
+

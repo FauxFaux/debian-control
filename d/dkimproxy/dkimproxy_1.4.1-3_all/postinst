@@ -1,0 +1,46 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# add the user and group for dkimproxy to operate
+addgroup --system dkimproxy
+adduser --system dkimproxy --ingroup dkimproxy --home /var/lib/dkimproxy --no-create-home
+
+# if we don't have a private key yet in /var/lib/dkimproxy/private.key, generate a private and public key
+if [ ! -e /var/lib/dkimproxy/private.key ]; then
+	openssl genrsa -out /var/lib/dkimproxy/private.key 1024
+	openssl rsa -in /var/lib/dkimproxy/private.key -pubout -out /var/lib/dkimproxy/public.key
+fi
+# Make sure it's not world readable, but still accessible by both dkimproxy and the ssl-cert group
+chmod 644 /var/lib/dkimproxy/public.key
+chmod 640 /var/lib/dkimproxy/private.key
+if getent group ssl-cert >/dev/null ; then
+	adduser dkimproxy ssl-cert || true
+	chown root:ssl-cert /var/lib/dkimproxy/public.key /var/lib/dkimproxy/private.key
+	chown dkimproxy:ssl-cert /var/lib/dkimproxy
+else
+	chown root:dkimproxy /var/lib/dkimproxy/public.key /var/lib/dkimproxy/private.key
+fi
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/dkimproxy" ]; then
+	update-rc.d dkimproxy defaults >/dev/null
+	invoke-rc.d dkimproxy start || exit $?
+fi
+# End automatically added section
+
+
+exit 0

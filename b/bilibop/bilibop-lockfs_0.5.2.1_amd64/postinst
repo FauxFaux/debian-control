@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+    configure)
+        # Add bilibop-lockfs scripts in the initramdisk:
+        if which update-initramfs >/dev/null; then
+            update-initramfs -u
+        fi
+        ;;
+esac
+
+
+:
+# vim: et ts=4 sts=4 sw=4

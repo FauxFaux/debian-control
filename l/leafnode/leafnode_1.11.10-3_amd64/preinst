@@ -1,0 +1,42 @@
+#!/bin/sh 
+
+set -e
+
+# We don't actually need to use debconf for anything, we just need to
+# decide if we want to be chatty now.
+if [ -f /usr/share/debconf/confmodule ]; then
+   debconf=true
+else
+   debconf=false
+fi
+
+case "$1" in
+   install|upgrade)
+
+      if [ ! -e /etc/news/leafnode/config -a -e /etc/leafnode.conf ]; then
+         if [ "$debconf" = "false" ]; then
+            echo Moving configuration file to /etc/news/leafnode/config...
+         fi
+ 	 mkdir -p /etc/news/leafnode/
+	 # Move conffile. I think it's safest to use cat here, becuase 
+	 # the user may have done something funky like made it be a symlink.
+	 cat /etc/leafnode.conf > /etc/news/leafnode/config
+	 # Fix permissions while we're at it
+	 chmod 660 /etc/news/leafnode/config
+	 chown news /etc/news/leafnode/config
+	 chgrp news /etc/news/leafnode/config
+      fi
+      rm -f /etc/leafnode.conf
+
+      ;;
+   abort-upgrade)
+      ;;
+   abort-install)
+      ;;
+   *) 
+      echo "preinst called with unknown argument \'$1\'" >&2
+      exit 0
+      ;;
+esac
+
+

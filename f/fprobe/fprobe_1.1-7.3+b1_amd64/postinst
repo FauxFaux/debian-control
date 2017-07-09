@@ -1,0 +1,56 @@
+#! /bin/sh -e
+# postinst script for fprobe
+
+# Use debconf.
+. /usr/share/debconf/confmodule
+
+# generate default file if it doesn't exist
+if [ ! -e /etc/default/fprobe ]; then
+	cat > /etc/default/fprobe <<-END
+	#fprobe default configuration file
+	
+	INTERFACE="eth0"
+	FLOW_COLLECTOR="localhost:2055"	
+	
+	#fprobe can't distinguish IP packet from other (e.g. ARP)
+	OTHER_ARGS="-fip"
+	END
+fi
+
+if [ "$1" = "configure" ]; then
+    db_get fprobe/interface && interface="$RET"
+    db_get fprobe/collector && collector="$RET"
+		
+    # If the admin deleted or commented some variables but then set
+    # them via debconf, (re-)add them to the conffile.
+    test -z "$interface" || grep -Eq '^ *INTERFACE=' /etc/default/fprobe || \
+    	echo "INTERFACE=" >> /etc/default/fprobe
+    test -z "$collector" || grep -Eq '^ *FLOW_COLLECTOR=' /etc/default/fprobe || \
+	    echo "FLOW_COLLECTOR=" >> /etc/default/fprobe
+
+    sed -i "s/^INTERFACE=.*$/INTERFACE=\"$interface\"/" /etc/default/fprobe
+    sed -i "s/^FLOW_COLLECTOR=.*$/FLOW_COLLECTOR=\"$collector\"/" /etc/default/fprobe
+fi	
+
+#close all fd's
+db_stop
+
+if [ "$1" = "configure" ] && [ -f /etc/init.d/fprobe-ng ]; then
+        echo "I: Removing fprobe-ng configuration files"
+	rm -f /etc/init.d/fprobe-ng
+	rm -f /etc/default/fprobe-ng
+        update-rc.d fprobe-ng remove >/dev/null || exit 0
+fi
+
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/fprobe" ]; then
+		update-rc.d fprobe defaults >/dev/null
+		invoke-rc.d fprobe start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0 

@@ -1,0 +1,90 @@
+#!/bin/sh
+set -e
+
+# config file
+DEFAULT=/etc/default/sslh
+. $DEFAULT
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+    configure)
+	# if sslh user doesn't exists, create it
+        if ! getent passwd sslh > /dev/null
+	then
+		echo "Adding system-user for sslh daemon"
+		adduser --system --group --quiet --home /nonexistent --no-create-home --disabled-login sslh
+	fi
+
+	# get launching mode of sslh from debconf
+	db_get sslh/inetd_or_standalone
+	if [ "$RET" = "from inetd" ]
+	then
+		echo "Please configure to your needs in /etc/inetd.conf and then restart inetd."
+		# try to add the service for the first time
+		# https to get 443/tcp reference from /etc/services for port binding
+		update-inetd --group STANDARD --add \
+		'https\tstream\ttcp\tnowait\troot\t/usr/sbin/tcpd /usr/sbin/sslh -i -u sslh -s localhost:22 -l localhost:444'
+	fi
+
+	# disable to force user to configure inetd mode
+	# and disable if standalone mode
+	update-inetd --disable https
+
+	if [ "$RET" = "standalone" ]
+	then
+		# if standalone, try to start daemon (if not the default configuration)
+		if command -v invoke-rc.d >/dev/null 2>&1
+		then
+			invoke-rc.d sslh start
+		else
+			/etc/init.d/sslh start
+		fi
+	fi
+
+	db_stop
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask sslh.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled sslh.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable sslh.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state sslh.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/sslh.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/sslh" ]; then
+		update-rc.d sslh defaults >/dev/null || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

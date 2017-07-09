@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+# Handle transition from lenny to sid smoothly as the previous package
+# versions were not relying on dh_installemacsen (see #454707).
+if [ "$1" = "install" ] || [ "$1" = "upgrade" ]; then
+    if [ -f "/etc/emacs/site-start.d/50nethack.el" ]; then
+        if [ ! -f "/etc/emacs/site-start.d/50nethack-el.el" ]; then
+            mv /etc/emacs/site-start.d/50nethack.el \
+                /etc/emacs/site-start.d/50nethack-el.el
+        else
+            mv /etc/emacs/site-start.d/50nethack.el \
+                /etc/emacs/site-start.d/50nethack-el.el.old
+        fi
+    fi
+fi
+
+
+
+exit 0

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/ssh puppet-module-ssh /usr/share/puppet/modules.available/saz-ssh 500
+fi
+
+
+
+exit 0

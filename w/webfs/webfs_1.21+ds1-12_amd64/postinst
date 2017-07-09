@@ -1,0 +1,120 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+q1=web_root
+q2=web_host
+q3=web_ip
+q4=web_port
+q5=web_virtual
+q6=web_timeout
+q7=web_conn
+q8=web_index
+q9=web_dircache
+q10=web_accesslog
+q11=web_logbuffering
+q12=web_syslog
+q13=web_user
+q14=web_group
+q15=web_cgipath
+q16=web_extras
+
+CONFFILE=/etc/webfsd.conf
+AUTOCONFFILE=/usr/share/webfs/webfsd.conf.auto
+
+if [ "$1" = "configure" ]
+then
+	TEMPCONFFILE=$(mktemp)
+
+	# Copy static file (in package) to a writable location.
+	cp -a $AUTOCONFFILE $TEMPCONFFILE
+
+	if test -f $CONFFILE
+	then
+		# Use old configuration as upgrade basis
+		cp -a $CONFFILE $TEMPCONFFILE
+	fi
+
+	# update config file from debconf answers
+
+	for question in $q1 $q2 $q3 $q4 $q5 $q6 $q7 $q8 $q9 $q10 \
+					$q11 $q12 $q13 $q14 $q15 $q16
+	do
+		db_get "webfsd/$question"
+	#	echo "debug: webfsd/$question=$RET" > /dev/tty
+		if grep -q -e "^$question=" $TEMPCONFFILE
+		then
+			sed -i -e "s|^$question=.*|$question=\"$RET\"|" \
+				$TEMPCONFFILE
+		else
+			echo "$question=\"$RET\"" >> $TEMPCONFFILE
+		fi
+	done
+
+	db_set webfsd/pending no
+
+	# Register the auto generated configuration file.
+	test -x /usr/bin/ucf && \
+		ucf --three-way --debconf-ok $TEMPCONFFILE $CONFFILE
+	test -x /usr/bin/ucfr && \
+		ucfr webfs $CONFFILE
+
+	# Compute some sensible defaults before doing setup.
+	db_get "webfs/web_user" || RET=www-data
+	web_user=$RET
+	db_get "webfs/web_group" || RET=www-data
+	web_group=$RET
+	db_get "webfs/web_accesslog" || RET=/var/log/webfs/webfs.log
+	web_accesslog=$RET
+
+	db_stop
+
+	# Set owner and group on the preferred logging directory.
+	# It was installed for "root:root".
+	reply=`dpkg-statoverride --list /var/log/webfs 2>&1` || true
+
+	if test -z "$reply"
+	then
+		# No previous overrides.
+		dpkg-statoverride --update --add root "$web_group" 0770 \
+				/var/log/webfs
+	else
+		# If the mode was 2755, as in some earlier package versions,
+		# then forcibly update it to 0770 for improved security.
+		#
+		# The pattern contains the obsolete override.
+		pattern="root $web_group 2755 /var/log/webfs"
+
+		if echo $reply | grep "$pattern" > /dev/null 2>&1
+		then
+			# Change the obsolete setting.
+			dpkg-statoverride --update --force \
+				--add root "$web_group" 0770 /var/log/webfs
+		fi
+	fi
+
+	# create logfile
+	if test "$web_accesslog" != "" && test ! -f "$web_accesslog"
+	then
+		touch "$web_accesslog" 2>/dev/null || true
+		chown "$web_user":"$web_group" "$web_accesslog" 2>/dev/null || true
+		chmod o= "$web_accesslog" || true
+	fi
+
+	# Erase safely, out of principle
+	rm $TEMPCONFFILE 2>/dev/null || true
+fi # test for "configure" 
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/webfs" ]; then
+		update-rc.d webfs defaults >/dev/null
+		invoke-rc.d webfs start || exit $?
+	fi
+fi
+# End automatically added section
+

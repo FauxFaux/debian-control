@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+PACKAGE="chemical-structures"
+SOURCE="chemical-structures"
+VERSION="2.0"
+
+. /usr/share/debconf/confmodule
+
+# Package maintainer's commands follow:
+db_input medium chemical-structures/reconfigure-webserver || true
+db_go
+# End of package maintainer's commands
+
+exit 0

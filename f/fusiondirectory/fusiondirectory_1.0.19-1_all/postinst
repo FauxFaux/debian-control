@@ -1,0 +1,110 @@
+#!/bin/sh
+# postinst script for fusiondirectory
+#
+# see: dh_installdeb(1)
+
+set -e
+
+case "$1" in
+  configure)
+      fusiondirectory-setup -y --check-directories --update-cache --update-locales
+      ;;
+
+  abort-upgrade|abort-remove|abort-deconfigure)
+      ;;
+
+  triggered)
+      fusiondirectory-setup --update-cache --update-locales
+      exit 0
+      ;;
+
+  *)
+      echo "postinst called with unknown argument \`$1'" >&2
+      exit 1
+      ;;
+esac
+
+
+
+if [ -d /etc/apache2/conf.d ]; then
+
+  # Copy FusionDirectory configuration to conf.d directories
+  if [ ! -L /etc/apache2/conf.d/fusiondirectory.conf ]; then
+
+    # Remove old instances of this file
+    if [ -f /etc/apache2/conf.d/fusiondirectory.conf ]; then
+      echo "Found old fusiondirectory apache configuration in /etc/apache2/conf.d - moving it to fusiondirectory.conf.orig..."
+      echo "Please check for changes in /etc/fusiondirectory/fusiondirectory-apache.conf if you modified this file!"
+      mv /etc/apache2/conf.d/fusiondirectory.conf /etc/apache2/conf.d/fusiondirectory.conf.orig
+    fi
+
+    echo "Making /fusiondirectory available in /etc/apache2/conf.d"
+
+    # Add FusionDirectory include file
+    ln -s /etc/fusiondirectory/fusiondirectory-apache.conf /etc/apache2/conf.d/fusiondirectory.conf
+  fi
+
+  # Add support for RequestHeader
+  if which apache2 1>/dev/null; then
+    if which a2enmod 1>/dev/null; then
+      a2enmod headers
+    fi
+  fi
+
+  # Finally restart servers
+  if which apache2 1>/dev/null; then
+    if which invoke-rc.d 1>/dev/null; then
+      invoke-rc.d apache2 reload
+    else
+      /etc/init.d/apache2 reload
+    fi
+  fi
+fi
+
+# conf-available
+if [ -d /etc/apache2/conf-available ] ; then
+
+  # Copy FusionDirectory configuration to conf-available directory /etc/apache2/conf-available
+  if [ ! -L /etc/apache2/conf-available/fusiondirectory.conf ]; then
+
+    # Remove old instances of this file
+    if [ -f /etc/apache2/conf-available/fusiondirectory.conf ]; then
+      echo "Found old fusiondirectory apache configuration in /etc/apache2/conf.d - moving it to fusiondirectory.conf.orig..."
+      echo "Please check for changes in /etc/fusiondirectory/fusiondirectory-apache.conf if you modified this file!"
+      mv /etc/apache2/conf.d/fusiondirectory.conf /etc/apache2/conf.d/fusiondirectory.conf.orig
+    fi
+
+    echo "Making /fusiondirectory available in /etc/apache2/conf-available"
+
+    # Add FusionDirectory include file
+    ln -s /etc/fusiondirectory/fusiondirectory-apache.conf /etc/apache2/conf-available/fusiondirectory.conf
+  fi
+
+  if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+    . /usr/share/apache2/apache2-maintscript-helper
+    apache2_invoke enconf fusiondirectory
+    apache2_invoke enconf javascript-common
+    apache2_invoke enmod headers
+  fi
+
+  # Finally restart servers
+  if which apache2 1>/dev/null; then
+    if which invoke-rc.d 1>/dev/null; then
+      invoke-rc.d apache2 reload
+    else
+      /etc/init.d/apache2 reload
+    fi
+  fi
+fi
+
+# Remove old instances of the fusiondirectory.conf template
+if [ -f /var/cache/fusiondirectory/template/fusiondirectory.conf ]; then
+  #link the template to /var/cache/fusiondirectory/template from usr
+  rm -f /var/cache/fusiondirectory/template/fusiondirectory.conf
+  ln -s /usr/share/doc/fusiondirectory/fusiondirectory.conf  /var/cache/fusiondirectory/template/fusiondirectory.conf
+else
+  #link the configuration template to /var/cache/fusiondirectory/template from /usr/share/doc/fusiondirectory/
+  ln -s /usr/share/doc/fusiondirectory/fusiondirectory.conf  /var/cache/fusiondirectory/template/fusiondirectory.conf
+fi
+
+exit 0

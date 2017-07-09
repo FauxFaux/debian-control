@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/tacacs_plus" ]; then
+		update-rc.d tacacs_plus defaults >/dev/null
+		invoke-rc.d tacacs_plus start || exit $?
+	fi
+fi
+# End automatically added section

@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/corosync/corosync.conf.example.udpu 2.3.5-1~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/corosync/corosync.conf.example 2.3.5-1~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/corosync" ]; then
+	invoke-rc.d corosync stop || exit $?
+fi
+# End automatically added section

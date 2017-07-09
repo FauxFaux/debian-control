@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+VARIANT=nox
+remove_variant_alternative () {
+	local variant=$1
+	update-alternatives --remove tachyon /usr/bin/tachyon-${variant}
+	return 0
+	}
+case $1 in
+	remove|deconfigure) remove_variant_alternative $VARIANT ;;
+	upgrade|failed-upgrade) ;;
+	*) echo "prerm called with unknown argument \`$1'" >&2 ; exit 0 ;;
+esac
+
+exit 0

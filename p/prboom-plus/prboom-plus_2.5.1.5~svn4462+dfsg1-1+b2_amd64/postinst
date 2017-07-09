@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "abort-upgrade" ] || [ "$1" = "configure" ]
+then
+  update-alternatives \
+  --install /usr/games/doom doom /usr/games/prboom-plus 50 \
+  --slave /usr/share/man/man6/doom.6.gz doom.6.gz /usr/share/man/man6/prboom-plus.6.gz
+
+  update-alternatives \
+  --install /usr/games/boom boom /usr/games/prboom-plus 50 \
+  --slave /usr/share/man/man6/boom.6.gz boom.6.gz /usr/share/man/man6/prboom-plus.6.gz
+fi
+
+
+
+exit 0

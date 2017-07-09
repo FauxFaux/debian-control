@@ -1,0 +1,99 @@
+#!/bin/sh -e
+
+if ! ([ "$1" = "configure" ] || [ "$1" = "reconfigure" ]); then
+  exit 0
+fi
+
+# Some useful variables
+OCSIGEN="ocsigen"
+CHOWN="/bin/chown"
+CHMOD="/bin/chmod"
+ADDUSER="/usr/sbin/adduser"
+USERDEL="/usr/sbin/userdel"
+USERADD="/usr/sbin/useradd"
+GROUPDEL="/usr/sbin/groupdel"
+GROUPMOD="/usr/sbin/groupmod"
+ID="/usr/bin/id"
+HOOKSDIR="/etc/ocsigenserver/update.d"
+
+###
+# 1. Get current uid and gid if user exists.
+set -e
+if $ID $OCSIGEN > /dev/null 2>&1; then
+   IUID=`$ID --user $OCSIGEN`
+   IGID=`$ID --group $OCSIGEN`
+else
+   IUID="NONE"
+   IGID="NONE"
+fi
+
+###
+# 2. Ensure that no standard account or group will remain before adding the
+#    new user.
+if [ "$IUID" = "NONE" ] || [ $IUID -ge 1000 ]; then # we must do sth :)
+  if ! [ "$IUID" = "NONE" ] && [ $IUID -ge 1000 ]; then
+      # user exists but isn't a system user... delete it.
+      $USERDEL $OCSIGEN
+      $GROUPDEL $OCSIGEN
+  fi
+
+###
+# 3. Add the system account.
+#    Issue a warning if it fails.
+  if $GROUPMOD $OCSIGEN > /dev/null 2>&1; then
+    # group already exists, use --ingroup
+    if ! $ADDUSER --system --disabled-password --disabled-login --home /var/lib/ocsigenserver --no-create-home --ingroup $OCSIGEN $OCSIGEN; then
+      echo "The adduser command failed."
+    fi
+  else
+    if ! $ADDUSER --system --disabled-password --disabled-login --home /var/lib/ocsigenserver --no-create-home --group $OCSIGEN; then
+      echo "The adduser command failed."
+    fi
+  fi
+fi
+set +e
+
+###
+# 4.1 Change ownership of directory.
+$CHOWN -R $OCSIGEN:$OCSIGEN /var/lib/ocsigenserver/
+$CHMOD 750 /var/lib/ocsigenserver/
+
+###
+# 4.2 Create log directory and empty log if needed
+LOGDIR="/var/log/ocsigenserver"
+LOGFILE="${LOGDIR}/access.log"
+mkdir -p $LOGDIR
+$CHOWN $OCSIGEN:$OCSIGEN $LOGDIR
+$CHMOD 750 $LOGDIR
+if [ ! -f $LOGFILE ]; then
+    touch $LOGFILE
+    $CHOWN $OCSIGEN:$OCSIGEN $LOGFILE
+    $CHMOD 640 $LOGFILE
+fi
+# The empty log is a workaround to logrotate complaining about
+# inexistent logs (see #550324)
+
+###
+# 5. Call update hooks
+if [ -d $HOOKSDIR ]; then
+  echo "Running hooks in $HOOKSDIR..."
+  if ! run-parts --exit-on-error $HOOKSDIR; then
+    echo "Some hook failed, you should have a look!"
+    exit 1
+  fi
+else
+  echo "No hook to run in $HOOKSDIR."
+fi
+
+###
+# 6. Call default debhelper scripts.
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/ocsigenserver" ]; then
+		update-rc.d ocsigenserver defaults >/dev/null
+		invoke-rc.d ocsigenserver start || exit $?
+	fi
+fi
+# End automatically added section
+

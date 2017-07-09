@@ -1,0 +1,44 @@
+#! /bin/sh -e
+
+set -e
+
+case "$1" in
+       	remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+
+	if test -e /usr/share/pyca && ! [ "$1" = upgrade ]; then 
+	
+		rm -rf /usr/share/pyca 2>&1 > /dev/null || exit 78	
+	fi
+	
+        ;;
+
+ 	purge)
+
+	if test -e /etc/pyca; then
+	
+		rm -rf /etc/pyca 2>&1 > /dev/null || exit 78
+
+	fi
+	
+	if test -e /var/lib/pyca; then
+	
+		rm -rf /var/lib/pyca 2>&1 > /dev/null || exit 78
+	fi
+
+	if test -e /var/log/pyca; then 
+
+		rm -rf /var/log/pyca 2>&1 > /dev/null || exit 78
+		
+	fi
+
+	;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 64
+
+esac
+
+
+
+exit 0

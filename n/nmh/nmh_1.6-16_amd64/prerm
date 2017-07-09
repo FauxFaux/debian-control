@@ -1,0 +1,12 @@
+#!/bin/sh
+# remove mhmail from alternatives
+set -e
+
+if [ "$1" = "remove" ]; then
+  update-alternatives --remove "mailx" "/usr/bin/mh/mhmail"
+fi
+
+
+
+
+

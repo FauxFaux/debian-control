@@ -1,0 +1,68 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] || [ "$1" = "reconfigure" ] ; then
+	# create rabbitmq group
+	if ! getent group rabbitmq >/dev/null; then
+		addgroup --system rabbitmq
+	fi
+
+	# create rabbitmq user
+	if ! getent passwd rabbitmq >/dev/null; then
+		adduser --system \
+		--ingroup rabbitmq \
+		--home /var/lib/rabbitmq \
+                --no-create-home \
+		--gecos "RabbitMQ messaging server" \
+                --disabled-login rabbitmq
+	fi
+
+	mkdir -p /etc/rabbitmq
+	chown rabbitmq:rabbitmq /etc/rabbitmq
+	if [ -f /etc/rabbitmq/rabbitmq.conf ] && [ ! -f /etc/rabbitmq/rabbitmq-env.conf ]; then
+		mv /etc/rabbitmq/rabbitmq.conf /etc/rabbitmq/rabbitmq-env.conf
+		chown rabbitmq:rabbitmq /etc/rabbitmq/rabbitmq-env.conf
+	fi
+	if [ -r /usr/share/rabbitmq/rabbitmq-env.conf ] && ! [ -e /etc/rabbitmq/rabbitmq-env.conf ] ; then
+		install -m 0644 -o rabbitmq -g rabbitmq /usr/share/rabbitmq/rabbitmq-env.conf /etc/rabbitmq/rabbitmq-env.conf
+	fi
+	if [ -f /etc/rabbitmq/enabled_plugins ] ; then
+		chown rabbitmq:rabbitmq /etc/rabbitmq/enabled_plugins
+	fi
+
+	mkdir -p /var/lib/rabbitmq/mnesia
+	chmod 750 /var/lib/rabbitmq/mnesia
+	chmod -R o-rwx,g-w /var/lib/rabbitmq/mnesia
+
+	chown -R rabbitmq:rabbitmq /var/lib/rabbitmq
+	chown -R rabbitmq:rabbitmq /var/log/rabbitmq
+
+fi
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask rabbitmq-server.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled rabbitmq-server.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable rabbitmq-server.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state rabbitmq-server.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/rabbitmq-server" ]; then
+		update-rc.d rabbitmq-server defaults >/dev/null
+		invoke-rc.d rabbitmq-server start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

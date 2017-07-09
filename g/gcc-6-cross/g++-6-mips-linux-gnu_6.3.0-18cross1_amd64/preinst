@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove mips-linux-gnu-g++ /usr/bin/mips-linux-gnu-g++-6
+fi
+
+
+
+exit 0

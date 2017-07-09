@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+. /usr/share/debconf/confmodule
+db_get haserl/setuid
+
+haserl_path=/usr/bin/haserl
+setuid_haserl ()
+{
+    dpkg-statoverride --force --update --add '#0' '#0' 2755 "$haserl_path"
+}
+
+unsetuid_haserl ()
+{
+    if dpkg-statoverride --quiet --list "$haserl_path"; then
+        dpkg-statoverride --remove "$haserl_path"
+        chmod 0755 "$haserl_path"
+    fi
+}
+
+if [ "$RET" = true ]; then
+    setuid_haserl
+else
+    unsetuid_haserl
+fi
+
+

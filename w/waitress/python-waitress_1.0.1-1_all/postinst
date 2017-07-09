@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]
+then
+    update-alternatives --install /usr/bin/waitress-serve waitress-serve /usr/bin/waitress-serve-python2 200
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-waitress 
+fi
+
+# End automatically added section
+

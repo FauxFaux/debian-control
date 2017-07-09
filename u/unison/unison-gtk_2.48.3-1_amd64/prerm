@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ]; then
+    update-alternatives --remove unison /usr/bin/unison-latest-stable-gtk
+    if true; then
+        update-alternatives --remove unison-gtk /usr/bin/unison-latest-stable-gtk
+    fi
+fi
+
+

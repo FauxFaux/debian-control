@@ -1,0 +1,35 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+
+	# are we upgrading from libchipcard prior to 4.99?
+	if dpkg --compare-versions "$2" lt 4.99 && ! test -z "$2" ; then
+            rm -f /var/run/chipcard/chipcard.comm
+	    rm -f /var/run/chipcard/chipcardd4.pid
+	    if [ -d /var/run/chipcard ]; then
+                rmdir /var/run/chipcard
+	    fi
+	    update-rc.d -f libchipcard-tools remove > /dev/null
+	fi
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Remove obsolete config file
+dpkg-maintscript-helper rm_conffile /etc/init.d/libchipcard-tools 5.0.3beta-2 -- "$@"
+
+
+
+exit 0

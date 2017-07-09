@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ -r /etc/sftpcloudfs/sftpcloudfs.conf ] ; then
+	AUTH_URL=`grep -E "^[ \t]*auth-url[ \t]*=" /etc/sftpcloudfs/sftpcloudfs.conf | cut -d= -f2 | awk '{print $1}'`
+	if [ -n "${AUTH_URL}" ] ; then
+		db_set sftpcloudfs/auth-url ${AUTH_URL}
+	fi
+fi
+
+db_input high sftpcloudfs/auth-url || true
+db_go
+
+exit 0

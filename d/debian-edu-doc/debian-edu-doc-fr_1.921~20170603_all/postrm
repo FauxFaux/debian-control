@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+
+
+# remove link we created at installation via postinst
+rm -f /usr/share/doc/debian-edu-doc/fr
+
+# cleanup. As debian-edu-doc is a transitional package now, it might have 
+# been removed, without this directory being removed, due to our link...
+rmdir --ignore-fail-on-non-empty /usr/share/doc/debian-edu-doc || true

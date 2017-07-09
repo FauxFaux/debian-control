@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -e
+
+# lkajan: resolution of #688682
+dpkg-maintscript-helper rm_conffile /etc/dma/dma.conf "0.0.2010.06.17-14.1~" dma -- "$@"
+
+case "$1" in
+    purge)
+	if which ucfr >/dev/null; then
+		ucfr --purge dma /etc/dma/dma.conf
+	fi
+	if which ucf >/dev/null; then
+		ucf --purge /etc/dma/dma.conf
+	fi
+	if [ -d /etc/dma ] ; then
+		rm -rf /etc/dma || true
+	fi
+	if [ -d /var/spool/dma ] ; then
+		rm -rf /var/spool/dma || true
+	fi
+    ;;
+esac
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/dma/virtusertable 0.9-1~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

@@ -1,0 +1,58 @@
+#! /bin/sh
+
+set -e
+
+if [ "$1" = "purge" ]; then
+    if dpkg-statoverride --list /usr/lib/cgi-bin/pks/\* >/dev/null; then
+        for i in $(dpkg-statoverride --list /usr/lib/cgi-bin/pks/\* | cut -d " " -f 4); do
+            dpkg-statoverride --remove $i
+	done
+    fi
+
+    rm -f /var/log/onak.log /var/log/onak.log.1 /var/log/onak.log.*.gz
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/onak.conf 0.4.6-1 onak -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d onak remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask onak.socket >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge onak.socket >/dev/null
+		deb-systemd-helper unmask onak.socket >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask onak.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge onak.service >/dev/null
+		deb-systemd-helper unmask onak.service >/dev/null
+	fi
+fi
+# End automatically added section
+

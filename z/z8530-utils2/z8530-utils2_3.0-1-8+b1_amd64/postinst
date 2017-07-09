@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+
+
+if [ ! -e /dev/scc0 ]; then
+	cd /dev
+	MAKEDEV -v hamradio scc
+fi
+
+exit 0

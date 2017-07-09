@@ -1,0 +1,234 @@
+#! /bin/sh
+# postinst script for dotlrn 
+#
+# see: dh_installdeb(1)
+#
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+set -e
+
+get_config() {
+    db_get dotlrn/db_host
+    db_host="$RET"
+
+    db_type="postgres7"
+    db_port=5432 
+
+    db_get dotlrn/dba_name
+    dba_name="$RET"
+
+    db_get dotlrn/dba_password
+    dba_password="$RET"
+
+    db_get dotlrn/dbu_name
+    dbu_name="$RET"
+
+    db_get dotlrn/dbu_password
+    dbu_password="$RET"
+ 
+    db_get dotlrn/pg_grant_access
+    if [ ! -z "$RET" ]; then
+        grant_access="$RET"
+    else
+        grant_access="false"
+    fi
+}
+
+db_not_installed() {
+    echo "Please install the chosen dotLRN SGBD: postgresql, then try"
+    echo "dpkg-reconfigure dotlrn"
+}
+
+case "$1" in
+    configure)
+	. /usr/share/debconf/confmodule
+	db_version 2.0
+
+	# Read debconf and edit the config file accordingly
+	get_config
+	
+	 # Care about the repository
+        repository=/var/lib/dotlrn
+        if [ -d $repository ]; then
+            # set the owner and change rights accordingly
+            chown www-data:www-data $repository $repository/content-repository-content-files/
+            chmod 0755 $repository $repository/content-repository-content-files/
+        fi
+
+	# Care about the log directory
+	logdir=/var/log/aolserver4/dotlrn
+        if [ -d $logdir ]; then
+            # set the owner and change rights accordingly
+            chown www-data:www-data $logdir
+            chmod 0755 $logdir
+        fi
+	
+	# Care about the app dir
+        appdir=/usr/share/dotlrn
+        if [ -d $appdir ]; then
+            # set the owner and change rights accordingly
+            chown -R www-data:www-data $appdir
+        fi
+
+	# care about the database creation
+	dbname=dotlrn
+	dbserver=$db_host
+	dbadmin=$dba_name
+	dbadmpass=$dba_password
+	dbuser=$dbu_name
+        dbpass=$dbu_password
+
+	# is the database server available? Then create the user.
+	dbuser=$dba_name
+        dbpass=$dba_password
+	. /usr/share/wwwconfig-common/pgsql.get
+        if  [ "A$($pgsqlcmd -c "SELECT usename from pg_user;" )" = "A" ]
+        then
+                err=1
+		echo "* Error trying to connect to Postgresql server."
+		if [ "$db_host" = "localhost" ]
+		then
+			echo "(TIP: is the postgresql package installed?)"
+		fi
+        else
+		dbuser=$dbu_name
+                dbpass=$dbu_password
+                . /usr/share/wwwconfig-common/pgsql-createuser.sh
+		. /usr/share/wwwconfig-common/pgsql-createdb.sh
+		if [ "$status" = "error" ]
+		then
+			err=1
+			echo $error
+		fi
+	
+		# Modify the pg_hba.conf to grant dotlrn user access to postgresql
+		# 1- Do we want to do that?
+		if [ "$grant_access" = true ]; then
+
+			# 2- Where is the pg_hba.conf from this database instance?
+			dbuser=$dba_name
+                	dbpass=$dba_password
+			. /usr/share/wwwconfig-common/pgsql.get
+			pg_hba_file=$($pgsqlcmd -c "SELECT * from pg_settings where name='hba_file';" 2>/dev/null | grep hba | cut -d\| -f2)
+			pg_version=$(echo "$pg_hba_file" | cut -d\/ -f4)
+			if [ "$status" = "error" ]
+        	  		then
+                		err=1
+                		echo $error
+	          	else
+				# 3- Modify the file
+				# Select connection method
+				if [ "A$dbu_password" != "A" ]; then 	
+					# No Blank Password
+					pg_conn_method="md5"
+				else
+					# Blank Password
+					pg_conn_method="trust"
+				fi
+				# Delete all lines between ## dotLRN ... ## and ########### from previous configurations.
+				# Insert connection line after the first local connection line (the postgres user connection line).
+				sed -i "/^## dotLRN package debconf changes (DO NOT EDIT BYHAND) ##/,/^##########################################################/d;1,/^local/{
+        /^local/a ## dotLRN package debconf changes (DO NOT EDIT BYHAND) ##\nlocal   dotlrn     $dbu_name                        $pg_conn_method\n##########################################################
+} " $pg_hba_file
+			
+				# 4-Reload postgresql conf
+				/etc/init.d/postgresql reload
+			fi
+		fi
+
+        # Create /etc/dotlrn/config.local file with debconf
+        # values, and manage with ucf.
+        # Create file
+        localconfigtmp=$(mktemp)
+        localconfig="/etc/dotlrn/config.local"
+        cat > $localconfigtmp <<EOF
+# Local dotLRN database settings.
+db_host=${dbserver}
+db_password=${dbu_password}
+db_port=5432
+db_user=${dbu_name}
+EOF
+        # Install file
+        if [ -d /etc/dotlrn -a -f $localconfigtmp ]; then
+            previous_localconfig=false
+            if [ -f $localconfig ]; then previous_localconfig=true; fi
+            ucf --debconf-ok $localconfigtmp $localconfig || cp -f $localconfigtmp $localconfig
+            ucfr dotlrn $localconfig
+            # Set permissions only if there is no previous config.local file.
+            if ! $previous_localconfig; then
+                chmod 640 $localconfig
+                chown root:www-data $localconfig
+            fi
+            rm -f $localconfigtmp
+        fi
+
+		# Install plpgsql on database and enable compatibility options
+		dbuser=$dba_name
+		dbpass=$dba_password
+		sqlfile=$(mktemp)
+		echo "CREATE LANGUAGE plpgsql;
+			ALTER DATABASE dotlrn SET add_missing_from = on;
+			ALTER DATABASE dotlrn SET default_with_oids = on;
+			ALTER DATABASE dotlrn SET regex_flavor = extended;
+			" > $sqlfile
+        	. /usr/share/wwwconfig-common/pgsql-exec.sh
+		rm -f $sqlfile
+
+		# Restart aolserver
+		invoke-rc.d aolserver4 restart
+
+	        if [ "$status" = "error" ]
+        	then
+                	err=1
+	                echo $error
+        	fi
+
+		if [ "$err" = "1" ]
+		then
+			echo "-------------------------------------------------------------"
+			echo "I've tried my best to create the dotLRN user and database"
+			echo "but an error has occurred"
+			echo "-------------------------------------------------------------"
+			echo "You will have to set up the dotLRN user and database yourself"
+			echo "-------------------------------------------------------------"
+		fi
+	fi
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# dh_installdeb will replace this with shell code automatically
+# generated by other debhelper scripts.
+
+
+
+db_stop
+
+exit 0
+
+

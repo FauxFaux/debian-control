@@ -1,0 +1,30 @@
+#!/bin/sh
+
+set -e
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "configure" ] ; then
+
+    CF=$(tempfile -m 644)
+
+    db_get cxref/cxref-cpp-autoconf
+    AUTOCONF="$RET"
+
+    echo "AUTOCONF=$AUTOCONF" >> $CF
+
+    ucf --debconf-ok $CF /etc/cxref/config
+    ucfr cxref /etc/cxref/config
+
+    chmod 644 /etc/cxref/config
+
+    if [ "$AUTOCONF" = "true" ] ; then
+	CXREF_DEFINE_DIR=$(dirname $CF) cxref-cpp-configure
+	ucf --debconf-ok $(dirname $CF)/cxref-cpp.defines /etc/cxref/cxref-cpp.defines
+    else
+	ucf --debconf-ok /usr/share/cxref/cxref-cpp.defines /etc/cxref/cxref-cpp.defines
+    fi
+    ucfr cxref /etc/cxref/cxref-cpp.defines
+
+fi
+
+

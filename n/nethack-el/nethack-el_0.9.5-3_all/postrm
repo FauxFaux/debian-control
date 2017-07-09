@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+
+
+# Remove old configuration file (see #454707).
+[ "$1" = "purge" ] && rm -f /etc/emacs/site-start.d/50nethack-el.el.old
+
+exit 0

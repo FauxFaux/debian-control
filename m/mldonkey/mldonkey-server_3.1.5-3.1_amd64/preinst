@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+CONFFILE=/etc/default/mldonkey-server
+
+case "$1" in
+    install|upgrade)
+    if dpkg --compare-versions "$2" lt "2.5.1-5" && [ -e /etc/mldonkey.conf ]; then
+        echo "Moving /etc/mldonkey.conf to /etc/default/mldonkey-server"
+        mv -f /etc/mldonkey.conf $CONFFILE
+    fi
+    ;;
+esac
+
+

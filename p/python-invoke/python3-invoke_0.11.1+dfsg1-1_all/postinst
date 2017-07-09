@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/invoke invoke /usr/bin/python3-invoke 200
+	update-alternatives --install /usr/bin/inv inv /usr/bin/python3-inv 200
+fi
+
+
+# Automatically added by dhpython:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-invoke 
+fi
+
+# End automatically added section
+
+
+exit 0
+

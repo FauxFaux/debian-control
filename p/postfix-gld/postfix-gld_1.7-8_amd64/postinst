@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+if [ "$1" = "configure" ]; then
+  if ! getent passwd postfix-gld >/dev/null; then
+    adduser --quiet --system --group --home / --no-create-home postfix-gld
+  fi
+fi
+
+if [ -x "/etc/init.d/gld" ]; then
+  update-rc.d gld defaults 19 > /dev/null
+  invoke-rc.d gld start
+fi

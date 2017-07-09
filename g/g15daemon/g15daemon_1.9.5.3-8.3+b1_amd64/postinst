@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/g15daemon" ]; then
+		update-rc.d g15daemon defaults >/dev/null
+		invoke-rc.d g15daemon start || exit $?
+	fi
+fi
+# End automatically added section

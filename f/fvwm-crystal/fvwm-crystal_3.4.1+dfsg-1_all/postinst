@@ -1,0 +1,50 @@
+#!/bin/sh
+
+set -e
+
+# Automatically added by dh_installmenu
+inst=/etc/menu-methods/fvwm-crystal
+if [ -f $inst ]; then
+	chmod a+x $inst
+	if [ -x "`which update-menus 2>/dev/null`" ]; then
+		update-menus
+	fi
+fi
+# End automatically added section
+
+
+FC_BASE="/usr/share/fvwm-crystal/fvwm"
+FC_ICONBASE="${FC_BASE}/icons/Default"
+FC_APPBASE="${FC_BASE}/Applications/debian"
+
+SIZES="22x22 32x32 48x48"
+
+# versions 3.0-1 - 3.0.3-1 of the package put the debianmenu in
+# /usr/share/fvwm-crystal. Since then the debian menu resides in
+# /var/lib/fvwm-crystal. Since function removes the menu from the
+# old location, if present, when upgrading to this version.
+removeLegacyMenu() {
+	if [ ! -d "${FC_APPBASE}" ]; then return; fi
+	for size in ${SIZES}; do
+		if [ ! -d "${FC_ICONBASE}/${size}/debianmenu/" ]; then
+			continue
+		fi
+		for file in `find ${FC_ICONBASE}/${size}/debianmenu/ -name "*.png"`; do
+			rm -f -- "`readlink "${file}"`"
+			rm -f -- "${file}"
+		done
+		rmdir --ignore-fail-on-non-empty "${FC_ICONBASE}/${size}/debianmenu/"
+	done
+	rm -rf -- "${FC_APPBASE}"
+}
+
+removeLegacyMenu
+
+if [ "$1" = "configure" ]; then
+update-alternatives --install /usr/bin/x-window-manager x-window-manager \
+                              /usr/bin/fvwm-crystal 50 \
+                    --slave   /usr/share/man/man1/x-window-manager.1.gz \
+                              x-window-manager.1.gz \
+                              /usr/share/man/man1/fvwm-crystal.1.gz
+fi
+

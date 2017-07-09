@@ -1,0 +1,12 @@
+#! /bin/sh
+
+set -e
+
+if [ "$1" = "remove" ]; then
+    update-alternatives --remove soqt-dev /usr/share/Coin/conf/soqt-qt4.cfg
+    update-alternatives --remove libSoQt.a /usr/lib/libSoQt4.a
+    update-alternatives --remove libSoQt.la /usr/lib/libSoQt4.la
+    update-alternatives --remove libSoQt.so /usr/lib/libSoQt4.so
+        fi
+
+

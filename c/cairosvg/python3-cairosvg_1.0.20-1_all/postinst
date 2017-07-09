@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+update-alternatives --quiet --install /usr/bin/cairosvg cairosvg /usr/bin/cairosvg-py3 5 \
+  --slave /usr/share/man/man1/cairosvg.1.gz cairosvg.1.gz /usr/share/man/man1/cairosvg-py3.1.gz
+
+
+# Automatically added by dhpython:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-cairosvg -V 3.0-
+fi
+
+# End automatically added section
+

@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+# Remove a no-longer used conffile
+rm_conffile() {
+    CONFFILE="$1"
+
+    if [ -e "$CONFFILE" ]; then
+        md5sum="`md5sum \"$CONFFILE\" | sed -e \"s/ .*//\"`"
+        old_md5sum="`dpkg-query -W -f='${Conffiles}' multitail | grep $CONFFILE | awk '{print $2}'`"
+        if [ "$md5sum" != "$old_md5sum" ]; then
+            echo "Obsolete conffile $CONFFILE has been modified by you."
+            echo "Saving as $CONFFILE.dpkg-bak ..."
+            mv -f "$CONFFILE" "$CONFFILE".bak
+        else
+            echo "Removing obsolete conffile $CONFFILE ..."
+            rm -f "$CONFFILE"
+        fi
+    fi
+}
+
+case "$1" in upgrade)
+	rm_conffile "/etc/multitail/colors-example.pl"
+	rm_conffile "/etc/multitail/colors-example.sh"
+	rm_conffile "/etc/multitail/convert-geoip.pl"
+	rm_conffile "/etc/multitail/convert-simple.pl"
+	;;
+esac
+
+
+

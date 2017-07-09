@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+if [ "$1" = configure ]; then
+	. /usr/share/debconf/confmodule
+
+	db_get playmidi/options
+	echo "$RET" > /etc/playmidi/playmidi.conf
+fi
+
+

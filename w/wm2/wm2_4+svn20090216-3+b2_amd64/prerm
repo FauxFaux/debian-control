@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  upgrade|failed-upgrade) ;;
+  remove)
+    update-alternatives --remove x-window-manager /usr/bin/wm2
+    ;;
+esac
+
+

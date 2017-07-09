@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "disappear" ] ; then
+	update-alternatives --remove git-os-job /usr/bin/python3-git-os-job
+fi
+
+
+
+exit 0

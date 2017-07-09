@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dhpython:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p mercurial-server 
+else
+	dpkg -L mercurial-server | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section

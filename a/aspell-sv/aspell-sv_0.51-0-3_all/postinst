@@ -1,0 +1,32 @@
+#!/bin/sh -e
+
+case "$1" in
+    configure)
+	# register with install-dictcommon-aspell
+	touch /var/lib/aspell/sv.compat
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by installdeb-aspell
+SCRIPT="update-dictcommon-aspell"
+
+if [ "$1" = "configure" ] ; then
+    if which $SCRIPT > /dev/null 2>&1; then
+	$SCRIPT  
+    else
+	echo "Error: $SCRIPT not present or executable. Missing dependency on dictionaries-common?" >&2
+	exit 1
+    fi
+fi
+# End automatically added section
+
+
+exit 0

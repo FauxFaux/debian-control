@@ -1,0 +1,19 @@
+#! /bin/sh
+
+set -e
+
+remove_alternative () {
+    update-alternatives --remove $1 /usr/bin/vigor
+}
+
+case $1 in
+    remove|deconfigure)
+	remove_alternative vi
+	remove_alternative view
+	remove_alternative editor
+	;;
+esac
+
+
+
+exit 0

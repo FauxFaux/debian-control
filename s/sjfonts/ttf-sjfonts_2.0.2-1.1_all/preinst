@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+if dpkg --compare-versions "$2" lt 2.0.2-2; then
+	if [ -x "which defoma-font 2>/dev/null" ]; then
+		defoma-font purge /etc/defoma/hints/ttf-sjfonts.hints
+	fi
+fi
+
+
+if dpkg-maintscript-helper supports rm_conffile 2>/dev/null; then
+  dpkg-maintscript-helper rm_conffile /etc/defoma/hints/ttf-sjfonts.hints 2.0.2-2 -- "$@"
+fi
+
+

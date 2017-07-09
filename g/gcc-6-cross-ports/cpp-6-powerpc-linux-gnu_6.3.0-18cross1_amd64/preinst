@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove powerpc-linux-gnu-cpp /usr/bin/powerpc-linux-gnu-cpp-6
+fi
+
+
+
+exit 0

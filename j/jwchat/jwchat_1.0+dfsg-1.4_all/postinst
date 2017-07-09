@@ -1,0 +1,75 @@
+#! /bin/sh
+#
+# postinst script for jwchat
+#
+
+set -e
+
+configfile='/etc/jwchat/config.js'
+configsource='/usr/share/jwchat/config.js'
+oldapachefile='/etc/apache2/sites-available/jwchat'
+apachefile='/etc/apache2/sites-available/jwchat.conf'
+apachesource='/usr/share/jwchat/apache.conf'
+wwwdir='/usr/share/jwchat/www'
+tempfile=$(mktemp)
+
+. /usr/share/debconf/confmodule
+
+# chown everything to nobody:nogroup to make suphp happy
+fixperms()
+{
+	find $wwwdir -type d -exec chmod 0755 {} \;
+	find $wwwdir -type f -exec chmod 0644 {} \;
+	find $wwwdir -type f -exec chown root:nogroup {} \;
+}
+
+setup_apache()
+{
+        case "$1" in
+            configure)
+                if dpkg --compare-versions "$2" le "1.0+dfsg-1.1"; then
+                    if [ -e $oldapachefile.dpkg-backup ] && [ ! -e $apachefile ] ; then
+                        mv  $oldapachefile.dpkg-backup $apachefile
+                    fi
+                fi
+        esac
+
+	db_get jwchat/ApacheServerName
+	apache_server_name="$RET"
+	sed -e "s|__ApacheServerName__|$apache_server_name|g" $configsource > \
+		$tempfile
+	ucf --three-way --debconf-ok $tempfile $configfile
+	chmod 644 $configfile
+	chown root:www-data $configfile
+	if [ -x /usr/sbin/apache2 -a "$apache_server_name" != "none" ]; then
+		db_get jwchat/JabberAddress
+		jabber_address="$RET"
+		sed -e "s|__ApacheServerName__|$apache_server_name|g" \
+		    -e "s|__JabberAddress__|$jabber_address|g" \
+		    $apachesource > $tempfile
+		ucf --three-way --debconf-ok $tempfile $apachefile
+		db_stop
+		if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+			. /usr/share/apache2/apache2-maintscript-helper
+			apache2_invoke enmod proxy
+			apache2_invoke enmod proxy_http
+			apache2_invoke ensite jwchat
+		fi
+	fi
+}
+
+
+case $1 in
+	configure|reconfigure)
+	fixperms
+	setup_apache $@
+	rm -f $tempfile
+	;;
+
+	*)
+	echo "postinst called with unknown argument \`$1'" 1>&2
+	exit 1
+	;;
+esac
+
+

@@ -1,0 +1,11 @@
+#! /bin/sh -e
+
+
+
+case "$1" in
+    upgrade|install)
+	# Remove cruft from old versions
+	update-alternatives --remove-all mftrace >/dev/null 2>&1 || true
+	rm -f /usr/share/mftrace/afm.pyc /usr/share/mftrace/tfm.pyc || true
+	;;
+esac

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+installinit_error() {
+	status=$?
+	start-stop-daemon --stop --quiet --oknodo --name 4s-backend && exit 0
+	start-stop-daemon --stop --quiet --oknodo --name 4s-httpd && exit 0
+	exit $status
+}
+
+

@@ -1,0 +1,68 @@
+#!/bin/sh
+CONFIGFILE=/etc/default/nufw
+
+set -e
+#set -x
+. /usr/share/debconf/confmodule
+
+grepconf () {
+        w=" 	" # space tab
+        sq=/etc/nufw/nufw.conf
+        # sed is cool.
+        res=`sed -ne '
+                s/^\s*'$1'\s*=\s*"\?\([^"]*\)\"$/\1/p;
+                t end;
+                d;
+                :end q' < $sq`
+        [ -n "$res" ] || res=$2
+        echo "$res"
+}
+
+replace_file () {
+    newfile=$1
+    oldfile=$2
+    if [ ! -f ${oldfile} ] ; then
+      cp ${newfile} ${oldfile}
+    else
+      ucf --three-way --debconf-ok ${newfile} ${oldfile}
+    fi
+}
+
+# Installing the config
+replace_file /usr/share/nufw/nufw.conf /etc/nufw/nufw.conf
+
+nufw_tls_key=`grepconf nufw_tls_key /etc/nufw/certs/nufw-key.pem`
+nufw_tls_cert=`grepconf nufw_tls_cert /etc/nufw/certs/nufw-cert.pem`
+
+# ssl certificate generation
+if [ -x /usr/bin/openssl ]; then
+  if [ ! -e /etc/nufw/certs/nufw-key.pem ]; then
+
+    make-ssl-cert /usr/share/ssl-cert/ssleay.cnf /etc/nufw/certs/nufw.pem
+
+    if [ -f /etc/nufw/certs/nufw.pem ]; then
+      # split key and certificate data
+      openssl x509 -in /etc/nufw/certs/nufw.pem -out $nufw_tls_cert
+      openssl rsa  -in /etc/nufw/certs/nufw.pem -out $nufw_tls_key
+      chmod 0600 $nufw_tls_key
+      rm -f /etc/nufw/certs/nufw.pem
+      find /etc/nufw/certs -type l -maxdepth 1 -delete
+    fi
+
+  fi
+fi
+
+db_stop
+
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/nufw" ]; then
+		update-rc.d nufw defaults >/dev/null
+		invoke-rc.d nufw start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

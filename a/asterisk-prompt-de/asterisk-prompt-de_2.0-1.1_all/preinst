@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ "$1" = "upgrade" -o "$1" = "install" -a "$2" != "" ]; then
+  SYMLINK=/usr/share/asterisk/sounds/digits/de
+  if [ -e $SYMLINK -a -L $SYMLINK ] ; then
+    rm -f $SYMLINK
+  fi
+fi
+
+
+

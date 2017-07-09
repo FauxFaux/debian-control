@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+db_input medium bottlerocket/x10_port || true
+db_go

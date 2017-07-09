@@ -1,0 +1,34 @@
+#!/bin/sh -e
+
+W=/usr/lib/gpr/lpr.wrapper
+D=/usr/bin/lpr.not.gpr
+L=/usr/bin/lpr
+
+if [ remove = "$1" ]; then
+    #act only if diversion is there
+    if  dpkg-divert --list gpr | grep -q $D ; then
+        #remove the link?
+	if [  -L $L ] && find $L -printf '%l' | egrep -q "$W|$D" ; then
+		rm $L
+	fi
+        #remove the diversion?
+	if [ -e  $L ] ; then 
+	    echo gpr problem: $L exists, cannot remove diversion 1>&2
+	    exit 5
+	else
+	    dpkg-divert --package gpr --remove --rename \
+		--divert $D $L 
+	fi
+    fi
+fi
+
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

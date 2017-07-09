@@ -1,0 +1,36 @@
+#! /bin/sh
+# postinst script for chameleon-cursor-theme
+# (based on postinst of comixcursors by Sune Vuorela)
+
+set -e
+
+TARGET=/usr/share/icons/default/index.theme
+ICONDIR=/usr/share/icons
+CHOSEN=Chameleon-Pearl-Large/cursor.theme
+PRIORITY1=50
+PRIORITY2=49
+
+case "$1" in
+    configure)
+	for theme in `find "$ICONDIR" -regex '.*Chameleon-\(Anthracite\|DarkSkyBlue\|Pearl\|White\|SkyBlue\)-.*theme$'`; do
+	    if [ "$theme" = "$ICONDIR/$CHOSEN" ];then
+	    	update-alternatives --install "$TARGET" x-cursor-theme "$theme" $PRIORITY1
+	    else
+	        update-alternatives --install "$TARGET" x-cursor-theme "$theme" $PRIORITY2
+	    fi
+	done
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

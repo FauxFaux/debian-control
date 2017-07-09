@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" -o "$1" = "remove" ]; then
+	unset CACHE
+	unset STAGE
+        . /etc/slack.conf
+        # purge the cache
+	if [ -n "$CACHE" ]; then
+        	rm -rf "$CACHE"/*
+	fi
+        # remove the stage
+	if [ -n "$STAGE" ]; then
+        	rm -rf "$STAGE"
+	fi
+fi
+
+
+
+exit 0

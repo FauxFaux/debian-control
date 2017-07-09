@@ -1,0 +1,319 @@
+#!/bin/bash
+set -e
+
+# uswsusp.config -- configure script for uswsusp debian package
+#
+# Copyright 2006, 2007	Tim Dijkstra <tim@famdijkstra.org>
+# Copyright 2012	Rodolfo García Peñas <kix@kix.es>
+#  04-2012 Full rewrited
+# Released under GPLv2
+CONFIGNAME=uswsusp.conf
+CONFIGFILE=/etc/$CONFIGNAME
+SWAPOFFSET=/usr/sbin/swap-offset
+
+# If we don't have /proc or /sys we can't work, this will probably
+# be a chroot or so.
+function check_filesystems
+{
+	mountpoint -q /sys || {
+		echo "/sys not mounted. Can't create $CONFIGNAME" >> /dev/stderr;
+		exit 0; }
+	mountpoint -q /proc || {
+		echo "/proc not mounted. Can't create $CONFIGNAME" >> /dev/stderr;
+		exit 0; }
+}
+
+# This function returns the full path in /dev/disk/by-uuid
+# for a given /dev device. If not found, returns the /dev device.
+function dev_to_uuid
+{
+	local link
+	local path
+	local uuid
+
+	if [ -d /dev/disk/by-uuid ]; then
+		uuid=$tmpswap
+		for path in /dev/disk/by-uuid/*; do
+			link=$(readlink -f "$path")
+			if [ "$link" = "$tmpswap" ]; then
+				uuid=${path}
+				break;
+			fi
+		done
+
+		tmpswap=$uuid
+	fi
+}
+
+function get_list_of_swaps
+{
+	SWAPLIST=
+	SWAPFIRST=
+	KOMMA=
+	tmpswap=
+
+	# Swap file support is from 2.6.20
+	if dpkg --compare-versions `uname -r` lt 2.6.20; then
+		NO_FILE=' && $2!="file"'
+	fi
+
+	# List of swaps, listed by size
+	for tmpswap in `sort -nr -k 3 /proc/swaps | awk '$2!="Type" '"$NO_FILE"' {print $1}'`; do
+		dev_to_uuid
+		SWAPLIST=${SWAPLIST}${KOMMA}${tmpswap}
+
+		if [ -z "$KOMMA" ]; then
+			SWAPFIRST=${tmpswap}
+			KOMMA=", "
+		fi
+	done
+}
+
+# This function checks snapshot support
+function check_snapshot_support
+{
+	if [ ! -e /sys/class/misc/snapshot/dev ]; then
+		db_input critical uswsusp/no_snapshot || true
+		db_fset uswsusp/no_snapshot hit true
+		db_go || true
+		exit 0
+	fi
+}
+
+# This function sets the max size of image
+function set_image_size
+{
+	IMAGESIZE=`awk '$1 == "MemTotal:" {printf("%lu\n", $2*1024*0.46)}' /proc/meminfo 2> /dev/null`
+	if [ -n "$IMAGESIZE" ]; then
+		db_set uswsusp/image_size $IMAGESIZE
+	fi
+}
+
+# Read the configuration file
+function read_config_file
+{
+# Luckily the parser in s2disk is quite strict
+	for i in $LOWQ $MEDQ $HIGHQ $NOTQ; do
+		VAL=`sed -n 's/^[[:space:]]*'"${i//_/ }"'[[:space:]]*[=:][[:space:]]*\([^[:space:]]*\)/\1/ p' $CONFIGFILE`
+
+		# For boolean values it only checks for [yY]
+		db_metaget uswsusp/${i} type
+		TYPE=$RET
+
+		if [ "boolean" = "$TYPE" ]; then
+			if [ "$VAL" = "y" -o "$VAL" = "Y" ];  then
+				db_set uswsusp/${i} true
+			else
+				db_set uswsusp/${i} false
+			fi
+		else
+			db_set uswsusp/${i} "$VAL"
+		fi
+	done
+}
+
+function get_partition_to_use
+{
+	if [ -z "$USERSWAP" ]; then
+		# The user didn't set one: Set the first as default
+		SWAPDEFAULT=$SWAPFIRST
+	elif echo "$SWAPLIST" | grep -q -e '\(^\|, \)'$USERSWAP'\(,\|$\)'; then
+		# Valid swap partition
+		SWAPDEFAULT=$USERSWAP
+	elif [ -n "$USEROFFSET" ] && [ -x $SWAPOFFSET ]; then
+		# Offset was specified
+		# If we don't have swap-offset, this probably means uswsusp
+		# was removed before, leaving the config file. Now we don't
+		# have a way to check the offset. Best is to ask if this is OK
+
+		devid=`printf "%x%02x" $(stat -c "0x%t 0x%T" $USERSWAP 2> /dev/null)`
+
+		while read name type rest; do
+			[ "$type" == "file" ]  || continue;
+			[ "$(stat -c '%D' $name)" == "$devid" ] || continue;
+			[ "$USEROFFSET" == "$(swap-offset $name | cut -c17- )" ] || continue;
+
+			SWAPDEFAULT=$name
+			break
+		done < /proc/swaps
+	fi
+}
+
+# Some people want to use a swap partition that is only mounted
+# during suspend. This means we can't find it in /proc/swaps, but
+# it is a valid option non the less. To not remove their changes
+# we add it to the SWAPLIST, but not after we confirmed this is
+# what they want.
+function get_partition_mounted_to_use
+{
+	# This can be:
+	#   Offset is given, no sbin/swap-offset
+	#   Offset is given, USERSWAP:USEROFFSET not in /proc/swaps
+	#   No offset, USERSWAP not in /proc/swaps
+	db_input critical uswsusp/continue_without_swap || true
+	db_get uswsusp/continue_without_swap
+	if [ "$RET" = "true" ]; then
+		SWAPLIST=${SWAPLIST}${KOMMA}${USERSWAP} ;
+		SWAPDEFAULT=${USERSWAP}
+		db_fset uswsusp/continue_without_swap hit true
+	fi
+}
+
+function setup_priority_questions
+{
+	for i in $LOWQ; do
+		db_input low uswsusp/${i} || true
+	done
+
+	for i in $MEDQ; do
+		db_input medium uswsusp/${i} || true
+	done
+
+	for i in $HIGHQ; do
+		db_input high uswsusp/${i} || true
+	done
+
+	# Ask questions
+	db_go || true
+}
+
+function set_encryption
+{
+	# First ask filename
+	while [ 1 ] ; do
+		db_input low uswsusp/RSA_key_file || true
+		db_go || true
+		db_get uswsusp/RSA_key_file || true
+		KEYFILE=$RET
+
+		if [ -n "$KEYFILE" ]; then
+			break
+		fi
+
+		db_reset uswsusp/RSA_key_file
+	done
+
+	# Then ask if we should generate it, default to yes if they don't have one yet
+	if [ -e "$KEYFILE" ]; then
+		db_set uswsusp/create_RSA_key false
+	else
+		db_set uswsusp/create_RSA_key true
+	fi
+
+	db_input low uswsusp/create_RSA_key || true
+	db_go || true
+
+	# If they want it created, ask nr bits and passphrase (twice)
+	db_get uswsusp/create_RSA_key
+	if [ "$RET" = "true" ]; then
+		while [ 1 ]; do
+			db_input low uswsusp/RSA_key_bits || true
+			db_go || true
+			db_get uswsusp/RSA_key_bits
+
+			if [ -z "$RET" ] || [ $RET -ge 1024 -a $RET -le 4096 ]; then
+				break;
+			fi
+
+			db_reset uswsusp/RSA_key_bits
+		done
+
+		P1=A; P2=B;
+
+		while [ "$P1" != "$P2" ]; do
+			db_input critical uswsusp/RSA_passphrase || true
+			db_input critical uswsusp/RSA_passphrase_v || true
+			db_go || true
+
+			db_get uswsusp/RSA_passphrase
+			if [ -n "$RET" ]; then
+				P1=$RET;
+			fi
+
+			db_get uswsusp/RSA_passphrase_v
+			if [ -n "$RET" ]; then
+				P2=$RET;
+			fi
+		done
+	fi
+}
+
+# MAIN SCRIPT #
+. /usr/share/debconf/confmodule
+
+LOWQ="snapshot_device compute_checksum compress early_writeout image_size suspend_loglevel max_loglevel shutdown_method"
+MEDQ="resume_device encrypt"
+HIGHQ=""
+NOTQ="RSA_key_file shutdown_method resume_offset"
+
+# Check if filesystems /proc and /sys are mounted
+check_filesystems
+
+# Reset these flags
+db_fset uswsusp/no_swap hit false
+db_fset uswsusp/no_snapshot hit false
+db_fset uswsusp/continue_without_swap hit false
+
+# Try to detect snapshot support
+check_snapshot_support
+
+# Get the list of swap devices
+get_list_of_swaps
+
+# Set the maximum size for image
+set_image_size
+
+# If config file, read it
+if [ -e "$CONFIGFILE" ]; then
+	read_config_file
+fi
+
+# Check resume_device and resume_offset from the config file
+db_get uswsusp/resume_device
+# If the file is a device file, translate to uuid file
+# Else we can get an error about file is not active.
+# debconf error uswsusp/continue_without_swap
+tmpswap=$RET
+dev_to_uuid
+USERSWAP=$tmpswap
+
+db_get uswsusp/resume_offset
+USEROFFSET=$RET
+
+# Get the swap partition to use
+get_partition_to_use
+
+# Some people want to use a swap partition that is only mounted
+# during suspend. This means we can't find it in /proc/swaps, but
+# it is a valid option non the less. To not remove their changes
+# we add it to the SWAPLIST, but not after we confirmed this is
+# what they want.
+if [ -z "$SWAPDEFAULT" ]; then
+	get_partition_mounted_to_use
+fi
+
+# If we still do not have a SWAPLIST, something is wrong
+if [ -z "$SWAPLIST" ]; then
+	db_input critical uswsusp/no_swap || true
+	db_fset uswsusp/no_swap hit true
+	db_go || true
+	exit 0
+fi
+db_subst uswsusp/resume_device list $SWAPLIST
+db_set uswsusp/resume_device $SWAPDEFAULT
+
+# If we're still here, reset the seen flags on error messages
+# Maybe they had problems before, but not anymore...
+db_fset uswsusp/no_swap seen false
+db_fset uswsusp/no_snapshot seen false
+
+# Stetup questions according to  priority
+setup_priority_questions
+
+# Only if they want encryption, ask the RSA question
+db_get uswsusp/encrypt
+if [ "$RET" = "false" ]; then
+	db_set uswsusp/create_RSA_key false
+elif [ "$RET" = "true" ]; then
+	set_encryption
+fi

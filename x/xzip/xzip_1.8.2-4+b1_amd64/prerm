@@ -1,0 +1,12 @@
+#! /bin/sh
+
+set -e
+
+
+
+if test "$1" = failed-upgrade; then
+  update-alternatives --remove zcode-interpreter /usr/bin/xzip
+  update-alternatives --remove zcode-interpreter /usr/X11R6/bin/xzip
+fi
+
+update-alternatives --remove zcode-interpreter /usr/games/xzip

@@ -1,0 +1,8 @@
+#! /bin/sh
+set -e
+
+
+if getent 'passwd' 'debianfdm' > /dev/null ; then
+  userdel debianfdm
+fi
+exit 0

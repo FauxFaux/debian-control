@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+# Remove emacs alternative (in case 2.2.22-2 had installed it)
+update-alternatives --remove emacs /usr/bin/zile
+
+if [ "$1" != "upgrade" ]
+then
+  update-alternatives --remove editor /usr/bin/zile
+fi
+
+

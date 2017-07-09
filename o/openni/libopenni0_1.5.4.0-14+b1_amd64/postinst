@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper mv_conffile /etc/openni/modules.xml /var/lib/ni/modules.xml 1.5.4.0-7~ libopenni0 -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/openni/licenses.xml /var/lib/ni/licenses.xml 1.5.4.0-7~ libopenni0 -- "$@"
+
+case "$1" in
+  configure)
+    # Fix for #767653
+    if [ -n "$2" ] && dpkg --compare-versions "$2" lt-nl "1.5.4.0-8"; then
+      mv /var/lib/ni/licenses.xml.dpkg-old /var/lib/ni/licenses.xml
+      mv /var/lib/ni/modules.xml.dpkg-old /var/lib/ni/modules.xml
+    fi
+    # Only register upon fresh install
+    if [ -z "$2" ]; then
+      # manually generate modules.xml, so we don't have a cyclic dependency to openni-utils
+      cat > /var/lib/ni/modules.xml <<EOF
+<Modules>
+    <Module path="/usr/lib/libnimMockNodes.so.0" configDir="/etc/openni" />
+    <Module path="/usr/lib/libnimCodecs.so.0" configDir="/etc/openni" />
+    <Module path="/usr/lib/libnimRecorder.so.0" configDir="/etc/openni" />
+</Modules>
+EOF
+    fi
+    ;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,200 @@
+#!/bin/sh
+
+set -e
+
+init_error ()
+{
+    exit 1
+}
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+DEBUG=false
+
+db_get mldonkey-server/launch_at_startup
+launch_at_startup="$RET"
+
+case "$1" in
+    configure)
+
+    CONF=/etc/default/mldonkey-server
+
+    ##################
+    # Default values #
+    ##################
+
+    mldonkey_umask=0022
+    run_as_user=mldonkey
+    mldonkey_group=mldonkey
+    new_mldonkey_dir="/var/lib/mldonkey"
+    client_name=`hostname`
+
+    if [ -r "$CONF" ]; then
+        . $CONF;
+        if [ -n "$MLDONKEY_USER" ]; then
+             run_as_user="$MLDONKEY_USER";
+        fi
+        if [ -n "$MLDONKEY_GROUP" ]; then
+             mldonkey_group="$MLDONKEY_GROUP";
+        fi
+        if [ -n "$MLDONKEY_DIR" ]; then
+             new_mldonkey_dir="$MLDONKEY_DIR";
+        fi
+        if [ -n "$MLDONKEY_UMASK" ]; then
+             mldonkey_umask="$MLDONKEY_UMASK";
+        fi
+    fi
+    umask $mldonkey_umask
+
+    ###################
+    # User management #
+    ###################
+
+    # Creating MLDonkey group if it isn't already there
+    if ! getent group $mldonkey_group > /dev/null ; then
+        $DEBUG && echo -n "Creating mldonkey group: "
+        addgroup --system --quiet $mldonkey_group
+        $DEBUG && echo "done."
+    fi
+
+    # Creating MLDonkey user if it isn't already there
+    if ! getent passwd $run_as_user > /dev/null ; then
+        $DEBUG && echo -n "Creating mldonkey user: "
+        adduser --quiet --system --ingroup $mldonkey_group \
+        --home "$new_mldonkey_dir" --no-create-home $run_as_user
+        $DEBUG && echo "done."
+    fi
+
+    run_as_useruid=`id -u $run_as_user`
+
+    if [ ! -d $new_mldonkey_dir ]; then
+        $DEBUG && echo -n "Creating mldonkey home directory: "
+        mkdir "$new_mldonkey_dir"
+        $DEBUG && echo "done."
+    fi
+
+    #################
+    # Downloads.ini #
+    #################
+
+    if [ ! -e "$new_mldonkey_dir/downloads.ini" ]; then
+        $DEBUG && echo -n "Creating a new $new_mldonkey_dir/downloads.ini: "
+        touch "$new_mldonkey_dir/downloads.ini"
+	cat > "$new_mldonkey_dir/downloads.ini" <<EOF
+run_as_useruid=$run_as_useruid
+run_as_user="$run_as_user"
+client_name="$client_name"
+EOF
+        $DEBUG && echo "done."
+    fi
+
+    #############
+    # Files.ini #
+    #############
+
+    # Handling fasttrack file split here, better than in the mldonkey-server.init
+
+    if [ -e "$new_mldonkey_dir/files.ini" ] \
+        && [ ! -e "$new_mldonkey_dir/files.ini.fasttrack" ] \
+        && /usr/lib/mldonkey/mldonkey_files --test Fasttrack -q -f0 "$new_mldonkey_dir/files.ini"; then
+        echo "Correction of the Fasttrack problem (see /usr/share/doc/mldonkey-server/README.Debian)"
+        echo -n "Splitting $new_mldonkey_dir/files.ini (backup in $new_mldonkey_dir/files.ini.fasttrack): "
+        /usr/lib/mldonkey/mldonkey_files --split Fasttrack -f0 "$new_mldonkey_dir/files.ini" \
+        -f1 "$new_mldonkey_dir/files.ini.fasttrack" \
+        -f2 "$new_mldonkey_dir/files.ini"
+        echo "done."
+    fi
+
+    ####################
+    # Files permission #
+    ####################
+
+    for file in \
+        "$new_mldonkey_dir"  \
+        "/var/run/mldonkey" \
+        "/var/log/mldonkey" \
+        "$new_mldonkey_dir/downloads.ini" \
+        "$new_mldonkey_dir/downloads.ini.dpkg" \
+        "$new_mldonkey_dir/downloads.ini.old" \
+        "$new_mldonkey_dir/downloads.ini.tmp" \
+        "$new_mldonkey_dir/files.ini" \
+        "$new_mldonkey_dir/files.ini.fasttrack"; do
+        $DEBUG && echo -n "Changing owner and file permission of $file: "
+        if ! dpkg-statoverride --list "$file" >/dev/null; then
+            # BUG: cf dpkg-statoverride above
+            if [ -e "$file" ]; then
+                chown -R $run_as_user:$mldonkey_group $file
+                $DEBUG && echo "done."
+            else
+                $DEBUG && echo "$file doesn't exist."
+            fi
+        else
+            $DEBUG && echo "$file is listed in dpkg-statoverride."
+        fi
+    done
+
+    for file in \
+        "$new_mldonkey_dir/users.ini" \
+        "$new_mldonkey_dir/users.ini.dpkg" \
+        "$new_mldonkey_dir/users.ini.old" \
+        "$new_mldonkey_dir/users.ini.tmp"; do
+        $DEBUG && echo -n "Changing owner and file permission of $file: "
+        if ! dpkg-statoverride --list "$file" >/dev/null; then
+            # BUG: cf dpkg-statoverride above
+            if [ -e "$file" ]; then
+                chown $run_as_user:$mldonkey_group "$file"
+                chmod 0600 "$file"
+                $DEBUG && echo "done."
+            else
+                $DEBUG && echo "$file doesn't exist."
+            fi
+        else
+            $DEBUG && echo "$file is listed in dpkg-statoverride."
+        fi
+    done
+
+    ################################
+    # /etc/default/mldonkey-server #
+    ################################
+
+    CONF_NEW=`tempfile`
+    $DEBUG && echo -n "Writing new values to $CONF_NEW: "
+
+    cat > "$CONF_NEW" <<EOF
+# MLDonkey configuration file
+# This file is loaded by /etc/init.d/mldonkey-server.
+# This file is managed using ucf(1).
+
+MLDONKEY_DIR=$new_mldonkey_dir
+MLDONKEY_USER=$run_as_user
+MLDONKEY_GROUP=$mldonkey_group
+MLDONKEY_UMASK=$mldonkey_umask
+LAUNCH_AT_STARTUP=$launch_at_startup
+EOF
+
+        ucf --debconf-ok "$CONF_NEW" "$CONF"
+
+        $DEBUG && echo "done."
+        ;;
+
+        abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+
+        *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+    esac
+
+db_stop
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/mldonkey-server" ]; then
+		update-rc.d mldonkey-server start 98 2 3 4 5 . stop 20 0 1 6 . >/dev/null
+		invoke-rc.d mldonkey-server start || init_error
+	fi
+fi
+# End automatically added section
+

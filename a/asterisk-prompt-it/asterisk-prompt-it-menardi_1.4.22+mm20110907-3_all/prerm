@@ -1,0 +1,10 @@
+#! /bin/sh
+
+set -e
+
+if [ "$1" = "remove" ]; then
+    update-alternatives --remove asterisk-prompt-it    /usr/share/asterisk/sounds/it_IT_f_Menardi
+    update-alternatives --remove asterisk-prompt-it-it /usr/share/asterisk/sounds/it_IT_f_Menardi
+fi
+
+

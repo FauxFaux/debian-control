@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+# source debconf library.
+. /usr/share/debconf/confmodule
+
+if [ -e /etc/default/popa3d ]; then
+        . /etc/default/popa3d
+        case $RUN_STANDALONE in
+                yes|1|true)
+                        db_set popa3d/standalone true;;
+                *)
+                        db_set popa3d/standalone false;;
+        esac
+fi
+
+
+# Should we start popa3d in standalone mode?
+db_input medium popa3d/standalone || true
+db_go

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+. /usr/share/debconf/confmodule
+
+if dpkg --compare-versions "$2" lt-nl "1:8.0.4.dfsg.1-1"; then
+    db_input high ircd-hybrid/upgrade_secure_links_warn || true
+    db_go
+    db_get ircd-hybrid/upgrade_secure_links_warn
+    if [ "$RET" = "false" ]; then
+        echo "Aborting install";
+        db_fset ircd-hybrid/upgrade_secure_links_warn seen false
+        exit 1
+    fi
+fi
+
+if [ "$1" = "configure" ]; then
+	if dpkg --compare-versions "$2" ge "1:7.2.2-1"; then
+		db_input medium ircd-hybrid/restart_on_upgrade || true
+	fi
+fi
+db_go
+
+exit 0

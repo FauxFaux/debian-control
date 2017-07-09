@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/ceilometer ceilometer /usr/bin/python3-ceilometer 200
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-ceilometerclient 
+fi
+
+# End automatically added section
+
+
+exit 0

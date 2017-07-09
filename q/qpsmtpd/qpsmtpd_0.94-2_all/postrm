@@ -1,0 +1,60 @@
+#!/bin/sh
+
+set -e
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d qpsmtpd remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+Q_USER=qpsmtpd
+Q_GROUP=qpsmtpd
+
+SPOOLDIR=/var/spool/qpsmtpd
+GREYLISTDIR=/var/lib/qpsmtpd/greylisting
+LOGDIR=/var/log/qpsmtpd
+PIDDIR=/var/run/qpsmtpd
+
+case "$1" in
+	purge)
+		# purge the maintainer script-generated configs
+		rm -f /etc/qpsmtpd/debconf-settings \
+			/etc/qpsmtpd/debian-queue-method \
+			/etc/qpsmtpd/debian-rcpthosts
+
+		# purge the logs
+		rm -f /var/log/qpsmtpd/*
+
+		# unregister the statoverrides before dpkg removes the dirs
+		for d in "$SPOOLDIR" "$GREYLISTDIR" "$LOGDIR" "$PIDDIR" ; do
+			if ( dpkg-statoverride --list "$d" > /dev/null) ; then
+				dpkg-statoverride --remove "$d" || true
+			fi
+		done
+
+        # debconf purge will be inserted by debhelper
+
+		# remove the run-as user
+		deluser --quiet "$Q_USER" || true
+		;;
+	*)
+		;;
+esac
+
+exit 0
+

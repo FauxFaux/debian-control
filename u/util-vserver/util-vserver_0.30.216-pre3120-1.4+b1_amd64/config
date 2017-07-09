@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+. /usr/share/debconf/confmodule
+
+db_title "util-vserver" || true
+
+db_input medium util-vserver/start_on_boot || true
+db_go || true

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+
+configure)
+    for plugin in $(/usr/lib/munin-c/plugins/munin-plugins-c listplugins); 
+    do
+	if [ -L /etc/munin/plugins/$plugin ];
+        then
+            # Only substitute standard munin plugins
+            if [ $(readlink /etc/munin/plugins/$plugin) = "/usr/share/munin/plugins/$plugin" ];
+            then
+                rm /etc/munin/plugins/$plugin
+                ln -s /usr/lib/munin-c/plugins/munin-plugins-c /etc/munin/plugins/$plugin
+            fi
+        fi
+    done
+;;
+esac
+
+

@@ -1,0 +1,41 @@
+#!/bin/sh
+
+set -e
+
+INETDCONF=/etc/inetd.conf
+INETDENTRY="asp		dgram	udp	wait	nobody	/usr/sbin/tcpd	/usr/sbin/in.aspd"
+
+case "$1" in
+    configure)
+	if [ -x /usr/sbin/update-inetd ]; then
+	    if grep -q '^asp' $INETDCONF ; then
+	        ENABLED=yes
+	    else
+	        ENABLED=no
+	    fi
+	    
+	    # remove legacy entry:
+	    if grep -q "^#$INETDENTRY" $INETDCONF ; then
+	        update-inetd --remove asp
+	    fi
+
+	    if [ "$ENABLED" = "yes" ]; then
+		update-inetd --add "$INETDENTRY"
+	    else
+	        update-inetd --add "#<off># $INETDENTRY"
+	    fi
+	fi
+        ;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+	if [ -x /usr/sbin/update-inetd ]; then
+	    update-inetd --remove asp
+	fi
+        ;;
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+
+

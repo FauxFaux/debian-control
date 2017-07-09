@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = upgrade -a "$2" = "0.57.snap040702-1" ]; then
+	if getent passwd SIProxd > /dev/null ; then
+	    echo "It's recommended you remove the user SIProxd."
+	    echo "This is now deprecated and can not be automated on removal of this package"
+#	    deluser SIProxd
+	    perl -pi -e 's/SIProxd/siproxd/g' /etc/siproxd.conf
+	fi
+fi
+
+rm -rf /var/lib/siproxd /var/run/siproxd
+
+

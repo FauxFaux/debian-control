@@ -1,0 +1,33 @@
+#!/bin/sh
+set -e
+
+# user nagios should have been created by the Nagios package
+MY_USER=nagios
+
+if ! getent passwd ${MY_USER} >/dev/null;
+then
+    echo "Expecting user $MY_USER to exist already, aborting."
+    exit 1
+fi
+
+ETC_DIR=/etc/nagios3/syslog.d
+if [ ! -d ${ETC_DIR} ];
+then
+    mkdir -p ${ETC_DIR}
+fi
+if [ -d ${ETC_DIR} ];
+then
+    chown ${MY_USER} ${ETC_DIR}
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/syslog-nagios-bridge" ]; then
+		update-rc.d syslog-nagios-bridge defaults >/dev/null
+		invoke-rc.d syslog-nagios-bridge start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

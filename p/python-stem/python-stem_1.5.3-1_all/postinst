@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+    update-alternatives \
+        --install /usr/bin/tor-prompt tor-prompt /usr/bin/python2-tor-prompt 300 \
+        --slave /usr/share/man/man8/tor-prompt.8.gz tor-prompt.8.gz \
+                /usr/share/man/man8/python2-tor-prompt.8.gz
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-stem 
+fi
+
+# End automatically added section
+
+
+exit 0

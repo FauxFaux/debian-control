@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -e
+
+# OK.  This is bad because it really should be in the guile config or
+# in some emacs-common sort of package.  Now we conditionally run it.
+# one of these probably shouldn't exist, but don't know which and
+# probably should support the older.
+
+if [ -x /usr/sbin/guile1.4-slibconfig ] ; then
+    echo guile1.4-slibconfig
+    guile1.4-slibconfig
+fi
+
+if [ -x /usr/bin/guile-1.6 -a -e /usr/share/guile/1.6/slib ] ; then
+    rm -f /usr/share/guile/1.6/slibcat
+
+    guile-1.6 -c "(use-modules (ice-9 slib)) (require 'new-catalog)"
+
+    if [ -e /usr/share/guile/1.6/slibcat ] ; then
+      chmod 644 /usr/share/guile/1.6/slibcat
+    fi
+fi
+
+if [ -x /usr/bin/scm ] ; then
+    rm -f /usr/lib/scm/slibcat
+    scm -c "(require 'new-catalog)"
+
+    if [ -e /usr/lib/scm/slibcat ] ; then
+      chmod 644 /usr/lib/scm/slibcat
+    fi
+fi
+
+

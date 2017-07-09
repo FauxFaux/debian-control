@@ -1,0 +1,52 @@
+#!/bin/sh
+# Copyright 2001 Alberto Gonzalez Iniesta <agi@agi.as>
+# Licensed under the GNU General Public License, version 2.  See the file
+# /usr/share/common-licenses/GPL or <http://www.gnu.org/copyleft/gpl.txt>.
+# 
+set -e
+test $DEBIAN_SCRIPT_DEBUG && set -v -x
+
+case "$1" in
+    purge)
+        # For some reason /etc/fwlogwatch does not disappear when purging the package
+	rm -rf /etc/fwlogwatch || true
+	rm -f /etc/default/fwlogwatch || true
+    ;;
+
+    # fwlw_respond & fwlw_notify were moved from /usr/sbin if we were upgrading
+    # from a version older than 0.4-3,  emove them back if upgrade fails
+    abort-upgrade)
+        if `dpkg --compare-versions $2 lt 0.4-3`
+        then
+            if [ -f /etc/fwlogwatch/fwlw_respond -a -f /etc/fwlogwatch/fwlw_notify ]
+            then
+                mv /etc/fwlogwatch/fwlw_respond /usr/sbin
+                mv /etc/fwlogwatch/fwlw_notify /usr/sbin
+            fi
+        fi
+    ;;
+esac
+
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d fwlogwatch remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+
+exit 0

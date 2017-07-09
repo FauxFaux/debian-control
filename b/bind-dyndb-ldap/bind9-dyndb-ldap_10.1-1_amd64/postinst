@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+if [ $1 = "configure" ]; then
+    chown root:bind /var/cache/bind/dynamic /var/cache/bind/dyndb-ldap
+    chmod 0770 /var/cache/bind/dynamic /var/cache/bind/dyndb-ldap
+fi
+
+

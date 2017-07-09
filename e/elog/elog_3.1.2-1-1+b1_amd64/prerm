@@ -1,0 +1,37 @@
+#!/bin/sh
+# Copyright © 2003, 2004  Recai Oktaş <roktas@omu.edu.tr>
+# Copyright © 2015  Roger Kalt <roger.kalt@gmail.com>
+#
+# Licensed under the GNU General Public License, version 2.
+# See the file `http://www.gnu.org/copyleft/gpl.txt'.
+
+set -e
+
+# taken from Debian's Developer's Reference, 6.4
+pathfind() {
+    OLDIFS="$IFS"
+    IFS=:
+    for p in $PATH; do
+        if [ -x "$p/$*" ]; then
+            IFS="$OLDIFS"
+            return 0
+        fi
+    done
+    IFS="$OLDIFS"
+    return 1
+}
+
+
+
+# Stop daemon.
+if pathfind invoke-rc.d; then
+	invoke-rc.d elog stop
+else
+	if [ -x /etc/init.d/elog ]; then
+		/etc/init.d/elog stop
+	fi
+fi || true
+
+exit 0
+
+# vim:ai:sts=8:sw=8:

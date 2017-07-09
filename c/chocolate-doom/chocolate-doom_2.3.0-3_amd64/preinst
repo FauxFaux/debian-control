@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "install" ] || [ "$1" = "upgrade" ]
+then
+  if dpkg --compare-versions "$2" lt-nl "2.1.0-2~"
+  then
+    update-alternatives --remove heretic /usr/games/chocolate-heretic
+    update-alternatives --remove hexen   /usr/games/chocolate-hexen
+    update-alternatives --remove strife  /usr/games/chocolate-strife
+  fi
+fi
+
+
+
+exit 0

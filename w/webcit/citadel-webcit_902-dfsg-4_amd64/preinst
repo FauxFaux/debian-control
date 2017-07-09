@@ -1,0 +1,17 @@
+#! /bin/sh
+# Abort if any command returns an error value
+set -e
+
+
+
+case "$1" in
+  install|upgrade)
+    if dpkg --compare-versions "$2" lt 8.05-dfsg-3; then
+	# remove directories that were created by postinst but never really used
+	[ ! -d /var/lib/citadel/keys ] || rmdir /var/lib/citadel/keys
+	[ ! -d /var/run/citadel/keys ] || rmdir /var/run/citadel/keys
+    fi
+  ;;
+esac
+
+exit 0

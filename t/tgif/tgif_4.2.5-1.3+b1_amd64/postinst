@@ -1,0 +1,47 @@
+#!/bin/sh -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+default_file=/etc/default/tgif
+
+# Get debconf answers
+db_get tgif/papersize
+papersize=$RET
+db_get tgif/gridunits
+gridunits=$RET
+case $papersize in
+    A4)     paper="21cm x 29.7cm" ;;
+    Letter) paper="8.5in x 11in" ;;
+esac
+
+case $1 in
+   abort-upgrade|abort-remove|abort-deconfigure ) 
+   exit 0
+   ;;
+   configure|reconfigure )
+   if [ -f $default_file ]
+   then
+       sed '/^! START debconf/,+5 d' $default_file
+   else
+       touch $default_file
+   fi
+   echo "! START debconf block - DO NOT EDIT" >>$default_file
+   echo "! " >>$default_file
+   echo "Tgif*InitialPaperSize: $paper" >>$default_file
+   echo "Tgif*GridSystem: $gridunits" >>$default_file
+   echo "!" >>$default_file
+   echo "! END debconf block" >>$default_file
+   ;;
+   * )
+   echo "postinst called with unknown argument \`$1'" >&2
+   exit 1
+   ;;
+esac

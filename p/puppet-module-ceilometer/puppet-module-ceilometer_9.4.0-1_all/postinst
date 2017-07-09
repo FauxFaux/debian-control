@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/ceilometer puppet-module-ceilometer /usr/share/puppet/modules.available/ceilometer 500
+fi
+
+
+
+exit 0

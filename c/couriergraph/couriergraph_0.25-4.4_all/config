@@ -1,0 +1,34 @@
+#!/bin/sh
+# config script for CourierGraph
+#
+# by Jose Luis Tallon <jltallon@adv-solutions.net>
+
+if [ -f /usr/share/debconf/confmodule ]; then 
+    . /usr/share/debconf/confmodule
+fi
+db_version 2.0
+
+db_title "CourierGraph"
+
+set -e
+
+case "$1" in
+        configure|reconfigure)
+ 
+		db_input medium couriergraph/start_on_boot || true
+		db_go
+
+		db_input medium couriergraph/logfile || true
+		db_go
+
+		db_input medium couriergraph/stay_on_purge || true
+		db_go
+	;;
+
+	*)
+		echo "config called with unknown argument \$1'" >&2
+		exit 0
+	;;
+esac
+
+exit 0

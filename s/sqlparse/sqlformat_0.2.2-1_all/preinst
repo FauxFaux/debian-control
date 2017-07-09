@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    install|upgrade)
+        # clean up leftowers from alternatives used up to 0.1.10
+        if update-alternatives --query sqlformat > /dev/null 2>&1 ; then
+            update-alternatives --quiet --remove-all sqlformat 
+        fi
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+    echo "preinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+

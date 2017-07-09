@@ -1,0 +1,26 @@
+#! /bin/sh
+
+set -e
+
+
+
+FLAVOR=".nox"
+PRIORITY=30
+
+update-alternatives --install /usr/bin/ssr-aap ssr-aap /usr/bin/ssr-aap${FLAVOR} ${PRIORITY}  \
+        --slave /usr/share/man/man1/ssr-aap.1.gz ssr-aap.1.gz /usr/share/man/man1/ssr-aap${FLAVOR}.1.gz
+update-alternatives --install /usr/bin/ssr-binaural ssr-binaural /usr/bin/ssr-binaural${FLAVOR} ${PRIORITY}  \
+        --slave /usr/share/man/man1/ssr-binaural.1.gz ssr-binaural.1.gz /usr/share/man/man1/ssr-binaural${FLAVOR}.1.gz
+update-alternatives --install /usr/bin/ssr-brs ssr-brs /usr/bin/ssr-brs${FLAVOR} ${PRIORITY}  \
+        --slave /usr/share/man/man1/ssr-brs.1.gz ssr-brs.1.gz /usr/share/man/man1/ssr-brs${FLAVOR}.1.gz
+update-alternatives --install /usr/bin/ssr-generic ssr-generic /usr/bin/ssr-generic${FLAVOR} ${PRIORITY}  \
+        --slave /usr/share/man/man1/ssr-generic.1.gz ssr-generic.1.gz /usr/share/man/man1/ssr-generic${FLAVOR}.1.gz
+update-alternatives --install /usr/bin/ssr-nfc-hoa ssr-nfc-hoa /usr/bin/ssr-nfc-hoa${FLAVOR} ${PRIORITY}  \
+        --slave /usr/share/man/man1/ssr-nfc-hoa.1.gz ssr-nfc-hoa.1.gz /usr/share/man/man1/ssr-nfc-hoa${FLAVOR}.1.gz
+update-alternatives --install /usr/bin/ssr-vbap ssr-vbap /usr/bin/ssr-vbap${FLAVOR} ${PRIORITY}  \
+        --slave /usr/share/man/man1/ssr-vbap.1.gz ssr-vbap.1.gz /usr/share/man/man1/ssr-vbap${FLAVOR}.1.gz
+update-alternatives --install /usr/bin/ssr-wfs ssr-wfs /usr/bin/ssr-wfs${FLAVOR} ${PRIORITY}  \
+        --slave /usr/share/man/man1/ssr-wfs.1.gz ssr-wfs.1.gz /usr/share/man/man1/ssr-wfs${FLAVOR}.1.gz
+
+exit 0
+

@@ -1,0 +1,52 @@
+#!/bin/sh
+
+set -e
+
+# if we do not have debconf, we just skip this
+. /usr/share/debconf/confmodule || exit 0
+
+# Read the package default, need to match the code in sitesummary-client
+[ -f /usr/share/sitesummary/sitesummary-client.conf ] && \
+  . /usr/share/sitesummary/sitesummary-client.conf
+
+db_get sitesummary-client/collector_url
+[ "$RET" ] && serverurls="$RET"
+
+for confdir in \
+    /usr/share/sitesummary/config.d \
+    /etc/sitesummary/config.d
+do
+    [ -d $confdir ] || continue
+    for config in $confdir/* ; do
+	if [ -f $config ] ;then
+	    . $config
+	    updatedebconf=yes
+	fi
+    done
+done
+
+db_set sitesummary-client/collector_url "$serverurls"
+
+db_input medium sitesummary-client/collector_url || true
+db_go || true
+
+if [ -f /etc/sitesummary/site ] ; then
+    SITE="`cat /etc/sitesummary/site`"
+    db_set sitesummary-client/site "$SITE"
+fi
+db_input medium sitesummary-client/site || true
+db_go || true
+
+if [ -f /etc/sitesummary/sitegroup ] ; then
+    SITEGROUP="`cat /etc/sitesummary/sitegroup`"
+    db_set sitesummary-client/sitegroup "$SITEGROUP"
+fi
+db_input medium sitesummary-client/sitegroup || true
+db_go || true
+
+if [ -f /etc/sitesummary/hostclass ] ; then
+    HOSTCLASS="`cat /etc/sitesummary/hostclass`"
+    db_set sitesummary-client/hostclass "$HOSTCLASS"
+fi
+db_input medium sitesummary-client/hostclass || true
+db_go || true

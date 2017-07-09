@@ -1,0 +1,961 @@
+#! /bin/sh -e
+# postinst script for aolserver4
+#
+# see: dh_installdeb(1)
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see /usr/doc/packaging-manual/
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+PACKAGE="aolserver4"
+ETCDIR="/etc/$PACKAGE"
+RUNDIR="/var/run/$PACKAGE"
+LOGDIR="/var/log/$PACKAGE"
+NEW_SUFFIX="new"
+OLD_SUFFIX="old"
+CONF="$ETCDIR/$PACKAGE.tcl"
+CONF_NEW="$CONF.$NEW_SUFFIX"
+INIT="/etc/init.d/$PACKAGE"
+INIT_NEW="$INIT.$NEW_SUFFIX"
+DEFAULT="/etc/default/$PACKAGE"
+DEFAULT_NEW="$DEFAULT.$NEW_SUFFIX"
+
+[ -d $RUNDIR ] || mkdir -p -m 0755 $RUNDIR
+
+replace_file () {
+    file=$1
+    if [ ! -f $file ] ; then
+        mv $file.$NEW_SUFFIX $file
+    else
+	# ask before replacing
+        cp $file $file.$OLD_SUFFIX
+        ucf --debconf-ok $file.$NEW_SUFFIX $file
+    fi
+}
+
+do_update () {
+    file=$1
+    if diff -q $file $file.$NEW_SUFFIX  >/dev/null 2>&1; then
+        # Old file and new file are identical
+        rm -f ${file}.$NEW_SUFFIX 
+    else
+        replace_file $file
+    fi
+}
+
+if [ "$1" != "configure" ]
+then
+    exit 0
+fi
+
+
+# get debconf choices
+
+. /usr/share/debconf/confmodule
+
+db_get $PACKAGE/hostname
+HOSTNAME=$RET
+
+db_get $PACKAGE/address
+ADDRESS=$RET
+
+db_get $PACKAGE/port
+PORT=$RET
+
+# use current configuration or generate a new one from scratch
+
+if [ ! -f $CONF ]; then
+
+	cat <<EOF >$CONF_NEW
+# 
+#    AOLServer 4 configuration file.
+#
+#    Copyright (C) 2003-2009 Francesco P. Lovergine <frankie@debian.org>
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+#    On Debian GNU/Linux systems a copy of the license is available
+#    as /usr/share/common-licenses/GPL.
+#
+
+#
+#    AOLServer can run multiple domains on a single machine. 
+#
+#    You can add more ns/server/domain sections and use the -s domain
+#    command line option to use the same configuration file in multi-configuration
+#    flavor. You could also use more configuration files and run multiple
+#    instances of the daemon, alternatively.
+#
+#    This file use a single 'main' domain per default.
+#
+
+array set debian_config {
+HOSTNAME $HOSTNAME
+ADDRESS $ADDRESS
+HTTP_PORT $PORT
+HTTPS_PORT 443
+}
+
+proc parse_shell_snippet {filename} {
+    global debian_config
+    set fd [open \$filename r]
+    set line_no 1
+    while {![eof \$fd]} {
+        set line [string trim [gets \$fd] " "]
+        if {\$line == ""} continue
+        switch -regexp -- \$line {
+            ^#.* { }
+            .*=.* {
+                set pair [split \$line =]
+                set name [string trim [lindex \$pair 0] " "]
+                set value [string trim [lindex \$pair 1] " "]
+                set debian_config(\$name) \$value
+            }
+           default {
+                error "Error parsing \$filename (line: \$line_no): \$line"
+           }
+        }
+        incr line_no
+    }
+    close \$fd
+}
+
+#
+# Parse default vars snippet file
+#
+parse_shell_snippet /etc/default/aolserver4
+
+#############################################################################################
+#
+#    GLOBAL VARIABLES
+#
+
+set httpport    \$debian_config(HTTP_PORT)
+set httpsport   \$debian_config(HTTPS_PORT)
+set controlport 9999
+
+set hostname \$debian_config(HOSTNAME)
+set address  \$debian_config(ADDRESS)
+
+set servername main
+set serverdesc "AOLServer Site"
+set package    $PACKAGE
+
+set pageroot      /var/www
+set directoryfile index.adp,index.html,index.htm
+
+set homedir /usr/lib/\${package}
+set bindir  \${homedir}/bin
+
+set sslmodule    nsssl.so
+set sslkeyfile   \${homedir}/servers/\${servername}/modules/nsssl/keyfile.pem
+set sslcertfile  \${homedir}/servers/\${servername}/modules/nsssl/certfile.pem
+
+set serverlog       /var/log/\${package}/\${package}.log
+set pidfile         /var/run/\${package}/\${package}.pid
+
+##############################################################################################
+#
+#    GLOBAL SERVER PARAMETERS
+#
+#
+ns_section "ns/parameters"
+
+ns_param home \${homedir}
+ns_param debug false
+ns_param servername \${servername}
+
+ns_param user  www-data
+ns_param group www-data
+
+# Data structures
+ns_param   dstringcachemaxentries 10        ;# Max no. of Dstrings to put on cache
+ns_param   dstringcachemaxsize    [expr 3*1024]
+ns_param   iobufsize              16000     ;# Buffer size suitable for I/O
+
+# Limits
+ns_param   keepalivetimeout 30       ;# Max time conn is kept alive (keepalive)
+                                     ;#   (set to 0 to disable keepalive)
+ns_param   listenbacklog   32        ;# Max length of pending conn queue
+ns_param   maxkeepalive    100       ;# Max no. of conns in keepalive state
+ns_param   schedmaxelapsed 2         ;# Warn when waiting on really long procs
+ns_param   shutdowntimeout 20        ;# Secs to wait on shutdown if open conns
+
+# Server logging
+ns_param dev             true      ;# Display logging with "Dev" severity
+ns_param debug           false     ;# Display logging with "Debug" severity
+ns_param logexpanded     false     ;# true = double-spaced server.log
+ns_param logroll         false     ;# Roll server.log every 24 hours.
+ns_param maxbackup       10        ;# Max number of old server.log files
+
+ns_param serverlog       \${serverlog}	;# Logging file name
+ns_param pidfile         \${pidfile}	;# pid of server file name
+
+# DNS tuning
+ns_param   dnscache        true      ;# In-memory cache of DNS lookups
+ns_param   dnscachetimeout 60        ;# How long to keep hostnames in cache
+
+# Miscellaneous
+ns_param   checkexitcode   false     ;# Check exit code on forked process
+ns_param   crashcmd        ns_crash  ;# A Tcl command that dumps core.
+ns_param   mailhost        localhost ;# SMTP host for ns_sendmail
+
+
+
+
+
+##############################################################################################
+#
+#    MODULE CONFIGURATIONS
+#
+#
+
+#
+# Thread library (nsthread) parameters
+#
+ns_section "ns/threads"
+ns_param   mutexmeter      true      ;# measure lock contention
+ns_param   stacksize       [expr 128*1024]  ;# stack size per thread (in bytes)
+
+#
+# MIME types.
+#
+# Note: AOLserver already has an exhaustive list of MIME types, but in
+# case something is missing you can add it here.
+#
+ns_section "ns/mimetypes"
+ns_param   default         "*/*"     ;# MIME type for unknown extension
+ns_param   noextension     "*/*"     ;# MIME type for missing extension
+#ns_param   ".xls"          "application/vnd.ms-excel"
+
+#
+#   I18N Mime-types; define content-type header values
+#                    to be mapped from these file-types.
+#                    Note that you can map file-types of adp files to control
+#                    the output encoding through mime-type specificaion.
+#                    Remember to add an adp mapping for that extension.
+#
+ns_param   .adp            "text/html; charset=iso-8859-1"
+ns_param   .u_adp          "text/html; charset=UTF-8"
+ns_param   .gb_adp         "text/html; charset=GB2312"
+ns_param   .sjis_html      "text/html; charset=shift_jis"
+ns_param   .sjis_adp       "text/html; charset=shift_jis"
+ns_param   .gb_html        "text/html; charset=GB2312"
+
+#
+#   I18N File-type to Encoding mappings
+#
+ns_section "ns/encodings"
+ns_param   .utf_html       "utf-8"
+ns_param   .sjis_html      "shiftjis"
+ns_param   .gb_html        "gb2312"
+ns_param   .big5_html      "big5"
+ns_param   .euc-cn_html    "euc-cn"
+
+#
+# Note: you will need to include file-type to encoding mappings
+#       for ANY source files that are to be used, to allow the
+#       server to handle them properly.  E.g., the following
+#       asserts that the GB-producing .adp files are themselves
+#       encoded in GB2312 (this is not simply assumed).
+#
+ns_param   .gb_adp         "gb2312"
+
+#
+# Thread library (nsthread) parameters
+#
+ns_section "ns/threads"
+ns_param mutexmeter      true           ;# measure lock contention
+ns_param stacksize       [expr 128*1024]  ;# stack size per thread (in bytes)
+                                                                                                                           
+
+##########################################################################################
+#
+#  SERVER LEVEL CONFIGURATION
+#
+#  There is only one server in AOLserver, but this is helpful when multiple
+#  servers share the same configuration file.  This file assumes that only
+#  one server is in use so it is set at the top.
+#
+
+ns_section "ns/servers"
+ns_param   \$servername         \$serverdesc ;# Name of virtual server.
+
+#
+# Server parameters
+#
+ns_section "ns/server/\${servername}"
+ns_param   directoryfile   \$directoryfile ;# List of files to use (index.html)
+ns_param   pageroot        \$pageroot ;# Directory under which all pages live
+
+# Tuning options
+ns_param   connsperthread  0         ;# Normally there's one conn per thread
+ns_param   flushcontent    false     ;# Flush all data before returning
+ns_param   maxconnections  100       ;# Max connections to put on queue
+ns_param   maxdropped      0         ;# Shut down if dropping too many conns
+ns_param   maxthreads      20        ;# Tune this to scale your server
+ns_param   minthreads      0         ;# Tune this to scale your server
+ns_param   threadtimeout   120       ;# Idle threads die at this rate
+
+# Limits
+ns_param   maxheaders      16384     ;# Max no. of headers from client
+ns_param   maxline         8192      ;# Max line length from client
+ns_param   maxpost         65536     ;# Max bytes on a POST
+ns_param   sendfdthreshold 2048      ;# Min size of file descriptor to send
+
+# Performance statistics gathering
+ns_param   globalstats     true      ;# Enable built-in statistics
+ns_param   urlstats        true      ;# Enable URL statistics
+ns_param   maxurlstats     1000      ;# Max number of URL's to do stats on
+
+# Directory listings can be generated with an ADP or a Tcl proc.
+ns_param   directoryadp    \$homedir/dirlist.adp  ;# Choose one or the other
+ns_param   directoryproc   _ns_dirlist        ;#  ...but not both!
+ns_param   directorylisting simple   ;# Can be simple or fancy (for ns_dirlist)
+
+# Miscellaneous
+ns_param   checkmodifiedsince true   ;# Check url if no If-Modified-Since?
+ns_param   enableaolpress  false     ;# Enable extra features used by AOLpress
+ns_param   headercase      preserve  ;# tolower, toupper, preserve
+
+#
+# Internal redirects
+#
+#ns_section "ns/server/\${servername}/redirects"
+#ns_param   404 "/notfound.html"      ;# Not Found error page
+#ns_param   500 "/servererror.html"   ;# Server Error page
+
+#
+# Fastpath serves HTML
+#
+#     Fast path configuration is used to configure options used for serving
+#     static content, and also provides options to automatically display
+#     directory listings.
+#
+# Parameters:
+#
+#     cache               Boolean. Enable cache for normal URLs.
+#                         Optional, default is false.
+#     cachemaxsize        Integer. Size of fast path cache.
+#                         Optional, default is 5120000.
+#     cachemaxentry       Integer. Largest file size allowed in cache.
+#                         Optional, default is cachemaxsize / 10.
+#     mmap                Boolean. Use mmap() for cache.
+#                         Optional, default is false.
+#     directoryfile       String. Directory index/default page to
+#                         look for. Optional, default is directoryfile
+#                         parameter set in ns/server/\${servername} section.
+#     directorylisting    String. Directory listing style. Optional,
+#                         Can be "fancy" or "simple".
+#     directoryproc       String. Name of Tcl proc to use to display
+#                         directory listings. Optional, default is to use
+#                         _ns_dirlist. You can either specify directoryproc,
+#                         or directoryadp - not both.
+#     directoryadp        String. Name of ADP page to use to display
+#                         directory listings. Optional. You can either
+#                         specify directoryadp or directoryproc - not both.
+#
+#
+#    ns_section "ns/server/\${servername}/fastpath"
+#        ns_param directorylisting fancy
+#
+
+ns_section "ns/server/\${servername}/fastpath"
+ns_param   cache           true      ;# Enable cache for normal URLs
+ns_param   cachemaxentry   8192      ;# Largest file size allowable in cache
+ns_param   cachemaxsize    [expr 5000*1024] ;# Size of fastpath cache
+ns_param   mmap            false     ;# Use mmap() for cache
+
+#
+# Tcl interpreter
+#
+ns_section "ns/server/\${servername}/tcl"
+ns_param   autoclose       true      ;# Close files the Tcl interp opened
+ns_param   debug           false     ;# Names of files sourced is logged
+ns_param   nsvbuckets      8         ;# No. of buckets to hold nsv's
+ns_param   statlevel       0         ;# How many levels deep to run tclstats
+ns_param   statmaxbuf      100       ;# Maximum entries in tclstats table
+ns_param   library \
+	\$homedir/servers/\${servername}/modules/tcl ;# Private tcl library for the server
+
+#
+# ADP (AOLserver Dynamic Page) configuration
+#
+ns_section "ns/server/\${servername}/adp"
+
+# ADP features
+ns_param   map             "/*.adp"  ;# Extensions to parse as ADP's
+ns_param   map             "/*.html" ;# Any extension can be mapped
+ns_param   enableexpire    true      ;# Set "Expires: now" on all ADP's
+ns_param   enabledebug     true      ;# Turn on Tclpro debugging with "?debug"
+ns_param   debuginit "ns_adp_debuginit" ;# Debug procedure
+
+# ADP tuning
+ns_param   cache           true      ;# In-memory cache of ADP's
+ns_param   cachesize       [expr 5000*1024]
+ns_param   taglocks        false     ;# Enable post-ini creation of ADP tags
+ns_param   threadcache     false     ;# default for Tcl 7.6 (nsd76)
+ns_param   threadcache     true      ;# default for Tcl 8.2 (nsd82)
+
+# ADP special pages
+#ns_param   errorpage \
+#	\${pageroot}/errorpage.adp        ;# Pretty-print ADP errors with an ADP
+#ns_param   startpage \
+#	\${pageroot}/startpage.inc        ;# Page to include for all ADP's
+
+
+#
+# ADP custom parsers -- see adp.c
+#
+ns_section "ns/server/\${servername}/adp/parsers"
+ns_param   adp             ".adp"   ;# The simple parser looks for <\% ... \%>
+ns_param   fancy           ".adp"   ;# The fancy parser does a lot more.
+
+
+#
+# Socket driver module (HTTP)  -- nssock
+#
+ns_section "ns/server/\${servername}/module/nssock"
+ns_param   port            \$httpport ;# Port for HTTP (typically 80)
+ns_param   hostname        \$hostname ;# This is not the same as your hostname
+ns_param   address         \$address  ;# This is not the same as your host addr
+ns_param   location        "http://\$hostname/"     ;# URL for auto-redirects (trailing slash)
+
+#
+# Socket driver module (HTTPS) -- nsssl
+#
+ns_section "ns/server/\${servername}/module/nsssl"
+ns_param   port            \$httpsport
+ns_param   hostname        \$hostname     
+ns_param   address         \$address  
+ns_param   keyfile         \$sslkeyfile
+ns_param   certfile        \$sslcertfile
+
+
+#
+# Control port -- nscp
+#
+# To enable:
+#
+# 1. Define an address and port to listen on. For security
+#    reasons listening on any port other then 127.0.0.1 is
+#    not recommended.
+#
+# 2. Decided whether or not you wish to enable features such
+#    as password echoing at login time, and command logging.
+#
+# 3. Add a list of authorized users and passwords. The entires
+#    take the following format:
+#
+#    <user>:<encryptedPassword>:
+#
+#    You can use the ns_crypt Tcl command to generate an encrypted
+#    password. The ns_crypt command uses the same algorithm as the
+#    Unix crypt(3) command. You could also use passwords from the
+#    /etc/passwd file.
+#
+#    The first two characters of the password are the salt - they can be
+#    anything since the salt is used to simply introduce disorder into
+#    the encoding algorithm.
+#
+#    ns_crypt <key> <salt>
+#    ns_crypt x t2
+#
+#    The configuration example below adds the user "nsadmin" with a
+#    password of "x".
+#
+# 4. Make sure the nscp.so module is loaded in the modules section.
+#
+ns_section "ns/server/\${servername}/module/nscp"
+ns_param   port            \$controlport      ;# Control port listens on port 9999
+ns_param   address         127.0.0.1         ;# For security, use 127.0.0.1 only
+ns_param   echopassword 1
+ns_param   cpcmdlogging 1
+ns_param   reconnection off
+
+# Control port users
+ns_section "ns/server/\${servername}/module/nscp/users"
+# The default password for nsadmin is "x". You should change it.
+# type "ns_crypt newpassword salt" and put the encrypted string below.
+ns_param user "nsadmin:t2GqvvaiIUbF2:" ;# sample user="nsadmin", pw="x".
+
+#
+# Access log -- nslog
+#
+ns_section "ns/server/\${servername}/module/nslog"
+ns_param   file            \${serverlog}
+ns_param   formattedtime   true      ;# true=common log format
+ns_param   logcombined     false     ;# true==NCSA combined format
+ns_param   maxbackup       5         ;# Max number to keep around when rolling
+ns_param   rollhour        0         ;# Time to roll log
+ns_param   rolllog         true      ;# Should we roll log?
+ns_param   rollonsignal    true      ;# Roll log on SIGHUP
+
+#
+# CGI interface -- nscgi
+#
+# Note: CGI is *vastly* inferior to ADP's or even built-in Tcl libraries.
+#
+ns_section "ns/server/\${servername}/module/nscgi"
+ns_param   debug           false     ;# Be chatty in log
+ns_param   gethostbyaddr   false     ;# Whether to do reverse DNS lookups
+ns_param   limit           0         ;# Max number of concurrent CGI processes
+ns_param   maxoutput       10240     ;# Max bytes allowed from external process
+ns_param   buffersize      8192      ;# Buffer output from external process
+#ns_param   map \
+#    "GET /cgi-lib /usr/lib/cgi-bin"        ;# Where system CGI executables live (GET)
+#ns_param   map \
+#    "POST /cgi-lib /usr/lib/cgi-bin"       ;# Where system CGI executables live (POST)
+#ns_param   map \
+#    "GET /cgi-bin /usr/local/cgi-bin"      ;# Where your CGI executables live (GET)
+#ns_param   map \
+#    "POST /cgi-bin /usr/local/cgi-bin"     ;# Where your CGI executables live (POST)
+ns_param   map \
+    "GET /cgi-bin /usr/lib/cgi-bin"      ;# Where your CGI executables live (GET)
+ns_param   map \
+    "POST /cgi-bin /usr/lib/cgi-bin"     ;# Where your CGI executables live (POST)
+
+ns_param map            "GET /*.py"
+#ns_param map           "GET /doc /usr/share/doc"
+ns_param map            "POST /*.pl"
+ns_param map            "POST /*.py"
+ns_param interps         cgiinterps
+                                                                                                                
+#ns_section "ns/interps/CGIinterps"
+#ns_param .pl          "/usr/bin/perl"
+#ns_param .sh          "/bin/sh"
+#ns_param .py          "/usr/bin/python"
+                                                                                                                
+
+# CGI environment variable handling -- See admin guide
+ns_param   systemenvironment false   ;# Copies environment from nsd start shell
+
+
+#
+# Access control (permissions) -- nsperm
+#
+ns_section "ns/server/\${servername}/module/nsperm"
+
+#
+# Unix domain socket driver -- nsunix
+#
+ns_section "ns/server/\${servername}/module/nsunix"
+ns_param   hostname        \$hostname    ;# Hostname used in response to client
+ns_param   port            \$httpport           ;# Port to listen on
+ns_param   socketfile      /var/run/\${package}/\${servername}.sock ;# UNIX domain socket driver
+
+#
+# Virtual Hosting redirector -- nsvhr
+#
+ns_section "ns/server/\${servername}/module/nsvhr"
+ns_param   busyurl         "url"     ;# Redirect here if back-end times out
+ns_param   errorurl        "url"     ;# Redirect here on proxy errors
+ns_param   method          "GET"     ;# Methods allowed to proxy
+ns_param   method          "POST"    ;# Methods allowed to proxy (can have >1)
+ns_param   timeout         30        ;# Timeout waiting for back-end
+
+# Register hosts to proxy
+#ns_section "ns/server/\${servername}/module/nsvhr/maps"
+#ns_param   "www.tcpsocket.com"    "http://127.0.0.0:2000" ;# HTTP proxy
+#ns_param   "www.domainsocket.com" "unix://somehost"       ;# Domain socket
+
+#
+# Database drivers
+#
+# Two pools are given here.  Sybase uses the Sybase client libraries,
+# obtained from Sybase.  Postgres is freely available at
+# www.postgresql.org.  Sybase uses an external proxy daemon while
+# Postgres uses an internal driver.  The Sybase driver requires some
+# configuration in ns/db/driver/sybase_driver to tell th "nsext.so"
+# driver where to find the nssybpd executable and some other things.
+# The Postgres driver doesn't need any of that because it's internal
+# and does not use nsext.so.
+#
+#ns_section "ns/db/drivers"
+#ns_param   sybase_driver   nsext.so       ;# Use nsext.so for a proxy daemon
+#ns_param   postgres_driver nspostgres.so  ;# An internal driver
+#
+#ns_section "ns/db/driver/sybase_driver"
+#ns_param   localdaemon     nssybpd        ;# Name of the proxy daemon executable
+#ns_param   param           path_to_sybase ;# Usually the \$SYBASE env var
+#
+#ns_section "ns/db/pools"
+#ns_param   sybase_pool    "Sybase Pool"
+#ns_param   postgres_pool  "Postgres Pool"
+#
+#ns_section "ns/db/pool/sybase_pool"
+#ns_param   driver          sybase_driver
+#ns_param   datasource      SERVER_NAME:database_name
+#ns_param   user            user_name
+#ns_param   password        password
+#ns_param   connections     1
+#ns_param   logsqlerrors    true      ;# Verbose SQL query error logging
+#ns_param   verbose         false     ;# Verbose error logging
+#ns_param   maxidle         600       ;# Max time to keep idle db conn open
+#ns_param   maxopen         3600      ;# Max time to keep active db conn open
+#
+#ns_section "ns/db/pool/postgres_pool"
+#ns_param   driver          postgres_driver
+#ns_param   datasource      HOSTNAME:PORT:database_name
+#ns_param   user            user_name
+#ns_param   password        password
+#ns_param   connections     1
+#ns_param   logsqlerrors    true      ;# Verbose SQL query error logging
+#ns_param   verbose         false     ;# Verbose error logging
+#ns_param   maxidle         600       ;# Max time to keep idle db conn open
+#ns_param   maxopen         3600      ;# Max time to keep active db conn open
+#
+# Accessing DB pools
+#
+# In the case of virtual servers you can give different virtual
+# servers access to different databases, or you can let them access
+# them all.  AOLserver 3.x does not use virtual servers so the only
+# useful value is "*", but if you use one config file for multiple nsd
+# processes, or you are using a version of AOLserver that supports
+# virtual servers, then you should list the pools you want to access.
+#
+#ns_section "ns/server/\${servername}/db"
+#ns_param pools          *            ;# Wildcard gives access to all
+#ns_param defaultpool    sybase_pool
+#
+
+#
+# Modules to load
+#
+# Note: Only load the modules you are actually going to use.
+# Add here optional modules when needed.
+#
+ns_section "ns/server/\${servername}/modules"
+ns_param   nssock             nssock.so
+ns_param   nslog              nslog.so
+ns_param   nscgi              nscgi.so
+ns_param   nsperm             nsperm.so
+#ns_param   nscp               nscp.so
+#if { [file exists \$sslcertfile] && [file exists \$sslkeyfile] } {
+#ns_param   nsssl 	       nsssl.so
+#}
+                                                                                                                
+#
+# Loading a Tcl module
+#
+# This example shows a Tcl module, called "tcl_module", has its code
+# in the AOLserver Tcl library in either the modules/tcl/tcl_module
+# directory or servers/servername/modules/tcl/tcl_module directory.
+#
+ns_param   tcl_module          tcl
+
+                                                                                                                
+#
+# Example: Multiple connection thread pools.
+#
+# To enable:
+#
+# 1. Define one or more thread pools.
+# 2. Configure pools as with the default server pool.
+# 3. Map method/URL combinations to the pools
+#
+# All unmapped method/URL's will go to the default server pool.
+#
+#ns_section ns/server/main/pools
+#ns_section slow "Slow requests here."
+#ns_section fast "Fast requests here."
+#
+#ns_section ns/server/main/pool/slow
+#ns_param map {POST /slowupload.adp}
+#ns_param maxconnections  100       ;# Max connections to put on queue
+#ns_param maxdropped      0         ;# Shut down if dropping too many conns
+#ns_param maxthreads      20        ;# Tune this to scale your server
+#ns_param minthreads      0         ;# Tune this to scale your server
+#ns_param threadtimeout   120       ;# Idle threads die at this rate
+#
+#ns_section ns/server/main/pool/fast
+#ns_param map {GET /faststuff.adp}
+#ns_param maxthreads 10
+#
+
+#
+# Example:  Web based stats interface.
+#
+# To enable:
+#
+# 1. Configure whether or not stats are enabled. (Optional: default = false)
+# 2. Configure URL for statistics. (Optional: default = /_stats)
+#
+#    http://<host>:<port>/_stats
+#
+# 3. Configure user. (Optional: default = aolserver)
+# 4. Configure password. (Optional: default = stats)
+#
+# For added security it is recommended that configure your own
+# URL, user, and password instead of using the default values.
+#
+#ns_section ns/server/stats
+#    ns_param enabled 1
+#    ns_param url /aolserver/stats
+#    ns_param user nsadmin
+#    ns_param password 23dfs!d
+#
+
+EOF
+
+else
+	cp $CONF $CONF_NEW
+	sed -i \
+	    -e "s/^HOSTNAME[ \t]\+\(.*\)\$/HOSTNAME $HOSTNAME/" \
+	    -e "s/^ADDRESS[ \t]\+\(.*\)\$/ADDRESS $ADDRESS/" \
+	    -e "s/^HTTP_PORT[ \t]\+\(.*\)\$/HTTP_PORT $PORT/" \
+	    $CONF_NEW 
+fi
+
+do_update $CONF
+
+chown root:root $CONF
+chmod 644 $CONF
+
+# create a new init script if it not exists, or update the existing one
+
+cat <<EOF >$INIT_NEW
+#!/bin/sh
+#
+# Start the AOLServer HTTP server.
+#
+# Copyright (C) 2003-2009 Francesco P. Lovergine <frankie@debian.org>
+#
+
+### BEGIN INIT INFO
+# Provides:          aolserver4
+# Required-Start:    \$local_fs \$remote_fs \$network \$syslog
+# Required-Stop:     \$local_fs \$remote_fs \$network \$syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Should-Start:      \$postgresql                                                                                             
+# Should-Stop:       \$postgresql                                                                                             
+# Short-Description: Starts AOLserver web daemon
+# Description:       It starts up the AOLserver http multi-threaded 
+#                    server
+### END INIT INFO
+
+NAME=$PACKAGE
+USER=www-data
+GROUP=www-data
+ADDRESS=$ADDRESS
+HTTP_PORT=$PORT
+DAEMON=/usr/sbin/$PACKAGE-nsd
+PIDFILE=$RUNDIR/\$NAME.pid
+CONF=$CONF
+RUN_DAEMON=yes
+
+trap "" 1
+
+[ -x \$DAEMON ] || exit 0
+
+. /lib/lsb/init-functions
+
+if [ -f $DEFAULT ]; then
+	. $DEFAULT
+fi
+
+# /var/run could be on a tmpfs
+
+[ ! -d \$RUNDIR ] && mkdir -p -m 755 \$RUNDIR
+
+start()
+{
+	if [ "\$RUN_DAEMON" = "yes" ]; then
+    	log_daemon_msg "Starting web server" "\$NAME"
+		start-stop-daemon --start --quiet --exec \$DAEMON --pidfile \$PIDFILE --oknodo -- \\
+			-u \$USER -g \$GROUP -b \$ADDRESS:\$HTTP_PORT -s main -t \$CONF >/dev/null 
+		if [ \$? != 0 ]; then
+			log_end_msg 1
+		exit 1
+		else
+			log_end_msg 0
+		fi
+	fi
+
+	for name in $ETCDIR/conf.d/*.sh; do
+		base=\$(basename \$name .sh)
+		if [ -e $ETCDIR/conf.d/\$base.tcl ]; then
+			AOL_PIDFILE=$RUNDIR/\$base.pid
+			AOL_ADDRESS=\$ADDRESS 
+			AOL_PORT=\$(expr \$HTTP_PORT + 1)
+			AOL_USER=\$USER
+			AOL_GROUP=\$GROUP
+			RUN_DAEMON=yes
+			. \$name
+			if [ "\$RUN_DAEMON" = "yes" ]; then
+				log_daemon_msg "Starting AOL instance" "\$base"
+				start-stop-daemon --start --quiet --exec \$DAEMON --pidfile \$AOL_PIDFILE --oknodo -- \\
+					-u \$AOL_USER -g \$AOL_GROUP -b \$AOL_ADDRESS:\$AOL_PORT -s \$base -t $ETCDIR/conf.d/\$base.tcl >/dev/null 
+				if [ \$? != 0 ]; then
+					log_end_msg 1
+				exit 1
+				else
+					log_end_msg 0
+				fi
+			fi
+		fi
+	done
+}
+
+stop()
+{
+	for name in $RUNDIR/*.pid; do
+		if [ -f \$name ]; then
+			base=\$(basename \$name .pid)
+			log_daemon_msg "Stopping web server" "\$base"
+			start-stop-daemon --stop --quiet --pidfile \$name --oknodo >/dev/null 
+			if [ \$? != 0 ]; then
+				log_end_msg 1
+			exit 2
+			else
+				log_end_msg 0
+			fi
+		fi
+	done
+}
+
+
+case "\$1" in
+  start)
+    start
+    ;;
+
+  stop)
+    stop
+    ;;
+
+  reload|force-reload|restart)
+    stop
+    sleep 2
+    start
+    ;;
+
+  *)
+    echo "Usage: /etc/init.d/\$NAME {start|stop|restart|reload|force-reload}"
+    exit 1
+    ;;
+esac
+
+exit 0
+
+EOF
+
+chown root:root $INIT_NEW
+chmod 755 $INIT_NEW
+
+if [ -f $INIT ]; then
+	do_update $INIT
+else 
+	replace_file $INIT
+fi
+
+# create a default file 
+
+cat <<EOF >$DEFAULT_NEW
+#
+# These variables can be customized to change main AOLserver settings.
+# More changes can be done by modifying the $CONF Tcl script.
+# 
+# Note that these variables are read and interpreted by the Tcl script
+# too, so avoid using shell capabilities in setting vars.
+#
+
+#USER=www-data
+#GROUP=www-data
+#HOSTNAME=$HOSTNAME
+#ADDRESS=$ADDRESS
+#HTTP_PORT=$PORT
+#HTTPS_PORT=443
+#CONF=$CONF
+#RUN_DAEMON=yes
+EOF
+
+chown root:root $DEFAULT_NEW
+chmod 644 $DEFAULT_NEW
+
+if [ -f $DEFAULT ]; then
+	do_update $DEFAULT
+else 
+	replace_file $DEFAULT
+fi
+
+# Important: keep db_stop before any ucf call or use --debconf-ok
+
+db_stop
+
+# remove any possible residual ldso file from previous installations
+
+rm /etc/ld.so.conf.d/aolserver4.conf >/dev/null 2>&1 && ldconfig || true
+
+if [ -x $INIT ]; then
+        update-rc.d $PACKAGE defaults 91 >/dev/null
+        if [ -x /usr/sbin/invoke-rc.d ]; then
+                invoke-rc.d $PACKAGE start
+        else
+                $INIT start
+        fi
+fi
+
+# create the pageroot dir if it does not exist and a default home page
+
+if [ ! -d /var/www ]; then
+        mkdir -p /var/www
+        chown root:root /var/www
+        chmod 755 /var/www
+fi
+
+if [ ! -f /var/www/index.adp ]; then
+		if [ -e /usr/share/doc/$PACKAGE/examples/index.adp.gz ]; then
+        	zcat /usr/share/doc/$PACKAGE/examples/index.adp.gz >/var/www/index.adp
+		fi
+		if [ -e /usr/share/doc/$PACKAGE/examples/index.adp ]; then
+        	cp /usr/share/doc/$PACKAGE/examples/index.adp /var/www/index.adp
+		fi
+        chmod 644 /var/www/index.adp || true
+fi
+
+# assign ownership of run and log directories to www-data
+
+if [ -d $RUNDIR ]; then
+	chown www-data:www-data $RUNDIR
+	chmod 755 $RUNDIR
+fi
+
+if [ -d $LOGDIR ]; then
+	chown www-data:www-data $LOGDIR
+	chmod 755 $LOGDIR
+fi
+
+# remove tmp files still around if any...
+
+rm -f "$CONF.$NEW_SUFFIX" "$CONF.$OLD_SUFFIX" "$INIT.$NEW_SUFFIX" "$INIT.$OLD_SUFFIX"
+
+
+
+
+

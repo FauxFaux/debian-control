@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+# Create armagetronad user if it isn't already there.
+if [ ! `getent passwd armagetronad` > /dev/null ]
+then
+    echo 'Adding system user for armagetronad' 1>&2
+    adduser --system --quiet --disabled-password --shell /bin/false --home /var/games/armagetronad --ingroup games armagetronad
+else
+    # If armagetronad user still exists, then make sure that the home directory
+    # is created again
+    mkdir -p /var/games/armagetronad
+    chown -R armagetronad:games /var/games/armagetronad
+fi
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask armagetronad-dedicated.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled armagetronad-dedicated.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable armagetronad-dedicated.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state armagetronad-dedicated.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/armagetronad-dedicated" ]; then
+		update-rc.d armagetronad-dedicated defaults >/dev/null
+		invoke-rc.d armagetronad-dedicated start || exit $?
+	fi
+fi
+# End automatically added section
+

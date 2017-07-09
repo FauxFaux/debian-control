@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+	configure)
+		update-alternatives --quiet \
+			--install /usr/bin/lzip lzip /usr/bin/lzip.lzd -2000
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+PACKAGE=nslint
+
+# on upgrade and removal, remove /usr/doc/$PACKAGE link if it exists
+if ( [ "$1" = "upgrade" ] || [  "$1" = "remove" ] ) \
+    && [ -L /usr/doc/$PACKAGE ]; then
+        rm -f /usr/doc/$PACKAGE
+fi
+

@@ -1,0 +1,17 @@
+#! /bin/sh
+
+set -e
+
+# interpreter name list
+inl="scheme-r4rs scheme-r5rs scheme-srfi-0 scheme-srfi-7 scheme-srfi-55"
+inl="$inl scheme-ieee-1178-1900"
+
+for int in $inl; do
+    update-alternatives \
+        --install "/usr/bin/$int" "$int" /usr/share/sisc/srfi-22.sh 50 \
+        --slave "/usr/share/man/man1/$int.1.gz" \
+        "$int.1.gz" \
+        /usr/share/man/man1/sisc.1.gz
+done
+
+

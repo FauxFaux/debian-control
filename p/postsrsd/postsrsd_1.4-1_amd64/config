@@ -1,0 +1,22 @@
+#!/bin/sh
+
+CONFIGFILE=/etc/default/postsrsd
+set -e
+. /usr/share/debconf/confmodule
+
+if [ -e $CONFIGFILE ]; then
+	. $CONFIGFILE || true
+	db_set postsrsd/domain "$SRS_DOMAIN"
+	priority="medium"
+else
+	if [ -e /usr/sbin/postconf ]; then
+		db_set postsrsd/domain "$(postconf -h mydomain)"
+		priority="medium"
+	else
+		db_set postsrsd/domain "$(hostname -d)"
+		priority="high"
+	fi
+fi
+
+db_input $priority postsrsd/domain || true
+db_go

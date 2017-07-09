@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove m68k-linux-gnu-gcc /usr/bin/m68k-linux-gnu-gcc-6
+    update-alternatives --quiet --remove m68k-linux-gnu-gcov /usr/bin/m68k-linux-gnu-gcov-6
+fi
+
+
+
+exit 0

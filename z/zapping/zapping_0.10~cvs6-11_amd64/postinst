@@ -1,0 +1,22 @@
+#!/bin/sh
+# $Id: postinst 47 2009-08-30 10:25:53Z robert $
+set -e
+
+
+if [ "$1" = configure ]; then
+	# create v4l devices ?
+	if [ ! -d /dev/v4l ] || [ ! -c /dev/video0 ] ; then
+		if [ -x /dev/MAKEDEV ]; then
+			(cd /dev;  ./MAKEDEV v4l)
+		fi
+	fi
+fi
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+exit 0

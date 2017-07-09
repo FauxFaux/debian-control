@@ -1,0 +1,212 @@
+#! /bin/sh
+# vim: set ft=sh sw=4 et:
+# postrm script for #PACKAGE#
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <postrm> `remove'
+#        * <postrm> `purge'
+#        * <old-postrm> `upgrade' <new-version>
+#        * <new-postrm> `failed-upgrade' <old-version>
+#        * <new-postrm> `abort-install'
+#        * <new-postrm> `abort-install' <old-version>
+#        * <new-postrm> `abort-upgrade' <old-version>
+#        * <disappearer's-postrm> `disappear' <r>overwrit>r> <new-version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+MTN_HOME="/var/lib/monotone"
+MTN_CONF_DIR="/etc/monotone"
+MTN_HOOKS_DIR="${MTN_CONF_DIR}/hooks.d"
+MTN_KEY_DIR="${MTN_HOME}/keys"
+MTN_LOG_DIR="/var/log/monotone"
+MTN_RUN_DIR="/var/run/monotone"
+MAINLOG="${MTN_LOG_DIR}/mtn.log"
+ERRORLOG="${MTN_LOG_DIR}/error.log"
+
+locate_key()
+{
+  # This function attempts to locate the auto-generated keypair for the monotone-server.
+  # It may list multiple filenames, or none at all.
+  # Filenames are printed to standard out.
+  db_get monotone-server/key
+
+  if [ -d ${MTN_KEY_DIR} ]; then
+    find ${MTN_KEY_DIR} -type f -regextype posix-egrep -regex "${MTN_KEY_DIR}/${RET}(\.[0-9a-f]{40})?"
+  fi
+}
+
+delete_key()
+{
+  local KEY
+  local KEY_COUNT
+
+  KEY=`locate_key`
+  KEY_COUNT=`echo ${KEY} | wc -w`
+
+  if [ ${KEY_COUNT} -gt 1 ]; then
+    echo "Unable to determine auto-generated monotone-server keypair." >&2
+    echo "Please delete it manually from ${MTN_KEY_DIR}." >&2
+  elif [ ${KEY_COUNT} -eq 1 ]; then
+    rm -f "${KEY}"
+  fi
+}
+
+case "$1" in
+    purge)
+       # note: when executing in this mode, this script cannot assume
+       # the existence of _any_ of the package dependencies.  it must
+       # work using only Essential packages.  hence, in several cases
+       # below we do cleanups only if the relevant program exists.
+
+       # remove config files from ucf database and filesystem
+       for conf in write-permissions read-permissions serverrc; do
+
+          # mimic dpkg and remove backups too
+          for ext in '' '~' '%' .bak .ucf-new .ucf-old .ucf-dist; do
+             rm -f /etc/monotone/$conf$ext || true
+          done 
+
+          # clear entries in ucf database
+          # note: we cannot assume ucf is still installed at this point
+          # (if it isn't, we don't need to worry about its database)
+          if which ucf > /dev/null; then
+             ucf --purge /etc/monotone/$conf
+          fi
+          if which ucfr > /dev/null; then
+             ucfr --purge monotone-server /etc/monotone/$conf
+          fi
+       done
+
+       # if debconf still exists and we were asked to auto-manage the
+       # database, delete the auto-generated key and database. don't
+       # delete anything else in /var/lib/monotone - there might be
+       # hand-created databases and keys that the admin wants to keep.
+       # in any case remove /var/lib/monotone(/keys) if empty.
+
+       if [ -e /usr/share/debconf/confmodule ]; then
+	   . /usr/share/debconf/confmodule
+
+	   db_get monotone-server/manage-db
+	   if [ "$RET" = true ]; then
+	       delete_key
+               rm -f ${MTN_HOME}/default.mtn
+               rm -f ${MTN_HOME}/default.mtn~
+               rm -f ${MTN_HOME}/default.mtn-journal
+
+               if [ -f /etc/monotone/passphrases ]; then
+                 db_get monotone-server/key
+	         grep -v "$RET" /etc/monotone/passphrases \
+	                      > /etc/monotone/passphrases.dpkg-new || true
+	         if [ -s /etc/monotone/passphrases.dpkg-new ]; then
+	  	     mv -f /etc/monotone/passphrases.dpkg-new \
+		           /etc/monotone/passphrases
+	         else
+		     rm -f /etc/monotone/passphrases.dpkg-new \
+		           /etc/monotone/passphrases
+	         fi
+	       fi
+	   fi
+	   # do not stop debconf, the debhelper additions will need it.
+       fi
+
+       if [ -d ${MTN_KEY_DIR} ]; then
+         rmdir --ignore-fail-on-non-empty ${MTN_KEY_DIR}
+       fi
+
+       if [ -d ${MTN_HOME} ]; then
+         rmdir --ignore-fail-on-non-empty ${MTN_HOME}
+       fi
+
+       if [ -d ${MTN_RUN_DIR} ]; then
+         rmdir --ignore-fail-on-non-empty ${MTN_RUN_DIR}
+       fi
+
+       # We only delete get_passphrase_from_file.lua if it is a symlink
+       # (as that is what the postinst script creates).
+       GET_PASSPHRASE_HOOK="${MTN_HOOKS_DIR}/get_passphrase_from_file.lua"
+       if [ -L ${GET_PASSPHRASE_HOOK} ]; then
+         rm ${GET_PASSPHRASE_HOOK}
+       fi
+
+       if [ -d ${MTN_HOOKS_DIR} ]; then
+         rmdir --ignore-fail-on-non-empty ${MTN_HOOKS_DIR}
+       fi
+
+       if [ -d ${MTN_CONF_DIR} ]; then
+         rmdir --ignore-fail-on-non-empty ${MTN_CONF_DIR}
+       fi
+
+       # delete log files if they exist
+       if [ -d ${MTN_LOG_DIR} ]; then
+         rm -f ${MAINLOG}
+         rm -f ${ERRORLOG}
+         rmdir --ignore-fail-on-non-empty ${MTN_LOG_DIR}
+       fi
+
+       # Create a list of paths that still exist and may contain files owned by the monotone
+       # user or group.
+       MTN_USED_PATHS=""
+       for MTN_USED_PATH in "${MTN_HOME}" "${MTN_CONF_DIR}" "${MTN_LOG_DIR}" "${MTN_RUN_DIR}"; do
+         if [ -d "${MTN_USED_PATH}" ]; then
+           MTN_USED_PATHS="${MTN_USED_PATHS:+${MTN_USED_PATHS}, }${MTN_USED_PATH}"
+         fi
+       done
+
+       # if deluser/delgroup exist, remove the server user and group.
+       # do not do this if /var/lib/monotone or /var/run/monotone still
+       # exists (so that it will still have a named user owning it).
+       if which deluser > /dev/null && [ -z "${MTN_USED_PATHS}" ]; then
+	   if [ -n "`id -u monotone 2>/dev/null`" ]; then
+               deluser --quiet monotone 2>/dev/null >/dev/null
+	   fi
+
+	   if [ -n "`id -g monotone 2>/dev/null`" ]; then
+               delgroup --quiet monotone 2>/dev/null >/dev/null
+	   fi
+       else
+	   if [ -n "${MTN_USED_PATHS}" ]; then
+	       reason="the following paths still exist: ${MTN_USED_PATHS}"
+	   else
+	       reason="deluser is not available"
+	   fi
+	   echo "warning: not deleting monotone user or group because $reason." >&2
+       fi
+
+    ;;
+    remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+
+esac
+
+# dh_installdeb will replace this with shell code automatically
+# generated by other debhelper scripts.
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d monotone remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

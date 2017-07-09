@@ -1,0 +1,95 @@
+#! /bin/sh -e
+# postrm script for lyskom-server
+
+# The server was stopped in the prerm, so we are safe to fool around with
+# the files as we want here.
+
+# Remove run-time files if removing or purging
+if test "$1" = "purge" -o "$1" = "remove"; then
+  # Remove state directory and files
+  if test -d /var/run/lyskom-server; then
+    echo 'Removing state files.'
+    rm -f /var/run/lyskom-server/pid
+    rm -f /var/run/lyskom-server/status
+    rmdir /var/run/lyskom-server || echo 'Could not remove /var/run/lyskom-server'
+  fi
+fi
+
+# Remove database and user if purging
+if test "$1" = "purge"; then
+  for f in /var/lib/lyskom-server /var/log/lyskom-server; do
+    if dpkg-statoverride --list $f >/dev/null 2>&1; then
+      dpkg-statoverride --remove $f
+    fi
+  done
+
+  # Remove log directory and files
+  if test -d /var/log/lyskom-server; then
+    echo 'Removing log files.'
+    rm -rf /var/log/lyskom-server
+  fi
+
+  # Remove database directory and files
+  if test -d /var/lib/lyskom-server; then
+    echo 'Removing LysKOM database.'
+    rm -rf /var/lib/lyskom-server
+  fi
+
+  # Remove 'lyskom' user
+  userexist=1
+  getent passwd lyskom > /dev/null || userexist=0
+  if [ "$userexist" = "1" ]; then
+    # User did exist
+    if [ -x "`which deluser 2>/dev/null`" ]; then
+        # Deluser is installed
+    	echo 'Removing lyskom user.'
+        deluser --system --quiet lyskom || echo 'Could not remove lyskom user'
+    fi
+  fi
+fi
+
+# Move config file back if downgrading
+if test "$1" = "upgrade"; then
+  if dpkg --compare-versions "$2" lt 2.1.0-1; then
+    # If new configuration file exists, and old does not, move it
+    if test -e /etc/lyskom-server/lyskomd.conf -a ! -e /etc/lyskom/server/config; then
+      echo 'Renaming /etc/lyskom-server/lyskomd.conf to config (old name)' 1>&2
+      mv -f /etc/lyskom-server/lyskomd.conf /etc/lyskom-server/config
+    fi
+  fi
+fi
+
+# Run anything debhelper wants us to run
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d lyskom-server remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask lyskom-server.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge lyskom-server.service >/dev/null
+		deb-systemd-helper unmask lyskom-server.service >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

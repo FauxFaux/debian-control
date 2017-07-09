@@ -1,0 +1,45 @@
+#!/bin/sh -e
+
+case "$1" in
+    remove)
+    ;;
+
+    purge)
+      # Delete the default log files if present; files of secondary
+      # configurations are not deleted automatically
+      if [ -f /var/log/bopm/bopm.log ]; then rm -f /var/log/bopm/bopm.log; fi
+      if [ -f /var/log/bopm/scan.log ]; then rm -f /var/log/bopm/scan.log; fi
+      # Delete the BOPM directory if non-empty
+      if [ -d /var/log/bopm ]; then
+        rmdir --ignore-fail-on-non-empty /var/log/bopm
+      fi
+      # This should not be necessary, as prerm is supposed to stop BOPM
+      # correctly. But we better delete some leftover cruft than having
+      # it still floating around on the system.
+      if [ -f /var/run/bopm/bopm.pid ]; then rm -f /var/run/bopm/bopm.pid; fi
+    ;;
+
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    *)
+    echo "postrm called with unknown argument '$1'" >&2
+    exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d bopm remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,22 @@
+#!/bin/sh
+# Post-removal script for wmaloader
+set -e
+
+if [ "$1" = "purge" ] ; then
+    # Remove user wmaloader, if it exists
+    userdel wmaloader || true
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d wmaloader remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+

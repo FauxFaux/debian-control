@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/rsync puppet-module-rsync /usr/share/puppet/modules.available/puppetlabs-rsync 500
+fi
+
+
+
+exit 0

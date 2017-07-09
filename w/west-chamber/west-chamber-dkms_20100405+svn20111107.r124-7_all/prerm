@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+NAME=west-chamber
+PACKAGE_NAME=$NAME-dkms
+VERSION=20100405+svn20111107.r124
+
+case "$1" in
+    remove|upgrade|deconfigure)
+      if [  "`dkms status -m $NAME`" ]; then
+         dkms remove -m $NAME -v $VERSION --all
+      fi
+    ;;
+
+    failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0
+
+

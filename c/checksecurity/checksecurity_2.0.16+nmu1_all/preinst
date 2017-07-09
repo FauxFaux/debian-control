@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+
+# Move the existing checksecurity.conf out of the way if this is a new
+# install, so that we don't get bogus "file has been edited""
+# interactions from dpkg, and so that I don't completely lose
+# /etc/checksecurity.conf under certain circumstances.
+
+if [ "$1" = "install" -a -z "$2" -a -f "/etc/checksecurity.conf" ] ; then
+        mv /etc/checksecurity.conf /etc/checksecurity.conf.cron
+fi
+# Resort /var/log/setuid.today if upgrading from 2.0.5 or earlier
+if [ "$1" = "upgrade" ] && dpkg --compare-versions "$2" "<<" "0.2.5.1"
+then
+	cp /var/log/setuid.today /var/log/setuid.preupgrade >/dev/null 2>&1 
+	# Only continue if the above worked (disk full?)
+	if [ "$?" -eq 0 ] 
+	then
+		cat /var/log/setuid.preupgrade | 
+		sort -k 12 > /var/log/setuid.today
+		rm -f /var/log/setuid.preupgrade
+	fi
+fi
+
+

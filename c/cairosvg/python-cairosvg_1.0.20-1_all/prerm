@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" != "upgrade" ]; then
+  update-alternatives --remove cairosvg /usr/bin/cairosvg-py2
+fi
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p python-cairosvg 
+else
+	dpkg -L python-cairosvg | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+

@@ -1,0 +1,15 @@
+#! /bin/sh
+
+set -e
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/ddns3-client" ]; then
+		update-rc.d ddns3-client defaults >/dev/null
+		invoke-rc.d ddns3-client start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+chmod 0600 /etc/default/ddns3-client

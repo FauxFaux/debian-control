@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# Display the existence-of-/etc/dailystrips.defs warning if appropriate
+if ( test -e /etc/dailystrips.defs ); then
+  db_input medium dailystrips/warning-etcdefs || true
+  db_go
+fi
+

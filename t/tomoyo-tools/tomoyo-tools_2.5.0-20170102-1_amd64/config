@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+GRUBFILE="/etc/default/grub"
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+if [ -f $GRUBFILE ]; then
+  db_set tomoyo-tools/grub true
+fi
+
+db_input medium tomoyo-tools/grub || true
+db_go
+
+exit 0

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -eu
+
+if dpkg-maintscript-helper supports symlink_to_dir; then
+    dpkg-maintscript-helper \
+        symlink_to_dir \
+        /usr/share/doc/python-pysqlite1.1-dbg /usr/share/doc/python-pysqlite1.1 \
+        1.1.8a-6 python-pysqlite1.1-dbg -- "$@"
+fi
+
+

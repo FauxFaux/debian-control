@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+PACKAGE="xfaces"
+
+# FSSTND compatibility symlinks
+if [ \( "$1" = "upgrade" -o "$1" = "remove" \) \
+ 	  -a -L /usr/doc/$PACKAGE ]; then
+    rm -f /usr/doc/$PACKAGE
+fi

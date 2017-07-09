@@ -1,0 +1,25 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+    purge)
+        ucf --purge /etc/slapos/slapos-node-unofficial.cfg || true
+        db_get slapos-node-unofficial/software_root
+        SOFTWARE_ROOT="$RET"
+
+        rm -rf /var/log/slapos/ /var/lib/slapos/ \
+            /var/cache/slapos/certificates/ "$SOFTWARE_ROOT"
+	;;
+esac
+
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

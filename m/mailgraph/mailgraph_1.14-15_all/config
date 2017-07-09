@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_title "mailgraph" || true
+
+# Sync debconf values with the local configuration
+if [ -r /etc/default/mailgraph ]; then
+	. /etc/default/mailgraph
+	db_set mailgraph/start_on_boot "$BOOT_START"
+	db_set mailgraph/mail_log "$MAIL_LOG"
+	db_set mailgraph/ignore_localhost "$IGNORE_LOCALHOST"
+fi
+
+db_input medium mailgraph/start_on_boot || true
+db_input medium mailgraph/mail_log || true
+db_input medium mailgraph/ignore_localhost || true
+db_go || true

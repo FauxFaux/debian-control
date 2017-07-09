@@ -1,0 +1,73 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    remove)
+        # Calling the init script during removal
+	if [ -x "/etc/init.d/enable-nat" ] ; then
+	    if [ -x "`which invoke-rc.d 2>/dev/null`" ] ; then
+		invoke-rc.d enable-nat stop || exit $?
+	    else
+		/etc/init.d/enable-nat stop || exit $?
+	    fi
+	fi
+
+        # Remove diverts before removing the package
+	if [ remove = "$1" ] \
+	    && [ -x /usr/share/debian-edu-config/tools/debian-edu-ltsp-audiodivert ] ; then
+	    /usr/share/debian-edu-config/tools/debian-edu-ltsp-audiodivert remove
+	fi
+	if [ remove = "$1" ] && [ -e /usr/share/pam-configs/edu-nopwdchange ]; then
+	    rm /usr/share/pam-configs/edu-nopwdchange
+	fi
+	pam-auth-update --package --remove edu-group edu-umask
+	;;
+esac
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /usr/share/debian-edu-config/iceweacel-networked-prefs.js 1.818+deb8u1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/cfengine/debian-edu/cf.iceweasel 1.818+deb8u1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/iceweasel-ldapconf 1.818+deb8u1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/apt/apt.conf.d/99-edu-prefer-iceweasel 1.818+deb8u1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/X11/Xsession.d/06debian-edu-iceweasel-ltsp 1.818+deb8u1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/ldap/slapd-lenny_debian-edu.conf 1.911 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/ldap/slapd-debian-edu.conf 1.911 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/insserv/overrides/kdm 1.906 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/cfengine/debian-edu/cf.kdm 1.906 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/powerdns/pdns.d/pdns-debian-edu.conf 1.811 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/insserv.conf.d/debian-edu-config 1.811 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/cfengine/debian-edu/cf.pdns 1.811 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/apache2/conf.d/debian-edu-config-doc /etc/apache2/conf-available/debian-edu-config-doc.conf 1.719 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/apache2/sites-available/debian-edu-ssl-default /etc/apache2/sites-available/debian-edu-ssl-default.conf 1.719 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/apache2/sites-available/debian-edu-default /etc/apache2/sites-available/debian-edu-default.conf 1.719 -- "$@"
+# End automatically added section
+

@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+        if [ -d /usr/doc -a -h /usr/doc/diploma -a -d /usr/share/doc/diploma ]; then
+                rm -f /usr/doc/diploma
+        fi
+fi
+
+

@@ -1,0 +1,81 @@
+#! /bin/bash
+
+set -e
+
+pyca_setup_user() {
+        if ! id pyca > /dev/null 2>&1 ; then
+                adduser --system --no-create-home pyca 2>&1 > /dev/null || exit 78
+        fi
+}
+
+pyca_log_perms() {
+
+    if test -e /var/log/pyca; then
+
+	chmod 655 /var/log/pyca || exit 78
+	chgrp adm /var/log/pyca || exit 78
+	
+
+    fi
+
+    if id www-data > /dev/null 2>&1; then
+
+	chgrp www-data /var/log/pyca/httpd_error_log || exit 78
+	chmod 620 /var/log/pyca/httpd_error_log || exit 78
+
+    fi
+
+    if id daemon > /dev/null 2>&1; then
+
+	chgrp daemon /var/log/pyca/ca-certreq-mail.out || exit 78
+	chmod 620 /var/log/pyca/ca-certreq-mail.out || exit 78
+
+    fi
+
+}
+
+pyca_make_alias() {
+
+    if test -e /etc/aliases; then 
+
+	if ! grep -q ca-certreq-mail /etc/aliases;then
+
+	    cat >> /etc/aliases <<EOF || exit 78
+
+# The following line added for pyca
+ca-certreq-mail: |/usr/sbin/ca-certreq-mail.py
+EOF
+	    if test -e /usr/bin/newaliases; then 
+		newaliases 2>&1 > /dev/null || exit 78
+	    fi
+
+	fi
+
+    fi
+
+}
+
+
+case "$1" in
+    configure)
+
+pyca_setup_user
+pyca_log_perms
+pyca_make_alias
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+	;;
+    
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 64
+    ;;
+esac
+
+
+
+exit 0
+

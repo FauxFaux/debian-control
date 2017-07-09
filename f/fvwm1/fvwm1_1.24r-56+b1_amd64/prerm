@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" != "upgrade" ]
+then
+    update-alternatives --remove fvwm /usr/bin/fvwm1
+    update-alternatives --remove x-window-manager /usr/bin/fvwm1
+elif dpkg --compare-versions "$2" lt-nl 1.24r-32
+then
+    # We're downgrading; avoid dpkg prompting about overwriting
+    # system.fvwmrc
+    rm -f /etc/X11/fvwm/system.fvwmrc
+fi
+
+
+
+exit 0

@@ -1,0 +1,67 @@
+#!/bin/sh
+
+set -e
+
+APPLICATIONS="admin applestreamingclient appselector flvplayback proxypublish samplefactory stresstest vptests"
+
+compare() {
+	[ $# != 2 ] && exit 1
+	A=$(md5sum $1 | cut -d' ' -f1)
+	B=$(md5sum $2 | cut -d' ' -f1)
+	[ "$A" = "$B" ] && return 0 || return 1
+}
+
+do_remove() {
+	for app in $APPLICATIONS; do
+		if [ -f "/etc/crtmpserver/applications/$app.lua" ]; then
+			compare "/etc/crtmpserver/applications/$app.lua" \
+				"/usr/share/crtmpserver-apps/$app.lua" \
+				&& rm -f "/etc/crtmpserver/applications/$app.lua"
+		fi
+	done
+
+	if [ -f "/etc/crtmpserver/conf.d/users.lua" ]; then
+		compare "/etc/crtmpserver/conf.d/users.lua" \
+			"/usr/share/crtmpserver-apps/conf.d/users.lua" \
+			&& rm -f "/etc/crtmpserver/conf.d/users.lua"
+	fi
+
+	if [ -f /etc/crtmpserver/enabled_applications.conf ]; then
+		compare "/etc/crtmpserver/enabled_applications.conf" \
+			"/usr/share/crtmpserver-apps/enabled_applications.conf" \
+			&& rm -f /etc/crtmpserver/enabled_applications.conf
+	fi
+
+	return 0
+}
+
+do_purge() {
+	for app in $APPLICATIONS; do
+		[ -f "/etc/crtmpserver/applications/$app.lua" ] && \
+			rm -f "/etc/crtmpserver/applications/$app.lua"
+	done
+	[ -f "/etc/crtmpserver/conf.d/users.lua" ] && \
+		rm -f "/etc/crtmpserver/conf.d/users.lua"
+	[ -f "/etc/crtmpserver/enabled_applications.conf" ] && \
+		rm -f "/etc/crtmpserver/enabled_applications.conf"
+
+	return 0
+}
+
+
+case "$1" in
+	remove)
+		do_remove
+		;;
+	purge)
+		do_remove
+		do_purge
+		;;
+	*)
+		exit 0
+		;;
+esac
+
+
+
+

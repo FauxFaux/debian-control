@@ -1,0 +1,69 @@
+#!/bin/sh
+
+set -e
+
+DBDIR="/var/cache/forked-daapd"
+DBDEFAULT="songs3.db"
+
+do_db_backup ()
+{
+    [ -f "$DBDIR/$DBDEFAULT" ] || return 0
+
+    DBBAK="$DBDIR/backups"
+
+    if [ ! -d "$DBBAK" ]; then
+	mkdir -p "$DBBAK"
+    fi
+
+    DBBAK="$DBBAK/$DBDEFAULT.$1"
+
+    [ -e "$DBBAK" ] && return 0
+
+    cp "$DBDIR/$DBDEFAULT" "$DBBAK"
+}
+
+if [ "$1" = "configure" ] || [ "$1" = "reconfigure" ]; then
+    if ! getent passwd daapd > /dev/null 2>&1; then
+	adduser --quiet --system --no-create-home --home /var/cache/forked-daapd daapd
+    fi
+
+    if ! dpkg-statoverride --list /var/cache/forked-daapd > /dev/null 2>&1; then
+	dpkg-statoverride --update --add daapd root 0755 /var/cache/forked-daapd
+    fi
+
+    # Backup database before a database upgrade
+    DBPATH=$(awk '/^[\t ]+db_path[\t ]*=/{ $0 = $3; gsub(/^[\t "]|[\t "]$/, ""); print};' /etc/forked-daapd.conf)
+    if [ -z "$DBPATH" ] || [ "$DBPATH" = "$DBDIR/$DBDEFAULT" ]; then
+        # v0.14: schema v11 -> v12
+	if dpkg --compare-versions "$2" lt-nl "0.14"; then
+	    do_db_backup prev12
+	fi
+    else
+	echo "Database not in the default location; no automatic backup made"
+    fi
+fi
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask forked-daapd.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled forked-daapd.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable forked-daapd.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state forked-daapd.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/forked-daapd" ]; then
+		update-rc.d forked-daapd defaults 25 >/dev/null
+		invoke-rc.d forked-daapd start || exit $?
+	fi
+fi
+# End automatically added section
+

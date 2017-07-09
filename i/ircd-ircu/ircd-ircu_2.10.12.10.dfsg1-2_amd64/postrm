@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" ]; then
+  if [ -d "/etc/ircd" ]; then
+    rm -rf /etc/ircd/*
+    rmdir --ignore-fail-on-non-empty /etc/ircd
+  fi
+fi
+
+if [ "$1" = "purge" ]; then
+  if [ -d "/var/log/ircd" ]; then
+    rm -rf /var/log/ircd/*
+    rmdir --ignore-fail-on-non-empty /var/log/ircd
+  fi
+fi
+
+if [ "$1" = "purge" ]; then
+  if [ -d "/var/run/ircd" ]; then
+    rm -rf /var/run/ircd/*
+    rmdir --ignore-fail-on-non-empty /var/run/ircd
+  fi
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d ircd-ircu remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0

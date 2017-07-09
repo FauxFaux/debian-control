@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+. /usr/share/debconf/confmodule
+db_fget encfs/security-information seen
+if [ "$RET" = false ]; then
+   db_input critical encfs/security-information ||:
+fi
+db_go || true

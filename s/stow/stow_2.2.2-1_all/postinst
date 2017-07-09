@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+if [ ! -e /usr/local/stow ]; then
+  if mkdir /usr/local/stow 2>/dev/null; then
+    if chown root:staff /usr/local/stow; then
+      chmod 2775 /usr/local/stow || true
+    fi
+  fi
+fi
+

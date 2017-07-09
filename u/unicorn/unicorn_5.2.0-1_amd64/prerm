@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  remove|deconfigure)
+    if [ -x /etc/init.d/unicorn ]; then
+      if [ -x "$(which invoke-rc.d)" ]; then
+        invoke-rc.d unicorn stop
+      else
+        /etc/init.d/unicorn stop
+      fi
+    fi
+  ;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+# The following is a workaround that is needed for version 3.0-1 because its init
+# script is sometimes not working properly. This would result in zombie processes
+# after installation, or even worse it could fail the installation
+# Also here is a fix for version 
+if [ "$1" = 'upgrade' ]; then
+        if dpkg --compare-versions "$2" eq 3.0-1 ; then
+                start-stop-daemon --stop -x /usr/sbin/smsd -R 30 --signal -9
+                if test -f /var/run/smsd.pid ; then rm /var/run/smsd.pid; fi
+	fi
+fi
+
+

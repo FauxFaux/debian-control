@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+[ "$1" = configure ] || exit 0
+
+if [ -x /usr/bin/update-menus ]; then
+	update-menus
+fi
+
+SCOREFILE=/var/games/pachi/data/scores.dat
+if [ ! -e $SCOREFILE ]; then
+	dd if=/dev/zero of=$SCOREFILE bs=170 count=1 2> /dev/null
+fi
+chown root:games $SCOREFILE
+chmod 0660       $SCOREFILE
+
+exit 0

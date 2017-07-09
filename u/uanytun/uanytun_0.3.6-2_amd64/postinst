@@ -1,0 +1,14 @@
+#!/bin/sh
+# postinst script for uanytun
+
+set -e
+
+if [ -x "/etc/init.d/uanytun" ]; then
+  update-rc.d uanytun defaults >/dev/null
+fi
+
+if [ "$1" = "configure" ]; then
+  adduser --quiet --system --group --no-create-home --home /var/run/uanytun uanytun
+fi
+
+

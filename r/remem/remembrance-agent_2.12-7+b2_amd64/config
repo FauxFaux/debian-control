@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+. /usr/share/debconf/confmodule
+
+db_input medium remembrance-agent/index-dir || true
+db_input medium remembrance-agent/exclude-dir || true
+db_go
+

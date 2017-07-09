@@ -1,0 +1,53 @@
+#! /bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+db_version 2.0 || [ $? -lt 30 ]
+
+if [ "$1" = "purge" ]; then
+
+    db_get ganglia-webfrontend/webserver || true
+
+    if [ "$RET" = "true" ]; then
+        webserver="apache2"
+
+        a2disconf ganglia-webfrontend || true
+
+        HTTPD_ETC=/etc/$webserver
+        HTTPD_CONF=$HTTPD_ETC/conf-available
+        HTTPD_CONF_GANGLIA=$HTTPD_CONF/ganglia-webfrontend.conf
+        if [ -h $HTTPD_CONF_GANGLIA ]; then
+            rm -f $HTTPD_CONF_GANGLIA
+        fi
+
+        if [ -x /usr/sbin/$webserver ]; then
+            db_reset ganglia-webfrontend/restart
+            db_input high ganglia-webfrontend/restart || true
+            db_go
+
+            # Restart apache2 if requested
+            db_get ganglia-webfrontend/restart
+            if [ "$RET" = "true" ]; then
+                if [ -x /usr/sbin/invoke-rc.d ]; then
+                    invoke-rc.d $webserver restart
+                else
+                    /etc/init.d/$webserver restart
+                fi
+            fi
+        fi
+    fi
+
+    rmdir --ignore-fail-on-non-empty /etc/ganglia-webfrontend || true
+
+    db_purge
+
+fi
+
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+## Drop documentation directory symlink
+docdir="/usr/share/doc/tupi"
+if [ -h "${docdir}" ]; then
+    rm -f "${docdir}" 2>>/dev/null
+fi
+
+

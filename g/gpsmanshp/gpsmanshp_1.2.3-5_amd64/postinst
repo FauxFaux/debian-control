@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -eu
+
+cd /usr/lib/tcl
+
+echo "pkg_mkIndex -lazy -verbose . gpsmanshp.so" | tclsh >/dev/null 2>&1
+
+

@@ -1,0 +1,20 @@
+#!/bin/sh
+# postrm script for libphone-utils
+
+set -e
+
+if [ "$1" = "purge" ] && [ "$(dpkg-query --show libphone-utils0 2> /dev/null | wc -l)" = 1 ] ; then
+	if [ -f /etc/phone-utils.conf ] ; then
+		rm /etc/phone-utils.conf
+	fi
+fi
+
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0;

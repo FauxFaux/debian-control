@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+# Activate the sysctl settings
+[ $1 != configure ] || sysctl --quiet --load="/etc/sysctl.d/corekeeper.conf"
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/corekeeper 1.1~ corekeeper -- "$@"
+# End automatically added section
+

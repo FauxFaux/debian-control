@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = 'remove' -a -L /usr/lib/x86_64-linux-musl/libc.so ]; then
+  rm /usr/lib/x86_64-linux-musl/libc.so
+fi
+
+
+

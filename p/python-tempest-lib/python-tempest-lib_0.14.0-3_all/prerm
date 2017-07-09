@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] ; then
+	update-alternatives --remove subunit-trace /usr/bin/python2-subunit-trace
+	update-alternatives --remove skip-tracker /usr/bin/python2-skip-tracker
+	update-alternatives --remove check-uuid /usr/bin/python2-check-uuid
+fi
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p python-tempest-lib 
+else
+	dpkg -L python-tempest-lib | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+
+exit 0
+

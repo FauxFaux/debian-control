@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e
+
+update-alternatives --install /usr/bin/jam jam /usr/bin/ftjam 11 \
+    --slave /usr/share/man/man1/jam.1.gz jam.1.gz /usr/share/man/man1/ftjam.1.gz
+
+

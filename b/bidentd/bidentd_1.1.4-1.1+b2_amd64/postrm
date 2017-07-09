@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+# I don't care what the user said; this should be removed, otherwise it
+# will taint the next install. The even dpkg --purge can't help the user.
+if [ "$1" = "purge" ]; then
+ if which update-inetd >/dev/null; then
+   update-inetd --multi --remove "/usr/sbin/bidentd"
+ fi
+fi

@@ -1,0 +1,14 @@
+#! /bin/sh
+
+set -e
+
+if [ $1 != "upgrade" ] ; then
+
+        update-alternatives --install /usr/bin/yacc yacc /usr/bin/pbyacc 30 \
+               --slave /usr/share/man/man1/yacc.1.gz yaccman /usr/share/man/man1/pbyacc.1.gz
+fi
+ 
+
+
+
+

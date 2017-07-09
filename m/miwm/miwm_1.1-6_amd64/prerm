@@ -1,0 +1,33 @@
+#!/bin/sh
+# miwm.prerm
+
+set -e
+
+PACKAGE="miwm"
+SECTION=x-window-manager
+BIN=/usr/bin/jwm
+
+Alternatives ()
+{
+    update-alternatives --remove $SECTION $BIN
+}
+
+Debhelper ()
+{
+    :
+    # Automatically generated
+    
+}
+
+Main ()
+{
+    echo "miwm.prerm: $1"
+    if [ "$1" = "remove" ] || [ "$1" = "purge" ] ; then
+        Alternatives
+        Debhelper
+    fi
+}
+
+Main "$@"
+
+# End of file

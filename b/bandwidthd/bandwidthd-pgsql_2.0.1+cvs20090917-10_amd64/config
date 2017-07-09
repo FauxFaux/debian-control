@@ -1,0 +1,136 @@
+#!/bin/sh
+
+set -e
+
+if [ "$BANDWIDTHD_PACKAGE_DEBUG" != "" ]; then
+	set -x
+fi
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+db_version 2.0
+db_title BandwidthD
+
+# find devices to use as choices for debconf.
+# (this should really be picked up from the output of "bandwidthd -l",
+#  but since the config script is ran before the package is even unpacked
+#  it can not be used.)
+
+IFCONFIG="/sbin/ifconfig"
+ROUTE="/sbin/route"
+IPROUTE="/bin/ip"
+
+LIST_DEV=""
+LIST_SUBNETS=""
+
+if [ -f $IPROUTE ]; then
+	LIST_DEV=$($IPROUTE link show | grep "UP" | sed -e "s/.*: \(.*\): <.*/\1/")
+	LIST_SUBNETS=$($IPROUTE route show | grep -v ^default | awk '{if (match($1, '/\\\//')) { print $1 } else { print $1 "/32" } }')
+elif [ -f $IFCONFIG ] && [ -f $ROUTE ]; then
+	LIST_DEV=$($IFCONFIG | grep "Link encap:" | cut -d" " -f1)
+	LIST_SUBNETS=$($ROUTE -n | grep ^[0-9] | grep -v ^0.0.0.0 | cut -c0-15,33-47 | sed -e 's# \+#/#')
+#else 
+#	echo "WARNING: bandwidthd.config: Could not find eigther ip(route2) nor ifconfig to list interfaces."
+fi
+
+# create device list, starting by pseudo-device "any".
+DEBCONF_INTERFACES="any"
+for DEV in $LIST_DEV; do
+		DEBCONF_INTERFACES="${DEBCONF_INTERFACES}, ${DEV}"
+done
+
+# (set default interface to eth0 if it exists, otherwise use any as
+#  a fallback default since it always exists).
+
+if [ "$(echo $DEBCONF_INTERFACES | grep -c1 ', eth0')" != 0 ]; then
+	DEBCONF_INTERFACES_DEFAULT="eth0"
+else
+	DEBCONF_INTERFACES_DEFAULT="any"
+fi
+
+# find subnets to use as default for debconf.
+
+for SUBNET in $LIST_SUBNETS; do
+	if [ "$DEBCONF_SUBNET_DEFAULT" = "" ]; then
+		DEBCONF_SUBNET_DEFAULT="${SUBNET}"
+	else
+		DEBCONF_SUBNET_DEFAULT="${DEBCONF_SUBNET_DEFAULT}, ${SUBNET}"
+	fi
+done
+
+# Use full hostname as default sensor id.
+DEBCONF_SENSORID=$(/bin/hostname)
+
+
+if [ "$BANDWIDTHD_PACKAGE_DEBUG" != "" ]; then
+	echo "dev: $DEBCONF_INTERFACES"
+	echo "dev(default): $DEBCONF_INTERFACES_DEFAULT"
+	echo "subnets: $DEBCONF_SUBNET_DEFAULT"
+fi
+
+if [ "$BANDWIDTHD_PACKAGE_DEBUG" != "" ]; then
+	db_fset bandwidthd/dev seen false
+	db_fset bandwidthd/subnet seen false
+	db_fset bandwidthd/promisc seen false
+	# bwdpgsql-specific:
+	db_fset bandwidthd-pgsql/sensorid seen false
+fi
+
+
+# --- Listen on which interface? ---
+
+# FIXME: replace db_subst "interfaces" with db_setchoices when it becomes 
+# available in debconf. See Debian bug #174130.
+# Set available choices.
+db_subst bandwidthd/dev "interfaces" "$DEBCONF_INTERFACES" || true
+
+# Set default choice (unless valid old value exists).
+db_get bandwidthd/dev || true
+if [ "$RET" = "" ]; then
+	db_set bandwidthd/dev "$DEBCONF_INTERFACES_DEFAULT" || true
+elif [ "$(echo $DEBCONF_INTERFACES | grep -c1 $RET)" = 0 ]; then
+	db_set bandwidthd/dev "$DEBCONF_INTERFACES_DEFAULT" || true
+fi
+
+# Ask question.
+db_input high bandwidthd/dev || true
+db_go || true
+
+
+# --- Log/Graph which subnets? ---
+
+# Set default subnets (unless value already exists).
+db_get bandwidthd/subnet || true 
+if [ "$RET" = "" ] ; then
+	db_set bandwidthd/subnet "$DEBCONF_SUBNET_DEFAULT" || true
+fi
+
+# Ask question.
+db_input high bandwidthd/subnet || true
+db_go || true
+
+# --- Sensor id? ---
+
+# Set fully qualified hostname as default sensor string
+db_get bandwidthd-pgsql/sensorid || true
+if [ "$RET" = "" ]; then
+	db_set bandwidthd-pgsql/sensorid "$DEBCONF_SENSORID" || true
+fi
+
+# ask question.
+db_input medium bandwidthd-pgsql/sensorid || true
+db_go || true
+
+# --- PROMISC ? ---
+
+db_input low bandwidthd/promisc || true
+db_go || true
+
+# source dbconfig-common shell library, and call the hook function
+if [ -f /usr/share/dbconfig-common/dpkg/config.pgsql ]; then
+     	. /usr/share/dbconfig-common/dpkg/config.pgsql 
+		dbc_first_version="2.0.1+cvs20050208-12"
+		dbc_load_include="php:/etc/bandwidthd/debian-db.php"
+		dbc_go bandwidthd-pgsql $@
+fi

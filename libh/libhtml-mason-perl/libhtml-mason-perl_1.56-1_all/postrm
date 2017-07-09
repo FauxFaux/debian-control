@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+purge)
+	# Remove mason data directory
+	rm -rf /var/cache/mason
+	# and old symlink
+	rm -f /var/lib/mason
+;;
+esac
+
+##
+
+exit 0

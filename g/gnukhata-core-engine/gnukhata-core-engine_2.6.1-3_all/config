@@ -1,0 +1,18 @@
+#!/bin/sh
+# config maintainer script for gnukhata-core-engine
+ 
+set -e
+
+# source debconf stuff
+. /usr/share/debconf/confmodule
+
+# source dbconfig-common shell library, and call the hook function
+if [ -f /usr/share/dbconfig-common/dpkg/config.pgsql ]; then
+   . /usr/share/dbconfig-common/dpkg/config.pgsql
+
+   dbc_dbname="gnukhata"
+   dbc_dbuser="gnukhata"
+
+   dbc_go gnukhata-core-engine $@
+fi
+

@@ -1,0 +1,26 @@
+#!/bin/sh -e
+
+. /usr/share/debconf/confmodule
+db_get orville-write/setuid
+SETUID=$RET
+
+# Orville write doesn't log if the file doesn't exist so create it.
+if [ "$1" = "configure" ]; then
+if [ ! -e "/var/log/write.log" ]; then
+touch /var/log/write.log
+chown root:tty /var/log/write.log
+chmod 0660 /var/log/write.log
+fi
+# drop setuid bit from write/mesg but make sure we can still write to the log.
+if [ "$SETUID" = "false" ]; then
+chmod u-s /usr/bin/orville-write /usr/bin/mesg
+else
+chmod u+s /usr/bin/orville-write /usr/bin/mesg
+fi
+fi
+
+update-alternatives \
+--install /usr/bin/write write /usr/bin/orville-write 150 \
+--slave /usr/share/man/man1/write.1.gz write.1.gz /usr/share/man/man1/orville-write.1.gz
+
+

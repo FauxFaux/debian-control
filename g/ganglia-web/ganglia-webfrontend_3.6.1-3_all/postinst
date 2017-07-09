@@ -1,0 +1,46 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+db_version 2.0 || [ $? -lt 30 ]
+
+chown -R www-data /var/lib/ganglia-web/dwoo/
+if [ "$1" = "configure" ]; then
+
+    db_get ganglia-webfrontend/webserver
+    autoconfigure="$RET"
+    webserver="apache2"
+
+    if [ "$autoconfigure" = true ]; then
+        test -x /usr/sbin/$webserver || continue
+
+        # Auto-configure module dependencies
+        a2enmod php5 || true
+        a2enmod php7.0 || true
+        a2enmod cgi || true
+
+        HTTPD_ETC=/etc/$webserver
+        HTTPD_CONF=$HTTPD_ETC/conf-available
+        HTTPD_CONF_GANGLIA=$HTTPD_CONF/ganglia-webfrontend.conf
+        if [ -d $HTTPD_ETC -a ! -f $HTTPD_CONF_GANGLIA -a ! -h $HTTPD_CONF_GANGLIA ]; then
+            ln -s /etc/ganglia-webfrontend/apache.conf $HTTPD_CONF_GANGLIA
+        fi
+
+        a2enconf ganglia-webfrontend || true
+
+        # Restart apache2 if requested
+        db_get ganglia-webfrontend/restart
+        if [ "$RET" = "true" ]; then
+            if [ -x /usr/sbin/invoke-rc.d ]; then
+                invoke-rc.d $webserver restart
+            else
+                /etc/init.d/$webserver restart
+            fi
+        fi
+
+    fi
+
+fi
+
+

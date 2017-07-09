@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# Build the bearoff databases after install if requested.
+
+set -e
+
+if [ "configure" = "$1" ] || [ "reconfigure" = "$1" ] ; then
+    . /usr/share/debconf/confmodule || exit
+    db_version 2.0
+    db_get gnubg/build-bearoffs
+
+    if [ "$RET" = "true" ] ; then
+        if [ ! -f "/var/lib/gnubg/gnubg_ts0.bd" ] ; then
+            echo 'Building two-sided bearoff database' \
+                '(this may take several minutes)' >&2
+            /usr/games/makebearoff -t 6x6 \
+                -f /var/lib/gnubg/gnubg_ts0.bd > /dev/null 2>&1
+        fi
+    fi
+fi
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

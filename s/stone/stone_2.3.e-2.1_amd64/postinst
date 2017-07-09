@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+cd /etc/ssl/certs
+PATH=$PATH:/usr/bin/ssl
+if [ -f stone.pem ]
+then
+    echo "You already have `pwd`/stone.pem"
+else
+    xHOSTNAME=`hostname -s`
+    xDOMAINNAME=`hostname -d`
+    openssl req -new -x509 -nodes -out stone.pem -keyout stone.pem > /dev/null 2>&1 <<+
+.
+.
+.
+$xDOMAIN_NAME
+$xHOST_NAME
+stone
+root@$xHOST_NAME.$xDOMAIN_NAME
++
+#    req -new -x509 -nodes -out stone.pem -keyout stone.pem
+    ln -sf stone.pem `openssl x509 -noout -hash < stone.pem`.0
+    chmod 644 stone.pem
+
+fi
+
+

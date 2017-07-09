@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+
+
+if [ "$1" = purge ]; then
+	rmdir -p /etc/ikiwiki-hosting/keys/dns/ 2>/dev/null || true
+fi

@@ -1,0 +1,21 @@
+#! /bin/sh
+# pre install script for the Debian GNU/Linux cfingerd package
+
+set -e
+
+if [ "$1" = "upgrade" ]; then
+    case $2 in
+    1.2*)
+	if [ -f /etc/cfingerd.conf ]; then
+	    test -d /etc/cfingerd || mkdir /etc/cfingerd
+	    cp /etc/cfingerd.conf /etc/cfingerd/saved.cfingerd.conf
+	    echo "Old /etc/cfingerd.conf saved as /etc/cfingerd/saved.cfingerd.conf"
+	fi
+	;;
+    esac
+    if `dpkg --compare-versions $2 lt 1.3.2-8`; then
+	for f in uptime ping; do
+	    cp /etc/cfingerd/scripts/$f /etc/cfingerd/saved.$f
+	done
+    fi
+fi

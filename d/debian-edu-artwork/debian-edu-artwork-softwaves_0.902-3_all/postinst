@@ -1,0 +1,23 @@
+#! /bin/sh
+
+set -e
+
+
+
+EDUTHEME="softwaves"
+
+# Make softwaves the default for stretch via triggers;
+# see debian-edu-artwork-softwaves.triggers
+# Set plymouth default theme only for Debian Edu installations.
+
+case "$1" in
+	configure)
+		update-debian-edu-artwork-$EDUTHEME configure
+	;;
+	triggered)
+		update-debian-edu-artwork-$EDUTHEME configure
+		if [ -f /etc/plymouth/plymouthd.conf ] && [ -f /etc/debian-edu/config ] && which plymouth-set-default-theme > /dev/null ; then
+			plymouth-set-default-theme -R debian-edu-${EDUTHEME}
+		fi
+	;;
+esac

@@ -1,0 +1,39 @@
+#!/bin/sh -e
+. /usr/share/debconf/confmodule
+
+# Version <= 0.29.103-6 used this file, not /etc/default/gom. We just delete that silently.
+no_auto_init_old=/etc/gom/NO_AUTO_INIT
+if [ -e ${no_auto_init_old} ]; then
+	rm -f ${no_auto_init_old}
+fi
+
+CONFFILE="/etc/default/gom"
+if [ ! -e $CONFFILE ] ; then
+	echo '# Use debconf to configure this file.' > $CONFFILE
+	echo 'auto_init="false"' >> $CONFFILE
+	echo 'valid_sound_devices="sound alsa"' >> $CONFFILE
+fi
+
+db_get gom/auto_init || true
+auto_init="${RET}"
+db_get gom/valid_sound_devices || true
+valid_sound_devices="${RET}"
+
+cp -a -f $CONFFILE $CONFFILE.tmp
+
+# If the admin deleted or commented some variables but then set
+# them via debconf, (re-)add them to the conffile.
+test -z "$auto_init" || grep -Eq '^ *auto_init=' $CONFFILE || \
+	echo "auto_init=" >> $CONFFILE
+test -z "$valid_sound_devices" || grep -Eq '^ *valid_sound_devices=' $CONFFILE || \
+	echo "valid_sound_devices=" >> $CONFFILE
+	  
+sed -e "s/^ *auto_init=.*/auto_init=\"$auto_init\"/" \
+	-e "s/^ *valid_sound_devices=.*/valid_sound_devices=\"$valid_sound_devices\"/" \
+	< $CONFFILE > $CONFFILE.tmp
+mv -f $CONFFILE.tmp $CONFFILE
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/gom -- "$@"
+# End automatically added section
+

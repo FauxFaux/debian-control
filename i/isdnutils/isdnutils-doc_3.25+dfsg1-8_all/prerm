@@ -1,0 +1,23 @@
+#! /bin/sh
+# prerm script for isdnutils-doc
+
+set -e
+
+case "$1" in
+    remove)
+	# Grr
+	rm -f /usr/share/doc/isdnutils-doc/*FAQ/.dhelp
+        ;;
+    upgrade|deconfigure)
+        ;;
+    failed-upgrade)
+        ;;
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+
+
+exit 0

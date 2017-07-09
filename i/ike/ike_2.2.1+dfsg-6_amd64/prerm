@@ -1,0 +1,16 @@
+#!/bin/sh
+# See /usr/share/debhelper/dh_make/debian/prerm.ex
+set -e
+
+ike_error() {
+	echo $?
+}
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/ike" ]; then
+	invoke-rc.d ike stop || ike_error
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+set -u
+
+GTK_QUERY_IMMODULES=/usr/lib/x86_64-linux-gnu/libgtk2.0-0/gtk-query-immodules-2.0
+
+if [ -x $GTK_QUERY_IMMODULES ]; then
+    case "$1" in
+        configure)
+            $GTK_QUERY_IMMODULES --update-cache
+            ;;
+    esac
+else
+    echo "Cannot find $GTK_QUERY_IMMODULES" >&2
+fi
+
+
+
+exit 0

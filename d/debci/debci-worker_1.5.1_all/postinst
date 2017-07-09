@@ -1,0 +1,45 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ] && [ -z "$2" ]; then
+  # build testbed immediately on first install
+  echo "Building testbeds in background ..."
+  debci update-worker --quiet &
+
+  # enable && start first instance
+  #
+  # FIXME manually creating symlink, deb-systemd-helper does not support
+  # template services yet.
+  mkdir -p /etc/systemd/system/debci-worker.service.wants
+  ln -sf /lib/systemd/system/debci-worker@.service \
+    /etc/systemd/system/debci-worker.service.wants/debci-worker@1.service
+  # tell systemd to reload
+  if [ -d /run/systemd/system ]; then
+    systemctl --system daemon-reload >/dev/null || true
+  fi
+  deb-systemd-invoke start  debci-worker@1.service
+fi
+
+## Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask debci-worker.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled debci-worker.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable debci-worker.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state debci-worker.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	deb-systemd-invoke start debci-worker.service >/dev/null || true
+fi
+# End automatically added section
+#

@@ -1,0 +1,55 @@
+#!/bin/sh
+# postinst script for nap
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <postinst> `abort-remove'
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+case "$1" in
+    configure)
+	;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+	;;
+esac
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+db_get nap/napping-setuid
+
+if [ "$RET" = true ]; then
+    echo "Installing /usr/bin/napping setuid root"
+    if ! dpkg-statoverride --list /usr/bin/napping >/dev/null; then
+	dpkg-statoverride --add --update root root 4755 /usr/bin/napping
+    fi
+else
+    echo "Installing /usr/bin/napping not setuid"
+    if dpkg-statoverride --list /usr/bin/napping >/dev/null; then
+	dpkg-statoverride --remove /usr/bin/napping; chmod -s /usr/bin/napping
+    fi
+fi
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+exit 0
+
+# end of file

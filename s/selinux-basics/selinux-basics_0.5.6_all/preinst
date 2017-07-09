@@ -1,0 +1,31 @@
+#!/bin/sh
+# preinst script for selinux-basics
+
+set -e
+
+case "$1" in
+    install|upgrade)
+        if dpkg --compare-versions "$2" le-nl "0.5.1~"; then
+            [ -L /etc/udev/rules.d/010-no-legacy-ptys.rules ] && \
+	        rm -f /etc/udev/rules.d/010-no-legacy-ptys.rules
+        fi
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/selinux-basics 0.5.3~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/udev/no-legacy-ptys.rules 0.5.1~ -- "$@"
+# End automatically added section
+
+
+exit 0

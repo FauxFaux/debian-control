@@ -1,0 +1,102 @@
+#!/bin/sh
+
+set -e
+
+CONFFILE="/etc/phamm/config.php"
+PLUGINS="/etc/phamm/plugins"
+
+#chown -R root:www-data $PLUGINS
+#chmod -R 0640 $PLUGINS
+
+. /usr/share/debconf/confmodule
+db_version 2.0 || [ $? -lt 30 ]
+
+if [ "$1" = "configure" ]; then
+    
+    if dpkg --compare-versions "$2" le-nl "0.6.2-1.1"; then
+        # remove links for obsolete versions of httpd
+        for webserver in apache apache-perl apache-ssl apache2; do
+          if [ -L /etc/$webserver/conf.d/phamm ]; then
+            rm /etc/$webserver/conf.d/phamm
+          fi
+	done
+
+	# Clean debconf registry of obsolete questions
+	db_unregister phamm/reconfigure-webserver || true
+	db_unregister phamm/restart-webserver || true
+    fi
+    
+    if [ ! -f /var/log/phamm.log ]; then
+	touch /var/log/phamm.log
+	chown www-data:adm /var/log/phamm.log
+	chmod 640 /var/log/phamm.log
+    fi
+
+    if [ ! -f $CONFFILE ]; then
+	cp /usr/share/phamm/config.inc.example.php $CONFFILE
+	chown -R root:www-data $CONFFILE
+	chmod 0640 $CONFFILE
+	if [ ! -e /usr/share/phamm/config.inc.php ]; then
+	    ln -s $CONFFILE /usr/share/phamm/config.inc.php
+	fi
+
+	db_get phamm/ldap-server || true
+	ldapserver="$RET"
+	perl -i -p -e "s/\('LDAP_HOST_NAME','127.0.0.1'\)/\('LDAP_HOST_NAME','$ldapserver'\)/" $CONFFILE 2> /dev/null
+
+
+	db_get phamm/ldap-tls || true
+	tls="$RET"
+	if [ "$tls" = "true" ]; then
+	    perl -i -p -e "s/\('LDAP_HOST_NAME','/\('LDAP_HOST_NAME','ldaps:\/\//" $CONFFILE 2> /dev/null
+	    perl -i -p -e "s/\('LDAP_PORT','389'\)/\('LDAP_PORT','636'\)/" $CONFFILE 2> /dev/null
+	
+	fi
+
+	db_get phamm/ldap-basedn || true
+	basedn="$RET"
+	perl -i -p -e "s/\('SUFFIX','dc=example,dc=tld'\)/\('SUFFIX','$basedn'\)/" $CONFFILE 2> /dev/null
+
+	db_get phamm/ldap-binddn || true
+	binddn="$RET"
+	perl -i -p -e "s/\('BINDDN','cn=admin,dc=example,dc=tld'\)/\('BINDDN','$binddn'\)/" $CONFFILE 2> /dev/null
+
+	perl -i -p -e "s/\('LDAP_BASE','o=hosting,dc=example,dc=tld'\)/\('LDAP_BASE','o=hosting,$basedn'\)/" $CONFFILE 2> /dev/null
+
+	perl -i -p -e "s/\('PHAMM_LOG',0\)/\('PHAMM_LOG',1\)/" $CONFFILE 2> /dev/null
+    else
+    	# Solve a non-link file in 0.5.9-*
+    	if [ ! -e /usr/share/phamm/config.inc.php ]; then
+    	    ln -s $CONFFILE /usr/share/phamm/config.inc.php
+    	fi
+    fi
+
+
+    # Configuration for apache2
+    if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+      . /usr/share/apache2/apache2-maintscript-helper
+      if ! a2query -qm actions ; then
+          apache2_invoke enmod actions
+      fi
+      if ! a2query -qm cgi ; then
+          apache2_invoke enmod cgi
+      fi
+    fi
+fi
+
+# Automatically added by dh_apache2
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in phamm  ; do
+			apache2_invoke enconf $conf  || exit $?
+		done
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/phamm/apache.conf /etc/apache2/conf-available/phamm.conf 0.6.2-1.1~ -- "$@"
+# End automatically added section
+
+
+exit 0

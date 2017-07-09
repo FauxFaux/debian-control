@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+# $Id: hearse.postinst,v 1.1 2002-05-22 21:08:38 roderick Exp $
+
+. /usr/share/debconf/confmodule
+
+[ -s /etc/nethack/hearse.user-token ] || {
+    db_get hearse/user-email
+    [ -z "$RET" ] ||
+    	hearse --user-email "$RET"
+}
+
+

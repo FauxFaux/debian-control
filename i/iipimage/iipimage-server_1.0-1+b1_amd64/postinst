@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -e
+
+
+
+if [ "$1" != "configure" -a "$1" != "purge" ]; then
+	exit 0
+fi
+
+if [ -e /etc/apache2/apache2.conf ]; then
+	a2enmod iipsrv || true
+	touch /var/log/iipsrv.log
+	chown www-data:www-data /var/log/iipsrv.log
+fi
+
+if [ -e /etc/lighttpd/lighttpd.conf ]; then
+	lighty-enable-mod iipsrv || true
+	touch /var/log/iipsrv.log
+	chown www-data:www-data /var/log/iipsrv.log
+fi
+
+if [ -x "/etc/init.d/memcached" ]; then
+  invoke-rc.d memcached start || exit $?
+fi
+
+exit 0

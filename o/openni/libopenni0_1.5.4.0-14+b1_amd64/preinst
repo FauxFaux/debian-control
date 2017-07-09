@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper mv_conffile /etc/openni/modules.xml /var/lib/ni/modules.xml 1.5.4.0-7~ libopenni0 -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/openni/licenses.xml /var/lib/ni/licenses.xml 1.5.4.0-7~ libopenni0 -- "$@"
+
+case "$1" in
+  upgrade)
+    # Fix for #767653
+    if dpkg --compare-versions "$2" lt "1.5.4.0-8"; then
+      mv /var/lib/ni/licenses.xml /var/lib/ni/licenses.xml.dpkg-old
+      mv /var/lib/ni/modules.xml /var/lib/ni/modules.xml.dpkg-old
+    fi
+    ;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,50 @@
+#!/bin/sh
+
+set -e
+
+GROUP="gearman"
+USER="gearman"
+LOGDIR="/var/log/gearman-job-server"
+
+# shamelessly copied from debian mysql-server package...
+#
+# - Remove the gearman user only after all his owned files are purged.
+#   
+if [ "$1" = "purge" ]; then
+  # we remove the mysql user only after all his owned files are purged
+  rm -rf $LOGDIR
+  rm -rf /var/run/gearman
+	rm -rf /var/lib/gearman
+
+  # --remove-all-files takes ages, so delete manually
+  deluser --system $USER || true
+  delgroup --system --only-if-empty $GROUP || true
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d gearman-job-server remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask gearman-job-server.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge gearman-job-server.service >/dev/null
+		deb-systemd-helper unmask gearman-job-server.service >/dev/null
+	fi
+fi
+# End automatically added section
+

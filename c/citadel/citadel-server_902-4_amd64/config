@@ -1,0 +1,137 @@
+#!/bin/sh
+set -e
+
+# source debconf stuff
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+db_capb backup 
+
+DO_CONFIGURE=no
+LASTSTATE=8
+
+RUNDIR=/var/run/citadel
+
+# if server is up, get our current config
+if test -S $RUNDIR/citadel.socket; then
+    db_set citadel/Administrator `sendcommand conf get 2>/dev/null|head -n 14|tail -n 1`
+    db_set citadel/ServerIPAddress "`sendcommand conf get 2>/dev/null|head -n 38|tail -n 1`"
+    db_set citadel/LoginType `sendcommand conf get 2>/dev/null|head -n 53|tail -n 1`
+    db_set citadel/LDAPServer `sendcommand conf get 2>/dev/null|head -n 33|tail -n 1`
+    db_set citadel/LDAPServerPort `sendcommand conf get 2>/dev/null|head -n 34|tail -n 1`
+    db_set citadel/LDAPBaseDN `sendcommand conf get 2>/dev/null|head -n 35|tail -n 1`
+    db_set citadel/LDAPBindDN `sendcommand conf get 2>/dev/null|head -n 36|tail -n 1`
+    db_set citadel/LDAPBindDNPassword `sendcommand conf get 2>/dev/null|head -n 37|tail -n 1`
+fi
+
+if test -n "$2"; then
+# do we want to reconfigure?
+    if [ "$1" = "reconfigure" ] || [ -n "$DEBCONF_RECONFIGURE" ]; then
+	DO_CONFIGURE=yes
+    fi
+else 
+# are we in first install?
+    if test "$1" = "configure"; then
+	DO_CONFIGURE=yes
+	LASTSTATE=10
+    fi
+fi
+
+if test "$DO_CONFIGURE" = "yes"; then
+    STATE=1
+    while [ "$STATE" != 0 -a "$STATE" -le "$LASTSTATE" ]; do
+
+	case "$STATE" in
+	    1)
+		db_input high citadel/ServerIPAddress || true
+		;;
+	    2)
+		db_input high citadel/LoginType || true
+		;;
+	    3)
+		db_input high citadel/Administrator || true
+		;;
+	    4)
+		db_input high citadel/LDAPServer || true
+		;;
+	    5)
+		db_input high citadel/LDAPServerPort || true
+		;;
+	    6)
+		db_input high citadel/LDAPBaseDN || true
+		;;
+	    7)
+		db_input high citadel/LDAPBindDN || true
+		;;
+	    8)
+		db_input high citadel/LDAPBindDNPassword || true
+		;;
+	    9)
+		db_input high citadel/Password || true
+		;;
+	    10)
+		db_input high citadel/Password_again || true
+		;;
+	esac
+
+	if db_go; then
+		case "$STATE" in
+		    1)
+			;;
+		    2)
+			db_get citadel/LoginType
+			LoginType=$RET
+			;;
+		    3)
+			case "$LoginType" in 
+				Host)
+					# external authentication => user has to exist
+					# and of course LDAP information is not needed
+					LASTSTATE=3
+					db_get citadel/Administrator
+					if ! getent passwd $RET >/dev/null; then
+						# user doesn't exist
+						db_fset citadel/BadUser seen false
+						db_input critical citadel/BadUser || true
+						db_go
+						STATE=$(($STATE - 1))
+					fi
+					;;
+				Internal)
+					# no need to ask for LDAP stuff
+					STATE=8
+					;;
+				*)
+					# user can only be created in Internal mode
+					LASTSTATE=8
+					;;
+			esac
+			;;
+		    9)
+			db_get citadel/Password
+			PW=$RET
+			if [ -z "$PW" ]; then
+				# empty password, no need to ask again
+				LASTSTATE=4
+			fi
+			;;
+		    10)
+			db_get citadel/Password_again
+			# check if passwords match
+			if [ "$RET" != "$PW" ]; then
+				# try again
+				STATE=$(($STATE - 2))
+				PW=' '
+			fi
+			;;
+		esac
+		STATE=$(($STATE + 1))
+	else
+		STATE=$(($STATE - 1))
+	fi
+	
+    done
+
+fi
+
+exit 0

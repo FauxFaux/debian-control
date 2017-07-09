@@ -1,0 +1,31 @@
+#! /bin/sh
+# postrm script for tenshi
+
+set -e
+
+case "$1" in
+       purge)
+         rm -rf /var/lib/tenshi ||true
+         if getent passwd tenshi 2>&1 >/dev/null; then
+             echo -n "Removing tenshi system user.."
+             userdel tenshi
+             echo ".done"
+         fi
+				 
+         ;;
+       remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+         ;;
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d tenshi remove >/dev/null
+fi
+# End automatically added section
+
+
+exit 0

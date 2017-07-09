@@ -1,0 +1,24 @@
+#!/bin/sh
+CONFIGFILE=/etc/tangorc
+set -e
+. /usr/share/debconf/confmodule
+
+# Load config file, if it exists.
+if [ -e $CONFIGFILE ]; then
+    . $CONFIGFILE || true
+
+    # Store values from config file into
+    # debconf db.
+    db_set tango-common/tango-host "$TANGO_HOST"
+else
+    if db_fget tango-common/tango-host seen; then
+	if [ "$RET" = "false" ]; then
+	    db_set tango-common/tango-host $(hostname -f)":10000"
+	fi
+    fi
+fi
+
+
+# what is the name of the tango host
+db_input high tango-common/tango-host || true
+db_go || true

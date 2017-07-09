@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/mactelnet-server" ]; then
+		update-rc.d mactelnet-server defaults >/dev/null
+		invoke-rc.d mactelnet-server start || exit $?
+	fi
+fi
+# End automatically added section

@@ -1,0 +1,28 @@
+#! /bin/sh
+# prerm script for ratpoison
+
+set -e
+
+case "$1" in
+    remove|deconfigure)
+    	update-alternatives --remove x-window-manager /usr/bin/ratpoison
+	if [ -d /var/lib/ratpoison/menu ] ; then
+		rm /var/lib/ratpoison/menu/*.menu || true
+	fi
+        ;;
+    upgrade|failed-upgrade)
+        ;;
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installemacsen
+if [ -e /var/lib/emacsen-common/state/package/installed/emacsen-common -a -x /usr/lib/emacsen-common/emacs-package-remove ] ; then
+	/usr/lib/emacsen-common/emacs-package-remove --prerm ratpoison
+fi
+# End automatically added section
+
+
+exit 0

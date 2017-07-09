@@ -1,0 +1,27 @@
+#!/bin/sh
+set -e
+
+if dpkg-statoverride --list /var/games/glhack > /dev/null; then
+	dpkg-statoverride --remove /var/games/glhack
+fi
+
+if dpkg-statoverride --list /var/games/glhack/save > /dev/null; then
+	dpkg-statoverride --remove /var/games/glhack/save
+fi
+
+if dpkg-statoverride --list /var/games/glhack/logfile > /dev/null; then
+	dpkg-statoverride --remove /var/games/glhack/logfile
+fi
+
+if dpkg-statoverride --list /var/games/glhack/perm > /dev/null; then
+	dpkg-statoverride --remove /var/games/glhack/perm
+fi
+
+if dpkg-statoverride --list /var/games/glhack/record > /dev/null; then
+	dpkg-statoverride --remove /var/games/glhack/record
+fi
+
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+

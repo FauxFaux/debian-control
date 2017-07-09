@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_input medium ckermit/iksd || true
+db_go || true
+
+db_get ckermit/iksd || true
+
+if [ "$RET"     = true ]
+then
+    db_input medium ckermit/iksd-anon || true
+    db_go || true
+
+    db_get ckermit/iksd-anon || true
+    if [ "$RET" = true ]
+    then
+        db_input medium ckermit/iksd-anondir || true
+        db_go || true
+    fi
+fi
+
+
+
+exit 0

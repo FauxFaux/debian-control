@@ -1,0 +1,15 @@
+#!/bin/sh
+# debconf config file for t-prot
+# Copyright 2002-2010 by Rhonda D'Vine <rhonda@debian.org>
+# Licenced under WTFPLv2
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# make the /etc/Muttrc.d/ symlink?
+db_input medium t-prot/muttrc.d || true
+db_go
+
+exit 0

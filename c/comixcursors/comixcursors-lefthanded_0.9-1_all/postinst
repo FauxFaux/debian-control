@@ -1,0 +1,53 @@
+#! /bin/sh
+# Post-install script for ‘comixcursors-lefthanded’.
+#
+# Manpage: ‘dh_installdeb(1)’
+
+set -e
+
+# Summary of ways this script can be called:
+#   * <postinst> configure <most-recently-configured-version>
+#   * <old-postinst> abort-upgrade <new version>
+#   * <conflictor's-postinst> abort-remove in-favour <package>
+#     <new-version>
+#   * <deconfigured's-postinst> abort-deconfigure in-favour
+#     <failed-install-package> <version> `removing'
+#     <conflicting-package> <version>
+# For details, see the Debian Policy §6.5 in the ‘debian-policy’ package
+# or on the web at <URL:http://www.debian.org/doc/debian-policy/>.
+
+action="$1"
+
+PRIORITY=50
+ICONDIR=/usr/share/icons
+TARGET="${ICONDIR}/default/index.theme"
+ALTERNATIVE_NAME=x-cursor-theme
+
+case "$action" in
+    configure)
+        # We work around Bug#392657 by *not* removing and re-installing on
+        # upgrade. Instead, in preinst we remove themes no longer shipped,
+        # and on upgrade we add new themes.
+        for theme in `find $ICONDIR -regex '.*ComixCursors-LH.*/index\.theme$'`; do
+            if ! update-alternatives --list $ALTERNATIVE_NAME | grep -q "$theme" ; then
+                update-alternatives --install "$TARGET" $ALTERNATIVE_NAME "$theme" $PRIORITY
+            fi
+        done
+        ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+
+    *)
+        printf "postinst called with unknown action ‘%s’\n" "$action" >&2
+        exit 1
+        ;;
+
+esac
+
+# ‘dh_installdeb’ will replace this with shell code automatically generated
+# by other Debhelper scripts.
+
+
+
+exit 0

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" ] ; then
+	rm -f /etc/senlin/senlin.conf
+	rmdir --ignore-fail-on-non-empty /etc/senlin || true
+	rm -rf /var/log/senlin /var/lib/senlin
+fi
+
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

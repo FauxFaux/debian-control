@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+ASRUN=/etc/codeaster/asrun
+
+if [ -f "$ASRUN" ]; then
+       editor=$(sed -ne 's/^editor[[:space:]]*:[[:space:]]*//; p; q' $ASRUN)
+       terminal=$(sed -ne '/^terminal/ { s/^terminal[[:space:]]*:[[:space:]]*//; p; q}' $ASRUN)
+       db_set astk/EDITOR "$editor"
+       db_set astk/TERMINAL "$terminal"
+fi
+db_input low astk/EDITOR || true
+db_input low astk/TERMINAL || true
+db_go || true

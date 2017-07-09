@@ -1,0 +1,30 @@
+#!/bin/sh
+set -e
+
+
+
+. /usr/share/debconf/confmodule
+
+CONFIG_FILE=/etc/slapos/slapos-client.cfg
+
+MASTER_URL=
+
+if [ -f "$CONFIG_FILE" ]; then
+    MASTER_URL="`sed -ne 's#^\s*master_url[^=]*=\s*\(.*\)$#\1#p' \"$CONFIG_FILE\"`"
+fi
+
+if [ -n "$MASTER_URL" ]; then
+    db_set shared/slapos/master_url "$MASTER_URL"
+    db_input medium shared/slapos/master_url || true
+else
+    db_input high shared/slapos/master_url || true
+fi
+
+db_go || true
+db_get shared/slapos/master_url
+( echo "$RET" | grep -q "^https://" ) && \
+    db_input high shared/slapos/master_url_with_ssl_note || true
+
+db_go || true
+
+exit 0

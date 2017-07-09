@@ -1,0 +1,14 @@
+#!/bin/sh
+# prerm script for uanytun
+
+set -e
+
+if [ -x "/etc/init.d/uanytun" ] && [ "$1" = remove ]; then
+  if [ -x "`which invoke-rc.d 2>/dev/null`" ]; then
+    invoke-rc.d uanytun stop || true
+  else
+    /etc/init.d/uanytun stop || true
+  fi
+fi
+
+

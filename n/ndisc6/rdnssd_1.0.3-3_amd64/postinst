@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  configure)
+    if ! getent passwd rdnssd >/dev/null; then
+      adduser --quiet --system --home /var/run/rdnssd rdnssd
+    fi
+  ;;
+esac
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask rdnssd.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled rdnssd.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable rdnssd.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state rdnssd.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/rdnssd" ]; then
+		update-rc.d rdnssd start 38 S . stop 16 0 6 . >/dev/null
+		invoke-rc.d rdnssd start || exit $?
+	fi
+fi
+# End automatically added section
+
+

@@ -1,0 +1,77 @@
+#! /bin/sh
+# Pre-install script for ‘comixcursors-lefthanded’.
+#
+# Manpage: ‘dh_installdeb(1)’
+
+set -e
+
+# Summary of ways this script can be called:
+#   * <new-preinst> install
+#   * <new-preinst> install <old-version>
+#   * <new-preinst> upgrade <old-version>
+#   * <old-preinst> abort-upgrade <new-version>
+# For details, see the Debian Policy §6.5 in the ‘debian-policy’ package
+# or on the web at <URL:http://www.debian.org/doc/debian-policy/>.
+
+action="$1"
+
+# All of the size-specific themes are removed in version 0.8.
+REMOVED_LIST=$(
+        for colour in Black Blue Green Orange Red White ; do
+            color_suffix="-$colour"
+            for size in Huge Large Regular Small ; do
+                size_suffix="-$size"
+                for width_suffix in "" "-Slim" ; do
+                    printf "ComixCursors%s%s%s\n" \
+                        "$color_suffix" "$size_suffix" "$width_suffix"
+                done
+            done
+        done)
+ICONDIR=/usr/share/icons
+ALTERNATIVE_NAME=x-cursor-theme
+
+remove_omitted_alternatives () {
+    # Remove themes installed by previous versions but omitted
+    # from this version of the package.
+
+    list_alternatives_cmd="update-alternatives --list $ALTERNATIVE_NAME"
+
+    # We need to test this explicitly to avoid exiting with an error when
+    # listing the alternatives.
+    if ! ( $list_alternatives_cmd > /dev/null 2>&1 ) ; then
+        # No alternatives installed, so we're done.
+        return
+    fi
+
+    installed_cursor_themes=`$list_alternatives_cmd`
+    for theme in $REMOVED_LIST ; do
+        theme_dir="${ICONDIR}/${theme}"
+        theme_file="${theme_dir}/index.theme"
+        if printf "$installed_cursor_themes" | grep -q "${theme_file}" ; then
+            update-alternatives --remove $ALTERNATIVE_NAME "${theme_file}"
+            rm -f "${theme_dir}"
+        fi
+    done
+}
+
+case "$action" in
+    upgrade)
+        remove_omitted_alternatives
+        ;;
+
+    install|abort-upgrade)
+        ;;
+
+    *)
+        printf "preinst called with unknown action ‘%s’\n" "$action" >&2
+        exit 1
+        ;;
+
+esac
+
+# ‘dh_installdeb’ will replace this with shell code automatically generated
+# by other debhelper scripts.
+
+
+
+exit 0

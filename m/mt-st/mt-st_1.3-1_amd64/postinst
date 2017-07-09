@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -eu
+
+# Automatically added by dh_installudev
+if [ "$1" = configure ]; then
+	if [ -e "/etc/udev/rules.d/z60_mt-st.rules" ]; then
+		echo "Preserving user changes to /etc/udev/rules.d/60-mt-st.rules ..."
+		if [ -e "/etc/udev/rules.d/60-mt-st.rules" ]; then
+			mv -f "/etc/udev/rules.d/60-mt-st.rules" "/etc/udev/rules.d/60-mt-st.rules.dpkg-new"
+		fi
+		mv -f "/etc/udev/rules.d/z60_mt-st.rules" "/etc/udev/rules.d/60-mt-st.rules"
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/mt-st 1.3-1~ mt-st -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/modprobe.d/mt-st.conf 1.3-1~ mt-st -- "$@"
+# End automatically added section
+
+
+if [ "$1" = configure ]; then
+  update-alternatives \
+    --install /bin/mt mt /bin/mt-st 20 \
+    --slave \
+    /usr/share/man/man1/mt.1.gz mt.1.gz /usr/share/man/man1/mt-st.1.gz
+
+  # Potentially upgrading from an older version. Check to see if we
+  # need to remove the (now obsolete) init script rc?.d symlinks, and
+  # potentially parent directory of the other obsolete conffile
+  # (needed due to bug in interaction between dpkg and
+  # dpkg-maintscript-helper, see #815969).
+  if  dpkg --compare-versions "$2" lt-nl "1.3-1"; then
+    update-rc.d mt-st remove
+    rmdir --ignore-fail-on-non-empty /etc/modprobe.d/
+  fi
+
+fi

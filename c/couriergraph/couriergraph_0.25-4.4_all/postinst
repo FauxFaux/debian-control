@@ -1,0 +1,76 @@
+#!/bin/sh
+# postinst script for CourierGraph
+#
+
+if [ -f /usr/share/debconf/confmodule ]; then
+    . /usr/share/debconf/confmodule
+fi
+db_version 2.0
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' 	n-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+DATADIR=/var/lib/couriergraph
+CACHEDIR=/var/cache/couriergraph
+DEFAULTS=/etc/default/couriergraph
+
+case "$1" in
+    configure)
+
+	if [ ! -d $DATADIR ]; then mkdir $DATADIR; fi
+	chown root:adm $DATADIR
+	chmod 775 $DATADIR
+ 
+	if [ ! -d $CACHEDIR ]; then mkdir -p $CACHEDIR; fi
+	chown www-data:www-data $CACHEDIR
+
+
+	if [ ! -f $DEFAULTS ]; then
+		db_get couriergraph/logfile
+		echo "MAIL_LOG=$RET" > $DEFAULTS
+	fi
+
+	db_get couriergraph/start_on_boot
+	if [ "$RET" = "true" ]; then
+		update-rc.d couriergraph defaults >/dev/null
+	else
+		update-rc.d -f couriergraph remove >/dev/null 2>&1
+	fi
+    ;;
+    
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+	echo "postinst called with unknown argument \$1'" >&2
+	exit 1
+    ;;
+esac
+
+db_get couriergraph/start_on_boot
+if [ "$RET" = "true" ]; then
+	invoke-rc.d --quiet couriergraph start
+fi
+db_stop
+
+# NO debhelper tag -- on purpose
+
+exit 0

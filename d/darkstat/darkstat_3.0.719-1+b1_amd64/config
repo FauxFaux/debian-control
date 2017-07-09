@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "configure" -a "$2" != "" ]; then
+    if dpkg --compare-versions "$2" lt "3.0.707-1" ; then
+     	db_input medium "darkstat/upgrade-question/db_purge-2.5-1" || true
+    fi
+
+    db_go
+fi
+
+db_get darkstat/upgrade-question/db_purge-2.5-1 || true
+if [ "$RET" = "false" ] ; then
+    # user has decided not to upgrade, installation stop here, package not configured.
+    false
+fi

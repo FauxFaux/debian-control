@@ -1,0 +1,31 @@
+#! /bin/sh -x
+# postrm script for routino-www
+#
+set -e
+
+if [ "$DPKG_DEBUG" = "developer" ]; then
+  set -x
+fi
+
+apache_uninstall() {
+        COMMON_STATE=$(dpkg-query -f '${Status}' -W 'apache2.2-common' 2>/dev/null | awk '{print $3}' || true)
+
+        if [ "$COMMON_STATE" = "installed" ] || [ "$COMMON_STATE" = "unpacked" ] ; then
+                [ ! -L /etc/apache2/conf.d/routino-www.conf ] || rm /etc/apache2/conf.d/routino-www.conf
+        fi
+
+        rm -f /etc/apache2/conf-available/routino-www.conf
+        rm -f /etc/apache2/conf-enabled/routino-www.conf
+        rm -f /var/lib/apache2/conf/enabled_by_maint/routino-www
+}
+
+if [ "$1" = "remove" -o "$1" = "purge" ]; then
+	apache_uninstall
+
+	rm -rf /var/lib/routino/results
+	rmdir --ignore-fail-on-non-empty /var/lib/routino/data || true
+	rmdir --ignore-fail-on-non-empty /var/lib/routino || true
+fi
+
+
+

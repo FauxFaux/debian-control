@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# $Id: whereami.postinst,v 1.6 2004/02/10 20:52:04 andrew Exp $
+#
+
+set -e
+
+if [ "$1" = "configure" ]; then
+    # CFG=/etc/whereami/whereami.conf
+
+    if [ ! -d /var/lib/whereami ] ; then
+      # Create new state files location then move and link files
+      mkdir /var/lib/whereami
+      cd /etc/whereami
+      mv iam iwas* whereiam.sh /var/lib/whereami
+      ln -s /var/lib/whereami/iam
+      ln -s /var/lib/whereami/iwas
+      ln -s /var/lib/whereami/whereiam.sh
+    fi
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/whereami" ]; then
+		update-rc.d whereami defaults 35 65 >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d whereami $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+

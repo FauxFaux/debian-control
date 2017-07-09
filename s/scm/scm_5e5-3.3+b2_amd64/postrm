@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = purge ] && [ -e /usr/lib/scm/implcat ] && [ -e /usr/lib/scm/slibcat ]; then
+   rm -f /usr/lib/scm/implcat /usr/lib/scm/slibcat
+fi
+
+

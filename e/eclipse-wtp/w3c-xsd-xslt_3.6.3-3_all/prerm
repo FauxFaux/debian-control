@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installxmlcatalogs
+if [ "$1" = "remove" ] || [ "$1" = "upgrade" ]; then
+	update-xmlcatalog --del --type uri --id "http://www.w3.org/1999/XSL/Transform" --root || true
+	update-xmlcatalog --del --type uri --id "http://www.w3.org/2001/XInclude" --root || true
+
+	update-xmlcatalog --del --type uri --id "http://www.w3.org/1999/XSL/Transform" --package w3c-xsd-xslt || true
+	update-xmlcatalog --del --type uri --id "http://www.w3.org/2001/XInclude" --package w3c-xsd-xslt || true
+
+fi
+# End automatically added section

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+user="ciderwebmail"
+home="/var/lib/$user"
+
+if [ "$1" = "configure" ]; then
+	adduser --system --quiet --group \
+		--home "$home" --no-create-home "$user" || :
+	if [ ! -e "$home" ]; then
+		mkdir "$home"
+	fi
+	chown "$user": "$home"
+	if [ -f "$home"/user_settings.sql ]; then
+		chown "$user": "$home"/user_settings.sql
+	fi
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper symlink_to_dir /usr/share/ciderwebmail/root/static/images/mimeicons ../../../../images/http-icons/ 1.05-5~ -- "$@"
+# End automatically added section
+

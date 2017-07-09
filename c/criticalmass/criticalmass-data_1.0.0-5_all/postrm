@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+# Replace the symlink if an upgrade fails.
+if [ "$1" = abort-upgrade ] && dpkg --compare-versions "$2" lt "1:0.9.12-5"; then
+	ln -s criticalmass /usr/share/doc/criticalmass-data
+fi
+

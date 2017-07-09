@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+oldapachefile='/etc/apache2/sites-available/jwchat'
+
+case "$1" in
+    install|upgrade)
+	if dpkg --compare-versions "$2" le "1.0+dfsg-1.1"; then
+	    if [ -e $oldapachefile ] ; then
+		mv $oldapachefile $oldapachefile.dpkg-backup
+	    fi
+	fi
+esac
+
+

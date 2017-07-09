@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+mode=$1
+
+source_package=pyspf
+
+case "$mode" in
+  configure )
+    prev_version=$2
+    
+    update-alternatives --install /usr/bin/spfquery spfquery      /usr/bin/spfquery.$source_package 75 \
+      --slave /usr/share/man/man1/spfquery.1.gz spfquery.1.gz /usr/share/man/man1/spfquery.${source_package}.1.gz
+    ;;
+esac
+
+

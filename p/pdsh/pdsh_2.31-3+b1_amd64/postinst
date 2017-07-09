@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+. /usr/share/debconf/confmodule
+
+# Get setuid root answer
+db_get pdsh/setuidroot
+
+if [ "$RET" = "true" ]; then
+   chmod 4755 /usr/bin/pdsh.bin
+else
+   chmod 0755 /usr/bin/pdsh.bin
+fi
+
+
+
+exit 0;

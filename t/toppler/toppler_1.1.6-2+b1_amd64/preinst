@@ -1,0 +1,20 @@
+#! /bin/sh
+# postrm script for toppler
+
+set -e
+
+case "$1" in
+    install)
+       GAMES="/var/games/"
+       DIR="$GAMES/toppler"
+       FILE="$DIR/toppler.hsc"
+       install -d -m 0755 $GAMES
+       install -d -m 0775 $DIR
+       chown root:games $DIR
+       touch $FILE
+       chown root:games $FILE
+       chmod 0664 $FILE
+esac
+
+
+

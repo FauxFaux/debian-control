@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_php
+for conf in uploadprogress; do
+    dpkg-maintscript-helper rm_conffile /etc/php/mods-available/${conf}.ini -- "$@"
+done
+
+if [ -e /usr/lib/php/php-maintscript-helper ] ; then
+    . /usr/lib/php/php-maintscript-helper
+    for conf in uploadprogress ; do
+        php_invoke enmod ALL ALL $conf || exit $?
+    done
+else
+    for conf in uploadprogress ; do
+        phpenmod $conf
+    done
+fi
+# End automatically added section

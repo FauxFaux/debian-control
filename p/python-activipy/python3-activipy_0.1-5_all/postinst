@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+mandir=/usr/share/man
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/activipy_tester activipy_tester /usr/bin/python3-activipy_tester 300 \
+		--slave $mandir/man1/activipy_tester.1.gz activipy_tester.1.gz $mandir/man1/python3-activipy_tester.1.gz
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-activipy 
+fi
+
+# End automatically added section
+
+
+exit 0

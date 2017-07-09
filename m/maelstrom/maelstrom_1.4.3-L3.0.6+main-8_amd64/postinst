@@ -1,0 +1,40 @@
+#!/bin/sh
+set -e
+
+#create maelstrom high-score directory
+SCOREDIR=/var/games
+if [ ! -e ${SCOREDIR} ] ; then
+    install -d ${SCOREDIR}
+    chown root:games ${SCOREDIR}
+    chmod 2775 ${SCOREDIR}
+fi
+
+#remove old symlink which may point to the wrong file
+if [ -e /usr/lib/games/maelstrom/Maelstrom-Scores ] ; then
+	rm -f /usr/lib/games/maelstrom/Maelstrom-Scores
+fi
+
+ln -sf ${SCOREDIR}/Maelstrom-Scores /usr/lib/games/maelstrom/Maelstrom-Scores
+
+#use old score file
+if [ -e /var/lib/games/maelstrom/Maelstrom-Scores ] ; then
+	echo "Using score file found in /var/lib/games/maelstrom"
+	install -p -m 664 -g games \
+	/var/lib/games/maelstrom/Maelstrom-Scores ${SCOREDIR}/Maelstrom-Scores
+	rm -rf /var/lib/games/maelstrom
+fi
+
+#install the default score file
+if [ ! -e ${SCOREDIR}/Maelstrom-Scores ] ; then
+	echo "installing debian default score file..."
+	install -p -m 664 -g games \
+       /usr/lib/games/maelstrom/Maelstrom-Scores.debian \
+       ${SCOREDIR}/Maelstrom-Scores
+fi
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

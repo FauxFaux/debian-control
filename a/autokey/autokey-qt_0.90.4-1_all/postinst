@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+update-alternatives --install /usr/bin/autokey autokey \
+  /usr/bin/autokey-qt 60 \
+  --slave /usr/share/man/man1/autokey.1.gz autokey.1.gz  \
+  /usr/share/man/man1/autokey-qt.1.gz
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p autokey-qt 
+fi
+
+# End automatically added section
+

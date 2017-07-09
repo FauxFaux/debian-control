@@ -1,0 +1,39 @@
+#!/bin/sh
+
+set -e
+
+# Debconf configuration script for MLDonkey server.
+# by Sylvain Le Gall <gildor@debian.org>
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+
+CONFIGFILE=/etc/default/mldonkey-server
+if [ -e $CONFIGFILE ]; then
+    LAUNCH_AT_STARTUP=
+
+    . $CONFIGFILE || true
+
+    if [ "$LAUNCH_AT_STARTUP" != "" ]; then
+        if [ "$LAUNCH_AT_STARTUP" = "true" ]; then
+            db_set mldonkey-server/launch_at_startup true
+        else
+            db_set mldonkey-server/launch_at_startup false
+        fi
+    fi
+fi
+
+# If it is the first time we install: set a default hostname
+if [ ! -n "$MLDONKEY_DIR" ] || [ ! -d $MLDONKEY_DIR ] || [ ! -f $MLDONKEY_DIR/downloads.ini ]; then
+    client_name=`hostname`
+fi
+
+# Do we start at startup?
+db_input high mldonkey-server/launch_at_startup || true
+db_go
+
+db_get mldonkey-server/launch_at_startup
+launch_at_startup="$RET"
+
+db_stop

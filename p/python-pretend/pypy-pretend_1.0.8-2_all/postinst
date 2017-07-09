@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dhpython:
+if which pypycompile >/dev/null 2>&1; then
+	pypycompile -p pypy-pretend 
+elif pypy -m py_compile >/dev/null 2>&1; then
+	dpkg -L pypy-pretend | grep '\.py$' | pypy -m py_compile - >/dev/null
+fi
+
+# End automatically added section

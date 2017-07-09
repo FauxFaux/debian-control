@@ -1,0 +1,22 @@
+#! /bin/sh -e
+
+if dpkg --compare-versions "$2" lt-nl "4.3.1-1" 
+then
+    # fix permissions on get-news.conf
+
+    chown root:news /etc/suck/get-news.conf
+    chmod 640 /etc/suck/get-news.conf
+fi
+
+# Move /var/state/suck to /var/lib/suck
+
+if [ -d /var/state/suck ]; then
+    mv -f /var/state/suck/* /var/lib/suck/ || true
+    rmdir /var/state/suck || true
+fi
+
+# Remove /var/lib/suck/suck.db because of changed on-disk file format.
+
+rm -f /var/lib/suck/suck.db
+
+

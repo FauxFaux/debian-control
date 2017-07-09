@@ -1,0 +1,45 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+
+	# Cleanup old mediawiki.ini
+	# This is intentionally PHP5 only, it was never installed
+	# for PHP7.
+	if [ -e "/usr/share/php5/php5-maintscript-helper" ]; then
+		. /usr/share/php5/php5-maintscript-helper
+		php5_invoke dismod ALL mediawiki
+	fi
+
+        chown -R www-data:www-data /var/lib/mediawiki/cache /var/lib/mediawiki/images
+        chmod 700 /var/lib/mediawiki/cache /var/lib/mediawiki/images
+
+    ;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_apache2
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in mediawiki  ; do
+			apache2_invoke enconf $conf  || exit $?
+		done
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/php5/mods-available/mediawiki.ini 1:1.27.0-1 -- "$@"
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,54 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "purge" ] ; then
+    . /usr/share/debconf/confmodule
+
+    deluser --quiet --system tftpd > /dev/null || true
+    delgroup --quiet --system tftpd > /dev/null || true
+
+    # Remove configuration file
+	ftsconfig=/etc/fts/config
+
+	for ext in '~' '%' .bak .ucf-new .ucf-old .ucf-dist; do
+		rm -f "$ftsconfig$ext"
+	done
+
+	rm -f $ftsconfig
+
+	if which ucf >/dev/null; then
+		ucf --purge $ftsconfig
+	fi
+	if which ucfr >/dev/null; then
+		ucfr --purge fts $ftsconfig
+	fi
+
+    # See if there's some stuff that is not created by us
+    db_version 2.0
+    db_get "fts/tftppath"
+    tftppath="$RET"
+
+    #default
+    rmdir "$tftppath/pxelinux.cfg" || true
+    rmdir "$tftppath/pxelinux.static" || true
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d fts remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

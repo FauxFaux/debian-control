@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdocs
+if [ "$1" = remove ] || [ "$1" = upgrade ] && \
+   which install-docs >/dev/null 2>&1; then
+	install-docs -r zpb-ttf
+fi
+# End automatically added section
+# Automatically added by dh_lisp
+if [ "$1" = "remove" ] || [ "$1" = "upgrade" ] || [ "$1" = "deconfigure" ]; then
+	if [ -x /usr/sbin/unregister-common-lisp-source ]; then
+	    /usr/sbin/unregister-common-lisp-source "zpb-ttf"
+	fi
+fi
+# End automatically added section

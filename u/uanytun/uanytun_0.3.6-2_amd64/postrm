@@ -1,0 +1,17 @@
+#!/bin/sh
+# postrm script for uanytun
+
+set -e
+
+if [ "$1" = "purge" ] ; then
+   update-rc.d uanytun remove >/dev/null || exit $?
+
+   if [ -x "$(command -v deluser)" -a -x "$(command -v delgroup)" ]; then
+      deluser  --quiet --system uanytun || true
+      delgroup --quiet --system uanytun || true
+   else
+      echo "Not removing uanytun user and group: adduser package not found." >&2
+   fi
+fi
+
+

@@ -1,0 +1,18 @@
+#!/bin/sh
+# dpkg will not replace a real directory with a symlink.
+# FIXME: Remove this file during the wheezy+1 cycle.
+
+set -e
+set -u
+
+RESDIR=/usr/lib/GNUstep/Applications/ViewPDF.app/Resources
+
+if [ "$1" = "upgrade" ] || [ "$1" = "install" ]; then
+    if [ -d $RESDIR ] && [ ! -L $RESDIR ]; then
+	rm -rf $RESDIR
+    fi
+fi
+
+
+
+exit 0

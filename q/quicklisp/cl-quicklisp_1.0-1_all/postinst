@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+	configure)
+		echo "To install Quicklisp in your home directory"
+		echo "please read /usr/share/doc/cl-quicklisp/README.Debian"
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+		;;
+esac
+
+
+
+exit 0

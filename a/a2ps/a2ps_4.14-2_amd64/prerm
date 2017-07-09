@@ -1,0 +1,15 @@
+#! /bin/sh
+set -e
+
+# postrm script for a2ps
+
+package=a2ps
+
+# Verifying that there are emacsen installed before calling emacs-package-remove
+if [ -x /usr/lib/emacsen-common/emacs-package-remove ] ; then
+    [ -e /var/lib/emacsen-common/installed-flavors ] && /usr/lib/emacsen-common/emacs-package-remove $package
+fi
+
+
+
+exit 0

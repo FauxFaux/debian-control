@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+if dpkg-maintscript-helper supports rm_conffile; then
+	dpkg-maintscript-helper rm_conffile \
+		/etc/logrotate.d/atop 1.26-2~ -- "$@"
+fi
+
+

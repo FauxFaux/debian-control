@@ -1,0 +1,54 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure|reconfigure)
+        if ! getent passwd celery > /dev/null ; then
+            echo 'Adding system user for Celery' 1>&2
+            adduser \
+                --system \
+                --quiet \
+                --home /nonexistant \
+                --no-create-home \
+                --group \
+                --gecos "Celery daemon" \
+                celery
+        fi
+
+        if ! dpkg-statoverride --list /var/log/celery >/dev/null; then
+            chown celery:adm /var/log/celery
+            chmod 750 /var/log/celery
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+        exit 0
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/celerybeat" ]; then
+		update-rc.d celerybeat defaults >/dev/null
+		invoke-rc.d celerybeat start || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/celeryd" ]; then
+		update-rc.d celeryd defaults >/dev/null
+		invoke-rc.d celeryd start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0
+

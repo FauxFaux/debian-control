@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "upgrade" ]; then
+  if dpkg --compare-versions "$2" lt "0.5.0-2~"; then
+    if update-alternatives --query gobby >/dev/null 2>&1; then
+      update-alternatives --remove-all gobby
+    fi
+  fi
+fi
+
+

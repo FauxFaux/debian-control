@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+# Support for initialization has been dropped, nothing to do here any more.
+exit 0
+
+. /usr/share/debconf/confmodule
+
+CONFFILE="/etc/default/gom"
+if [ -e "${CONFFILE}" ]; then
+	. "${CONFFILE}" || true
+	[ -z "${auto_init}" ]           || db_set gom/auto_init "${auto_init}"
+	[ -z "${valid_sound_devices}" ] || db_set gom/valid_sound_devices "${valid_sound_devices}"
+fi
+
+db_input medium gom/auto_init || true
+db_input low    gom/valid_sound_devices || true
+db_go || true

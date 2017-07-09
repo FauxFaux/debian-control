@@ -1,0 +1,62 @@
+#!/bin/sh
+
+# post-install script for Debian Slash'EM
+#
+# Peter Makholm (peter@makholm.net) 19991103
+# This script is released under GPLv2 or later
+#
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ -d /var/lib/games/slashem ] ; then
+    if [ -d /var/games/slashem ] ; then
+	echo "Warning:";
+	echo "Only /var/games/slashem/ should exist but /var/lib/games/slashem also";
+	echo "exists. Please fix it.";
+    else
+	echo -n "Moving /var/lib/games/slashem to /var/games/slashem... "
+	mv /var/lib/games/slashem /var/games/slashem;
+	echo "done."
+    fi
+fi
+
+# Make needed directories
+if [ ! -d /var/games/slashem ] ; then
+  mkdir -p /var/games/slashem
+fi
+
+chown root:games /var/games/slashem
+chmod 0775 /var/games/slashem
+
+if [ ! -d /var/games/slashem/save ] ; then
+  mkdir /var/games/slashem/save
+fi
+
+chown root:games /var/games/slashem/save
+chmod 0775 /var/games/slashem/save
+
+# Make needed files
+touch /var/games/slashem/perm
+chown root:games /var/games/slashem/perm
+chmod 0664 /var/games/slashem/perm
+
+touch /var/games/slashem/record
+chown root:games /var/games/slashem/record
+chmod 0664 /var/games/slashem/record
+
+touch /var/games/slashem/logfile
+chown root:games /var/games/slashem/logfile
+chmod 0664 /var/games/slashem/logfile
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/slashem-common" ]; then
+		update-rc.d slashem-common start 80 S . >/dev/null
+		invoke-rc.d slashem-common start || exit $?
+	fi
+fi
+# End automatically added section
+
+

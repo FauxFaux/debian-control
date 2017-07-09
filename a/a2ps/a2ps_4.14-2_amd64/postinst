@@ -1,0 +1,16 @@
+#! /bin/sh
+set -e
+
+# postinst script for a2ps
+
+package=a2ps
+
+# We need to test that there are emacsen installed before calling emacs-package-*
+if [ "$1" = "configure" ] && [ -x /usr/lib/emacsen-common/emacs-package-install ]
+then
+    [ -e /var/lib/emacsen-common/installed-flavors ] && /usr/lib/emacsen-common/emacs-package-install $package
+fi
+
+
+
+exit 0

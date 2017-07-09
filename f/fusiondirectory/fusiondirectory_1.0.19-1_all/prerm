@@ -1,0 +1,39 @@
+#! /bin/sh
+# prerm script for FusionDirectory
+#
+
+set -e
+
+case "$1" in
+	remove)
+
+	if [ -d /var/spool/fusiondirectory ] ; then
+		echo "Removing /var/spool/fusiondirectory as requested."
+		rm -Rf /var/spool/fusiondirectory
+	fi
+
+	if [ -d /var/cache/fusiondirectory ] ; then
+		echo "Removing cache data from /var/cache/fusiondirectory as requested."
+		rm -f  /var/cache/fusiondirectory/class.cache
+		rm -Rf /var/cache/fusiondirectory/tmp/*
+		rm -Rf /var/cache/fusiondirectory/fai/*
+		rm -Rf /var/cache/fusiondirectory/template/*
+		rm -Rf /var/cache/fusiondirectory/locale/*
+	fi
+
+	;;
+	deconfigure|upgrade|failed-upgrade)
+
+	:
+
+	;;
+	*) echo "$0: didn't understand being called with \`$1'" 1>&2
+
+	exit 1
+
+	;;
+esac
+
+
+
+exit 0

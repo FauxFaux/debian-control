@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+
+
+if [ "$1" = "configure" ] ; then
+	if ! dpkg-statoverride --list /var/lib/php-htmlpurifier/Serializer >/dev/null 2>&1; then
+		dpkg-statoverride --update --add www-data www-data 2770 /var/lib/php-htmlpurifier/Serializer
+	fi
+fi
+
+exit 0

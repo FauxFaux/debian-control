@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+
+test -e /var/lib/qmail/alias/.qmail-default ||
+  echo '| fastforward -d /etc/aliases.cdb' > \
+    /var/lib/qmail/alias/.qmail-default

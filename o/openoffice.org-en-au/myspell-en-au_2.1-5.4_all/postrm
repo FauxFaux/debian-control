@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+rmscript="update-dictcommon-hunspell"
+
+case "$1" in abort-install|remove)
+if which $rmscript > /dev/null 2>&1; then
+        $rmscript 
+	else
+        echo "Error: $rmscript not present or executable. Missing dependency on dictionaries-common?" >&2
+	    exit 1
+	    fi
+esac
+
+

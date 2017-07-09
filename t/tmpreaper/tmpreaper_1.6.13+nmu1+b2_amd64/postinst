@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+# dummy postinst for lintian warning:
+# W: tmpreaper: postinst-does-not-load-confmodule
+# as tmpreaper debconf stuff is only for notes.
+
+if [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+fi
+
+

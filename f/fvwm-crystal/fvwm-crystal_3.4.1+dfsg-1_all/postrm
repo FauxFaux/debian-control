@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+# remove debian menu files
+if [ "$1" = "purge" ]; then
+	rm -rf -- /var/lib/fvwm-crystal/Applications /var/lib/fvwm-crystal/icons
+fi
+
+# Automatically added by dh_installmenu
+inst=/etc/menu-methods/fvwm-crystal
+if [ "$1" = "remove" ] && [ -f "$inst" ]; then chmod a-x $inst ; fi
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+

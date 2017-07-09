@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+
+
+if [ "$1" = "configure" ]; then
+  test -d /dev/scsi || mkdir --mode=755 /dev/scsi || true
+  # first part before activating swap & remounting / rw
+  update-rc.d scsitools-pre.sh start 09 S . >/dev/null
+  # second part after modutils was run but before mounting other devices
+  update-rc.d scsitools.sh start 22 S . >/dev/null
+fi
+

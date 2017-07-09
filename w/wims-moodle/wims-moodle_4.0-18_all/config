@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+PACKAGE="wims-moodle"
+SOURCE="wims-moodle"
+VERSION="1.0"
+
+. /usr/share/debconf/confmodule
+
+# Package maintainer's commands follow:
+db_input high wims-moodle/remoteurl || true
+db_go
+# End of package maintainer's commands
+
+exit 0

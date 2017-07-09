@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+olddir=/usr/share/doc/python-gtk2-doc/html
+newdir=../../gtk-doc/html/pygtk
+
+if [ -d $olddir ] && ! [ -L $olddir ]; then
+	rmdir --ignore-fail-on-non-empty $olddir && ln -s $newdir $olddir
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-gtk2-doc /usr/share/pygtk -V 2.5-
+fi
+
+# End automatically added section
+

@@ -1,0 +1,37 @@
+#! /bin/sh
+# postrm script for cpu
+
+set -e
+
+
+case "$1" in
+    remove|upgrade|failed-upgrade|abort-install|abot-upgrade|disappear)
+    ;;
+
+    purge)
+        if which ucf >/dev/null; then
+            ucf --purge /etc/cpu/cpu.conf
+        fi
+        rm -f /etc/cpu/cpu.conf
+        for ext in '~' '%' .bak .ucf-new .ucf-old .ucf-dist;  do
+            rm -f /etc/cpu/cpu.conf$ext
+        done
+        [ -d /etc/cpu ] && rmdir /etc/cpu || true
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+
+esac
+
+# This will be auto-generated db_purge (debconf)
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

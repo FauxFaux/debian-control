@@ -1,0 +1,37 @@
+#!/bin/sh -e
+
+. /usr/share/debconf/confmodule
+
+set -e
+
+for file in blue brightblue brightcyan brightgreen brightmagenta brightred brightwhite brightyellow cyan exclude green include magenta white yellow
+do
+	dpkg-maintscript-helper mv_conffile /etc/logtool/$file	/etc/logtool/${file}.d/$file 1.2.8-9~ -- "$@"
+done
+
+db_get logtool/manual
+if [ "$RET" = "false" ]
+then
+        for level in paranoid server workstation violations cracking violations_ignore
+        do
+                db_get logtool/use-$level
+                if [ "$RET" = "true" ]
+                then
+                        db_get logtool/map-$level-to-file
+                        file=/etc/logtool/"$RET".d/$level
+			case $level in
+				paranoid|server|workstation)
+                        		ln -s /etc/logcheck/ignore.d.$level $file || true
+					;;
+				violations|cracking)
+					ln -s /etc/logcheck/$level.d $file || true
+					;;
+				violations-ignore)
+					ln -s /etc/logcheck/$level.d $file || true
+					;;
+			esac
+                fi
+        done
+fi
+
+

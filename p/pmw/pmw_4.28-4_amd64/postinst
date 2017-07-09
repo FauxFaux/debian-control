@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+	configure)
+		if [ -x /usr/sbin/update-gsfontmap ]
+		then
+			/usr/sbin/update-gsfontmap
+		fi
+	;;
+esac
+
+

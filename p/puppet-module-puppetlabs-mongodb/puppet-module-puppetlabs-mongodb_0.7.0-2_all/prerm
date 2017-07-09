@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "remove" ] || [ "${1}" = "upgrade" ] || [ "${1}" = "deconfigure" ] ; then
+	update-alternatives --remove puppet-module-mongodb /usr/share/puppet/modules.available/puppetlabs-mongodb
+fi
+
+
+
+exit 0

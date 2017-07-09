@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+        if [ -d /usr/doc -a -h /usr/doc/libshhopt1-dev -a -d /usr/share/doc/libshhopt1-dev ]; then
+                rm -f /usr/doc/libshhopt1-dev
+        fi
+fi
+
+

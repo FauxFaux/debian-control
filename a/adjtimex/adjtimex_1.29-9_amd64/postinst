@@ -1,0 +1,130 @@
+#! /bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+#		 old scripts
+oldfile=/etc/adjtimex.conf
+olderfile=/etc/rc.boot/adjtimex
+#		 new starting script
+startfile=/etc/init.d/adjtimex
+#		 new configuration file
+conffile=/etc/default/adjtimex
+
+migrate_old_adjtimex_conf()
+{
+
+	TICK=10000
+	FREQ=0
+
+	if [ -f $oldfile ]; then
+		TICK=`awk '
+		BEGIN{tick=10000;}
+		/[ \t]*TICK[ \t]*=[ \t]*"?[0-9]+"?/ {
+			sub(/[ \t]*TICK[ \t]*=[ \t]*"?/,"");
+			tick=$0+0;
+		}
+		END {print tick;}
+		' $oldfile`
+
+		FREQ=`awk '
+		BEGIN{freq=0;}
+		/[ \t]*FREQ[ \t]*=[ \t]*"?[0-9]+"?/ {
+			sub(/[ \t]*FREQ[ \t]*=[ \t]*"?/,"");
+			freq=$0+0;
+		}
+		END {print freq;}
+		' $oldfile`
+
+#		echo "parameters from $oldfile: TICK=$TICK FREQ=$FREQ";
+	elif [ -f $olderfile ]; then
+		TICK=`awk '
+		BEGIN{tick=10000;}
+		/[ \t]*TICK[ \t]*=[ \t]*"?[0-9]+"?/ {
+			sub(/[ \t]*TICK[ \t]*=[ \t]*"?/,"");
+			tick=$0+0;
+		}
+		END {print tick;}
+		' $olderfile`
+
+		FREQ=`awk '
+		BEGIN{freq=0;}
+		/[ \t]*FREQ[ \t]*=[ \t]*"?[0-9]+"?/ {
+			sub(/[ \t]*FREQ[ \t]*=[ \t]*"?/,"");
+			freq=$0+0;
+		}
+		END {print freq;}
+		' $olderfile`
+
+#		echo "parameters from $olderfile: TICK=$TICK FREQ=$FREQ";
+	fi
+
+	if [ -f $conffile ]; then
+#		echo "using existing $conffile";
+		true;
+	elif [ -f $oldfile ] || [ -f $olderfile ]; then
+		[ ! -d /etc/default ] && mkdir /etc/default
+		cat >$conffile <<EOF
+#  $conffile - configuration file for adjtimex(8)
+#
+#  you may adjust these values manually or by calling /usr/sbin/adjtimexconfig
+#
+#  This file is sourced by $startfile
+#
+TICK=$TICK
+FREQ=$FREQ
+
+EOF
+	fi
+
+	rm -f $oldfile $olderfile
+}
+
+
+case "$1" in
+	configure)
+
+# A previous installation may have left a corrupt conffile.
+# The regexp matches only blank lines, comments, and integer assignments:
+		if [ -f $conffile ]; then
+			egrep -qv '^([[:space:]]*(#.*)?|[[:space:]]*[a-zA-Z][a-zA-Z0-9]*[[:space:]]*=[[:space:]]*-?[0-9]+[[:space:]]*)$' $conffile && rm -f $conffile
+		fi
+
+		migrate_old_adjtimex_conf
+
+		# service starting depends on existence of /etc/default/adjtimex, which is ready only after running adjtimexconfig
+		update-rc.d adjtimex defaults > /dev/null
+
+		db_get adjtimex/compare_rtc
+		if [ "$RET" = "true" ]; then
+			adjtimexconfig
+		fi
+
+		;;
+	abort-upgrade|abort-remove|abort-deconfigure)
+		exit 0
+		;;
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 0
+		;;
+esac
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask adjtimex.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled adjtimex.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable adjtimex.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state adjtimex.service >/dev/null || true
+fi
+# End automatically added section
+

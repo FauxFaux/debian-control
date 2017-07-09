@@ -1,0 +1,26 @@
+#! /bin/sh
+# prerm script for openacs
+#
+
+set -e
+
+# If aolserver is running, stop it before removal, to avoid errors
+# while deleting the database due to active connections. 
+#
+# Also, as "invoke-rc.d aolserver4 reload" currently just stops and 
+# starts the daemon, and it is necessary to reload aolserver's configuration 
+# after openacs removal anyway, it will be stopped here and started in postrm.
+[ -f /var/run/aolserver4/openacs.pid ] && invoke-rc.d aolserver4 stop
+
+# Source debconf stuff
+[ -f /usr/share/debconf/confmodule ] && . /usr/share/debconf/confmodule
+
+# dbconfig-common prerm
+if [ -f /usr/share/dbconfig-common/dpkg/prerm.pgsql ]; then
+    . /usr/share/dbconfig-common/dpkg/prerm.pgsql
+     dbc_go openacs $@ || echo 'Automatic removal using dbconfig-common failed!'
+fi
+
+
+
+exit 0

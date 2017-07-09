@@ -1,0 +1,16 @@
+#! /bin/sh
+
+etcdir=/etc/texmf/dvi2ps
+
+. /usr/share/debconf/confmodule || exit
+db_version 2.0
+
+if [ -f ${etcdir}/fontdesc.disable ]; then
+	db_input high dvi2ps/fontdesc || true
+	db_go
+fi
+
+if [ -f ${etcdir}/configk.disable ]; then
+	db_input high dvi2ps/configk || true
+	db_go
+fi

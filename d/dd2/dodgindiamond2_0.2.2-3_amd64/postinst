@@ -1,0 +1,42 @@
+#!/bin/sh
+set -e
+
+SCOREDIR=/var/games/dodgindiamond2
+
+case "$1" in
+  configure)
+    if ! dpkg-statoverride --list /usr/games/dodgindiamond2 >/dev/null; then
+      dpkg-statoverride --update --add root games 2755 /usr/games/dodgindiamond2
+    fi
+    # Fix permissions
+    for x in hiscore; do
+      test -f $SCOREDIR/$x || cat > $SCOREDIR/$x << EOF
+nobody:10:10000
+gurkan:9:9058
+nobody:8:8000
+nobody:7:7000
+moni:6:6210
+nobody:5:5000
+nobody:4:4000
+nobody:3:3000
+nobody:2:2000
+nobody:1:1000
+EOF
+      chown root:games $SCOREDIR/$x
+      chmod 0664 $SCOREDIR/$x
+    done
+    ;;
+  abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+  *)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

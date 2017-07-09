@@ -1,0 +1,23 @@
+#!/bin/sh
+# Debian ctwm package pre-removal script
+# Copyright 1999, 2001 Branden Robinson.
+# Licensed under the GNU General Public License, version 2.  See the file
+# /usr/share/common-licenses/GPL or <http://www.gnu.org/copyleft/gpl.txt>.
+
+set -e
+
+trap "echo ;\
+      echo 'Received signal.  Aborting removal of ctwm package.' ;\
+      echo ;\
+      exit 1" 1 2 3 15
+
+case "$1" in
+  upgrade|failed-upgrade) ;;
+  remove|deconfigure)
+    update-alternatives --remove x-window-manager /usr/bin/ctwm
+    ;;
+esac
+
+
+
+exit

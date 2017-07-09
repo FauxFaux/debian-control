@@ -1,0 +1,97 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+# Automatically added by dh_installinit, edited for use with debconf
+# Not added anymore due to dh_installinit -n, so we manage it manually.
+if [ -x "/etc/init.d/ircd-hybrid" ]; then
+    update-rc.d ircd-hybrid defaults >/dev/null
+
+    if [ "$1" = "configure" ]; then
+	if dpkg --compare-versions "$2" le "1:7.2.2-1"; then
+	    RET="true"
+	else
+	    if [ -e /usr/share/debconf/confmodule ]; then
+		. /usr/share/debconf/confmodule
+		db_get ircd-hybrid/restart_on_upgrade
+	    else
+		RET="true"
+	    fi
+	fi
+    fi
+fi
+# End automatically added section
+
+if [ "$1" = configure ]; then
+
+if [ ! -d /etc/ircd-hybrid/key ]; then
+	mkdir /etc/ircd-hybrid/key;
+fi
+
+if [ -f /etc/ircd-hybrid/key/ircd.key ]; then
+	echo "You already have an SSL private key"
+else
+	echo "ircd.key not found in /etc/ircd-hybrid!"
+	echo "Generating SSL private key ..."
+	openssl genrsa -out /etc/ircd-hybrid/key/ircd.key 2048
+	chown -R irc:irc /etc/ircd-hybrid/key
+	echo "Correcting permissions..." 
+	chmod 0600 /etc/ircd-hybrid/key/ircd.key
+	echo "ircd.key generated in /etc/ircd-hybrid/key/"
+fi
+
+if [ ! -f /etc/ircd-hybrid/key/ircd.pem ]; then
+	echo "Generating ircd.pem for SSL client connections... (365 days)"
+	openssl req -config /etc/ircd-hybrid/cert.cnf -new -x509 -key /etc/ircd-hybrid/key/ircd.key -out /etc/ircd-hybrid/key/ircd.pem -days 365
+	echo "See README.Debian about personalizing the data in ircd.pem."
+fi
+
+# These directories may have been created before, but we need to make them
+# owned by irc. Or the initscript will get owned. If it's already this 
+# way, this operation makes no difference.
+# As of 1:8.2.8+dfsg.1-1 /var/lib/ircd-hybrid is created
+# and /etc/ircd-hybrid becomes root-owned
+    mkdir -p /var/lib/ircd-hybrid
+    chown irc:irc /var/log/ircd /var/lib/ircd-hybrid
+    chown root:irc /etc/ircd-hybrid
+    chmod 750 /etc/ircd-hybrid
+    chmod 770 /var/lib/ircd-hybrid
+    chown root:irc /etc/ircd-hybrid/ircd.conf
+    chmod 640 /etc/ircd-hybrid/ircd.conf
+
+    if [ "$RET" = "true" ]; then
+        invoke-rc.d ircd-hybrid stop || exit $?
+        if ls /etc/ircd-hybrid/*.db /etc/ircd-hybrid/links.txt > /dev/null 2>&1; then
+            sleep 3
+            if invoke-rc.d ircd-hybrid status > /dev/null 2>&1; then
+                echo "ircd-hybrid is still running, so I can't automatically"
+                echo "migrate files to /var/lib/ircd-hybrid. You should fix"
+                echo "this up manually."
+                exit 1
+            else
+                for file in /etc/ircd-hybrid/*.db /etc/ircd-hybrid/links.txt; do
+                    cp -p $file /var/lib/ircd-hybrid;
+                    mv $file $file.bak
+                done
+                echo "I have migrated data files from /etc/ircd-hybrid to /var/lib/ircd-hybrid"
+                echo "If you are happy that everything is okay, you can delete the backups in /etc/ircd-hybrid"
+            fi
+        fi
+        invoke-rc.d ircd-hybrid start || exit $?
+    else
+        echo "I have not stopped or restarted the ircd-hybrid daemon."
+        echo "You should do this yourself whenever you're ready."
+        if ls /etc/ircd-hybrid/*.db /etc/ircd-hybrid/links.txt > /dev/null 2>&1; then
+            echo "Type \`\`invoke-rc.d ircd-hybrid stop, then move the following"
+            echo "files to /var/lib/ircd-hybrid:"
+            echo /etc/ircd-hybrid/*.db /etc/ircd-hybrid/links.txt
+            echo "Then type \`\`invoke-rc.d ircd-hybrid start"
+        else
+	        echo "Type \`\`invoke-rc.d ircd-hybrid restart''."
+        fi
+    fi
+fi
+
+

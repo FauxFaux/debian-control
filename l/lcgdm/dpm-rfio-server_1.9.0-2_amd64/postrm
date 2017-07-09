@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "purge" ] ; then
+	update-rc.d dpm-rfiod remove >/dev/null || exit $?
+fi
+
+

@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ]; then
+  if ! id -u sm-archive > /dev/null 2>&1; then
+    adduser --quiet --system --home /nonexistent sm-archive
+  fi
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/sm-archive" ]; then
+		update-rc.d sm-archive defaults >/dev/null
+		invoke-rc.d sm-archive start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

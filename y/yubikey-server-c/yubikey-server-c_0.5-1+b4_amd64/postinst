@@ -1,0 +1,15 @@
+#! /bin/sh -e
+
+if ! getent passwd yubikeyd> /dev/null; then
+   useradd -U -r -d /nonexistent yubikeyd
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/yubikey-server-c" ]; then
+		update-rc.d yubikey-server-c defaults >/dev/null
+		invoke-rc.d yubikey-server-c start || exit $?
+	fi
+fi
+# End automatically added section
+

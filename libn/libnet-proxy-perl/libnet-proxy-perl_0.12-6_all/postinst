@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/sslh" ]; then
+	update-rc.d sslh start 16 2 3 4 5 . stop 84 1 . >/dev/null
+	invoke-rc.d sslh start || exit $?
+fi
+# End automatically added section

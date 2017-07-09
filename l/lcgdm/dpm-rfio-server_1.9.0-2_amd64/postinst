@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+if [ -x "/etc/init.d/dpm-rfiod" ]; then
+	update-rc.d dpm-rfiod defaults >/dev/null
+	if [ -x "`which invoke-rc.d 2>/dev/null`" ]; then
+		invoke-rc.d dpm-rfiod start || exit $?
+	else
+		/etc/init.d/dpm-rfiod start || exit $?
+	fi
+fi
+
+

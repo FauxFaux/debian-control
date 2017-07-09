@@ -1,0 +1,20 @@
+#!/bin/sh -e
+
+action="$1"
+oldversion="$2"
+
+if [ "$action" != upgrade ]; then
+    exit 0
+fi
+
+# Emacs mode moved to malaga-mode in 7.9-1, removing old malaga-bin's
+# 50malaga-bin.el file (bug #454714)
+if [ -e /etc/emacs/site-start.d/50malaga-bin.el ] && \
+    dpkg --compare-versions "$oldversion" le-nl 7.8-4; then
+    if [ $(dpkg -s malaga-mode | grep not-installed | wc -l) -gt 0 ]; then
+        rm -f /etc/emacs/site-start.d/50malaga-bin.el
+    fi
+fi
+
+
+

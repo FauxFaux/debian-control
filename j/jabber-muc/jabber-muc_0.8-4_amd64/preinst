@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    upgrade)
+    ;;
+
+    install|abort-upgrade)
+    ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+if ! getent group | grep -q "^jabber:"
+then
+   addgroup --system jabber
+fi
+
+if ! getent passwd | grep -q "^jabber:"
+then
+   adduser --system --home /var/lib/jabberd2 --no-create-home \
+   --quiet --disabled-password --ingroup jabber jabber
+fi
+
+
+
+exit 0

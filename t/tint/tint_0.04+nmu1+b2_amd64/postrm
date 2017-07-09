@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+scorefile="/var/games/tint.scores"
+
+if [ "$1" = "purge" ]
+then
+	if [ -e $scorefile ]
+	then
+		rm $scorefile
+	fi
+fi
+
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+
+

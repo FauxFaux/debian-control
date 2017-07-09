@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ -x "/etc/init.d/globus-scheduler-event-generator" ]; then
+	if [ -x "`which invoke-rc.d 2>/dev/null`" ]; then
+		invoke-rc.d globus-scheduler-event-generator start lsf || :
+	else
+		/etc/init.d/globus-scheduler-event-generator start lsf || :
+	fi
+fi
+
+

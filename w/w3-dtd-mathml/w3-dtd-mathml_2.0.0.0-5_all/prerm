@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installxmlcatalogs
+if [ "$1" = "remove" ] || [ "$1" = "upgrade" ]; then
+	update-xmlcatalog --del --type public --id "-//W3C//DTD MathML" --root || true
+	update-xmlcatalog --del --type public --id "-//W3C//DTD XHTML 1.1 plus MathML" --root || true
+	update-xmlcatalog --del --type system --id "http://www.w3.org/TR/MathML2/dtd/" --root || true
+
+	update-xmlcatalog --del --type public --id "-//W3C//DTD MathML" --package w3-dtd-mathml || true
+	update-xmlcatalog --del --type public --id "-//W3C//DTD XHTML 1.1 plus MathML" --package w3-dtd-mathml || true
+	update-xmlcatalog --del --type system --id "http://www.w3.org/TR/MathML2/dtd/" --package w3-dtd-mathml || true
+
+fi
+# End automatically added section

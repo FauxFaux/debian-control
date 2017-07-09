@@ -1,0 +1,90 @@
+#!/bin/bash
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# Modules
+
+modules_path="/var/lib/prey/modules"
+
+is_module_active(){
+	if [ -x "$modules_path/$1/core/run" ]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+is_module_selected(){
+	local module="$1"
+	shift
+	echo "$@" | grep -w "$module" 1>/dev/null
+	return "$?"
+}
+
+if [ -d "$modules_path" ]
+then
+	# How many mods are installed?
+	installed_mods=(`find "$modules_path" -maxdepth 1 -mindepth 1 -type d -exec basename {} \;`)
+	mods_count=${#installed_mods[@]}
+	for (( i=0; i < mods_count; i++  )); do
+		if [ $i -eq 0 ]; then
+			choices="${installed_mods[$i]}"
+			if is_module_active "${installed_mods[$i]}"
+			then
+				default="${installed_mods[$i]}"
+			fi
+		else
+			choices="$choices, ${installed_mods[$i]}"
+			if is_module_active "${installed_mods[$i]}"
+			then
+				default="$default, ${installed_mods[$i]}"
+			fi
+		fi
+	done
+	db_subst prey/active_modules choices $choices
+	db_set prey/active_modules "$default"
+	db_input medium prey/active_modules || true
+	db_go || true
+	db_get prey/active_modules
+	SELECTED_MODS="${RET//,/}"
+	#installed_mods="${installed_mods[@]}"
+	for module in "${installed_mods[@]}" ; do
+	#for (( i=0; i < mods_count; i++  )); do
+	#	module="${installed_mods[$i]}"
+		if [ -e "$modules_path/$module/core/run" ]; then
+			if is_module_selected "$module" "$SELECTED_MODS"
+			then
+				chmod 744 "$modules_path/$module/core/run"
+			else
+				chmod 644 "$modules_path/$module/core/run"
+			fi
+		fi
+	done
+fi
+
+if [ -f "/etc/cron.d/prey" -a -n "$(grep 'prey.sh' /etc/cron.d/prey | egrep -v '^#|^#$|^\s+#')" ]
+then
+	# Frequency of reports and actions
+
+	let current_timing=`grep 'prey.sh' /etc/cron.d/prey | head -1 | sed 's/ root.*//' | sed -e 's|^\*/\([0-9]\+\).*|\1|'`
+	db_input low prey/reporting_frequency || true
+	db_set prey/reporting_frequency "$current_timing"
+	db_go || true
+	db_get prey/reporting_frequency
+	let TIMING="$RET"
+
+	if [ $TIMING -ge 5 ]; then
+		# frequency must be greater than 5 minutes
+		sed -i -e "s|^\*/\([0-9]\+\)\(.*\)|\*/$TIMING\2|" /etc/cron.d/prey
+	fi
+fi
+
+# Show a text message
+
+db_input low prey/edit_config || true
+db_go || true
+
+exit 0

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	if [ `lsb_release -c | awk '{print $2}'` = "wheezy" ] ; then
+		if ! [ -e /usr/lib/python3/dist-packages/kerberos.so ] ; then
+			ln -s kerberos.cpython-32*.so /usr/lib/python3/dist-packages/kerberos.so
+		fi
+	else
+		if [ -e /usr/lib/python3/dist-packages/kerberos.so ] && [ -h /usr/lib/python3/dist-packages/kerberos.so ] ; then
+			rm /usr/lib/python3/dist-packages/kerberos.so
+		fi
+	fi	
+fi

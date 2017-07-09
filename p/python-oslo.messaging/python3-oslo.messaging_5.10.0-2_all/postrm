@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "disappear" ] ; then
+	update-alternatives --remove oslo-messaging-zmq-receiver /usr/bin/python3-oslo-messaging-zmq-receiver
+	update-alternatives --remove oslo-messaging-zmq-broker /usr/bin/python3-oslo-messaging-zmq-broker
+	update-alternatives --remove oslo-messaging-zmq-proxy /usr/bin/python3-oslo-messaging-zmq-proxy
+fi
+
+
+
+exit 0

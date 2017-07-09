@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+db_input low w3c-linkchecker/hostname || true
+db_input low w3c-linkchecker/private_ips || true
+db_go
+
+exit 0

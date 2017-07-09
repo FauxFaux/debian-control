@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+if [ "$1" = "purge" ]; then
+  if grep -q "#-- ifmail begin" /etc/aliases; then
+    cp /etc/aliases /etc/aliases.new
+    sed -e '/#-- ifmail begin/,/#-- ifmail end/d' \
+      </etc/aliases.new >/etc/aliases
+    rm /etc/aliases.new
+    newaliases || echo "newaliases command not available"
+  fi
+fi
+
+
+

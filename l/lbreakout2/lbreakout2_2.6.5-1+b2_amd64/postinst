@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] && ! [ -f /var/games/lbreakout2.hscr ]
+then
+ rm -f /var/games/lbreakout2.hscr
+ cp /usr/share/games/lbreakout2/lbreakout2.hscr.blank /var/games/lbreakout2.hscr
+ chown root:games /var/games/lbreakout2.hscr
+ chmod 664 /var/games/lbreakout2.hscr
+fi
+
+

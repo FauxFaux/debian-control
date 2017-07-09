@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+LEARNFILE=/var/games/phalanx.learn
+OLDLEARNFILE=/var/lib/games/phalanx.learn
+
+# Move the learning file
+
+if test -e $OLDLEARNFILE; then
+  if test ! -e $LEARNFILE; then
+    if test ! -d /var/games; then
+      mkdir /var/games
+      chmod 755 /var/games
+    fi
+    mv $OLDLEARNFILE $LEARNFILE
+  fi
+fi
+
+

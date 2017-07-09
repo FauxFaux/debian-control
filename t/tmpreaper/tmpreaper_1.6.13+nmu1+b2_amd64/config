@@ -1,0 +1,61 @@
+#!/bin/sh -e
+
+if [ -e /usr/share/debconf/confmodule ]; then
+    . /usr/share/debconf/confmodule
+fi
+
+# If the cron.daily script isn't there, then this is probably a new
+# installation; don't show the message in that case.
+# If the "installed version" is empty, this is definitely a new installation...
+
+GO4IT=false
+
+if [ ! -s /etc/cron.daily/tmpreaper -o -z "$2" ]; then
+    db_fset tmpreaper/confignowexists seen true
+
+# This debconf thing was introduced in version 1.5.1.
+# Only if the installed version is less should the message be displayed.
+
+elif dpkg --compare-versions "$2" ">>" "1.5.1"; then
+    db_fset tmpreaper/confignowexists seen true
+else
+    db_input high tmpreaper/confignowexists || true
+    GO4IT=true
+fi
+
+# If there isn't a tmpreaper.conf file, don't bother showing the note.
+# Or if the default value for TMPREAPER_TIME is still there,
+# also don't show the note.
+if [ ! -f /etc/tmpreaper.conf ] ||
+   [ "`grep '^TMPREAPER_TIME=7d$' /etc/tmpreaper.conf 2>/dev/null`" = "TMPREAPER_TIME=7d" ]; then
+    db_fset tmpreaper/TMPREAPER_TIME seen true
+else
+    db_input high tmpreaper/TMPREAPER_TIME || true
+    GO4IT=true
+fi
+
+# If upgrading, the user may not choose to replace the conffile,
+# so then show a different note than to users newly installing.
+if [ -z "$2" ]; then
+    # newly installing
+    db_fset tmpreaper/readsecurity_upgrading seen true # they must never see this note
+    db_input high tmpreaper/readsecurity || true # ... only this one
+elif dpkg --compare-versions "$2" "<<" "1.6.1"; then
+    # upgrading (from older version)
+    db_fset tmpreaper/readsecurity seen true # they must never see this other note
+    db_input high tmpreaper/readsecurity_upgrading || true # ... only this one
+    GO4IT=true
+else
+    # upgrading from newer version where it already was there
+    :
+fi
+
+
+if $GO4IT; then
+    db_go
+fi
+
+
+db_stop
+
+exit 0

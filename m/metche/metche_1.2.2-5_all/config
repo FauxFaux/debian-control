@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+CONFIGFILE="/etc/metche.conf"
+
+if [ -e "$CONFIGFILE" ]; then
+    . "$CONFIGFILE" || true
+    db_set metche/email "$EMAIL_ADDRESS"
+    db_set metche/changelog/type "No changelog monitoring"
+    if [ -n "$CHANGELOG_DIR" ]; then
+	db_set metche/changelog/type "Multiple changelog files"
+	db_set metche/changelog/directory "$CHANGELOG_DIR"
+    elif [ -n "$CHANGELOG_FILE" ]; then
+	db_set metche/changelog/type "Single changelog file"
+	db_set metche/changelog/file "$CHANGELOG_FILE"
+    fi
+fi
+
+db_input medium metche/email || true
+db_input medium metche/changelog/type || true
+db_go || true
+
+db_get metche/changelog/type
+case "$RET" in
+  "Single changelog file")
+    db_input medium metche/changelog/file || true
+    db_go || true
+    ;;
+  "Multiple changelog files")
+    db_input medium metche/changelog/directory || true
+    db_go || true
+    ;;
+esac
+

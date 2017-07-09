@@ -1,0 +1,55 @@
+#! /usr/bin/perl
+# post install script for the Debian GNU/Linux sendfile package
+
+require DebianNet;
+use Dpkg::Version;
+
+# Now modify the inetd.conf file
+
+open(INETD, "/etc/inetd.conf");
+@inetd=<INETD>;
+close(INETD);
+
+if (! grep(/.*sendfiled/, @inetd)) {
+    $newentry = 'saft	stream	tcp	nowait	root	/usr/sbin/tcpd	/usr/sbin/sendfiled';
+    $DebianNet::sep = "#<off># "; DebianNet::add_service($newentry, "OTHER");
+}
+undef(@inetd);
+
+# cleanup edits from versions before 2.1b.20080616-5.2
+# this can be removed after wheezy
+if (($ARGV[1] ne "") &&
+	(version_compare($ARGV[1],"2.1b.20080616-5.2") < 0)) {
+	
+	# remove line added by old version of sendfile
+	my $profile = '/etc/profile';
+	if (-e $profile) {
+		open(PROFILE, "$profile");
+		@profile=<PROFILE>;
+		close(PROFILE);
+
+		open(PROFILE, ">$profile");
+		printf PROFILE "%s", join ('', grep (!/^.*check-sendfile/, @profile));
+		close (PROFILE);
+	}
+
+	# delete /etc/services with only 1 line created by previous versions of
+	# sendfile
+	my $services = "/etc/services";
+	if (-e $services) {
+		open(SERVICES, $services);
+		my @srv = <SERVICES>;
+		close(SERVICES);
+		my $srv = join('',@srv);
+		my $oldsrv = "saft		487/tcp			# simple asynchronous file transfer\n";
+		if ($srv eq $oldsrv) {
+			unlink $services;
+		}
+	}
+}
+
+if ($ARGV[0] eq 'configure') {
+    if (defined $ARGV[1] && $ARGV[1] =~ /2\.1b(-[67]|\.20080311-|\.20080616-1)/) {
+	system "chmod 644 /etc/logrotate.d/sendfile";
+    }
+}

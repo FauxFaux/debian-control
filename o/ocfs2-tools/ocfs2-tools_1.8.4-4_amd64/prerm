@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/ocfs2" ] && [ "$1" = remove ]; then
+	invoke-rc.d ocfs2 stop || exit $?
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/o2cb" ] && [ "$1" = remove ]; then
+	invoke-rc.d o2cb stop || exit $?
+fi
+# End automatically added section

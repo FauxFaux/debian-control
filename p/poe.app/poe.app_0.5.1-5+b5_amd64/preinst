@@ -1,0 +1,28 @@
+#!/bin/sh
+# dpkg will not replace a real directory with a symlink.
+# FIXME: Remove during the squeeze+1 cycle.
+
+set -e
+set -u
+
+RESDIR=/usr/lib/GNUstep/Applications/Poe.app/Resources
+
+case "$1" in
+    install | upgrade)
+	if [ -d $RESDIR ] && [ ! -L $RESDIR ]; then
+	    rm -rf $RESDIR
+	fi
+    ;;
+    
+    abort-upgrade)
+    ;;
+
+    *)
+	echo "preinst called with unknown argument \`$1'" >&2
+	exit 1
+    ;;
+esac
+
+
+
+exit 0

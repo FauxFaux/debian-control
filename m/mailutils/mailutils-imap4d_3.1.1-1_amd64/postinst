@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -e
+
+update-inetd --group MAIL --add "imap \tstream \ttcp \tnowait \troot \t/usr/sbin/imap4d imap4d -i"
+
+

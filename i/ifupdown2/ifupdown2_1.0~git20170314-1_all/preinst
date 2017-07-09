@@ -1,0 +1,35 @@
+#!/bin/sh
+
+MYNAME="${0##*/}"
+
+report() { echo "${MYNAME}: $*" ; }
+report_err() { report "Error: $*" >&2 ; exit 1; }
+
+preinst_divert()
+{
+    diversions=$(LC_ALL=C.UTF-8 dpkg-divert --list | grep "$1" | grep -v 'ifupdown2$'  | wc -l 2> /dev/null)
+    if [ "$diversions" -gt 0 ];
+    then
+        report_err "existing diversion for $1"
+    else
+        dpkg-divert --add --package ifupdown2 --rename --divert "$1.disabled" "$1"
+    fi
+}
+
+set -e
+case "$1" in
+    install|upgrade)
+        for filename in ifup ifdown ifquery ifreload
+        do
+            preinst_divert "/sbin/$filename"
+            preinst_divert "/usr/share/bash-completion/completions/$filename"
+            preinst_divert "/etc/bash_completion.d/$filename"
+            preinst_divert "/usr/share/man/man8/$filename.8.gz"
+        done
+        preinst_divert "/usr/share/man/man5/interfaces.5.gz"
+        ;;
+esac
+
+dpkg-maintscript-helper rm_conffile "/etc/bash_completion.d/ifup" 1.1 -- $@
+
+

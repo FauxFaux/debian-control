@@ -1,0 +1,51 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+db_version 2.0 || [ $? -lt 30 ]
+
+if [ "$1" = "configure" ]; then
+
+	db_get phamm-ldap/init_base_ldap || true
+	init_base_ldap="$RET"
+
+	if [ "$init_base_ldap" = "true" ]; then
+	    db_get phamm-ldap/ldap-binddn || true
+	    binddn="$RET"
+
+	    db_get phamm-ldap/ldap-basedn || true
+	    basedn="$RET"
+
+	    db_get phamm-ldap/ldap-bindpw || true
+	    bindpw="$RET"
+	    db_set phamm-ldap/ldap-bindpw "" || true
+	    db_fset phamm-ldap/ldap-bindpw seen false
+	    
+	    db_get phamm-ldap/ldap-phammpw || true
+	    phammpw=`slappasswd -s "$RET"`
+	    db_set phamm-ldap/ldap-phammpw "" || true
+	    db_fset phamm-ldap/ldap-phammpw seen false
+
+	    cat << EOF | ldapadd -x -D "$binddn" -w "$bindpw" -h localhost
+dn:o=hosting,$basedn
+objectClass: top
+objectClass: organization
+o: hosting
+description: hosting root
+
+dn:cn=phamm,o=hosting,$basedn
+objectClass: top
+objectClass: organizationalRole
+objectClass: simpleSecurityObject
+cn: phamm
+userPassword: $phammpw
+EOF
+
+	    db_set phamm-ldap/init_base_ldap "false" || true
+	fi
+fi
+
+
+
+exit 0

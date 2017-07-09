@@ -1,0 +1,38 @@
+#!/bin/sh
+# postinst script for fookebox
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+	configure)
+		# only on new installations
+		if [ "$2" = "" ] ; then
+			# Set permissions
+			chgrp -R www-data /var/cache/fookebox
+			chgrp www-data /etc/fookebox/apache.conf
+			chgrp www-data /etc/fookebox/fookebox.wsgi
+			chgrp www-data /etc/fookebox/config.ini
+		fi
+	;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+	;;
+esac
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p fookebox /usr/share/fookebox -V 2.6-
+fi
+
+# End automatically added section
+
+
+exit 0

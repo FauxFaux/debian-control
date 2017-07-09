@@ -1,0 +1,30 @@
+#!/bin/sh
+
+set -e
+
+PACKAGE=yatex
+
+case "$1" in
+    remove|upgrade|deconfigure)
+
+	# Automatically added by dh_installemacsen
+if [ -e /var/lib/emacsen-common/state/package/installed/emacsen-common -a -x /usr/lib/emacsen-common/emacs-package-remove ] ; then
+	/usr/lib/emacsen-common/emacs-package-remove --prerm yatex
+fi
+# End automatically added section
+
+
+    ;;
+    failed-upgrade)
+        :
+    ;;
+    *)
+        echo "${0##*/}: Called with unknown argument \`$1'." >&2
+    ;;
+esac
+
+exit 0
+
+### Local Variables:
+### mode: shell-script
+### End:

@@ -1,0 +1,13 @@
+#! /bin/sh
+
+set -e
+
+# If keyd was enabled then make sure to stop it.
+if grep -q -E '^use_keyd=*(true|yes|1)$' /etc/onak.ini; then
+    invoke-rc.d onak stop || exit $?
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/onak.conf 0.4.6-1 onak -- "$@"
+# End automatically added section
+

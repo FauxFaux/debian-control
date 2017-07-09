@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = remove ]; then
+        update-alternatives --remove terminator /usr/bin/terminator || true
+        update-alternatives --remove x-terminal-emulator /usr/bin/terminator
+fi
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p terminator 
+else
+	dpkg -L terminator | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+

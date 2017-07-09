@@ -1,0 +1,29 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+        purge)
+                echo "Purging logfiles..."
+                rm -rf /var/log/argus
+esac
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/ppp/ip-up.d/argus-server 2:3.0.8.1-1~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/ppp/ip-down.d/argus-server 2:3.0.8.1-1~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/argus-server 2:3.0.8.1-1~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/default/argus-server 2:3.0.8.1-1~ -- "$@"
+# End automatically added section
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+
+

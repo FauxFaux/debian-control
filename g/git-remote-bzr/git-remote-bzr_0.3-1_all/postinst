@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    # Remove obsolete alternatives no longer provided by the package.
+    # https://bugs.debian.org/773196
+    configure)
+        update-alternatives --remove git-remote-bzr \
+            /usr/lib/git-core/git-remote-bzr--git
+    ;;
+esac
+
+
+

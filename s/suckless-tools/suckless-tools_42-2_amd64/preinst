@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ]; then
+    # If we upgrade from a version less than '41', remove dmenu alternatives
+    if dpkg --compare-versions "$2" lt "41"; then
+        update-alternatives --quiet --remove dmenu /usr/bin/dmenu.xft
+        update-alternatives --quiet --remove dmenu /usr/bin/dmenu.default
+    fi
+fi
+
+
+
+exit 0

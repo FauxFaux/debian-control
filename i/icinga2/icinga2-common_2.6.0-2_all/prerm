@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper rm_conffile \
+   "/etc/bash_completion.d/icinga2" "2.4.1-2~" -- "$@"
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/icinga2" ]; then
+	invoke-rc.d icinga2 stop || exit $?
+fi
+# End automatically added section
+
+
+exit 0

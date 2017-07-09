@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+pkg=rplayd
+
+if [ "$1" = "configure" ]; then
+  if [ -e /etc/init.d/rplayd ]; then
+      rm /etc/init.d/rplayd
+  fi
+
+  if [ ! -e /etc/rplay/rplay.hosts ]; then
+      echo "RPlayd is currently configured to only allow connections from localhost."
+      echo "  man rplay.hosts(5) for details of how to modify this."
+  fi
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/rplay" ]; then
+		update-rc.d rplay defaults 99 10 >/dev/null
+		invoke-rc.d rplay start || exit $?
+	fi
+fi
+# End automatically added section
+
+

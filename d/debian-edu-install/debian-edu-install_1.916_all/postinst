@@ -1,0 +1,199 @@
+#!/bin/sh
+
+set -e
+
+debian_edu_config="/etc/debian-edu/config"
+
+# Seed the debconf database with the answers for the common packages,
+# in case some of these are installed before the installer scripts
+# are executed. This could fix problems with discover and locales.
+
+print() {
+    # stdout is busy talking to debconf.  Print to stderr
+    echo "$*" 1>&2
+}
+info() {
+    if [ "$debug" != "true" ] ; then
+       print "info: $*"
+    fi
+}
+error() {
+    msg="error: $0: $1"
+    print "$msg"
+}
+
+
+# Make sure we load the profile-specific answers the same way as during
+# the first install.
+if [ ! "$DEBIAN_HAS_FRONTEND" ]; then
+    # Override default values based on the profile in
+    # $debian_edu_config.
+
+    pkglibdir=/usr/lib/debian-edu-install
+    defaults=$pkglibdir/defaults
+
+    if test -r $debian_edu_config ; then
+	print "info: $0: Loading config from $debian_edu_config"
+	. $debian_edu_config
+    else
+	error "Unable to read from $debian_edu_config."
+    fi
+
+    load_defaults() {
+	filename="$defaults.$1"
+	if test -r $filename; then
+	    print "info: Loading defaults from $filename"
+	    if debconf-set-selections $filename ; then
+		:
+	    else
+		error "unable to load defaults from $filename"
+	    fi
+	else
+	    error "unable to read defaults from $filename"
+	fi
+    }
+    load_defaults common
+
+    info "Got profile '$PROFILE'"
+    for value in `echo $PROFILE |sed 's/ /-/g' | sed 's/,-/ /g'`; do
+	info "Testing profile '$value'"
+	case $value in
+	    Workstation)
+		networked=true
+		workstation=true
+		;;
+	    Roaming-Workstation)
+		networked=true
+		workstation=true
+		roaming=true
+		;;
+	    LTSP-Server|Thin-Client-Server)
+		networked=true
+		workstation=true
+		ltspserver=true
+		;;
+	    Main-Server|Server)
+		networked=true
+		server=true
+		;;
+	    Standalone)
+		standalone=true
+		;;
+	    Minimal)
+		networked=true
+		;;
+	    *)
+		error "unknown profile '$profile'"
+		;;
+	esac
+    done
+
+    # Make sure the default values have priority
+    #  1 main-server
+    #  2 ltsp-server
+    #  3 workstation
+    #  4 networked (Common for non-standalone)
+    #  5 standalone 
+    #  6 barebone 
+    if test "$standalone" = true ; then
+	load_defaults standalone
+    fi
+    if test "$networked" = true ; then
+	load_defaults networked
+    fi
+    if test "$workstation" = true ; then
+	load_defaults workstation
+    fi
+    if test "$ltspserver" = true ; then
+	load_defaults ltsp-server
+    fi
+    if test "$server" = true ; then
+	load_defaults main-server
+    fi
+fi
+
+# Source the debconf confmodule to ensure that the templates are loaded.
+. /usr/share/debconf/confmodule
+
+oldversions="sarge \
+  terra_alpha \
+  terra_test01 terra_test02 terra_test03 terra_test04 \
+  terra_pre01 terra_pre02 \
+  terra_rc1 terra_rc2 terra_rc3 terra_rc4 terra_rc5"
+
+# get the current version
+new_version="$(cat /usr/lib/debian-edu-install/version)"
+
+if [ -f $debian_edu_config ] ; then
+	( # Subshell to avoid importing the variables into the entire script
+	VERSION=""
+	. $debian_edu_config
+
+	# FIXME: the following code doesn't seem to make any sense and should
+	# be cleaned up post jessie release. It's seems way simpler (and
+	# easier to maintain) to just rewrite /etc/debian-edu/config on
+	# upgrades like it done on installation in pre-pkgsel (from this
+	# package).
+
+	# clean up missing version caused by bug introduced in version
+	# 1.810 and fixed in version 1.813.
+	if [ -z "$VERSION" ] ; then
+	    sed -i $debian_edu_config -e \
+		"s/^VERSION=.*$/VERSION=\"$new_version\"/"
+	fi
+
+	# Need to list versions with space here, to avoid unwanted
+	# word splitting
+	for i in $oldversions '3.0r0 terra' '3.0r1 terra' '4.0r0 luna alpha1' \
+                 '5.0r0+edu0 alpha' '5.0.0+edu0 alpha' '5.0.1+edu0 alpha' \
+                 '5.0.2+edu0 alpha' '5.0.3+edu0 alpha' '5.0.3+edu0 rc1' \
+                 '5.0.4+edu0 rc2' '5.0.4+edu0' '5.0.6+edu1' '6.0.0+edu0 alpha' \
+                 '6.0.3+edu0 beta1' '6.0.3+edu0 beta2' '6.0.3+edu0 beta3' \
+                 '6.0.4+edu0 beta3' '6.0.4+edu0 rc1' '6.0.4+edu0 rc2' \
+	         '6.0.4+edu0 rc3' '6.0.4+edu+r0' '6.0.7+edu+r1' \
+	         '7.0.0+edu+alpha0' '7.0.0+edu+alpha2' '7.0.0+edu+alpha3' \
+		 '7.1+edu0~a3' '7.1+edu0~b0' '7.1+edu0~b1' '7.1+edu0~b2' \
+		 '7.1+edu0' '8.0.0+edu+alpha0' '8.0+edu+alpha0' \
+		 '8.0+edu0~alpha0' '8.0+edu0~alpha1' '8.0+edu0~alpha2' \
+		 '8.0+edu0~beta1' '8+edu0' '9+edu0~alpha0' '9+edu0~a0'
+
+	do
+		if [ "$VERSION" = "$i" ] ; then
+			sed -i $debian_edu_config -e \
+				"s/^VERSION=.*$/VERSION=\"$new_version\"/"
+		fi
+	done
+	)
+fi
+
+# handle preseeding to enable or disable firstboot script, as appropriate.
+firstboot_file=/etc/debian-edu/xdebian-edu-firstboot
+db_get debian-edu-install/run-firstboot
+
+# Override to handle upgrades from the old style firstboot handling
+if [ -h /etc/init.d/xdebian-edu-firstboot.dpkg-old ] && \
+   [ "$(readlink /etc/init.d/xdebian-edu-firstboot.dpkg-old)" = \
+            /usr/lib/debian-edu-install/firstboot ] ; then
+    rm /etc/init.d/xdebian-edu-firstboot.dpkg-old
+    RET=true
+fi
+
+if [ true = "$RET" ] ; then
+	db_set debian-edu-install/run-firstboot false
+	if [ -f "$firstboot_file" ]; then
+		rm -f "$firstboot_file"
+	fi
+elif [ ! -f "$firstboot_file" ]; then
+	touch "$firstboot_file"
+fi
+
+db_stop
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/xdebian-edu-firstboot" ]; then
+		update-rc.d xdebian-edu-firstboot start 99 2 3 4 5 . >/dev/null || exit $?
+	fi
+fi
+# End automatically added section
+

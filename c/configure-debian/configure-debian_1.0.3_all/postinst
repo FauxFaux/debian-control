@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "configure" ]
+then
+   if dpkg --compare-versions "$2" "le-nl" "0.5.1"
+   then
+	db_unregister configure-debian/another
+	db_unregister configure-debian/program
+	db_unregister configure-debian/subsection
+   fi
+fi
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if test "$1" != upgrade
+then
+    update-alternatives --remove jed-script /usr/bin/xjed
+    update-alternatives --remove editor /usr/bin/xjed
+fi
+
+

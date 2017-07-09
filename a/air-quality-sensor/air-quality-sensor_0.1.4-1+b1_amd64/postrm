@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+
+
+if [ "$1" = "purge" ] ; then
+        delgroup --quiet --system air-quality-sensor > /dev/null || true
+fi
+
+exit 0

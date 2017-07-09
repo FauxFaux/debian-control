@@ -1,0 +1,14 @@
+#!/bin/sh
+
+
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+    [ -x /usr/sbin/dictdconfig ] && dictdconfig -w
+    if [ -x /etc/init.d/dictd ]; then
+        if [ -x /usr/sbin/invoke-rc.d ]; then
+            invoke-rc.d dictd force-reload
+        fi
+    fi
+fi

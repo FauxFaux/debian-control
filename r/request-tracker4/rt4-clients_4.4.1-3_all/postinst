@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+
+OLDCONF=/etc/rt.conf
+NEWCONF=/etc/request-tracker4/rt.conf
+
+if [ -f "$OLDCONF" ] && [ ! -f "$NEWCONF" ]; then
+    echo "Found $OLDCONF; moving it to $NEWCONF"
+    mv "$OLDCONF" "$NEWCONF"
+fi
+
+alts() {
+    update-alternatives --install /usr/bin/rt rt /usr/bin/rt-4 260 \
+      --slave /usr/share/man/man1/rt.1.gz rt.1.gz \
+              /usr/share/man/man1/rt-4.1.gz
+    update-alternatives --install \
+      /usr/bin/rt-mailgate rt-mailgate /usr/bin/rt-mailgate-4 260 \
+      --slave /usr/share/man/man1/rt-mailgate.1.gz rt-mailgate.1.gz \
+              /usr/share/man/man1/rt-mailgate-4.1.gz
+}
+
+case "$1" in
+    configure)
+        alts
+        ;;
+    abort-upgrade)
+        alts
+	;;
+esac
+
+

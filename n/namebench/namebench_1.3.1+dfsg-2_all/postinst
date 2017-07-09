@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+
+# Move a conffile without triggering a dpkg question
+mv_conffile() {
+    local OLDCONFFILE="$1"
+    local NEWCONFFILE="$2"
+
+    [ -e "$OLDCONFFILE" ] || return 0
+
+    echo "Preserving user changes to $NEWCONFFILE ..."
+    mv -f "$NEWCONFFILE" "$NEWCONFFILE".dpkg-new
+    mv -f "$OLDCONFFILE" "$NEWCONFFILE"
+}
+
+case "$1" in
+configure)
+    if dpkg --compare-versions "$2" le "1.1+dfsg-2"; then
+        mv_conffile "/etc/namebench.cfg" "/etc/namebench/namebench.cfg"
+    fi
+    ;;
+*)
+    echo "preinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p namebench /usr/share/namebench -V 2.5-
+fi
+
+# End automatically added section
+
+
+exit 0

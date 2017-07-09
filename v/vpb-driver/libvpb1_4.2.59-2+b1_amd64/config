@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+. /usr/share/debconf/confmodule
+
+if [ ! -e /etc/vpb ]; then
+    db_input high libvpb1/countrycode || true
+    db_go
+fi
+

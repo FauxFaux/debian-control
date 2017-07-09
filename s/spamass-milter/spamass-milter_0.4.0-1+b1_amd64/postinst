@@ -1,0 +1,52 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        # Create the spamassmilter user
+	if [ -x /usr/sbin/adduser ] && [ -x /usr/bin/getent ] && [ -x /usr/sbin/addgroup ]; then
+	    if ! getent group spamass-milter >/dev/null 2>&1; then
+		addgroup --system spamass-milter;
+	    fi;
+	    if ! id -u spamass-milter >/dev/null 2>&1; then
+		adduser --system --ingroup spamass-milter --no-create-home --home /var/lib/spamass-milter spamass-milter;
+		if [ -d /var/lib/spamass-milter ]; then 
+		    chown spamass-milter:spamass-milter /var/lib/spamass-milter
+		fi;
+	    elif id -nG spamass-milter |grep -q spamass-milter; then
+		if [ -x /usr/sbin/usermod ]; then
+		    usermod --gid spamass-milter spamass-milter;
+		fi;
+	    fi;
+	fi;
+	# Attempt to remove /var/run/spamass if it exists
+
+	# If we're upgrading from -4 or earlier, we want to remove the
+	# pidfile if spamass.milter isn't running, and then remove
+	# /var/run/spamass
+	if dpkg --compare-versions "$2" 'lt' '0.3.1-5'; then
+	    if [ -f /var/run/spamass/spamass.pid ] && ! kill -0 "$(cat  /var/run/spamass/spamass.pid)"; then
+		rm -f /var/run/spamass/spamass.pid;
+	    fi;
+	    if [ -d /var/run/spamass ]; then
+		rmdir --ignore-fail-on-non-empty /var/run/spamass ;
+	    fi;
+	fi;
+	;;
+    *)
+	# do nothing
+	;;
+esac
+    
+### Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/spamass-milter" ]; then
+		update-rc.d spamass-milter defaults >/dev/null
+		invoke-rc.d spamass-milter start || exit $?
+	fi
+fi
+# End automatically added section
+##
+
+exit 0;

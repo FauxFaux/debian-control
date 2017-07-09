@@ -1,0 +1,117 @@
+#! /bin/sh
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see /usr/doc/packaging-manual/
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+set -e
+
+INPUTS=/var/lib/cfengine2/inputs
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+make_key () {
+    if [ ! -f /var/lib/cfengine2/ppkeys/localhost.priv ]; then
+	cfkey
+    fi
+}
+
+sed_script_config_daemons () {
+    # Spits out sed commands to re-configure /etc/default/cfengine2
+    ALL_DAEMONS="CFSERVD CFEXECD CFENVD"
+    for DAEMON in $ALL_DAEMONS; do
+	LC_DAEMON=$(echo $DAEMON | tr 'A-Z' 'a-z')
+	db_get "cfengine2/run_${LC_DAEMON}"
+	case "$RET" in
+	    true|1)
+		echo -n "s/^RUN_$DAEMON=[01]/RUN_$DAEMON=1/;"
+		;;
+	    false|0)
+		echo -n "s/^RUN_$DAEMON=[01]/RUN_$DAEMON=0/;"
+		;;
+	    *) echo "Wacky debconf answer: '$RET'" >&2 ; return 1;;
+	esac
+    done
+}
+
+config_daemons() {
+    CUR=/etc/default/cfengine2
+    test ! -f "$CUR" && cp -p /usr/share/cfengine2/default "$CUR"
+
+    SEDCMD=$(sed_script_config_daemons)
+
+    if [ ! "x$SEDCMD" = "x" ]; then
+	NEW=$(mktemp "${CUR}.XXXXXXXXX")
+	cp -a -f "$CUR" "$NEW"
+	sed $SEDCMD < "$CUR" > "$NEW"
+	mv -f "$NEW" "$CUR"
+    fi
+}
+
+
+no_files_in_common() {
+    # returns 0 if no files in $1 exist in $2;
+    # 1 if they intersect; 2 if symlink
+    for d in "$@"; do
+	test -L "$d" && return 2
+	test -d "$d" || return 0
+    done
+
+    (cd "$1" && find . -mindepth 1 -print0 2>/dev/null) |\
+	(cd "$2" && perl -ne \
+	'BEGIN {$/="\0"}; chomp; if (-e) {exit 1;}')
+    return $?
+}
+
+move_inputs_to_etc() {
+    test -d "$INPUTS" && return
+    if no_files_in_common "$INPUTS" /etc/cfengine; then
+	(cd "$INPUTS" && tar cf - .) | (cd /etc/cfengine && tar xpf -) && \
+	    { rm -rf "$INPUTS" && ln -s /etc/cfengine "$INPUTS"; }
+    else
+	cat <<-EOF
+	WARNING: Could not move files from $INPUTS to /etc/cfengine
+	Please do this manually and then run:
+	\$ ln -s /etc/cfengine $INPUTS
+EOF
+    fi
+}
+
+case "$1" in
+    configure|reconfigure)
+	make_key
+	config_daemons
+	rm -f /var/lib/cfengine2/av.db
+	test -L "$INPUTS" || move_inputs_to_etc
+	;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+    *)
+	echo "postinst called with unknown argument \`$1'" >&2
+        exit 0
+	;;
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/cfengine2" ]; then
+		update-rc.d cfengine2 defaults >/dev/null
+		invoke-rc.d cfengine2 start || exit $?
+	fi
+fi
+# End automatically added section
+

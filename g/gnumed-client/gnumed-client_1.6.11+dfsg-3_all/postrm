@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = purge ] && [ -e /etc/gnumed/client.conf ]; then
+    rm -f /etc/gnumed/client.conf
+fi
+
+

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" ]; then
+	rm -f /etc/X11/aewm/menudefs.hook
+fi
+
+# Automatically added by dh_installmenu
+inst=/etc/menu-methods/aewm
+if [ "$1" = "remove" ] && [ -f "$inst" ]; then chmod a-x $inst ; fi
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+

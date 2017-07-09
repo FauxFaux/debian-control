@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_input high slbackup-php/use-ssl || true
+db_go
+

@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+dpkg -L pike8.0-sane | grep '\.\(pike\|pmod\)$' |
+while read file; do
+      rm -f "${file}.o"
+done

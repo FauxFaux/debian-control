@@ -1,0 +1,19 @@
+#! /bin/sh
+
+set -e
+
+# We exit unless the package is being configured
+case "$1" in
+        abort*upgrade)         exit 0;;
+        abort*remove)          exit 0;;
+        abort*deconfigure)     exit 0;;
+        configure)
+          if [ -d /usr/doc -a -h /usr/doc/xscavenger ]; then
+	    # No longer need symlink from /usr/doc to /usr/share/doc/.
+	    rm -f /usr/doc/xscavenger
+          fi
+          ;;
+        *)                     exit 0;
+esac
+
+exit 0

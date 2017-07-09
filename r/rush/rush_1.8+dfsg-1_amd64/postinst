@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+EXECUTABLE=/usr/sbin/rush
+LIBDIR=/var/lib/rush
+
+if [ "$1" = "configure" ]; then
+  # Accounting needs to be done, initiate these.
+  touch $LIBDIR/utmp $LIBDIR/wtmp
+fi
+
+

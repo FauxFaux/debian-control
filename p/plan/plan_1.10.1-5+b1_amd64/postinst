@@ -1,0 +1,24 @@
+#!/bin/sh -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+if [ ! -f /etc/plan/holiday ] ; then
+    db_get plan/holiday
+    if [ "none" != "$RET" ] ; then
+	holidaydir=/usr/share/doc/plan/examples/holiday
+	if [ -r $holidaydir/holiday_$RET ] ; then
+	    mkdir /etc/plan
+	    echo "#include \"$holidaydir/holiday_$RET\"" > /etc/plan/holiday
+	fi
+    fi
+fi
+	
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+exit 0

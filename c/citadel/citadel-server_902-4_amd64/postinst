@@ -1,0 +1,142 @@
+#!/bin/sh
+# postinst script for citadel-server
+
+set -e
+
+# source debconf stuff
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+RUNDIR=/var/run/citadel
+
+move_file()
+{
+	[ ! -f $1 ] && return
+	[ -f $2 ] && return
+	mv -f $1 $2
+}
+
+fix_perm()
+{
+	[ ! -f $1 ] && return
+	chmod og-w $1
+}
+
+case "$1" in
+    configure)
+	if test ! -d $RUNDIR; then
+            mkdir -p $RUNDIR
+        fi
+
+        if ! getent group citadel >/dev/null; then 
+            addgroup --system citadel
+        fi
+
+        if ! getent passwd citadel >/dev/null; then 
+            adduser --system --ingroup citadel --home /var/lib/citadel \
+                    --gecos "Citadel system user" --shell /bin/sh \
+                    --disabled-password --no-create-home --shell /bin/false citadel
+        fi
+
+        chown -R citadel:citadel /etc/citadel
+        chown -R citadel:citadel /var/lib/citadel /var/spool/citadel
+
+	move_file /var/run/refcount_adjustments.dat /etc/citadel/data/refcount_adjustments.dat
+	move_file /etc/citadel/citadel.control /var/lib/citadel/data/citadel.control
+	move_file /etc/citadel/citadel.config /var/lib/citadel/data/citadel.config
+
+	# some old versions created world-writable files, let's fix that
+	fix_perm /etc/citadel/citadel.control
+	fix_perm /etc/citadel/netconfigs/7
+	fix_perm /etc/citadel/refcount_adjustments.dat
+
+        db_get citadel/Administrator &&		admin="$RET"
+        db_get citadel/ServerIPAddress && 	ip_addr="$RET"
+        db_get citadel/LoginType && 		deb_enable_unix_auth="$RET"
+	db_get citadel/LDAPServer &&		LDAP_HOST="$RET"; export LDAP_HOST
+        db_get citadel/LDAPServerPort &&	LDAP_PORT="$RET"; export LDAP_PORT
+        db_get citadel/LDAPBaseDN &&		LDAP_BASE_DN="$RET"; export LDAP_BASE_DN
+        db_get citadel/LDAPBindDN &&		LDAP_BIND_DN="$RET"; export LDAP_BIND_DN
+        db_get citadel/LDAPBindDNPassword &&	LDAP_BIND_PW="$RET"; export LDAP_BIND_PW
+
+        if test "$deb_enable_unix_auth" = "true"; then
+            export ENABLE_UNIX_AUTH=yes
+        else
+            export ENABLE_UNIX_AUTH=no
+	    # we're in a fresh install, so we have to set the password for the new user
+            if test -z "$2"; then
+        	db_get citadel/Password && pw="$RET"
+        	export SYSADMIN_PW=$pw
+	    fi
+        fi
+
+        db_stop
+
+        export IP_ADDR="$ip_addr"
+        export CITADEL_INSTALLER=yes
+        export ACT_AS_MTA=no
+        export SYSADMIN_NAME=$admin
+        export CREATE_XINETD_ENTRY=no
+        export CREATE_INITTAB_ENTRY=no
+        export NO_INIT_SCRIPTS=yes
+	export CITADEL_UID=`grep ^citadel: /etc/passwd | cut -d :  -f 3`
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/citadel" ]; then
+		update-rc.d citadel defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d citadel $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+
+
+if test x$1 = xconfigure; then
+	sleep 1
+	if test -S $RUNDIR/citadel-admin.socket; then
+		echo "applying your settings."
+		/usr/lib/citadel-server/setup -q
+
+		# we're in a fresh install, so we send the welcome message.
+		if test -z "$2"; then
+		    export SUPPRESS_DBVERSION_CHECK=yes
+		    /usr/lib/citadel-server/migrate_aliases.sh /etc/citadel/mail.aliases
+		    i=0;
+		    while test ! -S $RUNDIR/lmtp.socket -a "$i" -lt "10"; do
+			sleep 1
+			i=$(($i + 1))
+		    done
+		    if test -S $RUNDIR/lmtp.socket -a -x /usr/sbin/citmail ; then
+			export SEPERATOR=2600908b3f21ae7f692b973ed26e212d
+			export WELCOMEHTML=/usr/share/doc/citadel-server/welcomemail.html
+			export WELCOMETXT=/usr/share/doc/citadel-server/welcomemail.txt
+			export FROM=room_citadel_stats@uncensored.citadel.org
+			export TO=room_lobby
+			(
+			    printf "MIME-Version: 1.0\r\nContent-Type: multipart/alternative; \r\n boundary=$SEPERATOR\r\n\r\nThis is a multi-part message in MIME format.\r\n\r\n--$SEPERATOR\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\n"; 
+			    cat $WELCOMETXT
+			    printf "\r\n\r\n--$SEPERATOR\r\nContent-Type: text/html; charset=US-ASCII\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\n"
+			    cat $WELCOMEHTML; 
+			    printf "\r\n\r\n--$SEPERATOR--\r\n\r\n") | \
+				citmail -bm -r "$FROM" "$TO"
+		    fi
+		fi
+	fi
+fi
+exit 0

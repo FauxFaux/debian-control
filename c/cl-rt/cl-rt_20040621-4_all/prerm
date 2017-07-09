@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_lisp
+if [ "$1" = "remove" ] || [ "$1" = "upgrade" ] || [ "$1" = "deconfigure" ]; then
+    if which unregister-common-lisp-source > /dev/null; then
+	unregister-common-lisp-source "rt"
+    fi
+fi
+# End automatically added section

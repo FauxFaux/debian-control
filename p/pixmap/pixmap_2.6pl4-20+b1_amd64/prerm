@@ -1,0 +1,4 @@
+#!/bin/sh -e
+if [ \( "$1" = "upgrade" -o "$1" = "remove" \) -a -h /usr/doc/pixmap ]; then
+	rm -f /usr/doc/pixmap
+fi

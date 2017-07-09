@@ -1,0 +1,48 @@
+#!/bin/sh
+set -e
+
+upgrade_quirks() {
+  [ "$2" ] || return 0
+
+  dpkg --compare-versions $2 lt 1:2.5.1-1.3 || return 0
+
+  if [ -f /lib/init/rw/sendsigs.omit.d/atmarpd ]; then
+    mv /lib/init/rw/sendsigs.omit.d/atmarpd /run/sendsigs.omit.d/atmarpd
+  fi
+  rm -f /etc/rc0.d/K*atm /etc/rc6.d/K*atm
+
+  return 0
+}
+
+case "$1" in
+    configure)
+    upgrade_quirks "$@"
+    ;;
+esac
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask atm.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled atm.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable atm.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state atm.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/atm" ]; then
+		update-rc.d atm start 39 S . >/dev/null
+		invoke-rc.d atm start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

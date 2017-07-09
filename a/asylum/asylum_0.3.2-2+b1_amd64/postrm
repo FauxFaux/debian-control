@@ -1,0 +1,36 @@
+#!/bin/sh
+set -e
+
+SCOREFILES="
+    /var/games/asylum/EgoHighScores
+    /var/games/asylum/ExtendedHighScores
+    /var/games/asylum/IdHighScores
+    /var/games/asylum/PsycheHighScores
+    "
+
+case "$1" in
+    remove)
+    ;;
+
+    purge)
+        rm -f $SCOREFILES
+        rmdir --ignore-fail-on-non-empty /var/games/asylum
+    ;;
+
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+
+
+exit 0
+
+

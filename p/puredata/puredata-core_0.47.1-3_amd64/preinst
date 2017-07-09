@@ -1,0 +1,14 @@
+#! /bin/sh
+
+set -e
+
+
+
+# older versions of puredata-core provided theses as directories,
+# whereas nowadays they are symlinks to /usr/share/puredata/doc/
+# so we delete the directories here to smooth upgrades
+for d in 5.reference 7.stuff
+do
+  dir=/usr/lib/puredata/doc/$d
+  test -d "${dir}" && rm -r "${dir}" || true
+done

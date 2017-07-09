@@ -1,0 +1,45 @@
+#!/bin/sh
+# miwm.postinst
+
+PATH=/usr/bin:$PATH
+
+set -e
+
+GENERICBIN=/usr/bin/x-window-manager
+ETCALT=x-window-manager
+BIN=/usr/bin/miwm
+PRIORITY=20
+
+Warn ()
+{
+    echo "$@" >&2
+}
+
+Alternatives ()
+{
+    update-alternatives --install $GENERICBIN $ETCALT $BIN $PRIORITY
+}
+
+Debhelper ()
+{
+    :
+    # Automatically generated
+    # Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+}
+
+Main ()
+{
+    if [ "$1" = "configure" ] ; then
+        Alternatives
+        Debhelper
+    fi
+}
+
+Main "$@"
+
+# End of file

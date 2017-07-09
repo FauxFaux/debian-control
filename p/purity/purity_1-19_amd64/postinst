@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+if [ ! -f /var/games/purity.scores ]
+then
+	touch /var/games/purity.scores
+	chmod 660 /var/games/purity.scores
+	chown root:games /var/games/purity.scores;
+fi

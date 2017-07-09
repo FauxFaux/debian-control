@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+abort-upgrade | abort-deconfigure | abort-remove)
+	update-inetd --enable rstatd
+	;;
+configure)
+	if [ -n "$2" ]; then
+		update-inetd --enable rstatd
+	else
+		update-inetd --remove "rstatd/1-3	dgram	rpc/udp	wait	root	/usr/sbin/tcpd	/usr/sbin/rpc.rstatd"
+		update-inetd --group RPC --add "rstatd/1-5	dgram	rpc/udp	wait	nobody	/usr/sbin/tcpd	/usr/sbin/rpc.rstatd"
+	fi
+	;;
+*)
+	printf "$0: incorrect arguments: $*\n" >&2
+	exit 1
+	;;
+esac
+
+

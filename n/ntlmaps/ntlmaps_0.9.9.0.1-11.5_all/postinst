@@ -1,0 +1,130 @@
+#!/bin/sh -e
+
+. /usr/share/debconf/confmodule
+
+# write selected values into config file
+CONFIG_FILE=/etc/ntlmaps/server.cfg
+
+LISTENPORT_ENTRY=LISTEN_PORT
+PARENTPROXY_ENTRY=PARENT_PROXY
+PARENTPROXYPORT_ENTRY=PARENT_PROXY_PORT
+NTDOMAIN_ENTRY=NT_DOMAIN
+NTUSER_ENTRY=USER
+NTPASSWD_ENTRY=PASSWORD
+
+
+# copy configuration file template if necessary
+if [ ! -e $CONFIG_FILE ] ; then
+	cp /usr/share/ntlmaps/server.cfg /etc/ntlmaps/
+	# the config file may contain passwords, so make it non-world-readable
+	chmod 600 $CONFIG_FILE 
+fi
+
+LISTENPORT=5865
+db_get ntlmaps/listen_port
+LISTENPORT="$RET"
+# insert the entry, if it is missing (which it ought not to be)
+grep -Eq "^[[:blank:]]*$LISTENPORT_ENTRY:" $CONFIG_FILE || \
+    echo "$LISTENPORT_ENTRY: $LISTENPORT" >> $CONFIG_FILE 
+
+PARENTPROXY=your_parentproxy
+db_get ntlmaps/parent_proxy
+PARENTPROXY="$RET"
+# insert the entry, if it is missing (which it ought not to be)
+grep -Eq "^[[:blank:]]*$PARENTPROXY_ENTRY:" $CONFIG_FILE || \
+    echo "$PARENTPROXY_ENTRY: $PARENTPROXY" >> $CONFIG_FILE 
+
+PARENTPROXYPORT=8080
+db_get ntlmaps/parent_proxy_port
+PARENTPROXYPORT="$RET"
+# insert the entry, if it is missing (which it ought not to be)
+grep -Eq "^[[:blank:]]*$PARENTPROXYPORT_ENTRY:" $CONFIG_FILE || \
+    echo "$PARENTPROXYPORT_ENTRY: $PARENTPROXYPORT" >> $CONFIG_FILE 
+
+NTDOMAIN=your_domain
+db_get ntlmaps/nt_domain
+NTDOMAIN="$RET"
+# insert the entry, if it is missing (which it ought not to be)
+grep -Eq "^[[:blank:]]*$NTDOMAIN_ENTRY:" $CONFIG_FILE || \
+    echo "$NTDOMAIN_ENTRY: $NTDOMAIN" >> $CONFIG_FILE 
+
+NTUSER=username_to_use
+db_get ntlmaps/username
+NTUSER="$RET"
+# insert the entry, if it is missing (which it ought not to be)
+grep -Eq "^[[:blank:]]*$NTUSER_ENTRY:" $CONFIG_FILE || \
+    echo "$NTUSER_ENTRY: $NTUSER" >> $CONFIG_FILE 
+
+# copy config file here in order to preserve permissions when actually
+# building the tmp file in the sed step
+cp -a -f $CONFIG_FILE $CONFIG_FILE.tmp
+
+# update to the new values
+sed -e "
+    s/^[[:blank:]]*$LISTENPORT_ENTRY:.*/$LISTENPORT_ENTRY: $LISTENPORT/
+    s|^[[:blank:]]*$PARENTPROXY_ENTRY:.*|$PARENTPROXY_ENTRY: $PARENTPROXY|
+    s/^[[:blank:]]*$PARENTPROXYPORT_ENTRY:.*/$PARENTPROXYPORT_ENTRY: $PARENTPROXYPORT/
+    s/^[[:blank:]]*$NTDOMAIN_ENTRY:.*/$NTDOMAIN_ENTRY: $NTDOMAIN/
+    s/^[[:blank:]]*$NTUSER_ENTRY:.*/$NTUSER_ENTRY: $NTUSER/
+    " < $CONFIG_FILE > $CONFIG_FILE.tmp
+
+mv -f $CONFIG_FILE.tmp $CONFIG_FILE
+
+
+# to help improve security, treat the password separately.
+# The administrator may have chosen not to set it using debconf,
+# by leaving it blank.
+
+NTPASSWD=your_nt_password
+db_get ntlmaps/password
+NTPASSWD="$RET"
+# insert the entry, if it is missing (which it ought not to be)
+grep -Eq "^[[:blank:]]*$NTPASSWD_ENTRY:" $CONFIG_FILE || \
+    echo "$NTPASSWD_ENTRY: $NTPASSWD" >> $CONFIG_FILE 
+
+# only process the password if it is not empty
+if [ "$NTPASSWD" ]; then
+    # remove the password from the deconf database
+    db_set ntlmaps/password "password written to config file"
+
+    # copy config file here in order to preserve permissions when actually
+    # building the tmp file in the sed step
+    cp -a -f $CONFIG_FILE $CONFIG_FILE.tmp
+    
+    # escape sed special characters
+    #echo $NTPASSWD | sed -n 's|[\|\$\&\.\*\%\^\+\?]|\\&|g'
+    NTPASSWD=$(echo $NTPASSWD | sed 's|[\[\(\)\|\$\&\.\*\%\^\+\?\/]|\\&|g')
+    sed -e "s/^[[:blank:]]*$NTPASSWD_ENTRY:.*/$NTPASSWD_ENTRY: $NTPASSWD/" \
+	< $CONFIG_FILE > $CONFIG_FILE.tmp
+
+    mv -f $CONFIG_FILE.tmp $CONFIG_FILE
+fi
+
+# extra safety check: ensure passwords in config file cannot be read by anyone
+chmod og-r $CONFIG_FILE
+
+
+# must indicate we are done with debconf, or the script will hang when the
+# server is started below (DEBHELPER section, via dh_installinit).
+db_stop
+
+
+
+# Automatically added by dhpython:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p ntlmaps /usr/share/ntlmaps
+fi
+
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/ntlmaps" ]; then
+		update-rc.d ntlmaps defaults >/dev/null
+		invoke-rc.d ntlmaps start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0
+

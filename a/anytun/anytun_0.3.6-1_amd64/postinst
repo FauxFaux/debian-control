@@ -1,0 +1,14 @@
+#!/bin/sh
+# postinst script for anytun
+
+set -e
+
+if [ -x "/etc/init.d/anytun" ]; then
+  update-rc.d anytun defaults >/dev/null
+fi
+
+if [ "$1" = "configure" ]; then
+  adduser --quiet --system --group --no-create-home --home /var/run/anytun anytun
+fi
+
+

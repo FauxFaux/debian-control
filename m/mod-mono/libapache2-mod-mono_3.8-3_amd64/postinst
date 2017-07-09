@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+# Set up the environment
+set -e
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+# Automatically added by dh_apache2
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in mod_mono_auto mod_mono  ; do
+			apache2_invoke enmod $conf  || exit $?
+		done
+	fi
+fi
+# End automatically added section
+
+
+exit 0

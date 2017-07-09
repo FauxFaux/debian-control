@@ -1,0 +1,51 @@
+#!/bin/sh
+
+set -e
+
+CONFIGFILE="/etc/gnarwl.cfg"
+TMPCONF="/etc/gnarwl.cfg.dpkg-tmp"
+TEMPLATE="/usr/share/gnarwl/gnarwl.cfg.template"
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+
+
+# We exit unless the package is being configured
+case "$1" in
+        abort*upgrade) exit 0;;
+        abort*remove) exit 0;;
+        abort*deconfigure) exit 0;;
+        configure)
+            db_get gnarwl/server
+            SERVER=`echo $RET | cut -d: -f1`
+            PORT=`echo $RET | cut -d: -f2`
+            [ "$PORT" = "$SERVER" ] && PORT=389
+
+            db_get gnarwl/base
+            BASE="$RET"
+
+            # Generate temporary config file
+            sed -e "
+            /^server /c server $SERVER
+            /^port /c port $PORT
+            /^base /c base $BASE
+            " < $TEMPLATE > $TMPCONF
+
+            # Avoid spurious prompt if upgrading from pre-UCF version
+            if `dpkg --compare-versions "$2" le-nl 3.6.dfsg-6.1`; then
+                echo 99a06e9b2e087fae09e04be56a590805 > $TMPCONF.md5sum
+            fi
+
+            # Put config file in place through UCF
+            ucf --debconf-ok $TMPCONF $CONFIGFILE
+
+            rm -f $TMPCONF $TMPCONF.md5sum
+
+            # At first install, set safe permissions
+            if [ -z "$2" ]; then
+                chmod 600 $CONFIGFILE
+            fi
+            ;;
+        *) exit 0;
+esac

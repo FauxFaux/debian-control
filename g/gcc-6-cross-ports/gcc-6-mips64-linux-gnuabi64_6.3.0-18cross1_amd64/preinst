@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove mips64-linux-gnuabi64-gcc /usr/bin/mips64-linux-gnuabi64-gcc-6
+    update-alternatives --quiet --remove mips64-linux-gnuabi64-gcov /usr/bin/mips64-linux-gnuabi64-gcov-6
+fi
+
+
+
+exit 0

@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+    update-alternatives --quiet --install /usr/bin/tabbed tabbed \
+        /usr/bin/tabbed.default 100
+    update-alternatives --quiet --install /usr/bin/tabbed tabbed \
+        /usr/bin/tabbed.meta 50
+
+    # 'slock' needs to set '/proc/PID/oom_score_adj' to a value
+    # lower than '0'. Try and set CAP_SYS_RESOURCE to 'slock' binary,
+    # which allows us to install it without the setuid bit.
+    # We also need to set 'CAP_DAC_OVERRIDE',
+    # see http://www.gossamer-threads.com/lists/linux/kernel/1803612.
+    if command -v setcap > /dev/null; then
+        if ! setcap cap_sys_resource,cap_dac_override+ep /usr/bin/slock; then
+            echo "Setcap failed on /usr/bin/slock." \
+                "Slock will not be able to disable the OOM killer." >&2
+        fi
+    else
+        echo "Setcap is not installed." \
+            "Slock will not be able to disable the OOM killer." >&2
+    fi
+fi
+
+
+
+exit 0

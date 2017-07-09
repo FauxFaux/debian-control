@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+# bug #700785, was a symlink to 'libsdl-gfx1.2-4' in the past, so it will remove
+# files from there (e.g. debian/copyright)
+DOCDIR=/usr/share/doc/libsdl-gfx1.2-dev
+if [ -L "$DOCDIR" ]; then
+    rm "$DOCDIR"
+fi
+
+
+

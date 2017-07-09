@@ -1,0 +1,53 @@
+#!/bin/sh
+# This file is part of SAUCE, a very picky anti-spam receiver-SMTP.
+# SAUCE is Copyright (C) 1997-2003 Ian Jackson
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software Foundation,
+# Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. 
+#
+# $Id: postinst,v 1.10.2.1 2008/03/08 16:16:12 ian Exp $
+
+set -e
+
+case "$1" in
+configure)
+	update-rc.d sauce defaults > /dev/null
+
+	case "$2" in
+	0.7.?|0.7.1[0-4]|0.7.99.0.*)
+		printf "Clearing bug-induced cruft from site-annoy database..."
+		/usr/share/sauce/clean-site-annoy
+		echo ' done.'
+		;;
+	*)
+		find /var/lib/sauce -name 'db.site-annoy.*.csa~' \
+			-mtime +60 -ctime +60 -exec rm '{}' \;
+		;;
+	esac
+
+	sauce9-convert /var/lib/sauce
+
+	x=`find /var/lib/sauce -maxdepth 1 -name 'db.*.*' -exec echo y \;`
+	if [ "x$x" != x ]; then
+		echo 'Arranging to clean up old db.* files ...'
+		echo sauce9-convert /var/lib/sauce | at now +40 days
+	fi
+	;;
+esac
+
+case "$1" in
+configure|abort-upgrade|abort-remove|abort-deconfigure)
+	invoke-rc.d sauce start
+	;;
+esac

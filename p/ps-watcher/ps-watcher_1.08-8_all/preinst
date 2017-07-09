@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+# generate correct pid file, for versions where was non or incorrect
+if [ "$1" = "upgrade" ] && [ "$2" ] && dpkg --compare-versions "$2" le "1.06-6"; then
+	pidof ps-watcher > /var/run/ps-watcher.pid
+fi
+

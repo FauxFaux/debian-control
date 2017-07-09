@@ -1,0 +1,42 @@
+#!/bin/sh 
+# config script for lurker
+#
+set -e
+
+. /usr/share/debconf/confmodule
+
+# Use a state machine to allow jumping back to previous questions.
+STATE=1
+while [ "$STATE" != 0 ] && [ "$STATE" != 3 ]; do
+  case "$STATE" in
+    1)
+       if [ -e /etc/lurker/lurker.conf ]; then
+	 if which lurker-params >/dev/null; then
+           archve=`lurker-params -c /etc/lurker/lurker.conf -a`
+	   admnme=`lurker-params -c /etc/lurker/lurker.conf -n`
+	   admadr=`lurker-params -c /etc/lurker/lurker.conf -e`
+         else
+           archve=`grep "^[[:space:]]*archive[[:space:]]*=" /etc/lurker/lurker.conf | sed 's/^[^=]*=[[:space:]]*\([[:graph:]]*[[:print:]]\)[[:space:]]*/\1/' | tail -1`
+           admnme=`grep "^[[:space:]]*admin_name[[:space:]]*=" /etc/lurker/lurker.conf | sed 's/^[^=]*=[[:space:]]*\([[:graph:]]*[[:print:]]\)[[:space:]]*/\1/' | tail -1`
+           admadr=`grep "^[[:space:]]*admin_address[[:space:]]*=" /etc/lurker/lurker.conf | sed 's/^[^=]*=[[:space:]]*\([[:graph:]]*[[:print:]]\)[[:space:]]*/\1/' | tail -1`
+         fi
+	 if [ "$archve" ]; then db_set lurker/archive $archve; fi
+	 if [ "$admnme" ]; then db_set lurker/admin_name $admnme; fi
+	 if [ "$admadr" ]; then db_set lurker/admin_address $admadr; fi
+       fi 
+       db_input low lurker/archive || true
+       db_input low lurker/admin_name || true
+       db_input low lurker/admin_address || true
+    ;;
+    2)
+       db_input high lurker/group_passwd || true
+    ;;
+  esac
+
+  if db_go || true; then
+    STATE=$(($STATE + 1))
+  else
+    STATE=$(($STATE - 1))
+  fi
+done
+exit 0

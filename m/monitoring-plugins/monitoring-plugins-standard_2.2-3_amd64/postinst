@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/monitoring-plugins/dpkg/functions
+templdir=/usr/share/monitoring-plugins/templates-standard
+
+if [ "$1" = "configure" ]; then
+	register_cfgs $2
+fi
+
+

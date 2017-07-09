@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installxmlcatalogs
+if [ "$1" = "configure" ]; then
+	update-xmlcatalog --add --type public --id "-//W3C//DTD MathML" --package w3-dtd-mathml --local /usr/share/xml/schema/w3c/mathml/dtd/catalog.xml
+	update-xmlcatalog --add --type public --id "-//W3C//DTD XHTML 1.1 plus MathML" --package w3-dtd-mathml --local /usr/share/xml/schema/w3c/mathml/dtd/catalog.xml
+	update-xmlcatalog --add --type system --id "http://www.w3.org/TR/MathML2/dtd/" --package w3-dtd-mathml --local /usr/share/xml/schema/w3c/mathml/dtd/catalog.xml
+
+	update-xmlcatalog --add --type public --id "-//W3C//DTD MathML" --package w3-dtd-mathml --root
+	update-xmlcatalog --add --type public --id "-//W3C//DTD XHTML 1.1 plus MathML" --package w3-dtd-mathml --root
+	update-xmlcatalog --add --type system --id "http://www.w3.org/TR/MathML2/dtd/" --package w3-dtd-mathml --root
+
+fi
+# End automatically added section

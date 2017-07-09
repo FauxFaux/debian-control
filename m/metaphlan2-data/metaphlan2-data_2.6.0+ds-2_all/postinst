@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# Load debconf variables
+. /usr/share/debconf/confmodule
+
+conffile=/etc/metaphlan2/metaphlan2-data.conf
+
+set -e
+
+if [ -e $conffile ] ; then
+    # Fetch current values.
+    . $conffile
+fi
+
+# Get this setting from debconf.  It was set based on the content of
+# /etc/metaphlan2/metaphlan2-data.conf in the 'config' script, so it should be
+# safe to ignore the value fetched by loading the file above.  This
+# should allow for using debconf to reconfigure the package.
+db_get metaphlan2-data/createnow || true
+if [ "$RET" = "yes" ] || [ "$RET" = "YES" ] || [ "$RET" = "true" ]; then
+    CREATENOW="yes"
+else
+    CREATENOW="no"
+fi
+
+case "$1" in
+    configure)
+	if [ "$CREATENOW" = "yes" ]; then
+	    metaphlan2-data-convert
+	else
+            echo "Make sure you call metaphlan2-data-convert as root before using metaphlan2."
+	fi
+	;;
+    *)
+	;;
+esac
+
+

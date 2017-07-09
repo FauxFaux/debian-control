@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installxmlcatalogs
+if [ "$1" = "configure" ]; then
+	update-xmlcatalog --add --type public --id "-//Norman Walsh//DTD Slides" --package docbook-slides --local /usr/share/xml/docbook/custom/slides/3.4.0/catalog.xml
+	update-xmlcatalog --add --type system --id "http://docbook.sourceforge.net/release/slides/" --package docbook-slides --local /usr/share/xml/docbook/custom/slides/3.4.0/catalog.xml
+
+	update-xmlcatalog --add --type public --id "-//Norman Walsh//DTD Slides" --package docbook-slides --root
+	update-xmlcatalog --add --type system --id "http://docbook.sourceforge.net/release/slides/" --package docbook-slides --root
+
+fi
+# End automatically added section

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/heat puppet-module-heat /usr/share/puppet/modules.available/heat 500
+fi
+
+
+
+exit 0

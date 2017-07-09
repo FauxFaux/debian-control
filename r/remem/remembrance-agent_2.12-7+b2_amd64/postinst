@@ -1,0 +1,87 @@
+#!/bin/bash -e
+
+. /usr/share/debconf/confmodule
+test $DEBIAN_SCRIPT_DEBUG && set -v -x
+
+# Create a database from directories given by user 
+# the databases are made at a give directory (should be customizable)
+# TODO:
+# Use scope to modify the /etc/emacsxx/site-start.d/50remembrance...
+# file so they are automatically loaded on startup depending on
+# scope, maybe do a sed -e to change 'scope' into the scope given.
+
+PATH=/bin:/usr/bin
+package=remembrance-agent
+database=/var/lib/emacs/remembrance
+databasesed=`echo $database | sed -e 's/\//\\\\\//g'`
+scope=memory
+program=/usr/bin/ra-index
+config_file=/etc/savantrc
+emacs_el_start=/etc/emacs/site-start.d/50remembrance-agent.el
+tmp_file=`/bin/tempfile`
+#tmp_file=/tmp/${package}.el
+
+# First, per policy call emacs-install
+/usr/lib/emacsen-common/emacs-package-install ${package}
+
+
+user_input () {
+# User input
+db_get remembrance-agent/index-dir || true;  dirs="$RET"
+db_get remembrance-agent/exclude-dir || true;  edirs="$RET"
+# Should check here that the user has given only three..
+ONCE=TRUE
+}
+
+case "$1" in
+    install)
+        ;;
+    upgrade)
+        ;;
+    configure*)
+	
+	# First time around call user input
+	user_input
+
+# Now build the database
+if [ ! -z "${dirs}" ]; then
+	echo "Building database in ${database} using ${program}."
+	echo "Including directories under '${dirs}' "
+	echo "and excluding '${edirs}'."
+	echo "Note: If the file structure is large this will take quite some time"
+	echo "and require an important amount of memory and harddisk."
+#	if [ ! -d ${database}/${scope} ]; then \
+#		mkdir -p ${database}/${scope}; \
+#	fi;
+	# For Remembrance 2.0 (no scopes)
+	if [ ! -d "${database}/" ]; then \
+		mkdir -p ${database}/; \
+	fi;
+	${program} -c ${config_file} ${database}/ ${dirs} -e ${edirs}
+	echo -e "\nDatabase FINISHED."
+	echo -e "\nModifying ${emacs_el_start}"
+	perl -pe "s/~\/RA-indexes\//$databasesed/" ${emacs_el_start} >${tmp_file}
+	cp ${tmp_file} ${emacs_el_start}
+
+# NOT USED (might, in the future)
+# CHANGE scope in the .el file:
+#	sed -e s/\$SCOPES/${scope}/ ${emacs_el_start} >${tmp_file}
+# Maybe we should ask the user before doing this
+#	cp ${tmp_file} ${emacs_el_start}
+
+	rm ${tmp_file}
+else
+	echo -e "\nNOT building the database since no directories were specified."
+fi
+        ;;
+	abort-upgrade)
+	;;
+	*)
+	echo "postinst called with unknown argument \`$1'" >&2
+	exit 0
+	;;
+esac
+
+
+
+exit 0

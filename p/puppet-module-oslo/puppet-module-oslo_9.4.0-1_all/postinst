@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/oslo puppet-module-oslo /usr/share/puppet/modules.available/oslo 500
+fi
+
+
+
+exit 0

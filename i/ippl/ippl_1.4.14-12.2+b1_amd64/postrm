@@ -1,0 +1,34 @@
+#!/bin/sh -e
+# postrm
+
+USERNAME="Debian-ippl"
+HOMEDIR="/var/run/ippl"
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d ippl remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+
+
+if [ "$1" = "purge" ]; then
+	rm -rf /var/log/ippl
+	
+	if command -v deluser >/dev/null; then
+	  echo >&2 'Removing system user'
+	  RET=0
+	  deluser --remove-home --system $USERNAME || RET=$?
+	  if [ "$RET" != "8" ]; then
+	    exit $RET
+	  fi
+	else
+	  echo >&2 'Not removing system user, deluser not found'
+	fi
+fi

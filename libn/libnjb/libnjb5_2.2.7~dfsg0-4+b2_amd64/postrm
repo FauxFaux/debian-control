@@ -1,0 +1,10 @@
+#!/bin/sh
+# postrm script for libnjb
+
+set -e
+
+dpkg-maintscript-helper rm_conffile /etc/udev/libnjb.rules -- "$@"
+
+
+
+exit 0

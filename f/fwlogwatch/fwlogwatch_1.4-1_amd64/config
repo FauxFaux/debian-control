@@ -1,0 +1,114 @@
+#!/bin/sh
+# Copyright 2001 Alberto Gonzalez Iniesta <agi@agi.as>
+# Licensed under the GNU General Public License, version 2.  See the file
+# /usr/share/common-licenses/GPL or <http://www.gnu.org/copyleft/gpl.txt>.
+#
+set -e
+test $DEBIAN_SCRIPT_DEBUG && set -v -x
+CONFIG_FILE="/etc/default/fwlogwatch"
+
+# Use debconf
+. /usr/share/debconf/confmodule
+
+# Check if the existing configuration is parseable, or
+# if it has unknown values
+existing_config_is_valid() {
+  if ! [ "$START_DAEMON" = "true" -o "$START_DAEMON" = "false" ]; then
+    return 1
+  fi
+  for PARAM in $PARAMS; do
+    if ! [ "$PARAM" = "-B" -o "$PARAM" = "-A" ]; then
+      return 1
+    fi
+  done
+  if ! [ "$MODE" = "iptables" -o "$MODE" = "ipchains" -o "$MODE" = "other" -o "$MODE" = "" ]; then
+    return 1
+  fi
+
+  return 0
+}
+
+update_debconf_with_it() {
+  if [ "$START_DAEMON" = "true" ]; then
+    db_set fwlogwatch/realtime "true"
+  else
+    db_set fwlogwatch/realtime "false"
+  fi
+  for PARAM in $PARAMS; do
+    if [ "$PARAM" = "-B" ]; then
+      RESPOND="on"
+      case $MODE in
+        iptables)
+            db_set fwlogwatch/respond "yes (iptables)"
+            ;;
+        ipchains)
+            db_set fwlogwatch/respond "yes (ipchains)"
+            ;;
+        *)
+            db_set fwlogwatch/respond "yes (other)"
+            ;;
+      esac
+    elif [ "$PARAM" = "-A" ]; then
+      NOTIFY="on"
+      if [ ! -z "$EMAIL" ]; then
+        db_set fwlogwatch/notify "yes (mail)"
+        db_set fwlogwatch/email "$EMAIL"
+      else
+        db_set fwlogwatch/notify "yes (other)"
+      fi
+    fi
+  done
+  if [ -z "$RESPOND" ]; then
+    db_set fwlogwatch/respond "no"
+  fi
+  if [ -z "$NOTIFY" ]; then
+    db_set fwlogwatch/notify "no"
+  fi
+  db_set fwlogwatch/cron_email "$CRON_EMAIL"
+  db_set fwlogwatch/cron_parameters "$CRON_PARAMS"
+}
+
+if [ -f "$CONFIG_FILE" ]; then
+  . "$CONFIG_FILE"
+# If there's a non-manageable option in the existing configuration, we won't rewrite it
+  if existing_config_is_valid; then
+    update_debconf_with_it
+    db_set fwlogwatch/buildconfig "true"
+  else
+    db_set fwlogwatch/buildconfig "false"
+    exit 0
+  fi
+else
+  db_set fwlogwatch/buildconfig "true"
+fi
+
+# Do we want to run in realtime?
+db_input medium fwlogwatch/realtime || true
+db_go
+
+# Only ask for notify or respond in case of realtime mode operation
+db_get fwlogwatch/realtime || RET="false"
+if [ "$RET" = "true" ]; then
+  db_input medium fwlogwatch/respond || true
+  db_go
+  db_input medium fwlogwatch/notify || true
+  db_go
+  # If we want to be notified via email, ask for address
+  db_get fwlogwatch/notify || RET="false"
+  if [ "$RET" = "yes (mail)" ]; then
+    db_input medium fwlogwatch/email || true
+    db_go
+  fi
+fi
+# Do we want a daily cron job?
+db_input medium fwlogwatch/cron_email || true
+db_go
+db_get fwlogwatch/cron_email || RET="none"
+# We're running the cron job. What parameters do we want for it?
+if [ "$RET" != "none" ]; then
+  db_input low fwlogwatch/cron_parameters || true
+  db_go
+fi
+
+exit 0
+# vim: set ai et sts=2 sw=2 tw=0:

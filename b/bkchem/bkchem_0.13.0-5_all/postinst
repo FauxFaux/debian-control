@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dhpython:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p bkchem /usr/lib/bkchem
+fi
+
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p bkchem /usr/share/bkchem
+fi
+
+# End automatically added section
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section

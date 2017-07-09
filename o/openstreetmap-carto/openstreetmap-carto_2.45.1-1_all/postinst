@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+
+case "$1" in
+  configure|triggered)
+
+    # Generate style.xml from "template" in openstreetmap-carto-common
+    db_get openstreetmap-carto/database-name
+    sed -e"s/\[gis\]/\[$RET\]/" /usr/share/openstreetmap-carto-common/style.xml > /usr/share/openstreetmap-carto/style.xml
+
+
+
+  ;;
+
+  abort-upgrade|abort-remove|abort-deconfigure)
+  ;;
+
+  *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+  ;;
+
+esac
+
+# This is necessary in order to replace the dir with a symbolic link since a dir will never be
+# replaced by a symbolic link during upgrade if not done in maintainer scripts.
+dpkg-maintscript-helper dir_to_symlink /usr/share/openstreetmap-carto/symbols \
+     ../openstreetmap-carto-common/symbols 2.35.0-2 openstreetmap-carto -- "$@"
+
+
+
+
+exit 0

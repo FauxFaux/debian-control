@@ -1,0 +1,121 @@
+#!/bin/sh
+set -e
+
+if [ -f /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+fi
+
+db_version 2.0
+
+db_capb backup
+
+STATE=1
+MAXSTATE=12
+
+devicecount=0
+
+db_input medium smstools/configure || true
+db_go || true
+
+db_get smstools/configure
+if [ "$RET" = 'true' ]; then
+	if [ -f /etc/smsd.conf ]; then
+		EVENTHANDLER="`grep '^eventhandler' /etc/smsd.conf|head -1|cut -d'=' -f2|sed 's/ //g'|sed 's/@EVENTHANDLER@//g'`"
+		db_set smstools/eventhandler "$EVENTHANDLER" || true
+		db_go
+	fi
+
+
+
+while [ "$STATE" != 0 -a "$STATE" -lt $MAXSTATE ]; do
+	case "$STATE" in
+	1)
+		# Global event handler
+		db_input medium smstools/eventhandler || true
+	;;
+
+	2)
+		devicecount=$(( $devicecount+1 ))
+		db_register smstools/devicename smstools/modems/devicename$devicecount || true
+
+		if [ $devicecount -gt 1 ]
+		then
+			db_set smstools/modems/devicename$devicecount GSM$devicecount || true
+		fi
+
+		db_input medium smstools/modems/devicename$devicecount || true
+	;;
+
+	3)
+		db_register smstools/devicenode smstools/modems/devicenode$devicecount || true
+		db_input medium smstools/modems/devicenode$devicecount || true
+	;;
+
+	4)
+		db_get smstools/modems/devicenode$devicecount || true
+
+		if [ "$RET" = 'Other' ]; then
+			db_register smstools/devicenodeother smstools/modems/devicenodeother$devicecount || true
+			db_input medium smstools/modems/devicenodeother$devicecount || true
+		fi
+
+	;;
+
+	5)
+		db_register smstools/deviceinit smstools/modems/deviceinit$devicecount || true
+		db_input low smstools/modems/deviceinit$devicecount || true
+	;;
+
+	6)
+		db_register smstools/devicebaudrate smstools/modems/devicebaudrate$devicecount || true
+		db_input low smstools/modems/devicebaudrate$devicecount || true
+	;;
+
+	7)
+		db_get smstools/modems/devicebaudrate$devicecount || true
+
+		if [ "$RET" = 'Other' ]; then
+			db_register smstools/devicebaudrateother smstools/modems/devicebaudrateother$devicecount || true
+			db_input low smstools/modems/devicebaudrateother$devicecount || true
+		fi
+
+	;;
+
+	8)
+		db_register smstools/deviceincoming smstools/modems/deviceincoming$devicecount || true
+		db_input medium smstools/modems/deviceincoming$devicecount || true
+	;;
+
+	9)
+		db_register smstools/devicepin smstools/modems/devicepin$devicecount || true
+		db_input medium smstools/modems/devicepin$devicecount || true
+
+	;;
+
+	10)
+		if [ $devicecount -le 32 ]; then
+			db_register smstools/configureanothermodem smstools/configureanothermodem$devicecount || true
+			db_input medium smstools/configureanothermodem$devicecount || true
+		fi
+	;;
+
+	11)
+		if [ $devicecount -le 32 ]; then
+			db_get smstools/configureanothermodem$devicecount || true
+
+			if [ "$RET" = 'true' ]; then
+				STATE=1
+			fi
+		fi
+	;;
+
+
+	esac
+
+	if db_go; then
+	        STATE=$(($STATE + 1))
+	else
+	        STATE=$(($STATE - 1))
+	fi
+done
+fi

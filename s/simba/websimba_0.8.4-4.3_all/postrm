@@ -1,0 +1,85 @@
+#!/bin/sh
+
+
+#
+# Skip, if we are not in "configure" state
+# 
+if [ "$1" != "remove" ] && [ "$1" != "purge" ]; then
+	echo "I: Skipping configuration"
+	exit 0
+fi
+
+## Source debconf library
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+#
+# retieve various configuration options from debconf
+#
+db_get websimba/webserver
+WWWTYPE="$RET"
+
+case "$WWWTYPE" in
+	"Apache")
+		webservers="apache" ;;
+	"Apache-SSL")
+		webservers="apache-ssl" ;;
+	"Apache2")
+		webservers="apache2" ;;
+	"All")
+		webservers="apache apache-ssl apache2" ;;
+	*)
+		webservers="" ;;
+esac
+includefile=/etc/simba/apache.conf
+
+
+#
+# remove or purge the whole package
+#
+
+if [ "$1" = "purge" ] || [ "$1" = "remove" ]; then
+
+	echo -n "I: Remove apache configuration files:" 
+	for server in $webservers; do
+		echo -n " $server"
+
+		# prefer conf.d over monolithic form
+		if [ -d "/etc/${server}/conf.d" ]; then
+			if [ -L "/etc/${server}/conf.d/simba.conf" ]; then
+				rm "/etc/${server}/conf.d/simba.conf"
+			fi
+		else
+			conffile="/etc/$server/httpd.conf"
+			if [ -e /usr/share/wwwconfig-common/apache-uninclude.sh ]; then
+				. /usr/share/wwwconfig-common/apache-uninclude.sh
+				[ "$status" = "error" ] && echo "Unable to remove \"Include $includefile\" from $conffile"
+			else
+				echo "Cannot uninclude apache config part (can't find wwwconfig-common script)." >&2
+			fi
+		fi
+
+		if [ "$status" = "purge" ] ; then
+			restart="$restart $server"
+		fi
+		if [ -e /usr/share/wwwconfig-common/restart.sh ] ; then
+			. /usr/share/wwwconfig-common/restart.sh ||
+				echo "Could not restart servers (wwwconfig-common script failed)." >&2
+		else
+			echo "Cannot restart servers (can't find wwwconfig-common script)." >&2
+		fi
+		
+	done
+	echo "."
+fi
+
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0
+

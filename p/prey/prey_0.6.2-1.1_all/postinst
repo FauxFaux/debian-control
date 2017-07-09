@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p prey /usr/lib/prey -V 2.5-
+fi
+
+# End automatically added section
+
+
+exit 0

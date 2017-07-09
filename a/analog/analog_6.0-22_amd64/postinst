@@ -1,0 +1,25 @@
+#!/bin/sh
+set -e
+. /usr/share/debconf/confmodule
+
+db_get analog/anlgform
+if [ "$RET" = true ]; then
+	mkdir -p /usr/lib/cgi-bin
+	if ! ln -f /usr/share/analog/anlgform.pl /usr/lib/cgi-bin/anlgform.cgi; then
+		echo "warning: Failed to hard link anlgform.cgi. Using a soft link." >&2
+		echo "warning: The soft link may not work for some web servers." >&2
+		ln -sf /usr/share/analog/anlgform.pl /usr/lib/cgi-bin/anlgform.cgi
+	fi
+else
+	rm -f /usr/lib/cgi-bin/anlgform.cgi
+fi
+
+# File moved
+if [ -e /var/lib/analog/dnscache ]; then
+	mv -f /var/lib/analog/dnscache /var/cache/analog/
+fi
+if [ -d /var/lib/analog ]; then
+	rmdir --ignore-fail-on-non-empty -p /var/lib/analog
+fi
+
+

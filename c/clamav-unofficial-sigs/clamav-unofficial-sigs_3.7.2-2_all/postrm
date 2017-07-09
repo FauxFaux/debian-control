@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+
+purge=/var/lib/clamav-unofficial-sigs/purge.txt
+
+if [ "$1" = purge ] ; then
+	for file in `cat $purge 2>/dev/null` ; do
+		rm -f -- "$file"
+	done
+	for dir in configs gpg-key ; do
+		if dpkg-statoverride --list /var/lib/clamav-unofficial-sigs/$dir >/dev/null 2>&1; then
+			dpkg-statoverride --remove /var/lib/clamav-unofficial-sigs/$dir >/dev/null 2>&1
+		fi
+	done
+	for dir in ss-dbs msrbl-dbs si-dbs mbl-dbs add-dbs ; do
+		if dpkg-statoverride --list /var/cache/clamav-unofficial-sigs/$dir >/dev/null 2>&1; then
+			dpkg-statoverride --remove /var/cache/clamav-unofficial-sigs/$dir >/dev/null 2>&1
+		fi
+	done
+fi
+
+
+
+exit 0

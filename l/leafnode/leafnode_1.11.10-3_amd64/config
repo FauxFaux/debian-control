@@ -1,0 +1,64 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+# Has the user selected a server in debconf?
+db_fget leafnode/server seen || true
+if [ "$RET" = "false" ]; then
+   server_is_default="true"
+fi
+
+# Now we grovel around trying to find a value for the upstream server.
+# This is done on every configuration so that the debconf database will
+# pick up changes made by the user, which should prevent the postinst
+# overwriting changes the user made there.
+remoteserver=""
+
+# Is there an existing configuration on the system?
+if [ -f /etc/news/leafnode/config ]; then
+   remoteserver=`grep -v '#' /etc/news/leafnode/config | awk '{ if ($1 == "server") { printf("%s\n", substr($0,index($0,"=")+1)); exit } }' | tr -d ' '`
+
+# If there's a non-defualt debconf value then try that
+elif [ "$server_is_default" != "true" ] && db_get leafnode/server; then
+   remoteserver=$RET
+
+# Try the server name set in debconf
+elif db_get shared/news/server ; then
+   remoteserver=$RET
+
+# Otherwise, try the value of /etc/news/server
+elif [ -e /etc/news/server ]; then
+   remoteserver=`cat /etc/news/server`
+fi
+
+# If we found something, set it
+if [ "$remoteserver" != "" ]; then
+   db_set leafnode/server $remoteserver
+
+   # But only flag as default if the user hasn't set something before
+   if [ "$server_is_default" = "true" ]; then
+      db_fset leafnode/server seen false
+   fi
+fi
+
+# User interaction starts here.  We block all the user-selectable
+# options together.
+db_beginblock
+
+# Where do we get news from?  
+db_input high leafnode/server || true
+
+# What sort of network connection do we have?  
+db_input high leafnode/network || true
+
+# Should we use tcp wrappers?
+db_input low leafnode/tcpd || true
+
+# Should we download the list of groups when we're done?
+db_input medium leafnode/update-groups || true
+
+# Flush all the user selections.
+db_endblock
+db_go 

@@ -1,0 +1,13 @@
+#! /bin/sh
+
+set -e
+
+echo -n "Checking for /usr/share/doc/libdockapp-dev symbolic link..."
+if [ -h /usr/share/doc/libdockapp-dev ]; then
+	rm /usr/share/doc/libdockapp-dev
+	echo "removed."
+else
+	echo "not a symlink."
+fi
+
+

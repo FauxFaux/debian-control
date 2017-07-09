@@ -1,0 +1,33 @@
+#!/bin/sh -e
+# Gopal Narayanan <gopal@debian.org>
+
+. /usr/share/debconf/confmodule
+
+# Find the current setting.  This might be used later, if I implement
+# support for reconfiguring the package using debconf.
+
+# Do this in a subshell to be able to cd into the example directory
+(
+    if [ -f /etc/plan/holiday ] ; then
+	cd /usr/share/doc/plan/examples/holiday
+	for h in *; do 
+	    # Use cpp and remove # lines inserted by cpp to handle both
+	    # old style copying and new style #include in /etc/plan/holiday.
+	    if cpp /etc/plan/holiday | grep -v '^#' | cmp -s - $h; then
+		current=`echo $h | sed s/holiday_//`
+		echo "Current is $current" 1>&2
+	    fi
+	done
+    fi
+    if [ -z "$current" ] ; then
+	current=none
+    fi
+    db_set plan/holiday "$current"
+)
+
+# Do not touch the existing config file, to avoid problems with local
+# modifications of the file.
+if [ ! -f /etc/plan/holiday ] ; then
+    db_input medium plan/holiday || true
+    db_go
+fi

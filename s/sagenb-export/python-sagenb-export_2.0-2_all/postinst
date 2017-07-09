@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] ; then
+	update-alternatives --install /usr/bin/sagenb-export sagenb-export /usr/bin/sagenb-export-python2 300
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-sagenb-export 
+fi
+
+# End automatically added section
+

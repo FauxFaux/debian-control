@@ -1,0 +1,46 @@
+#!/bin/sh
+
+set -e
+
+# wdm versions before 1.28-4 updated display manager list in ${wdmconfig}
+# conffile everytime wdm is installed, upgraded or run. That causes unneeded
+# queries during upgrade. This was fixed in 1.28-4. This file tries to smooth
+# upgrades from previous versions (1.28-2 and above). Checks if the only change
+# is display manager line and then checks if change was not blessed by sysadmin,
+# reverting automatic changes if so. See Debian bugs #582612 and #606788
+
+# md5sums for pristine wdm-config with DisplayManager*wdmWm stripped
+# wdm_1.28-2 (as well as lenny wdm_1.28-3)
+pristine_stripped_md5="b903cf9c29cad13e3931ff30e6da7b96"
+# Intermediate wdm_1.28-3.5
+pristine_stripped_md5_alt="3ec0efa2089101552b0874ff63884292"
+
+# pristine wdm-config DisplayManager*wdmWm string
+pristine_string='! DisplayManager*wdmWm:         twm:wmaker:afterstep'
+
+wdmconfig="/etc/X11/wdm/wdm-config"
+wdmconfig_tmp="${wdmconfig}.dpkg-tmp"
+
+# Do nothing if this is first installation
+if [ -f "$wdmconfig" ]; then
+    wdmconfig_stripped_md5=$(grep -v 'DisplayManager\*wdmWm:' "${wdmconfig}" | md5sum  | sed 's/ .*//')
+
+    # First check if "$wdmconfig" matches old pristine files for everything but Displaymanager line.
+    if [ "$wdmconfig_stripped_md5" = "$pristine_stripped_md5" ] ||
+	[ "$wdmconfig_stripped_md5" = "$pristine_stripped_md5_alt" ]; then
+	wdmconfig_dpkg_md5sum=$(dpkg-query -W -f='${Conffiles}' wdm | grep "$wdmconfig" | awk '{print $2}')
+	sed -e 's/.*DisplayManager\*wdmWm:.*/'"$pristine_string"'/' "$wdmconfig" > "${wdmconfig_tmp}"
+	wdmconfig_new_md5=$(md5sum "${wdmconfig_tmp}" | sed 's/ .*//')
+
+	# Check now if re-created file md5 sum matches that registered by dpkg. Otherwise
+	# new file may have been explicitly accepted by sysadmin during upgrade.
+	if [ "$wdmconfig_new_md5" = "$wdmconfig_dpkg_md5sum" ]; then
+	    echo "Reverting unblessed automatic changes to ${wdmconfig}." >&2
+	    mv -f "${wdmconfig_tmp}" "$wdmconfig"
+	else
+	    rm -f "${wdmconfig_tmp}"
+	fi
+    fi
+fi
+
+

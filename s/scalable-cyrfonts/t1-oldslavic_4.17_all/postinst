@@ -1,0 +1,26 @@
+#!/bin/sh
+
+if which xftcache >/dev/null 2>&1; then
+	xftcache /usr/share/fonts/X11/Type1
+fi
+
+if which fc-cache >/dev/null 2>&1 && [ -f /etc/fonts/fonts.conf ]; then
+	fc-cache /usr/share/fonts/X11/Type1
+fi
+
+# Automatically added by dh_installxfonts
+if which update-fonts-dir >/dev/null 2>&1; then
+	update-fonts-scale Type1;update-fonts-dir --x11r7-layout Type1;update-fonts-alias --include /etc/X11/fonts/Type1/t1-oldslavic.alias Type1
+fi
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/X11/fonts/X11R7/Type1/t1-oldslavic.scale 4.12+nmu1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/X11/fonts/X11R7/Type1/t1-oldslavic.alias 4.12+nmu1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/defoma/hints/t1-oldslavic.hints 4.14 -- "$@"
+# End automatically added section
+
+

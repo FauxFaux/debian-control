@@ -1,0 +1,24 @@
+#!/bin/sh
+# config maintainer script for libwiki-toolkit-perl
+
+set -e
+
+# source debconf stuff
+. /usr/share/debconf/confmodule
+
+if [ -n "$2" ]; then
+    if dpkg --compare-versions "$2" lt 0.76-1; then
+        db_input high libwiki-toolkit-perl/schema_upgrade_warn || true
+        db_go
+        db_get libwiki-toolkit-perl/schema_upgrade_warn || true
+        if [ "$RET" = "false" ]; then
+            echo "Aborting install";
+            db_fset libwiki-toolkit-perl/schema_upgrade_warn seen false
+            exit 1
+        fi
+        if [ -d /usr/share/libwiki-toolkit-perl/upgrade-hooks ]; then
+            db_input high libwiki-toolkit-perl/schema_upgrade_auto || true
+            db_go
+        fi
+    fi
+fi

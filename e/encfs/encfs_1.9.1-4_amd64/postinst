@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+. /usr/share/debconf/confmodule
+db_fget encfs/security-information seen
+if [ "$RET" != true ]; then
+   db_get encfs/security-information
+   :
+fi
+
+

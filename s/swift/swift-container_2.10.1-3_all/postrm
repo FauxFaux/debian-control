@@ -1,0 +1,158 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d swift-container remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask swift-container-auditor.service swift-container-reconciler.service swift-container-replicator.service swift-container-sync.service swift-container-updater.service swift-container.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge swift-container-auditor.service swift-container-reconciler.service swift-container-replicator.service swift-container-sync.service swift-container-updater.service swift-container.service >/dev/null
+		deb-systemd-helper unmask swift-container-auditor.service swift-container-reconciler.service swift-container-replicator.service swift-container-sync.service swift-container-updater.service swift-container.service >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d swift-container-updater remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask swift-container-auditor.service swift-container-reconciler.service swift-container-replicator.service swift-container-sync.service swift-container-updater.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge swift-container-auditor.service swift-container-reconciler.service swift-container-replicator.service swift-container-sync.service swift-container-updater.service >/dev/null
+		deb-systemd-helper unmask swift-container-auditor.service swift-container-reconciler.service swift-container-replicator.service swift-container-sync.service swift-container-updater.service >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d swift-container-sync remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask swift-container-auditor.service swift-container-reconciler.service swift-container-replicator.service swift-container-sync.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge swift-container-auditor.service swift-container-reconciler.service swift-container-replicator.service swift-container-sync.service >/dev/null
+		deb-systemd-helper unmask swift-container-auditor.service swift-container-reconciler.service swift-container-replicator.service swift-container-sync.service >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d swift-container-replicator remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask swift-container-auditor.service swift-container-reconciler.service swift-container-replicator.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge swift-container-auditor.service swift-container-reconciler.service swift-container-replicator.service >/dev/null
+		deb-systemd-helper unmask swift-container-auditor.service swift-container-reconciler.service swift-container-replicator.service >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d swift-container-reconciler remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask swift-container-auditor.service swift-container-reconciler.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge swift-container-auditor.service swift-container-reconciler.service >/dev/null
+		deb-systemd-helper unmask swift-container-auditor.service swift-container-reconciler.service >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d swift-container-auditor remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask swift-container-auditor.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge swift-container-auditor.service >/dev/null
+		deb-systemd-helper unmask swift-container-auditor.service >/dev/null
+	fi
+fi
+# End automatically added section

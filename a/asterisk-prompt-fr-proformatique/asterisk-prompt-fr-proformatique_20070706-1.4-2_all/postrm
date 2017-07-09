@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    abort-upgrade)
+	if dpkg --compare-versions "$2" lt-nl 20070706-1.4-2; then
+	    for d in dictate digits letters phonetic; do
+		if ! [ -e "/usr/share/asterisk/sounds/${d}/fr" ]; then
+		    ln -s "../fr/${d}" "/usr/share/asterisk/sounds/${d}/fr"
+		fi
+	    done
+	fi
+	;;
+
+esac
+
+
+
+exit 0

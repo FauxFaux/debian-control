@@ -1,0 +1,33 @@
+#!/bin/sh
+# Debian vtwm package post-installation script
+# Copyright 1999 Branden Robinson.
+# Licensed under the GNU General Public License, version 2.  See the file
+# /usr/share/common-licenses/GPL or <http://www.gnu.org/copyleft/gpl.txt>.
+
+# $Id: postinst 47 2005-11-05 22:22:55Z branden $
+
+set -e
+
+trap "echo ;\
+      echo 'Received signal.  Aborting configuration of vtwm package.' ;\
+      echo ;\
+      exit 1" 1 2 3 15
+
+# Automatically added by dh_installmenu
+inst=/etc/menu-methods/vtwm
+if [ -f $inst ]; then
+	chmod a+x $inst
+	if [ -x "`which update-menus 2>/dev/null`" ]; then
+		update-menus
+	fi
+fi
+# End automatically added section
+
+
+update-alternatives --install /usr/bin/x-window-manager x-window-manager \
+  /usr/bin/vtwm 50 --slave /usr/share/man/man1/x-window-manager.1.gz \
+  x-window-manager.1.gz /usr/share/man/man1/vtwm.1x.gz
+
+exit 0
+
+# vim:set ai et sts=4 sw=4 tw=80:

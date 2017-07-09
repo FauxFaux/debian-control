@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+#
+# netplan pre-installation script
+#
+
+TRAD_ACL=/var/lib/plan/netplan.dir/.netplan-acl
+ETC_ACL=/etc/plan/netplan-acl
+
+if [ -r $TRAD_ACL ] && [ ! -L $TRAD_ACL ]
+then
+    if [ -r $ETC_ACL ]
+    then
+	cat >&2 <<EOF
+WARNING: you have both $TRAD_ACL and $ETC_ACL file.
+$TRAD_ACL should be a symlink to $ETC_ACL.
+Please fix before attempting to reinstall.
+EOF
+	exit 1
+    else
+	echo >&2 "Moving $TRAD_ACL to $ETC_ACL"
+	cp $TRAD_ACL $ETC_ACL && rm -f $TRAD_ACL
+    fi
+fi
+
+

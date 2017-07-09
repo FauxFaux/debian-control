@@ -1,0 +1,30 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+passwordsmatch=''
+
+while [ ! "$passwordsmatch" ]; do
+    #only ask for a password if no htpasswd exists
+    test -f /etc/pinto/htpasswd.users && break
+    db_input high pinto/adminpassword || true
+    db_input high pinto/adminpassword-repeat || true
+    db_go || true
+    db_get pinto/adminpassword
+    p1="$RET"
+    db_get pinto/adminpassword-repeat
+    p2="$RET"
+    if [ "$p1" = "$p2" ]; then
+        passwordsmatch="yes"
+    else
+        db_fset pinto/adminpassword seen false
+        db_fset pinto/adminpassword-repeat seen false
+        db_fset pinto/adminpassword-mismatch seen false
+        db_input critical pinto/adminpassword-mismatch || true
+    fi
+done
+
+db_go || true
+

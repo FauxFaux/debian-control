@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+# remove diversion that had been necessary for ipe <<6.0pre30-1
+if [ configure = "$1"  ]; then
+    case "$2" in
+        ( 20150406-[12] | 200* )
+        dpkg-divert --package figtoipe --remove --rename \
+                    --divert /usr/bin/figtoipe.distrib /usr/bin/figtoipe
+        dpkg-divert --package figtoipe --remove --rename \
+                    --divert /usr/share/man/man1/figtoipe.distrib.1.gz /usr/share/man/man1/figtoipe.1.gz
+        ;;
+    esac
+fi
+
+

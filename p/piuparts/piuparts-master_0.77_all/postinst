@@ -1,0 +1,72 @@
+#!/bin/sh
+set -e
+
+pgroup=piuparts
+muser=piupartsm
+scriptroot=/usr/share/piuparts
+userhome=/var/lib/piuparts
+
+if [ "$1" = "configure" ] ; then
+
+    addgroup --system --quiet $pgroup
+
+    for user in $muser
+    do
+        adduser --system --quiet --home $userhome/$user --ingroup $pgroup \
+                --shell /bin/sh $user
+
+	if ! [ -d $userhome/$user ]; then
+		mkdir -m 0755 $userhome/$user
+		chown $user:$pgroup $userhome/$user
+	fi
+
+        touch $userhome/$user/.profile
+        chown $user:$pgroup $userhome/$user/.profile
+
+        if [ $user = "piupartsm" ] ;
+        then
+            role="master"
+        else
+            role="slave"
+        fi
+
+        if ! grep -q $scriptroot/$role $userhome/$user/.profile ;
+        then
+            echo PATH=\$PATH:$scriptroot:$scriptroot/$role \
+                 >>$userhome/$user/.profile
+        fi
+
+        if [ ! -d $userhome/$user/.ssh ] ; then
+            install -d -o $user -g $pgroup -m 0755 $userhome/$user/.ssh
+        fi
+    done
+
+    install -d -o $muser -g $pgroup -m 0755 $userhome/master
+    install -d -o $muser -g $pgroup -m 0755 $userhome/backup
+
+    install -d -o $muser -g $pgroup -m 0755 $userhome/htdocs
+    cp -rf $scriptroot/htdocs/* $userhome/htdocs/
+
+    for icon in weather-severe-alert.png sunny.png
+    do
+        if [ -h $userhome/htdocs/images/$icon ] ; then
+            rm -f $userhome/htdocs/images/$icon
+        fi
+
+        if [ -e /usr/share/icons/Tango/24x24/status/$icon ] ; then
+            cp -f /usr/share/icons/Tango/24x24/status/$icon $userhome/htdocs/images/$icon
+        fi
+    done
+
+
+    if dpkg --compare-versions "$2" lt-nl "0.50" ; then
+        rm -rf $userhome/master/monitor-slave
+    fi
+
+fi
+
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/apache2/conf.d/piuparts.apache /etc/apache2/conf-available/piuparts-master.conf 0.58~ -- "$@"
+# End automatically added section
+

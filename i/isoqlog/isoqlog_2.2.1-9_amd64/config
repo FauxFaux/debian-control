@@ -1,0 +1,71 @@
+#!/usr/bin/perl -w
+# -*-CPerl-*-
+# Script to configure Isoqlog.
+
+use Debconf::Client::ConfModule ':all';
+my $version = version(2.0);
+capb("backup");
+title("Isoqlog Configuration");
+
+# begin configuration script
+my $topstate;
+my $back;
+my $noninteractive;
+
+$topstate = "start";
+
+## Ornek (non-interaktif kullanim icin)
+##$noninteractive = (((input("high", "isoqlog/main_logtype"))[0]) == 30);
+
+while ($topstate ne "done") {
+    if ($topstate eq "start") {
+	$noninteractive = (((input("high", "isoqlog/main_logtype"))[0]) == 30);
+	if (!$noninteractive) {
+	    go();
+	}
+	$topstate = "outputdir";
+    }
+
+    if ($topstate eq "outputdir") {
+	$noninteractive = (((input("high", "isoqlog/main_outputdir"))[0]) == 30);
+	if (!$noninteractive) {
+	    go();
+	}
+	$topstate = "hostname";
+    }
+
+    if ($topstate eq "hostname") {
+	$hostname = `hostname --fqdn` || "localdomain";
+	chomp($hostname);
+	set("isoqlog/main_hostname", $hostname);
+	$noninteractive = (((input("high", "isoqlog/main_hostname"))[0]) == 30);
+	if (!$noninteractive) {
+	    go();
+	}
+	$topstate = "langfile";
+    }
+
+    if ($topstate eq "langfile") {
+	$noninteractive = (((input("high", "isoqlog/main_langfile"))[0]) == 30);
+	if (!$noninteractive) {
+	    go();
+	}
+	$topstate = "domains";
+    }
+
+    if ($topstate eq "domains") {
+	$noninteractive = (((input("high", "isoqlog/main_domains"))[0]) == 30);
+	if (!$noninteractive) {
+	    go();
+	    $domains = get("isoqlog/main_domains");
+	    if ($domains =~ m/\,/) {
+		$topstate = "domains";
+	    } else {
+		$topstate = "done";
+	    }
+	} else {
+	    $topstate = "done";
+	}
+    }
+} ## while
+

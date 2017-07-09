@@ -1,0 +1,63 @@
+#!/bin/sh
+# post-installation script for popa3d
+
+set -e
+
+umask 022
+# Source the debconf library.
+. /usr/share/debconf/confmodule
+
+
+update_defaults()
+{
+    db_get popa3d/standalone
+    if [ "$RET" = "true" ]; then
+	RUN_STANDALONE="yes"
+	# Remove service from /etc/inetd.conf
+	update-inetd --pattern "popa3d" --remove pop3
+    else
+	RUN_STANDALONE="no"
+	pidof popa3d && /etc/init.d/popa3d stop
+        # Add service to /etc/inetd.conf
+        update-inetd --group MAIL --add 'pop3\t\tstream\ttcp\tnowait\troot\t/usr/sbin/tcpd\t/usr/sbin/popa3d'
+    fi
+    
+    if [ -e /etc/default/popa3d ]; then
+	sed -e "s/^RUN_STANDALONE=.*/RUN_STANDALONE=$RUN_STANDALONE/g" </etc/default/popa3d >$TMPFILE && mv -f $TMPFILE /etc/default/popa3d
+    else
+	cat > /etc/default/popa3d <<EOF
+# Automatically generated, edit by dpkg-reconfigure popa3d
+RUN_STANDALONE=$RUN_STANDALONE
+EOF
+    fi
+
+}
+
+TMPFILE=`tempfile`
+if [ $? -ne 0 ]; then
+	echo "$0: Can't create temp file, exiting..."
+	exit 1
+fi
+
+# adding popa3d group & user
+getent group popa3d > /dev/null 2>&1 || addgroup --system popa3d
+getent passwd popa3d > /dev/null 2>&1 || adduser --system --home /var/lib/popa3d --ingroup popa3d popa3d
+
+# /var/lib/popa3d should be created by package
+chown root:root /var/lib/popa3d
+chmod 755 /var/lib/popa3d     
+
+update_defaults
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/popa3d" ]; then
+		update-rc.d popa3d defaults >/dev/null
+		invoke-rc.d popa3d start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+
+db_stop

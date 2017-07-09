@@ -1,0 +1,57 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  purge)
+    # offer to remove chroot jail (if configured and still exists)
+    if [ -e /usr/share/debconf/confmodule ]
+    then
+      . /usr/share/debconf/confmodule
+      db_get cvsd/rootjail
+      if [ "$RET" != "" ] && [ "$RET" != "/" ] && [ "$RET" != "none" ] && [ -d "$RET" ]
+      then
+        CHROOT="$RET"
+        db_title "Removing cvsd"
+        db_subst cvsd/remove_chroot rootjail "$CHROOT"
+        db_input high cvsd/remove_chroot || true
+        db_go
+        db_get cvsd/remove_chroot
+        if [ "$RET" = "true" ]
+        then
+          rm -rf "$CHROOT"
+        fi
+      fi
+    fi
+    # remove config
+    rm -rf /etc/cvsd
+    # remove user/group
+    if [ -x "$(command -v deluser)" ]
+    then
+      deluser --quiet --system cvsd > /dev/null || true
+    else
+      echo "not removing cvsd system account because deluser command was not found" >&2
+    fi
+    if [ -x "$(command -v delgroup)" ]
+    then
+      delgroup --quiet --system cvsd > /dev/null || true
+    else
+      echo "not removing cvsd system group because delgroup command was not found" >&2
+    fi
+    ;;
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d cvsd remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

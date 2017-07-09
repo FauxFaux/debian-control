@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+set -e
+
+# source debconf library
+. /usr/share/debconf/confmodule
+
+  db_input high mailfilter/config || true
+
+# go, go, go! :)
+db_go

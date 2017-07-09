@@ -1,0 +1,23 @@
+#!/bin/sh
+# prerm script for cream
+set -e
+
+case "$1" in
+	remove)
+		# Deregister as editor alternative. Must only be done for the remove
+		# action to prevent breaking manual selection.
+		update-alternatives --remove editor /usr/bin/cream
+	;;
+
+	upgrade|deconfigure|failed-upgrade)
+	;;
+
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+	;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+set -e
+
+[ "$1" = configure ] || exit 0
+
+. /usr/share/debconf/confmodule
+
+db_get xcwcp/suid_bit
+
+if [ "$RET" = "true" ]; then
+  if !( `dpkg-statoverride --list | grep -q bin/xcwcp` ); then
+    dpkg-statoverride --add --update root root 4755 /usr/bin/xcwcp
+  fi
+fi

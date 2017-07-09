@@ -1,0 +1,63 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+add_entry() {
+	for server in $(echo "${2}")
+	do
+		echo "$1 ${server}" >> $TMP
+	done
+}
+
+if [ "$1" = "configure" ] && [ -z "$2" ]
+then
+    if [ ! -f /etc/mxallowd.conf ]
+    then
+        cp /usr/share/mxallowd/config.default /etc/mxallowd.conf
+    fi
+fi
+
+TMP=$(mktemp)
+if [ -f /etc/mxallowd.conf ]
+then
+    egrep -v "^ *(real|fake)-mailserver " /etc/mxallowd.conf > $TMP
+    db_get mxallowd/real_mailservers
+    [ -z "$RET" ] || add_entry "real-mailserver" "${RET}"
+
+    db_get mxallowd/fake_mailservers
+    [ -z "$RET" ] || add_entry "fake-mailserver" "${RET}"
+
+    cp $TMP /etc/mxallowd.conf
+fi
+
+rm -f ${TMP}
+
+# Call db_stop to avoid hangs when starting mxallowd from debconf
+db_stop
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask mxallowd.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled mxallowd.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable mxallowd.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state mxallowd.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/mxallowd" ]; then
+		update-rc.d mxallowd defaults >/dev/null
+		invoke-rc.d mxallowd start || exit $?
+	fi
+fi
+# End automatically added section
+

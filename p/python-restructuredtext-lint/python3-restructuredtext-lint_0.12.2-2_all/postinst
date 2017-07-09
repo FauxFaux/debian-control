@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/restructuredtext-lint restructuredtext-lint /usr/bin/python3-restructuredtext-lint 200
+	update-alternatives --install /usr/bin/rst-lint rst-lint /usr/bin/python3-rst-lint 200
+fi
+
+
+# Automatically added by dhpython:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-restructuredtext-lint 
+fi
+
+# End automatically added section
+
+
+exit 0

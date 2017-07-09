@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -e
+
+dante_service_error()
+{
+	local res="$?" conffile='/etc/danted.conf' notfound='' var
+	for var in internal external; do
+		if ! egrep -qe '^[[:space:]]*'"$var"'[[:space:]]*:' -- "$conffile"; then
+			notfound="$notfound $var"
+		fi
+	done
+	if [ -n "$notfound" ]; then
+		echo "Please edit the Dante server config file $conffile and specify at least the following directives:$notfound" 1>&2
+	else
+		# The required directives are specified, so propagate the error
+		exit "$res"
+	fi
+}
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/danted" ]; then
+		update-rc.d danted defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d danted $_dh_action || dante_service_error
+	fi
+fi
+# End automatically added section
+

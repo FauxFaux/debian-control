@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/pygopherd" ]; then
+	invoke-rc.d pygopherd stop || exit $?
+fi
+# End automatically added section
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p pygopherd 
+else
+	dpkg -L pygopherd | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section

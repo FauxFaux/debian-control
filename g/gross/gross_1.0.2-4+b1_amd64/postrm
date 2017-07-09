@@ -1,0 +1,39 @@
+#! /bin/sh
+# postrm script for gross
+
+set -e
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d gross remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+
+
+[ -e /usr/share/debconf/confmodule ]  && . /usr/share/debconf/confmodule
+
+case "$1" in
+    remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    purge)
+        if [ -d /var/lib/gross ]; then
+            rm -rf /var/lib/gross || true
+        fi
+
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+
+esac
+
+exit 0

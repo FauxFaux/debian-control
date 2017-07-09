@@ -1,0 +1,17 @@
+#!/bin/sh
+#test -h /usr/share/doc/liquidwar && rm /usr/share/doc/liquidwar || true
+# Whatever we had before, move all the cruft to the new directory and make
+# space for the symlink
+
+set -e
+
+if [ ! -h /usr/share/doc/liquidwar ] ; then
+   test -d /usr/share/doc/liquidwar-data || mkdir -p /usr/share/doc/liquidwar-data
+   if [ "`echo /usr/share/doc/liquidwar/*`" != "/usr/share/doc/liquidwar/*" ] ; then
+      mv -f /usr/share/doc/liquidwar/* /usr/share/doc/liquidwar-data/
+   fi
+fi
+
+rm -rf /usr/share/doc/liquidwar
+
+

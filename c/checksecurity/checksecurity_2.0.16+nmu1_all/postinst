@@ -1,0 +1,36 @@
+#!/bin/sh -e
+#
+# Tell the user about the old configuration file.
+#
+. /usr/share/debconf/confmodule
+if [ "$1" = "configure" ] && [ -z "$2" ] && [ -f /etc/checksecurity.conf.cron ] ; then
+        db_input low checksecurity/oldconf || true
+        db_go || true
+fi
+db_stop
+
+
+#
+# If there is not a /var/log/setuid directory create it, and move
+# any old logfiles into it.
+#
+if [ ! -d /var/log/setuid ]; then
+	mkdir -m 750 /var/log/setuid 
+	chown root:adm /var/log/setuid || true
+	for file in /var/log/setuid.yesterday /var/log/setuid.today /var/log/setuid.changes \
+		/var/log/setuid.changes.*; do
+		[ ! -e $file ] || mv $file /var/log/setuid 
+	done
+fi
+#
+# If there is no /var/log/checksecurity directory create it, and move
+#
+if [ ! -d /var/log/checksecurity ]; then
+	mkdir -m 750 /var/log/checksecurity 
+	chown root:adm /var/log/checksecurity || true
+fi
+
+
+
+
+exit 0

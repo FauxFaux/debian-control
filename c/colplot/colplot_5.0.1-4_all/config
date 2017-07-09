@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+action=$1
+version=$2
+
+## Source debconf library
+. /usr/share/debconf/confmodule
+
+if [ "$version" != "" ] ; then
+    webservers="None"
+    # Determine if one of the supported webservers is actually configured for colplot
+    # Both have old style and new style configuration names (in that order)
+    if [ -e /etc/apache2/conf.d/colplot.conf -o -e /etc/apache2/conf-enabled/colplot.conf ] ; then
+	webservers="apache2"
+    fi
+    if [ -e /etc/lighttpd/conf-enabled/colplot.conf -o -e /etc/lighttpd/conf-enabled/20-colplot.conf ] ; then
+	webservers="lighttpd"
+    fi
+    db_set colplot/webserver "$webservers"
+fi
+
+# which web-server should I use?
+db_input high colplot/webserver || true
+
+db_go || true
+
+exit 0

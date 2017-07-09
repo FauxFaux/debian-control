@@ -1,0 +1,45 @@
+#!/bin/sh
+# postinst script for polipo
+
+set -e
+
+CACHE_DIR=/var/cache/polipo
+LOG_DIR=/var/log/polipo
+
+IPUP_D=/etc/ppp/ip-up.d
+IPDOWN_D=/etc/ppp/ip-down.d
+
+case "$1" in
+    configure)
+	# Creating needed directories
+        mkdir -p "$CACHE_DIR"
+	chown proxy:proxy "$CACHE_DIR"
+	chmod 750 "$CACHE_DIR"
+
+	if [ -e "$LOG_DIR" ]; then
+	    chmod -R 640 "$LOG_DIR"
+	fi
+	mkdir -p "$LOG_DIR"
+	chown proxy:adm "$LOG_DIR"
+	chmod 2755 "$LOG_DIR"
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/polipo" ]; then
+	update-rc.d polipo defaults >/dev/null
+	invoke-rc.d polipo start || exit $?
+fi
+# End automatically added section
+
+
+exit 0

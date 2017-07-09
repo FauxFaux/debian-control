@@ -1,0 +1,41 @@
+#!/bin/sh
+
+set -e
+
+# Handle upgrades from versions supporting RUN in /etc/default/isatapd.
+# Disable the service properly if RUN is not set to "yes"
+if [ "$1" = 'configure' ] && [ -f /etc/default/isatapd ] ; then
+	if [ -n "$2" ] && dpkg --compare-versions "$2" lt 0.9.7 ; then
+		. /etc/default/isatapd
+		if [ -n "$RUN" ] && [ "$RUN" != "yes" ]; then
+			update-rc.d isatapd disable > /dev/null
+			deb-systemd-helper disable isatapd.service
+		fi
+	fi
+fi
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask isatapd.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled isatapd.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable isatapd.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state isatapd.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/isatapd" ]; then
+		update-rc.d isatapd defaults >/dev/null
+		invoke-rc.d isatapd start || exit $?
+	fi
+fi
+# End automatically added section
+
+

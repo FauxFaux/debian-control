@@ -1,0 +1,46 @@
+#!/bin/sh
+
+set -e
+
+GETENT=/usr/bin/getent
+TUMUSER=tumgreyspf
+
+if ${GETENT} passwd ${TUMUSER} >/dev/null ; then
+	echo "User ${TUMUSER} already exists: skipping creation!"
+else
+	if [ -x `which useradd` ] ; then
+		useradd -m -s /bin/false -g nogroup ${TUMUSER} -r -b /var/lib
+		echo "Created user ${TUMUSER}"
+	else
+		echo "Could not find the useradd binary!"
+		exit 1
+	fi
+fi
+if [ -x `which usermod` ] ; then
+	usermod -d /var/lib/tumgreyspf ${TUMUSER}
+fi
+
+chown ${TUMUSER} /var/lib/tumgreyspf
+chown -R ${TUMUSER} /var/lib/tumgreyspf/config
+chown ${TUMUSER} /var/lib/tumgreyspf/data
+chown ${TUMUSER} /var/lib/tumgreyspf/test
+chown ${TUMUSER} /var/lib/tumgreyspf/test/data
+
+# Clean up the old /etc/cron.d/tumgreyspdf if it hasn't been modified,
+# and replace by the new /etc/cron.daily/tumgreyspf
+if [ -f /etc/cron.d/tumgreyspf ] ; then
+	MYMD5=`md5sum /etc/cron.d/tumgreyspf | cut -d" " -f1`
+	if [ "${MYMD5}" = "24ea9c78656d84da9d734407d8fcd82b" ] ; then
+		echo "/etc/cron.d/tumgreyspdf has been replaced by /etc/cron.daily/tumgreyspf;"
+		echo "the old file has been deleted."
+		rm -f /etc/cron.d/tumgreyspf
+	else
+		echo "WARNING: there is an old /etc/cron.d/tumgreyspf file, but since it has"
+		echo "been modified, it wont be deleted automaticaly. Please proceed to its"
+		echo "deletion by hand if you don't need it anymore."
+	fi
+fi
+
+
+
+exit 0

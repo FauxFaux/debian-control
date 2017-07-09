@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+
+
+case "$1" in
+    install | upgrade )
+	dpkg-divert --package ncbi-entrez-direct --rename \
+		    --divert /usr/bin/efetch.acedb /usr/bin/efetch
+	dpkg-divert --package ncbi-entrez-direct --rename \
+		    --divert /usr/share/man/man1/efetch.acedb.1.gz \
+		    /usr/share/man/man1/efetch.1.gz
+	dpkg-divert --package ncbi-entrez-direct --rename \
+		    --divert /usr/bin/einfo.epub /usr/bin/einfo
+	dpkg-divert --package ncbi-entrez-direct --rename \
+		    --divert /usr/share/man/man1/einfo.epub.1.gz \
+		    /usr/share/man/man1/einfo.1.gz
+    ;;
+esac

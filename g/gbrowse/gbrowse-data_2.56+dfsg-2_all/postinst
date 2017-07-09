@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -e
+
+case "$1" in
+    configure)
+        chown -R root:www-data /var/lib/gbrowse/databases
+        chmod -R 770 /var/lib/gbrowse/databases
+	if [ -e /etc/init.d/gbrowse-slave ] ; then
+	  invoke-rc.d gbrowse-slave restart
+	fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+

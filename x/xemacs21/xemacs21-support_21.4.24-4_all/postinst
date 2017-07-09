@@ -1,0 +1,15 @@
+#!/bin/sh -e
+set -e
+
+OLDDATADIR=/usr/lib/xemacs-21.4.24
+NEWDATADIR=/usr/share/xemacs-21.4.24
+
+test -d ${OLDDATADIR}/etc && rm -r ${OLDDATADIR}/etc
+test -d ${OLDDATADIR}/lisp && rm -r ${OLDDATADIR}/lisp
+
+test -L ${OLDDATADIR}/etc || ln -s ${NEWDATADIR}/etc ${OLDDATADIR}/etc
+test -L ${OLDDATADIR}/lisp || ln -s ${NEWDATADIR}/lisp ${OLDDATADIR}/lisp
+
+mkdir -p /usr/local/lib/xemacs/site-lisp > /dev/null 2>&1 || true
+
+##

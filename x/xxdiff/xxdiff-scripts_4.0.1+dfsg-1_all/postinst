@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper rm_conffile /etc/bash_completion.d/xxdiff/bashrc 1:4.0+hg453+dfsg-1~ xxdiff-scripts -- "$@"
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p xxdiff-scripts 
+fi
+
+# End automatically added section
+
+
+# remove leftover /etc/bash_completion.d/xxdiff/ directory, if empty (cf. #584185)
+[ -d /etc/bash_completion.d/xxdiff ] && rmdir --ignore-fail-on-non-empty /etc/bash_completion.d/xxdiff
+
+exit 0

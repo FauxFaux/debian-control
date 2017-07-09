@@ -1,0 +1,22 @@
+#!/bin/sh -e
+# $Id: rusersd.postinst,v 1.1 1999/10/22 00:32:06 herbert Exp $
+
+case "$1" in
+abort-upgrade | abort-deconfigure | abort-remove)
+	update-inetd --enable rusersd
+	;;
+configure)
+	if [ -n "$2" ]; then
+		update-inetd --enable rusersd
+	else
+		update-inetd --remove "rusersd/2-3	dgram	rpc/udp	wait	root	/usr/sbin/tcpd	/usr/sbin/rpc.rusersd"
+		update-inetd --group RPC --add "rusersd/2-3	dgram	rpc/udp	wait	nobody	/usr/sbin/tcpd	/usr/sbin/rpc.rusersd"
+	fi
+	;;
+*)
+	printf "$0: incorrect arguments: $*\n" >&2
+	exit 1
+	;;
+esac
+
+

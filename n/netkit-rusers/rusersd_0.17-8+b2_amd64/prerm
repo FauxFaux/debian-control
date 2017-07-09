@@ -1,0 +1,9 @@
+#!/bin/sh -e
+# $Id: rusersd.prerm,v 1.1 1999/10/22 00:32:06 herbert Exp $
+
+# If netbase is not installed, then we don't need to do the remove.
+if command -v update-inetd >/dev/null 2>&1; then
+        update-inetd --disable rusersd
+fi
+
+

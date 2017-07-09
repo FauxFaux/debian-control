@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+EXECUTABLE=/usr/sbin/rush
+LIBDIR=/var/lib/rush
+
+# The two files
+#
+#    /var/lib/rush/{utmp,wtmp}
+#
+# are used for accounting. Delete them only
+# at package purging, not at package removal.
+# This decision simplifies back tracing of
+# the server environment.
+
+if [ "$1" = "purge" ]; then
+  # Purge any remaining access information.
+  rm -f $LIBDIR/utmp $LIBDIR/wtmp
+fi
+
+

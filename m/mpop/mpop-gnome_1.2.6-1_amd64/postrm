@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = remove ] ; then
+    dpkg-divert --remove --package mpop-gnome --rename \
+        --divert /usr/bin/mpop.orig /usr/bin/mpop
+fi
+
+
+
+exit 0

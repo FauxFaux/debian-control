@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+WMentry="/usr/bin/blackbox"
+
+# Automatically added by dh_installmenu
+inst=/etc/menu-methods/blackbox
+if [ -f $inst ]; then
+	chmod a+x $inst
+	if [ -x "`which update-menus 2>/dev/null`" ]; then
+		update-menus
+	fi
+fi
+# End automatically added section
+ 
+
+update-alternatives --install /usr/bin/x-window-manager \
+  x-window-manager $WMentry 50 --slave \
+  /usr/share/man/man1/x-window-manager.1.gz \
+  x-window-manager.1.gz /usr/share/man/man1/blackbox.1.gz
+

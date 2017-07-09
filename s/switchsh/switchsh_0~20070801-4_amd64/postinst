@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+bin=/usr/bin/switchsh
+
+if [ "$1" = "configure" ] && output="$(LC_ALL=C dpkg-statoverride --list $bin)"; then
+    if [ "$output" = "root root 4755 $bin" ]; then
+	dpkg-statoverride --remove $bin
+    fi
+fi
+
+

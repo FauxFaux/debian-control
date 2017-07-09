@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+# Remove symlink created by previous packages. #359400
+if [ "$1" = "configure" ]; then
+        if [ -d /usr/doc -a -h /usr/doc/eboard-extras-pack1 -a -d /usr/share/doc/eboard-extras-pack1 ]; then
+                rm -f /usr/doc/eboard-extras-pack1
+        fi
+fi
+
+

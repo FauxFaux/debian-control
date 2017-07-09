@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+if [ -f /usr/bin/std-write ]; then
+rm -f /usr/bin/write
+dpkg-divert --package orville-write --remove --rename \
+--divert /usr/bin/std-write /usr/bin/write
+fi
+
+if [ -f /usr/share/man/man1/std-write.1.gz ]; then
+rm -f /usr/share/man/man1/write.1.gz
+dpkg-divert --package orville-write --remove --rename \
+--divert /usr/share/man/man1/std-write.1.gz /usr/share/man/man1/write.1.gz
+fi
+
+if [ "$1" = "install" ]; then
+dpkg-divert --package orville-write --add --rename \
+--divert /usr/bin/std-mesg /usr/bin/mesg
+dpkg-divert --package orville-write --add --rename \
+--divert /usr/share/man/man1/std-mesg.1.gz /usr/share/man/man1/mesg.1.gz
+fi
+
+

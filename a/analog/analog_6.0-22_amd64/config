@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+. /usr/share/debconf/confmodule
+
+PRI=low
+if [ "$1" = configure ] && [ -n "$2" ] && dpkg --compare-versions "$2" lt "2:5.23-3"; then
+	# On upgrade, the question defaults to true so I don't break any
+	# existing installs.
+	db_set analog/anlgform true
+	PRI=medium
+elif [ -e /usr/lib/cgi-bin/anlgform.cgi ]; then
+	# The link exists, made by the postinst or by hand, so default
+	# to keeping it.
+	db_set analog/anlgform true
+else
+	# No link, no upgrade; disable.
+	db_set analog/anlgform false
+fi
+
+db_input $PRI analog/anlgform || true
+db_go || true

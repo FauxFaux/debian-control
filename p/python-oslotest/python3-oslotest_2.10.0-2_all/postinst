@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/oslo_debug_helper		oslo_debug_helper		/usr/bin/python3-oslo_debug_helper 200
+	update-alternatives --install /usr/bin/oslo_run_pre_release_tests	oslo_run_pre_release_tests	/usr/bin/python3-oslo_run_pre_release_tests 200
+	update-alternatives --install /usr/bin/oslo_run_cross_tests		oslo_run_cross_tests		/usr/bin/python3-oslo_run_cross_tests 200
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-oslotest 
+fi
+
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,52 @@
+#!/bin/sh
+#
+# postinst script for the jazip package
+
+set -e
+
+case "$1" in
+    configure)
+
+        # De-installation in prerm is created by dh_installdocs
+#	if [ -d /usr/doc -a ! -e /usr/doc/jazip -a -d /usr/share/doc/jazip ]; then
+#		ln -sf ../share/doc/jazip /usr/doc/jazip
+#	fi
+
+#       if ! grep -q \^jazip: /etc/group; then
+#           adduser --group jazip 
+#       fi
+
+# This block commented-out at version 0.33-3
+#        if [ -x /usr/sbin/suidregister ]; then
+#           suidregister -s jazip /usr/bin/jazip root floppy 4754
+#        else       
+#            chown root.floppy /usr/bin/jazip
+#            chmod 4754 /usr/bin/jazip
+#        fi
+
+#        if [ -x /usr/bin/update-menus ] ; then update-menus ; fi
+
+        if [ ! -f /etc/jazip.conf ]; then 
+            jazipconfig --non-interactive
+
+            . /usr/share/debconf/confmodule
+#           echo "*** Important notice for package jazip ***"
+#           echo "Users must be added to the 'floppy' group to allow access"
+#           echo "to the jazip program."
+#           echo "See /usr/doc/jazip/README.Debian and adduser(1)."
+        fi
+        ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        ;;
+esac
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

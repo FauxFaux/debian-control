@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+echo "   \`vfte' - editor for linux console /dev/vcsaXX - has SUID bit set!"
+echo "   however this is used only for opening console device...           "
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper symlink_to_dir /usr/share/doc/fte-console fte 0.50.2b6-2~ -- "$@"
+# End automatically added section
+

@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+if [ "$1" = "remove" ]; then
+    update-alternatives --remove x-window-manager \
+                                 /usr/bin/9wm
+    update-alternatives --remove x-window-manager.1.gz \
+                                 /usr/share/man/man1/9wm.1.gz
+fi
+
+

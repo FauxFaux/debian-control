@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+update-alternatives --install /usr/bin/x-window-manager x-window-manager \
+    /usr/bin/fvwm1 50 \
+    --slave /usr/share/man/man1/x-window-manager.1.gz \
+    x-window-manager.1.gz /usr/share/man/man1/fvwm1.1.gz
+
+update-alternatives --install /usr/bin/fvwm fvwm /usr/bin/fvwm1 100 \
+    --slave /usr/share/man/man1/fvwm.1.gz fvwm.1.gz \
+    /usr/share/man/man1/fvwm1.1.gz
+
+# Automatically added by dh_installmenu
+inst=/etc/menu-methods/fvwm1
+if [ -f $inst ]; then
+	chmod a+x $inst
+	if [ -x "`which update-menus 2>/dev/null`" ]; then
+		update-menus
+	fi
+fi
+# End automatically added section
+
+
+# What do we do if update-menus doesn't exist?
+if [ ! -x /usr/bin/update-menus ]; then
+    sed -e '/^# The menu system setup (do NOT modify these two lines!)/d' \
+	    -e '/^include-menu-defs$/d' \
+	    -e 's/^##Old-Debian //' \
+	< /etc/X11/fvwm/system.fvwmrc-menu > /etc/X11/fvwm/system.fvwmrc
+fi
+
+exit 0

@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+
+CERTDIR=/etc/apache2/nssdb
+
+if [ "$1" = configure ]; then
+    if dpkg --compare-versions "$2" lt-nl "1.0.12-2"; then
+        # buggy gencert created this
+	if [ -f /0 ]; then
+            rm -f /0
+        fi
+    fi
+    if [ ! -e $CERTDIR/key3.db ]; then
+        /usr/share/libapache2-mod-nss/gencert \
+		$CERTDIR > $CERTDIR/install.log 2>&1
+        echo "libapache2-mod-nss certificate database generated."
+    fi
+
+    # Make sure that the database ownership is setup properly.
+    find $CERTDIR -user root -name "*.db" -exec /bin/chgrp www-data {} \;
+    find $CERTDIR -user root -name "*.db" -exec /bin/chmod g+r {} \;
+fi
+
+

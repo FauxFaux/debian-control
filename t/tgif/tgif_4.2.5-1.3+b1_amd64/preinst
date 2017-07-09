@@ -1,0 +1,31 @@
+#!/bin/sh -e
+
+
+
+case $1 in
+   abort-upgrade ) 
+   exit 0
+   ;;
+   install|upgrade )
+   if [ ! -z "$2" ]; then
+      # Remove old config file if upgrading from tgif <= 3.0p13-1
+      rm -rf /etc/X11/tgif
+      # Clean up app-defaults files from previous versions of the postinst
+      # script tgif (< 4.2.2-4).  This should restore the files to their
+      # pristine state unless the user has made additional alterations.
+      for bit in "" "/ja_JP.eucJP" "/ru"; do
+          file=/etc/X11$bit/app-defaults/Tgif
+          # Remove all instances of the 
+          #   Tgif*InitialPaperSize:
+          #   Tgif*GridSystem:
+          # line pairs appended by old versions of postinst.
+          sed '/Tgif\*InitialPaperSize/,+1 d' $file > $file.clean
+          mv $file.clean $file
+      done
+   fi
+   ;;
+   * )
+   echo "preinst called with unknown argument \`$1'" >&2
+   exit 1
+   ;;
+esac

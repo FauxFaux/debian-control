@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+if [ -x "/etc/init.d/lfc-dli" ]; then
+	if [ -x "`which invoke-rc.d 2>/dev/null`" ]; then
+		invoke-rc.d lfc-dli stop || exit $?
+	else
+		/etc/init.d/lfc-dli stop || exit $?
+	fi
+fi
+
+

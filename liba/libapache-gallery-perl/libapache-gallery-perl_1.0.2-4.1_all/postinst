@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+cachedir="/var/cache/www"
+user="www-data"
+
+if [ "x$1" = "xconfigure" ]; then
+    if ! [ -d "$cachedir" ]; then
+        (mkdir "$cachedir" && chown "$user" "$cachedir") || exit 0;
+    fi;
+fi;
+   
+
+     

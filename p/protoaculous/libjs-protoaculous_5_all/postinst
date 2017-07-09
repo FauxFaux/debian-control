@@ -1,0 +1,46 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ] || [ "$1" = "triggered" ] ; then
+    ptmp="$(mktemp --tmpdir protoaculous-XXXXXXXX.js)"
+    stmp="$(mktemp --tmpdir scriptaculous-XXXXXXXX.js)"
+    cp /usr/share/javascript/scriptaculous/scriptaculous.js $stmp
+
+    echo "
+--- scriptaculous.js	2009-10-08 05:23:34.000000000 -0400
++++ scriptaculous.js	2009-12-24 23:50:51.000000000 -0500
+@@ -53,15 +53,6 @@
+        throw(\"script.aculo.us requires the Prototype JavaScript framework >= \" +
+         Scriptaculous.REQUIRED_PROTOTYPE);
+ 
+-    var js = /scriptaculous\.js(\?.*)?$/;
+-    \$\$('script[src]').findAll(function(s) {
+-      return s.src.match(js);
+-    }).each(function(s) {
+-      var path = s.src.replace(js, ''),
+-      includes = s.src.match(/\?.*load=([a-z,]*)/);
+-      (includes ? includes[1] : 'builder,effects,dragdrop,controls,slider,sound').split(',').each(
+-       function(include) { Scriptaculous.require(path+include+'.js') });
+-    });
+   }
+ };" | patch -s $stmp
+
+    cat /usr/share/javascript/prototype/prototype.js > $ptmp
+    cat $stmp >> $ptmp
+    cat /usr/share/javascript/scriptaculous/builder.js >> $ptmp
+    cat /usr/share/javascript/scriptaculous/effects.js >> $ptmp
+    cat /usr/share/javascript/scriptaculous/dragdrop.js >> $ptmp
+    cat /usr/share/javascript/scriptaculous/controls.js >> $ptmp
+    cat /usr/share/javascript/scriptaculous/slider.js >> $ptmp
+    cat /usr/share/javascript/scriptaculous/sound.js >> $ptmp
+    yui-compressor -o /var/lib/protoaculous/protoaculous.js $ptmp
+    rm -f $stmp $ptmp
+
+    pver="$(dpkg -l | grep libjs-prototype | awk '{print $3}')"
+    sver="$(dpkg -l | grep libjs-scriptaculous | awk '{print $3}')"
+    echo "Successfully combined prototype.js ($pver) and scriptaculous.js ($sver)"
+fi 
+
+
+
+exit 0

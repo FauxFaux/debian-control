@@ -1,0 +1,24 @@
+#! /bin/sh
+set -e
+
+case "$1" in
+    remove|upgrade|deconfigure)
+	for file in /usr/lib/stardata-common/*; do
+	    if [ -x $file ] ; then
+		name=`basename $file`
+		register-stardata remove all $name
+	    fi
+	done
+        ;;
+    failed-upgrade)
+        ;;
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+exit 0
+
+

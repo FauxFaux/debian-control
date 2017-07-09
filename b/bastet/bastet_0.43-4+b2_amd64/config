@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+oldscores=/var/games/bastet.scores
+
+if [ -e "$oldscores" ] ; then
+  db_input high bastet/score_file_compatibility || true
+  db_go
+fi

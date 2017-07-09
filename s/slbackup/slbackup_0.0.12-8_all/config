@@ -1,0 +1,215 @@
+#!/usr/bin/perl -w
+#
+# $Id: slbackup.config,v 1.6 2007-12-23 12:46:22 werner Exp $
+#
+# Author: Morten Werne Olsen <werner@skolelinux.no>
+#
+
+use strict;
+use Debconf::Client::ConfModule ":all";
+
+
+## subroutines
+
+# enable / disable backup and configuration
+sub enable {
+    title("Configure backup system now?");
+    input("medium", "slbackup/enable");
+    my @ret = go();
+
+    if ($ret[0] eq 30) {
+	return undef;
+    } else {
+	@ret = get("slbackup/enable");
+	if ($ret[1] eq "true") {
+	    #return "backuptime";
+	    return "client_name";
+	} else {
+	    return "exit";
+	}
+    }
+}
+
+# time to start backup session
+sub backuptime {
+    title("Time to run backup");
+    input("medium", "slbackup/backuptime");
+    my @ret = go();
+
+    if ($ret[0] eq 30) {
+	return undef;
+    } else {
+	@ret = get("slbackup/backuptime");
+	if ($ret[1] =~ /^\d\d:\d\d$/) {
+	    return "client_name";
+	} else {
+	    return "backuptime";
+	}
+    }
+}
+
+# clients unique name
+sub client_name {
+    title("Clients name");
+    input("medium", "slbackup/client_name");
+    my @ret = go();
+
+    if ($ret[0] eq 30) {
+	return undef;
+    } else {
+	return "client_type";
+    }
+}
+
+# client type; local or extern
+sub client_type {
+    title("Client type");
+    input("medium", "slbackup/client_type");
+    my @ret = go();
+
+    if ($ret[0] eq 30) {
+	return undef;
+    } else {
+	@ret = get("slbackup/client_type");
+	if ($ret[1] eq "local") {
+	    return "client_location";
+	} else {
+	    return "client_address";
+	}
+    }
+}
+
+# client's hostname or IP-address
+sub client_address {
+    title("Clients hostname or IP-address");
+    input("medium", "slbackup/client_address");
+    my @ret = go();
+
+    if ($ret[0] eq 30) {
+	return undef;
+    } else {
+	return "client_user";
+    }
+}
+
+# user that runs the backup software on the client
+sub client_user {
+    title("Username to run backup software");
+    input("medium", "slbackup/client_user");
+    my @ret = go();
+
+    if ($ret[0] eq 30) {
+	return undef;
+    } else {
+	return "client_location";
+    }
+}
+
+# locations to back up on client
+sub client_location {
+    title("Files/directories to back up");
+    input("medium", "slbackup/client_location");
+    my @ret = go();
+
+    if ($ret[0] eq 30) {
+	return undef;
+    } else {
+	return "client_keep";
+    }
+}
+
+# destination dir to store backup on backup server
+sub client_keep {
+    title("Number of days to keep backups for this client?");
+    input("medium", "slbackup/client_keep");
+    my @ret = go();
+
+    if ($ret[0] eq 30) {
+	return undef;
+    } else {
+	return "server_type";
+    }
+}
+
+# server type; local or extern
+sub server_type {
+    title("What kind of backup server?");
+    input("medium", "slbackup/server_type");
+    my @ret = go();
+
+    if ($ret[0] eq 30) {
+	return undef;
+    } else {
+	@ret = get("slbackup/server_type");
+	if ($ret[1] eq "local") {
+	    return "server_destdir";
+	} else {
+	    return "server_address";
+	}
+    }
+}
+
+# server's hostname or IP-address
+sub server_address {
+    title("Backup servers hostname or IP-address");
+    input("medium", "slbackup/server_address");
+    my @ret = go();
+
+    if ($ret[0] eq 30) {
+	return undef;
+    } else {
+	return "server_user";
+    }
+}
+
+# user that runs the backup software on the backup server
+sub server_user {
+    title("");
+    input("medium", "slbackup/server_user");
+    my @ret = go();
+
+    if ($ret[0] eq 30) {
+	return undef;
+    } else {
+	return "server_destdir";
+    }
+}
+
+# destination dir to store backup on backup server
+sub server_destdir {
+    title("Backups destination on backup server");
+    input("medium", "slbackup/server_destdir");
+    my @ret = go();
+
+    if ($ret[0] eq 30) {
+	return undef;
+    } else {
+	return "exit";
+    }
+}
+
+
+## start config
+
+version('2.0');
+capb('backup');
+title("slbackup configuration");
+
+my @statestack;
+push @statestack, "exit";
+
+# first move is to enable/disable backup and configuration
+my $state = "enable";
+
+while ($state ne "exit") {
+    no strict 'refs';
+    my $nextstate = &$state;
+    use strict;
+
+    if ($nextstate) {
+	push @statestack, $state;
+    } else {
+	$nextstate = pop @statestack;
+    }
+    $state = $nextstate;
+}

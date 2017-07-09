@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+# Replace documentation directory with symlink
+docdir="/usr/share/doc/libfso-glib-dev"
+if [ -d $docdir ] && [ ! -L $docdir ]; then
+	if rmdir $docdir 2>/dev/null; then
+		ln -sf libfso-glib2 $docdir
+	fi
+fi
+
+
+
+exit 0

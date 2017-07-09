@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = install ] || [ "$1" = upgrade ]; then
+	# Deal with font move in upgrade.
+	if [ "$1" = upgrade ] && dpkg --compare-versions "$2" lt 3.5; then
+		dpkg-divert --package big-cursor --remove --rename --divert \
+			/usr/X11R6/lib/X11/fonts/misc/cursor.pcf.gz-small \
+			/usr/X11R6/lib/X11/fonts/misc/cursor.pcf.gz
+	fi
+
+	# Divert the regular cursor font out of the way, so our font is used
+	# instead. This has to happen before update-font-dir, which is why it's in
+	# the preinst here; if this package and xfonts-base are installed at the
+	# same time, it needs to run before that package is unpacked.
+	dpkg-divert --package big-cursor --add --rename --divert \
+		/usr/share/fonts/X11/misc/cursor.pcf.gz-small \
+		/usr/share/fonts/X11/misc/cursor.pcf.gz 
+fi
+
+

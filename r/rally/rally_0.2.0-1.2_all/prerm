@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "remove" ] && [ -r /usr/share/debconf/confmodule ] && [ -r /usr/share/dbconfig-common/dpkg/prerm ] ; then
+	. /usr/share/debconf/confmodule
+	db_get rally/configure_db || true
+	if [ "$RET" = "true" ] ; then
+		. /usr/share/dbconfig-common/dpkg/prerm
+		dbc_go rally $@
+	fi
+fi
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p rally 
+else
+	dpkg -L rally | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+
+exit 0

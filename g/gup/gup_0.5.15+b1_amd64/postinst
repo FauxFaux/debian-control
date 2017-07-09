@@ -1,0 +1,50 @@
+#!/bin/sh -e
+
+create_uid_and_files() {
+
+if ! getent passwd gup >/dev/null; then
+  adduser --system --home /var/lib/gup/ --ingroup news \
+    --disabled-password --gecos "Group Update Program" gup
+elif [ ! -d /var/lib/gup/ ]; then
+  mkdir /var/lib/gup/
+  chown gup:news /var/lib/gup/
+fi
+
+if [ ! -d /var/lib/gup/default ]; then
+  cd /var/lib/gup/
+  echo '| /usr/lib/gup/process' > .forward
+  ln -s /etc/gup.conf config
+  mkdir default sites
+  printf 'HOST\\\n  :!*,\\\n' > default/header
+  echo '  :Tf,Wfb,B4096/1024:' > default/trailer
+  ln -s /etc/news/newsfeeds.header default/global.header
+  chown --recursive gup:news .
+fi
+
+if [ ! -f /etc/gup.conf ]; then
+  printf '#site\tpassword\tuser@example.com\n' > /etc/gup.conf
+  chown gup:news /etc/gup.conf
+  chmod 700 /etc/gup.conf
+fi
+
+if [ ! -d /var/log/gup ]; then
+  install --directory --owner=gup /var/log/gup
+fi
+
+}
+
+case "$1" in
+    configure)
+    create_uid_and_files
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+    echo "postinst called with unknown argument '$1'" >&2
+    exit 1
+esac
+	    
+
+

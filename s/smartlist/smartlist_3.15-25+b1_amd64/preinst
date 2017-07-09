@@ -1,0 +1,37 @@
+#!/bin/sh
+set -e
+
+LISTHOME="/var/list"
+LISTID=38
+
+if ! grep -q "^list:" /etc/passwd; then
+cat << FIN
+Error: User \`list' does not exist.
+You would have to upgrade the base-passwd package.
+
+However, it is possible that the current base-passwd
+does not automagically update /etc/passwd entries (yet).
+In such case (if you know what you are doing) you may
+create a new user with the following specifications:
+
+login name: list, UID: $LISTID
+group name: list, GID: $LISTID
+home directory: $LISTHOME
+
+FIN
+exit 1
+
+else
+  if ! grep -q "^list:.*:$LISTID:$LISTID:" /etc/passwd; then
+     echo "Error: \`list' user has not uid $LISTID and gid $LISTID"
+     echo "Please, fix this before trying again."
+     echo ""
+     exit 1
+  fi
+  if ! grep -q "^list:.*:$LISTID:$LISTID:.*:$LISTHOME:" /etc/passwd; then
+     echo "Error: \`list' home directory is not $LISTHOME"
+     echo "Please, fix this before trying again."
+     echo ""
+     exit 1
+  fi
+fi

@@ -1,0 +1,67 @@
+#!/bin/sh -e
+
+#log_failure_msg () {
+#        echo "$@"
+#}
+#[ -r /lib/lsb/init-functions ] && source  /lib/lsb/init-functions
+
+
+W=/usr/lib/gpr/lpr.wrapper
+D=/usr/bin/lpr.not.gpr
+L=/usr/bin/lpr
+
+if [ "$1" = reconfigure ] || [ "$1" = configure ] ; then
+  . /usr/share/debconf/confmodule
+  db_get gpr/divert_lpr 
+  db_stop
+  if [ "$RET" = "true" ]; then
+####### install lpr wrapper
+      #add diversion
+      if dpkg-divert --list gpr | grep -q $D ; then : ; else
+	  dpkg-divert --package gpr --add --rename \
+	              --divert $D $L
+      fi
+      #check (and create) link
+      if [ ! -e $L ] ; then
+	  ln -s $W $L 	  
+      elif [ ! -L $L ] ; then
+	  echo gpr problem: $L exists and is not a symlink 1>&2
+	  exit 1
+      elif find $L -printf '%l' | grep -q $W ; then
+	  true
+      elif find $L -printf '%l' | grep -q $D ; then
+	  #legacy from older versions
+	  rm $L
+	  ln -s $W $L 	  
+      else
+	  echo gpr problem: symlink $L does not point to $W 1>&2
+	  exit 2
+      fi
+####### deinstall lpr wrapper
+  else
+    #act only if diversion is there
+    if  dpkg-divert --list gpr | grep -q $D ; then
+        #remove the link?
+	if [  -L $L ] && find $L -printf '%l' | egrep -q "$W|$D" ; then
+		rm $L
+	fi
+        #remove the diversion?
+	if [ -e  $L ] ; then 
+	    echo gpr problem: $L exists, cannot remove diversion 1>&2
+	    exit 5
+	else
+	    dpkg-divert --package gpr --remove --rename \
+		--divert $D $L 
+	fi
+    fi
+  fi
+fi
+
+
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

@@ -1,0 +1,93 @@
+#! /bin/sh
+# Abort if any command returns an error value
+set -e
+. /usr/share/debconf/confmodule
+
+db_version 2.0
+
+case "$1" in
+  configure)
+	if ! getent group citadel >/dev/null; then
+            addgroup --system citadel
+        fi
+
+        if ! getent passwd citadel >/dev/null; then
+            adduser --system --ingroup citadel --home /var/lib/citadel \
+                    --gecos "Citadel system user" --shell /bin/sh \
+                    --disabled-password --no-create-home --shell /bin/false citadel
+        fi
+
+        chown -R citadel:citadel /etc/citadel
+        chown -R citadel:citadel /var/lib/citadel
+
+	if test -e /etc/default/webcit; then
+                . /etc/default/webcit
+	else
+                export WEBCIT_CITADEL_IP=127.0.0.1
+                export WEBCIT_CITADEL_PORT=504
+	fi
+
+	db_get citadel/WebcitApacheIntegration && WWWTYPE="$RET"
+	if test "$WWWTYPE" = "Internal"; then
+		export WEBCIT_APACHEFLAG=" "
+		export WEBCIT_LISTEN_IP=${WEBCIT_LISTEN_IP:-0.0.0.0}
+	else
+		export WEBCIT_APACHEFLAG="-f"
+		export WEBCIT_LISTEN_IP=${WEBCIT_LISTEN_IP:-127.0.0.1}
+	fi
+	
+	db_get citadel/WebcitHttpPort && export WEBCIT_HTTP_PORT=$RET
+	db_get citadel/WebcitHttpsPort && export WEBCIT_HTTPS_PORT=$RET
+	db_get citadel/WebcitOfferLang && export WEBCIT_LANG=$RET
+
+	db_stop
+	
+	set |grep WEBCIT |sed "s;^;export ;;" >/etc/default/webcit
+
+	# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/webcit" ]; then
+		update-rc.d webcit defaults >/dev/null
+		invoke-rc.d webcit start || exit $?
+	fi
+fi
+# End automatically added section
+
+	
+# update the webserver, if needed
+	case "$WWWTYPE" in
+	    "Apache")
+		webservers="apache" 
+		aenmod proxy||true
+		;;
+	    "Apache-SSL")
+		webservers="apache-ssl" 
+		;;
+	    "Apache2")
+		webservers="apache2"
+		a2enmod proxy||true
+		a2enmod proxy_http||true
+		;;
+	    "All")
+		webservers="apache apache-ssl apache2" 
+		;;
+	    *)
+		webservers="" 
+		;;
+	esac
+	for server in $webservers; do
+	    if [ -d "/etc/${server}/conf.d" ]; then
+		if [ ! -e "/etc/${server}/conf.d/webcit.conf" ] ; then
+		    ln -sf /etc/citadel/webcit.conf "/etc/${server}/conf.d/webcit.conf"
+                fi
+                invoke-rc.d $server reload || true
+	    fi
+	done
+    ;;
+  abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+  *) echo "$0: didn't understand being called with '$1'" 1>&2
+     exit 1;;
+esac
+
+exit 0

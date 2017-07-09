@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in 
+
+configure)
+    update-inetd --add "4949 stream tcp nowait nobody /usr/sbin/munin-node-c /usr/sbin/munin-node-c"
+    update-inetd --enable "4949"
+    ;;
+*)
+
+    ;;
+esac
+

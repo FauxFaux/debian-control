@@ -1,0 +1,35 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installxmlcatalogs
+if [ "$1" = "remove" ] || [ "$1" = "upgrade" ]; then
+	update-xmlcatalog --del --type public --id "-//OASIS//DTD Simplified DocBook" --root || true
+	update-xmlcatalog --del --type system --id "http://www.oasis-open.org/docbook/xml/simple/" --root || true
+	update-xmlcatalog --del --type system --id "http://docbook.org/xml/simple/" --root || true
+
+	update-xmlcatalog --del --type system --id "http://www.oasis-open.org/docbook/xml/simple/1.0/sdocbook.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type system --id "http://docbook.org/xml/simple/1.0/sdocbook.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type system --id "http://www.oasis-open.org/docbook/xml/simple/1.0/sdocbook-custom.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type system --id "http://docbook.org/xml/simple/1.0/sdocbook-custom.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type system --id "http://www.oasis-open.org/docbook/xml/simple/1.0/sdocbookref.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type system --id "http://docbook.org/xml/simple/1.0/sdocbookref.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type system --id "http://www.oasis-open.org/docbook/xml/simple/1.0/sdocbookref-custom.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type system --id "http://docbook.org/xml/simple/1.0/sdocbookref-custom.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type public --id "-//OASIS//DTD Simplified DocBook XML V1.0//EN" --package docbook-simple || true
+	update-xmlcatalog --del --type public --id "-//OASIS//DTD Simplified DocBook XML Customization V1.0//EN" --package docbook-simple || true
+	update-xmlcatalog --del --type public --id "-//OASIS//DTD Simplified DocBook RefEntry XML V1.0//EN" --package docbook-simple || true
+	update-xmlcatalog --del --type public --id "-//OASIS//DTD Simplified DocBook RefEntry XML Customization V1.0//EN " --package docbook-simple || true
+	update-xmlcatalog --del --type system --id "http://www.oasis-open.org/docbook/xml/simple/1.1/sdocbook.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type system --id "http://docbook.org/xml/simple/1.1/sdocbook.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type system --id "http://www.oasis-open.org/docbook/xml/simple/1.1/sdocbook-custom.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type system --id "http://docbook.org/xml/simple/1.1/sdocbook-custom.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type system --id "http://www.oasis-open.org/docbook/xml/simple/1.1/sdocbookref.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type system --id "http://docbook.org/xml/simple/1.1/sdocbookref.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type system --id "http://www.oasis-open.org/docbook/xml/simple/1.1/sdocbookref-custom.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type system --id "http://docbook.org/xml/simple/1.1/sdocbookref-custom.dtd" --package docbook-simple || true
+	update-xmlcatalog --del --type public --id "-//OASIS//DTD Simplified DocBook XML V1.1//EN" --package docbook-simple || true
+	update-xmlcatalog --del --type public --id "-//OASIS//DTD Simplified DocBook XML Customization V1.1//EN" --package docbook-simple || true
+	update-xmlcatalog --del --type public --id "-//OASIS//DTD Simplified DocBook RefEntry XML V1.1//EN" --package docbook-simple || true
+	update-xmlcatalog --del --type public --id "-//OASIS//DTD Simplified DocBook RefEntry XML Customization V1.1//EN " --package docbook-simple || true
+
+fi
+# End automatically added section

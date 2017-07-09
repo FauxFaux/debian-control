@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+# Automatically added by debian/scripts/fix_conffiles
+
+cfgdir="/etc/X11/afterstep"
+ucfdir="/usr/share/afterstep/ucf"
+cfgfiles="animate asmount autoexec banner base database gtkrc-2.0_template gtkrc_template kcsrc_template pager sound standard_categories wharf winlist wintabs"
+package="afterstep-data"
+
+if [ "$1" = "configure" ] ; then
+   ucfforce=""
+   if dpkg --compare-versions "$2" le 2.2.11-2~; then
+      ucfforce="--force"
+   fi
+
+   for f in $cfgfiles; do
+      uf="$ucfdir/$f"
+      cf="$cfgdir/${f%.menu-method}"
+      ucf --three-way "$uf" "$cf"
+      ucfr $ucfforce "$package" "$cf"
+   done
+fi
+
+# End automatically added section

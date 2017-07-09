@@ -1,0 +1,20 @@
+#!/bin/sh
+
+update-rc.d scanlogd defaults >/dev/null
+
+if [ -d /home/scanlogd ] ; then # Clean up after #668722
+        rmdir /home/scanlogd # If for some reason the directory isn't empty
+                             # then the directory shouldn't be unconditionally
+                             # removed
+fi
+
+# scanlogd needs a user
+adduser --system --home /var/lib/scanlogd --no-create-home --quiet scanlogd || true
+
+if which invoke-rc.d >/dev/null 2>&1; then
+    invoke-rc.d scanlogd start
+else
+    /etc/init.d/scanlogd start
+fi
+
+

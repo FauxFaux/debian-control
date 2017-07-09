@@ -1,0 +1,38 @@
+#! /bin/sh
+set -e
+
+case "$1" in
+  configure)
+    if ! getent passwd ajaxterm >/dev/null; then
+        adduser --disabled-password  --quiet --system \
+            --no-create-home \
+            --gecos "Ajaxterm system user" --group ajaxterm
+    else
+        # Unlock account in case it was locked from previous purge.
+        usermod -U -e '' ajaxterm > /dev/null || true
+    fi
+  ;;
+  abort-upgrade|abort-remove|abort-deconfigure)
+  ;;
+  *)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+  ;;
+esac
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p ajaxterm /usr/share/ajaxterm -V 2.3-
+fi
+
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/ajaxterm" ]; then
+	update-rc.d ajaxterm defaults >/dev/null
+	invoke-rc.d ajaxterm start || exit $?
+fi
+# End automatically added section
+
+
+exit 0

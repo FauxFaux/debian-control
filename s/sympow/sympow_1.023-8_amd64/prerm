@@ -1,0 +1,23 @@
+#!/bin/sh
+# prerm script for sympow
+set -e
+SYMPOW=/usr/bin/sympow
+ENDIANTUPLE=$($SYMPOW -dump-endiantuple)
+SYMPOW_PKGCACHEDIR=/var/cache/sympow
+SYMPOW_PKGCACHEDATADIR=$SYMPOW_PKGCACHEDIR/datafiles
+SYMPOW_PKGCACHEDATABINDIR=$SYMPOW_PKGCACHEDATADIR/$ENDIANTUPLE
+case "${1}" in
+	remove)
+    if [ -d $SYMPOW_PKGCACHEDATABINDIR ]; then
+			rm -f $SYMPOW_PKGCACHEDATABINDIR/*.bin
+			rmdir --ignore-fail-on-non-empty $SYMPOW_PKGCACHEDATABINDIR
+		fi
+		;;
+	*)
+		;;
+esac
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper dir_to_symlink /usr/share/doc/sympow /usr/share/doc/sympow-data 1.023-6~ -- "$@"
+# End automatically added section
+
+exit 0

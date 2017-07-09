@@ -1,0 +1,106 @@
+#!/bin/sh
+# postinst script for firebird3.0-superclassic
+
+set -e
+. /usr/share/debconf/confmodule
+set -u
+
+if [ -n "${DEBIAN_FIREBIRD_DEBUG:-}" ]; then
+    set -x
+fi
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+FB_VER=3.0
+. /usr/share/firebird${FB_VER}-common/functions.sh
+
+checkFirebirdAccount() {
+
+    adduser --system --quiet --home /var/lib/firebird \
+        --group --gecos "Firebird Database Administator" firebird
+}
+
+debhelper_hook()
+{
+    # This is here in order to make debhelper_hook() a valid
+    # shell procedure in the case when debhelper has nothing
+    # for us
+    DuMmYnOtUsEd="dummy"
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/firebird3.0.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/firebird3.0" ]; then
+		update-rc.d firebird3.0 defaults >/dev/null
+		invoke-rc.d firebird3.0 start || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask firebird3.0.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled firebird3.0.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable firebird3.0.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state firebird3.0.service >/dev/null || true
+fi
+# End automatically added section
+
+}
+
+
+case "$1" in
+    configure)
+        checkFirebirdAccount
+
+        firebird_config_postinst
+
+        # move the log files from /var/log to /var/log/firebird
+        if [ -n "${2:-}" ] \
+            && dpkg --compare-versions "$2" lt "3.0.0~svn+61473.ds4-1~"
+        then
+            find /var/log -maxdepth 1 -name 'firebird3.0.log*' \
+                -exec mv --backup=numbered '{}' /var/log/firebird/ \;
+        fi
+    ;;
+
+    *)
+        debhelper_hook "$@"
+    ;;
+esac
+
+dpkg-maintscript-helper rm_conffile \
+    /etc/default/firebird3.0 3.0.0~svn+61473.ds4-1~ -- "$@"
+
+exit 0
+
+# vi: set sw=4 ts=8 filetype=sh sts=4 :

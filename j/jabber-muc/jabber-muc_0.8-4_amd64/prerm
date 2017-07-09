@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    remove|upgrade)
+    if [ -f /var/run/jabberd2/muc.pid ]; then
+        invoke-rc.d jabberd2 stop muc || true
+    fi
+    ;;
+
+    deconfigure|failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

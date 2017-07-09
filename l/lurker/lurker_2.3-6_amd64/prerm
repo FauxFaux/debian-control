@@ -1,0 +1,31 @@
+#! /bin/sh
+# prerm script for lurker
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# debhelper stuff
+
+
+case "$1" in
+  remove)
+    if [ -x /usr/bin/lurker-prune ] && [ -f /etc/lurker/lurker.conf ] && [ -f /var/lib/lurker/db ]; then
+      echo "Pruning the lurker webserver cache."
+      su - www-data -s /bin/sh -c "/usr/bin/lurker-prune -p"
+    fi
+  ;;
+
+  purge)
+  ;;
+  
+  upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+  ;;
+  
+  *)
+    echo "postrm called with unknown argument \`$1'" >&2
+    exit 0
+  ;;
+esac
+
+exit 0

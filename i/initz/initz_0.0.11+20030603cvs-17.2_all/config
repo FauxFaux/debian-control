@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+#set -x
+
+. /usr/share/debconf/confmodule
+
+db_input medium initz/systemwide || true
+db_go || true

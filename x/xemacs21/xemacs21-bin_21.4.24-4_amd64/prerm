@@ -1,0 +1,33 @@
+#!/bin/sh -e
+set -e
+
+if [ "$1" != "upgrade" ] ; then
+  update-alternatives --remove xemacs /usr/bin/xemacs21
+  update-alternatives --remove editor /usr/bin/xemacs21
+
+  update-alternatives --remove xemacs /usr/bin/gnuclient.xemacs21
+  update-alternatives --remove xemacs21 /usr/bin/gnuclient.xemacs21
+
+  update-alternatives --remove movemail /usr/lib/xemacs-21.4.24/x86_64-linux-gnu/movemail
+
+  update-alternatives --remove mmencode /usr/lib/xemacs-21.4.24/x86_64-linux-gnu/mmencode
+
+  for i in b2m etags gnuclient gnuattach gnudoit rcs-checkin ellcc ; do
+    update-alternatives --remove $i /usr/bin/$i.xemacs21
+  done
+fi
+
+# Remove alternatives in prerm (See Bug#269177)
+update-alternatives --remove ootags /usr/bin/ootags.xemacs21
+update-alternatives --remove ctags /usr/bin/ctags.xemacs21
+
+# fixes an oopsy in an older prerm script.
+update-alternatives --remove xemacs21 /usr/bin/xemacs21-21.1.p2-mule
+update-alternatives --remove xemacs21 /usr/bin/xemacs21-21.1.p2-nomule
+update-alternatives --remove xemacs21 /usr/bin/xemacs21-21.1.p2-mule-canna-wnn
+
+if [ -L /usr/doc/xemacs21-bin ]; then
+	rm -f /usr/doc/xemacs21-bin
+fi
+
+##

@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  configure)
+    update-alternatives \
+    	--install /usr/bin/editor editor /usr/bin/xjed 35 \
+    	--slave /usr/share/man/man1/editor.1.gz editor.1.gz /usr/share/man/man1/xjed.1.gz;
+
+    update-alternatives \
+    	--install /usr/bin/jed-script jed-script /usr/bin/xjed 40 \
+    	--slave /usr/share/man/man1/jed-script.1.gz jed-script.1.gz /usr/share/man/man1/xjed.1.gz;
+
+    TEMP=$(tempfile)
+    RET=0
+    printf "Updating precompiled files..."
+    run-parts --exit-on-error --arg=install /usr/share/jed/compile/ \
+        >$TEMP 2>&1 || RET=$?
+    if test "$RET" -ne 0 ; then
+	echo "failed (see $TEMP)"
+	exit $RET
+    fi
+    echo "done"
+    rm $TEMP
+    ;;
+
+  abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+  *)
+    echo "unknown argument --> \"$1"\" >&2
+    exit 0
+    ;;
+esac
+
+

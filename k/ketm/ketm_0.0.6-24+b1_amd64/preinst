@@ -1,0 +1,21 @@
+#! /bin/sh
+# preinst script for ketm
+
+set -e
+
+scores=/var/games/ketm.scores
+
+case "$1" in
+  install|upgrade)
+    # old versions of ketm (< 0.0.6-20) will remove high score file
+    # on upgrade, so rescue it
+    if $(dpkg --compare-versions "$2" lt-nl 0.0.6-20) && [ -e $scores ] ; then
+      cp -p $scores $scores.tmp
+    fi
+    ;;
+esac
+
+
+
+exit 0
+

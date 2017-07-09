@@ -1,0 +1,44 @@
+#! /bin/sh
+#
+# preinst for ircd-ircu: check for hangover of old ircd package
+#
+#
+
+set -e
+
+case "$1" in
+
+	install)
+
+	if [ -f "/etc/init.d/ircd" ]; then
+		echo "init-script of old ircd found, stopping it."
+		invoke-rc.d ircd stop
+	fi
+
+	if [ -d "/etc/ircd" ]; then
+		echo -n "hangovers of old ircd found, saving them in /etc/ircd/bak: "
+		if [ ! -d "/etc/ircd/bak" ]; then
+			mkdir /etc/ircd/bak/
+		fi
+		for a in `find /etc/ircd -mindepth 1 -not -name bak`; do cp -r "$a" "/etc/ircd/bak/`echo \"$a\" | sed 's/\/etc\/ircd//g'`.bak"; done
+		echo "done."
+	fi
+
+	;;
+
+	abort-upgrade|upgrade)
+	
+	;;
+
+	*)
+        
+	echo "preinst called with unknown argument \`$1'" >&2
+	exit 1
+	
+	;;
+	
+esac
+
+
+
+exit 0

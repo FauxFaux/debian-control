@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+# 
+# Rely on makedev to Do The Right Thing and not stomp on devfsd, udeb
+# 
+if [ -e /sbin/MAKEDEV ]
+then
+	( cd /dev && MAKEDEV dvb )
+fi
+
+# Delete erroneous /dvb that may have been created due to #330373
+if [ -e /dvb ] ; then
+	set +e
+	echo -n "Incorrect directory /dvb found; attempting to delete it ..."
+	# Try Hard.
+	find /dvb -type c -exec rm {} 2> /dev/null \;
+	find /dvb -type d -exec rmdir {} 2> /dev/null \;
+	rm -rf /dvb 2> /dev/null 
+	set -e
+	if [ -e /dvb ]; then
+		echo ""
+	 	echo "/dvb could not be deleted. User files may be present."
+		echo "Please delete /dvb by hand."
+	else
+		echo " done."
+	fi
+fi
+
+

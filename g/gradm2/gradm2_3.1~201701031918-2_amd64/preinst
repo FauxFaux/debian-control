@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    install|abort-upgrade)
+    ;;
+
+    upgrade)
+        if dpkg --compare-versions "$2" lt-nl '3.1~201603152148-1'; then
+            [ -c /dev/grsec ] && rm -f /dev/grsec
+        fi
+    ;;
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+db_get solaar/use_plugdev_group
+if test "$RET" = true; then
+	# make sure the group exists if required
+	if ! getent group plugdev >/dev/null; then
+		groupadd --system plugdev || addgroup --system plugdev
+	fi
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p solaar /usr/share/solaar/lib -V 2.7-
+fi
+
+# End automatically added section
+

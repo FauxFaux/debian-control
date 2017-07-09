@@ -1,0 +1,41 @@
+#!/bin/sh
+CONFIGFILE=/etc/default/mimedefang
+set -e
+
+# We need debconf.
+. /usr/share/debconf/confmodule
+
+db_version 2.0
+db_capb backup
+db_title "MIMEDefang"
+
+# Load config file, if it exists.
+if [ -e $CONFIGFILE ]; then
+    . $CONFIGFILE || true
+    
+    #Store values from config file into debconf db.
+    if [ "$MX_EMBED_PERL"x = "yes"x ]
+    then 
+	db_set mimedefang/embedperl true
+    elif [ "$MX_EMBED_PERL"x = "no"x ]
+    then
+	db_set mimedefang/embedperl false
+    fi
+fi
+
+# Use a state machine to allow jumping back to previous questions.
+STATE=1
+while [ "$STATE" != 0 -a "$STATE" != 2 ]; do
+	case "$STATE" in
+	1)
+		db_input medium mimedefang/embedperl || true
+	;;
+	
+	esac
+
+	if db_go; then
+		STATE=$(($STATE + 1))
+	else
+		STATE=$(($STATE - 1))
+	fi
+done

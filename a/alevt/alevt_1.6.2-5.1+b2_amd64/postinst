@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+  # Purge the debconf database we no longer need.
+  if [ -e /usr/share/debconf/confmodule ]; then
+    . /usr/share/debconf/confmodule
+    db_purge
+  fi
+fi
+
+if [ ! -e /dev/vbi0 -a ! -e /dev/.devfsd ]; then
+  if [ -x /dev/MAKEDEV ]; then
+    echo "creating video4linux devices..."
+    cd /dev
+    ./MAKEDEV video4linux
+    cd $OLDPWD
+  fi
+fi
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/testr testr /usr/bin/testr-python3 200
+fi
+
+
+# Automatically added by dhpython:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-testrepository 
+fi
+
+# End automatically added section
+
+
+exit 0

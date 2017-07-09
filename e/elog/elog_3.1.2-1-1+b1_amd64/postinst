@@ -1,0 +1,199 @@
+#!/bin/sh
+# Copyright © 2003, 2005  Recai Oktaş <roktas@omu.edu.tr>
+#             2014, 2015 Roger Kalt  <roger.kalt@gmail.com>
+#
+# Licensed under the GNU General Public License, version 2.
+# See the file `http://www.gnu.org/copyleft/gpl.txt'.
+
+set -e
+
+# taken from Debian's Developer's Reference, 6.4
+pathfind() {
+    OLDIFS="$IFS"
+    IFS=:
+    for p in $PATH; do
+        if [ -x "$p/$*" ]; then
+            IFS="$OLDIFS"
+            return 0
+        fi
+    done
+    IFS="$OLDIFS"
+    return 1
+}
+
+if [ "$1" != "configure" ]; then
+	echo "postinst called with unknown argument '$1'" >&2
+	exit 0
+fi
+
+# ELOG root.
+SRVDIR=/var/lib/elog
+
+# Welcome subject to check for a previous install.
+WELCOME_SUBJECT="Welcome to ELOG"
+
+
+
+# manually register elog service and install the links since dh_installinit is not used
+if pathfind update-rc.d; then
+	update-rc.d elog defaults >/dev/null
+fi
+
+#if [ "$2" ]; then   // I have no idea what the $2 argument could be given for?
+if [ -d $SRVDIR/logbooks ]; then
+	# Start daemon.
+	if pathfind invoke-rc.d; then
+		invoke-rc.d elog start
+	else
+		if [ -x /etc/init.d/elog ]; then
+			/etc/init.d/elog start
+		fi
+	fi || true
+
+	# No bother anymore, if this is not a fresh install.
+	exit 0
+fi
+
+if ! getent passwd elog >/dev/null 2>&1; then
+	echo -n "Creating user/group 'elog'" >&2
+	adduser --quiet --system --group --no-create-home \
+	--disabled-password --disabled-login \
+	--shell /bin/false --home $SRVDIR elog
+	echo "."
+fi
+
+if [ ! -d $SRVDIR/logbooks ]; then
+	echo "Creating logbook directory '$SRVDIR/logbooks'" >&2
+	install -d $SRVDIR/logbooks
+fi
+
+# Touch the ownerships.
+chown -R elog:elog $SRVDIR
+# see http://webapps-common.alioth.debian.org/draft/html/ch-issues.html section 3.2.1
+chown root:elog /etc/elog.conf
+chmod 660 /etc/elog.conf
+
+# Now, setup ELOG port...
+
+# Stolen from 'freenet-unstable', slightly modified.
+is_freeport()
+{
+	# Pattern will fail to detect IPv6 bindings.
+	! LC_ALL=C /bin/netstat -tnl 2>/dev/null | \
+	egrep "tcp +[0-9]+ +[0-9]+ +[0-9]+\.[0-9]+\.[0-9]+\.[0-9]:$1 " >/dev/null
+}
+
+# Prints a welcome message for new users.
+welcome()
+{
+	cat <<EOF
+Congratulations for installing ELOG sucessfully!
+
+This is a demo entry to ensure the elogd server is working correctly.
+Click "New" to add new pages and "Delete" to delete this page.
+
+See the html manual in "/usr/share/doc/elog" for
+detailed instructions.  You can reach the manual from "doc-base".
+EOF
+}
+
+# Get default port.
+PORT=`awk 'tolower($1) == "port" { print $3 }' /etc/elog.conf`
+if [ -z "$PORT" ]; then
+	PORT=80
+fi
+
+# Search a free port.  Idea stolen from 'freenet-unstable'.  Since it is not
+# mandatory to do this, just check the existence of 'netstat'.  No need to
+# create a package dependency on 'net-tools'.
+if pathfind netstat; then
+	if is_freeport $PORT; then
+		good_port="yes"
+	else
+		echo "Port '$PORT' is not free, checking the near ports..." >&2
+
+		# First try to find the PORT in a memorizable range.
+		for try in `seq $(($PORT + 1)) $(($PORT + 10))`; do
+			echo -n "Checking $try... "
+			is_freeport $try && { echo "free" >&2; good_port="yes"; break; }
+			echo "not free" >&2
+		done
+
+		# Couldn't find?  Pick up a random PORT.
+		if [ "$good_port" != "yes" ]; then
+			echo -n "No free near ports, searching a random free port..." >&2
+			num_try=50
+			while [ $num_try -gt 0 ]; do
+				my_random=$(dd if=/dev/urandom bs=1 count=10 2>/dev/null | cksum | cut -d' ' -f1)
+				try=$(($my_random % 55535 + 10000))
+				is_freeport $try && \
+					{ echo " found $try" >&2; good_port="yes"; break; }
+				num_try=$(($num_try - 1))
+				echo -n "." >&2
+			done
+		fi
+
+		if [ "$good_port" = "yes" ]; then
+			PORT=$try
+			# OK.  Save this validated port.
+			tempfile="${TMPDIR:-/tmp}/elog.conf.$$"
+			awk 'tolower($1) == "port" \
+				{ $0 = "port = '"$PORT"' ; Automatically added in installation." }\
+				{ print }' /etc/elog.conf >$tempfile
+			mv -f $tempfile /etc/elog.conf
+		else
+			echo "$0: could not find a free port" >&2
+			echo "You must configure it manually." >&2
+		fi
+	fi
+
+else
+	# Nearly impossible case for a healthy Debian box.
+	echo "$0: can't exec 'netstat' to check for a free port" >&2
+	echo "You must configure it manually." >&2
+fi
+
+# Configuration has been done, start daemon.
+if [ -x /etc/init.d/elog ]; then
+	
+	if pathfind invoke-rc.d; then
+		invoke-rc.d elog start
+	else
+		/etc/init.d/elog start
+	fi || \
+	{
+		echo "$0: couldn't start ELOG; please start it later manually" >&2
+		exit 0
+	}
+
+	# Wait a second to settled down.
+	sleep 1
+fi
+
+# Submit a welcome log for the first time users.
+if [ "$good_port" = "yes" -a -d $SRVDIR/logbooks/demo ] \
+   && ! grep -sq "^Subject: *$WELCOME_SUBJECT$" $SRVDIR/logbooks/demo/*; then
+
+	echo -n "Submitting a test message... " >&2
+	# Piping only works for the 'elog' versions >= 2.3.8.
+	welcome | \
+	elog -h localhost -p $PORT -l demo \
+	     -a subject="$WELCOME_SUBJECT" \
+	     -a author="ELOG maintainer" \
+	     -a type="Routine" \
+	     -a category="General" >&2 || true
+fi
+
+# Always inform about the URL.
+
+URL='http://localhost'
+# Exclude default HTTP port if used.
+if [ "$PORT" != "80" ]; then
+	URL="$URL:$PORT"
+fi
+
+echo "ELOG is configured to reach from '$URL'." >&2
+
+exit 0
+
+# vim:ai:sts=8:sw=8:

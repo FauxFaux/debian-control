@@ -1,0 +1,40 @@
+#!/bin/sh
+set -e
+
+#
+#  Score file for the game.
+#
+scorefile="/var/games/late.scores"
+
+#
+#  The game binary itself.
+#
+binary="/usr/games/late"
+
+
+
+# First install the score file might be missing.
+if [ ! -e $scorefile ]
+then
+    install -d /var/games
+    touch $scorefile
+fi
+
+
+# Make sure the score file has the correct permissions
+chmod 0664 $scorefile
+chown root:games $scorefile
+
+
+# Now make the binary setgid(games).
+chmod 755 $binary
+chown root:games $binary
+chmod g+s $binary
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+

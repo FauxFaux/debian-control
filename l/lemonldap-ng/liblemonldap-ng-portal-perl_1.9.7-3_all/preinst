@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ "$1" == "configure" ]
+then
+	if [ -f /var/lib/lemonldap-ng/portal/index.pl ]; then \
+		diff /var/lib/lemonldap-ng/portal/index.pl \
+			/usr/share/doc/liblemonldap-ng-portal-perl/examples/index_skin.pl && \
+		rm -rf /var/lib/lemonldap-ng/portal/index.pl
+	fi
+fi
+
+
+exit 0

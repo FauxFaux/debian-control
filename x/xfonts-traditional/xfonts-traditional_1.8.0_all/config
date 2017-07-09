@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+. /usr/share/debconf/confmodule
+db_input low xfonts-traditional/generate || true
+db_get xfonts-traditional/generate || true
+if [ $RET != false ]; then
+	db_input high xfonts-traditional/reconfigure-xterm || true
+	db_input high xfonts-traditional/remap-fixed || true
+fi
+db_go || true

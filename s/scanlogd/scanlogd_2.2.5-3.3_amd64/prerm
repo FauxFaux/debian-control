@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# orginal by dh_installinit
+if which invoke-rc.d >/dev/null 2>&1; then
+    invoke-rc.d scanlogd stop
+else
+    /etc/init.d/scanlogd stop
+fi
+
+

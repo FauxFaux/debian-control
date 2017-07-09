@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ -r /usr/lib/plan/holiday ] && [ ! -L /usr/lib/plan/holiday ]
+then
+    mv /usr/lib/plan/holiday /etc/plan/
+    echo >&2 Moved /usr/lib/plan/holiday to /etc/plan/holiday.
+fi
+
+

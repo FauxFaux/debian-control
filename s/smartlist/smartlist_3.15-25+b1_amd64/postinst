@@ -1,0 +1,57 @@
+#!/bin/sh
+set -e
+LISTHOME="/var/list"
+LISTID=38
+
+if [ ! -f $LISTHOME/.etc/rc.init ]; then
+  if [ -f /etc/mailname ]; then
+    HOST="`cat /etc/mailname`"
+  else
+    HOST="`hostname --fqdn`"
+  fi
+  cat $LISTHOME/.etc/rc.init.dist | sed \
+    -e "s/listmaster=/listmaster=listman/g" \
+    -e "s/INSERT.YOUR.MAIL.DOMAIN.HERE/$HOST/g" \
+    > $LISTHOME/.etc/rc.init
+  chown list:list $LISTHOME/.etc/rc.init
+fi
+
+if ! grep -q "^# ---SmartList" /etc/aliases; then
+
+cat << FIN >> /etc/aliases
+# ---SmartList Begin
+listman:	root
+# Please, put list aliases here, and don't delete Begin or End lines.
+# This way they will removed automatically if you purge this package.
+# ---SmartList End
+FIN
+
+set +e
+newaliases
+set -e
+
+fi
+true
+
+if dpkg --compare-versions "$2" lt-nl "3.15-21"; then
+  awk '
+  {
+    if ($0 ~ "^listaddr=") {
+      print "listid=$list.$domain"
+      print $0
+    }
+    else {
+      print $0
+    }
+  }' $LISTHOME/.etc/rc.init > $LISTHOME/.etc/rc.init.updated
+  mv $LISTHOME/.etc/rc.init.updated $LISTHOME/.etc/rc.init
+  chown list:list $LISTHOME/.etc/rc.init
+fi
+
+if [ "$1" = "configure" ] && [ "$2" = "" ]; then
+  if [ ! -f $LISTHOME/.etc/reject ]; then
+    touch $LISTHOME/.etc/reject
+    chown list:list $LISTHOME/.etc/reject
+    chmod 660 $LISTHOME/.etc/reject
+  fi
+fi

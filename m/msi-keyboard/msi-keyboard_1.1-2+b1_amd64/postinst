@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e;
+
+
+
+if [ "$1" = "configure" -o "$1" = "upgrade" ] && command -V udevadm >/dev/null 2>&1; then
+   udevadm trigger --action=add --attr-match=idVendor=1770 --attr-match=idProduct=ff00
+fi

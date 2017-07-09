@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+# install alternatives link for nedit
+
+if [ "$1" = "configure" ]; then
+  update-alternatives --install /usr/bin/editor editor \
+  /usr/bin/nedit 40 --slave /usr/share/man/man1/editor.1.gz \
+  editor.1.gz /usr/share/man/man1/nedit.1.gz
+fi
+
+
+
+exit 0

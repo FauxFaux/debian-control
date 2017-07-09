@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/privsep-helper privsep-helper /usr/bin/python2-privsep-helper 300
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-oslo.privsep 
+fi
+
+# End automatically added section
+
+
+exit 0

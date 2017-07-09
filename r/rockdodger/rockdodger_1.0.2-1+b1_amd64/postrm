@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+SCOREFILE='/var/games/rockdodger.scores'
+
+if [ "$1" = 'purge' ]
+then
+	rm -f "$SCOREFILE"
+fi
+
+if [ -x "`which update-menus 2> /dev/null`" ]
+then
+	update-menus
+fi
+
+exit 0

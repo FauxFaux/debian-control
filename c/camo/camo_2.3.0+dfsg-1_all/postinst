@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+mkdir -p /var/log/camo/
+
+if ! [ -f /etc/default/camo ]; then
+    echo "ENABLED=yes" > /etc/default/camo
+    echo "PORT=9292" >> /etc/default/camo
+    echo "CAMO_KEY=`openssl rand -hex 20`" >> /etc/default/camo
+    echo "CAMO_LOGGING_ENABLED=1" >> /etc/default/camo
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/camo" ]; then
+		update-rc.d camo defaults >/dev/null
+		invoke-rc.d camo start || exit $?
+	fi
+fi
+# End automatically added section
+

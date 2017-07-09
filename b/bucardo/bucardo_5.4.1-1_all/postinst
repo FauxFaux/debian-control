@@ -1,0 +1,54 @@
+#!/bin/sh
+
+set -e
+
+DAEMON=/usr/bin/bucardo
+
+if [ -f /etc/default/bucardo ] ; then
+	. /etc/default/bucardo
+fi
+
+case "$1" in
+configure)
+	# Create dedicated bucardo user
+	if ! getent passwd bucardo > /dev/null; then
+		adduser --system --group --gecos "bucardo" --home /var/lib/bucardo --no-create-home --shell /bin/bash bucardo
+	fi
+	# Unlock account, it may have been locked by an earlier package removal
+	usermod -U -e '' bucardo
+	for file in /etc/bucardorc /var/log/bucardo /var/lib/bucardo /var/run/bucardo; do
+		if [ -e $file ] && ! dpkg-statoverride --list $file >/dev/null ; then
+			chown bucardo:bucardo $file
+			chmod o-o $file
+		fi
+	done
+	if [ "$ENABLED" != "0" ] ; then
+		# Do not try crossing the 4/5 boundary.
+		if `su bucardo --command "psql -c 'select 1 from syncrun' bucardo" > /dev/null`; then
+			su bucardo --command "$DAEMON upgrade batch" || true
+			su bucardo --command "$DAEMON validate all" || true
+		else
+			echo "Sorry, but Bucardo version 4 cannot be upgraded to version 5";
+			echo "You will have to recreate your information (dbs, syncs, etc.)";
+		fi
+	fi
+	;;
+abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+*)
+	echo "postinst called with unknown argument \`$1'" >&2
+	exit 1
+	;;
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/bucardo" ]; then
+		update-rc.d bucardo defaults >/dev/null
+		invoke-rc.d bucardo start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

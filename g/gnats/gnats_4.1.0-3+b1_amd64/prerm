@@ -1,0 +1,66 @@
+#!/bin/sh
+#
+# Gnats installation script -- written by Brian White <bcwhite@pobox.com>
+# (This was my very first attempt at learning perl... please forgive me!)
+#
+# Forgiving -- rewritten to bash :-) by Milan Zamazal <pdm@debian.org>.
+# ...and streamlined with SED by Chad Walstrom <chewie@debian.org>
+
+set -e
+
+###############################################################################
+#
+# Utility functions
+#
+
+# Call arguments and never return error
+protect () { "$@" || true; }
+
+###############################################################################
+#
+# Common initialization for install scripts
+#
+
+. /usr/share/debconf/confmodule
+
+protect db_get gnats/site
+SITE=${RET:-default}
+
+###############################################################################
+#
+# Purge operations
+#
+
+if [ "$1" = "remove" ] ; then
+
+  #
+  # Remove the 'gnats' system from mail
+  #
+  if [ -f /etc/aliases ] ; then
+    TEMPFILE=$(tempfile)
+    OLDMAILFILE=/etc/aliases.dpkg-old
+    
+    sed 's/^[ \t]*\(gnats-admin\|bugs\|query-pr\|$SITE-gnats\)\>\(.*\)$/#\1\2/' \
+	/etc/aliases >$TEMPFILE
+    cp /etc/aliases $OLDMAILFILE
+    chmod 644 $TEMPFILE
+    mv $TEMPFILE /etc/aliases
+  fi
+
+  #
+  # Remove symlinks to databases
+  #
+  protect rm -f /etc/gnats/db-config/*
+
+  #
+  # Remove symlink to gnatsd.user_access
+  #
+  protect rm -f /etc/gnats/gnatsd.user_access
+
+fi
+
+###############################################################################
+#
+# Automatically added debhelper stuff
+#
+

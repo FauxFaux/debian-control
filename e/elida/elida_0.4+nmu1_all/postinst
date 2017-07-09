@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+# Recover from incorrect init.d script runlevel settings in
+# version 0.4 and earlier
+if [ "$1" = "configure" ] && dpkg --compare-versions "$2" le "0.4" ; then
+    update-rc.d -f elida remove
+fi
+
+if [ "$1" = "configure" ]; then
+    update-rc.d elida start 20 2 3 4 5 . stop 20 0 1 6 . >/dev/null
+#   if [ ! -d /usr/src/elida ]; then
+#       mkdir /usr/src/elida
+#       chmod 2775 /usr/src/elida
+#       chgrp src /usr/src/elida
+#   fi
+fi
+
+exit 0 

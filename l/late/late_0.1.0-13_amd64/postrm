@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+#
+#  Score file for the game.
+#
+scorefile="/var/games/late.scores"
+
+
+case "$1" in
+purge)
+        rm -f $scorefile
+	;;
+*)
+        ;;
+esac
+
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+

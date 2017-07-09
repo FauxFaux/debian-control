@@ -1,0 +1,36 @@
+#! /bin/sh
+#
+# Possible invocations:
+#    * new-preinst install
+#    * new-preinst install old-version
+#    * new-preinst upgrade old-version
+#    * old-preinst abort-upgrade new-version
+
+set -e
+
+
+
+case "$1" in
+	upgrade)
+		bindir="/var/lib/cfengine2/bin"
+		# Remove it if it's a genuine directory so dpkg can install
+		# the link in its place.
+		if [ ! -h "$bindir" -a -d "$bindir" ]; then
+		    rmdir "$bindir" || {
+			fmt <<EOF >&2
+ERROR: $bindir could not be deleted automatically.
+To fix this, check it and delete it yourself, then run
+
+# dpkg --configure cfengine2
+EOF
+			exit 1
+		    }
+		fi
+		;;
+	install|abort-upgrade)
+		;;
+	*)
+		echo "Cfengine2 preinst called with invalid argument, '$1'" >&2
+		exit 1
+		;;
+esac

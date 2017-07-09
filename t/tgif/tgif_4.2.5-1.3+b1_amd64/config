@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+db_input medium tgif/papersize || true
+db_input medium tgif/gridunits || true
+db_go

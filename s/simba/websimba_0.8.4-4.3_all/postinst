@@ -1,0 +1,70 @@
+#!/bin/sh
+
+
+#
+# Skip, if we are not in "configure" state
+# 
+if [ "$1" != "configure" ]; then
+	echo "I: Skipping configuration"
+	cleanup
+	exit 0
+fi
+version="$2"
+
+
+## Source debconf library
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+#
+# retrieve various configuration options from debconf
+#
+db_get websimba/webserver
+WWWTYPE="$RET"
+
+
+# update the webserver, if needed
+echo -n "I: Installing apache config files:"
+case "$WWWTYPE" in
+	"Apache")
+		webservers="apache" ;;
+	"Apache-SSL")
+		webservers="apache-ssl" ;;
+	"Apache2")
+		webservers="apache2" ;;
+	"All")
+		webservers="apache apache-ssl apache2" ;;
+	*)
+		webservers="" ;;
+esac
+. /usr/share/wwwconfig-common/php.get
+. /usr/share/wwwconfig-common/apache-run.get
+
+for server in $webservers; do
+	echo -n " $server"
+
+	# prefer conf.d over monolithic form
+	if [ -d "/etc/${server}/conf.d" ]; then
+		if [ ! -h "/etc/${server}/conf.d/simba.conf" ] ; then
+			ln -s ../../simba/apache.conf "/etc/${server}/conf.d/simba.conf"
+		fi
+		restart="$server $restart"
+	else
+		includefile="/etc/simba/apache.conf"
+		. /usr/share/wwwconfig-common/apache-include_all.sh
+		test "$status" = "uncomment" || "$status" = "include" && restart="$server $restart"
+	fi
+
+	for index in index.php; do
+		. /usr/share/wwwconfig-common/apache-index_all.sh
+		test "$status" = "added" && restart="$server $restart"
+	done
+
+	. /usr/share/wwwconfig-common/restart.sh
+done
+echo "."
+
+
+
+exit 0
+

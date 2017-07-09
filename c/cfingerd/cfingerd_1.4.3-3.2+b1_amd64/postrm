@@ -1,0 +1,22 @@
+#! /bin/sh
+
+set -e
+
+if [ "$1" = "purge" ]
+then
+    rm -f /var/log/cfingerd.log*
+    if [ -d /var/log/OLD ]
+    then
+	rm -f /var/log/OLD/cfingerd.log*
+    fi
+    test -d /etc/cfingerd && rm -rf /etc/cfingerd
+fi
+
+# This will be executed on removal and purging of the package.
+if [ "$1" = "remove" ]; then
+    update-inetd --remove cfingerd
+    if grep -s "^[^ *#]" /etc/xinetd.conf | grep -q cfingerd; then
+	echo "Please remove the cfingerd entry from your /etc/xinetd.conf file"
+	echo "manually."
+    fi
+fi

@@ -1,0 +1,20 @@
+#! /bin/sh
+set -e
+
+
+DOCDIR=/usr/share/doc/python-sip-dbg
+DOCLINK=python-sip
+
+if [ -d $DOCDIR ] && [ ! -L $DOCDIR ]; then
+    rmdir $DOCDIR
+    ln -s $DOCLINK $DOCDIR
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-sip-dbg 
+fi
+
+# End automatically added section
+

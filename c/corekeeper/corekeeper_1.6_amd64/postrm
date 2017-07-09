@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+
+# Delete leftover core files when removing/purging
+[ $1 != purge -a $1 != remove ] || [ ! -d /var/crash ] || find /var/crash -name '*.core' -delete
+[ $1 != purge -a $1 != remove ] || [ ! -d /var/cache/corekeeper ] || find /var/cache/corekeeper -type f -delete
+
+# Turn off core dumps after remove/purge
+# Only after purge will they be fully turned off
+if [ $1 = purge -o $1 = remove ] ; then
+	if [ -x /bin/systemctl -a -d /run/systemd/system/ ] ; then
+		systemctl restart systemd-sysctl.service
+	elif [ -x /etc/init.d/procps ] ; then
+		invoke-rc.d procps reload
+	elif [ -x /lib/freebsd/sysctl ] ; then
+		/lib/freebsd/sysctl kern.sugid_coredump=0
+		/lib/freebsd/sysctl kern.corefile=%N.core
+	fi
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/corekeeper 1.1~ corekeeper -- "$@"
+# End automatically added section
+

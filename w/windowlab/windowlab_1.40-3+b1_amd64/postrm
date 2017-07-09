@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+_ETCW=/etc/X11/windowlab
+
+if test "$1" = "purge"; then
+    test -d $_ETCW && rm -f $_ETCW/windowlab.menurc.old  ||  true
+fi
+
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+

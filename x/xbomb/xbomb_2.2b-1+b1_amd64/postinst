@@ -1,0 +1,39 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+# none of the following checks script arguments because it's all
+# harmless and can be done repeatedly without danger.
+
+# create the new high-scores directory if needed
+mkdir -p /var/games/xbomb
+
+# clean up any existing files in the old location, /var/lib/games
+if [ -d /var/lib/games/xbomb ]; then
+    mv /var/lib/games/xbomb/* /var/games/xbomb || true
+    rm -rf /var/lib/games/xbomb || true
+fi
+
+# Create empty hi-score files if needed
+
+cd /var/games/xbomb/
+
+for i in xbomb6.hi xbomb4.hi xbomb3.hi; do
+    if [ ! -e $i ]; then
+	touch $i
+	chown root:games $i
+    fi
+    # Set permissions (fixes permissions of pre 2.0-3 files)
+    chmod 664 $i
+done
+
+# Updating menus after adding the current entry
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi

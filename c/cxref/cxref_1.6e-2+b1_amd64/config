@@ -1,0 +1,14 @@
+#!/bin/sh
+
+CF=/etc/cxref/config
+set -e
+. /usr/share/debconf/confmodule
+
+if [ -e $CF ]; then
+   . $CF || true
+   db_set cxref/cxref-cpp-autoconf $AUTOCONF
+fi
+
+db_input low cxref/cxref-cpp-autoconf || true
+db_go || true
+

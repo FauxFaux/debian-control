@@ -1,0 +1,27 @@
+#!/bin/sh
+
+PATH=/bin:/usr/bin
+package=remembrance-agent
+database=/var/lib/emacs/remembrance
+program=/usr/bin/ra-index
+config_file=/etc/savantrc
+
+case "$1" in
+  remove)
+# Per policy call emacs-remove
+	if [ -x /usr/lib/emacsen-common/emacs-package-remove ]; then
+		/usr/lib/emacsen-common/emacs-package-remove ${package}
+	fi
+	;;
+  deconfigure|upgrade|failed-upgrade)
+# Do nothing
+	 ;;
+  *) 
+         echo "$0: didn't understand being called with \`$1'" 1>&2
+         exit 0
+	 ;;
+esac
+
+
+
+exit 0

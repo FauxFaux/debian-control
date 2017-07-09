@@ -1,0 +1,103 @@
+#!/bin/sh
+
+. /usr/share/debconf/confmodule
+
+set -e
+
+case "$1" in
+	configure)
+	       	# Remove older attr +t if present
+       		if [ "`lsattr -d /var/lib/vservers/|cut -c16`" = "t" ] ; then
+			   chattr -t /var/lib/vservers
+       		fi
+
+       		# UPGRADE PATH FROM vserver PACKAGE!
+       		# It should be fairly fail safe.
+
+       		# Source the old /etc/vserver.conf file to get the VROOTDIR
+       		if [ -r /etc/vserver.conf ] ; then
+			   . /etc/vserver.conf
+			   if [ -n "$VSERVERS_ROOT" ] ; then
+			       VROOTDIR="$VSERVERS_ROOT"
+			   fi
+			   if [ -n "$VSERVER_ROOT" ] ; then
+			       VROOTDIR="$VSERVER_ROOT"
+			   fi
+			   rm /etc/vserver.conf
+       		fi
+
+       		# SOURCE the old /etc/vservers.conf file to get the VROOTDIR
+       		if [ -r /etc/vservers.conf ] ; then
+			   . /etc/vservers.conf
+			   if [ -n "$VSERVERS_ROOT" ] ; then
+			       VROOTDIR="$VSERVERS_ROOT"
+			   fi
+			   if [ -n "$VSERVER_ROOT" ] ; then
+			       VROOTDIR="$VSERVER_ROOT"
+			   fi
+			   rm /etc/vservers.conf
+       		fi
+
+		if [ -z $VROOTDIR ]
+		then
+			VROOTDIR=/var/lib/vservers
+		fi
+
+       		if [ ! -e /etc/vservers/.defaults/vdirbase ] ; then
+		   ln -s $VROOTDIR /etc/vservers/.defaults/vdirbase
+       		fi
+
+		# Remove old startup scripts
+		rm -f /etc/init.d/vservers-legacy
+		rm -f /etc/init.d/vservers-default
+		rm -f /etc/init.d/vprocunhide
+		rm -f /etc/default/util-vservere
+
+		if [ -f /etc/init.d/rebootmgr ]
+		then
+			/etc/init.d/rebootmgr stop
+			rm -f /etc/init.d/rebootmgr
+		fi
+
+       		# END OF UPGRADE PATH FROM vserver PACKAGE
+
+       		if [ ! -e /etc/vservers/.defaults/run.rev ] ; then
+			   mkdir -p /var/run/vservers.rev
+			   ln -s /var/run/vservers.rev /etc/vservers/.defaults/run.rev
+       		fi
+
+		test -d $VROOTDIR/.pkg || mkdir -m0755 $VROOTDIR/.pkg
+
+		test -d $VROOTDIR/.hash || mkdir -m0700 $VROOTDIR/.hash
+		hash="/etc/vservers/.defaults/apps/vunify/hash"
+		if [ -d $VROOTDIR/.hash ]; then
+		    test -e "$hash"/method -o -e "$hash"/00 || \
+		    ln -s $VROOTDIR/.hash "$hash"/00
+		fi
+
+		db_stop
+       ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    exit 0
+    ;;
+
+    *)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 0
+    ;;
+
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/util-vserver" ]; then
+		update-rc.d util-vserver defaults >/dev/null
+		invoke-rc.d util-vserver start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0
+

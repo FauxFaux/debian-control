@@ -1,0 +1,103 @@
+#!/bin/sh
+
+set -e
+
+#
+# netplan post-installation script
+#
+
+#Commented out for debconf: Gopal Narayanan 
+if [ "$1" != "configure" ] ; then
+    exit 0
+fi  
+
+
+# Check to see if both user netplan _and_ group netplan already exist,
+# as well as if /var/lib/plan/netplan.dir/ exists.
+if ! { getent group | grep -q '^netplan:[^:]*:' && \
+       getent passwd | grep -q '^netplan:[^:]*:' && \
+       [ -d /var/lib/plan/netplan.dir ] ; }
+then
+    # if at least one exists, but not all, remove all
+    # before attempting to recreate them, or adduser will barf.
+    # Note: Gopal Narayanan <gopal@debian.org> Jan 28, 2002:
+    # removed -d check - netplan.dir created by package -will 
+    # always fail
+    if grep -q '^netplan:[^:]*:63434' /etc/group || \
+	grep -q '^netplan:[^:]*:63434' /etc/passwd 
+#	[ -d /var/lib/plan/netplan.dir ]
+    then
+	echo >&2 "Existing config is broken."
+	echo >&2 "You may see errors while suppressing user+group \`netplan'."
+	userdel -r netplan || true
+	groupdel netplan || true
+	echo >&2 "User+group \`netplan' were deleted.  Proceeding with configuration."
+    fi
+
+    # Add user netplan with uid 63434 and create a new group with the gid
+    # equal to the uid. Also create home directory /var/lib/plan. If this
+    # fails due to one of user or group already existing fail and cat message.
+    if ! adduser --system --uid 63434 --group --home /var/lib/plan/netplan.dir\
+	--disabled-password --gecos "netplan daemon user" netplan
+    then
+	cat >&2 <<EOF
+
+ Unable to create the netplan user and group with uid 63434.
+
+ Please correct this problem and reinstall.
+
+ Note that both user and group IDs in the range 60000-64999 are globally
+ allocated by the Debian project.
+EOF
+	exit 1
+    fi
+
+    if [ -r /etc/plan/netplan-acl ]
+    then
+	echo >&2 "Found existing /etc/plan/netplan-acl"
+    else
+	# Create empty netplan appointment file and set proper permissions.
+	#echo >&2 "Creating empty file /etc/plan/netplan-acl.  See netplan(8)."
+	if [ -d /etc/plan ]
+	then
+	    echo >&2 "# Please read the netplan(8) man page before editing this file." \
+		> /etc/plan/netplan-acl
+	    chmod 755 /etc/plan
+	    chown netplan:netplan /etc/plan/netplan-acl
+	    chmod 644 /etc/plan/netplan-acl
+	else
+	    echo >&2 "/etc/plan does not exist. Aborting."
+	    echo >&2 "Please report this bug."
+	    exit 1
+	fi
+    fi
+fi
+
+#echo >&2 "Setting permissions on /var/lib/plan/netplan.dir/.  See netplan(8)."
+find /var/lib/plan/netplan.dir -type d | xargs chmod 755 
+chown -R netplan:netplan /var/lib/plan/netplan.dir
+find /var/lib/plan/netplan.dir -type f | xargs -r chmod 644
+
+if [ ! -f /etc/default/netplan ] || grep -q "^ENABLED=0$" /etc/default/netplan
+then
+  cat >&2 <<EOF
+ The netplan daemon, for IP servicing of calendar data, is currently
+ disabled. Create or edit /etc/default/netplan to enable.
+
+ Set ENABLED=1 to turn on the netplan daemon upon reboot. Please check
+ the netplan(8) manpage carefully for configuration details. The
+ default configuration file, /etc/plan/netplan-acl is currently empty.
+EOF
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/netplan" ]; then
+		update-rc.d netplan defaults >/dev/null
+		invoke-rc.d netplan start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

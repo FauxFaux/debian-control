@@ -1,0 +1,39 @@
+#! /bin/sh -e
+
+case "$1" in
+  configure)
+    if [ ! -e /var/games/crossfire/clockdata ] ; then
+	echo -n 0 > /var/games/crossfire/clockdata
+	chmod 0644 /var/games/crossfire/clockdata
+	chown games:games /var/games/crossfire/clockdata
+    fi
+    ;;
+
+  abort-upgrade)
+    # do nothing
+    ;;
+
+  abort-remove)
+    # do nothing
+    ;;
+
+  abort-deconfigure)
+    # do nothing
+    ;;
+
+  *)
+    echo "$0: incorrect arguments: $*" >&2
+    exit 1
+    ;;
+
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/crossfire-server" ]; then
+		update-rc.d crossfire-server defaults >/dev/null
+		invoke-rc.d crossfire-server start || exit $?
+	fi
+fi
+# End automatically added section
+

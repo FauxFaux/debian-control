@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = remove ] && \
+[ "$(dpkg-query --show libpam-ldap 2> /dev/null | wc -l)" = 1 ]; then
+	pam-auth-update --package --remove ldap
+fi
+
+
+
+exit 0

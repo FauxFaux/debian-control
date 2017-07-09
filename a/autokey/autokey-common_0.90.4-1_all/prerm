@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+# we ship an empty postinst file because svn-buildpackage keeps the
+# upstream debian/ files (see #623163)
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p autokey-common 
+else
+	dpkg -L autokey-common | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+# Ensure any ulogd-1.x instances are stopped
+if [ -x "/etc/init.d/ulogd" ]; then
+	invoke-rc.d ulogd stop || true
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/ulogd 2.0.4-2\~ ulogd -- \"\$\@\" 0 -- "$@"
+# End automatically added section
+
+

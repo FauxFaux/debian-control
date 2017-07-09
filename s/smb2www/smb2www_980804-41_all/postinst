@@ -1,0 +1,101 @@
+#!/bin/sh
+
+create_smb2www_conf () {
+    cat > "$conf" << EOF
+### This is the smb2www config file.
+enabled       = #ENABLED#
+masterbrowser = #MBROWSE#
+language      = #LANGUAGE#
+key           = #KEY#
+### Please see /usr/share/smb2www/smb2www.default
+### for other variables which can be set in this file.
+EOF
+
+    chmod 644 "$conf"
+}
+
+
+set -e
+conf=/etc/smb2www/smb2www.conf
+
+umask 022
+
+if [ "$1" = "reconfigure" ] || [ "$DEBCONF_RECONFIGURE" = "1" ] ; then
+    reconf=yes
+else
+    reconf=no
+fi
+
+if [ "$1" = "configure" ] ; then
+    if [ ! -f "$conf" ]; then
+        create_smb2www_conf
+    fi
+
+    . /usr/share/debconf/confmodule
+
+    RET="false"
+    db_get smb2www/set_link || true
+    if [ "$RET" = "true" ] ; then
+        enabled=yes
+    else
+        enabled=no
+    fi
+
+    RET=""
+    db_get smb2www/master_browser || true
+    master="$RET"
+
+    RET=""
+    db_get smb2www/language || true
+    language="$RET"
+
+    RET="false"
+    db_get smb2www/need_reconfigure || true
+    if [ "$RET" = "true" ] ; then
+        perl -e '
+            sub choose_key()
+            {
+                srand ( time^($$ + ($$ << 15)) );
+                while (length $_ < 25) { $_ = $_.chr(rand(64)+64) }
+                return $_
+            }
+
+            $key=&choose_key;
+            while (<STDIN>)
+            {
+                s|^(masterbrowser\s*=\s*).*$|$1$ARGV[0]|o;
+                s|^(language\s*=\s*).*$|$1 . lc($ARGV[1])|oe;
+                s|^(key\s*=\s*).*|$1$key|o;
+                s|^(enabled\s*=\s*).*|$1$ARGV[2]|o;
+                print;
+            } ' \
+        "$master" "$language" "$enabled" < "${conf}" > "${conf}.dpkg-tmp" \
+        && mv "${conf}" "${conf}.dpkg-old" \
+        && mv "${conf}.dpkg-tmp" "${conf}"
+
+        chmod 644 "$conf"
+    fi
+fi
+
+if [ "$reconf" = "yes" ] ; then
+    exit 0
+fi
+
+# Automatically added by dh_apache2
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in smb2www  ; do
+			apache2_invoke enconf $conf  || exit $?
+		done
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/apache2/conf.d/apache2 /etc/apache2/conf-available/smb2www.conf 980804-41~ -- "$@"
+# End automatically added section
+
+
+exit 0
+
+# vim: et ts=4

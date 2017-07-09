@@ -1,0 +1,101 @@
+#! /bin/sh
+# Copyright 2001 Alberto Gonzalez Iniesta <agi@agi.as>
+# Licensed under the GNU General Public License, version 2.  See the file
+# /usr/share/common-licenses/GPL or <http://www.gnu.org/copyleft/gpl.txt>.
+# 
+set -e
+test $DEBIAN_SCRIPT_DEBUG && set -v -x
+CONF_FILE='/etc/default/fwlogwatch'
+
+# use debconf
+. /usr/share/debconf/confmodule
+
+case "$1" in
+  configure)
+
+    db_get fwlogwatch/buildconfig || RET="true"
+    if [ "$RET" = "false" ]; then
+      echo "Not rebuilding '$CONF_FILE', since it contains unknown values."
+      echo "If you want to rebuild it with debconf, delete it and run: dpkg-reconfigure fwlogwatch"
+    else
+    cat > "$CONF_FILE" <<EOF
+#
+# Debian's configuration for fwlogwatch
+# The best way to edit this file is running 'dpkg-reconfigure fwlogwatch'
+#
+EOF
+    db_get fwlogwatch/realtime || RET="false"
+    ## If realtime is selected
+    if [ "$RET" = "true" ]; then
+      echo "START_DAEMON='true'" >> "$CONF_FILE"
+      db_get fwlogwatch/respond || RET="false"
+      # Respond active, using iptables
+      if [ "$RET" = "yes (iptables)" ]; then
+        PARAM1="-B"
+        MODE="iptables"
+      # Respond active, using ipchains
+      elif [ "$RET" = "yes (ipchains)" ]; then
+        PARAM1="-B"
+        MODE="ipchains"
+      # Respond active, using custom script
+      elif [ "$RET" = "yes (other)" ]; then
+        PARAM1="-B"
+        MODE="other"
+      # Respond NOT active
+      else
+        PARAM1=""
+        MODE=""
+      fi
+      db_get fwlogwatch/notify || RET="false"
+      # Notify active, send email (if there's no email address, do not notify)
+      if [ "$RET" = "yes (mail)" ]; then
+        db_get fwlogwatch/email || RET=""
+        if [ "$RET" != "" ]; then
+          PARAM2="-A"
+          EMAIL="$RET"
+        else
+          PARAM2=""
+          EMAIL=""
+        fi
+      # Notify active, other action (debconf warned to edit 'fwlw_notify')
+      elif [ "$RET" = "yes (other)" ]; then
+          PARAM2="-A"
+          EMAIL=""
+      # Notify NOT active
+      else
+          PARAM2=""
+          EMAIL=""
+      fi
+      echo "PARAMS='$PARAM2 $PARAM1'" >> "$CONF_FILE"
+      echo "MODE='$MODE'" >> "$CONF_FILE"
+      echo "EMAIL='$EMAIL'" >> "$CONF_FILE"
+    ## If realtime is NOT selected
+    else
+      echo "START_DAEMON='false'" >> "$CONF_FILE"
+      echo "PARAMS=''" >> "$CONF_FILE"
+      echo "MODE=''" >> "$CONF_FILE"
+      echo "EMAIL=''" >> "$CONF_FILE"
+    fi
+    db_get fwlogwatch/cron_email || RET="none"
+    # 'none' will avoid sending daily stats
+    echo "CRON_EMAIL='$RET'" >> "$CONF_FILE"
+    if [ "$RET" != "none" ]; then
+      db_get fwlogwatch/cron_parameters || RET="-p -d -O ta -t -e -l 1d"
+      echo "CRON_PARAMS='$RET'" >> "$CONF_FILE"
+    fi
+    fi
+    # Needs to be here because it seems something doesn't close all of its filedescriptors nicely
+    db_stop
+  ;;
+esac
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/fwlogwatch" ]; then
+	update-rc.d fwlogwatch defaults >/dev/null
+	invoke-rc.d fwlogwatch start || exit $?
+fi
+# End automatically added section
+
+
+exit 0
+# vim:set ai et sts=2 sw=2 tw=0:

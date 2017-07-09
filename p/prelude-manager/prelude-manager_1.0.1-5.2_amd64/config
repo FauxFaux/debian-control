@@ -1,0 +1,24 @@
+#!/bin/bash 
+
+set -e
+
+action=$1
+version=$2
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+db_version 2.0 || [ 0 -lt 30 ]
+
+if [ -f /usr/share/dbconfig-common/dpkg/config.mysql ]; then
+  dbc_first_version="0.9.8-3"
+  # hints for dbconfig
+  dbc_dbtypes="mysql, pgsql"
+  dbc_authmethod_user="password"
+  dbc_dbname="prelude"
+  dbc_dbuser="prelude"
+
+  . /usr/share/dbconfig-common/dpkg/config
+  dbc_go prelude-manager $@
+fi
+
+

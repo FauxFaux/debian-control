@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -e
+
+PYTHONVER=2
+ALT_NAME1=SL
+ALT_LINK1="/usr/bin/${ALT_NAME1}"
+ALT_PATH1="/usr/lib/python${PYTHONVER}-softlayer/${ALT_NAME1}"
+ALT_NAME2=slcli
+ALT_LINK2="/usr/bin/${ALT_NAME2}"
+ALT_PATH2="/usr/lib/python${PYTHONVER}-softlayer/${ALT_NAME2}"
+
+case "$1" in
+    configure)
+        update-alternatives --quiet --install \
+            "${ALT_LINK1}" "${ALT_NAME1}" "${ALT_PATH1}" 25
+        update-alternatives --quiet --install \
+            "${ALT_LINK2}" "${ALT_NAME2}" "${ALT_PATH2}" 25
+        ;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-softlayer 
+fi
+
+# End automatically added section
+
+
+exit 0

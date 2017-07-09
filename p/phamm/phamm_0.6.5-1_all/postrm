@@ -1,0 +1,48 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+  remove)
+
+	rm -f /usr/share/phamm/config.inc.php
+	;;
+
+  purge)
+	rm -f /usr/share/phamm/config.inc.php
+	rm -f /etc/phamm/config.php
+	rm -f /var/log/phamm.log*
+	rmdir --ignore-fail-on-non-empty /etc/phamm || true
+	;;
+
+  reconfigure)
+	rm -f /etc/phamm/config.php
+	;;
+
+esac
+
+# Automatically added by dh_apache2
+if [ "$1" = "purge" ] ; then
+	if true; then
+		if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+			. /usr/share/apache2/apache2-maintscript-helper
+
+			for conf in phamm  ; do
+				apache2_invoke disconf $conf  || exit $?
+			done
+		fi
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/phamm/apache.conf /etc/apache2/conf-available/phamm.conf 0.6.2-1.1~ -- "$@"
+# End automatically added section
+
+
+exit 0

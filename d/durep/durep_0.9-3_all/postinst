@@ -1,0 +1,66 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+CONFFILE=/etc/default/durep-rolling
+STORAGE=/usr/share/durep/www
+SCANDIR=/var/lib/durep
+
+# source debconf library
+#export DEBCONF_DEBUG=developer
+
+# sanity check, insert item if not present
+grep "^HTTPFILEROOT=" $CONFFILE >/dev/null 2>&1 || \
+cat <<-STOP  >> $CONFFILE
+
+	# where web content is located
+	HTTPFILEROOT=""'
+STOP
+
+# install files in web root
+if [ "$1" = "configure" ]; then
+   db_get durep/httpfileroot || RET=""
+   if [ -n "$RET" -a -d "$RET" ] ; then
+      sed -i -e "s,^HTTPFILEROOT=.*,HTTPFILEROOT=\"$RET\"," $CONFFILE
+      install -d $RET/durep
+      [ -s $RET/durep/www/bar.png ] || \
+         install $STORAGE/bar.png $RET/durep/
+      [ -s $RET/durep/www/style.css ] || \
+         install $STORAGE/style.css $RET/durep/
+   else
+      sed -i -e "s,^HTTPFILEROOT=.*,HTTPFILEROOT=\"\"," $CONFFILE
+   fi
+fi
+
+# override setgid-bit to enable the webserver to read scanned content
+if [ "$1" = "configure" ]; then
+   if ! dpkg-statoverride --list $SCANDIR > /dev/null 2>&1; then
+      dpkg-statoverride --update --add root www-data 2755 $SCANDIR
+   fi
+fi
+
+if test "$1" = "configure" && ! test -e $CONFFILE.no-debconf-changes ; then
+   # sanity check
+   grep "^FILESYSTEMS=" $CONFFILE >/dev/null 2>&1 || echo 'FILESYSTEMS=""' >> $CONFFILE
+
+   db_get durep/makereports || RET=false
+   if [ "$RET" = true ] ; then
+      db_get durep/filesystems || RET=""
+      if [ -n "$RET" ] ; then
+         perl -pe "s!^FILESYSTEMS=.*!FILESYSTEMS=\"$RET\"!" -i $CONFFILE
+      fi
+   else
+      perl -pe "s!^FILESYSTEMS=.*!FILESYSTEMS=\"\"!" -i $CONFFILE
+   fi
+fi
+
+rm -f $CONFFILE.no-debconf-changes
+
+#   perl -pe "s/^FILESYSTEMS=.*/FILESYSTEMS=\"$RET\"\n/"
+#   test -r /etc/default/durep-rolling && . /etc/default/durep-rolling
+#
+#   test -n "$FILESYSTEMS" && RET="$FILESYSTEMS"
+#
+
+

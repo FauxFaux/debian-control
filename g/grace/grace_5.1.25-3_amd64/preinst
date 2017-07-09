@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+# Cleaning up after defoma removal.  Added in 1:5.1.22-7.
+if which defoma-app >/dev/null 2>&1; then
+	defoma-app -t purge grace
+fi
+
+
+

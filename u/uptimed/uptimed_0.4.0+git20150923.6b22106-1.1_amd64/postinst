@@ -1,0 +1,101 @@
+#! /bin/sh
+
+. /usr/share/debconf/confmodule
+
+db_version 2.0
+
+set -e
+
+# exit if the config file is not present
+if [ ! -e /etc/uptimed.conf ]; then
+	exit 0
+fi
+
+if [ "$1" = "configure" ]; then
+# Step 1: Assemble a sed(1) script that does the configuration changes we
+#         want
+	SEDSCRIPT=`mktemp /tmp/debconfXXXXXX`
+	db_get 'uptimed/interval'
+	echo >$SEDSCRIPT "s/^UPDATE_INTERVAL=.*/UPDATE_INTERVAL=$RET/"
+	db_get 'uptimed/maxrecords'
+	echo >>$SEDSCRIPT "s/^LOG_MAXIMUM_ENTRIES=.*/LOG_MAXIMUM_ENTRIES=$RET/"
+	db_get 'uptimed/mail/do_mail'
+	if [ "$RET" = "Never" ]; then
+		echo >>$SEDSCRIPT "s/^SEND_EMAIL=.*/SEND_EMAIL=0/"
+	elif [ "$RET" = "Record" ]; then
+		echo >>$SEDSCRIPT "s/^SEND_EMAIL=.*/SEND_EMAIL=3/"
+	elif [ "$RET" = "Milestone" ]; then
+		echo >>$SEDSCRIPT "s/^SEND_EMAIL=.*/SEND_EMAIL=2/"
+	else
+		echo >>$SEDSCRIPT "s/^SEND_EMAIL=.*/SEND_EMAIL=1/"
+	fi
+	if [ "$RET" != "Never" ]; then
+		db_get 'uptimed/mail/address'
+		echo >>$SEDSCRIPT "s/^EMAIL=.*/EMAIL=$RET/"
+	fi
+	# 0.1.6-4 commented these out. Leave until the yet unnamed distro
+	# after sid
+	echo >>$SEDSCRIPT "s/^#disabled#MILESTONE=/MILESTONE=/"
+
+	db_stop
+
+# Step 2: Process the config file
+	TEMPFILE=`mktemp /tmp/debconfXXXXXX`
+	sed -f $SEDSCRIPT </etc/uptimed.conf >$TEMPFILE
+	rm $SEDSCRIPT
+
+# Step 3: See if anything has changed. If so, install the new configuration
+#         and restart uptimed
+        if diff /etc/uptimed.conf $TEMPFILE >/dev/null; then
+                rm $TEMPFILE
+        else
+                mv /etc/uptimed.conf \
+                        /etc/uptimed.conf.dpkg-old
+                mv $TEMPFILE /etc/uptimed.conf
+        fi
+	chmod 644 /etc/uptimed.conf
+	chown daemon:daemon /var/spool/uptimed
+	invoke-rc.d uptimed restart
+fi
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask uptimed.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled uptimed.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable uptimed.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state uptimed.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/uptimed.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/uptimed" ]; then
+		update-rc.d uptimed defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d uptimed $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/uptimed.sh 1:0.3.16-3.1 -- "$@"
+# End automatically added section
+

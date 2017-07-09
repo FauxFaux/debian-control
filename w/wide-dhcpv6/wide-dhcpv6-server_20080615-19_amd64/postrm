@@ -1,0 +1,41 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    purge)
+        # Remove var files
+	if [ -e /var/lib/dhcpv6/dhcp6s_duid ]; then
+            rm -f /var/lib/dhcpv6/dhcp6s_duid
+        fi
+	
+        if [ -e /etc/default/wide-dhcpv6-server ]; then
+            rm -f /etc/default/wide-dhcpv6-server
+        fi
+        ;;
+    *)
+        # Nothing to do...
+        ;;
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d wide-dhcpv6-server remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

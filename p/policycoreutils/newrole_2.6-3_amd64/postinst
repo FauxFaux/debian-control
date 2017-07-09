@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+
+PROGRAM=/usr/bin/newrole
+
+if [ "$1" = configure ]; then
+    if which setcap > /dev/null && [ -e $PROGRAM ]; then
+        if ! setcap cap_dac_read_search,cap_setpcap,cap_audit_write,cap_sys_admin,cap_fowner,cap_chown,cap_dac_override=pe $PROGRAM >/dev/null 2>&1; then
+            echo "Setting capabilities newrole using Linux Capabilities failed, falling back to setuid."
+            chmod 4755 $PROGRAM
+        fi
+    fi
+fi
+
+
+
+exit 0

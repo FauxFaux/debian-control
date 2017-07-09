@@ -1,0 +1,33 @@
+#!/bin/sh
+# vim: set noet ts=8:
+
+set -e
+
+case "$1" in
+	remove)
+		invoke-rc.d ceph stop || {
+			RESULT=$?
+			if [ $RESULT != 100 ]; then
+				exit $RESULT
+			fi
+		}
+	;;
+	*)
+	;;
+esac
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p ceph-base 
+else
+	dpkg -L ceph-base | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+
+exit 0

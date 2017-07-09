@@ -1,0 +1,46 @@
+#!/bin/sh
+
+set -e
+
+
+if [ "$1" = "purge" ] ; then
+   if [ -d "/var/games/pokerth-server" ]; then
+       rm -r /var/games/pokerth-server
+   fi
+   if [ -d "/var/games" ]; then
+       rmdir --ignore-fail-on-non-empty /var/games
+   fi
+fi
+
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d pokerth-server remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask pokerth-server.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge pokerth-server.service >/dev/null
+		deb-systemd-helper unmask pokerth-server.service >/dev/null
+	fi
+fi
+# End automatically added section
+

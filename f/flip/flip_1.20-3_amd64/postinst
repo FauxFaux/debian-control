@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+        if [ -d /usr/doc -a -h /usr/doc/flip -a -d /usr/share/doc/flip ]; then
+                rm -f /usr/doc/flip
+        fi
+fi
+
+

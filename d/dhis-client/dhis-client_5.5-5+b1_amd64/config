@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+package=dhis-client
+conf=/etc/dhid.conf
+
+if [ ! -f $conf ] || ! grep -q -v '^;' $conf; then
+	db_fset $package/register_with_provider seen false
+	db_input high $package/register_with_provider || true
+elif ! grep -q '{' $conf && grep -q -v '^;' $conf; then
+	db_fset $package/old_conf_warn seen false
+	db_input high $package/old_conf_warn || true
+fi
+db_go
+db_stop

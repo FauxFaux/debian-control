@@ -1,0 +1,58 @@
+#!/bin/sh
+
+# Slash'em pre-installation script for Debian
+#
+# Ben Gertzfield (che@debian.org) 29 July 1997
+# Copyright 1997 Ben Gertzfield. This script is released under the
+# GNU General Public License, version 2 or later.
+#
+# Changed for use with Slash'em:
+# Peter Makholm (peter@makholm.net) 19990303
+
+set -e
+
+. /usr/share/debconf/confmodule
+  
+# Location of variable data (savegames, hiscores, etc.)
+if [ -d /var/games/slashem/save ] ; then
+    DIR=/var/games/slashem ;
+else
+    DIR=/var/lib/games/slashem ;
+fi
+
+
+if [ -n "$2" -a "$1" != "abort-upgrade" -a -d "$DIR" ] ; then
+  # Ok, we're have some location where there might be incompatible savegames
+  # either because we're upgrading or from a previously install.
+  
+  # This question should have been asked. If the version allready installed isn't
+  # savegame incompatible slashem-common/do-backup should be ignore
+  db_get slashem-common/do-backup
+
+  case "$RET" in
+    # Shouldn't happen, but handle just in case.
+    abort)
+      exit 1
+      ;;
+    backup)
+      # only make an backup if there are any savegames...
+
+      if [ -n "`ls $DIR/save 2>/dev/null || true`" ] ; then
+        BACKUP=`tempfile --directory=/tmp --prefix=slash --suffix .tar.gz`
+        echo "  backing up $DIR/save to $BACKUP ..."
+	tar czf $BACKUP $DIR/save > /dev/null 2>&1
+	
+	rm -rf $DIR/save/*
+      fi
+
+      ;;
+    purge)
+      rm -rf $DIR/save/*
+      ;;
+    ignore)
+      # This is easy...
+      ;;
+  esac
+fi
+
+

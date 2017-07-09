@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+
+
+db_get xfonts-traditional/generate
+if [ "$RET" = true ]; then
+
+	echo Generating fonts...
+	update-xfonts-traditional --update
+
+fi
+
+/usr/share/xfonts-traditional/checkfiles postinst "$@"

@@ -1,0 +1,24 @@
+#!/bin/sh
+# postrm script for tiny-initramfs-core
+
+set -e
+
+case "$1" in
+    purge)
+        if [ -d /etc/tiny-initramfs ] ; then
+            rm -rf /etc/tiny-initramfs
+        fi
+    ;;
+
+    remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

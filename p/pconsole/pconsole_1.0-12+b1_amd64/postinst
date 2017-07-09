@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -e
+
+# Use debconf.
+. /usr/share/debconf/confmodule
+
+# nothing to do in here if we aren't called with configure
+if [ "$1" != configure ]; then
+        exit 0
+fi
+
+[ -e /usr/share/debconf/confmodule ] && {
+        db_get pconsole/setuid
+        setuid="$RET"
+}
+
+if ! dpkg-statoverride --list /usr/lib/pconsole/pconsole >/dev/null ; then
+        if [ "$setuid" = "true" ] ; then
+                chmod 4755 /usr/lib/pconsole/pconsole
+        elif [ "$setuid" = "false" ] ; then
+                chmod 0755 /usr/lib/pconsole/pconsole
+        fi
+fi
+
+db_go || true
+db_stop
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+exit 0

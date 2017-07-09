@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installudev
+if [ "$1" = configure ]; then
+	if [ -e "/etc/udev/rules.d/z60_libasedrive-usb.rules" ]; then
+		echo "Preserving user changes to /etc/udev/rules.d/60-libasedrive-usb.rules ..."
+		if [ -e "/etc/udev/rules.d/60-libasedrive-usb.rules" ]; then
+			mv -f "/etc/udev/rules.d/60-libasedrive-usb.rules" "/etc/udev/rules.d/60-libasedrive-usb.rules.dpkg-new"
+		fi
+		mv -f "/etc/udev/rules.d/z60_libasedrive-usb.rules" "/etc/udev/rules.d/60-libasedrive-usb.rules"
+	fi
+fi
+# End automatically added section

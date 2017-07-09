@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+if [ "$1" != "upgrade" ]; then
+  update-alternatives --remove policy-rc.d /usr/sbin/zg-policy-rc.d
+fi
+
+
+
+exit 0
+  

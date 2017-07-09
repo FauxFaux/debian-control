@@ -1,0 +1,23 @@
+#!/bin/bash
+set -e
+
+case "$1" in
+    remove)
+        if [ -f /usr/lib/games/xpat/keys.dist ]; then
+            rm -f /usr/lib/games/xpat/keys.dist
+        fi
+        if [ -f /var/games/xpat2/xpat.log ]; then
+            rm -f /var/games/xpat2/xpat.log
+        fi
+    ;;
+
+    upgrade|deconfigure|failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+

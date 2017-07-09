@@ -1,0 +1,52 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+	remove|upgrade|deconfigure)
+		update-alternatives --quiet --remove apache-icons /usr/share/apache2/icons
+		update-alternatives --quiet --remove apache-icons /usr/share/apache-icons/tango-png
+		update-alternatives --quiet --remove apache-icons /usr/share/apache-icons/tango-svg
+		update-alternatives --quiet --remove apache-icons /usr/share/apache-icons/awesome-png
+		update-alternatives --quiet --remove apache-icons /usr/share/apache-icons/awesome-svg
+		;;
+
+	failed-upgrade)
+
+		;;
+
+	*)
+		echo "prerm called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+# Automatically added by dh_apache2
+if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ] ; then
+	if true; then
+		if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+			. /usr/share/apache2/apache2-maintscript-helper
+
+			for conf in 000-apache-icons  ; do
+				apache2_invoke disconf $conf  || exit $?
+			done
+		fi
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_apache2
+if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ] ; then
+	if true; then
+		if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+			. /usr/share/apache2/apache2-maintscript-helper
+
+			for conf in 000-apache-icons  ; do
+				apache2_invoke dismod $conf  || exit $?
+			done
+		fi
+	fi
+fi
+# End automatically added section
+
+
+exit 0

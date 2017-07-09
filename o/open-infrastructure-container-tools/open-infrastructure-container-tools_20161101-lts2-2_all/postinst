@@ -1,0 +1,99 @@
+#!/bin/sh
+
+set -e
+
+Install ()
+{
+	DEFAULT="${1}"
+	TARGET="${2}"
+
+	mkdir -p "${DEFAULT}"
+	mkdir -p "${TARGET}"
+
+	if [ "${TARGET}" != "${DEFAULT}" ]
+	then
+		if [ -h "${DEFAULT}" ]
+		then
+			rm -f "${DEFAULT}"
+			ln -s "${TARGET}" "${DEFAULT}"
+		else
+			if [ -e "${DEFAULT}" ] && find "${DEFAULT}" -maxdepth 0 -empty > /dev/null 2>&1
+			then
+				rmdir "${DEFAULT}"
+				ln -s "${TARGET}" "${DEFAULT}"
+			fi
+		fi
+	fi
+
+	if ! dpkg-statoverride --list "${DEFAULT}" > /dev/null 2>&1 &&
+	   ! dpkg-statoverride --list "${TARGET}" > /dev/null 2>&1
+	then
+		chmod 0700 "${TARGET}"
+		chown root:root "${TARGET}"
+
+		chmod 0700 "${DEFAULT}"
+		chown root:root "${DEFAULT}"
+	fi
+}
+
+case "${1}" in
+	configure)
+		update-alternatives --quiet --install /usr/share/container-tools/scripts/default container-tools_script /usr/share/container-tools/scripts/debootstrap 1000
+		update-alternatives --quiet --install /usr/share/container-tools/scripts/default container-tools_script /usr/share/container-tools/scripts/debian 3000
+		update-alternatives --quiet --install /usr/share/container-tools/scripts/default container-tools_script /usr/share/container-tools/scripts/progress-linux 2000
+
+		. /usr/share/debconf/confmodule
+
+		db_get open-infrastructure-container-tools/machines
+		MACHINES="${RET:-/var/lib/machines}" # string (w/o empty)
+
+		db_get open-infrastructure-container-tools/config
+		CONFIG="${RET:-/etc/container-tools/config}" # string (w/o empty)
+
+		db_get open-infrastructure-container-tools/debconf
+		DEBCONF="${RET:-/etc/container-tools/debconf}" # string (w/o empty)
+
+		db_get open-infrastructure-container-tools/cache
+		CACHE="${RET:-/var/cache/container-tools}" # string (w/o empty)
+
+		db_get open-infrastructure-container-tools/script
+		SCRIPT="${RET:-debian}" # string (w/o empty)
+
+		db_stop
+
+		Install "/var/lib/machines" "${MACHINES}"
+		Install "/etc/container-tools/config" "${CONFIG}"
+		Install "/etc/container-tools/debconf" "${DEBCONF}"
+		Install "/var/cache/container-tools" "${CACHE}"
+
+		update-alternatives --quiet --set container-tools_script "/usr/share/container-tools/scripts/${SCRIPT}"
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask container-auto.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled container-auto.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable container-auto.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state container-auto.service >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0

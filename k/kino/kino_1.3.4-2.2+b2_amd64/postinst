@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+PACKAGE="kino"
+
+# remove old hotplug/udev files 
+if [ "$1" = "configure" ] && [ -d /etc/udev/ ]; then
+	rm -f /etc/udev/rules.d/035_kino.rules
+	rm -f /etc/udev/kino.rules
+	rm -f /etc/hotplug/usb/kino-jogshuttle
+	rm -f /etc/hotplug/usb/kino.usermap
+	rmdir /etc/hotplug/usb 2>/dev/null || true
+	rmdir /etc/hotplug 2>/dev/null || true
+fi
+
+exit 0

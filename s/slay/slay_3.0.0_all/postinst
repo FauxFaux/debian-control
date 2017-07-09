@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# Build config file based on answers... IF NECESSARY ONLY
+if test -n "$2"
+then
+ if dpkg --compare-versions $2 lt 1.2.7 || test ! -e /etc/slay_mode
+ then
+
+  db_get slay/punish
+  if [ "$RET" = "true" ]
+  then
+   echo "mean" > /etc/slay_mode
+  else
+   echo "nice" > /etc/slay_mode
+  fi
+
+  db_get slay/butthead
+  if [ "$RET" = "true" ]
+  then
+   echo "butthead" >> /etc/slay_mode
+  else
+   echo "normal" >> /etc/slay_mode
+  fi
+
+ fi
+fi
+# (yes, I know this was ugly)
+
+

@@ -1,0 +1,175 @@
+#!/bin/sh
+
+SITEKEYFILE=/etc/tripwire/site.key
+LOCALKEYFILE=/etc/tripwire/${hostname}-local.key
+
+set -e
+
+# Post-installation script for the Debian Tripwire distribution.
+
+# Make sure we should be running...
+case "$1" in
+    configure)
+        # continue below
+	;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+        exit 0
+	;;
+
+    *)
+        echo "postinst called with unknown argument: $1" >&2
+        exit 0
+        ;;
+esac
+
+
+
+# Set up the necessary environment
+
+CFGFILE=/etc/tripwire/tw.cfg
+CFGTEXT=/etc/tripwire/twcfg.txt
+POLTEXT=/etc/tripwire/twpol.txt
+
+eval `twadmin -m f 2>/dev/null | 
+	perl -pe 's!HOSTNAME!uname -n!g; s!DATE!date!g; \
+		    s!^\s*([^=\s]+)\s*=\s*(.+)!$1="$2"!'`
+
+case $ROOT in
+'')
+    eval `perl -pe 's!HOSTNAME!uname -n!g; s!DATE!date!g; \
+		    s!^\s*([^=\s]+)\s*=\s*(.+)!$1="$2"!' $CFGTEXT`
+    ;;
+
+esac
+
+# OK, now do the debconf stuff
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# The following pass phrase retrieval sequence is known to have
+# windows where the pass phrase is stoed somewhere in clear text.
+# I've attempted to reduce this window to the smallest possible
+# period.  If you can lower it further, send me a patch.
+
+get_pass_phrase ()
+{
+    while true
+    do
+	db_beginblock
+	db_title "Get $1 passphrase"
+	db_fset tripwire/$1-passphrase seen false
+	db_input critical tripwire/$1-passphrase || true
+	db_fset tripwire/$1-passphrase-again seen false
+	db_input critical tripwire/$1-passphrase-again || true
+	db_endblock
+	db_go
+
+	db_get tripwire/$1-passphrase
+	pass_phrase_1="$RET"
+	db_reset tripwire/$1-passphrase
+
+	db_get tripwire/$1-passphrase-again
+	pass_phrase_2="$RET"
+	db_reset tripwire/$1-passphrase-again
+
+	case "$pass_phrase_1" in
+	"$pass_phrase_2")
+	    break ;;
+	esac
+    done
+
+    # Protect against people using quoation characters in their passphrases
+    case "$1" in
+    local)
+	local_pass="$pass_phrase_1"
+	;;
+
+    site)
+	site_pass="$pass_phrase_1"
+	;;
+    esac
+
+    pass_phrase_1=
+    pass_phrase_2=
+}
+
+twadmin=/usr/sbin/twadmin
+
+db_get tripwire/use-sitekey
+use_sitekey="$RET"
+if [ "$use_sitekey" = "true" ] && [ ! -f "$SITEKEYFILE" ]
+then
+    get_pass_phrase site
+    echo "Generating site key (this may take several minutes)..."
+    (echo "$site_pass"; sleep 2; echo "$site_pass") \
+	| $twadmin -m G -S "$SITEKEYFILE" > /dev/null 2>&1
+fi
+
+db_get tripwire/use-localkey
+use_localkey="$RET"
+if [ "$use_localkey" = "true" ] && [ ! -f "$LOCALKEYFILE" ]
+then
+    get_pass_phrase local
+    echo "Generating local key (this may take several minutes)..."
+    (echo "$local_pass"; sleep 2; echo "$local_pass") | \
+	$twadmin -m G -L "$LOCALKEYFILE" > /dev/null 2>&1
+fi
+chmod 600 $SITEKEYFILE || true
+chmod 600 $LOCALKEYFILE || true
+
+case "$use_sitekey" in
+true)
+    db_get tripwire/rebuild-config
+    if [ ! -f "$CFGFILE" ] || [ "$RET" = "true" ]; then
+	case "$site_pass" in
+	'') get_pass_phrase site
+	    ;;
+	esac
+
+	while echo "$site_pass" | \
+	    $twadmin -m F -S "$SITEKEYFILE" $CFGTEXT | \
+	    grep -q 'Incorrect site passphrase.'
+	do
+	    db_fset tripwire/site-passphrase-incorrect seen false
+	    db_input critical tripwire/site-passphrase-incorrect
+	    db_go
+
+	    db_get tripwire/site-passphrase-incorrect
+	    case "$RET" in
+	    true) ;;
+	    *) exit 0;;
+	    esac
+	    get_pass_phrase site
+	done
+    fi
+
+    db_get tripwire/rebuild-policy
+    if [ ! -f "$POLFILE" ] || [ "$RET" = "true" ]; then
+	case "$site_pass" in
+	'') get_pass_phrase site
+	    ;;
+	esac
+
+	while echo "$site_pass" | \
+	    $twadmin -m P $POLTEXT | \
+		grep -q 'Incorrect site passphrase.'
+	do
+	    db_fset tripwire/site-passphrase-incorrect seen false
+	    db_input critical tripwire/site-passphrase-incorrect
+	    db_get tripwire/site-passphrase-incorrect
+	    case "$RET" in
+	    true) ;;
+	    *) exit 0;;
+	    esac
+	    get_pass_phrase site
+	done
+    fi
+    ;;
+esac
+
+db_input high tripwire/installed || true
+db_go
+
+exit 0

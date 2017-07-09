@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+update-alternatives --quiet --install /usr/bin/cairosvg cairosvg /usr/bin/cairosvg-py2 5 \
+  --slave /usr/share/man/man1/cairosvg.1.gz cairosvg.1.gz /usr/share/man/man1/cairosvg-py2.1.gz
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-cairosvg 
+fi
+
+# End automatically added section
+

@@ -1,0 +1,131 @@
+#!/bin/bash
+# config script for arno-iptables-firewall
+
+set -e
+. /usr/share/debconf/confmodule
+
+CONFIGFILE=/etc/arno-iptables-firewall/conf.d/00debconf.conf
+
+db_version 2.0
+db_capb backup
+db_settitle arno-iptables-firewall/title
+
+# Load config file, if it exists.
+if [ -e $CONFIGFILE ]; then
+    . $CONFIGFILE || true
+
+    # The fact that there is a debconf config file implies
+    # that debconf management is requested.
+    db_set arno-iptables-firewall/debconf-wanted true
+
+    # Store the current value of the EXT_IF var into
+    # debconf db.
+    db_set arno-iptables-firewall/config-ext-if $EXT_IF
+    if [ "$EXT_IF_DHCP_IP" = "1" ]; then
+        db_set arno-iptables-firewall/dynamic-ip true
+    else
+        db_set arno-iptables-firewall/dynamic-ip false
+    fi
+
+    db_set arno-iptables-firewall/services-tcp $OPEN_TCP
+    db_set arno-iptables-firewall/services-udp $OPEN_UDP
+
+    if [ "$NAT" = "1" ]; then
+        db_set arno-iptables-firewall/nat true
+    else
+        db_set arno-iptables-firewall/nat false
+    fi
+
+    db_set arno-iptables-firewall/config-int-if $INT_IF
+
+    db_set arno-iptables-firewall/config-int-net $INTERNAL_NET
+    db_set arno-iptables-firewall/config-int-nat-net $NAT_INTERNAL_NET
+
+    if [ "$OPEN_ICMP" = "1" ]; then
+        db_set arno-iptables-firewall/icmp-echo true
+    else
+        db_set arno-iptables-firewall/icmp-echo false
+    fi
+fi # load config file
+
+# This implements a simple state machine so the back button can be handled.
+# taken from debconf demo example
+STATE=1
+while [ "$STATE" != 0 -a "$STATE" != 11 ]; do
+    case $STATE in
+        1)
+            db_input high arno-iptables-firewall/debconf-wanted || true
+        ;;
+        2)
+            # This could be a multiselect question. Get all interfaces this way:
+            # db_subst arno-iptables-firewall/config-ext-if DETECTED `ifconfig -a | grep HWaddr | sed -e 's/[       ][      ]*Link.*/,/;s/:[0-9]*//' | sort -u`
+            # The problem is that currently not connected usb-net devices cannot be
+            # configured. Is this important?
+            db_input critical arno-iptables-firewall/config-ext-if || true
+            # include check for empty ext_if -> restarting the firewall will fail otherwise
+        ;;
+        3)
+            db_input low arno-iptables-firewall/dynamic-ip || true
+        ;;
+        4)
+            db_beginblock
+            db_input high arno-iptables-firewall/services-tcp || true
+            db_input high arno-iptables-firewall/services-udp || true
+            db_endblock
+        ;;
+        5)
+            db_input low arno-iptables-firewall/icmp-echo || true
+        ;;
+        6)
+            db_input high arno-iptables-firewall/config-int-if || true
+        ;;
+        7)
+            db_get arno-iptables-firewall/config-int-if
+            if [ "$RET" != "" ]; then
+                db_input high arno-iptables-firewall/config-int-net || true
+            else
+                db_set arno-iptables-firewall/nat false
+                db_set arno-iptables-firewall/config-int-net ""
+                db_set arno-iptables-firewall/config-int-nat-net ""
+            fi
+        ;;
+        8)
+            db_get arno-iptables-firewall/config-int-if
+            if [ "$RET" != "" ]; then
+                db_input low arno-iptables-firewall/nat || true
+            fi
+        ;;
+        9)
+            db_get arno-iptables-firewall/config-int-if
+            if [ "$RET" != "" ]; then
+                db_get arno-iptables-firewall/nat
+                if [ "$RET" = "true" ]; then
+                    db_input low arno-iptables-firewall/config-int-nat-net || true
+                else
+                    db_set arno-iptables-firewall/config-int-nat-net ""
+                fi
+            fi
+        ;;
+        10)
+            # make sure this question is displayed everytime the configuration might
+            # need inspection
+            db_fset arno-iptables-firewall/restart seen false
+            db_input critical arno-iptables-firewall/restart || true
+        ;;
+    esac
+
+    if db_go; then
+        STATE=$(($STATE + 1))
+    else
+        STATE=$(($STATE - 1))
+    fi
+
+    # check whether debconf is still welcome
+    db_get arno-iptables-firewall/debconf-wanted
+    if [ "$RET" != "true" ]; then
+        STATE=0
+    fi
+done
+
+db_stop
+

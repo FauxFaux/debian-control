@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# Pre-removal hook script for hibernate
+#
+# Originally written by Cameron Patrick, 2004 and released to the public domain.
+# Modified by martin f. krafft.
+#
+# Copyright © martin f. krafft <madduck@debian.org>
+# Released under the terms of the Artistic Licence 2.0
+#
+# $Id$
+#
+
+set -e
+set -u
+
+if [ "${1:-}" = remove ]; then
+  rmdir --ignore-fail-on-non-empty --parents \
+    /usr/local/share/hibernate/scriptlets.d 2>/dev/null || :
+fi
+
+# See #369953
+set +u
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/hibernate 1.99-1.1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hibernate/suspend2.conf /etc/hibernate/tuxonice.conf 1.99-1.1 -- "$@"
+# End automatically added section
+
+set -u

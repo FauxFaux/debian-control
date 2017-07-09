@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# postinst script for ffproxy
+#
+
+set -e
+
+if [ "$1" = "configure" ]; then
+    if which ucf >/dev/null; then
+        ucf /usr/share/ffproxy/ffproxy.conf.debian \
+            /etc/ffproxy/ffproxy.conf
+    fi
+    if which ucfr >/dev/null; then
+        ucfr ffproxy /etc/ffproxy/ffproxy.conf
+    fi
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/ffproxy" ]; then
+		update-rc.d ffproxy defaults >/dev/null
+		invoke-rc.d ffproxy start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

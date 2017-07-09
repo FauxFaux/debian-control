@@ -1,0 +1,58 @@
+#!/bin/sh -e
+
+. /usr/share/debconf/confmodule
+
+NAME=apt-cacher-ng
+CDIR=/var/cache/$NAME
+LDIR=/var/log/$NAME
+CFG=/etc/$NAME
+
+if [ "$1" = "purge" ]; then
+   rm -rf "$CDIR"
+   rm -f $LDIR/apt-cacher.err.* $LDIR/apt-cacher.err $LDIR/apt-cacher.log $LDIR/apt-cacher.log.* $LDIR/maint_*.log
+   rmdir $LDIR 2>/dev/null || true
+   rm -rf /var/lib/apt-cacher-ng
+   rm -rf $CFG/zz_debconf.conf $CFG/zz_debconf_security.conf
+
+   dpkg-statoverride --remove /etc/apt-cacher-ng/security.conf 2>/dev/null || true
+
+   deluser --quiet --system $NAME 2>/dev/null || userdel --force $NAME 2>/dev/null || true
+   delgroup --quiet --system $NAME 2>/dev/null || groupdel $NAME 2>/dev/null || true
+
+   rm -f $CFG/backends_debvol $CFG/backends_ubuntu $CFG/backends_debian
+   rmdir --ignore-fail-on-non-empty $CFG 2>/dev/null ||:
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d apt-cacher-ng remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask apt-cacher-ng.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge apt-cacher-ng.service >/dev/null
+		deb-systemd-helper unmask apt-cacher-ng.service >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

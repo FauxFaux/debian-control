@@ -1,0 +1,22 @@
+#! /bin/sh
+
+set -e
+
+ACTION=$1
+
+CFG_FILE="/etc/lazarus-1.6"
+
+# Debhelper code
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+if test "${ACTION}" = "purge"
+then
+	rm -rf  "${CFG_FILE}".cfg
+	rm -rf  "${CFG_FILE}".bak
+fi

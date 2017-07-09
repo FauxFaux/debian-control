@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+divert()
+{
+	if ! dpkg-divert --list "$1$2" | grep -q diversion; then
+		dpkg-divert --package rlinetd --quiet --rename --add \
+			--divert "$1.real$2" "$1$2"
+	fi
+}
+
+undivert_bad()
+{
+	if dpkg-divert --list "$1" | grep -q "diversion.*$1\.real.*rlinetd"; then
+		rm -f "$1"
+		dpkg-divert --package rlinetd --quiet --rename --remove \
+			--divert "$1.real" "$1"
+	fi
+}
+
+
+
+# undivert bad diversion in rlinetd 0.5.4
+undivert_bad /usr/share/man/man8/update-inetd.8.gz
+
+divert /usr/sbin/update-inetd
+divert /usr/share/man/man8/update-inetd .8.gz
+
+
+

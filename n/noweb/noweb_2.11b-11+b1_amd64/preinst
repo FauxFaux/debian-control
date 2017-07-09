@@ -1,0 +1,24 @@
+#!/bin/sh -e
+
+# Prepare to move a conffile without triggering a dpkg question
+# http://www.dpkg.org/dpkg/ConffileHandling
+prep_mv_conffile() {
+    CONFFILE="$1"
+
+    if [ -e "$CONFFILE" ]; then
+        md5sum="`md5sum \"$CONFFILE\" | sed -e \"s/ .*//\"`"
+        old_md5sum="`sed -n -e \"/^Conffiles:/,/^[^ ]/{\\\\' $CONFFILE'{s/.* //;p}}\" /var/lib/dpkg/status`"
+        if [ "$md5sum" = "$old_md5sum" ]; then
+            rm -f "$CONFFILE"
+        fi
+    fi
+}
+
+case "$1" in
+install|upgrade)
+    if dpkg --compare-versions "$2" le "2.11b-3"; then
+        prep_mv_conffile "/etc/emacs/site-start.d/50nowebm.el"
+    fi
+esac
+
+

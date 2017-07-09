@@ -1,0 +1,62 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+	configure|reconfigure)
+		# Create fwanalog user
+		adduser --system --ingroup adm --home /usr/share/fwanalog --shell /bin/sh \
+				--disabled-password fwanalog >/dev/null 2>&1 || true
+		if [ -f /etc/fwanalog/fwanalog.opts ];then 
+			. /etc/fwanalog/fwanalog.opts
+			chmod 750 $outdir
+			chown -h -R fwanalog:adm $outdir
+		fi
+	
+		db_get fwanalog/language
+		if [ -n "$RET" ];then
+            if [ "$RET" = "English" ];then
+                LANGUAGE="us"
+            elif [ "$RET" = "German" ];then
+                LANGUAGE="de"
+            elif [ "$RET" = "Italian" ];then
+                LANGUAGE="it"
+            elif [ "$RET" = "French" ];then
+                LANGUAGE="fr"
+            else
+                echo "Unknown language: $RET" >&2
+                exit 1
+            fi
+			/usr/lib/fwanalog/mklangfile.$LANGUAGE /usr/share/analog/lang/$LANGUAGE.lng > \
+                /usr/share/fwanalog/fwanalog.lng || exit 1
+		fi
+		
+		db_get fwanalog/cron
+		
+		if [ -n "$RET" ];then
+			CRON="$RET"
+			echo "CRON=$RET" > "/etc/default/fwanalog"
+		fi
+		
+		db_get fwanalog/mailto || true
+		if [ -n "$RET" ];then
+			# append mailto value only if the user enables the cron job
+			if [ "$CRON" = "true" ];then 
+				echo "MAILTO=$RET" >> "/etc/default/fwanalog"
+			fi
+		fi
+		
+	;;
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+	;;
+esac
+
+
+
+exit 0

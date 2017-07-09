@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_cligacpolicy
+if [ "$1" = "configure" ] && [ -x /usr/share/cli-common/policy-install ]; then
+	/usr/share/cli-common/policy-install nunit.framework 2.6
+fi
+# End automatically added section
+# Automatically added by dh_installcligac
+if [ "$1" = "configure" ] && [ -x /usr/share/cli-common/gac-package-install ]; then
+	/usr/share/cli-common/gac-package-install libnunit-framework2.6.3-cil
+fi
+# End automatically added section

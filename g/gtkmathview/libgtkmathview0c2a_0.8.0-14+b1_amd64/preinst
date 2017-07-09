@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+
+# remove an obsolete conffile
+rm_conffile() {
+  PKGNAME="$1"
+  CONFFILE="$2"
+
+  if [ -e "$CONFFILE" ] ; then
+    md5sum="`md5sum "$CONFFILE" | cut -d ' ' -f 1`"
+    old_md5sum="`dpkg-query -W -f='${Conffiles}' "$PKGNAME" | grep "$CONFFILE" | cut -d ' ' -f 3`"
+    if [ "$md5sum" != "$old_md5sum" ] ; then
+      echo "Obsolete configuration file $CONFFILE has been modified by you;"
+      echo "saving it as $CONFFILE.dpkg-bak ..."
+      mv -f "$CONFFILE" "$CONFFILE".dpkg-bak
+    else
+      echo "Removing obsolete configuration file $CONFFILE ..."
+      rm -f "$CONFFILE"
+    fi
+  fi
+}
+
+case "$1" in
+  install|upgrade)
+    rm_conffile libgtkmathview0c2a /etc/gtkmathview/t1.config
+    ;;
+esac
+
+
+
+exit 0

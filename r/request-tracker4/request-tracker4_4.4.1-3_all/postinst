@@ -1,0 +1,296 @@
+#!/bin/sh
+set -e
+
+branch_version=4
+branch_priority=250
+
+warn() {
+	fmt -60 | sed 's/^/**WARNING**  /' 1>&2
+}
+
+warn <<eof
+
+If you are using mod_perl or any form of persistent perl process
+such as FastCGI, you will need to restart your web server and any
+persistent processes now.
+
+For mod_perl this means
+
+invoke-rc.d apache2 stop && invoke-rc.d apache2 start
+
+eof
+
+find /var/cache/request-tracker$branch_version/mason_data -type f -print0 |xargs -r0 rm -f
+
+alts() {
+    for x in "/usr/bin/rt-crontool 1" "/usr/sbin/rt-setup-database 8" \
+             "/usr/sbin/rt-dump-metadata 8" \
+             "/usr/sbin/rt-email-digest 8" "/usr/sbin/rt-email-dashboards 8" \
+             "/usr/sbin/rt-clean-sessions 8" "/usr/sbin/rt-shredder 8" \
+             "/usr/sbin/rt-email-group-admin 8" "/usr/sbin/rt-attributes-viewer 8" \
+             "/usr/sbin/rt-fulltext-indexer 8" "/usr/sbin/rt-setup-fulltext-index 8" \
+             "/usr/sbin/rt-validator 8" "/usr/sbin/rt-session-viewer 8" \
+             "/usr/sbin/rt-preferences-viewer 8" \
+             "/usr/sbin/rt-validate-aliases 8" \
+             "/usr/sbin/rt-importer 8" \
+             "/usr/sbin/rt-serializer 8" \
+             "/usr/sbin/rt-externalize-attachments 8" \
+             "/usr/sbin/rt-ldapimport 8" ; do
+        set -- $x; alt=$1; manext=$2; base=`basename $alt`
+        update-alternatives \
+	  --install $alt $base $alt-$branch_version $branch_priority \
+          --slave /usr/share/man/man$manext/$base.$manext.gz \
+	          $base.$manext.gz \
+                  /usr/share/man/man$manext/$base-$branch_version.$manext.gz
+    done
+}
+
+create_debconf_snippet () {
+    # create a configuration snippet from the debconf database
+    # and handle it with ucf
+    tfile=$(mktemp -t request-tracker4-config.XXXXXXXX) || exit 1
+    for i in rtname organization correspondaddress commentaddress \
+             webpath webbaseurl
+    do
+        db_get "request-tracker4/$i"
+        echo "$i=$RET"
+    done | /usr/share/request-tracker4/debian/write-siteconfig \
+           /usr/share/request-tracker4/debian/siteconfig.template > $tfile
+    ucf --debconf-ok $tfile /etc/request-tracker4/RT_SiteConfig.d/50-debconf.pm
+    rm $tfile
+}
+
+run_dbconfig () {
+    dbc_generate_include=template:/etc/request-tracker4/RT_SiteConfig.d/51-dbconfig-common.pm
+    dbc_generate_include_args="-o template_infile=/usr/share/request-tracker4/debian/dbconfig.template"
+    if [ "$HANDLE_PERMISSIONS" = "true" ]
+    then
+        # hint the SQLite code for the database file permissions
+        dbc_dbfile_owner="root:www-data"
+        dbc_dbfile_perms=0660
+    fi
+
+    ROOT_PASSWORD="password"
+    db_get request-tracker4/dbconfig-install
+    DBC_INSTALL=$RET
+    if [ -n "$2" ]; then
+        DBC_INSTALL="false"
+    fi
+    db_get request-tracker4/dbconfig-reinstall
+    DBC_REINSTALL=$RET
+    if [ "$DBC_INSTALL" = "true" -o "$DBC_REINSTALL" = "true" ]; then
+        db_get request-tracker4/initial-root-password
+        if [ -n "$RET" ]; then
+            ROOT_PASSWORD="$RET"
+        fi
+    fi
+    ROOT_PASSWORD_FILE=`mktemp`
+    export ROOT_PASSWORD_FILE
+    echo $ROOT_PASSWORD > $ROOT_PASSWORD_FILE
+    unset ROOT_PASSWORD
+    . /usr/share/dbconfig-common/dpkg/postinst 
+    dbc_go request-tracker4 $@
+    if [ "$DBC_INSTALL" = "true" -o "$DBC_REINSTALL" = "true" ]; then
+        db_reset request-tracker4/initial-root-password
+        db_fset request-tracker4/initial-root-password seen true
+        rm -f $ROOT_PASSWORD_FILE
+    fi
+}
+
+maybe_handle_permissions () {
+    if [ "$HANDLE_PERMISSIONS" = "true" ]
+    then
+        chown root:www-data /etc/request-tracker4/RT_SiteConfig.pm
+        chmod 640           /etc/request-tracker4/RT_SiteConfig.pm
+    fi
+}
+
+ucf_register () {
+    # Add the generated files into the ucf registry
+    if which ucfr >/dev/null 2>&1
+    then
+        ucfr request-tracker4 /etc/request-tracker4/RT_SiteConfig.d/50-debconf.pm
+        ucfr request-tracker4 /etc/request-tracker4/RT_SiteConfig.pm
+        ucfr request-tracker4 /etc/cron.d/request-tracker4
+        # this should probably be registered by dbconfig-generate-include,
+        # but ucfr is idempotent so it doesn't hurt here anyway.
+        ucfr request-tracker4 /etc/request-tracker4/RT_SiteConfig.d/51-dbconfig-common.pm
+    fi
+}
+
+setup_cronjobs () {
+    tfile=$(mktemp -t request-tracker4-config.XXXXXXXX) || exit 1
+    chmod 0755 $tfile
+    if [ "$INSTALL_CRONJOBS" = "true" ]
+    then
+        cat > $tfile <<EOF
+0 0 * * * www-data [ -x /usr/sbin/rt-email-digest-4 ] && /usr/sbin/rt-email-digest-4 -m daily
+0 0 * * 0 www-data [ -x /usr/sbin/rt-email-digest-4 ] && /usr/sbin/rt-email-digest-4 -m weekly
+0 * * * * www-data [ -x /usr/sbin/rt-email-dashboards-4 ] && /usr/sbin/rt-email-dashboards-4
+0 0 * * * www-data [ -x /usr/sbin/rt-externalize-attachments-4 ] && /usr/sbin/rt-externalize-attachments-4
+EOF
+    else
+        cat > $tfile <<EOF
+#0 0 * * * www-data [ -x /usr/sbin/rt-email-digest-4 ] && /usr/sbin/rt-email-digest-4 -m daily
+#0 0 * * 0 www-data [ -x /usr/sbin/rt-email-digest-4 ] && /usr/sbin/rt-email-digest-4 -m weekly
+#0 * * * * www-data [ -x /usr/sbin/rt-email-dashboards-4 ] && /usr/sbin/rt-email-dashboards-4
+#0 0 * * * www-data [ -x /usr/sbin/rt-externalize-attachments-4 ] && /usr/sbin/rt-externalize-attachments-4
+EOF
+    fi
+    mkdir -p /etc/cron.d
+    ucf --debconf-ok $tfile /etc/cron.d/request-tracker4
+    rm $tfile
+    if [ -f /etc/cron.d/request-tracker40 ]; then
+        mv /etc/cron.d/request-tracker40 /etc/cron.d/request-tracker40.request-tracker4.0
+    fi
+}
+
+fix_vulnerable_passwords() {
+    if [ "$1" = "configure" ] && [ -n "$2" ] && \
+        dpkg --compare-versions "$2" lt 4.0.5-3
+    then
+        if su -s /bin/sh -c "RTHOME=/usr/share/request-tracker4 /usr/share/request-tracker4/etc/upgrade/vulnerable-passwords --fix" www-data; then
+            echo "rt-vulnerable-passwords-4 invoked successfully on upgrade"
+        else
+            echo "rt-vulnerable-passwords-4 exited with an error but the"
+            echo "package post-installation will continue. We recommend that"
+            echo "you check the above error and take corrective action to"
+            echo "ensure the privacy of your user's passwords."
+        fi
+    fi
+}
+
+move_gpg_data() {
+    if [ "$1" = "configure" ] && [ -n "$2" ] && \
+        dpkg --compare-versions "$2" lt 4.0.7-5
+    then
+        if [ -d /var/cache/request-tracker4/data/gpg ]; then
+            echo "Moving GPG data from /var/cache to /var/lib"
+            # This should be part of the package, but make sure
+            if [ ! -d /var/lib/request-tracker4/data ]; then
+                mkdir -p /var/lib/request-tracker4/data
+                chown www-data:root /var/lib/request-tracker4/data
+                chown 2750 /var/lib/request-tracker4/data
+            fi
+            mv -vu /var/cache/request-tracker4/data/gpg/* \
+                   /var/lib/request-tracker4/data/gpg
+            rmdir --ignore-fail-on-non-empty /var/cache/request-tracker4/data/gpg
+        fi
+    fi
+}
+
+move_snippets_to_pm() {
+    if [ "$1" = "configure" ] && [ -n "$2" ] && \
+        dpkg --compare-versions "$2" lt 4.4.1
+    then
+        for f in 50-debconf 51-dbconfig-common; do
+            path=/etc/request-tracker4/RT_SiteConfig.d/$f
+            if [ -e "$path" ]; then
+                if [ -e "$path.pm" ]; then
+                    echo "$path.pm already exists so not moving $path"
+                else
+                    echo "Moving $path to $path.pm"
+                    mv $path $path.pm
+                    ucfr --purge request-tracker4 $path
+                    ucfr request-tracker4 $path.pm
+                fi
+            fi
+        done
+    fi
+    # Also clean up obsolete script whilst we're here
+    update-alternatives --remove update-rt-siteconfig /usr/sbin/update-rt-siteconfig-4
+}
+
+# The actual work starts here
+. /usr/share/debconf/confmodule
+
+# this is used for the SiteConfig.pm file and the possible SQLite database file
+db_get request-tracker4/handle-siteconfig-permissions
+HANDLE_PERMISSIONS="$RET"
+
+db_get request-tracker4/install-cronjobs
+INSTALL_CRONJOBS="$RET"
+
+move_snippets_to_pm $@
+create_debconf_snippet
+run_dbconfig $@
+
+# Update /etc/request-tracker4/RT_SiteConfig.pm. This is now static
+# content, but we keep managing it with ucf to avoid unnecessary user
+# prompting. This is a quick fix to resolve an RC bug just before freeze;
+# there is probably a way to transition from ucf to a conffile that should
+# be investigated later.
+#
+# This is a much-shortened version of the previous update-rt-siteconfig
+# script (embedded as there should be no reason to call it elsewhere now.
+SITE_CONFIG="/etc/request-tracker4/RT_SiteConfig.pm"
+tfile=$(mktemp -t request-tracker-siteconfig.XXXXXXXX) || exit 1
+cat <<EOF > $tfile
+# Default RT_SiteConfig.pm for Debian
+# Since RT 4.4, snippets from /etc/request-tracker4/RT_SiteConfig.d
+# are read in by RT itself, so this file is now empty.
+EOF
+if [ -f "$SITE_CONFIG" ]
+then
+    # try to honor the existing mode and owner of the file
+    chown --reference "$SITE_CONFIG" $tfile
+    chmod --reference "$SITE_CONFIG" $tfile
+fi
+ucf --debconf-ok $tfile "$SITE_CONFIG"
+rm $tfile
+
+maybe_handle_permissions
+setup_cronjobs
+ucf_register
+fix_vulnerable_passwords $@
+move_gpg_data $@
+
+case "$1" in
+    configure)
+        alts
+        ;;
+    abort-upgrade)
+        alts
+        ;;
+esac
+
+
+# Automatically added by dh_usrlocal
+if [ "$1" = configure ]; then
+(
+	while read line; do
+		set -- $line
+		dir="$1"; mode="$2"; user="$3"; group="$4"
+		if [ ! -e "$dir" ]; then
+			if mkdir "$dir" 2>/dev/null; then
+				chown "$user":"$group" "$dir"
+				chmod "$mode" "$dir"
+			fi
+		fi
+	done
+) << DATA
+/usr/local/share 2775 root staff
+/usr/local/share/request-tracker4 2775 root staff
+/usr/local/share/request-tracker4/html 2775 root staff
+/usr/local/share/request-tracker4/lib 2775 root staff
+/usr/local/share/request-tracker4/plugins 2775 root staff
+/usr/local/share/request-tracker4/po 2775 root staff
+/usr/local/share/request-tracker4/static 2775 root staff
+DATA
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/request-tracker4" ]; then
+		update-rc.d request-tracker4 defaults >/dev/null
+		invoke-rc.d request-tracker4 start || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/request-tracker4/RT_SiteConfig.d/40-timezone /etc/request-tracker4/RT_SiteConfig.d/40-timezone.pm -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/request-tracker4/RT_SiteConfig.d/60-logging /etc/request-tracker4/RT_SiteConfig.d/60-logging.pm -- "$@"
+# End automatically added section
+

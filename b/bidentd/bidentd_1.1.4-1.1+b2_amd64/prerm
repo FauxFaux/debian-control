@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+
+# I don't care what the user said; this should be disabled now, otherwise it
+# would invoke us after we are deinstalled.
+if [ "$1" = "remove" ]; then
+ update-inetd --pattern "/usr/sbin/bidentd" --disable ident
+fi

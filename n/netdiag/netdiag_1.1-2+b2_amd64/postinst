@@ -1,0 +1,65 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = configure ]
+then
+    . /usr/share/debconf/confmodule
+
+    default_format="\
+# Start statnetd at boot time? 0 or 1
+run_statnetd=%s
+# Specify additional statnetd options here (see manpage).
+"
+
+    # Determine whether to start watchdog at boot time.
+    db_get netdiag/run_statnetd
+    case $RET in
+    false)  run_statnetd=0;;
+    *)      run_statnetd=1;;
+    esac
+
+    # Create an up-to-date copy of the default file.
+    {
+	# If it already exists, preserve everything except our comment
+	# and $run_statnetd.
+	if [ -f /etc/default/netdiag ]
+	then
+	    printf "$default_format" '.*' '.*' \
+		| grep -vxf - /etc/default/netdiag \
+		| grep -v statnetd_options || true
+	fi
+
+	# Append our comment and the current value.
+	printf "$default_format" "$run_statnetd" 
+
+	# And finally preserve the statnetd_options setting.
+	if [ -f /etc/default/netdiag ]
+	then
+		grep statnetd_options /etc/default/netdiag || true
+	fi
+    } > /etc/default/netdiag.dpkg-new
+
+    # Replace the original file atomically.
+    mv /etc/default/netdiag.dpkg-new /etc/default/netdiag
+
+    #
+    # stop debconf
+    #
+    db_stop
+fi
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/netdiag" ]; then
+		update-rc.d netdiag defaults >/dev/null
+		invoke-rc.d netdiag start || exit $?
+	fi
+fi
+# End automatically added section
+
+

@@ -1,0 +1,222 @@
+#! /usr/bin/perl -w
+
+use strict;
+use Debconf::Client::ConfModule ':all';
+
+my $debug = 0;
+
+version('2.0');
+my $capb=capb('backup');
+
+my @ret;
+
+# Step 1: Put the current settings into the DebConf database
+if (open(CONFIG, '/etc/calamaris/cron.conf')) {
+    while(<CONFIG>) {
+	chomp;
+	(/^daily:/) && do {
+	    my ($when, $mail, $web, $task, $title) = split(/:/);
+	    $title =~ s/^'(.*)'$/$1/;
+	    print STDERR "daily = ($when, $mail, $web, $task, $title)\n",
+	    if ($debug);
+ 	    set('calamaris/daily/mail', $mail);
+	    set('calamaris/daily/html', $web);
+	    set('calamaris/daily/title', $title);
+	    set('calamaris/daily/task', $task);
+	};
+	(/^weekly:/) && do {
+	    my ($when, $mail, $web, $task, $title) = split(/:/);
+	    $title =~ s/^'(.*)'$/$1/;
+	    print STDERR "weekly = ($when, $mail, $web, $task, $title)\n",
+	    if ($debug);
+	    set('calamaris/weekly/mail', $mail);
+	    set('calamaris/weekly/html', $web);
+	    set('calamaris/weekly/title', $title);
+	    set('calamaris/weekly/task', $task);
+	};
+	(/^monthly:/) && do {
+	    my ($when, $mail, $web, $task, $title) = split(/:/);
+	    $title =~ s/^'(.*)'$/$1/;
+	    print STDERR "monthly = ($when, $mail, $web, $task, $title)\n",
+	    if ($debug);
+	    set('calamaris/monthly/mail', $mail);
+	    set('calamaris/monthly/html', $web);
+	    set('calamaris/monthly/title', $title);
+	    set('calamaris/monthly/task', $task);
+	};
+	(/^cache=/) && do {
+	    s/^cache=//;
+	    set('calamaris/cache_type', $_);
+	};
+	(/^cachefile=/) && do {
+	    s/^cachefile=//;
+	    set('calamaris/cache_file', $_);
+	};
+    }
+}
+close(CONFIG);
+
+my $state = 1;
+while (($state >= 1) && ($state <= 5)) {
+
+    if ($state == 1) {
+	@ret = input("low", "calamaris/cache_type");
+	print STDERR "ret = ", @ret, "\n", if ($debug);
+	@ret = go();
+    }
+
+# select tasks block
+    if ($state == 2) {
+	beginblock();
+	@ret = input("medium", "calamaris/daily/task");
+	print STDERR "ret = ", @ret, "\n", if ($debug);
+	@ret = input("medium", "calamaris/weekly/task");
+	print STDERR "ret = ", @ret, "\n", if ($debug);
+	@ret = input("medium", "calamaris/monthly/task");
+	print STDERR "ret = ", @ret, "\n", if ($debug);
+	endblock();
+	@ret = go();
+    }
+
+# daily block
+    if ($state == 3) {
+	if (get('calamaris/daily/task') ne 'nothing') {
+	    beginblock();
+	    if (get('calamaris/daily/task') ne 'web') {
+		@ret = input("medium", "calamaris/daily/mail");
+		print STDERR "ret = ", @ret, "\n", if ($debug);
+	    }
+	    if (get('calamaris/daily/task') ne 'mail') {
+		@ret = input("medium", "calamaris/daily/html");
+		print STDERR "ret = ", @ret, "\n", if ($debug);
+	    }
+	    @ret = input("medium", "calamaris/daily/title");
+	    print STDERR "ret = ", @ret, "\n", if ($debug);
+	    endblock();
+	    @ret = go();
+	}
+    }
+
+
+# weekly block
+    if ($state == 4) {
+	if (get('calamaris/weekly/task') ne 'nothing') {
+	    beginblock();
+	    if ( (get('calamaris/daily/task') eq 'mail') ||
+		 (get('calamaris/daily/task') eq 'both')) {
+		my $mail = get('calamaris/daily/mail');
+		set('calamaris/weekly/mail', $mail);
+	    }
+	    if (get('calamaris/weekly/task') ne 'web') {
+		input("medium", "calamaris/weekly/mail");
+	    }
+	    if (get('calamaris/weekly/task') ne 'mail') {
+		input("medium", "calamaris/weekly/html");
+	    }
+	    input("medium", "calamaris/weekly/title");
+	    endblock();
+	    @ret = go();
+	}
+    }
+
+# monthly block
+    if ($state == 5) {
+	if (get('calamaris/monthly/task') ne 'nothing') {
+	    beginblock();
+	    if ( (get('calamaris/daily/task') eq 'mail') ||
+		 (get('calamaris/daily/task') eq 'both')) {
+		my $mail = get('calamaris/daily/mail');
+		set('calamaris/monthly/mail', $mail);
+	    }
+	    if ( (get('calamaris/weekly/task') eq 'mail') ||
+		 (get('calamaris/weekly/task') eq 'both')) {
+		my $mail = get('calamaris/weekly/mail');
+		set('calamaris/monthly/mail', $mail);
+	    }
+	    if (get('calamaris/monthly/task') ne 'web') {
+		input("medium", "calamaris/monthly/mail");
+	    }
+	    if (get('calamaris/monthly/task') ne 'mail') {
+		input("medium", "calamaris/monthly/html");
+	    }
+	    input("medium", "calamaris/monthly/title");
+	    endblock();
+	    @ret = go();
+	}
+    }
+
+    if ($state == 6) {
+	@ret = input("low", "calamaris/cache_file");
+	print STDERR "ret = ", @ret, "\n", if ($debug);
+	@ret = go();
+    }
+
+    print STDERR "ret = ", @ret, "\n", if ($debug);
+    if ($ret[0] == 0) {
+	$state ++;
+    } else {
+	$state --;
+    }
+}
+
+unless (open(CONF, "> /etc/calamaris/cron.conf")) {
+  exit 0;
+}
+print CONF <<'ENDOFTEXT'
+# configuration file for calamaris
+# by Philipp Frauenfelder <pfrauenf@debian.org>
+# 1998-10-09
+
+# There are three categories: daily, weekly and monthly. For each of these
+# one line is responsible. There must be a line for each category but only 
+# one.
+
+# cat: [daily|weekly|monthly]
+# mailto: mailaddress, eg. root
+# webto: path incl. file name, eg. /var/www/calamaris/daily.html. 
+#        The script does not check wether the directory 
+#        exists and fails with a rather ugly error.
+# todo: [nothing|mail|web|both]
+# title: try it :-)
+
+# cat:mailto:webto:todo:title
+ENDOFTEXT
+    ;
+
+print CONF 'daily:' .
+    get('calamaris/daily/mail') . ':' .
+    get('calamaris/daily/html') . ':' .
+    get('calamaris/daily/task') . ':' .
+    "'" . get('calamaris/daily/title') . "'\n";
+print CONF 'weekly:' .
+    get('calamaris/weekly/mail') . ':' .
+    get('calamaris/weekly/html') . ':' .
+    get('calamaris/weekly/task') . ':' .
+    "'" . get('calamaris/weekly/title') . "'\n";
+print CONF 'monthly:' .
+    get('calamaris/monthly/mail') . ':' .
+    get('calamaris/monthly/html') . ':' .
+    get('calamaris/monthly/task') . ':' .
+    "'" . get('calamaris/monthly/title') . "'\n";
+
+print CONF <<'ENDOFTEXT'
+
+# what log files should be parsed: [auto|squid|squid3]
+#       auto: tries to find the log files in this order: squid, squid3
+#       squid: parses a squid log file if available
+#       squid3: parses a squid3 log file if available
+ENDOFTEXT
+    ;
+
+print CONF 'cache=' . get('calamaris/cache_type') . "\n";
+print CONF <<'ENDOFTEXT'
+
+# name of the log file to be parsed: default is access.log
+# by default the script is supposed to run before log rotation
+# of squid. You can let it run after squid log rotation by
+# changing /etc/logrotate.d/squid. Then, this entry should be
+# access.log.1
+ENDOFTEXT
+    ;
+
+print CONF 'cachefile=' . get('calamaris/cache_file') . "\n";

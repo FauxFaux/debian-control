@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+update-inetd --comment-chars "#disabled#" --disable tfido
+update-inetd --group OTHER --add "tfido		stream	tcp	nowait	ftn	/usr/sbin/tcpd	/usr/lib/ifmail/ifcico -r 0 -t"
+update-inetd --comment-chars "#disabled#" --disable fido
+update-inetd --group OTHER --add "fido		stream	tcp	nowait  ftn	/usr/sbin/tcpd	/usr/lib/ifmail/ifcico -r 0"
+
+
+

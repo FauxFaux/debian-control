@@ -1,0 +1,26 @@
+#! /bin/sh
+# post removal script for the Debian GNU/Linux sendfile package
+
+set -e
+
+if [ "$1" = "purge" ]
+then
+  rm -rf /var/log/sendfile >/dev/null
+
+    if [ -d /var/spool/sendfile ]
+    then
+	cd /var/spool/sendfile
+
+	if [ -n "`ls`" ]; then
+	    for u in *; do
+		for num in 7 6 5 4 3 2 1; do
+		    if [ -f $u/log.$num ]; then rm -f $u/log.$num; fi
+		done
+	    done
+	fi
+	cd /
+	rm -rf /var/spool/sendfile >/dev/null
+    fi
+fi
+
+test ! -x update-inetd || update-inetd --remove saft

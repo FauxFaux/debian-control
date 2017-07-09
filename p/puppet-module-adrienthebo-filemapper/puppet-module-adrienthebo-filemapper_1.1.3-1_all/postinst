@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/filemapper puppet-module-filemapper /usr/share/puppet/modules.available/adrienthebo-filemapper 500
+fi
+
+
+
+exit 0

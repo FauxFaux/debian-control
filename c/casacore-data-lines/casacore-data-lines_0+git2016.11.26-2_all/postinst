@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+	if [ ! -d /var/lib/casacore/data/ephemerides/Lines/ ] ; then
+	    mkdir -p /var/lib/casacore/data/ephemerides
+            ln -sf /usr/share/casacore/data/ephemerides/Lines/ \
+	       /var/lib/casacore/data/ephemerides/Lines
+	fi
+	;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+	;;
+esac
+
+

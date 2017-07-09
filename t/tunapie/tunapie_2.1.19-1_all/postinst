@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+. /usr/share/debconf/confmodule
+db_get tunapie/uncensored_streams
+if [ "$RET" = "true" ]; then
+	echo '1'>/etc/tunapie.config
+	else
+	echo '0'>/etc/tunapie.config
+fi
+
+# Automatically added by dhpython:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p tunapie /usr/share/tunapie
+fi
+
+# End automatically added section
+

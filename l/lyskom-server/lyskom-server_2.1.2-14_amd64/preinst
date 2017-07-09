@@ -1,0 +1,19 @@
+#! /bin/sh -e
+# preinst script for lyskom-server
+
+# Versions up to 2.0 used "config" as its configuration file, whereas
+# 2.1 uses "lyskomd.conf"
+
+case "$1" in
+  upgrade|install)
+    if dpkg --compare-versions "$2" le "2.1.0-1"; then
+      # If old configuration file exists, and new does not, move it
+      if test -e /etc/lyskom-server/config -a ! -e /etc/lyskom/server/lyskomd.conf; then
+        echo 'Renaming /etc/lyskom-server/config to lyskomd.conf' 1>&2
+        mv -f /etc/lyskom-server/config /etc/lyskom-server/lyskomd.conf
+      fi
+    fi
+  ;;
+esac
+
+

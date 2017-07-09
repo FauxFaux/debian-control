@@ -1,0 +1,22 @@
+#! /bin/sh -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+# Get settings from /etc/default/courier
+if [ -f /etc/default/courier ]; then
+	. /etc/default/courier
+	if [ -n "$MAILDIR" ]; then
+		if [ "$MAILDIR" != "Maildir" ]; then
+			db_input high courier-base/maildirpath || [ $? -eq 30 ]
+			db_go
+		fi
+	fi
+fi
+
+# Question about configuration file mode
+db_subst courier-base/webadmin-configmode courieruser courier
+db_input high courier-base/webadmin-configmode || [ $? -eq 30 ]
+db_input high courier-base/certnotice || true
+db_input critical courier-base/courier-user || true
+db_go

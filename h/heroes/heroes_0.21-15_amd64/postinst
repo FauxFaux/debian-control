@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]
+then
+  if [ -d /var/games/heroes ]
+  then
+    # Just in case someone somehow got the wrong permissions on the directory.
+    chown root:root /var/games/heroes
+    chmod 755 /var/games/heroes
+  fi
+
+  # Create /var/games/heroes/scores
+  if ! [ -f /var/games/heroes/scores ]
+  then
+    touch /var/games/heroes/scores
+  fi
+
+  chown root:games /var/games/heroes/scores
+  chmod 664 /var/games/heroes/scores
+
+  #813244: forgot to remove old alternative
+  update-alternatives --remove heroes /usr/games/heroes-sdl
+fi
+
+

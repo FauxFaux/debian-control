@@ -1,0 +1,67 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+# Simply fetch all values stored in debconf
+db_get sbox-dtc/conf_use_dtc_dtcgrp
+conf_use_dtc_dtcgrp=${RET}
+
+CONF_DTC_SYSTEM_USERNAME=dtc
+CONF_DTC_SYSTEM_GROUPNAME=dtcgrp
+
+# Do a search and replace in a file using sh
+# Params:
+# $1 - File where to search
+# $2 - String to search
+# $3 - String to replace
+MKTEMP="mktemp -t"
+searchAndReplace () {
+	if ! grep ${2} ${1} >/dev/null 2>&1 ; then
+		TMP_FILE=`${MKTEMP} DTC_SAR_TEMP.XXXXXX` || exit 1
+		sed "s/${2}/${3}/" ${1} >${TMP_FILE}
+		cat ${TMP_FILE} >${1}
+		rm -f ${TMP_FILE}
+	fi
+}
+
+touch /var/log/sbox.log
+mkdir -p /etc/sbox/vhosts.d
+if [ ""${conf_use_dtc_dtcgrp} = "yes" -o ""${conf_use_dtc_dtcgrp} = "true" ] ; then
+	# Create our group and user
+	if getent group ${CONF_DTC_SYSTEM_GROUPNAME} >/dev/null ; then
+		echo "Group ${CONF_DTC_SYSTEM_GROUPNAME} already exists: skiping creation!"
+	else
+		groupadd -r ${CONF_DTC_SYSTEM_GROUPNAME}
+	fi
+	if getent passwd ${CONF_DTC_SYSTEM_USERNAME} >/dev/null ; then
+		echo "User ${CONF_DTC_SYSTEM_USERNAME} already exists: skiping creation!"
+	else
+		useradd -r -s /bin/false -g ${CONF_DTC_SYSTEM_GROUPNAME} ${CONF_DTC_SYSTEM_USERNAME}
+	fi
+
+	chown ${CONF_DTC_SYSTEM_USERNAME}:${CONF_DTC_SYSTEM_GROUPNAME} /var/log/sbox.log
+	# Make sure the /etc/sbox/vhosts.d is owned by the correct user
+	chown ${CONF_DTC_SYSTEM_USERNAME}:${CONF_DTC_SYSTEM_GROUPNAME} /etc/sbox/vhosts.d
+else
+	if getent passwd www-data >/dev/null ; then
+		if getent group www-data ; then
+			chown www-data:www-data /var/log/sbox.log
+		else
+			echo "sbox postinst: Can't find www-data group"
+		fi
+	else
+		echo "sbox postinst: Can't find www-data user"
+	fi
+	chown www-data:www-data /etc/sbox/vhosts.d
+fi
+
+# Make sure our script is SUID to root, as this is how it works
+chown root:root /usr/lib/cgi-bin/sbox
+chmod u=+rws /usr/lib/cgi-bin/sbox
+
+
+
+exit 0

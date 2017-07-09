@@ -1,0 +1,40 @@
+#!/bin/sh
+# postinst script for libphone-utils
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+cfgpath=/etc/phone-utils.conf
+
+cfg_prep() {
+	[ -f "$cfgpath" ] || touch "$cfgpath"
+	grep -q '^\[local\]' "$cfgpath" || echo '[local]' >> "$cfgpath"
+}
+
+cfg_set() {
+	var="$1" val="$2" perl -i -ple '
+		s/^($ENV{var})[ \t]*=.*/$1 = $ENV{val}/ and $seen++;
+		print STDERR "WARNING: option \"$ENV{var}\" set multiple times!\n" if ( $seen > 1 );
+		s/$/\n$ENV{var} = $ENV{val}/ if (eof and ! $seen);
+	' "$cfgpath"
+}
+
+if [ "$1" = "configure" ] ; then
+	cfg_prep
+	db_get libphone-utils/international_prefix
+	cfg_set international_prefix $RET
+	db_get libphone-utils/national_prefix
+	cfg_set national_prefix $RET
+	db_get libphone-utils/country_code
+	cfg_set country_code $RET
+	db_get libphone-utils/area_code
+	cfg_set area_code $RET
+fi
+
+# tell debconf we are done
+db_stop;
+
+
+
+exit 0;

@@ -1,0 +1,22 @@
+#!/bin/sh
+set -e
+
+# cleanup keys from the old /etc/apt/trusted.gpg, because it was not
+# properly cleaned up by previous versions of leap-keyring.
+
+# we could try to limit this cleanup to just upgrade moving from
+# versions before 2016.03.03, but due to the package rename and the
+# possibility of someone having purged the old package before
+# installing this new one, it's better to do it unconditionally.
+
+# another way of looking at this is that the installation of this
+# package will ensure that the keys in question don't show up in two
+# keyrings at once.
+
+if [ -e /etc/apt/trusted.gpg ] && which gpg >/dev/null; then
+   # remove the version of the keys that were shipped in leap-keyring before version 2016.03.03:
+   gpg --batch --no-tty --no-default-keyring --keyring /etc/apt/trusted.gpg --delete-key 0x1E453B2CE87BEE2F7DFE99661E34A1828E207901 2>/dev/null || true
+   gpg --batch --no-tty --no-default-keyring --keyring /etc/apt/trusted.gpg --delete-key 0xCE433F407BAB443AFEA196C1837C1AD5367429D9 2>/dev/null || true
+fi
+
+

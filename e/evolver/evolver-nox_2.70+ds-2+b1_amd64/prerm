@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+remove_variant_alternative () {
+	local variant=$1
+	update-alternatives --remove evolver /usr/bin/evolver-${variant}
+	return 0
+	}
+case $1 in
+	remove|deconfigure)
+		for VARIANT in nox-d nox-ld nox-q; do
+			remove_variant_alternative $VARIANT
+		done
+		;;
+	upgrade|failed-upgrade) ;;
+	*) echo "prerm called with unknown argument \`$1'" >&2 ; exit 0 ;;
+esac
+
+exit 0

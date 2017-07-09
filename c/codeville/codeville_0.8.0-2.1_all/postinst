@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/codeville" ]; then
+	update-rc.d codeville defaults >/dev/null
+	invoke-rc.d codeville start || exit $?
+fi
+# End automatically added section
+
+# Automatically added by dhpython:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p codeville 
+fi
+
+# End automatically added section

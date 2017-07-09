@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper symlink_to_dir /usr/share/ciderwebmail/root/static/images/mimeicons ../../../../images/http-icons/ 1.05-5~ -- "$@"
+# End automatically added section
+
+
+user="ciderwebmail"
+home="/var/lib/$user"
+
+if [ "$1" = "purge" ]; then
+	deluser --system --quiet "$user" || true
+	rm -rf "$home"
+fi

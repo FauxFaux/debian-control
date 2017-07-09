@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+# lkajan: resolution of #688682
+dpkg-maintscript-helper rm_conffile /etc/dma/dma.conf "0.0.2010.06.17-14.1~" dma -- "$@"
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/dma/virtusertable 0.9-1~ -- "$@"
+# End automatically added section
+

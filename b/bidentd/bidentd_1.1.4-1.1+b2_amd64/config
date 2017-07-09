@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+. /usr/share/debconf/confmodule
+
+# Can read commented lines in order to preserve user manual config which was
+# commented out by remove (without purge).
+if [ -e /etc/inetd.conf ] && grep -q "/usr/sbin/bidentd" /etc/inetd.conf; then
+ oldval=`grep "/usr/sbin/bidentd" /etc/inetd.conf | head -1 | sed 's/.*bidentd //'`
+ 
+ case "$oldval" in
+ "-qq")  thedefault="Be very quiet" ;;
+ "-q")   thedefault="Be quiet" ;;
+ "")     thedefault="Log all requests" ;;
+ "-v")   thedefault="Be somewhat verbose" ;;
+ "-vv")  thedefault="Be quite verbose" ;;
+ "-vvv") thedefault="Be really verbose" ;;
+ *)      thedefault="Manual config" ;;
+ esac
+ 
+ db_set bidentd/loglevel "$thedefault"
+fi
+
+db_input low bidentd/loglevel || true
+db_go || true

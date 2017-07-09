@@ -1,0 +1,77 @@
+#!/bin/sh
+set -e
+
+alias stripwhitespace="sed -e 's/^[[:blank:]]*//' -e 's/[[:blank:]]*$//'"
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+#DEB_HOST_ARCH_OS="$(dpkg-architecture -qDEB_HOST_ARCH_OS | tr '[:lower:]' '[:upper:]')"
+#DEB_HOST_ARCH_BITS="$(dpkg-architecture -qDEB_HOST_ARCH_BITS)"
+
+#Set default platform
+#if [ "${dc_platform}" = "" ] ; then
+#	dc_platform="${DEB_HOST_ARCH_OS}" && \
+#	db_set astk/platform "${dc_platform}"
+#	if [ "${DEB_HOST_ARCH_BITS}" = "64" ] ; then
+#	    dc_platform="${DEB_HOST_ARCH_OS}${DEB_HOST_ARCH_BITS}" && \
+#	    db_set astk/platform "${dc_platform}"
+#	fi
+#fi
+
+#Set default domain name
+if [ "${dc_domainname}" = "" ] ; then
+	dc_domainname="$(hostname --domain 2>/dev/null)" && \
+	db_set astk/domainname "${dc_domainname}"
+fi
+
+#Set default server name
+if [ "${dc_servername}" = "" ] ; then
+	dc_servername="$(hostname 2>/dev/null)"  && \
+	db_set astk/servername "${dc_servername}"
+fi
+
+#Set default node name
+if [ "${dc_node}" = "" ] ; then
+	dc_node="$(hostname -s 2>/dev/null)" && \
+	db_set astk/node "${dc_node}"
+fi
+
+#Set default editor name
+if [ "${dc_editor}" = "" ] ; then
+	dc_editor="/usr/bin/gedit --display=\@D" && \
+	db_set astk/EDITOR "${dc_editor}"
+fi
+
+#Set default terminal name
+if [ "${dc_terminal}" = "" ] ; then
+	dc_terminal="/usr/bin/gnome-terminal --display=\@D --command=\@E" && \
+	db_set astk/TERMINAL "${dc_terminal}"
+fi
+
+db_version 2.0
+
+# Choose Platform
+#db_input medium astk/platform || true
+#dc_platform="$RET"
+#db_go
+
+db_input medium astk/domainname || true
+dc_domainname="$RET"
+db_go
+
+db_input medium astk/servername || true
+dc_servername="$RET"
+db_go
+
+db_input medium astk/node || true
+dc_node="$RET"
+db_go
+
+db_input medium astk/EDITOR || true
+dc_editor="$RET"
+db_go
+
+db_input medium astk/TERMINAL || true
+dc_terminal="$RET"
+db_go

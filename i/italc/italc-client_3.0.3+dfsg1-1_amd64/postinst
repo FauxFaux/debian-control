@@ -1,0 +1,215 @@
+#!/bin/sh
+
+# postinst script for italc-client
+#
+# see: dh_installdeb(1)
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <postinst> `abort-remove'
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+case "$1" in
+	configure)
+		# italc_auth_helper needs to be installed setuid root
+		if ! dpkg-statoverride --list /usr/bin/italc_auth_helper >/dev/null; then
+			dpkg-statoverride --add --update root root 4755 /usr/bin/italc_auth_helper
+		fi
+
+		# fetch debconf-variables for italc-client
+		db_get italc-client/create-keypairs && italc_create_keypairs=$RET
+		db_get italc-client/key-access-for-groups && italc_key_access_for_groups=$RET
+		db_get italc-client/create-groups-for-roles && italc_create_groups_for_roles=$RET
+		db_get italc-client/use-existing-groups-for-roles && italc_use_existing_groups_for_roles=$RET
+
+		# users of iTALC client
+
+		db_get italc-client/del-last-group-student
+		del_last_group="$RET"
+		if [ "$del_last_group" = "true" ]; then
+			db_get italc-client/last-group-student
+			last_group=$(echo $RET | cut -d" " -f1)
+
+			# try to remove the formerly used group for this role, on failure, ignore it
+			getent group $last_group 1>/dev/null && delgroup "$last_group" || \
+			    echo "Removing Posix group »$last_group« for role »student« failed."
+
+		fi
+
+		db_get italc-client/group-italc-student
+		# for sanity: we take everything as a group name until we fine a blank...
+		student_group=$(echo $RET | cut -d" " -f1)
+
+		if ! getent group "$student_group" 1>/dev/null; then
+			if echo "$student_group" | egrep '^[[:digit:]]{1,5}$' 1>/dev/null; then
+				student_group=""
+			fi
+		fi
+
+		if [ "$italc_create_groups_for_roles" = "true" ]; then
+			if echo "$student_group" | egrep '^[[:digit:]]{1,5}$' 1>/dev/null; then
+				echo "Specified group for role »student« is a gidNumber, not creating any group." 1>&2
+			elif ! getent group $student_group >/dev/null; then
+				echo "Creating $student_group group." 1>&2
+				addgroup --system $student_group
+			else
+				echo "Group »$student_group« already exists." 1>&2
+			fi
+		fi
+
+		# users of iTALC master
+
+		if [ "$italc_create_keypairs" = "true" ]; then
+
+			# reset the configuration file...
+			if [ -f /etc/xdg/iTALC\ Solutions/iTALC.conf ]; then
+				sed -i /etc/xdg/iTALC\ Solutions/iTALC.conf \
+				    -e 's/^LogonGroups=.*/LogonGroups="ITALC_GROUP_ADMIN,ITALC_GROUP_SUPPORTER,ITALC_GROUP_TEACHER,ITALC_GROUP_STUDENT"/'
+			fi
+
+			for role in admin supporter teacher; do
+
+				db_get italc-client/del-last-group-$role
+				del_last_group="$RET"
+				if [ "$del_last_group" = "true" ]; then
+					db_get italc-client/last-group-$role
+					last_group=$(echo $RET | cut -d" " -f1)
+
+					# try to remove the formerly used group for this role, on failure, ignore it
+					getent group $last_group 1>/dev/null && delgroup "$last_group" || \
+					    echo "Removing Posix group »$last_group« for role »$role« failed."
+
+				fi
+
+				db_get italc-client/group-italc-$role
+				# for sanity: we take everything as a group name until we fine a blank...
+				group=$(echo $RET | cut -d" " -f1)
+
+				if ! getent group "$group" 1>/dev/null; then
+					if echo "$group" | egrep '^[[:digit:]]{1,5}$' 1>/dev/null; then
+						group=""
+					fi
+				fi
+
+				if [ "$italc_create_keypairs" = "true" ]; then
+					# the imc command tries to start its Qt GUI if $DISPLAY is set...
+					if [ ! -z ${DISPLAY+x} ]; then
+						remembered_DISPLAY=$DISPLAY
+					fi
+					unset DISPLAY
+					if ! test -f "/etc/italc/keys/public/$role/key" -a -f "/etc/italc/keys/private/$role/key"; then
+						echo -n "Creating iTALC public/private key pair for iTALC role »$role« ... "
+						mkdir -p "/etc/italc/keys/public/$role/"
+						mkdir -p "/etc/italc/keys/private/$role/"
+						imc -role $role -createkeypair >/dev/null 2>/dev/null
+						chmod -Rf a-w,o-rx "/etc/italc/keys/public/$role"
+						chmod -Rf a-w,o-rx "/etc/italc/keys/private/$role"
+						echo "done."
+					else
+						echo "iTALC public/private key for iTALC role »$role« already exists."
+					fi
+					if [ ! -z "${remembered_DISPLAY+x}" ]; then
+						DISPLAY=$remembered_DISPLAY
+					fi
+				fi
+
+				if [ "$italc_create_groups_for_roles" = "true" ] && [ "x$group" != "x" ]; then
+					if echo "$group" | egrep '^[[:digit:]]{1,5}$' 1>/dev/null; then
+						echo "Specified group for role »$role« is a gidNumber, not creating any group." 1>&2
+					elif ! getent group $group >/dev/null; then
+						echo "Creating $group group." 1>&2
+						addgroup --system $group
+					else
+						echo "Group »$group« already exists." 1>&2
+					fi
+				fi
+
+				# role dependent manipulation of iTALC.conf
+				if [ -f /etc/xdg/iTALC\ Solutions/iTALC.conf ]; then
+					ROLE=$(echo $role | tr [a-z] [A-Z])
+					sed -i /etc/xdg/iTALC\ Solutions/iTALC.conf \
+					    -e "s/ITALC_GROUP_$ROLE/$group/"
+				fi
+
+				if [ "$italc_key_access_for_groups" = "true" ]; then
+					if [ -f /etc/italc/keys/private/$role/key ]; then
+						chmod -Rf a-w,o-rx "/etc/italc/keys/private/$role"
+						if [ "x$group" != "x" ]; then
+							chown -Rf :$group "/etc/italc/keys/private/$role"
+						else
+							chown -Rf :root "/etc/italc/keys/private/$role"
+						fi
+					fi
+
+					if [ -f /etc/italc/keys/public/$role/key ]; then
+						chmod -Rf a-w,o-rx "/etc/italc/keys/public/$role"
+						if [ "x$student_group" != "x" ]; then
+							chown -Rf :$student_group "/etc/italc/keys/public/$role"
+						else
+							chown -Rf :root "/etc/italc/keys/public/$role"
+						fi
+					fi
+				fi
+
+			done
+
+			# manipulate role-independent things iTALC.conf
+			if [ -f /etc/xdg/iTALC\ Solutions/iTALC.conf ]; then
+				ROLE=$(echo $role | tr [a-z] [A-Z])
+				sed -i /etc/xdg/iTALC\ Solutions/iTALC.conf \
+				    -e "/^#debconf#.*/d" \
+				    -e "s/ITALC_GROUP_STUDENT/$student_group/"
+			fi
+
+			# Set permissions for /etc/italc/keys/public/.
+			# The permissions and group ownership found for this directory
+			# are essential for the iTALC Client startup (via the wrapper
+			# script in /usr/bin/ica).
+			if [ "$italc_key_access_for_groups" = "true" ]; then
+				if [ "x$student_group" != "x" ]; then
+					chown -Rf :$student_group "/etc/italc/keys/public"
+				else
+					chown -Rf :root "/etc/italc/keys/public"
+				fi
+				chmod 0750 "/etc/italc/keys/public"
+			fi
+
+		fi
+
+		db_get italc-client/autostart-on-login
+		if [ "$RET" = "true" ] && [ ! -e /etc/xdg/autostart/italc-client-autostart.desktop ]; then
+			echo "Setting up system-wide XDG autostart for iTALC client."
+			ln -sf /usr/share/applications/italc-client-autostart.desktop /etc/xdg/autostart/italc-client-autostart.desktop
+		elif [ "$RET" = "false" ] && [ -L /etc/xdg/autostart/italc-client-autostart.desktop ]; then
+			echo "Disabling system-wide XDG autostart for iTALC client."
+			rm -f /etc/xdg/autostart/italc-client-autostart.desktop
+		fi
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+		;;
+esac
+
+# dh_installdeb will replace this with shell code automatically
+# generated by other debhelper scripts.
+
+
+
+exit 0

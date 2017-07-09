@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+if [ "$1" = "purge" ]; then
+  echo "Directory /var/list not removed, as it may contain user data."
+  echo "Trying to remove list aliases from /etc/aliases..."
+  if ! grep -q "^# ---SmartList End" /etc/aliases; then
+    echo "Warning: \`# ---SmartList End' line not found in /etc/aliases."
+    echo "You will have to remove list alias by hand."
+    echo "Sorry."
+    echo ""
+  else
+    OLDALIASES=/etc/aliases.`date +%Y-%m-%d.%H:%M:%S`
+    cp -p /etc/aliases $OLDALIASES
+    cat $OLDALIASES | sed -e '/^# ---SmartList Begin/,/^# ---SmartList End/d' > /etc/aliases
+    echo "Done. Backup copy of your old /etc/aliases in $OLDALIASES"
+    echo ""
+    set +e
+    newaliases
+    set -e
+  fi
+  # Remove generated files
+  rm -f /var/list/.etc/rc.init
+  rm -f /var/list/.etc/reject
+fi

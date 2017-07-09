@@ -1,0 +1,83 @@
+#!/bin/sh
+
+set -e
+
+getent group dpmmgr > /dev/null || \
+    addgroup --quiet --system dpmmgr
+
+getent passwd dpmmgr > /dev/null || \
+    adduser --quiet --system --home /var/lib/dpm --shell /bin/sh \
+    --ingroup dpmmgr --disabled-password --disabled-login \
+    --gecos "DPM manager" dpmmgr
+
+chown dpmmgr:dpmmgr /var/log/dpm-srmv1
+
+update-alternatives --install /usr/sbin/dpm-srmv1 dpm-srmv1 \
+          /usr/lib/dpm-postgres/dpm-srmv1 10 \
+  --slave /usr/share/man/man8/dpm-srmv1.8.gz dpm-srmv1.8.gz \
+          /usr/lib/dpm-postgres/dpm-srmv1.8.gz \
+  --slave /etc/init.d/dpm-srmv1 dpm-srmv1.init \
+          /etc/dpm-postgres/dpm-srmv1.init \
+  --slave /etc/default/dpm-srmv1 dpm-srmv1.conf \
+          /etc/dpm-postgres/dpm-srmv1.conf \
+  --slave /etc/logrotate.d/dpm-srmv1 dpm-srmv1.logrotate \
+          /etc/dpm-postgres/dpm-srmv1.logrotate
+
+if [ -x "/etc/init.d/dpm-srmv1" ]; then
+	update-rc.d dpm-srmv1 defaults >/dev/null
+	if [ -x "`which invoke-rc.d 2>/dev/null`" ]; then
+		invoke-rc.d dpm-srmv1 start || exit $?
+	else
+		/etc/init.d/dpm-srmv1 start || exit $?
+	fi
+fi
+
+set -e
+
+chown dpmmgr:dpmmgr /var/log/dpm-srmv2
+
+update-alternatives --install /usr/sbin/dpm-srmv2 dpm-srmv2 \
+          /usr/lib/dpm-postgres/dpm-srmv2 10 \
+  --slave /usr/share/man/man8/dpm-srmv2.8.gz dpm-srmv2.8.gz \
+          /usr/lib/dpm-postgres/dpm-srmv2.8.gz \
+  --slave /etc/init.d/dpm-srmv2 dpm-srmv2.init \
+          /etc/dpm-postgres/dpm-srmv2.init \
+  --slave /etc/default/dpm-srmv2 dpm-srmv2.conf \
+          /etc/dpm-postgres/dpm-srmv2.conf \
+  --slave /etc/logrotate.d/dpm-srmv2 dpm-srmv2.logrotate \
+          /etc/dpm-postgres/dpm-srmv2.logrotate
+
+if [ -x "/etc/init.d/dpm-srmv2" ]; then
+	update-rc.d dpm-srmv2 defaults >/dev/null
+	if [ -x "`which invoke-rc.d 2>/dev/null`" ]; then
+		invoke-rc.d dpm-srmv2 start || exit $?
+	else
+		/etc/init.d/dpm-srmv2 start || exit $?
+	fi
+fi
+
+set -e
+
+chown dpmmgr:dpmmgr /var/log/dpm-srmv2.2
+
+update-alternatives --install /usr/sbin/dpm-srmv2.2 dpm-srmv2.2 \
+          /usr/lib/dpm-postgres/dpm-srmv2.2 10 \
+  --slave /usr/share/man/man8/dpm-srmv2.2.8.gz dpm-srmv2.2.8.gz \
+          /usr/lib/dpm-postgres/dpm-srmv2.2.8.gz \
+  --slave /etc/init.d/dpm-srmv2.2 dpm-srmv2.2.init \
+          /etc/dpm-postgres/dpm-srmv2.2.init \
+  --slave /etc/default/dpm-srmv2.2 dpm-srmv2.2.conf \
+          /etc/dpm-postgres/dpm-srmv2.2.conf \
+  --slave /etc/logrotate.d/dpm-srmv2.2 dpm-srmv2.2.logrotate \
+          /etc/dpm-postgres/dpm-srmv2.2.logrotate
+
+if [ -x "/etc/init.d/dpm-srmv2.2" ]; then
+	update-rc.d dpm-srmv2.2 defaults >/dev/null
+	if [ -x "`which invoke-rc.d 2>/dev/null`" ]; then
+		invoke-rc.d dpm-srmv2.2 start || exit $?
+	else
+		/etc/init.d/dpm-srmv2.2 start || exit $?
+	fi
+fi
+
+

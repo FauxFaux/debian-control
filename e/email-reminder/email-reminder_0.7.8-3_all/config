@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+db_input medium email-reminder/send_reminders || true
+db_go
+db_input medium email-reminder/smtp_server || true
+db_go
+db_input medium email-reminder/smtp_username || true
+db_go
+db_input medium email-reminder/smtp_password || true
+db_go
+db_input medium email-reminder/smtp_ssl || true
+db_go
+db_input medium email-reminder/mail_from || true
+db_go

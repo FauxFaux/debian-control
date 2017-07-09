@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+. /usr/share/debconf/confmodule
+
+
+if [ "$1" = "configure" ]; then
+ db_get bidentd/loglevel
+ 
+ case "$RET" in
+ "Be very quiet")       opt="-qq"  ;;
+ "Be quiet")            opt="-q"   ;;
+ "Log all requests")    opt=""     ;;
+ "Be somewhat verbose") opt="-v"   ;;
+ "Be quite verbose")    opt="-vv"  ;;
+ "Be really verbose")   opt="-vvv" ;;
+ "Manual config")       opt="USER" ;;
+ *)                     exit 43    ;;
+ esac
+ 
+ # Disable any other ident service, not just us. This prevents conflicts.
+ if [ -x /usr/sbin/update-inetd ]; then
+   update-inetd --disable ident
+ fi
+ 
+ if [ "x$opt" != "xUSER" ]; then
+  CONF_STR="ident\tstream\ttcp\tnowait\troot\t/usr/sbin/bidentd bidentd $opt"
+  update-inetd --pattern "/usr/sbin/bidentd" --remove ident
+  update-inetd --pattern "/usr/sbin/bidentd" --group INFO --add "$CONF_STR"
+ fi
+ 
+ # Re-enable the manual settings too
+ if [ -x /usr/sbin/update-inetd ]; then
+   update-inetd --pattern "/usr/sbin/bidentd" --enable ident
+ fi
+ 
+ db_stop
+fi

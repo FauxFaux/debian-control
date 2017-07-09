@@ -1,0 +1,16 @@
+#! /bin/sh
+set -e
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+# Register with freedesktop.org Shared MIME-Info database
+if hash update-desktop-database 2>/dev/null; then
+    update-desktop-database
+fi
+
+exit 0

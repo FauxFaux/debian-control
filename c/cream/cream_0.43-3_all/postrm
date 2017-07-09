@@ -1,0 +1,33 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_ucf
+if [ "$1" = "purge" ]; then
+	for ext in .ucf-new .ucf-old .ucf-dist ""; do
+		rm -f "/etc/cream/cream-conf.vim$ext"
+	done
+	
+	if [ -x "`which ucf 2>/dev/null`" ]; then
+		ucf --purge "/etc/cream/cream-conf.vim"
+	fi
+	if [ -x "`which ucfr 2>/dev/null`" ]; then
+		ucfr --purge cream "/etc/cream/cream-conf.vim"
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_ucf
+if [ "$1" = "purge" ]; then
+	for ext in .ucf-new .ucf-old .ucf-dist ""; do
+		rm -f "/etc/cream/cream-user.vim$ext"
+	done
+	
+	if [ -x "`which ucf 2>/dev/null`" ]; then
+		ucf --purge "/etc/cream/cream-user.vim"
+	fi
+	if [ -x "`which ucfr 2>/dev/null`" ]; then
+		ucfr --purge cream "/etc/cream/cream-user.vim"
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section

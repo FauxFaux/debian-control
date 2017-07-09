@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+# config -- debconf script for clamsmtpd
+#
+# Copyright: Public Domain
+set -e
+if [ -f /usr/share/debconf/confmodule ]; then
+    . /usr/share/debconf/confmodule
+fi
+
+# New Install? Add the new user and group
+if [ -z "$2" ] ; then
+  db_set clamsmtp/addusergroup true
+else
+  # Upgrade: If clamsmtp doesn't exist, ask
+  if [ -z "`getent passwd clamsmtp`" ] ; then
+    # The default config file may be installed if no local changes were made
+    if [ -f /etc/clamsmtpd.conf ] && \
+          (grep -e '^User: clamsmtp' /etc/clamsmtpd.conf>/dev/null) ; then
+      db_set clamsmtp/addusergroup true
+    else
+      db_set clamsmtp/addusergroup false
+      db_input high clamsmtp/addusergroup || true
+    fi
+  fi
+
+  # If this is an old version, ask about fixing permissions
+  if dpkg --compare-versions "$2" le 1.2-1 ; then
+# Set the default value for do-fixperms
+    db_set clamsmtp/do-fixperms true
+    db_input high clamsmtp/do-fixperms || true
+  fi
+fi
+
+db_set clamsmtp/purge true
+db_input medium clamsmtp/purge || true
+
+# Go!
+db_go || true
+

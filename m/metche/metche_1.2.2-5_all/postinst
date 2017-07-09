@@ -1,0 +1,61 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+  configure)
+    TEMPFILE=`tempfile`
+    cat "/usr/share/metche/config/metche.conf.default" > "$TEMPFILE"
+
+    db_get metche/email
+    EMAIL_ADDRESS="$RET"
+    sed -e "s/^ *EMAIL_ADDRESS=.*/EMAIL_ADDRESS=\"$EMAIL_ADDRESS\"/" \
+        -i "$TEMPFILE"
+
+    db_get metche/changelog/type
+    case "$RET" in
+      "Single changelog file")
+	db_get metche/changelog/file
+	CHANGELOG_FILE="$RET"
+	sed -e "s@^[# ]*CHANGELOG_FILE=.*@CHANGELOG_FILE=\"$CHANGELOG_FILE\"@" \
+	    -e "s@^[# ]*CHANGELOG_DIR@#CHANGELOG_DIR@" -i "$TEMPFILE"
+	;;
+      "Multiple changelog files")
+	db_get metche/changelog/directory
+	CHANGELOG_DIR="$RET"
+	sed -e "s@^[# ]*CHANGELOG_DIR=.*@CHANGELOG_DIR=\"$CHANGELOG_DIR\"@" \
+	    -e "s@^[# ]*CHANGELOG_FILE@#CHANGELOG_FILE@" -i "$TEMPFILE"
+	;;
+      "No changelog monitoring")
+	  sed -e "s@^[# ]*CHANGELOG_FILE@#CHANGELOG_FILE@" \
+	      -e "s@^[# ]*CHANGELOG_DIR@#CHANGELOG_DIR@" -i "$TEMPFILE"
+	;;
+    esac
+
+    ucf --debconf-ok --three-way "$TEMPFILE" "/etc/metche.conf"
+
+    rm -f "$TEMPFILE"
+
+    # Initialize metche data only when it was not configured before
+    # (= no previous version number given as a second argument)
+    if [ -z "$2" ]; then
+        metche cron
+    fi
+  ;;
+
+  abort-upgrade|abort-remove|abort-deconfigure)
+  ;;
+
+  *)
+    echo "postinst called with unkwnow argument '$1'" >&2
+    exit 0
+  ;;
+esac
+
+
+
+exit 0
+
+# vim: et sw=4

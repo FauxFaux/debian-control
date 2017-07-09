@@ -1,0 +1,67 @@
+#!/bin/sh
+# config maintainer script for gitlab
+
+CONFIGFILE=/etc/gitlab/gitlab-debian.conf
+ 
+set -e
+
+# source debconf stuffs
+. /usr/share/debconf/confmodule
+
+# Load config file, if it exists.
+  if [ -e $CONFIGFILE ]; then
+      . $CONFIGFILE || true
+
+      # Store values from config file into
+      # debconf db.
+      db_set gitlab/fqdn "$GITLAB_HOST"
+      db_set gitlab/user "$gitlab_user"
+      db_set gitlab/ssl "${GITLAB_HTTPS:-false}"
+      db_set gitlab/letsencrypt "${gitlab_letsencrypt:-false}"
+      if [ -n "$gitlab_letsencrypt_email" ]; then
+        db_set gitlab/letsencrypt_email "${gitlab_letsencrypt_email}"
+      fi
+  fi
+
+# What is your fqdn?
+db_input high gitlab/fqdn || true
+db_go
+
+# Do you want https?
+db_input high gitlab/ssl || true
+db_go
+
+# Don't prompt for letsencrypt if not installed
+if command -v letsencrypt >/dev/null; then
+  # Do you want Let's Encrypt?
+  db_get gitlab/ssl
+  if [ "${RET}" = "true" ]
+  then
+    db_input high gitlab/letsencrypt || true
+    db_go
+    db_get gitlab/letsencrypt
+    gitlab_letsencrypt=$RET
+    if [ "$gitlab_letsencrypt" = "true" ]; then
+      # Get email for letsencrypt updates
+      db_input high gitlab/letsencrypt_email || true
+      db_go
+    fi
+  fi
+fi
+
+# Do you want to change gitlab user?
+db_input high gitlab/user || true
+db_go
+db_get gitlab/user
+gitlab_user=$RET
+
+# source dbconfig-common shell library, and call the hook function
+if [ -f /usr/share/dbconfig-common/dpkg/config ]; then
+   . /usr/share/dbconfig-common/dpkg/config
+
+   dbc_dbtypes="pgsql"
+   dbc_dbname="gitlab_production"
+   dbc_dbuser="$gitlab_user"
+   
+   dbc_go gitlab "$@"
+fi

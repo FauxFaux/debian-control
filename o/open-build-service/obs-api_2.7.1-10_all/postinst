@@ -1,0 +1,53 @@
+#!/bin/sh -e
+
+# Place api and repo url on index page
+if [ ! -f /usr/share/obs/overview/index.html ] ; then
+  FQHOSTNAME=`hostname -f`
+
+  sed -e "s,___API_URL___,https://$FQHOSTNAME,g" \
+      -e "s,___REPO_URL___,http://$FQHOSTNAME:82,g" \
+        /usr/share/obs/overview/overview.html.TEMPLATE > /usr/share/obs/overview/index.html
+fi
+
+# Config secret.key
+if [ ! -e "/usr/share/obs/api/config/secret.key" ]; then
+  rm -f /usr/share/obs/api/config/secret.key
+fi
+SECRET_KEY="/etc/obs/api/config/secret.key"
+if [ ! -e "$SECRET_KEY" ]; then
+    ( umask 0077; dd if=/dev/urandom bs=256 count=1 2>/dev/null |sha256sum| cut -d\  -f 1 >$SECRET_KEY )
+    ln -s $SECRET_KEY /usr/share/obs/api/config/secret.key
+fi
+  chmod 0640 $SECRET_KEY
+  chown nobody:www-data $SECRET_KEY
+
+# Generate log files
+  touch /var/log/obs/access.log
+  touch /var/log/obs/backend_access.log
+  touch /var/log/obs/delayed_job.log
+  touch /var/log/obs/error.log
+  touch /var/log/obs/lastevents.access.log
+  touch /var/log/obs/production.log
+  touch /var/log/obs/production.searchd.log
+  touch /var/log/obs/production.searchd.query.log
+  touch /var/log/obs/production.sphinx.pid
+  touch /var/log/obs/clockworkd.clock.output
+
+# Config Database with dbconfig-common
+. /usr/share/debconf/confmodule
+. /usr/share/dbconfig-common/dpkg/postinst.mysql
+dbc_generate_include=template:/etc/obs/api/config/database.yml
+dbc_generate_include_args="-o template_infile=/usr/share/obs/api/config/database.yml.example"
+dbc_generate_include_owner=www-data
+dbc_go obs-api $@
+
+echo "OBS api installed. Please see /usr/share/doc/obs-api/README.Debian for the rest of setup."
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/obsapidelayed" ]; then
+		update-rc.d obsapidelayed defaults >/dev/null || exit $?
+	fi
+fi
+# End automatically added section
+

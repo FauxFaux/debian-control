@@ -1,0 +1,54 @@
+#!/bin/sh -e
+
+# Initialize debconf if not yet done
+if [ _"$DEBCONF_REDIR" = _"" ]; then
+    . /usr/share/debconf/confmodule
+    db_version 2.0
+    db_capb backup
+fi
+
+db_input "medium" "shared/science-config/useusermenus" || true
+db_go
+db_get shared/science-config/useusermenus
+if [ $RET ] ; then
+    db_input "medium" "shared/science-config/usermenus" || true
+    db_go
+fi
+
+# if blends.config package is not yet installed we have to stop here
+if [ ! -f /etc/blends/blends.conf ] ; then
+   db_stop
+   exit 0
+fi
+
+[ -s /etc/blends/blends.conf ]         && . /etc/blends/blends.conf
+[ -s /etc/blends/science/science.conf ] && . /etc/blends/science/science.conf
+
+# Add at least one default role for each Blend
+addRole science science
+
+# Login names of all users of the system as comma separated list 
+USERS=`getAllUsers 0 ,`
+
+# "login (Real Name)" of users registered to the Debian Pure Blend science
+BLENDUSERS=`getUsersInRole science science 0 ,`
+
+db_set science-config/group "$BLENDUSERS"
+db_subst science-config/group users "$USERS"
+db_get science-config/group
+
+db_input high science-config/group || true
+db_go
+
+db_stop
+
+if [ -d /etc/blends/science/ ] ; then 
+    if [ ! -f /etc/blends/science/science.conf ] ; then 
+        # Due to a bug in blends-common the real Blend config file was moved to science.conf~.  This is fixed here
+        if [ -f /etc/blends/science/science.conf~ ] ; then
+            cp -a /etc/blends/science/science.conf~ /etc/blends/science/science.conf
+        fi
+    fi
+fi
+                
+exit 0

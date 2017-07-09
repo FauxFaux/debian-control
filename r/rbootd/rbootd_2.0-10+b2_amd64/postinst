@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# post install script for Debian GNU/Linux rbootd package
+
+set -e 
+
+## install startup files
+update-rc.d rbootd defaults >/dev/null
+
+if which invoke-rc.d >/dev/null 2>&1; then
+  invoke-rc.d rbootd stop
+  invoke-rc.d rbootd start
+else
+  /etc/init.d/rbootd stop
+  /etc/init.d/rbootd start
+fi
+
+if [ "$1" = "configure" ]; then
+  if [ ! -z $2 ]; then
+   if dpkg --compare-versions $2 le 2.0-3; then
+     echo "This version of rbootd now stores its boot images in /var/lib/rbootd"
+     echo "and not in /usr/local/lib/rbootd.  Debian policy prevents the package"
+     echo "from making changes in /usr/local/lib, so you should move all your"
+     echo "boot files from there to /var/lib/rbootd; then run"
+     echo "/etc/init.d/rbootd restart"
+   fi
+  fi
+fi

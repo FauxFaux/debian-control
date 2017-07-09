@@ -1,0 +1,55 @@
+#!/bin/sh
+# Debian wdm package configuration script
+# Copyright 2001 Branden Robinson.
+# Copyright 2005 Vladimir Shakhov.
+# Licensed under the GNU General Public License, version 2.  See the file
+# /usr/share/common-licenses/GPL or <http://www.gnu.org/copyleft/gpl.txt>.
+
+set -e
+
+# source debconf library
+. /usr/share/debconf/confmodule
+
+THIS_PACKAGE=wdm
+DEFAULT_DISPLAY_MANAGER_FILE=/etc/X11/default-display-manager
+
+# set default display manager
+
+db_get shared/default-x-display-manager
+OLD_DEFAULT="$RET"
+
+db_metaget shared/default-x-display-manager owners
+OWNERS="$RET"
+db_metaget shared/default-x-display-manager choices
+CHOICES="$RET"
+
+# hack to upgrade from /usr/X11/bin/wdm to /usr/bin/wdm
+# for versions upgrade from early than 1.28-2
+NEW_WDM_DAEMON="/usr/bin/wdm"
+OLD_WDM_INSTALLED="no"
+if grep -qsv $NEW_WDM_DAEMON $DEFAULT_DISPLAY_MANAGER_FILE ; then
+  OLD_WDM_INSTALLED="yes" 
+fi
+
+if [ "$OWNERS" != "$CHOICES" ]; then
+  db_subst shared/default-x-display-manager choices $OWNERS
+  db_fset shared/default-x-display-manager seen false
+fi
+
+db_input high shared/default-x-display-manager || true
+db_go
+
+# using this display manager?
+db_get shared/default-x-display-manager
+CURRENT_DEFAULT="$RET"
+if [ "$CURRENT_DEFAULT" = "$THIS_PACKAGE" ]; then
+  if [ "$OLD_DEFAULT" != "$CURRENT_DEFAULT" -o "$OLD_WDM_INSTALLED" = "yes" ]; then
+    # remove the default display manager file since we're going to change it
+    rm -f $DEFAULT_DISPLAY_MANAGER_FILE
+
+  fi
+fi
+
+exit 0
+
+# vim:set ai et sts=2 sw=2 tw=0:

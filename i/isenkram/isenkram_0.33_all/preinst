@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+# Remove incorrect symlink.
+dpkg-maintscript-helper rm_conffile \
+    /etc/xdg/autostart/isenkram.desktop 0.1 isenkram -- "$@"
+
+

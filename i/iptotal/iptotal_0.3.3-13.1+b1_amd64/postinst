@@ -1,0 +1,91 @@
+#!/bin/sh
+#
+# Author: Dario Minnucci <debian@midworld.net>
+# Date:   Tue, 25 Aug 2009 02:52:05 +0200
+# Updated by: Ignace Mouzannar <mouzannar@gmail.com>
+#
+
+set -e
+
+case "$1" in
+	configure)
+        # Copy old user files (if they are present)
+        # Check archive and images directories
+        for folder in archive images
+        do
+            if [ -d "/usr/lib/iptotal/${folder}" ]; then
+            # case of update from 0.3.3-10 in which the working
+            # directory is /usr/lib/iptotal/
+                for file in `find /usr/lib/iptotal/${folder}/ -maxdepth 1 -type f`
+                do
+                    cp ${file} /var/lib/iptotal/${folder}
+                done
+                # delete files from old directories
+                rm -f /usr/lib/iptotal/${folder}/*
+                rm -f /var/www/iptotal/${folder}/*
+            elif [ -d "/var/www/iptotal/${folder}" ]; then
+            # case of update from 0.3.3-8 or older in which the working
+            # directory is /var/www/iptotal/
+                for file in `find /var/www/iptotal/${folder}/ -maxdepth 1 -type f`
+                do
+                    cp ${file} /var/lib/iptotal/${folder}
+                done
+                # delete files from old directory
+                rm -f /var/www/iptotal/${folder}/*
+            fi
+        done
+        for file in iptotal.rrd result.txt
+        do
+            if [ -f "/usr/lib/iptotal/${file}" ]; then
+                cp -f /usr/lib/iptotal/${file} /var/lib/iptotal/
+                rm -f /usr/lib/iptotal/${file}
+                rm -f /var/www/iptotal/${file}
+            elif [ -f "/var/www/iptotal/${file}" ]; then
+                cp -f /var/www/iptotal/${file} /var/lib/iptotal/
+                rm -f /var/www/iptotal/${file}
+            fi
+        done
+
+        # change ownership to www-data
+        chown -R www-data:www-data /var/lib/iptotal/*
+
+        # enable cgi
+        if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+            . /usr/share/apache2/apache2-maintscript-helper
+            apache2_invoke enmod cgi
+        fi
+	;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+
+	*) 
+	    echo "postinst called with unknown argument \`$1'" >&2
+	    exit 1
+	;;
+esac
+
+# Automatically added by dh_apache2
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in iptotal  ; do
+			apache2_invoke enconf $conf  || exit $?
+		done
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/iptotal" ]; then
+		update-rc.d iptotal defaults >/dev/null
+		invoke-rc.d iptotal start || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/iptotal/apache.conf /etc/apache2/conf-available/iptotal.conf 0.3.3-13.1~ -- "$@"
+# End automatically added section
+
+
+exit 0

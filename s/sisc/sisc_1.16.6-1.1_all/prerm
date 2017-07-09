@@ -1,0 +1,14 @@
+#! /bin/sh
+
+set -e
+
+if [ "$1" = "remove" ]; then
+   inl="scheme-r4rs scheme-r5rs scheme-srfi-0 scheme-srfi-7 scheme-srfi-55"
+   inl="$inl scheme-ieee-1178-1900"
+   
+   for int in $inl; do
+       update-alternatives --remove "$int" /usr/share/sisc/srfi-22.sh
+   done
+fi
+
+

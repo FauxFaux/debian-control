@@ -1,0 +1,25 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+	if ! [ -e /var/log/poldi ]; then
+	    touch /var/log/poldi
+	    chown root:adm /var/log/poldi
+	    chmod 0640 /var/log/poldi
+	fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

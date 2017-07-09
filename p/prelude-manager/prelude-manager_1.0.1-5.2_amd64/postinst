@@ -1,0 +1,96 @@
+#!/bin/sh
+
+set -e
+
+add_sysuser()
+{
+	if ! getent passwd prelude >/dev/null; then
+		adduser --system --disabled-login --no-create-home --group prelude 2>&1 > /dev/null
+	fi
+}
+
+add_sysuser
+
+if [ "$1" = "configure" ]; then
+  confpath="/etc/prelude-manager"
+  conffile="${confpath}/prelude-manager.conf"
+  confnew="${conffile}-new"
+  pkgpath="/usr/share/prelude-manager"
+
+  . /usr/share/debconf/confmodule
+  . /usr/share/dbconfig-common/dpkg/postinst
+  dbc_first_version="0.9.8-3"
+
+  dbc_go prelude-manager $@
+
+  if [ ! -e $conffile ]; then
+    cp ${pkgpath}/prelude-manager.conf $conffile
+  fi
+
+  cp $conffile $confnew
+
+  if [ -z "$dbc_dbserver" ]; then
+    dbc_dbserver=localhost
+  fi
+  if [ -z "$dbc_dbport" ]; then
+    if [ "$dbc_dbtype" = "mysql" ]; then
+      dbc_dbport=3306
+    else
+      if [ "$dbc_dbtype" = "pgsql" ]; then
+        dbc_dbport=5432
+      fi
+    fi
+  fi
+
+  if [ -n "$dbc_dbtype" ]; then
+    sed -i -e "s/@DBC_TYPE@/$dbc_dbtype/" \
+    -e "s/@DBC_HOST@/$dbc_dbserver/" \
+    -e "s/@DBC_PORT@/$dbc_dbport/" \
+    -e "s/@DBC_NAME@/$dbc_dbname/" \
+    -e "s/@DBC_USER@/$dbc_dbuser/" \
+    -e "s/@DBC_PASS@/$dbc_dbpass/" \
+    $confnew
+
+    # Installing the config
+    if diff -q /usr/share/doc/prelude-manager/examples/prelude-manager.conf $conffile >/dev/null 2>&1; then
+      # configure file has not been changed .. overwrite it
+      cp $confnew $conffile
+    else
+      ucf --three-way --debconf-ok $confnew $conffile
+    fi
+  fi
+
+  # make sure conf file has the correct permissions and owner/group
+  chmod 640 /etc/prelude-manager/prelude-manager.conf
+  chown prelude /etc/prelude-manager/prelude-manager.conf
+
+  rm -f $confnew
+
+  db_stop
+
+  # run this command before starting initscripts
+
+  chown -R prelude:prelude /var/spool/prelude-manager/ >/dev/null
+
+  PROFILE_NAME="prelude-manager"
+  if [ -x "/usr/bin/prelude-admin" ]; then
+    if [ ! -d "/etc/prelude/profile/$PROFILE_NAME" ]; then
+      prelude-admin add prelude-manager --uid prelude --gid prelude
+      prelude-admin chown prelude-manager --uid prelude --gid prelude
+    fi
+  fi
+
+fi
+
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/prelude-manager" ]; then
+		update-rc.d prelude-manager defaults >/dev/null
+		invoke-rc.d prelude-manager start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

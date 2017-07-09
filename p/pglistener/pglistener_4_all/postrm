@@ -1,0 +1,35 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+    remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+        ;;
+    purge)
+        getent passwd pglisten >/dev/null && \
+        if [ -x /usr/sbin/deluser ]; then
+            deluser --quiet --system pglisten
+        fi
+        rm -rf /var/lib/pglistener
+        ;;
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d pglistener remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0
+

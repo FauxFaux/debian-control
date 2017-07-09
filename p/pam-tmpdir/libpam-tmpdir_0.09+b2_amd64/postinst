@@ -1,0 +1,15 @@
+#! /bin/sh -e
+
+# Move /etc/pam_tmpdir.conf to /etc/security/tmpdir.conf, since that's
+# the proper place
+
+if [ -e "/etc/pam-tmpdir.conf" -a ! -e /etc/security/tmpdir.conf ]; then
+   mv /etc/pam-tmpdir.conf /etc/security/tmpdir.conf
+fi
+
+pam-auth-update --package
+
+
+
+exit 0
+

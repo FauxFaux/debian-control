@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+    configure)
+        # See #662588
+		if [ -n "$2" ]; then
+            if dpkg --compare-versions "$2" le "20110113-3"; then
+                update-alternatives --quiet --remove-all unhide || true
+            fi
+        fi
+		;;
+
+	*)
+		echo "prerm called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+
+
+exit 0

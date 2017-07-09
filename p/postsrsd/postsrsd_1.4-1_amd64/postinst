@@ -1,0 +1,114 @@
+#!/bin/sh
+
+CONFIGFILE=/etc/default/postsrsd
+set -e
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "configure" ]; then
+	if [ ! -f /etc/postsrsd.secret ]; then
+		echo "postsrsd: Generating initial /etc/postsrsd.secret" >&2
+		( umask 0077 ; dd if=/dev/urandom bs=24 count=1 2>/dev/null | base64 -w0 > /etc/postsrsd.secret )
+	fi
+
+	# We'll only write the configured domain to the config file if it doesn't
+	# exist yet, or we're called by dpkg-reconfigure.
+	db_get postsrsd/domain; DOMAIN="$RET"
+
+	if [ ! -e $CONFIGFILE ]; then
+		cp -a -f /usr/share/postsrsd/postsrsd.template $CONFIGFILE.tmp
+		# strip comment from SRS_DOMAIN and write configured domain to config file
+		sed -i "s/^#SRS_DOMAIN=.*/SRS_DOMAIN=$DOMAIN/" $CONFIGFILE.tmp
+		mv -f $CONFIGFILE.tmp $CONFIGFILE
+	fi
+
+	if [ "$DEBCONF_RECONFIGURE" = "1" ]; then
+		cp -a -f $CONFIGFILE $CONFIGFILE.tmp
+		sed -i "s/^ *SRS_DOMAIN=.*/SRS_DOMAIN=$DOMAIN/" $CONFIGFILE.tmp
+		mv -f $CONFIGFILE.tmp $CONFIGFILE
+	fi
+
+	# Create user
+	if ! getent passwd postsrsd > /dev/null; then
+		adduser --quiet --system --group --no-create-home --home /var/lib/postsrsd postsrsd
+
+		# When upgrading from versions before 1.4, change the RUN_AS variable in the
+		# configuration file from nobody to the postsrsd user.
+		if dpkg --compare-versions "$2" lt "1.4-1"; then
+			cp -a -f $CONFIGFILE $CONFIGFILE.tmp
+			sed -i "s/^ *RUN_AS=nobody */RUN_AS=postsrsd/" $CONFIGFILE.tmp
+			mv -f $CONFIGFILE.tmp $CONFIGFILE
+		fi
+	fi
+fi
+
+# Stop communcation with debconf, as the daemon might get confused with the extra file
+# descriptor if we an init system that doesn't close it.
+db_stop
+
+# Automatically added by dh_apparmor
+aa_is_enabled() {
+   if command aa-enabled >/dev/null 2>&1; then
+      # apparmor >= 2.10.95-2
+      aa-enabled --quiet 2>/dev/null
+   else
+      # apparmor << 2.10.95-2
+      # (This should be removed once Debian Stretch and Ubuntu 18.04 are out.)
+      rc=0
+      aa-status --enabled 2>/dev/null || rc=$?
+      [ "$rc" = 0 ] || [ "$rc" = 2 ]
+   fi
+}
+
+if [ "$1" = "configure" ]; then
+    APP_PROFILE="/etc/apparmor.d/usr.sbin.postsrsd"
+    if [ -f "$APP_PROFILE" ]; then
+        # Add the local/ include
+        LOCAL_APP_PROFILE="/etc/apparmor.d/local/usr.sbin.postsrsd"
+
+        test -e "$LOCAL_APP_PROFILE" || {
+            tmp=`mktemp`
+        cat <<EOM > "$tmp"
+# Site-specific additions and overrides for usr.sbin.postsrsd.
+# For more details, please see /etc/apparmor.d/local/README.
+EOM
+            mkdir `dirname "$LOCAL_APP_PROFILE"` 2>/dev/null || true
+            mv -f "$tmp" "$LOCAL_APP_PROFILE"
+            chmod 644 "$LOCAL_APP_PROFILE"
+        }
+
+        # Reload the profile, including any abstraction updates
+        if aa_is_enabled; then
+            apparmor_parser -r -T -W "$APP_PROFILE" || true
+        fi
+    fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask postsrsd.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled postsrsd.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable postsrsd.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state postsrsd.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/postsrsd" ]; then
+		update-rc.d postsrsd defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d postsrsd $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+

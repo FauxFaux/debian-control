@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# postinst for xcal
+#############################################
+set -e
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+# clean up the symlink to xcal.real that was created by the xaw wrappers
+# to point to xcal.real (which is no longer part of the package)
+if [ -L /etc/alternatives/xcal ] ; then
+   update-alternatives --remove xcal /usr/bin/xcal.real
+   update-alternatives --remove xcal /usr/share/xaw-wrappers/wrapper
+fi

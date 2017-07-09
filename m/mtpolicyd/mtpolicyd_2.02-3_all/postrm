@@ -1,0 +1,34 @@
+#!/bin/sh -e
+
+case "$1" in
+    remove)
+	;;
+
+    upgrade)
+	;;
+
+    purge)
+	rm -rf /var/lib/mtpolicyd
+	;;
+
+    failed-upgrade|abort-install|abort-upgrade|disappear)
+	;;
+
+    *)
+	echo "postrm called with unknown argument \`$1'" >&2
+	exit 1
+	;;
+esac
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d mtpolicyd remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+

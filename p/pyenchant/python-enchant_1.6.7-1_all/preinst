@@ -1,0 +1,9 @@
+#!/bin/sh
+# TODO: remove this file after releasing Squeeze
+set -e
+if [ "$1" = upgrade ] && dpkg --compare-versions "$2" lt-nl 1.5.2-1~;
+then
+	pycentral pkgremove python-enchant
+fi
+
+

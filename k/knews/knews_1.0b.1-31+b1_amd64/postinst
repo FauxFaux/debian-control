@@ -1,0 +1,33 @@
+#! /bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ "$1" = configure ]; then
+    if [ ! -s /etc/news/server ]; then
+	if [ ! -d /etc/news ]; then
+	    mkdir -m 755 /etc/news
+	    chown news:news /etc/news
+	fi
+
+	db_get shared/news/server
+	echo "$RET" > /etc/news/server
+	chmod 644 /etc/news/server
+    fi
+
+    if [ ! -s /etc/mailname ]; then
+	db_get knews/mail-name
+	echo "$RET" > /etc/mailname
+	chmod 644 /etc/mailname
+    fi
+fi
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+exit 0

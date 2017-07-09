@@ -1,0 +1,58 @@
+#!/bin/sh
+
+set -e
+
+export DEBCONF_DEBUG=developer
+CONFIGFILE=/etc/cpu/cpu.conf
+#DEBIANCONF=/etc/cpu/cpu-debian.conf
+. /usr/share/debconf/confmodule
+
+export PACKAGE=cpu
+
+read_config() {
+	for line in `grep '^[^#]' $CONFIGFILE | sed 's/[[:space:]]//g'`; do
+		NEWSECTION=`echo $line|grep '^\['|sed 's/\(\[\)\(.*\)\(\]\)/\2/'`
+		if [ -n "$NEWSECTION" ]; then
+			SECTION=`echo $NEWSECTION|tr '[A-Z]' '[a-z]'`
+		else
+			key=`echo $line|cut -f1 -d'='`
+			val=`echo $line|cut -f2- -d'='`
+			eval "db_set $PACKAGE/$SECTION/$key '$val' || true"
+		fi	
+	done
+}
+
+init_config() {
+	if [ -e $CONFIGFILE ]; then
+		read_config
+	fi	
+}
+
+db_capb backup
+
+STATE=1
+LASTSTATE=7
+while [ "$STATE" != 0 -a "$STATE" -le "$LASTSTATE" ]; do
+	case "$STATE" in
+	1) 	db_input medium $PACKAGE/do_debconf || true ;;	
+	2)
+		db_get $PACKAGE/do_debconf
+		[ "$RET" = "false" ] && break
+		init_config
+		;;
+	3)	db_input medium $PACKAGE/ldap/LDAP_URI || true ;;
+	4)	db_input medium $PACKAGE/ldap/BIND_DN || true ;;
+	5)	db_input medium $PACKAGE/ldap/BIND_PASS || true ;;
+	6)	db_input medium $PACKAGE/ldap/USER_BASE || true ;;
+	7)	db_input medium $PACKAGE/ldap/GROUP_BASE || true ;;
+
+	esac
+	if db_go; then
+		STATE=$(($STATE+1))
+	else
+		STATE=$(($STATE-1))
+	fi
+done	
+	
+exit 0	
+

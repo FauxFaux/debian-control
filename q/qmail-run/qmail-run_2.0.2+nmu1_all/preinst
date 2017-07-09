@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+errcho () {
+  echo "$*" >&2
+}
+
+if test "$1" = upgrade && dpkg --compare-versions "$2" lt 2.0.0; then
+  errcho "Upgrading qmail-run from version $2 is not yet supported."
+  errcho
+  exit 1
+fi

@@ -1,0 +1,23 @@
+#! /bin/sh
+
+set -e
+
+SCORE="njam-hiscore.dat"
+
+if [ ! -f /var/games/$SCORE ]; then
+    mkdir -p /var/games/
+    cp /usr/share/games/njam/hiscore.dat /var/games/$SCORE
+    ln -s /var/games/$SCORE /usr/share/games/njam/$SCORE
+fi
+
+chown root:games /var/games/$SCORE
+chmod 664 /var/games/$SCORE
+chown root:games /usr/games/njam
+chmod g+s /usr/games/njam
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

@@ -1,0 +1,12 @@
+#!/bin/sh -e
+# 
+# Preinst file for ccal
+# based on http://wiki.debian.org/DpkgConffileHandling
+
+# Move a conffile without triggering a dpkg question
+
+dpkg-maintscript-helper rm_conffile \
+    /etc/calcol 3.5-7 ccal -- "$@"
+
+
+

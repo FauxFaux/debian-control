@@ -1,0 +1,73 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# Does the user wish to upgrade
+if [ -f /etc/tripwire/tw.config ] || [ -f /etc/tw.config ]
+then
+    db_title Tripwire Upgrade
+    db_fset tripwire/upgrade seen false
+    db_input critical tripwire/upgrade || true
+    db_go
+
+    db_get tripwire/upgrade
+    case "$RET" in
+    false)
+	exit 0;
+	;;
+
+    esac
+fi
+
+# Title for the rest of the questions
+db_title Tripwire Configuration
+
+# Warn about chanes to policy file if necessary
+release=2.3.1.2-5
+version=2.3.1.2-6
+current=${2:-$version}
+
+if dpkg --compare-versions "$current" lt "$version"; then
+    db_fset tripwire/change-in-default-policy seen false
+    db_subst tripwire/change-in-default-policy release ${release}
+    db_input critical tripwire/change-in-default-policy
+    db_go
+fi
+
+# Does the user wish to create a site key file if non exists
+db_input high tripwire/use-sitekey || true
+db_go
+
+# Does the user wish to create a site key file if non exists
+db_input high tripwire/use-localkey || true
+db_go
+
+db_get tripwire/use-sitekey
+case "$RET" in
+true)
+    # Does the user wish to regenerate the configuration database
+    db_input high tripwire/rebuild-config || true
+    db_go
+
+    # Does the user wish to regenerate the policy database
+    db_input high tripwire/rebuild-policy || true
+    db_go
+    ;;
+esac
+
+# Does the user wish to recieve emailed reports
+db_input medium tripwire/email-reports || true
+db_go
+
+# Alert the user about broken packaging
+case "$2" in
+2.3.0-1)
+    db_subst tripwire/broken-passphrase hostname $(uname -n)
+    db_input critical tripwire/broken-passphrase || true
+    db_go
+    ;;
+
+esac

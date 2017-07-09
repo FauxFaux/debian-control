@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installxmlcatalogs
+if [ "$1" = "remove" ] || [ "$1" = "upgrade" ]; then
+	update-xmlcatalog --del --type uri --id "http://xmlroff.org/release/libfo/" --root || true
+
+	update-xmlcatalog --del --type uri --id "http://xmlroff.org/release/libfo/" --package xmlroff || true
+
+fi
+# End automatically added section

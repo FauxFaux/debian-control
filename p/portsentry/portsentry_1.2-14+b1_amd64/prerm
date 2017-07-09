@@ -1,0 +1,35 @@
+#!/bin/sh
+#$Id: prerm,v 1.4 2003/09/08 18:09:03 agx Exp $
+
+set -e
+
+# rm symbolic link to /usr/doc/portsentry when package gets removed or
+# upgraded 
+# keep this for one stable release to get rid of the symlink
+if [ \( "$1" = "upgrade" -o "$1" = "remove" \) -a -L /usr/doc/portsentry ]; then
+	rm -f /usr/doc/portsentry
+fi
+
+# to avoid long downtimes upon mass upgrades do not stop the daemon.
+# Unfortunately maintainer scripts prior to 1.0-1.2 don't know anything 
+# about this. So we have to stop the daemon on downgrades.
+if [ -n "$2" ] && dpkg --compare-versions $2 lt 1.0-2 ; then
+    if [ -x /usr/sbin/invoke-rc.d ]; then
+    	invoke-rc.d portsentry stop
+    else
+        /etc/init.d/portsentry stop
+    fi
+elif [ "$1" != "upgrade" ]; then
+    if [ -x /usr/sbin/invoke-rc.d ]; then
+    	invoke-rc.d portsentry stop
+    else
+        /etc/init.d/portsentry stop
+    fi
+fi
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/portsentry" ]; then
+	invoke-rc.d portsentry stop || exit $?
+fi
+# End automatically added section
+

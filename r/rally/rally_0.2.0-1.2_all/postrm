@@ -1,0 +1,35 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "purge" ] ; then
+	if [ -r /usr/share/debconf/confmodule ] ; then
+		. /usr/share/debconf/confmodule
+		db_get rally/configure_db || true
+		if [ "$RET" = "true" ] ; then
+			if [ -f /usr/share/dbconfig-common/dpkg/postrm ] ; then
+				. /usr/share/dbconfig-common/dpkg/postrm
+				dbc_go rally $@
+			else
+				rm -f /etc/dbconfig-common/rally.conf
+				if which ucf >/dev/null 2>&1; then
+					ucf --purge /etc/dbconfig-common/rally.conf
+					ucfr --purge rally /etc/dbconfig-common/rally.conf
+				fi
+			fi
+		fi
+	fi
+	rm -f /etc/rally/rally.conf
+	rmdir --ignore-fail-on-non-empty /etc/rally || true
+	rm -rf /var/lib/rally /var/lib/rally/cache /var/log/rally
+fi
+
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

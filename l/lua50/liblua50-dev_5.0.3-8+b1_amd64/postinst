@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+	# For now, just update the alternatives set to include us.
+	update-alternatives --install /usr/bin/lua-config lua-configuration /usr/bin/lua-config50 80 --slave /usr/share/man/man1/lua-config.1.gz lua-configuration-manual /usr/share/man/man1/lua-config50.1.gz
+fi # Configure
+
+

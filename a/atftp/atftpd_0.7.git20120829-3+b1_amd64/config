@@ -1,0 +1,105 @@
+#!/bin/sh -e
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+opts2debconf() {
+    while [ "$1" ] ; do
+	case "$1" in
+	    --daemon) ;;
+	    --port)          db_set atftpd/port "$2"; shift ;;
+	    --tftpd-timeout) db_set atftpd/tftpd-timeout "$2"; shift ;;
+	    --retry-timeout) db_set atftpd/retry-timeout "$2"; shift ;;
+	    --maxthread)     db_set atftpd/maxthread "$2"; shift ;;
+	    --no-timeout)    db_set atftpd/timeout "false"; shift ;;
+	    --no-tsize)      db_set atftpd/tsize "false"; shift ;;
+	    --no-blksize)    db_set atftpd/blksize "false"; shift ;;
+	    --no-multicast)  db_set atftpd/multicast "false"; shift ;;
+	    --mcast-port)    db_set atftpd/mcast_port "$2"; shift ;;
+	    --mcast-addr)    db_set atftpd/mcast_addr "$2"; shift ;;
+	    --mcast-ttl)     db_set atftpd/ttl "$2"; shift ;;
+	    --verbose=*)
+		db_set atftpd/verbosity $(echo "$1" | cut -d= -f2-)
+		;;
+	    --logfile)
+		db_set atftpd/logtofile true
+		db_set atftpd/logfile "$2"
+		;;
+	    /*) db_set atftpd/basedir "$1" ;;
+	esac
+	shift
+    done
+}
+
+# Load current settings from file
+if [ -f /etc/default/atftpd ]; then
+    . /etc/default/atftpd
+    db_set atftpd/use_inetd "$USE_INETD"
+    if [ "$USE_INETD" = "false" ]; then
+	opts2debconf $OPTIONS
+    else
+	# FIXME should work with xinetd too
+	INETOPTS="$(grep /usr/sbin/in.tftpd /etc/inetd.conf | sed 's%.*/usr/sbin/in.tftpd %%')"
+	opts2debconf $INETOPTS
+    fi
+fi
+# Do not ask if you need to configure atftp (Bug#266329)
+
+#db_beginblock
+#db_input high atftpd/configure || true
+#db_endblock
+#db_go
+
+#db_get atftpd/configure
+#if [ "$RET" = "true" ]; then
+
+    db_beginblock
+    db_input medium atftpd/use_inetd || true
+    db_endblock
+    db_go
+
+    db_get atftpd/use_inetd
+
+    if [ "$RET" = "true" ]; then
+	db_beginblock
+	db_input low atftpd/tftpd-timeout || true
+	db_endblock
+	db_go
+    fi
+
+    db_beginblock
+    db_input low atftpd/port || true
+    db_input low atftpd/retry-timeout || true
+    db_input low atftpd/maxthread || true
+    db_input low atftpd/timeout || true
+    db_input low atftpd/tsize || true
+    db_input low atftpd/blksize || true
+    db_input low atftpd/multicast || true
+    db_endblock
+    db_go
+
+    db_get atftpd/multicast
+    if [ "$RET" = "true" ]; then
+	db_beginblock
+	db_input low atftpd/mcast_port || true
+	db_input medium atftpd/mcast_addr || true
+	db_input medium atftpd/ttl || true
+	db_endblock
+	db_go
+    fi
+
+    db_beginblock
+    db_input low atftpd/verbosity || true
+    db_input medium atftpd/basedir || true
+    db_input low atftpd/logtofile || true
+    db_endblock
+    db_go
+    
+    db_get  atftpd/logtofile
+    if [ "$RET" = "true" ]; then
+	db_beginblock
+	db_input low atftpd/logfile || true
+	db_endblock
+	db_go
+    fi
+#fi

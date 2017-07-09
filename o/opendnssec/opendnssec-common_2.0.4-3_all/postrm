@@ -1,0 +1,69 @@
+#!/bin/sh
+# postrm script for opendnssec-conf
+
+set -e
+
+unset_perms() {
+    dpkg-statoverride --quiet --remove "$1" || true
+}
+
+case "$1" in
+    purge)
+
+	unset_perms /etc/opendnssec
+
+	for dir in tmp signconf unsigned signed db signer enforcer; do
+	    unset_perms /var/lib/opendnssec/$dir
+	done
+	unset_perms /var/lib/opendnssec
+
+	for conf in addns.xml conf.xml kasp.xml zonelist.xml; do
+	    # unset dpkg-statoverride permissions
+	    unset_perms /etc/opendnssec/$conf
+
+	    for ext in '~' '%' .bak .ucf-new .ucf-old .ucf-dist;  do
+		rm -f /etc/opendnssec/$conf$ext
+	    done
+            # remove the configuration file itself
+	    rm -f /etc/opendnssec/$conf
+
+            # and finally clear it out from the ucf database
+	    if which ucf >/dev/null; then
+		ucf --purge /etc/opendnssec/$conf
+	    fi
+	    if which ucfr >/dev/null; then
+		ucfr --purge opendnssec /etc/opendnssec/$conf
+	    fi
+	done
+
+	deluser --quiet opendnssec > /dev/null || true
+
+    ;;
+
+    abort-install|abort-upgrade)
+	if dpkg --compare-versions "$2" le "1.3.6-1"; then
+	    for conf in zonefetch.xml; do
+		[ -f "/etc/opendnssec/$conf".dpkg-del ] && \
+		    mv -f "/etc/opendnssec/$conf".dpkg-del "/etc/opendnssec/$conf";
+	    done
+	fi
+    ;;
+
+    remove|upgrade|failed-upgrade|disappear)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

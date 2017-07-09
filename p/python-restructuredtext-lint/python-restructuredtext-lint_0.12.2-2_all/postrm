@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "disappear" ] ; then
+	update-alternatives --remove restructuredtext-lint /usr/bin/python2-restructuredtext-lint
+	update-alternatives --remove rst-lint /usr/bin/python2-rst-lint
+fi
+
+
+
+exit 0

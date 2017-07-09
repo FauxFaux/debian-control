@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Debconf config script for spip
+
+set -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+db_input medium spip/webserver || true
+db_go
+
+db_stop
+
+exit 0
+
+

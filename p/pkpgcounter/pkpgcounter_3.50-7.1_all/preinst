@@ -1,0 +1,9 @@
+#!/bin/sh
+# TODO: remove this file after releasing Squeeze
+set -e
+if [ "$1" = upgrade ] && dpkg --compare-versions "$2" lt 3.50-5
+then
+    pycentral pkgremove pkpgcounter
+fi
+
+

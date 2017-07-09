@@ -1,0 +1,39 @@
+#!/bin/sh
+set -e
+
+update-alternatives --install /usr/bin/kinput2 kinput2 /usr/bin/kinput2-canna-wnn 30 --slave /usr/share/man/man1/kinput2.1x.gz kinput2.1x.gz /usr/share/man/man1/kinput2-canna-wnn.1x.gz
+
+update-alternatives \
+        --install /etc/X11/xinit/xinput.d/ja_JP xinput-ja_JP \
+        /etc/X11/xinit/xinput.d/kinput2-canna-wnn_canna 60
+update-alternatives \
+        --install /etc/X11/xinit/xinput.d/ja_JP xinput-ja_JP \
+        /etc/X11/xinit/xinput.d/kinput2-canna-wnn_wnn 50
+
+. /usr/share/debconf/confmodule
+
+if [ -f /etc/X11/Xresources/kinput2-common ]; then
+    rm -f /etc/X11/Xresources/kinput2-common
+fi
+
+XRESOURCE=/etc/X11/Xresources/kinput2
+
+if [ ! -f $XRESOURCE ]; then cat << EOF > $XRESOURCE
+Kinput2*CcWnn.ccdef: ccdef.kinput2
+EOF
+fi
+
+db_get shared/kinput2/wnn/keybindings
+if [ "$RET" = "Egg" ]; then
+    POSTFIX=".egg"
+fi
+sed "s/\(Kinput2\*CcWnn\.ccdef:\).*/\1\ ccdef.kinput2$POSTFIX/g" < $XRESOURCE > $XRESOURCE.new
+
+mv -f $XRESOURCE.new $XRESOURCE
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

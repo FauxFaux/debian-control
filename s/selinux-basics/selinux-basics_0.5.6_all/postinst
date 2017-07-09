@@ -1,0 +1,42 @@
+#!/bin/sh -e
+
+case "$1" in
+    configure)
+    for n in /boot/grub/menu.lst /etc/default/grub ; do
+      if [ -f $n ]; then
+        if grep -q selinux=1 $n ; then
+          if ! grep -q security=selinux $n ; then
+            sed -e "s/selinux=1/selinux=1 security=selinux/" < $n > $n.new
+            mv $n.new $n
+            update-grub
+          fi
+        fi
+      fi
+    done
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+    echo "$0 called with unknown argument '$1'" >&2
+    exit 1
+    ;;
+esac
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p selinux-basics /usr/share/selinux-basics -V 3.2-
+fi
+
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/selinux-basics 0.5.3~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/udev/no-legacy-ptys.rules 0.5.1~ -- "$@"
+# End automatically added section
+
+
+exit 0

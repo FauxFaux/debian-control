@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# Remove a built bearoffs database, if any is present.
+
+set -e
+
+if [ "remove" = "$1" ] ; then
+    rm -f /var/lib/gnubg/gnubg_os0.bd
+    rm -f /var/lib/gnubg/gnubg_ts0.bd
+fi
+
+

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = install ] || [ "$1" = upgrade ]; then
+	if [ -L "/etc/udev/rules.d/025_lomoco.rules" ]; then
+		rm -f "/etc/udev/rules.d/025_lomoco.rules"
+	fi
+
+	if [ -e "/etc/udev/lomoco.rules" ]; then
+		if [ "`md5sum \"/etc/udev/lomoco.rules\" | sed -e \"s/ .*//\"`" = \
+		     "`dpkg-query -W -f='${Conffiles}' lomoco | sed -n -e \"\\\\' /etc/udev/lomoco.rules's/.* //p\"`" ]
+		then
+			rm -f "/etc/udev/lomoco.rules"
+		else
+			mv "/etc/udev/lomoco.rules" "/etc/udev/rules.d/40-lomoco.rules"
+		fi
+	fi
+fi
+
+

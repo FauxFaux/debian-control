@@ -1,0 +1,22 @@
+#!/bin/sh
+# postinst script for frotz
+
+set -e
+
+case "$1" in
+    configure)
+        update-alternatives --install /usr/games/zcode-interpreter zcode-interpreter /usr/games/frotz-launcher 50 --slave /usr/share/man/man6/zcode-interpreter.6.gz zcode-interpreter-man-gz /usr/share/man/man6/frotz.6.gz
+        ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 0
+        ;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+db_get openstreetmap-carto/fetch-data
+if [ "$RET" = "true" ]; then
+    cd /usr/share/openstreetmap-carto-common/ && ./get-shapefiles.sh
+    db_set openstreetmap-carto/fetch-data false
+elif [ -d /usr/share/openstreetmap-carto/data.old ] &&
+     [ ! -L /usr/share/openstreetmap-carto/data.old ] &&
+     [ ! -e /usr/share/openstreetmap-carto-common/data ] ; then
+    mv /usr/share/openstreetmap-carto/data.old /usr/share/openstreetmap-carto-common/data
+fi
+
+

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+for file in blue brightblue brightcyan brightgreen brightmagenta brightred brightwhite brightyellow cyan exclude green include magenta white yellow
+do
+	if [ -L /etc/logtool/$file ]
+	then
+		# fix for #858046
+		rm /etc/logtool/$file
+		if [ -f /etc/logtool/${file}~ ]
+		then
+			mv /etc/logtool/${file}~ /etc/logtool/${file}
+		fi
+	fi
+	dpkg-maintscript-helper mv_conffile /etc/logtool/$file /etc/logtool/${file}.d/$file 1.2.8-9~ -- "$@"
+done
+
+

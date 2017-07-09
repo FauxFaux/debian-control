@@ -1,0 +1,51 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+
+
+/usr/share/xfonts-traditional/checkfiles prerm "$@"
+
+case "$1" in
+
+remove)
+
+	echo 'Checking that "fixed" is not from xfonts-traditional...'
+
+	if grep '^fixed[	 ][	 ]*-trad-' \
+			/etc/X11/fonts/misc/xfonts-base.alias \
+			/usr/share/fonts/X11/misc/fonts.alias; then
+
+		RET=''
+		db_input critical xfonts-traditional/confirm-break-remove ||:
+		db_go ||:
+		db_get xfonts-traditional/confirm-break-remove ||:
+		if [ x$RET != xtrue ]; then
+			db_fset xfonts-traditional/confirm-break-remove \
+				seen false ||:
+			echo 'Aborting to avoid breaking "fixed".' >&2
+			exit 1
+		fi
+	fi
+
+	for d in /usr/share/fonts/X11 /usr/local/share/fonts/X11; do
+		if ! test -e "$d"; then continue; fi
+
+		find "$d" \
+			   -type f \
+			\( -name xfonts-traditional.log -o \
+			   -name xfonts-traditional.done -o \
+			   -name xfonts-traditional.done.new -o  \
+			   -name trad--\*.pcf.gz.new \) \
+			-print0 | xargs -0r rm --
+
+		find "$d" \
+			   -type f \
+			   -name trad--\*.pcf.gz \
+			-print0 | xargs -0r rm --
+	done
+
+	;;
+
+esac

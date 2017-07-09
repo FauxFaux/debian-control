@@ -1,0 +1,10 @@
+#!/bin/sh
+# post removal script for the Debian GNU/Linux rbootd package
+
+set -e
+
+if [ $1 = "purge" ]
+then
+  update-rc.d rbootd remove >/dev/null
+fi
+

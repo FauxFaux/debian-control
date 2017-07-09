@@ -1,0 +1,24 @@
+#! /bin/sh -e
+
+set -e
+
+case "$1" in
+    configure|abort-upgrade|abort-remove|abort-deconfigure)
+        update-alternatives --install /usr/lib/mx/plotgnu mx-plot \
+        	/usr/lib/mx/plotgnu.plotit 10
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-wxmpl 
+fi
+
+# End automatically added section
+

@@ -1,0 +1,82 @@
+#!/bin/sh -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# grab selected config values from the config file and store them
+# in debconf's database
+
+# first grab existing value (keep config file's existing value)
+CONFIG_FILE=/etc/ntlmaps/server.cfg
+
+if [ -f $CONFIG_FILE ]; then
+
+    LISTENPORT_ENTRY=LISTEN_PORT
+    db_metaget ntlmaps/listen_port default
+    LISTENPORTDEFAULT=$RET
+
+    PARENTPROXY_ENTRY=PARENT_PROXY
+    db_metaget ntlmaps/parent_proxy default
+    PARENTPROXYDEFAULT=$RET
+
+    PARENTPROXYPORT_ENTRY=PARENT_PROXY_PORT
+    db_metaget ntlmaps/parent_proxy_port default
+    PARENTPROXYPORTDEFAULT=$RET
+
+    NTDOMAIN_ENTRY=NT_DOMAIN
+    db_metaget ntlmaps/nt_domain default
+    NTDOMAINDEFAULT=$RET
+
+    NTUSER_ENTRY=USER
+    db_metaget ntlmaps/username default
+    NTUSERDEFAULT=$RET
+
+    NTPASSWD_ENTRY=PASSWORD
+
+    LISTENPORT=`grep -E "^[[:blank:]]*$LISTENPORT_ENTRY:" $CONFIG_FILE | \
+    sed -e "s/^[[:blank:]]*$LISTENPORT_ENTRY:[[:blank:]]*//"`
+    if [ "$LISTENPORT" = "$LISTENPORTDEFAULT" ]; then 
+    db_set ntlmaps/listen_port $LISTENPORT
+    fi
+
+    PARENTPROXY=`grep -E "^[[:blank:]]*$PARENTPROXY_ENTRY:" $CONFIG_FILE | \
+    sed -e "s/^[[:blank:]]*$PARENTPROXY_ENTRY:[[:blank:]]*//"`
+    if [ "$PARENTPROXY" = "$PARENTPROXYDEFAULT" ]; then 
+    db_set ntlmaps/parent_proxy $PARENTPROXY
+    fi
+    
+    PARENTPROXYPORT=`grep -E "^[[:blank:]]*$PARENTPROXYPORT_ENTRY:" $CONFIG_FILE | \
+    sed -e "s/^[[:blank:]]*$PARENTPROXYPORT_ENTRY:[[:blank:]]*//"`
+    if [ "$PARENTPROXYPORT" = "$PARENTPROXYPORTDEFAULT" ]; then 
+    db_set ntlmaps/parent_proxy_port $PARENTPROXYPORT
+    fi
+    
+    NTDOMAIN=`grep -E "^[[:blank:]]*$NTDOMAIN_ENTRY:" $CONFIG_FILE | \
+    sed -e "s/^[[:blank:]]*$NTDOMAIN_ENTRY:[[:blank:]]*//"`
+    if [ "$NTDOMAIN" = "$NTDOMAINDEFAULT" ]; then 
+    db_set ntlmaps/nt_domain $NTDOMAIN
+    fi
+    
+    NTUSER=`grep -E "^[[:blank:]]*$NTUSER_ENTRY:" $CONFIG_FILE | \
+    sed -e "s/^[[:blank:]]*$NTUSER_ENTRY:[[:blank:]]*//"`
+    if [ "$NTUSER" = "$NTUSERDEFAULT" ]; then 
+    db_set ntlmaps/username $NTUSER
+    fi
+    
+fi
+
+# to help security, let password be entered afresh each time
+# (and don't display the value left in the debconf database of
+# "password written to config file")
+db_set ntlmaps/password ""
+
+db_input high ntlmaps/listen_port || true
+db_input critical ntlmaps/parent_proxy || true
+db_input medium ntlmaps/parent_proxy_port || true
+db_input medium ntlmaps/nt_domain || true
+db_input critical ntlmaps/username || true
+db_input critical ntlmaps/password || true
+
+db_go || true
+db_stop || true
+

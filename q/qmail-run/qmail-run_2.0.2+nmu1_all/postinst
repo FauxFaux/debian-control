@@ -1,0 +1,62 @@
+#!/bin/sh
+set -e
+
+test "$1" = 'configure' || exit 0
+
+stopinst() {
+  cat <<-EOT >&2
+	
+	The hostname -f command returned: $1
+	
+	You must have a fully qualified domain name (fqdn) for your system
+	to install the qmail and qmail-run packages.
+	
+	Installation aborted.
+	
+	EOT
+  exit 1
+}
+	
+if test ! -f /etc/aliases; then
+  echo "creating default /etc/aliases..."
+  cp /usr/share/qmail-run/default/aliases /etc/aliases
+fi
+if test ! -r /etc/mailname; then
+  MAILNAME=`hostname -f`
+  echo "$MAILNAME" |grep -F . >/dev/null || stopinst "$MAILNAME"
+  echo "creating default /etc/mailname: \"$MAILNAME\"..."
+  echo "$MAILNAME" >/etc/mailname
+fi
+MAILNAME=`cat /etc/mailname`
+if test ! -f /var/lib/qmail/control/defaulthost; then
+  echo "writing \"$MAILNAME\" to control/defaulthost..."
+  echo "$MAILNAME" > /var/lib/qmail/control/defaulthost
+fi
+
+for i in root postmaster; do
+  test ! -r /var/lib/qmail/alias/.qmail-$i || continue
+  cat <<-EOT
+	Creating ~alias/.qmail-$i to have mail to $i forwarded to
+	  the user alias...
+	EOT
+  echo '&alias' >/var/lib/qmail/alias/.qmail-$i
+done
+for i in mailer-daemon abuse; do
+  test ! -r /var/lib/qmail/alias/.qmail-$i || continue
+  cat <<-EOT
+	Creating symbolic link ~alias/.qmail-$i -> .qmail-postmaster.
+	EOT
+  ln -sf .qmail-postmaster /var/lib/qmail/alias/.qmail-$i
+done
+
+qmailctl cdb
+newaliases
+
+chown -R qmaill:qmail /var/log/qmail
+chmod 2755 /var/log/qmail
+chmod 2755 /var/log/qmail/smtpd
+chmod 2755 /var/log/qmail/verify
+
+update-service --add /etc/qmail/qmail-send
+update-service --add /etc/qmail/qmail-verify
+update-service --add /etc/qmail/qmail-smtpd

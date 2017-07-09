@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+#
+# Skip, if we are not in "remove" or "purge" state
+# 
+if [ "$1" != "remove" ] && [ "$1" != "purge" ]; then
+    exit 0
+fi
+
+## Source debconf library
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+# Remove the site symlink
+if [ -e /usr/share/colplot/site/index.cgi ] ; then
+    rm -f /usr/share/colplot/site/index.cgi
+fi
+
+
+exit 0
+

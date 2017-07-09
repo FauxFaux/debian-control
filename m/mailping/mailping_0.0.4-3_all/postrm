@@ -1,0 +1,30 @@
+#! /bin/sh
+set -e
+
+remove_plugins() {
+    RELOAD=0
+    echo -n "Removing plugins.."
+    for plugin in success latency; do
+	LINK="/etc/munin/plugins/mailping-$plugin"
+	if [ -L "$LINK" ]; then
+	    TARGET="$(readlink "$LINK")"
+	    if [ "$TARGET" = "/usr/share/mailping/munin-plugins/mailping-$plugin" ]; then
+		RELOAD=1
+		echo -n " '$plugin'"
+		rm "$LINK"
+	    fi
+	fi
+    done
+    echo "."
+    if [ "$RELOAD" = "1" ]; then
+	invoke-rc.d munin-node force-reload
+    fi
+}
+
+if [ "$1" = "remove" ]; then
+    remove_plugins
+elif [ "$1" = "purge" ]; then
+    rm -rf /var/lib/mailping
+fi
+
+

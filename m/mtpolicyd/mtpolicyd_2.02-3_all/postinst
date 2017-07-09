@@ -1,0 +1,61 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+RUNDIR=/var/run/mtpolicyd
+USER=mtpolicyd
+GROUP=mtpolicyd
+
+pathfind() {
+  OLDIFS="$IFS"
+  IFS=:
+  for p in $PATH; do
+    if [ -x "$p/$*" ]; then
+      IFS="$OLDIFS"
+      return 0
+    fi
+  done
+  IFS="$OLDIFS"
+  return 1
+}
+
+# Create the run directory if it doesn't exist
+if [ ! -d "$RUNDIR" ]; then
+    install -d "$RUNDIR" || exit 2
+    if pathfind restorecon; then restorecon "$RUNDIR"
+    fi
+fi
+
+if [ "$1" = configure ]; then
+	lastversion="$2";
+	
+	getent group mtpolicyd >/dev/null 2>&1 || addgroup --system mtpolicyd
+	getent passwd mtpolicyd >/dev/null 2>&1 ||
+	adduser --system --home /var/run/mtpolicyd --no-create-home \
+                --disabled-password --ingroup mtpolicyd mtpolicyd
+fi
+
+test -d /var/run/mtpolicyd && \
+  chown mtpolicyd:mtpolicyd /var/run/mtpolicyd
+
+test -d /var/lib/mtpolicyd && \
+  chown mtpolicyd:mtpolicyd /var/lib/mtpolicyd
+if [ ! -e /var/lib/mtpolicyd/mtpolicyd.sqlite ] ; then
+  touch /var/lib/mtpolicyd/mtpolicyd.sqlite
+  chown mtpolicyd:mtpolicyd /var/lib/mtpolicyd/mtpolicyd.sqlite
+  chmod 640 /var/lib/mtpolicyd/mtpolicyd.sqlite
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/mtpolicyd" ]; then
+		update-rc.d mtpolicyd defaults >/dev/null
+		invoke-rc.d mtpolicyd start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

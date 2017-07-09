@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# /etc/cron.weekly/sendfile was marked as a conffile in  2.1b.20080616-2.1.
+# dpkg will warn about local changes even if there aren't any, so if it's
+# unmodified then we remove it. (Bug #606777)
+
+if [ -f /etc/cron.weekly/sendfile ]; then
+	MD5="`md5sum /etc/cron.weekly/sendfile | sed -e 's/ .*//'`"
+	if dpkg --compare-versions "$2" lt "2.1b.20080616-2.1" && [ "${MD5}" = "fe757d596df419aaec4495a9645be94d" ]; then
+		rm /etc/cron.weekly/sendfile
+	fi
+fi

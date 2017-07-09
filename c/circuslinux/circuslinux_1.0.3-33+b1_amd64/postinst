@@ -1,0 +1,38 @@
+#!/bin/bash
+
+set -e
+
+#export DEBCONF_DEBUG=developer
+
+# do not use debconf anymore only to display a message
+# Source debconf library anyhow to prevent a lintian warning
+#. /usr/share/debconf/confmodule
+
+#db_get circuslinux/shared_score_file
+
+#db_get circuslinux/merge_score_files
+#if [ "$RET" = "true" ]; then
+#    if [ ! -e /var/games/circuslinux/scorefile ]; then
+#	bash /usr/share/games/circuslinux/merge_scorefiles.sh
+#    else
+#      db_get circuslinux/score_file_exists
+#    fi
+#fi
+
+if [ ! -d /var/games/circuslinux ]; then
+  mkdir -p /var/games/circuslinux
+fi
+
+# scorefile belongs to games
+chown root:games /var/games/circuslinux
+chmod 2775 /var/games/circuslinux
+touch /var/games/circuslinux/scorefile
+chown root:games /var/games/circuslinux/scorefile
+chmod 2664 /var/games/circuslinux/scorefile
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    purge)
+    	# Remove network-config directory in /etc.
+	rm -rf /etc/network-config
+    ;;
+esac
+
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+
+
+exit 0

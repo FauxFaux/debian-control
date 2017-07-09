@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+DATADIR="/var/lib/how-can-i-help"
+
+# remove old data directory on upgrade
+if [ "$1" = "upgrade" ] && [ -d "$DATADIR" ]
+then
+  rm -rf "$DATADIR"
+fi
+
+

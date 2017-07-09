@@ -1,0 +1,46 @@
+#!/bin/sh
+# vim:ts=2:sw=2:et
+
+set -e
+
+case "$1" in
+  purge)
+    # Remove dangling links from sites-enabled.
+    for link in /etc/freeradius/sites-enabled/* \
+                /etc/freeradius/3.0/sites-enabled/*; do
+      if [ -L "$link" ] && [ ! -e "$link" ]; then
+        rm -f "$link"
+      fi
+    done
+
+    # Remove dangling links from mods-enabled.
+    for link in /etc/freeradius/mods-enabled/* \
+                /etc/freeradius/3.0/mods-enabled/*; do
+      if [ -L "$link" ] && [ ! -e "$link" ]; then
+        rm -f "$link"
+      fi
+    done
+
+    for file in /etc/freeradius/3.0/certs/server.pem \
+                /etc/freeradius/3.0/certs/server.key \
+                /etc/freeradius/3.0/certs/ca.pem \
+                /etc/freeradius/3.0/certs/random \
+                /etc/freeradius/3.0/certs/dh \
+                /etc/freeradius/certs/server.pem \
+                /etc/freeradius/certs/server.key \
+                /etc/freeradius/certs/ca.pem \
+                /etc/freeradius/certs/random \
+                /etc/freeradius/certs/dh; do
+      rm -f "$file"
+    done
+
+    # rmdir fails when called on a directory which does not exist
+    if [ -d /etc/freeradius ]; then
+      rmdir --ignore-fail-on-non-empty /etc/freeradius
+    fi
+    ;;
+esac
+
+
+
+exit 0

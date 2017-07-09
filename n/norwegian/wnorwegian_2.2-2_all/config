@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+
+use Debconf::Client::ConfModule q(:all);
+
+version ('2.0');
+
+my $class  = "wordlist";
+my $script = "/usr/share/dictionaries-common/dc-debconf-select.pl";
+
+if ( -e $script ){
+    require $script;
+    dc_debconf_select($class);
+}
+
+
+# Now the package local stuff
+
+# Selecting whichvariant
+if (-l "/etc/dictionaries-common/norsk") {
+     my $lang = readlink "/etc/dictionaries-common/norsk";
+     $lang =~ s|^.*/||;
+     set("wnorwegian/whichvariant", $lang);
+}
+
+if (get("wnorwegian/whichvariant")){
+    input ("medium","wnorwegian/whichvariant");
+    go();
+}

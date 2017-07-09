@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "remove" ] || [ "${1}" = "disappear" ]; then
+	update-alternatives --remove puppet-module-vcsrepo /usr/share/puppet/modules.available/puppetlabs-vcsrepo
+fi
+
+
+
+exit 0

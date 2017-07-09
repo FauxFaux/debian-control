@@ -1,0 +1,39 @@
+#!/bin/sh
+
+set -e
+
+SCOREDIR=/var/games/powermanga
+
+case "$1" in
+  configure)
+    if !  dpkg-statoverride --list /usr/games/powermanga > /dev/null; then
+        chown root:games /usr/games/powermanga
+        chmod 2755 /usr/games/powermanga
+    fi
+    if !  dpkg-statoverride --list $SCOREDIR > /dev/null; then
+    # Fix permissions
+        mkdir -p $SCOREDIR
+        chown root:games $SCOREDIR
+        chmod 2755 $SCOREDIR
+    fi
+    for x in hi-easy hi hi-hard; do
+      test -f $SCOREDIR/powermanga.$x || touch $SCOREDIR/powermanga.$x
+      chown root:games $SCOREDIR/powermanga.$x
+      chmod 0664 $SCOREDIR/powermanga.$x
+    done
+    ;;
+  abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+  *)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+

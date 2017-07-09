@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ -n "$2" ]; then
+    if dpkg --compare-versions $2 lt 0.55; then
+        db_input high openguides/check_old_upgrade || true
+        db_go
+    fi
+fi

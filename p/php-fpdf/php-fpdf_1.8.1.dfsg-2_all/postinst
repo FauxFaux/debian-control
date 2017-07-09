@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = configure ] && [ ! -L /usr/share/fpdf ] && dpkg --compare-versions "$2" lt-nl 1.53.dfsg-3; then
+	rm -rf /usr/share/fpdf
+	ln -s php/fpdf /usr/share/fpdf
+fi
+
+

@@ -1,0 +1,34 @@
+#!/bin/sh
+# postinst script for citadel-client
+
+set -e
+
+case "$1" in
+    configure)
+        if test -f /etc/citadel/citadel.rc; then
+	    if ! getent group citadel >/dev/null; then 
+		addgroup --system citadel
+	    fi
+
+	    if ! getent passwd citadel >/dev/null; then 
+		adduser --system --ingroup citadel --home /var/lib/citadel \
+			--gecos "Citadel system user" --shell /bin/sh \
+			--disabled-password --no-create-home --shell /bin/false citadel
+	    fi
+
+	    chown citadel:citadel /etc/citadel/citadel.rc
+	fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

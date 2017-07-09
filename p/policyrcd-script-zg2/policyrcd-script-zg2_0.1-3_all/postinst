@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+case "$1" in
+  configure)
+    update-alternatives \
+      --install /usr/sbin/policy-rc.d policy-rc.d /usr/sbin/zg-policy-rc.d 10 \
+      --slave /usr/share/man/man8/policy-rc.d.8.gz policy-rc.d.8.gz /usr/share/man/man8/zg-policy-rc.d.8.gz
+    ;;
+esac
+
+
+
+exit 0

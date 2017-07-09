@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" ]; then
+  rm -f /var/games/xbill.scores
+  rmdir /var/lib/games/xbill /var/games/xbill 2>/dev/null || true
+fi
+
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+
+

@@ -1,0 +1,51 @@
+#!/bin/bash
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+LEARNFILE=/var/games/phalanx.learn
+OLDLEARNFILE=/var/lib/games/phalanx.learn
+
+db_reset phalanx/learning_file_size
+
+if [ -e $LEARNFILE ] || [ -e $OLDLEARNFILE ]; then
+  if [ "$1" = reconfigure ]; then
+    db_input medium phalanx/learning_file_erase || true
+    db_go
+    db_get phalanx/learning_file_erase
+    if [ "$RET" != true ]; then
+      exit 0
+    fi
+  else				# configure
+    db_set phalanx/learning_file_erase false
+    exit 0
+  fi
+else				# no learn file exists
+  db_set phalanx/learning_file_erase true
+fi
+
+if [ "$1" = reconfigure ]; then
+  ANSWERED=''
+  while [ -z "$ANSWERED" ]; do
+    db_input low phalanx/learning_file_size || true
+    db_go
+    db_get phalanx/learning_file_size  
+    if [ -n "$RET" ]; then
+      ITEMS="$RET"
+      OLDTEST=""
+      TEST="$RET"
+      while [ "$TEST" != "$OLDTEST" ]; do
+	OLDTEST="$TEST"
+	TEST=${TEST##[0-9]}
+      done
+      if [ -z "$TEST" ]; then
+	if [ ${#ITEMS} -gt 6 ] || [ "$ITEMS" -lt 1 ]; then
+	  true #echo "Please use number in the range 1-999999."
+	else
+	  ANSWERED=yes
+	fi
+      fi
+    fi
+  done
+fi

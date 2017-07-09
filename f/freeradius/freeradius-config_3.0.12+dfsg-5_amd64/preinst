@@ -1,0 +1,27 @@
+#!/bin/sh
+# vim:ts=2:sw=2:et
+
+set -e
+
+case "$1" in
+  upgrade)
+    # Delete any symlinks/files which were created in postinst previously.
+    # These are not covered by conffile handling, so they would otherwise not
+    # be cleaned up.
+    for file in /etc/freeradius/certs/ca.pem \
+                /etc/freeradius/certs/server.key \
+                /etc/freeradius/certs/server.pem \
+                /etc/freeradius/sites-enabled/default \
+                /etc/freeradius/sites-enabled/inner-tunnel
+    do
+      if [ -h "$file" ]
+      then
+        rm -f "$file"
+      fi
+    done
+    ;;
+esac
+
+
+
+exit 0

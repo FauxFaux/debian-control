@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper rm_conffile \
+	/etc/bash_completion.d/rpmlint \
+	1.7-2 rpmlint -- "$@"
+
+

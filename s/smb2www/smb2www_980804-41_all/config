@@ -1,0 +1,88 @@
+#!/usr/bin/perl -w
+
+my $config_file     = '/etc/smb2www/smb2www.conf';
+my $master_browser  = '#MBROWSE#';
+my $language        = '#LANGUAGE#';
+my $enabled         = '#ENABLED#';
+my $need_rec        = 0;
+my @languages       = ( 'english', 
+                        'czech', 
+                        'dutch', 
+                        'finnish', 
+                        'french', 
+                        'polish', 
+                        'spanish', 
+                        'swedish',
+                        'vietnamese' );
+
+use Debconf::Client::ConfModule qw(:all);
+
+if (open CFG, "<$config_file")
+{
+    my $re_lang = join('|', @languages);
+    while (<CFG>)
+    {
+        $master_browser=$1 if /^masterbrowser\s*=\s*(\S+)/;
+        $enabled=$1 if /^enabled\s*=\s*(\S+)/;
+        $language= ucfirst $1 if /^language\s*=\s*($re_lang)\s*/o;
+        $need_rec=1 if m|^key\s*=\s*#KEY#|;
+    }
+    close CFG;
+}   
+
+version('2.0');
+
+# check if debconf supports seen flag
+capb('backup');
+
+# title('SMB2WWW Configuration');
+
+set('smb2www/master_browser', $master_browser) 
+            if ($master_browser ne '#MBROWSE#');
+
+set('smb2www/language', $language)
+            if ($language ne '#LANGUAGE#');
+
+set('smb2www/set_link', ("$enabled" eq "yes") ? 'true' : 'false');
+
+my $state = $next = 1;
+while ($state > 0 && $state < 3)
+{
+    if ($state == 1)
+    {
+        beginblock();
+        input('high', 'smb2www/security');
+        input('medium', 'smb2www/set_link');
+        endblock();
+    }
+    elsif ($state == 2)
+    {
+        beginblock();
+        input('medium', 'smb2www/master_browser');
+        input('medium', 'smb2www/language');
+        endblock();
+    }
+    else
+    {
+        die ('Unknown state!');
+    }
+
+    $next = (((go())[0]) == 30) ? -1 : +1;
+    $state += $next;
+}
+
+
+if (($need_rec)
+   or (get('smb2www/master_browser') ne $master_browser)
+   or (get('smb2www/language') ne $language)
+   or (get('smb2www/set_link') ne $enabled))
+{
+    set('smb2www/need_reconfigure', 'true');
+}
+else
+{
+    set('smb2www/need_reconfigure', 'false');
+}
+
+
+# vim: et ts=4

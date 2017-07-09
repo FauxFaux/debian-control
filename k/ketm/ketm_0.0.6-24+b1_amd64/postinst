@@ -1,0 +1,41 @@
+#! /bin/sh
+
+set -e
+
+DOCDIR="/usr/share/doc/ketm"
+
+scores=/var/games/ketm.scores
+
+# old versions of ketm (< 0.0.6-20) will remove high score file
+# on upgrade, so rescue it
+if $(dpkg --compare-versions "$2" lt-nl 0.0.6-20) ; then
+  [ -e $scores.tmp ] && mv $scores.tmp $scores
+fi
+
+# create high score file if not already there
+if [ ! -e $scores ] ; then
+  mkdir -p /var/games
+  touch $scores
+  chown games:games $scores
+  chmod 664 $scores
+fi
+
+chown root:games /usr/games/ketm
+chmod 2755 /usr/games/ketm
+
+if [ -d "$DOCDIR" -a ! -L "$DOCDIR" ]; then
+  rmdir --ignore-fail-on-non-empty "$DOCDIR"
+  if [ ! -d "$DOCDIR" ]; then
+    ln -s ketm-data "$DOCDIR"
+  fi
+fi
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+exit 0
+

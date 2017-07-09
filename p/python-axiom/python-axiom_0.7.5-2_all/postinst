@@ -1,0 +1,31 @@
+#! /bin/sh
+
+set -e
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-axiom 
+fi
+
+# End automatically added section
+
+
+rebuild_cache() {
+    for p in $(pyversions -i); do
+        $p -c 'from twisted.plugin import IPlugin, getPlugins; import axiom.plugins; list(getPlugins(IPlugin, axiom.plugins))' >/dev/null 2>&1 || true
+    done
+}
+
+case "$1" in
+    triggered)
+        if [ "$2" = "axiom-plugins-cache" ]; then
+            rebuild_cache
+        fi
+        ;;
+    configure)
+        rebuild_cache
+        ;;
+esac
+
+exit 0

@@ -1,0 +1,89 @@
+#!/bin/sh
+
+set -e
+
+updatelfc () {
+    [ -r /etc/default/lfcdaemon ] && . /etc/default/lfcdaemon
+    [ -z "$NSCONFIGFILE" ] && NSCONFIGFILE=/etc/NSCONFIG
+    [ -r $NSCONFIGFILE ] || return 0
+
+    nscfg=$(cat $NSCONFIGFILE)
+
+    cfg1=$(echo $nscfg | cut -f1 -d@)
+    cfg2=$(echo $nscfg | cut -f2 -d@ -s)
+
+    user=$(echo $cfg1 | cut -f1 -d/)
+    passwd=$(echo $cfg1 | cut -f2 -d/ -s)
+    host=$(echo $cfg2 | cut -f1 -d/)
+    db=$(echo $cfg2 | cut -f2 -d/ -s)
+
+    [ -z "$user" ] && return 0
+    [ -z "$passwd" ] && return 0
+    [ -z "$host" ] && return 0
+    [ -z "$db" ] && db=cns_db
+
+    export PGPASSWORD=$passwd
+    psql="psql -t -q -U $user $db"
+
+    vmajor=$($psql -c "select major from schema_version" 2>/dev/null)
+    vminor=$($psql -c "select minor from schema_version" 2>/dev/null)
+    vpatch=$($psql -c "select patch from schema_version" 2>/dev/null)
+
+    if [ -z "$vmajor" -o -z "$vminor" -o -z "$vpatch" ] ; then
+	return 0
+    fi
+
+    if [ $vmajor -eq 3 -a $vminor -eq 0 -a $vpatch -eq 0 ] ; then
+	$psql <<-EOF
+	ALTER TABLE Cns_groupinfo ADD banned INTEGER;
+	ALTER TABLE Cns_userinfo ADD user_ca VARCHAR(255);
+	ALTER TABLE Cns_userinfo ADD banned INTEGER;
+	CREATE INDEX linkname_idx ON Cns_symlinks(linkname);
+	UPDATE schema_version SET major = 3, minor = 1, patch = 0;
+	EOF
+    fi
+
+    return 0
+}
+
+getent group lfcmgr > /dev/null || \
+    addgroup --quiet --system lfcmgr
+
+getent passwd lfcmgr > /dev/null || \
+    adduser --quiet --system --home /var/lib/lfc --shell /bin/sh \
+    --ingroup lfcmgr --disabled-password --disabled-login \
+    --gecos "LFC manager" lfcmgr
+
+chown lfcmgr:lfcmgr /var/lib/lfc
+
+chown lfcmgr:lfcmgr /var/log/lfc
+
+updatelfc
+
+update-alternatives --install /usr/sbin/lfcdaemon lfcdaemon \
+          /usr/lib/lfc-postgres/lfcdaemon 10 \
+  --slave /usr/share/man/man8/lfcdaemon.8.gz lfcdaemon.8.gz \
+          /usr/lib/lfc-postgres/lfcdaemon.8.gz \
+  --slave /usr/share/lcgdm/NSCONFIG.templ NSCONFIG.templ \
+          /usr/lib/lfc-postgres/NSCONFIG.templ \
+  --slave /etc/init.d/lfcdaemon lfcdaemon.init \
+          /etc/lfc-postgres/lfcdaemon.init \
+  --slave /etc/default/lfcdaemon lfcdaemon.conf \
+          /etc/lfc-postgres/lfcdaemon.conf \
+  --slave /etc/logrotate.d/lfcdaemon lfcdaemon.logrotate \
+          /etc/lfc-postgres/lfcdaemon.logrotate \
+  --slave /usr/sbin/lfc-shutdown lfc-shutdown \
+          /usr/lib/lfc-postgres/lfc-shutdown \
+  --slave /usr/share/man/man8/lfc-shutdown.8.gz lfc-shutdown.8.gz \
+          /usr/lib/lfc-postgres/lfc-shutdown.8.gz
+
+if [ -x "/etc/init.d/lfcdaemon" ]; then
+	update-rc.d lfcdaemon defaults >/dev/null
+	if [ -x "`which invoke-rc.d 2>/dev/null`" ]; then
+		invoke-rc.d lfcdaemon start || exit $?
+	else
+		/etc/init.d/lfcdaemon start || exit $?
+	fi
+fi
+
+

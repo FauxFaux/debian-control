@@ -1,0 +1,21 @@
+#!/bin/sh
+# Avoid the lintian warning image-file-in-usr-lib.
+# Based on gnumail's script written by Hubert Chathi <uhoreg@debian.org>.
+# FIXME: Remove during the squeeze+1 cycle.
+
+set -e
+set -u
+
+RESDIR=/usr/lib/GNUstep/Applications/DictionaryReader.app/Resources
+
+case "$1" in
+    install | upgrade)
+	if [ -d $RESDIR ] && [ ! -L $RESDIR ]; then
+	    rm -rf $RESDIR
+	fi
+    ;;
+esac
+
+
+
+exit 0

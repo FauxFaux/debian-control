@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# This is the postinst script for the Debian GNU/Linux rcconf package
+# Written by Atsushi Kamoshida <kamop@debian.org>
+#
+
+set -e
+
+case "$1" in
+    configure)
+        if [ -f /usr/sbin/rcconf ] && [ ! -f /usr/bin/rcconf ]; then
+            ln -s /usr/sbin/rcconf /usr/bin/rcconf
+        fi
+        ;;
+    *)
+        ;;
+esac
+
+exit 0

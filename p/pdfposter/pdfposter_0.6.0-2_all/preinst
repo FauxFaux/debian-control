@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+# TODO: remove this file after releasing Squeeze
+
+if [ "$1" = upgrade ] && dpkg --compare-versions "$2" lt 0.4.4-2
+then
+        pycentral pkgremove pdfposter
+fi
+
+
+

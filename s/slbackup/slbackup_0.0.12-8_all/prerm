@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+# slbackup prerm script
+# Modified by Morten Werner Olsen <werner@skolelinux.no>
+
+if [ "$1" = "upgrade" -o "$1" = "remove" ]; then
+    if [ -L /usr/doc/slbackup ]; then
+	rm -f /usr/doc/slbackup
+    fi
+fi
+
+
+
+exit 0

@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    remove|upgrade|deconfigure)
+
+        TEMP=$(tempfile)
+        printf "Running /usr/share/jed/compile/jed-common..."
+        RET=0
+        /usr/share/jed/compile/jed-common remove >$TEMP 2>&1 || RET=$?
+        if test "$RET" -ne 0 ; then
+            echo "failed (see $TEMP)"
+            exit $RET
+        fi
+        echo "done"
+        rm -f $TEMP
+
+    ;;
+
+    failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

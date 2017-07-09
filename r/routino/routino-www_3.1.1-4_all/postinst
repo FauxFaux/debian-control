@@ -1,0 +1,83 @@
+#! /bin/sh -x
+# postinst script for routino-www
+#
+set -e
+
+if [ "$DPKG_DEBUG" = "developer" ]; then
+	set -x
+fi
+
+avahi_install() {
+	if [ -d /etc/avahi/services/ -a ! -e /etc/avahi/services/routino-www.service -a ! -L /etc/avahi/services/routino-www.service ] ; then
+		ln -s ../../routino-www/routino-www.service /etc/avahi/services/
+	fi
+}
+
+desktop_install() {
+	if [ -d /usr/share/applications/ -a ! -e /usr/share/applications/routino-www.desktop -a ! -L /usr/share/applications/routino-www.desktop ] ; then
+		ln -s /etc/routino-www/routino-www.desktop /usr/share/applications/
+	fi
+}
+
+apache_install() {
+	mkdir -p /etc/apache2/conf-available
+	ln -sf ../../routino-www/apache.conf /etc/apache2/conf-available/routino-www.conf
+	
+	COMMON_STATE=$(dpkg-query -f '${Status}' -W 'apache2.2-common' 2>/dev/null | awk '{print $3}' || true)
+
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		apache2_invoke enconf routino-www || exit $?
+	elif [ "$COMMON_STATE" = "installed" ] || [ "$COMMON_STATE" = "unpacked" ] ; then
+		[ -d /etc/apache2/conf.d/ ] && [ ! -L /etc/apache2/conf.d/routino-www.conf ] && ln -s ../conf-available/routino-www.conf /etc/apache2/conf.d/routino-www.conf
+	fi
+
+}
+
+case "$1" in
+	configure)
+		if [ ! -d "/var/lib/routino/data" ] ; then
+			mkdir -p /var/lib/routino/data
+		fi
+		if [ ! -d "/var/lib/routino/results" ] ; then
+			mkdir -p /var/lib/routino/results
+		fi
+		chown -R www-data:www-data /var/lib/routino/results
+
+		webservers="apache2"
+
+		for webserver in $webservers; do
+			webserver=${webserver%,}
+			if [ "$webserver" = "lighttpd" ] ; then
+				lighttpd_install
+			else
+				apache_install $1
+			fi
+			# Reload webserver in any case, configuration might have changed
+			# Redirection of 3 is needed because Debconf uses it and it might 
+			# be inherited by webserver. See bug #446324.
+					if [ -f /etc/init.d/$webserver ] ; then
+							if [ -x "`which invoke-rc.d 2>/dev/null`" ]; then
+									invoke-rc.d $webserver reload 3>/dev/null || true
+							else
+									/etc/init.d/$webserver reload 3>/dev/null || true
+							fi
+					fi
+		done
+
+		avahi_install
+		desktop_install
+	;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+	;;
+esac
+
+
+
+

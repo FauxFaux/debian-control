@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_title "ht://Dig"
+
+if [ ! -d /etc/default ]; then
+	mkdir /etc/default
+fi
+
+if [ -r /etc/default/htdig ]; then
+	RUN=$(awk '/^run_rundig/ {print $3}' /etc/default/htdig)
+	if [ "$RUN"="true" ] || [ "$RUN"="false" ]; then
+		db_set htdig/run-rundig $RUN
+	fi
+fi
+
+# ask about rundig
+db_input medium htdig/run-rundig || true
+db_go
+
+# ask to generate ht://Dig databases now
+db_input medium htdig/generate-databases || true
+db_go
+
+db_get htdig/run-rundig
+RUN_NOTIFY=$RET
+
+if [ "$RUN_NOTIFY"="true" ] || [ "$RUN_NOTIFY"="false" ]; then
+	echo "# Whether to run the rundig script daily" > /etc/default/htdig
+	echo "run_rundig = $RUN_NOTIFY" >> /etc/default/htdig
+fi
+
+exit 0

@@ -1,0 +1,16 @@
+#! /bin/sh -e
+
+del_override() {
+    if dpkg-statoverride --list $4 >/dev/null; then
+	dpkg-statoverride --force --remove $4
+    fi
+}
+
+if [ "$1" = "purge" ]; then
+    del_override courier courier 0700 /var/lib/courier/faxtmp
+    del_override root courier 0640 /etc/courier/faxrc
+fi
+
+
+
+exit 0

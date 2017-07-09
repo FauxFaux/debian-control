@@ -1,0 +1,75 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+# This conf script is capable of backing up
+db_capb backup
+
+# our questions + initial state + count
+q1=web_root
+q2=web_host
+q3=web_ip
+q4=web_port
+q5=web_virtual
+q6=web_timeout
+q7=web_conn
+q8=web_index
+q9=web_dircache
+q10=web_accesslog
+q11=web_syslog
+q12=web_user
+q13=web_group
+q14=web_cgipath
+q15=web_extras
+
+STATE=1
+LEAVE=16
+
+# read current values from config file (unless webfsd/pending == "yes",
+# which means that postinst hasn't updated the config file yet).
+db_get "webfsd/pending"
+if test "$RET" != "yes" -a -f /etc/webfsd.conf; then
+	. /etc/webfsd.conf
+	for question in $q1 $q2 $q3 $q4 $q5 $q6 $q7 $q8 $q9 $q10 \
+		            $q11 $q12 $q13 $q14 $q15; do
+		eval "value=\"\$$question\""
+		db_set "webfsd/$question" "$value"
+	done
+fi
+
+# was added later -- make sure it gets a sane default
+db_get "webfsd/web_virtual"
+if test "$RET" = ""; then
+	db_set "webfsd/web_virtual" "false"
+fi
+
+# let the user edit stuff
+while [ "$STATE" != 0 -a "$STATE" != "$LEAVE" ]; do
+	eval "question=\$q$STATE"
+	db_input medium "webfsd/$question" || true
+	if db_go; then
+		STATE=$(($STATE + 1))
+	else
+		STATE=$(($STATE - 1))
+	fi
+	if [ "$STATE" = "11" ]; then
+		# After webfsd/web_accesslog, decide on buffering.
+		db_get "webfsd/web_accesslog" || true
+		if [ "$RET" != "" ]; then
+			db_input medium "webfsd/web_logbuffering" || true
+			db_go || true
+		fi
+	fi
+	if [ "$STATE" != "1" ]; then
+		db_get "webfsd/web_root"
+		if [ "$RET" = "" ]; then
+			break
+		fi
+	fi
+done
+
+db_set "webfsd/pending" "yes"

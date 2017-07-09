@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+
+        for keyring in ubuntu-archive-keyring ubuntu-archive-removed-keys
+        do
+          rm /etc/apt/trusted.gpg.d/$keyring.gpg || true
+        done
+    ;;
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

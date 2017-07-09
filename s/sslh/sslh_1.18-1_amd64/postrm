@@ -1,0 +1,85 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+	remove)
+		# if sslh launched by inetd, reload it to disable sslh
+		db_get sslh/inetd_or_standalone
+
+		if [ "$RET" = "from inetd" ]
+		then
+			# Disable inetd mode to avoid errors and SIGHUP inetd
+			if [ -x "$(which update-inetd)" ]
+			then
+				echo "Disabling sslh inetd service"
+				update-inetd --disable https
+			fi
+		fi
+	;;
+
+	purge)
+		# Remove inetd.conf launcher
+		if [ -x "$(which update-inetd)" ]
+		then
+			echo "Removing sslh inetd service"
+			update-inetd --remove https
+		fi
+
+		# delete sslh daemon user
+		# test if exists just to don't generate error
+		if getent passwd sslh > /dev/null
+		then
+			if [ -x "$(which deluser)" ]
+			then
+				echo "Deleting sslh user"
+				deluser --quiet sslh > /dev/null || true
+			fi
+		fi
+	;;
+
+	upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+	;;
+
+	*)
+		echo "postrm called with unknown argument \`$1'" >&2
+		exit 1
+	;;
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d sslh remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask sslh.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge sslh.service >/dev/null
+		deb-systemd-helper unmask sslh.service >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

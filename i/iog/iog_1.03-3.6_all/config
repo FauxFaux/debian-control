@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+. /usr/share/debconf/confmodule
+
+OLDLOCATION=/var/www/iog
+NEWLOCATION=/var/lib/iog
+
+LIBRARY=/usr/share/iog
+
+# Detect an old page depository and activate the desired location.
+
+if [ -f $OLDLOCATION/uptimes.pag ]
+then
+	db_input high iog/migrate || true
+	db_go || true
+	# Insert an answer even if 'db_get' fails.
+	db_get iog/migrate || db_set iog/migrate false || true
+fi
+

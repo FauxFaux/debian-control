@@ -1,0 +1,63 @@
+#!/bin/sh
+#
+# This is the postinst script for the Debian GNU/Linux apmd package
+#
+# Written by Dirk Eddelbuettel <edd@debian.org>
+# Debconf changes added by Chris Hanson <cph@debian.org>
+
+set -e 
+umask 022
+
+# Remove a no-longer used conffile
+rm_conffile()
+{
+    CONFFILE="$1"
+
+    if [ -e "$CONFFILE".dpkg-obsolete ]; then
+        echo "Removing obsolete conffile $CONFFILE"
+        rm -f "$CONFFILE".dpkg-obsolete
+    fi
+}
+
+case "${1}" in
+(configure)
+    . /usr/share/debconf/confmodule || exit 0
+
+    db_stop
+
+    # Upgrade from intrepid
+    if dpkg --compare-versions "$2" lt "3.2.2-12ubuntu2"; then
+	rm_conffile /etc/apm/scripts.d/hwclock
+	rm -f /etc/apm/suspend.d/99hwclock
+	rm -f /etc/apm/resume.d/00hwclock
+    fi
+
+    # Remove shutdown and reboot links; this init script does not need them.
+    if dpkg --compare-versions "$2" lt "3.2.2-7ubuntu1"; then
+	rm -f /etc/rc0.d/K20apmd /etc/rc6.d/K20apmd
+    fi
+
+    # Update init scripts links
+    if dpkg --compare-versions "$2" lt "3.2.2-12ubuntu3"; then
+	update-rc.d -f apmd remove
+    fi
+    ;;
+(abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+(*)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/apmd" ]; then
+		update-rc.d apmd start 10 2 3 4 5 . stop 21 1 . >/dev/null
+		invoke-rc.d apmd start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

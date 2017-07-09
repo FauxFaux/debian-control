@@ -1,0 +1,6 @@
+#! /bin/sh
+
+set -e
+
+test -x /usr/bin/update-menus && /usr/bin/update-menus || /bin/true
+test -x /usr/bin/update-desktop-database && update-desktop-database -q || /bin/true

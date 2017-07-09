@@ -1,0 +1,43 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+[ -f /usr/share/debconf/confmodule ] && . /usr/share/debconf/confmodule
+
+# Configure database with old or new values using dbconfig-common
+if [ -f /usr/share/dbconfig-common/dpkg/config.pgsql ]; then
+
+    # We support pgsql
+    dbc_dbtypes="pgsql"
+    dbc_dbuser="www-data"
+    dbc_dbname='openacs'
+    dbc_first_version="5.7.0+dfsg-1"
+
+    # Source dbconfig-common stuff
+    . /usr/share/dbconfig-common/dpkg/config.pgsql
+
+    # Old config previous or equal to 5.7.0+dfsg-1 (not managed by dbconfig-common)
+    old_config="/etc/openacs/config.tcl.old_version"
+    import_config=$(mktemp)
+
+    if [ -f $old_config ]; then
+
+        # dbc_load_include does not parse tcl files, so we will create a sh temp file 
+        # with values from the config.tcl file
+        sed -n '/## Debconf changes/,/## End Debconf/p;' $old_config | sed 's/^[ \t]*set\ //;/^\#/d;s/db_host/dbserver=/;s/db_password/dbpass=/;s/db_port/dbport=/;s/db_user/dbuser=/;s/=[ \t]*/=/' > $import_config
+        rm -f $old_config
+
+         # Feed dbconfig-common with the values
+        dbc_load_include="sh:$import_config"
+    fi
+
+    dbc_go openacs $@ || echo 'Automatic configuration using dbconfig-common failed!'
+
+    # Delete temporal file
+    rm -f $import_config
+fi
+
+db_stop
+
+exit 0

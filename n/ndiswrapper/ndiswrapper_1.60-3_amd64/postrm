@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "purge" ]; then
+    if [ -e /etc/ndiswrapper ]; then
+        rm -r /etc/ndiswrapper
+    fi
+    if [ -e /etc/modprobe.d/ndiswrapper.conf ]; then
+        rm /etc/modprobe.d/ndiswrapper.conf
+    fi
+fi
+
+

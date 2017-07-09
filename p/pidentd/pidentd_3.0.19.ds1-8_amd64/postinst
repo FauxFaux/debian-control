@@ -1,0 +1,57 @@
+#!/bin/sh
+set -e
+
+if ! id -u identd >/dev/null 2>&1; then
+	adduser --quiet --system --home /var/run/identd identd
+fi
+# It is possible that we already have an identd user but no /var/run/pidentd.
+mkdir -p /var/run/identd
+chown identd:nogroup /var/run/identd
+chmod 755 /var/run/identd
+
+enable_if_alone() {
+	if ! grep -q ^ident /etc/inetd.conf; then
+		update-inetd --pattern identd --enable ident
+	fi
+}
+
+case "$1" in
+abort-upgrade | abort-deconfigure | abort-remove)
+	enable_if_alone
+	;;
+configure)
+	if [ ! -f /etc/identd.key ]; then
+		ikeygen
+	fi
+	chown identd /etc/identd.key
+	if grep -q identd /etc/inetd.conf; then
+		enable_if_alone
+	else
+		idententry="ident		stream	tcp	wait	identd	/usr/sbin/identd	identd"
+		update-inetd --group INFO --add "$idententry"
+	fi
+	;;
+*)
+	printf "$0: incorrect arguments: $*\n" >&2
+	exit 1
+	;;
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/pidentd.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/pidentd" ]; then
+		update-rc.d pidentd start 20 S . >/dev/null
+		invoke-rc.d pidentd start || exit $?
+	fi
+fi
+# End automatically added section
+

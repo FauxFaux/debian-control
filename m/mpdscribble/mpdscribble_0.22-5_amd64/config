@@ -1,0 +1,30 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+MPD_SYSTEMWIDE=NOTSET
+if [ -f /etc/default/mpdscribble ] ; then
+    . /etc/default/mpdscribble
+fi
+
+if [ ! "x$MPD_SYSTEMWIDE" = "xNOTSET" ] ; then
+    if [ "x$MPD_SYSTEMWIDE" = x1 ]; then
+        db_set mpdscribble/systemwide true
+    else
+        db_set mpdscribble/systemwide false
+    fi
+fi
+
+db_input medium mpdscribble/systemwide || true
+db_go
+
+db_get mpdscribble/systemwide 
+
+if [ "$RET" = "true" ] ; then
+    db_input medium mpdscribble/user || true
+    db_input medium mpdscribble/password || true
+    db_go
+fi

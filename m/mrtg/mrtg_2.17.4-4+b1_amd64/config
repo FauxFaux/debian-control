@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+# debconf
+
+. /usr/share/debconf/confmodule || exit
+
+
+db_input 'high' mrtg/conf_mods || true
+db_go
+
+
+#db_get mrtg/conf_mods 
+#if [ "$RET" = "true" ]; then
+#	chown root.root /etc/mrtg.cfg
+#	chmod 600 /etc/mrtg.cfg
+#fi
+

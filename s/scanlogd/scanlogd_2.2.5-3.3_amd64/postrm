@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# orginal by installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d scanlogd remove >/dev/null
+	userdel scanlogd || true
+	rm -rf /var/run/scanlogd
+fi
+
+

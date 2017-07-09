@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+if [ "${1}" = "remove" ]; then
+	# Prepared Chroot models may have made extra changes to the
+	# system. We need to properly run 'unprepare' to all of them
+	# to not leave artefacts (i.e., /etc/schroot/chroot.d/*.conf
+	# plus backend-related cruft like LVM setups).
+	# (We cannot do it in postrm/purge as we need mini-buildd still installed for that.)
+	su mini-buildd -c "/usr/sbin/mini-buildd --foreground --verbose --remove-system-artifacts" || true
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/bash_completion.d/mini-buildd.bash-completion -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/mini-buildd" ] && [ "$1" = remove ]; then
+	invoke-rc.d mini-buildd stop || exit $?
+fi
+# End automatically added section
+
+
+exit 0

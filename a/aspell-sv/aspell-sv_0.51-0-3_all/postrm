@@ -1,0 +1,30 @@
+#!/bin/sh -e
+
+case "$1" in
+    remove|disappear)
+        rm -f /var/lib/aspell/sv.compat
+        # remove generated files since update-dictcommon-aspell does not
+        rm -f /var/lib/aspell/sv.rws
+    ;;
+
+    purge|upgrade|failed-upgrade|abort-install|abort-upgrade)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by installdeb-aspell
+rmscript="update-dictcommon-aspell"
+
+case "$1" in abort-install|remove)
+	if which $rmscript > /dev/null 2>&1; then
+	    $rmscript 
+	else
+	    echo "Warning: $rmscript not present or executable." >&2
+	fi
+esac
+# End automatically added section
+

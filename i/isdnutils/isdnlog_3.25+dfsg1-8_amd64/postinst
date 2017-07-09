@@ -1,0 +1,120 @@
+#! /bin/sh
+# postinst script for isdnlog
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+dowhat="$1"
+
+case "$dowhat" in
+    configure)
+	db_get isdnlog/countryprefix || true; countryprefix=$RET
+	db_get isdnlog/countrycode   || true; countrycode=$RET
+	db_get isdnlog/areaprefix    || true; areaprefix=$RET
+	db_get isdnlog/areacode      || true; areacode=$RET
+	db_get isdnlog/isdnrate-daemon || true; isdnrate_daemon=$RET
+	db_get isdnlog/country       || true; country=$RET
+	if [ "$country" = other ]; then
+            if db_get isdnlog/country_manual; then
+                country=$RET
+            else
+                country=DE # cant happen
+            fi
+	fi
+	country=`echo $country | tr '[A-Z]' '[a-z]'`
+        if [ "$country" = other ]; then
+            country=default
+        fi
+        defdir=/usr/share/isdn/default
+        conffile=/etc/isdn/isdn.conf
+        tempfile=$(mktemp -t isdnutils.XXXXXX)
+        trap 'rm -f "$tempfile"' EXIT
+        chmod uog+r "$tempfile"
+
+	for cfg in isdn.conf rate.conf; do
+		# the sed call further down only affects isdn.conf
+		if [ -e $defdir/$cfg.$country ]; then
+		    cat $defdir/$cfg.$country
+		elif [ -e $defdir/$cfg.$country.gz ]; then
+		    gzip -dc $defdir/$cfg.$country.gz
+		elif [ -e $defdir/$cfg.default ]; then
+		    cat $defdir/$cfg.default
+		elif [ -e $defdir/$cfg.default.gz ]; then
+		    gzip -dc $defdir/$cfg.default.gz
+		elif [ -e $defdir/$cfg ]; then
+		    cat $defdir/$cfg
+		elif [ -e $defdir/$cfg.gz ]; then
+		    gzip -dc $defdir/$cfg.gz
+                else
+		    echo "Warning: no suitable $cfg file found, proceeding with an empty one." >&2
+		fi | sed \
+		 -e "/^[[:space:]]*COUNTRYPREFIX[[:space:]]*=/  c  COUNTRYPREFIX = $countryprefix" \
+		 -e "/^[[:space:]]*COUNTRYCODE[[:space:]]*=/    c  COUNTRYCODE   = $countrycode" \
+		 -e "/^[[:space:]]*AREAPREFIX[[:space:]]*=/     c  AREAPREFIX    = $areaprefix" \
+		 -e "/^[[:space:]]*AREACODE[[:space:]]*=/       c  AREACODE      = $areacode" \
+		  > "$tempfile"
+		ucf --three-way --debconf-ok "$tempfile" /etc/isdn/$cfg
+		ucfr isdnlog /etc/isdn/$cfg
+	done
+
+	sed '/REMOVE the next line/,/REMOVE the above/d' < /usr/share/isdn/default/isdnlog.DEVICE > "$tempfile"
+	ucf --three-way --debconf-ok "$tempfile" /etc/isdn/isdnlog.isdnctrl0
+	ucfr isdnlog /etc/isdn/isdnlog.isdnctrl0
+	if [ -x /etc/init.d/isdnutils-base ]; then
+	  invoke-rc.d isdnutils-base start isdnlog
+	fi
+
+        conffile=/etc/isdn/isdnrate.conf
+        daemon=false
+        socket=/var/run/isdnrate/socket
+        if [ -s $conffile ]; then
+            set +e
+            . $conffile
+            set -e
+        else
+            md5sum=dummyvalue
+            ( echo "# isdnrate configuration"
+              echo ""
+              echo "# This file is sourced into a Bourne shell."
+              echo ""
+            ) > "$tempfile"
+            ucf --three-way --debconf-ok "$tempfile" $conffile
+            ucfr isdnlog $conffile
+        fi
+        if [ "x$isdnrate_daemon" = "xyes" ]; then
+            daemon=true
+        else
+            daemon=false
+        fi
+        cp -f $conffile "$tempfile"
+        for var in socket daemon; do
+          grep -e "^[[:space:]]*$var[[:space:]]*=" "$tempfile" || echo "$var=defaults" >> "$tempfile"
+        done >/dev/null 2>&1
+        sed -i \
+          -e "/^[[:space:]]*daemon[[:space:]]*=/  c  daemon=$daemon" \
+          -e "/^[[:space:]]*socket[[:space:]]*=/  c  socket=$socket" \
+          "$tempfile"
+	ucf --three-way --debconf-ok "$tempfile" $conffile
+	ucfr isdnlog $conffile
+	if [ -x /etc/init.d/isdnutils-base ]; then
+		invoke-rc.d isdnutils-base reload isdnlog
+	fi
+	rm -f "$tempfile"
+        ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$dowhat'" >&2
+        exit 0
+    ;;
+esac
+
+db_stop
+
+
+
+exit 0

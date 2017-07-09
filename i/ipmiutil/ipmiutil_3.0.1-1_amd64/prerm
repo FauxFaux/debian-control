@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/init.d/ipmi_port 3.0.0-3\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init.d/ipmiutil_asy 3.0.0-3\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init.d/ipmiutil_evt 3.0.0-3\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init.d/ipmiutil_wdt 3.0.0-3\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop ipmi_port.service ipmiutil_asy.service ipmiutil_evt.service ipmiutil_wdt.service >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop ipmi_port.service ipmiutil_asy.service ipmiutil_evt.service ipmiutil_wdt.service >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop ipmi_port.service ipmiutil_asy.service ipmiutil_evt.service ipmiutil_wdt.service >/dev/null
+fi
+# End automatically added section

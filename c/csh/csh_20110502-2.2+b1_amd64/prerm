@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = remove ]; then
+	update-alternatives --remove csh /bin/bsd-csh
+
+	if which remove-shell >/dev/null 2>&1; then
+		remove-shell /bin/csh
+	fi
+fi
+
+

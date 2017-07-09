@@ -1,0 +1,40 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_metainit
+
+# We assume that any previous installed /etc/init.d/infon-server
+# and /etc/default/infon-server files that are conffiles are not wanted any more.
+
+# Code taken from http://wiki.debian.org/DpkgConffileHandling
+
+rm_conffile() {
+    PKGNAME="$1"
+    CONFFILE="$2"
+
+    old_md5sum=`dpkg-query -W -f='${Conffiles}' $PKGNAME | awk '$3 == "obsolete" && $1=="'"$CONFFILE"'" {print $2}'`
+    if [ -n "$old_md5sum" -a -e "$CONFFILE" ]; then
+        md5sum="`md5sum \"$CONFFILE\" | sed -e \"s/ .*//\"`"
+        if [ "$md5sum" != "$old_md5sum" ]; then
+            echo "Obsolete conffile $CONFFILE has been modified by you."
+            echo "Saving as $CONFFILE.dpkg-bak ..."
+            mv -f "$CONFFILE" "$CONFFILE".dpkg-bak
+        else
+            echo "Removing obsolete conffile $CONFFILE ..."
+            rm -f "$CONFFILE"
+        fi
+    fi
+}
+
+rm_conffile infon-server "/etc/default/infon-server"
+rm_conffile infon-server "/etc/init.d/infon-server"
+
+update-metainit  >/dev/null || exit $?
+
+if [ -x "/etc/init.d/infon-server" ]; then
+	if [ -x "`which invoke-rc.d 2>/dev/null`" ]; then
+		invoke-rc.d infon-server start || exit $?
+	else
+		/etc/init.d/infon-server start || exit $?
+	fi
+fi
+# End automatically added section

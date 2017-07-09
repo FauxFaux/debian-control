@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ -f /usr/share/dbconfig-common/dpkg/config ]; then
+        dbc_dbtypes="mysql"
+        dbc_authmethod_user="password"
+		dbc_first_version="1.2-1"
+        . /usr/share/dbconfig-common/dpkg/config
+        dbc_go pnopaste $@
+fi
+
+
+
+exit 0

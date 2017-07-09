@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = purge ]; then
+    for dir in /var/cache/shibboleth /var/log/shibboleth; do
+        if dpkg-statoverride --list "$dir" >/dev/null 2>&1; then
+            dpkg-statoverride --remove "$dir"
+        fi
+        rm -rf "$dir"
+    done
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d shibd remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask shibd.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge shibd.service >/dev/null
+		deb-systemd-helper unmask shibd.service >/dev/null
+	fi
+fi
+# End automatically added section
+

@@ -1,0 +1,10 @@
+#! /bin/sh
+
+set -e
+
+
+
+update-alternatives \
+ --install /usr/games/zcode-interpreter zcode-interpreter /usr/games/xzip 0 \
+ --slave /usr/share/man/man6/zcode-interpreter.6.gz zcode-interpreter-man-gz \
+            /usr/share/man/man6/xzip.6.gz

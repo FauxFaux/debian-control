@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = upgrade ]; then
+	if [ -e "/etc/analog.conf" ] && [ ! -e "/etc/analog.cfg" ]; then
+		mv -f /etc/analog.conf /etc/analog.cfg
+	fi
+fi

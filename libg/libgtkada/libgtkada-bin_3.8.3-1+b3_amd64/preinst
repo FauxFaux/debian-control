@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+# See https://wiki.debian.org/MissingCopyrightFile.
+# This file is needed until 2.24.1-12 reaches oldstable.
+if [ -h /usr/share/doc/libgtkada-bin ]; then
+  rm -f /usr/share/doc/libgtkada-bin
+fi
+
+

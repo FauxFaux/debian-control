@@ -1,0 +1,19 @@
+#! /bin/sh 
+set -e
+
+if [ ! "$2" = "" ]; then
+  if [ "$1" = "configure" ]; then
+    if `dpkg --compare-versions $2 lt 2.30`; then
+      for j in 0 1 2 3 4 5 6; do
+        if [ -e /var/log/calamaris/daily.$j ]; then
+	  mv /var/log/calamaris/daily.$j /var/log/calamaris/forweekly.$j
+	fi
+      done
+    fi
+  fi
+fi
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+

@@ -1,0 +1,26 @@
+#! /usr/bin/perl
+# post install script for the Debian GNU/Linux cfingerd package
+
+require DebianNet;
+
+open(INETD, "/etc/inetd.conf");
+    @inetd=<INETD>;
+close(INETD);
+
+if (grep(/.*cfingerd.*/, @inetd)) {
+    $DebianNet::sep = "## "; DebianNet::disable_service("finger", "in.fingerd");
+    $DebianNet::sep = "#<off># "; DebianNet::enable_service("finger", "cfingerd");
+} else {
+    $DebianNet::sep = "## "; DebianNet::disable_service("finger", "in.fingerd");
+    $fingentry = 'finger		stream	tcp	nowait	root	/usr/sbin/tcpd	/usr/sbin/cfingerd';
+    $DebianNet::sep = "#<off># "; DebianNet::add_service($fingentry, "INFO");
+}
+undef(@inetd);
+
+foreach $f ("uptime","ping") {
+    if (-f "/etc/cfingerd/saved.$f") {
+	system "mv -f /etc/cfingerd/saved.$f /etc/cfingerd/scripts/$f";
+    }
+}
+
+system "/etc/init.d/netbase reload";

@@ -1,0 +1,11 @@
+#! /bin/sh
+set -e
+
+# workaround the lack of good solution to migrate a directory to a
+# compat symlink
+if [ -d /usr/share/sgml/docbook/custom/ebnf ]
+then
+    rm -rf /usr/share/sgml/docbook/custom/ebnf
+fi
+
+

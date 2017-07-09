@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+##
+
+# Create mason data directory
+
+case "$1" in
+configure)
+
+webuser=www-data
+webgroup=www-data
+
+if [ "`getent passwd $webuser`" -a "`getent group $webgroup `" ]; then
+    chown $webuser:$webgroup /var/cache/mason/cache /var/cache/mason/obj
+    chmod 0700 /var/cache/mason/cache /var/cache/mason/obj
+fi
+
+;;
+esac
+
+exit 0

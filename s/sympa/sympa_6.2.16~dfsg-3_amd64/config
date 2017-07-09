@@ -1,0 +1,137 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+db_version 2.0
+
+sympa_conf_get() {
+    key="${1}"
+    if [ -e "${conf}" ]; then
+        sed -r -n 's/^\s*db_user\s+(.*)$/\1/p' "${conf}"
+    fi
+}
+
+if [ -f "/etc/sympa/sympa/sympa.conf" ] || [ ! -f "/etc/sympa/sympa.conf" ]; then
+    conf=/etc/sympa/sympa/sympa.conf
+else
+    conf=/etc/sympa/sympa.conf
+fi
+
+# Default values
+default_lang="en"
+domain="$(head -n 1 /etc/mailname || hostname -fqdn || echo localhost)"
+listmaster="listmaster@${domain}"
+wwsympa_url="http://${domain}/wws"
+use_fast_cgi="true"
+
+
+# Get current config settings
+if [ -e "${conf}" ]; then
+    db_set sympa/language "$(sympa_conf_get 'lang')"
+    db_set sympa/hostname "$(sympa_conf_get 'domain')"
+    db_set sympa/listmaster "$(sympa_conf_get 'listmaster')"
+    db_set wwsympa/wwsympa_url "$(sympa_conf_get 'wwsympa_url')"
+    case "$(sympa_conf_get 'use_fast_cgi')" in
+        0)
+            db_set wwsympa/fastcgi "false"
+            ;;
+        1)
+            db_set wwsympa/fastcgi "true"
+            ;;
+        *)
+            ;;
+    esac
+else
+    db_set sympa/language "${default_lang}"
+    db_set sympa/hostname "${domain}"
+    db_set sympa/listmaster "${listmaster}"
+    db_set wwsympa/wwsympa_url "${wwsympa_url}"
+    db_set wwsympa/fastcgi "${use_fast_cgi}"
+fi
+
+# Ask for language
+locales="$(locale -a)"
+possible_langs="ar bg br ca cs de el en en_US es et eu fi fr gl hu id it ja ko la ml nb_NO nl oc pl pt_BR pt ro ru sv tr vi zh_CN zh_TW"
+supported_langs="${default_lang}"
+for lang in ${possible_langs} ; do
+    if echo "${locales}" | grep -q "^${lang}" ; then
+        supported_langs="${supported_langs}, ${lang}"
+    fi
+done
+if [ "${supported_langs}" != "en" ]; then
+    db_subst sympa/language supported_langs ${supported_langs}
+    db_input medium sympa/language || [ $? -eq 30 ]
+    db_go
+else
+    db_set sympa/language "${default_lang}"
+fi
+
+# Ask for hostname / domain
+db_get sympa/hostname
+if [ -z "${RET}" ]; then
+    db_set sympa/hostname "${domain}"
+fi
+db_input medium sympa/hostname || [ $? -eq 30 ]
+db_go
+
+# Ask for listmaster
+db_get sympa/listmaster
+if [ -z "${RET}" ]; then
+    db_get sympa/hostname
+    db_set sympa/listmaster "listmaster@${RET}"
+fi
+db_input medium sympa/listmaster || [ $? -eq 30 ]
+db_go
+
+# Ask for database settings
+if [ -f /usr/share/dbconfig-common/dpkg/config ]; then
+    dbc_dbtypes="mysql, pgsql, sqlite3"
+    dbc_authmethod_user="password"
+    . /usr/share/dbconfig-common/dpkg/config
+    dbc_first_version="5.3.4-6~"
+    dbctmpfile=$(tempfile -p sympa)
+    if [ -e "${conf}" ] && [ -e "${dbctmpfile}" ]; then
+        # Extract sympa.conf options parsable by dbconfig-common
+        sed -r -n 's/^\s*(db_[a-z]+)\s+(.*)$/\1="\2"/p' "${conf}" > "${dbctmpfile}"
+        dbc_load_include="sh:${dbctmpfile}"
+        dbc_load_include_args="-d db_name -p db_passwd -s db_host -P db_port -u db_user -t db_type"
+    fi
+    dbc_go sympa $@
+    rm -f -- "${dbctmpfile}"
+fi
+
+# Ask for WWSympa url
+db_get wwsympa/wwsympa_url
+if [ -z "${RET}" ]; then
+    db_get sympa/hostname
+    db_set wwsympa/wwsympa_url "http://${RET}/wws"
+fi
+db_input medium wwsympa/wwsympa_url || [ $? -eq 30 ]
+db_go
+
+# Fastcgi usage
+db_get wwsympa/fastcgi
+if [ -z "${RET}" ] ; then
+    db_set wwsympa/fastcgi "${use_fast_cgi}"
+fi
+
+# Ask for the installed web server
+db_input high wwsympa/webserver_type || [ $? -eq 30 ]
+db_go
+db_get wwsympa/webserver_type
+webserver="${RET}"
+if [ "${webserver}" != "none" ]; then
+    # Ask for fastcgi usage
+    db_input low wwsympa/fastcgi || [ $? -eq 30 ]
+    db_go
+    # Ask for soap usage
+    db_input medium sympa/use_soap || [ $? -eq 30 ]
+    db_go
+fi
+
+# Ask for spool directories removal
+db_input medium wwsympa/remove_spool || [ $? -eq 30 ]
+db_go

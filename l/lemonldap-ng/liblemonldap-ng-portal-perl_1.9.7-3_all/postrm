@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ "$1" == "configure" ]
+then
+	db_purge
+fi
+
+if [ "$1" == "purge" ]
+then
+	rm -f /var/lib/lemonldap-ng/portal/portal.wsdl
+fi
+
+
+exit 0

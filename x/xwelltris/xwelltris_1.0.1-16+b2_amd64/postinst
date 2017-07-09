@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+	configure)
+		if [ -f /var/games/xwelltris/welltris.scores ]
+		then
+			cp /usr/share/games/xwelltris/welltris.scores.blank /var/games/xwelltris/welltris.scores
+
+			chown root:games /var/games/xwelltris/welltris.scores
+			chmod 0664 /var/games/xwelltris/welltris.scores
+		fi
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+exit 0

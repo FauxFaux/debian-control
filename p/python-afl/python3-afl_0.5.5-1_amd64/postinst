@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+if [ "$1" = configure ]
+then
+    update-alternatives \
+    --install /usr/bin/py-afl-fuzz py-afl-fuzz /usr/share/python3-afl/py-afl-fuzz 10 \
+    --slave /usr/share/man/man1/py-afl-fuzz.1.gz py-afl-fuzz.1.gz /usr/share/man/man1/py-afl-fuzz.py3.1.gz
+fi
+

@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+if command -v invoke-rc.d >/dev/null 2>&1; then
+	invoke-rc.d userv stop
+else
+	/etc/init.d/userv stop
+fi
+
+if [ \( "$1" = "upgrade" -o "$1" = "remove" \) -a -L /usr/doc/userv ]; then
+	rm -f /usr/doc/userv
+fi

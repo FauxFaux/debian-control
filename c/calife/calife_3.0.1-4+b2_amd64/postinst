@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+if [ ! -f /etc/calife.auth ]
+then
+  echo 'Creating default /etc/calife.auth'
+  cat <<EOF > /etc/calife.auth
+### /etc/calife.auth for Debian GNU/Linux
+## calife.auth-dist
+##
+## Format
+##
+## name[:shell_to_be_run][:user1,user2,...,usern]
+##
+## $Id: //depot/security/calife/main/calife.auth-dist#3 $
+#fcb
+#roberto:/bin/tcsh
+#pb::guest,blaireau
+EOF
+fi
+
+chown root:root /etc/calife.auth /usr/bin/calife
+chmod 600 /etc/calife.auth
+chmod u+s /usr/bin/calife
+
+

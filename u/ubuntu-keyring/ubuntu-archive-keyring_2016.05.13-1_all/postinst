@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+for keyring in ubuntu-archive-keyring ubuntu-archive-removed-keys
+do
+  ln -sf /usr/share/keyrings/$keyring.gpg /etc/apt/trusted.gpg.d/
+done
+
+
+
+exit 0

@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+glib-compile-schemas /usr/share/glib-2.0/schemas
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p mate-menu 
+fi
+
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p mate-menu /usr/lib/mate-menu -V 2.4-
+fi
+
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p mate-menu /usr/share/mate-menu -V 2.4-
+fi
+
+# End automatically added section
+

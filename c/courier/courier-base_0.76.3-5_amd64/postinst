@@ -1,0 +1,68 @@
+#!/bin/sh -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+add_override() {
+    if ! dpkg-statoverride --list $4 >/dev/null; then
+	dpkg-statoverride --update --add $1 $2 $3 $4
+    fi
+}
+
+if [ "$1" = "configure" ]; then
+    # alternative for deliverquota
+    update-alternatives --install /usr/bin/deliverquota deliverquota /usr/bin/deliverquota.courier 10 \
+			--slave /usr/share/man/man8/deliverquota.8.gz deliverquota.8.gz /usr/share/man/man8/deliverquota.courier.8.gz
+    # alternative for maildir
+    update-alternatives --install /usr/share/man/man5/maildir.5.gz maildir.5.gz /usr/share/man/man5/maildir.courier.5.gz 5
+    # alternative for maildirmake
+    update-alternatives --install /usr/bin/maildirmake maildirmake /usr/bin/maildirmake.courier 5 \
+			--slave /usr/share/man/man1/maildirmake.1.gz maildirmake.1.gz /usr/share/man/man1/maildirmake.courier.1.gz
+    # alternative for maildirquota
+    update-alternatives --install /usr/share/man/man7/maildirquota.7.gz maildirquota.7.gz /usr/share/man/man7/maildirquota.courier.7.gz 5
+    # alternative for makedat
+    update-alternatives --install /usr/bin/makedat makedat /usr/bin/makedat.courier 5 \
+			--slave /usr/share/man/man1/makedat.1.gz makedat.1.gz /usr/share/man/man1/makedat.courier.1.gz
+
+    # create courier user and group
+    if ! getent passwd courier > /dev/null; then
+	adduser --quiet --system --group --no-create-home --home /var/lib/courier courier
+    fi
+
+    # generate dhparams
+    if [ ! -f /etc/courier/dhparams.pem ]; then
+	mkdhparams
+	chmod 0640 /etc/courier/dhparams.pem
+	chown root:courier /etc/courier/dhparams.pem
+    fi
+
+    add_override root courier 0755 /etc/courier
+    add_override root courier 0750 /etc/courier/shared
+    add_override root courier 0750 /etc/courier/hosteddomains
+    add_override root courier 0750 /etc/courier/esmtpacceptmailfor.dir
+    add_override root courier 0750 /etc/courier/imapaccess
+    add_override courier courier 0750 /var/lib/courier
+    add_override courier courier 0770 /var/lib/courier/tmp
+    add_override courier courier 0750 /var/lib/courier/msgs
+    add_override courier courier 0750 /var/lib/courier/msgq
+
+    chown root:courier /etc/courier
+    chown root:courier /etc/courier/shared
+    chown root:courier /etc/courier/hosteddomains
+    chown root:courier /etc/courier/esmtpacceptmailfor.dir
+
+    chown courier:courier /var/lib/courier
+
+    # Update permissions on upgrade (FIXME: when finished)
+    if test -n "$2"; then # && dpkg --compare-versions 0.75.0-9~ gt "$2"; then
+        find /etc/courier -uid $(id -u daemon) -exec chown root:courier {} \;
+	find /var/lib/courier -uid $(id -u daemon) -exec chown courier:courier {} \;
+
+	find /etc/courier -gid $(id -g daemon) -exec chown root:courier {} \;
+	find /var/lib/courier -gid $(id -g daemon) -exec chown courier:courier {} \;
+    fi
+fi
+
+
+
+exit 0

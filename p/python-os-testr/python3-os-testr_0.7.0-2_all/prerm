@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] ; then
+	update-alternatives --remove ostestr /usr/bin/python3-ostestr
+	update-alternatives --remove subunit-trace /usr/bin/python3-subunit-trace
+	update-alternatives --remove subunit2html /usr/bin/python3-subunit2html
+	update-alternatives --remove generate-subunit /usr/bin/python3-generate-subunit
+fi
+
+
+# Automatically added by dh_python3:
+if which py3clean >/dev/null 2>&1; then
+	py3clean -p python3-os-testr 
+else
+	dpkg -L python3-os-testr | perl -ne 's,/([^/]*)\.py$,/__pycache__/\1.*, or next; unlink $_ or die $! foreach glob($_)'
+	find /usr/lib/python3/dist-packages/ -type d -name __pycache__ -empty -print0 | xargs --null --no-run-if-empty rmdir
+fi
+
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+
+
+# /usr/share/doc/apcalc was a directory up to apcalc 2.11.8.1-1 but is a
+# symlink now. dpkg will not replace the directory itself, so we have to
+# do it manually.
+OLDDIR=/usr/share/doc/apcalc
+if [ "$1" = configure ] && ! [ -L "$OLDDIR" ] && [ -d "$OLDDIR" ]; then
+  if rmdir "$OLDDIR"; then
+    ln -s apcalc-common "$OLDDIR"
+  else
+    echo "$0: Warning: Could not replace $OLDDIR with symlink to apcalc-common." >&2
+  fi
+fi
+
+exit 0

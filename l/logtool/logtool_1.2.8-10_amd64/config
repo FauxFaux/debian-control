@@ -1,0 +1,90 @@
+#!/bin/bash -e
+# logtool/manual
+# logtool/use-level
+# logtool/map-level-to-file
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_version 2.0
+db_capb backup
+
+STATE=1
+#STATE_RESET=0
+LASTSTATE=4
+LEVELS="paranoid server workstation cracking violations violations_ignore"
+
+while [ "$STATE" != 0 -a "$STATE" -le "$LASTSTATE" ]; do
+  case "$STATE" in
+    1)
+      db_input high logtool/manual || true
+    ;;
+    2)
+      db_get logtool/manual
+      if [ "$RET" = "false" ]; then
+        for i in $LEVELS
+        do
+          db_register logtool/use-level logtool/use-$i
+          db_subst logtool/use-$i level $i
+          db_input medium logtool/use-$i || true
+        done
+      else
+        # move out
+        STATE=$LASTSTATE
+      fi
+    ;;
+    3)
+      for i in $LEVELS
+
+      do
+        db_get logtool/use-$i
+        if [ "$RET" = "true" ]; then
+          db_register logtool/map-level-to-file logtool/map-$i-to-file
+          db_subst logtool/map-$i-to-file level $i
+          db_input medium logtool/map-$i-to-file || true
+        fi
+      done
+      db_fset logtool/error-multiple seen false
+    ;;
+    4)
+      # input checking
+      for i in $LEVELS
+
+      do
+        db_get logtool/use-$i
+        if [ "$RET" = "true" ]; then
+          db_get logtool/map-$i-to-file
+          eval m$i="$RET"
+        else
+          eval m$i="$i"
+        fi
+	eval ival="m$i"
+	for j in $LEVELS
+	do
+	  eval jval="m$j"
+	  if [ ! -z "$jval" ]; then
+	    if [ "$ival" = "$jval" -a "$i" != "$j" ]; then
+	      db_subst logtool/error-multiple action $ival
+	      db_subst logtool/error-multiple level1 $i
+	      db_subst logtool/error-multiple level2 $j
+	      for k in $LEVELS
+	      do
+                db_fset logtool/map-$k-to-file seen false
+	      done
+              db_input medium logtool/error-multiple
+	      STATE=2
+	      break 2
+	    fi
+	  fi
+	done
+      done
+    ;;
+  esac
+
+  if db_go; then
+    STATE=$(($STATE + 1))
+  else
+    STATE=$(($STATE - 1))
+  fi
+done

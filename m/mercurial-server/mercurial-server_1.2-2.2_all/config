@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+# Load debconf
+. /usr/share/debconf/confmodule
+
+db_input medium mercurial-server/purge_repositories || true
+
+db_go || true
+
+exit 0

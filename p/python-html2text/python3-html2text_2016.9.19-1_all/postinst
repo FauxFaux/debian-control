@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        update-alternatives --install /usr/bin/html2markdown html2markdown \
+                                      /usr/bin/html2markdown.py3 10 \
+                            --slave /usr/share/man/man1/html2markdown.1.gz \
+                                    html2markdown.1.gz \
+                                    /usr/share/man/man1/html2markdown.py3.1.gz
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-html2text -V 3.2-
+fi
+
+# End automatically added section
+
+
+exit 0
+# vi: set et:

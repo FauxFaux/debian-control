@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+
+
+# source debconf library
+. /usr/share/debconf/confmodule
+
+db_version 2.0
+
+if [ "$1" = "remove" ]
+then
+    db_set rt4-db-sqlite/available false || true
+fi
+

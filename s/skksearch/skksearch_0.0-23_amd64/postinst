@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = configure ]; then
+    if which update-inetd >/dev/null 2>&1; then
+	update-inetd --multi --remove skkserv || true
+	update-inetd --add 'skkserv\t\tstream\ttcp\tnowait\tnobody\t/usr/sbin/tcpd\t/usr/sbin/skksearch -c /etc/skksearch.conf'
+    fi
+fi
+
+

@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+add_variant_alternative () {
+	local variant=$1
+	local priority=$2
+	update-alternatives \
+		--install /usr/bin/evolver evolver /usr/bin/evolver-${variant} $priority \
+		--slave /usr/share/man/man1/evolver.1.gz evolver.1.gz /usr/share/man/man1/evolver-${variant}.1.gz
+	return 0
+	}
+for VARIANT in ogl-d ogl-ld ogl-q; do
+	case $VARIANT in
+		nox-q)  PRIORITY=20 ;;
+		nox-ld) PRIORITY=40 ;;
+		nox-d)  PRIORITY=80 ;;
+		ogl-q)  PRIORITY=120 ;;
+		ogl-ld) PRIORITY=140 ;;
+		ogl-d)  PRIORITY=180 ;;
+		*) echo "unknown variant \'${VARIANT}': skip" >&2 ;;
+	esac
+	add_variant_alternative $VARIANT $PRIORITY
+done
+
+exit 0

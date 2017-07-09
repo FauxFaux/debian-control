@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" ] ; then
+	rm -f /etc/murano-agent/muranoagent.conf
+	rmdir --ignore-fail-on-non-empty /etc/murano-agent || true
+	rm -rf /var/lib/murano-agent
+	rm -rf /var/log/murano-agent
+fi
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d murano-agent remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask murano-agent.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge murano-agent.service >/dev/null
+		deb-systemd-helper unmask murano-agent.service >/dev/null
+	fi
+fi
+# End automatically added section
+
+
+exit 0

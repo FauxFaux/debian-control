@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+SCOREDIR=/var/games
+if test "$1" = purge; then
+    echo "Purging high-score file."
+    rm -f $SCOREDIR/Maelstrom-Scores
+fi
+
+LIBDIR=/usr/lib/games/maelstrom
+if test "$1" = purge; then
+    echo "Purging high-score file."
+    rm -f $LIBDIR/Maelstrom-Scores
+    rmdir $LIBDIR || true
+fi
+
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+

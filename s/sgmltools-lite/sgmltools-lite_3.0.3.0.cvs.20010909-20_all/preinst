@@ -1,0 +1,23 @@
+#! /bin/sh
+# preinst script for sgmltools-lite
+
+set -e
+
+case "$1" in
+    install|upgrade)
+
+     # remove runtime compiled files in old FSSTND dir
+     find /usr/lib/sgml/misc/sgmltools -name '*.pyc' 2>/dev/null|xargs rm -f
+
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+exit 0

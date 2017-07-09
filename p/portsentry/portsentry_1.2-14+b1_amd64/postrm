@@ -1,0 +1,48 @@
+#!/bin/sh -e
+# $Id: postrm,v 1.5 2001/07/11 21:12:47 agx Exp $
+
+set -e
+
+ETCDIR="/etc/portsentry"
+VARDIR="/var/lib/portsentry"
+STARTUP="/etc/default/portsentry"
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d portsentry remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+# Be sure to clean up the history files upon purge
+if [ "$1" = "purge" ]
+then
+	if [ \( -e $ETCDIR \) -o \( -e $STARTUP \) ]; then
+		echo -n "Purging additional configuration files..."
+		rm -f $ETCDIR/portsentry.ignore
+		rmdir --ignore-fail-on-non-empty $ETCDIR
+		rm -f $STARTUP
+		echo "done."
+	fi
+	if [ -e $VARDIR ]; then
+		echo -n "Purging history files..."
+		rm -f $VARDIR/portsentry.blocked.*tcp
+	        rm -f $VARDIR/portsentry.blocked.*udp
+		rm -f $VARDIR/portsentry.history
+		rmdir --ignore-fail-on-non-empty $VARDIR
+		echo "done."
+	fi
+fi

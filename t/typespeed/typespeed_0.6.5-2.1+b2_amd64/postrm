@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+if test "$1" = "purge"; then
+	rm -f /var/games/typespeed/high.words.*
+	if [ -d /var/games/typespeed ]; then
+		rmdir --ignore-fail-on-non-empty /var/games/typespeed
+	fi
+	rm -f /var/games/typespeed.score
+fi
+
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+
+

@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+# debconf
+. /usr/share/debconf/confmodule
+
+case "$1" in
+    configure)
+        # continue below
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+        exit 0
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# generate ht://Dig databases now
+db_get htdig/generate-databases
+if [ "$RET" = "true" ]; then
+	verbose= /usr/sbin/htdigconfig
+fi
+
+# These files were moved to /var/lib/htdig. (See #475885)
+for DB in root2word synonyms word2root
+do
+	if [ -f /etc/htdig/${DB}.db ]
+	then
+		mv /etc/htdig/${DB}.db /var/lib/htdig
+	fi
+done
+
+
+
+exit 0

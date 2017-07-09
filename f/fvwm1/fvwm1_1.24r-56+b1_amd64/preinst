@@ -1,0 +1,18 @@
+#! /bin/bash
+
+set -e
+
+
+
+# /usr/bin/X11 has moved; in sarge it used to point to /usr/X11R6/bin,
+# but now it's to /usr/bin. Remove any sym-links in there that we may
+# be responsible for so we don't break an etch uprade.
+
+if [ -x /usr/bin/X11/fvwm1 ] ; then
+    if [ ! -L /usr/bin/X11 ] || [ `readlink -f /usr/bin/X11`x = "/usr/X11R6/bin"x ] ; then
+        update-alternatives --remove fvwm /usr/bin/X11/fvwm1
+        update-alternatives --remove x-window-manager /usr/bin/X11/fvwm1
+    fi
+fi
+
+exit 0

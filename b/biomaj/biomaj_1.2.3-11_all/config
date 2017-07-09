@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# jdk_home
+#db_input low biomaj/jdk_home || true
+#db_go
+
+
+# Configure mysql ?
+	db_input critical biomaj/mysql || true
+	db_go
+	db_get biomaj/mysql
+	if [ "$RET" = "true" ]; then
+		# MySQL server
+		db_input critical biomaj/mysql_host || true
+		db_go
+
+		# MySQL login
+		db_input critical biomaj/mysql_login || true
+		db_go
+
+		# MySQL password
+		db_input critical biomaj/mysql_passwd || true
+		db_go
+	fi
+
+

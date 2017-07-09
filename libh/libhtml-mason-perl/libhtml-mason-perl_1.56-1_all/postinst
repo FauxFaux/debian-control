@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -e
+
+##
+
+# Create mason data directory
+
+case "$1" in
+configure)
+
+webuser=www-data
+webgroup=www-data
+
+# move old /var/lib/mason to /var/cache/mason
+if [ -d /var/lib/mason -a ! -h /var/lib/mason ]
+then
+    rm -rf /var/cache/mason
+    mv -i /var/lib/mason /var/cache/mason
+    ln -s /var/cache/mason /var/lib/mason
+
+    if [ ! -d /var/cache/mason/cache ]
+    then
+        mkdir /var/cache/mason/cache
+    fi
+    if [ ! -d /var/cache/mason/obj ]
+    then
+        mkdir /var/cache/mason/obj
+    fi
+fi
+
+# set permissions
+if [ "`getent passwd $webuser`" -a "`getent group $webgroup `" ]
+then
+    chown $webuser:$webgroup /var/cache/mason/cache /var/cache/mason/obj
+    chmod 0700 /var/cache/mason/cache /var/cache/mason/obj
+fi
+
+;;
+esac
+
+exit 0

@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = 'remove' ]; then
+  for file in xfsdump xfsrestore; do
+    if [ -L /usr/sbin/$file ]; then
+      rm /usr/sbin/$file
+    fi
+  done
+fi
+
+

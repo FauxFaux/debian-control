@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    remove)
+        if [ -x /usr/sbin/update-inetd ]; then
+	    update-inetd --remove asp
+	fi
+        ;;
+esac
+
+

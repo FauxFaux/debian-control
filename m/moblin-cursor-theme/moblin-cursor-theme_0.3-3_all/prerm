@@ -1,0 +1,11 @@
+#! /bin/sh
+set -e
+
+
+
+case "$1" in
+  remove|deconfigure|failed-upgrade)
+    update-alternatives --remove x-cursor-theme \
+        /etc/X11/cursors/moblin.theme
+  ;;
+esac

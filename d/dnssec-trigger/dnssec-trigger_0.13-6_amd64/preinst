@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper mv_conffile /etc/init.d/dnssec-trigger /etc/init.d/dnssec-triggerd 0.12-1~ dnssec-trigger -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/dnssec.conf /etc/dnssec-trigger/dnssec.conf 0.12-3~ dnssec-trigger -- "$@"
+
+
+
+exit 0

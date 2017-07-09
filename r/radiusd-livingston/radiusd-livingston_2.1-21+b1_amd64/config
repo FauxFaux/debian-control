@@ -1,0 +1,13 @@
+#!/bin/sh -e
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+if [ ! -f /etc/radiusd-livingston/clients ]; then
+	db_set medium radiusd-livingston/configure_clients || true
+	db_go
+fi
+if [ ! -f /etc/radiusd-livingston/users ]; then
+	db_set medium radiusd-livingston/configure_clients || true
+	db_go
+fi
+

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+
+
+# /usr/doc/apcalc-dev was a link up to apcalc-dev 2.10.3t5.46-1 but is a
+# directory now. So we have to make sure to remove the link before installing
+# the new package, because otherwise, dpkg will follow the link and our files
+# will end up in the wrong directory.
+[ -L /usr/doc/apcalc-dev ] && rm /usr/doc/apcalc-dev
+
+exit 0

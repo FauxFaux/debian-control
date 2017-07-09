@@ -1,0 +1,38 @@
+#! /bin/sh
+# postrm script for remem
+#
+# see: dh_installdeb(1)
+
+set -e
+
+PATH=/bin:/usr/bin
+package=remembrance-agent
+database=/var/lib/emacs/remembrance
+program=/usr/bin/ra-index
+config_file=/etc/savantrc
+
+case "$1" in
+	purge)
+	if [ -d ${database} ] 
+	then
+		rm -rf ${database}
+	fi
+	;;
+	remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+# Do nothing 
+	;;
+
+	*)
+	echo "postrm called with unknown argument \`$1'" >&2
+	exit 0
+esac
+
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

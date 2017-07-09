@@ -1,0 +1,25 @@
+#! /bin/sh -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+db_get sqwebmail/install-www
+db_set sqwebmail/install-www-backup "$RET"
+
+db_input medium sqwebmail/install-www || [ $? -eq 30 ]
+db_go
+
+db_input medium sqwebmail/calendarmode || [ $? -eq 30 ]
+db_go
+
+# determine available dictionaries
+DICTS=default
+for file in /usr/lib/ispell/*.hash; do
+	DICT=`basename $file .hash`
+	if [ "$DICT" != "default" ]; then
+		DICTS="$DICTS, $DICT"
+ 	fi
+done
+db_subst sqwebmail/dictionary DICTS $DICTS
+db_input low sqwebmail/dictionary || [ $? -eq 30 ]
+db_go

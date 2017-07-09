@@ -1,0 +1,82 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+# summary of how this script can be called:
+#        * <prerm> `remove'
+#        * <old-prerm> `upgrade' <new-version>
+#        * <new-prerm> `failed-upgrade' <old-version>
+#        * <conflictor's-prerm> `remove' `in-favour' <package> <new-version>
+#        * <deconfigured's-prerm> `deconfigure' `in-favour'
+#          <package-being-installed> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+# Try to stop any vservers that are running in a sane way, no vservers should be
+# running when configurations are removed! If it does not succeed, prompt the
+# admin to do it.
+
+: ${UTIL_VSERVER_VARS:=/usr/lib/util-vserver/util-vserver-vars}
+
+test -e "$UTIL_VSERVER_VARS" || 
+   {
+   	echo "Can not find util-vserver installation (the file '$UTIL_VSERVER_VARS' is expected); aborting..." >&2
+   	exit 1
+   }
+
+. "$UTIL_VSERVER_VARS"
+
+stop_vservers() {
+  set +e
+  if [ -x /usr/sbin/invoke-rc.d ]; then
+    invoke-rc.d util-vserver forcestop
+  else
+    /etc/init.d/util-vserver forcestop
+  fi
+  errno=$?
+  set -e
+
+  if [ "$?" != 0 ]; then
+    echo "Trying to stop vservers resulted in exitcode $?." 1>&2
+    echo "Stop them yourself and try again!" 1>&2
+    exit 1
+  fi
+}
+
+
+case "$1" in
+    remove|purge)
+    	if [ -n "`vserver-stat | grep -v "CTX   PROC    VSZ    RSS  userTIME   sysTIME    UPTIME NAME" |grep -v ^0 2>/dev/null`" ]
+	then
+		db_reset util-vserver/prerm_stop_running_vservers || true
+		db_input high util-vserver/prerm_stop_running_vservers || true
+		db_go
+		db_get util-vserver/prerm_stop_running_vservers || true
+		if [ "$RET" = "true" ]; then
+			stop_vservers
+		else
+			echo "WARNING: running vservers detected, reinstall util-vserver to manage them"
+		fi
+		db_stop
+	fi
+    ;; 
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+    *)
+     echo "prerm called with unknown argument \`$1'" >&2
+     exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/util-vserver" ] && [ "$1" = remove ]; then
+	invoke-rc.d util-vserver stop || exit $?
+fi
+# End automatically added section
+
+
+exit 0
+

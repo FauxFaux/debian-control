@@ -1,0 +1,10 @@
+#! /bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+    if [ -x /usr/sbin/dictdconfig ]; then dictdconfig -w ;fi
+    if [ -x /etc/init.d/dictd ]; then invoke-rc.d dictd restart ;fi
+fi	
+
+

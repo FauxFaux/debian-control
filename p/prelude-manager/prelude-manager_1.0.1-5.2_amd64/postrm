@@ -1,0 +1,53 @@
+#!/bin/sh
+set -e
+
+if [ -f /usr/share/debconf/confmodule ]; then
+    . /usr/share/debconf/confmodule
+fi
+
+if [ -f /usr/share/dbconfig-common/dpkg/postrm ]; then
+  . /usr/share/dbconfig-common/dpkg/postrm
+  dbc_go prelude-manager $@
+fi
+
+
+if [ "$1" = "purge" ]
+then 
+    rm -f /var/run/prelude-manager/tls-parameters.data >/dev/null
+    deluser prelude || true
+    rm -rf /var/spool/prelude-manager/ >/dev/null
+
+    for FILE in /etc/prelude-manager/prelude-manager.conf; do
+      # Taken from the ucf example postrm
+      for ext in '~' '%' .bak .dpkg-tmp .dpkg-new .dpkg-old .dpkg-dist .ucf-dist .ucf-old '-new';  do
+          rm -f $FILE$ext
+      done
+      rm -f $FILE
+      if which ucf >/dev/null 2>&1; then
+          ucf --purge $FILE
+      fi
+    done
+    if [ -d "/etc/prelude/profile/prelude-manager" ]; then
+      rm -rf /etc/prelude/profile/prelude-manager >/dev/null
+    fi
+fi
+
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d prelude-manager remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+

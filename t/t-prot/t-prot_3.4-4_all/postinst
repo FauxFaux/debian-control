@@ -1,0 +1,51 @@
+#!/bin/sh
+# postinst for t-prot
+# Copyright 2002-2016 by Rhonda D'Vine <rhonda@debian.org>
+# Licenced under WTFPLv2
+
+set -e
+
+# Source debconf library.
+if [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+fi
+
+action=$1
+version=$2
+if [ "${DEBCONF_RECONFIGURE}" = "1" ]; then
+	# workaround until reconfigure is really available
+	action=reconfigure
+fi
+
+if [ "$action" != 'configure' ] && [ "$action" != 'reconfigure' ]; then
+	exit 0
+fi
+
+# if we got reinstalled after a remove, enable the config snippet again
+if [ "$action" = 'configure' ] && [ -e /etc/Muttrc.d/t-prot.rc.removed ] && [ ! -e /etc/Muttrc.d/t-prot.rc ]; then
+	mv /etc/Muttrc.d/t-prot.rc.removed /etc/Muttrc.d/t-prot.rc || true
+fi
+
+# only on new install or reconfigure
+if [ "x$version" = "x" ] || [ "$action" = "reconfigure" ]; then
+	symlink=true
+	if [ -e /usr/share/debconf/confmodule ]; then
+		db_get t-prot/muttrc.d
+		symlink="$RET"
+	fi
+
+	case "$symlink" in
+	    true)
+		mkdir /etc/Muttrc.d 2> /dev/null || true
+		cd /etc/Muttrc.d && ln -sf ../t-prot/Muttrc t-prot.rc || true
+		;;
+	    false)
+		if [ -L /etc/Muttrc.d/t-prot.rc ]; then
+			rm /etc/Muttrc.d/t-prot.rc
+			rmdir /etc/Muttrc.d 2> /dev/null || true
+		fi
+		;;
+	esac
+fi
+
+

@@ -1,0 +1,51 @@
+#!/bin/sh
+
+set -e
+
+symlinks_to_drop="
+/usr/share/wordpress/wp-includes/js/tinymce/plugins/inlinepopups
+/usr/share/wordpress/wp-includes/js/tinymce/plugins/safari
+/usr/share/wordpress/wp-includes/js/tinymce/plugins/paste
+/usr/share/wordpress/wp-includes/js/tinymce/plugins/fullscreen
+/usr/share/wordpress/wp-includes/js/tinymce/plugins/autosave
+/usr/share/wordpress/wp-includes/js/tinymce/plugins/spellchecker/css
+/usr/share/wordpress/wp-includes/js/tinymce/plugins/spellchecker/img
+/usr/share/wordpress/wp-includes/js/tinymce/plugins/media
+/usr/share/wordpress/wp-includes/js/tinymce/plugins/tabfocus
+/usr/share/wordpress/wp-includes/js/tinymce/plugins/directionality
+/usr/share/wordpress/wp-includes/js/crop
+"
+
+case "$1" in
+    upgrade)
+	if dpkg --compare-versions "$2" lt 3.2.1+dfsg-2; then
+	    for symlink in $symlinks_to_drop; do
+		if [ -h $symlink ]; then
+		    echo "Dropping $symlink to convert it into a directory"
+		    rm -f $symlink
+		fi
+	    done
+	fi
+	if dpkg --compare-versions "$2" lt 3.4; then
+	    # Move some sub-directories of wp-content to their new place
+	    # in /var/lib/wordpress/wp-content
+	    if [ -e /var/lib/wordpress/blogs.dir ]; then
+		mkdir -p /var/lib/wordpress/wp-content
+		mv /var/lib/wordpress/blogs.dir /var/lib/wordpress/wp-content/
+		chown www-data:www-data /var/lib/wordpress/wp-content/blogs.dir
+	    fi
+	    if [ -d /usr/share/wordpress/wp-content/uploads ] && \
+	       [ ! -h /usr/share/wordpress/wp-content/uploads ] && \
+	       [ ! -e /var/lib/wordpress/wp-content/uploads ]; then
+		mkdir -p /var/lib/wordpress/wp-content
+		mv /usr/share/wordpress/wp-content/uploads /var/lib/wordpress/wp-content/
+		chown www-data:www-data /var/lib/wordpress/wp-content/uploads
+	    fi
+	fi
+    ;;
+esac
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/wordpress/wp-config.php 3.4+dfsg -- "$@"
+# End automatically added section
+

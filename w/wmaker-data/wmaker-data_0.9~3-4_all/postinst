@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+        if [ -d /usr/doc -a -h /usr/doc/wmaker-data -a -d /usr/share/doc/wmaker-data ]; then
+                rm -f /usr/doc/wmaker-data
+        fi
+fi
+
+

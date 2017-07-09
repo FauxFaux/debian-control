@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ]; then
+  if command -v install-docs >/dev/null 2>&1; then
+    install-docs -i /usr/share/doc-base/scalapack-faq
+    install-docs -i /usr/share/doc-base/scalapack-pblasqref
+    install-docs -i /usr/share/doc-base/scalapack-scalapackqref
+    install-docs -i /usr/share/doc-base/scalapack-slug
+  fi
+fi
+
+

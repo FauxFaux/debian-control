@@ -1,0 +1,146 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+db_version 2.0
+db_capb backup
+
+# Manage old configuration.
+if [ -f /etc/dotlrn/config.tcl.old_version ] || [ -f /etc/dotlrn/config.local ]; then
+
+    # Previous or equal to 2.5.0+dfsg-6+wheezy1
+    if [ -f /etc/dotlrn/config.tcl.old_version ]; then
+        old_configfile=$(mktemp)
+        # Retrieve old values
+        sed -n '/## Debconf changes/,/## End Debconf/p;' /etc/dotlrn/config.tcl.old_version | sed 's/^[ \t]*set\ //;/^\#/d;s/db_host/db_host=/;s/db_password/db_password=/;s/db_user/db_user=/;s/=[ \t]*/=/;' > $old_configfile
+    fi
+
+    # After 2.5.0+dfsg-6+wheezy1
+    if [ -f /etc/dotlrn/config.local ]; then
+        old_configfile=/etc/dotlrn/config.local
+    fi
+
+    # Feed debconf with them
+    db_set dotlrn/db_host $(grep "^db_host" $old_configfile | sed s/^db_host=//)
+    db_set dotlrn/dbu_name $(grep "^db_user" $old_configfile | sed s/^db_user=//)
+    db_set dotlrn/dbu_password "$(grep "^db_password" $old_configfile | sed 's/^db_password=//;s/\"//g')"
+    db_set dotlrn/dbu_confirm "$(grep "^db_password" $old_configfile | sed 's/^db_password=//;s/\"//g')"
+
+    # Delete old files if needed
+    if [ -f /etc/dotlrn/config.tcl.old_version ]; then rm -f /etc/dotlrn/config.tcl.old_version $old_configfile; fi
+fi
+
+# Reset passwords if reconfigure
+if [ "$1" = "reconfigure" ] ; then
+	db_reset dotlrn/dba_password
+	db_reset dotlrn/dba_confirm
+	db_reset dotlrn/dbu_password
+	db_reset dotlrn/dbu_confirm	
+fi
+
+STATE=1
+while [ "$STATE"  != 0 -a "$STATE" != 10 ]
+  do
+  case "$STATE" in
+      1)
+	  db_input critical dotlrn/db_host || true
+	  if db_go; then
+	      db_get dotlrn/db_host || true
+	      if [ ! -z "$RET" ]; then
+		  STATE=2
+	      fi
+              pg_host="$RET"
+	  else
+	      STATE=1
+	  fi
+	  ;;
+
+      2)
+	  db_input critical dotlrn/dba_name || true
+	  if db_go; then
+	      db_get dotlrn/dba_name || true
+	      if [ ! -z "$RET" ]; then
+		  STATE=3
+	      fi
+	  else
+	      STATE=1
+	  fi
+	  ;;
+
+      3)  
+	  db_input critical dotlrn/dba_password || true
+	  if db_go; then
+	      db_get dotlrn/dba_password || true
+	      STATE=5
+	  else
+	      STATE=2
+	  fi
+	  ;;
+
+      4) 
+	  db_input critical dotlrn/dbu_name || true
+	  if db_go; then
+	      db_get dotlrn/dbu_name || true
+	      if [ ! -z "$RET" ]; then
+		  STATE=5
+	      fi
+	  else
+	      STATE=2
+	  fi
+	  ;;
+
+      5)  
+	  db_input critical dotlrn/dbu_password || true
+	  if db_go; then
+	      db_get dotlrn/dbu_password || true
+	      STATE=6
+	  else
+	      STATE=4
+	  fi
+	  ;;
+
+      6)  
+	  db_input critical dotlrn/dbu_confirm || true
+	  if db_go; then
+	      db_get dotlrn/dbu_confirm || true
+	      CONFIRM="$RET"
+	      db_get dotlrn/dbu_password || true
+	      if [ A"$RET" != A"$CONFIRM" ]; then
+		  STATE=7
+	      else
+                  # Check if host is localhost to change 
+                  # the postgresql access permissions properly.
+                  if [ "$pg_host" = "localhost" ]; then
+                      STATE=8 
+                  else
+                      STATE=9
+                  fi
+	      fi
+	  else
+	      STATE=4
+	  fi
+	  ;;
+
+      7)
+	  db_input critical dotlrn/mismatch || true
+	  db_go
+	  STATE=4
+	  ;;
+
+
+      8) db_input critical dotlrn/pg_grant_access || true
+          db_go
+          STATE=9
+          ;;
+         
+      9)
+	  db_input critical dotlrn/create_tables || true
+	  db_go
+	  STATE=10
+	  ;;
+  esac
+done
+

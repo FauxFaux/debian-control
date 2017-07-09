@@ -1,0 +1,25 @@
+#!/bin/sh
+# prerm script for open-isns-discoveryd
+
+set -e
+
+case "$1" in
+    remove)
+        invoke-rc.d isnsdd stop || true
+    ;;
+
+    upgrade|deconfigure)
+    ;;
+
+    failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

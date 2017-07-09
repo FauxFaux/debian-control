@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+# Run reconf-inetd one last time to remove entries from /etc/inetd.conf
+reconf-inetd || true
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask nyancat-server.socket >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled nyancat-server.socket; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable nyancat-server.socket >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state nyancat-server.socket >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	deb-systemd-invoke start nyancat-server.socket >/dev/null || true
+fi
+# End automatically added section
+

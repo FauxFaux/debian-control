@@ -1,0 +1,21 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+	remove)
+		# avoid purging problem with version in squeeze 
+		if dpkg-divert --listpackage /usr/share/desktop-base/grub_background.sh.orig 1>/dev/null; then
+			dpkg-divert --package debian-edu-artwork \
+			            --rename --remove /usr/share/desktop-base/grub_background.sh
+		fi
+	;;
+esac
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/X11/Xsession.d/25debian-edu-artwork 0.902-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/gdm3/greeter.gsettings 0.0.39-1 -- "$@"
+# End automatically added section
+

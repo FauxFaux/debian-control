@@ -1,0 +1,28 @@
+#!/bin/sh -e
+
+case "$1" in
+    # do not stop the firewall during an upgrade
+    remove)
+        if [ -d "/run/systemd/system" ] && [ -f "/lib/systemd/system/shorewall6.service" ]
+        then
+            deb-systemd-helper disable shorewall6.service
+            deb-systemd-invoke stop shorewall6.service
+        elif [ -f "/etc/init.d/shorewall6" ]
+        then
+            if [ -x "/usr/sbin/invoke-rc.d" ]
+            then
+                invoke-rc.d shorewall6 stop
+            else
+                /etc/init.d/shorewall6 stop
+            fi
+        fi
+        ;;
+    upgrade|deconfigure|failed-upgrade)
+        ;;
+    *)
+        echo "prerem called with unknown argument \`$1\'" >&2
+        exit 1
+        ;;
+esac
+
+

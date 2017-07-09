@@ -1,0 +1,12 @@
+#!/bin/bash
+# use bash explicitly because the DEBHELPER part uses 'command -v'
+set -e
+
+if [ "$1" = "configure" ]; then
+        if [ -d /usr/doc -a -h /usr/doc/libshhmsg1-dev -a -d /usr/share/doc/libshhmsg1-dev ]; then
+                rm -f /usr/doc/libshhmsg1-dev
+        fi
+fi
+
+
+exit 0

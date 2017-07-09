@@ -1,0 +1,19 @@
+#! /bin/sh
+
+set -e
+if [ "$1" = "purge" ] ; then
+
+# remove empty/unused scorefiles
+
+SCORE="njam-hiscore.dat"
+
+  if [ -f /var/games/$SCORE ]; then
+    rm -f /var/games/$SCORE
+    rm -f /usr/share/games/njam/$SCORE
+  fi
+fi
+
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+

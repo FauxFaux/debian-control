@@ -1,0 +1,58 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+db_get dtc-xen-firewall/conf_soap_server_allowed_ip
+conf_soap_server_allowed_ip=$RET
+db_stop
+
+DTCXEN_ETCPATH=/etc/dtc-xen
+mkdir -p $DTCXEN_ETCPATH
+
+echo "# This is the configuration file for the dtc-xen-firewall package
+# Note that you can as well dpkg-reconfigure dtc-xen-firewall to edit this file
+
+soap_server_allowed_ip=${conf_soap_server_allowed_ip}
+" >${DTCXEN_ETCPATH}/dtc-xen-firewall.sh
+
+if ! [ -e /etc/dtc-xen/dtc-xen-firewall-custom-rules ] ; then
+	echo "# This is where to add your custom rules for your Firewall
+
+add_custom_rules () {
+	# Here is a short example.
+	# Disables all limitation forwarding rules for a specific target IP
+	# \${IPTABLES} -A dtc-xen-fw -s 1.2.3.4 -j RETURN
+	# \${IPTABLES} -A dtc-xen-fw -d 1.2.3.4 -j RETURN
+
+	# The following is there as if there is no instructions at all,
+	# the script fails. Of course, feel free to remove if you are
+	# adding custom rules in this script.
+	echo -n ""
+}
+
+" >/etc/dtc-xen/dtc-xen-firewall-custom-rules
+fi
+
+# Install our init.d script
+if [ -e /etc/redhat-release ] ; then
+	if [ -x /etc/rc.d/init.d/dtc-xen-firewall ] ; then
+		echo "TODO: CentOS startup links"
+		chkconfig --add dtc-xen-firewall
+		if [ -x /sbin/service ] ; then
+			service start dtc-xen-firewall
+		fi
+	fi
+fi
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/dtc-xen-firewall" ]; then
+	update-rc.d dtc-xen-firewall defaults >/dev/null
+	invoke-rc.d dtc-xen-firewall start || exit $?
+fi
+# End automatically added section
+
+
+exit 0

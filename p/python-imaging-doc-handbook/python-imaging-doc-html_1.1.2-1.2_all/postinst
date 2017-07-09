@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ "$1" = "configure" ]; then
+        if [ -d /usr/doc -a -h /usr/doc/python-imaging-doc-html -a -d /usr/share/doc/python-imaging-doc-html ]; then
+                rm -f /usr/doc/python-imaging-doc-html
+        fi
+fi
+
+

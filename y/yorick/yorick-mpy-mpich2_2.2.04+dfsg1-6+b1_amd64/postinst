@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+update-alternatives --install /usr/bin/mpy mpy /usr/bin/mpy.mpich2 40 \
+		    --slave /usr/lib/yorick/lib/libmpy.a libmpy.a \
+                            /usr/lib/yorick/lib/libmpy.mpich2.a \
+		    --slave /usr/lib/yorick/lib/mpymain.o mpymain.o \
+                            /usr/lib/yorick/lib/mpymain.mpich2.o \
+		    --slave /usr/lib/yorick/Makempy Makempy \
+                            /usr/lib/yorick/Makempy.mpich2
+
+
+exit 0

@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+# Copy the default highscore/log files if there are non present.
+if [ "$1" = "configure" ]; then
+	if [ ! -f /var/games/omega-rpg/omega.hi ]; then
+		cp -a /usr/share/games/omega-rpg/omega.hi /var/games/omega-rpg/omega.hi
+                chgrp games /var/games/omega-rpg/omega.hi
+                chmod g+w /var/games/omega-rpg/omega.hi
+	fi
+	if [ ! -f /var/games/omega-rpg/omega.log ]; then
+		cp -a /usr/share/games/omega-rpg/omega.log /var/games/omega-rpg/omega.log
+                chgrp games /var/games/omega-rpg/omega.log
+                chmod g+w /var/games/omega-rpg/omega.log
+	fi
+fi
+
+

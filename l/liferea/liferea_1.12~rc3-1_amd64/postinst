@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+
+    # We should have a symlink, instead of a doc dir,
+    # but dpkg will not replace one for the other, so we
+    # do it by hand.
+    # Closes: #521047.
+    DOCDIR=/usr/share/doc/liferea
+    if [ -d $DOCDIR -a ! -h $DOCDIR ] ; then
+        rmdir $DOCDIR
+        ln -s liferea-data $DOCDIR
+    fi
+
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p liferea /usr/lib -V 3.5
+fi
+
+# End automatically added section
+
+
+exit 0
