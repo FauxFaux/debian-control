@@ -1,0 +1,49 @@
+#!/bin/sh
+# postrm script for denyhosts
+
+set -e
+
+case "$1" in
+    purge)
+        rm -f /var/log/denyhosts /var/log/denyhosts.0 /var/log/denyhosts.[0-9].gz
+        rm -fr /var/lib/denyhosts
+        ;;
+
+    remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+	;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d denyhosts remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask denyhosts.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge denyhosts.service >/dev/null
+		deb-systemd-helper unmask denyhosts.service >/dev/null
+	fi
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+ONEHOME=/var/lib/one
+ONE_GROUP=oneadmin
+ONE_USER=oneadmin
+
+if [ "$1" = "configure" ]; then
+    chown $ONE_USER:$ONE_GROUP $ONEHOME/vms
+
+    # Add oneadmin user into libvirt group
+    if getent group libvirt >/dev/null && ! getent group libvirt | cut -f4 -d: | grep -q '\<$ONE_USER\>'; then
+        adduser $ONE_USER libvirt
+    fi
+    
+    # Add oneadmin user into kvm group
+    if getent group kvm >/dev/null && ! getent group kvm | cut -f4 -d: | grep -q '\<$ONE_USER\>'; then
+        adduser $ONE_USER kvm
+    fi
+fi
+
+

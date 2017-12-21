@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_input medium geoip-database-contrib/install-cronjob || true
+db_go
+

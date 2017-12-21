@@ -1,0 +1,48 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "purge" ];
+then
+
+    webserver="apache2"
+    pkgname=loganalyzer
+
+    HTTPD_ETC=/etc/$webserver
+    if [ -d ${HTTPD_ETC} ];
+    then
+        HTTPD_CONF_OLD=${HTTPD_ETC}/conf.d
+        HTTPD_CONF_NEW=${HTTPD_ETC}/conf-available
+        LOGANALYZER_CONF_NEW=${HTTPD_CONF_NEW}/${pkgname}.conf
+
+        if [ -d ${HTTPD_CONF_OLD} -a -h ${HTTPD_CONF_OLD}/${pkgname} ];
+        then
+            rm ${HTTPD_CONF_OLD}/${pkgname}
+        fi
+        if [ -d ${HTTPD_CONF_NEW} -a \
+            \( -e ${LOGANALYZER_CONF_NEW} -o -h ${LOGANALYZER_CONF_NEW} \) ];
+        then
+            # apache2-maintscript-helper will not be available in the
+            # following situations:
+            #   - apache2 has already been removed (but not purged perhaps)
+            #   - it is a wheezy system, the conf-available directory was
+            #     created by some backported package but apache2.4 is not
+            #     really present
+            if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+                . /usr/share/apache2/apache2-maintscript-helper
+                apache2_invoke disconf loganalyzer.conf || exit $?
+            fi
+            # regardless of whether apache2-maintscript-helper was found,
+            # we still remove the symlink if it exists
+            if [ -h ${LOGANALYZER_CONF_NEW} ];
+            then
+                rm ${LOGANALYZER_CONF_NEW}
+            fi
+        fi
+    fi
+fi
+
+
+

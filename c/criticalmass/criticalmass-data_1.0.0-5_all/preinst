@@ -1,9 +1,0 @@
-#!/bin/sh
-
-set -e
-
-# Older versions shipped a symlink; remove it.
-if [ "$1" = upgrade ] && dpkg --compare-versions "$2" lt "1:0.9.12-5"; then
-	rm -f /usr/share/doc/criticalmass-data
-fi
-

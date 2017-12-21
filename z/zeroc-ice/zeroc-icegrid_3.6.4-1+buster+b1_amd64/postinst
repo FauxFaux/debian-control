@@ -1,0 +1,91 @@
+#!/bin/sh
+# postinst script for zeroc-icegrid
+set -e
+
+if [ "$1" = "configure" ]; then
+    for i in icegrid icegrid/node1 icegrid/registry
+    do
+        if ! dpkg-statoverride --list /var/lib/ice/$i >/dev/null; then
+    	   dpkg-statoverride --update --add ice adm 0770 /var/lib/ice/$i >/dev/null 2>/dev/null || true
+        fi
+    done
+fi
+
+# Automatically added by dh_systemd_enable/10.9.1
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'icegridregistry.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'icegridregistry.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'icegridregistry.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'icegridregistry.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.9.1
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'icegridnode.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'icegridnode.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'icegridnode.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'icegridnode.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.9.1
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'icegridregistry.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'icegridregistry.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'icegridregistry.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'icegridregistry.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.9.1
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'icegridnode.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'icegridnode.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'icegridnode.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'icegridnode.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.9.1
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'icegridregistry.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'icegridregistry.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'icegridregistry.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'icegridregistry.service' >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0

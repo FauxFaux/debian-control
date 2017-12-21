@@ -1,0 +1,198 @@
+#! /bin/sh
+# postinst script for wims
+#
+# see: dh_installdeb(1)
+
+set -e
+[ -e /usr/share/debconf/confmodule ] && . /usr/share/debconf/confmodule
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+
+read_only_dirs(){
+dirs="/var/lib/wims/bin
+/var/lib/wims/log
+/var/lib/wims/log/account
+/var/lib/wims/log/classes
+/var/lib/wims/log/classes/1011/forum
+/var/lib/wims/log/classes/1011/forum/.threads
+/var/lib/wims/log/forums
+/var/lib/wims/log/modules
+/var/lib/wims/log/referer
+/var/lib/wims/public_html/bases/dic
+/var/lib/wims/public_html/bases/doc
+/var/lib/wims/public_html/bases/sheet
+/var/lib/wims/public_html/bases/site
+/var/lib/wims/public_html/bases/site/lists
+/var/lib/wims/public_html/bases/site/pop
+/var/lib/wims/public_html/bases/sys
+/var/lib/wims/public_html/bin
+/var/lib/wims/public_html/msg
+/var/lib/wims/public_html/scripts/adm
+/var/lib/wims/s2
+/var/lib/wims/sessions
+/var/lib/wims/src
+/var/lib/wims/tmp/log"
+
+for d in $dirs; do
+    mkdir -p $d
+    chmod 700 $d
+done
+true
+}
+
+adjust_maildir(){
+    maildir=""
+    if [ -f /etc/mailname ]; then maildir=$(cat /etc/mailname); fi
+    for f in themes/default/visitor.phtml \
+	themes/default/supervisor.phtml \
+	themes/standard/visitor.phtml \
+	themes/standard/supervisor.phtml ; do
+	source=/var/lib/wims/public_html/$f
+	if [ -n "$maildir" ]; then
+	    sed 's/!mailurl \$wims_site_manager/!mailurl wims@'$maildir'/' $source.tpl > $source
+	else
+	    cp $source.tpl $source
+	fi
+    done
+}
+
+msg_apache2_not_there="\
++========================================================+
+| WIMS is not properly installed due to the missing      |
+| apache2 package. Please install apache2, and reinstall |
+| wims after apache2's full configuration.               |
++========================================================+"
+
+msg_apache2_not_configured="\
++==========================================================+
+| WIMS is not properly installed due to the apache2        |
+| package not yet configured. Apache2 should be configured |
+| shortly, so you just need to reinstall wims to achieve   |
+| its full configuration.                                  |
++==========================================================+"
+
+case "$1" in
+    configure)
+      # add some utilities in the set of trusted wims applications:
+      rm -f /var/lib/wims/bin/true; ln -s /bin/true  /var/lib/wims/bin
+      rm -f /var/lib/wims/bin/false; ln -s /bin/false /var/lib/wims/bin
+      # giving all to wims user. That is a quick'n dirty hack !
+      # is it necessary ?
+      chown -R wims:wims /var/lib/wims /usr/lib/wims/bin /usr/lib/wims/other
+      # fixing permissions for some dirs
+      read_only_dirs;
+      # making wims suid, sgid
+      if ! dpkg-statoverride --list /var/lib/wims/public_html/wims >/dev/null 2>&1
+      then
+	  dpkg-statoverride --update --add wims wims 6755 /var/lib/wims/public_html/wims 2>/dev/null
+      fi
+      # apply a fix (thanks to dmanye@urv.cat for the hint, which solves bug #817963
+      for f in /var/lib/wims/sessions /var/lib/wims/s2; do
+	  if ! dpkg-statoverride --list $f >/dev/null 2>&1
+	  then
+	      dpkg-statoverride --update --add wims wims 755 $f 2>/dev/null
+	  fi
+      done
+      #making /usr/lib/wims/bin private
+      if ! dpkg-statoverride --list /usr/lib/wims/bin >/dev/null 2>&1
+      then
+	  dpkg-statoverride --update --add wims wims 700 /usr/lib/wims/bin 2>/dev/null
+      fi      
+      #making wims.conf private
+      conffile=/var/lib/wims/log/wims.conf
+      [ -f $conffile ] || cp -f $conffile.distrib $conffile
+      if ! dpkg-statoverride --list $conffile >/dev/null 2>&1
+      then
+	  dpkg-statoverride --update --add wims wims 600 $conffile 2>/dev/null
+      fi
+      # linking to /etc/wims
+      [ -e /etc/wims/wims.conf ] || \
+         [ -e $(readlink  /etc/wims/wims.conf) ] || 
+         ln -s $conffile /etc/wims
+      # downgrading permissions for some wrappers
+      lambdawrapper=/var/lib/wims/public_html/bin/wrap..exec
+      dpkg-statoverride --update --force --add nowims nowims 6755 $lambdawrapper 2>/dev/null
+      rm -f /var/lib/wims/log/unsecure
+	
+      # gives the write permission for wims over its config files
+      chown -R wims:root /etc/wims
+
+      # reconfigure the webserver if necessary
+      db_get wims/reconfigure-webserver
+      webservers="$RET"
+      db_stop || true
+      restart=""
+      # remove a previous file if existing for apache2.2
+      rm -f /etc/apache2/conf.d/wims.conf
+      # and create a symlink to the configuration managed by dh_apache2
+      # only when necessary
+      [ -d /etc/apache2/conf.d ] && \
+	  ln -s ../conf-available/wims.conf /etc/apache2/conf.d/
+      # enable silently the cgi module
+      if [ -e /usr/share/apache2/apache2-maintscript-helper ]; then
+	  if dpkg -l apache2 | grep -q ^ii; then
+	      . /usr/share/apache2/apache2-maintscript-helper
+	      apache2_invoke enmod cgi
+	  else
+	      echo $msg_apache2_not_configured
+	  fi
+      else
+	  echo $msg_apache2_not_there
+      fi
+      # restart webserver if necessary
+      for webserver in $restart; do
+	  webserver=${webserver%,}
+	  service $webserver reload || true
+      done
+
+      # modify the configuration for povray if this package is present
+      if [ -f /etc/povray/3.6/povray.conf ]; then
+	  if ! grep -q wims /etc/povray/3.6/povray.conf; then
+	      echo 'read+write* = /var/lib/wims/tmp' >> \
+		  /etc/povray/3.6/povray.conf
+	  fi
+      fi
+      # take in account the file /etc/mailname
+      adjust_maildir
+      # fix the link to the copyright file
+      ln -sf /usr/share/doc/wims/copyright /var/lib/wims/public_html/COPYING
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# dh_installdeb will replace this with shell code automatically
+# generated by other debhelper scripts.
+
+# Automatically added by dh_apache2/UNDECLARED
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in wims  ; do
+			apache2_invoke enconf $conf  || exit $?
+		done
+	fi
+fi
+# End automatically added section
+
+
+exit 0
+
+

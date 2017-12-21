@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	if ! getent passwd remotecv | grep -q remotecv; then
+		useradd --system --user-group --home /var/lib/python-remotecv remotecv
+	fi
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-remotecv 
+fi
+
+# End automatically added section
+# Automatically added by dh_systemd_start/10.7.2
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	deb-systemd-invoke start remotecv.service >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0

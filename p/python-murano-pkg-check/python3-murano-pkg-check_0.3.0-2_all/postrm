@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "disappear" ] ; then
+	update-alternatives --remove murano-pkg-check /usr/bin/python3-murano-pkg-check
+fi
+
+
+
+exit 0

@@ -1,0 +1,90 @@
+#!/bin/bash
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_get matlab-support/matlab-install-glob
+matlab_install_glob="$RET"
+db_get matlab-support/default-version
+matlab_default_path=$(echo $RET | cut -d '@' -f 2,2)
+db_get matlab-support/mexbuild-user
+matlab_mexbuild_user=$RET
+db_get matlab-support/rename-libs
+matlab_rename_libs=$RET
+
+CFG=/etc/matlab/debconf
+
+case "$1" in
+    configure)
+        # if there is no default path something went wrong
+        if [ -z "$matlab_default_path" ]; then
+            echo "No default Matlab path found. Exiting."
+            exit 1
+        fi
+        # look whether there is a config file and recreate the config file if
+        # missing
+        if [ ! -e $CFG ]; then
+            cp -f /usr/share/matlab/debian/debconf.template $CFG
+        fi
+        # make a backup conf file
+        cp -dpf $CFG $CFG.tmp
+
+        # check that all vars are in the debconf file
+        # If the admin deleted or commented some variables but then set
+        # them via debconf, (re-)add them to the conffile.
+        test -z "$matlab_install_glob" \
+          || grep -Eq '^ *MATLAB_INSTALL_GLOB=' $CFG.tmp \
+          || echo "MATLAB_INSTALL_GLOB=" >> $CFG.tmp
+        test -z "$matlab_mexbuild_user" \
+          || grep -Eq '^ *MATLAB_MEXBUILD_USER=' $CFG.tmp \
+          || echo "MATLAB_MEXBUILD_USER=" >> $CFG.tmp
+
+        # now set the value from the debconf database
+        # write values to config file
+        sed -e "s,^ *MATLAB_INSTALL_GLOB=.*,MATLAB_INSTALL_GLOB=\"$matlab_install_glob\"," \
+            -e "s,^ *MATLAB_MEXBUILD_USER=.*,MATLAB_MEXBUILD_USER=\"$matlab_mexbuild_user\"," \
+            < $CFG.tmp > $CFG
+
+        # remove tmp file
+        rm -f $CFG.tmp
+
+        # select the default alternative
+        update-alternatives --install /usr/bin/matlab matlab \
+          $matlab_default_path/bin/matlab 0 \
+          --slave /usr/bin/matlab-mex matlab-mex $matlab_default_path/bin/mex \
+          --slave /usr/bin/matlab-mbuild matlab-mbuild $matlab_default_path/bin/mbuild
+
+        if [ "$matlab_rename_libs" = "true" ]; then
+            for matlab_alt in $(update-alternatives --query matlab | grep 'Alternative:' | cut -d ' ' -f 2,2)
+            do
+                matlab_path=${matlab_alt%*/bin/matlab}
+                for f in $matlab_path/sys/os/glnx86/libgcc_s.so.1 \
+                         $matlab_path/sys/os/glnx86/libstdc++.so.6 \
+                         $matlab_path/sys/os/glnxa64/libgcc_s.so.1 \
+                         $matlab_path/sys/os/glnxa64/libstdc++.so.6
+                do
+                    if [ -e $f ]; then
+                        echo "Renaming $f to $f.bak."
+                        mv $f $f.bak
+                    else
+                        echo "Tried renaming $f"
+                    fi
+                done
+            done
+        fi
+
+
+
+    ;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+        # nothing to do
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+

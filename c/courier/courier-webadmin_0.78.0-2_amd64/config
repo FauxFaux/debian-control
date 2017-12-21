@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+db_input high courier-webadmin/install-cgi || [ $? -eq 30 ]
+db_go
+
+db_input critical courier-webadmin/password || [ $? -eq 30 ]
+db_go

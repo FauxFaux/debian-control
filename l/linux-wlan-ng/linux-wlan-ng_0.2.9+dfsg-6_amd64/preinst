@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+
+rm_conffile()
+{
+    CONFFILE="$1"
+
+    if [ -e "$CONFFILE" ]; then
+        md5sum=`md5sum "$CONFFILE" | cut -d ' ' -f 1`
+	old_md5sum=`dpkg-query -W -f='${Conffiles}' linux-wlan-ng | grep $CONFFILE | cut -d ' ' -f 3`
+        if [ "$md5sum" != "$old_md5sum" ]; then
+            echo "Obsolete conffile $CONFFILE has been modified by you, renaming to .dpkg-bak"
+            mv -f "$CONFFILE" "$CONFFILE".dpkg-bak
+	else
+            echo "Removing obsolete conffile $CONFFILE"
+	    rm -f "$CONFFILE"
+        fi
+    fi
+}
+
+rm_conffile /etc/modprobe/linux-wlan-ng
+

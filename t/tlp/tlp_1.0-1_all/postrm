@@ -1,0 +1,75 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dh_installdeb/10.7.2
+dpkg-maintscript-helper rm_conffile /etc/acpi/thinkpad-radiosw.sh -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/10.7.2
+dpkg-maintscript-helper rm_conffile /etc/acpi/events/thinkpad-radiosw -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/10.7.2
+dpkg-maintscript-helper rm_conffile /etc/bash_completion.d/tlp -- "$@"
+# End automatically added section
+# Automatically added by dh_systemd_start/10.7.2
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.7.2
+if [ "$1" = "purge" ] ; then
+	update-rc.d tlp remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.7.2
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask tlp-sleep.service tlp.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge tlp-sleep.service tlp.service >/dev/null
+		deb-systemd-helper unmask tlp-sleep.service tlp.service >/dev/null
+	fi
+fi
+# End automatically added section
+
+
+PMD="/usr/lib/pm-utils/power.d"
+ETD="/etc/pm/power.d"
+SYD="/lib/systemd/system"
+ESY="/etc/systemd/system"
+NUL="/dev/null"
+SRV="systemd-rfkill"
+
+case "$1" in
+    remove)
+        # Unmask pm-utils hooks
+        for i in 95hdparm-apm disable_wol hal-cd-polling intel-audio-powersave harddrive \
+            laptop-mode journal-commit pci_devices pcie_aspm readahead sata_alpm \
+            sched-powersave usb_bluetooth wireless xfs_buffer; do
+            if readlink ${ETD}/${i} | egrep -q 'tlp-nop$' ; then
+                rm ${ETD}/${i}
+            fi
+        done
+
+        # Unmask conflicting upstart jobs (Package rfkill in Ubuntu)
+        for i in /etc/init/rfkill-*.override; do
+            [ ! -f "$i" ] || rm -f $i
+        done
+
+        # Unmask conflicting systemd services
+        for i in $(ls ${SYD} 2> ${NUL} | egrep "${SRV}"); do
+            deb-systemd-helper unmask $i 2> ${NUL} || true
+        done
+        ;;
+
+esac

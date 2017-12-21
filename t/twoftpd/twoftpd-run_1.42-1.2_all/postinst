@@ -1,0 +1,29 @@
+#!/bin/sh
+set -e
+
+test "$1" = 'configure' || exit 0
+
+getent passwd ftp >/dev/null || \
+  adduser --system --home /var/ftp --no-create-home ftp
+getent passwd ftplog >/dev/null || \
+  adduser --system --home /nonexistent --no-create-home ftplog
+
+READD=twoftpd
+test -z "$2" || dpkg --compare-versions "$2" gt '1.21-4' || {
+  update-service --remove /etc/twoftpd 2>/dev/null || :
+  if update-service --check twoftpd-anon; then
+    update-service --remove /etc/twoftpd-anon || :
+    READD=twoftpd-anon
+  fi
+  sleep 6
+  for i in twoftpd twoftpd-anon; do
+    rm -rf /var/run/$i /var/run/$i.log
+  done
+}
+update-service --add /etc/$READD
+
+test -z "$2" || exit 0
+
+# new install
+chown ftplog:adm /var/log/twoftpd /var/log/twoftpd-anon
+chmod 2750 /var/log/twoftpd /var/log/twoftpd-anon

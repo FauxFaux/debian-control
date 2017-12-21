@@ -1,0 +1,43 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        if ! getent passwd grafana > /dev/null 2>&1 ; then
+            adduser --quiet --system --group --disabled-login --no-create-home --home /var/lib/grafana grafana
+        fi
+        chown -R grafana:grafana /var/log/grafana /var/lib/grafana
+        chmod 755 /var/log/grafana /var/lib/grafana
+
+        ## configuration files should not be modifiable by grafana user, as this can be a security issue.
+        chmod 755 /etc/grafana
+        chown -h root:grafana /etc/grafana/grafana.ini /etc/grafana/ldap.toml
+        chmod    u=rw,g=r,o=- /etc/grafana/grafana.ini /etc/grafana/ldap.toml
+    ;;
+esac
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask grafana.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled grafana.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable grafana.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state grafana.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/grafana" ]; then
+		update-rc.d grafana defaults >/dev/null
+		invoke-rc.d grafana start || exit $?
+	fi
+fi
+# End automatically added section
+

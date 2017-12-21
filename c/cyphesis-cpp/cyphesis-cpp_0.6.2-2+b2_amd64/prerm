@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+if [ -x "/etc/init.d/cyphesis-cpp" ]; then
+	invoke-rc.d cyphesis-cpp stop || exit $?
+fi
+
+

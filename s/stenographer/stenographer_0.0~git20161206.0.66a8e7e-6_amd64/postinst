@@ -1,0 +1,43 @@
+#!/bin/sh
+
+set -e
+
+STENOTYPE=/usr/sbin/stenotype
+
+if [ "$1" = configure ]; then
+    if which setcap > /dev/null; then
+        if setcap 'CAP_NET_RAW,CAP_NET_ADMIN=ep CAP_IPC_LOCK=ep' "$STENOTYPE"; then
+            echo "setcap on $STENOTYPE worked."
+            if ! dpkg-statoverride --list $STENOTYPE >/dev/null 2>&1; then
+                dpkg-statoverride \
+                    --quiet --update \
+                    --add stenographer root 0744 $STENOTYPE
+            fi
+            # twice, since caps seem to be reset after the call above
+            setcap 'CAP_NET_RAW,CAP_NET_ADMIN=ep CAP_IPC_LOCK=ep' "$STENOTYPE"
+        else
+            echo "setcap on $STENOTYPE failed, falling back to setuid."
+            if ! dpkg-statoverride --list $STENOTYPE >/dev/null 2>&1; then
+                dpkg-statoverride \
+                    --quiet --update \
+                    --add root stenographer 4754 $STENOTYPE
+            fi
+        fi
+    fi
+fi
+
+# Automatically added by dh_installinit/10.9.2
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/stenographer" ]; then
+		update-rc.d stenographer defaults >/dev/null
+		invoke-rc.d stenographer start || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start/10.9.2
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	deb-systemd-invoke start 'stenographer.service' >/dev/null || true
+fi
+# End automatically added section
+

@@ -1,0 +1,47 @@
+#!/bin/sh
+
+set -e
+
+# use && in order to avoid some problem with set -e in functions
+rebuild_constants_list () {
+    CONSTANTS_FILE="$DPKG_ROOT/usr/lib/nodejs/constants-browserify/constants.json"
+    # set -e is unspecified in function, moreover we want clean up
+    while true; do
+	# create file if not exist with some sensible right rw-r--r--
+	(umask 022 && touch "$CONSTANTS_FILE.triggered") || break;
+	# force right if it exist
+	chmod 0644 "$CONSTANTS_FILE.triggered" || break;
+	#reconstruct node constant list
+	# move is atomic not redirection
+	"$DPKG_ROOT/usr/bin/node" -pe 'JSON.stringify(require("constants"), null, "  ")' > "$CONSTANTS_FILE.triggered" || break;
+	mv "$CONSTANTS_FILE.triggered" "$CONSTANTS_FILE" || break;
+	return 0;
+    done
+    echo "postinst failled to create $CONSTANTS_FILE" >&2
+    # recover
+    rm -f  "$CONSTANTS_FILE.triggered"
+    rm -f  "$CONSTANTS_FILE"
+    return 1
+}
+
+case "$1" in
+    configure)
+	rebuild_constants_list
+    ;;
+
+    triggered)
+        rebuild_constants_list
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

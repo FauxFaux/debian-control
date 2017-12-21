@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        ## Secure access to Zabbix configuration:
+        chown -h root:grafana /etc/grafana/zabbix.json
+        chmod -c u=rw,g=r,o=- /etc/grafana/zabbix.json
+    ;;
+esac
+
+

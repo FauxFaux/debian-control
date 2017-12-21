@@ -1,0 +1,232 @@
+#!/bin/sh -e
+
+# Import debconf library...
+. /usr/share/debconf/confmodule
+
+# Any amd configuration present ?
+if test -d /etc/amd
+then
+    db_get am-utils/import-amd-conf-done
+    if test "$RET" = false
+    then
+	# Ask about importing amd configuration
+	db_input high am-utils/import-amd-conf || test $? = 30
+	db_go
+
+	db_get am-utils/import-amd-conf
+	if test "$RET" = true
+	then
+	    # Attempt importing defaults...
+	    if test -f /etc/amd/config.disabled-by-am-utils
+	    then
+		# Import general config
+		. /etc/amd/config.disabled-by-am-utils
+		if test "$LOGFILE" != syslog
+		then
+		    db_input medium am-utils/log-to-file
+		    db_go
+		fi
+		if test "x$NISMAP" != x
+		then
+		    db_set am-utils/use-nis true
+		    db_set am-utils/nis-master-map "$NISMAP"
+		    if test "x$NISKEY" != x
+		    then
+			db_set am-utils/nis-master-map-key-style config
+			db_set am-utils/nis-key "$NISKEY"
+		    else
+			db_set am-utils/nis-master-map-key-style onekey
+		    fi
+		else
+		    db_set am-utils/use-nis false
+		    # Try to locate various maps
+		    if test -f /etc/amd/amd.master
+		    then
+			success=true
+			passwdmap=false
+			netmap=false
+			maps=""
+			set -- `cat /etc/amd/amd.master`
+			while [ $# != 0 ]
+			do
+			    case "$1" in
+				-[nprv])
+				    shift
+				    ;;
+				-[acdkltwxyCD])
+				    shift
+				    if test $# = 0
+				    then
+					success=false
+					break
+				    fi
+				    shift
+				    ;;
+				*)
+				    break
+				    ;;
+			    esac
+			done
+			if $success
+			then
+			    while [ $# != 0 ]
+			    do
+				arg="$1"
+				shift
+				# Special cases
+				if [ "$arg" = home ] || [ "$arg" = /home ] \
+				&& [ "$1" = /etc/passwd ]
+				then
+				    shift
+				    passwdmap=true
+				    continue
+				fi
+				if [ "$arg" = /net ] && [ "$1" = /etc/amd/amd.net ]
+				then
+				    shift
+				    netmap=true
+				    continue
+				fi
+
+				case "$arg" in
+				    /*)
+					if test $# = 0
+					then
+					    success=false
+					    break
+					fi
+					loc="$1"
+					shift
+					case "$loc" in
+					    /etc/amd/*)
+						newloc="`echo $loc | sed -e \
+							 s!amd!am-utils!`"
+						if test -f "$loc"
+						then
+						    cp "$loc" "$newloc"
+						    loc="$newloc"
+						else
+						    success=false
+						    break
+						fi
+						;;
+					esac
+					maps="$maps $arg $loc"
+					while true
+					do
+					    case "$1" in
+						-*)
+						    maps="$maps $1"
+						    shift
+						    ;;
+						*)
+						    break
+						    ;;
+					    esac
+					done
+					;;
+				    *)
+					success=false
+					break
+					;;
+				esac
+			    done
+			fi
+			if $success
+			then
+			    if $netmap
+			    then
+				db_set am-utils/map-net true
+			    else
+				db_set am-utils/map-net false
+			    fi
+			    if $passwdmap
+			    then
+				db_set am-utils/map-home true
+			    else
+				db_set am-utils/map-home false
+			    fi
+			    db_set am-utils/map-others "$maps"
+			else
+			    db_input high am-utils/import-amd-failed
+			fi
+		    fi
+		fi
+	    fi
+	fi
+	db_set am-utils/import-amd-conf-done true
+    fi
+fi
+
+# Am-utils 5.0.5-1 and earlier had am-utils/nis-multi-key
+if db_get am-utils/nis-multi-key
+then
+    case "$RET" in
+	true)
+	    db_set am-utils/nis-master-map-key-style config
+	    ;;
+	false)
+	    db_set am-utils/nis-master-map-key-style onekey
+	    ;;
+	*)
+	    echo "$0: unknown value for nis-multi-key: $RET"
+	    exit 1
+    esac
+    db_unregister am-utils/nis-multi-key
+fi
+
+# Configuration
+db_input high am-utils/use-nis || test $? = 30
+db_go
+
+db_get am-utils/use-nis
+if test "$RET" = true
+then
+    # NIS config
+
+    # Ask master map name
+    db_input high am-utils/nis-master-map || test $? = 30
+    db_go
+
+    # Which kind of mast map...
+    db_input high am-utils/nis-master-map-key-style || test $? = 30
+    db_go
+
+    db_get am-utils/nis-master-map-key-style
+    case "$RET" in
+        config)
+    	# We use configurations as keys
+
+    	# Ask key name
+    	db_input high am-utils/nis-key || test $? = 30
+    	db_go
+    	;;
+        custom)
+    	# Custom string...
+    	db_input high am-utils/nis-custom || test $? = 30
+    	db_go
+    	;;
+    esac
+else
+    # No-NIS config
+
+    # net map
+    db_input medium am-utils/map-net || test $? = 30
+    db_go
+
+    # passwd map
+    db_input low am-utils/map-home || test $? = 30
+    db_go
+
+    # other maps
+    db_input low am-utils/map-others || test $? = 30
+    db_go
+fi
+
+db_input low am-utils/clustername || test $? = 30
+db_go
+
+db_stop
+
+# Done
+exit 0

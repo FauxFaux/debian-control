@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper rm_conffile /etc/apparmor.d/local/usr.lib.apache2.mpm-prefork.apache2 2.8.0-0ubuntu21~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper rm_conffile /etc/apparmor.d/usr.lib.apache2.mpm-prefork.apache2 2.8.0-0ubuntu21~ -- "$@"
+# End automatically added section
+# Automatically added by dh_apache2/UNDECLARED
+if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ] ; then
+	if true; then
+		if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+			. /usr/share/apache2/apache2-maintscript-helper
+
+			for conf in apparmor  ; do
+				apache2_invoke dismod $conf  || exit $?
+			done
+		fi
+	fi
+fi
+# End automatically added section

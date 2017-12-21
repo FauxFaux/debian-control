@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" -o "$1" = "remove" ]; then
+  for binary in maildirmake deliverquota makedat; do
+      update-alternatives --remove $binary /usr/bin/$binary.courier
+  done
+  update-alternatives --remove maildir.5.gz /usr/share/man/man5/maildir.courier.5.gz
+  update-alternatives --remove maildirquota.7.gz /usr/share/man/man7/maildirquota.courier.7.gz
+fi
+
+

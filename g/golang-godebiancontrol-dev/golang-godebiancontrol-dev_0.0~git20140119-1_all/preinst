@@ -1,6 +1,0 @@
-#!/bin/sh
-
-# This file is replaced by a symlink
-if [ "$1" = "install" ] || [ "$1" = "upgrade" ] && [ -n "$2" ] && dpkg --compare-versions "$2" lt "0.0~git20140119-1"; then
-	rm -rf /usr/share/gocode/src/github.com/mstap/godebiancontrol
-fi

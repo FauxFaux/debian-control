@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    remove|upgrade)
+        # This is to ensure that "old" doc files (which might not be
+        # overwritten by new installs) get removed
+        rm -f /usr/doc/scm
+    ;;
+esac
+
+

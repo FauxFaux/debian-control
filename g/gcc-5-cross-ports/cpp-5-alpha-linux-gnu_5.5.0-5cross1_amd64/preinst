@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove alpha-linux-gnu-cpp /usr/bin/alpha-linux-gnu-cpp-5
+fi
+
+
+
+exit 0

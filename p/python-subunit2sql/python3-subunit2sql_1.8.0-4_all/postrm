@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "disappear" ] ; then
+	update-alternatives --remove sql2subunit /usr/bin/python3-sql2subunit
+	update-alternatives --remove subunit2sql /usr/bin/python3-subunit2sql
+	update-alternatives --remove subunit2sql-db-manage /usr/bin/python3-subunit2sql-db-manage
+	update-alternatives --remove subunit2sql-graph /usr/bin/python3-subunit2sql-graph
+fi
+
+
+
+exit 0

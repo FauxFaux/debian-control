@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+TARGETDIR=/usr/share/astrometry
+
+if [ "$1" = "remove" ] ; then
+    for suffix in $(seq -f %02.0f 8 19) ; do
+	DATA=index-2mass-${suffix}.fits
+	rm -f ${TARGETDIR}/${DATA}
+    done
+fi
+
+

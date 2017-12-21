@@ -1,0 +1,19 @@
+#!/bin/sh
+# config script for oneliner-el
+#
+# see: dh_installdebconf(1)
+
+set -e
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+case "${1}" in
+    (configure|reconfigure)
+	db_input medium oneliner-el/default || true
+	db_go || true
+	;;
+    (*) echo >&2 "${0##*/}: Called with unknown argument \`${1}'." ;;
+esac
+
+exit 0

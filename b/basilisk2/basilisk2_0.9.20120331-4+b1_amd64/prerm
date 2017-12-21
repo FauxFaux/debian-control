@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+case "$1" in
+    remove|upgrade|deconfigure)
+        update-alternatives --remove BasiliskII /usr/bin/BasiliskII-jit
+        update-alternatives --remove BasiliskII /usr/bin/BasiliskII-nojit
+        ;;
+esac
+
+
+
+exit 0

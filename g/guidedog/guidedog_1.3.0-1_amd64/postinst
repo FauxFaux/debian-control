@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit/10.7.2
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/guidedog" ]; then
+		update-rc.d guidedog defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d guidedog $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_icons/10.7.2
+if which update-icon-caches >/dev/null 2>&1 ; then
+	update-icon-caches /usr/share/icons/locolor
+fi
+# End automatically added section

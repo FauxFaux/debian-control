@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+[ -n "$IUDSZG2DEBUG" ] && set -x
+
+case "$1" in
+	upgrade)
+       		if ! check-ifupdown-scripts-zg2.d-symlinks; then
+			echo "aborting package upgrade, see /etc/network/ifupdown-scripts-zg2.d/00README.linkdir"
+			exit 1
+		fi
+		;;
+	remove)
+	      	kill-ifupdown-scripts-zg2.d-symlinks
+		;;
+esac
+
+

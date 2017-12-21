@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+db_title publicfile-installer
+
+# FIXME add test if needed
+db_input high publicfile-installer/build || true
+db_go || true
+#
+
+db_get publicfile-installer/build || true
+if test x"$RET" = x"false"
+then
+    db_fset publicfile-installer/build seen false || true
+fi

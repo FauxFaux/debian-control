@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+if [ "$1" = remove ] || [ "$1" = deconfigure ]
+then
+	update-alternatives --remove py-afl-fuzz /usr/share/python-afl/py-afl-fuzz
+	update-alternatives --remove py-afl-cmin /usr/share/python-afl/py-afl-cmin
+	update-alternatives --remove py-afl-showmap /usr/share/python-afl/py-afl-showmap
+	update-alternatives --remove py-afl-tmin /usr/share/python-afl/py-afl-tmin
+fi
+

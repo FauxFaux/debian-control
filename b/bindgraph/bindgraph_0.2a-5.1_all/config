@@ -1,0 +1,46 @@
+#!/bin/sh
+# config script for BindGraph
+#
+# by Jose Luis Tallon <jltallon@adv-solutions.net>
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+db_title "BindGraph"
+
+set -e
+
+case "$1" in
+        configure|reconfigure)
+
+		if [ -f /etc/default/bindgraph ]; then
+			. /etc/default/bindgraph
+
+			if [ -n "$DNS_LOG" ]; then
+				db_set bindgraph/logfile "$DNS_LOG"
+			fi
+		fi 		
+ 
+		db_input medium bindgraph/start_on_boot || true
+		db_go
+
+#		BIND_VERSION=`dpkg -l bind9 | awk '{if($2=="bind9")print $3;}'`
+#		if [ -n "$BIND_VERSION" ]; then
+#			# Seems BIND9 is installed. Display config note
+#			db_input medium bindgraph/configure_bind || true
+#		fi
+
+		db_input medium bindgraph/logfile || true
+		db_go
+
+		db_input medium bindgraph/stay_on_purge || true
+		db_go
+	;;
+
+	*)
+		echo "config called with unknown argument \$1'" >&2
+		exit 0
+	;;
+esac
+
+exit 0

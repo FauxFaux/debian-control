@@ -1,0 +1,12 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+  remove|deconfigure)
+    update-alternatives --remove emacs.info.gz \
+                        /usr/share/info/emacs-25/emacs.info.gz
+    ;;
+esac
+
+

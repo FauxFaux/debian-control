@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+
+if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ]; then
+
+	update-alternatives --remove nvidia /usr/lib/nvidia/legacy-340xx
+
+fi
+
+
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper rm_conffile /etc/nvidia/nvidia-legacy-340xx-modprobe.conf 340.93-2\~ -- "$@"
+# End automatically added section
+

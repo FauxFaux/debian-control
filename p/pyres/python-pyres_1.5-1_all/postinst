@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	if ! getent passwd pyres | grep -q pyres; then
+		useradd --system --user-group --home /var/lib/python-pyres pyres
+	fi
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-pyres 
+fi
+
+# End automatically added section
+
+
+exit 0

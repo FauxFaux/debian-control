@@ -1,0 +1,161 @@
+#!/bin/sh
+# postinst script for igtf-policy-mics
+#
+# see: dh_installdeb(1)
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+# auxiliary function to find $1 in $2
+in_list() {
+    local i
+    local s=$1
+    shift
+    for i in "$@" ; do
+	if test "$s" = "$i" ; then
+	    return 0
+	fi
+    done
+    return 1
+}
+
+
+# check if $1 is supposed to be included.
+ca_included() {
+    if [ "$install_profile" = true ]; then
+	if in_list "$1" $excluded ; then
+	    return 1
+	else
+	    return 0
+	fi
+    else
+	if in_list "$1" $included ; then
+	    return 0
+	else
+	    return 1
+	fi
+    fi
+}
+
+# When CAs are discontinued, they (ought to) clean up the symlinks.
+# But the CRL files may be left behind. It's always a good idea to remove
+# those CRLs which no longer have their CA certificate present.
+remove_leftover_crls() {
+    for i in `find ${location} -maxdepth 1 -name '*.r0' -print` ; do
+	ca=`basename ${i%.*}`
+	if [ ! -e ${location}/$ca.0 ] ; then
+	    rm -f $i
+	fi
+    done
+}
+
+# Earlier versions of this package (<=1.54) did not clean up the symlinks
+# of removed CAs
+remove_discontinued_cas() {
+    discontinued="AIST 075047ca a317c467 JUnet-CA 3154fd00 b3222f9e IUCC bfafd1bd 6fee79b0"
+    for i in $discontinued ; do
+	for e in crl_url info namespaces pem signing_policy 0; do
+	    if [ -h /etc/grid-security/certificates/$i.$e ]; then
+		rm -f /etc/grid-security/certificates/$i.$e
+	    fi
+	done
+    done
+}
+
+
+case "$1" in
+    configure)
+	# find the location where to install the certificates
+	db_get igtf-policy/location
+	location="$RET"
+	if [ ! -d "$location" ]; then
+	    if ! mkdir -p "$location" ; then
+		echo "could not create directory $location" >&2
+		exit 1
+	    else
+		# leave a marker to flag that this directory should
+		# be removed along with the package.
+		touch "$location"/.created_by_igtf_policy
+	    fi
+	fi
+
+	db_get igtf-policy/old-location
+	oldloc="$RET"
+	# Move the whole kit and kaboodle to the new spot;
+	# including any other igtf profile.
+	if [ -d "$oldloc" -a "$oldloc" != "$location" ]; then
+	    mv "$oldloc"/* "$location"/ > /dev/null 2>&1 || true
+	    if [ -f "$oldloc"/.created_by_igtf_policy ]; then
+		rm  "$oldloc"/.created_by_igtf_policy
+		filesleft=`ls -a "$oldloc" | wc -l`
+		if [ $filesleft -eq 2 ]; then
+		    rmdir "$oldloc"
+		fi
+	    fi
+	fi
+
+	# The configuration works either by exclusion or
+	# inclusion of exceptions. If install_profile is
+	# 'yes', then all are installed except those listed
+	# in exclude_ca; if 'no' then only those in
+	# include_ca are installed.
+
+	# get the setting of whether to install the profile
+	db_get igtf-policy-mics/install_profile
+	install_profile="$RET"
+
+	# Get the in/exclude lists, replace the commas
+	db_get igtf-policy-mics/exclude_ca
+	excluded=`echo "$RET" | tr ',' ' '`
+
+	db_get igtf-policy-mics/include_ca
+	included=`echo "$RET" | tr ',' ' '`
+
+	# symlink each file to ${location}
+	# following the inclusion/exclusion principle described
+	# above. The hashed filenames are symlinks to the real
+	# names, so they must be resolved with readlink.
+	for f in `find /usr/share/igtf-policy/mics/ -maxdepth 1 -not -type d`  ; do
+            # read the link
+	    if [ -h "$f" ]; then
+		l=`readlink "$f"`
+	    else
+		l="$f"
+	    fi
+	    ca=`basename ${l%.*}`
+	    if ca_included $ca; then
+                # create symlink if it doesn't exist
+		if [ ! -e ${location}/`basename $f` ]; then
+		    # copy symbolic links (that point to the same directory)
+		    # rather than create another link
+		    if [ -h "$f" ] && ! readlink "$f" | grep -q '/' ; then
+			cp -d "$f" ${location}/
+		    else
+			ln -s "$f" ${location}/
+		    fi
+		fi
+	    else
+                # remove the files, and CRL if any
+		rm -f ${location}/`basename $f`
+		rm -f ${location}/`basename ${f%.*}`.r0
+	    fi
+    	done
+	remove_leftover_crls
+	if dpkg --compare-versions "$2" lt 1.55 ; then
+	    remove_discontinued_cas
+	fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

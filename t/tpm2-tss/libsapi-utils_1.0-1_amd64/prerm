@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ]; then
+	deb-systemd-invoke stop tpm2-resourcemgr.service >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/tpm2-resourcemgr" ]; then
+	invoke-rc.d tpm2-resourcemgr stop || exit $?
+fi
+# End automatically added section

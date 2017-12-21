@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+# Automatically added by dh_installdeb/10.7.2
+dpkg-maintscript-helper symlink_to_dir /usr/share/doc/afterstep /usr/share/doc/afterstep-data 2.2.12-4\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installwm/10.7.2
+if [ "$1" = "remove" ]; then
+	update-alternatives --remove x-window-manager /usr/bin/afterstep
+fi
+# End automatically added section
+
+
+if [ "$1" = "remove" ] ; then
+    rm -rf /var/lib/afterstep/menu
+fi
+
+exit 0

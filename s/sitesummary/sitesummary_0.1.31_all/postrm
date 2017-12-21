@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" ] ; then
+    cd /var/lib/sitesummary
+    rm -rf entries tmpstorage www
+    rm -f munin.conf munin.conf.pre munin.conf.post
+    rm -f nagios-generated.cfg
+fi
+
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper mv_conffile /etc/apache2/conf.d/sitesummary /etc/apache2/conf-available/sitesummary.conf 0.1.10 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdebconf/10.10.9
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

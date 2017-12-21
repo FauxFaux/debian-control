@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Automatically added by dh_installmenu/10.6.4
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+
+
+set -e
+
+if [ "$1" = purge -a -e /usr/share/debconf/confmodule ]; then
+  . /usr/share/debconf/confmodule
+  db_purge
+fi
+
+if ( `dpkg-statoverride --list | grep -q bin/cwcp` ); then
+  dpkg-statoverride --remove /usr/bin/cwcp
+fi

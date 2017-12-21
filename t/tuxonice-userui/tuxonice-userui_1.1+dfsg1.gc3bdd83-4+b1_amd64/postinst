@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+    if [ -x /usr/sbin/update-initramfs ]; then
+        update-initramfs -u
+    fi
+fi
+
+dpkg-maintscript-helper rm_conffile /etc/pm/config.d/tuxonice-userui 1.1+ -- "$@"
+
+

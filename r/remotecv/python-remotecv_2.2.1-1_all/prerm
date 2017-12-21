@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_systemd_start/10.7.2
+if [ -d /run/systemd/system ]; then
+	deb-systemd-invoke stop remotecv.service >/dev/null
+fi
+# End automatically added section
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p python-remotecv 
+else
+	dpkg -L python-remotecv | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section

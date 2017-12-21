@@ -1,0 +1,179 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installzopeinstance
+PKG=zope2.13-sandbox
+INSTANCE=sandbox
+ZVER=2.13
+PORT=8028
+DATABASE=ZODB
+
+# if we do not have debconf, we just skip this
+test -f /usr/share/debconf/confmodule || exit 0
+. /usr/share/debconf/confmodule
+
+db_capb backup
+
+LAST_STATE=0
+STATE=1
+TRIES=0
+
+if [ -d /var/lib/zope$ZVER/instance/$INSTANCE ] && \
+   [ -f /var/lib/zope$ZVER/instance/$INSTANCE/var/Data.fs ]; then
+   exit 0
+fi
+
+while true; do
+
+    if [ -d /var/lib/zope$ZVER/instance/$INSTANCE ] && \
+         [ "$DATABASE" != "ZEO" ] && \
+         [ ! -f /var/lib/zope$ZVER/instance/$INSTANCE/var/Data.fs ]; then
+        FIRST_STATE=1
+    else
+        FIRST_STATE=2
+    fi
+
+    [ $STATE -ge $FIRST_STATE ] || STATE=$FIRST_STATE
+    case "$STATE" in
+        1)
+            # directory exists, but no data file
+            db_register zope-common/remove-instance-without-data $PKG/remove-instance-without-data || true
+            db_subst $PKG/remove-instance-without-data instance "$INSTANCE" || true
+            db_subst $PKG/remove-instance-without-data zver "$ZVER" || true
+            if db_go; then
+                db_get $PKG/remove-instance-without-data
+                if [ "$RET" = abort ]; then
+                    exit 10
+                fi
+                STATE=2
+            else
+                STATE=1
+            fi
+            ;;
+        2)
+            RET=""
+            db_get $PKG/admin-user || true
+            USER="$RET"
+
+            db_register zope-common/admin-user $PKG/admin-user
+            db_subst $PKG/admin-user instance "$INSTANCE" || true
+            db_subst $PKG/admin-user zver "$ZVER" || true
+            if ! db_input high $PKG/admin-user && [ "$USER" = "" ]; then
+                db_set $PKG/admin-user "admin"
+            fi
+            if db_go; then
+                db_get $PKG/admin-user
+                if echo "$RET" | grep -q '^[a-zA-Z][a-zA-Z0-9]*$'; then
+                    STATE=3
+                else
+                    STATE=2
+                fi
+            else
+                STATE=1
+            fi
+           ;;
+        3)
+            RET=""
+            db_get $PKG/admin-password || true
+            PWD="$RET"
+
+            db_register zope-common/admin-password $PKG/admin-password
+            db_subst $PKG/admin-password instance "$INSTANCE" || true
+            db_subst $PKG/admin-password zver "$ZVER" || true
+            if ! db_input high $PKG/admin-password && [ "$PWD" = "" ]; then
+                rpassword=`head -c 4 /dev/urandom | od -x | awk '{print $2$3}' | head -n 1`
+                db_register zope-common/admin-password-confirmation $PKG/admin-password-confirmation || true
+                db_set $PKG/admin-password "$rpassword"
+                db_set $PKG/admin-password-confirmation "$rpassword"
+                db_register zope-common/admin-automatic-password $PKG/admin-automatic-password || true
+                db_subst $PKG/admin-automatic-password instance "$INSTANCE" || true
+                db_subst $PKG/admin-automatic-password zver "$ZVER" || true
+                db_subst $PKG/admin-automatic-password user "admin" || true
+                db_subst $PKG/admin-automatic-password password "$rpassword" || true
+                db_input high $PKG/admin-automatic-password || true
+                db_go || true
+		db_unregister $PKG/admin-automatic-password || true
+                STATE=4
+                continue
+            fi
+            if db_go; then
+                db_get $PKG/admin-password
+                if [ -n "$RET" ]; then
+                    PASS="$RET"
+                    db_register zope-common/admin-password-confirmation $PKG/admin-password-confirmation || true
+                    db_subst $PKG/admin-password-confirmation instance "$INSTANCE" || true
+                    db_subst $PKG/admin-password-confirmation zver "$ZVER" || true
+                    db_input high $PKG/admin-password-confirmation || true
+                    db_go
+                    db_get $PKG/admin-password-confirmation
+                    if [ "$PASS" = "$RET" ]; then
+                       STATE=4
+                    else
+                       STATE=3
+                    fi
+                else
+                    STATE=3
+                fi
+            else
+                STATE=2
+            fi
+            ;;
+        4)
+            db_register zope-common/instance-http-port $PKG/instance-http-port
+            db_subst $PKG/instance-http-port instance "$INSTANCE" || true
+            db_subst $PKG/instance-http-port zver "$ZVER" || true
+            db_fget $PKG/instance-http-port seen
+            if [ "$RET" = false ]; then
+                db_set $PKG/instance-http-port "$PORT" || true
+            fi
+            db_input high $PKG/instance-http-port || true
+            if db_go; then
+                STATE=5
+            else
+                STATE=3
+            fi
+            ;;
+        5)
+            if [ "$DATABASE" = "ZEO" ]; then
+                db_register zope-common/instance-zeo-port $PKG/instance-zeo-port
+                db_subst $PKG/instance-zeo-port instance "$INSTANCE" || true
+                db_fget $PKG/instance-zeo-port seen
+                if [ "$RET" = false ]; then
+                    db_set $PKG/instance-zeo-port "8100" || true
+                fi
+                db_input high $PKG/instance-zeo-port || true
+                if db_go; then
+                    STATE=6
+                else
+                    STATE=4
+                fi
+            else
+                STATE=6
+            fi
+            ;;
+        6)
+            db_register zope-common/keep-data-on-purge $PKG/keep-data-on-purge
+            db_subst $PKG/keep-data-on-purge instance "$INSTANCE" || true
+            db_subst $PKG/keep-data-on-purge zver "$ZVER" || true
+            db_input high $PKG/keep-data-on-purge || true
+            if db_go; then
+                STATE=7
+            else
+                STATE=5
+            fi
+            ;;
+        *)
+            break
+    esac
+    if [ $LAST_STATE -eq $STATE ]; then
+        TRIES=$(($TRIES + 1))
+        if [ $TRIES -gt 3 ]; then
+            exit $((20 + $STATE))
+        fi
+    fi
+    LAST_STATE=$STATE
+done
+
+if [ $STATE -le $FIRST_STATE ]; then
+    exit 30
+fi
+# End automatically added section

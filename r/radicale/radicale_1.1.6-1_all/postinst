@@ -1,0 +1,32 @@
+#!/bin/sh
+# postinst script for radicale
+
+set -e
+
+NAME=radicale
+ACCOUNTNAME=$NAME
+DAEMON_UID=$ACCOUNTNAME
+DAEMON_GID=$ACCOUNTNAME
+CALDIR=/var/lib/$NAME
+ACCOUNTHOME=$CALDIR
+GECOS="Radicale CalDAV server"
+
+case "$1" in
+  configure)
+	if ! getent passwd $ACCOUNTNAME >/dev/null 2>&1; then
+		adduser --system --home $ACCOUNTHOME --no-create-home \
+			--gecos "$GECOS" --group --disabled-password \
+			--quiet $ACCOUNTNAME
+	fi
+	;;
+esac
+
+# Automatically added by dh_installinit/10.6.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/radicale" ]; then
+		update-rc.d radicale defaults >/dev/null
+		invoke-rc.d radicale start || exit $?
+	fi
+fi
+# End automatically added section
+

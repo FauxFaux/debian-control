@@ -1,0 +1,74 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/bash_completion.d/one 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/econe.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /one/auth/ldap_auth.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/auth/x509_auth.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/vmm_ec2/vmm_ec2rc 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/vmm_ec2/vmm_ec2.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi_templates/small.erb 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi_templates/network.erb 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi_templates/medium.erb 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi_templates/large.erb 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi_templates/custom.erb 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi_templates/common.erb 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/im_ec2/im_ec2rc 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/im_ec2/im_ec2.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/auth/quota.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi-server.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/ozones-server.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi-server.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/group.default 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ]; then
+	deb-systemd-invoke stop opennebula-scheduler.service >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/opennebula" ]; then
+	invoke-rc.d opennebula stop || exit $?
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/opennebula-scheduler" ]; then
+	invoke-rc.d opennebula-scheduler stop || exit $?
+fi
+# End automatically added section

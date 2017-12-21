@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+if [ "$1" = "purge" ] && test -e /etc/GNUstep/Defaults/menu.hook ; then
+	rm /etc/GNUstep/Defaults/menu.hook
+fi
+# Automatically added by dh_installdeb/10.7.2
+dpkg-maintscript-helper rm_conffile /etc/menu-methods/wmaker 0.95.8-2\~ -- "$@"
+# End automatically added section
+

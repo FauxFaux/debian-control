@@ -1,0 +1,35 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ -f /usr/share/dbconfig-common/dpkg/config.pgsql ]; then
+    dbc_dbname="mailman3suite"
+    dbc_dbuser="mailman3suite"
+    . /usr/share/dbconfig-common/dpkg/config.pgsql
+    dbc_go mailman3-suite "$@"
+fi
+
+get_config_option () {
+    option="$1"
+    [ -f /etc/mailman3/mailman3-suite.py ] || return
+    sed -n -e "s/\s*$option\s*=\s*'\(.*\)'\s*$" \
+        /etc/mailman3/mailman3-suite.py 2>/dev/null
+}
+
+if [ -f /etc/mailman3/mailman-suite.py ]; then
+    emailname="$(get_config_option EMAILNAME)"
+    db_set mailman3-suite/emailname "$emailname"
+elif [ -f /etc/mailname ]; then
+    emailname="$(cat /etc/mailname)"
+    db_set mailman3-suite/emailname "$emailname"
+fi
+
+db_input medium mailman3-suite/emailname || true
+db_input medium mailman3-suite/superuser-name || true
+db_input medium mailman3-suite/superuser-mail || true
+db_input medium mailman3-suite/superuser-password || true
+db_input medium mailman3-suite/reconfigure-webserver || true
+db_input medium mailman3-suite/restart-webserver || true
+db_go

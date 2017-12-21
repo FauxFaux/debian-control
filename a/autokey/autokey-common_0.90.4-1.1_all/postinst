@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+# we ship an empty postinst file because svn-buildpackage keeps the
+# upstream debian/ files (see #623163)
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p autokey-common 
+fi
+
+# End automatically added section
+# Automatically added by dh_icons/10.10.9
+if which update-icon-caches >/dev/null 2>&1 ; then
+	update-icon-caches /usr/share/icons/Humanity /usr/share/icons/ubuntu-mono-dark /usr/share/icons/ubuntu-mono-light
+fi
+# End automatically added section
+
+
+exit 0

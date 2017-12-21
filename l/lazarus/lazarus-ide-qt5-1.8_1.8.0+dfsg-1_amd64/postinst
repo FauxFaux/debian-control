@@ -1,0 +1,12 @@
+#! /bin/sh
+
+set -e
+
+LAZARUS_DIR=/usr/lib/lazarus/1.8.0
+
+# Add alternatives
+update-alternatives \
+    --install ${LAZARUS_DIR}/lazarus lazarus-1.8.0 ${LAZARUS_DIR}/lazarus-qt5 1080000
+
+# Debhelper code
+

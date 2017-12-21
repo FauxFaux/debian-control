@@ -1,0 +1,42 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" ]; then
+	rm -rf /etc/ircd-hybrid/ircd.conf \
+          /etc/ircd-hybrid/ircd.motd \
+	      /var/lib/ircd-hybrid
+	
+	rm -f /etc/ircd-hybrid/key/ircd.key \
+		/etc/ircd-hybrid/key/ircd.pub \
+		/etc/ircd-hybrid/key/ircd.pem
+
+	if [ -d "/etc/ircd-hybrid/key" ]; then
+	  rmdir --ignore-fail-on-non-empty /etc/ircd-hybrid/key
+	fi
+
+	if [ -d "/etc/ircd-hybrid" ]; then
+	  rmdir --ignore-fail-on-non-empty /etc/ircd-hybrid
+	fi
+
+	rm -f /var/log/ircd/ircd-hybrid.log* /var/run/ircd/ircd-hybrid.pid
+
+	if [ -d "/var/log/ircd" ]; then
+	  rmdir --ignore-fail-on-non-empty /var/log/ircd
+	fi
+
+	if [ -d "/var/run/ircd" ]; then
+	  rmdir --ignore-fail-on-non-empty /var/run/ircd 
+	fi
+
+# Not added anymore with dh_installinit -n, so we manage it manually.
+	update-rc.d ircd-hybrid remove >/dev/null || exit $?
+fi
+
+# Automatically added by dh_installdebconf/10.7.2
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

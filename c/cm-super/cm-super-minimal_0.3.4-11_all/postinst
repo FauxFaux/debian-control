@@ -1,0 +1,28 @@
+#!/bin/sh -e
+# postinst for cm-super-minimal
+
+# Automatically added by dh_installtex
+##
+## postinst-tex
+##
+## postinst snippets for everything TeX related
+## simply call update-texmf-config triggers
+##
+## Authors:
+##       Norbert Preining <preining@logic.at>
+##
+#
+
+case "$1" in
+    configure|abort-upgrade|abort-remove|abort-deconfigure)
+        update-texmf-config map
+    ;;
+esac
+
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/texmf/updmap.d/50cm-super-minimal.cfg 0.3.4-4 -- "$@"
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ] ;
+then
+
+    # Add user cyphesis as system user
+            adduser --system --quiet --no-create-home --home /usr/share/cyphesis --gecos "Cyphesis C++ Administrator" --force-badname Cyphesis
+
+    update-rc.d cyphesis-cpp defaults >/dev/null
+    invoke-rc.d cyphesis-cpp start || exit $?
+
+fi
+
+

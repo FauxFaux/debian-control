@@ -1,0 +1,73 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        invoke-rc.d --query acpid restart 2>/dev/null && ret = $? || ret=$?
+        case $ret in
+        0|104|105|106)
+            invoke-rc.d acpid restart>/dev/null
+            ;;
+        esac
+
+	# transition to /run
+	if dpkg --compare-versions "$2" le-nl 1.1.11; then
+	    if [ -f /lib/init/rw/eeepc-acpi-scripts.sound ] && [ -d /run/ ]; then
+		mv /lib/init/rw/eeepc-acpi-scripts.sound /run
+	    fi
+	fi
+
+        # move eeepc-amixer-blacklist that could have been left behind
+        # if the user had changed it.
+        if ( dpkg --compare-versions "$2" le "1.1.10" &&
+            [ -e /etc/acpi/lib/eeepc-amixer-blacklist ] ); then
+            mv /etc/acpi/lib/eeepc-amixer-blacklist /etc/acpi/eeepc-amixer-blacklist
+            rmdir /etc/acpi/lib/ || true
+        fi
+        /lib/udev/eeepc-acpi-scripts
+
+        # we no longer configure stop init.d symlinks
+        # but the old ones keep triggering
+        #  insserv: warning: current stop runlevel(s) (0 1 6) of script `eeepc-acpi-scripts' overwrites defaults (empty).
+        if dpkg --compare-versions "$2" lt "1.1.3~"; then
+            echo "Removing stray rc.d stop links"
+            update-rc.d -f eeepc-acpi-scripts remove
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask eeepc-acpi-scripts.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled eeepc-acpi-scripts.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable eeepc-acpi-scripts.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state eeepc-acpi-scripts.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/eeepc-acpi-scripts" ]; then
+		update-rc.d eeepc-acpi-scripts start 20 S . >/dev/null || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0
+

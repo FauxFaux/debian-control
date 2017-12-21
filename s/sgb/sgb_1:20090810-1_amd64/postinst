@@ -1,0 +1,26 @@
+#!/bin/sh -e
+
+# Postinst for sgb package.
+
+# We have a shared library, so....
+
+if [ "$1" = configure ]; then
+  # This link got left from sgb-2000.09.14-1 when the soname was incorrect
+  rm -f /usr/lib/libgb.so.19990820
+  ldconfig
+
+  # Don't need a full mktexlsr for this
+  if [ -x /var/lib/texmf/web2c/mktexupd ]; then
+    /var/lib/texmf/web2c/mktexupd /usr/share/texmf/cweb/ boilerplate.w
+    /var/lib/texmf/web2c/mktexupd /usr/share/texmf/cweb/ gb_types.w
+  fi
+fi
+
+# Automatically added by dh_makeshlibs
+if [ "$1" = "configure" ]; then
+	ldconfig
+fi
+# End automatically added section
+
+
+exit 0

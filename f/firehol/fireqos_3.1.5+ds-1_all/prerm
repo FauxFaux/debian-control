@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit/10.9
+if [ -x "/etc/init.d/fireqos" ] && [ "$1" = remove ]; then
+	invoke-rc.d fireqos stop || exit $?
+fi
+# End automatically added section

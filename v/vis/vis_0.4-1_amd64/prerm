@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" -o "$1" = "deconfigure" ]; then
+  update-alternatives --remove editor /usr/bin/vis
+  update-alternatives --remove vi /usr/bin/vis
+fi
+
+
+
+exit 0

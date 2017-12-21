@@ -1,0 +1,46 @@
+#!/bin/sh
+# Postint script for tinyhoneypot
+
+set -e 
+# New user to create
+NUSER=thpot
+# User the group belongs to
+NUSERGROUP=nogroup
+# HOME directory for the user
+NUHOME=/usr/share/thpot
+
+case "$1" in
+    configure)
+        if ! getent passwd | grep -q "^$NUSER:"; then
+          adduser --quiet --system --home $NUHOME \
+                        --gecos "TinyHoneypot" \
+                        --gecos "Honeypot user" \
+                        --disabled-login \
+                        --disabled-password \
+                        --no-create-home \
+                        --home $NUHOME \
+                        --ingroup $NUSERGROUP \
+                        --shell /dev/null \
+                        $NUSER 
+        fi
+        # Setup the log directory
+	# TODO: maybe do this only once (if the directory belongs to
+	# root and the user has just been created)
+        chown -R $NUSER:root /var/log/thpot
+	chmod -R o-rwX /var/log/thpot
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0
+

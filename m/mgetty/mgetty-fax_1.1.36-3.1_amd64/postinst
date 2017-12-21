@@ -1,0 +1,85 @@
+#!/bin/sh -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see /usr/share/doc/packaging-manual/
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+# make sure this file exists to prevent someone from doing a symlink exploit
+test -e /var/spool/fax/outgoing/faxqueue_done ||
+  touch /var/spool/fax/outgoing/faxqueue_done
+chown uucp:fax /var/spool/fax/outgoing/faxqueue_done
+
+# ensuring proper permissions
+FAX_USER=uucp
+FAX_GROUP=fax
+
+# conditional stuff
+case "$1" in
+    configure)
+        # place the templates in /etc if they're not there ...
+        for file in faxheader faxrunq.config sendfax.config; do
+            if [ ! -f /etc/mgetty/$file ] ; then
+                cp -a /usr/share/mgetty/templates/etc/$file /etc/mgetty/$file;
+            fi;
+        done
+
+	. /usr/share/debconf/confmodule
+	db_version 2.0
+	    
+	db_get "mgetty-fax/start_faxrunqd"
+
+	if [ "$RET" = "true" ]; then
+	    rm -f /etc/mgetty/.faxrunqd_not_to_be_run || true
+	else
+	    touch /etc/mgetty/.faxrunqd_not_to_be_run
+	fi
+
+	db_stop
+
+	# ensuring permissions are set correctly
+	if ! dpkg-statoverride --list /usr/lib/mgetty-fax/faxq-helper >/dev/null; then
+	    dpkg-statoverride --update --add $FAX_USER $FAX_GROUP 4755 /usr/lib/mgetty-fax/faxq-helper;
+	fi
+
+        for i in /var/spool/fax/outgoing /var/log/mgetty/fax; do
+		if ! dpkg-statoverride --list $i >/dev/null; then
+		    dpkg-statoverride --update --add $FAX_USER root 0755 $i;
+		fi
+	done
+
+	# for upgrades from < 1.1.30-7 (means: woody)
+	# set new make.coverpg-location
+	if [ -x /usr/lib/mgetty+sendfax/make.coverpg -a ! -e /etc/mgetty/make.coverpg ];
+		then ln -s /usr/lib/mgetty+sendfax/make.coverpg /etc/mgetty/
+	fi
+	;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+    *)
+	;;
+esac
+
+# Automatically added by dh_installinit/10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/mgetty-fax" ]; then
+		update-rc.d mgetty-fax defaults >/dev/null
+		invoke-rc.d mgetty-fax start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0;

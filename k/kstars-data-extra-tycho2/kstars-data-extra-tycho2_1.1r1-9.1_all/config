@@ -1,0 +1,117 @@
+#!/bin/sh
+# kstars-data-extra CONFIG
+set -e
+
+
+
+# Can we work with debconf?
+if [ ! -e /usr/share/debconf/confmodule ] ; then
+        # Nothing we can do
+        exit 0
+fi
+
+#export DEBCONF_DEBUG=developer
+. /usr/share/debconf/confmodule
+
+db_version 2.0
+
+log ()
+{
+   echo config "$1" >&2 > /dev/null
+}
+
+log_err ()
+{
+   echo config "$1" >&2
+}
+
+log "$@"
+
+case $1 in
+   configure|reconfigure|install) # case $1
+
+      # Check if /etc/kde4 exists (somebody can, even if futile, install this package without kstars or any other KDE stuff)
+      if [ -d /etc/kde4 ] ; then
+
+         # Is this the first EVER kstars-data-extra package configured?
+         db_get "kstars-data-extra/kstarsrc-previously-exists"
+         kstarsrc_previously_exists_RET=$RET
+         log "kstarsrc-previously-exists RET $RET"
+
+         if [ "$kstarsrc_previously_exists_RET" = "unset" ] ; then
+            #THIS SECTION: IF NEVER HAS BEEN PREVIOUS FILE
+   
+            # If script reaches this point, it is beacause there have never
+            #been a kstars-data-extra package configured in this system.
+   
+            # Is there a preexistent global kstarsrc config file?
+            db_settitle kstars-data-extra/kstarsrc-title || true
+            if [ -f /etc/kde4/kstarsrc ] ; then
+               log "[ -f /etc/kde4/kstarsrc ] YES"
+               db_set "kstars-data-extra/kstarsrc-previously-exists" "previously exists"
+               pregunta="kstars-data-extra/kstarsrc-exists"
+            else
+               log "[ -f /etc/kde4/kstarsrc ] NO"
+               db_set "kstars-data-extra/kstarsrc-previously-exists" "does not exist"
+               pregunta="kstars-data-extra/kstarsrc-does-not-exist"
+            fi # if [ -f /etc/kde4/kstarsrc ]
+   
+            db_input high $pregunta || true
+            db_go || true
+            db_get $pregunta
+            log "`basename $pregunta` RET $RET" 
+   
+            if [ "$RET" = "backup and create new" ] ; then
+               # Backup now
+               cp /etc/kde4/kstarsrc /etc/kde4/kstarsrc.backup.`date +%Y-%m-%dT%H:%M:%S`
+            fi
+   
+            if [ "$RET" = "true" -o "$RET" = "backup and create new" -o "$RET" = "delete and create new" ] ; then
+               # Create new kstarsrc
+               db_settitle kstars-data-extra/disable-downloads-title || true
+               db_input high kstars-data-extra/disable-downloads || true
+               db_go || true
+               db_get kstars-data-extra/disable-downloads
+               log "disable-downloads RET $RET"
+
+
+
+
+
+
+
+
+
+
+
+            fi # if [ "$RET" = "true" -o "$RET" = "backup and create new" -o "$RET" = "delete and create new" ]
+   
+            db_stop || true
+            exit 0
+   
+         else # ! if [ "$kstarsrc_previously_exists_RET" = "unset" ]
+            #THIS SECTION: IF THERE HAS BEEN A PREVIOUS CONFIGURATION
+   
+            # If script reaches this point, it is because a previous
+            #kstars-data-extra package was configured. We will rely on its
+            #configuration and do nothing.
+   
+            # TODO Add here a low-p question about if you want to reconfigure
+   
+            db_stop || true
+            exit 0
+   
+         fi # if [ "$kstarsrc_previously_exists_RET" = "unset" ]
+   fi #if [ -f /etc/kde4 ]
+   ;; # configure|reconfigure|install)
+   
+
+
+
+
+   *) #case $1
+      log_err "config called with unknown argument $1"
+      exit 1
+   ;; # *)
+
+esac

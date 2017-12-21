@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+	configure)
+		mkdir -p /var/lib/package-tracker/etc/apt
+		mkdir -p /var/lib/package-tracker/var/cache/apt/archives/partial
+		mkdir -p /var/lib/package-tracker/var/lib/apt/lists/partial
+		mkdir -p /var/lib/package-tracker/var/lib/dpkg
+		mkdir -p /var/lib/package-tracker/var/log/apt
+		mkdir -p /var/log/package-tracker
+
+		for FILE in /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d
+		do
+			ln -sf "${FILE}" "/var/lib/package-tracker/${FILE}"
+		done
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+
+
+exit 0

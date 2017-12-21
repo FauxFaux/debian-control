@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+
+bindir=/usr/bin
+mandir=/usr/share/man/man1
+bcdir=/usr/share/bash-completion/completions
+
+if [ "$1" = "configure" ] ; then
+  update-alternatives --install $bindir/scrapy scrapy $bindir/python3-scrapy 300 \
+    --slave $mandir/scrapy.1.gz scrapy.1.gz $mandir/python3-scrapy.1.gz \
+    --slave $bcdir/scrapy scrapy.bash-completion $bcdir/python3-scrapy
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-scrapy -V 3.3-
+fi
+
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,48 @@
+#!/bin/bash -e
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+    abort-upgrade|abort-remove|abort-deconfigure)  exit 0 ;;
+    configure) ;;  # continue below
+    *)  exit 0 ;;
+esac
+
+MKARY=/usr/bin/mkary
+EDICT=/usr/share/dict/eijiro.sdic
+JDICT=/usr/share/dict/waeijiro.sdic
+SCRIPT=/usr/share/sdic/eijiro.pl
+
+db_get sdic-eijiro/tmpdir
+ORIG=`find $RET -iname 'eijiro[0-9]*.txt' -or -iname 'ryaku[0-9]*.txt' | xargs -r echo`
+WAORIG="$RET/waeiji*.txt"
+WAORIG=`find $RET -iname 'waeiji[0-9]*.txt' -print`
+
+make_array ()
+{
+    test -s $1.ary && return 0
+    test -x $MKARY || return 0
+    echo -n "Building suffix array (This will take a long long time) ... "
+    $MKARY -q -b 10 $1 && chmod 644 $1 && echo done.
+}
+
+
+# build eiwa dictionary
+if [ ! -s $EDICT ]; then
+    echo -n "Building $EDICT (from $ORIG) ... " 1>&2
+    nkf -e -S $ORIG | $SCRIPT > $EDICT
+    chmod 644 $EDICT
+    echo "done." 1>&2
+fi
+make_array $EDICT
+
+# build waei dictionary
+if [ ! -s $JDICT ]; then
+    echo -n "Building $JDICT ... " 1>&2
+    nkf -e -S $WAORIG | $SCRIPT --waei > $JDICT
+    chmod 644 $JDICT
+    echo "done." 1>&2
+fi
+make_array $JDICT
+
+

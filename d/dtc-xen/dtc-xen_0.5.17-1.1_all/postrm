@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+
+# Remove configuration if package is being purged
+if [ "$1" = "purge" ]; then
+	FILES="authorized_keys2 dtc-xen.cert.cert dtc-xen.cert.csr dtc-xen.cert.key htpasswd privkey.pem dtc-xen.conf"
+	MY_CWD=`pwd`
+	cd /etc/dtc-xen
+	for i in ${FILES} ; do
+		rm -f ${i}
+	done
+	cd ${MY_CWD}
+	rm -f /usr/share/dtc-xen/Properties.pyc
+	rm -f /usr/share/dtc-xen/daemon.pyc
+fi
+
+# Automatically added by dh_installdebconf/10.7.2
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.7.2
+if [ "$1" = "purge" ] ; then
+	update-rc.d dtc-xen remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0

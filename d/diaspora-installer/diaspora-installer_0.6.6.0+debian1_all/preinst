@@ -1,0 +1,50 @@
+#! /bin/sh
+set -e
+
+diaspora_home=/usr/share/diaspora
+
+# Keep it in sync with postrm
+diaspora_symlinks_list="Gemfile.lock log tmp public app/assets bin/bundle vendor/bundle db/schema.rb config/database.yml config/diaspora.yml"
+
+# Fix bin symlink set by earlier versions
+if test -L ${diaspora_home}/bin
+then
+    rm -rf ${diaspora_home}/bin
+fi
+
+# Backup the previous version
+# Just keep the modified files/directories
+# We need this to remove files removed upstream
+backup() {
+    backup_suffix=$(openssl rand -hex 4)
+    backup_dir=${diaspora_home}/.backup.${backup_suffix}
+    mkdir  ${backup_dir}
+    mv ${diaspora_home}/* ${backup_dir}
+
+    for i in vendor app bin db config; do
+      mkdir ${diaspora_home}/$i
+    done
+
+    for i in ${diaspora_symlinks_list}; do
+      test -e ${backup_dir}/$i && mv ${backup_dir}/$i ${diaspora_home}/$i
+    done
+}
+ 
+case "$1" in
+    upgrade)
+            echo "Stopping diaspora..."
+            invoke-rc.d diaspora stop
+            echo "Making a backup of ${diaspora_home}..."
+            backup || true
+        ;;
+    abort-upgrade|install)
+        ;;
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,66 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ]; then
+  if [ -z "$2" ]; then
+    ###################################################################
+    # new installs
+    ###################################################################
+
+    # produce empty but existing HTML output on first install
+    sudo -u debci -g debci debci update
+
+  else
+    ###################################################################
+    # upgrades
+    ###################################################################
+
+    # debci-generate-index.{service,timer} renamed to
+    # debci-update.{service,timer}
+    deb-systemd-helper purge debci-generate-index.service
+    deb-systemd-helper purge debci-generate-index.timer
+    deb-systemd-helper unmask debci-generate-index.service
+    deb-systemd-helper unmask debci-generate-index.timer
+
+  fi
+fi
+rm -f /etc/cron.d/debci-collector
+
+# Automatically added by dh_systemd_enable/10.8
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask debci-collector.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled debci-collector.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable debci-collector.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state debci-collector.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.8
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask debci-update.timer >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled debci-update.timer; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable debci-update.timer >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state debci-update.timer >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start/10.8
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	deb-systemd-invoke start debci-collector.service debci-update.service debci-update.timer >/dev/null || true
+fi
+# End automatically added section
+

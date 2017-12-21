@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+case "$1" in
+    remove)
+        update-alternatives --remove lua-interpreter /usr/bin/tarantool
+        ;;
+esac
+
+# Automatically added by dh_systemd_start/10.8
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop tarantool.service >/dev/null
+fi
+# End automatically added section
+

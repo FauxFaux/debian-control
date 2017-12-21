@@ -1,0 +1,40 @@
+#!/bin/sh
+set -e
+
+# load the fuse module just in case its missing
+if ! lsmod | grep -qE '^fuse\s+'; then
+    modprobe fuse || true
+fi
+
+# Automatically added by dh_systemd_enable/10.9.2
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'run-vmblock\\x2dfuse.mount' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'run-vmblock\\x2dfuse.mount'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'run-vmblock\\x2dfuse.mount' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'run-vmblock\\x2dfuse.mount' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.9.2
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/open-vm-tools-desktop.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start/10.9.2
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	deb-systemd-invoke start 'run-vmblock\\x2dfuse.mount' >/dev/null || true
+fi
+# End automatically added section
+
+

@@ -1,0 +1,50 @@
+#!/bin/sh
+
+set -e
+
+# Automatically added by dh_systemd_enable/10.7.2
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask nfs-server.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled nfs-server.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable nfs-server.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state nfs-server.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start/10.7.2
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	if [ -n "$2" ]; then
+		_dh_action=try-restart
+	else
+		_dh_action=start
+	fi
+	deb-systemd-invoke $_dh_action nfs-server.service >/dev/null || true
+fi
+# End automatically added section
+
+
+case "$1" in
+    configure)
+	ucf --three-way /usr/share/nfs-kernel-server/conffiles/etc.exports /etc/exports
+	ucf --three-way /usr/share/nfs-kernel-server/conffiles/nfs-kernel-server.default /etc/default/nfs-kernel-server
+
+	for f in /var/lib/nfs/etab  \
+		 /var/lib/nfs/rmtab \
+		 /var/lib/nfs/xtab; do
+	    [ -e $f ] || touch $f
+	done
+
+	update-rc.d nfs-kernel-server defaults 20 80 >/dev/null
+    ;;
+esac
+
+act="restart"
+[ "$1:$2" = "configure:" ] && act="start"
+invoke-rc.d nfs-kernel-server $act || echo "Failed to ${act} nfs-kernel-server, ignoring."

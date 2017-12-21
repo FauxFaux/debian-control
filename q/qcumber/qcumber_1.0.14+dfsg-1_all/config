@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+conffile=/etc/qcumber/config.txt
+DEFAULTKRAKENDB="/var/lib/kraken/minikraken_20141208"
+CHECKKRAKENDBFILE="database.idx"
+
+. /usr/share/debconf/confmodule
+
+if [ -f $conffile ] ; then
+    krakendb=`sed '/\[PATH\]/,$d' $conffile | grep "^kraken_db" | head -n 1 | sed 's/^kraken_db *= *\([^ ]\+\) *$/\1/'`
+    db_set qcumber/krakendb ${krakendb}
+fi
+
+if [ ! -e "${krakendb}/${CHECKKRAKENDBFILE}" ] ; then
+    # if Minikrakendb installation does not seem to be done further action needed
+    db_input high qcumber/krakendb || [ $? -eq 30 ]
+fi
+
+db_go || true

@@ -1,9 +1,0 @@
-#!/bin/sh
-
-set -e
-
-if [ "$1" = "remove" ] || [ "$1" = "disappear" ]; then
-	if [ -e /usr/lib/python3/dist-packages/kerberos.so ] && [ -h /usr/lib/python3/dist-packages/kerberos.so ] ; then
-		rm /usr/lib/python3/dist-packages/kerberos.so
-	fi
-fi

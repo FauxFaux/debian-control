@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove mips64-linux-gnuabi64-cpp /usr/bin/mips64-linux-gnuabi64-cpp-5
+fi
+
+
+
+exit 0

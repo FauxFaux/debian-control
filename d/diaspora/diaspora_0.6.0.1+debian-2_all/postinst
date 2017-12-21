@@ -1,0 +1,106 @@
+#! /bin/sh
+# postinst script for gnukhata-core-engine
+# copied from postinst script for hplip
+# $Id: hplip.postinst,v 1.1 2005/10/15 21:39:04 hmh Exp $
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+
+#######################################################################
+# Read debian specific configuration
+#######################################################################
+. /etc/diaspora/diaspora-common.conf
+cd ${diaspora_home}
+
+#######################################################################
+# update Gemfile.lock, after first install
+#######################################################################
+if [ -e ${diaspora_conf} ]; then
+  . ${diaspora_conf}
+  su ${diaspora_user} -s /bin/sh -c 'truncate -s 0 ${diaspora_home}/Gemfile.lock'
+  if ! su ${diaspora_user} -s /bin/sh -c 'bundle --local --quiet'; then
+    if [ "$1" = "triggered" ]; then
+      # probably triggered in the middle of an system upgrade; ignore failure
+      # but abort here
+      echo "#########################################################################"
+      echo "# Failed to detect gitlab dependencies; if you are in the middle of an #"
+      echo "# upgrade, this is probably fine, there will be another attempt later.  #"
+      echo "#                                                                       #"
+      echo "# If you are NOT in the middle of an upgrade, there is probably a real  #"
+      echo "# issue. Please report a bug.                                           #"
+      echo "#########################################################################"
+      exit 0
+    else
+      # something is really broken
+      exit 1
+    fi
+  fi
+fi
+case "$1" in
+    configure)
+
+	echo "Setting up environment varibales..."
+	. /usr/lib/diaspora-common/scripts/set-env-diaspora.sh
+	echo RAILS_ENV=$RAILS_ENV DB=$DB ENVIRONMENT_URL=$ENVIRONMENT_URL
+
+	echo "Verifying we have all required libraries..."
+	su diaspora -s /bin/sh -c 'bundle install --local'
+
+	echo "Setting up secret_token..."
+        DB=$DB RAILS_ENV=$RAILS_ENV DISABLE_SPRING=1 bundle exec rake generate:secret_token
+
+	# Initialize database
+        /usr/lib/diaspora-common/scripts/initdb.sh
+
+	echo "Precompiling assets..."
+	chown -R ${diaspora_user}: /var/lib/diaspora/app-assets /var/lib/diaspora/public
+	su diaspora -s /bin/sh -c 'bundle exec rake tmp:cache:clear assets:precompile'
+
+	echo "Running final rake tasks..."
+	. /usr/lib/diaspora-common/scripts/rake-tasks.sh
+   ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper dir_to_symlink /usr/share/diaspora/config /etc/diaspora 0.5.9.1+debian3 diaspora-common -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper dir_to_symlink /usr/share/diaspora/tmp /run/diaspora 0.6.0.0+debian-8 diaspora -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper dir_to_symlink /usr/share/diaspora/tmp/cache /var/cache/diaspora 0.6.0.0+debian-8 diaspora -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper dir_to_symlink /usr/share/diaspora/public/uploads /var/lib/diaspora/uploads 0.6.0.0+debian-8 diaspora -- "$@"
+# End automatically added section
+
+
+exit 0

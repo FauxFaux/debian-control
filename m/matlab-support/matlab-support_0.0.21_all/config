@@ -1,0 +1,152 @@
+#!/bin/bash
+set -e
+
+# enable all globbing that bash can do
+shopt -s extglob
+
+. /usr/share/debconf/confmodule
+
+db_version 2.0
+db_capb backup
+db_settitle matlab-support/title
+
+CONFIGFILE=/etc/matlab/debconf
+
+# Load config file, if it exists.
+if [ -e $CONFIGFILE ]; then
+    . $CONFIGFILE || true
+    db_set matlab-support/matlab-install-glob "$MATLAB_INSTALL_GLOB"
+    db_set matlab-support/mexbuild-user "$MATLAB_MEXBUILD_USER"
+fi # load config file
+
+
+# defaults
+# where to look for matlabs
+matlab_install_glob="$MATLAB_INSTALL_GLOB"
+# matlab alternatives as a comma separated list for debconf's select widget
+matlab_choices=""
+# chosen default matlab version
+matlab_default_version=""
+# flag whether any previous chosen default version is still a valid choice
+matlab_have_old_default=0
+
+# make a good guess of where matlab is if it has never been configured
+if [ -z "$matlab_install_glob" ]; then
+    # is there some matlab somewhere
+    if which matlab > /dev/null; then
+        # locate
+        matlab_bin="$(readlink -f $(which matlab))"
+        matlab_install_glob="$(dirname $(dirname $matlab_bin))"
+        db_set matlab-support/matlab-install-glob "$matlab_install_glob"
+    fi
+fi
+
+# This implements a simple state machine so the back button can be handled.
+# taken from debconf demo example
+STATE=1
+while [ "$STATE" != 0 -a "$STATE" != 6 ]; do
+    case $STATE in
+        1)
+            if [ -z "$MATLAB_INSTALL_GLOB" ]; then
+                db_fset matlab-support/matlab-install-glob seen false
+            fi
+            db_input high matlab-support/matlab-install-glob || true
+        ;;
+        2)
+            db_get matlab-support/matlab-install-glob
+            matlab_install_glob="$RET"
+            # no location is not good
+            if [ -z "$matlab_install_glob" ]; then
+                # fail in non-interactive mode
+                db_input critical matlab-support/no-matlab-found || \
+                { echo "No matlab found and maybe running in non-interactive mode. No way out -- failing..."; exit 1; }
+                db_fset matlab-support/matlab-install-glob seen false
+                STATE=0
+            else
+                # preserve the old default version to check whether it is still
+                # there
+                db_get matlab-support/default-version
+                matlab_old_default="$RET"
+                # figure out what versions we have
+                for mpath in $matlab_install_glob; do
+                    # ignore everything that doesn't look like matlab
+                    [ ! -f $mpath/bin/mex ] && continue
+                    # figure out the version
+                    mver=$(grep "ver='" ${mpath}/bin/mex* | cut -d "'" -f 2,2 | head -n1)
+                    if [ -z "$mver" ]; then
+                        # try alternative, more robust but heavy-weight approach
+                        mver=$(echo version | ${mpath}/bin/matlab -nodesktop -nodisplay -nosplash 2>/dev/null \
+                                    | grep -A2 'ans =' | tail -1 || :)
+                    fi
+                    # somewhat friendly description of this Matlab installation
+                    matlab_id="Matlab ${mver} @ ${mpath}"
+                    # is that the old default?
+                    if [ "$matlab_old_default" = "$matlab_id" ]; then
+                        matlab_have_old_default=1
+                    fi
+                    # make comma-separated list of all choices
+                    if [ -z "$matlab_choices" ]; then
+                        matlab_choices=$matlab_id
+                    else
+                        matlab_choices="${matlab_choices}, $matlab_id"
+                    fi
+                    # configure alternatives
+                    # cannot use plain 'mex' since there is such a binary in
+                    # 'texlive-lang-polish'
+                    update-alternatives --install /usr/bin/matlab matlab \
+                      $mpath/bin/matlab -1 \
+                      --slave /usr/bin/matlab-mex matlab-mex $mpath/bin/mex \
+                      --slave /usr/bin/matlab-mbuild matlab-mbuild $mpath/bin/mbuild
+                done
+            fi
+        ;;
+        3)
+            # make sure the selection gets displayed if the old default
+            # vanished
+            if [ $matlab_have_old_default -eq 0 ]; then
+                db_fset matlab-support/default-version seen false
+            fi
+            # we require at least one valid choice
+            if [ -z "$matlab_choices" ]; then
+                db_input critical matlab-support/no-matlab-found || true
+                db_fset matlab-support/matlab-install-glob seen false
+                STATE=0
+            else
+                # count the number of commas in the choices string to determine
+                # the number of choices
+                if [ $(echo $matlab_choices | tr -d -C ',' | wc -c) -gt 0 ]; then
+                    # make sure the default version selection is shown
+                    # whenever there is more than one choice
+                    db_fset matlab-support/default-version seen false
+                fi
+                # set the list of version choices
+                db_subst matlab-support/default-version choices $matlab_choices
+                db_input high matlab-support/default-version || true
+            fi
+        ;;
+        4)
+            # make sure we have a default
+            db_get matlab-support/default-version
+            matlab_default_version="$RET"
+            if [ -z "$matlab_default_version" ]; then
+                db_input critical matlab-support/no-matlab-found || true
+                db_fset matlab-support/matlab-install-glob seen false
+                STATE=0
+            else
+                db_input high matlab-support/mexbuild-user || true
+            fi
+        ;;
+        5)
+            db_input high matlab-support/rename-libs || true
+        ;;
+    esac
+
+    if db_go; then
+        STATE=$(($STATE + 1))
+    else
+        STATE=$(($STATE - 1))
+    fi
+done
+
+db_stop
+

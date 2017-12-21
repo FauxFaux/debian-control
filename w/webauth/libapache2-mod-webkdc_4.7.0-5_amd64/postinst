@@ -1,0 +1,25 @@
+#! /bin/sh
+
+set -e
+
+# Make sure that /var/lib/webkdc exists and is writable by the www-data group,
+# since this is where the keyring will go.
+if [ ! -d /var/lib/webkdc ] ; then
+    mkdir /var/lib/webkdc
+fi
+chgrp www-data /var/lib/webkdc
+chmod 770 /var/lib/webkdc
+
+# Automatically added by dh_apache2/UNDECLARED
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in webkdc  ; do
+			apache2_invoke enmod $conf  || exit $?
+		done
+	fi
+fi
+# End automatically added section
+
+
+exit 0

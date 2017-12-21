@@ -1,0 +1,20 @@
+#!/bin/sh -e
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p loggerhead 
+fi
+
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/loggerhead" ]; then
+		update-rc.d loggerhead defaults >/dev/null
+		invoke-rc.d loggerhead start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+adduser --system --group --home / loggerhead > /dev/null 2>&1
+chown loggerhead /var/log/loggerhead

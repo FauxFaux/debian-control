@@ -1,0 +1,16 @@
+#! /bin/sh -e
+
+EDICT=/usr/share/dict/edict.sdic
+JDICT=/usr/share/dict/jedict.sdic
+
+if [ "$1" = "purge" ]; then
+    rm -f ${EDICT}* ${JDICT}*
+fi
+
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

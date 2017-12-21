@@ -1,0 +1,43 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+case "$1" in
+    purge)
+    # Remove generated data and migration info
+    if [ -e /var/lib/biomaj ]; then
+      rm -rf /var/lib/biomaj
+    fi
+    # Remove all
+    if [ -e /usr/share/biomaj ]; then
+    rm -rf /usr/share/biomaj
+    fi
+
+    # Remove generated conf file
+    rm -f /etc/biomaj/db_properties/global.properties
+
+    echo "Warning, BioMAJ database for MySQL is not deleted by process removal."
+    ;;
+    remove|upgrade|failed-upgrade|abort-install|disappear)
+    echo "Warning, BioMAJ database for MySQL is not deleted by process removal."    ;;
+    abort-upgrade)
+    ;;
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+# Automatically added by dh_installdebconf/10.9
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+

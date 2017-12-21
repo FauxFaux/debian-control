@@ -1,0 +1,58 @@
+#!/bin/sh
+# $1 = action ('configure' or 'reconfigure')
+# $2 = current-installed-version
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_capb backup
+
+# record the original value in case we need to clean up
+# the old location
+
+if db_get igtf-policy/location ; then
+    oldloc="$RET"
+    db_set igtf-policy/old-location "$oldloc" || true
+fi
+
+db_input low igtf-policy/location || true
+
+db_go
+
+db_get igtf-policy/location || true
+location="$RET"
+
+# substitute the configuration location
+db_subst igtf-policy-classic/install_profile location "$location" || true
+db_subst igtf-policy-classic/exclude_ca location "$location" || true
+db_subst igtf-policy-classic/include_ca location "$location" || true
+
+db_input medium igtf-policy-classic/install_profile || true
+
+db_go
+
+# bother with possible in/exclusions
+# fetch the list of CAs to choose
+AVAILABLE_CA=
+for f in /usr/share/igtf-policy/classic/*.pem ; do
+    ca=`basename ${f%.*}` 
+    AVAILABLE_CA="$AVAILABLE_CA, $ca"
+done
+# remove leading comma
+AVAILABLE_CA=${AVAILABLE_CA#, }
+
+# The mode of operation is either:
+# yes: install all certificates with the exceptions listed in exclude_ca
+# no: only install the certificates in include_ca.
+db_get igtf-policy-classic/install_profile
+if [ "$RET" = true ]; then
+    db_subst igtf-policy-classic/exclude_ca exclude_ca "$AVAILABLE_CA"
+    db_input medium igtf-policy-classic/exclude_ca || true
+else
+    db_subst igtf-policy-classic/include_ca include_ca "$AVAILABLE_CA"
+    db_input high igtf-policy-classic/include_ca || true
+fi
+
+db_go
+
+db_stop

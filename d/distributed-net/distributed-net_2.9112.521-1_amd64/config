@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+# Load the debconf module
+. /usr/share/debconf/confmodule
+
+db_set distributed-net/fullconfig "false"
+
+# Ask if client configuration should be run
+# (high priority because the user must specify their email address)
+db_input high distributed-net/fullconfig || true
+db_go || true

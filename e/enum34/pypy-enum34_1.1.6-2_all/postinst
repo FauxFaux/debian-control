@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dh_pypy:
+if which pypycompile >/dev/null 2>&1; then
+	pypycompile -p pypy-enum34 
+elif pypy -m py_compile >/dev/null 2>&1; then
+	dpkg -L pypy-enum34 | grep '\.py$' | pypy -m py_compile - >/dev/null
+fi
+
+# End automatically added section

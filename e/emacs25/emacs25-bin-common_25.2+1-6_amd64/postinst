@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+FLAVOR=emacs25
+MAJOR=25
+MINOR=2
+FULL=25.2
+ALTERNATIVES="ctags ebrowse emacsclient etags"
+BIN_PRIORITY=28
+
+# update-alternatives on things that collide with xemacs, other editors
+for i in ${ALTERNATIVES}
+do
+  update-alternatives \
+    --install /usr/bin/$i $i /usr/bin/$i.${FLAVOR} ${BIN_PRIORITY} \
+    --slave /usr/share/man/man1/$i.1.gz $i.1.gz \
+            /usr/share/man/man1/$i.${FLAVOR}.1.gz
+done
+
+

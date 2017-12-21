@@ -1,0 +1,33 @@
+#! /bin/sh
+# preinst script for SRG
+#
+# Author:   Matt Brown <debian@mattb.net.nz>
+# Version:  $Id:$
+# Released under the GPL v2
+
+set -e
+
+# conffile handling thanks to http://wiki.debian.org/DpkgConffileHandling
+
+# Prepare to move a conffile without triggering a dpkg question
+prep_mv_conffile() {
+    PKGNAME="$1"
+    CONFFILE="$2"
+
+    if [ -e "$CONFFILE" ]; then
+        md5sum="`md5sum \"$CONFFILE\" | sed -e \"s/ .*//\"`"
+        old_md5sum="`dpkg-query -W -f='${Conffiles}' $PKGNAME | sed -n -e \"\\\\' $CONFFILE'{s/ obsolete$//;s/.* //p}\"`"
+        if [ "$md5sum" = "$old_md5sum" ]; then
+            rm -f "$CONFFILE"
+        fi
+    fi
+}
+
+case "$1" in
+install|upgrade)
+    if dpkg --compare-versions "$2" le "1.3.3-2"; then
+        prep_mv_conffile srg "/etc/srg/ip2user.txt"
+    fi
+esac
+
+

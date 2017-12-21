@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] ; then
+	update-alternatives --remove oslopolicy-checker /usr/bin/python3-oslopolicy-checker
+	update-alternatives --remove oslopolicy-list-redundant /usr/bin/python3-oslopolicy-list-redundant
+	update-alternatives --remove oslopolicy-policy-generator /usr/bin/python3-oslopolicy-policy-generator
+	update-alternatives --remove oslopolicy-sample-generator /usr/bin/python3-oslopolicy-sample-generator
+	update-alternatives --remove oslopolicy-checker /usr/bin/python3-oslopolicy-checker
+fi
+
+
+# Automatically added by dh_python3:
+if which py3clean >/dev/null 2>&1; then
+	py3clean -p python3-oslo.policy 
+else
+	dpkg -L python3-oslo.policy | perl -ne 's,/([^/]*)\.py$,/__pycache__/\1.*, or next; unlink $_ or die $! foreach glob($_)'
+	find /usr/lib/python3/dist-packages/ -type d -name __pycache__ -empty -print0 | xargs --null --no-run-if-empty rmdir
+fi
+
+# End automatically added section
+
+
+exit 0

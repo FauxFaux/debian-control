@@ -1,0 +1,36 @@
+#!/bin/sh
+set -e;
+
+PACKAGE=sendmail-base;
+
+if [ -L /usr/share/doc/$PACKAGE ]; then
+	# /usr/share/doc/$PACKAGE was a symlink to /usr/share/doc/sendmail
+	rm /usr/share/doc/$PACKAGE
+fi
+if [ -L /usr/share/bug/$PACKAGE ]; then
+	rm /usr/share/bug/$PACKAGE
+fi
+
+if [ "$1" = "upgrade" ] && dpkg --compare-versions "$2" lt "8.14.4-2.2~"; then
+	# /usr/share/doc/$PACKAGE was a symlink to /usr/share/doc/sendmail
+	rm -rf /usr/share/doc/sendmail/examples
+	rm -f /usr/share/doc/sendmail/Debian-specific.gz
+	rm -f /usr/share/doc/sendmail/site.config.m4.gz
+fi
+
+if [ "$1" = "upgrade" ]; then
+		# Prevent cronjob from running during upgrade...
+		if [ -f /etc/cron.d/sendmail ]; then
+			echo "#preinst" > /etc/cron.d/sendmail;
+			fi;
+
+		# Move files to new home
+		if [ -d /etc/mail/ssl ] && [ ! -e /etc/mail/tls ]; then
+			mv -f /etc/mail/ssl /etc/mail/tls;
+			fi;
+fi
+
+# Automatically added by dh_installdeb/10.8
+dpkg-maintscript-helper rm_conffile /etc/dhcp3/dhclient-exit-hooks.d/sendmail 8.14.4-2.2\~ -- "$@"
+# End automatically added section
+

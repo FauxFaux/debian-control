@@ -1,0 +1,28 @@
+#!/bin/sh
+# vim:ts=2:sw=2:et
+
+set -e
+
+case "$1" in
+  configure)
+    if [ -z "$2" ]; then
+      # On a fresh install, add the necessary user and group
+      adduser --quiet --system --no-create-home --home /etc/freeradius --group --disabled-password freerad || true
+
+      # Put user freerad in group shadow, so the daemon can auth locally
+      # Only do this on fresh install as the admin may not want freerad in shadow
+      # group if authenticating by another mechanism
+      adduser --quiet freerad shadow
+    fi
+    ;;
+esac
+
+# Automatically added by dh_installdeb/10.7.2
+dpkg-maintscript-helper rm_conffile /etc/freeradius/dictionary 3.0.12+dfsg-2~ freeradius-common -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/10.7.2
+dpkg-maintscript-helper rm_conffile /etc/freeradius/radiusd.conf 3.0.12+dfsg-2~ freeradius-common -- "$@"
+# End automatically added section
+
+
+exit 0

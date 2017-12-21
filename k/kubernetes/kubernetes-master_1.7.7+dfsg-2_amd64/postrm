@@ -1,0 +1,51 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    remove)
+        deluser  --quiet --system kube || true
+        delgroup --quiet --system --only-if-empty kube || true
+    ;;
+    purge)
+        rm -rf /var/lib/kube
+    ;;
+esac
+
+# Automatically added by dh_installinit/10.9
+if [ "$1" = "purge" ] ; then
+	update-rc.d kube-scheduler remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.9
+if [ "$1" = "purge" ] ; then
+	update-rc.d kube-controller-manager remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.9
+if [ "$1" = "purge" ] ; then
+	update-rc.d kube-apiserver remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+

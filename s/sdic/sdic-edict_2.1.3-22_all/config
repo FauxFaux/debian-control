@@ -1,0 +1,22 @@
+#! /bin/sh -e
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+db_beginblock
+
+if [ -x /usr/bin/mkary ]; then
+    db_input low sdic-edict/jp_array || true
+fi
+
+db_input low sdic-edict/make_en || true
+db_endblock
+db_go
+
+db_get sdic-edict/make_en
+if [ "$RET" = "true" ] && [ -x /usr/bin/mkary ]; then
+    db_input low sdic-edict/en_array || true
+    db_go
+fi
+
+exit 0

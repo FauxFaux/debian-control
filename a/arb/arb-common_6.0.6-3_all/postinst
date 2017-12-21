@@ -1,0 +1,41 @@
+#!/bin/sh
+set -e
+
+GROUP=arb
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+db_get arb/group
+retusers=${RET}
+
+db_go || true
+
+CURRENTGROUPUSERS=`getent group ${GROUP} | sed "s/.*:\([^:]*\)/\1/" | tr ',' '\n'`
+
+# Add those users which were selected but are not yet in the group
+for user in `echo "$retusers" | sed "s/([^)]*)//g" | sed "s/ //g" |  tr ',' '\n'` ; do
+    if ! `echo "${CURRENTGROUPUSERS}" | grep -q -w "$user"` ; then
+	adduser $user $GROUP
+    fi
+done
+
+# Del those users which were obviousely removed from list of arb users
+for user in ${CURRENTGROUPUSERS} ; do
+    if ! `echo "$retusers" | grep -q -w "$user"` && \
+	`getent group "$GROUP" | grep -q -w $user` ; then
+	deluser $user $GROUP
+    fi
+done
+
+ptsdir=/var/lib/arb/pts
+
+# Make sure PT server directory is
+# - owned by group arb
+chgrp ${GROUP} $ptsdir
+# - readable and enterable by everyone
+# - writeable by arb group members
+# - files created in directory inherit group (setgid)
+chmod 2775 $ptsdir
+
+

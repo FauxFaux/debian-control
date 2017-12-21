@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installzope
+if which dzhandle >/dev/null; then
+    case "$1" in upgrade|remove)
+	# upgrade:
+	#  - register instances, in which product is upgraded
+	#  - remove product from instances
+	# remove:
+	#  - register instances, in which product is removed, needed
+	#    for recovery in postinst abort-remove
+	#  - remove product from instances
+	#  - maybe fail if product installed in instance with addon policy
+	#    all and addon-mode linked or tree-linked
+
+	dzhandle prerm-product -m "$*" /usr/share/zope/Products/ZMySQLDA
+    esac
+fi
+# End automatically added section

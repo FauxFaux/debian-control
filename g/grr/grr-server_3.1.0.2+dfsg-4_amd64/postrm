@@ -1,0 +1,70 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    remove|purge)
+	rm -rf \
+	   /usr/share/grr-server/resources \
+	   /usr/share/grr-server/executables \
+	   /usr/share/grr-server/grr-response-templates \
+	   /usr/share/grr-server/lib
+	;;
+esac
+
+case "$1" in
+    purge)
+	rm -f /etc/grr/server.local.yaml # not a conffile
+	rm -rf /var/lib/grr-server /var/log/grr-server
+	deluser --quiet --system _grr
+	dpkg-statoverride --list \
+	    | awk '/^_grr/ {print $4}' \
+	    | xargs -r -n1 dpkg-statoverride --remove
+    ;;
+    remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_systemd_start/10.7.2
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.7.2
+if [ "$1" = "purge" ] ; then
+	update-rc.d grr-server@ remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.7.2
+if [ "$1" = "purge" ] ; then
+	update-rc.d grr-server remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/10.7.2
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

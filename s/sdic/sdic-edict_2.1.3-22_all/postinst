@@ -1,0 +1,51 @@
+#!/bin/bash -e
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+    abort-upgrade|abort-remove|abort-deconfigure)  exit 0 ;;
+    configure) ;;  # continue below
+    *)  exit 0 ;;
+esac
+
+MKARY=/usr/bin/mkary
+EDICT=/usr/share/dict/edict.sdic
+JDICT=/usr/share/dict/jedict.sdic
+SCRIPT=/usr/share/sdic/edict.pl
+
+make_array ()
+{
+    test -s $1.ary && return 0
+    test -x $MKARY || return 0
+    echo -n "Building suffix array (This will take for a minute) ... "
+    $MKARY -q -b 10 $1 && chmod 644 $1 && echo done.
+}
+
+# generate eiwa dictionary
+db_get sdic-edict/make_en
+if [ "$RET" = "true" ]; then
+    if [ ! -s $EDICT ]; then
+        echo -n "Building $EDICT ... " 1>&2
+        $SCRIPT --reverse /usr/share/edict/edict >$EDICT
+        chmod 644 $EDICT
+        echo "done." 1>&2
+    fi
+    db_get sdic-edict/en_array
+    if [ "$RET" = "true" ]; then
+        make_array $EDICT
+    fi
+fi
+
+# generate waei dictionary
+if [ ! -s $JDICT ]; then
+    echo -n "Building $JDICT ... " 1>&2
+    $SCRIPT /usr/share/edict/edict >$JDICT
+    chmod 644 $JDICT
+    echo "done." 1>&2
+fi
+db_get sdic-edict/jp_array
+if [ "$RET" = "true" ]; then
+    make_array $JDICT
+fi
+
+

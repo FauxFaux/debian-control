@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# $Id: config 111 2008-02-07 04:12:07Z branden $
+
+set -e
+
+# source debconf library
+. /usr/share/debconf/confmodule
+
+db_input high xtrs/roms_needed || true
+db_go
+
+exit 0
+
+# vim:set ai et sw=4 ts=4 tw=80:

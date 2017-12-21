@@ -1,0 +1,28 @@
+#!/bin/sh
+# Debian xtrs package post-installation script
+# Copyright 2001 Branden Robinson.
+# Licensed under the GNU General Public License, version 2.  See the file
+# /usr/share/common-licenses/GPL or <http://www.gnu.org/copyleft/gpl.txt>.
+
+# $Id: postinst 111 2008-02-07 04:12:07Z branden $
+
+set -e
+
+trap "message ;\
+      message 'Received signal.  Aborting xtrs package postinst script.' ;\
+      message ;\
+      exit 1" 1 2 3 15
+
+# source debconf library
+. /usr/share/debconf/confmodule
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+exit 0
+
+# vim:set ai et sw=4 ts=4 tw=80:

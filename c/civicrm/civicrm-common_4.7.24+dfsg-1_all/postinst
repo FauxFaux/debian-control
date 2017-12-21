@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure|reconfigure)
+        chmod o-rwx /etc/civicrm
+        if [ -n "$(ls -A /etc/civicrm)" ]; then
+            ## conf dir not empty -- locking:
+            chmod u-w  /etc/civicrm
+        else
+            ## conf dir is empty -- un-locking for initial setup:
+            chown www-data:root /etc/civicrm
+            chmod u+w /etc/civicrm
+        fi
+        chown -R www-data:www-data /var/lib/civicrm || true
+
+        ## drop caches on upgrade:
+        if [ -n "$2" ]; then
+            rm -rf /var/lib/civicrm/civicrm/templates_c/* || true
+        fi
+esac
+
+

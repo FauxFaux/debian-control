@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+SITE=$(hostname -f)
+SITE=${SITE#*.}
+SITE=${SITE%%.*}
+# db_subst should be here instead of db_set, but db_subst apparently doesn't
+# work for default values.
+db_set gnats/site "${SITE}"
+db_input medium gnats/site || true
+db_go

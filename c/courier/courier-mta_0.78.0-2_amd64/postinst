@@ -1,0 +1,186 @@
+#!/bin/sh
+
+set -e
+
+USER=courier
+GROUP=courier
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+add_override() {
+    if ! dpkg-statoverride --list $4 >/dev/null; then
+	dpkg-statoverride --update --add $1 $2 $3 $4
+    fi
+}
+
+if [ "$1" = "configure" ]; then
+
+    # write default domain file
+    db_get courier-mta/defaultdomain
+    echo $RET > /etc/courier/defaultdomain
+
+    # generate locals file if necessary
+    if [ ! -f /etc/courier/locals ]; then
+	echo "localhost" > /etc/courier/locals
+        echo "$RET" >> /etc/courier/locals
+    fi
+
+    # generate configuration directories if necessary
+    db_get courier-base/webadmin-configmode
+    if [ "$RET" = true ]; then
+	for dir in esmtpacceptmailfor.dir hosteddomains; do
+	    mkdir -p /etc/courier/$dir
+	    chmod 0750 /etc/courier/$dir
+	    chown root:courier /etc/courier/$dir
+	done
+    fi
+
+    # generate /etc/mailname if necessary
+    if [ ! -f /etc/mailname ]; then
+	echo "$RET" > /etc/mailname
+    fi
+
+    # write file with From: header for delivery notifications
+    db_get courier-mta/dsnfrom
+    echo $RET > /etc/courier/dsnfrom
+
+    # Update Alternatives
+    update-alternatives --install /usr/bin/lockmail lockmail /usr/bin/lockmail.courier 5 \
+			--slave /usr/share/man/man1/lockmail.1.gz lockmail.1.gz /usr/share/man/man1/lockmail.courier.1.gz
+    update-alternatives --install /usr/bin/preline preline /usr/bin/preline.courier 5 \
+			--slave /usr/share/man/man1/preline.1.gz preline.1.gz /usr/share/man/man1/preline.courier.1.gz
+
+    # run makesmtpaccess
+    makesmtpaccess
+
+    if [ ! -f /etc/courier/esmtpd.pem ]; then
+	mkesmtpdcert
+	chmod 0640 /etc/courier/esmtpd.pem
+	chown root:courier /etc/courier/esmtpd.pem
+    fi
+    add_override root root 0600 /etc/courier/esmtpd.cnf
+
+    add_override root courier 4755 /usr/sbin/rmail
+    add_override courier courier 2755 /usr/bin/mailq
+    add_override courier courier 6755 /usr/bin/cancelmsg
+    add_override root courier 2755 /usr/sbin/sendmail
+    add_override courier courier 4755 /usr/lib/courier/courier/submitmkdir
+
+    for dir in allfilters filters msgq msgs track; do
+	add_override courier courier 0750 /var/lib/courier/$dir
+    done
+    add_override courier courier 0770 /var/lib/courier/tmp
+
+    add_override root courier 0750 /etc/courier/aliasdir
+    add_override root courier 0750 /etc/courier/aliases
+    add_override root courier 0640 /etc/courier/aliases/system
+    add_override root courier 0640 /etc/courier/esmtpauthclient
+    add_override root courier 0750 /etc/courier/filters
+    add_override root courier 0750 /etc/courier/filters/active
+
+fi
+
+# Automatically added by dh_systemd_enable/10.8
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask courier-mta.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled courier-mta.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable courier-mta.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state courier-mta.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.8
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/courier-mta.conf /usr/lib/tmpfiles.d/courier.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.8
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/courier" ]; then
+		update-rc.d courier defaults >/dev/null
+		invoke-rc.d courier start || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.8
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/courier-mta.conf /usr/lib/tmpfiles.d/courier.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.8
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/courierfilter" ]; then
+		update-rc.d courierfilter defaults >/dev/null
+		invoke-rc.d courierfilter start || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.8
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/courier-mta.conf /usr/lib/tmpfiles.d/courier.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.8
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/courier-mta" ]; then
+		update-rc.d courier-mta defaults >/dev/null
+		invoke-rc.d courier-mta start || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.8
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/courier-mta.conf /usr/lib/tmpfiles.d/courier.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.8
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/courier-mta-ssl" ]; then
+		update-rc.d courier-mta-ssl defaults >/dev/null
+		invoke-rc.d courier-mta-ssl start || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.8
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/courier-mta.conf /usr/lib/tmpfiles.d/courier.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.8
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/courier-msa" ]; then
+		update-rc.d courier-msa defaults >/dev/null
+		invoke-rc.d courier-msa start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

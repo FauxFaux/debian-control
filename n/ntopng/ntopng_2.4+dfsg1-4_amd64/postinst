@@ -1,0 +1,52 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+OLD_CONF="/etc/default/ntopng.dpkg-backup"
+CONF="/etc/ntopng.conf"
+
+
+if [ "$1" = configure -a -f $OLD_CONF ]; then
+    # Migrate settings (except ADD_ARGS) from /etc/default/ntopng to
+    # /etc/ntopng.conf
+    . $OLD_CONF || true
+    if [ -n "$HTTP_PORT" ]; then
+        sed -i -e "s/^-w=.*\$/-w=$HTTP_PORT/" $CONF
+    fi
+    if [ -n "$INTERFACES" ]; then
+        # Make sure the file ends with a newline.
+        echo >> $CONF
+        for i in $INTERFACES; do
+            echo "-i=$i" >> $CONF
+        done
+    fi
+fi
+
+dpkg-maintscript-helper rm_conffile /etc/default/ntopng 1.2.1+dfsg1-1.1 -- "$@"
+
+# Automatically added by dh_systemd_enable/10.7.2
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask ntopng.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled ntopng.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable ntopng.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state ntopng.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.7.2
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/ntopng" ]; then
+		update-rc.d ntopng defaults >/dev/null
+		invoke-rc.d ntopng start || exit $?
+	fi
+fi
+# End automatically added section
+

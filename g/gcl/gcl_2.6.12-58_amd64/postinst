@@ -1,0 +1,46 @@
+#!/bin/sh
+case "$1" in
+  configure)
+
+	CONFIGFILE=$(tempfile -m 644)
+	set -e
+	. /usr/share/debconf/confmodule
+	
+	if [ "$1" = "configure" ] || [ "$1" = "reconfigure" ] ; then
+	    
+	    db_get gcl/default_gcl_ansi
+	    
+	    if [ "$RET" = "true" ] ; then 
+		DEFAULT_GCL_ANSI=t
+	    else
+		DEFAULT_GCL_ANSI=
+	    fi
+	    
+	    db_get gcl/default_gcl_prof
+	    
+	    if [ "$RET" = "true" ] ; then 
+		DEFAULT_GCL_PROF=y
+	    else
+		DEFAULT_GCL_PROF=
+	    fi
+	    
+	    echo "DEFAULT_GCL_ANSI=$DEFAULT_GCL_ANSI" >> $CONFIGFILE
+	    echo "DEFAULT_GCL_PROF=$DEFAULT_GCL_PROF" >> $CONFIGFILE
+	    
+	fi
+	
+	ucf --debconf-ok $CONFIGFILE /etc/default/gcl
+	ucfr gcl /etc/default/gcl
+
+#	chmod 644 /etc/default/gcl
+	
+esac
+
+# Automatically added by dh_installemacsen/10.7.2
+if [ "$1" = "configure" ] && [ -e /var/lib/emacsen-common/state/package/installed/emacsen-common -a -x /usr/lib/emacsen-common/emacs-package-install ]
+then
+	/usr/lib/emacsen-common/emacs-package-install --postinst gcl
+fi
+# End automatically added section
+
+

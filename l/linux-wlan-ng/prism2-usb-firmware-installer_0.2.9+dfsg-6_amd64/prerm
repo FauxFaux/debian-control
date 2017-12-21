@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+HEXFILE=/lib/firmware/ru010803.hex
+FWFILE=/lib/firmware/ru010803.fw
+
+if [ "$1" = "remove" -o "$1" = "purge" ]; then
+	echo "Deleting downloaded firmware files"
+	rm -f $HEXFILE $FWFILE
+fi
+
+
+

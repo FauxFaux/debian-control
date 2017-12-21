@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+# Automatically added by dh_installmenu
+inst=/etc/menu-methods/olvwm
+if [ "$1" = "remove" ] && [ -f "$inst" ]; then chmod a-x $inst ; fi
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+
+
+if [ "$1" = purge ]; then
+  rm -f /etc/X11/olvwm/openwin-menu-debian
+  rmdir /etc/X11/olvwm || true
+fi

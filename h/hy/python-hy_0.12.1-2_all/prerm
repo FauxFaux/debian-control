@@ -1,0 +1,33 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+	# only remove in remove/deconfigure so we don't disrupt users' preferences
+	remove|deconfigure)
+		update-alternatives --remove hy /usr/bin/hy2
+		;;
+
+	upgrade|failed-upgrade)
+		;;
+
+	*)
+		echo >&2 "prerm called with unknown argument: $1"
+		exit 0
+		;;
+esac
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p python-hy 
+else
+	dpkg -L python-hy | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+
+exit 0

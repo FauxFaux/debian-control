@@ -1,0 +1,62 @@
+#!/bin/sh 
+
+set -e
+
+PKG="ttf-mikachan"
+FILES="/etc/defoma/hints/ttf-mikachan-P.hints \
+       /etc/defoma/hints/ttf-mikachan-PB.hints \
+       /etc/defoma/hints/ttf-mikachan-PS.hints \
+       /etc/defoma/hints/ttf-mikachan.hints"
+VERSION="9.1-2"
+
+# Remove a no-longer used conffile
+rm_conffile() {
+    local PKGNAME="$1"
+    local CONFFILE="$2"
+    [ -e "$CONFFILE" ] || return 0
+
+    local md5sum="$(md5sum $CONFFILE | sed -e 's/ .*//')"
+    local old_md5sum="$(dpkg-query -W -f='${Conffiles}' $PKGNAME | \
+            sed -n -e "\' $CONFFILE ' { s/ obsolete$//; s/.* //; p }")"
+    if [ "$md5sum" != "$old_md5sum" ]; then
+        echo "Obsolete conffile $CONFFILE has been modified by you."
+        echo "Saving as $CONFFILE.dpkg-bak ..."
+        mv -f "$CONFFILE" "$CONFFILE".dpkg-bak
+    else
+        echo "Removing obsolete conffile $CONFFILE ..."
+        rm -f "$CONFFILE"
+    fi
+}
+
+pathfind() {
+    OLDIFS="$IFS"
+    IFS=:
+    for p in $PATH; do
+        if [ -x "$p/$*" ]; then
+            IFS="$OLDIFS"
+            return 0
+        fi
+    done
+    IFS="$OLDIFS"
+    return 1
+}
+
+
+case "$1" in
+install|upgrade)
+    if dpkg --compare-versions "$2" lt-nl "$VERSION"; then
+	for defoma_file in $FILES
+        do
+	if [ -f $defoma_file ]; then
+        	if [ -x `pathfind defoma-font` ]; then
+			defoma-font purge-all -vt $defoma_file || true
+		fi
+	fi
+	echo "defoma_file is $defoma_file"
+	rm_conffile $PKG $defoma_file
+        done
+
+    fi
+esac
+
+

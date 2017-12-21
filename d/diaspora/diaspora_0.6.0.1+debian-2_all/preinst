@@ -1,0 +1,39 @@
+#! /bin/sh
+set -e
+
+# Hardcore variables as diaspora-common.conf won't be available if both
+# installed together
+diaspora_home=/usr/share/diaspora
+
+# Remove bin directory if upgrading from diaspora-installer
+if test -d ${diaspora_home}/bin
+then
+    rm -rf ${diaspora_home}/bin
+fi
+
+case "$1" in
+    upgrade)
+        ;;
+    abort-upgrade|install)
+        ;;
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper dir_to_symlink /usr/share/diaspora/config /etc/diaspora 0.5.9.1+debian3 diaspora-common -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper dir_to_symlink /usr/share/diaspora/tmp /run/diaspora 0.6.0.0+debian-8 diaspora -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper dir_to_symlink /usr/share/diaspora/tmp/cache /var/cache/diaspora 0.6.0.0+debian-8 diaspora -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper dir_to_symlink /usr/share/diaspora/public/uploads /var/lib/diaspora/uploads 0.6.0.0+debian-8 diaspora -- "$@"
+# End automatically added section
+
+
+exit 0

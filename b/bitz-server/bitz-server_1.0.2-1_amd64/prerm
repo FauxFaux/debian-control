@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb/11
+dpkg-maintscript-helper rm_conffile /etc/init/bitz-server.conf 1.0.0-4\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit/11
+if [ -x "/etc/init.d/bitz-server" ] && [ "$1" = remove ]; then
+	invoke-rc.d bitz-server stop || exit $?
+fi
+# End automatically added section

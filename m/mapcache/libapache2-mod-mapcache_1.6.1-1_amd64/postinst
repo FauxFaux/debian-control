@@ -1,0 +1,30 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ] ; then
+	if [ -e /var/cache/mapcache ]; then
+		chown root:www-data /var/cache/mapcache
+		chmod 775 /var/cache/mapcache
+	fi
+
+	# only enable on new installs, not on upgrades
+	if [ -z "$2" ] ; then
+		if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+			. /usr/share/apache2/apache2-maintscript-helper
+			apache2_invoke enmod mapcache
+		fi
+	fi
+fi
+
+# Automatically added by dh_apache2/UNDECLARED
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in mapcache  ; do
+			apache2_invoke enmod $conf  || exit $?
+		done
+	fi
+fi
+# End automatically added section
+

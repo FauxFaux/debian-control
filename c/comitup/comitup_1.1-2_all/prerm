@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in 
+    remove)
+        rm -f /var/lib/comitup/comitup.json*
+    ;;
+
+    upgrade|deconfigure|failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \'$1\'" >&2
+        exit 1
+    ;;
+
+esac
+
+# Automatically added by dh_systemd_start/10.10.7
+if [ -d /run/systemd/system ]; then
+	deb-systemd-invoke stop 'comitup-web.service' 'comitup.service' >/dev/null
+fi
+# End automatically added section
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p comitup 
+else
+	dpkg -L comitup | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+

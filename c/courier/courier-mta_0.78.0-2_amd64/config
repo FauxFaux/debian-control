@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+do_config () {
+    FILENAME=$1
+    DEFAULT=$2
+
+    if [ -f /etc/courier/$FILENAME ]; then
+	# read current value from configuration file
+	VALUE=`head -n 1 /etc/courier/$FILENAME`
+	if [ "$VALUE" ]; then
+	    db_set courier-mta/$FILENAME "$VALUE"
+	fi
+    fi
+
+    db_get courier-mta/$FILENAME
+    if [ ! "$RET" ]; then
+	# enforce default
+	db_set courier-mta/$FILENAME "$DEFAULT"
+    fi
+
+    db_input medium courier-mta/$FILENAME || [ $? -eq 30 ]
+    db_go
+}
+
+do_config defaultdomain `hostname --fqdn`
+db_get courier-mta/defaultdomain
+do_config dsnfrom "mailer-daemon@$RET"

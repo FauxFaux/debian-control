@@ -1,0 +1,69 @@
+#!/bin/sh
+# preinst script for FSL
+
+set -e
+
+# Move a conffile. In case of an unmodified file simply
+# remove it to not trigger dpkg questions.
+# However, if the file is modified this question should occur.
+mv_conffile_oldfsl()
+{
+    CONFFILE="$1"
+    NEWLOCATION="$2"
+
+    if [ -e "$CONFFILE" ]; then
+        md5sum="`md5sum \"$CONFFILE\" | sed -e \"s/ .*//\"`"
+        old_md5sum=$(dpkg-query -W -f='${Conffiles}' fsl | grep ${CONFFILE} | awk '{ print $2 }')
+        if [ "$md5sum" = "$old_md5sum" ]; then
+            rm -f "$CONFFILE"
+        else
+            mv "$CONFFILE" "$NEWLOCATION"
+        fi
+    fi
+}
+
+case "$1" in
+    install|upgrade)
+        # This attempts to silently move the old fsl.conf configuration
+        # file to its new location /etc/fsl/fsl.sh if no local modifications
+        # are detected.
+        if dpkg --compare-versions "$2" le "3.3.11-2"; then
+            if [ -e /etc/fsl/fsl.conf ]; then
+                echo "Moving old FSL configuration to /etc/fsl/fsl.sh."
+
+                if [ ! -d /etc/fsl ]; then
+                    mkdir /etc/fsl
+                fi
+
+                mv_conffile_oldfsl "/etc/fsl/fsl.conf" "/etc/fsl/fsl.sh"
+            fi
+        fi
+        # Move whole config dir to a version-specific location when upgrading
+        # from an old unversioned installation
+        if dpkg --compare-versions "$2" le "4.1.6-2~"; then
+            # only if a real file, not a symlink
+            if [ -f /etc/fsl/fsl.sh -a ! -L /etc/fsl/fsl.sh ] ; then
+                echo "Moving FSL config file to /etc/fsl/5.0."
+                if [ ! -d /etc/fsl/5.0 ]; then
+                    mkdir /etc/fsl/5.0
+                fi
+                mv_conffile_oldfsl "/etc/fsl/fsl.sh" "/etc/fsl/5.0/fsl.sh"
+                mv_conffile_oldfsl "/etc/fsl/feat.tcl" "/etc/fsl/#FSLMVERSION/feat.tcl"
+            fi
+        fi
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0
+
+

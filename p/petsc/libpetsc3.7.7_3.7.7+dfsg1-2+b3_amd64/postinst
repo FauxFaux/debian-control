@@ -1,0 +1,20 @@
+#!/bin/sh -e
+
+DEB_HOST_MULTIARCH=x86_64-linux-gnu
+
+PETSC_VERSION=3.7.7
+PETSC_VERSION_NUMBER=$( echo ${PETSC_VERSION} | sed "s/\.//g" )
+SONAME=3.7
+
+# Make alternatives links
+if [ "$1" = "configure" ]; then
+  # alternative petsc version (for given soname), real or complex
+  update-alternatives --install /usr/lib/${DEB_HOST_MULTIARCH}/libpetsc.so.${SONAME} libpetsc.so.${SONAME} /usr/lib/${DEB_HOST_MULTIARCH}/libpetsc_real.so.${PETSC_VERSION} ${PETSC_VERSION_NUMBER}77 \
+    --slave /usr/lib/${DEB_HOST_MULTIARCH}/libpetsc.so.${PETSC_VERSION} libpetsc.so.${PETSC_VERSION} /usr/lib/${DEB_HOST_MULTIARCH}/libpetsc_real.so.${PETSC_VERSION}
+
+  # alternative real version (for given soname)
+  update-alternatives --install /usr/lib/${DEB_HOST_MULTIARCH}/libpetsc_real.so.${SONAME} libpetsc_real.so.${SONAME} /usr/lib/${DEB_HOST_MULTIARCH}/libpetsc_real.so.${PETSC_VERSION} ${PETSC_VERSION_NUMBER}77
+fi
+
+
+

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+TARGETDIR=/usr/share/astrometry
+STEP=04
+if [ "$1" = "remove" ] ; then
+    rm -f ${TARGETDIR}/index-2mass-${STEP}-??.fits
+fi
+
+

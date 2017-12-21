@@ -1,0 +1,32 @@
+#! /bin/sh -e
+#
+# postinst script for Debian python packages.
+# Written 1998 by Gregor Hoffleit <flight@debian.org>.
+#
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+PACKAGE=routeplanner
+DIRLIST="/usr/share/routeplanner"
+PYTHON=python`/usr/bin/python -c 'import sys, string; print string.split(sys.version)[0][:3]'`
+
+case "$1" in
+    configure|abort-upgrade|abort-remove|abort-deconfigure)
+        for i in $DIRLIST ; do
+            /usr/bin/python -O /usr/lib/$PYTHON/compileall.py -q $i
+            /usr/bin/python /usr/lib/$PYTHON/compileall.py -q $i
+        done
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+exit 0

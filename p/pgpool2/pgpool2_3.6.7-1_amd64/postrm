@@ -1,0 +1,45 @@
+#!/bin/sh
+
+set -e
+
+case $1 in
+    purge)
+	if which ucf >/dev/null; then
+	    ucf --purge /etc/pgpool2/pgpool.conf
+	fi
+	if which ucfr >/dev/null; then
+	    ucfr --purge pgpool2 /etc/pgpool2/pgpool.conf
+	fi
+	rm -f /etc/pgpool2/pgpool.conf /etc/pgpool2/pgpool.conf.ucf-dist
+	;;
+esac
+
+# Automatically added by dh_installinit/10.10.8
+if [ "$1" = "purge" ] ; then
+	update-rc.d pgpool2 remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.8
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'pgpool2.service' >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'pgpool2.service' >/dev/null
+		deb-systemd-helper unmask 'pgpool2.service' >/dev/null
+	fi
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "disappear" ] ; then
+	update-alternatives --remove pecan /usr/bin/python3-pecan
+	update-alternatives --remove gunicorn_pecan /usr/bin/python3-gunicorn_pecan
+fi
+
+
+
+exit 0

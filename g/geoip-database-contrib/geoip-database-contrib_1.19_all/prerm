@@ -1,0 +1,25 @@
+#!/bin/sh
+# prerm script for geoip-database-contrib
+
+set -e
+
+case "$1" in
+    remove)
+        if [ -f "/usr/share/GeoIP/GeoLiteCity.dat" ]
+        then
+            update-alternatives --remove GeoIPCity.dat /usr/share/GeoIP/GeoLiteCity.dat
+        fi
+    ;;
+
+    upgrade|deconfigure|failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

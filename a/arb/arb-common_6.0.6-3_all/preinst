@@ -1,0 +1,32 @@
+#!/bin/sh
+set -e
+
+
+case "$1" in
+upgrade)
+	case "$2" in
+	pre-0.0*)
+		# Reason: When upgrading from a pre-0.0.20050526-4 version a directory
+		# /usr/share/arb/lib/nas exists and prevents setting the symlink from
+		# the package correctly.  Thus this directory has to be removed first
+		dirtoremove=/usr/share/arb/lib/nas
+		if [ ! -L $dirtoremove ] ; then
+			if [ -d $dirtoremove ] ; then
+				# Just rmdir the directory, if there should be some user
+				# files the user get's the information to clean the
+				# directory by the error message
+				rmdir $dirtoremove
+			fi
+		fi
+	;;
+	5.5-*)
+		# PT servers from 5.5 are not compatible with 6.x
+		echo "Removing old incompatible PT servers..."
+		rm -fv /var/lib/arb/pts/*.arb /var/lib/arb/pts/*.arb.pt
+		echo "done"
+	;;
+	esac
+;;
+esac
+
+

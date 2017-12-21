@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+# To address security bug #363580, but don't change them again and
+# again if local admin put something else.
+if [ "$1" = "configure" ] && dpkg --compare-versions "$2" lt 2.0.2-2; then
+ chmod 640 /etc/wordpress/config* >/dev/null 2>&1 || true
+ chgrp www-data /etc/wordpress/config* >/dev/null 2>&1 || true
+fi
+
+if [ -h /usr/share/tinymce/www/plugins/inlinepopups/editor_plugin.js ] &&
+   [ ! -e /usr/share/tinymce/www/plugins/inlinepopups/editor_plugin.js ]; then
+    echo "WARNING: You have been affected by http://bugs.debian.org/639733" >&2
+    echo "you should reinstall tinymce." >&2
+fi
+if [ -h /usr/share/javascript/cropper/marqueeVert.gif ] &&
+   [ ! -e /usr/share/javascript/cropper/marqueeVert.gif ]; then
+    echo "WARNING: You have been affected by http://bugs.debian.org/639733" >&2
+    echo "you should reinstall libjs-cropper." >&2
+fi
+
+if [ "$1" = "triggered" ] || [ "$1" = "configure" ]; then
+    # Update /var/lib/wordpress/wp-content
+    wp-setup --sync-wp-content
+fi
+
+# Automatically added by dh_installdeb/10.10.5
+dpkg-maintscript-helper rm_conffile /etc/wordpress/wp-config.php 3.4+dfsg -- "$@"
+# End automatically added section
+
+
+exit 0

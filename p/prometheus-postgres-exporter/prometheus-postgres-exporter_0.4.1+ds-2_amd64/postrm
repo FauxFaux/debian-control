@@ -1,0 +1,41 @@
+#!/bin/sh
+# postrm script for prometheus-postgres-exporter
+# Script executed after the package is removed.
+
+set -e
+
+case "$1" in
+  purge)
+        rm -rf /var/log/prometheus/prometheus-postgres-exporter.log \
+            /var/run/prometheus/prometheus-postgres-exporter.pid
+	# We do NOT remove the system user.
+	;;
+esac
+
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "purge" ] ; then
+	update-rc.d prometheus-postgres-exporter remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'prometheus-postgres-exporter.service' >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'prometheus-postgres-exporter.service' >/dev/null
+		deb-systemd-helper unmask 'prometheus-postgres-exporter.service' >/dev/null
+	fi
+fi
+# End automatically added section
+

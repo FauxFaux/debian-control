@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_systemd_start/10.10.7
+if [ -d /run/systemd/system ]; then
+	deb-systemd-invoke stop 'jabberd-c2s.service' 'jabberd-router.service' 'jabberd-s2s.service' 'jabberd-sm.service' >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.7
+if [ -x "/etc/init.d/jabberd2" ]; then
+	invoke-rc.d jabberd2 stop || exit $?
+fi
+# End automatically added section

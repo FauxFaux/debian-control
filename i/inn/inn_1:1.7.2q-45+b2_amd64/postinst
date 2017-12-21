@@ -1,0 +1,134 @@
+#!/bin/sh -e
+
+make_directories() {
+  NEED_DIR='in.coming in.coming/bad in.coming/tmp
+	out.going over.view news.archive'
+  for D in $NEED_DIR; do
+    if [ ! -d /var/spool/news/$D ]; then
+      install -d -m 775 -o news -g news /var/spool/news/$D
+    fi
+  done
+}
+
+init_var_lib_news() {
+  if [ ! -f /var/lib/news/active ]; then
+    cat > /var/lib/news/active << END
+control 0000000000 0000000001 n
+control.cancel 0000000000 0000000001 n
+junk 0000000000 0000000001 y
+misc.test 0000000000 0000000001 y
+misc.test.moderated 0000000000 0000000001 m
+END
+    chown news:news /var/lib/news/active
+  fi
+
+  if [ ! -f /var/lib/news/history ]; then
+    touch /var/lib/news/history
+    /usr/lib/news/bin/makehistory -or
+    chown news:news /var/lib/news/history*
+  fi
+
+  if [ ! -f /var/lib/news/newsgroups ]; then
+    cat > /var/lib/news/newsgroups << END
+control		News server internal group.
+control.cancel	News server internal group.
+junk		News server internal group.
+misc.test	For testing of network software.  Very boring.
+misc.test.moderated	Testing of posting to moderated groups. (Moderated)
+END
+    chown news:news /var/lib/news/newsgroups
+  fi
+}
+
+add_mail_alias() {
+  if ! grep -qs '^usenet:' /etc/aliases; then
+    echo 'usenet: root' >> /etc/aliases
+    newaliases || echo "newaliases command not available."
+  fi
+}
+
+init_etc_files() {
+  if [ ! -f /etc/news/server ]; then
+    echo 'localhost' > /etc/news/server
+  fi
+
+  if [ ! -f /etc/news/whoami ]; then
+    if [ -f /etc/mailname ]; then
+      cp /etc/mailname /etc/news/whoami
+    else
+      hostname --fqdn > /etc/news/whoami
+    fi
+  fi
+}
+
+case "$1" in
+    configure)
+    make_directories
+    init_var_lib_news
+    add_mail_alias
+    init_etc_files
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+    echo "postinst called with unknown argument '$1'" >&2
+    exit 1
+    ;;
+esac
+
+# Automatically added by dh_systemd_enable/10.6.4
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask inn.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled inn.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable inn.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state inn.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.6.4
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask inn.socket >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled inn.socket; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable inn.socket >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state inn.socket >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.6.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/inn.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.6.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/inn" ]; then
+		update-rc.d inn defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d inn $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+
+

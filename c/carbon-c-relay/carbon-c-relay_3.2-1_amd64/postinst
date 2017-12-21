@@ -1,0 +1,45 @@
+#!/bin/sh
+set -e
+
+if dpkg-maintscript-helper supports mv_conffile 2>/dev/null; then
+    dpkg-maintscript-helper mv_conffile /etc/carbon/carbon-c-relay.conf /etc/carbon-c-relay.conf 0.40~ -- "$@"
+fi
+
+case "$1" in
+    configure)
+        adduser --quiet --system --no-create-home \
+            --home /var/lib/carbon-c-relay \
+            --group \
+            carbon-c-relay
+    ;;
+esac
+
+# Automatically added by dh_systemd_enable/10.9.2
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'carbon-c-relay.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'carbon-c-relay.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'carbon-c-relay.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'carbon-c-relay.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.9.2
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/carbon-c-relay" ]; then
+		update-rc.d carbon-c-relay defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d carbon-c-relay $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+

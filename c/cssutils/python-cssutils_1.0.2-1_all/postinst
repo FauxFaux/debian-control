@@ -1,0 +1,51 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        if [ -f /usr/bin/cssparse ] && [ ! -h /usr/bin/cssparse ]; then
+            rm /usr/bin/cssparse
+        fi
+        if [ -f /usr/bin/csscombine ] && [ ! -h /usr/bin/csscombine ]; then
+            rm /usr/bin/csscombine
+        fi
+        if [ -f /usr/bin/csscapture ] && [ ! -h /usr/bin/csscapture ]; then
+            rm /usr/bin/csscapture
+        fi
+        update-alternatives --install /usr/bin/cssparse cssparse \
+                                      /usr/bin/cssparse_py2 20 \
+                            --slave /usr/share/man/man1/cssparse.1.gz \
+                                    cssparse.1.gz \
+                                    /usr/share/man/man1/cssparse_py2.1.gz
+        update-alternatives --install /usr/bin/csscombine csscombine \
+                                      /usr/bin/csscombine_py2 20 \
+                            --slave /usr/share/man/man1/csscombine.1.gz \
+                                    csscombine.1.gz \
+                                    /usr/share/man/man1/csscombine_py2.1.gz
+        update-alternatives --install /usr/bin/csscapture csscapture \
+                                      /usr/bin/csscapture_py2 20 \
+                            --slave /usr/share/man/man1/csscapture.1.gz \
+                                    csscapture.1.gz \
+                                    /usr/share/man/man1/csscapture_py2.1.gz 
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-cssutils 
+fi
+
+# End automatically added section
+
+
+exit 0

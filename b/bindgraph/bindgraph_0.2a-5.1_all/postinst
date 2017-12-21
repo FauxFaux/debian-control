@@ -1,0 +1,117 @@
+#!/bin/sh
+# postinst script for BindGraph
+# by Jose Luis Tallon <jltallon@adv-solutions.net>
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' 	n-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+RUNDIR=/var/run/servergraph
+DATADIR=/var/lib/bindgraph
+CACHEDIR=/var/cache/bindgraph
+DEFAULTS=/etc/default/bindgraph
+
+NAMED_CONF_LOG=/etc/bind/named.conf.logging
+
+case "$1" in
+    configure)
+	[ -d $RUNDIR ] || mkdir -p $RUNDIR
+	chown daemon:root $RUNDIR
+
+	db_get bindgraph/logfile || true
+	LOGFILE="$RET"
+
+	if [ ! -d $DATADIR ]; then mkdir $DATADIR; fi
+	chown root:adm $DATADIR
+	chmod 775 $DATADIR
+ 
+	if [ ! -d $CACHEDIR ]; then mkdir -p $CACHEDIR; fi
+	chown www-data:www-data $CACHEDIR
+
+	
+	
+	# Solve #293819
+	BIND_VER="`dpkg -l bind9 | awk '/^ii/ { print $3; }'`"
+	if [ -n $BIND_VER ] && dpkg --compare-versions "$BIND_VER" ge '9.3' ; then
+		log_ver="bind93" ;
+	else
+		log_ver="bind92" ;
+	fi
+	
+	if [ ! -f $DEFAULTS ]; then
+		echo "DNS_LOG=$LOGFILE" > $DEFAULTS
+		echo "LOG_FORMAT=${log_ver}" >> $DEFAULTS
+
+	fi
+	
+	if [ -z "`egrep "^\s*DNS_LOG\s*=\s*$LOGFILE\s*$" $DEFAULTS`" ]; then
+ 		# update log file location
+		mv $DEFAULTS $DEFAULTS.tmp
+		grep -v DNS_LOG $DEFAULTS.tmp > $DEFAULTS
+		egrep -v "^\s*DNS_LOG\s*=" $DEFAULTS.tmp > $DEFAULTS
+		echo "DNS_LOG=$LOGFILE" >> $DEFAULTS
+		rm -f $DEFAULTS.tmp
+	fi
+	
+	if [ -n "$2" ]; then
+		# if we are upgrading, update config :-)
+		if [ -z "`egrep "^\s*LOG_FORMAT\s*=" ${DEFAULTS}`" ]; then
+			echo "LOG_FORMAT=${log_ver}" >> $DEFAULTS		
+		fi
+	fi
+
+
+	if [ ! -f $LOGFILE ]; then
+		# Ensure something is there, so that BindGraph can start
+		touch $LOGFILE
+		chown root:adm $LOGFILE; chmod 640 $LOGFILE
+	fi
+
+
+
+	db_get bindgraph/start_on_boot
+	if [ "$RET" = "true" ]; then
+		update-rc.d bindgraph defaults >/dev/null ;
+	else
+		update-rc.d -f bindgraph remove >/dev/null 2>&1 ;
+	fi
+    ;;
+    
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+	echo "postinst called with unknown argument \$1'" >&2
+	exit 1
+    ;;
+esac
+
+db_get bindgraph/start_on_boot
+if [ "$RET" = "true" ]; then
+	invoke-rc.d --quiet bindgraph start
+fi
+db_stop
+
+# NO debhelper tag -- on purpose
+
+exit 0

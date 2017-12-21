@@ -1,0 +1,123 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+# Automatically added by dh_installzopeinstance
+PKG=zope2.13-sandbox
+INSTANCE=sandbox
+ZVER=2.13
+DATABASE=ZODB
+USER=zope:zope
+
+add_products()
+{
+    products=""
+    if [ -n "$products" ]; then
+        dzhandle -z $ZVER add-product --lazy $INSTANCE $products
+    fi
+}
+
+if command -v invoke-rc.d >/dev/null 2>&1; then
+	INVOKE="invoke-rc.d zope$ZVER"
+else
+	INVOKE="/etc/init.d/zope$ZVER"
+fi
+
+case "$1" in
+  abort-deconfigure|abort-remove|abort-upgrade)
+    ;;
+  configure)
+    if dzhandle -z $ZVER show-instance $INSTANCE >/dev/null 2>&1; then
+        # instance already exists
+        echo "Zope$ZVER instance '$INSTANCE' already exists."
+        add_products
+	if [ "$DATABASE" = "ZEO" ]; then
+            if ! $INVOKE start "ZEOSERVER=$INSTANCE"; then
+	        echo "Could not start the zeo database which was"
+		echo "configured for the zope instance. Please"
+		echo "check for errors by running zeo by hand"
+		echo "and start the zope instance afterwards."
+		ZEOFAILURE="yes"
+	    fi
+	fi
+	if [ -z "$ZEOFAILURE" ]; then
+            if ! $INVOKE start "INSTANCE=$INSTANCE"; then
+                echo "Could not start zope instance $INSTANCE. Please check"
+                echo "for errors running the instance by hand:"
+                echo "  /var/lib/zope$ZVER/instance/$INSTANCE/runzope"
+	    fi
+        fi
+    else
+        if [ -d /var/lib/zope$ZVER/instance/$INSTANCE ] && \
+                [ "$DATABASE" != "ZEO" ] && \
+                [ ! -f /var/lib/zope$ZVER/instance/$INSTANCE/var/Data.fs ]; then
+            db_get $PKG/remove-instance-without-data
+            removal="$RET"
+            if [ "$removal" = abort ]; then
+                echo >&2 "don't touch /var/lib/zope$ZVER/instance/$INSTANCE"
+                exit 1
+            fi
+        else
+            clean_install=yes
+        fi
+        db_get $PKG/admin-user
+        user="$RET"
+        db_get $PKG/admin-password
+        password="$RET"
+        if echo "$user:$password" | grep -vq '^[a-zA-Z][a-zA-Z0-9]*:[^:][^:]*$'; then
+            echo >&2 "found invalid user and/or password"
+            exit 1
+        fi
+        db_get $PKG/instance-http-port
+        port="$RET"
+        
+        if [ "$DATABASE" = "ZEO" ]; then
+            db_get $PKG/instance-zeo-port
+            zeoport="$RET"
+            dzhandle -z $ZVER make-zeoinstance $INSTANCE $zeoport
+            $INVOKE start "ZEOSERVER=$INSTANCE"
+            ZEOSERVER="--zeo-server=localhost:$zeoport"
+        else
+            ZEOSERVER=""
+        fi
+
+        # set the install policy to manual
+        if dzhandle -z $ZVER make-instance -u "$user:$password" $INSTANCE \
+            --addon-mode=all --restart=end -t tree-linked \
+            --service-port=$port --service-user=zope:zope  $ZEOSERVER
+        then
+            # overwrite password in debconf database
+            db_set $PKG/admin-password ""
+            db_set $PKG/admin-password-confirmation ""
+            add_products
+            if ! $INVOKE start "INSTANCE=$INSTANCE"; then
+                echo "Could not start zope instance $INSTANCE. Please check"
+                echo "for errors running the instance by hand:"
+                echo "  /var/lib/zope$ZVER/instance/$INSTANCE/runzope"
+            fi
+        else
+            # remove, what we created
+            if [ "$clean_install" = yes ] && [ "$removal" != abort ]; then
+                rm -rf "/var/lib/zope$ZVER/instance/$INSTANCE"
+            fi
+            if [ "$clean_install" = yes ]; then
+                rm -rf "/var/log/zope$ZVER/$INSTANCE"
+                rm -rf "/etc/zope$ZVER/$INSTANCE"
+            fi
+            # something wrong happened, exit with a status error
+            exit 201
+        fi
+    fi
+    ;;
+
+  *)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+# End automatically added section
+
+
+db_stop

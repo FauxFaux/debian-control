@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    remove|upgrade|deconfigure)
+        vim-addon-manager -w remove bitbake > /dev/null
+    ;;
+
+    failed-upgrade)
+        # This will be interesting if vim-addon-manager changes behaviour
+        # in a way that the prerm-script of the old version of the package
+        # cannot be run successfully anymore and the prerm-script of the
+        # new version of the package can fix this issue. But for now, this
+        # is not the case.
+        exit 1
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

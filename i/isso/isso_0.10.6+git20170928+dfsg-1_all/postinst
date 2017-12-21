@@ -1,0 +1,43 @@
+#!/bin/sh
+# postinst script for isso
+
+set -e
+
+case $1 in
+    configure)
+
+        # Add isso user
+        if ! id isso > /dev/null 2>&1 ; then
+            adduser --system --group --home /var/lib/isso \
+                --disabled-password --quiet --gecos 'isso' \
+                isso || true
+        fi
+        chown isso /var/lib/isso
+        chown isso /var/log/isso
+        ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        ;;
+
+esac
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p isso 
+fi
+
+# End automatically added section
+# Automatically added by dh_installinit/10.10.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/isso" ]; then
+		update-rc.d isso defaults >/dev/null
+		invoke-rc.d isso start || exit $?
+	fi
+fi
+# End automatically added section
+

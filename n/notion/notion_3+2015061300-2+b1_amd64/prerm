@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = remove ] || [ "$1" = deconfigure ]; then
+    update-alternatives --remove x-window-manager /usr/bin/notion
+    update-alternatives --remove notion /usr/bin/notion
+fi
+
+if [ "$1" = remove ]; then
+    rm -f /var/lib/notion/debian-menu.lua
+    rm -f /var/lib/notion/debian-menu-i18n.lua
+fi
+
+

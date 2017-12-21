@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+# ssg packages with version less or equal to 0.1.31-3 use /usr/share/ssg to
+# keep ssg content.
+# From now on, remediation files are also deployed. These files depends on a
+# file named 'remediation_functions' which is set to be in
+# /usr/share/scap-security-guide. As a consequence, /usr/share/ssg is updated
+# to /usr/share/scap-security-guide to avoid patching mainstream
+# the update is done by ssg-base update. Other package all depend on it, which
+# means that this very file is enough for all other binary packages.
+if [ "$1" = "upgrade" ] && dpkg --compare-versions "$2" le "0.1.31-3" ; then
+  if [ -d /usr/share/ssg ]
+  then
+    mv /usr/share/ssg /usr/share/scap-security-guide
+  fi
+fi
+
+

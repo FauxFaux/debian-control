@@ -1,0 +1,46 @@
+#!/bin/sh
+set -e
+
+dpkg-maintscript-helper rm_conffile \
+	/etc/ppp/ip-up.d/1masqmail "0.3.4-1~" -- "$@"
+
+dpkg-maintscript-helper rm_conffile \
+	/etc/ppp/ip-down.d/99masqmail "0.3.4-1~" -- "$@"
+
+dpkg-maintscript-helper rm_conffile \
+	/etc/network/if-up.d/1masqmail "0.3.4-1~" -- "$@"
+
+dpkg-maintscript-helper rm_conffile \
+	/etc/network/if-down.d/99masqmail "0.3.4-1~" -- "$@"
+
+case "$1" in
+	configure)
+		# Create spool and log directories.
+		install -d -omail -gmail /var/log/masqmail/
+		install -d -omail -gmail /var/spool/masqmail/
+		install -d -omail -gmail /var/spool/masqmail/input/
+		install -d -omail -gmail /var/spool/masqmail/lock/
+
+		# Generate /etc/mailname and set default-value
+		if [ ! -f /etc/mailname ]; then
+			hostname -f >/etc/mailname
+		fi
+
+		if ! grep -qs "\." /etc/mailname; then
+			echo "No FQDN in /etc/mailname." >&2
+		fi
+	;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+esac
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/masqmail" ]; then
+	update-rc.d masqmail defaults >/dev/null
+	invoke-rc.d masqmail start || exit $?
+fi
+# End automatically added section
+
+
+exit 0

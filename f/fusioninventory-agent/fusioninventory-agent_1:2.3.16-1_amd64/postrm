@@ -1,0 +1,41 @@
+#! /bin/sh
+set -e
+
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d fusioninventory-agent remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+
+
+case "$1" in
+  purge)
+    for ext in '~' '%' .bak .ucf-new .ucf-old .ucf-dist;  do
+	rm -f /etc/fusioninventory/agent.cfg$ext
+    done
+
+    # remove the configuration file itself
+    rm -f /etc/fusioninventory/agent.cfg
+    [ -d /etc/fusioninventory ] && rmdir --ignore-fail-on-non-empty /etc/fusioninventory
+
+    # and finally clear it out from the ucf database
+    if which ucf >/dev/null; then
+        ucf --purge /etc/fusioninventory/agent.cfg
+    fi
+    if which ucfr >/dev/null; then
+        ucfr --purge fusioninventory-agent /etc/fusioninventory/agent.cfg
+    fi
+
+    ;;
+  *)
+     exit 0;;
+esac
+
+exit 0

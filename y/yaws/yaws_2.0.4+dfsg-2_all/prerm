@@ -1,0 +1,47 @@
+#! /bin/sh
+# prerm script for yaws
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <prerm> `remove'
+#        * <old-prerm> `upgrade' <new-version>
+#        * <new-prerm> `failed-upgrade' <old-version>
+#        * <conflictor's-prerm> `remove' `in-favour' <package> <new-version>
+#        * <deconfigured's-prerm> `deconfigure' `in-favour'
+#          <package-being-installed> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see /usr/doc/packaging-manual/
+
+case "$1" in
+    remove|upgrade|deconfigure|failed-upgrade)
+    ;;
+
+    *)
+	echo "prerm called with unknown argument \`$1'" >&2
+	exit 1
+    ;;
+esac
+
+# Automatically added by dh_usrlocal/10.6.3
+(
+	while read dir; do
+		rmdir "$dir" 2>/dev/null || true
+	done
+) << DATA
+/usr/local/lib/yaws-appmods/include
+/usr/local/lib/yaws-appmods/ebin
+/usr/local/lib/yaws-appmods
+DATA
+# End automatically added section
+# Automatically added by dh_installinit/10.6.3
+if [ -x "/etc/init.d/yaws" ] && [ "$1" = remove ]; then
+	invoke-rc.d yaws stop || exit $?
+fi
+# End automatically added section
+
+
+exit 0
+

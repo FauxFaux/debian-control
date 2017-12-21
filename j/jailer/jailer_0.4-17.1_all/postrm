@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+
+
+if $(dpkg-divert --list /etc/init.d/bind.jailer | grep -q "by jailer"); then
+	dpkg-divert --package jailer --remove --rename \
+		--divert /etc/init.d/bind.jailer /etc/init.d/bind
+fi
+
+if $(dpkg-divert --list /etc/init.d/ntp.jailer | grep -q "by jailer"); then
+	dpkg-divert --package jailer --remove --rename \
+		--divert /etc/init.d/ntp.jailer /etc/init.d/ntp
+fi

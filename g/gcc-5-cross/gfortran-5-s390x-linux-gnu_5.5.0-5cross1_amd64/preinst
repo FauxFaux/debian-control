@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove s390x-linux-gnu-gfortran /usr/bin/s390x-linux-gnu-gfortran-5
+fi
+
+
+
+exit 0

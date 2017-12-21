@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+# Load Debconf
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+# Autodetect default for swift_dir question
+for dir in /opt/swift /usr/local/swift /usr/local/share/swift /usr/share/swift; do
+  if [ -d "$dir" -a -d "$dir/include" -a -f "$dir/include/swift.h" -a -d "$dir/lib" ]; then
+    db_set gnome-speech-swift/swift_dir "$dir"
+    break
+  fi
+done
+
+db_input medium gnome-speech-swift/swift_dir || true
+db_go
+

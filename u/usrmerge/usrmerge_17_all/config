@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+# ask no questions if the system has already been converted
+if [ "$(readlink -f /lib)" = '/usr/lib' ]; then
+  exit
+fi
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+db_settitle usrmerge/title
+
+db_input critical usrmerge/autoconvert || true
+db_go || true
+
+
+

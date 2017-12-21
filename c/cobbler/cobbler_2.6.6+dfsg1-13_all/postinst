@@ -1,0 +1,73 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "configure" ] ; then
+	# If there's no password file, we set one
+	if ! [ -e /etc/cobbler/users.digest ] ; then
+		db_get cobbler/password || true
+		password="$RET"
+		hash=$(printf "cobbler:Cobbler:$password" | md5sum | awk '{print $1}')
+		[ -e /etc/cobbler/users.digest ] || install -o root -g root -m 0600 /dev/null /etc/cobbler/users.digest
+		htpasswd -D /etc/cobbler/users.digest "cobbler" || true
+		printf "cobbler:Cobbler:$hash\n" >> /etc/cobbler/users.digest
+		hash=$(printf "$password" | openssl passwd -1 -stdin)
+		sed -i "s%^default_password_crypted:.*%default_password_crypted: \"$hash\"%" /etc/cobbler/settings
+	fi
+
+	db_get cobbler/server || true
+	SERVER_HOSTNAME="${RET}"
+	if grep -qs "^server: .*" /etc/cobbler/settings; then
+		sed -i "s/^server: .*/server: $SERVER_HOSTNAME/" /etc/cobbler/settings
+	fi
+
+	db_get cobbler/next_server || true
+	ipaddr="$RET"
+	if grep -qs "^next_server: .*" /etc/cobbler/settings; then
+		sed -i "s/^next_server: .*/next_server: $ipaddr/" /etc/cobbler/settings
+	fi
+	chmod 664 /etc/cobbler/settings
+
+	a2enmod proxy_http
+	a2enmod wsgi
+	a2enmod rewrite
+	a2dismod python || true
+	a2ensite cobbler.conf
+	invoke-rc.d apache2 reload
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p cobbler 
+fi
+
+# End automatically added section
+# Automatically added by dh_systemd_enable
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask cobbler.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled cobbler.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable cobbler.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state cobbler.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/cobbler" ]; then
+		update-rc.d cobbler defaults >/dev/null
+		invoke-rc.d cobbler start || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

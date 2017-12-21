@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper symlink_to_dir /usr/share/horde/js/jquery.mobile/images /usr/share/javascript/jquery-mobile/images 2.27.6+debian1-1~ -- "$@"
+# End automatically added section
+
+
+case "$1" in
+  install|upgrade)
+    # jquery.mobile was previously a symlink to jquery-mobile (<= 2.4.3-1),
+    # but as it was missing jquery, the directory was put back. However,
+    # dpkg does not delete the symlink on upgrade...
+    if [ -L /usr/share/horde/js/jquery.mobile ]; then
+        rm /usr/share/horde/js/jquery.mobile
+    fi
+    ;;
+  *)
+    ;;
+esac
+
+exit 0

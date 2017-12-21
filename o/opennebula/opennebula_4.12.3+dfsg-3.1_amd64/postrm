@@ -1,0 +1,124 @@
+#!/bin/sh
+
+set -e
+
+ONEHOME=/var/lib/one
+ONE_GROUP=oneadmin
+ONE_USER=oneadmin
+
+if [ "$1" = "remove" ]; then
+    # Remove logs
+    rm -rf /var/log/one/*
+fi
+
+if [ "$1" = "purge" ]; then
+    # purge stats overrides
+    # stats overrides could already be removed by root
+    dpkg-statoverride --quiet --remove /var/log/one || true
+    dpkg-statoverride --quiet --remove $ONEHOME/.one || true
+    dpkg-statoverride --quiet --remove $ONEHOME/images || true
+    dpkg-statoverride --quiet --remove $ONEHOME/datastores/0 || true
+    dpkg-statoverride --quiet --remove $ONEHOME/datastores/1 || true
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/bash_completion.d/one 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/econe.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /one/auth/ldap_auth.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/auth/x509_auth.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/vmm_ec2/vmm_ec2rc 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/vmm_ec2/vmm_ec2.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi_templates/small.erb 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi_templates/network.erb 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi_templates/medium.erb 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi_templates/large.erb 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi_templates/custom.erb 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi_templates/common.erb 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/im_ec2/im_ec2rc 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/im_ec2/im_ec2.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/auth/quota.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi-server.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/ozones-server.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/occi-server.conf 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/one/group.default 4.12.3+dfsg-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d opennebula remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = "purge" ] ; then
+	update-rc.d opennebula-scheduler remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask opennebula.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge opennebula.service >/dev/null
+		deb-systemd-helper unmask opennebula.service >/dev/null
+	fi
+fi
+# End automatically added section
+

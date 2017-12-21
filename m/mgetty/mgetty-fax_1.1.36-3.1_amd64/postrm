@@ -1,0 +1,44 @@
+#!/bin/sh -e
+
+case "$1" in
+    purge)
+        # remove the configuration files in /etc/mgetty
+        for file in faxheader faxrunq.config sendfax.config; do
+	    if [ -f /etc/mgetty/$file ] ; then
+	    	rm -f /etc/mgetty/$file
+	    fi
+	    if [ -f /etc/mgetty/$file.dpkg-old ] ; then
+	    	rm -f /etc/mgetty/$file.dpkg-old
+	    fi
+	    if [ -f /etc/mgetty/$file.dpkg-new ] ; then
+	    	rm -f /etc/mgetty/$file.dpkg-new
+	    fi
+	done
+	rmdir /etc/mgetty || true;
+	rm -f /var/spool/fax/outgoing/faxqueue_done
+        rmdir /var/spool/fax/outgoing /var/spool/fax || true;
+        rm -rf /var/lock/fax /var/run/mgetty-fax
+	;;
+    *)
+	;;
+esac
+
+# Automatically added by dh_installdebconf/10.9
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.9
+if [ "$1" = "purge" ] ; then
+	update-rc.d mgetty-fax remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+

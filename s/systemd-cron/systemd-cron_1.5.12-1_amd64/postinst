@@ -1,0 +1,60 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" != configure ]; then
+    exit 0
+fi
+
+# Add group for crontabs
+getent group crontab > /dev/null 2>&1 || addgroup --system crontab
+
+# Fixup crontab binary for new group 'crontab'.
+if ! dpkg-statoverride --list /lib/systemd-cron/crontab_setgid > /dev/null ; then
+    dpkg-statoverride --update --add root crontab 2755 /lib/systemd-cron/crontab_setgid
+fi
+
+# Remove leftover setgid bit from Vixie-cron
+if dpkg-statoverride --list /usr/bin/crontab > /dev/null ; then
+    dpkg-statoverride --remove /usr/bin/crontab
+    chown root:root /usr/bin/crontab
+    chmod 0755 /usr/bin/crontab
+fi
+
+# Fixup crontab , directory and files for new group 'crontab'
+mkdir -p /var/spool/cron/crontabs
+chown root:crontab /var/spool/cron/crontabs
+chmod 1730 /var/spool/cron/crontabs
+cd /var/spool/cron/crontabs
+set +e
+ls -1 | xargs -r -n 1 --replace=xxx  chown 'xxx:crontab' 'xxx'
+ls -1 | xargs -r -n 1 chmod 600
+set -e
+
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'cron.target' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'cron.target'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'cron.target' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'cron.target' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start/10.10.9
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	if [ -n "$2" ]; then
+		_dh_action=restart
+	else
+		_dh_action=start
+	fi
+	deb-systemd-invoke $_dh_action 'cron.target' >/dev/null || true
+fi
+# End automatically added section
+

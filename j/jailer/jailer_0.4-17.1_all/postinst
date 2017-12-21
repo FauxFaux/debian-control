@@ -1,0 +1,60 @@
+#!/bin/sh
+
+set -e
+
+
+
+exit 0
+
+
+
+echo "Jailer contains pre-defined jails for BIND and for NTP."
+echo ""
+echo -n "Add BIND jail?[Y/n] "
+read yn
+test -n "$yn" || yn="Y"
+
+case "$yn" in
+	[Nn]*)
+		echo "BIND jail not configured automaticly!"
+		echo -n "Press [ENTER] "
+		read line
+		;;
+	*)
+		if ! $(dpkg-divert --list /etc/init.d/bind.jailer | grep -q "by jailer"); then
+		    dpkg-divert --package jailer --add --rename \
+		        --divert /etc/init.d/bind.jailer /etc/init.d/bind
+		fi
+
+		/usr/sbin/jailer.pl /etc/jailer.conf bind
+
+		update-rc.d jail-bind defaults >/dev/null
+		/etc/init.d/jail-bind start
+
+		;;
+esac
+
+echo ""
+echo -n "Add BIND jail?[Y/n] "
+read yn
+test -n "$yn" || yn="Y"
+
+case "$yn" in
+	[Nn]*)
+		echo "BIND jail not configured automaticly!"
+		echo -n "Press [ENTER] "
+		read line
+		;;
+	*)
+		if ! $(dpkg-divert --list /etc/init.d/ntp.jailer | grep -q "by jailer"); then
+		    dpkg-divert --package jailer --add --rename \
+  		      --divert /etc/init.d/ntp.jailer /etc/init.d/ntp
+		fi
+
+		/usr/sbin/jailer.pl /etc/jailer.conf ntp
+
+		update-rc.d jail-ntp defaults >/dev/null
+		/etc/init.d/jail-ntp start
+
+		;;
+esac

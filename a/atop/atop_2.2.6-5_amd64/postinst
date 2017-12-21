@@ -1,0 +1,80 @@
+#!/bin/bash
+
+set -e
+
+if dpkg-maintscript-helper supports rm_conffile; then
+	dpkg-maintscript-helper rm_conffile \
+		/etc/logrotate.d/atop 1.26-2~ -- "$@"
+fi
+
+case "$1" in
+    configure)
+        touch /var/log/atop/dummy_after /var/log/atop/dummy_before
+        if dpkg --compare-versions "$2" lt-nl 2; then
+            # updating from a pre-2.0 version which won't read the old log file format
+            # move away old log file format
+            DATE="$(date +%Y%m%d)"
+            if [ -e "/var/log/atop/atop_${DATE}" ]; then
+                mv "/var/log/atop/atop_${DATE}" "/var/log/atop/atop_${DATE}_pre_2_0"
+            fi
+        fi
+        ;;
+esac
+
+# Automatically added by dh_systemd_enable/10.10.8
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'atop.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'atop.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'atop.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'atop.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.8
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'atopacct.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'atopacct.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'atopacct.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'atopacct.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.8
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/atop" ]; then
+		update-rc.d atop defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d atop $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.8
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/atopacct" ]; then
+		update-rc.d atopacct defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d atopacct $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+[ -n "$IUDSZG2DEBUG" ] && set -x
+
+CHECKIFDSYMLINKS="/usr/bin/check-ifupdown-scripts-zg2.d-symlinks"
+
+#if [ "$1" = "configure" ]; then
+if [ -x $CHECKIFDSYMLINKS ] && ! $CHECKIFDSYMLINKS; then
+	echo >&2 "aborting package installation, see /etc/network/ifupdown-scripts-zg2.d/00README.linkdir"
+	exit 1
+fi
+#fi
+
+

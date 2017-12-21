@@ -1,0 +1,57 @@
+#!/bin/sh
+
+set -e
+
+DOCDIR="/usr/share/doc/wing"
+
+case "$1" in
+  configure)
+    if ! dpkg-statoverride --list /usr/games/wing >/dev/null; then
+      dpkg-statoverride --update --add root games 2755 /usr/games/wing
+    fi
+    # Fix old things
+    if ! test -f /var/games/wing.scores; then
+      if test -f /var/games/wing/scores.dat; then
+        mv /var/games/wing/scores.dat /var/games/wing.scores
+        rm -f /var/games/wing/scores.default
+        rmdir /var/games/wing >/dev/null 2>&1 || true
+      else
+        cat >/var/games/wing.scores <<EOF
+anonymous 0
+anonymous 0
+anonymous 0
+anonymous 0
+anonymous 0
+anonymous 0
+anonymous 0
+anonymous 0
+anonymous 0
+anonymous 0
+EOF
+      fi
+    fi
+    # Get rid of all the cruft from earlier wing-data packages
+    if test -d /var/games/wing; then
+      rm -Rf /var/games/wing
+    fi
+    # Fix perms, just in case
+    chown root:games /var/games/wing.scores
+    chmod 0664 /var/games/wing.scores
+    # Fix the wing/wing-data circular dependency
+    if [ -d "$DOCDIR" -a ! -L "$DOCDIR" ]; then
+      rmdir --ignore-fail-on-non-empty "$DOCDIR"
+      if [ ! -d "$DOCDIR" ]; then
+        ln -s wing-data "$DOCDIR"
+      fi
+    fi
+    ;;
+  abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+  *)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+
+

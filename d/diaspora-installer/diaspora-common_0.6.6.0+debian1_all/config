@@ -1,0 +1,179 @@
+#!/bin/sh
+# config maintainer script for diaspora-common
+
+CONFIGFILE=/etc/diaspora.conf
+ 
+set -e
+
+
+# source debconf stuff
+. /usr/share/debconf/confmodule
+
+# Load config file, if it exists.
+  if [ -e $CONFIGFILE ]; then
+      . $CONFIGFILE || true
+
+      # Store values from config file into
+      # debconf db.
+      db_set diaspora-common/url "$SERVERNAME"
+      db_set diaspora-common/ssl "${ENVIRONMENT_REQUIRE_SSL:-true}"
+      db_set diaspora-common/letsencrypt "${diaspora_letsencrypt:-false}"
+      if [ -n "$diaspora_letsencrypt_email" ]; then
+        db_set diaspora-common/letsencrypt_email "${diaspora_letsencrypt_email}"
+      fi
+  fi
+
+# What is your pod address?
+db_input high diaspora-common/url || true
+db_go
+
+# Allow user to disable https for local testing
+db_input high diaspora-common/ssl || true
+db_go
+
+# Don't prompt for letsencrypt if not installed
+if command -v letsencrypt >/dev/null; then
+  # Do you want Let's Encrypt?
+  db_get diaspora-common/ssl
+  if [ "${RET}" = "true" ]
+  then
+    db_input high diaspora-common/letsencrypt || true
+    db_go
+    db_get diaspora-common/letsencrypt
+    diaspora_letsencrypt=$RET
+    if [ "$diaspora_letsencrypt" = "true" ]; then
+      # Get email for letsencrypt updates
+      db_input high diaspora-common/letsencrypt_email || true
+      db_go
+    fi
+
+  fi
+fi
+
+db_input high diaspora-common/services || true
+db_go
+db_get diaspora-common/services
+selectedservices=$RET
+if [ "$RET" != "" ]; then
+  #Check if Facebook is selected
+  servicename="Facebook"
+  if [ "${selectedservices#*$servicename}" != "$RET" ]; then
+    db_beginblock
+      db_input high diaspora-common/facebook_app_id || true
+      db_go
+      db_input high diaspora-common/facebook_secret || true
+      db_go
+    db_endblock
+    db_get diaspora-common/facebook_app_id
+    facebook_app_id=$RET
+    db_get diaspora-common/facebook_secret
+    facebook_secret=$RET
+    # Repeat the questions if user leave any of the two blank
+    while [ "$facebook_app_id" = "" ] || [ "$facebook_secret" = "" ]; do
+      db_beginblock
+        db_input high diaspora-common/facebook_app_id || true
+        db_go
+        db_input high diaspora-common/facebook_secret || true
+        db_go
+      db_endblock
+      db_get diaspora-common/facebook_app_id
+      facebook_app_id=$RET
+      db_get diaspora-common/facebook_secret
+      facebook_secret=$RET
+    done
+  fi
+  servicename="Twitter"
+  if [ "${selectedservices#*$servicename}" != "$selectedservices" ]; then
+    db_beginblock
+      db_input high diaspora-common/twitter_key || true
+      db_go
+      db_input high diaspora-common/twitter_secret || true
+      db_go
+    db_endblock
+    db_get diaspora-common/twitter_key
+    twitter_key=$RET
+    db_get diaspora-common/twitter_secret
+    twitter_secret=$RET
+    # Repeat the questions if user leave any of the two blank
+    while [ "$twitter_key" = "" ] || [ "$twitter_secret" = "" ]; do
+      db_beginblock
+        db_input high diaspora-common/twitter_key || true
+        db_go
+        db_input high diaspora-common/twitter_secret || true
+        db_go
+      db_endblock
+      db_get diaspora-common/twitter_key
+      twitter_key=$RET
+      db_get diaspora-common/twitter_secret
+      twitter_secret=$RET
+    done
+  fi
+  servicename="Tumblr"
+  if [ "${selectedservices#*$servicename}" != "$selectedservices" ]; then
+    db_beginblock
+      db_input high diaspora-common/tumblr_key || true
+      db_go
+      db_input high diaspora-common/tumblr_secret || true
+      db_go
+    db_endblock
+    db_get diaspora-common/tumblr_key
+    tumblr_key=$RET
+    db_get diaspora-common/tumblr_secret
+    tumblr_secret=$RET
+    # Repeat the questions if user leave any of the two blank
+    while [ "$tumblr_key" = "" ] || [ "$tumblr_secret" = "" ]; do
+      db_beginblock
+        db_input high diaspora-common/tumblr_key || true
+        db_go
+        db_input high diaspora-common/tumblr_secret || true
+        db_go
+      db_endblock
+      db_get diaspora-common/tumblr_key
+      tumblr_key=$RET
+      db_get diaspora-common/tumblr_secret
+      tumblr_secret=$RET
+    done
+  fi
+  servicename="Wordpress"
+  if [ "${selectedservices#*$servicename}" != "$selectedservices" ]; then
+    db_beginblock
+      db_input high diaspora-common/wordpress_client_id || true
+      db_go
+      db_input high diaspora-common/wordpress_secret || true
+      db_go
+    db_endblock
+    db_get diaspora-common/wordpress_client_id
+    wordpress_client_id=$RET
+    db_get diaspora-common/wordpress_secret
+    wordpress_secret=$RET
+    # Repeat the questions if user leave any of the two blank
+    while [ "$wordpress_client_id" = "" ] || [ "$wordpress_secret" = "" ]; do
+      db_beginblock
+        db_input high diaspora-common/wordpress_client_id || true
+        db_go
+        db_input high diaspora-common/wordpress_secret || true
+        db_go
+      db_endblock
+      db_get diaspora-common/wordpress_client_id
+      wordpress_client_id=$RET
+      db_get diaspora-common/wordpress_secret
+      wordpress_secret=$RET
+    done
+  fi
+fi
+
+
+# DB password can be left blank
+db_input high diaspora-common/dbpass || true
+db_go
+
+# source dbconfig-common shell library, and call the hook function
+if [ -f /usr/share/dbconfig-common/dpkg/config ]; then
+   . /usr/share/dbconfig-common/dpkg/config
+
+   dbc_dbtypes="pgsql, mysql"
+   dbc_dbname="diaspora_production"
+   dbc_dbuser="diaspora"
+
+   dbc_go diaspora-common "$@"
+fi

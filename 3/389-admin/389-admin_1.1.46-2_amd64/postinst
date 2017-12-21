@@ -1,0 +1,38 @@
+#!/bin/sh
+set -e
+
+invoke_failure() {
+    # invoke-rc.d failed, likely because no instance has been configured yet
+    # but exit with an error if an instance is configured and the invoke failed
+    if [ -z $INSTANCES ]; then
+        echo "... because no instance has been configured yet."
+    else
+        exit 1
+    fi
+}
+
+
+# Automatically added by dh_systemd_enable/10.9
+if deb-systemd-helper debian-installed dirsrv-admin.service; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask dirsrv-admin.service >/dev/null || true
+
+	if deb-systemd-helper --quiet was-enabled dirsrv-admin.service; then
+		# Create new symlinks, if any.
+		deb-systemd-helper enable dirsrv-admin.service >/dev/null || true
+	fi
+fi
+
+# Update the statefile to add new symlinks (if any), which need to be cleaned
+# up on purge. Also remove old symlinks.
+deb-systemd-helper update-state dirsrv-admin.service >/dev/null || true
+# End automatically added section
+# Automatically added by dh_installinit/10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/dirsrv-admin" ]; then
+		update-rc.d dirsrv-admin defaults 15 85 >/dev/null
+		invoke-rc.d dirsrv-admin start || invoke_failure
+	fi
+fi
+# End automatically added section
+

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+. /usr/lib/fheroes2-pkg/VARS
+
+case "$1" in
+    purge|abort-install)
+        rm -rf /usr/src/${PKGI} || true
+        rm -f  /etc/apt/apt.conf.d/${P88} || true
+    ;;
+    remove)
+        rm -rf /usr/src/${PKGI}/build || true
+        rm -f  /etc/apt/apt.conf.d/${P88} || true
+    ;;
+esac
+
+

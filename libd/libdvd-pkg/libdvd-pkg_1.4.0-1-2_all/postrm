@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+PKGI=libdvd-pkg
+P88="88libdvdcss-pkg"
+
+## version of bundled "guest" package
+VERGG=1.4.0-1
+
+case "$1" in
+    purge|abort-install)
+        rm -rf /usr/src/${PKGI} || true
+        rm -f  /etc/apt/apt.conf.d/${P88} || true
+    ;;
+    remove)
+        rm -rf /usr/src/${PKGI}/build || true
+        rm -f  /etc/apt/apt.conf.d/${P88} || true
+    ;;
+esac
+
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

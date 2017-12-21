@@ -1,0 +1,122 @@
+#!/bin/sh
+
+set -e
+
+add_sysuser()
+{
+	if ! getent passwd prelude >/dev/null; then
+		adduser --system --disabled-login --no-create-home --home /var/run/prelude-manager/ --group prelude 2>&1 > /dev/null
+	fi
+}
+
+add_sysuser
+
+if [ "$1" = "configure" ]; then
+  confpath="/etc/prelude-manager"
+  conffile="${confpath}/prelude-manager.conf"
+  confnew="${conffile}-new"
+  pkgpath="/usr/share/prelude-manager"
+
+  . /usr/share/debconf/confmodule
+  . /usr/share/dbconfig-common/dpkg/postinst
+  dbc_first_version="0.9.8-3"
+
+  dbc_go prelude-manager $@
+
+  if [ ! -e $conffile ]; then
+    cp ${pkgpath}/prelude-manager.conf $conffile
+  fi
+
+  cp $conffile $confnew
+
+  if [ -z "$dbc_dbserver" ]; then
+    dbc_dbserver=localhost
+  fi
+  if [ -z "$dbc_dbport" ]; then
+    if [ "$dbc_dbtype" = "mysql" ]; then
+      dbc_dbport=3306
+    else
+      if [ "$dbc_dbtype" = "pgsql" ]; then
+        dbc_dbport=5432
+      fi
+    fi
+  fi
+
+  if [ -n "$dbc_dbtype" ]; then
+    sed -i -e 's/@DBC_TYPE@/$dbc_dbtype/' \
+           -e 's/@DBC_HOST@/$dbc_dbserver/' \
+           -e 's/@DBC_PORT@/$dbc_dbport/' \
+           -e 's/@DBC_NAME@/$dbc_dbname/' \
+           -e 's/@DBC_USER@/$dbc_dbuser/' \
+           -e 's/@DBC_PASS@/$dbc_dbpass/' \
+      $confnew
+
+    # Installing the config
+    if diff -q /usr/share/doc/prelude-manager/examples/prelude-manager.conf $conffile >/dev/null 2>&1; then
+      # configure file has not been changed .. overwrite it
+      cp $confnew $conffile
+    else
+      ucf --three-way --debconf-ok $confnew $conffile
+    fi
+  fi
+
+  # make sure conf file has the correct permissions and owner/group
+  chmod 640 /etc/prelude-manager/prelude-manager.conf
+  chown prelude /etc/prelude-manager/prelude-manager.conf
+
+  rm -f $confnew
+
+  db_stop
+
+  # run this command before starting initscripts
+
+  chown -R prelude:prelude /var/spool/prelude-manager/ >/dev/null
+
+  if [ -d /run/systemd/system ] ; then
+    systemd-tmpfiles --create /usr/lib/tmpfiles.d/prelude-manager.conf >/dev/null || true
+  fi
+
+  PROFILE_NAME="prelude-manager"
+  if [ -x "/usr/bin/prelude-admin" ]; then
+    if [ ! -d "/etc/prelude/profile/$PROFILE_NAME" ]; then
+      prelude-admin add prelude-manager --uid prelude --gid prelude
+      prelude-admin chown prelude-manager --uid prelude --gid prelude
+    fi
+  fi
+
+fi
+
+
+# Automatically added by dh_systemd_enable/11
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'prelude-manager.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'prelude-manager.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'prelude-manager.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'prelude-manager.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start/11
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	if [ -n "$2" ]; then
+		_dh_action=restart
+	else
+		_dh_action=start
+	fi
+	deb-systemd-invoke $_dh_action 'prelude-manager.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11
+dpkg-maintscript-helper rm_conffile /etc/init.d/prelude-manager 3.1.0-0.2\~ prelude-manager -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/default/prelude-manager 3.1.0-0.2\~ prelude-manager -- "$@"
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+[ ! -f /etc/alternatives/dclfrt-f77 ] || \
+    update-alternatives --remove dclfrt /usr/bin/dclfrt-f77
+
+
+
+exit 0

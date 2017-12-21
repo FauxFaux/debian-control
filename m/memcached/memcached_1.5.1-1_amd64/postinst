@@ -1,0 +1,72 @@
+#!/bin/sh
+
+set -e
+
+GROUP="memcache"
+USER="memcache"
+DATADIR="/nonexistent"
+
+# shamelessly copied from debian gearman-job-server package...
+
+case "$1" in
+configure)
+    # creating memcache group if it isn't already there
+    if ! getent group $GROUP >/dev/null ; then
+            # Adding system group
+            addgroup --system $GROUP >/dev/null
+    fi
+
+    # creating memcache user if it isn't already there
+    if ! getent passwd $USER >/dev/null ; then
+            # Adding system user
+            adduser \
+              --system \
+              --disabled-login \
+              --ingroup $GROUP \
+              --home $DATADIR \
+              --no-create-home \
+              --gecos "Memcached" \
+              --shell /bin/false \
+              $USER  >/dev/null
+    fi
+    if [ ! -e /etc/memcached.conf ]
+        then
+            mkdir -p /etc
+            cp /usr/share/memcached/memcached.conf.default /etc/memcached.conf
+    fi
+    ;;
+esac
+
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'memcached.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'memcached.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'memcached.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'memcached.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/memcached.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/memcached" ]; then
+		update-rc.d memcached defaults >/dev/null
+		invoke-rc.d memcached start || exit $?
+	fi
+fi
+# End automatically added section
+

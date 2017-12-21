@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+UFC_INCLUDE_DIR=/usr/lib/python3/dist-packages/ffc/backends/ufc
+
+# Make alternatives links
+if [ "$1" = "configure" ]; then
+  # alternative ufc.h
+  update-alternatives --install /usr/include/ufc.h ufc.h ${UFC_INCLUDE_DIR}/ufc.h 100 \
+    --slave /usr/include/ufc_geometry.h ufc_geometry.h ${UFC_INCLUDE_DIR}/ufc_geometry.h 
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-ffc 
+fi
+
+# End automatically added section
+

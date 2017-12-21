@@ -1,0 +1,160 @@
+#!/bin/sh -e
+
+if ! getent group obsrun > /dev/null; then
+    addgroup --system --quiet obsrun
+fi
+
+if ! getent passwd obsrun > /dev/null; then
+    adduser --system --quiet \
+        --ingroup obsrun --shell /bin/false \
+        --home /usr/lib/obs --no-create-home \
+        --shell /bin/false obsrun
+    usermod -c "User for build service backend" obsrun
+fi
+
+if ! getent passwd obsservicerun > /dev/null; then
+    adduser --system --quiet \
+        --ingroup obsrun --shell /bin/false \
+        --home /usr/lib/obs/server --no-create-home \
+        --shell /bin/false obsservicerun
+    usermod -c "User for obs source service server" obsservicerun
+fi
+
+mkdir -p /srv/obs/repos
+chown obsrun:obsrun /srv/obs/repos
+
+# Start up schedulers
+#deb-systemd-helper enable obsscheduler\@i586.service
+#deb-systemd-helper enable obsscheduler\@x86_64.service
+#deb-systemd-helper enable obsscheduler\@armv7hl.service
+# FIXME manually creating symlink, deb-systemd-helper does not support
+# template services yet. See #801822
+# FIXME make sure multi-user.target.wants directory created before creating symlink. See #870841
+mkdir -p /etc/systemd/system/multi-user.target.wants
+ln -sf /lib/systemd/system/obsscheduler@.service \
+   /etc/systemd/system/multi-user.target.wants/obsscheduler\@i586.service
+ln -sf /lib/systemd/system/obsscheduler@.service \
+   /etc/systemd/system/multi-user.target.wants/obsscheduler\@x86_64.service
+ln -sf /lib/systemd/system/obsscheduler@.service \
+   /etc/systemd/system/multi-user.target.wants/obsscheduler\@armv7hl.service
+# tell systemd to reload
+if [ -d /run/systemd/system ]; then
+  systemctl --system daemon-reload >/dev/null || true
+fi
+invoke-rc.d obsscheduler@i586 start || true
+invoke-rc.d obsscheduler@x86_64 start || true
+invoke-rc.d obsscheduler@armv7hl start || true
+
+# Automatically added by dh_systemd_enable/10.7.2
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask obsdispatcher.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled obsdispatcher.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable obsdispatcher.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state obsdispatcher.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.7.2
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask obsdodup.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled obsdodup.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable obsdodup.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state obsdodup.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.7.2
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask obspublisher.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled obspublisher.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable obspublisher.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state obspublisher.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.7.2
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask obsrepserver.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled obsrepserver.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable obsrepserver.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state obsrepserver.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.7.2
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask obssigner.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled obssigner.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable obssigner.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state obssigner.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.7.2
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask obssrcserver.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled obssrcserver.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable obssrcserver.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state obssrcserver.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.7.2
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask obswarden.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled obswarden.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable obswarden.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state obswarden.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start/10.7.2
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	deb-systemd-invoke start obsdispatcher.service obsdodup.service obspublisher.service obsrepserver.service obssigner.service obssrcserver.service obswarden.service >/dev/null || true
+fi
+# End automatically added section
+
+

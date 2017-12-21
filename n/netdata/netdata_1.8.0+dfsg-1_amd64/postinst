@@ -1,0 +1,65 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+  configure)
+        if [ -z "$2" ]; then
+          if ! getent group netdata >/dev/null; then
+              addgroup --quiet --system netdata
+          fi
+
+          if ! getent passwd netdata >/dev/null; then
+              adduser --quiet --system --ingroup netdata --home /var/lib/netdata --no-create-home netdata
+              mkdir -p /var/lib/netdata
+          fi
+
+          for dir_name in /var/cache/netdata /var/lib/netdata; do
+              if ! dpkg-statoverride --list "$dir_name" >/dev/null 2>&1; then
+                  dpkg-statoverride --update --add netdata netdata 0755 "$dir_name"
+              fi
+
+          done
+        fi
+
+        chown -R root:netdata /usr/lib/x86_64-linux-gnu/netdata/plugins.d
+        setcap cap_dac_read_search,cap_sys_ptrace+ep /usr/lib/x86_64-linux-gnu/netdata/plugins.d/apps.plugin
+        chown netdata:adm /var/log/netdata
+        chmod 02750 /var/log/netdata
+
+#PERMS#
+        ;;
+esac
+
+# Automatically added by dh_systemd_enable/10.8
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask netdata.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled netdata.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable netdata.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state netdata.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.8
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/netdata" ]; then
+		update-rc.d netdata defaults >/dev/null
+		invoke-rc.d netdata start || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/10.8
+dpkg-maintscript-helper rm_conffile /etc/netdata/python.d/nginx_log.conf 1.8.0+dfsg-1~ netdata -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/10.8
+dpkg-maintscript-helper rm_conffile /etc/netdata/python.d/gunicorn_log.conf 1.8.0+dfsg-1~ netdata -- "$@"
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,41 @@
+#!/bin/sh
+
+set -e
+
+. /usr/lib/libdvd-pkg/VARS
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+#echo "${PKGI}/postinst: $1 $2::${VERGG}" >&2
+
+case "$1" in
+    configure*)
+        ## install or remove APT post-install hook, according to user
+        ## selection in 'config'.
+        db_get ${PKGI}/post-invoke_hook-install
+        if [ "$RET" = "true" ]; then
+            [ -h "/etc/apt/apt.conf.d/${P88}" ] \
+            || ln -s /usr/lib/${PKGI}/${P88} /etc/apt/apt.conf.d/${P88}
+        else
+            rm -fv /etc/apt/apt.conf.d/${P88} || true
+        fi
+
+        # check if particular version of guest package is already installed.
+        if [ "${VERGG}~local" = "${VERG}" ]; then
+            echo "${PKGI}: guest package [${PKGG}/${VERG}] is already installed." >&2
+        else
+            ## Build package
+            db_get ${PKGI}/build
+            if [ "$RET" = "true" ]; then
+                rm -f /usr/src/${PKGI}/*.is-installed
+                /usr/lib/${PKGI}/b-i_libdvdcss.sh
+            fi
+        fi
+    ;;
+esac
+
+db_stop
+
+

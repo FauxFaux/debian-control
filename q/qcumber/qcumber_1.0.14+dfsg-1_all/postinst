@@ -1,0 +1,43 @@
+#!/bin/sh
+
+set -e
+
+conffile=/etc/qcumber/config.txt
+CHECKKRAKENDBFILE="database.idx"
+
+. /usr/share/debconf/confmodule
+
+db_get qcumber/krakendb || true
+
+DEFAULTKRAKENDB=$RET
+
+if [ "$DEFAULTKRAKENDB" = "" ] ; then
+    DEFAULTKRAKENDB=`sed '/\[PATH\]/,$d' $conffile | grep "^kraken_db" | head -n 1 | sed 's/^kraken_db *= *\([^ ]\+\) *$/\1/'`
+else
+    # check whether configfile has the same dir as the user has input in config step
+    if ! grep -q "^kraken_db *= *$DEFAULTKRAKENDB *$" $conffile ; then
+        sed -i "s:^\(kraken_db *=\) *.*$:\1 $DEFAULTKRAKENDB:" $conffile
+    fi
+fi
+
+if [ "$1" = configure ] ; then
+    # Make sure minikraken DB exists
+    if [ ! -e "$DEFAULTKRAKENDB/$CHECKKRAKENDBFILE" ] ; then
+cat <<EOT
+*************************************************************************
+* Minikraken DB is missing.  Either move the according files to         *
+*     $DEFAULTKRAKENDB
+* or call the script /usr/share/doc/qcumber/get-minikrakendb as root.   *
+*************************************************************************
+EOT
+    fi
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p qcumber /usr/share/qcumber
+fi
+
+# End automatically added section
+

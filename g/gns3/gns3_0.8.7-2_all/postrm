@@ -1,0 +1,31 @@
+#! /bin/sh
+# postrm script for gns3
+
+set -e
+
+# Automatically added by dh_ucf
+if [ "$1" = "purge" ]; then
+	for ext in .ucf-new .ucf-old .ucf-dist ""; do
+		rm -f "/etc/gns3/gns3.ini$ext"
+	done
+	
+	if [ -x "`which ucf 2>/dev/null`" ]; then
+		ucf --purge "/etc/gns3/gns3.ini"
+	fi
+	if [ -x "`which ucfr 2>/dev/null`" ]; then
+		ucfr --purge gns3 "/etc/gns3/gns3.ini"
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+
+
+#Remove conf directory if required
+if [ "$1" = "purge" ]; then
+	if [ -d /etc/gns3 ]
+	then
+		rm -rf /etc/gns3
+	fi
+fi

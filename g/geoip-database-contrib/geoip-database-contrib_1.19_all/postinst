@@ -1,0 +1,47 @@
+#!/bin/sh
+# postinst script for geoip-database-contrib
+
+set -e
+
+case "$1" in
+    configure)
+
+        . /usr/share/debconf/confmodule
+
+        update-geoip-database || echo "Failed to download some files. Run update-geoip-database manually to fix it."
+
+        db_get geoip-database-contrib/install-cronjob
+        INSTALL_CRONJOB="$RET"
+
+        tfile=$(mktemp -t geoip-database-contrib_config.XXXXXXXX) || exit 1
+        if [ "$INSTALL_CRONJOB" = "true" ]
+        then
+            cat > $tfile <<EOF
+#
+# Regular cron job for the geoip-database-contrib package,
+# used to update the GeoLite database.
+#
+0 4 10 * *      root    [ -x /usr/sbin/update-geoip-database ] && /usr/sbin/update-geoip-database > /dev/null
+EOF
+        else
+            cat > $tfile <<EOF
+#
+# Regular cron job for the geoip-database-contrib package,
+# used to update the GeoLite database.
+#
+#0 4 10 * *      root    [ -x /usr/sbin/update-geoip-database ] && /usr/sbin/update-geoip-database > /dev/null
+EOF
+        fi
+
+        mkdir -p /etc/cron.d
+        ucf --debconf-ok $tfile /etc/cron.d/geoip-database-contrib
+        rm $tfile
+		chmod 0644 /etc/cron.d/geoip-database-contrib
+
+        update-alternatives --install /usr/share/GeoIP/GeoIPCity.dat GeoIPCity.dat /usr/share/GeoIP/GeoLiteCity.dat 50
+    ;;
+esac
+
+
+
+exit 0

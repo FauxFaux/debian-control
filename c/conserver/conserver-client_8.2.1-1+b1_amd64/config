@@ -1,0 +1,25 @@
+#!/bin/sh -e
+
+. /usr/share/debconf/confmodule
+
+conf=/etc/conserver/console.cf
+
+if [ -r $conf ]; then
+	SERVER=$(perl -ne 'print $1 if /master\s+([^;]+);/' $conf)
+	PORT=$(perl   -ne 'print $1 if /port\s+([^;]+);/'   $conf)
+
+	db_set conserver-client/server "$SERVER"
+	db_set conserver-client/port   "$PORT"
+fi
+
+db_input medium conserver-client/config || true
+db_go
+
+db_get conserver-client/config
+if [ "$RET" = "true" ]; then
+	db_input medium conserver-client/server || true
+	db_go
+
+	db_input medium conserver-client/port || true
+	db_go
+fi

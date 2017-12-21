@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+	configure)
+		echo 'mercurial-git extension is disabled by default.'
+		echo 'You can follow the instructions in /usr/share/doc/mercurial-git/README.Debian to enable it.'
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+		;;
+esac
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p mercurial-git 
+fi
+
+# End automatically added section
+

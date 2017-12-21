@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "disappear" ] ; then
+	update-alternatives --remove convert-json /usr/bin/python3-convert-json
+fi
+
+
+
+exit 0

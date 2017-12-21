@@ -1,0 +1,296 @@
+#!/bin/sh
+set -e;
+
+PACKAGE=sendmail-bin;
+
+#-----------------------------------------------------------
+#stop(): stop sendmail
+stop_mta () {
+	# Account for varying PIDfile locations of older sendmail packages
+	if [ -f /var/run/sendmail/mta/sendmail.pid ]; then
+		start-stop-daemon --stop --oknodo --quiet \
+			--pidfile /var/run/sendmail/msp/sendmail.pid > /dev/null;
+		start-stop-daemon --stop --oknodo --quiet \
+			-pidfile /var/run/sendmail/mta/sendmail.pid > /dev/null;
+	elif [ -f /var/run/sendmail/sendmail.pid ]; then
+		start-stop-daemon --stop --oknodo --quiet \
+			--pidfile /var/run/sendmail/sendmail.pid > /dev/null;
+	elif [ -f /var/run/sendmail.pid ]; then
+		start-stop-daemon --stop --oknodo --quiet \
+			--pidfile /var/run/sendmail.pid > /dev/null;
+		fi;
+	# Since we changed the executable, do one more try - using the old name
+	if [ -f /var/run/sendmail/mta/sendmail.pid ]; then
+		start-stop-daemon --stop --oknodo --quiet \
+			--pidfile /var/run/sendmail/mta/sendmail.pid > /dev/null;
+		fi;
+	start-stop-daemon --stop --oknodo --quiet \
+		--name sendmail > /dev/null;
+	if [ -x /etc/init.d/sendmail ]; then
+		invoke-rc.d --quiet --force sendmail stop
+		fi;
+	};
+
+#-----------------------------------------------------------
+#start(): start sendmail
+start_mta () {
+	invoke-rc.d sendmail start
+	};
+
+#-----------------------------------------------------------
+# configure(): save sendmail.cf, call sendmailconfig
+configure_mta () {
+	local enter;
+	echo -n "Configure now ? (y/N) ";
+	read yn;
+	yn=$(echo -n "$yn" | sed -e "s/^\ *//" -e "s/^\t*//");
+	test -n "$yn" || yn="N";
+	case "$yn" in 
+		[Yy]*) 
+			stop_mta;
+			sendmailconfig --no-reload;
+			start_mta;
+			;;
+
+		[Nn]*)
+			echo '';
+			echo "To configure sendmail later, type" \
+				"sendmailconfig";
+			echo "After configuring sendmail, you can" \
+				"start it via /etc/init.d/sendmail start";
+			echo -n "Press [ENTER] ";
+			read enter;
+			;;
+		esac;
+	};
+
+# do we have debconf?
+if [ -f /usr/share/debconf/confmodule ]; then
+	DEBCONF=true;
+	#. /usr/share/debconf/confmodule;
+	#db_stop; # For testing
+else
+	DEBCONF='';
+	fi;
+
+case "$1" in
+	configure)
+		# continue below
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+		exit 0;
+		;;
+
+	*)
+		echo "$PACKAGE postinst called with unknown argument \`$1'" >&2;
+		exit 1;
+		;;
+	esac;
+
+#--------------------------------------------------------------------
+# Continuation of "$1" = "configure"
+
+# Note: can't use debhelper here because the actions aren't contiguous
+#xxxHELPER#
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/sendmail" ]; then
+	update-rc.d -f sendmail remove >/dev/null;
+	update-rc.d sendmail defaults 21 19 >/dev/null;
+	#/etc/init.d/sendmail start
+fi
+# End automatically added section
+
+#-----------------------------------------------------------
+# Create (or update) MTA, MSP alternatives
+# This way, we'll be able to install 2 MTAs on the same box :)
+update-alternatives \
+	--install /usr/sbin/sendmail-mta sendmail-mta /usr/lib/sm.bin/sendmail 25 \
+	--slave   /usr/share/man/man8/sendmail-mta.8.gz sendmail-mta.8.gz \
+			  /usr/share/man/man8/sendmail.sendmail.8.gz \
+	--slave	  /usr/sbin/runq runq /usr/share/sendmail/runq \
+	--slave	  /usr/share/man/man8/runq.8.gz runq.8.gz \
+			  /usr/share/man/man8/runq.sendmail.8.gz \
+	--slave   /usr/sbin/newaliases newaliases \
+			  /usr/share/sendmail/newaliases \
+	--slave	  /usr/share/man/man8/newaliases.8.gz newaliases.8.gz \
+			  /usr/share/man/man8/newaliases.sendmail.8.gz \
+	--slave	  /usr/bin/mailq mailq /usr/share/sendmail/mailq \
+	--slave	  /usr/share/man/man1/mailq.1.gz mailq.1.gz \
+			  /usr/share/man/man1/mailq.sendmail.1.gz \
+	--slave	  /usr/share/man/man5/aliases.5.gz aliases.5.gz \
+			  /usr/share/man/man5/aliases.sendmail.5.gz \
+			  ;
+update-alternatives \
+	--install /usr/sbin/sendmail-msp sendmail-msp /usr/lib/sm.bin/sendmail 25 \
+	--slave   /usr/share/man/man8/sendmail-msp.8.gz sendmail-msp.8.gz \
+			  /usr/share/man/man8/sendmail.sendmail.8.gz \
+	--slave   /usr/sbin/sendmail sendmail /usr/lib/sm.bin/sendmail \
+	--slave   /usr/lib/sendmail lib.sendmail /usr/lib/sm.bin/sendmail \
+	--slave   /usr/share/man/man8/sendmail.8.gz sendmail.8.gz \
+			  /usr/share/man/man8/sendmail.sendmail.8.gz \
+			  ;
+
+#-----------------------------------------------------------
+# With a dynamic uid/gid, have to set appropriate ownership herein
+if ! dpkg-statoverride --list /usr/lib/sm.bin/sendmail >/dev/null ; then
+	dpkg-statoverride --update --add root smmsp 02755 /usr/lib/sm.bin/sendmail
+fi
+if ! dpkg-statoverride --list /usr/lib/sm.bin/mailstats >/dev/null ; then
+	dpkg-statoverride --update --add root smmsp 02755 /usr/lib/sm.bin/mailstats
+fi
+
+#-----------------------------------------------------------
+# Create backups of /etc/mail/{sendmail,submit}.mc
+if [ -f /etc/mail/sendmail.cf ]; then
+	echo "Saving old /etc/mail/sendmail.cf" \
+		"as /etc/mail/sendmail.cf.old ...";
+	cp -f /etc/mail/sendmail.cf \
+		/etc/mail/sendmail.cf.old;
+	chown root:root /etc/mail/sendmail.cf.old;
+	chmod 0644 /etc/mail/sendmail.cf.old;
+	fi;
+if [ -f /etc/mail/submit.cf ]; then
+	cp -f /etc/mail/submit.cf \
+		/etc/mail/submit.cf.old;
+	chown root:root /etc/mail/submit.cf.old;
+	chmod 0644 /etc/mail/submit.cf.old;
+	fi;
+
+start_ask=0;
+
+#-----------------------------------------------------------
+# Create /etc/mail/sendmail.mc if it doesn't exist
+if [ ! -f /etc/mail/sendmail.mc ]; then
+	cat <<-EOT
+
+	You are doing a new install, or have erased /etc/mail/sendmail.mc.
+	If you've accidentaly erased /etc/mail/sendmail.mc, check /var/backups.
+
+	I am creating a safe, default sendmail.mc for you and you can
+	run sendmailconfig later if you need to change the defaults.
+
+	EOT
+	fi;
+
+if [ -x /usr/share/sendmail/update_sendmail ]; then
+	stop_mta;
+	echo "Updating sendmail environment ...";
+	/usr/share/sendmail/update_sendmail || true;
+	start_mta;
+	fi;
+exit 0;
+
+
+#-----------------------------------------------------------
+# See if we can do this automagically...
+cat <<-EOT
+
+It is a good idea to regenerate the sendmail configuration
+file with each new spin of the sendmail package.
+
+But, if you hand edit sendmail.cf instead of making changes through
+sendmail.mc, then you want to say no, save your old sendmail.cf, run
+sendmailconfig, then migrate your changes into the new version.
+
+EOT
+echo -n "Automagically regenerate the sendmail.cf configuration file? (Y/n) ";
+read yn;
+yn=$(echo -n "$yn" | sed -e "s/^\ *//" -e "s/^\t*//");
+test -n "$yn" || yn="Y";
+case "$yn" in
+	[Yy]*)
+		if [ -f /etc/mail/sendmail.cf ]; then
+			echo "Saving old /etc/mail/sendmail.cf" \
+				"as /etc/mail/sendmail.cf.old ...";
+			cp -f /etc/mail/sendmail.cf \
+				/etc/mail/sendmail.cf.old;
+			chown root:root /etc/mail/sendmail.cf.old;
+			chmod 0644 /etc/mail/sendmail.cf.old;
+			fi;
+		if [ -f /etc/mail/submit.cf ]; then
+			cp -f /etc/mail/submit.cf \
+				/etc/mail/submit.cf.old;
+			chown root:root /etc/mail/submit.cf.old;
+			chmod 0644 /etc/mail/submit.cf.old;
+			fi;
+		if [ -x /usr/share/sendmail/update_sendmail ]; then
+			stop_mta;
+			echo "Updating sendmail environment ...";
+			/usr/share/sendmail/update_sendmail || true;
+			fi;
+		;;
+
+	[Nn]*)
+		cat <<-EOT
+
+		Your files (sendmail.mc,cf, etc) have *not* been altered.
+
+  *** Warning *** Warning *** Warning *** Warning *** Warning *** Warning ***
+
+		There have been changes in
+			* Paths of some databases and executables
+			* FEATUREs, DOMAIN, includes
+			* Internal Database storage
+
+		These changes were *NOT* made for you ... And will not be
+		until you run sendmailconfig!
+
+		Until you update /etc/mail/sendmail.cf via sendmailconfig,
+		you should expect to have problems running sendmail!
+
+		"Well, a pet peeve of mine is people who directly edit the
+		.cf file instead of using the m4 configuration files.
+		Don't do it! [laughs] I treat the .cf file as a binary
+		file - you should too."
+						--	Eric Allman 1999/10/18
+
+  *** Warning *** Warning *** Warning *** Warning *** Warning *** Warning ***
+
+		EOT
+		echo "Do you wish to run sendmailconfig now, or later";
+		start_ask=0;
+		configure_mta;
+		case "$yn" in
+			[Yy]*)
+				cat <<-EOT
+
+				Do you wish to start sendmail with the new sendmail.cf,
+				or do you wish to delay until you can merge any changes
+				from your older sendmail.cf.old?
+				EOT
+				start_ask=1;
+				start_mta;
+				;;
+		   esac;
+		exit 0;
+	esac;
+
+#-----------------------------------------------------------
+# If we're still here, we're going the automagic path...
+# Now, liberal application of smoke and mirrors
+if [ -f /etc/mail/sendmail.mc ]; then
+	start_ask=1;
+	start_mta;
+	fi;
+
+exit 0;
+
+#-----------------------------------------------------------
+#
+# List herein (for reference) what debhelper would've done:
+# Automatically added by dh_installinit/10.8
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/sendmail" ]; then
+		update-rc.d sendmail defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d sendmail $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+

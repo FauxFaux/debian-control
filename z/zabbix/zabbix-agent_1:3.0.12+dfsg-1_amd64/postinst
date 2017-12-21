@@ -1,0 +1,70 @@
+#!/bin/sh
+
+set -e
+
+# If /tmp/ZABBIX_PACKAGE_DEBUG file exists then enable debugging of this script.
+#if [ -e /tmp/ZABBIX_PACKAGE_DEBUG ]; then
+#    set -x
+#fi
+
+CONFFILE="/usr/share/zabbix-agent/zabbix_agentd.conf"
+CONFFILE_DEST="/etc/zabbix/zabbix_agentd.conf"
+
+if [ "$1" = "configure" ]; then
+    # Does the user 'zabbix' exist?
+    if ! getent passwd zabbix > /dev/null 2>&1 ; then
+        # Not yet. Create it.
+        adduser --quiet --system --group --disabled-login --no-create-home --home /nonexistent zabbix
+    fi
+
+    # Use ucf to handle the zabbix_agentd.conf configuration file
+    ucf $CONFFILE $CONFFILE_DEST
+    ucfr zabbix-agent $CONFFILE_DEST
+
+    chown zabbix:zabbix /var/log/zabbix-agent -R
+fi
+
+# Automatically added by dh_systemd_enable/10.10.5
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'zabbix-agent.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'zabbix-agent.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'zabbix-agent.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'zabbix-agent.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/zabbix-agent.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/zabbix-agent" ]; then
+		update-rc.d zabbix-agent defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d zabbix-agent $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_ucf/10.10.5
+if [ "$1" = "configure" ]; then
+	ucf "/usr/share/zabbix-agent/zabbix_agentd.conf" "/etc/zabbix/zabbix_agentd.conf"
+	ucfr zabbix-agent "/etc/zabbix/zabbix_agentd.conf"
+fi
+# End automatically added section
+

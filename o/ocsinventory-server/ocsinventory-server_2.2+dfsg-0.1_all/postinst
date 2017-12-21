@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+log="/var/log/ocsinventory-server"
+
+# allow mod_perl to write on log files
+chown -R www-data:adm $log
+
+if [ "$1" = "configure" ]; then
+  # remove chmod g+w on logs, see #678363
+  chmod -R g-w $log
+fi
+
+# Automatically added by dh_apache2
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in ocsinventory-server  ; do
+			apache2_invoke enconf $conf  || exit $?
+		done
+	fi
+fi
+# End automatically added section
+
+
+exit 0

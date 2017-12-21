@@ -1,0 +1,133 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ] ; then
+    update-alternatives \
+        --install /usr/share/info/emacs.info.gz \
+        emacs.info.gz \
+        /usr/share/info/emacs-25/emacs.info.gz \
+        28 \
+        --slave /usr/share/info/ada-mode.info.gz ada-mode.info.gz \
+                /usr/share/info/emacs-25/ada-mode.info.gz \
+        --slave /usr/share/info/auth.info.gz auth.info.gz \
+                /usr/share/info/emacs-25/auth.info.gz \
+        --slave /usr/share/info/autotype.info.gz autotype.info.gz \
+                /usr/share/info/emacs-25/autotype.info.gz \
+        --slave /usr/share/info/bovine.info.gz bovine.info.gz \
+                /usr/share/info/emacs-25/bovine.info.gz \
+        --slave /usr/share/info/calc.info.gz calc.info.gz \
+                /usr/share/info/emacs-25/calc.info.gz \
+        --slave /usr/share/info/ccmode.info.gz ccmode.info.gz \
+                /usr/share/info/emacs-25/ccmode.info.gz \
+        --slave /usr/share/info/cl.info.gz cl.info.gz \
+                /usr/share/info/emacs-25/cl.info.gz \
+        --slave /usr/share/info/dbus.info.gz dbus.info.gz \
+                /usr/share/info/emacs-25/dbus.info.gz \
+        --slave /usr/share/info/dired-x.info.gz dired-x.info.gz \
+                /usr/share/info/emacs-25/dired-x.info.gz \
+        --slave /usr/share/info/ebrowse.info.gz ebrowse.info.gz \
+                /usr/share/info/emacs-25/ebrowse.info.gz \
+        --slave /usr/share/info/ede.info.gz ede.info.gz \
+                /usr/share/info/emacs-25/ede.info.gz \
+        --slave /usr/share/info/ediff.info.gz ediff.info.gz \
+                /usr/share/info/emacs-25/ediff.info.gz \
+        --slave /usr/share/info/edt.info.gz edt.info.gz \
+                /usr/share/info/emacs-25/edt.info.gz \
+        --slave /usr/share/info/eieio.info.gz eieio.info.gz \
+                /usr/share/info/emacs-25/eieio.info.gz \
+        --slave /usr/share/info/eintr.info.gz eintr.info.gz \
+                /usr/share/info/emacs-25/eintr.info.gz \
+        --slave /usr/share/info/elisp.info.gz elisp.info.gz \
+                /usr/share/info/emacs-25/elisp.info.gz \
+        --slave /usr/share/info/emacs-gnutls.info.gz emacs-gnutls.info.gz \
+                /usr/share/info/emacs-25/emacs-gnutls.info.gz \
+        --slave /usr/share/info/emacs-mime.info.gz emacs-mime.info.gz \
+                /usr/share/info/emacs-25/emacs-mime.info.gz \
+        --slave /usr/share/info/epa.info.gz epa.info.gz \
+                /usr/share/info/emacs-25/epa.info.gz \
+        --slave /usr/share/info/erc.info.gz erc.info.gz \
+                /usr/share/info/emacs-25/erc.info.gz \
+        --slave /usr/share/info/ert.info.gz ert.info.gz \
+                /usr/share/info/emacs-25/ert.info.gz \
+        --slave /usr/share/info/eshell.info.gz eshell.info.gz \
+                /usr/share/info/emacs-25/eshell.info.gz \
+        --slave /usr/share/info/eudc.info.gz eudc.info.gz \
+                /usr/share/info/emacs-25/eudc.info.gz \
+        --slave /usr/share/info/eww.info.gz eww.info.gz \
+                /usr/share/info/emacs-25/eww.info.gz \
+        --slave /usr/share/info/flymake.info.gz flymake.info.gz \
+                /usr/share/info/emacs-25/flymake.info.gz \
+        --slave /usr/share/info/forms.info.gz forms.info.gz \
+                /usr/share/info/emacs-25/forms.info.gz \
+        --slave /usr/share/info/gnus.info.gz gnus.info.gz \
+                /usr/share/info/emacs-25/gnus.info.gz \
+        --slave /usr/share/info/htmlfontify.info.gz htmlfontify.info.gz \
+                /usr/share/info/emacs-25/htmlfontify.info.gz \
+        --slave /usr/share/info/idlwave.info.gz idlwave.info.gz \
+                /usr/share/info/emacs-25/idlwave.info.gz \
+        --slave /usr/share/info/ido.info.gz ido.info.gz \
+                /usr/share/info/emacs-25/ido.info.gz \
+        --slave /usr/share/info/info.info.gz info.info.gz \
+                /usr/share/info/emacs-25/info.info.gz \
+        --slave /usr/share/info/mairix-el.info.gz mairix-el.info.gz \
+                /usr/share/info/emacs-25/mairix-el.info.gz \
+        --slave /usr/share/info/message.info.gz message.info.gz \
+                /usr/share/info/emacs-25/message.info.gz \
+        --slave /usr/share/info/mh-e.info.gz mh-e.info.gz \
+                /usr/share/info/emacs-25/mh-e.info.gz \
+        --slave /usr/share/info/newsticker.info.gz newsticker.info.gz \
+                /usr/share/info/emacs-25/newsticker.info.gz \
+        --slave /usr/share/info/nxml-mode.info.gz nxml-mode.info.gz \
+                /usr/share/info/emacs-25/nxml-mode.info.gz \
+        --slave /usr/share/info/octave-mode.info.gz octave-mode.info.gz \
+                /usr/share/info/emacs-25/octave-mode.info.gz \
+        --slave /usr/share/info/org.info.gz org.info.gz \
+                /usr/share/info/emacs-25/org.info.gz \
+        --slave /usr/share/info/pcl-cvs.info.gz pcl-cvs.info.gz \
+                /usr/share/info/emacs-25/pcl-cvs.info.gz \
+        --slave /usr/share/info/pgg.info.gz pgg.info.gz \
+                /usr/share/info/emacs-25/pgg.info.gz \
+        --slave /usr/share/info/rcirc.info.gz rcirc.info.gz \
+                /usr/share/info/emacs-25/rcirc.info.gz \
+        --slave /usr/share/info/reftex.info.gz reftex.info.gz \
+                /usr/share/info/emacs-25/reftex.info.gz \
+        --slave /usr/share/info/remember.info.gz remember.info.gz \
+                /usr/share/info/emacs-25/remember.info.gz \
+        --slave /usr/share/info/sasl.info.gz sasl.info.gz \
+                /usr/share/info/emacs-25/sasl.info.gz \
+        --slave /usr/share/info/sc.info.gz sc.info.gz \
+                /usr/share/info/emacs-25/sc.info.gz \
+        --slave /usr/share/info/semantic.info.gz semantic.info.gz \
+                /usr/share/info/emacs-25/semantic.info.gz \
+        --slave /usr/share/info/ses.info.gz ses.info.gz \
+                /usr/share/info/emacs-25/ses.info.gz \
+        --slave /usr/share/info/sieve.info.gz sieve.info.gz \
+                /usr/share/info/emacs-25/sieve.info.gz \
+        --slave /usr/share/info/smtpmail.info.gz smtpmail.info.gz \
+                /usr/share/info/emacs-25/smtpmail.info.gz \
+        --slave /usr/share/info/speedbar.info.gz speedbar.info.gz \
+                /usr/share/info/emacs-25/speedbar.info.gz \
+        --slave /usr/share/info/srecode.info.gz srecode.info.gz \
+                /usr/share/info/emacs-25/srecode.info.gz \
+        --slave /usr/share/info/todo-mode.info.gz todo-mode.info.gz \
+                /usr/share/info/emacs-25/todo-mode.info.gz \
+        --slave /usr/share/info/tramp.info.gz tramp.info.gz \
+                /usr/share/info/emacs-25/tramp.info.gz \
+        --slave /usr/share/info/url.info.gz url.info.gz \
+                /usr/share/info/emacs-25/url.info.gz \
+        --slave /usr/share/info/vhdl-mode.info.gz vhdl-mode.info.gz \
+                /usr/share/info/emacs-25/vhdl-mode.info.gz \
+        --slave /usr/share/info/vip.info.gz vip.info.gz \
+                /usr/share/info/emacs-25/vip.info.gz \
+        --slave /usr/share/info/viper.info.gz viper.info.gz \
+                /usr/share/info/emacs-25/viper.info.gz \
+        --slave /usr/share/info/widget.info.gz widget.info.gz \
+                /usr/share/info/emacs-25/widget.info.gz \
+        --slave /usr/share/info/wisent.info.gz wisent.info.gz \
+                /usr/share/info/emacs-25/wisent.info.gz \
+        --slave /usr/share/info/woman.info.gz woman.info.gz \
+                /usr/share/info/emacs-25/woman.info.gz
+fi
+
+

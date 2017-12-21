@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+#Script to configure fprobe.
+
+# Use debconf.
+. /usr/share/debconf/confmodule
+
+# Load config file, if it exists.
+if [ -e /etc/default/fprobe ]; then
+	. /etc/default/fprobe || true
+
+	# Store values from config file into debconf db.
+	db_set fprobe/interface "$INTERFACE"
+	db_set fprobe/collector "$FLOW_COLLECTOR"
+fi
+
+
+db_input high fprobe/interface || true
+db_input high fprobe/collector || true
+db_go
+

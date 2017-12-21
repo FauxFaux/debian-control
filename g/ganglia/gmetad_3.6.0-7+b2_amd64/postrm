@@ -1,0 +1,32 @@
+#!/bin/sh -e
+
+if [ "$1" = "purge" ] ; then
+   # rm the rrds if this is the last ganglia package being removed.
+   if [ ! -f /usr/sbin/gmond ] ; then
+        if [ -d /var/lib/ganglia ]; then
+		# Remove rrd dir
+                rm -rf /var/lib/ganglia/rrds
+        fi
+   	# remove ganglia user only if gmond isn't installed
+        if getent passwd ganglia >/dev/null; then
+                userdel ganglia
+        fi
+        if getent group ganglia >/dev/null; then
+                groupdel ganglia
+        fi
+   fi
+fi
+
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "purge" ] ; then
+	update-rc.d gmetad remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+

@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+FILE=/root/tmp/HyperSpec-6-0.tar.gz
+
+check_archive()
+{    
+    # check if the file is ok
+    if [ -s "$FILE" -a ! -L "$FILE" -a ! -O "$FILE" -a ! -G "$FILE" ] && \
+	gzip --test --quiet  "$FILE" > /dev/null 2>&1 ; then
+	true
+    else
+	false
+    fi
+}
+
+
+if test "$1" = "reconfigure" ; then
+    db_reset cltl/downloading
+fi
+
+case "$1" in
+    configure|reconfigure)
+	set +e
+	check_archive
+	if [ $? != 0 ]; then
+	    db_input medium cltl/downloading
+	    db_go
+	fi
+	set -e
+	;;
+    *) 
+	echo "config called with invalid option" >&2
+	exit 0
+	;;
+esac
+
+exit 0

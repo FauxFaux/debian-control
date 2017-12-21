@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+. /usr/share/debconf/confmodule
+
+db_input medium conserver-server/run_as_root || true
+db_go
+
+db_input medium conserver-server/port || true
+db_go
+
+db_input medium conserver-server/base_port || true
+db_go
+
+db_input medium conserver-server/listen_address || true
+db_go
+
+# upgrade to version 8.x.x
+if [ -f /etc/conserver/conserver.cf ]; then
+	if egrep -q '^[^:#]+:[^:]*:' /etc/conserver/conserver.cf; then
+		db_input medium conserver-server/upgrade_800_flag || true
+		db_go
+	fi
+fi

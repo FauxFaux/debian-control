@@ -1,0 +1,37 @@
+#!/bin/sh
+# prerm script for mandos
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <prerm> 'remove'
+#        * <old-prerm> 'upgrade' <new-version>
+#        * <new-prerm> 'failed-upgrade' <old-version>
+#        * <conflictor's-prerm> 'remove' 'in-favour' <package> <new-version>
+#        * <deconfigured's-prerm> 'deconfigure' 'in-favour'
+#          <package-being-installed> <version> 'removing'
+#          <conflicting-package> <version>
+# for details, see /usr/share/doc/packaging-manual/
+
+case "$1" in
+    remove|deconfigure)
+	invoke-rc.d mandos stop || :
+	;;
+    upgrade|failed-upgrade)
+        ;;
+    *)
+        echo "prerm called with unknown argument '$1'" >&2
+        exit 0
+    ;;
+esac
+
+# Automatically added by dh_installinit/10.7.2
+if [ -x "/etc/init.d/mandos" ]; then
+	invoke-rc.d mandos stop || exit $?
+fi
+# End automatically added section
+
+
+exit 0

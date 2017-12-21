@@ -1,0 +1,305 @@
+#!/bin/sh
+# postinst script for fex
+#
+# see: dh_installdeb(1)
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <postinst> `abort-remove'
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+case "$1" in
+    configure)
+    # lets give them a fex user/group in all cases.
+    getent group fex >/dev/null 2>&1 || addgroup --system fex
+    getent passwd fex >/dev/null 2>&1 || adduser --system --home /usr/share/fex --no-create-home \
+        --disabled-password --shell /bin/sh --ingroup fex fex
+
+    FEX_USER_SHELL=$(getent passwd fex|awk -F: '{print $7}')
+    if [ "$FEX_USER_SHELL" = "/bin/false" ];then
+        echo "Updating user fex to have a valid shell (/bin/sh)"
+        chsh -s /bin/sh fex
+    fi
+
+    # ensure fac and fex_cleanup are run as user fex
+    for file in fex_cleanup logwatch fexwall;do
+        dpkg-statoverride --list /usr/share/fex/bin/$file >/dev/null || dpkg-statoverride --add fex fex 4750 /usr/share/fex/bin/$file
+        chown fex:fex /usr/share/fex/bin/$file
+        chmod 4750 /usr/share/fex/bin/$file
+    done
+    dpkg-statoverride --list /usr/bin/fac >/dev/null || dpkg-statoverride --add fex fex 4750 /usr/bin/fac
+    chown fex:fex /usr/bin/fac
+    chmod 4750 /usr/bin/fac
+
+    if [ ! -d /var/lib/fex/htdocs ]; then
+        echo "Installing initial copy of htdocs into /var/lib/fex/htdocs ..."
+        mkdir -p /var/lib/fex/htdocs/FAQ/
+        cd /usr/share/fex/htdocs/
+        find . -type f -exec cp {} /var/lib/fex/htdocs/{} \;
+        ln -sf /usr/share/javascript/jquery/jquery.js /var/lib/fex/htdocs/FAQ/jquery.js
+        ln -s /usr/share/fex/htdocs/download /var/lib/fex/htdocs/
+    else
+        echo "Upgrading version file in /var/lib/fex/htdocs"
+        cp /usr/share/fex/htdocs/version /var/lib/fex/htdocs/version
+        echo "/var/lib/fex/htdocs exists already, checking for default install"
+        [ -d /var/lib/fex/htdocs/FAQ/ ]||mkdir /var/lib/fex/htdocs/FAQ/
+        tmp=$(mktemp)
+        vers=$(mktemp -d)
+        (cd ${vers};tar xfz /usr/share/fex/.md5/htdocs.tgz)
+        if [ -f /usr/share/fex/.lastver ];then
+            lastinst=$(cat /usr/share/fex/.lastver)
+            db_set fex/lastver "$lastinst"
+            rm -f /usr/share/fex/.lastver
+        else
+            db_get fex/lastver
+            lastinst=$RET
+        fi
+        lastinstnoepoch=$(echo $lastinst | cut -d':' -f 2)
+        if [ -f ${vers}/${lastinst} ];then
+            if (cd /var/lib/fex;md5sum -c --quiet "${vers}/${lastinst}" >/dev/null 2>&1);then
+                # htdocs is identical
+                echo "Updating $lastinst default htdocs to new default htdocs"
+                cd /usr/share/fex/htdocs/
+                find . -type f -exec cp {} /var/lib/fex/htdocs/{} \;
+                rm -f "$tmp"
+            fi
+            if [ -L /var/lib/fex/htdocs/download ];then
+                if [ "$(readlink /var/lib/fex/htdocs/download)" = "/usr/share/fex/htdocs/download" ];then
+                    #echo "Download directory is up to date."
+                    true
+                else
+                    echo "Download directory is pointing to non-default location."
+                    echo "Please update client scripts yourself"
+                fi
+            else
+                for file in /usr/share/fex/htdocs/download/*;do
+                    ln -sf "$file" /var/lib/fex/htdocs/download
+                done
+            fi
+            if [ -L /var/lib/fex/htdocs/FAQ/jquery.js ];then
+                if [ "$(readlink /var/lib/fex/htdocs/FAQ/jquery.js)" = "/usr/share/javascript/jquery/jquery.js" ];then
+                    #echo "jquery.js link is up to date."
+                    true
+                else
+                    echo "jquery.js in htdocs/FAQ is pointing to non-default location."
+                    echo "Please update jquery.js symlink yourself unless intended to not be system default"
+                fi
+            elif [ ! -f "/var/lib/fex/htdocs/FAQ/jquery.js" ];then
+                ln -s /usr/share/javascript/jquery/jquery.js /var/lib/fex/htdocs/FAQ/jquery.js
+            fi
+        fi
+        # tmp is created by mktemp and not cleaned up 
+        # if we don't have ${vers}/${lastinst} - 
+        # thus custom builds are always custom
+        if [ -f "$tmp" ];then
+            echo "Customizations in htdocs found. Not touching any files."
+            echo "The new default pages are at /usr/share/fex/htdocs/."
+            echo "Please check the diff yourself and update your htdocs dir if required."
+            rm "$tmp"
+        fi
+        if [ -e /var/lib/fex/htdocs/FIX.jar ];then
+            echo "F*IX is no longer supported. You should remove /var/lib/fex/htdocs/FIX.jar."
+        elif [ -L /var/lib/fex/htdocs/FIX.jar -a ! -e /var/lib/fex/htdocs/FIX.jar ];then
+            echo "Removing dangling symlink to FIX.jar"
+            rm -f /var/lib/fex/htdocs/FIX.jar
+        fi
+        rm -rf ${vers} 
+    fi
+
+    # make sure we don't have MYHOSTNAME.MYDOMAIN as $hostname in /etc/fex/fex.ph
+    myhostname=$(hostname -f) # in case our piuparts chroot doesn't know about hostname
+    if [ ! -f /etc/fex/fex.ph ];then
+        if [ -z "$myhostname" ];then
+            echo 'Initializing /etc/fex/fex.ph WITHOUT hostname (Please correct before using F*EX)'
+            cat /usr/share/fex/templates/fex.ph >/var/lib/fex/fex.ph
+        else
+            echo 'Initializing /etc/fex/fex.ph with correcting hostname (using: '${myhostname}')'
+            cat /usr/share/fex/templates/fex.ph|sed -e 's/^\$hostname.*/\$hostname = '"'${myhostname}'"';/' >/var/lib/fex/fex.ph
+        fi
+        # make sure we reset ucf here..
+        ucfr --purge fex /etc/fex/fex.ph
+        mv /var/lib/fex/fex.ph /etc/fex/fex.ph
+        ucfr fex /etc/fex/fex.ph
+
+        # XXX: fex adminpw and ~fex/.fex/id will be autocreated by fex_cleanup further down
+    else
+        if egrep -q '^\$hostname.*=.*'"'MYHOSTNAME.MYDOMAIN'" /etc/fex/fex.ph 2>/dev/null;then
+            echo 'Unconfigured hostname found in /etc/fex/fex.ph! Please correct before using F*EX'
+        else
+            PW=$(perl -e 'require "/etc/fex/fex.ph";print $admin_pw;')
+            ADMIN=$(perl -e 'require "/etc/fex/fex.ph";print $admin;')
+            if [ ! -f /usr/share/fex/.fex/id -a -n "$PW" ];then
+                echo "Creating fex admin login. Moving admin_pw from fex.ph"
+                [ -d /usr/share/fex/.fex/ ]||install -d -m 0700 -o fex -g fex /usr/share/fex/.fex/
+                touch /usr/share/fex/.fex/id
+                chmod 0600 /usr/share/fex/.fex/id
+                chown fex:fex /usr/share/fex/.fex/id
+                perl -e 'require "/etc/fex/fex.ph";$opt_p ||= "8888";print "$hostname:$opt_p\n$admin\n$admin_pw\n";' > /usr/share/fex/.fex/id
+            fi
+            if [ ! -f "/usr/share/fex/spool/${ADMIN}/@" ];then
+                mkdir -p "/usr/share/fex/spool/${ADMIN}"
+                chmod 0700 "/usr/share/fex/spool/${ADMIN}"
+                touch "/usr/share/fex/spool/${ADMIN}/@"
+                chmod 0600 "/usr/share/fex/spool/${ADMIN}/@"
+                chown fex:fex "/usr/share/fex/spool/${ADMIN}"
+                echo "$PW" > "/usr/share/fex/spool/${ADMIN}/@"
+            fi
+            if grep -q '^$admin_pw' /etc/fex/fex.ph 2>/dev/null;then
+                echo '$admin_pw is set in /etc/fex/fex.ph ...'
+                echo 'Removing line and replacing by comment.'
+                echo 'From now on the fexmaster account also works in the web fac UI.'
+                sed -i -e  '/^$admin_pw/s,^$admin_pw.*$,### $admin_pw is no longer used - fexmaster account may now also login via web-fac,' /etc/fex/fex.ph
+                PW=$(perl -e 'require "/etc/fex/fex.ph";print $admin_pw;')
+                if [ -n "$PW" ];then
+                    echo
+                    echo ' *** WARNING ***'
+                    echo 'Some sort of include happening inside fex.ph. Please remove $admin_pw in include manually!'
+                    echo ' *** WARNING ***'
+                    echo
+                fi
+            fi
+        fi
+        NOTIFY=$(perl -e 'require "/etc/fex/fex.ph";print $notify_newrelease;')
+        if [ "$NOTIFY" != "" ];then
+            echo "You have notify_newrelease defined in /etc/fex/fex.ph!"
+            echo 'This should be set to'
+            echo '# ************************************************************'
+            echo '$notify_newrelease='"'';"
+            echo '# ************************************************************'
+            echo 'to ensure you do not get nagged for new upstream releases.'
+            echo "Updates for Debian fex come through apt/aptitude and don't need this obviously."
+        fi
+    fi
+    if [ -f /etc/aliases -o -L /etc/aliases ]; then
+        if ! grep -qi "^\s*fex\s*:" /etc/aliases; then
+            if [ -z "$2" ];then
+                echo "Adding system alias for fex to root"
+                echo "fex: root" >> /etc/aliases
+                # run newaliases for e.g. postfix
+                newal=`which newaliases || true`
+                if [ -n "$newal" ] && [ -x "$newal" ]; then
+                    $newal || true
+                fi
+            else
+                echo "You have no alias set for user fex in /etc/aliases!"
+                echo "Consider adding one or you will not receive bounced emails from"
+                echo "fex daemon email notifications"
+            fi
+        fi
+    fi
+    if [ -f /etc/exim/exim.conf -o -f /var/lib/exim4/config.autogenerated ]; then
+        # exim4 found...
+        [ ! -f /var/lib/exim4/config.autogenerated ]||ISTRUSTED=$(egrep '^\s*(MAIN_TRUSTED_USERS|trusted_users)\s*=.*fex' /var/lib/exim4/config.autogenerated||true)
+        [ ! -f /etc/exim/exim.conf ]||ISTRUSTED=$(egrep '^\s*(MAIN_TRUSTED_USERS|trusted_users)\s*=.*fex' /etc/exim/exim.conf||true)
+        [ -z "$ISTRUSTED" ]||echo "You're running exim4 and fex isn't in the trusted_users list. Consider adding or email notifications may not work!"
+    fi
+    
+    # make sure we have correct permissions
+    dpkg-statoverride --list /etc/fex/fex.ph >/dev/null || dpkg-statoverride --add fex fex 0640 /etc/fex/fex.ph
+    dpkg-statoverride --list /etc/fex/fup.pl >/dev/null || dpkg-statoverride --add fex fex 0640 /etc/fex/fup.pl
+    chown fex:fex /etc/fex/fex.ph /etc/fex/fup.pl
+    chmod 0640 /etc/fex/fex.ph /etc/fex/fup.pl
+
+    logdir=`sed -n '/\$logdir/s/^\$logdir\s*=\s*['"'"'"]\(.*\)['"'"'"].*/\1/p' /etc/fex/fex.ph|tail -n 1||true`
+    if [ "$logdir" = "/var/log/fex" ];then
+        for log in cleanup.log dop.log error.log fexsrv.log fop.log fup.log;do
+            if [ -r /var/spool/fex/${log} ];then
+                echo -n "Moving old log file ${log} to /var/log/fex"
+                if [ ! -r /var/log/fex/${log} ];then
+                    mv /var/spool/fex/${log} /var/log/fex/
+                    chmod 0640 /var/log/fex/${log}
+                    echo '.'
+                elif [ ! -r /var/log/fex/${log}.1 ];then 
+                    # we already have a new logfile in /var/log/fex
+                    mv /var/spool/fex/${log} /var/log/fex/${log}.1
+                    chmod 0640 /var/log/fex/${log}*
+                    echo '.'
+                else
+                    echo ': failed!'
+                    echo "New logdir already populated."
+                    echo "Please move /var/spool/fex/${log} yourself if required."
+                fi
+            else
+                # Create new logfile with correct permissions
+                touch /var/log/fex/${log}
+                chmod 0640 /var/log/fex/${log}
+            fi 
+        done
+    elif [ -z "$logdir" -o "${logdir}" = '$spooldir' ];then
+        echo 'Logdir still pointing to $spooldir. Please update to /var/log/fex'
+        echo 'in order to take full advantage of logrotate settings.'
+        echo 'Once you have updated your configfiles just run:'
+        echo '           dpkg-reconfigure fex'
+        echo 'To have the logfiles moved into their new location'
+        else
+        echo "Custom logdir configured. Not moving logfile to /var/log/fex."
+    fi
+
+    echo -n "Adding default spool keys dirs with secure permissions: "
+    for dir in .dkeys .ukeys .akeys .skeys .gkeys .xkeys .locks;do
+      mkdir -p "/var/spool/fex/$dir"
+      chmod 0700 "/var/spool/fex/$dir"
+    done
+    echo "done."
+
+    chown -R fex:fex /usr/share/fex/ /var/lib/fex/ /var/log/fex/ /var/spool/fex/
+    chmod 0750 /usr/share/fex/ /var/lib/fex/ /var/log/fex/ /var/spool/fex/
+    if [ -d /etc/xinetd.d ];then
+        ucf --debconf-ok /usr/share/fex/templates/xinetd_fex /etc/xinetd.d/fex
+        remainingsrv=`grep -r /usr/share/fex/bin/fexsrv /etc/xinetd.d|grep -v '^/etc/xinetd.d/fex:'|sed -e 's#^/etc/xinetd.d/\([^:]\+\):.*#\1#'|grep -v 'fex.*-*'||true`
+        if [ ! -z "$remainingsrv" ];then
+            echo "User-defined services in xinetd not updated: ${remainingsrv}. Please update yourself!"
+        fi
+        if [ -x /etc/init.d/xinetd ]; then
+            if [ -x /usr/sbin/invoke-rc.d ]; then
+                invoke-rc.d xinetd reload || true
+            else
+                /etc/init.d/xinetd reload || true
+            fi
+        fi
+    elif [ -r /etc/inetd.conf ];then
+        # We're running openbsd-inetd or something similar
+        fexsrv=`egrep '\s/usr/share/fex/bin/fexsrv' /etc/inetd.conf 2>/dev/null||true`
+        if [ -x /usr/sbin/update-inetd -a -z "$fexsrv" ];then
+            # as --multi is ugly we'll only support v4 through inetd.conf
+            # whoever wants IPv6 needs to go xinetd or hack his own version
+            # i.e. replace tcp with tcp6
+            update-inetd --add '8888\tstream\ttcp\tnowait\tfex:fex\t/usr/sbin/tcpd\t/usr/share/fex/bin/fexsrv'
+        elif [ -z "$fexsrv" ];then
+            echo 'Unable to automatically update inetd.conf'
+            echo 'Please update yourself and restart inetd'
+        fi
+    fi
+    echo 'Running fex_cleanup to verify config integrity ...'
+    su -s /bin/bash -c /usr/share/fex/bin/fex_cleanup fex
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# dh_installdeb will replace this with shell code automatically
+# generated by other debhelper scripts.
+
+
+
+exit 0
+
+# vi: set smartindent ts=4 sw=4 expandtab autoindent sts=4:

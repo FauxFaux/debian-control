@@ -1,0 +1,49 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ]; then
+    # keep group and user in sync with pacemaker-common.postinst
+    addgroup --system haclient
+    adduser --system hacluster --ingroup haclient --home /var/lib/pacemaker --no-create-home
+
+    chown hacluster:haclient /var/lib/heartbeat/cores/hacluster
+    chown nobody:nogroup /var/lib/heartbeat/cores/nobody
+fi
+
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'logd.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'logd.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'logd.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'logd.service' >/dev/null || true
+fi
+# End automatically added section
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p cluster-glue /usr/lib/stonith/plugins -V 3.6
+fi
+
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/logd" ]; then
+		update-rc.d logd defaults 20 32 >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d logd $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+

@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        update-alternatives --quiet \
+            --install /usr/bin/www-browser www-browser /usr/bin/elinks 35 \
+            --slave /usr/share/man/man1/www-browser.1.gz www-browser.1.gz /usr/share/man/man1/elinks.1.gz
+    ;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+# Automatically added by dh_installmenu/10.10.7
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/10.10.7
+dpkg-maintscript-helper symlink_to_dir /usr/share/doc/elinks elinks-data 0.12\~pre6-11\~ -- "$@"
+# End automatically added section
+
+
+exit 0

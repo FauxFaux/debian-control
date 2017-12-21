@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove sh4-linux-gnu-g++ /usr/bin/sh4-linux-gnu-g++-5
+fi
+
+
+
+exit 0

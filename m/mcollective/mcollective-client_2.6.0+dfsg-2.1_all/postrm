@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+MCOLLECTIVE_CLIENT_CFG="/etc/mcollective/client.cfg"
+
+case "$1" in
+	purge)
+		if [ -e "$MCOLLECTIVE_CLIENT_CFG" ]; then
+			rm -rf $MCOLLECTIVE_CLIENT_CFG
+			rmdir --ignore-fail-on-non-empty /etc/mcollective
+		fi
+
+	;;
+	upgrade|failed-upgrade|abort-install|abort-upgrade|disappear|remove)
+	;;
+	*)
+		echo "postrm called with unknown argument \`${1}'" >&2
+		exit 1
+	;;
+esac
+
+
+
+exit 0

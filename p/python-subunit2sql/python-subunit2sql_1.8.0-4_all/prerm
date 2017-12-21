@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] ; then
+	update-alternatives --remove sql2subunit /usr/bin/python2-sql2subunit
+	update-alternatives --remove subunit2sql /usr/bin/python2-subunit2sql
+	update-alternatives --remove subunit2sql-db-manage /usr/bin/python2-subunit2sql-db-manage
+	update-alternatives --remove subunit2sql-graph /usr/bin/python2-subunit2sql-graph
+fi
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p python-subunit2sql 
+else
+	dpkg -L python-subunit2sql | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+
+exit 0

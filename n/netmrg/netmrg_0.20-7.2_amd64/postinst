@@ -1,0 +1,205 @@
+#! /bin/sh
+# postinst script for netmrg
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+
+. /usr/share/debconf/confmodule
+
+if [ "$DPKG_DEBUG" = "developer" ]; then
+	set -x
+fi
+
+if ! id netmrg > /dev/null 2>&1; then
+	adduser --system --ingroup www-data --home /var/lib/netmrg --shell /bin/bash --gecos netmrg netmrg
+else
+	# There has been previous inoffical version where the shell had been
+	# set to /bin/false. This causes problems when running the crontab entry.
+	chsh -s /bin/bash netmrg
+fi
+
+get_db_params () {
+  db_get "netmrg/db/host"
+  dbserver="$RET"
+  db_get "netmrg/db/name"
+  dbname="$RET"
+  db_get "netmrg/db/admin/name"
+  dbadmin="$RET"
+  db_get "netmrg/db/admin/password"
+  dbadmpass="$RET"
+  db_get "netmrg/db/user/name"
+  dbuser="$RET"
+  db_get "netmrg/db/user/password"
+  dbpass="$RET"
+  db_get "netmrg/web/host"
+  webhost="$RET"
+  db_get "netmrg/company/name"
+  companyname="$RET"
+  db_get "netmrg/company/link"
+  companylink="$RET"
+}
+
+case "$1" in
+    configure)
+
+			chown -R netmrg:www-data /var/lib/netmrg
+			chown -R netmrg:www-data /var/log/netmrg
+			if [ ! -d "/var/lib/netmrg/sessions" ] ; then
+				mkdir -p /var/lib/netmrg/sessions
+			fi
+			chown -R www-data:www-data /var/lib/netmrg/sessions
+			chmod 700 /var/lib/netmrg/sessions
+
+			config="/etc/netmrg/netmrg.xml"
+			if [ -s $config ] ; then
+				template=$config
+			else
+				template="/usr/share/netmrg/netmrg.xml.sample"
+			fi
+
+			# Get the web server type.
+			db_get "netmrg/webserver"
+			webserver="$RET"
+			case $webserver in
+				Apache2)		webservers="apache2" ;;
+				Apache)		webservers="apache" ;;
+				Apache-SSL)	webservers="apache-ssl" ;;
+				All)		webservers="apache2 apache apache-ssl" ;;
+				*)		webservers="" ;;
+			esac
+			. /usr/share/wwwconfig-common/php.get
+			. /usr/share/wwwconfig-common/apache-run.get
+
+			# Set up web server.
+			for server in $webservers ; do
+				# prefer conf.d over monolithic form
+				if [ -d "/etc/${server}/conf.d" ] ; then
+					rm -f "/etc/${server}/conf.d/netmrg.conf"
+					if [ ! -e "/etc/${server}/conf.d/netmrg.conf" ] ; then
+						ln -s /etc/netmrg/netmrg.conf "/etc/${server}/conf.d/netmrg.conf"
+					fi
+					restart="$server $restart"
+				else
+					includefile="/etc/netmrg/netmrg.conf"
+					. /usr/share/wwwconfig-common/apache-include_all.sh
+					test "$status" = "uncomment" -o "$status" = "include" && restart="$server $restart"
+				fi
+				
+				for index in index.php; do
+					. /usr/share/wwwconfig-common/apache-index_all.sh
+					test "$status" = "added" && restart="$server $restart"
+				done
+			done
+
+			# Setup the database.
+			get_db_params
+			. /usr/share/wwwconfig-common/mysql-createdb.sh
+			dbcreatestatus=$status
+			if [ "$status" = "create" ]; then
+				if eval $mysqlcmd -f mysql -e '"select User from user;"' | grep $dbuser >/dev/null 2>&1 ; then
+					userexists=true
+				else
+					userexists=false
+				fi
+				. /usr/share/wwwconfig-common/mysql-createuser.sh
+				if [ "$status" != "error" ]; then
+					# Check for one table
+					if ! eval $mysqlcmd $dbname -e '"show tables;"' | grep graphs >/dev/null 2>&1 ; then
+						if ! eval $mysqlcmd $dbname < /usr/share/netmrg/db/netmrg.mysql > /dev/null 2>&1 ; then
+							status=error
+						else
+							status=exec
+						fi
+						if [ "$status" != "exec" ]; then
+							db_fset netmrg/db/tablegen_error seen false
+							db_input high netmrg/db/tablegen_error || true
+							db_go
+							. /usr/share/wwwconfig-common/mysql-dropdb.sh
+							if [ "$userexists" != "true" ]; then
+								. /usr/share/wwwconfig-common/mysql-dropuser.sh
+							fi
+						fi
+					fi
+
+				else
+					db_reset "netmrg/db/admin/password"
+					db_fset netmrg/db/usergen_error seen false
+					db_input high netmrg/db/usergen_error || true
+					db_go
+					# Only delete the database when it was created in this script
+					if [ $dbcreatestatus = "create" ] ; then
+						. /usr/share/wwwconfig-common/mysql-dropdb.sh
+					fi
+				fi
+
+			elif [ "$status" = "nothing" ]; then
+				# run createuser in case the password has been changed during
+				# a reconfiguration of the package
+				. /usr/share/wwwconfig-common/mysql-createuser.sh
+				oldvers=$(eval "$mysqlcmd $dbname -e 'select module, version from versioninfo'" | grep Main | awk '{print $2}')
+				if [ -f /usr/share/doc/netmrg/update-from-$oldvers.sql ] ; then
+					echo "Updating from version $oldvers."
+					sqlfile=/usr/share/doc/netmrg/update-from-$oldvers.sql
+					. /usr/share/wwwconfig-common/mysql-exec.sh
+					if [ $status = "execerror" ] ; then
+						echo "Updating from version $oldvers failed!"
+					fi
+				else
+					echo "No update for database needed."
+				fi
+			else
+				db_reset "netmrg/db/admin/password"
+				db_fset netmrg/db/generation_error seen false
+				db_input high netmrg/db/generation_error || true
+				db_go
+			fi
+
+			# Everything fine so far. Now create an new config file
+			TEMPFILE=`tempfile -s .netmrg_install.tmp` && chown root:www-data $TEMPFILE && chmod 640 $TEMPFILE
+			sed "s:^\(.*\)<host>\(.*\)</host>:\1<host>$dbserver</host>:g" $template | \
+			sed "s:^\(.*\)<user>\(.*\)</user>:\1<user>$dbuser</user>:g" | \
+			sed "s|^\(.*\)<password>\(.*\)</password>|\1<password>$dbpass</password>|g" | \
+			sed "s:^\(.*\)<db>\(.*\)</db>:\1<db>$dbname</db>:g" | \
+			sed "s|^\(.*\)<webhost>\(.*\)</webhost>|\1<webhost>$webhost</webhost>|g" | \
+			sed "s|^\(.*\)<webroot>\(.*\)</webroot>|\1<webroot>/netmrg</webroot>|g" | \
+			sed "s|^\(.*\)<company>\(.*\)</company>|\1<company>$companyname</company>|g" | \
+			sed "s|^\(.*\)<companylink>\(.*\)</companylink>|\1<companylink>$companylink</companylink>|g" > \
+			$TEMPFILE && mv $TEMPFILE $config
+
+			# Restart the servers that need to be restarted
+			servers="apache-ssl apache apache2 mysql"
+			. /usr/share/wwwconfig-common/restart.sh
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# dh_installdeb will replace this with shell code automatically
+# generated by other debhelper scripts.
+
+
+
+exit 0
+
+

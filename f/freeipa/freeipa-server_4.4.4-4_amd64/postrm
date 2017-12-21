@@ -1,0 +1,128 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    remove|purge)
+        if [ -e /usr/share/apache2/apache2-maintscript-helper ]; then
+            . /usr/share/apache2/apache2-maintscript-helper
+
+            if [ -e /etc/apache2/mods-enabled/auth_kerb.load ]; then
+                apache2_invoke dismod auth_kerb || exit $?
+            fi
+            if [ -e /etc/apache2/mods-enabled/auth_gssapi.load ]; then
+                apache2_invoke dismod auth_gssapi || exit $?
+            fi
+            if [ -e /etc/apache2/mods-enabled/authz_user.load ]; then
+                apache2_invoke dismod authz_user || exit $?
+            fi
+            if [ -e /etc/apache2/mods-enabled/deflate.load ]; then
+                apache2_invoke dismod deflate || exit $?
+            fi
+            if [ -e /etc/apache2/mods-enabled/expires.load ]; then
+                apache2_invoke dismod expires || exit $?
+            fi
+            if [ -e /etc/apache2/mods-enabled/headers.load ]; then
+                apache2_invoke dismod headers || exit $?
+            fi
+            if [ -e /etc/apache2/mods-enabled/proxy.load ]; then
+                apache2_invoke dismod proxy || exit $?
+            fi
+            if [ -e /etc/apache2/mods-enabled/proxy_ajp.load ]; then
+                apache2_invoke dismod proxy_ajp || exit $?
+            fi
+            if [ -e /etc/apache2/mods-enabled/proxy_http.load ]; then
+                apache2_invoke dismod proxy_http || exit $?
+            fi
+            if [ -e /etc/apache2/mods-enabled/rewrite.load ]; then
+                apache2_invoke dismod rewrite || exit $?
+            fi
+        fi
+    ;;
+esac
+case "$1" in
+    purge)
+        rm -f \
+            /var/log/ipareplica-conncheck.log \
+            /var/log/ipareplica-install.log \
+            /var/log/ipaserver-install.log \
+            /var/log/ipaserver-uninstall.log \
+            /var/log/ipaupgrade.log
+    ;;
+esac
+
+# Automatically added by dh_systemd_start/10.10.9
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'ipa-ods-exporter.service' >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'ipa-ods-exporter.service' >/dev/null
+		deb-systemd-helper unmask 'ipa-ods-exporter.service' >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'ipa-custodia.service' >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'ipa-custodia.service' >/dev/null
+		deb-systemd-helper unmask 'ipa-custodia.service' >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'ipa-dnskeysyncd.service' >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'ipa-dnskeysyncd.service' >/dev/null
+		deb-systemd-helper unmask 'ipa-dnskeysyncd.service' >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'ipa_memcached.service' >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'ipa_memcached.service' >/dev/null
+		deb-systemd-helper unmask 'ipa_memcached.service' >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'ipa.service' >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'ipa.service' >/dev/null
+		deb-systemd-helper unmask 'ipa.service' >/dev/null
+	fi
+fi
+# End automatically added section
+

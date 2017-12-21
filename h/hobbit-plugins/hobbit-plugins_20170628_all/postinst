@@ -1,0 +1,132 @@
+#!/bin/sh
+
+LOCAL_CONFIG_FILES="apt_no_repo_accept apt_reject libs.local.yaml zombies_ignore"
+
+set -e
+
+case $1 in
+	configure)
+		# Move configuration files which are recognized, but
+		# not shipped by default and hence are not conffiles.
+		# See README.Debian.
+		if [ -d /etc/hobbit/ ]; then
+                    for f in $LOCAL_CONFIG_FILES; do
+                        if [ -e /etc/hobbit/$f -a ! -e /etc/xymon/$f ]; then
+                            mv -v /etc/hobbit/$f /etc/xymon/$f
+                        fi
+                    done
+                fi
+
+		if test -x /usr/lib/xymon/server/bin/xymond ; then
+			invoke-rc.d xymon reload || :
+		else
+			invoke-rc.d xymon-client reload || :
+		fi
+		;;
+esac
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/hobbitgraph.d/entropy.cfg /etc/xymon/graphs.d/entropy.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/hobbitgraph.d/postgres.cfg /etc/xymon/graphs.d/postgres.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/hobbitserver.d/entropy.cfg /etc/xymon/xymonserver.d/entropy.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/hobbitserver.d/postgres.cfg /etc/xymon/xymonserver.d/postgres.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/hobbitserver.d/ircbot.cfg /etc/xymon/xymonserver.d/ircbot.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/hobbitserver.d/conn6.cfg /etc/xymon/xymonserver.d/conn6.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/dirty_etc_ok /etc/xymon/dirty_etc_ok 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/misc.d/mount-ro /etc/xymon/misc.d/mount-ro 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/misc.d/zombies /etc/xymon/misc.d/zombies 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/hobbitlaunch.d/ircbot.cfg /etc/xymon/xymonlaunch.d/ircbot.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/hobbitlaunch.d/conn6.cfg /etc/xymon/xymonlaunch.d/conn6.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/hobbitlaunch.d/tftp.cfg /etc/xymon/xymonlaunch.d/tftp.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/hobbitlaunch.d/aptdiff.cfg /etc/xymon/xymonlaunch.d/aptdiff.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/clientlaunch.d/entropy.cfg /etc/xymon/clientlaunch.d/entropy.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/clientlaunch.d/postgres.cfg /etc/xymon/clientlaunch.d/postgres.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/clientlaunch.d/backuppc.cfg /etc/xymon/clientlaunch.d/backuppc.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/clientlaunch.d/mq.cfg /etc/xymon/clientlaunch.d/mq.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/clientlaunch.d/dirtyetc.cfg /etc/xymon/clientlaunch.d/dirtyetc.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/clientlaunch.d/apt.cfg /etc/xymon/clientlaunch.d/apt.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/clientlaunch.d/ntpq.cfg /etc/xymon/clientlaunch.d/ntpq.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/clientlaunch.d/ipmi.cfg /etc/xymon/clientlaunch.d/ipmi.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/clientlaunch.d/dirtyvcs.cfg /etc/xymon/clientlaunch.d/dirtyvcs.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/clientlaunch.d/misc.cfg /etc/xymon/clientlaunch.d/misc.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/clientlaunch.d/mdstat.cfg /etc/xymon/clientlaunch.d/mdstat.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/clientlaunch.d/mailman.cfg /etc/xymon/clientlaunch.d/mailman.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/clientlaunch.d/libs.cfg /etc/xymon/clientlaunch.d/libs.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/clientlaunch.d/sftbnc.cfg /etc/xymon/clientlaunch.d/sftbnc.cfg 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/dirty_vcs_dirs /etc/xymon/dirty_vcs_dirs 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/sudoers.d/hobbit /etc/sudoers.d/xymon 20120532 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/hobbit/libs.yaml /etc/xymon/libs.yaml 20140121 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/xymon/xymongraph.d/entropy.cfg /etc/xymon/xymongraph.d/entropy.cfg 20140515+exp -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/xymon/xymongraph.d/postgres.cfg /etc/xymon/xymongraph.d/postgres.cfg 20140515+exp -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/xymon/xymongraph.d/temp.cfg /etc/xymon/xymongraph.d/temp.cfg 20140515+exp -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/xymon/xymongraph.d/pgbouncer.cfg /etc/xymon/xymongraph.d/pgbouncer.cfg 20140515+exp -- "$@"
+# End automatically added section
+
+
+exit 0

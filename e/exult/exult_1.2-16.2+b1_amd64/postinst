@@ -1,0 +1,86 @@
+#!/bin/sh
+
+set -e
+
+config=/etc/exult.cfg
+
+setkeys='%d = ("/config/debian-warning" => 0);
+%k = @ARGV;
+while (<STDIN>) {
+  if (m|</(.*?)>|) {
+    $p =~ s|/$1$|| or die "line $.: </$1> unexpected\n";
+    print if $skip < 2;
+    $skip = 0;
+    next
+  }
+  next if $skip;
+  if (m|(\s*)<(.*?)>|) {
+    $i = $1;
+    $p .= "/$2";
+    exists $d{$p} and $skip = 2, next;
+    print;
+    exists $k{$p} and $skip = 1, print "$i$k{$p}\n";
+    next;
+  }
+  print;
+}'
+
+case "$1" in
+	configure)
+		. /usr/share/debconf/confmodule
+		db_get exult/blackgate
+		blackgate="${RET:-.}"
+		db_get exult/serpent
+		serpent="${RET:-.}"
+		if [ -e $config ]; then
+			perl -e "$setkeys" \
+				/config/disk/game/blackgate/path $blackgate \
+				/config/disk/game/serpentisle/path $serpent \
+				<$config >$config.dpkg-new
+			mv $config.dpkg-new $config
+		else
+			cat <<EOF >$config
+<config>
+ <disk>
+  <game>
+   <blackgate>
+    <title>
+    blackgate
+    </title>
+    <path>
+    $blackgate
+    </path>
+   </blackgate>
+   <serpentisle>
+    <title>
+    serpentisle
+    </title>
+    <path>
+    $serpent
+    </path>
+   </serpentisle>
+  </game>
+ </disk>
+</config>
+EOF
+		fi
+	;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+
+	;;
+
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+	;;
+esac
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+exit 0

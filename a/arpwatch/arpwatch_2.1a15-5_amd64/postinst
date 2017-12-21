@@ -1,0 +1,103 @@
+#!/bin/sh
+# arpwatch.postinst: v11 2004/09/15 KELEMEN Peter <fuji@debian.org>
+
+set -e
+
+AWUSER="arpwatch"
+AWGROUP="arpwatch"
+AWHOME="/var/lib/$AWUSER"
+AWGECOS="ARP Watcher"
+
+update_ethercodes () {
+	# create or update the database file ethercodes.db; check existence of
+	# the script so it can be disabled using dpkg-divert
+	if [ -x /var/lib/ieee-data/update.d/arpwatch ] ; then
+		/var/lib/ieee-data/update.d/arpwatch \
+			/var/lib/ieee-data/ oui.txt
+	fi
+}
+
+case "$1" in
+	configure)
+		# Take care of group.
+		if AWGROUP_ENTRY=`getent group $AWGROUP`; then
+			# group exists
+			:
+		else
+			# group does not exist yet
+			addgroup --quiet --system $AWGROUP
+		fi
+
+		# Take care of user.
+		if AWUSER_ENTRY=`getent passwd $AWUSER`; then
+			# user exists
+			adduser --quiet $AWUSER $AWGROUP
+		else
+			# user does not exist yet
+			adduser --quiet --system	\
+				--ingroup $AWGROUP	\
+				--gecos "$AWGECOS"	\
+				--home $AWHOME		\
+				--no-create-home	\
+				--shell /bin/sh		\
+				--disabled-login	\
+				--disabled-password	\
+				$AWUSER
+		fi
+
+		# Set up home directory.
+		if [ -d $AWHOME ]; then
+			chown -R ${AWUSER}:${AWGROUP} $AWHOME
+			chmod -R o-rwX $AWHOME
+		fi
+
+		update_ethercodes
+		;;
+	triggered)
+		update_ethercodes
+		;;
+	abort-upgrade|abort-remove|abort-deconfigure)
+		;;
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+		;;
+esac
+
+# Automatically added by dh_systemd_enable/10.6.4
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask arpwatch.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled arpwatch.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable arpwatch.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state arpwatch.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.6.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/arpwatch" ]; then
+		update-rc.d arpwatch defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d arpwatch $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/10.6.4
+dpkg-maintscript-helper rm_conffile /etc/arpwatch.conf 2.1a15-3\~ arpwatch -- "$@"
+# End automatically added section
+
+
+
+exit 0
+
+# End of file.

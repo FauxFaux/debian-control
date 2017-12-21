@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+TEMPDIR=$(mktemp -d) || exit 1
+
+echo Fetching file...
+wget -P $TEMPDIR http://www.opengroup.org/onlinepubs/007904975/download/susv3.tar.bz2
+
+echo Verifying SHA512 checksum...
+SHA512SUM="b1b8a79112d3f41a3d2951341cd9220566f551e5750378bba5cf786a0c381b064fa1a1cfeb6e76e9c6beb85a893cbb6f90879203e9931e9043bcb95b032def40"
+[ x"$(sha512sum $TEMPDIR/susv3.tar.bz2 | cut -f1 -d\ )" = x"$SHA512SUM" ] || (rm -rf $TEMPDIR; exit 1)
+
+echo Untarring...
+bunzip2 -cd $TEMPDIR/susv3.tar.bz2 | tar xf - -C /usr/share/doc/susv3 --no-same-permissions --no-same-owner
+
+rm -rf $TEMPDIR
+
+# Since the documents don't exist when the install-docs is first run
+# we need to re-run install-docs to ensure that the doc-base files
+# actually gets registered in the database
+if [ -x /usr/sbin/install-docs ]; then
+	install-docs --install /usr/share/doc-base/susv3
+fi
+
+## Note: Keep debhelper token after so that files exist when they're being
+## registered.
+
+

@@ -1,0 +1,26 @@
+#! /bin/sh
+set -e
+
+case "$1" in
+    configure)
+        update-alternatives --quiet --install /usr/bin/pcb pcb /usr/bin/pcb-gtk 20
+	;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+# Automatically added by dh_installmenu/10.9.1
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+exit 0

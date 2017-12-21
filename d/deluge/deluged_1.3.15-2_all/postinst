@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+add_override()
+{
+    # add_override <user> <group> <perms> <file>
+    if ! dpkg-statoverride --list $4 >/dev/null 2>&1; then
+      dpkg-statoverride --update --add $@
+    fi
+}
+
+case "$1" in
+  configure)
+    if ! getent passwd debian-deluged >/dev/null; then
+      adduser --system --group --quiet --no-create-home --home /var/lib/deluged debian-deluged
+    fi
+
+    add_override debian-deluged adm 2750 /var/log/deluged
+    add_override debian-deluged debian-deluged 0750 /var/lib/deluged
+    add_override debian-deluged debian-deluged 0750 /var/lib/deluged/config
+    ;;
+esac
+
+# Automatically added by dh_installinit/10.7.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/deluged" ]; then
+		update-rc.d deluged defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d deluged $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0;

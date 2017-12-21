@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    install|upgrade)
+	if ! getent group 'elasticsearch' > /dev/null 2>&1 ; then
+	    addgroup --system elasticsearch --quiet
+	fi
+	if ! getent user 'elasticsearch' > /dev/null 2>&1 ; then
+	    adduser --system --home /var/lib/elasticsearch --no-create-home \
+		--ingroup elasticsearch --disabled-password --shell /bin/false \
+		elasticsearch
+	fi
+        ;;
+
+    abort-upgrade)
+        ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+
+
+exit 0

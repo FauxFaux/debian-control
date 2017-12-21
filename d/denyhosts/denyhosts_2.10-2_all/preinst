@@ -1,0 +1,14 @@
+#!/bin/sh
+# preinst script for denyhosts
+
+set -e
+
+if dpkg --compare-versions "$2" lt 2.6-6.1 && [ -e /var/lib/dpkg/info/denyhosts.postrm ]
+then
+	sed -e 's#rm -f /etc/logrotate.d/denyhosts##g' < /var/lib/dpkg/info/denyhosts.postrm > /var/lib/dpkg/info/denyhosts.postrm.changed && \
+	mv -f /var/lib/dpkg/info/denyhosts.postrm.changed /var/lib/dpkg/info/denyhosts.postrm
+fi
+
+
+
+exit 0

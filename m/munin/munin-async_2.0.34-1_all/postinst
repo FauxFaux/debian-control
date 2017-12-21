@@ -1,0 +1,59 @@
+#! /bin/sh
+
+set -e
+
+prevver="$2"
+
+add_munin_async_user() {
+	if ! getent passwd munin-async >/dev/null; then
+		adduser --group --system --home /var/lib/munin-async --shell /bin/bash munin-async
+	fi
+	# workaround bug (#531021) in xen-tools
+	if ! getent group munin-async >/dev/null; then
+		addgroup --system munin-async
+		adduser --shell /bin/bash munin-async
+	fi
+}
+
+case "$1" in
+	configure)
+		add_munin_async_user
+		;;
+	abort-upgrade|abort-deconfigure|abort-remove)
+		:
+		;;
+	*)
+		echo "Called with unknown argument $1, bailing out."
+		exit 1
+		;;
+esac
+
+# Automatically added by dh_systemd_enable/10.10.2
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'munin-async.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'munin-async.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'munin-async.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'munin-async.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.2
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/munin-async" ]; then
+		update-rc.d munin-async defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d munin-async $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+

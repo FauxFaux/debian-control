@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+mandir=/usr/share/man
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/pyscss pyscss /usr/bin/python3-pyscss 300 \
+		--slave $mandir/man1/pyscss.1.gz pyscss.1.gz $mandir/man1/python3-pyscss.1.gz
+	update-alternatives --install /usr/bin/less2scss less2scss /usr/bin/python3-less2scss 300 \
+		--slave $mandir/man1/less2scss.1.gz less2scss.1.gz $mandir/man1/python3-less2scss.1.gz
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-pyscss 
+fi
+
+# End automatically added section
+
+
+exit 0

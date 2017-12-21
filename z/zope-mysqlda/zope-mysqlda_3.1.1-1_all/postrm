@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installzope
+if which dzhandle >/dev/null; then
+    case "$1" in remove)
+	# remove:
+	# - unregister sucessfully removed product
+
+	dzhandle postrm-product -m "$*" zope-mysqlda /usr/share/zope/Products/ZMySQLDA ZMySQLDA
+    esac
+fi
+# End automatically added section

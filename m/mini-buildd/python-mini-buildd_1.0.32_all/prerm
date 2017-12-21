@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb/10.9
+dpkg-maintscript-helper rm_conffile /etc/bash_completion.d/mini-buildd-tool.bash-completion -- "$@"
+# End automatically added section
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p python-mini-buildd 
+else
+	dpkg -L python-mini-buildd | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section

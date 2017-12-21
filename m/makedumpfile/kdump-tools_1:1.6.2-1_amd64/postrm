@@ -1,0 +1,72 @@
+#! /bin/sh
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+
+set -e
+
+# Automatically added by dh_installdeb/10.10.5
+dpkg-maintscript-helper rm_conffile /etc/default/grub.d/kdump-tools..ppc64el 1:1.6.1-2~ kdump-tools -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/10.10.5
+dpkg-maintscript-helper mv_conffile /etc/default/grub.d/kdump-tools.default /etc/default/grub.d/kdump-tools.cfg 1:1.6.1-2~ kdump-tools -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit/10.10.5
+if [ "$1" = "purge" ] ; then
+	update-rc.d kdump-tools remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'kdump-tools.service' >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'kdump-tools.service' >/dev/null
+		deb-systemd-helper unmask 'kdump-tools.service' >/dev/null
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/10.10.5
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+case "$1" in
+       remove)
+	       if test -e /etc/zipl.conf;then
+	             sed -i "s/ crashkernel=.*M//" /etc/zipl.conf
+		     zipl
+	       fi
+	       if [ -x /usr/sbin/update-grub ] && [ -e /boot/grub/grub.cfg ]; then
+		       update-grub
+	       fi
+	       ;;
+       purge)
+		rm -rf /var/lib/kdump
+		if which ucf > /dev/null 2>&1; then
+			ucf --purge /etc/default/kdump-tools
+			ucfr -p kdump-tools /etc/default/kdump-tools
+		fi
+		rm -f /etc/default/kdump-tools
+		for i in new old dist; do
+			rm -f /etc/default/kdump-tools.ucf-$i
+		done
+	       ;;
+esac
+

@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+case "$1" in
+    configure)
+	if [ -x /usr/bin/BasiliskII-jit ]
+	then
+            update-alternatives \
+		--install /usr/bin/BasiliskII \
+		BasiliskII /usr/bin/BasiliskII-jit 50 \
+		--slave /usr/share/man/man1/BasiliskII.1.gz \
+		BasiliskII.1.gz /usr/share/man/man1/BasiliskII-jit.1.gz
+	fi
+	if [ -x /usr/bin/BasiliskII-nojit ]
+	then
+            update-alternatives \
+		--install /usr/bin/BasiliskII \
+		BasiliskII /usr/bin/BasiliskII-nojit 100 \
+		--slave /usr/share/man/man1/BasiliskII.1.gz \
+		BasiliskII.1.gz /usr/share/man/man1/BasiliskII-nojit.1.gz
+	fi
+        ;;
+esac
+
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+exit 0

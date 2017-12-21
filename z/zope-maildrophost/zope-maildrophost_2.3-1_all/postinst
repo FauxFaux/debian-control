@@ -1,0 +1,47 @@
+#! /bin/sh
+set -e
+
+case "$1" in
+  configure|install)
+	queuedir="/var/spool/zope-maildrophost"
+
+	chown zope:zope "$queuedir"
+	chmod 2775 "$queuedir"
+
+	vardir="/usr/share/zope/Products/MaildropHost/var"
+	chown zope:zope "$vardir"
+	chmod 2775 "$vardir"
+
+	logfile="/var/log/zope-maildrophost.log"
+	touch "$logfile"
+	chown zope:zope "$logfile"
+  ;;
+esac
+
+# Automatically added by dh_installzope
+if which dzhandle >/dev/null; then
+    case "$1" in configure|abort-upgrade|abort-remove)
+	# configure:
+	#  - install product in instances with addon-mode all,
+	#    and in which the product is upgraded
+	#  - unregister product as beeing upgraded
+	# abort-upgrade: (from old postinst)
+	#  - re-add product to instances, where it was removed from
+	#  - unregister product as beeing upgraded
+	# abort-remove:
+	#  - re-add product to instances, where it was removed from
+	#  - unregister product as beeing removed
+
+	dzhandle postinst-product -m "$*" /usr/share/zope/Products/MaildropHost
+    esac
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/zope-maildrophost" ]; then
+	update-rc.d zope-maildrophost defaults >/dev/null
+	invoke-rc.d zope-maildrophost start || exit $?
+fi
+# End automatically added section
+
+
+exit 0

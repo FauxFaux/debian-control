@@ -1,0 +1,98 @@
+#!/bin/sh -e
+
+set -e
+#set -x
+
+if [ -f /usr/share/debconf/confmodule ]; then
+    . /usr/share/debconf/confmodule
+fi
+if [ -f /usr/share/dbconfig-common/dpkg/postrm.mysql ]; then
+    . /usr/share/dbconfig-common/dpkg/postrm.mysql
+    dbc_go obs-api $@
+fi
+
+pathfind() {
+    OLDIFS="$IFS"
+    IFS=:
+    for p in $PATH; do
+        if [ -x "$p/$*" ]; then
+            IFS="$OLDIFS"
+            return 0
+        fi
+    done
+    IFS="$OLDIFS"
+    return 1
+}
+
+reload_apache()
+{
+    if apache2ctl configtest 2>/dev/null; then
+        if `pathfind defoma-font`; then
+            invoke-rc.d apache2 $1 3>/dev/null || true
+        else
+            /etc/init.d/apache2 $1 3>/dev/null || true
+        fi
+    else
+        echo "Your Apache 2 configuration is broken, so we're not restarting it for you."
+    fi
+}
+
+if [ "$1" = "purge" ]; then
+    # ucf follows the symlink under /etc
+    #rm -f /etc/obs/api/config/database.yml
+    if which ucf >/dev/null 2>&1; then
+	ucf --purge /etc/obs/api/config/database.yml
+    fi
+    rm -rf /etc/obs/api
+    rm -rf /usr/share/obs/api
+    rm -rf /usr/share/obs/overview
+    rm -rf /var/cache/obs
+    # Remove log files
+    rm -f /var/log/obs/apache_access_log*
+    rm -f /var/log/obs/apache_error_log*
+    rm -f /var/log/obs/access.log*
+    rm -f /var/log/obs/backend_access.log*
+    rm -f /var/log/obs/db_setup.log*
+    rm -f /var/log/obs/delayed_job.log*
+    rm -f /var/log/obs/error.log*
+    rm -f /var/log/obs/lastevents.access.log*
+    rm -f /var/log/obs/production.log*
+    rm -f /var/log/obs/production.searchd.log*
+    rm -f /var/log/obs/production.searchd.query.log*
+    rm -f /var/log/obs/production.sphinx.pid
+    rm -f /var/log/obs/clockworkd.clock.output*
+    rmdir /var/log/obs 2> /dev/null || true
+    # Test whether a2dissite is available (and thus also apache2ctl).
+    if `pathfind a2dissite`; then
+    # Disable the obs site if not already disabled
+        a2dissite obs.conf	> /dev/null || true
+    fi
+    # Restart Apache to really unload obs.conf
+    reload_apache restart
+fi
+
+# Automatically added by dh_installinit/10.7.2
+if [ "$1" = "purge" ] ; then
+	update-rc.d obsapidelayed remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/10.7.2
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/10.7.2
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

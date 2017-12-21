@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ]; then
+	rm -f /etc/graphite/*.pyc
+	rm -f /var/lib/graphite/search_index
+	rm -rf /var/lib/graphite/.fontconfig
+fi
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p graphite-web 
+else
+	dpkg -L graphite-web | grep \.py$ | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+
+exit 0
+

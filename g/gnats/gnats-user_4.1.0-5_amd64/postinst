@@ -1,0 +1,78 @@
+#!/bin/bash
+#
+# Gnats installation script -- written by Brian White <bcwhite@pobox.com>
+# (This was my very first attempt at learning perl... please forgive me!)
+#
+# Forgiving -- rewritten to bash :-) by Milan Zamazal <pdm@debian.org>.
+# ...and streamlined with SED by Chad Walstrom <chewie@debian.org>
+
+set -e
+
+###############################################################################
+#
+# Utility functions
+#
+
+# Call arguments and never return error
+function protect () { "$@" || true; }
+
+###############################################################################
+#
+# Common initialization for install scripts
+#
+
+. /usr/share/debconf/confmodule
+
+###############################################################################
+#
+# Check the 'gnats' userid in the password file
+#
+
+if [ "$1" = configure ]; then
+
+  if [ $(protect grep -c "^gnats:" /etc/group) -eq 0 ]; then
+    adduser --group --gid 41 gnats
+  fi
+  
+  PWFOUND=$(protect grep -c "^gnats:" /etc/passwd)
+
+  if [ $PWFOUND -gt 1 ]; then
+    db_subst gnats/user_multiple PASSWDFILE "/etc/passwd"
+    protect db_input high gnats/user_multiple
+    protect db_go
+  fi
+
+  if [ $PWFOUND -gt 0 ]; then
+    if [ $(protect grep -c "^gnats:.*:/usr/lib/gnats/gnats-db:" /etc/passwd) -gt 0 ]
+    then
+      if [ -e /usr/lib/gnats/gnats-db/.profile ]; then
+	mv /usr/lib/gnats/gnats-db/.profile /var/lib/gnats/
+      fi
+      usermod -d /var/lib/gnats gnats
+    fi
+    if [ $(protect grep -c "^gnats:[^:]*:41:41:" \
+           /etc/passwd) \
+	 -eq 0 ]
+    then
+      usermod -u 41 -G 41 gnats
+    fi
+  else
+    adduser --quiet --system --home /var/lib/gnats --no-create-home \
+            --gid 41 --shell /bin/sh --disabled-login \
+	    --gecos 'GNU GNATS Bug-Reporting System' gnats
+  fi
+
+fi
+
+
+###############################################################################
+#
+# Automatically added debhelper stuff
+#
+# Automatically added by dh_installemacsen/10.7.2
+if [ "$1" = "configure" ] && [ -e /var/lib/emacsen-common/state/package/installed/emacsen-common -a -x /usr/lib/emacsen-common/emacs-package-install ]
+then
+	/usr/lib/emacsen-common/emacs-package-install --postinst gnats-user
+fi
+# End automatically added section
+

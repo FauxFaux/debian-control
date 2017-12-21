@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+VARDIR=/var/games/bsdgames-nonfree
+SCOREFILES="$VARDIR/rogue.scores"
+
+# Remove high score files on purge.
+if [ "$1" = "purge" ]; then
+	rm -f $SCOREFILES
+fi
+
+
+# Automatically added by dh_installmenu
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+

@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+TAXONOMYDIR=/var/lib/kronatools
+
+case "$1" in
+    purge)
+        rm -rf $TAXONOMYDIR
+    ;;
+    remove|upgrade|deconfigure|failed-upgrade)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0
+
+

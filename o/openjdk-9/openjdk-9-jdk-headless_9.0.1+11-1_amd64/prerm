@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+set -e
+
+jdk_hl_tools='idlj jdeps wsimport jinfo jstat jlink javah jhsdb jps jstack jrunscript javac jmod javap jar jaotc policytool javadoc schemagen jshell xjc rmic jdeprscan jimage jstatd jmap jdb serialver wsgen jcmd jarsigner'
+basedir=/usr/lib/jvm/java-9-openjdk-amd64
+
+
+if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ]; then
+    for i in $jdk_hl_tools; do
+	update-alternatives --remove $i $basedir/bin/$i
+    done
+fi
+
+

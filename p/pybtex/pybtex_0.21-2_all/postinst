@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        update-alternatives \
+            --install /usr/bin/bibtex bibtex /usr/bin/bibtex.pybtex 10 \
+	    --slave /usr/share/man/man1/bibtex.1.gz bibtex.1.gz /usr/share/man/man1/bibtex.pybtex.1.gz
+        update-alternatives \
+            --install /usr/bin/pybtex pybtex /usr/bin/bibtex.pybtex 200 \
+	    --slave /usr/share/man/man1/pybtex.1.gz pybtex.1.gz /usr/share/man/man1/bibtex.pybtex.1.gz
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

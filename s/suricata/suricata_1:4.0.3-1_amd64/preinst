@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+# we do not need alternatives anymore
+if update-alternatives --quiet --query suricata 2> /dev/null; then
+    echo "Removing legacy alternatives for Hyperscan/non-Hyperscan versions"
+    update-alternatives --remove-all suricata
+fi
+
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper mv_conffile /etc/suricata/suricata-debian.yaml /etc/suricata/suricata.yaml 3.1-1 suricata -- "$@"
+# End automatically added section
+
+
+exit 0

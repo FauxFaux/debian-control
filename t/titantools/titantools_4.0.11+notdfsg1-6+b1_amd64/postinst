@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+f=/sbin/noshell
+l=/etc/shells
+if grep -Fx "$f" "$l" >/dev/null; then 
+    echo "$0: warning: $l contains an entry for $f;" 
+    echo "see /usr/share/doc/titantools/README.Debian" 
+fi >&2
+
+

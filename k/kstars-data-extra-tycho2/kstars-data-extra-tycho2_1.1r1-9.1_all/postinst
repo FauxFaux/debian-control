@@ -1,0 +1,117 @@
+#!/bin/sh
+# kstars-data-extra POSTINST
+set -e
+
+
+
+# Can we work with debconf?
+if [ ! -e /usr/share/debconf/confmodule ] ; then
+        # Nothing we can do
+        exit 0
+fi
+
+#export DEBCONF_DEBUG=developer
+. /usr/share/debconf/confmodule
+
+db_version 2.0
+
+log ()
+{
+   echo postinst "$1" >&2 > /dev/null
+}
+
+log_err ()
+{
+   echo postinst "$1" >&2
+}
+
+log "$@"
+
+case $1 in
+   configure|reconfigure|install) # case $1
+
+      # Check if /etc/kde4 exists (somebody can, even if futile, install this package without kstars or any other KDE stuff)
+      if [ -d /etc/kde4 ] ; then
+
+         # Is this the first EVER kstars-data-extra package configured?
+         db_get "kstars-data-extra/kstarsrc-previously-exists"
+         kstarsrc_previously_exists_RET=$RET
+         log "kstarsrc-previously-exists RET $RET"
+
+         if [ "$kstarsrc_previously_exists_RET" = "unset" ] ; then
+            #THIS SECTION: IF NEVER HAS BEEN PREVIOUS FILE
+
+            # If script reaches this point, it is beacause there have never
+            #been a kstars-data-extra package configured in this system.
+   
+            # Is there a preexistent global kstarsrc config file?
+
+            if [ -f /etc/kde4/kstarsrc ] ; then
+               log "[ -f /etc/kde4/kstarsrc ] YES"
+
+               pregunta="kstars-data-extra/kstarsrc-exists"
+            else
+               log "[ -f /etc/kde4/kstarsrc ] NO"
+               db_set "kstars-data-extra/kstarsrc-previously-exists" "does not exist"
+               pregunta="kstars-data-extra/kstarsrc-does-not-exist"
+            fi # if [ -f /etc/kde4/kstarsrc ]
+
+
+
+            db_get $pregunta
+            log "`basename $pregunta` RET $RET" 
+
+
+
+
+
+
+            if [ "$RET" = "true" -o "$RET" = "backup and create new" -o "$RET" = "delete and create new" ] ; then
+               # Create new kstarsrc
+
+
+
+       	       db_get kstars-data-extra/disable-downloads
+               log "disable-downloads RET $RET"
+               echo '#/etc/kde4/kstarsrc' > /etc/kde4/kstarsrc
+               echo '# This file has been created by debconf' >> /etc/kde4/kstarsrc
+               echo '[KDE Action Restrictions]' >> /etc/kde4/kstarsrc
+               if [ "$RET" = "keep enabled" ] ; then
+                  :
+               elif [ "$RET" = "disable" ] ; then
+                  echo 'action/get_data=false' >> /etc/kde4/kstarsrc
+               elif [ "$RET" = "lock" ] ; then
+                  echo 'action/get_data[$i]=false' >> /etc/kde4/kstarsrc
+               fi
+
+            fi # if [ "$RET" = "true" -o "$RET" = "backup and create new" -o "$RET" = "delete and create new" ]
+   
+            db_stop || true
+            exit 0
+   
+         else # ! if [ "$kstarsrc_previously_exists_RET" = "unset" ]
+            #THIS SECTION: IF THERE HAS BEEN A PREVIOUS CONFIGURATION
+   
+            # If script reaches this point, it is because a previous
+            #kstars-data-extra package was configured. We will rely on its
+            #configuration and do nothing.
+   
+            # TODO Add here a low-p question about if you want to reconfigure
+   
+            db_stop || true
+            exit 0
+   
+         fi # if [ "$kstarsrc_previously_exists_RET" = "unset" ]
+   fi #if [ -f /etc/kde4 ]
+   ;; # configure|reconfigure|install)
+   
+   abort-remove|abort-deconfigure) #case $1
+      log "postinst $1"
+      exit 0
+   ;; # abort-remove|abort-deconfigure)
+   *) #case $1
+      log_err "postinst called with unknown argument $1"
+      exit 1
+   ;; # *)
+
+esac

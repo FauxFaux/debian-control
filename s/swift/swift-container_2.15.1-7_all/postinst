@@ -1,0 +1,395 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-auditor.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-auditor.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-auditor.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-auditor.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/swift-container-auditor" ]; then
+		update-rc.d swift-container-auditor defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d swift-container-auditor $_dh_action || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-auditor.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-auditor.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-auditor.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-auditor.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-reconciler.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-reconciler.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-reconciler.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-reconciler.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/swift-container-reconciler" ]; then
+		update-rc.d swift-container-reconciler defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d swift-container-reconciler $_dh_action || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-auditor.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-auditor.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-auditor.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-auditor.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-reconciler.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-reconciler.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-reconciler.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-reconciler.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-replicator.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-replicator.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-replicator.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-replicator.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/swift-container-replicator" ]; then
+		update-rc.d swift-container-replicator defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d swift-container-replicator $_dh_action || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-auditor.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-auditor.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-auditor.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-auditor.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-reconciler.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-reconciler.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-reconciler.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-reconciler.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-replicator.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-replicator.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-replicator.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-replicator.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-sync.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-sync.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-sync.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-sync.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/swift-container-sync" ]; then
+		update-rc.d swift-container-sync defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d swift-container-sync $_dh_action || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-auditor.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-auditor.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-auditor.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-auditor.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-reconciler.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-reconciler.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-reconciler.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-reconciler.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-replicator.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-replicator.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-replicator.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-replicator.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-sync.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-sync.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-sync.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-sync.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-updater.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-updater.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-updater.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-updater.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/swift-container-updater" ]; then
+		update-rc.d swift-container-updater defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d swift-container-updater $_dh_action || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-auditor.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-auditor.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-auditor.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-auditor.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-reconciler.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-reconciler.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-reconciler.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-reconciler.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-replicator.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-replicator.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-replicator.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-replicator.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-sync.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-sync.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-sync.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-sync.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container-updater.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container-updater.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container-updater.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container-updater.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'swift-container.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'swift-container.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'swift-container.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'swift-container.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/swift-container" ]; then
+		update-rc.d swift-container defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d swift-container $_dh_action || true
+	fi
+fi
+# End automatically added section

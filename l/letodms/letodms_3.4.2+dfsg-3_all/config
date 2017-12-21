@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+if [ -f /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+fi
+if [ -f /usr/share/dbconfig-common/dpkg/config.mysql ]; then
+        dbc_dbuser="letodms"
+	dbc_dbname="letodms"
+	. /usr/share/dbconfig-common/dpkg/config.mysql 
+	if ! dbc_go letodms $@ ; then
+	    echo 'Automatic configuration using dbconfig-common failed!'
+	fi
+fi
+
+

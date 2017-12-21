@@ -1,0 +1,43 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+config=/etc/exult.cfg
+
+getkey='BEGIN { $k = shift } if (m|</(.*?)>|) { $p =~ s|/$1$|| or die "line $.: </$1> unexpected\n"; next } m|<(.*?)>| and $p .= "/$1", next; $p eq $k && s/^\s*// && s/\s*$/\n/ and print;'
+
+for game in blackgate serpent; do
+	case $game in
+		blackgate) key=/config/disk/game/blackgate/path;;
+		serpent)   key=/config/disk/game/serpentisle/path;;
+	esac
+
+	if [ -e $config ]; then
+		val=`perl -ne "$getkey" $key /etc/exult.cfg`
+		[ "$val" ] && db_set exult/$game $val
+	fi
+
+	while true; do
+		set +e
+		db_input high exult/$game
+		[ $? -eq 30 ] && break # question skipped, don't validate answer
+		set -e
+		db_go
+
+		db_get exult/$game
+		[ -z "$RET" ] && break
+		if [ -d "$RET" ]; then
+			if ls "$RET" | grep -qi '^static$'; then
+				break
+			else
+				db_fset exult/no_static seen false
+				db_input high exult/no_static || true
+			fi
+		else
+			db_fset exult/not_a_dir seen false
+			db_input high exult/not_a_dir || true
+		fi
+	done
+done

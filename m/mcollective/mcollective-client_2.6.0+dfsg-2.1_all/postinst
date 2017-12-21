@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -e
+
+MCOLLECTIVE_CLIENT_CFG="/etc/mcollective/client.cfg"
+
+case "$1" in
+	configure)
+		if [ ! -e "$MCOLLECTIVE_CLIENT_CFG" ]; then
+			cp /usr/share/mcollective-client/client.cfg $MCOLLECTIVE_CLIENT_CFG
+                else
+                        # try to update config file values
+                        # remove deprecated voncif goption
+                        sed -i 's/^topicprefix.*$//g' $MCOLLECTIVE_CLIENT_CFG
+                        # change default connector. previous one "stomp" has been deprecated since 2.2.0
+                        sed -i 's/^connector = stomp/connector = activemq\nplugin.activemq.pool.size = 1/g' $MCOLLECTIVE_CLIENT_CFG
+                        # change stomp options to activemq ones, keeping user values
+                        sed -i 's/^plugin.stomp.host=\(.*\)$/plugin.activemq.pool.1.host = \1/g' $MCOLLECTIVE_CLIENT_CFG
+                        sed -i 's/^plugin.stomp.port=.*$/plugin.activemq.pool.1.port = 61613/g' $MCOLLECTIVE_CLIENT_CFG
+                        sed -i 's/^plugin.stomp.user=\(.*\)$/plugin.activemq.pool.1.user = \1/g' $MCOLLECTIVE_CLIENT_CFG
+                        sed -i 's/^plugin.stomp.password=\(.*\)/plugin.activemq.pool.1.password = \1/g' $MCOLLECTIVE_CLIENT_CFG
+		fi
+
+		chmod 600 $MCOLLECTIVE_CLIENT_CFG
+	;;
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+	*)
+		echo "postinst called with unknown argument \`${1}'" >&2
+		exit 1
+	;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/sql2subunit sql2subunit /usr/bin/python3-sql2subunit 200
+	update-alternatives --install /usr/bin/subunit2sql subunit2sql /usr/bin/python3-subunit2sql 200
+	update-alternatives --install /usr/bin/subunit2sql-db-manage subunit2sql-db-manage /usr/bin/python3-subunit2sql-db-manage 200
+	update-alternatives --install /usr/bin/subunit2sql-graph subunit2sql-graph /usr/bin/python3-subunit2sql-graph 200
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-subunit2sql 
+fi
+
+# End automatically added section
+
+
+exit 0

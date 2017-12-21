@@ -1,0 +1,26 @@
+#!/bin/sh
+set -e
+
+PROG=arb
+GROUP=${PROG}
+CONFFILE=/etc/${PROG}/${PROG}_tcp.dat
+
+## Add group ${PROG} if not existent
+TESTGROUP="`getent group ${GROUP}`" || true
+if [ -z "${TESTGROUP}" ] ; then
+    addgroup --system "${GROUP}" >/dev/null
+fi
+
+if [ -e /usr/share/${PROG}/SH/arb_create_debian_conffile ] ; then
+    /usr/share/${PROG}/SH/arb_create_debian_conffile
+fi
+
+ARBLIBDIR=/usr/lib/${PROG}/lib/
+if [ ! -d ${ARBLIBDIR} ] ; then
+    mkdir -p ${ARBLIBDIR}
+fi
+if [ ! -L ${ARBLIBDIR}/`basename ${CONFFILE}` ] ; then
+    ln -s ${CONFFILE} ${ARBLIBDIR}/`basename ${CONFFILE}`
+fi
+
+

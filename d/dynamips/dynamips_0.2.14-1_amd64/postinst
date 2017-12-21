@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+
+
+#Set Capabilities on Dynamips
+if [ "$1" = "configure" ] && [ -x "`which setcap 2>/dev/null`" ]; then
+	setcap cap_net_raw,cap_net_admin+eip /usr/bin/dynamips
+fi

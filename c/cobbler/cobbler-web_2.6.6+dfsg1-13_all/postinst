@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	for i in webui_sessions webui_cache ; do
+		mkdir -p /var/lib/cobbler/$i
+		chown www-data:www-data /var/lib/cobbler/$i
+		chmod 0700 /var/lib/cobbler/$i
+	done
+
+	# Copy the settings.py if it doesn't exist in /etc/cobbler
+	if ! [ -r /etc/cobbler/settings.py ] ; then
+		cp /usr/share/cobbler-web/config/settings.py /etc/cobbler
+	fi
+	# Change the secret key if it's not set
+	if grep -q "SECRET_KEY = ''" /etc/cobbler/settings.py ; then
+		gen_pass=`dd if=/dev/random bs=64 count=1 2>|/dev/null | md5sum | cut -d' ' -f1 | awk '{print substr($0,0,16)}'`
+		sed -i "s/SECRET_KEY = ''/SECRET_KEY = '${gen_pass}'/" /etc/cobbler/settings.py
+	fi
+
+	a2enmod proxy_http
+	a2enmod wsgi
+	a2enmod rewrite
+	a2dismod python || true
+	a2ensite cobbler_web.conf
+	invoke-rc.d apache2 reload
+fi
+
+
+
+exit 0

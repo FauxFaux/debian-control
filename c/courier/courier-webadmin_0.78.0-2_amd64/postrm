@@ -1,0 +1,39 @@
+#!/bin/sh
+
+set -e
+
+del_override() {
+    if dpkg-statoverride --list $4 >/dev/null; then
+	dpkg-statoverride --force --remove $4
+    fi
+}
+
+if [ "$1" = "remove" ]; then
+    # Remove CGI script if installed by this package
+    . /usr/share/debconf/confmodule
+
+    db_get courier-webadmin/install-cgi || [ $? -eq 10 ]
+    if [ "$RET" = "true" ]; then
+	rm -f /usr/lib/cgi-bin/courierwebadmin
+    fi
+fi
+
+if [ "$1" = "purge" ]; then
+    del_override root courier 0750 /etc/courier/webadmin
+    del_override root courier 0750 /etc/courier/webadmin/added
+    del_override root courier 0750 /etc/courier/webadmin/removed
+    del_override root courier 4755 /usr/lib/courier/courier/webmail/webadmin
+
+    # Remove remains of web administration
+    rm -rf /etc/courier/webadmin
+fi
+
+# Automatically added by dh_installdebconf/10.8
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

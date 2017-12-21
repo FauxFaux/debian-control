@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+update-alternatives --install \
+    /usr/bin/x-window-manager x-window-manager /usr/bin/notion 49 \
+    --slave /usr/share/man/man1/x-window-manager.1.gz x-window-manager.1.gz \
+    /usr/share/man/man1/notion.1.gz
+
+# Initialise extra configuration file list if missing
+[ -f /etc/X11/notion/cfg_debian_ext.lua ] || >/etc/X11/notion/cfg_debian_ext.lua
+
+# Automatically added by dh_installmenu
+inst=/etc/menu-methods/notion
+if [ -f $inst ]; then
+	chmod a+x $inst
+	if [ -x "`which update-menus 2>/dev/null`" ]; then
+		update-menus
+	fi
+fi
+# End automatically added section
+

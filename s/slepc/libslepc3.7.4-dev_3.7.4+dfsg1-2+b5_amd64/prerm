@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+DEB_HOST_MULTIARCH=x86_64-linux-gnu
+
+SONAME=3.7
+
+SLEPC_VERSION=3.7.4
+SLEPC_ARCH=${DEB_HOST_MULTIARCH}
+SLEPC_REAL_ARCH=${SLEPC_ARCH}-real
+
+SLEPC_DIR_REAL=/usr/lib/slepcdir/${SLEPC_VERSION}/${SLEPC_REAL_ARCH}
+
+# Remove alternatives links
+if [ "$1" = "remove" ]; then
+  update-alternatives --remove slepc /usr/lib/slepcdir/${SLEPC_VERSION}/${SLEPC_REAL_ARCH}
+  update-alternatives --remove libslepc_real.so /usr/lib/${DEB_HOST_MULTIARCH}/libslepc_real.so.${SLEPC_VERSION}
+
+  update-alternatives --remove slepc${SONAME} ${SLEPC_DIR_REAL}
+  update-alternatives --remove slepc${SONAME}-real ${SLEPC_DIR_REAL}
+fi
+
+

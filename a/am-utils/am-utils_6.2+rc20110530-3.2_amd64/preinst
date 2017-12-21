@@ -1,0 +1,10 @@
+#!/bin/sh -eu
+
+
+
+# Disable the OLD amd package (reinstated in postrm)
+if test -f /etc/amd/config
+then
+    echo "Disabling old amd package..."
+    mv -f /etc/amd/config /etc/amd/config.disabled-by-am-utils
+fi

@@ -1,0 +1,433 @@
+#! /bin/sh
+# postinst script for gitlab
+# copied from postinst script for hplip
+# $Id: hplip.postinst,v 1.1 2005/10/15 21:39:04 hmh Exp $
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# Setup variables
+# Now using gitlab-debian.defaults to override variables used only in
+# maintainer scripts. Earlier versions used gitlab-debian.conf for this.
+# Now gitlab-debian.conf will only have user/admin configurable variables
+# and variables required by systemd services.
+gitlab_debian_conf_example=/usr/lib/gitlab/templates/gitlab-debian.conf.example
+gitlab_debian_conf_private=/var/lib/gitlab/gitlab-debian.conf
+gitlab_debian_conf=/etc/gitlab/gitlab-debian.conf
+gitlab_debian_defaults=/usr/lib/gitlab/gitlab-debian.defaults
+gitlab_debian_defaults_copy=/var/lib/gitlab/gitlab-debian.defaults
+
+# Show debconf questions
+. /usr/share/debconf/confmodule
+. /usr/share/dbconfig-common/dpkg/postinst
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+#######################################################################
+# Read debian specific configuration
+#######################################################################
+
+# Bootstrap config file - first try
+. ${gitlab_debian_conf_example}
+# second try
+test -f ${gitlab_debian_conf_private} || \
+cp ${gitlab_debian_conf_example} ${gitlab_debian_conf_private}
+. ${gitlab_debian_conf_private}
+
+# If /etc/gitlab/gitlab-debian.conf is already present, use it
+test -f ${gitlab_debian_conf} && . ${gitlab_debian_conf}
+export DB RAILS_ENV
+
+# Read default values (we cannot do this before gitlab-debian.conf is exported
+# as we want to override variables set by gitlab-debian.conf in earlier gitlab
+# versions with gitlab-debian.defaults)
+. ${gitlab_debian_defaults}
+
+# Copy defaults for use with postrm
+cp ${gitlab_debian_defaults} ${gitlab_debian_defaults_copy}
+
+# Read gitlab_user from debconf db
+db_get gitlab/user
+gitlab_user=$RET >/dev/null
+
+# Create gitlab user
+. /usr/lib/gitlab/scripts/adduser.sh
+
+#######################################################################
+# update Gemfile.lock, always
+#######################################################################
+runuser -u ${gitlab_user} -- sh -c "touch ${gitlab_data_dir}/Gemfile.lock && \
+truncate -s 0 ${gitlab_data_dir}/Gemfile.lock"
+cd ${gitlab_app_root}
+if ! runuser -u ${gitlab_user} -- sh -c 'bundle --local --quiet'; then
+  if [ "$1" = "triggered" ]; then
+    # probably triggered in the middle of an system upgrade; ignore failure
+    # but abort here
+    echo "#########################################################################"
+    echo "# Failed to detect gitlab dependencies; if you are in the middle of an #"
+    echo "# upgrade, this is probably fine, there will be another attempt later.  #"
+    echo "#                                                                       #"
+    echo "# If you are NOT in the middle of an upgrade, there is probably a real  #"
+    echo "# issue. Please report a bug.                                           #"
+    echo "#########################################################################"
+    exit 0
+  else
+    # something is really broken
+    exit 1
+  fi
+fi
+cd - >/dev/null
+
+case "$1" in
+  configure)
+    gitlab_builds_log=${gitlab_log_dir}/builds
+    gitlab_repo_path=${gitlab_data_dir}/repositories
+    gitlab_uploads_path=${gitlab_data_dir}/public/uploads
+
+    # Create directories and change ownership
+    echo "Creating runtime directories for gitlab..."
+    # Setup ssh key file
+    mkdir -p ${gitlab_data_dir}/.ssh
+    touch ${gitlab_data_dir}/.ssh/authorized_keys
+    chown -R ${gitlab_user}: ${gitlab_data_dir}/.ssh
+    # Create .bundle for .bundle/config
+    mkdir -p ${gitlab_data_dir}/.bundle
+    chown -R ${gitlab_user}: ${gitlab_data_dir}/.bundle
+    # Create more required directories
+    for i in ${gitlab_repo_path} ${gitlab_cache_path} ${gitlab_uploads_path}\
+    ${gitlab_pid_path} ${gitlab_log_dir} ${gitlab_shell_log} ${gitlab_builds_log}; do
+      mkdir -p $i
+      chown -R ${gitlab_user}: $i
+    done
+
+    # nginx/httpd should be able to connect to gitlab-workhorse.socket and serve public
+    chown ${gitlab_user}:${nginx_user} -R ${gitlab_uploads_path}/.. ${gitlab_pid_path}
+    
+    # Customize permissions
+    echo "Updating file permissions..."
+    chmod -R ug+rwX,o-rwx ${gitlab_repo_path}/
+    chmod -R ug-s ${gitlab_repo_path}/
+    find ${gitlab_repo_path}/ -type d -print0 | xargs -0 chmod g+s
+    for i in ${gitlab_data_dir} ${gitlab_shell_root}; do
+      chown -R ${gitlab_user}: $i
+    done
+
+    runuser -u ${gitlab_user} -- sh -c "chmod 700 ${gitlab_uploads_path}"
+    runuser -u ${gitlab_user} -- sh -c 'git config --global core.autocrlf "input"'
+
+    # Commands below needs to be run from gitlab_app_root
+    cd ${gitlab_app_root}
+
+    # Obtain hostname from debconf db
+    echo "Configuring hostname and email..."
+    db_get gitlab/fqdn
+    GITLAB_HOST=$RET
+    GITLAB_EMAIL_FROM="no-reply@$GITLAB_HOST"
+    GITLAB_EMAIL_DISPLAY_NAME="Gitlab"
+    GITLAB_EMAIL_REPLY_TO="no-reply@$GITLAB_HOST"
+    db_get gitlab/user
+    gitlab_user=$RET
+    # Check if ssl option is selected
+    db_get gitlab/ssl
+    GITLAB_HTTPS=$RET
+    gl_proto="http"
+    db_get gitlab/letsencrypt
+    gitlab_letsencrypt=$RET
+    db_get gitlab/letsencrypt_email
+    gitlab_letsencrypt_email=$RET
+
+    cp -a -f ${gitlab_debian_conf_private} ${gitlab_debian_conf_private}.tmp
+
+    # If the admin deleted or commented some variables but then set
+    # them via debconf, (re-)add them to the conffile.
+    test -z "$GITLAB_HOST" || grep -Eq '^ *GITLAB_HOST=' ${gitlab_debian_conf_private} || \
+        echo "GITLAB_HOST=" >> ${gitlab_debian_conf_private}
+    test -z "$GITLAB_EMAIL_FROM" || grep -Eq '^ *GITLAB_EMAIL_FROM=' ${gitlab_debian_conf_private} || \
+        echo "GITLAB_EMAIL_FROM=" >> ${gitlab_debian_conf_private}
+    test -z "$GITLAB_EMAIL_DISPLAY_NAME" || grep -Eq '^ *GITLAB_EMAIL_DISPLAY_NAME=' ${gitlab_debian_conf_private} || \
+        echo "GITLAB_EMAIL_DISPLAY_NAME=" >> ${gitlab_debian_conf_private}
+    test -z "$GITLAB_EMAIL_REPLY_TO" || grep -Eq '^ *GITLAB_EMAIL_REPLY_TO=' ${gitlab_debian_conf_private} || \
+        echo "GITLAB_EMAIL_REPLY_TO=" >> ${gitlab_debian_conf_private}
+    test -z "$gitlab_user" || grep -Eq '^ *gitlab_user=' ${gitlab_debian_conf_private} || \
+        echo "gitlab_user=" >> ${gitlab_debian_conf_private}
+    test -z "$GITLAB_HTTPS" || grep -Eq '^ *GITLAB_HTTPS=' ${gitlab_debian_conf_private} || \
+        echo "GITLAB_HTTPS=" >> ${gitlab_debian_conf_private}
+    test -z "$gitlab_letsencrypt" || grep -Eq '^ *gitlab_letsencrypt=' ${gitlab_debian_conf_private} || \
+        echo "gitlab_letsencrypt=" >> ${gitlab_debian_conf_private}
+    test -z "$gitlab_letsencrypt_email" || grep -Eq '^ *gitlab_letsencrypt_email=' ${gitlab_debian_conf_private} || \
+        echo "gitlab_letsencrypt_email=" >> ${gitlab_debian_conf_private}
+    sed -e "s/^ *GITLAB_HOST=.*/GITLAB_HOST=\"$GITLAB_HOST\"/" \
+        -e "s/^ *GITLAB_EMAIL_FROM=.*/GITLAB_EMAIL_FROM=\"$GITLAB_EMAIL_FROM\"/" \
+        -e "s/^ *GITLAB_EMAIL_DISPLAY_NAME=.*/GITLAB_EMAIL_DISPLAY_NAME=\"$GITLAB_EMAIL_DISPLAY_NAME\"/" \
+        -e "s/^ *GITLAB_EMAIL_REPLY_TO=.*/GITLAB_EMAIL_REPLY_TO=\"$GITLAB_EMAIL_REPLY_TO\"/" \
+        -e "s/^ *gitlab_user=.*/gitlab_user=\"$gitlab_user\"/" \
+        -e "s/^ *GITLAB_HTTPS=.*/GITLAB_HTTPS=\"$GITLAB_HTTPS\"/" \
+        -e "s/^ *gitlab_letsencrypt=.*/gitlab_letsencrypt=\"$gitlab_letsencrypt\"/" \
+        -e "s/^ *gitlab_letsencrypt_email=.*/gitlab_letsencrypt_email=\"$gitlab_letsencrypt_email\"/" \
+            < ${gitlab_debian_conf_private} > ${gitlab_debian_conf_private}.tmp
+        mv -f ${gitlab_debian_conf_private}.tmp ${gitlab_debian_conf_private}
+
+    # Copy example configurations
+    test -f ${gitlab_yml_private} || \
+    cp ${gitlab_yml_example} ${gitlab_yml_private}
+    test -f ${gitlab_shell_config_private} || \
+    cp ${gitlab_shell_config_example} ${gitlab_shell_config_private}
+
+    # Set gitlab user first time
+    sed -i "s/GITLAB_USER/${gitlab_user}/" ${gitlab_yml_private}
+    # Update gitlab user (its a hack, proper fix is to have gitlab accept GITLAB_USER variable)
+    sed -i "s/^ *user:.* #gitlab_user/    user: $gitlab_user #gitlab_user/" ${gitlab_yml_private}
+
+    if [ "$GITLAB_HTTPS" = "true" ]; then
+      echo "Configuring nginx with HTTPS..."
+      # Workaround for #813770
+      gl_proto="https"
+      echo "Configuring gitlab with HTTPS..."
+      sed -i "s/#port: 80/port: 443/" ${gitlab_yml_private}
+      sed -i "s/https: false/https: true/" ${gitlab_yml_private}
+      echo "Updating gitlab_url in gitlab-shell configuration..."
+      sed -i \
+	  "s/gitlab_url: http*:\/\/.*/gitlab_url: ${gl_proto}:\/\/${GITLAB_HOST}/"\
+	  ${gitlab_shell_config_private}
+      
+      mkdir -p /etc/gitlab/ssl
+      nginx_conf_example=${nginx_ssl_conf_example}
+
+      # Check if letsencrypt option is selected
+      if [ "$gitlab_letsencrypt" = "true" ]; then
+	  echo "Configuring letsencrypt..."
+        ln -sf /etc/letsencrypt/live/${GITLAB_HOST}/fullchain.pem \
+        /etc/gitlab/ssl/gitlab.crt
+        ln -sf /etc/letsencrypt/live/${GITLAB_HOST}/privkey.pem \
+        /etc/gitlab/ssl/gitlab.key
+	    
+        # Check if certificate is already present
+        if [ -e /etc/letsencrypt/live/${GITLAB_HOST}/fullchain.pem ]; then
+          echo "Let's encrypt certificate already present."
+        else
+          # Port 80 and 443 should be available for letsencrypt
+          if command -v nginx > /dev/null; then
+	    echo "Stopping nginx for letsencrypt..."
+	    invoke-rc.d nginx stop
+	  fi
+          db_get gitlab/letsencrypt_email
+          gitlab_letsencrypt_email=$RET
+          LETSENCRYPT_CMD="letsencrypt --standalone --agree-tos -m $gitlab_letsencrypt_email -d ${GITLAB_HOST} certonly"
+          $LETSENCRYPT_CMD || {
+	    echo "letsencrypt auto configuration failed..."
+	    echo "Stop your webserver and try running letsencrypt manually..."
+	    echo "$LETSENCRYPT_CMD"
+	  }
+        fi 
+      fi
+    else
+      # Revert https setting
+      sed -i "s/port: 443/#port: 80/" ${gitlab_yml_private}
+      sed -i "s/https: true/https: false/" ${gitlab_yml_private}
+    fi
+
+    # Cleanup in case letsencrypt were disabled later
+    if [ "$gitlab_letsencrypt" = "false" ]; then
+        if [ -L /etc/gitlab/ssl/gitlab.crt ]; then
+          if [ "$(file /etc/gitlab/ssl/gitlab.crt|awk '{ print $NF }')" = "/etc/letsencrypt/live/${GITLAB_HOST}/fullchain.pem" ]; then
+            echo "Removing symbolic links to letsencrypt certificate..."
+            rm -f /etc/gitlab/ssl/gitlab.crt
+          fi
+        fi
+        if [ -L /etc/gitlab/ssl/gitlab.key ]; then
+          if [ "$(file /etc/gitlab/ssl/gitlab.key|awk '{ print $NF }')" = "/etc/letsencrypt/live/${GITLAB_HOST}/privkey.pem" ]; then
+            echo "Removing symbolic links to letsencrypt certificate private key..."
+            rm -f /etc/gitlab/ssl/gitlab.key
+          fi
+        fi
+    fi
+
+      # Manage tmpfiles.d/gitlab.conf via ucf
+      test -f ${gitlab_tmpfiles_private} || \
+      cp ${gitlab_tmpfiles_example} ${gitlab_tmpfiles_private}
+      sed -i "s/GITLAB_USER/${gitlab_user}/" ${gitlab_tmpfiles_private}
+      echo "Registering ${gitlab_tmpfiles} via ucf"
+      ucf --debconf-ok --three-way ${gitlab_tmpfiles_private} ${gitlab_tmpfiles}
+      ucfr gitlab ${gitlab_tmpfiles}
+
+      # Override User for systemd services
+      for service in mailroom unicorn sidekiq workhorse; do
+        path=/etc/systemd/system/gitlab-${service}.service.d
+        mkdir -p $path
+        if [ -e $path/override.conf ]; then
+          echo "$path/override.conf already exist"
+          # Make sure only gitlab user is updated
+          sed -i "s/^ *User=.*/User=$gitlab_user/" $path/override.conf
+        else
+          printf "[Service]\nUser=${gitlab_user}\n" > $path/override.conf
+        fi
+      done
+
+      # Manage gitlab-shell's config.yml via ucf
+      mkdir -p /etc/gitlab-shell
+      echo "Registering ${gitlab_shell_config} via ucf"
+      ucf --debconf-ok --three-way ${gitlab_shell_config_private} ${gitlab_shell_config}
+      ucfr gitlab ${gitlab_shell_config}
+
+      # Manage gitlab.yml via ucf
+      echo "Registering ${gitlab_yml} via ucf"
+      ucf --debconf-ok --three-way ${gitlab_yml_private} ${gitlab_yml}
+      ucfr gitlab ${gitlab_yml}
+
+      # Manage gitlab-debian.conf via ucf
+      echo "Registering ${gitlab_debian_conf} via ucf"
+      ucf --debconf-ok --three-way ${gitlab_debian_conf_private} ${gitlab_debian_conf}
+      ucfr gitlab ${gitlab_debian_conf}
+
+      # configure nginx site
+      if test -d /etc/nginx/sites-available/; then
+        if test -f ${nginx_conf_example}; then
+          nginx_site="/etc/nginx/sites-available/${GITLAB_HOST}"
+          sed -e "s/YOUR_SERVER_FQDN/${GITLAB_HOST}/"\
+          ${nginx_conf_example} >${nginx_site_private}
+          ucf --debconf-ok --three-way ${nginx_site_private} ${nginx_site}
+          ucfr gitlab ${nginx_site}
+          ln -fs ${nginx_site} /etc/nginx/sites-enabled/
+        else
+          echo "nginx example configuration file not found"
+          exit 1
+        fi
+      fi
+      # Reload nginx
+      if command -v nginx > /dev/null; then
+        echo "Reloading nginx configuration..."
+        invoke-rc.d nginx reload
+      fi
+    
+    dbc_go gitlab "$@"
+    db_stop
+
+    # enable the pg_trgm extension
+    runuser -u postgres -- sh -c "psql -d gitlab_production -c \"CREATE EXTENSION IF NOT EXISTS pg_trgm;\""
+
+    # Remove Gemfile.lock if present
+    rm -f ${gitlab_data_dir}/Gemfile.lock
+
+    # Create Gemfile.lock and .secret in /var/lib/gitlab
+    runuser -u ${gitlab_user} -- sh -c "touch ${gitlab_data_dir}/Gemfile.lock"
+
+    echo "Verifying we have all required libraries..."
+    runuser -u ${gitlab_user} -- sh -c 'bundle install --without development test --local'
+        
+    echo "Running final rake tasks and tweaks..."
+    . /usr/lib/gitlab/scripts/rake-tasks.sh
+    ;;
+
+  triggered)
+    # Already handled
+    ;;
+
+  abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+  *)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'gitlab.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'gitlab.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'gitlab.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'gitlab.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'gitlab.target' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'gitlab.target'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'gitlab.target' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'gitlab.target' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/gitlab-sidekiq" ]; then
+		update-rc.d gitlab-sidekiq defaults >/dev/null || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/gitlab-unicorn" ]; then
+		update-rc.d gitlab-unicorn defaults >/dev/null || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/gitlab-mailroom" ]; then
+		update-rc.d gitlab-mailroom defaults >/dev/null || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/gitlab-workhorse" ]; then
+		update-rc.d gitlab-workhorse defaults >/dev/null || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/gitlab" ]; then
+		update-rc.d gitlab defaults >/dev/null
+		invoke-rc.d gitlab start || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper rm_conffile /etc/gitlab/initializers/devise_async.rb 8.8.2+dfsg-5 gitlab -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper rm_conffile /etc/gitlab/gitlab.teatro.yml 8.11.3+dfsg1-1 gitlab -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper rm_conffile /etc/gitlab/initializers/haml.rb 8.11.3+dfsg1-1 gitlab -- "$@"
+# End automatically added section
+
+
+case "$1" in
+  configure)
+    echo "Running rake checks..."
+    . /usr/lib/gitlab/scripts/gitlab-check.sh
+  ;;
+esac

@@ -1,0 +1,80 @@
+#!/bin/sh
+set -e
+
+# Source debconf library (see dh_installdebconf(1) and #106070 #626312)
+. /usr/share/debconf/confmodule
+
+kernelbits=unknown
+if [ -r /proc/kallsyms ]; then
+	addrlen=$(head -1 /proc/kallsyms|awk '{print $1}'|wc -c)
+	if [ $addrlen = 17 ]; then
+		kernelbits=64
+	elif [ $addrlen = 9 ]; then
+		kernelbits=32
+	fi
+fi
+
+if [ $kernelbits != 64 ]; then
+	if [ $kernelbits = 32 ]; then
+		db_get zfs-dkms/stop-build-for-32bit-kernel
+		if [ "$RET" = "true" ]; then
+			echo "Ok, aborting, since ZFS is not designed for 32-bit kernels." 1>&2
+			# Exit 0: Tell dpkg that we finished OK but stop here.
+			# (don't build the module)
+			exit 0
+		else
+			echo "WARNING: Building ZFS module on a 32-bit kernel." 1>&2
+		fi
+	else
+		db_get zfs-dkms/stop-build-for-unknown-kernel
+		if [ "$RET" = "true" ]; then
+			echo "Ok, aborting, since ZFS is not designed for 32-bit kernels." 1>&2
+			# Exit 0: (same that above)
+			exit 0
+		else
+			echo "WARNING: Building ZFS module on an unknown kernel." 1>&2
+		fi
+	fi
+fi
+
+# Here the module gets built (automatically handled by dh_dkms)
+
+# Automatically added by dh_dkms/UNDECLARED
+# The original file can be found in template-dkms-mkdeb/debian/postinst
+# in the DKMS tarball, check it for copyright notices.
+
+DKMS_NAME=zfs
+DKMS_PACKAGE_NAME=$DKMS_NAME-dkms
+DKMS_VERSION=0.7.4
+
+postinst_found=0
+
+case "$1" in
+	configure)
+		for DKMS_POSTINST in /usr/lib/dkms/common.postinst /usr/share/$DKMS_PACKAGE_NAME/postinst; do
+			if [ -f $DKMS_POSTINST ]; then
+				$DKMS_POSTINST $DKMS_NAME $DKMS_VERSION /usr/share/$DKMS_PACKAGE_NAME "" $2
+				postinst_found=1
+				break
+			fi
+		done
+		if [ "$postinst_found" -eq 0 ]; then
+			echo "ERROR: DKMS version is too old and $DKMS_PACKAGE_NAME was not"
+			echo "built with legacy DKMS support."
+			echo "You must either rebuild $DKMS_PACKAGE_NAME with legacy postinst"
+			echo "support or upgrade DKMS to a more current version."
+			exit 1
+		fi
+	;;
+esac
+# End automatically added section
+
+
+
+case $1 in
+	(configure)
+		if [ -x /usr/share/update-notifier/notify-reboot-required ]; then
+			/usr/share/update-notifier/notify-reboot-required
+		fi
+		;;
+esac

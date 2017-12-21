@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+
+INITSCRIPTS="bootlogd stop-bootlogd-single stop-bootlogd"
+
+case "$1" in
+    purge)
+	#
+	# Remove log files
+	#
+	rm -f /var/log/boot
+
+	# Remove rc symlinks in the reverse dependency order they were
+	# inserted
+	for F in $INITSCRIPTS; do
+		REVERSE="$F $REVERSE"
+	done
+	for F in $REVERSE; do
+		update-rc.d $F remove >/dev/null || exit $?
+	done
+
+	for F in $INITSCRIPTS; do
+		SERVICE="$(basename $F .sh).service"
+		if [ -L /etc/systemd/system/$SERVICE ]; then
+			rm /etc/systemd/system/$SERVICE
+		fi
+	done
+        ;;
+esac
+
+

@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+rm -f /usr/lib/scm/slibcat
+scm -c "(require 'new-catalog)"
+if [ -e /usr/lib/scm/slibcat ] ; then
+  chmod 644 /usr/lib/scm/slibcat
+fi
+
+

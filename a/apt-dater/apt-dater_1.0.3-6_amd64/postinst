@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ]; then
+    getent group apt-dater >/dev/null 2>&1 || addgroup --system apt-dater
+
+    chown :apt-dater /etc/apt-dater /etc/apt-dater/ssh
+    chmod 0750 /etc/apt-dater
+    chmod 0710 /etc/apt-dater/ssh
+
+    for d in /var/cache/apt-dater/stats /var/cache/apt-dater/tmux /var/lib/apt-dater/history; do
+		chown :apt-dater "$d"
+		chmod 02770 "$d"
+    done
+fi
+
+# Automatically added by dh_installmenu/10.10.5
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

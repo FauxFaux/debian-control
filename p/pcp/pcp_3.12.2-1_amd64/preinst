@@ -1,0 +1,147 @@
+#!/bin/sh -e
+
+#
+# The goal here is to collect PCP configuration files from places
+# they may have been stashed away in previous versions
+#
+
+# The new place ... this should match the setting in /etc/pcp.conf
+#
+PCP_SYSCONF_DIR=/etc/pcp
+# and same here ...
+#
+PCP_LOG_DIR=/var/log/pcp
+[ -d "$PCP_LOG_DIR" ] || mkdir "$PCP_LOG_DIR"
+
+PCP_ETC_DIR=/etc
+for crontab in pmlogger pmie
+do
+    test -f "$PCP_ETC_DIR/cron.d/$crontab" || continue
+    mv -f "$PCP_ETC_DIR/cron.d/$crontab" "$PCP_ETC_DIR/cron.d/pcp-$crontab"
+done
+# Function to do all of the configuration file migration work
+#
+_clean_configs()
+{
+    #
+    # Usage: _clean_configs [-v] new_dir old_dir ...
+    #
+    # Across all the files in the new_dir and old_dir args, match
+    # names and pick the most recently modified version and leave
+    # this (same mode and modification date) in new_dir
+    #
+    # -v option is verbose mode for debugging
+    #
+
+    _verbose=false
+    if [ $# -gt 0 -a X"$1" = "X-v" ]
+    then
+	_verbose=true
+	shift
+    fi
+
+    if [ $# -lt 2 ]
+    then
+	echo >&2 "Usage: _clean_configs [-v] new_dir old_dir ..."
+	return
+    fi
+
+    _new="$1"
+    if [ ! -d "$_new" ]
+    then
+	$verbose && echo >&2 + mkdir -p "$_new"
+	mkdir -p "$_new"
+    fi
+
+    shift
+    for _dir
+    do
+	[ "$_dir" = "$_new" ] && continue
+	if [ -d "$_dir" ]
+	then
+	    ( cd "$_dir" ; find . -type f -print ) \
+	    | sed -e 's/^\.\///' \
+	    | while read _file
+	    do
+		_want=false
+		if [ -f "$_new/$_file" ]
+		then
+		    # file exists in both directories, pick the more
+		    # recently modified one
+		    #
+		    _try=`find "$_dir/$_file" -newer "$_new/$_file" -print`
+		    [ -n "$_try" ] && _want=true
+		else
+		    _want=true
+		fi
+		if $_want
+		then
+		    _dest=`dirname $_new/$_file`
+		    if [ ! -d "$_dest" ]
+		    then
+			$verbose && >&2 echo + mkdir "$_dest"
+			mkdir "$_dest"
+		    fi
+		    $_verbose && echo >&2 + cp -p "$_dir/$_file" "$_new/$_file"
+		    cp -p "$_dir/$_file" "$_new/$_file"
+		fi
+	    done
+	fi
+    done
+}
+
+_version_configs()
+{
+    # Use the supported conffile move method (no prompts)
+    local FILE
+
+    local NPMCD=/etc/pcp/pmcd
+    local PMCD1=/etc/pmcd
+    local PMCD2=/var/lib/pcp/config/pmcd
+    for FILE in pmcd.conf pmcd.options rc.local; do
+        dpkg-maintscript-helper mv_conffile $PMCD2/$FILE $NPMCD/$FILE 3.7.0~ pcp -- "$@"
+        dpkg-maintscript-helper mv_conffile $PMCD1/$FILE $NPMCD/$FILE 3.6.1~ pcp -- "$@"
+    done
+
+    local NPMIE=/etc/pcp/pmie
+    local PMIE1=/etc/pmie
+    local PMIE2=/var/lib/pcp/config/pmie
+    for FILE in control; do
+        dpkg-maintscript-helper mv_conffile $PMIE2/$FILE $NPMIE/$FILE 3.7.0~ pcp -- "$@"
+        dpkg-maintscript-helper mv_conffile $PMIE1/$FILE $NPMIE/$FILE 3.6.1~ pcp -- "$@"
+    done
+
+    local NPMPROXY=/etc/pcp/pmproxy
+    local PMPROXY1=/etc/pmproxy
+    local PMPROXY2=/var/lib/pcp/config/pmproxy
+    for FILE in pmproxy.options; do
+        dpkg-maintscript-helper mv_conffile $PMPROXY2/$FILE $NPMPROXY/$FILE 3.7.0~ pcp -- "$@"
+        dpkg-maintscript-helper mv_conffile $PMPROXY1/$FILE $NPMPROXY/$FILE 3.6.1~ pcp -- "$@"
+    done
+
+    local NPMLOGGER=/etc/pcp/pmlogger
+    local PMLOGGER1=/etc/pmlogger
+    local PMLOGGER2=/var/lib/pcp/config/pmlogger
+    for FILE in control; do
+        dpkg-maintscript-helper mv_conffile $PMLOGGER2/control $NPMLOGGER/control 3.7.0~ pcp -- "$@"
+        dpkg-maintscript-helper mv_conffile $PMLOGGER1/control $NPMLOGGER/control 3.6.1~ pcp -- "$@"
+    done
+}
+# migrate and clean configs
+
+if dpkg-maintscript-helper supports mv_conffile
+then
+    _version_configs "$@"
+else
+    # Fallback to our homebrew method (might prompt user)
+    #echo >>$PCP_LOG_DIR/install.log
+    #date >>$PCP_LOG_DIR/install.log
+    for base in pmcd pmie pmlogger pmproxy
+    do
+	_clean_configs -v $PCP_SYSCONF_DIR/$base \
+		/var/lib/pcp/config/$base \
+		/etc/$base /etc/pcp/$base \
+		/etc/sysconfig/$base \
+	# 2>>$PCP_LOG_DIR/install.log
+    done
+fi

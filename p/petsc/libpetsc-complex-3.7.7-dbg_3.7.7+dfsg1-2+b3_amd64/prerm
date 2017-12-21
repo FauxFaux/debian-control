@@ -1,0 +1,26 @@
+#!/bin/sh -e
+
+DEB_HOST_MULTIARCH=x86_64-linux-gnu
+
+PETSC_VERSION=3.7.7
+PETSC_ARCH=${DEB_HOST_MULTIARCH}
+PETSC_DEBUG_ARCH=${PETSC_ARCH}-complex-debug
+
+# Remove alternatives links
+if [ "$1" = "remove" ]; then
+  update-alternatives --remove petsc /usr/lib/petscdir/${PETSC_VERSION}/${PETSC_DEBUG_ARCH}
+fi
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p libpetsc-complex-3.7.7-dbg 
+else
+	dpkg -L libpetsc-complex-3.7.7-dbg | grep '\.py$' | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+

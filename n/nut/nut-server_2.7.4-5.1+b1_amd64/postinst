@@ -1,0 +1,152 @@
+#!/bin/sh -e
+
+handle_start_failure () {
+# The nut server part (upsd) must run in all cases except when MODE in
+# /etc/nut/nut.conf is set to "none", not set at all or if the machine is a
+# client.
+  [ -r /etc/nut/nut.conf ] && . /etc/nut/nut.conf
+  if [ -d /run/systemd/system ] \
+	  && [ "$MODE" = "none" -o "$MODE" = "netclient" -o -z "$MODE" ]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+case "$1" in
+
+  configure)
+
+    # make sure the nut user exists and has correct memberships
+    if ! getent group nut >/dev/null; then
+      addgroup --quiet --system nut
+    fi
+    if ! getent passwd nut >/dev/null; then
+      adduser --quiet --system --ingroup nut --home /var/lib/nut --no-create-home nut
+    elif ! groups nut | grep -qw nut; then
+      adduser nut nut
+    fi
+# for Ubuntu, while waiting for a proper debconf
+#    if ! groups nut | grep -qw dialout; then
+#	adduser nut dialout
+#    fi
+
+    # make sure that conffiles are secured and have the correct ownerships
+    # on first install
+    if [ -z "$2" ] ; then
+        if [ -d /etc/nut/ ] ; then
+          chown root:nut /etc/nut/
+        fi
+        for file in ups.conf upsd.conf upsd.users ; do
+            if [ -f /etc/nut/$file ] ; then
+                chown root:nut /etc/nut/$file
+                chmod 640 /etc/nut/$file
+            fi
+        done
+    fi
+
+    # make sure that /var/run/nut exists and has the correct ownerships
+    if [ ! -d /var/run/nut ] ; then
+        mkdir -p /var/run/nut
+    fi
+    if [ -d /var/run/nut ] ; then
+        chown root:nut /var/run/nut
+        chmod 770 /var/run/nut
+        if which restorecon >/dev/null 2>&1; then
+	    restorecon /var/run/nut
+        fi
+    fi
+
+    # make sure that /var/lib/nut has the correct permissions and ownerships
+    if [ -d /var/lib/nut ] ; then
+        chown root:nut /var/lib/nut
+        chmod 770 /var/lib/nut
+    fi
+
+    # ask udev to check for new udev rules
+    [ -x /etc/init.d/udev ] && pidof systemd-udevd > /dev/null \
+      && udevadm trigger --subsystem-match=usb --action=change
+
+    # 557178  udevadm trigger --subsystem-match=usb
+
+    if dpkg --compare-versions "$2" le "2.6.4-2~" &&
+      [ -f /etc/init.d/nut ] ; then
+        if [ "`md5sum /etc/init.d/nut | cut -d ' ' -f 1`" = 72f1dbc6b92cb4407f26605d05b12681 ]; then
+            rm -f /etc/init.d/nut
+        else
+            mv /etc/init.d/nut /etc/init.d/nut.dpkg-old
+        fi
+        update-rc.d nut remove >/dev/null
+    fi
+    ;;
+
+  abort-upgrade)
+    # do nothing
+    ;;
+
+  abort-remove)
+    # do nothing
+    ;;
+
+  abort-deconfigure)
+    # do nothing
+    ;;
+
+  *)
+    echo "$0: incorrect arguments: $*" >&2
+    exit 1
+    ;;
+
+esac
+
+# Automatically added by dh_systemd_enable/10.10.5
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'nut-server.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'nut-server.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'nut-server.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'nut-server.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/nut-server.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/nut-server" ]; then
+		update-rc.d nut-server defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d nut-server $_dh_action || handle_start_failure
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start/10.10.5
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	if [ -n "$2" ]; then
+		_dh_action=try-restart
+	else
+		_dh_action=start
+	fi
+	deb-systemd-invoke $_dh_action 'nut-driver.service' >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0

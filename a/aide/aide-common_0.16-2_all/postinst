@@ -1,0 +1,75 @@
+#!/bin/sh
+#
+# post-installation script for AIDE
+# A whole lot of this is "borrowed" from tripwire's postinst
+#
+
+set -e
+
+# We need debconf.
+. /usr/share/debconf/confmodule
+
+if [ -n "$AIDEDEBUG" ]; then
+  echo "now debugging $0 $@"
+  set -x
+fi
+
+PKGNAME="aide"
+
+# Flags to be passed to aideinit
+aideinitflags="-b"
+
+# Make sure we should be running...
+case "$1" in
+    configure)
+        # continue below
+        ;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+        exit 0
+        ;;
+    *)
+        echo "postinst called with unknown argument "$1 >&2
+        exit 0
+        ;;
+esac
+
+# handle ucf-conffiles
+
+. /usr/share/aide/ucf-helper-functions.sh
+SRCDIR="/usr/share/$PKGNAME/config"
+TRGDIR="/etc"
+
+if dpkg --compare-versions "$2" le "0.16-1"; then
+    # we're updating from a version earlier than 0.16-1, rename DHCP conffiles
+    rename_ucf_file /etc/aide/aide.conf.d/31_aide_dhcp3-client /etc/aide/aide.conf.d/31_aide_isc-dhcp-client 
+    rename_ucf_file /etc/aide/aide.conf.d/31_aide_dhcp3-server /etc/aide/aide.conf.d/31_aide_isc-dhcp-server 
+fi
+handle_all_ucf_files $SRCDIR $TRGDIR
+
+db_get aide/aideinit
+if [ "$RET" = "true" ]; then
+	if [ -f "/var/lib/aide/aide.db.new" ]; then
+		db_get aideinit/overwritenew
+		if [ "$RET" = "true" ]; then
+			aideinitflags="$aideinitflags -y"
+		fi
+	fi
+	db_get aideinit/copynew
+	if [ "$RET" = "true" ]; then
+		aideinitflags="$aideinitflags -f"
+	fi
+	# generate configuration
+	update-aide.conf
+	# borrowed this trick from man-db
+	# just making sure it actually ends up in the background...
+	start-stop-daemon --start --background --pidfile /dev/null \
+	--startas /usr/sbin/aideinit -- $aideinitflags
+	db_set aide/aideinit false
+fi
+
+
+
+exit 0
+
+# vim:sw=4:sts=4:et:
+

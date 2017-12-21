@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+"purge")
+        for ext in .ucf-new .ucf-old .ucf-dist ""; do
+                rm -f "/etc/cacti/spine.conf$ext"
+        done
+
+        if [ -x "`which ucf 2>/dev/null`" ]; then
+                ucf --purge "/etc/cacti/spine.conf"
+        fi
+        if [ -x "`which ucfr 2>/dev/null`" ]; then
+                ucfr --purge cacti-spine "/etc/cacti/spine.conf"
+        fi
+;;
+esac
+
+# Automatically added by dh_installdebconf/10.7.2
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

@@ -1,0 +1,34 @@
+#!/bin/sh -e
+
+UPSTREAM='http://git.shaftnet.org/git/gitweb.cgi?p=linux-wlan-ng.git;a=blob_plain;f=src/prism2/ru010803.hex;hb=HEAD'
+HEXFILE=/lib/firmware/ru010803.hex
+FWFILE=/lib/firmware/ru010803.fw
+
+checkfile () {
+	md5sum --check <<- EOMD5SUM
+	3eba76f7e3a10d64071b1822a229f49e  $HEXFILE
+	EOMD5SUM
+}
+
+# Fetch firmware if needed
+if [ ! -s $HEXFILE ] || ! checkfile ; then
+	rm -f $HEXFILE
+	wget -O $HEXFILE $UPSTREAM || cat <<- EOMSG 1>&2
+
+		Warning: Failed to download firmware for prism2-usb.
+		Please run "dpkg-reconfigure prism2-usb-firmware-installer"
+		again when networking is up, or copy the firmware manually
+		to $HEXFILE
+		and rerun the command to convert the firmware.
+
+	EOMSG
+fi
+
+# Convert from SREC format (.hex) to kernel (.fw)
+if [ -s $HEXFILE ] && checkfile ; then
+	echo Converting firmware file
+	/usr/bin/srec2fw $HEXFILE $FWFILE
+fi
+
+
+

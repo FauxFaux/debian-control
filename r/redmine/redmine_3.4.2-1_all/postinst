@@ -1,0 +1,103 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+#######################################################################
+# update Gemfile.lock, always
+#######################################################################
+rm -f /var/lib/redmine/Gemfile.lock
+cd /usr/share/redmine
+if ! bundle --local --quiet; then
+  if [ "$1" = "triggered" ]; then
+    # probably triggered in the middle of an system upgrade; ignore failure
+    # but abort here
+    echo "#########################################################################"
+    echo "# Failed to detect redmine dependencies; if you are in the middle of an #"
+    echo "# upgrade, this is probably fine, there will be another attempt later.  #"
+    echo "#                                                                       #"
+    echo "# If you are NOT in the middle of an upgrade, there is probably a real  #"
+    echo "# issue. Please report a bug.                                           #"
+    echo "#########################################################################"
+    exit 0
+  else
+    # something is really broken
+    exit 1
+  fi
+fi
+cd - >/dev/null
+chown www-data:www-data /var/lib/redmine/Gemfile.lock
+
+#######################################################################
+# create necessary directories
+#######################################################################
+
+mkdir -p /var/log/redmine
+
+#######################################################################
+# manage instances
+#######################################################################
+
+. /usr/share/dbconfig-common/dpkg/postinst
+
+manage_instance() {
+  local instance="$1"
+  shift
+
+  db_get redmine/instances/$instance/database-type || true
+  local dbtype="$RET"
+
+  dbc_generate_include=template:/etc/redmine/$instance/database.yml
+  dbc_generate_include_args="-o template_infile=/usr/share/redmine/templates/database-${dbtype}.yml.template"
+  dbc_generate_include_owner="root:www-data"
+  dbc_generate_include_perms="640"
+  dbc_dbfile_owner="root:www-data"
+  dbc_dbuser=redmine_$instance
+  # this is for sqlite3 to be r/w for www-data
+  dbc_dbfile_perms="0660"
+  dbc_mysql_createdb_encoding="UTF8"
+  dbc_pgsql_createdb_encoding="UTF8"
+  dbc_dbname=redmine_$instance
+
+  if db_get redmine/instances/$instance/db/basepath && [ -n "$RET" ]; then
+    dbc_basepath="$RET"
+  fi
+
+  /usr/share/redmine/bin/redmine-instances create $instance
+
+  dbc_go redmine/instances/$instance "$@"
+
+  local secret_key=/etc/redmine/$instance/secret_key.txt
+  if [ ! -f $secret_key ]; then
+    ruby -rsecurerandom -e 'puts SecureRandom.hex(16)' > $secret_key
+  fi
+  chown root:www-data $secret_key
+  chmod 0640  $secret_key
+
+  # check if the user either use dbconfig-no-thanks or selected a manual DB install
+  dbc_install=false
+  if [ -f $dbc_packageconfig ]; then
+    . $dbc_packageconfig
+  fi
+
+  if [ "$dbc_install" = "true" ]; then
+    cd /usr/share/redmine
+    su www-data -s /bin/sh -c "REDMINE_INSTANCE=$instance SCHEMA=/dev/null bundle exec rake db:migrate redmine:plugins:migrate"
+
+    db_get redmine/instances/$instance/default-language || true
+    REDMINE_LANG="${RET:-en}"
+    su www-data -s /bin/sh -c "REDMINE_INSTANCE=$instance REDMINE_LANG=$REDMINE_LANG bundle exec rake redmine:load_default_data"
+  fi
+
+  # tell application to restart (works with passenger)
+  su www-data -s /bin/sh -c "touch /var/lib/redmine/$instance/tmp/restart.txt"
+}
+
+db_get redmine/current-instances || true
+instances="$RET"
+for inst in $instances; do
+  manage_instance "$inst" "$@"
+done
+
+##

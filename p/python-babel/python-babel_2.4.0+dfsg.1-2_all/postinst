@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] ; then
+	update-alternatives --install /usr/bin/pybabel pybabel /usr/bin/pybabel-python2 300
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-babel 
+fi
+
+# End automatically added section
+

@@ -1,0 +1,148 @@
+#!/bin/sh
+
+set -e
+
+if [ "$BANDWIDTHD_PACKAGE_DEBUG" != "" ]; then
+	echo "bandwidthd.postinst: $*"
+	set -x
+fi
+
+# Always source debconf library in postinst.
+. /usr/share/debconf/confmodule
+
+# -------------------------------------------------------------
+# Create bandwidthd.conf based on debconf data, and install it.
+# -------------------------------------------------------------
+
+if [ "$1" = "configure" ]; then
+
+db_get bandwidthd/dev || true
+DEV=$RET
+
+db_get bandwidthd/subnet || true
+SUBNETS=$RET
+# ATTENTION! $SUBNETS needs to be parsed and split.
+# Example contents: 192.168.1.0/24, 172.20.0.0 255.255.0.0, 10.0.0.0/8
+
+db_get bandwidthd/outputcdf || true
+OUTPUTCDF=$RET
+
+db_get bandwidthd/recovercdf || true
+RECOVERCDF=$RET
+
+db_get bandwidthd/metarefresh || true
+if [ "$RET" = "" ]; then
+	RET=150
+fi
+METAREFRESH=$RET
+
+db_get bandwidthd/promisc || true
+PROMISC=$RET
+
+
+if [ "$BANDWIDTHD_PACKAGE_DEBUG" != "" ]; then
+	echo "This is the bandwidthd postinst script reporting debconf settings:"
+	echo "dev: $DEV"
+	echo "subnets: $SUBNETS"
+	echo "outputcdf: $OUTPUTCDF"
+	echo "recovercdf: $RECOVERCDF"
+	echo "metarefresh: $METAREFRESH"
+	echo "promisc: $PROMISC"
+fi
+
+# parse a bandwidthd.conf template and insert dev, subnet and
+# recover_cdf rules, then use ucf to install config file.
+
+TMPDIR=$(mktemp -d)
+TMPFILE=$TMPDIR/bandwidthd.conf
+
+cp /usr/share/bandwidthd/bandwidthd.conf.template $TMPFILE
+chmod 640 $TMPFILE
+
+RULE='s%^#DEBCONF_DEVS#$%dev "'$DEV'"%'
+sed -e "$RULE" < $TMPFILE > $TMPFILE.new
+mv $TMPFILE.new $TMPFILE
+
+PARSED_SUBNETS=$(echo $SUBNETS | sed -e 's/, */:/g')
+#PARSED_SUBNETS=$(echo $PARSED_SUBNETS | sed -e 's/^/subnet /')
+OLDIFS=$IFS
+IFS=":"
+for subnet in $PARSED_SUBNETS ; do
+	# CIDR and dotted-quad subnets have different syntax:
+	# subnet 1.2.3.4/24
+	# subnet 4.3.2.1 255.255.255.0
+	subnet=$(echo $subnet | sed -e 's#/\(.*\..*\)# \1#')
+	RULE='s%^#DEBCONF_SUBNETS#$%subnet '$subnet'\
+#DEBCONF_SUBNETS#%'
+	sed -e "$RULE" < $TMPFILE > $TMPFILE.new
+	mv $TMPFILE.new $TMPFILE
+done
+RULE='s%^#DEBCONF_SUBNETS#$%%'
+sed -e "$RULE" < $TMPFILE > $TMPFILE.new
+mv $TMPFILE.new $TMPFILE
+IFS=$OLDIFS
+
+RULE='s%^#DEBCONF_OUTPUTCDF#$%output_cdf '$OUTPUTCDF'%'
+sed -e "$RULE" < $TMPFILE > $TMPFILE.new
+mv $TMPFILE.new $TMPFILE
+
+
+RULE='s%^#DEBCONF_RECOVERCDF#$%recover_cdf '$RECOVERCDF'%'
+sed -e "$RULE" < $TMPFILE > $TMPFILE.new
+mv $TMPFILE.new $TMPFILE
+
+RULE='s%^#DEBCONF_METAREFRESH#$%meta_refresh '$METAREFRESH'%'
+sed -e "$RULE" < $TMPFILE > $TMPFILE.new
+mv $TMPFILE.new $TMPFILE
+
+RULE='s%^#DEBCONF_PROMISC#$%promiscuous '$PROMISC'%'
+sed -e "$RULE" < $TMPFILE > $TMPFILE.new
+mv $TMPFILE.new $TMPFILE
+
+# Install new configuration...
+chmod 640 $TMPFILE
+ucf --debconf-ok $TMPFILE /etc/bandwidthd/bandwidthd.conf
+chmod 640 /etc/bandwidthd/bandwidthd.conf
+
+# clean up
+rm -rf $TMPDIR
+
+# stop debconf
+db_stop
+
+
+fi # "$1" = "configure"
+
+# ----------------------------------------------------------------------
+
+# move apache configuration file to new location for apache 2.4
+dpkg-maintscript-helper mv_conffile \
+	/etc/apache2/conf.d/bandwidthd /etc/apache2/conf-available/bandwidthd.conf 2.0.1+cvs20090917-6~ bandwidthd -- "$@"
+
+# From http://wiki.debian.org/Apache/PackagingFor24 :
+# "In your postinst maintainer script invoke the enconf handler on fresh installations."
+if [ -z "$2" ]; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		apache2_invoke enconf bandwidthd.conf
+	fi
+fi
+
+# reload apache2 config for installed /bandwidthd alias.
+if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+	. /usr/share/apache2/apache2-maintscript-helper
+	apache2_reload
+fi
+
+# debhelper autoinserted stuff:
+
+# Automatically added by dh_installinit/10.8
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/bandwidthd" ]; then
+		update-rc.d bandwidthd defaults >/dev/null
+		invoke-rc.d bandwidthd start || exit $?
+	fi
+fi
+# End automatically added section
+
+

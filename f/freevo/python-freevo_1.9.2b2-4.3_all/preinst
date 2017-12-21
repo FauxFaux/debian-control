@@ -1,0 +1,16 @@
+#!/bin/sh -e
+# TODO: remove this file after releasing Squeeze
+
+if [ "$1" = upgrade ] && dpkg --compare-versions "$2" lt 1.9.0-4
+then
+       pycentral pkgremove freevo || true #fix bug #606782
+       pycentral pkgremove python-freevo || true #fix bug #606782
+       for i in 2.4 2.5 2.6 ; do
+         if test -r /usr/lib/python$i/site-packages/freevo ; then
+           find /usr/lib/python$i/site-packages/freevo \
+             \( -type l -a -name '*.py' \) -o \( -type f -a -name '*.pyc' \)  \
+              -o \( -type f -a -name '*.pyo' \) | xargs -r rm  || true
+         fi
+       done
+fi
+

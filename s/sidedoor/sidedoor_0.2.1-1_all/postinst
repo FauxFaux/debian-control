@@ -1,0 +1,60 @@
+#!/bin/sh
+
+set -e
+
+create_empty() {
+  [ -e "$1" ] || touch "$1"
+}
+
+if [ "$1" = configure ]; then
+  adduser --quiet --system --no-create-home --group \
+    --home /var/lib/sidedoor \
+    --shell /bin/sh \
+    sidedoor
+  passwd --quiet --lock sidedoor
+
+  # Create remaining config files with correct permissions.
+  # These are not managed as conffiles because they are empty
+  # and instead populated by each user.
+  create_empty /etc/sidedoor/id_rsa
+  chown root:sidedoor /etc/sidedoor/id_rsa
+  chmod 640 /etc/sidedoor/id_rsa
+  create_empty /etc/sidedoor/known_hosts
+
+  # If authorized_keys is missing, try authorized_keys.old, otherwise
+  # create a new empty file. authorized_keys.old is created by preinst
+  # when upgrading from old versions of this package.
+  sshdir=/var/lib/sidedoor/.ssh
+  if dpkg --compare-versions "$2" lt 0.2~; then
+    if [ ! -s "$sshdir/authorized_keys" -a \
+           -s "$sshdir/authorized_keys.old" ]; then
+      mv "$sshdir/authorized_keys.old" "$sshdir/authorized_keys"
+    fi
+  fi
+  create_empty "$sshdir/authorized_keys"
+fi
+
+# Automatically added by dh_systemd_enable/10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask sidedoor.service >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled sidedoor.service; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable sidedoor.service >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state sidedoor.service >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/sidedoor" ]; then
+		update-rc.d sidedoor defaults >/dev/null
+		invoke-rc.d sidedoor start || exit $?
+	fi
+fi
+# End automatically added section
+

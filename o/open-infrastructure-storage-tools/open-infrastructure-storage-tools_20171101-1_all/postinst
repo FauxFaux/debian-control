@@ -1,0 +1,174 @@
+#!/bin/sh
+
+set -e
+
+CONFFILE="/etc/default/storage-tools"
+
+case "${1}" in
+	configure)
+		. /usr/share/debconf/confmodule
+
+		db_get open-infrastructure-storage-tools/ceph-log
+		CEPH_LOG="${RET}" # boolean
+
+		db_get open-infrastructure-storage-tools/ceph-info
+		CEPH_INFO="${RET}" # boolean
+
+		db_get open-infrastructure-storage-tools/cephfs-snap
+		CEPHFS_SNAP="${RET}" # boolean
+
+		db_get open-infrastructure-storage-tools/cephfs-snap-directories
+		CEPHFS_SNAP_DIRECTORIES="${RET}" # string (w/ empty)
+
+		db_get open-infrastructure-storage-tools/cephfs-snap-hourly
+		CEPHFS_SNAP_HOURLY="${RET}" # string (w/ empty)
+
+		db_get open-infrastructure-storage-tools/cephfs-snap-daily
+		CEPHFS_SNAP_DAILY="${RET}" # string (w/ empty)
+
+		db_get open-infrastructure-storage-tools/cephfs-snap-weekly
+		CEPHFS_SNAP_WEEKLY="${RET}" # string (w/ empty)
+
+		db_get open-infrastructure-storage-tools/cephfs-snap-monthly
+		CEPHFS_SNAP_MONTHLY="${RET}" # string (w/ empty)
+
+		db_get open-infrastructure-storage-tools/cephfs-snap-yearly
+		CEPHFS_SNAP_YEARLY="${RET}" # string (w/ empty)
+
+		db_get open-infrastructure-storage-tools/irc
+		IRK_TARGETS="${RET}" # string (w/ empty)
+
+		db_stop
+
+		if [ ! -e "${CONFFILE}" ]
+		then
+
+cat > "${CONFFILE}" << EOF
+# /etc/default/storage-tools
+
+CEPH_INFO="${CEPH_INFO}"
+CEPH_LOG="${CEPH_LOG}"
+
+CEPHFS_SNAP="${CEPHFS_SNAP}"
+CEPHFS_SNAP_DIRECTORIES="${CEPHFS_SNAP_DIRECTORIES}"
+
+CEPHFS_SNAP_HOURLY="${CEPHFS_SNAP_HOURLY}"
+CEPHFS_SNAP_DAILY="${CEPHFS_SNAP_DAILY}"
+CEPHFS_SNAP_WEEKLY="${CEPHFS_SNAP_WEEKLY}"
+CEPHFS_SNAP_MONTHLY="${CEPHFS_SNAP_MONTHLY}"
+CEPHFS_SNAP_YEARLY="${CEPHFS_SNAP_YEARLY}"
+
+IRK_TARGETS="${IRK_TARGETS}"
+EOF
+
+		fi
+
+		cp -a -f "${CONFFILE}" "${CONFFILE}.tmp"
+
+		# If the admin deleted or commented some variables but then set
+		# them via debconf, (re-)add them to the config file.
+
+		test -z "${CEPH_LOG}" || \
+			grep -Eq '^ *CEPH_LOG=' "${CONFFILE}" || \
+			echo "CEPH_LOG=" >> "${CONFFILE}"
+
+		test -z "${CEPH_INFO}" || \
+			grep -Eq '^ *CEPH_INFO=' "${CONFFILE}" || \
+			echo "CEPH_INFO=" >> "${CONFFILE}"
+
+		test -z "${CEPHFS_SNAP}" || \
+			grep -Eq '^ *CEPHFS_SNAP=' "${CONFFILE}" || \
+			echo "CEPHFS_SNAP=" >> "${CONFFILE}"
+
+		test -z "${CEPHFS_SNAP_DIRECTORIES}" || \
+			grep -Eq '^ *CEPHFS_SNAP_DIRECTORIES=' "${CONFFILE}" || \
+			echo "CEPHFS_SNAP_DIRECTORIES=" >> "${CONFFILE}"
+
+		test -z "${CEPHFS_SNAP_HOURLY}" || \
+			grep -Eq '^ *CEPHFS_SNAP_HOURLY=' "${CONFFILE}" || \
+			echo "CEPHFS_SNAP_HOURLY=" >> "${CONFFILE}"
+
+		test -z "${CEPHFS_SNAP_DAILY}" || \
+			grep -Eq '^ *CEPHFS_SNAP_DAILY=' "${CONFFILE}" || \
+			echo "CEPHFS_SNAP_DAILY=" >> "${CONFFILE}"
+
+		test -z "${CEPHFS_SNAP_WEEKLY}" || \
+			grep -Eq '^ *CEPHFS_SNAP_WEEKLY=' "${CONFFILE}" || \
+			echo "CEPHFS_SNAP_WEEKLY=" >> "${CONFFILE}"
+
+		test -z "${CEPHFS_SNAP_MONTHLY}" || \
+			grep -Eq '^ *CEPHFS_SNAP_MONTHLY=' "${CONFFILE}" || \
+			echo "CEPHFS_SNAP_MONTHLY=" >> "${CONFFILE}"
+
+		test -z "${CEPHFS_SNAP_YEARLY}" || \
+			grep -Eq '^ *CEPHFS_SNAP_YEARLY=' "${CONFFILE}" || \
+			echo "CEPHFS_SNAP_YEARLY=" >> "${CONFFILE}"
+
+		test -z "${IRK_TARGETS}" || \
+			grep -Eq '^ *IRK_TARGETS=' "${CONFFILE}" || \
+			echo "IRK_TARGETS=" >> "${CONFFILE}"
+
+		sed	-e "s|^ *CEPH_LOG=.*|CEPH_LOG=\"${CEPH_LOG}\"|" \
+			-e "s|^ *CEPH_INFO=.*|CEPH_INFO=\"${CEPH_INFO}\"|" \
+			-e "s|^ *CEPHFS_SNAP=.*|CEPHFS_SNAP=\"${CEPHFS_SNAP}\"|" \
+			-e "s|^ *CEPHFS_SNAP_DIRECTORIES=.*|CEPHFS_SNAP_DIRECTORIES=\"${CEPHFS_SNAP_DIRECTORIES}\"|" \
+			-e "s|^ *CEPHFS_SNAP_HOURLY=.*|CEPHFS_SNAP_HOURLY=\"${CEPHFS_SNAP_HOURLY}\"|" \
+			-e "s|^ *CEPHFS_SNAP_DAILY=.*|CEPHFS_SNAP_DAILY=\"${CEPHFS_SNAP_DAILY}\"|" \
+			-e "s|^ *CEPHFS_SNAP_WEEKLY=.*|CEPHFS_SNAP_WEEKLY=\"${CEPHFS_SNAP_WEEKLY}\"|" \
+			-e "s|^ *CEPHFS_SNAP_MONTHLY=.*|CEPHFS_SNAP_MONTHLY=\"${CEPHFS_SNAP_MONTHLY}\"|" \
+			-e "s|^ *CEPHFS_SNAP_YEARLY=.*|CEPHFS_SNAP_YEARLY=\"${CEPHFS_SNAP_YEARLY}\"|" \
+			-e "s|^ *IRK_TARGETS=.*|IRK_TARGETS=\"${IRK_TARGETS}\"|" \
+		< "${CONFFILE}" > "${CONFFILE}.tmp"
+
+		mv -f "${CONFFILE}.tmp" "${CONFFILE}"
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+# Automatically added by dh_apache2/UNDECLARED
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in ceph-info  ; do
+			apache2_invoke enconf $conf  || exit $?
+		done
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.5
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'ceph-log.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'ceph-log.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'ceph-log.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'ceph-log.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start/10.10.5
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	if [ -n "$2" ]; then
+		_dh_action=try-restart
+	else
+		_dh_action=start
+	fi
+	deb-systemd-invoke $_dh_action 'ceph-log.service' >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0

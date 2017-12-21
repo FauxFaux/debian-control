@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb/10.8
+dpkg-maintscript-helper rm_conffile /etc/netdata/python.d/gunicorn_log.conf 1.8.0+dfsg-1~ netdata -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/10.8
+dpkg-maintscript-helper rm_conffile /etc/netdata/python.d/nginx_log.conf 1.8.0+dfsg-1~ netdata -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit/10.8
+if [ -x "/etc/init.d/netdata" ]; then
+	invoke-rc.d netdata stop || exit $?
+fi
+# End automatically added section

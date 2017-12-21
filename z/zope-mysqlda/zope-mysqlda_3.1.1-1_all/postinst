@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installzope
+if which dzhandle >/dev/null; then
+    case "$1" in configure|abort-upgrade|abort-remove)
+	# configure:
+	#  - install product in instances with addon-mode all,
+	#    and in which the product is upgraded
+	#  - unregister product as beeing upgraded
+	# abort-upgrade: (from old postinst)
+	#  - re-add product to instances, where it was removed from
+	#  - unregister product as beeing upgraded
+	# abort-remove:
+	#  - re-add product to instances, where it was removed from
+	#  - unregister product as beeing removed
+
+	dzhandle postinst-product -m "$*" /usr/share/zope/Products/ZMySQLDA
+    esac
+fi
+# End automatically added section

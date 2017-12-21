@@ -1,0 +1,22 @@
+#! /bin/bash
+# postinst script for vim-airline
+
+set -e
+
+case "$1" in
+    configure)
+        vim-addon-manager -w install airline-themes
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

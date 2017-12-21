@@ -1,0 +1,61 @@
+#!/bin/sh
+
+set -e
+
+if [ -e /usr/share/debconf/confmodule ]
+then
+	. /usr/share/debconf/confmodule
+fi
+
+# Set the prompt to remove data, logs, and settings each removal.
+db_fset ifetch-tools/purge seen false
+
+case "${1}" in
+	configure)
+		if ! getent passwd "ifetch-tools" > /dev/null 2>&1
+		then
+			# Add new user account
+			adduser --system --shell /bin/false --disabled-password --home /dev/null --gecos 'ifetch-tools account' --group --quiet ifetch-tools
+		elif ! getent group "ifetch-tools" > /dev/null 2>&1
+		then
+			# Add existing user to new new group
+			addgroup --system --quiet ifetch-tools
+			gpasswd -a ifetch-tools ifetch-tools
+		fi
+
+		mkdir -p /etc/ifetch-tools/cameras
+		mkdir -p /var/log/ifetch-tools
+		mkdir -p /var/lib/ifetch-tools
+
+		chown ifetch-tools:ifetch-tools /var/log/ifetch-tools /etc/ifetch-tools /var/lib/ifetch-tools -R
+		chmod 700 /etc/ifetch-tools /etc/ifetch-tools/cameras
+
+		if [ ! -e /etc/ifetch-tools/ifetch-tools.conf ]
+		then
+			cp /usr/share/ifetch-tools/examples/ifetch-tools.conf /etc/ifetch-tools/ifetch-tools.conf
+			chmod 600 /etc/ifetch-tools/ifetch-tools.conf
+			chown ifetch-tools:ifetch-tools /etc/ifetch-tools/ifetch-tools.conf
+		fi
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+# Automatically added by dh_installinit/10.10.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/ifetch-tools" ]; then
+		update-rc.d ifetch-tools defaults >/dev/null
+		invoke-rc.d ifetch-tools start || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

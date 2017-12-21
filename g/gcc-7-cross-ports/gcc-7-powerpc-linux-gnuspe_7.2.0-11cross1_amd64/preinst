@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove powerpc-linux-gnuspe-gcc /usr/bin/powerpc-linux-gnuspe-gcc-7
+    update-alternatives --quiet --remove powerpc-linux-gnuspe-gcov /usr/bin/powerpc-linux-gnuspe-gcov-7
+fi
+
+
+
+exit 0

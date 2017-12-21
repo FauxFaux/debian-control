@@ -1,0 +1,188 @@
+#!/bin/bash
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ "$DPKG_DEBUG" = "developer" ]; then
+	set -x
+fi
+
+db_version 2.0
+
+if [ "$1" = "reconfigure" ] ; then
+	# Rotate old configuration
+	configs="/etc/netmrg/netmrg.xml"
+	for config in $configs ; do
+		for i in $(seq 8 -1 0) ; do
+			if [ -f ${config}.$i ]
+				then mv ${config}.$i ${config}.$(($i +1))
+			fi
+		done
+		cp ${config} ${config}.0
+	done
+fi
+
+step=1
+finished="false"
+checkagain="true"
+dbexists="false"
+db_capb backup
+while ! $finished ; do
+    skip="false"
+    password=""
+    confirm=""
+    case $step in
+	1)	# Ask for web server type.
+	    db_input medium "netmrg/webserver" || true
+	    next=`expr $step + 1`
+	    previous="-1"
+	    ;;
+	2)	# Ask on wich host the DBMS is installed.
+	    db_input critical "netmrg/db/host" || true
+	    previous=`expr $step - 1`
+	    next=`expr $step + 1`
+	    ;;
+	3)	# Get the database administrator name and password.
+	    db_get "netmrg/db/admin/name"
+	    if [ -z "$RET" ] ; then
+		    dbadmname="root"
+				if [ -n "$dbadmname" ] ; then
+		    		db_set "netmrg/db/admin/name" $dbadmname
+				fi
+	    fi
+	    db_beginblock
+	     db_input critical "netmrg/db/admin/name" || true
+	     db_input critical "netmrg/db/admin/password" || true
+	    db_endblock
+	    previous=`expr $step - 1`
+	    next=`expr $step + 1`
+	    ;;
+	4)	# Ask for DB name.
+	    db_input critical "netmrg/db/name" || true
+	    previous=`expr $step - 1`
+	    next=`expr $step + 1`
+	    ;;
+	5)	# Check if DB already exists 
+			if [ "$1" = "configure" ] ; then
+				if $checkagain ; then 
+					db_get "netmrg/db/name"
+					dbname="$RET"
+					db_get "netmrg/db/admin/name"
+					dbadmin="$RET"
+					db_get "netmrg/db/admin/password"
+					dbadmpass="$RET"
+					. /usr/share/wwwconfig-common/mysql.get
+					if eval $mysqlcmd $dbname -e '"show tables;"' | grep graphs >/dev/null 2>&1 ; then
+	    			db_subst "netmrg/db/exists" "dbname" $dbname
+						db_input critical "netmrg/db/exists" || true
+						db_go
+#						db_fset  "netmrg/db/name" "seen" "false" || true
+	    			db_input critical "netmrg/db/name" || true
+						next=`expr $step + 1`
+						previous=`expr $step - 1`
+					else
+						skip="true"
+						next=`expr $step + 1`
+					fi
+					checkagain="false"
+				else
+					skip="true"
+					next=`expr $step + 1`
+				fi
+			else
+				checkagain="false"
+				skip="true"
+				next=`expr $step + 1`
+			fi
+	    ;;
+	6)	# Get the DBMS account username
+	    db_input critical "netmrg/db/user/name" || true
+	    previous=`expr $step - 1`
+	    next=`expr $step + 1`
+	    ;;
+	7) # Get the DBMS account password
+	    db_beginblock
+	     db_input critical "netmrg/db/user/password" || true
+	     db_input critical "netmrg/db/user/password/confirm" || true
+	    db_endblock
+	    previous=`expr $step - 1`
+	    next=`expr $step + 1`
+	    ;;
+	8)	# Check if passwords match.
+	    db_get "netmrg/db/user/password"
+	    password="$RET"
+	    db_get "netmrg/db/user/password/confirm"
+	    confirm="$RET"
+	    if [ "$password" != "$confirm" ] ; then
+		# Reset the template used
+		db_reset "netmrg/db/user/password" || true
+		db_fset  "netmrg/db/user/password" "seen" "false" || true
+		db_reset "netmrg/db/user/password/confirm" || true
+		db_fset  "netmrg/db/user/password/confirm" "seen" "false" || true
+		# Promt the user
+		db_input critical "netmrg/db/user/password/mismatch" || true
+		# Do one step back anyway.
+		next=`expr $step - 1`
+		previous=`expr $step - 1`
+	    else
+		# Do not prompt, go to the next step.
+		skip="true"
+		next=`expr $step + 1`
+	    fi
+	    ;;
+	9)	# Ask for deleting all the database on package purge.
+	    db_input medium "netmrg/postrm" || true
+	    next=`expr $step + 1`
+	    previous=`expr $step - 1`
+	    ;;
+	10)	# Ask for web host.
+	    db_input medium "netmrg/web/host" || true
+	    next=`expr $step + 1`
+			previous=`expr $step - 1`
+	    ;;
+	11)	# Ask for company name.
+	    db_input medium "netmrg/company/name" || true
+	    next=`expr $step + 1`
+			previous=`expr $step - 1`
+	    ;;
+	12)	# Ask for company url.
+	    db_input medium "netmrg/company/link" || true
+	    next=-1
+			previous=`expr $step - 1`
+	    ;;
+	-1) finished="true"
+			# if this is an initial configure run and the database is fresh
+			# then warn the user about the predefined password
+			if [ "$1" = "configure" -a ! $dbexists ] ; then
+				db_fset "netmrg/configuration/note" "seen" "false" || true
+			fi
+			db_beginblock
+			db_subst "netmrg/configuration/note" "site" `hostname -f`
+			db_input medium "netmrg/configuration/note" || true
+			db_endblock
+	    ;;
+	*)
+	    skip="true"
+	    message="Unknown step #$step."
+	    if [ $step -gt 12 ] || [ $step -le 0 ] ; then
+		finished="true"
+	    fi
+	    ;;
+    esac
+	
+    if ! $skip ; then
+	db_title "netmrg" || true
+	if db_go ; then
+	    step=$next
+	else
+	    step=$previous
+	fi
+    else
+	step=$next
+    fi
+done
+
+db_stop
+
+exit 0

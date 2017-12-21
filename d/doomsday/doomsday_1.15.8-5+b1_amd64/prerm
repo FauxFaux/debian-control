@@ -1,0 +1,23 @@
+#! /bin/sh
+# prerm script for doomsday
+
+set -e
+
+case "$1" in
+    remove)
+        update-alternatives --remove doom /usr/games/doomsday-compat
+        update-alternatives --remove boom /usr/games/doomsday-compat
+        update-alternatives --remove heretic /usr/games/doomsday-compat
+        update-alternatives --remove hexen /usr/games/doomsday-compat
+        ;;
+    upgrade|deconfigure|failed-upgrade)
+        ;;
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = install ] || [ "$1" = upgrade ]; then
+	if [ -e "/etc/udev/rules.d/42-madfuload.rules" ]; then
+		if [ "`md5sum \"/etc/udev/rules.d/42-madfuload.rules\" | sed -e \"s/ .*//\"`" = \
+		     "`dpkg-query -W -f='${Conffiles}' madfuload | sed -n -e \"\\\\' /etc/udev/rules.d/42-madfuload.rules's/.* //p\"`" ]
+		then
+			rm -f "/etc/udev/rules.d/42-madfuload.rules"
+		fi
+	fi
+fi
+
+

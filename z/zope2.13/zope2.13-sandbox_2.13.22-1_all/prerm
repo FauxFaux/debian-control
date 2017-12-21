@@ -1,0 +1,42 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installzopeinstance
+PKG=zope2.13-sandbox
+INSTANCE=sandbox
+ZVER=2.13
+DATABASE=ZODB
+
+[ -n "$(echo $INSTANCE)" ] || exit 1
+
+if command -v invoke-rc.d >/dev/null 2>&1; then
+	INVOKE="invoke-rc.d zope$ZVER"
+else
+	INVOKE="/etc/init.d/zope$ZVER"
+fi
+
+remove_products()
+{
+    products=""
+    if [ -n "$products" ]; then
+	dzhandle -z $ZVER remove-product --lazy --force $INSTANCE $products
+    fi
+}
+
+case "$1" in
+  remove|upgrade)
+    if [ "$DATABASE" = "ZEO" ]; then
+	$INVOKE stop "ZEOSERVER=$INSTANCE" || true
+    fi
+    $INVOKE stop "INSTANCE=$INSTANCE" || true
+    remove_products || true
+    ;;
+
+  failed-upgrade|deconfigure)
+    ;;
+
+  *)
+    echo "prerm called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+# End automatically added section

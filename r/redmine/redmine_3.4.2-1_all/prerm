@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+if [ -f /usr/share/dbconfig-common/dpkg/prerm ]; then
+  . /usr/share/dbconfig-common/dpkg/prerm
+
+  db_get redmine/current-instances || true
+  instances="$RET"
+
+  # remove all instances
+  for inst in "$instances"; do
+    dbc_go redmine/instances/$inst "$@"
+  done
+
+  # remember the instance list for postrm
+  # (the dbconf DB is cleaned already,
+  #  listing the /etc/redmine subdirectories might not match reality
+  #  and we should always be able to uninstall no matter how broken things are)
+  mkdir -p /etc/redmine
+  echo "$instances" >/etc/redmine/.instances
+fi
+
+##

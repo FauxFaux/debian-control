@@ -1,0 +1,42 @@
+#! /bin/sh
+
+set -e
+
+# Only try to add the inetd line on an initial installation.  Add it
+# commented out in a way that will not be automatically enabled, since the
+# Kerberos administrator should do that manually when ready.
+#
+# If update-inetd isn't available, don't bother, since it's just an example.
+if [ "configure" = "$1" ] && which update-inetd >/dev/null 2>&1 ; then
+    if [ -z "$2" ] || [ x"$2" = x"<unknown>" ] ; then
+        update-inetd --add --group Kerberos \
+            '#krb5_prop\tstream\ttcp\tnowait\troot\t/usr/sbin/kpropd kpropd'
+    fi
+fi
+
+# Automatically added by dh_installinit/10.10.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/krb5-kpropd" ]; then
+		update-rc.d krb5-kpropd defaults 18 18 >/dev/null
+		invoke-rc.d krb5-kpropd start || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.5
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'krb5-kpropd.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'krb5-kpropd.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'krb5-kpropd.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'krb5-kpropd.service' >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0

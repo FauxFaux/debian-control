@@ -1,0 +1,26 @@
+#! /bin/sh
+# postrm script for gliese
+
+set -e
+
+case "$1" in
+    remove|upgrade|deconfigure)
+    if [ -x /usr/sbin/register-stardata ] ; then
+	register-stardata remove gliese all
+    fi
+    ;;
+
+    failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0
+
+

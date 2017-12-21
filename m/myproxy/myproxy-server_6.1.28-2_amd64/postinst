@@ -1,0 +1,42 @@
+#!/bin/sh
+
+set -e
+
+if test "$1" = "configure" -o "$1" = "reconfigure" ; then
+
+    test -r /etc/default/myproxy-server && . /etc/default/myproxy-server
+
+    if test -z "$MYPROXY_USER" -o "$MYPROXY_USER" = "myproxy" ; then
+
+	getent group myproxy > /dev/null || \
+	    addgroup --quiet --system myproxy
+
+	getent passwd myproxy > /dev/null || \
+	    adduser --quiet --system --home /var/lib/myproxy \
+	    --shell /bin/false --ingroup myproxy --disabled-password \
+	    --disabled-login --gecos "User to run the MyProxy service" myproxy
+
+	chown myproxy:myproxy /var/lib/myproxy
+
+    fi
+
+fi
+
+# Automatically added by dh_installinit/10.6.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/myproxy-server.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.6.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/myproxy-server" ]; then
+		update-rc.d myproxy-server defaults >/dev/null
+		invoke-rc.d myproxy-server start || exit $?
+	fi
+fi
+# End automatically added section
+

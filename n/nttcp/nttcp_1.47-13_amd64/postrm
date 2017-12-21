@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+if [ "$1" = purge ]; then
+    perl -i -npe 's{.*/usr/bin/nttcp}{}g' /etc/inetd.conf
+fi
+
+

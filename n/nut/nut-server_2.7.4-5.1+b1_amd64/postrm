@@ -1,0 +1,81 @@
+#!/bin/sh -e
+
+case "$1" in
+
+  remove)
+    # remove sample file if those were previously (wrongly) installed
+    for file in ups.conf upsd.conf upsmon.conf upsd.users upssched.conf ; do
+      rm -f /etc/nut/${file}.sample
+    done
+    ;;
+
+  purge)
+    # remove udev rules files
+    rm -f /etc/udev/rules.d/025_nut-usbups.rules
+    rm -f /etc/udev/rules.d/52_nut-usbups.rules
+    rm -f /etc/udev/rules.d/52-nut-usbups.rules
+    # handle a dpkg bug
+    [ -d /etc/nut ] && rmdir --ignore-fail-on-non-empty /etc/nut >/dev/null 2>&1
+    ;;
+
+  upgrade)
+    # do nothing
+    ;;
+
+  failed-upgrade)
+    # do nothing
+    ;;
+
+  abort-install)
+    # do nothing
+    ;;
+
+  abort-upgrade)
+    # do nothing
+    ;;
+
+  disappear)
+    # do nothing
+    ;;
+
+  *)
+    echo "$0: incorrect arguments: $*" >&2
+    exit 1
+    ;;
+
+esac
+
+# Automatically added by dh_systemd_start/10.10.5
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.5
+if [ "$1" = "purge" ] ; then
+	update-rc.d nut-server remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.10.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'nut-server.service' >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'nut-server.service' >/dev/null
+		deb-systemd-helper unmask 'nut-server.service' >/dev/null
+	fi
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,225 @@
+#! /bin/sh
+# postinst script for boxbackup-server
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+#loading debconf module
+. /usr/share/debconf/confmodule
+
+CONFDIR=/etc/boxbackup
+DEBCONFRAID=$CONFDIR/raidfile.debconf
+DEBCONFBB=$CONFDIR/bbstored.debconf
+RAIDCONF=$CONFDIR/raidfile.conf
+BBCONF=$CONFDIR/bbstored.conf
+BBACCOUNTS=$CONFDIR/bbstored/boxbackup-server-accounts.txt
+BBUSER=bbstored
+BBPRIVKEY=$CONFDIR/bbstored/boxbackup-server-key.pem
+BBCERTREQ=$CONFDIR/bbstored/boxbackup-server-cert-req.pem
+BBCERT=$CONFDIR/bbstored/boxbackup-server-cert.pem
+BBCACERT=$CONFDIR/bbstored/boxbackup-client-ca-cert.pem
+
+case "$1" in
+    configure)
+
+	# Set up the bbstored user
+	if [ -z "`getent passwd $BBUSER`" ]; then
+		echo "Creating $BBUSER user." >&2
+		adduser --system --no-create-home \
+			--disabled-password --disabled-login \
+			--shell /bin/false --group --home /var $BBUSER
+	else
+		echo "User $BBUSER already exists." >&2
+	fi
+
+	db_get boxbackup-server/debconf
+	if [ "$RET" = "true" ]; then
+	    # Generate configuration files
+	    # raidfile.conf
+	    echo "#To reconfigure boxbackup-server run #dpkg-reconfigure boxbackup-server" >> $DEBCONFRAID
+
+	    echo "disc0" >> $DEBCONFRAID
+	    echo "{" >> $DEBCONFRAID
+	    echo "	SetNumber = 0" >> $DEBCONFRAID
+
+	    db_get boxbackup-server/raidBlockSize
+	    echo "	BlockSize = $RET" >> $DEBCONFRAID
+
+	    db_get boxbackup-server/raidDirectories
+
+	    DIR1=`echo "$RET" | awk '{ print $1 }'`
+	    DIR2=`echo "$RET" | awk '{ print $2 }'`
+	    DIR3=`echo "$RET" | awk '{ print $3 }'`
+
+	    if [ -n $DIR1 ]; then
+		if [ -z "$DIR2" -o -z "$DIR3" ]; then
+		    DIR2=$DIR1
+		    DIR3=$DIR1
+		fi
+	    fi
+
+	    echo "	Dir0 = $DIR1" >> $DEBCONFRAID
+	    echo "	Dir1 = $DIR2" >> $DEBCONFRAID
+	    echo "	Dir2 = $DIR3" >> $DEBCONFRAID
+
+	    echo "}" >> $DEBCONFRAID
+
+	    # Handle backup directories creation/permissions
+	    for dir in "$DIR1" "$DIR2" "$DIR3"; do
+		if [ -d "$dir/backup" ]; then
+		    # need stat package on Woody
+		    #if (`stat -c %U $dir/backup` != $BBUSER); then
+		    if [ `ls -ld $dir/backup | awk '{ print $3 }'` != "$BBUSER" ]; then
+			echo "Incorrect owner of backup directory. Changing it to $BBUSER..." >&2
+			chown $BBUSER:$BBUSER $dir/backup
+		    fi
+
+		    #if [ `stat -c %a $dir/backup` != "700" ]; then
+		    if [ `ls -ld $dir/backup | awk '{ print $1 }'` != "drwx------" ]; then
+			chmod 700 $dir/backup
+		    fi
+		else
+		    echo "Creating $dir/backup directory..." >&2
+		    mkdir -p $dir/backup
+		    chown $BBUSER:$BBUSER $dir/backup
+		    chmod 700 $dir/backup
+		fi
+	    done
+
+	    if ! dpkg-statoverride --list $CONFDIR/bbstored > /dev/null; then
+		dpkg-statoverride --update --add $BBUSER $BBUSER 700 $CONFDIR/bbstored
+	    fi
+
+	    # Accounts file
+	    if [ ! -e $BBACCOUNTS ]; then
+		touch $BBACCOUNTS
+	    fi
+
+	    #if [ `stat -c %U $BBACCOUNTS` != $BBUSER ]; then
+	    if [ `ls -ld $BBACCOUNTS | awk '{ print $3 }'` != "$BBUSER" ]; then
+		chown $BBUSER:$BBUSER $BBACCOUNTS
+	    fi
+
+	    #if [ `stat -c %a $BBACCOUNTS` != "600" ]; then
+	    if [ `ls -ld $BBACCOUNTS | awk '{ print $1 }'` != "drw-------" ]; then
+		chmod 600 $BBACCOUNTS
+	    fi
+
+	    SERVNAME=`hostname --fqdn`
+
+	    # SSL stuff
+	    if [ ! -e $BBPRIVKEY -a ! -e $BBCERT ]; then
+		db_get boxbackup-server/generateCertificate
+
+		if [ "$RET" = "true" ]; then
+		    if ! openssl genrsa -out $BBPRIVKEY 2048 >&2; then
+			echo "Private key generation failed! Check why." >&2
+		    else
+			chown $BBUSER: $BBPRIVKEY
+			chmod 600 $BBPRIVKEY || true
+		    fi
+
+		    if ! openssl req -new -key $BBPRIVKEY -sha1 -out $BBCERTREQ >&2 <<EOF
+.
+.
+.
+.
+.
+$SERVNAME
+.
+.
+.
+EOF
+		    then
+			echo "Certificate request generation failed ! Check why." >&2
+		    fi
+		fi
+	    fi
+
+	    # Generate bbstored.conf
+	    echo "#To reconfigure boxbackup-server run #dpkg-reconfigure boxbackup-server" >> $DEBCONFBB
+	    echo "RaidFileConf = $RAIDCONF" >> $DEBCONFBB
+	    echo "AccountDatabase = $BBACCOUNTS" >> $DEBCONFBB
+	    echo  >> $DEBCONFBB
+	    echo "# Uncomment this line to see exactly what commands are being received from clients." >> $DEBCONFBB
+	    echo "# ExtendedLogging = yes" >> $DEBCONFBB
+	    echo  >> $DEBCONFBB
+	    echo "# scan all accounts for files which need deleting every 15 minutes." >> $DEBCONFBB
+	    echo "TimeBetweenHousekeeping = 900" >> $DEBCONFBB
+	    echo >> $DEBCONFBB
+	    echo "Server" >> $DEBCONFBB
+	    echo "{" >> $DEBCONFBB
+	    echo "	PidFile = /var/run/bbstored.pid" >> $DEBCONFBB
+	    echo "	User = bbstored" >> $DEBCONFBB
+	    echo "	ListenAddresses = inet:$SERVNAME" >> $DEBCONFBB
+	    echo "	CertificateFile = $BBCERT"  >> $DEBCONFBB
+	    echo "	PrivateKeyFile = $BBPRIVKEY" >> $DEBCONFBB
+	    echo "	TrustedCAsFile = $BBCACERT" >> $DEBCONFBB
+	    echo "}" >> $DEBCONFBB
+
+	    if [ -x "`which ucf`" ]; then
+		ucf --three-way --debconf-ok $DEBCONFRAID $RAIDCONF
+	    fi
+	    rm -f $DEBCONFRAID
+	    chmod 644 $RAIDCONF || true
+	    chown root:root $RAIDCONF || true
+
+	    if [ -x "`which ucf`" ]; then
+		ucf --three-way --debconf-ok $DEBCONFBB $BBCONF
+	    fi
+	    rm -f $DEBCONFBB
+	    chmod 644 $BBCONF || true
+	    chown root:root $BBCONF || true
+	fi
+	db_stop
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+	db_stop
+    ;;
+
+    *)
+	echo "postinst called with unknown argument \`$1'" >&2
+	db_stop
+	exit 1
+    ;;
+esac
+
+# dh_installdeb will replace this with shell code automatically
+# generated by other debhelper scripts.
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/boxbackup-server" ]; then
+		update-rc.d boxbackup-server defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d boxbackup-server $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

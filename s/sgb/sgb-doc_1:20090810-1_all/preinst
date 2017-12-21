@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+# Preinst for sgb-doc package.
+
+# There seem to be problems with some spurious symlinks:
+# /usr/share/doc/sgb-doc/examples/examples -> ../sgb-doc/examples symlink
+# I can't figure out where it originated, but we'll scotch them out if they
+# still exist.
+
+rm -f /usr/share/doc/sgb-doc/examples/examples 2>/dev/null || true
+
+# If we're upgrading from sgb-doc (<< 20090810-1), we need to remove
+# the /usr/share/doc/sgb-doc -> /usr/share/doc/sgb symlink before we
+# install the newer version of the package
+
+[ -L /usr/share/doc/sgb-doc ] && rm -f /usr/share/doc/sgb-doc
+
+
+
+
+exit 0
+

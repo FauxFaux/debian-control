@@ -1,0 +1,95 @@
+#!/bin/sh
+set -e
+
+# In preconfigure stage (like when package is being installed for the first
+# time) "VARS" do not exist in which case we just exit to avoid error.
+[ -s /usr/lib/fheroes2-pkg/VARS ] \
+&& . /usr/lib/fheroes2-pkg/VARS   \
+|| exit 0
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+db_version 2.0
+db_capb escape
+
+if [ "$1" = configure ] ; then
+    if [ -z "$2" ]; then
+    ## first install
+        db_subst      fheroes2-pkg/first-install PKGI ${PKGI}
+        db_subst      fheroes2-pkg/first-install PKGG ${PKGG}
+        db_subst      fheroes2-pkg/first-install PKGG_ALL ${PKGG_ALL}
+        db_subst      fheroes2-pkg/first-install VER /${VERGG}
+        db_input high fheroes2-pkg/first-install || true
+        db_go || true
+    fi
+
+    ## APT post-invoke install prompt
+    if [ ! -h "/etc/apt/apt.conf.d/${P88}" ]; then
+        ## show prompt again if APT post-invoke hook is missing
+        db_fset       fheroes2-pkg/post-invoke_hook-install seen false
+        db_subst      fheroes2-pkg/post-invoke_hook-install PKGI ${PKGI}
+        db_input high fheroes2-pkg/post-invoke_hook-install || true
+        db_go || true
+    fi
+
+    ## upgrade check
+    if [ "${VERGG}~local" != "${VERG}" ] && [ -n "$2" ];then
+        db_get fheroes2-pkg/post-invoke_hook-install
+        if [ "$RET" != "true" ]; then
+        ## no APT post-invoke hook: remind to upgrade manually
+            ## make sure notice shown more than once, if necessary
+            db_fset       fheroes2-pkg/upgrade seen false
+            db_settitle   fheroes2-pkg/title_u
+            db_subst      fheroes2-pkg/upgrade PKGI ${PKGI}
+            db_subst      fheroes2-pkg/upgrade PKGG_ALL ${PKGG_ALL}
+            db_subst      fheroes2-pkg/upgrade VER ${VERGG}
+            db_input high fheroes2-pkg/upgrade || true
+            db_go || true
+        fi
+    fi
+fi
+if [ "$1" = reconfigure ] ; then
+    ## build prompt (manual)
+    if [ "${VERGG}~local" != "${VERG}" ]; then
+        ## upgrade or new version exist
+        db_subst      fheroes2-pkg/title_b-i PKGG ${PKGG}
+        db_subst      fheroes2-pkg/title_b-i VER /${VERGG}
+        db_settitle   fheroes2-pkg/title_b-i
+
+        db_subst      fheroes2-pkg/build PKGG ${PKGG}
+        db_subst      fheroes2-pkg/build PKGG_ALL ${PKGG_ALL}
+        db_subst      fheroes2-pkg/build VER /${VERGG}
+        db_reset      fheroes2-pkg/build
+        db_input high fheroes2-pkg/build || true
+        db_go || true
+    fi
+
+    ## remind to install hook if it is missing
+    if [ ! -h "/etc/apt/apt.conf.d/${P88}" ]; then
+        db_subst      fheroes2-pkg/post-invoke_hook-install PKGI ${PKGI}
+        db_reset      fheroes2-pkg/post-invoke_hook-install
+        db_input high fheroes2-pkg/post-invoke_hook-install || true
+        db_go || true
+    else
+        db_get fheroes2-pkg/build
+        if [ "$RET" != "true" ]; then
+            ## prompt to remove hook if it is installed and user don't want
+            ## to build guest package(s).
+            db_subst      fheroes2-pkg/post-invoke_hook-remove PKGI ${PKGI}
+            db_reset      fheroes2-pkg/post-invoke_hook-remove
+            db_input high fheroes2-pkg/post-invoke_hook-remove || true
+            db_go || true
+
+            ## set primary debconf/DB-value to script symlink removal
+            ## "post-invoke_hook-remove" template exists merely to provide friendly prompt
+            db_get fheroes2-pkg/post-invoke_hook-remove
+            if [ "$RET" = "true" ]; then
+                db_set fheroes2-pkg/post-invoke_hook-install false
+            else
+                db_set fheroes2-pkg/post-invoke_hook-install true
+            fi
+        fi
+    fi
+fi
+
+db_stop

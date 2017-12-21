@@ -1,0 +1,56 @@
+#!/bin/sh
+
+set -e
+
+del_override() {
+    if dpkg-statoverride --list $4 >/dev/null; then
+	dpkg-statoverride --force --remove $4
+    fi
+}
+
+if [ "$1" = "purge" ]; then
+    # Remove generated TLS certificate
+    rm -f /etc/courier/pop3d.pem
+
+    del_override root courier 0640 /etc/courier/pop3d.cnf
+fi
+
+# Automatically added by dh_installinit/10.8
+if [ "$1" = "purge" ] ; then
+	update-rc.d courier-pop-ssl remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.8
+if [ "$1" = "purge" ] ; then
+	update-rc.d courier-pop remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/10.8
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask courier-pop.service >/dev/null
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge courier-pop.service >/dev/null
+		deb-systemd-helper unmask courier-pop.service >/dev/null
+	fi
+fi
+# End automatically added section
+

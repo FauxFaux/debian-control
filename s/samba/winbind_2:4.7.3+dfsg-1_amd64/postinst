@@ -1,0 +1,44 @@
+#! /bin/sh
+
+set -e
+
+getent group winbindd_priv >/dev/null 2>&1 ||
+	addgroup --system --force-badname --quiet winbindd_priv
+
+winbindd_privileged_socket_directory='/var/lib/samba/winbindd_privileged'
+mkdir -pv "$winbindd_privileged_socket_directory"
+chgrp -c winbindd_priv "$winbindd_privileged_socket_directory"
+chmod -c 0750 "$winbindd_privileged_socket_directory"
+
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'winbind.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'winbind.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'winbind.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'winbind.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/winbind" ]; then
+		update-rc.d winbind defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d winbind $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/10.10.9
+dpkg-maintscript-helper rm_conffile /etc/init/winbind.conf 2:4.6.5\+dfsg-5\~ -- "$@"
+# End automatically added section
+

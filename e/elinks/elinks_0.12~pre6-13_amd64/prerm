@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    remove|deconfigure)
+        update-alternatives --quiet --remove www-browser /usr/bin/elinks
+        ;;
+    *)
+esac
+
+# Automatically added by dh_installdeb/10.10.7
+dpkg-maintscript-helper symlink_to_dir /usr/share/doc/elinks elinks-data 0.12\~pre6-11\~ -- "$@"
+# End automatically added section

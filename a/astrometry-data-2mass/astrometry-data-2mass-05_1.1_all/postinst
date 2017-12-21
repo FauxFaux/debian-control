@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+TARGETDIR=/usr/share/astrometry/
+SERIES=42
+STEP=05
+BASE_URL=http://data.astrometry.net/${SERIES}00
+
+if [ "$1" = "configure" ] ; then
+    if [ ! -f "${TARGETDIR}/index-2mass-${STEP}-00.fits" ]; then
+       curl --create-dirs -o "${TARGETDIR}/index-2mass-${STEP}-#1.fits" \
+	    ${BASE_URL}/index-${SERIES}${STEP}-[00-11].fits
+    fi
+fi
+
+

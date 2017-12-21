@@ -1,0 +1,50 @@
+#! /bin/sh
+# postrm script for thpot
+
+# User to delete
+DUSER=thpot
+
+set -e
+
+case "$1" in
+       purge)
+         # find first and last SYSTEM_UID numbers
+         for LINE in `grep SYSTEM_UID /etc/adduser.conf | grep -v "^#"`; do
+            case $LINE in
+               FIRST_SYSTEM_UID*)
+                  FIST_SYSTEM_UID=`echo $LINE | cut -f2 -d '='`
+               ;;
+               LAST_SYSTEM_UID*)
+                  LAST_SYSTEM_UID=`echo $LINE | cut -f2 -d '='`
+               ;;
+               *)
+               ;;
+            esac
+         done
+         # remove thpot system account if necessary
+         if [ -n "$FIST_SYSTEM_UID" ] && [ -n "$LAST_SYSTEM_UID" ]; then
+            if DUSERID=`getent passwd $DUSER | cut -f 3 -d ':'`; then
+               if [ -n "$DUSERID" ]; then
+                  if [ "$FIST_SYSTEM_UID" -le "$DUSERID" ] && \
+                     [ "$DUSERID" -le "$LAST_SYSTEM_UID" ]; then
+                        deluser --quiet $DUSER || true
+                  fi
+               fi
+            fi
+         fi
+
+        ;;
+       remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+
+
+        ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+
+esac
+
+
+
+exit 0

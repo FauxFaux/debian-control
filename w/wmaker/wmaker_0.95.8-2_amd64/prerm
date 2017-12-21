@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb/10.7.2
+dpkg-maintscript-helper rm_conffile /etc/menu-methods/wmaker 0.95.8-2\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installwm/10.7.2
+if [ "$1" = "remove" ]; then
+	update-alternatives --remove x-window-manager /usr/bin/wmaker
+fi
+# End automatically added section

@@ -1,0 +1,55 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        # Create the unscd user
+	    if which adduser >/dev/null 2>&1 &&
+               which getent >/dev/null 2>&1 &&
+               which id >/dev/null 2>&1 &&
+               which addgroup >/dev/null 2>&1; then
+	        if ! getent group unscd >/dev/null 2>&1; then
+		        addgroup --system unscd;
+	        fi;
+	        if ! id -u unscd >/dev/null 2>&1; then
+		        adduser --quiet --system --ingroup unscd --no-create-home --home /var/lib/unscd unscd;
+	        fi;
+	    fi;
+	    ;;
+    *)
+	    # do nothing
+	    ;;
+esac
+
+### Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'unscd.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'unscd.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'unscd.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'unscd.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/unscd" ]; then
+		update-rc.d unscd defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d unscd $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+##
+
+exit 0;

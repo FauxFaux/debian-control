@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "install" ] || [ "$1" = "upgrade" ]
+then
+  if dpkg --compare-versions "$2" lt-nl "1.7+svn262+dfsg1-3~" && \
+      [ -L /etc/alternatives/wolf4sdl ]
+  then
+    update-alternatives --quiet --remove-all wolf4sdl
+  fi
+fi
+
+

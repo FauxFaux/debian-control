@@ -1,0 +1,31 @@
+#! /bin/sh
+# postinst script for SRG
+#
+# Author:   Matt Brown <debian@mattb.net.nz>
+# Version:  $Id:$
+# Released under the GPL v2
+
+set -e
+
+# conffile handling thanks to http://www.dpkg.org/ConffileHandling
+
+# Move a conffile without triggering a dpkg question
+mv_conffile() {
+    OLDCONFFILE="$1"
+    NEWCONFFILE="$2"
+
+    if [ -e "$OLDCONFFILE" ]; then
+        echo "Preserving user changes to $NEWCONFFILE ..."
+        mv -f "$NEWCONFFILE" "$NEWCONFFILE".dpkg-new
+        mv -f "$OLDCONFFILE" "$NEWCONFFILE"
+    fi
+}
+
+case "$1" in
+configure)
+    if dpkg --compare-versions "$2" le "1.3.3-2"; then
+        mv_conffile "/etc/srg/ip2user.txt" "/etc/srg/ip2user"
+    fi
+esac
+
+

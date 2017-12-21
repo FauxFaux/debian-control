@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+
+
+## Note:  Keep debhelper token before so that this package behaves
+## like other packages - The files should still exist when the debhelper
+## bits runs.
+
+rm -rf /usr/share/doc/susv3/susv3
+rm /usr/share/doc/susv3/susv3xbd /usr/share/doc/susv3/susv3xcu
+rm /usr/share/doc/susv3/susv3xrat /usr/share/doc/susv3/susv3xsh

@@ -1,0 +1,82 @@
+#!/bin/sh
+# postinst script for shairport-sync
+#
+# see: dh_installdeb(1)
+
+set -e
+
+case "$1" in
+configure)
+	# create shairport-sync group if there isn't one already
+	if ! getent group shairport-sync >/dev/null; then
+		addgroup --system shairport-sync >/dev/null
+	fi
+
+	# create shairport-sync user if there isn't one already
+	if ! getent passwd shairport-sync >/dev/null; then
+		adduser --system --ingroup shairport-sync --shell /usr/sbin/nologin \
+			--home /run/shairport-sync shairport-sync >/dev/null
+		# Add shairport-sync to the audio group
+		adduser shairport-sync audio
+	elif [ "$(getent passwd shairport-sync | awk -F: '{ print $6 }')" = "/var/lib/shairport-sync" ]; then
+		# If the home directory is the old location, try to update it
+		# This will fail if any processes are running under the user.
+		# This isn't normally the case here in the postinst but it's
+		# not worth aborting the whole install if we can't fix that up.
+		if usermod -d /run/shairport-sync shairport-sync; then
+			# Try to remove the unused and obsolete directory.
+			# Ignore the failure if it's non-empty.
+			rmdir /var/lib/shairport-sync || true
+		fi
+	fi
+	;;
+
+abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+
+*)
+	echo "postinst called with unknown argument \`$1'" >&2
+	exit 1
+	;;
+esac
+
+# Automatically added by dh_systemd_enable/10.10.9
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask 'shairport-sync.service' >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled 'shairport-sync.service'; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable 'shairport-sync.service' >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'shairport-sync.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/shairport-sync.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/10.10.9
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/shairport-sync" ]; then
+		update-rc.d shairport-sync defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d shairport-sync $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+
+
+exit 0

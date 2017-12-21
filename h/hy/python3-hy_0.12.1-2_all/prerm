@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+	# only remove in remove/deconfigure so we don't disrupt users' preferences
+	remove|deconfigure)
+		update-alternatives --remove hy /usr/bin/hy3
+		;;
+
+	upgrade|failed-upgrade)
+		;;
+
+	*)
+		echo >&2 "prerm called with unknown argument: $1"
+		exit 0
+		;;
+esac
+
+
+# Automatically added by dh_python3:
+if which py3clean >/dev/null 2>&1; then
+	py3clean -p python3-hy 
+else
+	dpkg -L python3-hy | perl -ne 's,/([^/]*)\.py$,/__pycache__/\1.*, or next; unlink $_ or die $! foreach glob($_)'
+	find /usr/lib/python3/dist-packages/ -type d -name __pycache__ -empty -print0 | xargs --null --no-run-if-empty rmdir
+fi
+
+# End automatically added section
+
+
+exit 0

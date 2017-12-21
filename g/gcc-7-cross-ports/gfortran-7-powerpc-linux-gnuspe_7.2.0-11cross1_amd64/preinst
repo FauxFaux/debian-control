@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove powerpc-linux-gnuspe-gfortran /usr/bin/powerpc-linux-gnuspe-gfortran-7
+fi
+
+
+
+exit 0

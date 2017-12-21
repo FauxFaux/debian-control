@@ -1,0 +1,32 @@
+#! /bin/sh
+# postinst script for gns3
+
+set -e
+
+#Create conf directory if required
+if [ "$1" = "configure" ]; then
+	if [ ! -d /etc/gns3 ]
+	then
+		mkdir /etc/gns3
+	fi
+fi
+
+
+# Automatically added by dhpython:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p gns3 /usr/share/gns3 -V 2.6-
+fi
+
+# End automatically added section
+# Automatically added by dh_installmenu
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+# Automatically added by dh_ucf
+if [ "$1" = "configure" ]; then
+	ucf "/usr/share/gns3/gns3.ini" "/etc/gns3/gns3.ini"
+	ucfr gns3 "/etc/gns3/gns3.ini"
+fi
+# End automatically added section
+

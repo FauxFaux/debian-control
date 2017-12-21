@@ -1,0 +1,31 @@
+#!/bin/sh
+# Config prior to download/install of Mathematica 4.1
+#
+# (C) 2008 Atsuhito Kohda
+# You may freely distribute this file under the terms of the GNU General
+# Public License, version 2 or later
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+if [ -n "$http_proxy" ] ; then
+  db_set mathematica-fonts/http_proxy $http_proxy
+fi
+db_input medium mathematica-fonts/http_proxy || true
+
+db_input critical mathematica-fonts/license || true
+db_input critical mathematica-fonts/accept_license || true
+
+db_go
+
+db_get mathematica-fonts/accept_license
+if [ "$RET" != "true" ]; then
+    db_fset mathematica-fonts/license seen false
+    db_fset mathematica-fonts/accept_license seen false
+elif [ "$RET" = "true" ]; then
+    # license accepted
+    exit 0
+fi
+

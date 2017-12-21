@@ -1,0 +1,37 @@
+#!/bin/bash
+set -e
+FILE=/etc/apparmor.d/local/usr.sbin.mysqld
+IFILE=/etc/init.d/apparmor
+FTMP=`mktemp /tmp/tmp.XXXXXX`
+
+# If file exists but is empty then it was broken by a previous bug in postrm - so fix it
+if [ -s $FILE ]
+then
+  echo "# Site-specific additions and overrides for usr.sbin.mysqld." > $FILE
+  echo "# For more details, please see /etc/apparmor.d/local/README." >> $FILE
+fi
+
+if [ -f $FILE ]
+then
+  grep -v "@{HOME}/.config/cqrlog/database/" $FILE >> $FTMP
+  cat $FTMP > $FILE
+  echo ""
+  echo Changes removed from $FILE
+  echo "Restarting apparmor..."
+  echo ""  
+  if [ -f $IFILE ]
+  then
+    if which invoke-rc.d >/dev/null 2>&1; then
+       invoke-rc.d apparmor restart
+    else
+      /etc/init.d/apparmor restart
+    fi
+  fi
+fi
+rm $FTMP
+# Automatically added by dh_icons/10.6.4
+if which update-icon-caches >/dev/null 2>&1 ; then
+	update-icon-caches /usr/share/icons/cqrlog /usr/share/icons/cqrlog.png
+fi
+# End automatically added section
+

@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# exit if any errors occur
+set -e
+
+# Load debconf
+. /usr/share/debconf/confmodule
+
+# Configure the distributed.net client
+db_get distributed-net/fullconfig
+if [ $RET = "true" ]; then
+	db_stop
+
+	touch /etc/distributed-net.conf
+	chown daemon:daemon /etc/distributed-net.conf
+
+	cd /var/lib/distributed-net
+
+	# Redirecting SDTIN from /dev/tty to workaroung bug #142944
+	su daemon -s /bin/sh -c "/usr/bin/dnetc -ini /etc/distributed-net.conf -inbase /var/lib/distributed-net/buff-in -outbase /var/lib/distributed-net/buff-out -config" < /dev/tty
+fi
+
+# Set the ownership on the buffers.
+chown daemon:daemon /var/lib/distributed-net/* 2>/dev/null || true
+chown daemon:daemon /var/lib/distributed-net 2>/dev/null || true
+
+# Create the log file initially.
+touch /var/log/distributed-net.log
+chown daemon:adm /var/log/distributed-net.log
+chmod 640 /var/log/distributed-net.log
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/distributed-net" ]; then
+		update-rc.d distributed-net defaults >/dev/null
+		invoke-rc.d distributed-net start || exit $?
+	fi
+fi
+# End automatically added section
+

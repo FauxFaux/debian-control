@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove powerpc64-linux-gnu-gcc /usr/bin/powerpc64-linux-gnu-gcc-5
+    update-alternatives --quiet --remove powerpc64-linux-gnu-gcov /usr/bin/powerpc64-linux-gnu-gcov-5
+fi
+
+
+
+exit 0

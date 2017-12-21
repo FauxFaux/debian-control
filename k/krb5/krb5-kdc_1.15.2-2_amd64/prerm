@@ -1,0 +1,23 @@
+#! /bin/sh
+
+set -e
+
+init_error() {
+    echo failed to stop krb5-kdc
+    exit 1
+    }
+
+if test "remove" = "$1"; then
+    if which update-inetd >/dev/null 2>&1 ; then
+	update-inetd --remove '#?krb5_prop.*/usr/sbin/kpropd'
+    fi
+fi
+
+# Automatically added by dh_installinit/10.10.5
+if [ -x "/etc/init.d/krb5-kdc" ]; then
+	invoke-rc.d krb5-kdc stop || init_error
+fi
+# End automatically added section
+
+
+exit 0

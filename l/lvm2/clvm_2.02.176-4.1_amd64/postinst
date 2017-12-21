@@ -1,0 +1,25 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installsystemd/10.10.9
+if deb-systemd-helper debian-installed 'lvm2-cluster-activation.service'; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'lvm2-cluster-activation.service' >/dev/null || true
+
+	if deb-systemd-helper --quiet was-enabled 'lvm2-cluster-activation.service'; then
+		# Create new symlinks, if any.
+		deb-systemd-helper enable 'lvm2-cluster-activation.service' >/dev/null || true
+	fi
+fi
+
+# Update the statefile to add new symlinks (if any), which need to be cleaned
+# up on purge. Also remove old symlinks.
+deb-systemd-helper update-state 'lvm2-cluster-activation.service' >/dev/null || true
+# End automatically added section
+# Automatically added by dh_installsystemd/10.10.9
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	if [ -n "$2" ]; then
+		deb-systemd-invoke try-restart 'lvm2-cluster-activation.service' >/dev/null || true
+	fi
+fi
+# End automatically added section

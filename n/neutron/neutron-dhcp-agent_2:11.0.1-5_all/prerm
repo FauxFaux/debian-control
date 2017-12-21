@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit/10.10.9
+if [ -x "/etc/init.d/neutron-dhcp-agent" ] && [ "$1" = remove ]; then
+	invoke-rc.d neutron-dhcp-agent stop || true
+fi
+# End automatically added section
