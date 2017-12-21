@@ -4,13 +4,13 @@ suffix =
 script = ./with-download.sh
 
 pool big
-    depth = 4
+    depth = 10
 
 pool massive
-    depth = 2
+    depth = 10
 
 rule process-binary
-    command = $script $url $subdir $out
+    command = $script $url $out
 
 include sid.ninja
 
