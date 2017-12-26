@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper dir_to_symlink \
+	/usr/share/openstack-dashboard/static /var/lib/openstack-dashboard/static 2:9.0.0~rc1-2 openstack-dashboard -- "$@"
+
+if [ "${1}" = "purge" ] ; then
+	rm -f /etc/openstack-dashboard/local_settings.py
+	rmdir --ignore-fail-on-non-empty /etc/openstack-dashboard || true
+	rm -rf /var/lib/openstack-dashboard
+	rm -rf /var/lib/horizon
+	rm -rf /usr/share/openstack-dashboard
+fi
+
+# Automatically added by dh_installdebconf/11
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0
