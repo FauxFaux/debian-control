@@ -1,0 +1,18 @@
+Package: fl-cow
+Version: 0.6-4.2
+Architecture: amd64
+Maintainer: Robert Collins <robertc@robertcollins.net>
+Installed-Size: 56
+Depends: libc6 (>= 2.14)
+Section: utils
+Priority: extra
+Description: copy-on-write utility
+ Fl-cow allows you to utilise hard links to save disk space by causing
+ hard-linked files to be copied rather than overwritten as they are changed.
+ .
+ This is useful for making changes to large source trees while keeping a copy
+ of the original tree to generate patches from. Also, if you are using the
+ Arch revision control system with working copies hard-linked to a revision
+ library, using fl-cow can prevent revision library corruption.
+ .
+ Fl-cow is an LD_PRELOAD hack, not a kernel patch.

@@ -1,0 +1,34 @@
+Package: archivemount
+Source: archivemount (0.8.7-1)
+Version: 0.8.7-1+b1
+Architecture: amd64
+Maintainer: Chrysostomos Nanakos <cnanakos@debian.org>
+Installed-Size: 69
+Depends: libarchive13 (>= 3.0.4), libc6 (>= 2.4), libfuse2 (>= 2.6), fuse (>= 2.8.5-2)
+Section: utils
+Priority: optional
+Homepage: http://www.cybernoia.de/software/archivemount/
+Description: mounts an archive for access as a file system
+ archivemount is a FUSE based file system for Unix variants, including Linux.
+ Its purpose is to mount archives to a mount point where it can be read from
+ or written to as with any other file system.
+ This makes accessing the contents of the archive, which maybe compressed,
+ transparent to other programs, without decompressing them.
+ The archive formats that archivemount supports are:
+  *   old-style tar archives,
+  .
+  *   most variants of the POSIX 'ustar' format,
+  .
+  *   the POSIX 'pax interchange' format,
+  .
+  *   GNU-format tar archives,
+  .
+  *   most common cpio archive formats,
+  .
+  *   ISO9660 CD images (with or without RockRidge extensions),
+  .
+  *   Zip archives.
+  .
+  *   two different variants of shar archives.
+  .
+ archivemount is FUSE (Filesystem in USErspace).

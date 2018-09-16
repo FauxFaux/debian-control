@@ -1,0 +1,32 @@
+Package: golang-github-qor-inflection-dev
+Source: golang-github-qor-inflection
+Version: 0.0~git20151009.0.3272df6-2
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 24
+Section: devel
+Priority: extra
+Homepage: https://github.com/qor/inflection
+Description: Pluralizes and singularizes English nouns
+ Inflection is a Go package that pluralizes and singularizes English nouns.
+ .
+   inflection.Plural("person") => "people"
+   inflection.Plural("Person") => "People"
+   inflection.Plural("PERSON") => "PEOPLE"
+   inflection.Plural("bus")    => "buses"
+   inflection.Plural("BUS")    => "BUSES"
+   inflection.Plural("Bus")    => "Buses"
+ .
+   inflection.Singularize("people") => "person"
+   inflection.Singularize("People") => "Person"
+   inflection.Singularize("PEOPLE") => "PERSON"
+   inflection.Singularize("buses")  => "bus"
+   inflection.Singularize("BUSES")  => "BUS"
+   inflection.Singularize("Buses")  => "Bus"
+ .
+   inflection.Plural("FancyPerson") => "FancyPeople"
+   inflection.Singularize("FancyPeople") => "FancyPerson"
+ .
+ Standard rules are from Rails's ActiveSupport.
+ .
+ This package contains the source.

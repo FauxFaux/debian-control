@@ -1,0 +1,20 @@
+Package: freebsd-mk
+Source: freebsd-buildutils
+Version: 10.3~svn296373-7
+Architecture: all
+Maintainer: GNU/kFreeBSD Maintainers <debian-bsd@lists.debian.org>
+Installed-Size: 189
+Enhances: bmake
+Replaces: freebsd-buildutils (<< 10.0~svn259404-5~)
+Section: devel
+Priority: extra
+Multi-Arch: foreign
+Description: FreeBSD makefile templates for bmake
+ This package contains the makefile templates from the FreeBSD project. They
+ provide simple rules to build programs, libraries, etc.
+ .
+ These templates provide an alternative to the default makefile templates
+ shipped with bmake. If you want to enable them in your programs, simply
+ invoke bmake as follows:
+ .
+ bmake -m /usr/share/mk-freebsd

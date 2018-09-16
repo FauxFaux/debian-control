@@ -1,0 +1,15 @@
+Package: sniproxy
+Version: 0.5.0-2
+Architecture: amd64
+Maintainer: Jan Dittberner <jandd@debian.org>
+Installed-Size: 111
+Depends: lsb-base, libc6 (>= 2.14), libev4 (>= 1:4.04), libpcre3, libudns0 (>= 0.4)
+Recommends: logrotate
+Section: web
+Priority: optional
+Homepage: https://github.com/dlundquist/sniproxy
+Description: Transparent TLS and HTTP layer 4 proxy with SNI support
+ Proxies incoming HTTP and TLS connections based on the hostname contained in
+ the initial request of the TCP session. This enables HTTPS name-based virtual
+ hosting to separate backend servers without installing the private key on the
+ proxy machine.

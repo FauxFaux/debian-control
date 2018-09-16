@@ -1,0 +1,17 @@
+Package: feed2exec
+Version: 0.12.0
+Architecture: all
+Maintainer: Antoine Beaupré <anarcat@debian.org>
+Installed-Size: 374
+Depends: python3-click, python3-feedparser, python3-html2text, python3-requests, python3-requests-file, python3-unidecode, python3-xdg, python3:any (>= 3.3.2-2~)
+Suggests: feed2exec-doc
+Section: admin
+Priority: optional
+Homepage: https://gitlab.com/anarcat/feed2exec
+Description: programmable feed reader
+ feed2exec is a simple program that runs custom actions on new RSS
+ feed items (or whatever feedparser can read). It currently has
+ support for writing into mailboxes (Maildir or mbox folders) or
+ executing commands, but more actions can be easily implemented
+ through plugins. Email are saved as multipart plain/HTML and can be
+ sent to arbitrary folders.

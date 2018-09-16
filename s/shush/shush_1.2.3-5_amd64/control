@@ -1,0 +1,29 @@
+Package: shush
+Version: 1.2.3-5
+Architecture: amd64
+Maintainer: Dario Minnucci <midget@debian.org>
+Installed-Size: 119
+Depends: libc6 (>= 2.14), libpcre3
+Section: admin
+Priority: extra
+Homepage: http://web.taranis.org/shush/
+Description: runs a command and optionally reports its output by mail
+ shush was written to be a generic wrapper around cron jobs so that it can be
+ applied to any command without having to modify it or create a custom wrapper
+ for it. In a sense, it solves a fairly simple problem, but it also brings some
+ powerful features making it a useful tool beyond cron jobs.
+ .
+ Feature highlights:
+ .
+   * Multiple reports (for the output) may be defined
+   * Decision to send a report (or not) is configurable based on:
+     - Output content analysis (using regular expressions)
+     - Command exit code
+     - Size of output
+     - Command execution duration
+   * Support for plain text, enriched text and HTML report formatting.
+     (The latter two allow rendering part of the output in bold.)
+   * Various timeout actions such as notification and command termination
+   * Locking support
+   * Progress report logging via syslog
+   * Automatic crontab file updating based on shush's configuration

@@ -1,0 +1,21 @@
+Package: libcatalyst-plugin-session-store-dbic-perl
+Version: 0.14-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: perl, libcatalyst-perl (>= 5.65), libcatalyst-plugin-session-store-delegate-perl (>= 0.05), libclass-accessor-perl, libdbix-class-perl (>= 0.07000), libmro-compat-perl, libtest-warn-perl (>= 0.20)
+Breaks: libcatalyst-modules-perl (<< 48~)
+Replaces: libcatalyst-modules-perl (<< 48~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-Plugin-Session-Store-DBIC
+Description: DBIx::Class-based session storage plugin for Catalyst
+ Catalyst::Plugin::Session::Store::DBIC saves session data in a database via
+ DBIx::Class. It's actually just a wrapper around
+ Catalyst::Plugin::Session::Store::Delegate. The later may be a better option
+ if complete control over how sessions are stored is needed.
+ .
+ Catalyst is an elegant Model-View-Controller web application framework
+ written in Perl.
+ .
+ DBIx::Class is an extensible and flexible object <-> relational mapper.

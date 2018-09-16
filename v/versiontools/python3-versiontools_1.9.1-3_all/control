@@ -1,0 +1,30 @@
+Package: python3-versiontools
+Source: versiontools
+Version: 1.9.1-3
+Architecture: all
+Maintainer: Benjamin Drung <benjamin.drung@profitbricks.com>
+Installed-Size: 67
+Depends: python3-distutils, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://launchpad.net/versiontools
+Description: Smart replacement for plain tuple used in __version__ (Python 3)
+ versiontools is a Python module providing a smart replacement for plain tuple
+ used in __version__. It has following features:
+ .
+  * A piece of code that allows you to keep a single version definition inside
+    your package or module. No more hacks in setup.py, no more duplicates in
+    setup.py and somewhere else. Just one version per package.
+  * Version objects can produce nice version strings for released files that
+    are compliant with PEP 386. Releases, alphas, betas, development snaphots.
+    All of those get good version strings out of the box.
+  * Version objects understand the VCS used by your project. Git, Mercurial and
+    Bazaar are supported out of the box. Custom systems can be added by 3rd
+    party plugins.
+  * Version object that compares as a tuple of values and sorts properly.
+  * Zero-dependency install! If all you care about is handling setup() to get
+    nice tarball names then you don’t need to depend on versiontools (no
+    setup_requires, no install_requires!). You will need to bundle a small
+    support module though.
+ .
+ This is the Python 3 version of the package.

@@ -1,0 +1,23 @@
+Package: starpu-contrib-tools
+Source: starpu-contrib
+Version: 1.2.5+dfsg-2
+Architecture: amd64
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Installed-Size: 193
+Depends: libc6 (>= 2.4), libcusparse9.1, libstarpu-contrib-1.2-5
+Conflicts: starpu-tools
+Provides: starpu-any-tools
+Section: contrib/utils
+Priority: optional
+Homepage: http://starpu.gforge.inria.fr/
+Description: Task scheduler for heterogeneous multicore machines - tools
+ StarPU is a runtime system that offers support for heterogeneous
+ multicore machines. While many efforts are devoted to design efficient
+ computation kernels for those architectures (e.g. to implement BLAS
+ kernels on GPUs or on Cell's SPUs), StarPU not only takes care of
+ offloading such kernels (and implementing data coherency across
+ the machine), but it also makes sure the kernels are executed as
+ efficiently as possible.
+ .
+ This package contains StarPU tools.
+ This "contrib" version is built against CUDA.

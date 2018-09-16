@@ -1,0 +1,23 @@
+Package: zorp
+Version: 6.0.10-4
+Architecture: amd64
+Maintainer: SZALAY Attila <sasa@debian.org>
+Installed-Size: 1097
+Depends: libc6 (>= 2.15), libgcc1 (>= 1:3.0), libglib2.0-0 (>= 2.24.0), libssl1.0.2 (>= 1.0.2d), libstdc++6 (>= 4.1.1), libzorp6.0, libzorpll-6.0-10, python-openssl (>= 0.10), python-dnspython, adduser, python:any (<< 2.8), python:any (>= 2.7.5-5~), python-radix, lsb-base, openssl, python-netaddr
+Suggests: zorp-doc, zorp-modules (= 6.0.10-4)
+Breaks: zorp-modules (<< 3.9.0-1)
+Replaces: zorp-modules (<< 3.9.0-1)
+Section: net
+Priority: optional
+Description: Advanced protocol analyzing firewall
+ Zorp is a new generation firewall. It is essentially a transparent proxy
+ firewall, with strict protocol analyzing proxies, a modular architecture,
+ and fine-grained control over the mediated traffic. Configuration decisions
+ are scriptable with the Python based configuration language.
+ .
+ Zorp has been successfully deployed in demanding environments like the
+ protection of high traffic web sites, or the protection of large intranets.
+ Since the protocol analysis is strict and many of the common exploits
+ violate the application protocol they are injected into, a large percentage
+ of the attacks do not cross a Zorp based firewall even if the given service
+ is permitted.

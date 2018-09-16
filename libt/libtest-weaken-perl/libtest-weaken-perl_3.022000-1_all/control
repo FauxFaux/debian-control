@@ -1,0 +1,24 @@
+Package: libtest-weaken-perl
+Version: 3.022000-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 122
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Test-Weaken/
+Description: Perl module to test that freed memory objects were actually freed
+ A memory leak occurs when a Perl data structure is destroyed but some of the
+ contents of that structure are not freed. Leaked memory is a useless
+ overhead. Leaks can significantly impact system performance. They can also
+ cause an application to abend due to lack of memory. In Perl, circular
+ references are a common cause of memory leaks. Circular references are
+ allowed in Perl, but data structures containing circular references will leak
+ memory unless the programmer takes specific measures to prevent leaks.
+ Preventive measures include weakening the references and arranging to break
+ the reference cycle just before the structure is destroyed. When using
+ circular references, it is easy to misdesign or misimplement a scheme for
+ preventing memory leaks. Mistakes of this kind have been hard to detect in a
+ test suite. Test::Weaken allows easy detection of unfreed Perl data and
+ allows you to examine the unfreed data, even data that would usually have
+ been made inaccessible.

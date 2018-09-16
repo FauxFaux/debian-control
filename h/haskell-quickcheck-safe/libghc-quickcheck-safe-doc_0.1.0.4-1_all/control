@@ -1,0 +1,29 @@
+Package: libghc-quickcheck-safe-doc
+Source: haskell-quickcheck-safe
+Version: 0.1.0.4-1
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 273
+Depends: haddock-interface-31
+Recommends: ghc-doc, libghc-quickcheck2-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: http://hackage.haskell.org/package/QuickCheck-safe
+Description: Safe reimplementation of QuickCheck's core; documentation
+ QuickCheck-safe reimplements the quickCheck functionality with a pure
+ interface and a very small trusted base (see Test.QuickCheck.Safe.Trusted).
+ .
+ * uses the existing Arbitrary instances
+ * implemented features: testing, result minimization (i.e., shrinking)
+ * missing features: expected failures, label frequencies, coverage
+ .
+ The package is targeted at users who want to leverage SafeHaskell for
+ sandboxing.
+ .
+   >>> putStr $ quickCheck (inventQCGen ()) (\x -> length (x :: [()]) < 10)
+   *** Failed! Falsifiable (after 18 tests and 3 shrinks):
+   [(),(),(),(),(),(),(),(),(),(),(),(),(),(),()]
+ .
+ This package provides the documentation for a library for the Haskell
+ programming language.
+ See http://www.haskell.org/ for more information on Haskell.

@@ -1,0 +1,45 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" -o "$1" = "remove" ]; then
+    for binary in lockmail preline; do
+	update-alternatives --remove $binary /usr/bin/$binary.courier
+    done
+fi
+
+if [ ! -f /etc/courier/module.fax ]; then
+    # fax module configuration file is missing, courier
+    # will not shutdown properly, therefore we are using
+    # this kludge
+    start-stop-daemon --stop --oknodo --exec /usr/lib/courier/courier/courierd 
+fi
+
+# Automatically added by dh_installinit/11.1.4
+if [ -x "/etc/init.d/courier-msa" ]; then
+	invoke-rc.d courier-msa stop || exit 1
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.1.4
+if [ -x "/etc/init.d/courier-mta-ssl" ]; then
+	invoke-rc.d courier-mta-ssl stop || exit 1
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.1.4
+if [ -x "/etc/init.d/courier-mta" ]; then
+	invoke-rc.d courier-mta stop || exit 1
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.1.4
+if [ -x "/etc/init.d/courierfilter" ]; then
+	invoke-rc.d courierfilter stop || exit 1
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.1.4
+if [ -x "/etc/init.d/courier" ]; then
+	invoke-rc.d courier stop || exit 1
+fi
+# End automatically added section
+
+
+exit 0

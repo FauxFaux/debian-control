@@ -1,0 +1,32 @@
+Package: draai
+Version: 20180521-1
+Architecture: all
+Maintainer: Joost van Baal-Ilić <joostvb@debian.org>
+Installed-Size: 143
+Depends: mpc, zsh, unsort, perl:any
+Suggests: xterm | x-terminal-emulator, at
+Enhances: mpc
+Section: sound
+Priority: optional
+Homepage: http://mdcc.cx/draai/
+Description: Command-line music player for MPD
+ Draai is a wrapper around mpc, making playing music from the commandline more
+ enjoyable.  mpc is a client for MPD, the Music Player Daemon.  Using draai,
+ one can play an audiofile (ogg, mp3, whatever your MPD offers), play all
+ files in a predefined playlist, view details on current, past and future
+ playing songs, skip to the next song, etc.
+ .
+ The interface is purely command-line.  No fancy gui's whatsoever.  Draai
+ consists of one zsh shell script, calling mpc.
+ .
+ Main differences with mpc: draai supports smooth fadeouts, draai can be used
+ as an alarmclock, draai supports rescheduling a track as the upcoming track,
+ draai offers fancy status windows.  When draai starts playing the next song
+ it informs syslog about it, including all details about the song; a "tail -F"
+ on syslog yields a nice playlist history.  Like mpc, draai comes with full
+ zsh tabcompletion support.  The author uses draai for doing DJ sets in clubs.
+ If you, like the author, are a Unix sysadmin who likes to play music, you'll
+ like draai.
+ .
+ Next to draai itself, the package installs some extra utilities for dealing
+ with audio files.

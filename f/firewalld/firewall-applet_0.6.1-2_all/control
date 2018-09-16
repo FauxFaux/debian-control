@@ -1,0 +1,23 @@
+Package: firewall-applet
+Source: firewalld
+Version: 0.6.1-2
+Architecture: all
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 271
+Depends: firewall-config (= 0.6.1-2), firewalld (= 0.6.1-2), gir1.2-nm-1.0, gir1.2-notify-0.7, python3-dbus, python3-gi, python3-pyqt5, python3-dbus.mainloop.pyqt5, python3-slip-dbus, python3:any
+Breaks: firewalld (<< 0.3.14.2-1~)
+Replaces: firewalld (<< 0.3.14.2-1~)
+Section: net
+Priority: optional
+Homepage: http://www.firewalld.org/
+Description: panel applet providing status information of firewalld
+ firewalld is a dynamically managed firewall daemon with support for
+ network/firewall zones to define the trust level of network connections
+ or interfaces. It has support for IPv4, IPv6 firewall settings and for
+ ethernet bridges and has a separation of runtime and persistent
+ configuration options.
+ It also provides a D-Bus interface for services or applications to add
+ and apply firewall rules on-the-fly.
+ .
+ This package provides a panel applet which shows status information
+ of firewalld.

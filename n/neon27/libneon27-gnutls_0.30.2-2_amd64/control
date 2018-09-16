@@ -1,0 +1,38 @@
+Package: libneon27-gnutls
+Source: neon27
+Version: 0.30.2-2
+Architecture: amd64
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 250
+Depends: libc6 (>= 2.14), libcomerr2 (>= 1.01), libgnutls30 (>= 3.5.6), libgssapi-krb5-2 (>= 1.14+dfsg), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.6.dfsg.2), libxml2 (>= 2.7.4), zlib1g (>= 1:1.1.4)
+Recommends: ca-certificates
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.webdav.org/neon/
+Description: HTTP and WebDAV client library (GnuTLS enabled)
+ neon is an HTTP and WebDAV client library, with a C language API.
+ .
+ WARNING: THE NEON API IS NOT YET STABLE.
+ .
+ Provides lower-level interfaces to directly implement new HTTP
+ methods, and higher-level interfaces so that you don't have to
+ worry about the lower-level stuff.
+ .
+ Current features:
+   * High-level interface to HTTP and WebDAV methods (PUT, GET, HEAD, etc.)
+   * Low-level interface to HTTP request handling, to allow implementing
+     new methods easily.
+   * persistent connections
+   * RFC2617 basic and digest authentication (including auth-int, md5-sess)
+   * Proxy support (including basic/digest authentication)
+   * SSL/TLS support using GnuTLS (including client certificate and thread
+     safety support)
+   * Generic WebDAV 207 XML response handling mechanism
+   * XML parsing using the expat or libxml parsers
+   * Easy generation of error messages from 207 error responses
+   * WebDAV resource manipulation: MOVE, COPY, DELETE, MKCOL.
+   * WebDAV metadata support: set and remove properties, query any set ofi
+     properties (PROPPATCH/PROPFIND).
+   * autoconf macros supplied for easily embedding neon directly inside an
+     application source tree.

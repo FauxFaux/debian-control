@@ -1,0 +1,15 @@
+Package: libmail-verify-perl
+Version: 0.02-5.1
+Architecture: all
+Maintainer: Alexander Wirt <formorer@debian.org>
+Installed-Size: 18
+Depends: perl, libnet-dns-perl
+Section: perl
+Priority: optional
+Description: Utility to verify an email address
+ Mail::Verify provides a function CheckAddress function for verifying
+ email addresses. First the syntax of the email address is checked, then
+ it verifies that there is at least one valid MX server accepting email
+ for the domain. Using Net::DNS and IO::Socket a list of MX records (or,
+ falling back on a hosts A record) are checked to make sure at least one
+ SMTP server is accepting connections.

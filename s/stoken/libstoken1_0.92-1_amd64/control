@@ -1,0 +1,26 @@
+Package: libstoken1
+Source: stoken
+Version: 0.92-1
+Architecture: amd64
+Maintainer: Kevin Cernekee <cernekee@gmail.com>
+Installed-Size: 75
+Depends: libc6 (>= 2.8), libtomcrypt1, libxml2 (>= 2.7.4)
+Breaks: stoken (<< 0.5)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://stoken.sf.net/
+Description: Software Token for cryptographic authentication - shared library
+ stoken is a software token which generates one-time passwords compatible
+ with RSA SecurID 128-bit (AES) tokens.  SecurID tokens are commonly
+ used to authenticate end users to protected network resources and VPNs,
+ as OTPs provide greater resistance to many attacks associated with static
+ passwords.
+ .
+ stoken aims to provide a Linux-friendly, free software alternative to the
+ proprietary RSA SecurID Software Authenticators.
+ .
+ This package provides a shared library allowing other applications, such
+ as VPN clients and web browsers, to generate tokencodes.  This can improve
+ both ease of use and security, as the user does not need to copy and paste
+ tokencodes between applications.

@@ -1,0 +1,26 @@
+Package: netsniff-ng
+Version: 0.6.4-2
+Architecture: amd64
+Maintainer: Daniel Borkmann <daniel.borkmann@alumni.ethz.ch>
+Installed-Size: 1925
+Depends: libc6 (>= 2.15), libcli1.9 (>= 1.9.1), libgeoip1, libncurses6 (>= 6), libnet1 (>= 1.1.2.1), libnetfilter-conntrack3, libnfnetlink0, libnl-3-200 (>= 3.2.7), libnl-genl-3-200 (>= 3.2.7), libnl-route-3-200 (>= 3.2.7), libpcap0.8 (>= 0.9.8), libsodium23 (>= 0.6.0), libtinfo6 (>= 6), liburcu6 (>= 0.10.0), zlib1g (>= 1:1.2.3.3)
+Recommends: ntp
+Section: net
+Priority: optional
+Homepage: http://netsniff-ng.org/
+Description: Linux network packet sniffer toolkit
+ netsniff-ng is a high performance Linux network sniffer for packet inspection.
+ It can be used for protocol analysis, reverse engineering or network
+ debugging. The gain of performance is reached by 'zero-copy' mechanisms, so
+ that the kernel does not need to copy packets from kernelspace to userspace.
+ .
+ netsniff-ng toolkit currently consists of the following utilities:
+ .
+  * netsniff-ng: a zero-copy packet analyzer, pcap capturing/replaying tool
+  * trafgen: a multithreaded low-level zero-copy network packet generator
+  * mausezahn: high-level packet generator for appliances with Cisco-CLI
+  * ifpps: a top-like kernel networking and system statistics tool
+  * curvetun: a lightweight curve25519-based multiuser IP tunnel
+  * astraceroute: an autonomous system trace route and DPI testing utility
+  * flowtop: a top-like netfilter connection tracking tool
+  * bpfc: a [seccomp-]BPF (Berkeley packet filter) compiler, JIT disassembler

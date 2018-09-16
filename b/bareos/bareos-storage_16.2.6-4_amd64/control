@@ -1,0 +1,24 @@
+Package: bareos-storage
+Source: bareos
+Version: 16.2.6-4
+Architecture: amd64
+Maintainer: Bareos Packaging Team <pkg-bareos-devel@lists.alioth.debian.org>
+Installed-Size: 322
+Pre-Depends: debconf (>= 1.4.30) | debconf-2.0, adduser
+Depends: bareos-common (= 16.2.6-4), lsb-base (>= 3.2-13), lsof, libc6 (>= 2.14), libcap2 (>= 1:2.10), libgcc1 (>= 1:3.0), libgnutls30 (>= 3.5.0), libjansson4 (>= 2.0.1), liblzo2-2, libstdc++6 (>= 5), libwrap0 (>= 7.6-4~), zlib1g (>= 1:1.1.4)
+Conflicts: bacula-sd
+Breaks: bareos-storage-tape (<< 14.2.6~)
+Replaces: bacula-sd
+Section: admin
+Priority: optional
+Homepage: http://www.bareos.org/
+Description: Backup Archiving Recovery Open Sourced - storage daemon
+ Bareos is a set of programs to manage backup, recovery and verification of
+ data across a network of computers of different kinds.
+ .
+ The storage daemon performs the storage and recovery of the file
+ attributes and data to the physical media; in other words, it is
+ responsible for reading and writing the backups.
+ .
+ It runs on the machine which has access to the backup device(s) - usually
+ a tape drive, but alternatively other storage media, such as files.

@@ -1,0 +1,24 @@
+Package: autoproject
+Version: 0.20-10
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 318
+Depends: automake | automaken
+Section: devel
+Priority: optional
+Homepage: http://jrv.oddones.org
+Description: create a skeleton source package for a new program
+ autoproject interviews the user, then creates a source package for
+ a new program which follows the GNU programming standards. The new
+ package uses autoconf to configure itself, and automake to create
+ the Makefile.
+ .
+ The idea is that you execute autoproject just once when you start
+ a new project.  It will ask a few questions, then create a new
+ directory and populate it with standard files, customized for the
+ new project.
+ .
+ Optionally, the new package will use a command line parser generator.
+ Currently, autoproject supports two parser generators: clig by Harald
+ Kirsch <kir@iitb.fhg.de> (see http://wsd.iitb.fhg.de/software/), and
+ autogen by Bruce Korb <bkorb@gnu.org> (see  http://autogen.sf.net/).

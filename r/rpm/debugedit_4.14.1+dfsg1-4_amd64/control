@@ -1,0 +1,18 @@
+Package: debugedit
+Source: rpm
+Version: 4.14.1+dfsg1-4
+Architecture: amd64
+Maintainer: RPM packaging team <team+pkg-rpm@tracker.debian.org>
+Installed-Size: 1308
+Depends: libc6 (>= 2.14), libdw1 (>= 0.167), libelf1 (>= 0.144), libpopt0 (>= 1.14), librpmio8 (= 4.14.1+dfsg1-4)
+Suggests: rpm-i18n
+Breaks: rpm (<< 4.11.1-2)
+Replaces: rpm (<< 4.11.1-2)
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://rpm.org/
+Description: tool to mangle source locations in .debug files
+ This tool allows rewriting of source code locations in .debug files
+ to point to /usr/src (or anywhere else). It has been split out of the
+ rpm package to be useful on its own.

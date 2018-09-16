@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# post-remove script for Debian Slash'EM
+#
+# Peter Makholm (peter@makholm.net) 14. Marts 1999
+# This script is released under GPLv2 or later
+#
+
+set -e
+
+# Source debconf library to make debconf work.
+[ -e /usr/share/debconf/confmodule ] && . /usr/share/debconf/confmodule
+
+if [ "$1" = "purge" ]; then
+    echo -n "Purging high-scores and save-files for Slash'EM... "
+    rm -rf /var/games/slashem/
+    echo "done."
+fi
+
+# Automatically added by dh_installinit/11.2.1
+if [ "$1" = "purge" ] ; then
+	update-rc.d slashem-common remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.2.1
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+

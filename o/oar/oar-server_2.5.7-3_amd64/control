@@ -1,0 +1,18 @@
+Package: oar-server
+Source: oar
+Version: 2.5.7-3
+Architecture: amd64
+Maintainer: Pierre Neyron <pierre.neyron@free.fr>
+Installed-Size: 885
+Depends: libc6 (>= 2.3.4), perl, openssh-client, cron, lsb-base, libsort-versions-perl, libdbi-perl, oar-common (= 2.5.7-3), oar-server-pgsql (= 2.5.7-3) | oar-server-mysql (= 2.5.7-3), perl (<< 5.17) | libterm-ui-perl
+Recommends: libxml-dumper-perl, libyaml-perl, libyaml-syck-perl
+Suggests: taktuk, phpmyadmin, oar-node, oar-doc, openssh-server
+Breaks: oar-admin
+Section: utils
+Priority: extra
+Homepage: http://oar.imag.fr/
+Description: OAR batch scheduler server package
+ OAR is a versatile resource and task manager (also called a batch scheduler)
+ for clusters and other computing infrastructures
+ .
+ This package installs the server part of the OAR batch scheduler

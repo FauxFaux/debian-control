@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+# remove this unconditionally because its changed with multiarch
+(update-alternatives --remove-all mpi ) || true
+(update-alternatives --remove-all mpi-x86_64-linux-gnu ) || true
+
+
+
+exit 0

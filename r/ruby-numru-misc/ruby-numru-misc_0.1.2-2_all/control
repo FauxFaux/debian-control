@@ -1,0 +1,26 @@
+Package: ruby-numru-misc
+Version: 0.1.2-2
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 69
+Depends: ruby-narray, ruby-narray-miss
+Section: ruby
+Priority: optional
+Homepage: http://ruby.gfd-dennou.org/products/numru-misc/
+Description: Miscellaneous functions and classes to help Ruby programming
+ The module "NumRu::Misc" provides miscellaneous functions and classes to
+ facilitate programming for Ruby.
+   - NumRu::Misc::KeywordOpt
+     A class to facilitate optional keyword arguments. More specifically,
+     it helps the use of a Hash to mimic the keyword argument system.
+     With this, you can set default values and description to each
+     keyword argument.
+   - NArray Enhanchement
+   - NumRu::Misc::MD_Iterators
+     A Mixin. To be included in a class with multi-dimension indexing
+     support (such as NArray).
+   - NumRu::Misc::EMath
+     To be included instead of the Math predefined module (or NMath in
+     NArray). Unlike Math and NMath, EMath handles unknown classes by
+     calling its native instance method (assuming the same name).
+Ruby-Versions: all

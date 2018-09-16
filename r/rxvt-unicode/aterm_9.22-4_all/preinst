@@ -1,0 +1,28 @@
+#!/bin/sh -e
+set -e
+
+case $1 in
+    upgrade)
+        # We're transitioning from an ancient version of aterm to something
+        # post-transition.
+        if dpkg --compare-versions $2 lt 1.0.1dummy1; then
+            update-alternatives --remove aterm /usr/bin/aterm-xterm
+            update-alternatives --remove x-terminal-emulator /usr/bin/aterm-xterm
+            # Remove those from aterm-ml as well.
+            update-alternatives --remove aterm /usr/bin/katerm
+            update-alternatives --remove aterm /usr/bin/caterm
+            update-alternatives --remove aterm /usr/bin/gaterm
+            update-alternatives --remove aterm /usr/bin/taterm
+            update-alternatives --remove x-terminal-emulator /usr/bin/katerm
+            update-alternatives --remove x-terminal-emulator /usr/bin/caterm
+            update-alternatives --remove x-terminal-emulator /usr/bin/gaterm
+            update-alternatives --remove x-terminal-emulator /usr/bin/taterm
+        fi
+        ;;
+    *)
+    ;;
+esac
+
+
+
+exit 0

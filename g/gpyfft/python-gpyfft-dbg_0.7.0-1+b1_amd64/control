@@ -1,0 +1,21 @@
+Package: python-gpyfft-dbg
+Source: gpyfft (0.7.0-1)
+Version: 0.7.0-1+b1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 283
+Depends: python-dbg (<< 2.8), python-gpyfft (= 0.7.0-1+b1), python-numpy-dbg, python-pyopencl-dbg, python-numpy (>= 1:1.14.3), python-numpy-abi9, python-dbg (>= 2.7~), python-dbg:any (<< 2.8), python-dbg:any (>= 2.7~), libc6 (>= 2.4), libclfft2
+Suggests: python-gpyfft-doc
+Section: debug
+Priority: optional
+Homepage: https://github.com/geggo/gpyfft
+Description: Wrapper for the OpenCL FFT library clFFT (Python 2 debug)
+ This python wrapper is designed to tightly integrate with
+ PyOpenCL. It consists of a low-level Cython based wrapper with an
+ interface similar to the underlying C library. On top of that it
+ offers a high-level interface designed to work on data contained in
+ instances of pyopencl.array.Array, a numpy work-alike array class for
+ GPU computations. The high-level interface takes some inspiration
+ from pyFFTW. For details of the high-level interface see fft.py.
+ .
+ This package installs the library for Python 2 debug.

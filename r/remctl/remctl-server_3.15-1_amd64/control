@@ -1,0 +1,21 @@
+Package: remctl-server
+Source: remctl
+Version: 3.15-1
+Architecture: amd64
+Maintainer: Russ Allbery <rra@debian.org>
+Installed-Size: 251
+Depends: libc6 (>= 2.26), libevent-2.1-6 (>= 2.1.8-stable), libgssapi-krb5-2 (>= 1.14+dfsg), libkrb5-3 (>= 1.6.dfsg.2), libpcre3, libsystemd0, update-inetd | inet-superserver, netbase (>= 4.31)
+Recommends: openbsd-inetd | inet-superserver, tcpd
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.eyrie.org/~eagle/software/remctl/
+Description: Server for Kerberos-authenticated command execution
+ remctl is a client/server protocol for executing specific commands on a
+ remote system with Kerberos authentication.  The allowable commands must
+ be listed in a server configuration file, and the executable run on the
+ server may be mapped to any command name.  Each command is also
+ associated with an ACL containing a list of Kerberos principals
+ authorized to run that command.
+ .
+ This package contains the server (remctld).

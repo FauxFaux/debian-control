@@ -1,0 +1,26 @@
+Package: guacamole
+Source: guacamole-client
+Version: 0.9.9+dfsg-1
+Architecture: all
+Maintainer: Debian Remote Maintainers <pkg-remote-team@lists.alioth.debian.org>
+Installed-Size: 6218
+Depends: debconf, guacd, libatinject-jsr330-api-java, libcommons-codec-java, libguava-java, libguice-java, libjackson-json-java, libjersey1-core-java, libjersey1-guice-java, libjersey1-json-java, libjersey1-server-java, libjs-angularjs, libjs-jquery, libjs-lodash, libjsr311-api-java, liblogback-java, libservlet3.1-java, libslf4j-java, tomcat8, debconf (>= 0.5) | debconf-2.0
+Recommends: apache2 | httpd
+Suggests: xrdp
+Enhances: xrdp
+Conflicts: guacamole-tomcat
+Provides: guacamole-tomcat
+Section: net
+Priority: optional
+Homepage: http://guacamole.incubator.apache.org/
+Description: HTML5 web application for accessing remote desktops
+ Guacamole is an HTML5 web application that provides access to a desktop
+ environment using remote desktop protocols. A centralized server acts as a
+ tunnel and proxy, allowing access to multiple desktops through a web browser.
+ No plugins are needed: the client requires nothing more than a web browser
+ supporting HTML5 and AJAX.
+ .
+ This package contains the web application itself and depends on the
+ guacd proxy daemon, which allows communication with various backend
+ protocols. It also configures a Tomcat instance and provides web server
+ configuration for Apache.

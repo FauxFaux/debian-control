@@ -1,0 +1,26 @@
+Package: wine-binfmt
+Source: wine
+Version: 3.0.2-3
+Architecture: all
+Maintainer: Debian Wine Team <debian-wine@lists.debian.org>
+Installed-Size: 97
+Depends: wine, binfmt-support
+Section: otherosfs
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.winehq.org
+Description: Activate Wine as interpreter for Windows executables
+ Wine is a free MS-Windows API implementation.
+ This is still a work in progress and many applications may still not work.
+ .
+ This package registers Wine as interpreter for Windows executables, using
+ the kernel binfmt_misc module.  This causes Wine to be invoked automatically
+ whenever a matching file is executed.
+ .
+ WARNING:  This increases the risk of inadvertently launching Windows
+ malware, so please make sure that you understand the security risks before
+ blindly installing this package.
+ .
+ This feature is probably most interesting for automatic software testing.
+ Desktop users usually don't need it, so don't install wine-binfmt unless you
+ know that you need it.  Refer to Wine's README.debian for more information.

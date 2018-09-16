@@ -1,0 +1,31 @@
+Package: libgxps-utils
+Source: libgxps
+Version: 0.3.0-2
+Architecture: amd64
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Installed-Size: 162
+Depends: libc6 (>= 2.11), libcairo2 (>= 1.10.0), libglib2.0-0 (>= 2.37.3), libgxps2 (>= 0.2.1), libjpeg62-turbo (>= 1.3.1), libpng16-16 (>= 1.6.2-1)
+Section: utils
+Priority: optional
+Homepage: https://wiki.gnome.org/libgxps
+Description: handling and rendering XPS documents (utilities)
+ OpenXPS or XPS stands for XML Paper Specification. It is based on XML and it's
+ a new electronic paper format originally developed by Microsoft and it serves
+ as a PDF alternative. XPS files are usually created using "Microsoft XPS
+ Document Writer" in Windows environments. It is now standardized as an open
+ standard document format.
+ .
+ Quoting Wikipedia:
+ An XPS file is in fact a Unicoded ZIP archive using the Open Packaging
+ Conventions, containing the files which make up the document. These include an
+ XML markup file for each page, text, embedded fonts, raster images, 2D vector
+ graphics, as well as the digital rights management information. The contents
+ of an XPS file can be examined simply by opening it in an application which
+ supports ZIP files.
+ .
+ The OpenXPS document format specification supports features such as color
+ gradients, transparencies, CMYK color spaces, printer calibration,
+ multiple-ink systems and print schemas.
+ .
+ This package contains the binary utilities:
+ xpstopng, xpstopdf, xpstosvg, xpstojpeg and xpstops

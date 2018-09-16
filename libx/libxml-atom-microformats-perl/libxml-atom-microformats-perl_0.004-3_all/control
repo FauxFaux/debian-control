@@ -1,0 +1,20 @@
+Package: libxml-atom-microformats-perl
+Version: 0.004-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 49
+Depends: perl, libhtml-microformats-perl, libjson-perl, librdf-trine-perl, librdf-query-perl, libxml-atom-owl-perl, libxml-libxml-perl (>= 1.95+dfsg)
+Recommends: librdf-rdfa-parser-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/XML-Atom-Microformats
+Description: parse microformats in Atom content
+ The XML::Atom::Microformats module brings the functionality of
+ HTML::Microformats to Atom 1.0 Syndication feeds. It finds microformats
+ embedded in the <content> elements (note: not <summary>) of Atom
+ entries.
+ .
+ The general pattern of usage is to create an XML::Atom::Microformats
+ object (which corresponds to an Atom 1.0 feed) using the "new_feed"
+ method; then ask for the data, as a Perl hashref, a JSON string, or an
+ RDF::Trine model.

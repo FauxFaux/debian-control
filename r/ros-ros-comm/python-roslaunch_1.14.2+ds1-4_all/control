@@ -1,0 +1,21 @@
+Package: python-roslaunch
+Source: ros-ros-comm
+Version: 1.14.2+ds1-4
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 400
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~), python-rosclean, rosout, python-rospkg, python-rosgraph, python-roslib, python-rosmaster, python-rosgraph-msgs, python-netifaces, python-rosparam, python-yaml
+Section: python
+Priority: optional
+Multi-Arch: allowed
+Homepage: https://wiki.ros.org/ros_comm
+Description: roslaunch tool for Robot OS
+ This package is part of Robot OS (ROS). roslaunch is a tool for
+ easily launching multiple ROS nodes locally and remotely via SSH, as
+ well as setting parameters on the Parameter Server. It includes
+ options to automatically respawn processes that have already died.
+ roslaunch takes in one or more XML configuration files (with the
+ launch extension) that specify the parameters to set and nodes to
+ launch, as well as the machines that they should be run on.
+ .
+ This package contains the roscore program.

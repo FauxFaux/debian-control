@@ -1,0 +1,16 @@
+Package: libtest-tempdir-perl
+Version: 0.10-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 43
+Depends: perl, libfile-nfslock-perl, libmoose-perl, libmoosex-types-path-class-perl, libnamespace-autoclean-perl, libpath-class-perl, libsub-exporter-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-TempDir
+Description: Perl module that creates temporary files for testing
+ Test::TempDir provides temporary directory creation with testing in mind.
+ .
+ The differences between this module and File::Temp are:
+  * prevent race conditions when running parallel tests harness
+  * empty directory before running tests
+  * files are not cleaned at the end of the tests if they fail

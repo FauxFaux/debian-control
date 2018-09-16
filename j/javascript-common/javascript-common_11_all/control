@@ -1,0 +1,15 @@
+Package: javascript-common
+Version: 11
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 68
+Suggests: apache2 (>= 2.4.6~) | lighttpd | httpd
+Section: web
+Priority: optional
+Description: Base support for JavaScript library packages
+ Web applications that use JavaScript need to distribute it through HTTP. Using
+ a common path for every script avoids the need to enable this path in the HTTP
+ server for every package.
+ .
+ This is a helper package that creates /usr/share/javascript and enables it in
+ the Apache and Lighttpd webserver.

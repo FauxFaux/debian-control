@@ -1,0 +1,24 @@
+Package: sbox-dtc
+Source: sbox-dtc (1.11.7-1)
+Version: 1.11.7-1+b2
+Architecture: amd64
+Maintainer: Thomas Goirand <zigo@debian.org>
+Installed-Size: 927
+Depends: debconf (>= 0.5) | debconf-2.0, debconf, passwd, libc6 (>= 2.4), libdotconf0 (>= 1.0.13)
+Recommends: apache2 | httpd-cgi
+Section: web
+Priority: extra
+Homepage: http://www.gplhost.com/software-sboxdtc.html
+Description: CGI chroot wrapper script for safer hosting environment
+ Sbox is a CGI wrapper script that helps Web site hosting services to safely
+ grant CGI authoring privileges to untrusted clients. In addition to changing
+ the process privileges of client scripts to match their owners, it goes beyond
+ other wrappers by placing configurable ceilings on script resource usage,
+ avoiding unintentional (as well as intentional) denial of service attacks. It
+ also optionally let the Webmaster to place client's CGI scripts in a chroot'ed
+ shell restricted to the author's home directories.
+ .
+ Thanks to a cleaver per-vhost configuration, SBOX is also capable of being
+ highly customizable on a per web site level. SBOX also runs Ruby, Perl, Python
+ and PHP script using their respective interpreter, with a configurable path
+ for each of them.

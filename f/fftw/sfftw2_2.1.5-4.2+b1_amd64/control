@@ -1,0 +1,21 @@
+Package: sfftw2
+Source: fftw (2.1.5-4.2)
+Version: 2.1.5-4.2+b1
+Architecture: amd64
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 554
+Depends: libc6 (>= 2.14), libopenmpi3
+Suggests: mpi-defaults-bin, sfftw-dev
+Conflicts: fftw2 (<= 2.1.3-10), fftw2-single
+Provides: fftw2-single
+Section: oldlibs
+Priority: extra
+Homepage: http://fftw.org
+Description: library for computing Fast Fourier Transforms
+ This library computes Fast Fourier Transforms (FFT) in one or more dimensions.
+ It is extremely fast. This package contains the shared library version of the
+ fftw libraries in single precision.
+ .
+ To get the static library and the header files you need to install sfftw-dev.
+ .
+ For documentation and test programs, install fftw-docs

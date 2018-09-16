@@ -1,0 +1,20 @@
+Package: openalpr-daemon
+Source: openalpr
+Version: 2.3.0-1.1
+Architecture: amd64
+Maintainer: Matthew Hill <matthill@openalpr.com>
+Installed-Size: 249
+Depends: libopenalpr2 (= 2.3.0-1.1), libc6 (>= 2.14), libcurl4 (>= 7.16.2), libgcc1 (>= 1:3.0), liblept5, liblog4cplus-1.1-9, libopencv-calib3d3.2, libopencv-contrib3.2, libopencv-core3.2, libopencv-features2d3.2, libopencv-flann3.2, libopencv-highgui3.2, libopencv-imgcodecs3.2, libopencv-imgproc3.2, libopencv-ml3.2, libopencv-objdetect3.2, libopencv-photo3.2, libopencv-shape3.2, libopencv-stitching3.2, libopencv-superres3.2, libopencv-video3.2, libopencv-videoio3.2, libopencv-videostab3.2, libopencv-viz3.2, libstdc++6 (>= 5.2), libtesseract4, adduser, beanstalkd
+Section: video
+Priority: optional
+Homepage: https://github.com/openalpr/openalpr
+Description: Daemon to run OpenALPR in the background
+ OpenALPR is an open source Automatic License Plate Recognition library written
+ in C++. The library analyzes images and identifies license plates. The output
+ is the text representation of any license plate characters found in the image.
+ .
+ The OpenALPR daemon allows you to monitor a camera stream for license plate
+ numbers in the background. Alprd runs as a daemon process on Linux.
+ .
+ The plate numbers can be streamed to another server (via HTTP posts) or can be
+ consumed programmatically via a beanstalkd queue.

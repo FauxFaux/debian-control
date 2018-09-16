@@ -1,0 +1,28 @@
+Package: flatzinc
+Source: gecode
+Version: 6.0.1-1
+Architecture: amd64
+Maintainer: Kari Pahula <kaol@debian.org>
+Installed-Size: 109
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgecode47, libgecodeflatzinc47, libgecodegist47, libgmp10, libmpfr6 (>= 3.1.3), libstdc++6 (>= 5.2)
+Recommends: minizinc
+Replaces: libgecode-dev (<< 3.7.0)
+Section: devel
+Priority: optional
+Homepage: http://www.gecode.org/flatzinc.html
+Description: constraint problem modelling language
+ FlatZinc is a low-level modelling language for constraint
+ problems. It is designed to be easily interfaceable to constraint
+ solvers (like Gecode). For more information on FlatZinc, please refer
+ to the MiniZinc pages of the G12 project
+ <http://www.g12.cs.mu.oz.au/minizinc/>.
+ .
+ We provide a parser that reads a FlatZinc model from a file, and
+ returns a Gecode Space object that represents the model. We also
+ provide a simple front-end, an executable program that reads a
+ FlatZinc model and prints the solution (if any) on the standard
+ output.
+ .
+ The FlatZinc interpreter that ships with Gecode version 4.4.0
+ supports the FlatZinc language and MiniZinc global constraint
+ definitions of MiniZinc version 1.6.0.

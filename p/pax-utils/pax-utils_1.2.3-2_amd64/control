@@ -1,0 +1,18 @@
+Package: pax-utils
+Version: 1.2.3-2
+Architecture: amd64
+Maintainer: Tomasz Buchert <tomasz@debian.org>
+Installed-Size: 278
+Depends: binutils, libc6 (>= 2.27), libcap2 (>= 1:2.10)
+Suggests: paxctl
+Section: misc
+Priority: optional
+Homepage: https://wiki.gentoo.org/wiki/Hardened/PaX_Utilities
+Description: Security-focused ELF files checking tool
+ This is a small set of various PaX aware and related utilities for ELF
+ binaries. It can check ELF binary files and running processes for
+ issues that might be relevant when using ELF binaries along with PaX,
+ such as non-PIC code or executable stack and heap.
+ .
+ This package installs: dumpelf, lddtree, pspax, scanelf, scanmacho
+ and symtree.

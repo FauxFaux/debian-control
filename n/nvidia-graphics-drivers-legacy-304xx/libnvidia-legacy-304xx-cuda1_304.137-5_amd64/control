@@ -1,0 +1,29 @@
+Package: libnvidia-legacy-304xx-cuda1
+Source: nvidia-graphics-drivers-legacy-304xx
+Version: 304.137-5
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 10085
+Depends: nvidia-support, nvidia-legacy-304xx-alternative (= 304.137-5), libc6 (>= 2.2.5), zlib1g (>= 1:1.1.4)
+Recommends: nvidia-legacy-304xx-kernel-dkms (= 304.137-5) | nvidia-legacy-304xx-kernel-304.137, nvidia-legacy-304xx-smi, nvidia-persistenced, libnvidia-legacy-304xx-cuda1-i386
+Suggests: nvidia-cuda-mps, nvidia-legacy-304xx-kernel-dkms (>= 304.137) | nvidia-legacy-304xx-kernel-source (>= 304.137)
+Provides: libcuda-5.0-1, libcuda1-any
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com/CUDA
+Description: NVIDIA CUDA Driver Library (304xx legacy version)
+ The Compute Unified Device Architecture (CUDA) enables NVIDIA
+ graphics processing units (GPUs) to be used for massively parallel
+ general purpose computation.
+ .
+ This package contains the CUDA Driver API library for low-level CUDA
+ programming.
+ .
+ Supported NVIDIA devices include GPUs starting from GeForce 8 and Quadro FX
+ series, as well as the Tesla computing processors.
+ .
+ Please see the nvidia-legacy-304xx-kernel-dkms or
+ nvidia-legacy-304xx-kernel-source packages
+ for building the kernel module required by this package.
+ This will provide nvidia-legacy-304xx-kernel-304.137.

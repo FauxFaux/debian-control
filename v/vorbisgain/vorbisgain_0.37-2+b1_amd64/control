@@ -1,0 +1,19 @@
+Package: vorbisgain
+Source: vorbisgain (0.37-2)
+Version: 0.37-2+b1
+Architecture: amd64
+Maintainer: Daniel Martí <mvdan@mvdan.cc>
+Installed-Size: 72
+Depends: libc6 (>= 2.14), libogg0 (>= 1.0rc3), libvorbis0a (>= 1.1.2), libvorbisfile3 (>= 1.1.2)
+Section: sound
+Priority: optional
+Homepage: http://sjeng.org/vorbisgain.html
+Description: add Replay Gain volume tags to Ogg Vorbis files
+ vorbisgain calculates a percieved volume of an Ogg Vorbis file using
+ the Replay Gain algorithm. It then stores a per-track and per-album
+ volume adjustment in the file's tags, to let songs play back  with a
+ uniform volume. The process is non-destructive and does not change the
+ audio data at all.
+ .
+ Many audio players in Debian support reading these tags, including XMMS,
+ Quod Libet, amaroK, Muine, and Rhythmbox.

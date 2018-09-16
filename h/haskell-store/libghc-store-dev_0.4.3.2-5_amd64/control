@@ -1,0 +1,40 @@
+Package: libghc-store-dev
+Source: haskell-store
+Version: 0.4.3.2-5
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 9522
+Depends: libghc-array-dev-0.5.2.0-26dc0, libghc-async-dev-2.1.1.1-3e78d, libghc-base-dev-4.10.1.0-35a7f, libghc-base-orphans-dev-0.7-ad004, libghc-base64-bytestring-dev-1.0.0.1-e7f64, libghc-bytestring-dev-0.10.8.2-4a9e2, libghc-conduit-dev-1.3.0.3-b0809, libghc-containers-dev-0.5.10.2-cc496, libghc-contravariant-dev-1.4.1-a4c61, libghc-cryptohash-dev-0.11.9-63364, libghc-deepseq-dev-1.4.3.0-38379, libghc-directory-dev-1.3.0.2-60cb0, libghc-filepath-dev-1.4.1.2-f4919, libghc-free-dev-5.0.2-392aa, libghc-ghc-prim-dev-0.5.1.1-c8f3d, libghc-hashable-dev-1.2.7.0-6cb51, libghc-hspec-dev-2.4.8-32d37, libghc-hspec-smallcheck-dev-0.5.0-ece82, libghc-integer-gmp-dev-1.0.1.0-9c3d9, libghc-lifted-base-dev-0.2.3.12-7ba7d, libghc-monad-control-dev-1.0.2.3-18c64, libghc-mono-traversable-dev-1.0.8.1-4271b, libghc-network-dev-2.6.3.5-a1fbb, libghc-primitive-dev-0.6.4.0-ae1a7, libghc-resourcet-dev-1.2.1-e377b, libghc-safe-dev-0.3.17-73e3c, libghc-semigroups-dev-0.18.4-c7396, libghc-smallcheck-dev-1.1.4-767d3, libghc-store-core-dev-0.4.4-6576a, libghc-streaming-commons-dev-0.1.19-f744b, libghc-syb-dev-0.7-06df4, libghc-template-haskell-dev-2.12.0.0-22576, libghc-text-dev-1.2.3.0-81981, libghc-th-lift-dev-0.7.10-ed3ef, libghc-th-lift-instances-dev-0.1.11-9ad65, libghc-th-orphans-dev-0.13.6-95084, libghc-th-reify-many-dev-0.1.8-9aa0b, libghc-th-utilities-dev-0.2.0.1-d53eb, libghc-time-dev-1.8.0.2-7cc03, libghc-transformers-dev-0.5.2.0-e0457, libghc-unordered-containers-dev-0.2.9.0-d1c8f, libghc-vector-dev-0.12.0.1-c53f0, libghc-void-dev-0.7.2-5d64d, libc6 (>= 2.14), libgmp10, zlib1g (>= 1:1.1.4)
+Suggests: libghc-store-doc, libghc-store-prof
+Provides: libghc-store-dev-0.4.3.2-ab8b5
+Section: haskell
+Priority: optional
+Homepage: https://github.com/fpco/store
+Description: Fast binary serialization
+ The 'store' package provides efficient binary serialization. There are a
+ couple features that particularly distinguish it from most prior Haskell
+ serialization libraries:
+ .
+  * Its primary goal is speed. By default, direct machine representations
+    are used for things like numeric values (Int, Double, Word32, etc)
+    and buffers (Text, ByteString, Vector, etc). This means that much of
+    serialization uses the equivalent of memcpy.
+  * Instead of implementing lazy serialization / deserialization involving
+    multiple input / output buffers, peek and poke always work with a
+    single buffer. This buffer is allocated by asking the value for its
+    size before encoding. This simplifies the encoding logic, and allows
+    for highly optimized tight loops.
+  * store can optimize size computations by knowing when some types always
+    use the same number of bytes. This allows for computing the byte size
+    of a `Vector Int32` by just doing `length v * 4`.
+ .
+ It also features:
+ .
+  * Optimized serialization instances for many types from base, vector,
+    bytestring, text, containers, time, template-haskell, and more.
+  * TH and GHC Generics based generation of Store instances for datatypes
+  * TH generation of testcases
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: store-0.4.3.2-K54YjLPD7m0HjcpVA1l7O9

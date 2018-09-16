@@ -1,0 +1,48 @@
+Package: jack-tools
+Source: jack-tools (20131226-1)
+Version: 20131226-1+b2
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 245
+Depends: libc6 (>= 2.14), libjack-jackd2-0 (>= 1.9.10+20150825) | libjack-0.125, liblo7 (>= 0.26~repack), libncurses6 (>= 6), libsamplerate0 (>= 0.1.7), libsndfile1 (>= 1.0.20), libtinfo6 (>= 6), libx11-6, libxext6, jackd
+Section: sound
+Priority: optional
+Homepage: http://slavepianos.org/rd/?t=rju
+Description: various JACK tools: dl, record, scope, osc, plumbing, udp, play, transport
+ jack-tools is a collection of small tools for the JACK Audio Connection
+ Kit.
+ .
+ JACK allows the connection of multiple applications to an audio device,
+ as well as allowing them to share audio between themselves.
+ .
+ jack-dl loads dsp algorithms from shared libraries.  Commands are sent
+ as OSC packets over a UDP connection.
+ .
+ jack-record is a light-weight JACK capture client to write an arbitrary
+ number of channels to disk.
+ .
+ jack-scope draws either a time domain signal trace or a self
+ correlation trace.  Multiple input channels are superimposed, each
+ channel is drawn in a different color.  jack-scope accepts OSC packets
+ for interactive control of drawing parameters.
+ .
+ jack-osc publishes the transport state of the local JACK server as OSC
+ packets over a UDP connection.  jack-osc allows any OSC enabled
+ application to act as a JACK transport client, receiving sample
+ accurate pulse stream timing data, and monitoring and initiating
+ transport state change.
+ .
+ jack-plumbing maintains a set of port connection rules and manages
+ these as clients register ports with JACK.  Port names are implicitly
+ bounded regular expressions and support sub-expression patterns.
+ .
+ jack-udp is a UDP audio transport mechanism for JACK.  jack-udp is
+ obsolete: use net driver instead.
+ .
+ jack-play is a light-weight JACK sound file player. It creates as many
+ output ports as there are channels in the input file.
+ .
+ jack-transport is a JACK session manager.  It reads configuration
+ information from a system wide and a user specific configuration file
+ and manages sessions involving the JACK daemon proper and optionally a
+ set of secondary jack daemons.

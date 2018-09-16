@@ -1,0 +1,19 @@
+Package: fastqtl
+Version: 2.184+dfsg-6
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 652
+Depends: libblas3 | libblas.so.3, libboost-iostreams1.62.0, libboost-program-options1.62.0, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgsl23 (>= 2.5), libhts2 (>= 1.0), libstdc++6 (>= 5.2), r-mathlib, zlib1g (>= 1:1.1.4)
+Suggests: fastqtl-doc
+Section: science
+Priority: optional
+Homepage: http://fastqtl.sourceforge.net/
+Description: Quantitative Trait Loci (QTL) mapper in cis for molecular phenotypes
+ The goal of FastQTL is to identify single-nucleotide polymorphisms (SNPs)
+ which are significantly associated with various molecular phenotypes
+ (i.e. expression of known genes, cytosine methylation levels, etc).
+ It performs scans for all possible phenotype-variant pairs in cis
+ (i.e. variants located within a specific window around a phenotype).
+ FastQTL implements a new permutation scheme (Beta approximation) to accurately
+ and rapidly correct for multiple-testing at both the genotype and phenotype
+ levels.

@@ -1,0 +1,18 @@
+Package: libdata-validate-struct-perl
+Version: 0.1-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: perl, libdata-validate-ip-perl (>= 0.18), libdata-validate-perl, libregexp-common-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Data-Validate-Struct
+Description: module to validate recursive hash structures
+ Data::Validate::Struct validates a hash reference against a given hash
+ structure. This is in contrast to Data::Validate in which you have to check
+ each value separately.
+ .
+ The hash could be the result of a config parser or just any hash structure.
+ E.g. the hash returned by XML::Simple could be validated using this module.
+ You may also use it to validate CGI input; just fetch the input data from
+ CGI, map it to a hash and validate it.

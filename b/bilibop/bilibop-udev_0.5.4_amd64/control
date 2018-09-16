@@ -1,0 +1,28 @@
+Package: bilibop-udev
+Source: bilibop
+Version: 0.5.4
+Architecture: amd64
+Maintainer: Yann Amar <quidame@poivron.org>
+Installed-Size: 31
+Depends: bilibop-common (= 0.5.4)
+Suggests: bilibop-lockfs
+Provides: bilibop-device-policy
+Section: admin
+Priority: optional
+Homepage: https://un.poivron.org/~quidame/wiki/bilibop
+Description: minimal udev rule for Debian GNU/Linux running from external media
+ Bilibop helps to maintain a Debian GNU/Linux operating system installed
+ on an external media (USB, FireWire, Flash memory, eSATA). It hardens
+ standard rules and policies to make the system more robust in this
+ particular situation.
+ .
+ This package provides a udev rules file to manage the external drive hosting
+ the running system. Its goal is to forbid low-level write access on this
+ drive and its partitions by any unprivileged user or application.
+ .
+ This package is not designed to be used on internal disks. It works only
+ for OS installed on removable and writable media, especially LiveUSB systems
+ and disk images provided by most vendors of popular ARM-based development
+ boards. See also the bilibop-rules package.
+ .
+ Some features may require Linux kernel 2.6.37 or higher to work properly.

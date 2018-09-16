@@ -1,0 +1,37 @@
+Package: libarpack2
+Source: arpack
+Version: 3.6.2-1
+Architecture: amd64
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 329
+Depends: libblas3 | libblas.so.3, libc6 (>= 2.27), libgcc1 (>= 1:3.0), libgfortran5 (>= 8), liblapack3 | liblapack.so.3, libquadmath0 (>= 4.6)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/opencollab/arpack-ng
+Description: Fortran77 subroutines to solve large scale eigenvalue problems
+ ARPACK software is capable of solving large scale symmetric,
+ nonsymmetric, and generalized eigenproblems from significant
+ application areas. The software is designed to compute a few (k)
+ eigenvalues with user specified features such as those of largest
+ real part or largest magnitude. Storage requirements are on the order
+ of n*k locations. No auxiliary storage is required. A set of Schur
+ basis vectors for the desired k-dimensional eigen-space is computed
+ which is numerically orthogonal to working precision. Numerically
+ accurate eigenvectors are available on request.
+ .
+ Important Features:
+ .
+  * Reverse Communication Interface.
+  * Single and Double Precision Real Arithmetic Versions for Symmetric,
+    Non-symmetric,
+  * Standard or Generalized Problems.
+  * Single and Double Precision Complex Arithmetic Versions for Standard or
+    Generalized Problems.
+  * Routines for Banded Matrices - Standard or Generalized Problems.
+  * Routines for The Singular Value Decomposition.
+  * Example driver routines that may be used as templates to implement
+    numerous Shift-Invert strategies for all problem types, data types and
+    precision.
+ .
+ This package contains the shared library.

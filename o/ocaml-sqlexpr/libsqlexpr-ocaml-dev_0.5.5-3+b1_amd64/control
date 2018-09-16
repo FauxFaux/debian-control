@@ -1,0 +1,25 @@
+Package: libsqlexpr-ocaml-dev
+Source: ocaml-sqlexpr (0.5.5-3)
+Version: 0.5.5-3+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 1149
+Depends: libbatteries-ocaml-dev-sgbg8, libcamlp4-ocaml-dev-w0ou6, libcsv-ocaml-dev-dkq57, libestring-ocaml-dev-04wq1, liblwt-ocaml-dev-wwm00, libresult-ocaml-dev-ciso5, libsqlexpr-ocaml-ynx93, libsqlite3-ocaml-dev-fg2a5, ocaml-nox-4.05.0, libc6 (>= 2.2.5)
+Recommends: ocaml-findlib
+Provides: libsqlexpr-ocaml-dev-ynx93
+Section: ocaml
+Priority: optional
+Homepage: http://github.com/mfp/ocaml-sqlexpr
+Description: type-safe, convenient SQLite database access (development)
+ Minimalistic library and syntax extension for type-safe, convenient execution
+ of SQL statements. Currently compatible with Sqlite3.
+ .
+ Sqlexpr features:
+  * automated prepared statement caching, param binding, data extraction, error
+    checking (including automatic stmt reset to avoid BUSY/LOCKED errors in
+    subsequent queries), stmt finalization on db close, etc.
+  * HOFs like iter, fold, transaction
+  * support for different concurrency models: everything is functorized over a
+    THREAD monad, so you can for instance do concurrent folds/iters with Lwt
+  * support for SQL stmt syntax checks and some extra semantic checking (column
+    names, etc)

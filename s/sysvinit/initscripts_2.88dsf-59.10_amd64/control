@@ -1,0 +1,16 @@
+Package: initscripts
+Source: sysvinit
+Version: 2.88dsf-59.10
+Architecture: amd64
+Maintainer: Debian sysvinit maintainers <pkg-sysvinit-devel@lists.alioth.debian.org>
+Installed-Size: 205
+Depends: mount (>= 2.11x-1), debianutils (>= 4), lsb-base (>= 3.2-14), sysvinit-utils (>= 2.88dsf-59.5), sysv-rc | file-rc | openrc, coreutils (>= 5.93)
+Recommends: psmisc, e2fsprogs
+Breaks: hurd (<< 0.5.git20131101~), ifupdown (<< 0.7.46), util-linux (<< 2.26.2-4~)
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://savannah.nongnu.org/projects/sysvinit
+Description: scripts for initializing and shutting down the system
+ The scripts in this package initialize a standard Debian
+ system at boot time and shut it down at halt or reboot time.

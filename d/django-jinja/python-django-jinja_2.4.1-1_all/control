@@ -1,0 +1,25 @@
+Package: python-django-jinja
+Source: django-jinja
+Version: 2.4.1-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 102
+Depends: python-django (>= 1.8), python-jinja2, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://github.com/niwibe/django-jinja
+Description: Jinja2 templating language integrated in Django
+ Jinja2 provides certain advantages over the native system of Django, for
+ example, explicit calls to callable from templates, has better performance
+ and has a plugin system
+ .
+ Features:
+ .
+    * Auto-load templatetags compatible with Jinja2 on same way as Django.
+    * Django templates can coexist with Jinja2 templates without any problems.
+      It works as middleware, intercepts Jinja templates by file path pattern.
+    * Django template filters and tags can mostly be used in Jinja2 templates.
+    * I18n subsystem adapted for Jinja2 (makemessages now collects messages
+      from Jinja templates)
+    * Compatible with python2 and python3 using same codebase.
+    * jinja2 bytecode cache adapted for use django cache subsystem.

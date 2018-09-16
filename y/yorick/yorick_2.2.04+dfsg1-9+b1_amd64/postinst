@@ -1,0 +1,52 @@
+#!/bin/sh
+set -e
+if [ "$1" = "configure" ] && [ -x "`which update-yorickdoc 2>/dev/null`" ]; then
+	update-yorickdoc --auto
+fi
+# Automatically added by dh_installmenu/11.2.1
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+# Automatically added by dh_usrlocal/11.2.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ]; then
+(
+	default_mode=0755
+	default_user=root
+	default_group=root
+	if [ -e /etc/staff-group-for-usr-local ]; then
+		default_mode=02775
+		default_group=staff
+	fi
+	while read line; do
+		set -- $line
+		dir="$1"; mode="$2"; user="$3"; group="$4"
+		if [ "$mode" = "default" ]; then
+			mode="$default_mode"
+			user="$default_user"
+			group="$default_group"
+		fi
+		if [ ! -e "$dir" ]; then
+			if mkdir "$dir" 2>/dev/null; then
+				if chown "$user":"$group" "$dir" ; then
+					chmod "$mode" "$dir" || true
+				fi
+			fi
+		fi
+	done
+) << DATA
+/usr/local/lib default
+/usr/local/lib/yorick default
+/usr/local/lib/yorick/contrib default
+/usr/local/lib/yorick/data default
+/usr/local/lib/yorick/glade default
+/usr/local/lib/yorick/i default
+/usr/local/lib/yorick/i-start default
+/usr/local/lib/yorick/i0 default
+/usr/local/lib/yorick/lib default
+/usr/local/lib/yorick/packages default
+/usr/local/lib/yorick/python default
+DATA
+fi
+# End automatically added section
+

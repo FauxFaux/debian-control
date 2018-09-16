@@ -1,0 +1,26 @@
+Package: python-mode
+Version: 1:6.2.3-1
+Architecture: all
+Maintainer: Barry Warsaw <barry@debian.org>
+Installed-Size: 1146
+Depends: emacsen-common (>= 2.0.8), python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Recommends: pychecker, pymacs (>= 0.22-6)
+Suggests: pylint, python-ropemacs
+Conflicts: python-elisp, python1.5-elisp, python2.1-elisp, python2.2-elisp
+Replaces: python-elisp, python1.5-elisp, python2.1-elisp, python2.2-elisp
+Provides: python-elisp
+Section: python
+Priority: optional
+Homepage: https://launchpad.net/python-mode/
+Description: Python mode for GNU Emacs and XEmacs
+ Provides a major mode for GNU Emacs and XEmacs to edit, debug, and develop
+ Python programs and doctests.
+ .
+ If you install this with XEmacs 21, it will replace the included
+ python-mode.el, which may or may not be a more recent version
+ (use "C-h v py-version" to compare).
+ .
+ Since this package automagically loads after Python mode shipped with
+ GNU emacs >= 22, installation of this package makes python-mode's
+ mode the default for editing Python code in emacs.
+Python-Version: 2.7

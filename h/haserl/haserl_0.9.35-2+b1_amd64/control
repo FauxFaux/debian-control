@@ -1,0 +1,25 @@
+Package: haserl
+Source: haserl (0.9.35-2)
+Version: 0.9.35-2+b1
+Architecture: amd64
+Maintainer: Chow Loong Jin <hyperair@debian.org>
+Installed-Size: 79
+Depends: libc6 (>= 2.14), liblua5.2-0, debconf (>= 0.5) | debconf-2.0
+Recommends: lua5.2
+Section: interpreters
+Priority: optional
+Homepage: http://haserl.sourceforge.net/
+Description: CGI scripting program for embedded environments
+ Haserl is a CGI wrapper that allows PHP-style programming in Lua or a
+ POSIX-compliant shell. It is very small, so it can be used in embedded
+ environments, or where something like PHP is too big.
+ .
+ It combines three features into a small CGI engine:
+  * It parses POST and GET requests, placing form-elements into the
+    environment as name=value pairs for the CGI script to use. This is
+    somewhat similar to the uncgi wrapper.
+  * It opens a shell, and translates all text into printable statements.
+    All text within <% ... %> constructs is passed verbatim to the shell.
+    This is somewhat similar to how PHP scripts are parsed.
+  * It can be set up to drop its permissions to the owner of the script,
+    giving it some of the security features of suexec or cgiwrapper.

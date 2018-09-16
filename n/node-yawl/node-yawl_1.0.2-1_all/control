@@ -1,0 +1,23 @@
+Package: node-yawl
+Version: 1.0.2-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 51
+Depends: nodejs, node-pend (>= 1.2.0), node-bl (>= 0.9.3)
+Section: web
+Priority: extra
+Homepage: https://github.com/andrewrk/node-yawl
+Description: yet another web sockets library
+ yawl is a Node.js module which provides an API to create a web socket server
+ and a web socket client. It is RFC 6455 compliant with two exceptions:
+ .
+ First, it uses Node.js's built in UTF-8 decoding instead of strictly closing
+ the connection when decoding errors occur.
+ .
+ Second, the "payload length" field is limited to 2 to the power of 52 instead
+ of 2 to the power of 64.
+ .
+ yawl uses streams and handles backpressure correctly. It is a pure JavaScript
+ implementation.
+ .
+ Node.js is an event-based server-side JavaScript engine.

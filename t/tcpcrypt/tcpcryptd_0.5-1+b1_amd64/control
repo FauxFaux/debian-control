@@ -1,0 +1,19 @@
+Package: tcpcryptd
+Source: tcpcrypt (0.5-1)
+Version: 0.5-1+b1
+Architecture: amd64
+Maintainer: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+Installed-Size: 164
+Depends: adduser, libtcpcrypt0 (= 0.5-1+b1), init-system-helpers (>= 1.18~), libc6 (>= 2.15), libcap2 (>= 1:2.10), libnetfilter-conntrack3, libnetfilter-queue1, libnfnetlink0, libpcap0.8 (>= 1.0.0), libssl1.1 (>= 1.1.0)
+Section: net
+Priority: optional
+Homepage: http://tcpcrypt.org/
+Description: Opportunistically encrypt network transport
+ Tcpcrypt offers opportunistic security for TCP network traffic.  All
+ traffic between two tcpcrypt-enabled peers will be encrypted to
+ protect against passive monitoring.  tcpcrypt also exposes a strong
+ session identifier to tcpcrypt-aware clients and servers, which can
+ be used as a hook for authentication.
+ .
+ This package contains the network daemon, which will accept and wrap
+ traffic redirected to it.

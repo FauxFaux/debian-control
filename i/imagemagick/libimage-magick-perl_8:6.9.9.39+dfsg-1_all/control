@@ -1,0 +1,25 @@
+Package: libimage-magick-perl
+Source: imagemagick
+Version: 8:6.9.9.39+dfsg-1
+Architecture: all
+Maintainer: ImageMagick Packaging Team <pkg-gmagick-im-team@lists.alioth.debian.org>
+Installed-Size: 98
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: perl, imagemagick-6-common (= 8:6.9.9.39+dfsg-1), libimage-magick-q16-perl
+Suggests: imagemagick-doc
+Breaks: perlmagick (<< 8:6.8.3.10-1~)
+Replaces: perlmagick (<< 8:6.8.3.10-1~)
+Provides: perlmagick
+Section: perl
+Priority: optional
+Multi-Arch: allowed
+Homepage: https://www.imagemagick.org/
+Description: Perl interface to the ImageMagick graphics routines
+ PerlMagick is an objected-oriented Perl interface to ImageMagick.
+ Use the module to read, manipulate, or write an image or image sequence from
+ within a Perl script. This makes it very suitable for Web CGI scripts.
+ .
+ This is the compatibility (wrapper) perlmagick package that
+ use the default channel depth.
+ .
+ This package provides the perl Image::Magick class.

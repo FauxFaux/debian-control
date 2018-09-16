@@ -1,0 +1,20 @@
+Package: slapd
+Source: openldap
+Version: 2.4.46+dfsg-5
+Architecture: amd64
+Maintainer: Debian OpenLDAP Maintainers <pkg-openldap-devel@lists.alioth.debian.org>
+Installed-Size: 15351
+Pre-Depends: debconf (>= 0.5) | debconf-2.0
+Depends: libc6 (>= 2.14), libdb5.3, libgnutls30 (>= 3.5.0), libldap-2.4-2 (= 2.4.46+dfsg-5), libltdl7 (>= 2.4.6), libodbc1 (>= 2.3.1), libperl5.26 (>= 5.26.0~rc1), libsasl2-2, libwrap0 (>= 7.6-4~), coreutils (>= 4.5.1-1), psmisc, perl (>> 5.8.0) | libmime-base64-perl, adduser, lsb-base (>= 3.2-13)
+Recommends: libsasl2-modules
+Suggests: ldap-utils, libsasl2-modules-gssapi-mit | libsasl2-modules-gssapi-heimdal
+Conflicts: ldap-server, libltdl3 (= 1.5.4-1), umich-ldapd
+Replaces: ldap-utils (<< 2.2.23-3), libldap2
+Provides: ldap-server, libslapi-2.4-2
+Section: net
+Priority: optional
+Homepage: http://www.openldap.org/
+Description: OpenLDAP server (slapd)
+ This is the OpenLDAP (Lightweight Directory Access Protocol) server
+ (slapd). The server can be used to provide a standalone directory
+ service.

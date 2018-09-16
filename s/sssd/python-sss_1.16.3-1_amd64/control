@@ -1,0 +1,22 @@
+Package: python-sss
+Source: sssd
+Version: 1.16.3-1
+Architecture: amd64
+Maintainer: Debian SSSD Team <pkg-sssd-devel@alioth-lists.debian.net>
+Installed-Size: 224
+Depends: python (<< 2.8), python (>= 2.7~), python:any (<< 2.8), python:any (>= 2.7~), libc6 (>= 2.4), libldb1 (>= 0.9.21), libpopt0 (>= 1.14), libpython2.7 (>= 2.7), libselinux1 (>= 1.32), libtalloc2 (>= 2.0.4~git20101213)
+Recommends: sssd
+Provides: python2.7-sss
+Section: python
+Priority: optional
+Homepage: https://pagure.io/SSSD/sssd/
+Description: Python module for the System Security Services Daemon
+ Provides a set of daemons to manage access to remote directories and
+ authentication mechanisms. It provides an NSS and PAM interface toward
+ the system and a pluggable backend system to connect to multiple different
+ account sources. It is also the basis to provide client auditing and policy
+ services for projects like FreeIPA.
+ .
+ This package provide a module to access the configuration of the sssd daemon.
+ .
+ This package installs the library for Python 2.

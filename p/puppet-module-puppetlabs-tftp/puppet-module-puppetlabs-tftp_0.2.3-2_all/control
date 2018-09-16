@@ -1,0 +1,26 @@
+Package: puppet-module-puppetlabs-tftp
+Version: 0.2.3-2
+Architecture: all
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 55
+Depends: puppet-common, puppet-module-puppetlabs-stdlib, puppet-module-puppetlabs-xinetd
+Section: admin
+Priority: extra
+Homepage: https://github.com/puppetlabs/puppetlabs-tftp
+Description: Puppet module for managing tftp-hpa
+ Puppet lets you centrally manage every important aspect of your system using a
+ cross-platform specification language that manages all the separate elements
+ normally aggregated in different files, like users, cron jobs, and hosts,
+ along with obviously discrete elements like packages, services, and files.
+ .
+ This module will install tftp-hpa as a xinetd service by default. It can be
+ overridden to run as a standalone daemon by setting the inetd parameter to
+ false.
+ .
+ Parameters:
+  * username: tftp daemon user, default tftp
+  * directory: service directory, default see params class.
+  * address: bind address, default 0.0.0.0.
+  * port: bind port, default 69.
+  * options: service option, default --secure.
+  * inetd: run service via xinetd, default true.

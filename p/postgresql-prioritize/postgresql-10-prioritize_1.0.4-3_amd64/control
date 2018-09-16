@@ -1,0 +1,14 @@
+Package: postgresql-10-prioritize
+Source: postgresql-prioritize
+Version: 1.0.4-3
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <pkg-postgresql-public@lists.alioth.debian.org>
+Installed-Size: 40
+Depends: libc6 (>= 2.2.5), postgresql-10
+Section: database
+Priority: optional
+Homepage: http://pgxn.org/dist/prioritize/
+Description: Get and set the nice priorities of PostgreSQL backends
+ This module implements an interface to getpriority() and setpriority() for
+ PostgreSQL backends, callable from SQL functions. Essentially, this module
+ allows users to `renice' their backends.

@@ -1,0 +1,26 @@
+Package: aspell
+Version: 0.60.7~20110707-5
+Architecture: amd64
+Maintainer: Brian Nelson <pyro@debian.org>
+Installed-Size: 1062
+Depends: libaspell15 (= 0.60.7~20110707-5), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libncursesw6 (>= 6), libstdc++6 (>= 5), libtinfo6 (>= 6), dictionaries-common (>> 0.40)
+Recommends: aspell-en | aspell-dictionary | aspell6a-dictionary
+Suggests: aspell-doc, spellutils
+Breaks: aspell-bin (<< 0.60.3-2)
+Replaces: aspell-bin (<< 0.60.3-2), aspell-hi (<= 0.01-1), aspell-mr (<= 0.10-1)
+Provides: aspell-bin
+Section: text
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://aspell.net/
+Description: GNU Aspell spell-checker
+ GNU Aspell is a spell-checker which can be used either as a standalone
+ application or embedded in other programs.  Its main feature is that it
+ does a much better job of suggesting possible spellings than just about
+ any other spell-checker available for the English language, including
+ Ispell and Microsoft Word.  It also has many other technical
+ enhancements over Ispell such as using shared memory for dictionaries
+ and intelligently handling personal dictionaries when more than one
+ Aspell process is open at once.
+ .
+ Aspell is designed to be a drop-in replacement for Ispell.

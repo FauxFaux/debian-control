@@ -1,0 +1,21 @@
+Package: autocutsel
+Version: 0.10.0-2
+Architecture: amd64
+Maintainer: Elmar S. Heeb <elmar@heebs.ch>
+Installed-Size: 59
+Depends: libc6 (>= 2.14), libice6 (>= 1:1.0.0), libsm6, libx11-6, libxaw7, libxext6, libxmu6, libxt6
+Enhances: emacsen, vnc-viewer
+Section: x11
+Priority: optional
+Homepage: http://www.nongnu.org/autocutsel/
+Description: Keep the X clipboard and the cutbuffer in sync
+ This tracks changes in the server's cutbuffer and clipboard
+ selection. when the clipboard is changed, it updates the
+ cutbuffer. When the cutbuffer is changed, it owns the clipboard
+ selection. The cutbuffer and clipboard selection are always
+ synchronized. In the case of a VNC client since it synchronizes the
+ Windows' clipboard and the server's cutbuffer, all three "clipboards"
+ are always kept synchronized. When you copy some text in Windows, the
+ cutbuffer and the clipboard selection are updated. When you copy text
+ on the server using either the cutbuffer or the clipboard selection,
+ the Windows's clipboard is always updated.

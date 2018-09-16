@@ -1,0 +1,14 @@
+Package: libvm-ec2-security-credentialcache-perl
+Version: 0.23-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 21
+Depends: perl, libdatetime-format-iso8601-perl, libvm-ec2-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/VM-EC2-Security-CredentialCache
+Description: EC2 credential cache respecting expiration time for IAM roles
+ VM::EC2::Security::CredentialCache provides a cache for an EC2's IAM
+ credentials represented by VM::EC2::Security::Credentials. Rather than
+ retriving the credentials for every possible call that uses them, cache them
+ until they expire and retrieve them again if they have expired.

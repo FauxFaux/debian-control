@@ -1,0 +1,19 @@
+Package: xbuilder
+Version: 1.0.1
+Architecture: all
+Maintainer: Wookey <wookey@debian.org>
+Installed-Size: 102
+Depends: sbuild | xdeb | pdebuild-cross, dctrl-tools
+Recommends: make
+Section: utils
+Priority: optional
+Description: Tool to cross-build a list of packages using sbuild, xdeb or pdebuild-cross
+ This package contains scripts to run a batch-job of cross-builds,
+ using various methods, on a list of source packages. It also has a
+ simple cross-bootstraping helper (using build-profiles), and scripts
+ for generating html tables summarising the results of a build run, and
+ generating the packagelists to build.
+ .
+ It is not a proper buildd, or smart in any way, just really a
+ collection of scripts wrtten for a particular task. Nevertheless they
+ remain useful for this particular job.

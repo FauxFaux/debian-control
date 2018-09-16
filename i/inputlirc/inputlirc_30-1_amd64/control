@@ -1,0 +1,15 @@
+Package: inputlirc
+Version: 30-1
+Architecture: amd64
+Maintainer: Guus Sliepen <guus@debian.org>
+Installed-Size: 74
+Depends: libc6 (>= 2.15)
+Suggests: lirc, input-utils
+Section: utils
+Priority: optional
+Description: Zeroconf LIRC daemon using input event devices
+ This is a small LIRC-compatible daemon that reads from /dev/input/eventX
+ devices and sends the received keycodes to connecting LIRC clients. Inputlircd
+ needs no configuration, it uses the standardised names for the keycodes as
+ used by the kernel. Many USB remote controls that present HID devices, as well
+ as multimedia keyboards should work out of the box.

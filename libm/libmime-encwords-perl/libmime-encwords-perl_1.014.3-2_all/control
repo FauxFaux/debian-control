@@ -1,0 +1,23 @@
+Package: libmime-encwords-perl
+Version: 1.014.3-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 111
+Depends: perl, libmime-charset-perl (>= 1.010.1)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MIME-EncWords
+Description: Perl interface to deal with RFC 2047 encoded words
+ MIME::EncWords is a module providing several utilities to encode and decode
+ arbitrary text in RFC 2047 (formerly RFC 1522) format. The MIME standard gives
+ users the ability to represent any characters in any character set by using
+ special sequences like:
+ .
+  =?ISO-8859-1?Q?Keld_J=F8rn_Simonsen?=
+ .
+ There are various modules available to manipulate these special character
+ sequences. This module bears most resemblance to the MIME::Words module and
+ provides a similar interface, providing for relatively painless upgrading,
+ while having stricter conformance to the aforementioned RFCs. It provides
+ more flexibility than MIME::WordDecoder because characters can be mapped
+ into any desired encoding, rather than simply the local system representation.

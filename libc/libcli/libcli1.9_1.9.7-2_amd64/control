@@ -1,0 +1,23 @@
+Package: libcli1.9
+Source: libcli
+Version: 1.9.7-2
+Architecture: amd64
+Maintainer: Jonathan McDowell <noodles@earth.li>
+Installed-Size: 56
+Depends: libc6 (>= 2.15)
+Conflicts: libcli1
+Replaces: libcli1
+Provides: libcli1
+Section: libs
+Priority: optional
+Multi-Arch: same
+Description: emulates a cisco style telnet command-line interface
+ libcli provides a consistent Cisco style command-line environment for
+ remote clients, with a few common features between every implemtation.
+ .
+ The library is not accessed by itself, rather the software which uses
+ it listens on a defined port for a Telnet connection. This connection
+ is handed off to libcli for processing.
+ .
+ libcli includes support for command history, command line editing and
+ filtering of command output.

@@ -1,0 +1,25 @@
+Package: r-other-hms-dbmi-spp
+Source: r-other-hms-dbmi-spp (1.15.2-1)
+Version: 1.15.2-1+b1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 442
+Depends: r-base-core (>= 3.5.0-5), r-api-3.5, r-cran-rcpp, r-bioc-rsamtools, r-cran-catools, libbz2-1.0, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), zlib1g (>= 1:1.1.4)
+Section: gnu-r
+Priority: optional
+Homepage: http://compbio.med.harvard.edu/Supplements/ChIP-seq/
+Description: GNU R ChIP-seq processing pipeline
+ R package for anlaysis of ChIP-seq and other functional sequencing data
+  * Assess overall DNA-binding signals in the data and select appropriate
+    quality of tag alignment.
+  * Discard or restrict positions with abnormally high number of tags.
+  * Calculate genome-wide profiles of smoothed tag density and save them
+    in WIG files for viewing in other browsers.
+  * Calculate genome-wide profiles providing conservative statistical
+    estimates of fold enrichment ratios along the genome. These can be
+    exported for browser viewing, or thresholded to determine regions of
+    significant enrichment/depletion.
+  * Determine statistically significant point binding positions
+  * Assess whether the set of point binding positions detected at a
+    current sequencing depth meets saturation criteria, and if does not,
+    estimate what sequencing depth would be required to do so.

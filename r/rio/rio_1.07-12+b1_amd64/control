@@ -1,0 +1,28 @@
+Package: rio
+Source: rio (1.07-12)
+Version: 1.07-12+b1
+Architecture: amd64
+Maintainer: Vince Mulhollon <vlm@debian.org>
+Installed-Size: 58
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:4.1.1), libstdc++6 (>= 4.1.1)
+Section: sound
+Priority: optional
+Description: Command line Diamond Rio MP3 player controller
+ rio is a Diamond Rio MP3 CLI controller program
+ The home website is http://www.world.co.uk/sba
+ This program supports file uploads and downloads, on both
+ the Classic Rio and the 64 Meg Rio, and supports plug in cards.
+ .
+ The default port is 0x378, if your rio is plugged into a
+ different port, you will need to use the -p option.
+ .
+ This program directly controls various IOports.  The program need to
+ be run as root, or setuid root.
+ .
+ If you execute the following line as root after package installation,
+ the program will be setuid root.
+ .
+ chmod 4755 /usr/bin/rio
+ .
+ Do NOT do that unless you understand the security implications of a
+ setuid binary that can "easily" overwrite any system file.

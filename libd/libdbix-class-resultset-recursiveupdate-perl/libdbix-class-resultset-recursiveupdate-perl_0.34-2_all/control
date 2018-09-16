@@ -1,0 +1,19 @@
+Package: libdbix-class-resultset-recursiveupdate-perl
+Version: 0.34-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 87
+Depends: perl, libcarp-clan-perl, libdbix-class-introspectablem2m-perl, libdbix-class-perl, liblist-moreutils-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/DBIx-Class-ResultSet-RecursiveUpdate
+Description: module for recursive updates of DBIx::Class::ResultSets
+ You can feed the ->create method of DBIx::Class with a recursive
+ datastructure and have the related records created. Unfortunately you cannot
+ do a similar thing with update_or_create.
+ .
+ DBIx::Class::ResultSet::RecursiveUpdate tries to fill that void.
+ .
+ It is a base class for DBIx::Class::ResultSet providing the method
+ recursive_update which works just like update_or_create but can recursively
+ update or create result objects composed of multiple rows.

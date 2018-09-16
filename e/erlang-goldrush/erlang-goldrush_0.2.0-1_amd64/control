@@ -1,0 +1,29 @@
+Package: erlang-goldrush
+Version: 0.2.0-1
+Architecture: amd64
+Maintainer: Ejabberd Packaging Team <ejabberd@packages.debian.org>
+Installed-Size: 114
+Depends: erlang-base | erlang-abi-17.0, erlang-base (>= 1:20.3.8.1+dfsg) | erlang-base-hipe (>= 1:20.3.8.1+dfsg), erlang-syntax-tools (>= 1:20.3.8.1+dfsg)
+Section: libs
+Priority: optional
+Homepage: https://github.com/DeadZen/goldrush
+Description: small Erlang app that provides fast event stream processing
+ Goldrush is a small Erlang app that provides fast event stream processing
+ .
+ Features:
+  * Event processing compiled to a query module
+   - per module protected event processing statistics
+   - query module logic can be combined for any/all filters
+   - query module logic can be reduced to efficiently match event processing
+  * Complex event processing logic
+   - match input events with greater than (gt) logic
+   - match input events with less than (lt) logic
+   - match input events with equal to (eq) logic
+   - match input events with wildcard (wc) logic
+   - match input events with notfound (nf) logic
+   - match no input events (null blackhole) logic
+   - match all input events (null passthrough) logic
+  * Handle output events
+   - Once a query has been composed the output action can be overridden
+     with an erlang function. The function will be applied to each
+     output event from the query.

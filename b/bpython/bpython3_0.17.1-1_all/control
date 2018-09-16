@@ -1,0 +1,30 @@
+Package: bpython3
+Source: bpython
+Version: 0.17.1-1
+Architecture: all
+Maintainer: Sebastian Ramacher <sramacher@debian.org>
+Installed-Size: 717
+Depends: python3-pkg-resources, python3-six (>= 1.5), python3-curtsies, python3-greenlet, python3-pygments, python3-requests, python3:any (>= 3.3.2-2~)
+Recommends: python3-watchdog
+Suggests: python3-jedi
+Section: python
+Priority: optional
+Homepage: http://bpython-interpreter.org/
+Description: fancy interface to the Python 3 interpreter
+ bpython is a fancy interface to the Python interpreter, and has the
+ following features:
+ .
+   * In-line syntax highlighting.
+   * Readline-like autocomplete with suggestions displayed as you type
+   * Expected parameter list for any Python function. Uses pydoc to attempt to
+     divine params for C functions.
+   * "Rewind" function to pop the last line of code from memory and re-evaluate.
+     Note: this is only really useful when laying out classes and functions,
+     since a true "undo" function is impossible, so be careful when using this.
+   * Send the code you've entered off to a pastebin and display the pastebin URL
+     for copying, etc.
+   * Save the code you've entered to a file.
+   * Auto-indentation.
+   * Anti-Crash Mode.
+ .
+ This package contains bpython for Python 3.

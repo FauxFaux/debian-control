@@ -1,0 +1,26 @@
+Package: libfccp-dev
+Source: fast-cpp-csv-parser
+Version: 0.0+git20160525~9bf299c-2
+Architecture: all
+Maintainer: Jörg Frings-Fürst <debian@jff.email>
+Installed-Size: 121
+Section: libdevel
+Priority: optional
+Homepage: https://github.com/ben-strasser/fast-cpp-csv-parser
+Description: Fast C++ CSV Parser
+ fast-cpp-cvs-parser is a small, easy-to-use and fast header-only
+ library for reading comma separated value (CSV) files. The library
+ is completely contained inside a single header file. The library
+ can used with a standard conformant C++11 compiler.
+ .
+ Feature list:
+  * Automatically rearranges columns by parsing the header line.
+  * Disk I/O and CSV-parsing are overlapped using threads for efficiency.
+  * Parsing features such as escaped strings can be enabled and disabled
+    at compile time using templates.
+  * Can read multiple GB files in reasonable time.
+  * Support for custom columns separators (i.e. Tab separated value files
+    are supported), quote escaped strings, automatic space trimming.
+  * Works with *nix and Windows newlines and automatically ignores UTF-8 BOMs.
+  * Exception classes with enough context to format useful error messages.
+  * what() returns error messages ready to be shown to a user.

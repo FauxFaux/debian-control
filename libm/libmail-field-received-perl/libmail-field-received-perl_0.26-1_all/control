@@ -1,0 +1,21 @@
+Package: libmail-field-received-perl
+Version: 0.26-1
+Architecture: all
+Maintainer: Dominic Hargreaves <dom@earth.li>
+Installed-Size: 92
+Depends: perl, libmailtools-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Mail-Field-Received/
+Description: mostly RFC822-compliant parser of Received headers
+ Don't use this class directly!  Instead ask Mail::Field for new
+ instances based on the field name!
+ .
+ Mail::Field::Received provides subroutines for parsing Received
+ headers from e-mails.  It mostly complies with RFC822, but deviates to
+ accommodate a number of broken MTAs which are in common use.  It also
+ attempts to extract useful information which MTAs often embed within
+ the (comments).
+ .
+ It is a subclass derived from the Mail::Field and Mail::Field::Generic
+ classes.

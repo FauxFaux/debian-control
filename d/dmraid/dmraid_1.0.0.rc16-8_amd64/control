@@ -1,0 +1,27 @@
+Package: dmraid
+Version: 1.0.0.rc16-8
+Architecture: amd64
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 93
+Depends: libc6 (>= 2.4), libdmraid1.0.0.rc16 (>= 1.0.0.rc16), libselinux1 (>= 1.32), libsepol1 (>= 2.4), udev, dmsetup
+Section: admin
+Priority: optional
+Homepage: http://people.redhat.com/~heinzm/sw/dmraid/
+Description: Device-Mapper Software RAID support tool
+ dmraid discovers, activates, deactivates and displays properties
+ of software RAID sets (eg, ATARAID) and contained DOS partitions.
+ .
+ dmraid uses the Linux device-mapper to create devices with respective
+ mappings for the ATARAID sets discovered.
+ .
+ The following formats are supported:
+  Highpoint HPT37X/HPT45X
+  Intel Software RAID
+  LSI Logic MegaRAID
+  NVidia NForce RAID (nvraid)
+  Promise FastTrack
+  Silicon Image(tm) Medley(tm)
+  VIA Software RAID
+ .
+ Please read the documentation in /usr/share/doc/dmraid BEFORE attempting
+ any use of this software. Improper use can cause data loss!

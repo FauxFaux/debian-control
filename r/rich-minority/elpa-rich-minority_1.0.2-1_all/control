@@ -1,0 +1,28 @@
+Package: elpa-rich-minority
+Source: rich-minority
+Version: 1.0.2-1
+Architecture: all
+Maintainer: Debian Emacs addons team <pkg-emacsen-addons@lists.alioth.debian.org>
+Installed-Size: 43
+Depends: emacsen-common
+Recommends: emacs (>= 46.0)
+Enhances: emacs, emacs25
+Section: lisp
+Priority: optional
+Homepage: https://github.com/Malabarba/rich-minority
+Description: clean-up and beautify the list of minor-modes in Emacs' mode-line
+ Rich-minority-mode is used for hiding and/or highlighting the list of
+ minor-modes in the mode-line.  It is a more full-featured alternative
+ to diminish.el, and supports configuration using lists and regular
+ expressions by customising these three variables:
+ .
+ rm-blacklist: List of minor mode names that will be hidden from the
+ minor-modes list. Use this to hide only a few modes that are always
+ active and don’t really contribute information.
+ .
+ rm-whitelist: List of minor mode names that are allowed on the
+ minor-modes list. Use this to hide all but a few modes.
+ .
+ rm-text-properties: List text properties to apply to each minor-mode
+ lighter. For instance, by default Ovwrt is highlighted with a red
+ face, so you always know if you’re in overwrite-mode.

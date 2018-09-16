@@ -1,0 +1,20 @@
+Package: libtest-memory-cycle-perl
+Version: 1.06-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 35
+Depends: perl, libdevel-cycle-perl, libpadwalker-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Memory-Cycle
+Description: Perl module that verifies code hasn't left circular references
+ Test::Memory::Cycle checks for memory leaks and circular memory
+ references. It's a thin Test::More-compatible wrapper around Lincoln
+ Stein's Devel::Cycle module.
+ .
+ Perl's garbage collection has one big problem: Circular references
+ can't get cleaned up. A circular reference can be as simple as two
+ reference that refer to each other. Test::Memory::Cycle is built on
+ top of Devel::Cycle to give you an easy way to check for these
+ circular references. You can also use memory_cycle_exists() to make
+ sure that you have a cycle where you expect to have one.

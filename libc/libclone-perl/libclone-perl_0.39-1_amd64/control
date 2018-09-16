@@ -1,0 +1,18 @@
+Package: libclone-perl
+Version: 0.39-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 38
+Depends: perl (>= 5.26.1-2), perlapi-5.26.1, libc6 (>= 2.2.5)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Clone
+Description: module for recursively copying Perl datatypes
+ The Clone module provides a clone() method which makes recursive copies of
+ nested hash, array, scalar and reference types, including tied variables and
+ objects.
+ .
+ It is faster (although less flexible) than Storable's dclone. Its
+ functionality is _not_ serializing in-memory objects (i.e. as
+ Data::Dumper or YAML::Dump do), but deep-copying them over to new
+ in-memory structures.

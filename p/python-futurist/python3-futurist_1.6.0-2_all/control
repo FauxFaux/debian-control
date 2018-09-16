@@ -1,0 +1,27 @@
+Package: python3-futurist
+Source: python-futurist
+Version: 1.6.0-2
+Architecture: all
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 140
+Depends: python3-contextlib2 (>= 0.4.0), python3-monotonic (>= 0.6), python3-pbr (>= 2.0.0), python3-prettytable, python3-six (>= 1.10.0), python3:any (>= 3.3.2-2~)
+Suggests: python-futurist-doc
+Section: python
+Priority: optional
+Homepage: http://www.openstack.org/
+Description: useful additions to futures, from the future - Python 3.x
+ Code from the future, delivered to you in the now. For example:
+  * A futurist.GreenThreadPoolExecutor using eventlet green thread pools. It
+    provides a standard executor API/interface and it also gathers execution
+    statistics.
+  * A futurist.ProcessPoolExecutor derivative that gathers execution
+    statistics.
+  * A futurist.SynchronousExecutor that doesn’t run concurrently. It has the
+    same executor API/interface and it also gathers execution statistics.
+  * A futurist.ThreadPoolExecutor derivative that gathers execution statistics.
+  * A futurist.periodics.PeriodicWorker that can use the previously mentioned
+    executors to run asynchronous work periodically in parallel or
+    synchronously.
+  * etc.
+ .
+ This package contains the Python 3.x module.

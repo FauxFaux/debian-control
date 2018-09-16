@@ -1,0 +1,16 @@
+Package: dwww
+Version: 1.13.4
+Architecture: amd64
+Maintainer: Robert Luberda <robert@debian.org>
+Installed-Size: 405
+Depends: apache2 | httpd-cgi, debianutils (>= 2.5), doc-base (>= 0.8.12), file, libfile-ncopy-perl, libmime-types-perl (>= 1.15), man-db (>> 2.5.2), mime-support, ucf (>= 3.12), debconf (>= 0.5) | debconf-2.0, perl, libc6 (>= 2.14)
+Recommends: apt, dlocate (>= 0.5-0.1), info2www, swish++, apache2 (>= 2.4.6-4~) | httpd
+Suggests: doc-debian, dpkg-www, links | www-browser
+Breaks: apache2 (<< 2.4.4-6~)
+Section: doc
+Priority: optional
+Description: Read all on-line documentation with a WWW browser
+ All installed on-line documentation will be served via a local HTTP
+ server. When possible, dwww converts the documentation to HTML.
+ You need to install both a CGI-capable HTTP server and a WWW
+ browser to read the documentation.

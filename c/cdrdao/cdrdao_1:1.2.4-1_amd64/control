@@ -1,0 +1,24 @@
+Package: cdrdao
+Version: 1:1.2.4-1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 1194
+Depends: libao4 (>= 1.1.0), libc6 (>= 2.27), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), libvorbisfile3 (>= 1.1.2)
+Recommends: libperl4-corelibs-perl | perl (<< 5.12.3-7)
+Section: otherosfs
+Priority: optional
+Homepage: http://cdrdao.sourceforge.net/
+Description: records CDs in Disk-At-Once (DAO) mode
+ cdrdao records audio or data CD-Rs in disk-at-once (DAO) mode based on a
+ textual description of the CD contents.
+ .
+ Recording in disk-at-once mode writes the complete disc, i.e. lead-in, one or
+ more tracks and lead-out, in a single step. The commonly used track-at-once
+ (TAO) mode writes each track independently which requires link blocks between
+ two tracks. You probably want to use this if you're copying a CD with multiple
+ tracks, like most audio CDs.
+ .
+ cdrdao can also handle the bin/cue format commonly used for VCDs or disks with
+ subchannel data.
+ .
+ If you just want to burn a normal data CD, you probably want wodim instead.

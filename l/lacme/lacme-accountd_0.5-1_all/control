@@ -1,0 +1,44 @@
+Package: lacme-accountd
+Source: lacme
+Version: 0.5-1
+Architecture: all
+Maintainer: Guilhem Moulin <guilhem@debian.org>
+Installed-Size: 27
+Depends: libconfig-tiny-perl, libjson-perl, perl:any
+Recommends: libcrypt-openssl-rsa-perl
+Section: utils
+Priority: optional
+Homepage: https://git.guilhem.org/lacme/about/
+Description: lacme account key manager
+ lacme is an ACME client written with process isolation and minimal privileges
+ in mind.  It is divided into four components, each with its own executable:
+ .
+  * A process to manage the account key and issue SHA-256 signatures needed for
+    each ACME command.  (This process binds to a UNIX-domain socket to reply to
+    signature requests from the ACME client.)  One can use the UNIX-domain
+    socket forwarding facility of OpenSSH 6.7 and later to run this process on
+    a different host.
+ .
+  * A "master" process, which runs as root and is the only component
+    with access to the private key material of the server keys.  It is used to
+    fork the ACME client (and optionally the ACME webserver) after dropping
+    root privileges.  For certificate issuances, it also generates Certificate
+    Signing Requests, then verifies the validity of the issued certificate, and
+    optionally reloads or restarts services.
+ .
+  * An actual ACME client, which builds ACME commands and dialogues with
+    the remote ACME server.  Since ACME commands need to be signed with the
+    account key, the "master" process passes the UNIX-domain socket of the
+    account key manager to the ACME client: data signatures are requested by
+    writing the data to be signed to the socket.
+ .
+  * For certificate issuances, an optional webserver, which is spawned
+    by the "master" process when no service is listening on the HTTP port.
+    (The only challenge type currently supported is "http-01", which requires a
+    webserver to answer challenges.)  That webserver only processes GET and
+    HEAD requests under the "/.well-known/acme-challenge/" URI.  By default
+    some iptables(8) rules are automatically installed to open the HTTP port,
+    and removed afterwards.
+ .
+ lacme-accountd is the first (account key manager) component.  It is the only
+ component with access to the account key.

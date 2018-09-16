@@ -1,0 +1,16 @@
+Package: libmessage-passing-filter-regexp-perl
+Version: 0.05-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 40
+Depends: libconfig-tiny-perl, libjson-types-perl, libmessage-passing-perl, libregexp-log-perl, perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Message-Passing-Filter-Regexp/
+Description: regexp capture filter For Message::Passing
+ Message::Passing::Filter::Regexp is a Message::Passing filter which
+ passes all incoming messages through regexp captures.
+ .
+ Note it must be applied after Message::Passing::Filter::ToLogstash
+ because it won't process JSON data but directly captures
+ "$message-"{'@message'}> data lines into "%{ $message-"{'@fields'} }>.

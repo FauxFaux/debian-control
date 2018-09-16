@@ -1,0 +1,25 @@
+Package: cvm-mysql
+Source: cvm
+Version: 0.97-0.1
+Architecture: amd64
+Maintainer: Gerrit Pape <pape@smarden.org>
+Installed-Size: 93
+Depends: libbg2 (>= 2.03), libc6 (>= 2.4), libcvm1, libmariadbclient18 (>= 10.1.28)
+Recommends: cvm
+Section: admin
+Priority: optional
+Description: Credential Validation Modules (MySQL)
+ CVM is a framework for validating a set of credentials against a database
+ using a filter program.  The modules act as a filter, taking a set of
+ credentials as input and writing a set of facts as output if those
+ credentials are valid.  Optional input is given to the module through
+ environment variables.
+ .
+ Some of the ideas for CVM came from experience with PAM (pluggable
+ authentication modules), the checkpassword interface used by qmail-pop3d,
+ and the "authmod" interface used by Courier IMAP and POP3.  This framework
+ places fewer restrictions on the invoking client than checkpassword does,
+ and is much simpler to implement on both sides than PAM and the authmod
+ framework.
+ .
+ See http://untroubled.org/cvm/cvm.html for more information.

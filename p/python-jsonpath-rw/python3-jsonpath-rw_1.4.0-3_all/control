@@ -1,0 +1,26 @@
+Package: python3-jsonpath-rw
+Source: python-jsonpath-rw
+Version: 1.4.0-3
+Architecture: all
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 71
+Depends: python3-decorator, python3-ply, python3-six, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/kennknowles/python-jsonpath-rw
+Description: extended implementation of JSONPath for Python 3.x
+ This library provides a robust and significantly extended implementation of
+ JSONPath for Python. It is tested with Python 2.6, 2.7, 3.2, and 3.3.
+ .
+ This library differs from other JSONPath implementations in that it is a full
+ language implementation, meaning the JSONPath expressions are first class
+ objects, easy to analyze, transform, parse, print, and extend.
+ .
+ The JSONPath syntax supported by this library includes some additional
+ features and omits some problematic features (those that make it unportable).
+ In particular, some new operators such as "|" and "where" are available, and
+ parentheses are used for grouping not for callbacks into Python, since with
+ these changes the language is not trivially associative. Also, fields may be
+ quoted whether or not they are contained in brackets.
+ .
+ This package provides the Python 3.x module.

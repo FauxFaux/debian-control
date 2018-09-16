@@ -1,0 +1,58 @@
+#!/bin/sh
+# vim:ts=4:sts=4
+# $Id: postrm 265 2009-01-02 23:51:30Z robert $
+
+set -e
+
+undivert()
+{
+	if LC_ALL=C dpkg-divert --list "$1$2" | grep -q 'diversion.*rlinetd'; then
+		dpkg-divert --package rlinetd --quiet --rename --remove \
+			--divert "$1.real$2" "$1$2"
+	fi
+}
+
+
+
+if [ "X$1" = "Xremove" ] ; then
+	undivert /usr/share/man/man8/update-inetd .8.gz
+	undivert /usr/sbin/update-inetd
+	rm -rf /var/lib/rlinetd
+fi
+
+
+if [ "X$1" = "Xpurge" ] ; then
+	if [ -n "`which ucf`" ]; then
+		ucfq -w rlinetd | while IFS=":" read file package changed exists; do
+			ucf --purge "$file"
+			ucfr --purge "rlinetd" "$file"
+		done
+	fi
+	if [ -d /etc/rlinetd.d ] ; then
+		echo -n "Purging files from /etc/rlinetd.d directory..." 1>&2
+		rm -rf /etc/rlinetd.d
+		echo "done" 1>&2
+	fi
+fi
+
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "purge" ] ; then
+	update-rc.d rlinetd remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.3.5
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+

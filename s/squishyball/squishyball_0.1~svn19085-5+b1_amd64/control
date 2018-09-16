@@ -1,0 +1,23 @@
+Package: squishyball
+Source: squishyball (0.1~svn19085-5)
+Version: 0.1~svn19085-5+b1
+Architecture: amd64
+Maintainer: Jonathan Dowland <jmtd@debian.org>
+Installed-Size: 102
+Depends: libao4 (>= 1.1.0), libc6 (>= 2.15), libflac8 (>= 1.3.0), libncurses6 (>= 6), libopusfile0 (>= 0.5), libtinfo6 (>= 6), libvorbisfile3 (>= 1.1.2)
+Section: sound
+Priority: extra
+Homepage: http://svn.xiph.org/trunk/squishyball/
+Description: audio sample comparison testing tool
+ squishyball is a simple command-line utility for performing
+ double-blind A/B, A/B/X or X/X/Y (A/B/X with additional sample order
+ randomisation) testing of audio samples on the command line.
+ .
+ The user specifies two input files to be compared and uses the
+ keyboard during playback to flip between the randomized samples to
+ perform on-the-fly comparisons.  After a predetermined number of
+ trials, squishyball prints the trial results to stdout and exits.
+ .
+ squishyball can be used to help establish what lossy audio codec
+ settings are optimal for a particular combination of user and
+ audio equipment.

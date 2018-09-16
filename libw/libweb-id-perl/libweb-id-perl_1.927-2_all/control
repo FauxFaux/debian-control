@@ -1,0 +1,31 @@
+Package: libweb-id-perl
+Version: 1.927-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 132
+Depends: libcrypt-x509-perl, libdatetime-perl, libexporter-tiny-perl, liblist-moreutils-perl, libtype-tiny-perl, libpath-tiny-perl, libplack-perl, librdf-query-perl, librdf-trine-perl, libfile-sharedir-perl, libtypes-datetime-perl, libtypes-uri-perl, liburi-perl, libnamespace-sweep-perl, libmoose-perl (>= 2.0600), libmatch-simple-perl (>= 0.008), perl
+Recommends: openssl
+Suggests: libwww-finger-perl, libplack-middleware-apache2-modssl-perl, libplack-middleware-gepokx-modssl-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Web-ID
+Description: implementation of WebID (a.k.a. FOAF+SSL)
+ WebID is a simple authentication protocol based on TLS (Transaction
+ Layer Security, better known as Secure Socket Layer, SSL) and the
+ Semantic Web. This module provides a Perl implementation for
+ authenticating clients using WebID.
+ .
+ For more information see the Web::ID::FAQ document.
+ .
+ Bundled with this module are Plack::Middleware::Auth::WebID, a plugin
+ for Plack to perform WebID authentication on HTTPS connections; and
+ Web::ID::Certificate::Generator, a module that allows you to generate
+ WebID-enabled certificates that can be installed into web browsers.
+ .
+ If WWW::Finger (libwww-finger-perl) is installed,
+ Web::ID::Certificate::Generator attempts to locate some RDF data about
+ the holder of an e-mail address provided as Web::ID::SAN::Email. It is
+ probably not especially interoperable with other WebID implementations.
+ .
+ Depending on webserver setup, libplack-middleware-apache2-modssl-perl
+ or libplack-middleware-gepokx-modssl-perl may be required.

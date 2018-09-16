@@ -1,0 +1,21 @@
+Package: python3-django-netfields
+Source: python-django-netfields
+Version: 0.8-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 54
+Depends: python3-psycopg2, python3-django, python3-netaddr, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/jimfunk/django-postgresql-netfields/
+Description: Django PostgreSQL netfields implementation (Python3 version)
+ This project is an attempt at making proper PostgreSQL net related fields for
+ Django. In Django pre 1.4 the built in IPAddressField does not support IPv6 and
+ uses an inefficient HOST() cast in all lookups. As of 1.4 you can use
+ GenericIPAddressField for IPv6, but the casting problem remains.
+ .
+ In addition to the basic IPAddressField replacement a CIDR and a MACADDR field
+ have been added. This library also provides a manager that allows for advanced
+ IP based lookup directly in the ORM.
+ .
+ This package contains the Python 3 version of the library.

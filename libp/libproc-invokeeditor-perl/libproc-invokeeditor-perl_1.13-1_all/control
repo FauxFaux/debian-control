@@ -1,0 +1,26 @@
+Package: libproc-invokeeditor-perl
+Version: 1.13-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 34
+Depends: perl, libcarp-assert-perl
+Suggests: editor, ed, nvi
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Proc-InvokeEditor
+Description: Perl extension for starting a text editor
+ Proc::InvokeEditor module provides the ability to supply some text to an
+ external text editor, have it edited by the user, and retrieve the results.
+ .
+ The File::Temp module is used to provide secure, safe temporary
+ files, and File::Temp is set to its highest available level of
+ security. This may cause problems on some systems where no secure
+ temporary directory is available.
+ .
+ When the editor is started, no subshell is used. Your path will
+ be scanned to find the binary to use for each editor if the string
+ given does not exist as a file, and if a named editor contains whitespace,
+ for example if you try to use the editor 'xemacs -nw', then the string will
+ be split on whitespace and anything after the editor name will be passed
+ as arguments to your editor. A shell is not used but this should cover
+ most simple cases.

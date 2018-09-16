@@ -1,0 +1,25 @@
+Package: python-geopandas
+Version: 0.4.0-3
+Architecture: all
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 3766
+Depends: python-fiona, python-pandas, python-pyproj, python-shapely, python-six, python-numpy, python:any (<< 2.8), python:any (>= 2.7~)
+Recommends: python-descartes, python-geopy, python-matplotlib, python-psycopg2, python-pysal, python-rtree
+Section: python
+Priority: optional
+Homepage: http://www.geopandas.org
+Description: Python tools for geographic data
+ GeoPandas is a project to add support for geographic data to
+ pandas objects.  It currently implements
+ `GeoSeries` and `GeoDataFrame` types which are subclasses of
+ `pandas.Series` and `pandas.DataFrame` respectively.  GeoPandas
+ objects can act on shapely  geometry objects and perform geometric operations.
+ .
+ GeoPandas geometry operations are cartesian.  The coordinate reference
+ system (crs) can be stored as an attribute on an object, and is
+ automatically set when loading from a file.  Objects may be
+ transformed to new coordinate systems with the `to_crs()` method.
+ There is currently no enforcement of like coordinates for operations,
+ but that may change in the future.
+ .
+ This package contains the Python 2 version of the library.

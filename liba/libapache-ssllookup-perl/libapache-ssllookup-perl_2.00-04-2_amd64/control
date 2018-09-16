@@ -1,0 +1,22 @@
+Package: libapache-ssllookup-perl
+Version: 2.00-04-2
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 41
+Depends: perl (>= 5.26.2-7), perlapi-5.26.2, libc6 (>= 2.2.5), libapache2-mod-perl2
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/GEOFF/Apache-SSLLookup-2.00_04
+Description: glue layer between Perl handlers and the mod_ssl public API
+ Apache::SSLLookup is a glue layer between Perl handlers and the mod_ssl
+ public API. Under normal circumstances, you would use $r->subprocess_env() to
+ glean information about mod_ssl. for example,
+ .
+ $request_is_over_ssl = $r->subprocess_env('HTTPS');
+ .
+ however, this is only possible after mod_ssl runs its fixups - that is, Perl
+ handlers can only accurately check the subprocess_env table for mod_ssl
+ information in the PerlResponsePhase or later.
+ .
+ This module allows you to query mod_ssl directly via its public C API at any
+ point in the request cycle. but without using C, of course.

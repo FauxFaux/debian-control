@@ -1,0 +1,22 @@
+Package: libapache-session-wrapper-perl
+Version: 0.34-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 61
+Depends: perl, libapache-session-perl, libparams-validate-perl, libclass-container-perl, libexception-class-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Apache-Session-Wrapper
+Description: simple wrapper around Apache::Session
+ Apache::Session::Wrapper module is a simple wrapper around
+ Apache::Session which provides some methods to simplify getting and
+ setting the session id.
+ .
+ It can uses cookies to store the session id, or it can look in a
+ provided object for a specific parameter.  Alternately, you can simply
+ provide the session id yourself in the call to the session()
+ method.
+ .
+ If you're using Mason, you should probably take a look at
+ MasonX::Request::WithApacheSession first, which integrates this
+ module directly into Mason.

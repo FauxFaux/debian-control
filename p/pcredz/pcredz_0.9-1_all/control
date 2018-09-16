@@ -1,0 +1,25 @@
+Package: pcredz
+Version: 0.9-1
+Architecture: all
+Maintainer: Gunnar Wolf <gwolf@debian.org>
+Installed-Size: 63
+Depends: python:any, python-libpcap
+Section: net
+Priority: extra
+Homepage: http://github.com/lgandx/PCredz
+Description: Extracts authentication credentials from network captures
+ Pcredz extracts and dumps authentication information from either a
+ live network capture or a pcap dump file. It works on the following
+ (unencrypted) protocols:
+ .
+  - POP
+  - SMTP
+  - IMAP
+  - SNMP community string
+  - FTP
+  - HTTP Basic
+  - NTLMv1/v2 (DCE-RPC,SMBv1/2,LDAP, MSSQL, HTTP, etc)
+  - Kerberos (AS-REQ Pre-Auth etype 23) hashes.
+ .
+ It can also optionally, although with far lesser certainty, print
+ sniffed strings that appear to be credit card numbers.

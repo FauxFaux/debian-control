@@ -1,0 +1,26 @@
+Package: dimbl
+Version: 0.15-2
+Architecture: amd64
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 136
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgomp1 (>= 4.9), libstdc++6 (>= 5.2), libticcutils2v5, libtimbl4
+Section: science
+Priority: optional
+Homepage: http://ilk.uvt.nl/dimbl/
+Description: Distributed Memory Based Learner
+ Dimbl is a wrapper around the k-nearest neighbor classifier in TiMBL, offering
+ parallel classification on multi-CPU machines.  Dimbl splits the original
+ training set, builds separate TiMBL classifiers per training subset, and
+ merges their nearest-neighbor sets per classified instance
+ .
+ Dimbl's features are:
+  * Wraps neatly around TiMBL, retaining all command line options;
+  * Knows what to do with your multiple, duo, or quad cores;
+  * Makes use of the OpenMP specification for parallel programming;
+  * Can attain superlinear speed gains compared to standard TiMBL.
+ .
+ Dimbl is a product of the ILK Research Group (Tilburg University, The
+ Netherlands).
+ .
+ If you do scientific research in Natural Language Processing using the
+ Memory-Based Learning technique, Dimbl will likely be of use to you.

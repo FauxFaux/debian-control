@@ -1,0 +1,20 @@
+Package: duc
+Version: 1.4.3-4
+Architecture: amd64
+Maintainer: Jonathan Dowland <jmtd@debian.org>
+Installed-Size: 145
+Depends: libc6 (>= 2.14), libcairo2 (>= 1.2.4), libglib2.0-0 (>= 2.12.0), libncursesw6 (>= 6), libpango-1.0-0 (>= 1.14.0), libpangocairo-1.0-0 (>= 1.14.0), libtinfo6 (>= 6), libtokyocabinet9 (>= 1.4.47), libx11-6
+Conflicts: duc-nox (>= 1.4.3-3)
+Section: utils
+Priority: optional
+Homepage: http://duc.zevv.nl/
+Description: high-performance disk usage analyzer
+ Duc maintains a database of accumulated sizes of directories of the file
+ system, and allows you to query this database with some tools, or create
+ fancy graphs showing you where your bytes are.
+ .
+ Duc comes with console utilities, ncursesw and X11 user interfaces and a
+ CGI wrapper for disk usage querying and visualisation.
+ .
+ Duc is designed to scale to huge filesystems: it will index and display
+ hundreds of millions of files on petabytes of storage without problems.

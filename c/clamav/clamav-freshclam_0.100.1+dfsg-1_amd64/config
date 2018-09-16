@@ -1,0 +1,406 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+# This conf script is capable of backing up
+db_version 2.0
+db_capb backup
+
+to_lower()
+{
+  word="$1"
+  lcword=$(echo "$word" | tr A-Z a-z)
+  echo "$lcword"
+}
+
+is_true()
+{
+  var="$1"
+  lcvar=$(to_lower "$var")
+  [ 'true' = "$lcvar" ] || [ 'yes' = "$lcvar" ] || [ 1 = "$lcvar" ]
+  return $?
+}
+
+is_false()
+{
+  var="$1"
+  lcvar=$(to_lower "$var")
+  [ 'false' = "$lcvar" ] || [ 'no' = "$lcvar" ] || [ 0 = "$lcvar" ]
+  return $?
+}
+
+ucf_cleanup()
+{
+  # This only does something if I've fucked up before
+  # Not entirely impossible :(
+
+  configfile=$1
+
+  if [ `grep "$configfile" /var/lib/ucf/hashfile | wc -l` -gt 1 ]; then
+    grep -v "$configfile" /var/lib/ucf/hashfile > /var/lib/ucf/hashfile.tmp
+    grep "$configfile" /var/lib/ucf/hashfile | tail -n 1  >> /var/lib/ucf/hashfile.tmp
+    mv /var/lib/ucf/hashfile.tmp /var/lib/ucf/hashfile
+  fi
+}
+
+add_to_ucf()
+{
+  configfile=$1
+  ucffile=$2
+
+  if ! grep -q "$configfile" /var/lib/ucf/hashfile; then
+    md5sum $configfile >> /var/lib/ucf/hashfile
+    cp $configfile $ucffile
+  fi
+}
+
+ucf_upgrade_check()
+{
+  configfile=$1
+  sourcefile=$2
+  ucffile=$3
+
+  if [ -f "$configfile" ]; then
+    add_to_ucf $configfile $ucffile
+    ucf --three-way --debconf-ok "$sourcefile" "$configfile"
+  else
+    [ -d /var/lib/ucf/cache ] || mkdir -p /var/lib/ucf/cache
+    pathfind restorecon && restorecon /var/lib/ucf/cache
+    cp $sourcefile $configfile
+    add_to_ucf $configfile $ucffile
+  fi
+}
+
+slurp_config()
+{
+  CLAMAVCONF="$1"
+  
+  if [ -e "$CLAMAVCONF" ]; then
+    for variable in `egrep -a -v '^[[:space:]]*(#|$)' "$CLAMAVCONF" | awk '{print $1}'`; do
+      case "$variable" in
+        DatabaseMirror)
+        if [ -z "$DatabaseMirror" ]; then
+          for i in `grep -a ^$variable $CLAMAVCONF | awk '{print $2}'`; do
+            value="$value $i"
+          done
+        else
+          continue
+        fi
+        ;;
+        DatabaseCustomURL)
+        if [ -z "$DatabaseCustomURL" ]; then
+          for i in `grep -a ^$variable $CLAMAVCONF | awk '{print $2}'`; do
+            value="$value $i"
+          done
+        else
+          continue
+        fi
+        ;;
+        IncludePUA)
+        if [ -z "$IncludePUA" ]; then
+          for i in `grep -a ^$variable $CLAMAVCONF | awk '{print $2}'`; do
+            value="$i $value"
+          done
+        else
+          continue
+        fi
+        ;;
+        ExcludePUA)
+        if [ -z "$ExcludePUA" ]; then
+          for i in `grep -a ^$variable $CLAMAVCONF | awk '{print $2}'`; do
+            value="$i $value"
+          done
+        else
+          continue
+        fi
+        ;;
+        ExtraDatabase)
+        if [ -z "$ExtraDatabase" ]; then
+          for i in `grep -a ^$variable $CLAMAVCONF | awk '{print $2}'`; do
+            value="$value $i"
+          done
+        else
+          continue
+        fi
+        ;;
+        VirusEvent|OnUpdateExecute|OnErrorExecute|RejectMsg)
+        value=`grep -a ^$variable $CLAMAVCONF | head -n1 | sed -e s/$variable\ //`
+        ;;
+        *)
+        value=`grep -a "^$variable[[:space:]]" $CLAMAVCONF | head -n1 | awk '{print $2}'`
+        ;;
+      esac
+      if [ -z "$value" ]; then 
+        export "$variable"="true"
+      elif [ "$value" != "$variable" ]; then
+        export "$variable"="$value"
+      else
+        export "$variable"="true"
+      fi
+      unset value
+    done
+  fi
+}
+
+pathfind() {
+  OLDIFS="$IFS"
+  IFS=:
+  for p in $PATH; do
+    if [ -x "$p/$*" ]; then
+      IFS="$OLDIFS"
+      return 0
+    fi
+  done
+  IFS="$OLDIFS"
+  return 1
+}
+
+set_debconf_value()
+{
+prog=$1
+name=$2
+eval variable="\$${name}"
+if [ -n "$variable" ]; then
+  db_set clamav-$prog/$name "$variable" || true
+fi
+}
+
+make_dir()
+{
+  DIR=$1
+  if [ -d "$DIR" ]; then
+    return 0;
+  fi
+  [ -n "$User" ] || User=clamav
+  mkdir -p -m 0755 "$DIR"
+  chown "$User" "$DIR"
+  pathfind restorecon && restorecon "$DIR"
+}
+
+# Debconf Functions
+
+isdigit ()
+{
+  case $1 in
+    [[:digit:]]*)
+    ISDIGIT=1
+    ;;
+    *)
+    ISDIGIT=0
+    ;;
+  esac
+}
+
+inputdigit ()
+{
+  ISDIGIT=0
+  while [ "$ISDIGIT" = '0' ]; do
+    db_input "$1" "$2" || true
+    if ! db_go; then
+      return 30
+    fi
+    db_get $2 || true
+    isdigit $RET
+    if [ "$ISDIGIT" = '0' ]; then
+      db_input critical clamav-base/numinfo || true
+      db_go
+    fi
+  done
+  return 0
+}
+
+StateGeneric()
+{
+  PRIO=$1
+  QUESTION=$2
+  NEXT=$3
+  LAST=$4
+
+  db_input $PRIO $QUESTION || true
+  if db_go; then
+    STATE=$NEXT
+  else
+    STATE=$LAST
+  fi
+}
+
+StateGenericDigit()
+{
+  PRIO=$1
+  QUESTION=$2
+  NEXT=$3
+  LAST=$4
+
+  inputdigit $PRIO $QUESTION || true
+  if db_go; then
+    STATE=$NEXT
+  else
+    STATE=$LAST
+  fi
+}
+
+
+FRESHCLAMCONF='/etc/clamav/freshclam.conf'
+
+if [ -n "$http_proxy" ]; then 
+  db_set clamav-freshclam/http_proxy "$http_proxy" || true
+fi
+
+# Read the configuration file
+slurp_config "$FRESHCLAMCONF"
+
+# Store conf file values as debconf answers - make sure user changes made 
+# outside of debconf are preserved
+[ -f /var/lib/clamav/interface ] && Interface=`cat /var/lib/clamav/interface`
+if [ -n "$Interface" ]; then
+  db_set clamav-freshclam/autoupdate_freshclam ifup.d || true
+fi
+if [ -n "$Interface" ]; then
+  db_set clamav-freshclam/internet_interface "$Interface" || true
+fi
+if [ -n "$DatabaseMirror" ]; then
+  # pick the first entry, there may be more than one of them
+  DatabaseMirror="`echo $DatabaseMirror | awk '{print $1}'`"
+  if [ -e /usr/share/doc/clamav-freshclam/mirror-list.gz ]; then
+    if zgrep -q "$DatabaseMirror" /usr/share/doc/clamav-freshclam/mirror-list.gz;then
+      db_set clamav-freshclam/local_mirror `zgrep "$DatabaseMirror" /usr/share/doc/clamav-freshclam/mirror-list.gz` || true
+    else
+      db_set clamav-freshclam/local_mirror "$DatabaseMirror" || true
+    fi
+  fi
+fi
+if [ -n "$HTTPProxyServer" ]; then
+  db_set clamav-freshclam/http_proxy "http://$HTTPProxyServer:$HTTPProxyPort/" || true
+fi
+if [ -n "$HTTPProxyUsername" ]; then
+  db_set clamav-freshclam/proxy_user "$HTTPProxyUsername:$HTTPProxyPassword" || true
+fi
+if [ -n "$Checks" ]; then
+  db_set clamav-freshclam/update_interval "$Checks" || true
+fi
+if [ -n "$NotifyClamd" ]; then
+  # clamav-freshclam/NotifyClamd is a boolean template, but the postinst writes
+  # the path to the clamav-daemon configuration file to the freshclam.conf
+  [ "$NotifyClamd" = "/etc/clamav/clamd.conf" ] && NotifyClamd="true"
+  db_set clamav-freshclam/NotifyClamd "$NotifyClamd" || true
+fi
+set_debconf_value freshclam SafeBrowsing
+set_debconf_value freshclam Bytecode
+set_debconf_value freshclam PrivateMirror
+set_debconf_value freshclam LogRotate
+
+
+# States
+
+StateInit()
+{
+  STATE="autoupdate_freshclam"
+}
+
+Stateautoupdate_freshclam()
+{
+  db_input medium clamav-freshclam/autoupdate_freshclam || true
+  if db_go; then
+    db_metaget clamav-freshclam/autoupdate_freshclam value || true
+    if [ "$RET" = "ifup.d" ]; then
+      STATE="internet_interface"
+    else
+      STATE="local_mirror"
+    fi
+  else
+    STATE="End"
+  fi
+}
+
+Statelocal_mirror()
+{
+  db_input medium clamav-freshclam/local_mirror || true
+  if ! db_go; then
+    STATE="autoupdate_freshclam"
+  else
+    db_metaget clamav-freshclam/local_mirror value || true
+    if [ -z "$RET" ]; then
+      db_set clamav-freshclam/local_mirror 'db.local.clamav.net' || true
+    fi
+    STATE="http_proxy"
+  fi
+}
+
+Statehttp_proxy()
+{
+  db_input medium clamav-freshclam/http_proxy || true
+  if ! db_go; then
+    STATE="local_mirror"
+  else
+    db_metaget clamav-freshclam/http_proxy value || true
+    if [ -z "$RET" ]; then
+      STATE="update_interval"
+    else
+      STATE="proxy_user"
+    fi
+  fi
+}
+
+Stateupdate_interval()
+{
+  db_input low clamav-freshclam/update_interval || true
+  if ! db_go; then
+    STATE="http_proxy"
+  else
+    db_metaget clamav-freshclam/update_interval value || true
+    if [ -z "$RET" ]; then
+      db_set clamav-freshclam/update_interval 12 || true
+    fi
+    STATE="notify_daemon"
+  fi
+}
+
+# This is the statemachine that controls execution. All the 'real' work is 
+# performed by subfunctions above. 
+
+STATE="Init"
+while [ "$STATE" != "End" ]; do
+  case "$STATE" in
+    Init)
+    StateInit
+    ;;
+    autoupdate_freshclam)
+    Stateautoupdate_freshclam
+    ;;
+    local_mirror)
+    Statelocal_mirror
+    ;;
+    http_proxy)
+    Statehttp_proxy
+    ;;
+    proxy_user)
+    StateGeneric medium clamav-freshclam/proxy_user update_interval http_proxy
+    ;;
+    internet_interface)
+    StateGeneric high clamav-freshclam/internet_interface local_mirror autoupdate_freshclam
+    ;;
+    update_interval)
+    Stateupdate_interval
+    ;;
+    notify_daemon)
+    StateGeneric medium clamav-freshclam/NotifyClamd safebrowsing update_interval
+    ;;
+    safebrowsing)
+    StateGeneric low clamav-freshclam/SafeBrowsing bytecode notify_daemon
+    ;;
+    bytecode)
+    StateGeneric low clamav-freshclam/Bytecode private_mirror safebrowsing
+    ;;
+    private_mirror)
+    StateGeneric low clamav-freshclam/PrivateMirror log_rotate bytecode
+    ;;
+    log_rotate)
+    StateGeneric low clamav-freshclam/LogRotate End private_mirror
+    ;;
+  esac
+done
+db_stop || true
+exit 0

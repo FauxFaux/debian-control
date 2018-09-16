@@ -1,0 +1,22 @@
+Package: pandoc-citeproc-preamble
+Version: 1.2.3
+Architecture: amd64
+Maintainer: Sean Whitton <spwhitton@spwhitton.name>
+Installed-Size: 10172
+Depends: libc6 (>= 2.14), libffi6 (>= 3.0.4), libgmp10
+Recommends: pandoc-citeproc
+Section: haskell
+Priority: extra
+Homepage: https://spwhitton.name/tech/code/pandoc-citeproc-preamble/
+Description: insert a preamble before pandoc-citeproc's bibliography
+ pandoc-citeproc-preamble is a JSON filter for Pandoc which inserts a
+ preamble before the output that the pandoc-citeproc filter appends to
+ the document. This preamble might include a heading
+ (e.g. "Bibliography") and raw markup to format the bibliography for
+ the output format.
+ .
+ Since pandoc-citeproc doesn't provide any facility to add formatting
+ control code to its output, pandoc-citeproc-preamble is necessary to
+ avoid the user being forced to add their control code to the end of
+ their input files, thereby losing the input file's agnosticity with
+ regard to output format.

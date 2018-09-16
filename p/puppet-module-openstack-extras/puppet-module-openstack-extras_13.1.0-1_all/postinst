@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+        update-alternatives --install /usr/share/puppet/modules/openstack_extras puppet-module-openstack_extras /usr/share/puppet/modules.available/openstack_extras 500
+fi
+
+
+
+exit 0

@@ -1,0 +1,17 @@
+Package: libapache2-mod-gnutls
+Source: mod-gnutls
+Version: 0.8.4-1
+Architecture: amd64
+Maintainer: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+Installed-Size: 211
+Depends: apache2-api-20120211, apache2-bin (>= 2.4.16), libaprutil1 (>= 1.4.0), libc6 (>= 2.14), libgnutls30 (>= 3.5.10), libmsv1
+Section: httpd
+Priority: optional
+Homepage: https://mod.gnutls.org/
+Description: Apache module for SSL and TLS encryption with GnuTLS
+ mod_gnutls provides TLS encryption using the GnuTLS library. It's
+ similar in purpose to mod_ssl, but doesn't use OpenSSL, and provides
+ some additional features:
+  * PKCS #11 access to server keys and certificates,
+  * OpenPGP authentication, and
+  * using Monkeysphere for client certificate validation.

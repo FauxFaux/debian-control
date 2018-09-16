@@ -1,0 +1,24 @@
+Package: libhtml-template-perl
+Version: 2.97-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 188
+Depends: perl, libcgi-pm-perl | perl (<< 5.19)
+Suggests: libipc-sharedcache-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/HTML-Template
+Description: module for using HTML templates with Perl
+ HTML::Template attempts to make using HTML templates simple and
+ natural. It extends standard HTML with the pseudo tags <TMPL_VAR>,
+ <TMPL_LOOP>, <TMPL_INCLUDE>, <TMPL_IF> and <TMPL_ELSE>. These are used
+ to implement some basic logic - variable substitution, loops,
+ conditional branches - inside the HTML template, while leaving the more
+ complex computations to separate Perl code. This keeps the template
+ accessible for designers and other non-Perl people, without limiting
+ the programmer.
+ .
+ HTML::Template optionally stores its cache in shared memory using the
+ IPC::SharedCache module. Please install libipc-sharedcache-perl and
+ pass the shared_cache option to HTML::Template if you want to make use
+ of this.

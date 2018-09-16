@@ -1,0 +1,21 @@
+Package: courier-ldap
+Source: courier (0.78.0-2)
+Version: 0.78.0-2+b1
+Architecture: amd64
+Maintainer: Markus Wanner <markus@bluegap.ch>
+Installed-Size: 169
+Depends: courier-authlib-ldap, courier-base (= 0.78.0-2+b1), debconf | debconf-2.0, sysvinit-utils (>= 2.88dsf-50) | init-d-script, courier-authlib (>= 0.66.4-5~), libc6 (>= 2.15), libldap-2.4-2 (>= 2.4.7)
+Suggests: courier-doc
+Conflicts: courier-imap-authldap
+Replaces: courier-imap-authldap
+Section: mail
+Priority: optional
+Homepage: http://www.courier-mta.org/
+Description: Courier mail server - LDAP support
+ The Courier mail transfer agent (MTA) is an integrated mail/groupware
+ server based on open commodity protocols, such as ESMTP, IMAP, POP3, LDAP,
+ TLS, and HTTP. Courier provides ESMTP, IMAP, POP3, webmail, and mailing list
+ services within a single, consistent, framework.
+ .
+ This package contains support for LDAP authentication and
+ LDAP-based mail aliasing.

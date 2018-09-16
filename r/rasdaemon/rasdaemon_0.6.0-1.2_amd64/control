@@ -1,0 +1,17 @@
+Package: rasdaemon
+Version: 0.6.0-1.2
+Architecture: amd64
+Maintainer: Al Stone <ahs3@debian.org>
+Installed-Size: 251
+Depends: libc6 (>= 2.14), libsqlite3-0 (>= 3.6.0), perl:any, sqlite3, systemd, libdbd-sqlite3-perl
+Section: admin
+Priority: optional
+Homepage: https://apps.fedoraproject.org/packages/rasdaemon
+Description: utility to receive RAS error tracings
+ rasdaemon is a RAS (Reliability, Availability and Serviceability) logging
+ tool.  It currently records memory errors, using the EDAC tracing events.
+ EDAC are drivers in the Linux kernel that handle detection of ECC errors
+ from memory controllers for most chipsets on x86 and ARM architectures.
+ This userspace component consists of an init script which makes sure EDAC
+ drivers and DIMM labels are loaded at system startup, as well as a utility
+ for reporting current error counts from the EDAC sysfs files.

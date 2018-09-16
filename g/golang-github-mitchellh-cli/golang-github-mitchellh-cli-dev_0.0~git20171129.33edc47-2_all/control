@@ -1,0 +1,26 @@
+Package: golang-github-mitchellh-cli-dev
+Source: golang-github-mitchellh-cli
+Version: 0.0~git20171129.33edc47-2
+Architecture: all
+Maintainer: pkg-go <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 114
+Depends: golang-github-armon-go-radix-dev, golang-github-bgentry-speakeasy-dev, golang-github-mattn-go-isatty-dev, golang-github-posener-complete-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/mitchellh/cli
+Description: library for implementing command-line interfaces
+ cli is a library for implementing powerful command-line interfaces in
+ Go. cli is the library that powers the CLI for Packer, Serf, and Consul.
+ .
+ Features:
+  - Easy sub-command based CLIs: cli foo, cli bar, etc.
+  - Optional support for default subcommands so cli does something other
+    than error.
+  - Automatic help generation for listing subcommands
+  - Automatic help flag recognition of -h, --help, etc.
+  - Automatic version flag recognition of -v, --version.
+  - Helpers for interacting with the terminal, such as outputting information,
+    asking for input, etc. These are optional, you can always interact with
+    the terminal however you choose.
+  - Use of Go interfaces/types makes augmenting various parts of the library a
+    piece of cake.

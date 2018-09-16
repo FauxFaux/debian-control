@@ -1,0 +1,21 @@
+Package: elpa-ps-ccrypt
+Source: ccrypt
+Version: 1.11-1
+Architecture: all
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 75
+Depends: ccrypt (>= 1.10-5), emacsen-common
+Recommends: emacs (>= 46.0)
+Enhances: emacs, emacs24, emacs25
+Breaks: ccrypt (<< 1.10-5)
+Replaces: ccrypt (<< 1.10-5)
+Section: lisp
+Priority: optional
+Homepage: http://ccrypt.sourceforge.net/
+Description: Emacs addon for working with files encrypted with ccrypt
+ elpa-ps-ccrypt provides low-level support for reading, writing, and
+ loading files encrypted with ccrypt. It hooks into the low-level file I/O
+ functions (including write-region and insert-file-contents) so that they
+ automatically encrypt or decrypt a file if the file appears to need it
+ (based on the extension of the file name). Packages like Rmail, VM, GNUS,
+ and Info should be able to work with encrypted files without modification.

@@ -1,0 +1,26 @@
+Package: git-mediawiki
+Source: git
+Version: 1:2.19.0-1
+Architecture: all
+Maintainer: Gerrit Pape <pape@smarden.org>
+Installed-Size: 832
+Depends: git (>> 1:2.19.0), git (<< 1:2.19.0-.), libmediawiki-api-perl (>= 0.39), liblwp-protocol-https-perl, libdatetime-format-iso8601-perl
+Suggests: mediawiki
+Section: vcs
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://git-scm.com/
+Description: fast, scalable, distributed revision control system (MediaWiki remote helper)
+ Git is popular version control system designed to handle very large
+ projects with speed and efficiency; it is used for many high profile
+ open source projects, most notably the Linux kernel.
+ .
+ Git falls in the category of distributed source code management tools.
+ Every Git working directory is a full-fledged repository with full
+ revision tracking capabilities, not dependent on network access or a
+ central server.
+ .
+ This package provides the mediawiki remote helper, which allows Git to
+ read from and write to a wiki such as Wikipedia as though it were a
+ remote Git repository, and a 'git mw' command that can show a preview
+ of how wiki markup will be rendered before pushing.

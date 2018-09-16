@@ -1,0 +1,27 @@
+Package: ledgersmb
+Version: 1.5.21+ds-2
+Architecture: all
+Maintainer: LedgerSMB Core Team <devel@lists.ledgersmb.org>
+Installed-Size: 24977
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: adduser, libcarp-always-perl, libcgi-emulate-psgi-perl, libcgi-simple-perl, libclass-c3-xs-perl, libconfig-inifiles-perl, libdatetime-perl, libdatetime-format-strptime-perl, libdbd-pg-perl, libdbi-perl, libfile-mimeinfo-perl, libhttp-exception-perl, libjs-dojo-dijit, libjson-perl, liblocale-codes-perl, liblocale-maketext-lexicon-perl (>= 0.62-1), liblog-log4perl-perl, libnamespace-autoclean-perl, libmime-lite-perl, libmoose-perl, libmoosex-nonmoose-perl, libnumber-format-perl, libpgobject-perl (>= 1.403.2-1), libpgobject-simple-perl (>= 3.000002-1), libpgobject-simple-role-perl (>= 2.000000-1), libpgobject-type-bigfloat-perl, libpgobject-type-bytestring-perl (>= 1.1.1-1), libpgobject-type-datetime-perl, libpgobject-util-dbmethod-perl, libpgobject-util-dbadmin-perl, libplack-perl, libplack-builder-conditionals-perl, libtemplate-perl (>= 2.14-1), libtry-tiny-perl, libxml-simple-perl, perl, postgresql-client, postgresql-contrib, starman, ucf, debconf (>= 0.5) | debconf-2.0, perl:any
+Recommends: apache2 | nginx-light | nginx-full | nginx-extra, libjson-xs-perl, liblatex-driver-perl (>= 0.300.2), libmath-bigint-gmp-perl, libtemplate-plugin-latex-perl (>= 3.09-1), libtex-encode-perl, texlive-latex-recommended
+Suggests: default-mta | mail-transport-agent, latex-cjk-all, ledgersmb-1.5-apache | ledgersmb-1.5-nginx, libimage-size-perl, libopenoffice-oodoc-perl, libx12-parser-perl, postgresql, lpr, texlive-xetex
+Section: web
+Priority: optional
+Homepage: http://www.ledgersmb.org/
+Description: financial accounting and ERP program
+ LedgerSMB is a full featured double-entry financial accounting and Enterprise
+ Resource Planning system accessed via a web browser (Perl/JS with a PostgreSQL
+ backend) which offers "Accounts Receivable", "Accounts Payable" and "General
+ Ledger" tracking as well as inventory control and fixed assets handling. The
+ LedgerSMB client can be a web browser or a programmed API call. The goal of
+ the LedgerSMB project is to bring high quality ERP and accounting capabilities
+ to Small and Midsize Businesses.
+ .
+ The application now defaults to being made available locally on port 5762 and
+ being run directly by Starman instead of by Apache. If other access is needed,
+ a Reverse Proxy can be configured locally using Apache, Nginx, Lighttpd, or
+ Varnish.
+ .
+ For more information, please see /usr/share/doc/ledgersmb/README.Debian.

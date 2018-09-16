@@ -1,0 +1,28 @@
+Package: libgeo-point-perl
+Version: 0.96-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 133
+Depends: perl, libgeo-distance-perl, libgeo-proj4-perl, libmath-polygon-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Geo-Point
+Description: module to simplify handling geographic points
+ One location on the globe, in any coordinate system. Geo::Point tries
+ to hide the maths and the coordinate system in which the point is
+ represented.
+ .
+ One of the most confusing things when handling geometrical data, is
+ that sometimes latlong, sometimes xy are used: horizontal and vertical
+ organization reversed. This package tries to hide this from your
+ program by providing abstract accessors latlong(), longlat(), xy(), and
+ yx().
+ .
+ This package provides the following modules:
+  * Geo::Line - a sequence of connected points
+  * Geo::Point - a point on the globe
+  * Geo::Proj - simplified wrapper for Geo::Proj4
+  * Geo::Shape - base class for 2-dimensional points on the earth
+    surface
+  * Geo::Space - A collection of various items
+  * Geo::Surface - A surface description

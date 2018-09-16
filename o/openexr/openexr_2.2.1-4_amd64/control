@@ -1,0 +1,35 @@
+Package: openexr
+Version: 2.2.1-4
+Architecture: amd64
+Maintainer: Debian PhotoTools Maintainers <pkg-phototools-devel@lists.alioth.debian.org>
+Installed-Size: 1286
+Depends: libc6 (>= 2.27), libgcc1 (>= 1:3.0), libilmbase23 (>= 2.2.1), libopenexr23, libstdc++6 (>= 5.2), zlib1g (>= 1:1.1.4)
+Suggests: exrtools
+Section: graphics
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.openexr.com
+Description: command-line tools for the OpenEXR image format
+ OpenEXR is a high dynamic-range (HDR) image file format developed by
+ Industrial Light & Magic for use in computer imaging applications.
+ .
+ OpenEXR's features include:
+    * Higher dynamic range and colour precision than existing 8- and
+      10-bit image file formats.
+    * Support for the "half" 16-bit floating-point pixel format.
+    * Multiple lossless image compression algorithms. Some of the
+      included codecs can achieve 2:1 lossless compression ratios on
+      images with film grain.
+    * Extensibility. New compression codecs and image types can easily
+      be added by extending the C++ classes included in the OpenEXR
+      software distribution. New image attributes (strings, vectors,
+      integers, etc.) can be added to OpenEXR image headers without
+      affecting backward compatibility with existing OpenEXR
+      applications.
+ .
+ This package contains the following tools:
+    * exrheader, a utility for dumping header information.
+    * exrstdattr, a utility for modifying OpenEXR standard attributes.
+    * exrmaketiled, for generating tiled and rip/mipmapped images.
+    * exrenvmap, for creating OpenEXR environment maps.
+    * exrmakepreview, for creating preview images for OpenEXR files.

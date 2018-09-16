@@ -1,0 +1,19 @@
+Package: apt-listchanges
+Version: 3.17
+Architecture: all
+Maintainer: Robert Luberda <robert@debian.org>
+Installed-Size: 396
+Depends: apt (>= 0.5.3), python3-apt (>= 0.7.93), python3-debconf, sensible-utils, ucf (>= 0.28), debconf (>= 0.5) | debconf-2.0, python3:any (>= 3.5~)
+Suggests: default-mta | mail-transport-agent, python3-gi, www-browser, x-terminal-emulator
+Section: utils
+Priority: standard
+Description: package change history notification tool
+ The tool apt-listchanges can compare a new version of a
+ package with the one currently installed and show what has been
+ changed, by extracting the relevant entries from the Debian changelog
+ and NEWS files.
+ .
+ It can be run on several .deb archives at a time to get a list of all
+ changes that would be caused by installing or upgrading a group of
+ packages. When configured as an APT plugin it will do this
+ automatically during upgrades.

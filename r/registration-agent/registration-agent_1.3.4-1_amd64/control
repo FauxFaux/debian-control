@@ -1,0 +1,15 @@
+Package: registration-agent
+Version: 1.3.4-1
+Architecture: amd64
+Maintainer: Debian VoIP Team <pkg-voip-maintainers@lists.alioth.debian.org>
+Installed-Size: 304
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libqpid-proton-cpp8, libresiprocate-1.11, libstdc++6 (>= 5.2), adduser
+Suggests: python-qpid-proton
+Section: net
+Priority: extra
+Homepage: https://github.com/resiprocate/registration-agent
+Description: SIP registration agent
+ registration-agent is a daemon that can maintain one or more SIP registrations,
+ typically sending a Contact header to the registrar telling it to send incoming
+ calls to a local SIP proxy or other gateway device that is unable to send
+ a registration request itself.

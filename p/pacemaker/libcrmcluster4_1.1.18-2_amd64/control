@@ -1,0 +1,23 @@
+Package: libcrmcluster4
+Source: pacemaker
+Version: 1.1.18-2
+Architecture: amd64
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Installed-Size: 214
+Depends: libbz2-1.0, libc6 (>= 2.14), libcmap4 (>= 1.99.9), libcorosync-common4 (>= 1.99.9), libcpg4 (>= 1.99), libcrmcommon3 (>= 1.1.17~rc1), libglib2.0-0 (>= 2.16.0), libqb0 (>= 0.17.1), libquorum5 (>= 1.99.9), libstonithd2 (>= 1.1.9)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.clusterlabs.org/
+Description: cluster resource manager cluster library
+ At its core, Pacemaker is a distributed finite state
+ machine capable of co-ordinating the startup and recovery of inter-related
+ services across a set of machines.
+ .
+ Pacemaker understands many different resource types (OCF, SYSV, systemd) and
+ can accurately model the relationships between them (colocation, ordering).
+ .
+ It can even use technology such as Docker to automatically isolate the
+ resources managed by the cluster.
+ .
+ This package contains the cluster library.

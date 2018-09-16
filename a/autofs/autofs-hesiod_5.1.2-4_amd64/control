@@ -1,0 +1,24 @@
+Package: autofs-hesiod
+Source: autofs
+Version: 5.1.2-4
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 398
+Depends: libc6 (>= 2.17), libhesiod0, autofs (= 5.1.2-4)
+Breaks: autofs5-hesiod (<< 5.0.6-1~)
+Replaces: autofs5-hesiod (<< 5.0.6-1~)
+Provides: autofs5-hesiod
+Section: utils
+Priority: optional
+Homepage: http://www.kernel.org/pub/linux/daemons/autofs/v5/
+Description: Hesiod map support for autofs
+ Autofs controls the operation of the automount daemons. The
+ automount daemons automatically mount filesystems when they
+ are used and unmount them after a period of inactivity. This
+ is done based on a set of pre-configured maps.
+ .
+ The kernel automounter implements an almost complete SunOS
+ style automounter under Linux. A recent version of the kernel
+ autofs4 module (builtin or separate) is required.
+ .
+ This is the Hesiod module of the autofs.

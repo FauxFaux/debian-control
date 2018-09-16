@@ -1,0 +1,19 @@
+Package: python-fparser
+Source: fparser
+Version: 0.0.7-1
+Architecture: all
+Maintainer: Alastair McKinstry <mckinstry@debian.org>
+Installed-Size: 824
+Depends: python-nose, python-six, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Provides: python2.7-fparser
+Section: python
+Priority: optional
+Homepage: https://github.com/stfc/fparser
+Description: Python Parser for the Fortran language
+ The fparser package is a Python implementation of a Fortran 66/77/90/95/2003
+ language parser. Currently fparser actually includes two different
+ implementations; the first, “fparser”, supports Fortran 66/77/90 (plus some
+ extensions — see fparser) but only parses down to the level of individual
+ lines of code, i.e. not the content of the Fortran expressions themselves.
+ The second, “fparser2”, also has support for Fortran 2003 and is able to parse
+ Fortran expressions. It is however, less mature than fparser.

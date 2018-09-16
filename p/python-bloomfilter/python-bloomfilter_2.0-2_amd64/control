@@ -1,0 +1,17 @@
+Package: python-bloomfilter
+Version: 2.0-2
+Architecture: amd64
+Maintainer: Ulises Vitulli <dererk@debian.org>
+Installed-Size: 49
+Depends: python-bitarray, python:any (<< 2.8), python:any (>= 2.7~)
+Section: python
+Priority: optional
+Homepage: https://github.com/jaybaird/python-bloomfilter
+Description: Native Python implementation of the Bloom filter probabilistic data structure
+ This module includes both the Bloom filter probabilistic data structure,
+ together with a Scalable Bloom filter that allows a bloom filter to grow
+ without knowing the original set size.
+ .
+ Bloom filters are great if you understand what amount of bits you need to set
+ aside early to store your entire set. Scalable Bloom Filters allow your bloom
+ filter bits to grow as a function of false positive probability and size.

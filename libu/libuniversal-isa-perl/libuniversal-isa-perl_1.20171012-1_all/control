@@ -1,0 +1,19 @@
+Package: libuniversal-isa-perl
+Version: 1.20171012-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 25
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/UNIVERSAL-isa
+Description: safer version of UNIVERSAL::isa
+ UNIVERSAL is base class for ALL classes in Object Oriented Perl.
+ UNIVERSAL::isa (isa stands for "is a") is method which can tell
+ You if object is blessed in package or inherits from package.
+ .
+ This module overloads UNIVERSAL::isa with a version that makes sure
+ that, when called as a function on objects which override isa, isa will
+ call the appropriate method on those objects
+ .
+ In all other cases, the real UNIVERSAL::isa gets called directly.

@@ -1,0 +1,22 @@
+Package: ruby-jar-dependencies
+Version: 0.3.10-2
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 84
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: https://github.com/mkristian/jar-dependencies
+Description: manage jar dependencies for Ruby gems
+ jar-dependencies gem provides a simple way to load jars into JRuby's
+ classloader. It also has additional and very convenient features like:
+ allowing to declare jar dependencies in the gemspec files, vendoring
+ jars with gems if needed, reuse jar files from Maven local
+ repositories, lock down specific jar versions to avoid conflicts and
+ support for proxy and mirrors functionalities thanks to a close
+ integration with Maven.
+ .
+ The idea behind jar-dependencies is to do jar dependencies management
+ in a correct way. It's somehow similar to the bundler tool but for
+ jars.
+Ruby-Versions: all

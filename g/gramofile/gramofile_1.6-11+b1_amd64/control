@@ -1,0 +1,45 @@
+Package: gramofile
+Source: gramofile (1.6-11)
+Version: 1.6-11+b1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 234
+Depends: fftw2, libc6 (>= 2.7), libncurses6 (>= 6), libtinfo6 (>= 6)
+Recommends: mctools-lite
+Suggests: wodim
+Section: sound
+Priority: optional
+Homepage: http://www.opensourcepartners.nl/~costar/gramofile
+Description: transfer sound from gramophone records to CD
+ GramoFile enables you to record audio from (for example) gramophone
+ records, process the signal and listen to the results. Because sound
+ files in .WAV-format are used, it is possible to exchange the files
+ with many other programs. Wodim(1) can burn CD-Recordables of these,
+ so you can make CDs with the music of your favorite records.  The user
+ interface of GramoFile has a windows-like look-and-feel, making it
+ fairly easy to use.
+ .
+ One of the most important parts of GramoFile is the ability to process
+ digital audio signals. Through the application of several filters it
+ is possible to accomplish a significant reduction of disturbances like
+ ticks and scratches. These filters have been programmed in such a fashion
+ that they can be applied in any order (and multiple times) in a single
+ run, thus avoiding the use of temporary files. It is possible to adjust
+ the properties of each filter independently, so in every situation an
+ optimal result can be achieved.
+ .
+ Another interesting feature is the track splitting. Just make one .wav
+ file of an entire side of an record and GramoFile will detect where
+ the individual tracks are located. This happens fully automatically,
+ without need to set any options. More experienced users may fine-tune
+ the algorithm, or change the detected track starts and ends, but
+ generally that will not be necessary. Track-times are saved in an
+ editable (plaintext) .tracks file, that will be used during the signal
+ processing to produce one processed .wav file for each individual track.
+ .
+ To record and play .wav files, modified versions of brec(1) and bplay(1)
+ by David Monro are included. These programs provide buffered recording
+ and playback, so all will go well even on a highly loaded system. Both
+ programs have been modified to support the standard GramoFile user
+ interface.  Brec also got a `graphical' peak level meter, and bplay a
+ running time display.

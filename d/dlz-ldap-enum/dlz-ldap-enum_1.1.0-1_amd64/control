@@ -1,0 +1,16 @@
+Package: dlz-ldap-enum
+Version: 1.1.0-1
+Architecture: amd64
+Maintainer: Debian VoIP Team <pkg-voip-maintainers@lists.alioth.debian.org>
+Installed-Size: 187
+Depends: libc6 (>= 2.4), libldap-2.4-2 (>= 2.4.7), bind9
+Section: admin
+Priority: extra
+Homepage: http://www.opentelecoms.org/dlz-ldap-enum
+Description: Plug-in for bind9 that uses LDAP data to fulfill ENUM requests
+ New versions of bind9 provide a dynamically loaded module interface
+ dubbed dlz_dlopen.  This module is linked to bind9 at runtime using the
+ dlz_dlopen.  The module accepts ENUM query strings and consults the
+ LDAP database to map the phone number to an email address.  It then
+ returns NAPTR records providing SIP and Jabber/XMPP routes based
+ on the email address in LDAP.

@@ -1,0 +1,18 @@
+Package: maven-ant-helper
+Version: 8.5
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 63
+Depends: ant, ant-contrib, ant-optional, libstax-java, maven-repo-helper (>= 1.4)
+Suggests: default-jdk-doc, libmaven-plugin-tools-java, libmaven3-core-java, libmodello-java (>= 1.0), libplexus-component-metadata-java
+Section: java
+Priority: extra
+Homepage: https://salsa.debian.org/java-team/maven-ant-helper.git
+Description: helper scripts for building Maven components with ant
+ An environment that can be used to simplify the creation of Debian packages
+ to support the Maven system. A "modello" ant task is also provided.
+ .
+ maven-build.xml attempts to reproduce the Maven build life-cycle.
+ You can use it to build your jar or javadoc. If you have libmaven2-core-java
+ installed, you can even use it to launch some Maven plugins to generate
+ some code.

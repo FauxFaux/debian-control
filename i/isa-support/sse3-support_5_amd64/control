@@ -1,0 +1,14 @@
+Package: sse3-support
+Source: isa-support
+Version: 5
+Architecture: amd64
+Maintainer: Adam Borowski <kilobyte@angband.pl>
+Installed-Size: 23
+Pre-Depends: libc6 (>= 2.2.5)
+Section: misc
+Priority: optional
+Multi-Arch: foreign
+Description: prevent installation on processors without required instructions
+ This is a mostly dummy package, whose only purpose is to detect the presence
+ of sse3.  It refuses to install on inadequate processors, thus allowing
+ specifying such a requirement as a dependency.

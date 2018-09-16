@@ -1,0 +1,28 @@
+Package: viewvc
+Version: 1.1.26-1
+Architecture: all
+Maintainer: Lev Lamberov <dogsleg@debian.org>
+Installed-Size: 1644
+Depends: python, python:any (>= 2.7.5-5~), python-subversion, cvs | subversion, rcs
+Recommends: python-pygments, apache2 | httpd-cgi
+Suggests: cvsgraph, viewvc-query, libapache2-mod-python, python-tk, mime-support
+Section: vcs
+Priority: optional
+Homepage: http://www.viewvc.org/
+Description: web interface for CVS and/or Subversion repositories
+ ViewVC is a browser (web) interface for CVS and Subversion version
+ control repositories.  It generates templatized HTML to present
+ navigable directory, revision, and change log listings.  It can display
+ specific versions of files as well as diffs between those versions.
+ .
+ Basically, ViewVC provides the bulk of the report-like functionality you
+ expect out of your version control tool, but much more prettily than the
+ average textual command-line program output.
+ .
+ ViewVC can be used in two modes, both of which are supported by this
+ package: (1) by running the simple stand-alone server
+ "viewvc-standalone", with or without a GUI, and/or (2) by integrating
+ ViewVC with any CGI-enabled HTTP server like Apache or nginx.
+ .
+ Three different binaries are provided: FastCGI, WSGI (for Apache mod_python),
+ and plain CGI.

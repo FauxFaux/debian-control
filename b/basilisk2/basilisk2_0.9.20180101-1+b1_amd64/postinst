@@ -1,0 +1,29 @@
+#!/bin/sh
+set -e
+
+# The -x checks allow this postinst to support architectures
+# with and without JITs
+case "$1" in
+    configure)
+	if [ -x /usr/bin/BasiliskII-jit ]
+	then
+            update-alternatives \
+		--install /usr/bin/BasiliskII \
+		BasiliskII /usr/bin/BasiliskII-jit 50 \
+		--slave /usr/share/man/man1/BasiliskII.1.gz \
+		BasiliskII.1.gz /usr/share/man/man1/BasiliskII-jit.1.gz
+	fi
+	if [ -x /usr/bin/BasiliskII-nojit ]
+	then
+            update-alternatives \
+		--install /usr/bin/BasiliskII \
+		BasiliskII /usr/bin/BasiliskII-nojit 100 \
+		--slave /usr/share/man/man1/BasiliskII.1.gz \
+		BasiliskII.1.gz /usr/share/man/man1/BasiliskII-nojit.1.gz
+	fi
+        ;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,52 @@
+Package: liblip-dev
+Source: liblip
+Version: 2.0.0-1.2
+Architecture: amd64
+Maintainer: Juan Esteban Monsalve Tobon <esteban@v7w.com>
+Installed-Size: 295
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:4.1.1), libstdc++6 (>= 4.1.1), libtnt-dev, liblip2 (= 2.0.0-1.2)
+Section: libdevel
+Priority: optional
+Homepage: http://www.deakin.edu.au/~gleb/lip.html
+Description: reliable interpolation of multivariate scattered data
+ Lip interpolates scattered multivariate data with a Lipschitz function.
+ .
+ Methods of interpolation of multivariate scattered data are scarce.
+ The programming library Lip implements a
+ new method by G. Beliakov, which relies on building reliable lower and
+ upper approximations of Lipschitz functions. If we assume that the
+ function that we want to interpolate is Lipschitz-continuous, we can
+ provide tight bounds on its values at any point, in the worse case
+ scenario. Thus we obtain the interpolant, which approximates the unknown
+ Lipschitz function f  best in the worst case scenario. This translates
+ into reliable learning of f, something that other methods cannot do (the
+ error of approximation of most other methods can be infinitely large,
+ depending on what f generated the data).
+ .
+ Lipschitz condition implies that the rate of change of the function is
+ bounded:
+ .
+ |f(x)-f(y)|<M||x-y||.
+ .
+ It is easily interpreted as the largest slope of the function f. f needs
+ not be differentiable.
+ .
+ The interpolant based on the Lipschitz properties of the function is
+ piecewise linear, it possesses many useful properties, and it is shown
+ that it is the best possible approximation to f in the worst case
+ scenario. The value of the interpolant depends on the data points in the
+ immediate neigbourhood of the point in question, and in this sense, the
+ method is similar to the natural neighbour interpolation.
+ .
+ There are two methods of construction and evaluation of the interpolant.
+ The explicit method processes all data points to find the neighbours of
+ the point in question. It does not require any preprocessing, but the
+ evaluation of the interpolant has linear complexity O(K) in terms of the
+ number of data.
+ .
+ "Fast" method requires substantial preprocessing in the case of more
+ than 3-4 variables, but then it provides O(log K) evaluation time, and
+ thus is suitable for very large data sets (K of order of 500000) and
+ modest dimension (n=1-4). For larger dimension, explicit method becomes
+ practically more efficient. The class library Lip implements both fast
+ and explicit methods.

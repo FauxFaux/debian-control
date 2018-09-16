@@ -1,0 +1,16 @@
+Package: libmodule-extract-use-perl
+Version: 1.043-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 38
+Depends: perl, libppi-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Module-Extract-Use
+Description: Perl module to extract which modules some code uses
+ Module::Extract::Use extracts the names of the modules used in a file using a
+ static analysis. It uses PPI (Perl Parsing Interface) to tokenize and extract
+ the file data.
+ .
+ Since this module does not run code, it cannot find dynamic uses of modules,
+ such as eval "require $class".

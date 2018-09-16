@@ -1,0 +1,27 @@
+Package: appmenu-registrar
+Version: 0.7.1-1
+Architecture: amd64
+Maintainer: Ayatana Packagers <pkg-ayatana-devel@lists.alioth.debian.org>
+Installed-Size: 47
+Depends: libc6 (>= 2.4), libglib2.0-0 (>= 2.39.90)
+Recommends: appmenu-qt, appmenu-qt5, libdbusmenu-glib4, libdbusmenu-gtk3-4, libdbusmenu-gtk4, appmenu-gtk2-module, appmenu-gtk3-module
+Breaks: vala-panel-appmenu-registrar (<< 0.7.1)
+Replaces: vala-panel-appmenu-registrar (<< 0.7.1)
+Section: x11
+Priority: optional
+Homepage: https://gitlab.com/vala-panel-project/vala-panel-appmenu
+Description: Appmenu DBusMenu registrar
+ This package provides a standalone Appmenu registrar that allows other
+ applications to access any active window's application menu tree.
+ .
+ Such a registrar is extremely useful for, e.g.
+ .
+   * implementing global menus (application menus appear in the top
+     panel bar of the desktop environment)
+   * adding an application menu browser or search engine to HUDs
+ .
+ The registrar uses the protocol originally published with the Unity7
+ desktop environment. It supports all features found in that
+ implementation.
+ .
+ This package is a subproject of the vala-panel-appmenu project.

@@ -1,0 +1,16 @@
+Package: libcatalyst-action-serialize-data-serializer-perl
+Version: 1.08-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 11
+Depends: perl, libcatalyst-action-rest-perl (>= 1.08), libcatalyst-perl (>= 5.80030), libdata-serializer-perl, libmoose-perl, libnamespace-autoclean-perl
+Breaks: libcatalyst-action-rest-perl (<< 1.11-1)
+Replaces: libcatalyst-action-rest-perl (<< 1.11-1)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-Action-Serialize-Data-Serializer/
+Description: serializing module for Catalyst::Action::REST using Data::Serializer
+ Catalyst::Action::Serialize::Data::Serializer implements a serializer for use
+ with "Data::Dumper" and others. It was factored out of Catalyst::Action::REST
+ because it is unlikely to be widely used and tends to break tests, be
+ insecure, and is generally weird. Use at your own risk.

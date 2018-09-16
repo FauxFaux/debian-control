@@ -1,0 +1,35 @@
+Package: asterisk
+Version: 1:13.22.0~dfsg-2
+Architecture: amd64
+Maintainer: Debian VoIP Team <pkg-voip-maintainers@lists.alioth.debian.org>
+Installed-Size: 5519
+Depends: adduser, asterisk-config (= 1:13.22.0~dfsg-2) | asterisk-config-custom, asterisk-core-sounds-en, asterisk-modules (= 1:13.22.0~dfsg-2), lsb-base (>= 3.0-6), libc6 (>= 2.27), libcap2 (>= 1:2.10), libedit2 (>= 2.11-20080614), libjansson4 (>= 2.3), libpopt0 (>= 1.14), libsqlite3-0 (>= 3.5.9), libssl1.1 (>= 1.1.0), libsystemd0, liburiparser1 (>= 0.6.0), libuuid1 (>= 2.16), libxml2 (>= 2.7.4), libxslt1.1 (>= 1.1.25)
+Recommends: asterisk-moh-opsound-gsm, asterisk-voicemail | asterisk-voicemail-storage, sox
+Suggests: asterisk-dahdi, asterisk-dev, asterisk-doc, asterisk-ooh323, asterisk-opus, asterisk-vpb
+Provides: asterisk-1fb7f5c06d7a2052e38d021b3d8ca151
+Section: comm
+Priority: optional
+Homepage: http://www.asterisk.org/
+Description: Open Source Private Branch Exchange (PBX)
+ Asterisk is an Open Source PBX and telephony toolkit.  It is, in a
+ sense, middleware between Internet and telephony channels on the bottom,
+ and Internet and telephony applications at the top.
+ .
+ Asterisk can be used with Voice over IP (SIP, H.323, IAX and more) standards,
+ or the Public Switched Telephone Network (PSTN) through supported hardware.
+ .
+ Supported hardware:
+ .
+  * All Wildcard (tm) ISDN PRI cards from Digium (http://www.digium.com)
+  * HFC-S/HFC-4S-based ISDN BRI cards (Junghanns.NET, beroNet, Digium etc.)
+  * All TDM (FXO/FXS) cards from Digium
+  * Various clones of Digium cards such as those by OpenVox
+  * Xorcom Astribank USB telephony adapter (http://www.xorcom.com)
+  * Voicetronix OpenPCI, OpenLine and OpenSwitch cards
+  * CAPI-compatible ISDN cards (using the add-on package chan-capi)
+  * Full Duplex Sound Card (ALSA or OSS) supported by Linux
+  * Tormenta T1/E1 card (http://www.zapatatelephony.org)
+  * QuickNet Internet PhoneJack and LineJack (http://www.quicknet.net)
+ .
+ This is the main package that includes the Asterisk daemon and most channel
+ drivers and applications.

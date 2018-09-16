@@ -1,0 +1,18 @@
+Package: cyrus-replication
+Source: cyrus-imapd (2.5.10-3)
+Version: 2.5.10-3+b1
+Architecture: amd64
+Maintainer: Debian Cyrus Team <pkg-cyrus-imapd-debian-devel@lists.alioth.debian.org>
+Installed-Size: 288
+Pre-Depends: dpkg (>= 1.17.14~)
+Depends: cyrus-common (= 2.5.10-3+b1), cyrus-imapd (= 2.5.10-3+b1) | cyrus-pop3d (= 2.5.10-3+b1), libc6 (>= 2.4), libicu57 (>= 57.1-1~), libsasl2-2, libwrap0 (>= 7.6-4~), zlib1g (>= 1:1.1.4)
+Breaks: cyrus-replication-2.4
+Replaces: cyrus-replication-2.4
+Section: mail
+Priority: extra
+Homepage: http://www.cyrusimap.org/
+Description: Cyrus mail system - replication
+ This package contains the Cyrus IMAPd suite replication system.
+ It allows the replication of the mail spool between two imap or pop servers.
+ .
+ For more information, please see the cyrus-common package.

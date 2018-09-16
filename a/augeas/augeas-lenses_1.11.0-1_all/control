@@ -1,0 +1,24 @@
+Package: augeas-lenses
+Source: augeas
+Version: 1.11.0-1
+Architecture: all
+Maintainer: Hilko Bengen <bengen@debian.org>
+Installed-Size: 1911
+Suggests: augeas-doc
+Section: misc
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://augeas.net/
+Description: Set of lenses needed by libaugeas0 to parse config files
+ Augeas parses configuration files described in lenses into a tree structure,
+ which it exposes through its public API. Changes made through the API are
+ written back to the initially read files.
+ .
+ Lenses are the building blocks of the file <-> tree transformation; they
+ combine parsing a file and building the tree (the get transformation), with
+ turning the tree back into an (updated) file (the put transformation).
+ .
+ The transformation works very hard to preserve comments and formatting
+ details. It is controlled by ``lens'' definitions that describe the file
+ format and the transformation into a tree. This package includes the official
+ set of lenses.

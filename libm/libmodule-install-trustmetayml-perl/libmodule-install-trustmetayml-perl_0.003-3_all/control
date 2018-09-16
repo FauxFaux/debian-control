@@ -1,0 +1,17 @@
+Package: libmodule-install-trustmetayml-perl
+Version: 0.003-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: libyaml-tiny-perl, libmodule-install-perl, perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Module-Install-TrustMetaYml
+Description: trust META.yml list of dependencies
+ CPAN doesn't trust "META.yml"'s list of dependencies for a module.
+ Instead it expects "Makefile.PL" run on the computer the package is
+ being installed upon to generate its own list of dependencies (called
+ "MYMETA.yml" or "MYMETA.json").
+ .
+ Module::Install::TrustMetaYml generates "MYMETA.yml" by simply passing
+ through the dependencies from "META.yml".

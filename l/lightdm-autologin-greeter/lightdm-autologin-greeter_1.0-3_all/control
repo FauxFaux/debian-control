@@ -1,0 +1,35 @@
+Package: lightdm-autologin-greeter
+Version: 1.0-3
+Architecture: all
+Maintainer: Debian Edu Packaging Team <debian-edu-pkg-team@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: python3, lightdm, python3-gi, liblightdm-gobject-1-0, gir1.2-lightdm-1
+Provides: lightdm-greeter
+Section: x11
+Priority: optional
+Homepage: https://github.com/spanezz/lightdm-autologin-greeter
+Description: Autologin greeter for LightDM
+ Minimal autologin greeter for LightDM that has the same auto-login
+ behaviour as nodm, but being based on LightDM it stays on top of modern
+ display manager requirements.
+ .
+ The difference between LightDM's built-in auto-login and this greeter,
+ are the behaviour in case of 0-seconds autologin delay: when LightDM
+ autologs in with no delay, upon logout it will show the login window
+ again. The intent is that, if the default user logged out, they probably
+ intend to log in again as a different user.
+ .
+ When managing a kiosk-like setups, once the X session quits, the
+ desired behaviour is to just start it again.
+ .
+ LightDM with an auto-login timeout of 1 or more seconds would work as
+ needed, but one sees the login dialog window appear and disappear on
+ screen at each system startup. While it is functional, on a kiosk setup
+ this is aesthetically unprofessional.
+ .
+ With this greeter, the X session starts right away, and is restarted if
+ it quits, without any flicker of a login dialog.
+ .
+ If one is not setting up a kiosk-like setup, it's very likely that the
+ default auto-login behaviour of LightDM is the way to go, and that this
+ greeter is not needed.

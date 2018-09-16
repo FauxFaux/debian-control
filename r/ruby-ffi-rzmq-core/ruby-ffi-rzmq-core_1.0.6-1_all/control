@@ -1,0 +1,24 @@
+Package: ruby-ffi-rzmq-core
+Version: 1.0.6-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: libzmq5, ruby | ruby-interpreter, ruby-ffi (>= 1.9.3debian-1+b1)
+Suggests: ruby-ffi-rzmq (>= 2.0~)
+Breaks: ruby-ffi-rzmq (<< 2.0~)
+Replaces: ruby-ffi-rzmq (<< 2.0~)
+Section: ruby
+Priority: optional
+Homepage: https://github.com/chuckremes/ffi-rzmq-core
+Description: FFI wrapper around the ZeromMQ (ØMQ) networking library for Ruby
+ ØMQ is a library which extends the standard socket interfaces with features
+ traditionally provided by specialised messaging middleware products.
+ .
+ ØMQ sockets provide an abstraction of asynchronous message queues, multiple
+ messaging patterns, message filtering (subscriptions), seamless access to
+ multiple transport protocols and more.
+ .
+ This package contains only the FFI wrapper for the ZeroMQ (0mq) networking
+ library. It has been split from ruby-ffi-rzmq so that it can be used by any
+ other ZeroMQ Ruby library that want to provide their own high-level Ruby API.
+Ruby-Versions: all

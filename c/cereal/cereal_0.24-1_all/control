@@ -1,0 +1,21 @@
+Package: cereal
+Version: 0.24-1
+Architecture: all
+Maintainer: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+Installed-Size: 176
+Depends: runit (>= 1.8.0-3), screen, adduser, procmail
+Section: utils
+Priority: extra
+Homepage: http://cmrg.fifthhorseman.net/wiki/cereal
+Description: automated, logged serial terminal management system
+ cereal provides a framework to easily set up and maintain automated,
+ timestamped logs of serial lines, while simultaneously allowing end
+ user access to them.  This is probably most useful for providing
+ automated, logged access to remote serial consoles.
+ .
+ cereal can control an arbitrary number of independently monitored and
+ logged lines.  Direct access to the monitored lines is allowed only
+ to a specific user (who doesn't necessarily otherwise have access to
+ the direct serial line), but logs can be made available to any group.
+ Logs are rotated automatically and their total space can be limited
+ in size.

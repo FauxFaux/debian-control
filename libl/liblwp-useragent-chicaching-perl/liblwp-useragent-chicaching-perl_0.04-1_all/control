@@ -1,0 +1,18 @@
+Package: liblwp-useragent-chicaching-perl
+Version: 0.04-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 61
+Depends: libchi-perl, libwww-perl, libtype-tiny-perl, libtypes-uri-perl, libmoo-perl (>= 1.006000), perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/LWP-UserAgent-CHICaching
+Description: LWP::UserAgent with caching based on CHI
+ LWP::UserAgent::CHICaching is yet another caching user agent.  When the
+ client makes a request to the server, sometimes the response should be
+ cached, so that no actual request has to be sent at all, or possibly
+ just a request to validate the cache.  HTTP 1.1 defines how to do this.
+ This class simply extends LWP::UserAgent with
+ LWP::UserAgent::Role::CHICaching (also in this distribution) which is
+ doing the real work to make it possible to use the very flexible CHI
+ module to manage such a cache.

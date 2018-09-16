@@ -1,0 +1,23 @@
+Package: r-cran-brglm
+Version: 0.6.1-2
+Architecture: amd64
+Maintainer: Debian R Packages Maintainers <r-pkg-team@alioth-lists.debian.net>
+Installed-Size: 160
+Depends: r-base-core (>= 3.5.0-5), r-api-3.5, r-cran-profilemodel, libc6 (>= 2.2.5)
+Suggests: r-cran-mass
+Section: gnu-r
+Priority: optional
+Homepage: https://cran.r-project.org/package=brglm
+Description: GNU R package for bias reduction in binomial-response GLMs
+ Fit generalized linear models with binomial responses using either an
+ adjusted-score approach to bias reduction or maximum penalized
+ likelihood where penalization is by Jeffreys invariant prior. These
+ procedures return estimates with improved frequentist properties
+ (bias, mean squared error) that are always finite even in cases where
+ the maximum likelihood estimates are infinite (data separation).
+ Fitting takes place by fitting generalized linear models on
+ iteratively updated pseudo-data. The interface is essentially the same
+ as 'glm'.  More flexibility is provided by the fact that custom
+ pseudo-data representations can be specified and used for model
+ fitting. Functions are provided for the construction of confidence
+ intervals for the reduced-bias estimates.

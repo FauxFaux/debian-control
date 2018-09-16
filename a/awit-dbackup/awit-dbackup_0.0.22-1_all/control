@@ -1,0 +1,16 @@
+Package: awit-dbackup
+Version: 0.0.22-1
+Architecture: all
+Maintainer: Nigel Kukard <nkukard@lbsd.net>
+Installed-Size: 54
+Depends: perl, tar (>= 1.22), perl (>= 5.14) | libio-compress-perl, libconfig-inifiles-perl
+Recommends: pbzip2, pigz, pixz, pdlzip
+Section: utils
+Priority: optional
+Homepage: http://www.dbackup.org
+Description: Flexible one archive per directory backup tool
+ This is a backup software package which basically creates one
+ archive per directory it backs up. This makes searching
+ through the backup much easier as you can look for which files
+ you're after in the directory hierarchy. It will only backup
+ directories which have changed, which makes it rsync friendly.

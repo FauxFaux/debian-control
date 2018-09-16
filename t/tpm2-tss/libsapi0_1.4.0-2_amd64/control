@@ -1,0 +1,20 @@
+Package: libsapi0
+Source: tpm2-tss
+Version: 1.4.0-2
+Architecture: amd64
+Maintainer: Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>
+Installed-Size: 225
+Depends: libc6 (>= 2.15), libgcc1 (>= 1:3.0), libstdc++6 (>= 4.1.1)
+Section: libs
+Priority: optional
+Homepage: https://github.com/01org/TPM2.0-TSS
+Description: TPM2 Software stack library - TSS and TCTI libraries
+ TPM2.0 TSS (Software Stack) consists of API layers provided to support
+ TPM 2.0 chips. It is made out of three layers:
+ .
+   - System API (SAPI), which implements the system layer API;
+   - TPM Command Transmission Interface (TCTI), which is used by SAPI to
+     allow communication with the TAB/RM layer;
+ .
+ This package contains the TSS and TCTI libraries that client applications
+ will link against when they require accessing the TPM.

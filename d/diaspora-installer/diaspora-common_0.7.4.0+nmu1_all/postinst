@@ -1,0 +1,254 @@
+#! /bin/sh
+# postinst script for diaspora-installer
+# copied from postinst script for hplip
+# $Id: hplip.postinst,v 1.1 2005/10/15 21:39:04 hmh Exp $
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+
+case "$1" in
+  configure)
+    # Source varibales
+    . /etc/diaspora/diaspora-common.conf
+
+    # Show debconf questions
+    . /usr/share/debconf/confmodule
+    . /usr/share/dbconfig-common/dpkg/postinst
+
+    # Create diaspora user
+    ${diaspora_scripts}/adduser.sh
+
+    # Create assets cache directory
+    mkdir -p /var/cache/diaspora
+    chown ${diaspora_user}: /var/cache/diaspora
+
+    # Create temporary directory
+    mkdir -p /run/diaspora
+    chown ${diaspora_user}:www-data /run/diaspora
+    chmod 2750 /run/diaspora
+    ln -fs /var/cache/diaspora /run/diaspora/cache
+    runuser -u ${diaspora_user} -- sh -c 'mkdir -p /run/diaspora/pids'
+
+    # Create writable directories and files
+    su ${diaspora_user} -s /bin/sh -c 'mkdir -p  ~/.bundle ~/public ~/app-assets'
+    su ${diaspora_user} -s /bin/sh -c 'touch  ~/Gemfile.lock'
+
+    # Create private copy of diaspora.conf from example
+    mkdir -p /var/lib/diaspora-common
+    test -f ${diaspora_conf_private} ||\
+    cp ${diaspora_conf_example} ${diaspora_conf_private}
+
+    dbc_go diaspora-common "$@"
+
+    cp -a -f ${diaspora_conf_private} ${diaspora_conf_private}.tmp
+
+    # Read from debconf db
+    db_get diaspora-common/url
+    SERVERNAME=${RET}
+    db_get diaspora-common/ssl
+    ENVIRONMENT_REQUIRE_SSL=$RET
+    ENVIRONMENT_URL="https:\/\/$SERVERNAME"
+    if [ "$ENVIRONMENT_REQUIRE_SSL" = "false" ]; then
+      ENVIRONMENT_URL="http:\/\/$SERVERNAME"
+    fi
+    db_get diaspora-common/letsencrypt
+    diaspora_letsencrypt=$RET
+    db_get diaspora-common/letsencrypt_email
+    diaspora_letsencrypt_email=$RET
+
+    # If the admin deleted or commented some variables but then set
+    # them via debconf, (re-)add them to the conffile.
+    test -z "$SERVERNAME" || grep -Eq '^ *export SERVERNAME=' ${diaspora_conf_private} || \
+        echo "export SERVERNAME=" >> ${diaspora_conf_private}
+    test -z "$ENVIRONMENT_URL" || grep -Eq '^ *export ENVIRONMENT_URL=' ${diaspora_conf_private} || \
+        echo "export ENVIRONMENT_URL=" >> ${diaspora_conf_private}
+    test -z "$ENVIRONMENT_REQUIRE_SSL" || grep -Eq '^ *export ENVIRONMENT_REQUIRE_SSL=' ${diaspora_conf_private} || \
+        echo "export ENVIRONMENT_REQUIRE_SSL=" >> ${diaspora_conf_private}
+    test -z "$diaspora_letsencrypt" || grep -Eq '^ *export diaspora_letsencrypt=' ${diaspora_conf_private} || \
+        echo "export diaspora_letsencrypt=" >> ${diaspora_conf_private}
+    test -z "$diaspora_letsencrypt_email" || grep -Eq '^ *export diaspora_letsencrypt_email=' ${diaspora_conf_private} || \
+        echo "export diaspora_letsencrypt_email=" >> ${diaspora_conf_private}
+    sed -e "s/^ *export SERVERNAME=.*/export SERVERNAME=\"$SERVERNAME\"/" \
+        -e "s/^ *export ENVIRONMENT_URL=.*/export ENVIRONMENT_URL=\"$ENVIRONMENT_URL\"/" \
+        -e "s/^ *export ENVIRONMENT_REQUIRE_SSL=.*/export ENVIRONMENT_REQUIRE_SSL=\"$ENVIRONMENT_REQUIRE_SSL\"/" \
+        -e "s/^ *export diaspora_letsencrypt=.*/export diaspora_letsencrypt=\"$diaspora_letsencrypt\"/" \
+        -e "s/^ *export diaspora_letsencrypt_email=.*/export diaspora_letsencrypt_email=\"$diaspora_letsencrypt_email\"/" \
+            < ${diaspora_conf_private} > ${diaspora_conf_private}.tmp
+        mv -f ${diaspora_conf_private}.tmp ${diaspora_conf_private}
+
+    # Get ssl choice
+    db_get diaspora-common/ssl
+    if [ "${RET}" = "true" ]; then
+        db_go
+        # Configure nginx if available
+        if which nginx > /dev/null 2>&1; then
+            echo "SSL enabled, configuring nginx for ${SERVERNAME}..."
+            /usr/lib/diaspora-common/scripts/set-env-nginx.sh ${SERVERNAME}
+        else
+            echo "nginx not installed, skipping configuration..."
+        fi
+
+        db_go
+
+        # Check if letsencrypt option is selected
+        if [ "$diaspora_letsencrypt" = "true" ]; then
+	  echo "Configuring letsencrypt..."
+          mkdir -p /etc/diaspora/ssl
+          ln -sf /etc/letsencrypt/live/${SERVERNAME}/fullchain.pem \
+          /etc/diaspora/ssl/${SERVERNAME}-bundle.pem
+          ln -sf /etc/letsencrypt/live/${SERVERNAME}/privkey.pem \
+          /etc/diaspora/ssl/${SERVERNAME}.key
+
+	  # Check if certificate is already present
+	  if [ -e /etc/letsencrypt/live/${SERVERNAME}/fullchain.pem ]; then
+	    echo "Let's encrypt certificate already present."
+	  else
+	    # Port 80 and 443 should be available for letsencrypt
+	    if command -v nginx > /dev/null; then
+	      echo "Stopping nginx for letsencrypt..."
+	      invoke-rc.d nginx stop
+	    fi
+	    LETSENCRYPT_CMD="letsencrypt --standalone --agree-tos -m $diaspora_letsencrypt_email -d ${SERVERNAME} certonly"
+            $LETSENCRYPT_CMD || {
+	    echo "letsencrypt auto configuration failed..."
+	    echo "Stop your webserver and try running letsencrypt manually..."
+	    echo "$LETSENCRYPT_CMD"
+	    }
+	  fi
+        fi
+    else
+        db_go
+        # Configure pod address.
+        db_get diaspora-common/url
+        # Configure nginx if available
+        if which nginx > /dev/null 2>&1; then
+            echo "SSL disabled, configuring nginx for ${SERVERNAME}..."
+            /usr/lib/diaspora-common/scripts/set-env-nginx.sh ${SERVERNAME} nohttps
+        else
+            echo "nginx not installed, skipping configuration..."
+        fi
+    fi
+
+    # Check if user want to connect to some third party services
+    db_get diaspora-common/services
+    echo "Services List"
+    selectedservices=$RET
+    echo $selectedservices
+    if [ "$RET" != "" ]; then
+      chmod go-r ${diaspora_conf_private}
+      #Check if Facebook is selected
+      servicename="Facebook"
+      if [ "${selectedservices#*$servicename}" != "$RET" ]; then
+        if ! grep SERVICES_FACEBOOK_ ${diaspora_conf_private}; then
+          db_get diaspora-common/facebook_app_id
+          facebook_app_id=$RET
+          db_get diaspora-common/facebook_secret
+          facebook_secret=$RET
+          echo export SERVICES_FACEBOOK_ENABLE=true >> ${diaspora_conf_private}
+          echo export SERVICES_FACEBOOK_APP_ID=$facebook_app_id >> ${diaspora_conf_private}
+          echo export SERVICES_FACEBOOK_SECRET=$facebook_secret >> ${diaspora_conf_private}
+        fi
+      fi
+      servicename="Twitter"
+      if [ "${selectedservices#*$servicename}" != "$selectedservices" ]; then
+        if ! grep SERVICES_TWITTER_ ${diaspora_conf_private}; then
+          db_get diaspora-common/twitter_key
+          twitter_key=$RET
+          db_get diaspora-common/twitter_secret
+          twitter_secret=$RET
+          echo export SERVICES_TWITTER_ENABLE=true >> ${diaspora_conf_private}
+          echo export SERVICES_TWITTER_KEY=$twitter_key >> ${diaspora_conf_private}
+          echo export SERVICES_TWITTER_SECRET=$twitter_secret >> ${diaspora_conf_private}
+        fi
+      fi
+      servicename="Tumblr"
+      if [ "${selectedservices#*$servicename}" != "$selectedservices" ]; then
+        if ! grep SERVICES_TUMBLR_ ${diaspora_conf_private}; then
+          db_get diaspora-common/tumblr_key
+          tumblr_key=$RET
+          db_get diaspora-common/tumblr_secret
+          tumblr_secret=$RET
+          echo export SERVICES_TUMBLR_ENABLE=true >> ${diaspora_conf_private}
+          echo export SERVICES_TUMBLR_KEY=$tumblr_key >> ${diaspora_conf_private}
+          echo export SERVICES_TUMBLR_SECRET=$tumblr_secret >> ${diaspora_conf_private}
+        fi
+      fi
+      servicename="Wordpress"
+      if [ "${selectedservices#*$servicename}" != "$selectedservices" ]; then
+       if grep ! SERVICES_WORDPRESS_ ${diaspora_conf_private}; then
+          db_get diaspora-common/wordpress_client_id
+          wordpress_client_id=$RET
+          db_get diaspora-common/wordpress_secret
+          wordpress_secret=$RET
+          echo export SERVICES_WORDPRESS_ENABLE=true >> ${diaspora_conf_private}
+          echo export SERVICES_WORDPRESS_CLIENT_ID=$wordpress_client_id >> ${diaspora_conf_private}
+          echo export SERVICES_WORDPRESS_SECRET=$wordpress_secret >> ${diaspora_conf_private}
+        fi
+      fi
+    fi
+    ${diaspora_scripts}/grantpriv.sh
+	    echo "Registering ${diaspora_conf} via ucf"
+    ucf --debconf-ok --three-way ${diaspora_conf_private} ${diaspora_conf}
+    ucfr diaspora-common ${diaspora_conf}
+    chmod go-r ${diaspora_conf}
+    ucf --debconf-ok --three-way ${diaspora_database_yml_private} ${diaspora_database_yml}
+    ucfr diaspora-common ${diaspora_database_yml}
+    chmod go-r ${diaspora_database_yml}
+    chown ${diaspora_user}: ${diaspora_database_yml}
+    mkdir -p ${diaspora_nginx_log}
+    mkdir -p ${diaspora_log_dir}
+    mkdir -p ${diaspora_home}
+    chown -R ${diaspora_user}: ${diaspora_log_dir}
+    db_stop
+
+        ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create diaspora.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/diaspora" ]; then
+		update-rc.d diaspora defaults >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

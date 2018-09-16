@@ -1,0 +1,23 @@
+Package: libclass-autoloadcan-perl
+Version: 0.03-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Class-AutoloadCAN
+Description: module managing conflict between AUTOLOAD, can and inheritance
+ Class::AutoloadCAN solves a fundamental conflict between AUTOLOAD, can and
+ inheritance. The problem is that while you can implement anything in
+ AUTOLOAD, UNIVERSAL::can is not aware that it is there. Attempting to modify
+ UNIVERSAL::can to document those methods is very hard. And if a parent class
+ uses AUTOLOAD then subclasses have to do a lot of work to make their
+ AUTOLOADs cooperate with the parent one. It is harder still if 2 parent
+ classes in a multiple inheritance tree wish to cooperate with each other. Few
+ try to do this, which may be good since those who try usually get it wrong.
+ See http://www.perlmonks.org/?node_id=342804 for a fuller discussion.
+ .
+ With this module instead of writing AUTOLOADs, you write CANs. Based on what
+ they return, Class::AutoloadCAN will decide whether you handle the call or it
+ needs to search higher up the inheritance chain.

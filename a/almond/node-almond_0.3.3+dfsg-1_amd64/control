@@ -1,0 +1,25 @@
+Package: node-almond
+Source: almond
+Version: 0.3.3+dfsg-1
+Architecture: amd64
+Maintainer: Georges Khaznadar <georgesk@debian.org>
+Installed-Size: 39
+Depends: nodejs, node-requirejs-text
+Section: javascript
+Priority: optional
+Homepage: https://github.com/requirejs/almond/
+Description: minimal AMD API implementation for use in optimized browser builds
+ Some developers like to use the AMD API to code modular JavaScript,
+ but after doing an optimized build, they do not want to include a
+ full AMD loader like RequireJS, since they do not need all that
+ functionality.
+ .
+ In the context of Javascript modules, AMD refers to a format
+ specification which makes modules  easier to use. See
+ http://requirejs.org/docs/whyamd.html#amd
+ .
+ Some use cases, like mobile, are very sensitive to file sizes.
+ .
+ By including almond in the built file, there is no need for
+ RequireJS.  almond is around **1 kilobyte** when minified with
+ Closure Compiler and gzipped.

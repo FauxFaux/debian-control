@@ -1,0 +1,20 @@
+Package: libhtml-diff-perl
+Version: 0.600-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: perl, libalgorithm-diff-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/HTML-Diff
+Description: module for comparing two HTML documents
+ HTML::Diff compares two strings of HTML and returns a list of a chunks which
+ indicate the diff between the two input strings, where changes in formatting
+ are considered changes.
+ .
+ HTML::Diff does not strictly parse the HTML. Instead, it uses regular
+ expressions to make a decent effort at understanding the given HTML. As a
+ result, there are many valid HTML documents for which it will not produce the
+ correct answer. But there may be some invalid HTML documents for which it
+ gives you the answer you're looking for. Your mileage may vary; test it on
+ lots of inputs from your domain before relying on it.

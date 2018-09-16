@@ -1,0 +1,15 @@
+Package: libgit-objectstore-perl
+Version: 0.007-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 37
+Depends: perl, libgit-raw-perl (>= 0.71)
+Section: perl
+Priority: optional
+Homepage: https://github.com/ssinyagin/p5-Git-ObjectStore
+Description: abstraction layer for Git::Raw and libgit2
+ Git::ObjectStore provides an abstraction layer on top of Git::Raw, a Perl
+ wrapper for libgit2, in order to use a bare Git repository as an object
+ store. The objects are written into a mempack, and then flushed to disk, so
+ thousands of objects can be created without polluting your filesystem and
+ exhausting its inode pool.

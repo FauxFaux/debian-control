@@ -1,0 +1,29 @@
+Package: ikiwiki
+Version: 3.20180311-1
+Architecture: all
+Maintainer: Simon McVittie <smcv@debian.org>
+Installed-Size: 6456
+Depends: libhtml-parser-perl, libhtml-scrubber-perl, libhtml-template-perl, libjson-perl, libmarkdown2 (>= 2.2.0), libtext-markdown-discount-perl, liburi-perl (>= 1.36), libyaml-libyaml-perl, perl
+Recommends: gcc | c-compiler, git (>= 1:1.7) | git-core (>= 1:1.5.0) | subversion | tla | bzr (>= 0.91) | mercurial | monotone (>= 0.38) | darcs, libauthen-passphrase-perl, libc6-dev | libc-dev, libcgi-formbuilder-perl (>= 3.05), libcgi-pm-perl, libcgi-session-perl (>= 4.14-1), libcrypt-ssleay-perl, libgravatar-url-perl, liblwpx-paranoidagent-perl, libmail-sendmail-perl, libnet-openid-consumer-perl, librpc-xml-perl, libterm-readline-gnu-perl, libtimedate-perl, libxml-simple-perl
+Suggests: dvipng, file, gettext, ghostscript, graphviz, libfile-mimeinfo-perl, libhighlight-perl, libhtml-tree-perl, libimage-magick-perl | perlmagick, liblocale-gettext-perl (>= 1.05-1), libmagickcore-extra, libmailtools-perl, libnet-amazon-s3-perl, libnet-inet6glue-perl, libsearch-xapian-perl, libsort-naturally-perl, libsparkline-php, libtext-csv-perl, libtext-multimarkdown-perl, libtext-textile-perl, libtext-typography-perl, libtext-wikicreole-perl, libtext-wikiformat-perl, libxml-feed-perl, libxml-writer-perl, po4a (>= 0.35-1), polygen, python3, python3-docutils, texlive, tidy, viewvc | gitweb | viewcvs, xapian-omega (>= 1.0.5)
+Conflicts: ikiwiki-plugin-table
+Replaces: ikiwiki-plugin-table
+Provides: ikiwiki-plugin-table
+Section: web
+Priority: optional
+Homepage: https://ikiwiki.info/
+Description: wiki compiler
+ Ikiwiki converts a directory full of wiki pages into HTML pages suitable
+ for publishing on a website. Unlike many wikis, ikiwiki does not have its
+ own ad-hoc means of storing page history, and instead uses a revision
+ control system such as Subversion or Git.
+ .
+ Ikiwiki implements all of the other standard features of a wiki, including
+ web-based page editing, user registration and logins, a RecentChanges
+ page, BackLinks, search, Discussion pages, tags, smart merging and conflict
+ resolution, and page locking.
+ .
+ Ikiwiki also supports generating news feeds (RSS and Atom) and blogging.
+ Ikiwiki provides a plugin system which allows many other features to be
+ added. Some of the plugins have additional dependencies, found among the
+ Recommends and Suggests of this package.

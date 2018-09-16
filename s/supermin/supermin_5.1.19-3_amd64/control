@@ -1,0 +1,16 @@
+Package: supermin
+Version: 5.1.19-3
+Architecture: amd64
+Maintainer: Debian Libvirt Maintainers <pkg-libvirt-maintainers@lists.alioth.debian.org>
+Installed-Size: 1306
+Depends: libc6 (>= 2.27), libcom-err2 (>= 1.43.9), libext2fs2 (>= 1.42.7), apt, cpio, e2fsprogs
+Breaks: libguestfs-tools (<< 1.25.38)
+Built-Using: musl (= 1.1.19-2)
+Section: admin
+Priority: optional
+Homepage: http://people.redhat.com/~rjones/supermin/
+Description: tool for building supermin appliances.
+ Supermin appliances are tiny appliances, similar to virtual machine
+ images, usually around 100KB in size, which get fully instantiated
+ on-the-fly in a fraction of a second to a filesystem image when they
+ are booted.

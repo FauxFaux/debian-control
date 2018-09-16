@@ -1,0 +1,110 @@
+#!/bin/bash -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+# This conf script is capable of backing up
+#db_version 2.0
+#db_capb backup
+
+#db_metaget debconf/priority value
+#CONFPRIO=$RET
+
+# Handle with debconf or not?
+db_input medium boxbackup-server/debconf || true
+db_go
+db_get boxbackup-server/debconf
+if [ "$RET" = "false" ]; then
+    exit 0
+fi
+
+# RAID directories
+db_get boxbackup-server/raidDirectories
+OLDRAIDDIR=$RET
+RAIDOK=0
+while [ $RAIDOK = 0 ]; do
+    db_input critical boxbackup-server/raidDirectories || true
+    db_go
+
+    db_get boxbackup-server/raidDirectories
+
+    DIR1=`echo "$RET" | awk '{ print $1 }'`
+    DIR2=`echo "$RET" | awk '{ print $2 }'`
+    DIR3=`echo "$RET" | awk '{ print $3 }'`
+
+    if [ -n "$DIR1" ]; then
+	if [ -z "$DIR2" -o -z "$DIR3" ]; then
+	    DIR2="$DIR1"
+	    DIR3="$DIR1"
+	fi
+
+	PATHOK=1
+	for i in "$DIR1" "$DIR2" "$DIR3"; do
+	    if [ `echo $i | awk '{ if (/^\/[A-Za-z0-9\.\-_]+\/?([A-Za-z0-9\.\-_]+\/?)*$/) { print 1 } else { print 0 } }'` = 0 ]; then
+		PATHOK=0
+	    fi
+	done
+
+	if [ $PATHOK = 1 ]; then
+	    RAIDOK=1;
+	fi
+    fi
+
+    if [ $RAIDOK = 0 ]; then
+	db_input critical boxbackup-server/incorrectDirectories || true
+	db_go
+    fi
+done
+
+# RAID block size
+# Try to figure out the block size of the first partition given
+db_get boxbackup-server/raidDirectories
+if [ "$OLDRAIDDIR" != "$RET" ]; then # Directories have been changed so we can try to guess the block size
+    TMPDIR=`echo "$DIR1" | sed 's/\/$//'`
+
+    while [ "$TMPDIR" != "" ]; do
+	DEV=`df -P | grep "$TMPDIR$" | awk '{ print $1 }'`
+
+	if [ -z "$DEV" ]; then
+	    TMPDIR=`echo "$TMPDIR" | sed 's/\/[^\/]*$//'`
+	else
+	    TMPDIR=""
+	fi
+    done
+
+    if [ "$DEV" != "" ]; then
+        TUNE2FS="$(command -v tune2fs)"
+	if [ -x "${TUNE2FS}" ]; then
+	    BS=`${TUNE2FS} -l $DEV 2>/dev/null | grep 'Block size' | awk '{print $3 }'`
+	    
+	    if [ $? = 0 -a "$BS" != "" ]; then
+		db_set boxbackup-server/raidBlockSize "$BS"
+	    fi
+	fi
+    fi
+fi
+
+BSOK=0
+while [ $BSOK = 0 ]; do
+    db_input critical boxbackup-server/raidBlockSize || true
+    db_go
+
+    db_get boxbackup-server/raidBlockSize
+
+    if [ `echo $RET | awk '{ if (/^[0-9]+$/) { print 1 } else { print 0 } }'` = 1 ]; then
+	if [ `echo $RET | awk '{ bs=sqrt($1); if (bs ~ /^[0-9]+$/) { print 1 } else { print 0 } }'` = 1 ]; then
+	    BSOK=1
+	fi
+    fi
+
+    if [ "$BSOK" = 0 ]; then
+	db_input critical boxbackup-server/incorrectBlocksize || true
+	db_go
+    fi
+done
+
+# x509 and private key
+db_input medium boxbackup-server/generateCertificate || true
+db_go
+
+exit 0

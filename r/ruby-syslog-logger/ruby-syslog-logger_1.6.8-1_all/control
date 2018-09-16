@@ -1,0 +1,18 @@
+Package: ruby-syslog-logger
+Version: 1.6.8-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: http://github.com/ngmoco/syslog_logger
+Description: improved Logger replacement that logs to syslog
+ Logger::Syslog is a Logger replacement that logs to syslog. It is almost
+ drop-in with a few caveats. Add Logger::Syslog to your Rails production
+ environment to aggregate logs between multiple machines.
+ .
+ This particular Logger::Syslog improves the original by correctly
+ mapping Rails log severities to the Syslog counterparts. It also adds
+ the ability to select a syslog facility other than "user".
+Ruby-Versions: all

@@ -1,0 +1,27 @@
+Package: snapper
+Version: 0.5.6-3
+Architecture: amd64
+Maintainer: Hideki Yamane <henrich@debian.org>
+Installed-Size: 1866
+Depends: libacl1 (>= 2.2.51-8), libboost-system1.62.0, libboost-thread1.62.0, libbtrfs0 (>= 4.16.1), libc6 (>= 2.14), libdbus-1-3 (>= 1.9.14), libgcc1 (>= 1:3.0), libmount1 (>= 2.24.2), libsnapper4 (>= 0.5.6), libstdc++6 (>= 5.2), libxml2 (>= 2.6.27), zlib1g (>= 1:1.1.4)
+Enhances: btrfs-progs
+Section: utils
+Priority: optional
+Homepage: http://snapper.io/
+Description: Linux filesystem snapshot management tool
+ Snapper is a tool for Linux filesystem snapshot management. Apart from the
+ obvious creation and deletion of snapshots, it can compare snapshots and revert
+ differences between snapshots. In simple terms, this allows root and non-root
+ users to view older versions of files and revert changes.
+ .
+ The features include:
+   * Manually create snapshots
+   * Automatically create snapshots, e.g. when using a package manager
+   * Automatically create timeline of snapshots
+   * Show and revert changes between snapshots
+   * Works with btrfs and thin-provisioned LVM volumes
+   * Supports Access Control Lists and Extended Attributes
+   * Automatic cleanup of old snapshots
+   * Command line interface
+   * D-Bus interface
+   * PAM module to create snapshots during login and logout (libpam-snapper)

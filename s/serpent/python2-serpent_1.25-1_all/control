@@ -1,0 +1,20 @@
+Package: python2-serpent
+Source: serpent
+Version: 1.25-1
+Architecture: all
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 49
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Suggests: pyro4-doc, pyro4
+Section: python
+Priority: optional
+Homepage: https://pypi.python.org/pypi/serpent
+Description: simple serialization library based on ast.literal_eval(), Python2 modules
+ Serpent provides ast.literal_eval() compatible object tree serialization.
+ It serializes an object tree into bytes (utf-8 encoded string) that can be
+ decoded and then passed as-is to ast.literal_eval() to rebuild it as the
+ original object tree.
+ As such it is safe to send serpent data to other machines over the network
+ for instance (because only 'safe' literals are encoded).
+ .
+ This package contains the core Serpent module for Python 2.x .

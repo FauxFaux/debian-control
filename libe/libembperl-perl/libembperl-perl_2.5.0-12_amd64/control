@@ -1,0 +1,30 @@
+Package: libembperl-perl
+Version: 2.5.0-12
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 2162
+Depends: libwww-perl, perl (>= 5.26.2-6), perlapi-5.26.2, libc6 (>= 2.14), libxml2 (>= 2.7.4), libxslt1.1 (>= 1.1.25)
+Recommends: apache2-api-20120211, libapache-sessionx-perl, libapache2-mod-perl2 | libfcgi-perl, libcgi-pm-perl
+Suggests: libdbix-recordset-perl, libjs-prototype, mmm-mode
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Embperl
+Description: system for building dynamic websites with Perl
+ Embperl gives you the power to embed Perl code in your HTML/XML
+ documents and the ability to build your Web site out of small
+ reusable objects in an object-oriented style. You can also take
+ advantage of all the usual Perl modules, (including DBI for database
+ access) use their functionality and easily include their output in
+ your web pages.
+ .
+ Embperl has several features which are especially useful for creating
+ Websites, including dynamic tables, form field processing, URL
+ escaping/unescaping, session handling, caching, XSLT transformation
+ and more. See http://www.embperl.org/embperl/ for more information
+ about Embperl.
+ .
+ This package contains Apache2, FastCGI, CGI and offline versions of
+ Embperl, although you may need to install some additional packages to
+ use some of those modes. Please note that when running under mod_perl,
+ Embperl requires Apache's prefork mpm module and will not work with the
+ more recent worker mpm.

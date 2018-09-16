@@ -1,0 +1,24 @@
+Package: luksipc
+Source: luksipc (0.04-2)
+Version: 0.04-2+b1
+Architecture: amd64
+Maintainer: Vincent Bernat <bernat@debian.org>
+Installed-Size: 67
+Depends: libc6 (>= 2.14), cryptsetup, dmsetup
+Section: admin
+Priority: optional
+Homepage: http://johannes-bauer.com/linux/luksipc/
+Description: LUKS in-place conversion tool
+ luksipc is a tool to convert (unencrypted) block devices to
+ (encrypted) LUKS devices in-place (therefore it's name LUKS in-place
+ conversion). This means the conversion is performed without the need
+ of copying all data somewhere, recreating the whole disk (i.e. create
+ a LUKS device, create a new filesystem on the mapped LUKS device, copy
+ all data back). Instead, the process is reduced to:
+ .
+  1. Unmounting the filesystem
+  2. Resizing the filesystem to shrink about 10 megabytes (2048 kB is
+     the current LUKS header size -- but do not trust this value, it
+     has changed in the past!)
+  3. Performing luksipc
+  4. Adding custom keys to the LUKS keyring

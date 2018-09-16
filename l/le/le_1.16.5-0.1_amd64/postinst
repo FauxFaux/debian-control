@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+    update-alternatives --install /usr/bin/editor editor /usr/bin/le 60 \
+      --slave /usr/share/man/man1/editor.1.gz editor.1.gz \
+    /usr/share/man/man1/le.1.gz
+fi
+
+

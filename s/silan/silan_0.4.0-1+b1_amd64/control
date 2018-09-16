@@ -1,0 +1,20 @@
+Package: silan
+Source: silan (0.4.0-1)
+Version: 0.4.0-1+b1
+Architecture: amd64
+Maintainer: Kyle Robbertze <krobbertze@gmail.com>
+Installed-Size: 49
+Depends: libavcodec58 (>= 7:4.0) | libavcodec-extra58 (>= 7:4.0), libavformat58 (>= 7:4.0), libavutil56 (>= 7:4.0), libc6 (>= 2.14), libsndfile1 (>= 1.0.20)
+Section: sound
+Priority: optional
+Homepage: https://github.com/x42/silan/
+Description: commandline tool to detect silence in audio-files
+ Silan is a standalone application to analyze audio files for
+ silence and print ranges of detected signals.
+ .
+ It supports a variety of audio-formats and codecs by making
+ use of libsndfile  and ffmpeg/libav for reading audio-data.
+ .
+ Signal threshold and hold-off time can be freely configured.
+ The output can be formatted with samples or seconds as unit
+ or printed as audacity label file.

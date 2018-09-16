@@ -1,0 +1,23 @@
+Package: sgml-spell-checker
+Version: 0.0.20040919-3
+Section: text
+Priority: optional
+Architecture: all
+Depends: opensp | sp, aspell, sgmlspl, perl
+Installed-Size: 72
+Maintainer: Peter Eisentraut <petere@debian.org>
+Description: spell checker for SGML documents
+ This package includes a couple of tools that you can use to
+ automatically spell-check your SGML documents. One of the
+ advantages of this tool over some other SGML-aware spell
+ checkers is that it scans your documents in the form in which
+ the SGML parser actually sees it, which means it is not line-based,
+ system entities are resolved, marked sections are treated appropriately, etc.
+ .
+ Also, this tool can be made aware of particular DTDs, in the
+ sense that it knows not to spell-check the content of elements
+ that do not represent human-language text, such as <programlisting>
+ in DocBook. An exclusion list for the DocBook DTD is included, others
+ can be added trivially.
+ .
+ Home page: http://developer.postgresql.org/~petere/sgml-spell-checker/

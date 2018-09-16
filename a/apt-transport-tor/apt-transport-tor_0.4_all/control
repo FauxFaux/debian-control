@@ -1,0 +1,27 @@
+Package: apt-transport-tor
+Version: 0.4
+Architecture: all
+Maintainer: APT Development Team <deity@lists.debian.org>
+Installed-Size: 26
+Depends: apt (>= 1.3~rc1)
+Recommends: apt (>= 1.6~alpha6), tor
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Description: APT transport for anonymous package downloads via Tor
+ Provides support in APT for downloading packages anonymously via the Tor
+ network.
+ .
+ APT already includes mechanisms for guaranteeing the authenticity of the
+ packages you download.  However, an adversary sniffing your network traffic
+ can still see what software you are installing.
+ .
+ Install apt-transport-tor, edit your sources.list to include only tor://
+ URLs, and you can make it very difficult for anyone intercepting your
+ network traffic to be able to tell that you are installing Debian packages,
+ or which packages you are installing.
+ .
+ Please note that this approach is only as secure as Tor itself - this
+ software cannot protect you from an attacker who has access to your local
+ machine.  In addition, attackers may be able to correlate your network
+ traffic with the packets coming out of an exit node, so do be careful.

@@ -1,0 +1,21 @@
+Package: z-push
+Version: 2.4.4-1
+Architecture: all
+Maintainer: Giraffe Maintainers <pkg-giraffe-maintainers@alioth-lists.debian.net>
+Installed-Size: 60
+Depends: z-push-backend-imap (= 2.4.4-1) | z-push-backend-kopano (= 2.4.4-1) | z-push-backend-combined (= 2.4.4-1) | z-push-backend-ldap (= 2.4.4-1), z-push-common (= 2.4.4-1)
+Recommends: apache2 | lighttpd | httpd-cgi, libapache2-mod-php
+Breaks: d-push (<< 2.1.0~M2-1.1~)
+Replaces: d-push (<< 2.1.0~M2-1.1~)
+Provides: d-push
+Section: web
+Priority: optional
+Homepage: http://z-push.org/download/
+Description: open source implementation of the ActiveSync protocol - metapackage
+ Z-Push is an implementation of the ActiveSync protocol which is used
+ 'over-the-air' for multi platform ActiveSync devices, including Windows
+ Mobile, iPhone, Sony Ericsson and Nokia mobile devices. With Z-Push any
+ groupware can be connected and synced with these devices.
+ .
+ This is a metapackage depending on packages providing the basic
+ syncronisation functionality.

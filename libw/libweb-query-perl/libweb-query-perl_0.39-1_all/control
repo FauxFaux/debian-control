@@ -1,0 +1,21 @@
+Package: libweb-query-perl
+Version: 0.39-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 62
+Depends: libhtml-parser-perl, libhtml-selector-xpath-perl (>= 0.20), libhtml-treebuilder-libxml-perl, libhtml-treebuilder-xpath-perl, libwww-perl, perl (>= 5.25.1) | libscalar-list-utils-perl (>= 1:1.44), perl
+Recommends: libxml-libxml-perl (>= 2.0107)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Web-Query
+Description: perl web scraping library like jQuery
+ Web::Query is a yet another web scraping framework, with a jQuery like
+ interface.
+ .
+ Web::Query built at top of the CPAN modules HTML::TreeBuilder::XPath,
+ LWP::UserAgent, and HTML::Selector::XPath.
+ .
+ Web::Query uses HTML::Selector::XPath and only supports the CSS 3 selector
+ supported by that module. It doesn't support jQuery's extended queries
+ (yet?). If a selector is passed as a scalar ref, it'll be taken as a straight
+ XPath expression.

@@ -1,0 +1,15 @@
+Package: tiny-initramfs
+Version: 0.1-5
+Architecture: all
+Maintainer: Christian Seiler <christian@iwakd.de>
+Installed-Size: 34
+Depends: tiny-initramfs-core (>= 0.1-5), tiny-initramfs-core (<< 0.1-5+b+~)
+Conflicts: dracut, initramfs-tools, live-tools
+Provides: linux-initramfs-tool
+Section: utils
+Priority: extra
+Homepage: https://github.com/chris-se/tiny-initramfs/
+Description: Minimalistic initramfs implementation (automation)
+ This package builds a bootable initramfs for Linux kernel packages.
+ The initramfs is loaded along with the kernel and is responsible for
+ mounting the root filesystem and starting the main init system.

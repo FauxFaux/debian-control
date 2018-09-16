@@ -1,0 +1,21 @@
+Package: f2c
+Version: 20160102-1
+Architecture: amd64
+Maintainer: Barak A. Pearlmutter <bap@debian.org>
+Installed-Size: 430
+Depends: libc6 (>= 2.14), libf2c2-dev
+Recommends: gcc
+Suggests: fort77
+Section: devel
+Priority: optional
+Homepage: http://www.netlib.org/f2c/
+Description: FORTRAN 77 to C/C++ translator
+ Translates FORTRAN 77 (with some extensions) into C, so that it can
+ then be compiled and run on a system with no Fortran compiler.  The C
+ files must then be linked against the appropriate libraries.
+ .
+ This is an actively maintained FORTRAN to C translator and with the
+ fort77 frontend provides an ideal way to compile FORTRAN routines
+ as black boxes (for example for invocation from C).  Source level
+ debugging facilities are not available, and error messages are not as
+ well developed as in g77.

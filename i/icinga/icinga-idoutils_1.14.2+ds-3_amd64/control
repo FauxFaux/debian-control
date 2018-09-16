@@ -1,0 +1,30 @@
+Package: icinga-idoutils
+Source: icinga
+Version: 1.14.2+ds-3
+Architecture: amd64
+Maintainer: Debian Nagios Maintainer Group <pkg-nagios-devel@lists.alioth.debian.org>
+Installed-Size: 1542
+Depends: dbconfig-common, icinga-common (= 1.14.2+ds-3), libdbd-mysql | libdbd-pgsql, lsb-base, ucf, debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.15), libdbi1 (>= 0.8.4), zlib1g (>= 1:1.1.4)
+Recommends: default-mysql-client | mysql-client | postgresql-client
+Suggests: default-mysql-server | mysql-server | postgresql-server
+Section: net
+Priority: optional
+Homepage: https://www.icinga.com/
+Description: host and network monitoring system - icinga-dataobjects support
+ Icinga is a modular monitoring framework for hosts, services, and
+ networks, based on the Nagios project. It is designed to be easy to
+ understand and modify to fit any need.
+ .
+ Features include:
+  * monitoring of network services via ping, SMTP, POP3, HTTP, NNTP, or
+    TCP port
+  * plugin interface to allow for user-developed service checks
+  * contact notifications when problems occur and get resolved (via
+    email, pager, or user-defined method)
+  * support for proactive problem resolution (handlers can be defined to
+    be run during service or host events)
+  * web output: current status, notifications, problem history, log
+    file, etc.
+ .
+ This package contains icinga-dataobjects support which makes it possible
+ to import Icinga status information messages into an SQL database.

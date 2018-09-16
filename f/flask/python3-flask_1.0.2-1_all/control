@@ -1,0 +1,27 @@
+Package: python3-flask
+Source: flask
+Version: 1.0.2-1
+Architecture: all
+Maintainer: Piotr Ożarowski <piotr@debian.org>
+Installed-Size: 385
+Depends: python3-click (>= 5.1), python3-itsdangerous (>= 0.24), python3-jinja2 (>= 2.10), python3-werkzeug (>= 0.14), python3:any (>= 3.3.2-2~)
+Recommends: python3-pkg-resources, python3-blinker
+Suggests: python-flask-doc
+Section: python
+Priority: optional
+Homepage: http://flask.pocoo.org/
+Description: micro web framework based on Werkzeug and Jinja2 - Python 3.x
+ Flask is a micro web framework for Python based on Werkzeug, Jinja 2 and good
+ intentions. A minimal Flask application looks like that:
+ .
+   from flask import Flask
+   app = Flask(__name__)
+ .
+   @app.route("/")
+   def hello():
+       return "Hello World!"
+ .
+   if __name__ == '__main__':
+       app.run()
+ .
+ This package contains the Python 3.x module.

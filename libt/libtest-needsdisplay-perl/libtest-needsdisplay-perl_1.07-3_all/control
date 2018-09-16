@@ -1,0 +1,24 @@
+Package: libtest-needsdisplay-perl
+Version: 1.07-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 21
+Depends: perl
+Recommends: xauth, xvfb
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-NeedsDisplay
+Description: module to ensure that tests needing a display have one
+ When testing GUI applications, sometimes applications or modules absolutely
+ insist on a display, even just to load a module without actually showing any
+ objects.
+ .
+ Regardless, this makes GUI applications pretty much impossible to build and
+ test on headless or automated systems. And it fails to the point of not even
+ running the Makefile.PL script because a dependency needs a display so it can
+ be loaded to find a version.
+ .
+ In these situations, what is needed is a fake display.
+ .
+ The Test::NeedsDisplay module will search around and try to find a way to load
+ some sort of display that can be used for the testing.

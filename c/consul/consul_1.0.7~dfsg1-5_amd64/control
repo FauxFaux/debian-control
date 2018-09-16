@@ -1,0 +1,34 @@
+Package: consul
+Version: 1.0.7~dfsg1-5
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 25597
+Depends: libc6 (>= 2.3.2), adduser
+Built-Using: golang-1.10 (= 1.10.3-1), golang-github-armon-circbuf (= 0.0~git20150827.0.bbbad09-2), golang-github-armon-go-metrics (= 0.0~git20171117.6c3acc97-1), golang-github-armon-go-radix (= 0.0~git20150602.0.fbd82e8-2), golang-github-aws-aws-sdk-go (= 1.12.79+dfsg-1), golang-github-bgentry-speakeasy (= 0.1.0-1), golang-github-boltdb-bolt (= 1.3.1-5), golang-github-circonus-labs-circonus-gometrics (= 1.2.0-1), golang-github-circonus-labs-circonusllhist (= 0.0~git20160526.0.d724266-2), golang-github-datadog-datadog-go (= 1.1.0-5), golang-github-denverdino-aliyungo (= 0.0~git20170721.0.80ceb80-1), golang-github-docker-go-connections (= 0.3.0-3), golang-github-elazarl-go-bindata-assetfs (= 0.0~git20151224.0.57eb5e1-2), golang-github-go-ini-ini (= 1.32.0-2), golang-github-gophercloud-gophercloud (= 0.0~git20170728.0.0118feec-2), golang-github-hashicorp-errwrap (= 0.0~git20141028.0.7554cd9-2), golang-github-hashicorp-go-checkpoint (= 0.0~git20170624.a8d0786-1), golang-github-hashicorp-go-cleanhttp (= 0.0~git20171219.d5fe4b57-1), golang-github-hashicorp-go-immutable-radix (= 0.0~git20170725.0.8aac270-1), golang-github-hashicorp-go-memdb (= 0.0~git20180224.1289e7ff-1), golang-github-hashicorp-go-msgpack (= 0.0~git20150518.0.fa3f638-6), golang-github-hashicorp-go-multierror (= 0.0~git20161216.0.ed90515+ds-1), golang-github-hashicorp-go-retryablehttp (= 0.0~git20160810.0.f4ed9b0-2), golang-github-hashicorp-go-rootcerts (= 0.0~git20160503.0.6bb64b3-1), golang-github-hashicorp-go-sockaddr (= 0.0~git20170627.41949a1+ds-1), golang-github-hashicorp-go-syslog (= 0.0~git20150218.0.42a2b57-1), golang-github-hashicorp-go-uuid (= 0.0~git20160311.0.d610f28-2), golang-github-hashicorp-go-version (= 0.0~git20171129.4fe82ae-3), golang-github-hashicorp-golang-lru (= 0.0~git20160813.0.0a025b7-2), golang-github-hashicorp-hcl (= 0.0~git20170509.0.392dba7-1), golang-github-nytimes-gziphandler (= 1.0.1-1), golang-google-cloud (= 0.9.0-5), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-2)
+Section: devel
+Priority: optional
+Homepage: https://github.com/hashicorp/consul
+Description: tool for service discovery, monitoring and configuration
+ Consul is a tool for service discovery and configuration. Consul is
+ distributed, highly available, and extremely scalable.
+ .
+ Consul provides several key features:
+ .
+  - Service Discovery - Consul makes it simple for services to register
+    themselves and to discover other services via a DNS or HTTP interface.
+    External services such as SaaS providers can be registered as well.
+ .
+  - Health Checking - Health Checking enables Consul to quickly alert operators
+    about any issues in a cluster. The integration with service discovery
+    prevents routing traffic to unhealthy hosts and enables service level
+    circuit breakers.
+ .
+  - Key/Value Storage - A flexible key/value store enables storing dynamic
+    configuration, feature flagging, coordination, leader election and more.
+    The simple HTTP API makes it easy to use anywhere.
+ .
+  - Multi-Datacenter - Consul is built to be datacenter aware, and can support
+    any number of regions without complex configuration.
+ .
+ Consul runs on Linux, Mac OS X, and Windows. It is recommended to run the
+ Consul servers only on Linux, however.

@@ -1,0 +1,29 @@
+Package: starman
+Version: 0.4014-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 73
+Depends: perl, libdata-dump-perl, libhttp-date-perl, libhttp-parser-xs-perl, libnet-server-perl, libnet-server-ss-prefork-perl, libplack-perl, libwww-perl
+Recommends: libserver-starter-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Starman
+Description: high-performance preforking PSGI/Plack web server
+ Starman is a PSGI perl web server that has unique features such as:
+  * High Performance - Uses the fast XS/C HTTP header parser
+  * Preforking - Spawns workers preforked like most high performance UNIX
+    servers do. Starman also reaps dead children and automatically restarts
+    the worker pool.
+  * Signals - Supports HUP for graceful restarts, and TTIN/TTOU to
+    dynamically increase or decrease the number of worker processes.
+  * Superdaemon aware - Supports Server::Starter for hot deploy and
+    graceful restarts.
+  * Multiple interfaces and UNIX Domain Socket support - Able to listen
+    on multiple intefaces including UNIX sockets.
+  * Small memory footprint - Preloading the applications with --preload-app
+    command line option enables copy-on-write friendly memory management.
+    Also, the minimum memory usage Starman requires for the master process
+    is 7MB and children (workers) is less than 3.0MB.
+  * PSGI compatible - Can run any PSGI applications and frameworks
+  * HTTP/1.1 support - Supports chunked requests and responses, keep-alive
+    and pipeline requests.

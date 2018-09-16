@@ -1,0 +1,25 @@
+Package: libtpl0
+Source: libtpl
+Version: 1.6.1-1
+Architecture: amd64
+Maintainer: Kari Pahula <kaol@debian.org>
+Installed-Size: 68
+Depends: libc6 (>= 2.14)
+Section: devel
+Priority: extra
+Homepage: http://troydhanson.github.io/tpl/
+Description: efficient C serialization library
+ Tpl is a library for serializing C data. The data is stored in its
+ natural binary form. The API is small and tries to stay "out of the
+ way". Tpl can serialize many C data types, including structures.
+ .
+ Tpl makes a convenient file format. For example, suppose a program
+ needs to store a list of user names and ids. This can be expressed
+ using the format string "A(si)". If the program needs two such lists
+ (say, one for regular users and one for administrators) this could be
+ expressed as "A(si)A(si)". It is easy to read and write this kind of
+ structured data using tpl.
+ .
+ Tpl can also be used as an IPC message format. It handles byte order
+ issues and deframing individual messages off of a stream
+ automatically.

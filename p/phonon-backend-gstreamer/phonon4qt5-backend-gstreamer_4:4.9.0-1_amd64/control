@@ -1,0 +1,23 @@
+Package: phonon4qt5-backend-gstreamer
+Source: phonon-backend-gstreamer
+Version: 4:4.9.0-1
+Architecture: amd64
+Maintainer: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Installed-Size: 371
+Depends: gstreamer1.0-plugins-base, gstreamer1.0-pulseaudio | gstreamer1.0-alsa | gstreamer1.0-audiosink, phonon-backend-gstreamer-common (= 4:4.9.0-1), libc6 (>= 2.14), libgl1-mesa-glx | libgl1, libglib2.0-0 (>= 2.16.0), libgstreamer-plugins-base1.0-0 (>= 1.0.0), libgstreamer1.0-0 (>= 1.0.0), libphonon4qt5-4 (>= 4:4.8.0), libqt5core5a (>= 5.5.0), libqt5gui5 (>= 5.0.2), libqt5opengl5 (>= 5.0.2), libqt5widgets5 (>= 5.0.2), libqt5x11extras5 (>= 5.2.0), libstdc++6 (>= 5.2)
+Recommends: gstreamer1.0-plugins-good
+Suggests: gstreamer1.0-plugins-ugly
+Provides: phonon4qt5-backend
+Section: sound
+Priority: optional
+Multi-Arch: same
+Homepage: http://phonon.kde.org/
+Description: Phonon Qt5 GStreamer 1.0 backend
+ This package contains Qt5 GStreamer 1.0 backend for Phonon multimedia
+ framework. It transparently adapts and reroutes all requests from Phonon
+ applications to the GStreamer framework which in turn performs requested
+ audio/video decoding/capture tasks.
+ .
+ You should install gstreamer1.0-plugins-good to get support for playing
+ popular free multimedia formats and gstreamer1.0-plugins-ugly to get support
+ for popular MPEG audio formats like MP3.

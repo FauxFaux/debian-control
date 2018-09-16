@@ -1,0 +1,23 @@
+Package: debiandoc-sgml
+Version: 1.2.32-2
+Architecture: all
+Maintainer: Debian XML SGML Team <debian-sgml@lists.debian.org>
+Installed-Size: 1207
+Depends: libhtml-parser-perl, libroman-perl, libtext-format-perl, opensp, sgml-data, sgmlspl, sgml-base (>= 1.28), perl
+Recommends: ghostscript, texinfo, texlive, texlive-latex-extra
+Suggests: debiandoc-sgml-doc, latex-cjk-all, texlive-lang-all
+Section: text
+Priority: optional
+Multi-Arch: foreign
+Description: DebianDoc SGML DTD and formatting tools
+ This is an SGML-based documentation formatting package used for the
+ Debian manuals.  It reads markup files and produces HTML, LaTeX, DVI
+ (via LaTeX), PostScript (via LaTeX/DVI), PDF (via LaTeX), Texinfo,
+ Info (via Texinfo), DebianDoc SGML, DocBook XML, plain text (with
+ overstrikes a la troff as well as without) files.
+ .
+ The LaTeX based output needs the texlive, texlive-latex-extra and
+ texlive-lang-all packages.  In addition to this, Chinese and Japanese need
+ latex-cjk-all and corresponding font packages.
+ .
+ The Texinfo based output needs the texinfo package.

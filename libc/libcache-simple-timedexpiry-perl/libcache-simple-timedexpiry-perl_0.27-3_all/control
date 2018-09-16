@@ -1,0 +1,17 @@
+Package: libcache-simple-timedexpiry-perl
+Version: 0.27-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 21
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Cache-Simple-TimedExpiry
+Description: Perl module to cache and expire key/value pairs
+ Example:
+ .
+ my $h = new Cache::Simple::TimedExpiry;
+ .
+ $h->set(Forever => "Don't expire", 0);
+ do {$h->set($_,"Value of $_", 1); sleep 2;} for qw(Have a nice day); $,=' ';
+ print $h->elements; $h->dump; sleep 4; print $h->elements; $h->dump;

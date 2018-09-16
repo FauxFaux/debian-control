@@ -1,0 +1,36 @@
+Package: libjimfs-java-doc
+Source: jimfs
+Version: 1.1-5
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 614
+Section: doc
+Priority: extra
+Homepage: https://github.com/google/jimfs
+Description: Documentation for libjimfs-java
+ Jimfs is an in-memory file system for Java 7 and above, implementing
+ the java.nio.file abstract file system APIs. Jimfs supports almost
+ all the APIs under java.nio.file. It supports:
+ .
+  * Creating, deleting, moving and copying files and directories.
+  * Reading and writing files with FileChannel or SeekableByteChannel,
+    InputStream, OutputStream, etc.  Symbolic links.
+  * Hard links to regular files.
+  * SecureDirectoryStream, for operations relative to an open directory.
+  * Glob and regex path filtering with PathMatcher.
+  * Watching for changes to a directory with a WatchService.
+  * File attributes. Built-in attribute views that can be supported
+    include "basic", "owner", "posix", "unix", "dos", "acl" and "user".
+    Do note, however, that not all attribute views provide useful
+     attributes.
+ .
+ For example, while setting and reading POSIX file permissions is
+ possible with the "posix" view, those permissions will not actually
+ affect the behavior of the file system.
+ .
+ Jimfs also supports creating file systems that, for example, use
+ Windows-style paths and (to an extent) behavior. In general, however,
+ file system behavior is modeled after UNIX and may not exactly match
+ any particular real file system or platform.
+ .
+ This package contains the generated API documentation.

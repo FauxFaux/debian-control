@@ -1,0 +1,50 @@
+#!/bin/sh
+
+set -e
+
+ODOO_LIB_DIR=/var/lib/odoo
+ODOO_USER="odoo"
+ODOO_GROUP="odoo"
+
+case "${1}" in
+    remove)
+        deluser --quiet --system $ODOO_USER || true
+        delgroup --quiet --system --only-if-empty $ODOO_GROUP || true
+        if [ -d "$ODOO_LIB_DIR" ]; then
+            rm -rf $ODOO_LIB_DIR
+        fi
+        ;;
+
+    purge)
+        if [ -d "$ODOO_LIB_DIR" ]; then
+            rm -rf $ODOO_LIB_DIR
+        fi
+        ;;
+
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+        ;;
+
+esac
+
+# Automatically added by dh_installsystemd/11.3.5
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'oca-core.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'oca-core.service' >/dev/null || true
+		deb-systemd-helper unmask 'oca-core.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,17 @@
+Package: node-stream-each
+Version: 1.2.2-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 16
+Depends: nodejs, node-stream-shift (>= 1.0.0), node-end-of-stream (>= 1.1.0)
+Section: javascript
+Priority: optional
+Homepage: https://github.com/mafintosh/stream-each
+Description: Iterate all the data in a stream
+ Iterate the data in the stream by calling the iterator function with
+ (data, next) where data is a data chunk and next is a callback. Call next when
+ you are ready to consume the next chunk. Optionally you can call next with an
+ error to destroy the stream. When the stream ends/errors the callback is
+ called if provided.
+ .
+ Node.js is an event-based server-side JavaScript engine.

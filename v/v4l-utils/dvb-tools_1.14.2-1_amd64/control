@@ -1,0 +1,28 @@
+Package: dvb-tools
+Source: v4l-utils
+Version: 1.14.2-1
+Architecture: amd64
+Maintainer: Gregor Jasny <gjasny@googlemail.com>
+Installed-Size: 206
+Depends: libdvbv5-0 (= 1.14.2-1), libc6 (>= 2.16), libudev1 (>= 183)
+Section: utils
+Priority: optional
+Homepage: https://linuxtv.org/downloads/v4l-utils/
+Description: Collection of command line DVB utilities
+ This is a series of tools written to help testing and working with DVB,
+ using its latest V5 API. The tools can also work with the DVBv3 API.
+ .
+ The current tools are:
+ .
+ dvb-fe-tool: a simple test application, that reads from the frontend.
+ it also allows one to change the default delivery system.
+ In the future, it may be used to change any property via command line.
+ .
+ dvb-format-convert: converts from zap and scan initial-tuning-data-file
+ into the new format defined to work with DVBv5.
+ .
+ dvbv5-scan: a DVBv5 scan tool.
+ .
+ dvbv5-zap: a DVBv5 zap tool. It allows one to tune into a DVB channel,
+ and to watch to a DVB service (e. g. receiving the video and audio
+ streams, via another application using the dvr device).

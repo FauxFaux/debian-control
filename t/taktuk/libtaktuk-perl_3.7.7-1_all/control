@@ -1,0 +1,23 @@
+Package: libtaktuk-perl
+Source: taktuk
+Version: 3.7.7-1
+Architecture: all
+Maintainer: Vincent Danjean <vdanjean@debian.org>
+Installed-Size: 79
+Depends: perl
+Recommends: taktuk (>= 3.7.3)
+Section: perl
+Priority: optional
+Homepage: http://taktuk.gforge.inria.fr/
+Description: Perl bindings for taktuk
+ TakTuk allows one to execute commands in parallel on a potentially large set
+ of remote nodes (using ssh to connect to each node). It is typically used
+ inside high performance computing clusters and grids. It uses an adaptive
+ algorithm to efficiently distribute the work and sets up an interconnection
+ network to transport commands and perform I/Os multiplexing. It doesn't
+ require any specific software on the nodes thanks to a self-propagation
+ algorithm.
+ .
+ This package provides perl bindings to the TakTuk API. It also provides
+ TakTuk::Pilot, a perl module that allows one to manage a TakTuk instance from
+ a perl program.

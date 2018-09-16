@@ -1,0 +1,22 @@
+Package: node-rc
+Version: 1.1.6-2
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: nodejs, node-minimist, node-deep-extend, node-strip-json-comments, node-ini
+Section: web
+Priority: optional
+Homepage: https://github.com/dominictarr/rc
+Description: find, load, flatten json or ini application configuration
+ This Node.js module finds and loads configuration files in the usual
+ places, loads them, and flatten them in that order:
+  - command line arguments (parsed by minimist)
+  - environment variables prefixed with $appname_
+  - config file path given as `--config` argument
+  - .rc in parents folders, in home, or /etc
+  - .config/$appname or .config/$appname/config in home
+  - /etc/$appname/config
+ It is also possible to set a custom command-line options parser
+ or a custom configuration file parser.
+ .
+ Node.js is an event-based server-side JavaScript engine

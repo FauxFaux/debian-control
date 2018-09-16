@@ -1,0 +1,26 @@
+Package: python3-pgpdump
+Source: python-pgpdump
+Version: 1.5-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 88
+Depends: python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://pypi.python.org/pypi/pgpdump/
+Description: PGP packet parser library (Python 3)
+ python-pgpdump is a Python library for parsing PGP packets as specified in
+ RFC2440 and RFC4880. It is derived from pgpdump, a C program published at:
+ http://www.mew.org/~kazu/proj/pgpdump/ The intent is to support what people
+ actually have to do with PGP packets 95% of the time. This module does not
+ aim to be a complete PGP parser, as it currently does not decode every PGP
+ packet type. Currently supported things include:
+ .
+  * Signature packets
+  * Public key packets
+  * ASCII-armor decoding and CRC check
+ .
+ A single codebase with dependencies on only the standard Python library is
+ compatible across Python 2.7, Python 3.2, and PyPy 1.8.
+ .
+ This is the Python 3 version of the package.

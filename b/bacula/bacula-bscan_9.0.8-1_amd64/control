@@ -1,0 +1,22 @@
+Package: bacula-bscan
+Source: bacula
+Version: 9.0.8-1
+Architecture: amd64
+Maintainer: Debian Bacula Team <pkg-bacula-devel@alioth-lists.debian.net>
+Installed-Size: 83
+Depends: bacula-common-sqlite3 (= 9.0.8-1) | bacula-common-pgsql (= 9.0.8-1) | bacula-common-mysql (= 9.0.8-1), bacula-sd (= 9.0.8-1), bacula-common (= 9.0.8-1), libc6 (>= 2.4), libgcc1 (>= 1:3.0), libssl1.1 (>= 1.1.0), libstdc++6 (>= 5), zlib1g (>= 1:1.1.4)
+Breaks: bacula-sd-mysql (<< 7.4.3+dfsg-3), bacula-sd-pgsql (<< 7.4.3+dfsg-3), bacula-sd-sqlite3 (<< 7.4.3+dfsg-3)
+Replaces: bacula-sd-mysql (<< 7.4.3+dfsg-3), bacula-sd-pgsql (<< 7.4.3+dfsg-3), bacula-sd-sqlite3 (<< 7.4.3+dfsg-3)
+Section: admin
+Priority: optional
+Homepage: http://www.bacula.org/
+Description: network backup service - bscan tool
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ The storage daemon performs the storage and recovery of the file
+ attributes and data to the physical media; in other words, it is
+ responsible for reading and writing the backups.
+ .
+ This package contains the bscan utility, which is used for recovery
+ when Bacula's catalog is unavailable.

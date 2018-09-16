@@ -1,0 +1,14 @@
+Package: librust-language-tags+heap-size-dev
+Source: rust-language-tags
+Version: 0.2.2-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-language-tags-dev (= 0.2.2-1), librust-heapsize-0.3+default-dev | librust-heapsize-0.2+default-dev (>= 0.2.2~~), librust-heapsize-plugin-0.1+default-dev (>= 0.1.2~~)
+Provides: librust-language-tags-0+heap-size-dev (= 0.2.2-1), librust-language-tags-0.2+heap-size-dev (= 0.2.2-1), librust-language-tags-0.2.2+heap-size-dev (= 0.2.2-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Language tags for Rust - feature "heap_size"
+ This metapackage enables feature heap_size for the Rust language-tags crate, by
+ pulling in any additional dependencies needed by that feature.

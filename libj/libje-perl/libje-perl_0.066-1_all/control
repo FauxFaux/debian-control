@@ -1,0 +1,27 @@
+Package: libje-perl
+Version: 0.066-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 568
+Depends: perl, libtie-refhash-weak-perl, libtimedate-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/JE
+Description: Pure-Perl ECMAScript (JavaScript) Engine
+ JE is a pure-Perl ECMAScript (JavaScript) engine.
+ .
+ Advantages:
+  - Compatible with Data::Dump::Streamer, so the runtime environment can be
+    serialised
+  - The parser can be extended/customised to support extra (or fewer) language
+    features (not yet complete)
+  - All JavaScript datatypes can be manipulated directly from Perl (they all
+    have overloaded operators)
+ .
+ Weaknesses:
+  - It's slow
+  - It uses lots of memory.
+  - It leaks memory (to be fixed).
+ .
+ This is still an alpha release, but it fully implements ECMAScript v3, except
+ for a few seldom-used features like -0.

@@ -1,9 +1,0 @@
-#!/bin/sh
-set -e
-
-. /usr/share/debconf/confmodule
-
-db_input high openvas-scanner/enable_redis || true
-db_go
-
-exit 0

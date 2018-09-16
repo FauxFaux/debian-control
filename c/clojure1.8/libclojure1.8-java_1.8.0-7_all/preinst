@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ]; then
+        CLOJUREVER=1.8
+
+	if dpkg --compare-versions "$2" "lt" "1.8.0-6" && update-alternatives --query clojure 2> /dev/null ; then
+		update-alternatives --remove-all clojure
+	fi
+fi
+
+

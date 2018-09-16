@@ -1,0 +1,18 @@
+Package: w3c-linkchecker
+Version: 4.81-10
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 200
+Depends: debconf (>= 0.5) | debconf-2.0, perl:any, libcgi-pm-perl | perl (<< 5.19), libconfig-general-perl, libcss-dom-perl, libencode-locale-perl, libhtml-parser-perl, liblocale-codes-perl | perl (<< 5.28), libnet-ip-perl, libterm-readkey-perl, liburi-perl, libwww-perl, ucf
+Recommends: w3c-markup-validator, apache2 | httpd-cgi
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/W3C-LinkChecker
+Description: tool to verify the links in a web page are still valid
+ The checklink tool is a program that reads an HTML or XHTML document,
+ extracts a list of anchors and links and checks that no anchor is defined twice
+ and that all the links are dereferenceable, including the fragments. It warns
+ about HTTP redirects, including directory redirects, and can check recursively
+ a part of a web site. The program can be used either as a command line tool or
+ as a CGI script. The official site is available as
+ http://validator.w3.org/checklink.

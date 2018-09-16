@@ -1,0 +1,23 @@
+Package: python3-debian
+Source: python-debian
+Version: 0.1.33
+Architecture: all
+Maintainer: Debian python-debian Maintainers <pkg-python-debian-maint@lists.alioth.debian.org>
+Installed-Size: 297
+Depends: python3-chardet, python3-six (>> 1.4~), python3:any
+Recommends: python3-apt
+Suggests: gpgv
+Section: python
+Priority: optional
+Homepage: https://salsa.debian.org/python-debian-team/python-debian
+Description: Python 3 modules to work with Debian-related data formats
+ This package provides Python 3 modules that abstract many formats of Debian
+ related files. Currently handled are:
+  * Debtags information (debian.debtags module)
+  * debian/changelog (debian.changelog module)
+  * Packages files, pdiffs (debian.debian_support module)
+  * Control files of single or multiple RFC822-style paragraphs, e.g.
+    debian/control, .changes, .dsc, Packages, Sources, Release, etc.
+    (debian.deb822 module)
+  * Raw .deb and .ar files, with (read-only) access to contained
+    files and meta-information

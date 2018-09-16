@@ -1,0 +1,22 @@
+Package: libencode-zapcp1252-perl
+Version: 0.33-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 34
+Depends: perl
+Recommends: libencode-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Encode-ZapCP1252
+Description: zap Windows Western gremlin characters
+ CP1252 (Windows Western) is a superset of ISO8859-1 (Latin-1).
+ Accidentally mixing CP1252 with ISO8859-1 is common, causing "gremlins"
+ - broken misfit characters.
+ .
+ Encode::ZapCP1252 detects freak characters and either transliterates
+ them into ASCII counterparts or translates them to UTF-8 equivalents.
+ .
+ Processed strings are assumed to contain a mixture of ASCII, ISO8859-1
+ and CP1252, but no actual UTF-8 characters (even if encoded as such).
+ For string soups including UTF-8 characters, Encoding::FixLatin may be
+ better suitable.

@@ -1,0 +1,18 @@
+Package: libapp-fatpacker-perl
+Version: 0.010007-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 44
+Depends: perl
+Provides: fatpack
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/App-FatPacker
+Description: module to pack dependencies onto script files
+ While the proliferation of solutions like local::lib and cpanminus has made
+ it a breeze to manage dependencies, there are still some rare occassions in
+ which shipping code that has no external non-core dependencies is necessary.
+ .
+ App::FatPacker and the included fatpack script do the work of tracing,
+ collecting packlists, extracting modules in fatlib, then concatenating into a
+ packed script - in one shot.

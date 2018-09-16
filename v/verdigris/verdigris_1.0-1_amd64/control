@@ -1,0 +1,18 @@
+Package: verdigris
+Version: 1.0-1
+Architecture: amd64
+Maintainer: Debian Qt extras Maintainers <debian-qt-kde@lists.debian.org>
+Installed-Size: 95
+Depends: qtbase5-dev (>= 5.5)
+Section: devel
+Priority: optional
+Homepage: https://github.com/woboq/verdigris
+Description: Header-only Qt moc replacement
+ Verdigris is a header-only library that can be used with Qt.
+ It uses macros to create a QMetaObject
+ that is binary compatible with Qt's own QMetaObject without requiring moc.
+ In other words, you can use Verdigris macros in your Qt or QML application
+ instead of some of the Qt macros and then you do not need to run moc.
+ .
+ Moreover, Verdigris supports templated and nested QObject classes.
+ It needs a modern C++ compiler with C++14 relaxed constexpr.

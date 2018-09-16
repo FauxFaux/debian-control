@@ -1,0 +1,26 @@
+Package: xenomai-kernel-source
+Source: xenomai
+Version: 2.6.4+dfsg-1
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 12924
+Depends: kernel-package, libncurses-dev, fakeroot, zlib1g-dev, libxenomai-dev
+Suggests: xenomai, linux-source
+Replaces: linux-patch-xenomai
+Section: kernel
+Priority: extra
+Homepage: http://www.xenomai.org/
+Description: Linux kernel patches for Xenomai
+ Xenomai is a real-time development framework cooperating with the Linux
+ kernel in order to provide a pervasive, interface-agnostic, hard real-time
+ support to user-space applications, seamlessly integrated into the GNU/Linux
+ environment. Xenomai provides its own API and emulation layers ("skins") to
+ make migration from other RTOS easier. Examples are: pSOS+, VxWorks, VRTX,
+ uiTRON, RTAI, POSIX.
+ .
+ This package contains patches for 2.6 series kernels - These are intended for
+ use with kernel-package and a virgin Linux source tree. Note: These patches
+ include the base adeos-ipipe patch along with all the additional material
+ normally added by the prepare-kernel.sh script.
+ .
+ This package contains the following patches:

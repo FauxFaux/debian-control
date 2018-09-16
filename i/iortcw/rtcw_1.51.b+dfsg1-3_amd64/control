@@ -1,0 +1,27 @@
+Package: rtcw
+Source: iortcw
+Version: 1.51.b+dfsg1-3
+Architecture: amd64
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Installed-Size: 6265
+Depends: rtcw-common (= 1.51.b+dfsg1-3), libc6 (>= 2.15), libcurl3-gnutls (>= 7.16.2), libfreetype6 (>= 2.2.1), libgcc1 (>= 1:3.0), libgl1, libjpeg62-turbo (>= 1.3.1), libogg0 (>= 1.0rc3), libopenal1 (>= 1.14), libopus0 (>= 1.1), libopusfile0 (>= 0.5), libsdl2-2.0-0 (>= 2.0.7), libstdc++6 (>= 5), libvorbis0a (>= 1.1.2), libvorbisfile3 (>= 1.1.2), zlib1g (>= 1:1.1.4)
+Recommends: x11-utils | zenity | kdialog
+Breaks: apparmor (<< 2.10.95-5~)
+Section: contrib/games
+Priority: optional
+Homepage: https://github.com/iortcw/iortcw/
+Description: game engine for Return to Castle Wolfenstein
+ Return to Castle Wolfenstein is a military- and occult-themed first-person
+ shooter game in a Second World War setting, originally released in 2001.
+ It is a sequel to Wolfenstein 3D, which is also available for Debian
+ (in the wolf4sdl package).
+ .
+ This package contains the iortcw game engines for the single-player campaign
+ and multiplayer, based on ioquake3 and the GPL source releases of RTCW.
+ .
+ For security reasons, this version has been modified to prevent native
+ executable code from being unpacked from game packages (PK3 files).
+ Some game modifications will not work as a result of this change.
+ .
+ Return to Castle Wolfenstein requires non-distributable game data files
+ in the rtcw-data package, prepared using the game-data-packager tool.

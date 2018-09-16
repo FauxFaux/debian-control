@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" != "upgrade" ] ; then
+    update-alternatives --remove waitress-serve /usr/bin/waitress-serve-python2
+fi
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p python-waitress 
+else
+	dpkg -L python-waitress | grep '\.py$' | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+

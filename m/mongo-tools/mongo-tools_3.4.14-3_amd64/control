@@ -1,0 +1,26 @@
+Package: mongo-tools
+Version: 3.4.14-3
+Architecture: amd64
+Maintainer: Debian MongoDB Maintainers <team+mongodb@tracker.debian.org>
+Installed-Size: 74089
+Depends: libc6 (>= 2.14), libpcap0.8 (>= 1.5.1), libsasl2-2, libssl1.1 (>= 1.1.0)
+Breaks: mongodb-clients (<< 1:3.2)
+Replaces: mongodb-clients (<< 1:3.2)
+Built-Using: golang-1.10 (= 1.10.3-1), golang-github-golang-snappy (= 0.0+git20160529.d9eb7a3-2), golang-github-mattn-go-runewidth (= 0.0.2+git20170510.3.97311d9-1), golang-github-nsf-termbox-go (= 0.0~git20160914-3), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-sys (= 0.0~git20180510.7dfd129-1), golang-gopkg-tomb.v2 (= 0.0~git20161208.d5d1b58-3), gopacket (= 1.1.14-2)
+Section: admin
+Priority: optional
+Homepage: https://github.com/mongodb/mongo-tools
+Description: collection of tools for administering MongoDB servers
+ mongodb-tools is a collection of tools for administering MongoDB instances.
+ The package includes the following tools:
+ .
+  * bsondump: display BSON files in a human-readable format
+  * mongoimport: convert data from JSON, TSV or CSV and insert them into a
+    collection
+  * mongoexport: write an existing collection to CSV or JSON format
+  * mongodump/mongorestore: dump MongoDB backups to disk in .BSON format, or
+    restore them to a live database
+  * mongostat: monitor live MongoDB servers, replica sets, or sharded clusters
+  * mongofiles: read, write, delete, or update files in GridFS
+  * mongooplog: replay oplog entries between MongoDB servers
+  * mongotop: monitor read/write activity on a mongo server

@@ -1,0 +1,28 @@
+Package: libghc-ofx-dev
+Source: haskell-ofx
+Version: 0.4.2.0-4
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 2091
+Depends: libghc-base-dev-4.10.1.0-35a7f, libghc-parsec-dev-3.1.13.0-c7e67, libghc-pretty-dev-1.1.3.3-da5c0, libghc-time-dev-1.8.0.2-7cc03, libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-ofx-doc, libghc-ofx-prof
+Provides: libghc-ofx-dev-0.4.2.0-042e5
+Section: haskell
+Priority: optional
+Homepage: http://www.github.com/massysett/ofx
+Description: parser for Open Financial Exchange (OFX) financial data
+ A parser for Open Financial Exchange (OFX) financial data. This
+ handles OFX version 1.03, which is documented at http://www.ofx.net/ .
+ This also handles QFX, which is OFX plus some minor additions made by
+ Intuit, the publishers of Quicken.
+ .
+ The parser will place all the data into a tree, which you can query
+ for whatever data you may need, although you will need to be familiar
+ with the OFX spec to do this. There is also a Transaction type which
+ you can easily parse from the tree; this will contain most, if not
+ all, of the data you will be interested in if your OFX file is from a
+ bank or credit card account.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: ofx-0.4.2.0-Gs97rzNfNxqGC4AlD0x9cc

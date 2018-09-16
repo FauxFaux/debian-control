@@ -1,0 +1,20 @@
+Package: libusbredirhost-dev
+Source: usbredir
+Version: 0.7.1-1
+Architecture: amd64
+Maintainer: Liang Guo <guoliang@debian.org>
+Installed-Size: 38
+Depends: libusbredirhost1 (= 0.7.1-1), libusbredirparser-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.spice-space.org/
+Description: implementing the usb-host (*) side of a usbredir connection (development)
+ Usbredirhost is a library implementing the usb-host (*) side of a
+ usbredir connection. All that an application wishing to implement
+ an usb-host needs to do is:
+  * Provide a libusb device handle for the device
+  * Provide write and read callbacks for the actual transport of usbredir data
+  * Monitor for usbredir and libusb read/write events and call their handlers
+ .
+ This package contains the development header files.

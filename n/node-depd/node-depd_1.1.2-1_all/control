@@ -1,0 +1,23 @@
+Package: node-depd
+Version: 1.1.2-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 42
+Depends: nodejs
+Section: javascript
+Priority: optional
+Homepage: https://github.com/dougwilson/nodejs-depd
+Description: mark a function or property as deprecated - Node.js module
+ This module goes above and beyond with deprecation warnings by introspecting
+ the call stack (but only the bits that it is interested in).
+ .
+ Instead of just warning on the first invocation of a deprecated function and
+ never again, this module will warn on the first invocation of a deprecated
+ function per unique call site, making it ideal to alert users of all
+ deprecated uses across the code base, rather than just whatever happens to
+ execute first.
+ .
+ The deprecation warnings from this module also include the file and line
+ information for the call into the module that the deprecated function was in.
+ .
+ Node.js is an event-based server-side JavaScript engine.

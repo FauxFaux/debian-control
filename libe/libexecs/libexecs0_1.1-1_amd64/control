@@ -1,0 +1,20 @@
+Package: libexecs0
+Source: libexecs
+Version: 1.1-1
+Architecture: amd64
+Maintainer: Giulia Cantini <giuliacantini3@gmail.com>
+Installed-Size: 40
+Depends: libc6 (>= 2.11)
+Section: libs
+Priority: optional
+Description: C library for commands execution
+ s2argv converts a command string into an argv array for execv, execvp,
+ execvpe. execs is like execv taking a string instead of an argv.
+ Similarly execsp and execspe are the counterpart of execvp and execvpe,
+ respectively, using command strings.
+ coprocv, coprocvp, coprocvpe, coprocs, coprocsp execute a command in
+ coprocessing mode.
+ The following functions all work without using a shell:
+ esystem, system_eexecsp execute a command with its arguments from a string.
+ popen_nosh, popen_execsp and pclose_nosh pipe stream to or from a process.
+ system_nosh executes a command with its arguments from a string.

@@ -1,0 +1,21 @@
+Package: ruby-solve
+Version: 4.0.0-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 71
+Depends: ruby | ruby-interpreter, ruby-molinillo (>= 0.6), ruby-semverse (>= 1.1)
+Breaks: berkshelf (<< 6.3.1-1~)
+Section: ruby
+Priority: optional
+Homepage: https://github.com/berkshelf/solve
+Description: Ruby version constraint solver implementing semantic versioning
+ Ruby versioning constraint solver implementing Semantic Versioning 2.0.0
+ (see http://semver.org/).
+ .
+ Solve supports two different resolvers. A pure Ruby solver implemented using
+ Molinillo and the same dependency resolver the Chef Server uses, dep-selector,
+ which is a Ruby C extension for Gecode.
+ .
+ The Ruby solver is installed and enabled by default. If you'd like to use the
+ Gecode solver you can do so by installing the ruby-dep-selector package.
+Ruby-Versions: all

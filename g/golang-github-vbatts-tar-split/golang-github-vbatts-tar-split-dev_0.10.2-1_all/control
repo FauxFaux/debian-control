@@ -1,0 +1,33 @@
+Package: golang-github-vbatts-tar-split-dev
+Source: golang-github-vbatts-tar-split
+Version: 0.10.2-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 325
+Depends: golang-github-sirupsen-logrus-dev, golang-github-urfave-cli-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/vbatts/tar-split
+Description: tar archive assembly/disassembly (source)
+ Pristinely disassembling a tar archive, and stashing needed raw bytes and
+ offsets to reassemble a validating original archive.
+ .
+ Eventually this should detect TARs that this is not possible with.
+ .
+ For example stored sparse files that have "holes" in them, will be read as a
+ contiguous file, though the archive contents may be recorded in sparse format.
+ Therefore when adding the file payload to a reassembled tar, to achieve
+ identical output, the file payload would need be precisely re-sparsified. This
+ is not something I seek to fix immediately, but would rather have an alert that
+ precise reassembly is not possible. (see more
+ http://www.gnu.org/software/tar/manual/html_node/Sparse-Formats.html)
+ .
+ Other caveat, while tar archives support having multiple file entries for the
+ same path, we will not support this feature. If there are more than one entries
+ with the same path, expect an err (like ErrDuplicatePath) or a resulting tar
+ stream that does not validate your original checksum/signature.
+ .
+ Contract: Do not break the API of stdlib archive/tar in our fork (ideally find
+ an upstream mergeable solution).
+ .
+ This package contains the source.

@@ -1,0 +1,16 @@
+Package: onak
+Version: 0.5.0-1
+Architecture: amd64
+Maintainer: Jonathan McDowell <noodles@earth.li>
+Installed-Size: 1063
+Depends: libc6 (>= 2.15), libcurl3-gnutls (>= 7.16.2), libdb5.3, libnettle6, libsystemd0 (>= 214), init-system-helpers (>= 1.18~), perl:any, adduser
+Recommends: apache2 | httpd
+Suggests: db-util
+Section: net
+Priority: optional
+Homepage: https://www.earth.li/projectpurple/progs/onak.html
+Description: OpenPGP Key Server
+ onak is an OpenPGP compatible keyserver which supports multiple subkeys,
+ photo ids and path finding between keys. It can provide an HKP
+ compatible interface for use with the --keyserver option of gnupg as
+ well as including a command line tool for querying the key database.

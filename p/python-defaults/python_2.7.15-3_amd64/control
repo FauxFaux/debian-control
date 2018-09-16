@@ -1,0 +1,26 @@
+Package: python
+Source: python-defaults
+Version: 2.7.15-3
+Architecture: amd64
+Maintainer: Matthias Klose <doko@debian.org>
+Installed-Size: 68
+Pre-Depends: python-minimal (= 2.7.15-3)
+Depends: python2.7 (>= 2.7.15-1~), libpython-stdlib (= 2.7.15-3), python2 (= 2.7.15-3)
+Suggests: python-doc (= 2.7.15-3), python-tk (>= 2.7.15-1~)
+Conflicts: python-central (<< 0.5.5)
+Breaks: update-manager-core (<< 0.200.5-2)
+Replaces: python-dev (<< 2.6.5-2)
+Provides: python-ctypes, python-email, python-importlib, python-profiler, python-wsgiref
+Section: python
+Priority: optional
+Multi-Arch: allowed
+Homepage: https://www.python.org/
+Description: interactive high-level object-oriented language (Python2 version)
+ Python2, the high-level, interactive object oriented language,
+ includes an extensive class library with lots of goodies for
+ network programming, system administration, sounds and graphics.
+ .
+ This package is a dependency package, which depends on Debian's Python2
+ version (currently v2.7).
+Cnf-Extra-Commands: python
+Cnf-Priority-Bonus: 3

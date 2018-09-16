@@ -1,0 +1,34 @@
+Package: cvs-buildpackage
+Version: 5.26
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 124
+Depends: dpkg-dev, cvs
+Section: devel
+Priority: optional
+Description: set of Debian package scripts for CVS source trees
+ This package provides the capability to inject or import Debian
+ source packages into a CVS repository, build a Debian package from
+ the CVS repository, and helps in integrating upstream changes into
+ the repository.
+ .
+ The import or inject process takes a dsc (Debian source control)
+ file, and imports it into CVS. The module path can maintains
+ distribution and section information; for example, one may inject
+ hemm/hemm/devel/make into the repository.
+ .
+ The build process works analogously to dpkg-buildpackage, and can be
+ used from within the checked out source tree, or with additional
+ information, can be used from anywhere. In the latter case, you can
+ build any previous version of the package, as long as the
+ corresponding orig.tar.gz file is still around. The build script
+ checks out the relevant version from the CVS repository, and runs
+ dpkg-buildpackage to create the Debian package.
+ .
+ Combined, these utilities provide an infrastructure to facilitate the
+ use of CVS by Debian maintainers. This allows one to keep separate
+ CVS branches of a package for stable, unstable, and possibly
+ experimental distributions, along with the other benefits of a
+ version control system.
+ .
+ This can be used to generate a unified CVS source tree, for example.

@@ -1,0 +1,22 @@
+Package: hpijs-ppds
+Source: hplip
+Version: 3.17.10+repack0-7
+Architecture: all
+Maintainer: Debian Printing Team <debian-printing@lists.debian.org>
+Installed-Size: 219
+Depends: cups-filters (>= 1.0.42) | foomatic-filters, printer-driver-hpijs (>= 3.17.10+repack0-7), python3:any, xz-utils
+Breaks: foomatic-filters-ppds (>> 20000101), hplip-ppds
+Replaces: hplip-ppds
+Provides: hplip-ppds
+Section: utils
+Priority: optional
+Homepage: https://developers.hp.com/hp-linux-imaging-and-printing
+Description: HP Linux Printing and Imaging - HPIJS PPD files
+ This package contains PPD (printer definition) files for the
+ printers supported through the HP Linux Printing and Imaging
+ System HPIJS driver.
+ .
+ These PPDs should work well with the matching versions of HPLIP
+ and HPIJS, but may not be the most up-to-date PPDs available for
+ a given printer.  See http://www.openprinting.org/ for the latest
+ version of the PPDs (which are not guaranteed to work well).

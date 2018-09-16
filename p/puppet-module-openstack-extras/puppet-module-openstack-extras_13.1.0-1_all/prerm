@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "remove" ] || [ "${1}" = "upgrade" ] || [ "${1}" = "deconfigure" ] ; then
+	update-alternatives --remove puppet-module-openstack_extras /usr/share/puppet/modules.available/openstack_extras
+fi
+
+
+
+exit 0

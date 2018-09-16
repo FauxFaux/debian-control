@@ -1,0 +1,29 @@
+Package: libdancer2-plugin-database-perl
+Version: 2.17-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 37
+Depends: perl, libdancer-plugin-database-core-perl (>= 0.16), libdancer2-perl (>= 0.166001)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Dancer2-Plugin-Database
+Description: module for easy database connections for Dancer2 applications
+ Dancer2::Plugin::Database Provides an easy way to obtain a connected DBI
+ database handle by simply calling the database keyword within your Dancer2
+ application
+ .
+ The module returns a Dancer::Plugin::Database::Core::Handle object, which is
+ a subclass of DBI's `DBI::db' connection handle object, so it does everything
+ you'd expect to do with DBI, but also adds a few convenience methods.
+ .
+ It takes care of ensuring that the database handle is still connected and
+ valid. If the handle was last asked for more than
+ `connection_check_threshold' seconds ago, it will check that the connection
+ is still alive, using either the `$dbh->ping' method if the DBD driver
+ supports it, or performing a simple no-op query against the database if not.
+ If the connection has gone away, a new connection will be obtained and
+ returned. This avoids any problems for a long-running script where the
+ connection to the database might go away.
+ .
+ Care is taken that handles are not shared across processes/threads, so this
+ should be thread-safe with no issues with transactions etc.

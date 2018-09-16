@@ -1,0 +1,18 @@
+Package: libhtml-template-dumper-perl
+Version: 0.1-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: perl, libhtml-template-perl
+Recommends: libyaml-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/HTML-Template-Dumper
+Description: module to output template data in a test-friendly format
+ HTML::Template::Dumper helps you to test HTML::Template-based programs by
+ printing only the information used to fill-in the template data. This makes
+ it much easier to automatically parse the output of your program. Currently,
+ data can be outputed by Data::Dumper (default) or YAML.
+ .
+ Note that the underlying HTML::Template methods are still called, so options
+ like strict and die_on_bad_params will still throw errors.

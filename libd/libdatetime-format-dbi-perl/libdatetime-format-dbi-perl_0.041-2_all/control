@@ -1,0 +1,23 @@
+Package: libdatetime-format-dbi-perl
+Version: 0.041-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: perl, libdatetime-perl, libdbi-perl
+Recommends: libdatetime-format-db2-perl, libdatetime-format-mysql-perl, libdatetime-format-pg-perl, libdatetime-format-sqlite-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/DateTime-Format-DBI
+Description: abstraction layer for DateTime over some database vendors
+ DateTime::Format::DBI finds a DateTime::Format::* class that is suitable for
+ the use with a given DBI connection (and DBD::* driver).
+ .
+ It currently supports the following format modules: IBM DB2
+ (DB2)|DateTime::Format::DB2, MySQL|DateTime::Format::MySQL,
+ Oracle|DateTime::Format::Oracle, PostgreSQL (Pg)|DateTime::Format::Pg,
+ SQLite|DateTime::Format::SQLite.
+ .
+ NOTE: This module provides a quick method to find the correct parser and
+ formatter class. However, this is usually not sufficient for full database
+ abstraction. You will also have to cater for differences in the syntax and
+ semantics of SQL datetime functions (and other SQL commands).

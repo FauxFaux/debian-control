@@ -1,0 +1,15 @@
+Package: libhttp-thin-perl
+Version: 0.006-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 20
+Depends: perl (>= 5.13.9), libclass-method-modifiers-perl, libhash-multivalue-perl, libhttp-message-perl, libsafe-isa-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/HTTP-Thin
+Description: Thin Wrapper around HTTP::Tiny to play nice with HTTP::Message
+ HTTP::Thin is a thin wrapper around HTTP::Tiny adding the ability to pass in
+ HTTP::Request objects and get back HTTP::Response objects. The maintainers of
+ HTTP::Tiny, justifiably, don't want to have to maintain compatibility but
+ many other projects already consume the HTTP::Message objects. This is just
+ glue code doing what it does best.

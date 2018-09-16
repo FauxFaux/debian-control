@@ -1,0 +1,16 @@
+Package: ruby-base62
+Version: 1.0.0-3
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 25
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: https://github.com/jtzemp/base62
+Description: base62 encoding and decoding library for Ruby
+ Base62 monkeypatches Integer to add an Integer#base62_encode
+ instance method to encode an integer in the character set of
+ 0-9 + A-Z + a-z. It also monkeypatches String to add
+ String#base62_decode to take the string and turn it back
+ into a valid integer.
+Ruby-Versions: all

@@ -1,0 +1,14 @@
+Package: libmoosex-strictconstructor-perl
+Version: 0.21-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 46
+Depends: perl, libmoose-perl, libnamespace-autoclean-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MooseX-StrictConstructor
+Description: Make your object constructors blow up on unknown attributes
+ "use MooseX::StrictConstructor" instead of just "use Moose" makes your
+ constructors strict. If your constructor is called with an attribute
+ init argument that your class does not declare, then it calls
+ "Carp::confess()". This is a great way to catch small typos.

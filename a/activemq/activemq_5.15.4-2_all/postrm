@@ -1,0 +1,65 @@
+#!/bin/sh
+
+set -e
+
+AMQ_HOME=/var/lib/activemq
+AMQ_GROUP=activemq
+AMQ_USER=activemq
+
+del_group() {
+    if getent group $AMQ_GROUP > /dev/null 2>&1; then
+        if [ -x "`which delgroup 2>/dev/null`" ]; then
+            delgroup --system --only-if-empty $AMQ_GROUP
+        else
+            echo >&2 "Not removing \`$AMQ_GROUP' system group" \
+              "because delgroup command was not found."
+        fi
+
+    fi
+}
+
+del_user() {
+    if getent passwd $AMQ_USER > /dev/null 2>&1; then
+        if [ -x "`which deluser 2>/dev/null`" ]; then
+            deluser --system $AMQ_USER
+        else
+            echo >&2 "Not removing \`$AMQ_USER' system account" \
+              "because deluser command was not found."
+        fi
+    fi
+}
+
+disable_user() {
+    if getent passwd $AMQ_USER > /dev/null 2>&1; then
+        usermod --shell /bin/false $AMQ_USER
+    fi
+}
+
+if [ "$1" = "purge" ]; then
+    # purge stats overrides
+    # stats overrides could already be removed by root
+    dpkg-statoverride --remove $AMQ_HOME || true
+
+    # Unsure about this:
+    # http://wiki.debian.org/AccountHandlingInMaintainerScripts
+    #del_user
+    #del_group
+    # or just disable account ?
+    # disable_user
+    rm -rf /etc/activemq
+    rm -rf $AMQ_HOME
+fi
+
+# Automatically added by dh_installinit/11.3.2
+if [ "$1" = "purge" ] ; then
+	update-rc.d activemq remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+

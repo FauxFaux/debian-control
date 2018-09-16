@@ -1,0 +1,24 @@
+Package: gman
+Source: gman (0.9.3-5.2)
+Version: 0.9.3-5.2+b2
+Architecture: amd64
+Maintainer: Josip Rodin <joy-packages@debian.org>
+Installed-Size: 103
+Depends: libatk1.0-0 (>= 1.12.4), libc6 (>= 2.14), libcairo2 (>= 1.2.4), libfontconfig1 (>= 2.11), libfreetype6 (>= 2.2.1), libgcc1 (>= 1:3.0), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.16.0), libgtk2.0-0 (>= 2.8.0), libpango-1.0-0 (>= 1.14.0), libpangocairo-1.0-0 (>= 1.14.0), libpangoft2-1.0-0 (>= 1.14.0), libstdc++6 (>= 5), man-db, xterm | x-terminal-emulator
+Suggests: gv, man2html, httpd, sensible-browser, evince
+Provides: man-browser
+Section: doc
+Priority: optional
+Description: small man(1) front-end for X
+ Gman is a simple front-end for the manual page system. The most basic job
+ of gman is to build a database for all the man pages and display them
+ (or part of them) on the screen. When user decides to read a man page,
+ gman will launch an external viewer to display the manual page. More than
+ one external viewer windows can be launched at the same time.
+ .
+ The default manual page viewer is a terminal window with the original
+ man(1). It can also launch gv, evince, or a link to a CGI script which
+ utilizes man2html, for viewing manual pages using a web browser.
+ .
+ There is an index search function to look for the man pages that one needs.
+ It's simple, but it's useful.

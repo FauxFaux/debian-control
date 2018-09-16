@@ -1,0 +1,18 @@
+Package: cricket
+Version: 1.0.5-22
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 1143
+Depends: libc6 (>= 2.2.5), perl:any, libtimedate-perl, libsnmp-session-perl, librrds-perl (>= 1.0.10), libdigest-md5-perl, cron
+Recommends: logrotate, apache2 | httpd
+Suggests: libwww-perl, libtime-hires-perl, libsnmp-perl
+Section: net
+Priority: extra
+Description: Program for collection and display of time-series data
+ This is Cricket. It is a configuration, polling, and data-display engine
+ wrapped around the RRD tool by Tobias Oetiker. There are three user-visible
+ pieces to Cricket: the collector, the grapher, and the config tree. The
+ collector runs from cron and fetches data from a number of devices
+ according to the info it finds in the config tree. The grapher is a CGI
+ application that allows users to traverse the config tree from a web
+ browser and see the data that the collector recorded.

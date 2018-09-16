@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+        dpkg-maintscript-helper rm_conffile /etc/rsyslog.d/asunder.conf 2.5-2 -- "$@"
+        dpkg-maintscript-helper rm_conffile /etc/logrotate.d/asunder 2.8-3 -- "$@"
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

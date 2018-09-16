@@ -1,0 +1,23 @@
+Package: dnet-common
+Source: dnprogs
+Version: 2.65
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 103
+Pre-Depends: debconf (>= 0.5.00) | debconf-2.0
+Depends: debianutils (>= 1.13), kmod, lsb-base
+Suggests: iproute2
+Conflicts: dnprogs
+Section: net
+Priority: extra
+Multi-Arch: foreign
+Description: Base package for Linux DECnet
+ This is the base package for Linux DECnet. It contains the necessary
+ configuration files and a script to set up the MAC address of your
+ Ethernet card(s) at boot-up.
+ .
+ You will also need to be running a 2.4+ kernel and have DECnet either
+ built as a module or compiled into the kernel.
+ .
+ To do useful work with DECnet you will need the libdnet package and
+ probably also dnet-progs.

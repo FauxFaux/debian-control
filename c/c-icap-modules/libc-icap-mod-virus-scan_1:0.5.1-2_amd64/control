@@ -1,0 +1,16 @@
+Package: libc-icap-mod-virus-scan
+Source: c-icap-modules
+Version: 1:0.5.1-2
+Architecture: amd64
+Maintainer: Mathieu Parent <sathieu@debian.org>
+Installed-Size: 140
+Depends: c-icap (>= 1:0.2.5~), clamav, libc6 (>= 2.7), libclamav7 (>= 0.100.1)
+Breaks: c-icap (<< 1:0.1.3-1)
+Replaces: c-icap
+Provides: libc-icap-module
+Section: net
+Priority: optional
+Homepage: http://c-icap.sourceforge.net/
+Description: Antivirus Service for c-icap
+ This is an antivirus Service for c-icap which uses libclamav or clamd to do
+ scanning. It is distributed with c-icap and written by the same author.

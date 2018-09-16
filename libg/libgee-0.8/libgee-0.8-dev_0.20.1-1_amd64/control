@@ -1,0 +1,52 @@
+Package: libgee-0.8-dev
+Source: libgee-0.8
+Version: 0.20.1-1
+Architecture: amd64
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Installed-Size: 642
+Depends: libgee-0.8-2 (= 0.20.1-1), gir1.2-gee-0.8 (= 0.20.1-1), libglib2.0-dev (>= 2.36)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://wiki.gnome.org/Projects/Libgee
+Description: GObject based collection and utility library (development files)
+ libgee is a collection library providing GObject-based interfaces and
+ classes for commonly used data structures.
+ .
+ libgee provides the following interfaces:
+  * Traversable
+    - Iterable
+         + Collection
+           # List
+             * BidirList
+           # Set
+             * SortedSet
+               - BidirSortedSet
+           # MultiSet
+           # Queue
+             * Deque
+         + Map
+           # SortedMap
+             * BidirSortedMap
+    - Iterator
+         + BidirIterator
+           # BidirListIterator
+         + ListIterator
+           # BidirListIterator
+  * MultiMap
+  * Future
+ .
+ The ArrayList, ArrauQueue, ConcurrentLinkedList, ConcurrentSet, HashSet,
+ HashMap, HashMultiSet, HashMultiMap, LinkedList, PriorityQueue, Promise,
+ TreeSet, TreeMap, TreeMultiSet, and TreeMultiMap classes provide a
+ reasonable sample implementation of those interfaces. In addition, a set of
+ abstract classes are provided to ease the implementation of new collections.
+ .
+ Around that, the API provides means to retrieve read-only views, efficient
+ sort algorithms, simple, bi-directional or index-based mutable iterators
+ depending on the collection type.
+ .
+ libgee is written in Vala and can be used like any GObject-based C library.
+ It's planned to provide bindings for further languages.
+ .
+ This package contains the headers and development libraries.

@@ -1,0 +1,25 @@
+Package: libfile-wildcard-perl
+Version: 0.11-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 48
+Depends: perl, libmodule-optional-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/File-Wildcard
+Description: Enhanced glob processing
+ When looking at how various operating systems do filename wildcard expansion
+ (globbing), VMS has a nice syntax which allows expansion and searching of
+ whole directory trees. It would be nice if other operating systems had
+ something like this built in. The best Unix can manage is through the utility
+ program find.
+ .
+ File::Wildcard provides this facility to Perl. Whereas native VMS syntax uses
+ the ellipsis "...", this will not fit in with POSIX filenames, as ... is a
+ valid (though somewhat strange) filename. Instead, the construct "///" is
+ used as this cannot syntactically be part of a filename, as you do not get
+ three concurrent filename separators with nothing between (three slashes are
+ used to avoid confusion with //node/path/name syntax).
+ .
+ You don't have to use this syntax, as you can do the splitting yourself and
+ pass in an arrayref as your path.

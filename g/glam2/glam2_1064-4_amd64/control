@@ -1,0 +1,32 @@
+Package: glam2
+Version: 1064-4
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 500
+Depends: libc6 (>= 2.14), libfftw3-double3 (>= 3.3.5)
+Section: science
+Priority: optional
+Homepage: http://acb.qfab.org/acb/glam2/
+Description: gapped protein motifs from unaligned sequences
+ GLAM2 is a software package for finding motifs in sequences, typically
+ amino-acid or nucleotide sequences. A motif is a re-occurring sequence
+ pattern: typical examples are the TATA box and the CAAX prenylation motif. The
+ main innovation of GLAM2 is that it allows insertions and deletions in motifs.
+ .
+ This package includes programs for discovering motifs shared by a set of
+ sequences and finding matches to these motifs in a sequence database, as well
+ as utilities for converting glam2 motifs to standard alignment formats,
+ masking glam2 motifs out of sequences so that weaker motifs can be found, and
+ removing highly similar members of a set of sequences.
+ .
+ The package includes these programs:
+  glam2:       discovering motifs shared by a set of sequences;
+  glam2scan:   finding matches, in a sequence database, to a motif discovered
+               by glam2;
+  glam2format: converting glam2 motifs to  standard alignment formats;
+  glam2mask:   masking glam2 motifs out of sequences, so that weaker motifs
+               can be found;
+  glam2-purge: removing highly similar members of a set of sequences.
+ .
+ In this binary package, the fast Fourier algorithm (FFT) was enabled for the
+ glam2 program.

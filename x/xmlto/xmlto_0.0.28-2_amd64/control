@@ -1,0 +1,25 @@
+Package: xmlto
+Version: 0.0.28-2
+Architecture: amd64
+Maintainer: ChangZhuo Chen (陳昌倬) <czchen@debian.org>
+Installed-Size: 126
+Depends: libc6 (>= 2.3.4), debianutils (>= 1.16), docbook-xml (>= 4.2-8), docbook-xsl (>= 1.64.1.0), libxml2-utils, sgml-base, xsltproc (>= 1.1.12-8)
+Recommends: dblatex | fop, libpaper-utils, zip
+Suggests: w3m | lynx-cur | links, texlive-htmlxml
+Section: text
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://fedorahosted.org/xmlto/
+Description: XML-to-any converter
+ xmlto is a front-end to an XSL toolchain. It chooses an appropriate
+ stylesheet for the conversion you want and applies it using an external
+ XSLT processor (currently, only xsltproc is supported). It also performs
+ any necessary post-processing.
+ .
+ It supports converting from DocBook XML to DVI, XSL-FO, HTML and XHTML
+ (one or multiple pages), epub, manual page, PDF, PostScript and plain
+ text. It also supports converting from XSL-FO to DVI, PDF and PostScript.
+ .
+ DVI output requires dblatex or PassiveTeX. Other formats can be produced
+ with any of the supported toolchains - dblatex, PassiveTeX or
+ docbook-xsl/fop (but may require some extensions).

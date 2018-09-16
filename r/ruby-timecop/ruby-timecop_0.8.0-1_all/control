@@ -1,0 +1,20 @@
+Package: ruby-timecop
+Version: 0.8.0-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 36
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: https://github.com/travisjeffery/timecop
+Description: Ruby library to easily test time-dependent code
+ Timecop makes it easy to travel through or freeze time for creating a
+ predictable and ultimately testable scenario.
+ .
+ It is a wrapper class for manipulating the extensions to the Time, Date,
+ and DateTime objects. It avoids overloading of functions with optional
+ arguments while writing test cases. It is possible to nest multiple
+ calls to Timecop.travel and Timecop.freeze, with each block maintaining
+ concept of "now". Having no dependencies, it works with regular Ruby projects
+ and Ruby on Rails projects.
+Ruby-Versions: all

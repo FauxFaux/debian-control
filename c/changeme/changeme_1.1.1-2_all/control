@@ -1,0 +1,24 @@
+Package: changeme
+Version: 1.1.1-2
+Architecture: all
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 293
+Depends: python3-cerberus, python3-jinja2, python3-libnmap, python3-logutils, python3-lxml, python3-memcache, python3-netaddr, python3-nose, python3-paramiko, python3-psycopg2, python3-pymongo, python3-pyodbc, python3-pysnmp4, python3-redis, python3-requests, python3-selenium, python3-shodan, python3-sqlalchemy, python3-tabulate, python3-yaml, python3:any (>= 3.3.2-2~)
+Suggests: phantomjs
+Section: misc
+Priority: optional
+Homepage: https://github.com/ztgrace/changeme
+Description: Default credential scanner
+ This package contains a default credential scanner. Commercial vulnerability
+ scanners miss common default credentials. Getting default credentials added to
+ commercial scanners is often difficult and slow. changeme is designed to be
+ simple to add new credentials without having to write any code or modules.
+ .
+ changeme keeps credential data separate from code. All credentials are stored
+ in yaml files so they can be both easily read by humans and processed by
+ changeme. Credential files can be created by using the ./changeme.py --mkcred
+ tool and answering a few questions.
+ .
+ changeme supports the http/https, MSSQL, MySQL, Postgres, ssh and ssh w/key
+ protocols. Use ./changeme.py --dump to output all of the currently available
+ credentials.

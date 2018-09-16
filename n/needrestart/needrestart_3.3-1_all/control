@@ -1,0 +1,26 @@
+Package: needrestart
+Version: 3.3-1
+Architecture: all
+Maintainer: Patrick Matthäi <pmatthaei@debian.org>
+Installed-Size: 252
+Depends: perl, dpkg (>= 1.16.0), gettext-base, libintl-perl, libproc-processtable-perl, libsort-naturally-perl, libmodule-scandeps-perl, libterm-readkey-perl, libmodule-find-perl, binutils, xz-utils
+Recommends: libpam-systemd | sysvinit-core
+Suggests: needrestart-session | libnotify-bin, iucode-tool
+Enhances: intel-microcode
+Section: admin
+Priority: optional
+Homepage: https://github.com/liske/needrestart
+Description: check which daemons need to be restarted after library upgrades
+ needrestart checks which daemons need to be restarted after library upgrades.
+ It is inspired by checkrestart from the debian-goodies package.
+ .
+ Features:
+  - supports (but does not require) systemd
+  - binary blacklisting (i.e. display managers)
+  - tries to detect required restarts of interpreter based daemons
+    (supports Java, Perl, Python, Ruby)
+  - tries to detect required resarts of  containers (docker, LXC)
+  - tries to detect pending kernel upgrades
+  - tries to detect pending microcode upgrades for Intel CPUs
+  - could be used as nagios check_command
+  - fully integrated into apt/dpkg using hooks

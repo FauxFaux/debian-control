@@ -1,0 +1,36 @@
+Package: libclass-spiffy-perl
+Version: 0.15-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 56
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Class-Spiffy/
+Description: Spiffy Perl interface framework
+ Class::Spiffy is a framework and methodology for doing object oriented
+ programming in Perl. Class::Spiffy combines the best parts of Exporter.pm,
+ base.pm, mixin.pm and SUPER.pm into one magic foundation class. It attempts to
+ fix all the nits and warts of traditional Perl OO, in a clean, straightforward
+ and (perhaps someday) standard way.
+ .
+ Class::Spiffy borrows ideas from other OO languages like Python, Ruby, Java
+ and Perl 6. It also adds a few tricks of its own.
+ .
+ If you take a look on CPAN, there are a ton of OO related modules. When
+ starting a new project, you need to pick the set of modules that makes most
+ sense, and then you need to use those modules in each of your classes.
+ Class::Spiffy, on the other hand, has everything you'll probably need in one
+ module, and you only need to use it once in one of your classes. If you make
+ Class::Spiffy the base class of the basest class in your project,
+ Class::Spiffy will automatically pass all of its magic to all of your
+ subclasses. You may eventually forget that you're even using it!
+ .
+ The most striking difference between Class::Spiffy and other Perl object
+ oriented base classes, is that it has the ability to export things. If you
+ create a subclass of Class::Spiffy, all the things that Class::Spiffy exports
+ will automatically be exported by your subclass, in addition to any more
+ things that you want to export. And if someone creates a subclass of your
+ subclass, all of those things will be exported automatically, and so on. Think
+ of it as "Inherited Exportation", and it uses the familiar Exporter.pm
+ specification syntax.

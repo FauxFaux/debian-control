@@ -1,0 +1,28 @@
+Package: gpg-agent
+Source: gnupg2
+Version: 2.2.10-1
+Architecture: amd64
+Maintainer: Debian GnuPG Maintainers <pkg-gnupg-maint@lists.alioth.debian.org>
+Installed-Size: 1228
+Depends: gpgconf (= 2.2.10-1), pinentry-curses | pinentry, libassuan0 (>= 2.5.1), libc6 (>= 2.17), libgcrypt20 (>= 1.8.0), libgpg-error0 (>= 1.14), libnpth0 (>= 0.90)
+Recommends: gnupg (= 2.2.10-1)
+Suggests: dbus-user-session, libpam-systemd, pinentry-gnome3, scdaemon
+Breaks: gnupg-agent (<< 2.1.21-4)
+Replaces: gnupg-agent (<< 2.1.21-4)
+Provides: gnupg-agent
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.gnupg.org/
+Description: GNU privacy guard - cryptographic agent
+ GnuPG is GNU's tool for secure communication and data storage.
+ It can be used to encrypt data and to create digital signatures.
+ It includes an advanced key management facility and is compliant
+ with the proposed OpenPGP Internet standard as described in RFC4880.
+ .
+ This package contains the agent program gpg-agent which handles all
+ secret key material for OpenPGP and S/MIME use.  The agent also
+ provides a passphrase cache, which is used by pre-2.1 versions of
+ GnuPG for OpenPGP operations.  Without this package, trying to do
+ secret-key operations with any part of the modern GnuPG suite will
+ fail.

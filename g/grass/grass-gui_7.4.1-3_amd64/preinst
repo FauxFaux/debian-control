@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+
+
+# Switch directories to symlinks (#776349)
+if dpkg-maintscript-helper supports dir_to_symlink 2>/dev/null; then
+  dpkg-maintscript-helper dir_to_symlink \
+    /usr/lib/grass64/etc/gui/icons /usr/share/grass64/etc/gui/icons 7.0.0~rc1-1~exp1~ -- "$@"
+
+  dpkg-maintscript-helper dir_to_symlink \
+    /usr/lib/grass64/etc/gui/images /usr/share/grass64/etc/gui/images 7.0.0~rc1-1~exp1~ -- "$@"
+
+  dpkg-maintscript-helper dir_to_symlink \
+    /usr/lib/grass64/bwidget/images /usr/share/grass64/bwidget/images 7.0.0~rc1-1~exp1~ -- "$@"
+fi

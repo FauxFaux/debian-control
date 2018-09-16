@@ -1,0 +1,22 @@
+Package: python3-cffi-backend
+Source: python-cffi
+Version: 1.11.5-3
+Architecture: amd64
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 364
+Depends: python3 (<< 3.8), python3 (>= 3.6~), libc6 (>= 2.14), libffi6 (>= 3.0.4)
+Breaks: python3-cffi (<< 1)
+Replaces: python3-cffi (<< 1)
+Provides: python3-cffi-backend-api-9729, python3-cffi-backend-api-max (= 10495), python3-cffi-backend-api-min (= 9729)
+Section: python
+Priority: optional
+Homepage: http://cffi.readthedocs.org/
+Description: Foreign Function Interface for Python 3 calling C code - runtime
+ Convenient and reliable way of calling C code from Python 3.
+ .
+ The aim of this project is to provide a convenient and reliable way of calling
+ C code from Python. It keeps Python logic in Python, and minimises the C
+ required. It is able to work at either the C API or ABI level, unlike most
+ other approaches, that only support the ABI level.
+ .
+ This package contains the runtime support for pre-built cffi modules.

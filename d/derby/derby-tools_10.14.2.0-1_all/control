@@ -1,0 +1,35 @@
+Package: derby-tools
+Source: derby
+Version: 10.14.2.0-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 260
+Depends: default-jre | java6-runtime-headless, java-wrappers, libderby-java, libderbyclient-java
+Section: java
+Priority: optional
+Homepage: http://db.apache.org/derby/
+Description: Apache Derby Tools
+ The Derby tools and utilities are a set of routines supplied with Derby
+ that are typically used to create, inspect, and update a Derby database.
+ .
+ These tools and utilities include:
+  * NetworkServerControl, provides the ability to start a Network Server or
+    connect to a running Network Server to shutdown, configure or retrieve
+    diagnostic information.
+  * ij, the Derby's interactive JDBC scripting tool. It is a simple utility
+    for running scripts against a Derby database. You can also use it
+    interactively to run ad hoc queries. ij provides several commands for ease
+    in accessing a variety of JDBC features.
+    ij can be used in an embedded or a client/server environment.
+  * sysinfo, provides information about your version of Derby and your
+    environment.
+  * dblook, the Derby's Data Definition Language (DDL) Generation Utility,
+    more informally called a schema dump tool. It is a simple utility that
+    dumps the DDL of a user-specified database to either a console or a file.
+    The generated DDL can then be used for such things as recreating all or
+    parts of a database, viewing a subset of a database's objects (for example,
+    those which pertain to specific tables and schemas), or documenting
+    a database's schema.
+  * SignatureChecker, a tool that identifies any SQL functions and procedures
+    in a database that do not follow the SQL Standard argument matching rules.
+  * PlanExporter, a tool to export query plan data for further analysis.

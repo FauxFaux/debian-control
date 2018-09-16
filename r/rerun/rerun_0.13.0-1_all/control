@@ -1,0 +1,18 @@
+Package: rerun
+Version: 0.13.0-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 66
+Depends: ruby | ruby-interpreter, ruby-listen (>= 3.0)
+Suggests: libnotify-bin
+Section: ruby
+Priority: optional
+Homepage: http://github.com/alexch/rerun/
+Description: tool to launch commands and restart them on filesystem changes
+ Rerun launches your program, then watches the filesystem. If a relevant file
+ changes, then it restarts your program. Rerun works for both long-running
+ processes (e.g. apps) and for short-running ones (e.g. tests).
+ .
+ Install libnotify-bin to get desktop notifications when your application is
+ restarted, or about the results of your tests.
+Ruby-Versions: all

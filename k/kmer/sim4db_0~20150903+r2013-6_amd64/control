@@ -1,0 +1,30 @@
+Package: sim4db
+Source: kmer
+Version: 0~20150903+r2013-6
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 3341
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Recommends: leaff, kmer-examples
+Section: science
+Priority: optional
+Homepage: http://kmer.sourceforge.net
+Description: batch spliced alignment of cDNA sequences to a target genome
+ Sim4db performs fast batch alignment of large cDNA (EST, mRNA) sequence
+ sets to a set of eukaryotic genomic regions. It uses the sim4 and sim4cc
+ algorithms to determine the alignments, but incorporates a fast sequence
+ indexing and retrieval mechanism, implemented in the sister package
+ 'leaff', to speedily process large volumes of sequences.
+ .
+ While sim4db produces alignments in the same way as sim4 or sim4cc, it
+ has additional features to make it more amenable for use with whole-genome
+ annotation pipelines. A script file can be used to group pairings between
+ cDNAs and their corresponding genomic regions, to be aligned as one run
+ and using the same set of parameters. Sim4db also optionally reports more
+ than one alignment for the same cDNA within a genomic region, as long
+ as they meet user-defined criteria such as minimum length, percentage
+ sequence identity or coverage. This feature is instrumental in finding
+ all alignments of a gene family at one locus. Lastly, the output is
+ presented either as custom sim4db alignments or as GFF3 gene features.
+ .
+ This package is part of the Kmer suite.

@@ -1,0 +1,24 @@
+Package: libdmalloc5
+Source: dmalloc
+Version: 5.5.2-10
+Architecture: amd64
+Maintainer: Carlos Maddela <e7appew@gmail.com>
+Installed-Size: 360
+Depends: libc6 (>= 2.14)
+Suggests: gcc, gdb
+Conflicts: libdmalloc4
+Replaces: libdmalloc4
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://dmalloc.com/
+Description: debug memory allocation library
+ Drop in replacement for the system's `malloc', `realloc', `calloc', `free' and
+ other memory management routines while providing powerful debugging facilities
+ configurable at runtime.
+ .
+ These facilities include such things as memory-leak tracking, fence-post write
+ detection, file/line number reporting, and general logging of statistics.
+ .
+ This package contains only the shared libraries, the development files and
+ documentation is in the libdmalloc-dev package.

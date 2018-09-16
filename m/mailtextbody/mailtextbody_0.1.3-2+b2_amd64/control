@@ -1,0 +1,17 @@
+Package: mailtextbody
+Source: mailtextbody (0.1.3-2)
+Version: 0.1.3-2+b2
+Architecture: amd64
+Maintainer: gregor herrmann <gregoa@debian.org>
+Installed-Size: 35
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libmimetic0v5, libstdc++6 (>= 5.2)
+Section: mail
+Priority: optional
+Homepage: http://www.toastfreeware.priv.at/
+Description: tool to return the body of an email message
+ Mailtextbody reads a complete email message on stdin and returns the body
+ on stdout.  Technically speaking, it returns the first decoded text/plain
+ MIME part of any (however nested) MIME message or just the body of a
+ non-MIME message otherwise.
+ .
+ Mailtextbody can easily be included in other tools using pipes.

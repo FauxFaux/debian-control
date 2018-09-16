@@ -1,0 +1,24 @@
+Package: brutefir
+Source: brutefir (1.0o-1)
+Version: 1.0o-1+b1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 504
+Depends: libasound2 (>= 1.0.16), libc6 (>= 2.15), libfftw3-double3 (>= 3.3.5), libfftw3-single3 (>= 3.3.5), libjack-jackd2-0 (>= 1.9.10+20150825) | libjack-0.125
+Section: sound
+Priority: optional
+Homepage: http://www.ludd.luth.se/~torger/brutefir.html
+Description: software convolution engine
+ BruteFIR is a program for applying long FIR filters to multi-channel
+ digital audio, either offline or in realtime. Its basic operation is
+ specified through a configuration file, and filters, attenuation and
+ delay can be changed in runtime through a simple command line
+ interface. The FIR filter algorithm used is  an optimised frequency
+ domain algorithm, partly implemented in hand-coded assembler, thus
+ throughput is extremely high. In realtime, a standard computer can
+ typically run more than 10 channels with more than 60000 filter taps
+ each.
+ .
+ Through its highly modular design, things like adaptive filtering,
+ signal generators and sample I/O are easily added, extended and
+ modified, without the need to alter the program itself.

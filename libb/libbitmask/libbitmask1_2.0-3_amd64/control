@@ -1,0 +1,40 @@
+Package: libbitmask1
+Source: libbitmask
+Version: 2.0-3
+Architecture: amd64
+Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
+Installed-Size: 33
+Depends: libc6 (>= 2.7)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://oss.sgi.com/projects/cpusets/
+Description: supports multi-word bitmask operations
+ This Bitmask library supports multi-word bitmask operations for
+ applications programmed in 'C'. It works in conjunction with recent
+ Linux kernel support for processor and memory placement on
+ multiprocessor SMP and NUMA systems. The cpuset library, being
+ developed in parallel, depends on this bitmask library.
+ .
+ Bitmasks provide multi-word bit masks and operations thereon to do
+ such things as set and clear bits, intersect and union masks,
+ query bits, and display and parse masks.
+ .
+ The initial intended use for these bitmasks is to represent sets of
+ CPUs and Memory Nodes, when configuring large SMP and NUMA systems.
+ However there is little in the semantics of bitmasks that is
+ specific to this particular use, and bitmasks should be usable for
+ other purposes that had similar design requirements.
+ .
+ These bitmasks share the same underlying layout as the bitmasks
+ used by the Linux kernel to represent sets of CPUs and Memory
+ Nodes. Unlike the kernel bitmasks, these bitmasks use dynamically
+ allocated memory and are manipulated via a pointer. This enables a
+ program to work correctly on systems with various numbers of CPUs
+ and Nodes, without recompilation.
+ .
+ There is a related cpuset library which uses the bitmask type
+ provided here to represent sets of CPUs and Memory Nodes. The
+ internal representation (as an array of unsigned longs, in little
+ endian order) is directly compatible with the sched_setaffinity(2)
+ and sched_getaffinity(2) system calls (added in Linux 2.6).

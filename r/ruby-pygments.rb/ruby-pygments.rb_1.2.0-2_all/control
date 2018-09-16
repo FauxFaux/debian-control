@@ -1,0 +1,21 @@
+Package: ruby-pygments.rb
+Version: 1.2.0-2
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 344
+Depends: python, python-pygments, ruby | ruby-interpreter, ruby-multi-json, ruby-posix-spawn, ruby-yajl
+Provides: ruby-pygments
+Section: ruby
+Priority: optional
+Homepage: https://github.com/tmm1/pygments.rb
+Description: pygments wrapper for Ruby
+ A Ruby wrapper for the Python pygments syntax highlighter.
+ .
+ pygments.rb works by talking over a simple pipe to a long-lived Python child
+ process. This library replaces albino, as well as a version of pygments.rb
+ that used an embedded Python interpreter.
+ .
+ Each Ruby process that runs has its own 'personal Python'; for example, 4
+ Unicorn workers will have one Python process each.  If a Python process dies,
+ a new one will be spawned on the next pygments.rb request.
+Ruby-Versions: all

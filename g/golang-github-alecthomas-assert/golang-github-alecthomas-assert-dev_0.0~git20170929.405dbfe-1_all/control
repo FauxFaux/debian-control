@@ -1,0 +1,18 @@
+Package: golang-github-alecthomas-assert-dev
+Source: golang-github-alecthomas-assert
+Version: 0.0~git20170929.405dbfe-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 60
+Depends: golang-github-alecthomas-colour-dev, golang-github-alecthomas-repr-dev, golang-github-sergi-go-diff-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/alecthomas/assert
+Description: Fork of stretchr/testify/assert that uses FailNow()
+ This is a fork of stretchr's assertion library that does two things:
+ .
+ 1. It makes spotting differences in equality much easier.  It uses
+    github.com/alecthomas/repr and github.com/sergi/go-diff/diffmatchpatch
+    to display structural differences in colour.
+ 2. Aborts tests on first assertion failure (the same behaviour as
+    stretchr/testify/require).

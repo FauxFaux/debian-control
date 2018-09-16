@@ -1,0 +1,19 @@
+Package: libunac1-dev
+Source: unac
+Version: 1.8.0-8
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 95
+Depends: libunac1 (= 1.8.0-8), libc6-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Description: C programmer's library that removes accents from a string
+ Unac is a C programmer's library that removes accents from a string.
+ For instance the string été will become ete.  It provides a command
+ line interface that removes accents from a input flow or a string
+ given in argument (unaccent command). In the library function and the
+ command, the charset of the input is specified as an argument. The
+ input is converted to UTF-16 using iconv(3), accents are stripped and
+ the result is converted back to the original charset. The iconv --list
+ command on GNU/Linux will show all charset supported.

@@ -1,0 +1,34 @@
+Package: sql-ledger
+Version: 3.2.6-1
+Architecture: all
+Maintainer: Robert James Clay <jame@rocasa.us>
+Installed-Size: 41615
+Depends: perl:any, apache2 | httpd, libdbd-pg-perl
+Suggests: texlive-latex-extra, postgresql
+Section: web
+Priority: optional
+Homepage: https://www.sql-ledger.com
+Description: Web based double-entry accounting program
+ Accounting data is stored in an SQL Server, for the display any text or
+ GUI browser can be used. The entire system is linked through a chart
+ of accounts. Each item in inventory is linked to revenue, expense,
+ inventory and tax accounts. When you sell and purchase goods and
+ services the accounts are automatically updated.
+ .
+ With the assembly feature you can build manufactured goods from parts,
+ services and assemblies. When you sell assemblies all the accounts
+ linked to the individual parts, services and assemblies are updated
+ and stock levels adjusted accordingly. If any item belonging to an
+ assembly is changed all assemblies are updated as well.
+ .
+ Invoices, Packing List, Income Statement, Balance Sheet, Sales and
+ Purchase Order, Statements, Receipts and Checks are generated from
+ templates and may be changed to suit your needs. Templates are provided
+ in html and tex format. The tex templates are processed with LaTeX
+ to produce postscript and PDF documents and can be sent to a printer,
+ displayed in a PDF viewer or sent out via email ...
+ .
+ NOTE: This package does not benefit from serious security support
+ and you should use it only in a trusted environment. It's known
+ to be affected by multiple SQL injections and similar problems. See
+ the README.Debian file for more information.

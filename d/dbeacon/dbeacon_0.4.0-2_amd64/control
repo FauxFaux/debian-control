@@ -1,0 +1,21 @@
+Package: dbeacon
+Version: 0.4.0-2
+Architecture: amd64
+Maintainer: Internet Measurement Packaging Team <pkg-netmeasure-discuss@lists.alioth.debian.org>
+Installed-Size: 153
+Depends: libc6 (>= 2.15), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), init-system-helpers (>= 1.18~), lsb-base, adduser
+Recommends: libxml-parser-perl, perl:any
+Suggests: librrds-perl
+Section: net
+Priority: optional
+Homepage: https://github.com/uoaerg/dbeacon/
+Description: Multicast beacon
+ dbeacon is a multicast beacon: its main purpose is to monitor other beacons'
+ reachability and collect statistics such as loss, delay and jitter between
+ them.
+ .
+ dbeacon supports both IPv4 and IPv6 multicast, collecting information using
+ both Any Source Multicast (ASM) and Source-Specific Multicast (SSM).
+ .
+ This package also includes dbeacon matrix, a Perl script to generate beacon
+ reachability matrices in HTML.

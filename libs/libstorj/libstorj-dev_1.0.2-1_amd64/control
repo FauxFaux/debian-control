@@ -1,0 +1,29 @@
+Package: libstorj-dev
+Source: libstorj
+Version: 1.0.2-1
+Architecture: amd64
+Maintainer: Josue Ortega <josue@debian.org>
+Installed-Size: 317
+Depends: libstorj0 (= 1.0.2-1), libmicrohttpd-dev, libcurl4-gnutls-dev, nettle-dev, libjson-c-dev, libuv1-dev
+Conflicts: libstorj-dev
+Provides: libstorj-dev
+Section: libdevel
+Priority: optional
+Homepage: https://github.com/Storj/libstorj
+Description: C library for file transfer on Storj network (Development files)
+ Asynchronous multi-platform C library for encrypted file transfer on  the Storj
+ network.
+ libstorj provides the following features:
+  - Asynchronous I/O with concurrent peer-to-peer network requests for shards
+  - Erasure encoding with reed solomon for data durability
+  - Robust handling of shard transfers by selecting alternative sources
+  - File integrity and authenticity verified with HMAC-SHA512
+  - File encryption with AES-256-CTR
+  - File name and bucket name encryption with AES -256 -GCM
+  - Proxy support with SOCKS5, SOCKS4, SOCKS4a
+  - Asynchronous progress updates in bytes per file
+  - Transfers can be cleanly canceled per file
+  - Seed based file encryption key for portability between devices
+  - Reference implementation for SIP5 file standard
+ .
+ This package contains the development files for libjstorj.

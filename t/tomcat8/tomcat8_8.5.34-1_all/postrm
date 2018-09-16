@@ -1,0 +1,111 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "purge" ] ; then
+	update-rc.d tomcat8 remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'tomcat8.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'tomcat8.service' >/dev/null || true
+		deb-systemd-helper unmask 'tomcat8.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.3.5
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+CONFFILE=/etc/default/tomcat8
+LR_CONFFILE=/etc/logrotate.d/tomcat8
+
+# Remove cached files and auto-generated catalina.policy
+rm -rf /var/cache/tomcat8/*
+rm -rf /var/lib/tomcat8/policy
+
+case "$1" in
+    remove)
+        # Remove ROOT webapp if not modified
+        RWLOC="/var/lib/tomcat8/webapps/ROOT"
+        RWFILES="$RWLOC/index.html $RWLOC/META-INF/context.xml"
+        if [ "`(cat $RWFILES | md5sum -) 2>/dev/null | cut -d ' ' -f 1`" \
+                            = "9e0c02ed7d64301d7c57380900ecce4f" ] ; then
+            rm $RWFILES
+            rmdir --ignore-fail-on-non-empty \
+                /var/lib/tomcat8/webapps/ROOT/META-INF \
+                /var/lib/tomcat8/webapps/ROOT \
+                /var/lib/tomcat8/webapps \
+                /var/lib/tomcat8 || true
+        fi
+        if [ -d /var/lib/tomcat8/common ] && [ -z "`(find var/lib/tomcat8/common/classes -type f)`" ] ; then
+            rmdir --ignore-fail-on-non-empty \
+                /var/lib/tomcat8/common/classes \
+                /var/lib/tomcat8/common || true
+        fi
+        if [ -d /var/lib/tomcat8/server ] && [ -z "`(find var/lib/tomcat8/server/classes -type f)`" ] ; then
+            rmdir --ignore-fail-on-non-empty \
+                /var/lib/tomcat8/server/classes \
+                /var/lib/tomcat8/server || true
+        fi
+        if [ -d /var/lib/tomcat8/shared ] && [ -z "`(find var/lib/tomcat8/shared/classes -type f)`" ] ; then
+            rmdir --ignore-fail-on-non-empty \
+                /var/lib/tomcat8/shared/classes \
+                /var/lib/tomcat8/shared || true
+        fi
+        if [ -d /var/lib/tomcat8/lib ] && [ -z "`(find var/lib/tomcat8/lib/classes -type f)`" ] ; then
+            rmdir --ignore-fail-on-non-empty \
+                /var/lib/tomcat8/lib/classes \
+                /var/lib/tomcat8/lib || true
+        fi
+        if [ -d "/var/cache/tomcat8" ] ; then
+            rm -rf /var/cache/tomcat8
+        fi
+    ;;
+
+    purge)
+        # ignore errors during purge
+        set +e
+        if [ -x "/usr/bin/ucf" ]; then
+            ucf --purge $CONFFILE
+            ucf --purge $LR_CONFFILE
+        fi
+        rm -rf /var/log/tomcat8 /var/lib/tomcat8/temp $CONFFILE $LR_CONFFILE
+        if [ -d "/var/lib/tomcat8" ] ; then
+            rmdir --ignore-fail-on-non-empty /var/lib/tomcat8
+        fi
+        rmdir --ignore-fail-on-non-empty /etc/tomcat8/policy.d \
+          /etc/tomcat8/Catalina/localhost /etc/tomcat8/Catalina /etc/tomcat8
+        # clean up /etc/authbind after conffiles have been removed
+        rmdir --ignore-fail-on-non-empty /etc/authbind/byuid /etc/authbind
+
+        set -e
+    ;;
+
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+        # Nothing to do here
+    ;;
+
+    *)
+        echo "$0 called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac

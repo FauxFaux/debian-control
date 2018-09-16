@@ -1,0 +1,20 @@
+Package: tpm-tools-pkcs11
+Source: tpm-tools
+Version: 1.3.9.1-0.2
+Architecture: amd64
+Maintainer: Pierre Chifflier <pollux@debian.org>
+Installed-Size: 208
+Depends: libc6 (>= 2.14), libssl1.1 (>= 1.1.0), libtspi1 (>= 0.3.1), opencryptoki, trousers
+Breaks: tpm-tools (<< 1.3.9.1-0.2~)
+Replaces: tpm-tools (<< 1.3.9.1-0.2~)
+Section: admin
+Priority: optional
+Homepage: http://trousers.sourceforge.net/
+Description: Management tools for the TPM hardware (PKCS#11 tools)
+ tpm-tools is a group of tools to manage and utilize the Trusted Computing
+ Group's TPM hardware. TPM hardware can create, store and use RSA keys securely
+ (without ever being exposed in memory), verify a platform's software state
+ using cryptographic hashes and more.
+ .
+ This package contains commands to utilize some of the capabilities available
+ in the TPM PKCS#11 interface implemented in the openCryptoki project.

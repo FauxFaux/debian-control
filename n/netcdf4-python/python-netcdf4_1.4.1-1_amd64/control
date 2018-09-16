@@ -1,0 +1,25 @@
+Package: python-netcdf4
+Source: netcdf4-python
+Version: 1.4.1-1
+Architecture: amd64
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 1527
+Depends: python (<< 2.8), python (>= 2.7~), python-cftime, python-numpy (>= 1:1.14.3), python-numpy-abi9, python:any (<< 2.8), python:any (>= 2.7~), libc6 (>= 2.14), libcurl3-gnutls (>= 7.16.2), libhdf5-100, libnetcdf13 (>= 4.4.0), libsz2, zlib1g (>= 1:1.1.4)
+Section: python
+Priority: optional
+Homepage: http://unidata.github.io/netcdf4-python/
+Description: Python interface to the netCDF4 (network Common Data Form) library
+ NetCDF version 4 has many features not found in earlier versions of the
+ library and is implemented on top of HDF5. This module can read and write
+ files in both the new netCDF 4 and the old netCDF 3 format, and can create
+ files that are readable by HDF5 clients. The API is modelled after
+ Scientific.IO.NetCDF, and should be familiar to users of that module.
+ .
+ Most new features of netCDF 4 are implemented, such as multiple unlimited
+ dimensions, groups and zlib data compression. All the new numeric data types
+ (such as 64 bit and unsigned integer types) are implemented. Compound and
+ variable length (vlen) data types are supported, but the enum and opaque data
+ types are not. Mixtures of compound and vlen data types (compound types
+ containing vlens, and vlens containing compound types) are not supported.
+ .
+ This package contains the netCDF 4 module for Python 2.

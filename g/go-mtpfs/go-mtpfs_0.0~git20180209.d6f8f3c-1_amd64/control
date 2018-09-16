@@ -1,0 +1,17 @@
+Package: go-mtpfs
+Version: 0.0~git20180209.d6f8f3c-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 2469
+Depends: libc6 (>= 2.3.2), libusb-1.0-0 (>= 2:1.0.9)
+Section: devel
+Priority: optional
+Homepage: https://github.com/hanwen/go-mtpfs
+Description: Mount MTP devices over FUSE
+ Go-mtpfs is a simple FUSE filesystem for mounting Android devices as
+ an MTP device.
+ .
+ It will expose all storage areas of a device in the mount, and only
+ reads file metadata as needed, making it mount quickly. It uses Android
+ extensions to read/write partial data, so manipulating large files
+ requires no extra space in /tmp.

@@ -1,0 +1,25 @@
+Package: libpdf-fdf-simple-perl
+Version: 0.21-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 921
+Depends: perl, libclass-accessor-perl, libfile-sharedir-perl, libparse-recdescent-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/PDF-FDF-Simple
+Description: Perl module to read and write (Acrobat) FDF files
+ PDF::FDF::Simple helps creating and extracting the content of FDF files. It
+ is meant to be a simple replacement for the Adobe FdfToolkit. Therefore some
+ of its behavior, especially handling of diverse whitespace/newline artefacts,
+ is orientated on FdfToolkit's handling.
+ .
+ After the extraction process the content is available within a hash
+ reference.
+ .
+ For creating FDF files it currently only supports setting text
+ values. Anyway, this should be enough to create FDF files for text
+ fields, text areas, checkboxes and radio buttons.
+ .
+ PDF::FDF::Simple uses Parse::RecDescent and understands both the
+ "Kids" notation and the "dotted" notation for field names. Saving will
+ always use the "dotted" notation.

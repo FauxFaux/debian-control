@@ -1,0 +1,28 @@
+Package: libarchive-tools
+Source: libarchive
+Version: 3.2.2-5
+Architecture: amd64
+Maintainer: Peter Pentchev <roam@debian.org>
+Installed-Size: 194
+Depends: libarchive13 (= 3.2.2-5), libc6 (>= 2.14)
+Breaks: bsdcpio (<< 3.2.1-2~), bsdtar (<< 3.2.1-2~)
+Replaces: bsdcpio (<< 3.2.1-2~), bsdtar (<< 3.2.1-2~)
+Section: utils
+Priority: optional
+Homepage: https://www.libarchive.org/
+Description: FreeBSD implementations of 'tar' and 'cpio' and other archive tools
+ This package contains several command-line tools based on the libarchive
+ library.
+ .
+ The bsdtar program is the default system 'tar' program used on FreeBSD. bsdtar
+ uses the libarchive library as a backend which does all of the work for reading
+ and writing archives in various formats.
+ .
+ The bsdcpio program is the default system 'cpio' program used on FreeBSD.
+ bsdcpio uses the libarchive library as a backend which does all of the work for
+ reading and writing archives in various formats.
+ .
+ The bsdcat program reads archived data from files or from its standard input
+ and uses the libarchive library to decompresses it to its standard output.
+ It may be used for viewing the contents of archives or for passing it to other
+ tools for further processing.

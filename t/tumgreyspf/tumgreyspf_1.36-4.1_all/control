@@ -1,0 +1,26 @@
+Package: tumgreyspf
+Version: 1.36-4.1
+Architecture: all
+Maintainer: Thomas Goirand <zigo@debian.org>
+Installed-Size: 158
+Depends: python-spf, adduser, python, passwd, spfquery
+Section: mail
+Priority: optional
+Homepage: http://www.tummy.com/Community/software/tumgreyspf/
+Description: external policy checker for the postfix mail server
+ Tumgreyspf can optionally greylist and/or use spfquery to check SPF records
+ to determine if email should be accepted by your server. The default behavior
+ is to let emails comming from server that are SPF approved without any sort
+ of greylisting, while all others will be greylisted.
+ .
+ SPF is information published by the domain owner about what systems may
+ legitimately send e-mail for the domain. Greylisting takes advantage of spam
+ and viruses that do not follow the RFCs and retry deliveries on temporary
+ failure. These checks can be used as part of a mail system and allow several
+ orders of magnitude reduction in spam, lower system load, and few problems
+ with legitimate mail getting blocked.
+ .
+ Tumgreyspf uses the file-system as its database, no additional database is
+ required to use it, see /var/lib/tumgreyspf/data and it's clean-up cron
+ script. Also take care that tumgreyspf will block emails from any domain with
+ DNS configured with a buggy SPF record.

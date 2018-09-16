@@ -1,0 +1,21 @@
+Package: cyrus-clients
+Source: cyrus-imapd (2.5.10-3)
+Version: 2.5.10-3+b1
+Architecture: amd64
+Maintainer: Debian Cyrus Team <pkg-cyrus-imapd-debian-devel@lists.alioth.debian.org>
+Installed-Size: 160
+Pre-Depends: dpkg (>= 1.17.14~)
+Depends: cyrus-common, libc6 (>= 2.15), libicu57 (>= 57.1-1~), libsasl2-2, libssl1.1 (>= 1.1.0)
+Breaks: cyrus-clients-2.4
+Replaces: cyrus-clients-2.4
+Section: mail
+Priority: extra
+Homepage: http://www.cyrusimap.org/
+Description: Cyrus mail system - test clients
+ This package contains client tools to test the Cyrus IMAPd suite.
+ It contains the mupdatetest, sivtest, smtptest, lmtptest,
+ imtest and pop3test tools which can be used to interactively talk to
+ a mupdate, Sieve, SMTP, LMTP, IMAP or POP3 server.
+ The clients are fully SASL-enabled for authentication.
+ .
+ For more information, please see the cyrus-common package.

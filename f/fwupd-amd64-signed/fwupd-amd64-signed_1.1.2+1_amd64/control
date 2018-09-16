@@ -1,0 +1,18 @@
+Package: fwupd-amd64-signed
+Version: 1.1.2+1
+Architecture: amd64
+Maintainer: Debian EFI <debian-efi@lists.debian.org>
+Installed-Size: 12
+Depends: fwupd (= 1.1.2-1)
+Provides: fwupd-signed
+Section: admin
+Priority: optional
+Homepage: https://github.com/hughsie/fwupd
+Description: Tools to manage UEFI firmware updates (signed)
+ fwupd provides functionality to update system firmware. It has been
+ initially designed to update firmware using UEFI capsule updates, but
+ it is designed to be extensible to other firmware update standards.
+ .
+ This package contains just the signed version of the fwupd binary,
+ needed if your system has UEFI Secure Boot enabled. It depends on the
+ normal fwupd package for everything else.

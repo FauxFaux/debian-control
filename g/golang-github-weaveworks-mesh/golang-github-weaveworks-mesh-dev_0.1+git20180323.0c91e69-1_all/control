@@ -1,0 +1,23 @@
+Package: golang-github-weaveworks-mesh-dev
+Source: golang-github-weaveworks-mesh
+Version: 0.1+git20180323.0c91e69-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 205
+Depends: golang-github-stretchr-testify-dev, golang-golang-x-crypto-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/weaveworks/mesh
+Description: go library to build distributed systems
+ Mesh implements a gossip protocol that provide membership, unicast, and
+ broadcast functionality with eventually-consistent semantics. In CAP terms, it
+ is AP: highly-available and partition-tolerant.
+ .
+ Mesh works in a wide variety of network setups, including thru NAT and
+ firewalls, and across clouds and datacenters. It works in situations where
+ there is only partial connectivity, i.e. data is transparently routed across
+ multiple hops when there is no direct connection between peers. It copes with
+ partitions and partial network failure. It can be easily bootstrapped,
+ typically only requiring knowledge of a single existing peer in the mesh to
+ join. It has built-in shared-secret authentication and encryption. It scales
+ to on the order of 100 peers, and has no dependencies.

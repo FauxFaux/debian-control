@@ -1,0 +1,25 @@
+Package: liblexical-failure-perl
+Version: 0.000007-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 102
+Depends: perl (>= 5.14.0), libkeyword-simple-perl, libscope-upper-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Lexical-Failure
+Description: Perl module for user-selectable lexically-scoped failure signaling
+ Lexical::Failure sets up two new keywords: fail and ON_FAILURE, with which
+ you can quickly create modules whose failure signaling is lexcially scoped,
+ under the control of client code.
+ .
+ Normally, modules specify some fixed mechanism for error handling and require
+ client code to adapt to that policy. One module may signal errors by
+ returning undef, or perhaps some special "error object". Another may die or
+ croak on failure. A third may set a flag variable. A fourth may require the
+ client code to set up a callback, which is executed on failure.
+ .
+ If you are using all four modules, your own code now has to check for failure
+ in four different ways, depending on where the failing component originated.
+ If you would rather that all components throw exceptions, or all return
+ undef, you will probably have to write wrappers around 3/4 of them, to
+ convert from their "native" failure mechanism to your preferred one.

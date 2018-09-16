@@ -1,0 +1,34 @@
+Package: ntlmaps
+Version: 0.9.9.0.1-11.5
+Architecture: all
+Maintainer: David Watson <dwatson@debian.org>
+Installed-Size: 292
+Depends: python:any (>= 2.7.5-5~), debconf (>= 0.5) | debconf-2.0
+Section: web
+Priority: optional
+Homepage: http://ntlmaps.sourceforge.net/
+Description: NTLM Authorization Proxy Server
+ 'NTLM Authorization Proxy Server' (APS) is a proxy software that
+ allows you to authenticate via an MS Proxy Server (e.g. ISA server)
+ using the proprietary NTLM protocol. Since version 0.9.5 APS has an
+ ability to behave as a standalone proxy server and authenticate http
+ clients at web servers using NTLM method. It can change arbitrary
+ values in your client's request header so that those requests will
+ look like they were created by MS IE. It is written in Python v1.5.2
+ language.
+ .
+ Main features:
+    * supports NTLM authentication via parent proxy server
+      (Error 407 Proxy Authentication Required)
+    * supports NTLM authentication at web servers
+      (Error 401 Access Denied/Unauthorized)
+    * supports translation of NTLM scheme to standard "Basic"
+      authentication scheme
+    * supports the HTTPS 'CONNECT' method for transparent tunnelling
+      through parent proxy server
+    * has ability to change arbitrary values in client's request headers;
+    * supports unlimited number of client connections
+    * supports connections from external hosts
+    * supports HTTP 1.1 persistent connections
+    * stores user's credentials in config file or requests
+      password from a console during the start time

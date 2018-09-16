@@ -1,0 +1,15 @@
+Package: slack
+Version: 1:0.15.2-9
+Architecture: all
+Maintainer: Andrew Pollock <apollock@debian.org>
+Installed-Size: 117
+Depends: perl, rsync
+Suggests: openssh-server, openssh-client
+Section: admin
+Priority: optional
+Description: configuration management program for lazy admins
+ slack tries to allow centralized configuration management with a bare
+ minimum of effort.  Usually, just putting a file in the right place
+ will cause the right thing to be done.  It uses rsync to copy files
+ around, so can use any sort of source (NFS directory, remote server
+ over SSH, remote server over rsync) that rsync supports.

@@ -1,0 +1,18 @@
+Package: libbtrfs0
+Source: btrfs-progs
+Version: 4.17-1
+Architecture: amd64
+Maintainer: Dimitri John Ledkov <xnox@debian.org>
+Installed-Size: 84
+Depends: libblkid1 (>= 2.16), libc6 (>= 2.4), libuuid1 (>= 2.16)
+Breaks: btrfs-progs (<< 4.16.1-1)
+Replaces: btrfs-progs (<< 4.16.1-1)
+Section: libs
+Priority: optional
+Homepage: http://btrfs.wiki.kernel.org/
+Description: Checksumming Copy on Write Filesystem utilities (runtime library)
+ Btrfs is a new copy on write filesystem for Linux aimed at implementing
+ advanced features while focusing on fault tolerance, repair and easy
+ administration.
+ .
+ This package contains userspace shared code library libbtrfs.

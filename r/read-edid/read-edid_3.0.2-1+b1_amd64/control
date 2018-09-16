@@ -1,0 +1,26 @@
+Package: read-edid
+Source: read-edid (3.0.2-1)
+Version: 3.0.2-1+b1
+Architecture: amd64
+Maintainer: Dariusz Dwornikowski <dariusz.dwornikowski@cs.put.poznan.pl>
+Installed-Size: 69
+Depends: libc6 (>= 2.4), libx86-1 (>= 0.99-1)
+Section: utils
+Priority: optional
+Homepage: http://www.polypux.org/projects/read-edid/
+Description: hardware information-gathering tool for VESA PnP monitors
+ read-edid consists of two tools:
+ .
+ get-edid uses a VESA VBE 2 interrupt service routine request to read
+ a 128 byte EDID version 1 structure from your graphics card, which
+ retrieves this information from the monitor via the Data Display
+ Channel (DDC).
+ .
+ get-edid uses architecture-specific methods for querying the video
+ hardware (real-mode x86 instructions on i386, Open Firmware device
+ tree parsing on PowerMac) and is therefore only available for i386 and
+ powerpc architectures.
+ .
+ parse-edid parses this data structure and outputs data suitable for
+ inclusion into the XFree86 or X.org configuration file. It is available
+ for any architecture.

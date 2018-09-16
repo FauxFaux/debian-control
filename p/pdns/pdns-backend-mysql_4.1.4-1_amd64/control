@@ -1,0 +1,20 @@
+Package: pdns-backend-mysql
+Source: pdns
+Version: 4.1.4-1
+Architecture: amd64
+Maintainer: pdns packagers <pdns@packages.debian.org>
+Installed-Size: 184
+Depends: pdns-server (= 4.1.4-1), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libmariadbclient18 (>= 10.1.28), libstdc++6 (>= 5.2), zlib1g (>= 1:1.1.4)
+Suggests: default-mysql-server
+Provides: pdns-backend
+Section: net
+Priority: optional
+Homepage: https://www.powerdns.com/
+Description: generic MySQL backend for PowerDNS
+ PowerDNS is a versatile nameserver which supports a large number
+ of different backends ranging from simple zonefiles to relational
+ databases and load balancing/failover algorithms.
+ PowerDNS tries to emphasize speed and security.
+ .
+ This package contains a generic MySQL backend for the PowerDNS
+ nameserver. It has configurable SQL statements.

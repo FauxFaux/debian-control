@@ -1,0 +1,17 @@
+Package: python-sendfile
+Source: pysendfile
+Version: 2.0.1-2
+Architecture: amd64
+Maintainer: Ghe Rivero <ghe@debian.org>
+Installed-Size: 40
+Depends: libc6 (>= 2.4), python (<< 2.8), python (>= 2.7~), python:any (<< 2.8), python:any (>= 2.7~)
+Section: python
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/giampaolo/pysendfile
+Description: Python interface to sendfile(2)
+ Python library which provides a "zero-copy" way of copying data from one
+ file descriptor to another (a socket). The phrase "zero-copy" refers to
+ the fact that all of the copying of data between the two descriptors is
+ done entirely by the kernel, with no copying of data into userspace buffers.
+ This is particularly useful when sending a file over a socket (e.g. FTP).

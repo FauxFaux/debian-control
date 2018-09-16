@@ -1,0 +1,17 @@
+Package: libpam-tmpdir
+Source: pam-tmpdir (0.09)
+Version: 0.09+b2
+Architecture: amd64
+Maintainer: Tollef Fog Heen <tfheen@debian.org>
+Installed-Size: 53
+Depends: libc6 (>= 2.8), libpam0g (>= 0.99.7.1), libpam-runtime (>= 1.0.1-6)
+Section: admin
+Priority: optional
+Description: automatic per-user temporary directories
+ Many programs use $TMPDIR for storing temporary files.  Not
+ all of them are good at securing the permissions of those
+ files.  libpam-tmpdir sets $TMPDIR and $TMP for PAM sessions
+ and sets the permissions quite tight.  This helps system
+ security by having an extra layer of security, making such
+ symlink attacks and other /tmp based attacks harder or
+ impossible

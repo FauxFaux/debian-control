@@ -1,0 +1,17 @@
+Package: golang-github-oschwald-geoip2-golang-dev
+Source: golang-github-oschwald-geoip2-golang
+Version: 1.1.0-4
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 33
+Depends: golang-go, golang-github-oschwald-maxminddb-golang-dev (>= 1.2.0), golang-gopkg-check.v1-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/oschwald/geoip2-golang
+Description: Unofficial MaxMind GeoIP2 Reader for Go
+ This library reads MaxMind GeoLite2 and GeoIP2 databases.
+ It is built using the Go maxminddb reader. All data for
+ the database record is decoded using this library. If you
+ only need several fields, you may get superior performance
+ by using maxminddb's Lookup directly with a result struct
+ that only contains the required fields.

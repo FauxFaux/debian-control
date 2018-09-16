@@ -1,0 +1,21 @@
+Package: mercurial-crecord
+Version: 0.20151121-1
+Architecture: all
+Maintainer: Andrew Shadura <andrewsh@debian.org>
+Installed-Size: 105
+Depends: mercurial (>= 3.0.2), python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://bitbucket.org/edgimar/crecord/
+Description: Mercurial crecord extension
+ The crecord mercurial extension allows you to interactively choose among the
+ changes you have made (with line-level granularity), and commit only those
+ changes you select.  After committing the selected changes, the unselected
+ changes are still present in your working copy, so you can use crecord
+ multiple times to split large change s into several smaller changesets.
+ .
+ This extension provides the following hg commands:
+ .
+  * crecord,
+  * qcrecord,
+  * qcrefresh.

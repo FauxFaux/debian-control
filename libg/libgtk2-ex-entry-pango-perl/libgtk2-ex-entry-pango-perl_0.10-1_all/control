@@ -1,0 +1,24 @@
+Package: libgtk2-ex-entry-pango-perl
+Version: 0.10-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 50
+Depends: perl, libgtk2-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Gtk2-Ex-Entry-Pango
+Description: Gtk2::Entry that accepts pango markup
+ Gtk2::Ex::Entry::Pango is a Gtk2::Entry that can accept Pango markup for
+ various purposes (for more information about Pango text markup language see
+ http://library.gnome.org/devel/pango/stable/PangoMarkupFormat.html).
+ .
+ The widget allows Pango markup to be used for input as an alternative to
+ set_text or for setting a default value when the widget is empty. The default
+ value when empty is ideal for standalone text entries that have no accompanying
+ label (such as a text field for a search).
+ .
+ This widget allows for the text data to be entered either through the normal
+ methods provided by Gtk2::Entry or to use the method /set_markup. It's
+ possible to switch between two methods for applying the text. The standard
+ Gtk2::Entry methods will always apply a text without styles while
+ set_markup() will use a style.

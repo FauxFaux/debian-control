@@ -1,0 +1,31 @@
+Package: dindel
+Version: 1.01-wu1-3+dfsg-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 998
+Depends: libboost-program-options1.62.0, libc6 (>= 2.15), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), zlib1g (>= 1:1.2.3.3)
+Section: science
+Priority: optional
+Homepage: https://github.com/genome/dindel-tgi
+Description: determines indel calls from short-read data
+ Dindel is a program for calling small indels from short-read sequence
+ data ('next generation sequence data'). It currently is designed to
+ handle only Illumina data.
+ .
+ Dindel requires a BAM file containing the read-alignments as input. It
+ then extracts candidate indels from the BAM file, and realigns the reads
+ to candidate haplotypes consisting of these candidate indels. If there
+ is sufficient evidence for an alternative haplotype to the reference,
+ it will call an indel.
+ .
+ It is possible to test indels discovered with other methods using Dindel,
+ for instance longer indels obtained through assembly methods. Dindel
+ will then realign both mapped and unmapped reads to see if the candidate
+ indel is supported by the reads.
+ .
+ Dindel outputs both genotype likelihoods and includes a script to
+ convert these to a VCF file with indel and SNP calls.
+ .
+ There is basic support for outputting realigned BAM files for each
+ realignment-window. These realigned BAM files can be used to call SNPs
+ near (candidate) indels.

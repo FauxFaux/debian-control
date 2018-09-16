@@ -1,0 +1,18 @@
+Package: libtest-email-perl
+Version: 0.07-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 37
+Depends: perl, libmime-tools-perl
+Recommends: libmail-pop3client-perl, libmail-sendmail-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Email
+Description: email contents test module
+ Test::Email provides tests for email contents; it is a subclass of
+ MIME::Entity with header_is, body_is, or _ok or _like and part_ok,
+ mime_type_ok methods. Tests for equality remove trailing newlines from
+ strings before testing. Some mail messages have newlines appended to them
+ during the mailing process, which could cause unnecessary confusion.
+ .
+ This package also provides Test::POP3 to automate email delivery tests.

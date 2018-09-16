@@ -1,0 +1,19 @@
+Package: fusioninventory-agent-task-network
+Source: fusioninventory-agent
+Version: 1:2.4.1-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 242
+Depends: perl:any, fusioninventory-agent (>= 1:2.4.1-3), libcrypt-des-perl, libnet-ip-perl, libnet-snmp-perl, libnet-nbname-perl
+Breaks: libfusioninventory-agent-task-netdiscovery-perl (<< 1:2.3.0-1), libfusioninventory-agent-task-network-perl (<< 1:2.3.0-1), libfusioninventory-agent-task-snmpquery-perl (<< 1:2.3.0-1)
+Replaces: libfusioninventory-agent-task-netdiscovery-perl (<< 1:2.3.0-1), libfusioninventory-agent-task-network-perl (<< 1:2.3.0-1), libfusioninventory-agent-task-snmpquery-perl (<< 1:2.3.0-1)
+Section: net
+Priority: optional
+Homepage: http://fusioninventory.org/
+Description: network device discovery for FusionInventory Agent
+ This module scans your networks to quickly identify its hosts with SNMP,
+ Echo Ping, TimeStamp ping, arp table lookup and NetBIOS request:
+  - networking devices discovery within an IP range
+  - identify unknown MAC addresses
+ .
+ The plugin depends on FusionInventory for GLPI on server side.

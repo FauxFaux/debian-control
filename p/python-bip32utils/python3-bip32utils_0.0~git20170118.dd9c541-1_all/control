@@ -1,0 +1,35 @@
+Package: python3-bip32utils
+Source: python-bip32utils
+Version: 0.0~git20170118.dd9c541-1
+Architecture: all
+Maintainer: Josue Ortega <josue@debian.org>
+Installed-Size: 51
+Depends: python3:any (>= 3.3.2-2~), python:any, python3-ecdsa
+Section: python
+Priority: optional
+Homepage: https://github.com/prusnak/bip32utils
+Description: Python implementation of Bitcoin hierarchical deterministic wallet
+ The bip32utils library is a pure Python implementation of Bitcoin hierarchical
+ deterministic wallet ("HD Wallet") ECDSA key generation as specified in
+ BIP0032 (Bitcoin Improvement Proposal #0032).
+ .
+ Deterministic ECDSA key generation allows creating a sequence of Bitcoin
+ private and public ECDSA keys from an initial seed and a hierarchical set of
+ indices. A number of benefits follow:
+  - An entire wallet can be backed up once by storing the wallet seed or master
+    extended private key, and all future addresses in the wallet can be restored
+    from it.
+  - The creation of public and private ECDSA keys may be separated from each
+    other. That is, it is possible to create only the public ECDSA key half
+    (and receiving address) of an ECDSA key pair, without the ability to create
+    the private half. Thus, one can create receiving addresses on a public
+    facing system that if compromised would not give the attacker the ability to
+    spend bitcoin received at those addresses. A separate, offline machine can
+    generate the corresponding private ECDSA keys and sign transactions.
+  - Public and private ECDSA keys may be created in a hierarchy, and control
+    over or visibility of portions of the hierarchy may be delegated to third
+    parties.
+    This has uses for auditing, for separating ECDSA key sequences into
+    different logical groups or accounts, and for giving 3rd parties the ability
+    to create spending transactions without first getting a receiving address
+    in advance.

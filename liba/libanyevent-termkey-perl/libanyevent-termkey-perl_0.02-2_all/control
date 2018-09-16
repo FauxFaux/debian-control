@@ -1,0 +1,22 @@
+Package: libanyevent-termkey-perl
+Version: 0.02-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: perl, libanyevent-perl, libterm-termkey-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/AnyEvent-TermKey
+Description: module for terminal key input using libtermkey with AnyEvent
+ AnyEvent::TermKey implements an asynchronous perl wrapper around the
+ libtermkey library, which provides an abstract way to read keypress events in
+ terminal-based programs. It yields structures that describe keys, rather than
+ simply returning raw bytes as read from the TTY device.
+ .
+ It internally uses an instance of Term::TermKey to access the underlying C
+ library. For details on general operation, including the representation of
+ keypress events as objects, see the documentation on that class.
+ .
+ Proxy methods exist for normal accessors of Term::TermKey, and the usual
+ behaviour of the getkey or other methods is instead replaced by the on_key
+ event.

@@ -1,0 +1,20 @@
+Package: libfakeroot
+Source: fakeroot
+Version: 1.23-1
+Architecture: amd64
+Maintainer: Clint Adams <clint@debian.org>
+Installed-Size: 149
+Depends: libc6 (>= 2.14)
+Breaks: fakeroot (<< 1.20-2~)
+Replaces: fakeroot (<< 1.20-2~)
+Section: utils
+Priority: optional
+Multi-Arch: same
+Description: tool for simulating superuser privileges - shared libraries
+ fakeroot provides a fake "root environment" by means of LD_PRELOAD and
+ SysV IPC (or TCP) trickery. It puts wrappers around getuid(), chown(),
+ stat(), and other file-manipulation functions, so that unprivileged
+ users can (for instance) populate .deb archives with root-owned files;
+ various build tools use fakeroot for this by default.
+ .
+ This package contains the LD_PRELOAD libraries.

@@ -1,0 +1,18 @@
+Package: ruby-buftok
+Version: 0.2.0-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 55
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: https://github.com/sferik/buftok
+Description: extracts token delimited entities from a sequence of arbitrary inputs
+ Statefully split input data by a specifiable token
+ .
+ BufferedTokenizer takes a delimiter upon instantiation, or acts line-based by
+ default.  It allows input to be spoon-fed from some outside source which
+ receives arbitrary length datagrams which may-or-may-not contain the token by
+ which entities are delimited.  In this respect it's ideally paired with
+ something like EventMachine.
+Ruby-Versions: all

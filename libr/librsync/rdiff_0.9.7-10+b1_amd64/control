@@ -1,0 +1,20 @@
+Package: rdiff
+Source: librsync (0.9.7-10)
+Version: 0.9.7-10+b1
+Architecture: amd64
+Maintainer: Andrey Rahmatullin <wrar@wrar.name>
+Installed-Size: 63
+Depends: libc6 (>= 2.4), libpopt0 (>= 1.14), librsync1 (>= 0.9.6)
+Section: utils
+Priority: optional
+Homepage: http://librsync.sourceforge.net/
+Description: Binary diff tool for signature-based differences
+ rdiff is a little like diff and patch all rolled into one, with support for
+ binary files. Since it takes advantage of the rsync remote-delta algorithm, you
+ do not need the source file in the same place as your destination file.
+ .
+ To use it, you generate a "signature" of the original file and copy the
+ signature (which is very small) to the same location as the modified file. Then
+ you generate a "delta" which describes the changes required to turn the source
+ file into the modified file. The small delta file can then be used to "patch"
+ the original file, to transform it into the modified file.

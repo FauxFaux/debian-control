@@ -1,0 +1,31 @@
+Package: sendmail-bin
+Source: sendmail
+Version: 8.15.2-12
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 1863
+Pre-Depends: debconf
+Depends: sendmail-base (= 8.15.2-12), sendmail-cf (= 8.15.2-12), procps, lsb-base (>= 3.0-6), libc6 (>= 2.15), libdb5.3, libldap-2.4-2 (>= 2.4.7), liblockfile1 (>= 1.0), libsasl2-2, libssl1.1 (>= 1.1.0), libwrap0 (>= 7.6-4~)
+Suggests: sendmail-doc, sasl2-bin, libsasl2-modules, openssl
+Conflicts: mail-transport-agent
+Replaces: mail-transport-agent
+Provides: mail-transport-agent
+Section: mail
+Priority: optional
+Homepage: http://www.sendmail.org
+Description: powerful, efficient, and scalable Mail Transport Agent
+ Sendmail is an alternative Mail Transport Agent (MTA) for Debian.
+ It is suitable for handling sophisticated mail configurations,
+ although this means that its configuration can also be complex.
+ .
+ Fortunately, simple things can be done easily, and complex things
+ are possible, even if not easily understood ;)  Sendmail is the *ONLY*
+ MTA with a Turing complete language to control *ALL* aspects of delivery!
+ .
+ Sendmail provides Security and SPAM/UCE/UBE protection via several means.
+ .
+ Sendmail includes *no* Mail User Agents (MUA), you'll have to
+ pick from the plethora of available MUAs (mutt, vm, etc.)
+ .
+ This package supports REGEX, DB, NIS, NIS+, LDAP, DNS maps,
+ and has enabled TCPWrappers, IPv6, LockFile, SMTP AUTH(SASL), STARTTLS(SSL).

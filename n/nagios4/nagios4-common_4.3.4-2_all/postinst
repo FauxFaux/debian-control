@@ -1,0 +1,78 @@
+#!/bin/bash
+
+set -e
+
+# debconf-devel(7) asks we do this
+.  /usr/share/debconf/confmodule
+
+# some shorthands for sanity
+en="/etc/nagios4"
+enc="/etc/nagios4/conf.d"
+usn="/usr/share/nagios4"
+
+setperm() {
+    local user="${1}"
+    local group="${2}"
+    local mode="${3}"
+    local file="${4}"
+    shift 4
+    # only do something when no setting exists
+    if ! dpkg-statoverride --list "${file}" >/dev/null 2>&1
+    then
+	if [ -e "${file}" ]
+	then
+	    chown "${user}":"${group}" "${file}"
+	    chmod "${mode}" "${file}"
+	fi
+    fi
+}
+
+case "${1}" in
+    configure)
+	if ! getent passwd nagios > /dev/null
+	then
+	    echo 'Adding system-user for nagios' 1>&2
+	    adduser --system --group --home /var/lib/nagios \
+		    --disabled-login --force-badname nagios > /dev/null
+	fi
+
+	# explicitly set permissions on some files that are dependent
+	# on the uid/gid of the nagios user, which is dynamically created.
+	setperm root nagios 0640 "${en}/resource.cfg"
+	setperm nagios adm 2751 /var/log/nagios4
+	setperm nagios adm 2751 /var/log/nagios4/archives
+	setperm nagios nagios 0750 /var/lib/nagios4/spool
+	setperm nagios nagios 0750 /var/lib/nagios4/spool/checkresults
+
+	case "$(dpkg-query --status nagios-cgi 2>/dev/null)" in
+	    install|hold)
+	      setperm nagios nagios 0750 /var/lib/nagios4
+	      setperm nagios nagios 0700 /var/lib/nagios4/rw ;;
+	    *)
+	      setperm nagios www-data 0750 /var/lib/nagios4
+	      setperm nagios www-data 2710 /var/lib/nagios4/rw ;;
+	esac
+
+	;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+    *)
+	echo "postinst called with unknown argument '${1}'" >&2
+	exit 1
+	;;
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	if [ -x "/etc/init.d/nagios4" ]; then
+		update-rc.d nagios4 defaults 30 18 >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d nagios4 $_dh_action || exit $?
+	fi
+fi
+# End automatically added section
+

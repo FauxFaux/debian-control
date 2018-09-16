@@ -1,0 +1,18 @@
+Package: libcatalyst-authentication-credential-http-perl
+Version: 1.018-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 53
+Depends: libcatalyst-perl, libclass-accessor-perl, libstring-escape-perl, liburi-perl, libossp-uuid-perl | libdata-uuid-perl, libcatalyst-plugin-authentication-perl | catalyst-modules, perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Catalyst-Authentication-Credential-HTTP/
+Description: HTTP Basic and Digest authentication for Catalyst
+ Catalyst::Authentication::Credential::HTTP lets you use HTTP
+ authentication with Catalyst::Plugin::Authentication. Both basic and
+ digest authentication are currently supported.
+ .
+ When authentication is required, this module sets a status of 401, and
+ the body of the response to 'Authorization required.'. To override this
+ and set your own content, check for the "$c->res->status == 401" in
+ your "end" action, and change the body accordingly.

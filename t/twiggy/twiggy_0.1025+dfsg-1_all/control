@@ -1,0 +1,23 @@
+Package: twiggy
+Version: 0.1025+dfsg-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 60
+Depends: perl, libanyevent-perl, libplack-perl, libtry-tiny-perl, libwww-perl
+Recommends: libhttp-parser-xs-perl, libserver-starter-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Twiggy
+Description: AnyEvent HTTP server for PSGI (like Thin)
+ Twiggy is a lightweight and fast HTTP server with unique features:
+  * Can run any PSGI applications. Fully supports psgi.nonblocking
+    and psgi.streaming interfaces.
+  * This server uses AnyEvent and runs in a non-blocking event loop,
+    so it's best to run event-driven web applications that runs I/O bound
+    jobs or delayed responses such as long-poll, WebSocket or streaming
+    content (server push).
+  * Uses XS/C based HTTP header parser for the best performance. (optional)
+  * The memory required to run twiggy is 6MB and it can serve more than
+    4500 req/s with a single process on Perl 5.10 with MacBook Pro 13"
+    late 2009.
+  * Supports Server::Starter for hot deploy and graceful restarts.

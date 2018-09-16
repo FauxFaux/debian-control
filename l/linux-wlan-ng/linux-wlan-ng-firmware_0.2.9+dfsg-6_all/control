@@ -1,0 +1,25 @@
+Package: linux-wlan-ng-firmware
+Source: linux-wlan-ng
+Version: 0.2.9+dfsg-6
+Architecture: all
+Maintainer: Tormod Volden <debian.tormod@gmail.com>
+Installed-Size: 163
+Depends: build-essential, debhelper, git, fakeroot
+Section: contrib/kernel
+Priority: extra
+Description: firmware files used by the linux-wlan-ng driver
+ linux-wlan-ng is a set of drivers and utilities that is intended to
+ provide the full range of IEEE 802.11 MAC management capabilities for use
+ in user-mode utilities and scripts. The package currently supports the
+ Intersil 802.11b Prism2, Prism2.5, and Prism3 reference designs for
+ PCMCIA, PCI, and USB. Additionally, the package includes support for the
+ PLX9052 based PCI to PCMCIA adapter with a few different PCMCIA cards.
+ .
+ This package doesn't contain the firmware files, but a script to download
+ the upstream source tree and build a deb that contains them. Note that
+ only some adapters really need a firmware file and that firmware files are
+ not completely free (in the sense of freely redistributable), that's why
+ this package exists.
+ .
+ This package is only relevant for PCMCIA and PCI cards, if you have a USB
+ card, install the prism2-usb-firmware-installer package instead.

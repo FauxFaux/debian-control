@@ -1,0 +1,13 @@
+#!/bin/sh
+# postinst script for cherrytree
+
+update-desktop-database &
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p cherrytree /usr/share/cherrytree -V 2.6-
+fi
+
+# End automatically added section
+

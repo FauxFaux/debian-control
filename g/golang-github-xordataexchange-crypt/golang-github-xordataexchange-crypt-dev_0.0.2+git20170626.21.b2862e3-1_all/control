@@ -1,0 +1,33 @@
+Package: golang-github-xordataexchange-crypt-dev
+Source: golang-github-xordataexchange-crypt
+Version: 0.0.2+git20170626.21.b2862e3-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 63
+Depends: golang-github-armon-consul-api-dev, golang-github-coreos-etcd-dev | golang-etcd-server-dev, golang-golang-x-crypto-dev
+Suggests: golang-github-xordataexchange-crypt
+Section: devel
+Priority: extra
+Homepage: https://github.com/xordataexchange/crypt
+Description: Store/retrieve encrypted configs from etcd or Consul (Go library)
+ Fess up.  You have passwords and usernames hard coded in your apps.
+ You have IP addresses checked in to your source code repository.
+ You have entire configuration files that were created by the developer
+ who wrote the app and haven’t been changed since she typed "git init".
+ .
+ "crypt" is here to lead you back to the Path of Enlightened Configuration.
+ Store encrypted configuration values in etcd or Consul using a command-line
+ application.
+ .
+ Decrypt them before starting your application using a wrapper script and
+ the handy CLI tool, or inside the app using the "crypt/config" library.
+ .
+ "crypt" is built on time-tested standards like OpenPGP, base64, and gzip.
+ Your data is encrypted using public key encryption, and can only be
+ decrypted by when the private key is available.  After compression,
+ it is encrypted, and base64-encoded so it can be stored in your key/value
+ store of choice.  etcd and Consul are supported out of the box, but adding
+ other storage tools is a trivial task, thanks to Go’s interfaces.
+ .
+ This package provides the "github.com/xordataexchange/crypt/config"
+ Go library.

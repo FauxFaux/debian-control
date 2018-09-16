@@ -1,0 +1,28 @@
+Package: golang-github-googleapis-gnostic-dev
+Source: golang-github-googleapis-gnostic
+Version: 0.2.0-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 989
+Depends: golang-github-docopt-docopt-go-dev, golang-golang-x-net-dev, golang-golang-x-oauth2-google-dev, golang-goprotobuf-dev, golang-yaml.v2-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/googleapis/gnostic
+Description: compiler for OpenAPI specification - library
+ Protocol Buffers (https://developers.google.com/protocol-buffers/)
+ provide a language-neutral, platform-neutral, extensible mechanism
+ for serializing structured data. gnostic's Protocol Buffer models for
+ the OpenAPI Specification can be used to generate code that includes
+ data structures with explicit fields for the elements of an OpenAPI
+ description. This makes it possible for developers to work with
+ OpenAPI descriptions in type-safe ways, which is particularly useful in
+ strongly-typed languages like Go and Swift.
+ .
+ gnostic reads OpenAPI descriptions into these generated data structures,
+ reports errors, resolves internal dependencies, and writes the results in
+ a binary form that can be used in any language that is supported by the
+ Protocol Buffer tools.  A plugin interface simplifies integration with
+ API tools written in a variety of different languages, and when necessary,
+ Protocol Buffer OpenAPI descriptions can be reexported as JSON or YAML.
+ .
+ This package provides the development files.

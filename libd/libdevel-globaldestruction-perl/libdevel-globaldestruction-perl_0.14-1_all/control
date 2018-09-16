@@ -1,0 +1,14 @@
+Package: libdevel-globaldestruction-perl
+Version: 0.14-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 20
+Depends: perl (>= 5.14.0), libsub-exporter-progressive-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Devel-GlobalDestruction
+Description: module to expose the flag that marks global destruction
+ Devel::GlobalDestruction is a Perl module that exposes the PL_dirty flag
+ to Perl as a subroutine named in_global_destruction. It is useful when
+ writing destructors, so that only non-process local resources are freed
+ while in global destruction.

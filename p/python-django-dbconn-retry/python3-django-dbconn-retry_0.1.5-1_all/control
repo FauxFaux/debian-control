@@ -1,0 +1,17 @@
+Package: python3-django-dbconn-retry
+Source: python-django-dbconn-retry
+Version: 0.1.5-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 37
+Depends: python3-django, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/jdelic/django-dbconn-retry/
+Description: reconnect on a failed database (Python3 version)
+ This library monkeypatches django.db.backends.base.BaseDatabaseWrapper so that
+ when a database operation fails because the underlying TCP connection was
+ already closed, it first tried to reconnect, instead of immediately raising an
+ OperationException.
+ .
+ This package contains the Python 3 version of the library.

@@ -1,0 +1,26 @@
+Package: bzrtools
+Version: 2.6.0-4
+Architecture: all
+Maintainer: Debian Bazaar Maintainers <pkg-bazaar-maint@lists.alioth.debian.org>
+Installed-Size: 255
+Depends: bzr (<< 2.8.0), bzr (>= 2.6~), patch, python (<< 2.8), python (>= 2.7), python:any (>= 2.6.6-7~)
+Recommends: rsync
+Suggests: graphviz, librsvg2-bin
+Section: vcs
+Priority: optional
+Homepage: http://bazaar-vcs.org/BzrTools
+Description: Collection of tools for bzr
+ This package contains a collection of plugins for bzr - a distributed
+ version control system. Some of these tools may work their way into
+ bzr itself at some point, and some are just convenient addons useful
+ for day to day operations.
+ .
+ bzrtools actually includes:
+  * rspush: Push local changes to a remote server using rsync instead
+    sftp.
+  * graph-ancestry: Use graphviz to produce graphs of branch ancestry.
+  * shell: Start up a command interpreter that run bzr natively,
+    providing autocompletion.
+  * patch: Apply a specified patch to your tree, that can be a file
+    or URL.
+  * heads: Show all revisions in a repository not having descendants.

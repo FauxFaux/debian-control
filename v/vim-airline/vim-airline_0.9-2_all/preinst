@@ -1,0 +1,24 @@
+#!/bin/sh
+# preinst script for vim-airline
+
+set -e
+
+case "$1" in
+    install|upgrade)
+        if [ "$(vim-addons status | grep airline | awk '{print $3}')" = "installed" ] ; then
+                vim-addon-manager -w remove airline
+        fi
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

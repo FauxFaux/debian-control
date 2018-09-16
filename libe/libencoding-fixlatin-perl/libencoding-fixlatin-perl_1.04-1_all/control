@@ -1,0 +1,21 @@
+Package: libencoding-fixlatin-perl
+Version: 1.04-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 47
+Depends: perl
+Recommends: libencoding-fixlatin-xs-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Encoding-FixLatin
+Description: takes mixed encoding input and produces UTF-8 output
+ Most encoding conversion tools take input in one encoding and produce
+ output in another encoding.  Encoding::FixLatin takes input which may
+ contain characters in more than one encoding and makes a best effort to
+ convert them all to UTF-8 output.
+ .
+ For string soups containing only ASCII, ISO8859-1 and CP1252 but no
+ actual UTF-8 characters (even if encoded as such), Encode::ZapCP1252
+ may be better suitable.
+ .
+ Includes command-line tool fix_latin.

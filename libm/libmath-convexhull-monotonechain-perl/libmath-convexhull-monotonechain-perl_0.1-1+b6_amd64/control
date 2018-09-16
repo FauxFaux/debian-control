@@ -1,0 +1,21 @@
+Package: libmath-convexhull-monotonechain-perl
+Source: libmath-convexhull-monotonechain-perl (0.1-1)
+Version: 0.1-1+b6
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 38
+Depends: perl (>= 5.26.0-4), perlapi-5.26.0, libc6 (>= 2.2.5)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Math-ConvexHull-MonotoneChain/
+Description: Perl module to calculate a convex hull using Andrew's monotone chain algorithm
+ Math::ConvexHull::MonotoneChain optionally exports a single function
+ convex_hull which calculates the convex hull of the input points and returns
+ it. Andrew's monotone chain convex hull algorithm constructs the convex hull
+ of a set of 2-dimensional points in O(n*log(n)) time.
+ .
+ It does so by first sorting the points lexicographically (first by
+ x-coordinate, and in case of a tie, by y-coordinate), and then constructing
+ upper and lower hulls of the points in O(n) time. It should be somewhat faster
+ than a plain Graham's scan (also O(n*log(n))) in practice since it avoids polar
+ coordinates.

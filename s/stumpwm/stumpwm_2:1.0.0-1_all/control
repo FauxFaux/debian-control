@@ -1,0 +1,29 @@
+Package: stumpwm
+Version: 2:1.0.0-1
+Architecture: all
+Maintainer: Debian Common Lisp Team <debian-common-lisp@lists.debian.org>
+Installed-Size: 764
+Depends: cl-clx-sbcl | cmucl-source, cl-ppcre
+Suggests: info-browser, rlwrap, slime, www-browser, x-terminal-emulator, x11-utils
+Provides: x-window-manager
+Section: x11
+Priority: optional
+Homepage: https://stumpwm.github.io/
+Description: tiling, keyboard driven Common Lisp window manager
+ StumpWM is a window manager written entirely in Common Lisp. It
+ attempts to be highly customizable while relying entirely on the
+ keyboard for input. You will not find buttons, icons, title bars,
+ tool bars, or any of the other conventional GUI widgets.
+ .
+ These design decisions reflect the growing popularity of productive,
+ customizable lisp based systems.
+ .
+ Please ensure that you install compatible implementations of CL and
+ CLX.  That means either install sbcl and cl-clx-sbcl or cmucl and
+ cmucl-source or clisp-module-clx only.
+ .
+ The suggested package, slime, lets you control a running StumpWM
+ session through Emacs.
+ .
+ If you need Xinerama support, you need the xdpyinfo utility from the
+ x11-utils package.

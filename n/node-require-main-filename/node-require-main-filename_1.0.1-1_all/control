@@ -1,0 +1,20 @@
+Package: node-require-main-filename
+Version: 1.0.1-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 16
+Depends: nodejs
+Section: web
+Priority: optional
+Homepage: https://github.com/yargs/require-main-filename#readme
+Description: shim for require.main.filename() that works in as many environments as possible
+ require.main.filename is great for figuring out the entry point for the
+ current application. This can be combined with a module like pkg-conf
+ to, as if by magic, load top-level configuration.
+ .
+ Unfortunately, require.main.filename sometimes fails when an application
+ is executed with an alternative process manager, e.g., iisnode.
+ .
+ require-main-filename is a shim that addresses this problem.
+ .
+ Node.js is an event-based server-side JavaScript engine.

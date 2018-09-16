@@ -1,0 +1,21 @@
+Package: ruby-foreman
+Version: 0.82.0-2
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 117
+Depends: ruby | ruby-interpreter, ruby-dotenv, ruby-thor (>= 0.19.1)
+Section: ruby
+Priority: optional
+Homepage: http://github.com/ddollar/foreman
+Description: Process manager for applications with multiple components
+ Foreman is a process manager commonly used during development of
+ multi-component applications. For production, it allows allow you to either
+ run your application directly or export it to some other process management
+ format (i.e. init system service files).
+ .
+ Foreman uses a file called Procfile, which is the same mechanism for declaring
+ what commands are run by your application’s dynos on the Heroku platform. It
+ follows the process model. You can use a Procfile to declare various process
+ types, such as multiple types of workers, a singleton process like a clock, or
+ a consumer of the Twitter streaming API.
+Ruby-Versions: all

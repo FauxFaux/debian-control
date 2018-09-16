@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+DEB_HOST_MULTIARCH=x86_64-linux-gnu
+
+SONAME=3.8
+
+SLEPC_VERSION=3.8.3
+SLEPC_ARCH=${DEB_HOST_MULTIARCH}
+SLEPC_COMPLEX_ARCH=${SLEPC_ARCH}-complex
+SLEPC_SONAME_VERSION=3.8
+SLEPC_NAME=slepc${SLEPC_SONAME_VERSION}
+
+SLEPC_DIR_COMPLEX=/usr/lib/slepcdir/${SLEPC_NAME}/${SLEPC_COMPLEX_ARCH}
+
+# Remove alternatives links
+if [ "$1" = "remove" ]; then
+  update-alternatives --remove slepc ${SLEPC_DIR_COMPLEX}
+  update-alternatives --remove libslepc_complex.so /usr/lib/${DEB_HOST_MULTIARCH}/libslepc_complex.so.${SLEPC_VERSION}
+  update-alternatives --remove slepc${SONAME} ${SLEPC_DIR_COMPLEX}
+fi
+
+

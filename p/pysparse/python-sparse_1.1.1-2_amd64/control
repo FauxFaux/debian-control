@@ -1,0 +1,23 @@
+Package: python-sparse
+Source: pysparse
+Version: 1.1.1-2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 445
+Depends: python-numpy (>= 1:1.14.3), python (<< 2.8), python (>= 2.7~), python-numpy-abi9, python:any (<< 2.8), python:any (>= 2.7.5-5~), libamd2 (>= 1:4.5.2), libblas3 | libblas.so.3, libc6 (>= 2.14), liblapack3 | liblapack.so.3, libsuperlu5, libumfpack5 (>= 1:4.5.2)
+Suggests: python-sparse-examples
+Provides: python2.7-sparse
+Section: python
+Priority: optional
+Homepage: http://pysparse.sourceforge.net/
+Description: Sparse linear algebra extension for Python
+ This provides a set of sparse matrix types for Python, with modules which
+ implement:
+  - Iterative methods for solving linear systems of equations
+  - A set of standard preconditioners
+  - An interface to a direct solver for sparse linear systems of equations
+  - The JDSYM eigensolver
+ .
+ All of these modules are implemented as C extension modules based on standard
+ sparse and dense matrix libraries (UMFPACK/AMD, SuperLU, BLAS/LAPACK) for
+ maximum performance and robustness.

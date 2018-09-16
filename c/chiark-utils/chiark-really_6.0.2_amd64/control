@@ -1,0 +1,25 @@
+Package: chiark-really
+Source: chiark-utils
+Version: 6.0.2
+Architecture: amd64
+Maintainer: Ian Jackson <ijackson@chiark.greenend.org.uk>
+Installed-Size: 42
+Depends: libc6 (>= 2.4)
+Section: admin
+Priority: extra
+Description: really - a tool for gaining privilege (simple, realistic sudo)
+ really is a program that allows certain users to become whatever user
+ they like on request.  It is a bit like sudo in that respect.
+ However, really is simpler than sudo, and doesn't give the system
+ administrator any false security promises.  So really is less of a
+ general security risk to the system.
+ .
+ Unlike sudo it does not pretend that the called account can be any
+ more secure than the calling account, so there is never a need for a
+ password.  If you wanted to restrict which commands and functions the
+ called user can perform, use userv, not really or sudo.
+ .
+ Also unlike sudo, really only works if the calling user is supposed
+ to be equivalent to root.  But, really can also be used by
+ root-equivalent users to become any user, not just root; in this way
+ it can be a replacement for certain uses of su.

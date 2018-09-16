@@ -1,0 +1,41 @@
+Package: dotter
+Source: seqtools (4.44.1+dfsg-2)
+Version: 4.44.1+dfsg-2+b1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 406
+Depends: libatk1.0-0 (>= 1.12.4), libc6 (>= 2.14), libcairo2 (>= 1.2.4), libcurl4 (>= 7.16.2), libfontconfig1 (>= 2.12.6), libfreetype6 (>= 2.2.1), libfribidi0 (>= 0.19.2), libgbtools0, libgcc1 (>= 1:3.0), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.22.0), libgtk2.0-0 (>= 2.12.0), libjsoncpp1 (>= 1.7.4), libpango-1.0-0 (>= 1.14.0), libpangocairo-1.0-0 (>= 1.14.0), libpangoft2-1.0-0 (>= 1.14.0), libstdc++6 (>= 5.2)
+Conflicts: acedb-other-dotter (<< 4.9.39+dfsg.02-2)
+Replaces: acedb-other-dotter (<< 4.9.39+dfsg.02-2)
+Provides: acedb-other-dotter
+Section: science
+Priority: optional
+Homepage: http://www.sanger.ac.uk/science/tools/seqtools
+Description: detailed comparison of two genomic sequences
+ Dotter is a graphical dot-matrix program for detailed comparison of two
+ sequences.
+ .
+  * Every residue in one sequence is compared to every residue in the
+    other, and a matrix of scores is calculated.
+  * One sequence is plotted on the x-axis and the other on the y-axis.
+  * Noise is filtered out so that alignments appear as diagonal lines.
+  * Pairwise scores are averaged over a sliding window to make the score
+    matrix more intelligible.
+  * The averaged score matrix forms a three-dimensional landscape,
+    with the two sequences in two dimensions and the height of the
+    peaks in the third. This landscape is projected onto two
+    dimensions using a grey-scale image - the darker grey of a peak,
+    the higher the score is.
+  * The contrast and threshold of the grey-scale image can be adjusted
+    interactively, without having to recalculate the score matrix.
+  * An Alignment Tool is provided to examine the sequence alignment that
+    the grey-scale image represents.
+  * Known high-scoring pairs can be loaded from a GFF file and overlaid
+    onto the plot.
+  * Gene models can be loaded from GFF and displayed alongside the
+    relevant axis.
+  * Compare a sequence against itself to find internal repeats.
+  * Find overlaps between multiple sequences by making a dot-plot of all
+    sequences versus themselves.
+  * Run Dotter in batch mode to create large, time-consuming dot-plots as
+    a background process.

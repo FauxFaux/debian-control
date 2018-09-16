@@ -1,0 +1,19 @@
+Package: ratt
+Version: 0.0~git20180127.c44413c-2
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Installed-Size: 2624
+Depends: sbuild, libc6 (>= 2.3.2)
+Recommends: dose-extra
+Built-Using: golang-1.10 (= 1.10.3-1), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-pault-go-debian (= 0.9-1), golang-pault-go-topsort (= 0.0~git20150602.0.a54e6e0-3)
+Section: devel
+Priority: optional
+Homepage: https://github.com/debian/ratt
+Description: Rebuild All The Things!
+ ratt (“Rebuild All The Things!”) operates on a Debian .changes file of a
+ just-built package, identifies all reverse-build-dependencies and rebuilds
+ them with the .debs from the .changes file.
+ .
+ The intended use-case is, for example, to package a new snapshot of
+ a Go library and verify that the new version does not break any other
+ Go libraries/binaries.

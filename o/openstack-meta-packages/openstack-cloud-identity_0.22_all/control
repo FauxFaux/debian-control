@@ -1,0 +1,19 @@
+Package: openstack-cloud-identity
+Source: openstack-meta-packages
+Version: 0.22
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 11
+Pre-Depends: openstack-cloud-services
+Depends: keystone
+Section: net
+Priority: optional
+Homepage: http://openstack.alioth.debian.org/
+Description: Metapackage to install an Openstack keystone
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ This metapackage will install keystone, and is needed because of the orders
+ in which things should be configured to install all of openstack at once.

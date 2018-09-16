@@ -1,0 +1,28 @@
+Package: libhwloc-plugins
+Source: hwloc
+Version: 1.11.11-1
+Architecture: amd64
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Installed-Size: 74
+Depends: libc6 (>= 2.4), libltdl7 (>= 2.4.6), libpciaccess0, libxml2 (>= 2.7.4), ocl-icd-libopencl1 | libopencl1, ocl-icd-libopencl1 (>= 1.0) | libopencl-1.1-1, libhwloc5 (>= 1.11.11~), libhwloc5 (<< 1.11.11A)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.open-mpi.org/projects/hwloc/
+Description: Hierarchical view of the machine - plugins
+ libhwloc provides a portable abstraction (across OS, versions,
+ architectures, ...) of the hierarchical topology of modern architectures. It
+ primarily aims at helping high-performance computing applications with
+ gathering information about the hardware so as to exploit it accordingly and
+ efficiently.
+ .
+ libhwloc provides a hierarchical view of the machine, NUMA memory nodes,
+ sockets, shared caches, cores and simultaneous multithreading. It also gathers
+ various attributes such as cache and memory information.
+ .
+ libhwloc supports old kernels not having sysfs topology information,
+ with knowledge of cpusets, offline cpus, and Kerrighed support
+ .
+ This package contains plugins to add more discovery support. This includes
+  - PCI support
+  - libxml support

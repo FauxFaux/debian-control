@@ -1,0 +1,44 @@
+#!/bin/sh
+# postrm script for prewikka
+#
+# see: dh_installdeb(1)
+
+set -e
+
+. /usr/share/debconf/confmodule
+db_version 2.0 || [ $? -lt 30 ]
+
+if [ -f /usr/share/dbconfig-common/dpkg/postrm.mysql ]; then
+    . /usr/share/dbconfig-common/dpkg/postrm
+    dbc_go prewikka $@
+fi
+
+if [ "$1" = "purge" ]; then
+
+  rm -f /etc/prewikka/prewikka.conf
+  rm -f /etc/prewikka/prewikka.conf-new /etc/prewikka/prewikka.conf.ucf-dist /etc/prewikka/prewikka.conf.ucf-old
+  if which ucf >/dev/null 2>&1; then
+      ucf --purge /etc/prewikka/prewikka.conf
+  fi
+
+  rmdir --ignore-fail-on-non-empty /etc/prewikka || true
+
+fi
+
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+        . /usr/share/debconf/confmodule
+        db_purge
+fi
+
+
+# Automatically added by dh_installdebconf/11.3.5
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0
+
+

@@ -1,0 +1,32 @@
+Package: libclass-std-storable-perl
+Version: 0.0.1-2
+Architecture: all
+Maintainer: KURASHIKI Satoru <lurdan@gmail.com>
+Installed-Size: 38
+Depends: perl, libclass-std-perl (>= 0.0.4)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Class-Std-Storable
+Description: Support for creating serializable "inside-out" classes
+ Class::Std introduced the "inside-out" model for classes (perldoc Class::Std
+ for details). Among its salient features is complete encapsulation; that is,
+ an object's data may only be accessed via its methods, unlike the usual
+ hashref model that permits direct access by any code whatsoever. However, the
+ drawback of complete encapsulation is that normal mechanisms for
+ serialization won't work, as they rely on direct access to an object's
+ attributes.
+ .
+ This class provides the class-building functionality from Class::Std, and in
+ addition provides an interface to allow Storable to freeze and thaw any
+ declared attributes of this class and any superclasses that were built via
+ Class::Std::Storable.
+ .
+ However, in order to let Storable save attributes and construct the object,
+ it is necessary to expose the attributes of the class to the world. Thus, any
+ code could use the same interface that Storable does to get a copy of object
+ attributes and create new objects with arbitrary attributes without going
+ through the constructor. While the interface CAN'T be used to replace the
+ existing attributes of an object, it COULD be used to create an arbitrarily
+ mutated clone of an object without going through its methods. Also, if
+ attributes are themselves references, then the objects to which they refer
+ can be obtained and modified.

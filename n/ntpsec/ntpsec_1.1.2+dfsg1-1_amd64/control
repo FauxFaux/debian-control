@@ -1,0 +1,31 @@
+Package: ntpsec
+Version: 1.1.2+dfsg1-1
+Architecture: amd64
+Maintainer: Richard Laager <rlaager@wiktel.com>
+Installed-Size: 765
+Depends: adduser, lsb-base (>= 3.2-13), netbase, python3 (>= 3.3), python3-ntp, tzdata (>= 2015d-1), libc6 (>= 2.15), libcap2 (>= 1:2.10), libssl1.1 (>= 1.1.0)
+Recommends: systemd | cron | cron-daemon
+Suggests: apparmor, ntpsec-doc, ntpsec-ntpviz
+Conflicts: ntp, ntpdate, time-daemon
+Breaks: apparmor-profiles-extra (<< 1.8)
+Replaces: ntp, time-daemon
+Provides: time-daemon
+Section: net
+Priority: optional
+Homepage: https://www.ntpsec.org
+Description: Network Time Protocol daemon and utility programs
+ NTP, the Network Time Protocol, is used to keep computer clocks
+ accurate by synchronizing them over the Internet or a local network,
+ or by following an accurate hardware receiver that interprets GPS,
+ DCF-77, or similar time signals.
+ .
+ This package contains the NTP daemon and utility programs.  An NTP
+ daemon needs to be running on each host that is to have its clock
+ accuracy controlled by NTP.  The same NTP daemon is also used to
+ provide NTP service to other hosts.
+ .
+ This is the NTPsec version of NTP.  NTPsec is a secure, hardened,
+ and improved implementation derived from the original NTP project.
+ .
+ For more information about the NTP protocol and NTP server
+ configuration and operation, install the package "ntpsec-doc".

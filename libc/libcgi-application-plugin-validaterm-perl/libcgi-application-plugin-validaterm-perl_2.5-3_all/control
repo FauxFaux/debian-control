@@ -1,0 +1,19 @@
+Package: libcgi-application-plugin-validaterm-perl
+Version: 2.5-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 35
+Depends: perl, libcgi-application-perl, libhtml-fillinform-perl, libdata-formvalidator-perl
+Suggests: libhtml-template-perl, libcgi-application-plugin-forward-perl
+Breaks: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Replaces: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Application-Plugin-ValidateRM
+Description: plugin for validating form data using Data::FormValidator
+ CGI::Application::Plugin::ValidateRM helps to validate web forms when using
+ the CGI::Application framework. The check_rm method takes a run mode and a
+ Data::FormValidator profile and validates the query parameters against the
+ profile. Based upon the return results the web application either has
+ some valid data to work with or the user receives the form with
+ information about the invalid fields.

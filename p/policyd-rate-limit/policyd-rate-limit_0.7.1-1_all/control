@@ -1,0 +1,18 @@
+Package: policyd-rate-limit
+Version: 0.7.1-1
+Architecture: all
+Maintainer: Python Applications Packaging Team <python-apps-team@lists.alioth.debian.org>
+Installed-Size: 124
+Depends: python3-yaml, python3:any (>= 3.4~), adduser
+Suggests: python3-mysqldb, python3-psycopg2
+Enhances: postfix
+Section: mail
+Priority: optional
+Homepage: https://pypi.python.org/pypi/policyd-rate-limit
+Description: postfix policy daemon limiting the number of mails a user can send
+ policyd-rate-limit is a simple postfix policy daemon written in python3
+ allowing to limit the number of mails a user can send over time.
+ Users are identified either via their sasl usernames or their ip addresses.
+ Limitation rules are a list of couples (number of mails, number of seconds).
+ If a user has sent more than number of mails in number of seconds,
+ a configurable error is returned to the user.

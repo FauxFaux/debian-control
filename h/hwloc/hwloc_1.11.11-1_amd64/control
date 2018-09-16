@@ -1,0 +1,26 @@
+Package: hwloc
+Version: 1.11.11-1
+Architecture: amd64
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Installed-Size: 658
+Depends: libc6 (>= 2.17), libcairo2 (>= 1.2.4), libhwloc5 (>= 1.11.11), libice6 (>= 1:1.0.0), libsm6, libtinfo6 (>= 6), libx11-6
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.open-mpi.org/projects/hwloc/
+Description: Hierarchical view of the machine - utilities
+ Hardware Locality (hwloc) provides a portable abstraction (across OS, versions,
+ architectures, ...) of the hierarchical topology of modern architectures. It
+ primarily aims at helping high-performance computing applications with
+ gathering information about the hardware so as to exploit it accordingly and
+ efficiently.
+ .
+ hwloc provides a hierarchical view of the machine, NUMA memory nodes,
+ sockets, shared caches, cores and simultaneous multithreading. It also gathers
+ various attributes such as cache and memory information.
+ .
+ hwloc supports old kernels not having sysfs topology information,
+ with knowledge of cpusets, offline cpus, and Kerrighed support
+ .
+ This package contains utilities to show the topology of the machine (lstopo and
+ hwloc-ls), manipulate cpu masks (hwloc-calc), and bind processes (hwloc-bind).

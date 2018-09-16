@@ -1,0 +1,17 @@
+Package: mdadm
+Version: 4.1~rc1-4
+Architecture: amd64
+Maintainer: Debian mdadm maintainers <pkg-mdadm-devel@lists.alioth.debian.org>
+Installed-Size: 1205
+Depends: libc6 (>= 2.27), udev, debconf (>= 0.5) | debconf-2.0, lsb-base, debconf
+Recommends: default-mta | mail-transport-agent, kmod | module-init-tools
+Suggests: dracut-core
+Section: admin
+Priority: optional
+Homepage: http://neil.brown.name/blog/mdadm
+Description: tool to administer Linux MD arrays (software RAID)
+ The mdadm utility can be used to create, manage, and monitor MD
+ (multi-disk) arrays for software RAID or multipath I/O.
+ .
+ This package automatically configures mdadm to assemble arrays during the
+ system startup process. If not needed, this functionality can be disabled.

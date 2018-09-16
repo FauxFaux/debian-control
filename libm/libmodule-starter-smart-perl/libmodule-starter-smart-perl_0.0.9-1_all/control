@@ -1,0 +1,17 @@
+Package: libmodule-starter-smart-perl
+Version: 0.0.9-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 30
+Depends: perl, libmodule-starter-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Module-Starter-Smart
+Description: Module::Starter plugin to add new modules into existing distributions
+ Module::Starter::Smart is a simple helper plugin for Module::Starter. It
+ overrides the create_distro, create_modules, and create_t subroutines
+ defined in whichever engine plugin in use (say, Module::Starter::Simple).
+ .
+ When invoked with an existing distribution, the plugin may bypass the
+ create_basedir subroutine, pull in a list of existing modules as well as
+ test files, create new modules, and recreate the manifest file accordingly.

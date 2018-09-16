@@ -1,0 +1,22 @@
+Package: libunsafe-fences-java
+Source: unsafe-fences
+Version: 1.0-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 25
+Section: java
+Priority: optional
+Homepage: https://github.com/headius/unsafe-fences
+Description: wrapper library around the Java 8 fences API
+ unsafe-fences is a very simple Java library that just provides a shim
+ around the Java 8 Unsafe methods used for memory fencing.
+ .
+ In Java 8, three memory-ordering intrinsics were added to the
+ sun.misc.Unsafe class: fullFence, storeFence, and loadFence.
+ .
+ The main goal of unsafe-fences is to allow code in Java 6 and 7
+ to compile those calls with a provided boolean guard.
+ .
+ This is especially useful for projects like JRuby that support
+ several JDK versions but it can be reused by other Java projects as
+ well.

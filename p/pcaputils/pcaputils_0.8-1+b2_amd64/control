@@ -1,0 +1,25 @@
+Package: pcaputils
+Source: pcaputils (0.8-1)
+Version: 0.8-1+b2
+Architecture: amd64
+Maintainer: Robert S. Edmonds <edmonds@debian.org>
+Installed-Size: 219
+Depends: libc6 (>= 2.3), libjudydebian1, libpcap0.8 (>= 0.9.8)
+Section: net
+Priority: extra
+Description: specialized libpcap utilities
+ pcaputils includes the following libpcap-based utilities:
+  - pcapip: filters an input pcap file based on a file containing IP addresses
+  - pcappick: picks specific frames out of a pcap by number
+  - pcapuc: prints unique src IPs, dst IPs, or {src, dst} IP pairs witnessed
+  - pcapdump: a dedicated packet capture utility similar to dumpcap, but with
+    these features:
+  * logs packet dump and drop rates
+  * can run as a daemon
+  * can dynamically reload its configuration without dropping packets
+  * can be signalled to immediately rotate its capture output file
+  * can partition its output based on time intervals (e.g., start of hour or
+    start of day)
+  * can strip application data from the trace file (output headers only)
+  * can sample the packet stream (e.g., only dump every 1 in 10 or 1 in 100
+    packets)

@@ -1,0 +1,20 @@
+Package: gccgo-6-m68k-linux-gnu
+Source: gcc-6-cross-ports (28)
+Version: 6.4.0-16cross1
+Architecture: amd64
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 55182
+Depends: gcc-6-m68k-linux-gnu-base (= 6.4.0-16cross1), gcc-6-m68k-linux-gnu (= 6.4.0-16cross1), libgo9-m68k-cross (>= 6.3.0-1), libc6-dev-m68k-cross (>= 2.13-5), libc6 (>= 2.14), libgmp10 (>= 2:5.0.1~), libisl19 (>= 0.15), libmpc3, libmpfr6 (>= 3.1.3), zlib1g (>= 1:1.1.4)
+Suggests: gccgo-6-doc, libgo9-dbg-m68k-cross (>= 6.4.0-16cross1)
+Conflicts: golang-go (<< 2:1.3.3-1ubuntu2)
+Breaks: libgo9-m68k-cross (<< 6.4.0-12)
+Replaces: libgo9-m68k-cross (<< 6.4.0-12)
+Provides: go-compiler
+Built-Using: gcc-6 (= 6.4.0-16)
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://gcc.gnu.org/
+Description: GNU Go compiler
+ This is the GNU Go compiler, which compiles Go on platforms supported
+ by the gcc compiler. It uses the gcc backend to generate optimized code.

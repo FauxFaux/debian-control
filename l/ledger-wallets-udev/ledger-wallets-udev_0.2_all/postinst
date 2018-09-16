@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+#set -x 
+
+if [ x"$1" = "xconfigure" ]; then
+	udevadm trigger || true
+	udevadm control --reload || true
+fi
+
+
+

@@ -1,0 +1,37 @@
+Package: vde2
+Version: 2.3.2+r586-2.1
+Architecture: amd64
+Maintainer: Debian VSquare Team <pkg-vsquare-devel@lists.alioth.debian.org>
+Installed-Size: 651
+Depends: adduser, libc6 (>= 2.16), libpcap0.8 (>= 0.9.8), libvde0, libvdeplug2
+Suggests: vde2-cryptcab, qemu-kvm, qemu
+Replaces: vde
+Section: net
+Priority: optional
+Homepage: http://vde.sourceforge.net
+Description: Virtual Distributed Ethernet
+ VDE is a virtual switch that can connect multiple virtual machines together,
+ both local and remote.
+ .
+ Components of the VDE architecture are VDE switches (virtual counterpart of
+ ethernet switches) and VDE cables (virtual counterpart of a crossed-cable used
+ to connect two switches).
+ .
+ VDE 2 includes:
+  - switch management both from console and from a "unix socket terminal"
+  - VLAN 801.1q
+  - FSTP (fast spanning tree)
+  - distributed cable manager using a blowfish encrypted channel
+  - wire packet filter to emulate delays and packet loss on virtual wires
+ .
+ Examples of VDE uses:
+  - With VDE it is possible to create a virtual network of QEMU machines
+    running on several real computer
+  - VDE can be used to create tunnels (even crossing masqueraded networks)
+  - VDE can provide mobility support
+ .
+ The VDE also provides bi-directional pipe command (dpipe) and remote terminal
+ for unix sockets (unixterm).
+ .
+ The Debian package provides a nice extension for /etc/network/interfaces file
+ for easy set up.

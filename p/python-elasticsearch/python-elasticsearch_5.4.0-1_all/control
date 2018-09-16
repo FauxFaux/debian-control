@@ -1,0 +1,26 @@
+Package: python-elasticsearch
+Version: 5.4.0-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 292
+Depends: python-urllib3, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Suggests: python-elasticsearch-doc
+Section: python
+Priority: optional
+Homepage: https://github.com/elasticsearch/elasticsearch-py
+Description: Python client for Elasticsearch
+ Official low-level client for Elasticsearch. Its goal is to provide common
+ ground for all Elasticsearch-related code in Python; because of this it tries
+ to be opinion-free and very extendable.
+ .
+ The client's features include:
+  * translating basic Python data types to and from json (datetimes are not
+    decoded for performance reasons)
+  * configurable automatic discovery of cluster nodes
+  * persistent connections
+  * load balancing (with pluggable selection strategy) across all available
+    nodes
+  * failed connection penalization (time based - failed connections won't be
+    retried until a timeout is reached)
+  * thread safety
+  * pluggable architecture

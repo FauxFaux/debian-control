@@ -1,0 +1,18 @@
+Package: libdir-self-perl
+Version: 0.11-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 19
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Dir-Self
+Description: module providing a __DIR__ constant for the directory of the source file
+ Perl has two pseudo-constants describing the current location in your source
+ code, __FILE__ and __LINE__. Dir::Self adds __DIR__, which expands to the
+ directory your source file is in, as an absolute pathname.
+ .
+ This is useful if your code wants to access files in the same directory, like
+ helper modules or configuration data. This is a bit like FindBin except it's
+ not limited to the main program, i.e. you can also use it in modules. And it
+ actually works.

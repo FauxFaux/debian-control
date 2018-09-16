@@ -1,0 +1,26 @@
+Package: aide-dynamic
+Source: aide
+Version: 0.16-4
+Architecture: amd64
+Maintainer: Aide Maintainers <aide@packages.debian.org>
+Installed-Size: 283
+Depends: libacl1 (>= 2.2.51-8), libattr1 (>= 1:2.4.46-8), libaudit1 (>= 1:2.2.1), libc6 (>= 2.14), libext2fs2 (>= 1.37), libmhash2, libpcre3, libselinux1 (>= 1.32), zlib1g (>= 1:1.1.4)
+Recommends: aide-common (= 0.16-4)
+Conflicts: aide, aide-xen
+Provides: aide-binary
+Section: admin
+Priority: optional
+Homepage: http://aide.sourceforge.net
+Description: Advanced Intrusion Detection Environment - dynamic binary
+ AIDE is an intrusion detection system that detects changes to files on
+ the local system. It creates a database from the regular expression rules
+ that it finds from the config file. Once this database is initialized
+ it can be used to verify the integrity of the files. It has several
+ message digest algorithms (md5, sha1, rmd160, tiger, haval, etc.) that are
+ used to check the integrity of the file. More algorithms can be added
+ with relative ease. All of the usual file attributes can also be checked
+ for inconsistencies.
+ .
+ This package contains a dynamically linked binary and should only be
+ used in exeptional circumstances. To avoid exposure to trojaned
+ libraries, it is advised to use one of the statically linked binaries.

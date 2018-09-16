@@ -1,0 +1,25 @@
+Package: sunpinyin-utils
+Source: sunpinyin
+Version: 3.0.0~rc1+ds1-1
+Architecture: amd64
+Maintainer: Debian Input Method Team <debian-input-method@lists.debian.org>
+Installed-Size: 555
+Depends: python, libc6 (>= 2.27), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Section: utils
+Priority: optional
+Homepage: https://github.com/sunpinyin/sunpinyin
+Description: Simplified Chinese Input Method from SUN (utilities)
+ Sunpinyin is a statistical language model (SLM) based input method
+ engine for Simplified Chinese, it features full sentence input.
+ .
+ This package contains some utilities used by open-gram project,
+ including:
+ .
+  * genpyt - generate the pinyin lexicon
+  * tslmpack - convert the ARPA format of SunPinyin back-off language
+    model to its binary representation
+  * tslmendian - change the byte-order of sunpinyin's threaded back-off
+    language model
+ .
+ and some Python programs which maybe used to import user dictionary
+ from other input method such as sougou, google, fcitx etc.

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+update-alternatives --install /usr/games/nethack nethack \
+  /usr/lib/games/nethack/nethack-x11-tty.sh 60
+
+update-alternatives --install /usr/games/nethack nethack \
+  /usr/lib/games/nethack/nethack-x11.sh 50
+
+# Automatically added by dh_installxfonts/11.2.1
+if which update-fonts-dir >/dev/null 2>&1; then
+	update-fonts-dir --x11r7-layout misc
+fi
+# End automatically added section
+

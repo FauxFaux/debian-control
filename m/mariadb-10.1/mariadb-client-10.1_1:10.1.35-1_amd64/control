@@ -1,0 +1,23 @@
+Package: mariadb-client-10.1
+Source: mariadb-10.1
+Version: 1:10.1.35-1
+Architecture: amd64
+Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Installed-Size: 23665
+Depends: debianutils (>= 1.6), mariadb-client-core-10.1 (>= 1:10.1.35-1), libconfig-inifiles-perl, perl:any, libc6 (>= 2.17), libstdc++6 (>= 5), zlib1g (>= 1:1.1.4)
+Recommends: libdbd-mysql-perl (>= 1.2202), libdbi-perl, libterm-readkey-perl
+Conflicts: mysql-client-core-5.5, mysql-client-core-5.6, mysql-client-core-5.7, mytop, virtual-mysql-client
+Breaks: mariadb-client-10.0, mariadb-client-5.5, mariadb-server-10.0 (<< 10.0.13-1~), mysql-client-5.5, mysql-client-5.6, mysql-client-5.7
+Replaces: mariadb-client-10.0, mariadb-client-5.5, mariadb-server-10.0 (<< 10.0.13-1~), mysql-client-5.5, mysql-client-5.6, mysql-client-5.7, mytop, virtual-mysql-client
+Provides: virtual-mysql-client
+Section: database
+Priority: optional
+Homepage: https://mariadb.org/
+Description: MariaDB database client binaries
+ MariaDB is a fast, stable and true multi-user, multi-threaded SQL database
+ server. SQL (Structured Query Language) is the most popular database query
+ language in the world. The main goals of MariaDB are speed, robustness and
+ ease of use.
+ .
+ This package includes the client binaries and the additional tools
+ innotop and mysqlreport.

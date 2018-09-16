@@ -1,0 +1,21 @@
+Package: libapp-daemon-perl
+Version: 0.22-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 49
+Depends: libfile-pid-perl, liblog-log4perl-perl, perl
+Suggests: libproc-processtable-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/App-Daemon
+Description: Perl module to start an Application as a Daemon
+ App::Daemon helps running an application as a daemon. The idea to prepend
+ scripts with functions provided by this module to 'daemonize' it.
+ .
+ Along with the common features offered by similar modules on CPAN, it
+  * supports logging with Log4perl: In background mode, it logs to a logfile. In
+    foreground mode, log messages go directly to the screen.
+  * detects if another instance is already running and ends itself
+    automatically in this case.
+  * shows with the 'status' command if an instance is already running and
+    which PID it has.

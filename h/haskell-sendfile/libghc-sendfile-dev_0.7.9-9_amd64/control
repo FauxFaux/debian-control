@@ -1,0 +1,23 @@
+Package: libghc-sendfile-dev
+Source: haskell-sendfile
+Version: 0.7.9-9
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 391
+Depends: libghc-base-dev-4.10.1.0-35a7f, libghc-bytestring-dev-0.10.8.2-4a9e2, libghc-network-dev-2.6.3.5-a1fbb, libc6 (>= 2.3), libgmp10
+Suggests: libghc-sendfile-doc, libghc-sendfile-prof
+Provides: libghc-sendfile-dev-0.7.9-1e1a4
+Section: haskell
+Priority: optional
+Homepage: http://hub.darcs.net/stepcut/sendfile
+Description: Haskell portable sendfile library
+ This Haskell library exposes zero-copy sendfile functionality in a
+ portable way. sendfile is a non standard system call that copies data
+ between one file descriptor and another. This library uses the native
+ implementations where possible (for example, under Linux or FreeBSD) and
+ provides an Haskell replacement in other cases, thus providing a
+ portable interface.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: sendfile-0.7.9-2Cd1j9WQUepAhlsfFrNTfP

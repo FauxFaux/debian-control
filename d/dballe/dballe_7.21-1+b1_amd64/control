@@ -1,0 +1,48 @@
+Package: dballe
+Source: dballe (7.21-1)
+Version: 7.21-1+b1
+Architecture: amd64
+Maintainer: Enrico Zini <enrico@debian.org>
+Installed-Size: 178
+Depends: dballe-common, libc6 (>= 2.14), libdballe7 (>= 7.0), libgcc1 (>= 1:3.0), liblua5.1-0, libpopt0 (>= 1.14), libstdc++6 (>= 5.2), libwreport3 (>= 3.0)
+Recommends: python-dballe
+Section: misc
+Priority: optional
+Homepage: https://github.com/ARPA-SIMC/dballe
+Description: Database for punctual meteorological data (Command line tools)
+ DB-All.e is a fast on-disk database where meteorological observed and
+ forecast data can be stored, searched, retrieved and updated.
+ .
+ This framework allows one to manage large amounts of data using its simple
+ Application Program Interface, and provides tools to visualise, import
+ and export in the standard formats BUFR, AOF and CREX.
+ .
+ The main characteristics of DB-ALL.e are:
+ .
+  * Fortran, C, C++ and Python APIs are provided.
+  * To make computation easier, data is stored as physical quantities,
+    that is, as measures of a variable in a specific point of space and
+    time, rather than as a sequence of report.
+  * Internal representation is similar to BUFR and CREX WMO standard
+    (table code driven) and utility for import and export are included
+    (generic and ECMWF template).
+  * Representation is in 7 dimensions: latitude and longitude geographic
+    coordinates, table driven vertical coordinate, reference time,
+    table driven observation and forecast specification, table driven
+    data type.
+  * It allows one to store extra information linked to the data, such as
+    confidence intervals for quality control.
+  * It allows one to store extra information linked to the stations.
+  * Variables can be represented as real, integer and characters, with
+    appropriate precision for the type of measured value.
+  * It is based on physical principles, that is, the data it contains are
+    defined in terms of homogeneous and consistent physical data. For
+    example, it is impossible for two incompatible values to exist in the
+    same point in space and time.
+  * It can manage fixed stations and moving stations such as airplanes or
+    ships.
+  * It can manage both observational and forecast data.
+  * It can manage data along all three dimensions in space, such as data
+    from soundings and airplanes.
+  * Report information is preserved. It can work based on physical
+    parameters or on report types.

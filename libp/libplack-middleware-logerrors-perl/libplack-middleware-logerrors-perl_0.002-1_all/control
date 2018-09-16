@@ -1,0 +1,30 @@
+Package: libplack-middleware-logerrors-perl
+Version: 0.002-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: libplack-perl, perl
+Enhances: libplack-middleware-logwarn-perl, libplack-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/pod/Plack::Middleware::LogErrors
+Description: map psgi.errors to psgix.logger or other logger
+ psgi.errors defaults to stderr in most backends, which results in
+ content going somewhere unhelpful like the server console.
+ .
+ Plack::Middleware::LogErrors simply remaps the psgi.errors stream to
+ the psgix.logger stream, or an explicit logger that you provide.
+ .
+ This is especially handy when used in combination with other
+ middlewares such as Plack::Middleware::LogWarn (which diverts Perl
+ warnings to psgi.errors); Plack::Middleware::HTTPExceptions (which
+ diverts uncaught exceptions to psgi.errors); and
+ Plack::Middleware::AccessLog, which defaults to psgi.errors when not
+ passed a logger -- which is also automatically applied via plackup (so
+ if you provided no --access-log option indicating a filename,
+ psgi.errors is used).
+ .
+ Plack is a set of tools similar to Ruby's Rack or Python's Paste for
+ WSGI. It implements the Perl Server Gateway Interface (PSGI) standard
+ interface, which allows developers to decouple their web application
+ framework from the local web server environment.

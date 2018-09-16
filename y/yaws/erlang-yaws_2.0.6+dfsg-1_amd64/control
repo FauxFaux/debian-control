@@ -1,0 +1,20 @@
+Package: erlang-yaws
+Source: yaws
+Version: 2.0.6+dfsg-1
+Architecture: amd64
+Maintainer: Debian Erlang Packagers <pkg-erlang-devel@lists.alioth.debian.org>
+Installed-Size: 1789
+Depends: erlang-abi-17.0, erlang-base (>= 1:20.3.8.1+dfsg) | erlang-base-hipe (>= 1:20.3.8.1+dfsg), erlang-crypto (>= 1:20.3.8.1+dfsg), erlang-inets (>= 1:20.3.8.1+dfsg), erlang-mnesia (>= 1:20.3.8.1+dfsg), erlang-ssl (>= 1:20.3.8.1+dfsg), erlang-tools (>= 1:20.3.8.1+dfsg), erlang-xmerl (>= 1:20.3.8.1+dfsg), libc6 (>= 2.4), libpam0g (>= 0.99.7.1)
+Suggests: yaws, yaws-doc, zip, bzip2
+Breaks: yaws (<< 1.99), yaws-chat (<< 1.99), yaws-mail (<< 1.99), yaws-wiki (<< 1.99), yaws-yapp (<< 1.99)
+Replaces: yaws (<< 1.88-2)
+Section: httpd
+Priority: optional
+Homepage: http://yaws.hyber.org/
+Description: Erlang application which implements HTTP webserver
+ Yaws is a high performance HTTP 1.1 webserver written in Erlang. It is a
+ multithreaded webserver where one Erlang light weight process is used to
+ handle each client. Two separate modes of operation are supported.
+ .
+ This package includes Erlang Yaws application suitable to work in embedded
+ mode where it runs as a webserver in another Erlang application.

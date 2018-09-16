@@ -1,0 +1,25 @@
+Package: scanbd
+Version: 1.5.1-4
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 181
+Depends: lsb-base (>= 3.0-6), openbsd-inetd | inet-superserver, sane-utils, update-inetd, libc6 (>= 2.4), libconfuse2 (>= 3.2.1~), libdbus-1-3 (>= 1.9.14), libsane (>= 1.0.24), libudev1 (>= 183)
+Section: misc
+Priority: optional
+Homepage: http://scanbd.sf.net/
+Description: Scanner button daemon
+ It polls the scanner buttons looking for buttons pressed or function knob
+ changes or other scanner events as paper inserts / removals and at the same
+ time allows also scan-applications to access the scanners. If buttons are
+ pressed, etc., various actions can be submitted (scan, copy, email, ...) via
+ action scripts. The function knob values are passed to the action-scripts as
+ well.
+ .
+ Scan actions are also signaled via D-Bus. This can be useful for foreign
+ applications. Scans can also be triggered via D-Bus from foreign applications.
+ .
+ On platforms which support signaling of dynamic device insertion / removal
+ (libudev, D-Bus, hal) scanbd supports this as well. scanbd can use all
+ sane-backends or some special backends from the (old) scanbuttond project.
+ .
+ This package is a successor of scanbuttond.

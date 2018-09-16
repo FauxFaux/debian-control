@@ -1,0 +1,30 @@
+Package: kimwitu++
+Source: kimwitu++ (2.3.13-2)
+Version: 2.3.13-2+b1
+Architecture: amd64
+Maintainer: Michael Piefel <piefel@debian.org>
+Installed-Size: 785
+Depends: libc6 (>= 2.2.5), libgcc1 (>= 1:4.1.1), libstdc++6 (>= 5.2)
+Recommends: g++ | c++-compiler
+Suggests: kimwitu++-doc, bison | byacc | btyacc
+Section: devel
+Priority: optional
+Description: A (syntax-)tree-handling tool (term processor)
+ Kimwitu++ is a system that supports the construction of programs that use
+ trees or terms as their main data structure.  It allows you to define, store
+ and operate on trees with typed nodes. Each type of node has a specific number
+ of sons, and expects these sons to have specific types.  The most popular
+ example of such trees are syntax trees.
+ .
+ The nodes are defined in a Yacc-like fashion.  The tree can be unparsed (ie.
+ treewalk) and rewritten (ie. term substitution). Kimwitu++ gives you powerful
+ pattern matching for specifying unparse and rewrite rules.
+ .
+ Kimwitu++ is an extension to C++. It introduces Yacc-like node definitions,
+ the unparse and rewrite rules, and extensions for pattern matching within
+ functions. It will translate its input files into pure C++.
+ .
+ To build the tree you might use a parser generated with Bison, but you are
+ free to use other tools.  There also exists Kimwitu (also packaged for Debian)
+ which interfaces with C instead of C++ which can also be used in C++ projects,
+ but Kimwitu++ has some extensions one might consider useful.

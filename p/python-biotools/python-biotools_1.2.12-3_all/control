@@ -1,0 +1,26 @@
+Package: python-biotools
+Version: 1.2.12-3
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 115
+Depends: python-matplotlib, python-numpy, python:any (<< 2.8), python:any (>= 2.7.5-5~), clustalw, ncbi-blast+ | ncbi-blast+-legacy
+Section: python
+Priority: optional
+Homepage: https://github.com/sonwell/biotools
+Description: Python bioinformatics utilities for high-throughput genomic sequencing
+ This package contains utilities like
+  biotools.align - align sequences (hybrid between Needleman-Wunsch and
+                   Smith-Waterman which is used to find the subsequence
+                   within a larger sequence that best aligns to a reference)
+  biotools.annotation - create annotation files. The annotations can be used
+                        to create a hierarchy among the annotations
+  biotools.BLAST - manage BLAST databases and interface with the BLAST+
+                   standalone program available from NCBI.
+  biotools.clustal - interface to clustalw global (multiple nucleotide or
+                     peptide sequence alignment)
+  biotools.complement - creates the complement of a sequence, which can then be
+                        reversed
+  biotools.sequence - various tools to deal with sequences
+  biotools.translate - translate a nucleotide using the standard genetic code
+ .
+ This package contains the Python 2 module.

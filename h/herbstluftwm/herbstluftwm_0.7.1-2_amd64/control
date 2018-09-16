@@ -1,0 +1,21 @@
+Package: herbstluftwm
+Version: 0.7.1-2
+Architecture: amd64
+Maintainer: Christoph Egger <christoph@debian.org>
+Installed-Size: 532
+Depends: libc6 (>= 2.15), libgcc1 (>= 1:3.0), libglib2.0-0 (>= 2.28.0), libstdc++6 (>= 4.1.1), libx11-6, libxext6, libxinerama1
+Recommends: dzen2, xterm, xfonts-base
+Suggests: suckless-tools
+Provides: x-window-manager
+Section: x11
+Priority: optional
+Homepage: https://herbstluftwm.org
+Description: manual tiling window manager for X11
+ In herbstluftwm the layout is based on splitting frames into
+ subframes which can be split again or can be filled with windows,
+ Tags (or workspaces or virtual desktops or ...) can be added/removed
+ at runtime. Each tag contains an own layout and exactly one tag is
+ viewed on each monitor. The tags are monitor independent.
+ .
+ It is configured at runtime via ipc calls from herbstclient. So the
+ configuration file is just a script which is run on startup.

@@ -1,0 +1,16 @@
+Package: libfile-sharedir-par-perl
+Version: 0.06-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 39
+Depends: perl, libfile-sharedir-perl, libclass-inspector-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/File-ShareDir-PAR
+Description: module for handling shared data in PAR archives
+ File::ShareDir::PAR is a Perl module that provides a mechanism for locating
+ shared data in PAR packages. By using this module's functions, the currently
+ loaded .par files will be scanned before @INC, which is the same order you
+ get for loading modules when PAR is in effect. If a matching path is found
+ in a PAR archive, the full archive is extracted and the path returned will
+ point to the extracted copy on disk.

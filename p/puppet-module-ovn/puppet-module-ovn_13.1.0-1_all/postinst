@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/ovn puppet-module-ovn /usr/share/puppet/modules.available/ovn 500
+fi
+
+
+
+exit 0

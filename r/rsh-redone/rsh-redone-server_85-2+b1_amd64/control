@@ -1,0 +1,18 @@
+Package: rsh-redone-server
+Source: rsh-redone (85-2)
+Version: 85-2+b1
+Architecture: amd64
+Maintainer: Guus Sliepen <guus@debian.org>
+Installed-Size: 61
+Depends: libc6 (>= 2.14), libpam0g (>= 0.99.7.1), openbsd-inetd | inet-superserver
+Conflicts: rsh-server
+Replaces: rsh-server
+Provides: rsh-server
+Section: net
+Priority: optional
+Description: Reimplementation of rshd and rlogind
+ Rsh-redone is a reimplementation of the remote shell clients and servers.
+ It is written from the ground up to avoid the bugs found in the standard
+ clients and servers. It also fully supports IPv6.
+ .
+ This package provides rshd and rlogind.

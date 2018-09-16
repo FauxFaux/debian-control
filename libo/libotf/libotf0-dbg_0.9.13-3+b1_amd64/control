@@ -1,0 +1,28 @@
+Package: libotf0-dbg
+Source: libotf (0.9.13-3)
+Version: 0.9.13-3+b1
+Architecture: amd64
+Maintainer: Harshula Jayasuriya <harshula@debian.org>
+Installed-Size: 251
+Depends: libotf0 (= 0.9.13-3+b1)
+Section: debug
+Priority: extra
+Multi-Arch: same
+Homepage: http://www.nongnu.org/m17n/
+Description: libotf libraries and debugging symbols
+ The libotf library provides the following facilities:
+  - Read Open Type Layout Tables from OTF file.  Currently these
+    tables are supported; head, name, cmap, GDEF, GSUB, and GPOS.
+  - Convert a Unicode character sequence to a glyph code sequence by
+    using the above tables.
+ .
+ The combination of libotf and the FreeType library (Ver.2) realizes
+ CTL (complex text layout) by OpenType fonts.
+ .
+ This package contains unstripped shared libraries. it is provided
+ primarily to provide a backtrace with names in a debugger, this makes
+ it somewhat easier to interpret core dumps.  The libraries are installed
+ in /usr/lib/debug and can be used by placing that directory in
+ LD_LIBRARY_PATH.
+ Most people will not need this package.
+Build-Ids: 07d1291c960f81eda21358f9a2985b7475826bff

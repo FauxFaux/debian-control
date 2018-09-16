@@ -1,0 +1,28 @@
+Package: libghc-typed-process-doc
+Source: haskell-typed-process
+Version: 0.2.2.0-1
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 202
+Depends: haddock-interface-31
+Recommends: ghc-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: https://haskell-lang.org/library/typed-process
+Description: run external processes, with strong typing of streams; documentation
+ This library provides the ability to launch and interact with
+ external processes. It wraps around the process library, and intends
+ to improve upon it by:
+ .
+  * Using type variables to represent the standard streams, making
+    them easier to manipulate
+  * Use proper concurrency (e.g., the async library) in place of the
+    weird lazy I/O tricks for such things as consuming output streams
+  * Allow for more complex concurrency by providing STM-based functions
+  * Using binary I/O correctly
+  * Providing a more composable API, designed to be easy to use for
+    both simple and complex use cases
+ .
+ This package provides the documentation for a library for the Haskell
+ programming language.
+ See http://www.haskell.org/ for more information on Haskell.

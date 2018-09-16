@@ -1,0 +1,24 @@
+Package: librelative-perl
+Version: 0.04-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: perl, libuniversal-require-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/relative
+Description: Load modules with relative names
+ This module allows you to load modules using only parts of their name,
+ relatively to the current module or to a given module. Module names are
+ by default searched below the current module, but can be searched upper
+ in the hierarchy using the ..:: syntax.
+ .
+ In order to further loosen the namespace coupling, import returns
+ the full names of the loaded modules, making object-oriented code easier
+ to write:
+ .
+    use relative;
+ .
+    my ($Maker, $Publisher) = import relative qw(Create Publish);
+    my $report    = $Maker->new;
+    my $publisher = $Publisher->new;

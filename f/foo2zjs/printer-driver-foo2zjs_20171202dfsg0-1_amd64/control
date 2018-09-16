@@ -1,0 +1,25 @@
+Package: printer-driver-foo2zjs
+Source: foo2zjs
+Version: 20171202dfsg0-1
+Architecture: amd64
+Maintainer: Debian Printing Team <debian-printing@lists.debian.org>
+Installed-Size: 661
+Depends: libc6 (>= 2.14), libcups2 (>= 1.4.0), libjbig0 (>= 2.0), cups-filters | foomatic-filters, dc, printer-driver-foo2zjs-common (>= 20171202dfsg0-1), liblcms2-utils
+Recommends: wget, unzip, mscompress, cups, cups-client
+Suggests: psutils, hannah-foo2zjs
+Breaks: cups (<< 1.5.0-3~), foo2zjs (<< 20111023dfsg0-1~), udev (<< 136-1)
+Replaces: foo2zjs (<< 20111023dfsg0-1~)
+Section: text
+Priority: optional
+Homepage: http://foo2zjs.rkkda.com/
+Description: printer driver for ZjStream-based printers
+ foo2zjs is an open source printer driver for printers that use the
+ Zenographics ZjStream wire protocol for their print data, such as the
+ Minolta magicolor 2200/2300/2430 DL, Minolta Color PageWorks/Pro L and
+ HP LaserJet 1000/1005/1018/1020/1022. These printers are often
+ erroneously referred to as "winprinters" or "GDI printers".
+ .
+ This package provides the following drivers: foo2hblp2, foo2hiperc,
+ foo2hp, foo2lava, foo2oak, foo2qpdl, foo2slx, foo2xqx, foo2zjs.
+ .
+ The psutils package is needed to enable n-up printing support.

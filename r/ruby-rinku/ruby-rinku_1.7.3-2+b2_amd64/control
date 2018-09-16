@@ -1,0 +1,19 @@
+Package: ruby-rinku
+Source: ruby-rinku (1.7.3-2)
+Version: 1.7.3-2+b2
+Architecture: amd64
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: ruby (>= 1:2.5~0), libc6 (>= 2.14), libgmp10, libruby2.5 (>= 2.5.0~preview1), ruby (<< 1:2.6~)
+Suggests: ruby-rinku-doc
+Section: ruby
+Priority: optional
+Homepage: https://github.com/vmg/rinku
+Description: autolinker for Ruby
+ Rinku is a Ruby library that does autolinking.
+ .
+ It parses text and turns anything that remotely resembles a link into an HTML
+ link, just like the Ruby on Rails `auto_link` method -- but it's about 20
+ times faster, because it's written in C, and it's about 20 times smarter when
+ linking, because it does actual parsing instead of RegEx replacements.
+Ruby-Versions: ruby2.5

@@ -1,0 +1,25 @@
+Package: libsane-extras
+Source: sane-backends-extras
+Version: 1.0.22.6
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 160
+Depends: libc6 (>= 2.14), libusb-1.0-0 (>= 2:1.0.8), libsane-extras-common (= 1.0.22.6)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Description: API library for scanners -- extra backends
+ SANE stands for "Scanner Access Now Easy" and is an application
+ programming interface (API) that provides standardized access to any
+ raster image scanner hardware (flatbed scanner, hand-held scanner,
+ video- and still-cameras, frame-grabbers, etc.). The SANE standard is
+ free and its discussion and development are open to everybody. The
+ current source code is written to support several operating systems,
+ including GNU/Linux, OS/2, Win32 and various Unices and is available
+ under the GNU General Public License (commercial applications and
+ backends are welcome, too, however).
+ .
+ This package includes some backends that are not yet included into the
+ official SANE distribution. Currently, they are :
+   * geniusvp2 (Genius ColorPage-Vivid Pro II)
+   * ls5000 (Nikon LS-5000 ED, Coolscan 5000 ED)

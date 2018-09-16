@@ -1,0 +1,15 @@
+Package: libcatalystx-injectcomponent-perl
+Version: 0.025-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 50
+Depends: perl, libcatalyst-perl, libclass-inspector-perl, libmodule-pluggable-perl | perl (<< 5.17.0)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CatalystX-InjectComponent/
+Description: module for injecting components into Catalyst applications
+ CatalystX::InjectComponent will inject Controller, Model, and View
+ components into Catalyst applications at setup (run)time. It does
+ this by creating a new package on-the-fly, having that package extend
+ the given component, and then having Catalyst setup the new component
+ (via "->setup_component").

@@ -1,0 +1,31 @@
+Package: libsbsms-dev
+Source: libsbsms
+Version: 2.0.2-2
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 438
+Depends: libsbsms10 (= 2.0.2-2)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: http://sbsms.sourceforge.net/
+Description: Subband Sinusoidal Modeling Synthesis (development files)
+ libsbsms is a C++ library for high quality time stretching and pitch scaling of
+ audio. It uses octave subband sinusoidal modeling.
+ .
+ The audio is fed into a FIFO, which takes the STFT of the input. Each frame is
+ high-pass filtered in the Fourier domain, and then written to a frame FIFO
+ which does quadratic interpolating peak detection and track continuation. The
+ tracks are resynthesized with a quadratic phase preserving oscillator bank at
+ an arbitrary time scale.
+ .
+ The subbands are fed from the low-pass filtered frames, which are decimated by
+ two and reconstructed in a half rate time domain. The subbands perform the same
+ process as the parent band, only the data is at half the audio frequency, and
+ at half the rate. There are typically 6 bands. The point of subbands is to
+ allow high time resolution for high frequencies and at the same time high
+ frequency resolution for low frequencies.
+ .
+ Pitch scaling is performed in a post-processing resampling step.
+ .
+ This package contains the development files.

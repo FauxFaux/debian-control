@@ -1,0 +1,16 @@
+Package: libpython3.7-minimal
+Source: python3.7
+Version: 3.7.0-6
+Architecture: amd64
+Maintainer: Matthias Klose <doko@debian.org>
+Installed-Size: 3899
+Depends: libc6 (>= 2.4), libssl1.1 (>= 1.1.0)
+Recommends: libpython3.7-stdlib
+Conflicts: binfmt-support (<< 1.1.2), libpython3.7-stdlib (<< 3.7.0~b2-1~)
+Breaks: libpython3.7-stdlib (<< 3.7.0~b2-1~)
+Section: python
+Priority: optional
+Multi-Arch: same
+Description: Minimal subset of the Python language (version 3.7)
+ This package contains some essential modules. It is normally not
+ used on it's own, but as a dependency of python3.7-minimal.

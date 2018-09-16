@@ -1,0 +1,29 @@
+Package: libxvmc-dev
+Source: libxvmc
+Version: 2:1.0.10-1
+Architecture: amd64
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Installed-Size: 90
+Depends: libxvmc1 (= 2:1.0.10-1), libx11-dev (>= 2:1.0.0-1), libxext-dev (>= 1:1.0.0-2), x11proto-video-dev, libxv-dev
+Conflicts: x11proto-video-dev (<< 2.2+cvs.20050712-1)
+Replaces: x11proto-video-dev (<< 2.2+cvs.20050712-1)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Description: X11 Video extension library (development headers)
+ libXvMC provides an X Window System client interface to the
+ XVideo-MotionCompensation extension to the X protocol.
+ .
+ The XVideo-MotionCompensation extension allows for further accelerated drawing
+ of videos.  Video data may be sent at earlier stages of the decoding pipeline
+ than raw YUV data.  At the moment, driver support for XvMC is poor to
+ non-existent.
+ .
+ This package contains the development headers for the library found in
+ libxvmc1.  Non-developers likely have little use for this package.
+ .
+ More information about X.Org can be found at:
+ <URL:https://www.X.org>
+ .
+ This module can be found at
+ git://anongit.freedesktop.org/git/xorg/lib/libXvMC

@@ -1,0 +1,19 @@
+Package: spamprobe
+Source: spamprobe (1.4d-14)
+Version: 1.4d-14+b2
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 509
+Depends: debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.14), libdb5.3, libgcc1 (>= 1:3.0), libgif7 (>= 5.1), libjpeg62-turbo (>= 1.3.1), libpng16-16 (>= 1.6.2-1), libstdc++6 (>= 5.2)
+Recommends: procmail | maildrop
+Section: mail
+Priority: optional
+Homepage: http://spamprobe.sf.net/
+Description: Bayesian spam filter
+ This package provides a spam filter based on the article 'A Plan for Spam'
+ by Paul Graham. It uses a database (either BerkeleyDB or a simpler hash
+ file) to store one- and two-word phrases. Only certain headers are analyzed
+ and HTML tags are ignored to prevent false positives of legitimate HTML
+ emails. Image attachments are considered as words that can signal spam. It
+ can be simply integrated with procmail or maildrop to filter spam on
+ incoming mail.

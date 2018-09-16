@@ -1,0 +1,16 @@
+Package: libio-all-lwp-perl
+Version: 0.14-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 39
+Depends: perl, libio-all-perl, libwww-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/IO-All-LWP
+Description: Perl module to use HTTP and FTP URLs with IO::All
+ IO::All::LWP acts as glue between IO::All and LWP, so that files can
+ be read and written through the network using the convenient IO:All
+ interface. Note that this module is not used directly: you just use
+ IO::All, which knows when to autoload IO::All::HTTP, IO::All::HTTPS,
+ IO::All::FTP, or IO::All::Gopher, which implement the specific
+ protocols based on IO::All::LWP.

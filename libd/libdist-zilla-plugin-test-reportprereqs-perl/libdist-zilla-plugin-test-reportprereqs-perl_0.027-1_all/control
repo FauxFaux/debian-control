@@ -1,0 +1,25 @@
+Package: libdist-zilla-plugin-test-reportprereqs-perl
+Version: 0.027-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 44
+Depends: perl, libdata-section-perl (>= 0.200002), libdist-zilla-perl, libmoose-perl, libsub-exporter-formethods-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Dist-Zilla-Plugin-Test-ReportPrereqs
+Description: module to report on prerequisite versions during automated testing
+ The Dist::Zilla::Plugin::Test::ReportPrereqs plugin adds a
+ t/00-report-prereqs.t test file. It reports the version of all modules listed
+ in the distribution metadata prerequisites (including 'recommends',
+ 'suggests', etc.). However, any 'develop' prereqs are not reported (unless
+ they show up in another category).
+ .
+ If a MYMETA.json file exists and CPAN::Meta is installed on the testing
+ machine, MYMETA.json will be examined for prerequisites in addition, as it
+ would include any dynamic prerequisites not set in the distribution metadata.
+ .
+ Versions are reported based on the result of parse_version from
+ ExtUtils::MakeMaker, which means prerequisite modules are not actually loaded
+ (which avoids various edge cases with certain modules). Parse errors are
+ reported as "undef". If a module is not installed, "missing" is reported
+ instead of a version string.

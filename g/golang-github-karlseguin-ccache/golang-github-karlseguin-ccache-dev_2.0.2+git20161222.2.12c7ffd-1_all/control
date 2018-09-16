@@ -1,0 +1,16 @@
+Package: golang-github-karlseguin-ccache-dev
+Source: golang-github-karlseguin-ccache
+Version: 2.0.2+git20161222.2.12c7ffd-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 56
+Depends: golang-github-karlseguin-expect-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/karlseguin/ccache
+Description: Golang LRU Cache for high concurrency
+ CCache is an LRU Cache, written in Go, focused on supporting high
+ concurrency. Lock contention on the list is reduced by introducing a
+ window which limits the frequency that an item can get promoted,
+ using a buffered channel to queue promotions for a single worker, and
+ garbage collecting within the same thread as the worker.

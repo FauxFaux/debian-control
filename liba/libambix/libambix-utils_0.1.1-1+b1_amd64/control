@@ -1,0 +1,26 @@
+Package: libambix-utils
+Source: libambix (0.1.1-1)
+Version: 0.1.1-1+b1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 133
+Depends: libambix0 (>= 0.1), libc6 (>= 2.4), libjack-jackd2-0 (>= 1.9.10+20150825) | libjack-0.125, libsamplerate0 (>= 0.1.7), libsndfile1 (>= 1.0.20)
+Section: sound
+Priority: optional
+Homepage: http://ambisonics.iem.at/xchange/format
+Description: AMBIsonics eXchange library (utilities)
+ libambix is a library of C routines for reading and writing files following the
+ "ambix" (AMBIsonics eXchange) conventions.
+ .
+ Ambisonics is a periphonic (3D) surround sound technique, with a scalable
+ spatial resolution (put simply: "the more audio channels you use, the better").
+ The ambix convention defines an extensible format for exchanging soundfiles
+ containing Higher Order Ambisonics data.
+ .
+ This package contains additional commandline utilities to work with
+ ambix-files:
+  - ambix-info: Print information on ambix files
+  - ambix-interleave: Merges several audio files into an ambix file
+  - ambix-deinterleave: Split an ambix file into several mono files
+  - ambix-jplay: Play back an ambix file via JACK
+  - ambix-jrecord: Record an ambix file via JACK

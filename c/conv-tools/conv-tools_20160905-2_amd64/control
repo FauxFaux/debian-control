@@ -1,0 +1,19 @@
+Package: conv-tools
+Version: 20160905-2
+Architecture: amd64
+Maintainer: Petter Reinholdtsen <pere@debian.org>
+Installed-Size: 42
+Depends: libc6 (>= 2.22)
+Section: utils
+Priority: optional
+Homepage: https://github.com/dag-erling/conv-tools
+Description: convert 8 bit character encoding in file names and text content to UTF-8
+ The mixconv utility reads a mixed-encoding text file, analyzes each
+ line to determine whether it is in 7-bit ASCII, an 8-bit encoding,
+ UTF-8 or WTF-8, converts everything to UTF-8 and prints the result to
+ standard output.
+ .
+ The dirconv utility scans a directory structure, analyzes each file
+ and directory name to determine whether it is in 7-bit ASCII, an 8-bit
+ encoding, UTF-8 or WTF-8, converts everything to UTF-8, and renames
+ the files and directories accordingly.

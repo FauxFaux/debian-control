@@ -1,0 +1,25 @@
+Package: xfsprogs
+Version: 4.15.1-1
+Architecture: amd64
+Maintainer: XFS Development Team <linux-xfs@vger.kernel.org>
+Installed-Size: 4664
+Depends: libblkid1 (>= 2.17.2), libc6 (>= 2.26), libdevmapper1.02.1 (>= 2:1.02.20), libreadline5 (>= 5.2), libunistring2 (>= 0.9.7), libuuid1 (>= 2.16), python3:any
+Suggests: xfsdump, acl, attr, quota
+Breaks: xfsdump (<< 3.0.0)
+Replaces: xfsdump (<< 3.0.0)
+Provides: fsck-backend
+Section: admin
+Priority: optional
+Homepage: https://xfs.wiki.kernel.org/
+Description: Utilities for managing the XFS filesystem
+ A set of commands to use the XFS filesystem, including mkfs.xfs.
+ .
+ XFS is a high performance journaling filesystem which originated
+ on the SGI IRIX platform.  It is completely multi-threaded, can
+ support large files and large filesystems, extended attributes,
+ variable block sizes, is extent based, and makes extensive use of
+ Btrees (directories, extents, free space) to aid both performance
+ and scalability.
+ .
+ Refer to the documentation at https://xfs.wiki.kernel.org/
+ for complete details.

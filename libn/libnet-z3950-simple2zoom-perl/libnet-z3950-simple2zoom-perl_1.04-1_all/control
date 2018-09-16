@@ -1,0 +1,22 @@
+Package: libnet-z3950-simple2zoom-perl
+Version: 1.04-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 188
+Depends: perl, libmarc-record-perl, libmarc-xml-perl, libnet-z3950-simpleserver-perl, libnet-z3950-zoom-perl, liburi-perl, libwww-perl, libxml-libxml-perl, libxml-simple-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Net-Z3950-Simple2ZOOM/
+Description: gateway between Z39.50 and SRU/SRW
+ The Net::Z3950::Simple2ZOOM module provides all the application logic of a
+ generic "Swiss Army Gateway" between Z39.50 and SRU. It is used by the
+ simple2zoom program, and there is probably no good reason to make any other
+ program to use it. For that reason, this library-level documentation is more
+ than usually terse.
+ .
+ The library has only two public entry points: the new() constructor and the
+ launch_server() method. The synopsis above shows how they are used: a
+ Simple2ZOOM object is created using new(), then the launch_server() method is
+ invoked on it to -- get ready for a big surprise here -- launch the server.
+ (In fact, this synopsis is essentially the whole of the code of the
+ simple2zoom program. All the work happens inside the library.)

@@ -1,0 +1,21 @@
+Package: libmail-dkim-perl
+Version: 0.53-1
+Architecture: all
+Maintainer: Magnus Holmgren <holmgren@debian.org>
+Installed-Size: 391
+Depends: perl, liberror-perl, libdigest-sha-perl, libmailtools-perl, libnet-dns-perl, libcrypt-openssl-rsa-perl (>= 0.24)
+Breaks: dkimproxy (<< 1.2-1)
+Replaces: dkimproxy (<< 1.2-1)
+Section: perl
+Priority: optional
+Homepage: http://dkimproxy.sourceforge.net
+Description: cryptographically identify the sender of email - perl library
+ RFC 4871, DomainKeys Identified Mail (DKIM), defines a domain-level
+ authentication framework for email using public-key cryptography and
+ key server technology to permit verification of the source and
+ contents of messages by either Mail Transport Agents (MTAs) or Mail
+ User Agents (MUAs).
+ .
+ This is a Perl implementation created by Jason Long of Messiah
+ College. It performs signing as well as signature verification. It
+ also supports the older DomainKeys standard.

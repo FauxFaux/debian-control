@@ -1,0 +1,25 @@
+Package: module-assistant
+Version: 0.11.10
+Architecture: all
+Maintainer: Eduard Bloch <blade@debian.org>
+Installed-Size: 391
+Depends: perl:any, libtext-wrapi18n-perl, bzip2, xz-utils
+Recommends: liblocale-gettext-perl
+Suggests: build-essential, dialog | whiptail
+Section: kernel
+Priority: optional
+Description: tool to make module package creation easier
+ The module-assistant tool (also known as m-a) helps users and maintainers
+ with managing external Linux kernel modules packaged for Debian. It can
+ do:
+ .
+  * automated preparation of build environment for module compilation
+    (e.g. automatic detection and installation of required kernel
+    source/headers);
+  * automated module source downloads;
+  * configuration and tracking of external and locally built modules
+    packages;
+  * semi-automated multiple builds for multiple kernel versions;
+ .
+ It also contains some infrastructure to be used by the build-scripts in the
+ accompanying modules-source packages in Debian.

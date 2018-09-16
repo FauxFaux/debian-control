@@ -1,0 +1,14 @@
+Package: metamonger
+Version: 0.20150503-1.1
+Architecture: all
+Maintainer: Richard Hartmann <richih@debian.org>
+Installed-Size: 37
+Depends: perl:any, libconfig-simple-perl, libfile-lchown-perl, libfile-util-perl, libhash-diff-perl, libhash-merge-simple-perl, libjson-perl, liblog-contextual-perl, liblog-log4perl-perl, libpadwalker-perl, libshell-command-perl, libtest-most-perl
+Section: misc
+Priority: optional
+Homepage: https://github.com/RichiH/metamonger
+Description: Save, diff, and restore filesystem metadata
+ metamonger allows you to save, diff, and restore filesystem metadata like
+ mtime, atime, uid, gid, etc. The storage backend is line-wise JSON; this makes
+ it easy to commit, track, and merge the data with a VCS like Git as well as
+ edit the stored data by hand.

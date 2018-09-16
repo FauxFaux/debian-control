@@ -1,0 +1,23 @@
+Package: libapache2-mod-webauth
+Source: webauth (4.7.0-6)
+Version: 4.7.0-6+b1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 541
+Depends: apache2 (>= 2.4.4), apache2-api-20120211, apache2-bin (>= 2.4.16), libc6 (>= 2.14), libcurl4 (>= 7.16.2), libwebauth12 (>= 4.7.0)
+Suggests: libapache2-mod-webauthldap
+Breaks: libapache2-webauth (<< 4.2.0)
+Replaces: libapache2-webauth (<< 4.2.0)
+Section: httpd
+Priority: optional
+Homepage: https://webauth.stanford.edu/
+Description: Apache module for WebAuth authentication
+ WebAuth is a cookie-based web authentication system built on top of
+ Kerberos.  It relies on a central authentication server that handles all
+ user authentication for a domain and creates user authentication
+ credentials for any web server that needs strong authentication.
+ .
+ This package contains the Apache module to do user authentication for
+ individual web servers.  This module does not do authorization; for an
+ approach to LDAP-based authorization that works well with WebAuth, see
+ libapache2-mod-webauthldap.

@@ -1,0 +1,15 @@
+Package: librust-memchr+use-std-dev
+Source: rust-memchr
+Version: 2.0.2-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-memchr-dev (= 2.0.2-1), librust-libc-0.2+use-std-dev (>= 0.2.18~~), librust-libc-0.2-dev (>= 0.2.18~~)
+Provides: librust-memchr-2+use-std-dev (= 2.0.2-1), librust-memchr-2.0+use-std-dev (= 2.0.2-1), librust-memchr-2.0.2+use-std-dev (= 2.0.2-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/BurntSushi/rust-memchr
+Description: Safe interface to memchr - feature "use_std"
+ This metapackage enables feature use_std for the Rust memchr crate, by pulling
+ in any additional dependencies needed by that feature.

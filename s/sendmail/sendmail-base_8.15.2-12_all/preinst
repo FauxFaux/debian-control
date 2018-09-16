@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e;
+
+if [ "$1" = "upgrade" ]; then
+		# Prevent cronjob from running during upgrade...
+		if [ -f /etc/cron.d/sendmail ]; then
+			echo "#preinst" > /etc/cron.d/sendmail;
+			fi;
+
+		# Move files to new home
+		if [ -d /etc/mail/ssl ] && [ ! -e /etc/mail/tls ]; then
+			mv -f /etc/mail/ssl /etc/mail/tls;
+			fi;
+fi
+
+# Automatically added by dh_installdeb/11.4
+dpkg-maintscript-helper rm_conffile /etc/dhcp3/dhclient-exit-hooks.d/sendmail 8.14.4-2.2\~ -- "$@"
+# End automatically added section
+

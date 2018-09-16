@@ -1,0 +1,19 @@
+Package: sks
+Source: sks (1.1.6-14)
+Version: 1.1.6-14+b1
+Architecture: amd64
+Maintainer: Christoph Martin <martin@uni-mainz.de>
+Installed-Size: 4770
+Depends: adduser, db-util, lsb-base (>= 3.0-6), db5.3-util, libc6 (>= 2.17), libdb5.3, libgmp10, zlib1g (>= 1:1.1.4)
+Suggests: logrotate, postfix | mail-transport-agent, procmail
+Section: net
+Priority: optional
+Homepage: https://bitbucket.org/skskeyserver/sks-keyserver/wiki/Home
+Description: Synchronizing OpenPGP Key Server
+ SKS is an OpenPGP key server that correctly handles all OpenPGP features
+ defined in RFC2440 and RFC4880, including photoID packages and multiple
+ subkeys.
+ .
+ This key server implementation uses an efficient and reliable reconciliation
+ algorithm to keep the database in sync with other SKS servers.  Additionally
+ it can both send and receive PKS style sync emails.

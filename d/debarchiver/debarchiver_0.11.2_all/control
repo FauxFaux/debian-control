@@ -1,0 +1,20 @@
+Package: debarchiver
+Version: 0.11.2
+Architecture: all
+Maintainer: Ola Lundqvist <opal@debian.org>
+Installed-Size: 212
+Depends: opalmod (>= 0.1.10), apt-utils | dpkg-dev, adduser
+Recommends: exim4 | mail-transport-agent | mailutils | bsd-mailx | mailx
+Suggests: devscripts, gnupg
+Section: devel
+Priority: optional
+Description: tool to handle Debian package archives
+ This tool can sort packages into a directory structure that apt-get
+ and similar tools can use as an installation source (arranged in an
+ old-style simple repository layout without package pools). It is meant
+ to be used by administrators who need special packages, or
+ tweaked versions to ease administration.
+ .
+ Package files placed in debarchiver's incoming directory along with the
+ corresponding generated ".changes" file will be sorted by a cronjob
+ into the appropriate directory of the repository.

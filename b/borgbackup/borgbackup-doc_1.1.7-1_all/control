@@ -1,0 +1,27 @@
+Package: borgbackup-doc
+Source: borgbackup
+Version: 1.1.7-1
+Architecture: all
+Maintainer: Danny Edel <debian@danny-edel.de>
+Installed-Size: 6889
+Depends: libjs-sphinxdoc (>= 1.0)
+Section: doc
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://borgbackup.github.io/borgbackup/
+Description: deduplicating and compressing backup program (documentation)
+ Borg is a deduplicating and compressing backup program. Optionally, it
+ also supports authenticated encryption. It was forked from the attic
+ backup program.
+ .
+ The main goal of Borg is to provide an efficient and secure way to
+ backup data. The data deduplication technique used makes Borg suitable
+ for daily backups since only the changes are stored. The authenticated
+ encryption makes it suitable for backups to not fully trusted targets.
+ .
+ It can push backups to remote repositories accessed via ssh. A client
+ pushing a backup invokes "borg serve" on the repository host. It is
+ possible to restrict the ssh key to "borg serve" using the
+ authorized_keys command= clause.
+ .
+ This is the documentation package

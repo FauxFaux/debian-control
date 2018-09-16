@@ -1,0 +1,16 @@
+Package: postgresql-10-pgq-node
+Source: pgq-node
+Version: 3.2.5-1
+Architecture: all
+Maintainer: Debian PostgreSQL Maintainers <pkg-postgresql-public@lists.alioth.debian.org>
+Installed-Size: 532
+Depends: postgresql-10, postgresql-10-pgq3
+Replaces: postgresql-10-pgq3 (<= 3.2.6-5)
+Section: database
+Priority: optional
+Description: Cascaded queueing on top of PgQ
+ PgQ provides generic queues for PostgreSQL. It allows multiple queues in one
+ database, each queue can be consumed by multiple consumers.
+ .
+ This package contains the pgq_node PostgreSQL extension that provides queue
+ node registration and coordination for cascaded queueing.

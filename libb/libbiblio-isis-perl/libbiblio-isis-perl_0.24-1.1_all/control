@@ -1,0 +1,30 @@
+Package: libbiblio-isis-perl
+Version: 0.24-1.1
+Architecture: all
+Maintainer: Jose Parrella <joseparrella@cantv.net>
+Installed-Size: 128
+Depends: perl (>= 5.6.0-16)
+Section: perl
+Priority: optional
+Description: Perl module which reads ISIS databases
+ This module will read ISIS databases created by DOS CDS/ISIS, WinIsis or
+ IsisMarc.
+ .
+ Biblio::Isis is a Perl module which reads ISIS databases produced by
+ CDS/ISIS programs, such as MicroISIS, WinISIS and IsisMARC. ISIS was a
+ popular family of integrated library systems provided as freeware by
+ UNESCO, and this module provides methods to parse full databases and
+ use them in a Perl program in order to migrate them to other formats.
+ .
+ It can create hash values from data in ISIS database (using to_hash),
+ ASCII dump (using to_ascii) or just hash with field names and packed
+ values (like ^asomething^belse).
+ .
+ Unique feature of this module is ability to include_deleted records.
+ It will also skip zero sized fields (OpenIsis has a bug in XS bindings, so
+ fields which are zero sized will be filled with random junk from memory).
+ .
+ It also has support for identifiers (only if ISIS database is created by
+ IsisMarc), see to_hash.
+ .
+ Homepage: http://search.cpan.org/~dpavlin/Biblio-Isis-0.24/lib/Biblio/Isis.pm

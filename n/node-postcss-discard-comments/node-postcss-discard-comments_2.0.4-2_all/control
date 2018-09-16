@@ -1,0 +1,19 @@
+Package: node-postcss-discard-comments
+Version: 2.0.4-2
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 38
+Depends: nodejs, node-postcss (>= 5.0.14)
+Section: javascript
+Priority: optional
+Homepage: https://github.com/ben-eb/postcss-discard-comments
+Description: Discard comments in your CSS files with PostCSS
+ This module discards comments from your CSS files; by default, it will remove
+ all regular comments (/* comment */) and preserve comments marked as important
+ (/*! important */).
+ .
+ Note that this module does not handle source map comments because they are not
+ available to it; PostCSS handles this internally, so if they are removed then
+ you will have to configure source maps in PostCSS.
+ .
+ Node.js is an event-based server-side JavaScript engine.

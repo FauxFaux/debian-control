@@ -1,0 +1,23 @@
+Package: kubernetes-master
+Source: kubernetes
+Version: 1.7.16+dfsg-1
+Architecture: amd64
+Maintainer: Dmitry Smirnov <onlyjob@debian.org>
+Installed-Size: 332395
+Depends: libc6 (>= 2.7), adduser, lsb-base, etcd
+Recommends: kubernetes-client
+Built-Using: etcd (= 3.2.18+dfsg-1), golang-1.10 (= 1.10.1-3), golang-github-abbot-go-http-auth (= 0.0~git20150714.0.46b9627-2), golang-github-appc-spec (= 0.8.9+dfsg2-2), golang-github-armon-circbuf (= 0.0~git20150827.0.bbbad09-2), golang-github-aws-aws-sdk-go (= 1.12.79+dfsg-1), golang-github-azure-azure-sdk-for-go (= 10.3.0~beta-1), golang-github-azure-go-autorest (= 8.3.1-1), golang-github-beorn7-perks (= 0.0~git20160804.0.4c0e845-1), golang-github-blang-semver (= 3.5.1-1), golang-github-cloudflare-cfssl (= 1.2.0+git20160825.89.7fb22c8-3), golang-github-cockroachdb-cmux (= 0.0~git20170110.0.30d10be-1), golang-github-coreos-bbolt (= 1.3.1-coreos.5-1), golang-github-coreos-go-oidc (= 0.0~git20160926.0.16c5ecc-1), golang-github-coreos-go-systemd (= 14-1), golang-github-coreos-pkg (= 3-1), golang-github-coreos-semver (= 0.2.0-3), golang-github-hashicorp-hcl (= 0.0~git20170509.0.392dba7-1), golang-github-kubernetes-gengo (= 0.0~git20170531.0.c79c13d-1), golang-github-makenowjust-heredoc (= 0.0~git20140704.0.1d91351-1), golang-github-opennota-urlesc (= 0.0~git20160726.0.5bd2802-1), golang-github-puerkitobio-purell (= 1.1.0-1), golang-google-cloud (= 0.9.0-5), kubernetes-addon-heapster (= 1.2.0+dfsg-1)
+Section: admin
+Priority: optional
+Homepage: http://kubernetes.io/
+Description: Kubernetes services for master host
+ Container Cluster Manager from Google. Kubernetes is an open source system
+ for managing containerized applications across multiple hosts, providing
+ basic mechanisms for deployment, maintenance, and scaling of applications.
+ .
+ Linux kernel version 3.8 or above is required for proper operation of the
+ daemon process, and that any lower versions may have subtle and/or glaring
+ issues.
+ .
+ This package provides "kube-apiserver", "kube-controller-manager" and
+ "kube-scheduler" daemons.

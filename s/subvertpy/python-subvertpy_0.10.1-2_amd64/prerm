@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p python-subvertpy 
+else
+	dpkg -L python-subvertpy | grep '\.py$' | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+
+case "$1" in
+    remove|deconfigure)
+	update-alternatives --remove subvertpy-fast-export /usr/bin/subvertpy2-fast-export
+        ;;
+    *)
+esac

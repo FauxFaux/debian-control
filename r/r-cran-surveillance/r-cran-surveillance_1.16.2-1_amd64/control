@@ -1,0 +1,43 @@
+Package: r-cran-surveillance
+Version: 1.16.2-1
+Architecture: amd64
+Maintainer: Debian R Packages Maintainers <r-pkg-team@alioth-lists.debian.net>
+Installed-Size: 6937
+Depends: r-base-core (>= 3.5.1-1), r-api-3.5, r-cran-sp (>= 1.0-15), r-cran-xtable (>= 1.7-0), r-cran-rcpp (>= 0.11.1), r-cran-polycub (>= 0.6.0), r-cran-mass, r-cran-matrix, r-cran-nlme, r-cran-spatstat (>= 1.36-0), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Recommends: r-cran-testthat (>= 0.10.0), r-cran-spdep, r-cran-memoise, r-cran-maxlik
+Suggests: r-cran-xts, r-cran-gridextra (>= 2.0.0), r-cran-lattice, r-cran-colorspace, r-cran-scales, r-cran-animation, r-cran-msm, r-cran-spc, r-cran-quadprog, r-cran-polyclip, r-cran-maptools, r-cran-numderiv, r-cran-gsl, r-cran-testthat (>= 0.11.0), r-cran-coda, r-cran-ggplot2, r-cran-knitr
+Section: gnu-r
+Priority: optional
+Homepage: https://cran.r-project.org/package=surveillance
+Description: GNU R package for the Modeling and Monitoring of Epidemic Phenomena
+ Implementation of statistical methods for the modeling and change-point
+ detection in time series of counts, proportions and categorical data, as
+ well as for the modeling of continuous-time epidemic phenomena, e.g.,
+ discrete-space setups such as the spatially enriched
+ Susceptible-Exposed-Infectious-Recovered (SEIR) models, or
+ continuous-space point process data such as the occurrence of infectious
+ diseases. Main focus is on outbreak detection in count data time series
+ originating from public health surveillance of communicable diseases,
+ but applications could just as well originate from environmetrics,
+ reliability engineering, econometrics or social sciences.
+ .
+ Currently, the package contains implementations of many typical
+ outbreak detection procedures such as Farrington et al (1996), Noufaily
+ et al (2012) or the negative binomial LR-CUSUM method described in Höhle
+ and Paul (2008). A novel CUSUM approach combining logistic and
+ multinomial logistic modelling is also included.  Furthermore, inference
+ methods for the retrospective infectious disease models in Held et al
+ (2005), Held et al (2006), Paul et al (2008), Paul and Held (2011), Held
+ and Paul (2012), and Meyer and Held (2014) are provided.
+ .
+ Continuous self-exciting spatio-temporal point processes are modeled
+ through additive-multiplicative conditional intensities as described in
+ Höhle (2009) ('twinSIR', discrete space) and Meyer et al (2012)
+ ('twinstim', continuous space).
+ .
+ The package contains several real-world data sets, the ability to
+ simulate outbreak data, visualize the results of the monitoring in
+ temporal, spatial or spatio-temporal fashion.
+ .
+ Note: Using the 'boda' algorithm requires the 'INLA' package, which
+ is available from <http://www.r-inla.org/download>.

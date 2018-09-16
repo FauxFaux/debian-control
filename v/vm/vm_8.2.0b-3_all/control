@@ -1,0 +1,24 @@
+Package: vm
+Version: 8.2.0b-3
+Architecture: all
+Maintainer: Ian Jackson <ijackson@chiark.greenend.org.uk>
+Installed-Size: 4167
+Depends: ucf (>= 0.08), emacsen-common (>= 2.0.8), make, dpkg (>= 1.15.4) | install-info
+Suggests: exim4 | sendmail | mail-transport-agent, stunnel
+Conflicts: semi, semi1.12, wemi, wemi1.12
+Provides: mail-reader
+Section: mail
+Priority: optional
+Homepage: https://launchpad.net/vm
+Description: mail user agent for Emacs
+ VM (View Mail) is an Emacs subsystem that allows UNIX mail to be read
+ and disposed of within Emacs.  Commands exist to do the normal things
+ expected of a mail user agent, such as generating replies, saving
+ messages to folders, deleting messages and so on.  There are other
+ more advanced commands that do tasks like bursting and creating
+ digests, message forwarding, and organizing message presentation
+ according to various criteria.  With smtpmail in modern emacsen, you do
+ not need an MTA locally in order to use VM.
+ .
+ This package does not cater to XEmacs, since vm comes (by default)
+ bundled in with XEmacs.

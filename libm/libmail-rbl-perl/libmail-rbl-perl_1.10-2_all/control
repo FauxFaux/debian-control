@@ -1,0 +1,17 @@
+Package: libmail-rbl-perl
+Version: 1.10-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 25
+Depends: libnet-dns-perl, libnetaddr-ip-perl, perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Mail-RBL
+Description: Perl extension to access RBL-style host verification services
+ Mail::RBL eases the task of checking if a given host is in the list. The
+ methods available are described below:
+ .
+  - new(suffix, resolver): Creates a list handle
+  - check($host): either a hostname or an IP address
+  - check_rhsbl($host): queries RHSBLs instead of IP-based lists, useful for
+    using lists such as some of http://www.rfc-ignorant.org/

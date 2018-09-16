@@ -1,0 +1,26 @@
+Package: libmariadb-dev
+Source: mariadb-connector-c
+Version: 1:3.0.6-1
+Architecture: amd64
+Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Installed-Size: 673
+Depends: libmariadb3 (= 1:3.0.6-1), libc6 (>= 2.3.4)
+Conflicts: libmariadb-client-lgpl-dev
+Replaces: libmariadb-client-lgpl-dev
+Provides: libmariadb-client-lgpl-dev
+Section: libdevel
+Priority: optional
+Homepage: https://mariadb.org/
+Description: MariaDB Connector/C, development files
+ MariaDB is a fast, stable and true multi-user, multi-threaded SQL database
+ server. SQL (Structured Query Language) is the most popular database query
+ language in the world. The main goals of MariaDB are speed, robustness and
+ ease of use.
+ .
+ This package includes development libraries and header files for
+ MariaDB Connector/C.
+ .
+ Note that MariaDB also comes with an included version of the client library.
+ The main reason to use this package, rather than libmariadbclient-dev, is
+ differences in licensing: this package uses the LGPL, while
+ libmariadbclient-dev uses the GPL.

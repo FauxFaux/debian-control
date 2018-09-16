@@ -1,0 +1,40 @@
+#!/bin/sh
+
+#set -o pipefail
+
+PIPELINE=uves
+VERSION=5.9.1
+
+CALIB=${PIPELINE}-calib-${VERSION}
+COMPONENTS="${CALIB}/cal"
+TARGETDIR="/usr/share/cpl-plugins/${PIPELINE}-${VERSION}"
+
+downloaded=0
+
+if [ "$1" = "configure" ] ; then
+    mkdir -p ${TARGETDIR}
+
+    for suffix in "" $(seq -f -%.0f 1 9) ; do
+
+	KIT=${PIPELINE}-kit-${VERSION}${suffix}
+	URL=ftp://ftp.eso.org/pub/dfs/pipelines/${PIPELINE}/${KIT}.tar.gz
+	TAR=${KIT}/${CALIB}.tar.gz
+
+	wget -O- ${URL} | \
+	    tar xzO ${TAR} | \
+	    tar xzC ${TARGETDIR} ${COMPONENTS} --strip-components=1
+
+	if [ $? = 0 ] ; then
+	    downloaded=1
+	    break
+	fi
+    done
+fi
+
+if [ $downloaded = 0 ] ; then
+    exit 1
+fi
+
+set -e
+
+

@@ -1,0 +1,28 @@
+Package: libgl1-nvidia-legacy-304xx-glx
+Source: nvidia-graphics-drivers-legacy-304xx
+Version: 304.137-5
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 1510
+Pre-Depends: nvidia-installer-cleanup
+Depends: nvidia-legacy-304xx-alternative (= 304.137-5), libnvidia-legacy-304xx-glcore (= 304.137-5), nvidia-support, libc6 (>= 2.2.5), libx11-6, libxext6, libxv1, libxvmc1
+Recommends: nvidia-legacy-304xx-kernel-dkms (= 304.137-5) | nvidia-legacy-304xx-kernel-304.137
+Suggests: nvidia-legacy-304xx-kernel-dkms (>= 304.137) | nvidia-legacy-304xx-kernel-source (>= 304.137)
+Breaks: libxvmcnvidia1 (<< 305)
+Replaces: libxvmcnvidia1 (<< 305)
+Provides: libgl1-nvidia-glx-any
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: NVIDIA binary OpenGL/GLX library (304xx legacy version)
+ The NVIDIA binary driver provides optimized hardware acceleration of
+ OpenGL/GLX applications via a direct-rendering X Server
+ for graphics cards using NVIDIA chip sets.
+ .
+ See the description of the nvidia-legacy-304xx-driver package
+ or /usr/share/doc/libgl1-nvidia-legacy-304xx-glx/README.txt.gz
+ for a complete list of supported GPUs and PCI IDs.
+ .
+ This package contains the driver specific binary OpenGL/GLX implementation
+ provided by NVIDIA.

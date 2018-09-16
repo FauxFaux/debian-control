@@ -1,0 +1,18 @@
+Package: notmuch-addrlookup
+Version: 9-1
+Architecture: amd64
+Maintainer: Sophie Brun <sophie@freexian.com>
+Installed-Size: 37
+Depends: libc6 (>= 2.4), libglib2.0-0 (>= 2.43.1), libnotmuch5 (>= 0.13~rc1)
+Section: utils
+Priority: optional
+Homepage: https://github.com/aperezdc/notmuch-addrlookup-c
+Description: Address lookup tool for Notmuch
+ This package uses the Notmuch database to output the names and e-mail
+ addresses of the people you have exchanged e-mails with, most used ones
+ first. This works neatly as address completer for the Notmuch Emacs
+ interface.
+ .
+ The program works by invoking from a shell. The only argument it takes is
+ a string, which is searched for in the e-mail addresses contained in the
+ headers of the messages indexed by Notmuch.

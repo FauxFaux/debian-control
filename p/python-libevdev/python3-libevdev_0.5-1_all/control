@@ -1,0 +1,23 @@
+Package: python3-libevdev
+Source: python-libevdev
+Version: 0.5-1
+Architecture: all
+Maintainer: Stephen Kitt <skitt@debian.org>
+Installed-Size: 96
+Depends: libevdev2, python3:any (>= 3.3.2-2~)
+Suggests: python-libevdev-doc
+Section: python
+Priority: optional
+Homepage: https://github.com/whot/python-libevdev
+Description: Python 3 wrapper for libevdev
+ This is a Python wrapper around libevdev, a wrapper library for evdev
+ devices. It provides a simpler API around evdev and takes advantage
+ of libevdev’s advanced event handling, providing
+ .
+  * access to the state of the device (not just the events)
+  * correct handling of fake multitouch devices
+  * synchronisation of slots and per-slot state
+  * transparent generation of missing tracking ids
+  * per-context event handling
+ .
+ This package installs the library for Python 3.

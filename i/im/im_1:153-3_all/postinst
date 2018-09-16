@@ -1,0 +1,64 @@
+#! /bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_get im/rpop
+if [ "$RET" = "true" ]; then
+  if [ x = x"`command -v suidperl`" ]; then
+    echo "The suidperl command is not found."
+    db_purge
+    exit 255
+  else
+    if dpkg-statoverride --list /usr/bin/imget >/dev/null ; then
+      dpkg-statoverride --remove /usr/bin/imget
+    fi
+    dpkg-statoverride --update --add root root 4755 /usr/bin/imget
+  fi
+else
+  if dpkg-statoverride --list /usr/bin/imget >/dev/null ; then
+    dpkg-statoverride --remove /usr/bin/imget
+  fi
+  chmod 0755 /usr/bin/imget
+fi
+
+db_get im/siteconfig_by_hand
+if [ "$RET" = "false" ]; then
+  db_get im/fromdomain
+  FROM_DOMAIN="$RET"
+
+  db_get im/todomain
+  TO_DOMAIN="$RET"
+
+  db_get im/organization
+  ORGANIZATION="$RET"
+
+  db_get im/use_maildir
+  if [ "$RET" = "true" ]; then
+    MBOXSTYLE="qmail"
+  else
+    MBOXSTYLE=""
+  fi
+
+  TMPCONFIG=/etc/im/SiteConig.postinst-tmp
+  cat <<POSTINST_EOF_OF_IM > $TMPCONFIG
+FromDomain=$FROM_DOMAIN	# domain of your mail address
+ToDomain=$TO_DOMAIN	# domain when domain part is omitted
+Org=$ORGANIZATION	# for news posting
+MBoxStyle=$MBOXSTYLE	# qmail or not
+POSTINST_EOF_OF_IM
+
+  if [ -f /etc/im/SiteConfig ]; then
+    if cmp -s /etc/im/SiteConfig $TMPCONFIG ; then
+      rm -f $TMPCONFIG
+    else
+      savelog /etc/im/SiteConfig
+      rm -f /etc/im/SiteConfig
+      mv $TMPCONFIG /etc/im/SiteConfig
+    fi
+  else
+    mv $TMPCONFIG /etc/im/SiteConfig
+  fi
+fi
+
+

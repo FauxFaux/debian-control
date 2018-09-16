@@ -1,0 +1,15 @@
+Package: db2twitter
+Version: 0.6-1
+Architecture: all
+Maintainer: Carl Chenet <chaica@debian.org>
+Installed-Size: 70
+Depends: python3-pil, python3-sqlalchemy, python3-tweepy, python3:any (>= 3.4~)
+Section: python
+Priority: optional
+Homepage: https://github.com/chaica/db2twitter
+Description: Simple Twitter bot using a database to build and send tweets
+ db2twitter fetches data from a database using the SQLAlchemy library,
+ filling a user-defined template to build a tweet and send it.
+ db2twitter keeps track of already sent tweets and only sends a new
+ tweet if it was not sent before. db2twitter information are stored in
+ a sqlite database.

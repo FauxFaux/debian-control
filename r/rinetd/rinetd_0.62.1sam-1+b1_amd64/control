@@ -1,0 +1,19 @@
+Package: rinetd
+Source: rinetd (0.62.1sam-1)
+Version: 0.62.1sam-1+b1
+Architecture: amd64
+Maintainer: Sam Hocevar <sho@debian.org>
+Installed-Size: 70
+Depends: libc6 (>= 2.15)
+Section: net
+Priority: optional
+Description: Internet TCP redirection server
+ rinetd redirects TCP connections from one IP address and port to another,
+ with basic IP-based access control.
+ .
+ rinetd is a single-process server which handles any number of connections
+ to the address/port pairs specified in the file /etc/rinetd.conf. Since
+ rinetd runs as a single process using nonblocking I/O, it is able to
+ redirect a large number of connections without a severe impact on the
+ machine. This makes it practical to run services on machines inside an IP
+ masquerading firewall.

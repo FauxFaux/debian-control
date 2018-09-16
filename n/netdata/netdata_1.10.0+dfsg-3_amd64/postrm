@@ -1,0 +1,70 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    remove)
+        ;;
+
+    purge)
+        for dir_name in /var/cache/netdata /var/lib/netdata; do
+            if dpkg-statoverride --list | grep -qw "$dir_name"; then
+                dpkg-statoverride --remove "$dir_name"
+            fi
+        done
+
+        rm -rf /var/cache/netdata /var/log/netdata
+
+        if getent passwd netdata >/dev/null; then
+            deluser --quiet --system netdata || echo "Unable to remove netdata user"
+        fi
+
+        if getent group netdata >/dev/null; then
+            delgroup --quiet --system netdata || echo "Unable to remove netdata group"
+        fi
+
+        ;;
+
+    *)
+        ;;
+esac
+
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "purge" ] ; then
+	update-rc.d netdata remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper rm_conffile /etc/netdata/python.d/nginx_log.conf 1.8.0\+dfsg-1\~ netdata -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/netdata/python.d/gunicorn_log.conf 1.8.0\+dfsg-1\~ netdata -- "$@"
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'netdata.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'netdata.service' >/dev/null || true
+		deb-systemd-helper unmask 'netdata.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.3.5
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,25 @@
+Package: libpgocaml-ocaml
+Source: pgocaml (2.3-1)
+Version: 2.3-1+b2
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 558
+Depends: libcalendar-ocaml (>= 2), libcalendar-ocaml-oxa78, ocaml-base-nox-4.05.0, libc6 (>= 2.2.5)
+Recommends: ocaml-findlib
+Suggests: postgresql (>= 7.4)
+Breaks: libpgocaml-ocaml-dev (<< 1.3-3)
+Replaces: libpgocaml-ocaml-dev (<< 1.3-3)
+Provides: libpgocaml-ocaml-6bg65
+Section: ocaml
+Priority: optional
+Homepage: http://pgocaml.forge.ocamlcore.org/
+Description: OCaml type-safe bindings for PostgreSQL (runtime)
+ PG'OCaml provides an interface to PostgreSQL databases for OCaml applications.
+ It uses Camlp4 to extend the OCaml syntax, enabling one to directly embed SQL
+ statements inside the OCaml code. Moreover, it uses the describe feature of
+ PostgreSQL to obtain type information about the database. This allows PG'OCaml
+ to check at compile-time if the program is indeed consistent with the database
+ structure. This type-safe database access is the primary advantage that
+ PG'OCaml has over other PostgreSQL bindings for OCaml.
+ .
+ This package contains dynamically loadable plugins for PG'OCaml.

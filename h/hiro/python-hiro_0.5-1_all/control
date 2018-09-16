@@ -1,0 +1,21 @@
+Package: python-hiro
+Source: hiro
+Version: 0.5-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 50
+Depends: python-mock, python-six (>= 1.4.1), python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Suggests: python-hiro-doc
+Section: python
+Priority: optional
+Homepage: http://hiro.readthedocs.org
+Description: time manipulation utilities for Python - Python 2.X
+ The hiro module provides a context-manager which hijacks a few commonly used
+ time function to manipulate time in its context. It allows you to rewind,
+ forward, freeze, unfreeze, and scale time according to given settings.
+ .
+ Most notably, the builtin functions time.sleep, time.time, time.gmtime,
+ datetime.now, datetime.utcnow and datetime.today behave according the
+ configuration of the context.
+ .
+ This package provides the Python 2 version of the hiro module.

@@ -1,0 +1,21 @@
+Package: fatrace
+Version: 0.13-1
+Architecture: amd64
+Maintainer: Martin Pitt <mpitt@debian.org>
+Installed-Size: 34
+Depends: libc6 (>= 2.13)
+Recommends: python3, powertop
+Section: utils
+Priority: optional
+Homepage: https://launchpad.net/fatrace
+Description: report system wide file access events
+ fatrace reports file access events from all running processes.
+ Its  main  purpose  is to find processes which keep waking up the disk
+ unnecessarily and thus prevent some power saving.
+ .
+ This package also contains a "power-usage-report" tool, which uses
+ fatrace and powertop to build a textual report from one minute of
+ measuring power usage and file accesses. This does not take any
+ arguments or requires any interactivity, so is very simple to use and
+ serves as a starting point for bug reports or optimizing a particular
+ installation.

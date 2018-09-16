@@ -1,0 +1,19 @@
+Package: libadns1
+Source: adns
+Version: 1.5.0~rc1-1.1
+Architecture: amd64
+Maintainer: Ian Jackson <ijackson@chiark.greenend.org.uk>
+Installed-Size: 153
+Depends: libc6 (>= 2.16)
+Suggests: adns-tools
+Section: libs
+Priority: optional
+Homepage: http://www.chiark.greenend.org.uk/~ian/adns/
+Description: Asynchronous-capable DNS client library
+ adns is a resolver library for C (and C++) programs.  In contrast
+ with the existing interfaces, gethostbyname et al and libresolv, it
+ can be used in an asynchronous, non-blocking manner, and has a
+ convenient interface which doesn't require the application to handle
+ any DNS data formats.  Many queries can be handled simultaneously.
+ .
+ This package contains the runtime library.

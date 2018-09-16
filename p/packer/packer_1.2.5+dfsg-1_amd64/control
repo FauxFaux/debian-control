@@ -1,0 +1,28 @@
+Package: packer
+Version: 1.2.5+dfsg-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Installed-Size: 42950
+Depends: libc6 (>= 2.3.2)
+Recommends: docker.io, qemu
+Suggests: ansible, chef
+Built-Using: golang-1.10 (= 1.10.3-1), golang-github-aliyun-aliyun-oss-go-sdk (= 1.5.0+dfsg1-1), golang-github-armon-go-radix (= 0.0~git20150602.0.fbd82e8-2), golang-github-aws-aws-sdk-go (= 1.12.79+dfsg-1), golang-github-azure-go-ntlmssp (= 0.0~git20170206.0.29affce-1), golang-github-bgentry-speakeasy (= 0.1.0-1), golang-github-biogo-hts (= 1.0.1+dfsg1-2), golang-github-christrenkamp-goxpath (= 1.0~alpha3-1), golang-github-denverdino-aliyungo (= 0.0~git20170721.0.80ceb80-1), golang-github-digitalocean-godo (= 1.1.0-1), golang-github-dylanmei-iso8601 (= 0.1.0-5), golang-github-go-ini-ini (= 1.32.0-2), golang-github-google-go-querystring (= 0.0~git20170111.0.53e6ce1-4), golang-github-google-shlex (= 0.0~git20150127.0.6f45313-2), golang-github-gophercloud-gophercloud (= 0.0~git20170728.0.0118feec-2), golang-github-hashicorp-atlas-go (= 0.0~git20170808.8261ea0-3), golang-github-hashicorp-errwrap (= 0.0~git20141028.0.7554cd9-2), golang-github-hashicorp-go-checkpoint (= 0.0~git20170624.a8d0786-1), golang-github-hashicorp-go-cleanhttp (= 0.0~git20171219.d5fe4b57-1), golang-github-hashicorp-go-multierror (= 0.0~git20161216.0.ed90515+ds-1), golang-github-hashicorp-go-rootcerts (= 0.0~git20160503.0.6bb64b3-1), golang-github-hashicorp-go-uuid (= 0.0~git20160311.0.d610f28-2), golang-github-hashicorp-go-version (= 0.0~git20171129.4fe82ae-3), golang-google-cloud (= 0.9.0-5)
+Section: utils
+Priority: optional
+Homepage: https://www.packer.io/
+Description: tool for creating machine images for multiple platforms
+ Packer is an open source tool for creating identical machine images for
+ multiple platforms from a single source configuration. Packer is lightweight,
+ runs on every major operating system, and is highly performant, creating
+ machine images for multiple platforms in parallel. Packer does not replace
+ configuration management like Chef or Puppet. In fact, when building images,
+ Packer is able to use tools like Chef or Puppet to install software onto the
+ image.
+ .
+ A machine image is a single static unit that contains a pre-configured
+ operating system and installed software which is used to quickly create new
+ running machines. Machine image formats change for each platform. Some
+ examples include AMIs for EC2, VMDK/VMX files for VMware, OVF exports for
+ VirtualBox, etc.
+ .
+ For the documentation of Packer, please see <https://www.packer.io/docs>.

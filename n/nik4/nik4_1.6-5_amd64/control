@@ -1,0 +1,24 @@
+Package: nik4
+Version: 1.6-5
+Architecture: amd64
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 606
+Depends: python-mapnik, python:any (<< 2.8), python:any (>= 2.7~)
+Suggests: openstreetmap-carto
+Section: utils
+Priority: optional
+Homepage: https://github.com/Zverik/Nik4
+Description: Mapnik to image export
+ Nik4 is a mapnik-to-image exporting script using the Mapnik Python
+ bindings.
+ .
+ Nik4 takes great care to preserve values you feed it. If you say you
+ need a 800x600 image, it won't take a pixel less or more. It won't
+ shrink a bounding box or distort lines when specifying so called "scale
+ factor". When you need a 300 dpi image, you tell it --ppi 300 and can be
+ sure you will get what you intended.
+ .
+ Also it can use real-world units, that is, millimeters (and prefers to).
+ Specify dimensions for printing, choose bounding box and ppi scale - and
+ the result won't disappoint. Options are intuitive and plenty, and you
+ will be amazed how much tasks became simpler with Nik4.

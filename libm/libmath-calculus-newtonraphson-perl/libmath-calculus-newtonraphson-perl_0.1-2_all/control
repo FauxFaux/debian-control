@@ -1,0 +1,25 @@
+Package: libmath-calculus-newtonraphson-perl
+Version: 0.1-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: perl, libmath-calculus-expression-perl, libmath-calculus-differentiate-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Math-Calculus-NewtonRaphson
+Description: Algebraic Newton Raphson Implementation
+ The Math::Calculus::NewtonRaphson module takes an algebraic expression,
+ parses it and then uses the Newton Raphson method to solve it.
+ The Newton Raphson method relies on the fact that the expression
+ you pass in evaluates to zero where there is a solution. That is, to solve:-
+ .
+ x^2 = 5
+ .
+ You would need to pass in:-
+ .
+ x^2 - 5
+ .
+ It understands expressions containing any of the operators +, -, *, / and ^
+ (raise to power), bracketed expressions to enable correct precedence and the
+ functions ln, exp, sin, cos, tan, sec, cosec, cot, sinh, cosh, tanh, sech,
+ cosech, coth, asin, acos, atan, asinh, acosh and atanh.

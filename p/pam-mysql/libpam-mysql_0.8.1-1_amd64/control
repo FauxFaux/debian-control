@@ -1,0 +1,18 @@
+Package: libpam-mysql
+Source: pam-mysql
+Version: 0.8.1-1
+Architecture: amd64
+Maintainer: Ferenc Wágner <wferi@debian.org>
+Installed-Size: 90
+Depends: libc6 (>= 2.14), libmariadbclient18 (>= 10.1.28), libpam0g (>= 0.99.7.1), libssl1.1 (>= 1.1.0), zlib1g (>= 1:1.1.4)
+Section: admin
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/NigelCunningham/pam-MySQL
+Description: PAM module interfacing with MySQL databases
+ This module lets PAM-enabled applications get authentication and
+ account information from MySQL databases.  Passwords can be stored
+ in various encrypted formats, for example as crypt, MD5 or SHA1 hashes,
+ in MySQL format or in the Drupal 7 salted format.  Account and password
+ expiration is handled via SQL expressions.  Logging into MySQL is also
+ supported.

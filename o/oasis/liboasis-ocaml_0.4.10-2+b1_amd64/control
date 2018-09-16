@@ -1,0 +1,34 @@
+Package: liboasis-ocaml
+Source: oasis (0.4.10-2)
+Version: 0.4.10-2+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 5563
+Depends: libfindlib-ocaml-ima03, ocaml-base-nox-4.05.0, libc6 (>= 2.2.5)
+Suggests: liboasis-ocaml-doc
+Provides: liboasis-ocaml-tpn43
+Section: ocaml
+Priority: optional
+Homepage: http://oasis.forge.ocamlcore.org/
+Description: Build-system generation for OCaml projects -- runtime
+ OASIS generates a full configure, build and install system for your
+ application. It starts with a simple `_oasis` file at the toplevel of your
+ project and creates everything required.
+ .
+ It uses external tools like OCamlbuild and it can be considered as the glue
+ between various subsystems that do the job. It should support the following
+ tools:
+ .
+  - OCamlbuild
+  - OMake (todo)
+  - OCamlMakefile (todo),
+  - ocaml-autoconf (todo)
+ .
+ It also features a do-it-yourself command line invocation and an internal
+ configure/install scheme. Libraries are managed through findlib. It has been
+ tested on GNU Linux and Windows.
+ .
+ OASIS supports standard entry points and descriptions. It helps to
+ integrates your libraries and software with third parties tools like GODI.
+ .
+ This package contains the shared runtime libraries and plugins.

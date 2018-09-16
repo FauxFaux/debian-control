@@ -1,0 +1,20 @@
+Package: libcpan-inject-perl
+Version: 1.14-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 75
+Depends: perl, libcpan-checksums-perl, libfile-chmod-perl, libparams-util-perl
+Provides: cpaninject
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/CPAN-Inject/
+Description: module for injecting distributions into CPAN sources
+ CPAN::Inject is a Perl module that provides a simple and reusable interface
+ for injecting arbitrary packages to a CPAN mirror. Specifically, it accepts
+ any Perl distribution tarball and performs some processing to make it look
+ like it came from CPAN. Subsequently, the package will be installable from
+ the CPAN Shell, with the full automatic recursive dependency resolution.
+ .
+ This package also provides a command line utility, cpaninject, which can be
+ used to inject arbitrary packages under the officially blessed "Reserved
+ Local CPAN Author" id, LOCAL.

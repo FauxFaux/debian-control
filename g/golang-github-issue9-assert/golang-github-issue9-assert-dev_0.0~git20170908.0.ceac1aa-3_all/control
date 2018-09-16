@@ -1,0 +1,30 @@
+Package: golang-github-issue9-assert-dev
+Source: golang-github-issue9-assert
+Version: 0.0~git20170908.0.ceac1aa-3
+Architecture: all
+Maintainer: QA Group <packages@qa.debian.org>
+Installed-Size: 52
+Section: devel
+Priority: extra
+Homepage: https://github.com/issue9/assert
+Description: Simple extension to test a series of assert functions
+ The issue9-assert library provides a simple extension to testing that
+ provides a series of assert functions that are convenient for use in
+ test functions
+ .
+ Example:
+    func TestA(t testing.T) {
+        v := true
+        assert.True(v)
+        a := assert.New(t)
+        a.True(v)
+    }
+    // Can also be used for testing.B
+    func Benchmark1(b *testing.B) {
+        a := assert.New(b)
+        v := false
+        a.True(v)
+        for(i:=0; i<b.N; i++) {
+            // do something
+        }
+    }

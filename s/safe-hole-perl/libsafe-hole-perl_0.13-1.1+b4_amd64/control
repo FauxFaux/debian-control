@@ -1,0 +1,18 @@
+Package: libsafe-hole-perl
+Source: safe-hole-perl (0.13-1.1)
+Version: 0.13-1.1+b4
+Architecture: amd64
+Maintainer: Stefan Hornburg (Racke) <racke@linuxia.de>
+Installed-Size: 42
+Depends: libc6 (>= 2.2.5), perl (>= 5.26.0-4), perlapi-5.26.0
+Section: perl
+Priority: optional
+Description: Perl module which makes a "hole" in the Safe compartment
+ libsafe-hole-perl allows externally defined routines and methods
+ of objects to be called from within the Safe compartment.  However,
+ those subroutines and methods are executed within the Safe compartment,
+ so they are unable to call other subroutines which are dynamically
+ qualified with the package name such as class methods.
+ .
+ Through Safe::Hole, we can execute externally defined subroutines in
+ the original main compartment from the Safe compartment.

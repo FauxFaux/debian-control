@@ -1,0 +1,21 @@
+Package: golang-github-ccding-go-stun-dev
+Source: golang-github-ccding-go-stun
+Version: 0.1.0-4
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 61
+Section: devel
+Priority: optional
+Homepage: https://github.com/ccding/go-stun
+Description: implementation of the STUN client (RFC 3489 and RFC 5389)
+ go-stun is a STUN (RFC 3489, 5389) client implementation in golang
+ (a.k.a. UDP hole punching).
+ .
+ Use the Library The library github.com/ccding/go-stun/stun is extremely
+ easy to use -- just one line of code.
+ .
+ ```go import "github.com/ccding/go-stun/stun"
+ .
+ func main() {
+     nat, host, err := stun.NewClient().Discover()
+ } ```

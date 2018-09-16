@@ -1,0 +1,44 @@
+#!/bin/sh -e
+
+DEB_HOST_MULTIARCH=x86_64-linux-gnu
+
+PETSC_VERSION=3.9.3
+PETSC_ARCH=${DEB_HOST_MULTIARCH}
+PETSC_DEBUG_ARCH=${PETSC_ARCH}-complex-debug
+PETSC_VERSION_NUMBER=$( echo ${PETSC_VERSION} | sed "s/\.//g" )
+PETSC_SONAME_VERSION=3.9
+PETSC_NAME=petsc${PETSC_SONAME_VERSION}
+
+PETSC_DIR_COMPLEX_DEBUG=/usr/lib/petscdir/${PETSC_NAME}/${PETSC_DEBUG_ARCH}
+
+
+# Make alternatives links
+if [ "$1" = "configure" ]; then
+
+# alternative libpetsc.so.multiarch is deprecated
+# test if libpetsc.so.multiarch is still in use, so remove old petsc alternatives
+# This should be safe since Conflicts are set up with the dev package versions using deprecated libpetsc.so.multiarch.
+if update-alternatives --query petsc | grep libpetsc.so.multiarch > /dev/null ; then
+  echo Removing deprecated petsc alternatives using libpetsc.so.multiarch.
+  for alt in `update-alternatives --list petsc`; do
+    update-alternatives --remove petsc ${alt}
+  done
+fi
+
+update-alternatives --install /usr/lib/petsc petsc ${PETSC_DIR_COMPLEX_DEBUG} ${PETSC_VERSION_NUMBER}33 \
+  --slave /usr/lib/${DEB_HOST_MULTIARCH}/libpetsc.so libpetsc.so ${PETSC_DIR_COMPLEX_DEBUG}/lib/libpetsc_complex.so.${PETSC_VERSION} \
+  --slave /usr/include/petsc petscinclude ${PETSC_DIR_COMPLEX_DEBUG}/include \
+  --slave /usr/lib/${DEB_HOST_MULTIARCH}/pkgconfig/PETSc.pc PETSc.pc ${PETSC_DIR_COMPLEX_DEBUG}/lib/pkgconfig/PETSc.pc \
+  --slave /usr/share/octave/site/m/petsc petsc-octave ${PETSC_DIR_COMPLEX_DEBUG}/share/petsc/matlab
+
+fi
+
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p libpetsc-complex3.9-dbg /usr/lib/petscdir/petsc3.9/x86_64-linux-gnu-complex-debug/lib/petsc/bin
+fi
+
+# End automatically added section
+

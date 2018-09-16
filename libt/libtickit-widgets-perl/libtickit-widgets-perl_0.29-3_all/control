@@ -1,0 +1,27 @@
+Package: libtickit-widgets-perl
+Version: 0.29-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 309
+Depends: perl, libparser-mgc-perl, libstruct-dumb-perl, libtickit-perl, perl (>= 5.19.5) | libscalar-list-utils-perl (>= 1:1.33)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Tickit-Widgets
+Description: collection of Tickit::Widget implementations
+ This class acts as an abstract base class for on-screen widget objects. It
+ provides the lower-level machinery required by most or all widget types.
+ .
+ Objects cannot be directly constructed in this class. Instead, a subclass of
+ this class which provides a suitable implementation of the render_to_rb and
+ other provided methods is derived. Instances in that class are then
+ constructed.
+ .
+ The core Tickit distribution only contains a couple of simple widget classes.
+ Many more widget types are available on CPAN. Almost certainly for any
+ widget-based program you will want to at least install the Tickit::Widgets
+ distribution, which provides many of the basic UI types of widget.
+ .
+ Tickit is a high-level toolkit for creating full-screen terminal-based
+ interactive programs. It allows programs to be written in an abstracted way,
+ working with a tree of widget objects, to represent the layout of the
+ interface and implement its behaviours.

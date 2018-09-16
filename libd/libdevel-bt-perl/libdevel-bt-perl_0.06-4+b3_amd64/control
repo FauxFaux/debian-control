@@ -1,0 +1,19 @@
+Package: libdevel-bt-perl
+Source: libdevel-bt-perl (0.06-4)
+Version: 0.06-4+b3
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 38
+Depends: perl (>= 5.26.0-4), perlapi-5.26.0, libc6 (>= 2.15), gdb, libfile-which-perl, perl-debug
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Devel-bt
+Description: module providing automatic gdb backtraces on errors
+ Devel::bt, when enabled, registers a handler for certain types of fatal
+ errors, like segmentation faults, and, once such an error occurs, prints a
+ debugger backtrace to standard output before exiting the program.
+ .
+ It is intended to be used to debug crashes in situations where running the
+ failing program directly under a debugger is not possible, for example when
+ trying to get more information from cpantesters or from users unfamiliar with
+ gdb.

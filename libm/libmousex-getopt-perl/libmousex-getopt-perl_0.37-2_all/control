@@ -1,0 +1,25 @@
+Package: libmousex-getopt-perl
+Version: 0.37-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 87
+Depends: perl, libgetopt-long-descriptive-perl, libmouse-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MouseX-Getopt
+Description: Mouse role for processing command line options
+ MouseX::Getopt is a role which provides an alternate constructor for creating
+ objects using parameters passed in from the command line.
+ .
+ MouseX::Getopt attempts to DWIM as much as possible with the command line
+ params by introspecting your class's attributes. It will use the name of your
+ attribute as the command line option, and if there is a type constraint
+ defined, it will configure Getopt::Long to handle the option accordingly.
+ .
+ You can use the trait MouseX::Getopt::Meta::Attribute::Trait or the attribute
+ metaclass MouseX::Getopt::Meta::Attribute to get non-default commandline
+ option names and aliases.
+ .
+ You can use the trait MouseX::Getopt::Meta::Attribute::Trait::NoGetopt or the
+ attribute metaclass MouseX::Getopt::Meta::Attribute::NoGetopt to have
+ MouseX::Getopt ignore your attribute in the commandline options.

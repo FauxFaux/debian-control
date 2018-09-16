@@ -1,0 +1,25 @@
+Package: sbws
+Version: 0.6.0-1
+Architecture: all
+Maintainer: Debian Privacy Tools Maintainers <pkg-privacy-maintainers@lists.alioth.debian.org>
+Installed-Size: 216
+Depends: python3-requests, python3-stem, python3:any, adduser, python3-socks, tor
+Recommends: systemd
+Section: net
+Priority: optional
+Homepage: https://git.torproject.org/sbws.git
+Description: Simple Bandwidth Scanner for the Tor network
+ Simple Bandwidth Scanner (sbws) scan the Tor network and generates
+ bandwidth list files (also called measurements).
+ .
+ Bandwidth list files contain the Tor relays' bandwidths scaled.
+ The are read by the Tor directory authorities to assign weights to the relays
+ during heir votes. The specification of the Bandwidth list format is in
+ https://gitweb.torproject.org/torspec.git/tree/bandwidth-file-spec.txt
+ .
+ The scanner (also called generator) builds two hop circuits consisting
+ of the relay being measured and a fast exit.
+ Over these circuits it measures RTT and download performance.
+ .
+ sbws is intended to be run by the Tor directory/bandwidth authorities or
+ researchers in test networks.

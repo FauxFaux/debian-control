@@ -1,0 +1,34 @@
+Package: duma
+Source: duma (2.5.15-1.1)
+Version: 2.5.15-1.1+b1
+Architecture: amd64
+Maintainer: Julien Danjou <acid@debian.org>
+Installed-Size: 249
+Depends: libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libstdc++6 (>= 4.1.1)
+Section: devel
+Priority: extra
+Homepage: http://duma.sf.net
+Description: library to detect buffer overruns and under-runs in C and C++ programs
+ Open-source library to detect buffer overruns and under-runs
+ in C and C++ programs.
+ .
+ This library is a fork of Bruce Perens Electric Fence library and adds
+ some new features to it. Features of the DUMA library:
+   * "overloads" all standard memory allocation functions like
+     malloc(), calloc(), memalign(), strdup(), operator new, operator
+     new[] and also their counterpart deallocation functions like free(),
+     operator delete and operator delete[]
+   * utilizes the MMU (memory management unit) of the CPU:
+     allocates and protects an extra memory page to detect any illegal
+     access beyond the top of the buffer (or bottom, at the user's option)
+   * stops the program at exactly that instruction, which does the
+     erroneous access to the protected memory page,
+     allowing location of the defective source code in a debugger
+     detects erroneous writes at the non-protected end of the memory
+     block at deallocation of the memory block
+   * detects mismatch of allocation/deallocation functions: f.e.
+     allocation with malloc() but deallocation with operator delete
+   * leak detection: detect memory blocks which were not deallocated
+     until program exit
+   * preloading of the library
+   * allowing tests without necessity of changing source code or recompilation

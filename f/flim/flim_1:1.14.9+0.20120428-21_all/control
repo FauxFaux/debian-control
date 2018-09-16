@@ -1,0 +1,32 @@
+Package: flim
+Version: 1:1.14.9+0.20120428-21
+Architecture: all
+Maintainer: Tatsuya Kinoshita <tats@debian.org>
+Installed-Size: 606
+Depends: emacsen-common (>= 2.0.8), emacs-nox | emacs | emacsen, apel (>= 10.7), dpkg (>= 1.15.4) | install-info
+Suggests: xemacs21-bin, semi, wl | wl-beta
+Conflicts: flim1.13, semi-gnus (<< 1:6.10.13), tm
+Replaces: flim1.13
+Section: lisp
+Priority: optional
+Homepage: http://git.chise.org/elisp/flim/
+Description: library about internet message for emacsen
+ FLIM (Faithful Library about Internet Message) is a library to provide
+ basic functions about message representation and encoding for emacsen.
+ It consists of following modules:
+ .
+  std11.el         STD 11 (RFC 822) parser and utility
+  mime.el          to provide various services about MIME-entities
+  mime-def.el      Definitions about MIME format
+  mime-parse.el    MIME parser
+  mel.el           MIME encoder/decoder
+  mel-b-dl.el      base64 (B-encoding) encoder/decoder
+                   (for Emacs 20 with dynamic loading support)
+  mel-b-ccl.el     base64 (B-encoding) encoder/decoder (using CCL)
+  mel-b-en.el      base64 (B-encoding) encoder/decoder (for other emacsen)
+  mel-q-ccl.el     quoted-printable and Q-encoding encoder/decoder (using CCL)
+  mel-q.el         quoted-printable and Q-encoding encoder/decoder
+  mel-u.el         unofficial backend for uuencode
+  mel-g.el         unofficial backend for gzip64
+  eword-decode.el  encoded-word decoder
+  eword-encode.el  encoded-word encoder

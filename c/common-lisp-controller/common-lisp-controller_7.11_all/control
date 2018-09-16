@@ -1,0 +1,24 @@
+Package: common-lisp-controller
+Version: 7.11
+Architecture: all
+Maintainer: Debian Common Lisp Team <debian-common-lisp@lists.debian.org>
+Installed-Size: 116
+Depends: debconf (>= 1.0) | debconf-2.0, debianutils (>= 1.7), cl-asdf (>= 2:2.009-1), perl, adduser
+Suggests: sbcl, darcs
+Breaks: cl-asdf (<< 1.501), clisp (<< 1:2.48-1), cmucl (<< 3.1.0), sbcl (<< 1:1.0.29.0)
+Replaces: cmucl (<< 3.1.0)
+Section: lisp
+Priority: optional
+Description: Common Lisp source and compiler manager
+ This package helps installing Common Lisp sources and compilers.
+ .
+ It creates a user-specific cache of compiled objects. When a library
+ or an implementation is upgraded, all compiled objects in the cache
+ are flushed. It also provides tools to recompile all libraries and to
+ generate Debian packages from asdf-install packages.
+ .
+ Also includes clc-clbuild, a wrapper for clbuild. Please see
+ http://common-lisp.net/project/clbuild/ for more information.
+ .
+ This package also contains a wrapper to invoke emacs with a
+ clbuild provided slime environment.

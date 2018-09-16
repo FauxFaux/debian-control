@@ -1,0 +1,28 @@
+Package: libnxt
+Version: 0.3-9
+Architecture: amd64
+Maintainer: Debian LEGO Team <debian-lego-team@lists.alioth.debian.org>
+Installed-Size: 54
+Depends: libc6 (>= 2.4), libusb-0.1-4 (>= 2:0.1.12)
+Recommends: nxt-firmware
+Section: electronics
+Priority: extra
+Homepage: http://code.google.com/p/libnxt
+Description: utility library for talking to the LEGO Mindstorms NXT brick
+ LibNXT is an utility library for talking to the LEGO Mindstorms NXT intelligent
+ brick at a relatively low level. It currently does:
+  * Handling USB communication and locating the NXT in the USB tree.
+  * Interaction with the Atmel AT91SAM boot assistant.
+  * Flashing of a firmware image to the NXT.
+  * Execution of code directly in RAM.
+ .
+ The design of LibNXT is layered, meaning you can plug into it at any level of
+ complexityor abstraction you desire, from the lowest level USB bulk bit-pushing
+ interface, to an API exposing the SAM-BA commandset, right up to just calling
+ nxt_firmware_flash() and having everything taken care of!
+ .
+ This package provides two binary utils:
+  * fwflash is the program that uses LibNXT. As its name hints, its purpose is
+    to take a NXT firmware image file and flash it to a connected NXT device.
+  * fwexec is another utility, which takes a specially compiled firmware image,
+   uploads it to the NXT's RAM, and executes it directly from there.

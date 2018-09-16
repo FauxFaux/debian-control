@@ -1,0 +1,24 @@
+Package: dracut-core
+Source: dracut
+Version: 048+80-1
+Architecture: amd64
+Maintainer: Thomas Lange <lange@debian.org>
+Installed-Size: 1137
+Depends: cpio, kmod, udev, kpartx, util-linux (>= 2.20), pkg-config, libkmod2 (>= 22~), e2fsprogs, libc6 (>= 2.14)
+Recommends: cryptsetup, dmsetup, dmraid, lvm2, mdadm, console-setup, binutils, systemd
+Breaks: dracut (<< 044+3-2~), dracut-network (<< 043-2)
+Replaces: dracut (<< 044+3-2~), dracut-network (<< 043-2)
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.kernel.org/pub/linux/utils/boot/dracut/dracut.html
+Description: dracut is an event driven initramfs infrastructure (core tools)
+ Unlike existing initramfs's, this is an attempt at having as little as
+ possible hard-coded into the initramfs as possible.  The initramfs has
+ (basically) one purpose in life -- getting the rootfs mounted so that
+ we can transition to the real rootfs.  This is all driven off of
+ device availability.  Therefore, instead of scripts hard-coded to do
+ various things, we depend on udev to create device nodes for us and
+ then when we have the rootfs's device node, we mount and carry on.
+ Having the root on MD, LVM2, LUKS is supported as well as NFS, iSCSI,
+ NBD and FCOE with dracut-network.

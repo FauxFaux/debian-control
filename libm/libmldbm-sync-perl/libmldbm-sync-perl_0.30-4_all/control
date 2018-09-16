@@ -1,0 +1,15 @@
+Package: libmldbm-sync-perl
+Version: 0.30-4
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 76
+Depends: perl, libmldbm-perl
+Recommends: libtie-cache-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MLDBM-Sync/
+Description: Perl module for safe concurrent access to MLDBM databases
+ MLDBM::Sync wraps around the MLDBM interface, by handling concurrent
+ access to MLDBM databases with file locking, and flushes i/o explicity
+ per lock/unlock.  The new [Read]Lock()/UnLock() API can be used to serialize
+ requests logically and improve performance for bundled reads & writes.

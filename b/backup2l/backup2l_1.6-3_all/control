@@ -1,0 +1,31 @@
+Package: backup2l
+Version: 1.6-3
+Architecture: all
+Maintainer: Joachim Wiedorn <joodebian@joonet.de>
+Installed-Size: 114
+Recommends: bzip2
+Suggests: xz-utils
+Section: admin
+Priority: optional
+Homepage: https://github.com/gkiefer/backup2l
+Description: low-maintenance backup/restore tool
+ backup2l [backup-too-l] is a tool for autonomously generating, maintaining
+ and restoring backups on a mountable file system (e. g. hard disk). In a
+ default installation, backups are created regularly by a cron script.
+ .
+ The main design goals are low maintenance effort, efficiency, transparency
+ and robustness. All control files are stored together with the archives on
+ the backup device, and their contents are mostly self-explaining. Hence, a
+ user can - if necessary - browse the files and extract archives manually.
+ .
+ backup2l features differential backups at multiple hierarchical levels.
+ This allows one to generate small incremental backups at short intervals
+ while at the same time, the total number of archives only increases
+ logarithmically with the number of backups since the last full backup.
+ .
+ An open driver architecture allows one to use virtually any archiving
+ program as a backend. Built-in drivers support .tar.gz, .tar.bz2 and others.
+ Further user-defined drivers can be added.
+ .
+ An integrated split-and-collect function allows one to comfortably transfer
+ all or selected archives to a set of CDs or other removable media.

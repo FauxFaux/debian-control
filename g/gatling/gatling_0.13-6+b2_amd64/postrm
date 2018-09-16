@@ -1,0 +1,30 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = remove ] ; then
+        MD5SUM="`md5sum /var/www/default/index.html 2>/dev/null | cut -d ' ' -f 1`"
+        case "$MD5SUM" in
+		4f264ae5fc7173e43656d985e833e213)
+                        rm -f /var/www/default/index.html
+			rmdir --ignore-fail-on-non-empty /var/www/default
+                        ;;
+        esac
+fi
+
+# Automatically added by dh_installinit/11.1.4
+if [ "$1" = "purge" ] ; then
+	update-rc.d gatling remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0
+

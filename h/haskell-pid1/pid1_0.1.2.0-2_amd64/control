@@ -1,0 +1,20 @@
+Package: pid1
+Source: haskell-pid1
+Version: 0.1.2.0-2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 1114
+Depends: libc6 (>= 2.27), libffi6 (>= 3.0.4), libgmp10
+Section: admin
+Priority: optional
+Homepage: https://github.com/fpco/pid1#readme
+Description: signal handling and orphan reaping for Unix PID1 init processes
+ Library/executable for initializing signal handlers, spawning and
+ child process, and reaping orphan processes. These are the
+ responsibilities that must be fulfilled by the initial process in a
+ Unix system, and in particular comes up when running Docker
+ containers.
+ .
+ This library/executable will automatically detect if it is run as some
+ process besides PID1 and, if so, use a straightforward exec system
+ call instead.

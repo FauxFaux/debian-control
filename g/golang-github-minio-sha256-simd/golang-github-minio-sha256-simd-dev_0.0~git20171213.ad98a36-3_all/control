@@ -1,0 +1,25 @@
+Package: golang-github-minio-sha256-simd-dev
+Source: golang-github-minio-sha256-simd
+Version: 0.0~git20171213.ad98a36-3
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 458
+Depends: golang-go
+Section: devel
+Priority: optional
+Homepage: https://github.com/minio/sha256-simd
+Description: implementation of SHA256 using SIMD instructions for Intel and ARM
+ sha256-simd accelerate SHA256 computations in pure Go for both Intel
+ (AVX2, AVX, SSE) as well as ARM (arm64) platforms.  Introduction This
+ package is designed as a drop-in replacement for crypto/sha256. For Intel
+ CPUs it has three flavors for AVX2, AVX and SSE whereby the fastest
+ method is automatically chosen depending on CPU capabilities. For ARM
+ CPUs with the Cryptography Extensions advantage is taken of the SHA2
+ instructions resulting in a massive performance improvement.
+ .
+ This package uses Golang assembly and as such does not depend on cgo. The
+ Intel versions are based on the implementations as described in "Fast
+ SHA-256 Implementations on Intel Architecture Processors" by J. Guilford
+ et al.  Performance Below is the speed in MB/s for a single core (ranked
+ fast to slow) as well as the factor of improvement over crypto/sha256
+ (when applicable).

@@ -1,0 +1,82 @@
+Package: disktype
+Version: 9-7
+Architecture: amd64
+Maintainer: Joao Eriberto Mota Filho <eriberto@debian.org>
+Installed-Size: 104
+Depends: libc6 (>= 2.15)
+Section: utils
+Priority: optional
+Homepage: http://disktype.sf.net
+Description: detection of content format of a disk or disk image
+ The purpose of disktype is to detect the content format of a disk or
+ disk image. It knows about common file systems, partition tables and
+ boot codes. This software can be used for forensics analysis.
+ .
+ As of version 9, disktype knows about the following formats:
+ .
+ File systems:
+    FAT12/FAT16/FAT32
+    NTFS
+    HPFS
+    MFS, HFS, HFS Plus
+    ISO9660 (incl. Joliet, El Torito)
+    UDF
+    ext2/ext3
+    ext4 (patch from upstream CVS)
+    btrfs (patch from upstream CVS)
+    Minix
+    ReiserFS
+    Reiser4
+    Linux romfs
+    Linux cramfs
+    Linux squashfs
+    UFS (some variations)
+    SysV FS (some variations)
+    JFS
+    XFS
+    Amiga FS/FFS
+    Amiga SFS
+    Amiga PFS
+    BeOS BFS
+    QNX4 FS
+    3DO CD-ROM FS
+    Veritas VxFS
+    Xbox DVD file system
+ Partitioning:
+    DOS/PC style
+    EFI GPT
+    Apple
+    Amiga "Rigid Disk"
+    ATARI ST (AHDI3)
+    BSD disklabel
+    Linux RAID physical disks
+    Linux LVM1 physical volumes
+    Linux LVM2 physical volumes
+    Solaris SPARC disklabel
+    Solaris x86 disklabel (vtoc)
+ Other structures:
+    Debian split floppy header
+    Linux swap
+ Disk images:
+    Raw CD image (.bin)
+    Virtual PC hard disk image
+    Apple UDIF disk image (limited)
+ Boot loaders:
+    LILO
+    GRUB
+    SYSLINUX
+    ISOLINUX
+    Linux kernel
+    FreeBSD loader
+    Windows/MS-DOS loader
+    BeOS loader, Haiku loader
+    Sega Dreamcast
+ Compression formats:
+    gzip
+    compress
+    bzip2
+ Archive formats:
+    tar
+    cpio
+    bar
+    dump/restore

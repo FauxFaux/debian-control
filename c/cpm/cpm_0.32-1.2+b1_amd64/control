@@ -1,0 +1,21 @@
+Package: cpm
+Source: cpm (0.32-1.2)
+Version: 0.32-1.2+b1
+Architecture: amd64
+Maintainer: Kacper Wysocki (Redpill-Linpro) <kwy@redpill-linpro.com>
+Installed-Size: 220
+Depends: libassuan0 (>= 2.0.1), libc6 (>= 2.14), libcdk5nc6 (>= 5.0.20180306), libcrack2 (>= 2.8.12), libdotconf0 (>= 1.0.13), libgpg-error0 (>= 1.14), libgpgme11 (>= 1.2.0), libncursesw6 (>= 6), libtinfo6 (>= 6), libxml2 (>= 2.7.4), zlib1g (>= 1:1.1.4), libxml2-utils
+Section: utils
+Priority: extra
+Homepage: http://github.com/comotion/cpm
+Description: Curses based password manager using PGP-encryption
+ This program is a ncurses based console tool to manage passwords
+ and store them public key encrypted in a file - even for more than
+ one person. The encryption is handled via GnuPG so the programs data
+ can be accessed via gpg as well, in case you want to have a look
+ inside. The data is stored as zlib compressed XML so it's even
+ possible to reuse the data for some other purpose.
+ .
+ The software uses CDK (ncurses) to handle the user interface, libxml2
+ to store the information, the zlib library to compress the data and
+ the library GpgMe to encrypt and decrypt the data securely.

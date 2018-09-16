@@ -1,0 +1,16 @@
+Package: libpam-geoip
+Source: pam-geoip
+Version: 1.1-4
+Architecture: amd64
+Maintainer: Patrick Matthäi <pmatthaei@debian.org>
+Installed-Size: 58
+Depends: libc6 (>= 2.3), libgeoip1, libpam0g (>= 0.99.7.1)
+Suggests: geoip-database-extra
+Section: admin
+Priority: optional
+Homepage: http://ankh-morp.org/code/pam_geoip/
+Description: PAM module checking access of source IPs with a GeoIP database
+ This PAM module provides GeoIP checking for logins. The user can be
+ allowed or denied based on the location of the originating IP address.
+ This is similar to pam_access, but uses a GeoIP City database instead
+ of host name / IP matching.

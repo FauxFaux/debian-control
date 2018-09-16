@@ -1,0 +1,16 @@
+Package: kerneloops
+Version: 0.12+git20140509-6
+Architecture: amd64
+Maintainer: Balint Reczey <balint@balintreczey.hu>
+Installed-Size: 57
+Depends: libc6 (>= 2.14), libcurl3-gnutls (>= 7.16.2), libdbus-1-3 (>= 1.9.14), libdbus-glib-1-2 (>= 0.78), libglib2.0-0 (>= 2.14.0), init-system-helpers (>= 1.18~), lsb-base
+Recommends: kerneloops-applet
+Breaks: kerneloops-daemon (<< 0.12+git20140509-2)
+Replaces: kerneloops-daemon (<< 0.12+git20140509-2)
+Section: utils
+Priority: optional
+Homepage: http://oops.kernel.org/
+Description: kernel oops tracker
+ kerneloops is a daemon that collects kernel crash information and then
+ submits the extracted signature to the oops.kernel.org website for
+ statistical analysis and presentation to the Linux kernel developers.

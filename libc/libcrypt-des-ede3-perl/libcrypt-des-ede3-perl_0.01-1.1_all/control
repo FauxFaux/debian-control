@@ -1,0 +1,20 @@
+Package: libcrypt-des-ede3-perl
+Version: 0.01-1.1
+Architecture: all
+Maintainer: Pierre-Matthieu Alamy <pm.alamy@habitat-humanisme.org>
+Installed-Size: 60
+Depends: libcrypt-des-perl, perl (>= 5.6.0-16)
+Section: perl
+Priority: optional
+Description: Triple-DES EDE encryption/decryption for perl
+ Crypt::DES_EDE3 implements DES-EDE3 encryption. This is triple-DES
+ encryption where an encrypt operation is encrypt-decrypt-encrypt, and
+ decrypt is decrypt-encrypt-decrypt. This implementation uses Crypt::DES
+ to do its dirty DES work, and simply provides a wrapper around that
+ module: setting up the individual DES ciphers, initializing the keys,
+ and performing the encryption/decryption steps.
+ .
+ You're probably best off not using this module directly, as the encrypt
+ and decrypt methods expect 8-octet blocks. You might want to use the
+ module in conjunction with Crypt::CBC, for example. This would be
+ DES-EDE3-CBC, or triple-DES in outer CBC mode.

@@ -1,0 +1,33 @@
+Package: safecopy
+Version: 1.7-3
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 97
+Depends: libc6 (>= 2.15)
+Section: admin
+Priority: optional
+Homepage: http://safecopy.sf.net
+Description: data recovery tool for problematic or damaged media
+ Safecopy tries to get as much data from SOURCE as possible, even resorting
+ to device specific low level operations if applicable. This is achieved by
+ identifying problematic or damaged areas, skipping over them and continuing
+ reading afterwards. The corresponding area in the destination file is either
+ skipped (on initial creation that means padded with zeros) or deliberately
+ filled with a recognizable pattern to later find affected files on a corrupted
+ device. The work is similar to ddrescue, generating an image of the original
+ media. This media can be floppy disks, harddisk partitions, CDs, DVDs, tape
+ devices, where other tools like dd would fail due to I/O errors.
+ .
+ Safecopy uses an incremental algorithm to identify the exact beginning and
+ end of bad areas, allowing the user to trade minimum accesses to bad areas
+ for thorough data resurrection.
+ .
+ Multiple passes over the same file are possible, to first retrieve as much
+ data from a device as possible with minimum harm, and then trying to retrieve
+ some of the remaining data with increasingly aggressive read attempts.
+ .
+ Safecopy includes a low level I/O layer to read CDROM disks in raw mode,
+ and issue device resets and other helpful low level operations on a number
+ of other device classes.
+ .
+ Safecopy is useful in forensics investigations and disaster recovery.

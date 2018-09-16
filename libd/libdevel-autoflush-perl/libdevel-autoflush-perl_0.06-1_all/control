@@ -1,0 +1,23 @@
+Package: libdevel-autoflush-perl
+Version: 0.06-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 52
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: http://metacpan.org/release/Devel-Autoflush
+Description: module for setting autoflush from the command line
+ Devel::Autoflush is a hack to set autoflush for STDOUT and STDERR from the
+ command line or from "PERL5OPT" for code that needs it but doesn't have it.
+ .
+ This often happens when prompting:
+ .
+   # guess.pl
+   print "Guess a number: ";
+   $n = <STDIN>;
+ .
+ As long as the output is going to a terminal, the prompt is flushed when STDIN
+ is read.  However, if the output is being piped, the print statement will
+ not automatically be flushed, no prompt will be seen and the program will
+ silently appear to hang while waiting for input.

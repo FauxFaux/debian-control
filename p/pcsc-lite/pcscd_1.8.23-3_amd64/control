@@ -1,0 +1,19 @@
+Package: pcscd
+Source: pcsc-lite
+Version: 1.8.23-3
+Architecture: amd64
+Maintainer: Ludovic Rousseau <rousseau@debian.org>
+Installed-Size: 198
+Depends: libccid (>= 1.4.1~) | pcsc-ifd-handler, libc6 (>= 2.15), libsystemd0, libudev1 (>= 183), lsb-base (>= 3.0-6), libpcsclite1 (= 1.8.23-3)
+Suggests: systemd
+Section: misc
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://pcsclite.apdu.fr/
+Description: Middleware to access a smart card using PC/SC (daemon side)
+ The purpose of PC/SC Lite is to provide a Windows(R) SCard interface
+ in a very small form factor for communicating to smart cards and
+ smart cards readers.
+ .
+ The PC/SC daemon is used to dynamically allocate/deallocate reader
+ drivers at runtime and manage connections to the readers.

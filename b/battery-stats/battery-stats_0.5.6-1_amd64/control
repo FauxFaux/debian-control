@@ -1,0 +1,18 @@
+Package: battery-stats
+Version: 0.5.6-1
+Architecture: amd64
+Maintainer: Petter Reinholdtsen <pere@debian.org>
+Installed-Size: 96
+Depends: logrotate, gzip (>= 1.3.2)
+Recommends: python, python-matplotlib, libtext-csv-perl, gnuplot (>= 4.0.0)
+Section: admin
+Priority: extra
+Homepage: https://github.com/petterreinholdtsen/battery-stats/
+Description: collects statistics about charge of laptop batteries
+ This package provides battery-stats-collector, a daemon which will periodically
+ collect statistics about the charge of the batteries present.
+ .
+ It also proves a binary called battery-graph, which can be used to generate
+ qplot graphs about the battery charge/discharge patterns over time
+ .
+ Note: This requires APM or ACPI to be enabled and working in your kernel.

@@ -1,0 +1,19 @@
+Package: libtie-cphash-perl
+Version: 2.000-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 30
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Tie-CPHash
+Description: module for managing a case preserving but case insensitive hash table
+ Tie::CPHash provides a hash table that is case preserving but case
+ insensitive. This means that
+ .
+  $cphash{KEY}    $cphash{key}
+  $cphash{Key}    $cphash{keY}
+ .
+ all refer to the same entry.  Also, the hash remembers which form of
+ the key was last used to store the entry.  The keys and each functions
+ will return the key that was used to set the value.

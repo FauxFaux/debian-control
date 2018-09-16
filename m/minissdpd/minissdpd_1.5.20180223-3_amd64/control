@@ -1,0 +1,22 @@
+Package: minissdpd
+Version: 1.5.20180223-3
+Architecture: amd64
+Maintainer: Thomas Goirand <zigo@debian.org>
+Installed-Size: 95
+Depends: debconf, lsb-base, debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.15), libnfnetlink0
+Section: net
+Priority: optional
+Homepage: http://miniupnp.free.fr/minissdpd.html
+Description: keep memory of all UPnP devices that announced themselves
+ MiniSSDPd is a small daemon used by MiniUPnPc (a UPnP control point for IGD
+ devices) to speed up device discoveries. MiniSSDPd keeps memory of all UPnP
+ devices that announced themselves on the network through SSDP NOTIFY packets.
+ MiniSSDPd also has the ability to handle all SSDP traffic received on a
+ computer via the multicast group 239.255.255.250:1900.
+ .
+ MiniSSDPd receives NOTIFY packets and stores information contained for later
+ use by UPnP Control Points on the machine. MiniSSDPd receives M-SEARCH packets
+ and answers on behalf of the UPnP devices running on the machine. MiniUPnPd
+ and MiniUPnPc are designed to take automatically advantage of MiniSSDPd
+ running on the same computer. Just make sure that MiniSSDPd is started before
+ any other UPnP program on the computer.

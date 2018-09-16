@@ -1,0 +1,36 @@
+Package: libghc-snap-core-prof
+Source: haskell-snap-core (1.0.3.2-1)
+Version: 1.0.3.2-1+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 7151
+Depends: libghc-snap-core-dev (= 1.0.3.2-1+b1), libghc-hunit-prof-1.6.0.0-644f9, libghc-attoparsec-prof-0.13.2.2-eb13e, libghc-base-prof-4.10.1.0-35a7f, libghc-bytestring-prof-0.10.8.2-4a9e2, libghc-case-insensitive-prof-1.2.0.11-61a20, libghc-containers-prof-0.5.10.2-cc496, libghc-directory-prof-1.3.0.2-60cb0, libghc-filepath-prof-1.4.1.2-f4919, libghc-hashable-prof-1.2.7.0-6cb51, libghc-io-streams-prof-1.5.0.1-9b18d, libghc-lifted-base-prof-0.2.3.12-7ba7d, libghc-monad-control-prof-1.0.2.3-18c64, libghc-mtl-prof-2.2.2-ada79, libghc-network-prof-2.6.3.5-a1fbb, libghc-network-uri-prof-2.6.1.0-376aa, libghc-old-locale-prof-1.0.0.7-cd490, libghc-random-prof-1.1-bddaa, libghc-readable-prof-0.3.1-3a9be, libghc-regex-posix-prof-0.95.2-cd420, libghc-text-prof-1.2.3.0-81981, libghc-time-prof-1.8.0.2-7cc03, libghc-transformers-prof-0.5.2.0-e0457, libghc-transformers-base-prof-0.4.4-a16aa, libghc-unix-compat-prof-0.5.0.1-10859, libghc-unordered-containers-prof-0.2.9.0-d1c8f, libghc-vector-prof-0.12.0.1-c53f0
+Provides: libghc-snap-core-prof-1.0.3.2-2b902
+Section: haskell
+Priority: optional
+Homepage: http://snapframework.com/
+Description: Snap: A Haskell Web Framework (Core); profiling libraries
+ Snap is a simple and fast web development framework and server written in
+ Haskell. For more information or to download the latest version, you can
+ visit the Snap project website at <http://snapframework.com/>.
+ .
+ This library contains the core definitions and types for the Snap framework,
+ including:
+ .
+ 1. Primitive types and functions for HTTP (requests, responses, cookies,
+ post/query parameters, etc)
+ .
+ 2. Type aliases and helper functions for Iteratee I/O
+ .
+ 3. A monad for programming web handlers called \"Snap\", inspired by
+ happstack's (<http://happstack.com/index.html>), which allows:
+ .
+ o Stateful access to the HTTP request and response objects
+ .
+ o Monadic failure (i.e. MonadPlus/Alternative instances) for declining
+ to handle requests and chaining handlers together
+ .
+ o Early termination of the computation if you know early what you want
+ to return and want to prevent further monadic processing
+ .
+ This package contains the libraries compiled with profiling enabled.

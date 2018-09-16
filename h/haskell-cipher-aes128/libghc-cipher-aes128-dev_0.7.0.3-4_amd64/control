@@ -1,0 +1,26 @@
+Package: libghc-cipher-aes128-dev
+Source: haskell-cipher-aes128
+Version: 0.7.0.3-4
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 1238
+Depends: libghc-base-dev-4.10.1.0-35a7f, libghc-bytestring-dev-0.10.8.2-4a9e2, libghc-cereal-dev-0.5.5.0-f70f8, libghc-crypto-api-dev-0.13.3-81c97, libghc-tagged-dev-0.8.5-a8d72, libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-cipher-aes128-doc, libghc-cipher-aes128-prof
+Provides: libghc-cipher-aes128-dev-0.7.0.3-8f92a
+Section: haskell
+Priority: optional
+Homepage: https://github.com/TomMD/cipher-aes128
+Description: AES and common modes
+ Cipher-aes128 is an implementation of AES and common modes of operation.
+ .
+ It borrows Hanquez's C AES code (see 'cipher-aes') but is unique due to
+   * including compile-time detection of NI compiler support,
+   * a slightly more functional interface for GCM operations,
+   * exposure of 'Ptr' based operations via the .Internal module, and
+   * build-in crypto-api support.
+ Cipher-aes128 was originally developed as "'cipher-aes' plus trampolines",
+ which has since been adopted into cipher-aes.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: cipher-aes128-0.7.0.3-KygTIkV5jVf9NgaYfzM5Ap

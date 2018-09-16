@@ -1,0 +1,28 @@
+Package: murasaki-mpi
+Source: murasaki
+Version: 1.68.6-7
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 3863
+Depends: murasaki-common, libboost-filesystem1.62.0, libboost-iostreams1.62.0, libboost-regex1.62.0 (>= 1.62.0+dfsg-5.1), libboost-system1.62.0, libc6 (>= 2.14), libcrypto++6, libgcc1 (>= 1:3.0), libopenmpi3, libstdc++6 (>= 5.2)
+Section: science
+Priority: optional
+Homepage: http://murasaki.dna.bio.keio.ac.jp/wiki/
+Description: homology detection tool across multiple large genomes (MPI-version)
+ Murasaki is a scalable and fast, language theory-based homology
+ detection tool across multiple large genomes. It enable whole-genome
+ scale multiple genome global alignments. Supports unlimited length
+ gapped-seed patterns and unique TF-IDF based filtering.
+ .
+ Murasaki is an anchor alignment software, which is
+  * exteremely fast (17 CPU hours for whole Human x Mouse genome (with
+    40 nodes: 52 wall minutes))
+  * scalable (Arbitrarily parallelizable across multiple nodes using MPI.
+    Even a single node with 16GB of ram can handle over 1Gbp of sequence.)
+  * unlimited pattern length
+  * repeat tolerant
+  * intelligent noise reduction
+ .
+ This package provides the MPI-enabled binary for murasaki.  While this
+ will speed up operation on multi-processor machines it will slow down
+ on a single processor.

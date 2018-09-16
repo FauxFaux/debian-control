@@ -1,0 +1,25 @@
+Package: libhtml-simpleparse-perl
+Version: 0.12-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 35
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/HTML-SimpleParse
+Description: bare-bones HTML parser
+ HTML::SimpleParse is a bare-bones HTML parser, similar to HTML::Parser,
+ but with a couple important distinctions:
+ .
+ First, HTML::Parser knows which tags can contain other tags, which start
+ tags have corresponding end tags, which tags can exist only in the <HEAD>
+ portion of the document, and so forth.  HTML::SimpleParse does not know any
+ of these things.  It just finds tags and text in the HTML you give it, it
+ does not care about the specific content of these tags (though it does
+ distinguish between different _types_ of tags, such as comments, starting
+ tags like <b>, ending tags like </b>, and so on).
+ .
+ Second, HTML::SimpleParse does not create a hierarchical tree of HTML
+ content, but rather a simple linear list.  It does not pay any attention to
+ balancing start tags with corresponding end tags, or which pairs of tags are
+ inside other pairs of tags.

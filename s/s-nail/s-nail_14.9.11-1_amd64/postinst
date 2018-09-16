@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] && [ -n "$2" ] && dpkg --compare-versions "$2" lt 14.8.14-2~ ; then
+    update-alternatives --remove "mailx" "/usr/bin/s-nail"
+fi
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+if [ "$1" = "configure" ]; then
+    db_get s-nail/setgid-dotlock
+
+    if [ "$RET" = true ]; then
+        chmod 2755 /usr/lib/s-nail/s-nail-privsep
+    else
+        chmod 0755 /usr/lib/s-nail/s-nail-privsep
+    fi
+fi
+
+# Automatically added by dh_installmenu/11.3.5
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

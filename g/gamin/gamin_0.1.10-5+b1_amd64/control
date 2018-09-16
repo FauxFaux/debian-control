@@ -1,0 +1,25 @@
+Package: gamin
+Source: gamin (0.1.10-5)
+Version: 0.1.10-5+b1
+Architecture: amd64
+Maintainer: Michael Banck <mbanck@debian.org>
+Installed-Size: 143
+Depends: libc6 (>= 2.4), libglib2.0-0 (>= 2.35.9), libgamin0 (= 0.1.10-5+b1)
+Conflicts: fam
+Section: admin
+Priority: optional
+Description: File and directory monitoring system
+ Gamin is a file and directory monitoring system which allows
+ applications to detect when a file or a directory has been added,
+ removed or modified by somebody else.
+ .
+ It can be used by desktops like KDE, GNOME or Xfce to have their
+ virtual file systems keep track of changes to files and directories.
+ For example, if a file manager displays a directory to the user, and
+ the user removes one of the files via the command-line, gamin will
+ notify the file manager of this change so that it can update the
+ directory display.
+ .
+ Gamin has been designed as a drop-in replacement for FAM with security
+ and maintainability in mind and can use Linux's advanced inotify
+ service when available.

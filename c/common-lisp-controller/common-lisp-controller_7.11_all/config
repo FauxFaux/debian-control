@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# site names
+db_input low common-lisp-controller/short-site-name || true
+db_go
+
+db_input low common-lisp-controller/long-site-name || true
+db_go

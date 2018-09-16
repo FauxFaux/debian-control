@@ -1,0 +1,24 @@
+Package: mtr-tiny
+Source: mtr
+Version: 0.92-2
+Architecture: amd64
+Maintainer: Robert Woodcock <rcw@debian.org>
+Installed-Size: 152
+Depends: libc6 (>= 2.15), libncurses6 (>= 6), libtinfo6 (>= 6)
+Breaks: mtr, suidmanager (<< 0.50)
+Replaces: mtr
+Section: net
+Priority: optional
+Homepage: http://www.bitwizard.nl/mtr/
+Description: Full screen ncurses traceroute tool
+ mtr combines the functionality of the 'traceroute' and 'ping' programs
+ in a single network diagnostic tool.
+ .
+ As mtr starts, it investigates the network connection between the host
+ mtr runs on and a user-specified destination host.  After it
+ determines the address of each network hop between the machines,
+ it sends a sequence of ICMP ECHO requests to each one to determine the
+ quality of the link to each machine.  As it does this, it prints
+ running statistics about each machine.
+ .
+ mtr-tiny is compiled without support for X and conserves disk space.

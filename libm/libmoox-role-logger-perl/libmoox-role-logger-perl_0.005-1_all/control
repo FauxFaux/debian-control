@@ -1,0 +1,25 @@
+Package: libmoox-role-logger-perl
+Version: 0.005-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 33
+Depends: liblog-any-perl, libmoo-perl, perl
+Section: perl
+Priority: optional
+Homepage: https://github.com/dagolden/MooX-Role-Logger
+Description: provide logging via Log::Any
+ MooX::Role::Logger provides universal logging via Log::Any.  The class
+ using this role doesn't need to know or care about the details of log
+ configuration, implementation or destination.
+ .
+ Use it when you want your module to offer logging capabilities, but
+ don't know who is going to use your module or what kind of logging they
+ will implement. This role lets you do your part and leaves actual log
+ setup and routing to someone else.
+ .
+ The application that ultimately uses your module can then choose to
+ direct log messages somewhere based on its own needs and configuration
+ with Log::Any::Adapter.
+ .
+ This role is based on Moo so it should work with either Moo or Moose
+ based classes.

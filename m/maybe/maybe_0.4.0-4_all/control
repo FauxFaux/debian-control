@@ -1,0 +1,18 @@
+Package: maybe
+Version: 0.4.0-4
+Architecture: all
+Maintainer: Stephen Kitt <skitt@debian.org>
+Installed-Size: 50
+Depends: python3-blessings, python3-ptrace, python3:any (>= 3.3.2-2~)
+Section: utils
+Priority: optional
+Homepage: https://github.com/p-e-w/maybe
+Description: control filesystem modifications before they occur
+ maybe runs processes under the control of ptrace. When it intercepts
+ a system call that is about to make changes to the file system, it
+ logs that call, ignores the system call and indicates success to the
+ calling process.
+ .
+ After execution, maybe produces a report of all attempted changes to
+ the filesystem, and offers to re-run the process (without filtering
+ this time).

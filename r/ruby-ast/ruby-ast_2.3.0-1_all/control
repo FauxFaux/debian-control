@@ -1,0 +1,21 @@
+Package: ruby-ast
+Version: 2.3.0-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: https://whitequark.github.io/ast/
+Description: Ruby library for working with abstract syntax trees
+ ast embraces immutability; each AST node is inherently frozen at
+ creation, and updating a child node requires recreating that node
+ and its every parent, recursively.
+ .
+ This is a design choice. It does create some pressure on
+ garbage collector, but completely eliminates all concurrency
+ and aliasing problems.
+ .
+ See also AST::Node, AST::Processor::Mixin and AST::Sexp classes for
+ additional recommendations and design patterns.
+Ruby-Versions: all

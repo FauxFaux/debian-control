@@ -1,0 +1,22 @@
+Package: libcatalyst-plugin-stacktrace-perl
+Version: 0.12-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 15
+Depends: perl, libcatalyst-perl (>= 5.70), libdevel-stacktrace-perl, libmro-compat-perl (>= 0.10)
+Breaks: libcatalyst-modules-perl (<< 48~)
+Replaces: libcatalyst-modules-perl (<< 48~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-Plugin-StackTrace
+Description: Catalyst plugin for displaying a stack trace on the debug screen
+ Catalyst::Plugin::StackTrace will enhance the standard Catalyst debug screen
+ by including a stack trace of your appliation up to the point where the error
+ occurred. Each stack frame is displayed along with the package name, line
+ number, file name, and code context surrounding the line number.
+ .
+ This plugin is only active in -Debug mode by default, but can be enabled by
+ setting the enable config option.
+ .
+ Catalyst is an elegant Model-View-Controller web application framework
+ written in Perl.

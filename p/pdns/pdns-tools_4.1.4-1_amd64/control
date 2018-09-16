@@ -1,0 +1,31 @@
+Package: pdns-tools
+Source: pdns
+Version: 4.1.4-1
+Architecture: amd64
+Maintainer: pdns packagers <pdns@packages.debian.org>
+Installed-Size: 9188
+Depends: libboost-program-options1.62.0, libc6 (>= 2.16), libgcc1 (>= 1:3.0), libssl1.1 (>= 1.1.0), libstdc++6 (>= 6)
+Breaks: pdns-server (<< 3.4.6-2)
+Replaces: pdns-server (<< 3.4.6-2)
+Section: net
+Priority: optional
+Homepage: https://www.powerdns.com/
+Description: Tools for DNS debugging by PowerDNS
+ PowerDNS is a versatile nameserver which supports a large number
+ of different backends ranging from simple zonefiles to relational
+ databases and load balancing/failover algorithms.
+ PowerDNS tries to emphasize speed and security.
+ .
+ This package contains several tools to debug DNS issues. These tools do not
+ require any part of the PowerDNS server components to work.
+ .
+   * dnsbulktest: A resolver stress-tester
+   * dnsgram: Show per 5-second statistics to study intermittent resolver issues
+   * dnsreplay: Replay a pcap with DNS queries
+   * dnsscan: Prints the query-type amounts in a pcap
+   * dnsscope: Calculates statistics without replaying traffic
+   * dnstcpbench: Perform TCP benchmarking of DNS servers
+   * dnswasher: Clean a pcap of identifying IP information
+   * ixplore: Explore diffs from IXFRs
+   * nsec3dig: Calculate the correctness of NSEC3 proofs
+   * saxfr: AXFR zones and show extra information

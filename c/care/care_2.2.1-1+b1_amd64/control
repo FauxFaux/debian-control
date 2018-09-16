@@ -1,0 +1,27 @@
+Package: care
+Source: care (2.2.1-1)
+Version: 2.2.1-1+b1
+Architecture: amd64
+Maintainer: Rémi Duraffort <ivoire@videolan.org>
+Installed-Size: 233
+Depends: libarchive13 (>= 3.1.2), libc6 (>= 2.15), libtalloc2 (>= 2.0.4~git20101213)
+Replaces: proot (<< 5.1.0-2)
+Section: utils
+Priority: optional
+Homepage: http://reproducible.io
+Description: make linux programs reproducible on all linux systems
+ CARE monitors the execution of the specified command to create an archive that
+ contains all the material required to re-execute it in the same context.
+ .
+ That way, the command will be reproducible everywhere, even on Linux systems
+ that are supposed to be not compatible with the original Linux system. CARE is
+ typically useful to get reliable bug reports, demonstrations, artifact
+ evaluation, tutorials, portable applications, minimal rootfs, file-system
+ coverage, ...
+ .
+ By design, CARE does not record events at all. Instead, it archives
+ environment variables and accessed file-system components -- before
+ modification -- during the so-called initial execution. Then, to reproduce
+ this execution, the re-execute.sh script embedded into the archive restores
+ the environment variables and relaunches the command confined into the saved
+ file-system.

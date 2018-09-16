@@ -1,0 +1,25 @@
+Package: bacula-director-mysql
+Source: bacula
+Version: 9.0.8-1
+Architecture: amd64
+Maintainer: Debian Bacula Team <pkg-bacula-devel@alioth-lists.debian.net>
+Installed-Size: 78
+Depends: bacula-common-mysql (= 9.0.8-1), dbconfig-mysql | dbconfig-no-thanks, default-mysql-client | virtual-mysql-client, bacula-common (= 9.0.8-1), debconf (>= 0.5) | debconf-2.0
+Recommends: default-mysql-server | virtual-mysql-server
+Suggests: gawk
+Conflicts: bacula-director-database
+Replaces: bacula-director-database
+Provides: bacula-director-database
+Section: admin
+Priority: optional
+Homepage: http://www.bacula.org/
+Description: network backup service - MySQL storage for Director
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ The Bacula Director service supervises all the backup, restore, verify, and
+ archive operations. It can run as a daemon or as a foreground service which
+ administrators can use to schedule backups and recover files.
+ .
+ This package stores Bacula's catalog in a MySQL database, and thus is
+ suitable for medium-sized installations.

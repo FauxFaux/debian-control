@@ -1,0 +1,18 @@
+Package: dlint
+Version: 1.4.0-7
+Section: net
+Priority: extra
+Architecture: all
+Depends: perl, dnsutils
+Installed-Size: 96
+Maintainer: Florian Hinzmann <fh@debian.org>
+Description: Checks dns zone information using nameserver lookups
+ This program analyzes any DNS zone you specify, and reports any problems it
+ finds by displaying errors and warnings.  Then it descends recursively to
+ examine all zones below the given one (this can be disabled with a command-
+ line option).
+ .
+ You don't have to feed any BIND conffiles to Dlint. Dlint uses
+ nameserver calls to gather information.
+ .
+ Designed for Unix, dlint is written in Bourne Shell and Perl.

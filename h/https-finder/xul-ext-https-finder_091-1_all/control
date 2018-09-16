@@ -1,0 +1,27 @@
+Package: xul-ext-https-finder
+Source: https-finder
+Version: 091-1
+Architecture: all
+Maintainer: Debian Mozilla Extension Maintainers <pkg-mozext-maintainers@lists.alioth.debian.org>
+Installed-Size: 228
+Depends: iceweasel (>= 4.0)
+Enhances: iceweasel, xul-ext-https-everywhere
+Breaks: iceweasel (<< 4.0)
+Provides: https-finder, iceweasel-https-finder
+Section: web
+Priority: optional
+Homepage: https://code.google.com/p/https-finder/
+Description: extension that detects valid HTTPS pages as you browse
+ HTTPS Finder automatically detects and enforces valid HTTPS connections
+ as you browse, as well as automating the rule creation process for
+ HTTPS-Everywhere (instead of having to manually type "https://" in the
+ address bar to test, and writing your own XML rule for it).
+ .
+ The extension sends a small HTTPS request to each HTTP page you browse
+ to. If there is a response, the certificate is checked for validity (any
+ certificate errors will result in no notification, and no further
+ detection requests during that session). If valid, HTTPS is
+ automatically enforced (can be disabled for an alert only, with no
+ redirect), and the user is given an option to save the auto-generated
+ rule for HTTPS Everywhere. It is recommended to create rules whenever
+ possible, as it more securely enforces secure connections.

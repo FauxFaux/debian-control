@@ -1,0 +1,28 @@
+Package: dict
+Source: dictd
+Version: 1.12.1+dfsg-8
+Architecture: amd64
+Maintainer: Robert Luberda <robert@debian.org>
+Installed-Size: 162
+Depends: netbase, recode, libc6 (>= 2.14), libmaa4 (>= 1.2.0)
+Suggests: dictd | dict-server, gawk, m4
+Provides: dict-client
+Section: text
+Priority: optional
+Homepage: https://sourceforge.net/projects/dict/
+Description: dictionary client
+ This package provides a client application to query a dictd server.
+ The client-server protocol is TCP-based; the server may then be local or
+ accessed through the network.
+ .
+ The DICT Development Group maintains several public servers which can
+ be accessed from any machine connected to the Internet.  The default
+ configuration is to query one of these servers first. This may be
+ changed in the configuration file /etc/dictd/dict.conf.
+ .
+ Queries may be customized by numerous command line options, including
+ specifying the database(s) to be queried and the search strategy to
+ be used.
+ .
+ This package also provides dictl, which allows using UTF-8 encoded dictionaries
+ with terminals that do not support UTF-8.

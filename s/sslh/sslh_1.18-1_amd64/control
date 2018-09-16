@@ -1,0 +1,17 @@
+Package: sslh
+Version: 1.18-1
+Architecture: amd64
+Maintainer: Guillaume Delacour <gui@iroqwa.org>
+Installed-Size: 153
+Depends: libc6 (>= 2.15), libcap2 (>= 1:2.10), libconfig9, libwrap0 (>= 7.6-4~), debconf (>= 0.5), init-system-helpers (>= 1.18~), adduser, lsb-base (>= 3.0-6), update-inetd
+Recommends: apache2 | httpd, openssh-server | ssh-server
+Suggests: openbsd-inetd | inet-superserver
+Conflicts: libnet-proxy-perl
+Section: net
+Priority: extra
+Homepage: http://www.rutschle.net/tech/sslh.shtml
+Description: Applicative protocol multiplexer
+ sslh lets one accept HTTPS, SSH, OpenVPN, tinc and XMPP connections on the
+ same port. This makes it possible to connect to any of these servers on
+ port 443 (e.g. from inside a corporate firewall, which almost never block
+ port 443) while still serving HTTPS on that port.

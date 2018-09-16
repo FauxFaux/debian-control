@@ -1,0 +1,18 @@
+Package: ps-watcher
+Version: 1.08-8
+Architecture: all
+Maintainer: Jan Wagner <waja@cyconet.org>
+Installed-Size: 98
+Depends: libconfig-inifiles-perl, lsb-base, procps, perl:any
+Recommends: libsys-syslog-perl
+Section: admin
+Priority: extra
+Homepage: http://ps-watcher.sourceforge.net/
+Description: monitoring a system via ps-like commands
+ This program runs the ps command periodically and triggers commands on matches.
+ The match patterns are Perl regular expressions which can refer to the process
+ information via variables.
+ .
+ For example it can be used to ensure that a daemon is running, or is not
+ running too many times. It can also be used to determine when a process has
+ consumed too many resources, perhaps due to a memory leak.

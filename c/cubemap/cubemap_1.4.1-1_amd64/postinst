@@ -1,0 +1,65 @@
+#!/bin/sh
+set -e
+
+set_perms() {
+  USER=$1
+  GROUP=$2
+  MODE=$3
+  FILE=$4
+  if ! dpkg-statoverride --list $FILE > /dev/null 2>&1; then
+    chown $USER:$GROUP $FILE
+    chmod $MODE $FILE
+  fi
+}
+
+case "$1" in
+  configure)
+    if ! getent passwd cubemap >/dev/null; then
+      adduser --disabled-password  --quiet --system \
+        --home /var/lib/cubemap --no-create-home \
+        --gecos "Cubemap daemon" --group cubemap
+    fi
+    set_perms cubemap cubemap 755 /var/lib/cubemap
+    set_perms cubemap cubemap 755 /var/log/cubemap
+  ;;
+  abort-upgrade|abort-remove|abort-deconfigure)
+  ;;
+  *)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+  ;;
+esac
+
+# Automatically added by dh_systemd_enable/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'cubemap.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'cubemap.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'cubemap.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'cubemap.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/cubemap" ]; then
+		update-rc.d cubemap defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d cubemap $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

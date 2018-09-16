@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+    rm -f /usr/share/emacs/site-lisp/emacs-goodies-el/emacs-goodies-loaddefs.el
+fi
+
+
+# Automatically added by dh_installemacsen/11.3.5
+if [ -e /var/lib/emacsen-common/state/package/installed/emacsen-common -a -x /usr/lib/emacsen-common/emacs-package-remove ] ; then
+	/usr/lib/emacsen-common/emacs-package-remove --prerm emacs-goodies-el
+fi
+# End automatically added section
+
+
+exit 0

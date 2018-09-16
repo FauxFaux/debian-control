@@ -1,0 +1,37 @@
+Package: python-mpltoolkits.basemap
+Source: basemap
+Version: 1.1.0+dfsg-2
+Architecture: amd64
+Maintainer: Sandro Tosi <morph@debian.org>
+Installed-Size: 418
+Depends: libc6 (>= 2.4), libgeos-c1v5 (>= 3.4.2), python-numpy (>= 1:1.14.3), python-numpy-abi9, python (<< 2.8), python (>= 2.7~), python:any (<< 2.8), python:any (>= 2.7.5-5~), python-mpltoolkits.basemap-data (>= 1.1.0+dfsg-2), python-matplotlib, python-pyproj, python-pyshp
+Recommends: python-dap, python-pil
+Suggests: python-scipy, python-owslib
+Section: python
+Priority: optional
+Homepage: http://matplotlib.org/basemap/
+Description: matplotlib toolkit to plot on map projections
+ The matplotlib basemap toolkit is a library for plotting 2D data on maps in
+ Python. It is similar in functionality to the matlab mapping toolbox, the IDL
+ mapping facilities, GrADS, or the Generic Mapping Tools. PyNGL and CDAT are
+ other libraries that provide similar capabilities in Python.
+ .
+ Basemap does not do any plotting on its own, but provides the facilities to
+ transform coordinates to one of 23 different map projections (using the PROJ.4
+ C library). Matplotlib is then used to plot contours, images, vectors, lines or
+ points in the transformed coordinates. Shoreline, river and political boundary
+ datasets (from Generic Mapping Tools) are provided, along with methods for
+ plotting them. The GEOS library is used internally to clip the coastline and
+ political boundary features to the desired map projection region.
+ .
+ Basemap provides facilities for reading data in netCDF and Shapefile formats,
+ as well as directly over http using OPeNDAP. This functionality is provided
+ through the PyDAP client, and a Python interface to the Shapefile C library.
+ .
+ Basemap is geared toward the needs of earth scientists, particular
+ oceanographers and meteorologists. The author originally wrote Basemap to help
+ in his research (climate and weather forecasting), since at the time CDAT was
+ the only other tool in Python for plotting data on map projections. Over the
+ years, the capabilities of Basemap have evolved as scientists in other
+ disciplines (such as biology, geology and geophysics) requested and contributed
+ new features.

@@ -1,0 +1,22 @@
+Package: libpackage-locator-perl
+Version: 0.10-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 50
+Depends: perl, libcpan-distnameinfo-perl, libmoose-perl, libmoosex-markasmethods-perl, libmoosex-types-path-class-perl, libmoosex-types-uri-perl, libpath-class-perl, liburi-perl, libwww-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Package-Locator
+Description: module to find a package among CPAN-like repositories
+ Package::Locator attempts to answer the question: "Where a distribution that
+ will provide this package?" The answer is divined by searching the indexes
+ for one or more CPAN-like repositories. If you also provide a specific
+ version number, Package::Locator will attempt to find a distribution with
+ that version of the package, or higher. You can also ask to find the latest
+ version of a package across all the indexes.
+ .
+ Package::Locator only looks at the index files for each repository, and those
+ indexes only contain information about the latest versions of the packages
+ within that repository. So Package::Locator is not BackPAN magic -- you
+ cannot use it to find precisely which distribution a particular package (or
+ file) came from.

@@ -1,0 +1,47 @@
+#!/bin/sh -e
+
+# This script can be called in the following ways:
+#
+# Before the package is installed:
+#       <new-preinst> install
+#
+# Before removed package is upgraded:
+#       <new-preinst> install <old-version>
+#
+# Before the package is upgraded:
+#       <new-preinst> upgrade <old-version>
+#
+#
+# If postrm fails during upgrade or fails on failed upgrade:
+#       <old-preinst> abort-upgrade <new-version>
+
+set -e
+
+case "$1" in
+    install)
+        ;;
+
+    upgrade)
+        # 2.3.0 is not compatible with 2.2.x. Thus we need to create a new db.
+		# Otherwise, the kernel will panic on boot
+        if dpkg --compare-versions "$2" lt 2.4.0-20111025-1; then
+				if [ -d /etc/tomoyo ]; then
+						mv -f /etc/tomoyo /etc/tomoyo.old.$2;
+				fi
+        fi
+		;;
+
+    abort-upgrade)
+        ;;
+
+
+    *)
+        echo "$0 called with unknown argument \`$1'" 1>&2
+        exit 1
+        ;;
+esac
+
+
+
+exit 0
+

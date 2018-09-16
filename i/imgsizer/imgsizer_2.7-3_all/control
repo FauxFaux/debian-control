@@ -1,0 +1,18 @@
+Package: imgsizer
+Version: 2.7-3
+Architecture: all
+Maintainer: Peter S Galbraith <psg@debian.org>
+Installed-Size: 64
+Depends: imagemagick | file, imagemagick | libjpeg-progs, python (>= 2.4)
+Section: web
+Priority: optional
+Description: Adds WIDTH and HEIGHT attributes to IMG tags in HTML files
+ The imgsizer script automates away the tedious task of creating and
+ updating the extension HEIGHT and WIDTH parameters in HTML IMG tags.
+ These parameters help browsers to multi-thread image loading, instead of
+ having to load images in strict sequence in order to have each one's
+ dimensions available so the next can be placed.  This generally allows
+ text on the remainder of the page to load much faster.
+ .
+ The package needs either the imagemagick package or both the file and
+ libjpeg-progs packages.

@@ -1,0 +1,20 @@
+Package: msva-perl
+Version: 0.9.2-1
+Architecture: all
+Maintainer: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+Installed-Size: 202
+Depends: libcrypt-x509-perl (>= 0.50), libconvert-asn1-perl, libnet-server-perl (>= 2.00), libhttp-server-simple-perl, libjson-perl, libparent-perl, libgnupg-interface-perl (>= 0.43), libregexp-common-perl, libfile-homedir-perl, libconfig-general-perl
+Recommends: libgtk2-perl, libanyevent-perl, liblinux-inotify2-perl, liburi-perl, libnet-ssleay-perl, libio-socket-ssl-perl (>= 1.37), libwww-perl
+Suggests: liblwp-protocol-socks-perl
+Enhances: xul-ext-monkeysphere
+Conflicts: monkeysphere (<< 0.32)
+Provides: monkeysphere-validation-agent
+Section: net
+Priority: extra
+Homepage: http://web.monkeysphere.info/
+Description: Cryptographic identity validation agent (Perl implementation)
+ The Monkeysphere Validation Agent offers a local service for tools to
+ validate certificates (both X.509 and OpenPGP) and other public keys.
+ .
+ This package contains a perl implementation of a Monkeysphere
+ Validation Agent.

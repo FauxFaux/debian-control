@@ -1,0 +1,15 @@
+Package: maven-cache-cleanup
+Version: 1.0.4-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 34
+Depends: default-jre-headless | java7-runtime-headless
+Section: java
+Priority: optional
+Homepage: https://github.com/nadestin/tools
+Description: Utility to purge timestamped snapshots from Maven repositories
+ Maven 3 dropped support for non-unique snapshot versions, which had the
+ side effect of filling up Maven caches on developer machines and on CI
+ build hosts. The Maven Cache Cleanup utility scans a specified Maven cache
+ directory for snapshot versions and deletes all but the latest version of
+ the timestamped artifacts.

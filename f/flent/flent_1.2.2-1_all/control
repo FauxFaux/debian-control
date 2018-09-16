@@ -1,0 +1,27 @@
+Package: flent
+Version: 1.2.2-1
+Architecture: all
+Maintainer: Internet Measurement Packaging Team <pkg-netmeasure-discuss@lists.alioth.debian.org>
+Installed-Size: 1553
+Depends: python3:any (>= 3.3.2-2~)
+Recommends: python3-matplotlib, python3-pyqt5, fping | ping, irtt
+Suggests: netperf (>= 2.6.0)
+Section: net
+Priority: optional
+Homepage: https://flent.org
+Description: FLExible Network Tester for bufferbloat testing and more
+ The FLExible Network Tester: Python wrapper to run multiple simultaneous
+ netperf/iperf/ping instances and aggregate the results.
+ .
+ Tests are specified as config files (which are really Python), and
+ various parsers for tool output are supplied. At the moment, parsers for
+ netperf in -D mode, iperf in csv mode and ping/ping6 in -D mode are
+ supplied, as well as a generic parser for commands that just outputs a
+ single number.
+ .
+ Several commands can be run in parallel and, provided they output
+ timestamped values, (which netperf ping and iperf do, the latter with a
+ small patch, available in the misc/ directory), the test data points can
+ be aligned with each other in time, interpolating differences between
+ the actual measurement points. This makes it possible to graph (e.g.)
+ ping times before, during and after a link is loaded.

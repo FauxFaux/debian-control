@@ -1,0 +1,27 @@
+Package: xmpi
+Version: 2.2.3b8-13.2
+Architecture: amd64
+Maintainer: Camm Maguire <camm@debian.org>
+Installed-Size: 304
+Depends: lam-runtime, libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), liblam4, libstdc++6 (>= 4.9), libx11-6, libxm4 (>= 2.3.4), libxmpi4, libxt6
+Conflicts: xmpi1-runtime
+Replaces: xmpi1-runtime
+Section: devel
+Priority: extra
+Description: Graphical user interface for MPI program development
+ MPI is a standard for writing parallel processing programs using
+ a well defined Message Passing Interface.
+ .
+ XMPI can acquire and display extensive detail on an application's MPI
+ communication, including the following:
+  o process synchronization status: running, system or blocked
+  o message queue contents
+  o source, destination, root ranks
+  o MPI function name
+  o communicator
+  o data type
+  o message count
+  o tag
+ The above information is acquired from on-demand snapshots of
+ application status using debugging hooks in the MPI implementation or
+ from a trace log of communication activity.

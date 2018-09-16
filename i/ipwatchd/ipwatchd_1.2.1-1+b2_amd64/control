@@ -1,0 +1,19 @@
+Package: ipwatchd
+Source: ipwatchd (1.2.1-1)
+Version: 1.2.1-1+b2
+Architecture: amd64
+Maintainer: Jaroslav Imrich <jariq@jariq.sk>
+Installed-Size: 57
+Depends: libc6 (>= 2.14), libnet1 (>= 1.1.2.1), libpcap0.8 (>= 0.9.8)
+Suggests: ipwatchd-gnotify
+Section: net
+Priority: optional
+Homepage: http://ipwatchd.sf.net
+Description: IP conflict detection tool
+ IPwatchD is a simple daemon that analyses all incoming ARP packets in order
+ to detect IP conflicts on Linux. It can be configured to listen on one or
+ more interfaces (alias interfaces are also supported) in active or passive
+ mode. In active mode IPwatchD protects your host before IP takeover by
+ answering Gratuitous ARP requests received from conflicting system.
+ In passive mode it just records information about conflict through standard
+ syslog interface.

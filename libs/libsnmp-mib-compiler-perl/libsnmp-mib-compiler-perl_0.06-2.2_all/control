@@ -1,0 +1,33 @@
+Package: libsnmp-mib-compiler-perl
+Version: 0.06-2.2
+Architecture: all
+Maintainer: Deepak Tripathi <apenguinlinux@gmail.com>
+Installed-Size: 221
+Depends: perl
+Section: perl
+Priority: optional
+Description: a MIB Compiler supporting SMIv1 and SMIv2
+ SNMP::MIB::Compiler is a MIB compiler that fully supports
+ both SMI(v1) and SMIv2. This module can be use to compile
+ MIBs (recursively or not) or load already compiled MIBs for
+ later use.
+ Some tasks can be performed by the resulting object such as :
+ .
+  resolution of object names into object identifiers (OIDs).
+ e.g. ifInOctets => 1.3.6.1.2.1.2.2.1.10
+ .
+  convertion of OIDs.
+ e.g. 1.3.6.1.2.1.2.1 =>
+ iso.org.dod.internet.mgmt.mib-2.interfaces.ifNumber
+ .
+  drawing MIB trees.
+ e.g. ifTestTable => ifTestTable
+ |
+ +-- --- ifTestEntry(1)
+ |
+ +-- -rw Integer  ifTestId(1)
+ +-- -rw Integer  ifTestStatus(2)
+ +-- -rw ObjectID ifTestType(3)
+ +-- -r- Integer  ifTestResult(4)
+ +-- -r- ObjectID ifTestCode(5)
+ +-- -rw String   ifTestOwner(6)

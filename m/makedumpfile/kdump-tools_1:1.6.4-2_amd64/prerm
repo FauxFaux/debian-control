@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit/11.3.5
+if [ -x "/etc/init.d/kdump-tools" ]; then
+	invoke-rc.d kdump-tools stop || exit 1
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper rm_conffile /etc/default/grub.d/kdump-tools..ppc64el 1:1.6.1-2~ kdump-tools -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper mv_conffile /etc/default/grub.d/kdump-tools.default /etc/default/grub.d/kdump-tools.cfg 1:1.6.1-2~ kdump-tools -- "$@"
+# End automatically added section

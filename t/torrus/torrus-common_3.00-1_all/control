@@ -1,0 +1,34 @@
+Package: torrus-common
+Source: torrus
+Version: 3.00-1
+Architecture: all
+Maintainer: Torrus maintainers <torrus@packages.debian.org>
+Installed-Size: 3289
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: adduser, rrdtool, perl, redis, libredis-fast-perl, libgit-objectstore-perl, libjson-perl, libcache-ref-perl, libxml-libxml-perl, libnet-snmp-perl, libproc-daemon-perl, librrds-perl, libcgi-fast-perl, libapache-session-perl, libtemplate-perl, libtimedate-perl
+Suggests: libapache2-mod-fcgid | libapache2-mod-fastcgi | lighttpd, libcrypt-des-perl, libdigest-hmac-perl, libio-socket-inet6-perl
+Conflicts: torrus-apache2
+Replaces: torrus-apache2
+Provides: torrus-apache2
+Section: net
+Priority: optional
+Homepage: http://torrus.org/
+Description: Universal front-end for Round-Robin Databases (common files)
+ Core part of the Torrus suite, providing support files needed by the
+ other Torrus packages. It can be installed directly and used with any
+ FastCGI-compatible webserver package.
+ .
+ Torrus is designed to be a universal front-end framework for
+ Round-Robin Databases using Tobias Oetiker's RRDtool. It may be configured
+ to collect and monitor arbitrary data series from various data
+ sources which can in turn be displayed on a web page.
+ .
+ One of the traditional applications of this functionality is the collection
+ and visualization of network information using the Simple Network Management
+ Protocol (SNMP) from SNMP-enabled devices.
+ .
+ You will need to install libcrypt-des-perl and libdigest-hmac-perl for SNMPv3
+ support. SNMP over IPv6-transport is also supported after installing
+ libio-socket-inet6-perl.
+ .
+ Torrus has been formerly known as rrfw, round-robin database framework.

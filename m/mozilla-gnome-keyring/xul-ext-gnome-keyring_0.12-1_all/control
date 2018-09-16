@@ -1,0 +1,21 @@
+Package: xul-ext-gnome-keyring
+Source: mozilla-gnome-keyring
+Version: 0.12-1
+Architecture: all
+Maintainer: Ximin Luo <infinity0@debian.org>
+Installed-Size: 106
+Depends: iceweasel (>= 4.0) | firefox (>= 4.0) | firefox-esr (>= 4.0) | thunderbird (>= 5.0) | icedove (>= 5.0), libgnome-keyring0
+Enhances: firefox, firefox-esr, icedove, iceweasel, thunderbird
+Breaks: firefox (<< 4.0), firefox-esr (<< 4.0), icedove (<< 5.0), iceweasel (<< 4.0), thunderbird (<< 5.0)
+Provides: firefox-esr-gnome-keyring, firefox-gnome-keyring, icedove-gnome-keyring, iceweasel-gnome-keyring, thunderbird-gnome-keyring
+Section: web
+Priority: optional
+Homepage: https://github.com/swick/mozilla-gnome-keyring
+Description: Store mozilla passwords in GNOME Keyring
+ This extension integrates gnome-keyring into xulrunner applications as the
+ software security device.
+ .
+ This replaces the default password manager in Firefox and Thunderbird
+ with an implementation which uses GNOME Keyring. This is a centralised
+ system-based password manager, which is more simple to handle than
+ per-application management.

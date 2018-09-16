@@ -1,0 +1,34 @@
+Package: yum-utils
+Version: 1.1.31-2
+Architecture: all
+Maintainer: Mike Miller <mtmiller@ieee.org>
+Installed-Size: 426
+Depends: python (>= 2.7), python (<< 2.8), python-iniparse, python-libxml2, python-rpm, python-urlgrabber, yum (>= 3.2.29)
+Section: admin
+Priority: extra
+Homepage: http://yum.baseurl.org/wiki/YumUtils
+Description: Utilities based around the yum package manager
+ Yum-utils is a collection of utilities and examples for the yum package
+ manager. It includes utilities by different authors that make yum easier and
+ more powerful to use. The commands provided are:
+ .
+  * repo-graph: output a full package dependency graph in dot format
+  * repo-rss: generate an RSS feed from one or more yum repositories
+  * repoclosure: display a list of unresolved dependencies for a yum repository
+  * repodiff: list differences between two or more yum repositories
+  * repomanage: list the newest or oldest packages in a yum repository
+  * repoquery: query information from yum repositories
+  * reposync: synchronize yum repositories to a local directory
+  * repotrack: track a package and its dependencies and download them
+  * yum-builddep: install missing dependencies for building an RPM package
+  * yum-complete-transaction: attempt to complete failed or aborted yum
+    transactions
+  * yum-config-manager: manage yum configuration options and yum repositories
+  * yum-groups-manager: create and edit group metadata for a yum repository
+  * yumdb: query and alter the yum database
+  * yumdownloader: download RPM packages from yum repositories
+ .
+ On Debian and derived systems, this package can be useful for installing
+ and managing chroots or lxc containers of yum-based distributions. The
+ utilities for querying and managing yum repositories may also be useful for
+ maintaining repositories of RPM packages on a Debian host.

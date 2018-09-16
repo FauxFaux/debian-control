@@ -1,0 +1,29 @@
+Package: libscalar-properties-perl
+Version: 1.100860-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 37
+Depends: perl
+Enhances: libdata-compare-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Scalar-Properties
+Description: perl module to add run-time properties on scalar variables
+ Scalar::Properties attempts to make Perl more object-oriented by
+ taking an idea from Ruby: Everything you manipulate is an object,
+ and the results of those manipulations are objects themselves.
+ .
+ 'hello world'->length
+ (-1234)->abs
+ "oh my god, it's full of properties"->index('g')
+ .
+ The first example asks a string to calculate its length. The second
+ example asks a number to calculate its absolute value. And the
+ third example asks a string to find the index of the letter 'g'.
+ .
+ Using this module you can have run-time properties on initialized
+ scalar variables and literal values. The word 'properties' is used
+ in the Perl 6 sense: out-of-band data, little sticky notes that
+ are attached to the value. While attributes (as in Perl 5's attribute
+ pragma, and see the Attribute::* family of modules) are handled
+ at compile-time, properties are handled at run-time.

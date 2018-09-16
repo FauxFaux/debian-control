@@ -1,0 +1,14 @@
+Package: grub-imageboot
+Version: 0.6
+Architecture: all
+Maintainer: Alexander Wirt <formorer@debian.org>
+Installed-Size: 42
+Depends: grub-pc | grub-efi-amd64 | grub-efi-ia32, syslinux-common (>= 4)
+Section: admin
+Priority: extra
+Description: boot iso, harddisk and floppy images with grub2 and syslinux memdisk
+ This package installs a grub hook which integrates iso, harddisk and floppy
+ images into the grub menu.
+ .
+ memdisk can't boot every image see
+ http://syslinux.zytor.com/wiki/index.php/MEMDISK for its limitations.

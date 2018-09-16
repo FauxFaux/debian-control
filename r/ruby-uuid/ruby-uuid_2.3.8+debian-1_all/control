@@ -1,0 +1,22 @@
+Package: ruby-uuid
+Version: 2.3.8+debian-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 36
+Depends: ruby | ruby-interpreter, ruby-macaddr
+Section: ruby
+Priority: optional
+Homepage: http://github.com/assaf/uuid
+Description: UUID generator for Ruby
+ UUID generator for producing universally unique identifiers based on RFC 4122.
+ These identifiers are useful in distributed applications like diaspora.
+ .
+ A UUID is 128 bit long, and consists of a 60-bit time value, a 16-bit
+ sequence number and a 48-bit node identifier.
+ .
+ To guarantee that UUIDs are unique across all machines in the network,
+ the IEEE 802 MAC address of the machine's network interface card is used as
+ the node identifier.
+ .
+ Learn more about using this library from /usr/share/ruby-uuid/README.rdoc
+Ruby-Versions: all

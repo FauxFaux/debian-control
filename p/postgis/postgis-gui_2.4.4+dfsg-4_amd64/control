@@ -1,0 +1,24 @@
+Package: postgis-gui
+Source: postgis
+Version: 2.4.4+dfsg-4
+Architecture: amd64
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 741
+Depends: libc6 (>= 2.14), libglib2.0-0 (>= 2.12.0), libgtk2.0-0 (>= 2.14.0), liblwgeom-2.4-0 (>= 2.0.0), libpq5
+Recommends: postgresql-10-postgis-2.4, postgis-doc
+Suggests: postgis
+Breaks: postgis (<< 2.2.2+dfsg-2~)
+Replaces: postgis (<< 2.2.2+dfsg-2~)
+Section: misc
+Priority: optional
+Homepage: http://postgis.net/
+Description: Geographic objects support for PostgreSQL -- GUI programs
+ PostGIS adds support for geographic objects to the PostgreSQL
+ object-relational database. In effect, PostGIS "spatially enables"
+ the PostgreSQL server, allowing it to be used as a backend spatial
+ database for geographic information systems (GIS), much like ESRI's
+ SDE or Oracle's Spatial extension. PostGIS follows the OpenGIS
+ "Simple Features Specification for SQL".
+ .
+ This package contains the PostGIS graphical shape file loader,
+ shp2pgsql-gui.

@@ -1,0 +1,19 @@
+Package: rungetty
+Source: rungetty (1.2-16)
+Version: 1.2-16+b1
+Architecture: amd64
+Maintainer: Rhonda D'Vine <rhonda@debian.org>
+Installed-Size: 40
+Depends: libc6 (>= 2.14)
+Section: admin
+Priority: optional
+Description: minimal console getty that can run any process
+ rungetty might be the getty you were looking for.  It is able to run any
+ program, not just login. If a different program than login is used it usually
+ is run as nobody:nogroup, or the user/group specified on the commandline.
+ rungetty can even be configured to autologin, under certain circumstances.
+ See the manual page for more information.
+ .
+ You have to change some lines in /etc/inittab for having any effect after
+ installing the package.  rungetty is based on mingetty and therefore not
+ suitable for serial use.

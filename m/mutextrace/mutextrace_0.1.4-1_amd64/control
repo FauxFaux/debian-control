@@ -1,0 +1,18 @@
+Package: mutextrace
+Version: 0.1.4-1
+Architecture: amd64
+Maintainer: Simon Richter <sjr@debian.org>
+Installed-Size: 75
+Depends: libc6 (>= 2.4)
+Section: devel
+Priority: extra
+Description: Lock debugging tool
+ This tool displays mutexes locked and unlocked during execution of a
+ program, and can provide hints for debugging multithreaded
+ applications. As it is fairly lightweight and easy to use, it is ideal
+ at the start of a debugging session or when only limited resources are
+ available.
+ .
+ It cannot detect data races as it only looks at the synchronisation
+ primitives themselves; if you need that, use helgrind (in the valgrind
+ package) instead.

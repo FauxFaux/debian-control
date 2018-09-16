@@ -1,0 +1,28 @@
+Package: libsmbios-dev
+Source: libsmbios
+Version: 2.4.1-1
+Architecture: amd64
+Maintainer: Debian UEFI Maintainers <debian-efi@lists.debian.org>
+Installed-Size: 628
+Depends: libsmbios-c2 (= 2.4.1-1)
+Section: libdevel
+Priority: optional
+Homepage: https://github.com/dell/libsmbios/
+Description: Provide access to (SM)BIOS information - development files
+ libsmbios aims towards providing access to as much BIOS information as
+ possible. It does this by providing a library of functions that can be
+ used as well as sample binaries.
+ .
+ It incorporates extensible access to SMBIOS information capabilities and
+ ability to perform unit tests across multiple systems without using physical
+ hardware. Moreover, centralized, data-driven exception handling for broken
+ BIOS tables is provided.
+ .
+ To start out with, the focus is on the SMBIOS tables. Currently, full access
+ to the SMBIOS table and its items is implemented. In the future, it will
+ provide $PIR, MPTABLE, RCI, RBU, and other tables as well.
+ .
+ Additionally, access and manipulation of Dell Indexed IO Token (type 0xD4)
+ is implemented. This token is a vendor-extention SMBIOS structure which
+ allows uniform access to manipulate the system CMOS to enable, disable, or
+ otherwise manipulate normal BIOS functions or features.

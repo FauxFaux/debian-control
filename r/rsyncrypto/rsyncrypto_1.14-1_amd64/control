@@ -1,0 +1,17 @@
+Package: rsyncrypto
+Version: 1.14-1
+Architecture: amd64
+Maintainer: Shachar Shemesh <shachar@debian.org>
+Installed-Size: 390
+Depends: libargtable2-0 (>= 7), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libssl1.1 (>= 1.1.0), libstdc++6 (>= 5.2), gzip (>= 1.3.5-4)
+Recommends: rsync
+Section: utils
+Priority: optional
+Homepage: https://rsyncrypto.lingnu.com
+Description: rsync friendly encryption
+ Rsyncrypto allows you to encrypt a file or a directory structure, such that
+ they can later be synchronized to another machine using rsync. This means
+ that local changes to the plain text file result in local changes to the
+ cipher text file.
+ .
+ rsyncrypto compresses the plain text file prior to encrypting it.

@@ -1,0 +1,15 @@
+Package: pentium-builder
+Version: 0.21
+Architecture: all
+Maintainer: Alex Pennace <alex@pennace.org>
+Installed-Size: 44
+Depends: gcc | g++, perl
+Section: devel
+Priority: extra
+Description: force pentium optimized compilation
+ Replaces gcc, cc, and g++ with scripts that build pentium optimized code.
+ (Other processors can be optimized for as well.)
+ .
+ By default, after installing this package, the compilers will behave
+ normally. However, if the environment variable DEBIAN_BUILDARCH=pentium
+ is set, they will enter pentium optimized compile mode.

@@ -1,0 +1,15 @@
+Package: debootstrap
+Version: 1.0.109
+Architecture: all
+Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Installed-Size: 281
+Depends: wget
+Recommends: gnupg, debian-archive-keyring, arch-test (>= 0.11~)
+Suggests: ubuntu-archive-keyring, squid-deb-proxy-client
+Section: admin
+Priority: optional
+Description: Bootstrap a basic Debian system
+ debootstrap is used to create a Debian base system from scratch,
+ without requiring the availability of dpkg or apt. It does this by
+ downloading .deb files from a mirror site, and carefully unpacking them
+ into a directory which can eventually be chrooted into.

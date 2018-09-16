@@ -1,0 +1,24 @@
+Package: libreswan
+Version: 3.25-1
+Architecture: amd64
+Maintainer: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+Installed-Size: 3624
+Pre-Depends: debconf | debconf-2.0
+Depends: bsdmainutils, dns-root-data, host, iproute2 | iproute (>= 20071016), iptables, libnspr4 (>= 2:4.9-2~), libnss3 (>= 2:3.18), libnss3-tools, libunbound2 (>= 1.4.22), systemd, libaudit1 (>= 1:2.2.1), libc6 (>= 2.27), libcap-ng0 (>= 0.7.9), libcurl3-nss (>= 7.23.1), libevent-2.1-6 (>= 2.1.8-stable), libevent-pthreads-2.1-6 (>= 2.1.8-stable), libldap-2.4-2 (>= 2.4.7), libldns2 (>= 1.6.11), libpam0g (>= 0.99.7.1), libselinux1 (>= 1.32), libsystemd0
+Recommends: python3
+Conflicts: ike-server, strongswan-libcharon, strongswan-starter
+Replaces: ike-server
+Provides: ike-server
+Section: net
+Priority: optional
+Homepage: https://libreswan.org/
+Description: Internet Key Exchange daemon
+ Libreswan is an IPsec implementation for Linux. It has support for most
+ of the extensions (RFC + IETF drafts) related to IPsec, including
+ IKEv2, X.509 Digital Certificates, NAT Traversal, and many others.
+ .
+ Libreswan has been forked from Openswan 2.6.38, which was forked from
+ FreeS/WAN 1.99.
+ .
+ The Libreswan IKE daemon is named pluto. It was inherited from the FreeS/WAN
+ project, but provides improved X.509 certificate support and other features.

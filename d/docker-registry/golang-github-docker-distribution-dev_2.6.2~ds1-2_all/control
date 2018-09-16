@@ -1,0 +1,30 @@
+Package: golang-github-docker-distribution-dev
+Source: docker-registry
+Version: 2.6.2~ds1-2
+Architecture: all
+Maintainer: pkg-go <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 2436
+Depends: golang-github-aws-aws-sdk-go-dev, golang-github-bugsnag-bugsnag-go-dev, golang-github-docker-libtrust-dev, golang-github-garyburd-redigo-dev, golang-github-gorilla-handlers-dev, golang-github-gorilla-mux-dev, golang-github-mitchellh-mapstructure-dev, golang-github-ncw-swift-dev, golang-github-sirupsen-logrus-dev (>= 1.0.2~), golang-github-spf13-cobra-dev, golang-github-stevvooe-resumable-dev, golang-golang-x-crypto-dev, golang-golang-x-net-dev, golang-gopkg-check.v1-dev | golang-check.v1-dev, golang-github-rsc-letsencrypt-dev, golang-gopkg-yaml.v2-dev | golang-yaml.v2-dev
+Section: utils
+Priority: optional
+Homepage: https://github.com/docker/distribution
+Description: Docker toolset to pack, ship, store, and deliver content (source)
+ The Docker toolset to pack, ship, store, and deliver content.
+ .
+ The Docker Registry 2.0 implementation contained in this package is for storing
+ and distributing Docker images. It supersedes the docker/docker-registry
+ project with a new API design, focused around security and performance.
+ .
+ This project should provide an implementation to a V2 API for use in the Docker
+ core project. The API should be embeddable and simplify the process of securely
+ pulling and pushing content from docker daemons.
+ .
+ The new registry implementation provides the following benefits:
+ .
+  * faster push and pull
+  * new, more efficient implementation
+  * simplified deployment
+  * pluggable storage backend
+  * webhook notifications
+ .
+ This package contains the source.

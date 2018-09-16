@@ -1,0 +1,24 @@
+Package: spamassassin-heatu
+Version: 3.02+20101108-2
+Architecture: all
+Maintainer: Jari Aalto <jari.aalto@cante.net>
+Installed-Size: 68
+Depends: perl, spamassassin
+Section: mail
+Priority: optional
+Homepage: http://wiki.apache.org/spamassassin/AutoWhitelist
+Description: Heuristic Email Address Tracker Utility for Spamassassin
+ Check or clean the SpamAssassin auto-whitelist (AWL) database file;
+ also called the SpamAssassin Heuristic Email Address Tracker file.
+ .
+ The Auto-WhiteList feature in Spamassassing tracks scores from
+ messages previously received and adjusts the message score, either by
+ boosting messages from senders who send ham or penalizing senders who
+ have sent spam previously. This not only treats some senders as if
+ they were whitelisted but also treats spammers as if they were
+ blacklisted.
+ .
+ This and enhanced version of the original AWL tool. The AWL database
+ can be examined and pruned; single email entries can be removed. This
+ is useful when a spammer sends one or more ham messages before
+ sending spam.

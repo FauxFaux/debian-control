@@ -1,0 +1,34 @@
+Package: python3-cloud-sptheme
+Source: cloud-sptheme
+Version: 1.9.4-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 136
+Depends: cloud-sptheme-common (= 1.9.4-1), python3-sphinx, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://cloud-sptheme.readthedocs.io/
+Description: Cloud Sphinx theme and related extensions (python3 version)
+ cloud_sptheme contains a Sphinx theme named "Cloud", and some related
+ Sphinx extensions.  Cloud and its extensions are primarily oriented
+ towards generating html documentation for Python libraries. It provides
+ numerous small enhancements to make the html documentation more
+ interactive, and improve the layout on mobile devices.
+ .
+ In addition to the Cloud theme, this package provides a few extra Sphinx
+ extensions which may be useful when documenting Python projects; and
+ should be theme-agnostic:
+ .
+ cloud_sptheme.ext.autodoc_sections
+   Patches the sphinx.ext.autodoc to handle RST section headers inside
+   docstrings.
+ cloud_sptheme.ext.issue_tracker
+   Adds a special :issue: role for quickly linking to your project's
+   issue tracker.
+ cloud_sptheme.ext.escaped_samp_literals
+   Patches Sphinx to permit escaped {} characters within a :samp: role.
+ cloud_sptheme.ext.table_styling
+   Enhances .. table directive to support per-column text alignment and
+   other layout features.
+ .
+ This package contains the Python 3 version of cloud_sptheme.

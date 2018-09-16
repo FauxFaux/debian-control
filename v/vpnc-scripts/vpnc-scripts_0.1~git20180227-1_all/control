@@ -1,0 +1,20 @@
+Package: vpnc-scripts
+Version: 0.1~git20180227-1
+Architecture: all
+Maintainer: Mike Miller <mtmiller@debian.org>
+Installed-Size: 54
+Depends: iproute2 | net-tools
+Suggests: dnsmasq, openssh-server, resolvconf
+Section: net
+Priority: optional
+Homepage: http://www.infradead.org/openconnect/vpnc-script.html
+Description: Network configuration scripts for VPNC and OpenConnect
+ This package contains scripts required to configure routing and name
+ services when invoked by the VPNC or OpenConnect Cisco VPN clients.
+ The primary script automatically configures network routes and name
+ servers for the active VPN connection. It also provides hooks for
+ executing custom actions at various stages of the connection and
+ disconnection process.
+ .
+ An alternate replacement script is also provided that contains the VPN
+ in a network namespace which is accessible via SSH.

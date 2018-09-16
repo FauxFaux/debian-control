@@ -1,0 +1,42 @@
+Package: gesftpserver
+Version: 0.2.2-1
+Architecture: amd64
+Maintainer: Jonas Smedegaard <dr@jones.dk>
+Installed-Size: 96
+Depends: libc6 (>= 2.14)
+Enhances: openssh-server
+Section: utils
+Priority: optional
+Homepage: http://www.greenend.org.uk/rjk/sftpserver/
+Description: sftp server submodule for OpenSSH
+ Green End SFTP Server is an SFTP server supporting up to protocol
+ version 6.  It is possible to use it as a drop-in replacement for the
+ OpenSSH server (which supports only protocol version 3).
+ .
+  * Protocol versions 3 and higher:
+    * Upload and download files
+    * List files
+    * Create directories and symbolic links
+    * Rename and delete files
+  * Protocol versions 4 and higher:
+    * Filename encoding translation
+    * Text mode transfers
+    * String owner/group names (instead of numeric)
+    * Sub-second timestamps (where supported by server OS)
+  * Protocol versions 5 and higher:
+    * Extended rename semantics (e.g. atomic overwrite)
+  * Protocol versions 6 and higher:
+    * Create hard links
+  * Several SFTP extensions
+ .
+ Features of SFTP protocol versions are listed more detailed at
+ <http://www.greenend.org.uk/rjk/sftp/sftpversions.html>.
+ .
+ Features beyond the v3 set depend on suitable client support. A list of
+ clients and the versions they support is at
+ <http://www.greenend.org.uk/rjk/sftp/sftpimpls.html>.
+ .
+ NB! This server is currently experimental and still under development.
+ Don't trust your critical data to it.  The code has an extensive and
+ growing test suite (invoke 'make check' to run it) but bugs may yet
+ remain.

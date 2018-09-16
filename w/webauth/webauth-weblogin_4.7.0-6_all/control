@@ -1,0 +1,23 @@
+Package: webauth-weblogin
+Source: webauth
+Version: 4.7.0-6
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 205
+Depends: libwebkdc-perl (>= 4.5.0), perl:any
+Recommends: httpd-cgi
+Suggests: libapache2-mod-auth-kerb
+Section: web
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://webauth.stanford.edu/
+Description: Central login server for WebAuth authentication
+ WebAuth is a cookie-based web authentication system built on top of
+ Kerberos.  It relies on a central authentication server that handles all
+ user authentication for a domain and creates user authentication
+ credentials for any web server that needs strong authentication.
+ .
+ This package contains the CGI-based WebLogin server that handles initial
+ user authentication and building authentication tokens for WebAuth
+ servers.  Only one WebLogin server is needed to support a site WebAuth
+ installation.  It is normally run on the same system as the WebKDC.

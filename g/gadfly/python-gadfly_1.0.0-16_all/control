@@ -1,0 +1,27 @@
+Package: python-gadfly
+Source: gadfly
+Version: 1.0.0-16
+Architecture: all
+Maintainer: Matthias Klose <doko@debian.org>
+Installed-Size: 603
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Recommends: python-kjbuckets
+Conflicts: python-kjbuckets (<< 1.0.0-9), python2.3-gadfly, python2.4-gadfly
+Replaces: python2.3-gadfly, python2.4-gadfly
+Provides: python2.7-gadfly
+Section: python
+Priority: optional
+Description: SQL database and parser generator for Python
+ Gadfly is a relational database management system which uses a large
+ subset of very standard SQL as its query language. The underlying
+ engine consists of Python modules. Gadfly stores the active database
+ in memory, with logging to a file system for recovery from system or
+ software failures (but not for disk failures).
+ .
+ kwParser, included as part of the Gadfly package, is a parser
+ generator for Python. It transforms an abstract specification of a
+ language grammar (for example, the CORBA Interface Definition
+ Language), together with "interpretation functions" that define the
+ semantics of the language, into a compiler or translator or
+ interpreter.
+Python-Version: 2.7

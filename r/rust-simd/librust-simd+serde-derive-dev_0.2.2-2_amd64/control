@@ -1,0 +1,16 @@
+Package: librust-simd+serde-derive-dev
+Source: rust-simd
+Version: 0.2.2-2
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-simd-dev (= 0.2.2-2), librust-serde-derive-1+default-dev
+Provides: librust-simd-0+serde-derive-dev (= 0.2.2-2), librust-simd-0.2+serde-derive-dev (= 0.2.2-2), librust-simd-0.2.2+serde-derive-dev (= 0.2.2-2)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Cross-platform access to SIMD instructions - feature "serde_derive"
+ (To be obsoleted by the `std::simd` implementation RFC 2366.)
+ .
+ This metapackage enables feature serde_derive for the Rust simd crate, by
+ pulling in any additional dependencies needed by that feature.

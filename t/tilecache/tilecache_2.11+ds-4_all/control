@@ -1,0 +1,20 @@
+Package: tilecache
+Version: 2.11+ds-4
+Architecture: all
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 471
+Depends: python:any (<< 2.8), python:any (>= 2.7~), libjs-jquery, libjs-openlayers, libjs-underscore
+Recommends: python-pil
+Suggests: python-mapscript, python-mapnik, memcached, python-memcache, python-boto, python-flup, python-paste, python-wsgiref
+Section: web
+Priority: optional
+Homepage: http://tilecache.org/
+Description: Web map tile caching system
+ TileCache is an implementation of a WMS-C compliant server made available by
+ MetaCarta. TileCache provides a Python-based WMS/TMS server, with pluggable
+ caching mechanisms and rendering backends. In the simplest use case, TileCache
+ requires only write access to a disk, the ability to run Python CGI scripts,
+ and a WMS you want to be cached. With these resources, you can create your own
+ local disk-based cache of any WMS server, and use the result in any WMS-C
+ supporting client, like OpenLayers, or any TMS supporting client, like
+ OpenLayers and worldKit.

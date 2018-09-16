@@ -1,0 +1,16 @@
+Package: libdist-zilla-app-command-authordebs-perl
+Version: 0.003-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 24
+Depends: perl, dh-make-perl, libdist-zilla-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Dist-Zilla-App-Command-Authordebs
+Description: List or install Dist::Zilla authors dependencies as Debian packages
+ dzil authordebs uses Dist::Zilla::Util::AuthorDeps to scan the Perl modules
+ required to build a Perl module using Dist::Zilla and list the corresponding
+ Debian packages.
+ .
+ With --install option, the required packages are installed with sudo apt-get
+ install, so you must have sudo configured properly.

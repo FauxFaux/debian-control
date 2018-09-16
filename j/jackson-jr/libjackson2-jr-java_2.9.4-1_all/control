@@ -1,0 +1,23 @@
+Package: libjackson2-jr-java
+Source: jackson-jr
+Version: 2.9.4-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 110
+Depends: libjackson2-core-java (>= 2.9.4)
+Suggests: libjackson2-jr-java-doc
+Section: java
+Priority: optional
+Homepage: https://github.com/FasterXML/jackson-jr
+Description: JSON library for Java -- standalone data-binding module
+ Jackson jr is a compact alternative to the full Jackson Databind component. It
+ implements a subset of functionality, for example for cases where size of jar
+ or startup time matters. In addition to basic datatypes the package supports
+ reading and writing of standard Java Beans (an implementation that mimics the
+ standard JDK Bean Introspection).
+ .
+ Jackson jr also adds composer implementation that can be used to construct
+ JSON output with builder-style API, but without necessarily having to build an
+ in-memory representation: instead, it can directly use the streaming-api for
+ direct output. It is also possible to build actual in-memory JSON String or
+ byte[] representation, if that is preferable.

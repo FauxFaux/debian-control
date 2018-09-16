@@ -1,0 +1,32 @@
+#!/bin/sh
+# vim:ts=2:sw=2:et
+
+set -e
+
+case "$1" in
+  purge)
+    # If we haven't managed to remove /etc/freeradius, make
+    # sure that freerad:freerad doesn't own anything before
+    # we remove the user and group
+    test ! -d /etc/freeradius || find /etc/freeradius -user freerad -exec chown --no-dereference root "{}" \; || true
+    test ! -d /etc/freeradius || find /etc/freeradius -group freerad -exec chgrp --no-dereference root "{}" \; || true
+
+    if [ -x `which deluser` ]; then
+      deluser --quiet freerad shadow || true
+      deluser --quiet freerad || true
+    fi
+    if [ -x `which delgroup` ]; then
+      delgroup --quiet freerad || true
+    fi
+    ;;
+esac
+
+# Automatically added by dh_installdeb/11.1.5
+dpkg-maintscript-helper rm_conffile /etc/freeradius/radiusd.conf 3.0.12+dfsg-2~ freeradius-common -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.1.5
+dpkg-maintscript-helper rm_conffile /etc/freeradius/dictionary 3.0.12+dfsg-2~ freeradius-common -- "$@"
+# End automatically added section
+
+
+exit 0

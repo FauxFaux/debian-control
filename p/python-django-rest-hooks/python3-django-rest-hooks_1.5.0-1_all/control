@@ -1,0 +1,29 @@
+Package: python3-django-rest-hooks
+Source: python-django-rest-hooks
+Version: 1.5.0-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 61
+Depends: python3-django, python3-requests, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/zapier/django-rest-hooks/
+Description: Add webhook subscriptions to Django apps (Python3 version)
+ REST Hooks are advanced versions of webhooks. Traditional webhooks are usually
+ managed manually by the user, but REST Hooks are not. They encourage RESTful
+ access to the hooks (or subscriptions) themselves. Add several hooks for any
+ combination of event and URLs, then get notificatied in real-time by a bundled
+ threaded callback mechanism.
+ .
+ By reusing Django's signals framework, this library can be integrated into any
+ existing Django app.
+ .
+ Using built-in actions, no work is required to support any basic created,
+ updated, and deleted actions across any Django model. It also allows for custom
+ actions (IE: beyond CRUD) to be simply defined and triggered for any model, as
+ well as truly custom events that let an application send arbitrary payloads.
+ .
+ By default, this library will just POST Django's JSON serialization of a model,
+ but it  provides a serialize_hook method to customize payloads.
+ .
+ This package contains the Python 3 version of the library.

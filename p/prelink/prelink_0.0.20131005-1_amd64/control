@@ -1,0 +1,13 @@
+Package: prelink
+Version: 0.0.20131005-1
+Architecture: amd64
+Maintainer: Geoffrey Thomas <geofft@ldpreload.com>
+Installed-Size: 1757
+Depends: execstack
+Built-Using: elfutils (= 0.168-0.2), glibc (= 2.24-10), libselinux (= 2.6-3)
+Section: admin
+Priority: optional
+Description: ELF prelinking utility to speed up dynamic linking
+ The prelink package contains a utility which modifies ELF shared libraries
+ and executables, so that far fewer relocations need to be resolved at
+ runtime and thus programs come up faster.

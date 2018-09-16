@@ -1,0 +1,16 @@
+Package: tuned
+Version: 2.10.0-1
+Architecture: all
+Maintainer: Evgeni Golov <evgeni@debian.org>
+Installed-Size: 504
+Depends: dbus, ethtool, gawk, hdparm, policykit-1 (>= 0.105-17~), procps, python3-configobj, python3-dbus, python3-decorator, python3-gi, python3-pyudev, virt-what, python3:any
+Recommends: linux-cpupower
+Section: admin
+Priority: optional
+Homepage: https://tuned-project.org/
+Description: daemon for monitoring and adaptive tuning of system devices
+ The tuned package contains a daemon that tunes system settings dynamically.
+ It does so by monitoring the usage of several system components periodically.
+ Based on that information components will then be put into lower or higher
+ power saving modes to adapt to the current usage. Currently only ethernet
+ network and ATA harddisk devices are implemented.

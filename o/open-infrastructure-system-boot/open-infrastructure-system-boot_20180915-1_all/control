@@ -1,0 +1,17 @@
+Package: open-infrastructure-system-boot
+Version: 20180915-1
+Architecture: all
+Maintainer: Daniel Baumann <daniel.baumann@progress-linux.org>
+Installed-Size: 176
+Depends: busybox | busybox-initramfs, initramfs-tools, udev
+Recommends: rsync, uuid-runtime
+Suggests: cryptsetup, curlftpfs, httpfs2, wget
+Conflicts: live-boot, live-boot-doc, live-boot-initramfs-tools
+Replaces: live-boot, live-boot-doc, live-boot-initramfs-tools
+Provides: system-boot
+Section: admin
+Priority: optional
+Homepage: https://open-infrastructure.net/software/system-boot
+Description: Boot Debian-based system images
+ system-boot provides the system integration for booting from a read-only root
+ filesystem such as a live system.

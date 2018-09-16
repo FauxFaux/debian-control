@@ -1,0 +1,22 @@
+Package: libstatistics-normality-perl
+Version: 0.01-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 40
+Depends: perl, libstatistics-distributions-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Statistics-Normality
+Description: module for testing normal distribution of data
+ Various situations call for testing whether an empirical sample can be
+ presumed to have been drawn from a normally (Gaussian) distributed
+ population, especially because many downstream significance tests depend upon
+ the assumption of normality. Statistics::Normality implements some of the
+ more well-known normality tests from the mathematical statistics literature,
+ though there are also others that are not included. The tests here are all
+ so-called omnibus tests that find departures from normality on the basis of
+ skewness and/or kurtosis.
+ .
+ Note that, although the Kolmogorov-Smirnov test can also be used in this
+ capacity, it is a distance test and therefore not advisable. This, and other
+ distance tests (e.g. Chi-square) are not implemented here.

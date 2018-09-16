@@ -1,0 +1,20 @@
+Package: libpoe-component-client-ping-perl
+Version: 1.175-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 56
+Depends: perl, libpoe-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/POE-Component-Client-Ping
+Description: ICMP ping client component for POE
+ POE::Component::Client::Ping is an asynchronous, event driven client
+ for ICMP ping. It accepts events containing the specifics of ICMP
+ ping requests, and it returns events carrying the results of those
+ pings.
+ .
+ Ping client components are not proper objects.  Instead of being
+ created, as most objects are, they are "spawned" as separate sessions.
+ To avoid confusion (and hopefully not cause other confusion), they
+ must be spawned with a spawn method, not created anew with a new
+ one.

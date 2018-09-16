@@ -1,0 +1,23 @@
+Package: cli-common-dev
+Source: cli-common
+Version: 0.9+nmu1
+Architecture: all
+Maintainer: Debian CLI Common Team <pkg-cli-common-team@lists.alioth.debian.org>
+Installed-Size: 85
+Depends: debhelper (>= 7.0.8), perl, mono-utils (>= 3.0~) | cil-disassembler, mono-devel (>= 3.0~) | strong-name-tool, libxml-dom-perl
+Replaces: cli-common (<< 0.4.0)
+Section: cli-mono
+Priority: optional
+Homepage: http://alioth.debian.org/projects/pkg-cli-common/
+Description: common files for building CLI packages
+ This package must be installed if a CLI (Common Language Infrastructure)
+ packaging environment is desired.
+ .
+ It includes debhelper scripts for managing automatic dependency tracking
+ between native libraries, CLI libraries and CLI applications:
+  * dh_clideps to generate cli:Depends information for debian/control
+  * dh_makeclilibs to create clilibs files that are needed/used by dh_clideps
+  * dh_installcligac to register assemblies to be late installed into a GAC
+  * dh_cligacpolicy to create and install the policy files into a GAC
+  * dh_clifixperms to fix permissions of files in CLI package build directories
+  * dh_clistrip to strip CLI debug symbols from package build directories

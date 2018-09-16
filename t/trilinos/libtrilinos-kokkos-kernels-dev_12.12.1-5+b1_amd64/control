@@ -1,0 +1,25 @@
+Package: libtrilinos-kokkos-kernels-dev
+Source: trilinos (12.12.1-5)
+Version: 12.12.1-5+b1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 2209
+Depends: libtrilinos-kokkos-kernels12 (= 12.12.1-5+b1), trilinos-dev
+Suggests: trilinos-doc
+Breaks: libtrilinos-tpetra-dev (<< 12.12.0)
+Replaces: libtrilinos-tpetra-dev (<< 12.12.0)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: http://trilinos.org
+Description: Kokkos local computational kernels - development files
+ KokkosKernels implements local computational kernels for linear algebra and
+ graph operations, using the Kokkos shared-memory parallel programming model.
+ "Local" means not using MPI, or running within a single MPI process without
+ knowing about MPI.  "Computational kernels" are coarse-grained operations;
+ they take a lot of work and make sense to parallelize inside using Kokkos.
+ KokkosKernels can be the building block of a parallel linear algebra library
+ like Tpetra that uses MPI and threads for parallelism, or it can be used
+ stand-alone in your application.
+ .
+ This package provides headers.

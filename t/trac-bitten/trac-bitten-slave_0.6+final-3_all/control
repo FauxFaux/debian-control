@@ -1,0 +1,25 @@
+Package: trac-bitten-slave
+Source: trac-bitten
+Version: 0.6+final-3
+Architecture: all
+Maintainer: Python Applications Packaging Team <python-apps-team@lists.alioth.debian.org>
+Installed-Size: 295
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8), python-pkg-resources
+Suggests: adduser
+Breaks: trac-bitten (<< 0.6+final-1)
+Replaces: trac-bitten (<< 0.6+final-1)
+Section: web
+Priority: optional
+Homepage: http://bitten.edgewall.org/
+Description: continuous integration plugin for Trac
+ Bitten is a Trac extension for continuous integration. It uses
+ a distributed build model, where one or more "slaves" run the
+ actual tests, and a "master" gathers the results and displays
+ them nicely on a web page.
+ .
+ Bitten is similar to BuildBot, Gump, Hudson, Jenkins, or
+ Tinderbox, but integrated well into Trac.
+ .
+ This package contains the slave, which performs the actual build.
+ It is recommended to run the slave on behalf of a non-privileged
+ user. You may run the slave from e.g. from cron or as a daemon.

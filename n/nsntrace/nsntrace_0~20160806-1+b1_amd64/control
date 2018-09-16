@@ -1,0 +1,15 @@
+Package: nsntrace
+Source: nsntrace (0~20160806-1)
+Version: 0~20160806-1+b1
+Architecture: amd64
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 34
+Depends: libc6 (>= 2.4), libnl-3-200 (>= 3.2.7), libnl-route-3-200 (>= 3.2.24), libpcap0.8 (>= 0.9.8), iptables
+Suggests: sudo
+Section: admin
+Priority: extra
+Homepage: https://github.com/jonasdn/nsntrace
+Description: perform network trace of a single process by using network namespaces
+ Uses Linux network namespaces to perform network traces of a single
+ application. The traces are saved as pcap files. And can later be analyzed
+ by for instance Wireshark.

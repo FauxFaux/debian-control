@@ -1,0 +1,23 @@
+Package: bosixnet-daemon
+Source: bosixnet
+Version: 1.9-1
+Architecture: all
+Maintainer: Boris Pek <tehnick@debian.org>
+Installed-Size: 43
+Depends: curl, lsb-base (>= 3.0-6), sed (>= 4.2), init-system-helpers (>= 1.18~)
+Suggests: bosixnet-webui, miredo | gogoc
+Section: net
+Priority: optional
+Homepage: https://github.com/tehnick/bosixnet
+Description: Build Own IPv6 Network (client utilities)
+ Project should be useful when you have to administer many computers
+ distributed through different networks and connected via NAT. In most of
+ cases you may just install miredo, gogoc or any other tunnel broker's
+ software and these computers will be available via IPv6 addresses. BOSixNet
+ includes the collection of tools for automatic updating the list of such
+ hosts.
+ .
+ This package provides the shell script which periodically sends information
+ about current IPv6 address to remote server and updates local /etc/hosts
+ based on data received from that remote server. It is expected that
+ bosixnet-webui is launched on that remote server.

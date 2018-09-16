@@ -1,0 +1,27 @@
+Package: iraf-mscred
+Version: 5.05+2018.07.09-1
+Architecture: amd64
+Maintainer: Debian Astro Team <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 13231
+Depends: iraf, libc6 (>= 2.15), libcfitsio5 (>= 3.390~), libcurl3-gnutls (>= 7.16.2), libexpat1 (>= 2.0.1)
+Suggests: iraf-fitsutil
+Enhances: iraf
+Section: science
+Priority: optional
+Multi-Arch: foreign
+Description: CCD mosaic reduction package for IRAF
+ The MSCRED external package is used to reduce CCD mosaic data in
+ multiextension FITS format. This format is produced for example by
+ the Data Capture Agent when observing with the NOAO CCD Mosaic
+ Imager, as well as similar instruments from AAO, CFA, CFHT, ESO, INT
+ and others.
+ .
+ The tasks in the mscred package perform the following functions:
+ .
+  * display the mosaic data as an apparent single mosaic image,
+  * provide interactive examination of displayed mosaic data,
+  * combine multiple calibration exposures into master calibration files,
+  * perform the basic CCD calibrations such as zero level and gain,
+  * reconstruct a single mosaic image with distortions removed,
+  * register and combine dithered operations, and
+  * save and restore data on tape.

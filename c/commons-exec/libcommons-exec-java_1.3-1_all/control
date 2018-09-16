@@ -1,0 +1,27 @@
+Package: libcommons-exec-java
+Source: commons-exec
+Version: 1.3-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 114
+Section: java
+Priority: optional
+Homepage: http://commons.apache.org/exec/
+Description: Java library to reliably execute external processes from within the JVM
+ Executing external processes from Java is a well-known problem
+ area. It is inherently platform dependent and requires the developer
+ to know and test for platform specific behaviors, for example
+ using cmd.exe on Windows or limited buffer sizes causing deadlocks.
+ The JRE support for this is very limited, albeit better with the
+ new Java SE 1.5 ProcessBuilder class.
+ .
+ Reliably executing external processes can also require knowledge of
+ the environment variables before or after the command is executed. In
+ J2SE 1.1-1.4 there is no support for this, since the method,
+ System.getenv(), for retrieving environment variables is deprecated.
+ .
+ There are currently several different libraries that for their own
+ purposes have implemented frameworks around Runtime.exec() to handle
+ the various issues outlined above. The commons-exec package aims
+ at coordinating and learning from these initiatives to create and
+ maintain a simple, reusable and well-tested package.

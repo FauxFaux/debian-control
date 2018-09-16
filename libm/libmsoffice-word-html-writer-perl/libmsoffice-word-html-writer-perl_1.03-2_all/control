@@ -1,0 +1,32 @@
+Package: libmsoffice-word-html-writer-perl
+Version: 1.03-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 58
+Depends: perl, libmime-types-perl, libparams-validate-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MsOffice-Word-HTML-Writer
+Description: module for writing MsWord documents in HTML format
+ MsOffice::Word::HTML-Writer is one way to programatically generate documents
+ targeted for Microsoft Word (MsWord).
+ .
+ MsWord can read documents encoded in native binary format, in Rich Text
+ Format (RTF), in WordML (an XML dialect), or -- maybe this is less known --
+ in HTML, with some special markup for pagination and other MsWord-specific
+ features. Such HTML documents are often in several parts, because attachments
+ like images or headers/footers need to be in separate files; however, since
+ it is more convenient to carry all data in a single file, MsWord also
+ supports the "MHTML" format (or "MHT" for short), i.e. an encapsulation of a
+ whole HTML tree into a single file encoded in MIME multipart format. This
+ format can be generated interactively from MsWord by calling the "SaveAs"
+ menu and choosing the .mht extension.
+ .
+ MsOffice::Word::HTML::Writer helps you to programatically generate MsWord
+ documents in MHT format. The advantage of this technique is that one can rely
+ on standard HTML mechanisms for layout control, such as styles, tables, divs,
+ etc -- of course this markup can be produced using your favorite HTML module.
+ The added value of MsOffice::Word::HTML::Writer is to help building the MIME
+ multipart file, and provide some abstractions for representing
+ MsWord-specific features (headers, footers, fields, etc.). This is probably
+ the most convenient way for programmatic document generation.

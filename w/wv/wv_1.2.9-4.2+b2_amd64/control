@@ -1,0 +1,36 @@
+Package: wv
+Source: wv (1.2.9-4.2)
+Version: 1.2.9-4.2+b2
+Architecture: amd64
+Maintainer: Daniel Walrond <debian@djw.org.uk>
+Installed-Size: 717
+Depends: libc6 (>= 2.4), libglib2.0-0 (>= 2.12.0), libgsf-1-114 (>= 1.14.8), libwmf0.2-7 (>= 0.2.8.4), libwv-1.2-4 (= 1.2.9-4.2+b2)
+Suggests: texlive, ghostscript, elinks | links | lynx, imagemagick, gv | postscript-viewer
+Section: text
+Priority: optional
+Homepage: http://www.abisource.com/projects/
+Description: Programs for accessing Microsoft Word documents
+ wvWare (previously known as mswordview) is a library that allows access
+ to Microsoft Word files.  It can load and parse the Word 2000, Word 97,
+ Word 95, and Word 6 file formats.  (Work is underway to support reading
+ earlier formats as well: Word 2 documents are converted to plain text.)
+ .
+ This package provides the following programs:
+ .
+  * wvWare: Converts to HTML and LaTeX.  It's used by a small army of
+    helper scripts able to preview Word documents and convert them to
+    various other formats, like PostScript, PDF, DVI, etc.
+ .
+  * wvRTF: Converts to Microsoft's Rich Text Format.
+ .
+  * wvSummary: Displays the summary information stream of all OLE2 files,
+    i.e. Excel, PowerPoint, Visio, Access, etc.
+ .
+  * wvVersion: Outputs the version of the Word format a document is stored
+    in.
+ .
+ Note that conversion to DVI, PostScript, or PDF requires the 'texlive'
+ package; PDF conversion also requires Ghostscript.  Having ELinks, Links,
+ or Lynx will greatly improve the plain text output.  ImageMagick may help
+ with the quality of images.  If you wish to preview Word documents from
+ the comfort of your mail reader, install a PostScript viewer like gv.

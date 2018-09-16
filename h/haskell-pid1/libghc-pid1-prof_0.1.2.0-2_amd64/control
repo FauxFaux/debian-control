@@ -1,0 +1,24 @@
+Package: libghc-pid1-prof
+Source: haskell-pid1
+Version: 0.1.2.0-2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 138
+Depends: libghc-pid1-dev (= 0.1.2.0-2), libghc-base-prof-4.10.1.0-35a7f, libghc-directory-prof-1.3.0.2-60cb0, libghc-process-prof-1.6.1.0-df30c, libghc-unix-prof-2.7.2.2-1e3ca
+Provides: libghc-pid1-prof-0.1.2.0-21236
+Section: haskell
+Priority: optional
+Homepage: https://github.com/fpco/pid1#readme
+Description: signal handling and orphan reaping for Unix PID1 init processes; profiling libraries
+ Library/executable for initializing signal handlers, spawning and
+ child process, and reaping orphan processes. These are the
+ responsibilities that must be fulfilled by the initial process in a
+ Unix system, and in particular comes up when running Docker
+ containers.
+ .
+ This library/executable will automatically detect if it is run as some
+ process besides PID1 and, if so, use a straightforward exec system
+ call instead.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

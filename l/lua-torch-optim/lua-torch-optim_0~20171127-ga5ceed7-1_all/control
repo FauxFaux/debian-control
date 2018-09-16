@@ -1,0 +1,38 @@
+Package: lua-torch-optim
+Version: 0~20171127-ga5ceed7-1
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 350
+Depends: lua5.1 | luajit, lua-torch-torch7, lua-torch-xlua
+Section: interpreters
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/torch/optim
+Description: Numeric Optimization Package for Torch Framework
+ This package contains several optimization routines and a logger for Torch.
+ .
+ The following algorithms are provided:
+  * Stochastic Gradient Descent
+  * Averaged Stochastic Gradient Descent
+  * L-BFGS
+  * Congugate Gradients
+  * AdaDelta
+  * AdaGrad
+  * Adam
+  * AdaMax
+  * FISTA with backtracking line search
+  * Nesterov's Accelerated Gradient method
+  * RMSprop
+  * Rprop
+  * CMAES
+ All these algorithms are designed to support batch optimization as well
+ as stochastic optimization. It's up to the user to construct an objective
+ function that represents the batch, mini-batch, or single sample on which
+ to evaluate the objective.
+ .
+ This package provides also logging and live plotting capabilities via the
+ `optim.Logger()` function. Live logging is essential to monitor the
+ network accuracy and cost function during training and testing, for
+ spotting under- and over-fitting, for early stopping or just for monitoring
+ the health of the current optimisation task.
+Lua-Versions: 5.1

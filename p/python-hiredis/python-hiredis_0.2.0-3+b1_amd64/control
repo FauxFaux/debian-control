@@ -1,0 +1,23 @@
+Package: python-hiredis
+Source: python-hiredis (0.2.0-3)
+Version: 0.2.0-3+b1
+Architecture: amd64
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 41
+Depends: python (<< 2.8), python (>= 2.7~), python:any (<< 2.8), python:any (>= 2.7.5-5~), libc6 (>= 2.14), libhiredis0.13 (>= 0.13.1)
+Recommends: python-redis
+Suggests: python-gevent, redis-server
+Section: python
+Priority: optional
+Homepage: https://github.com/redis/hiredis-py
+Description: redis protocol reader for Python 2.X using hiredis
+ python-hiredis provides a Python extension that wraps the protocol parsing
+ code in Hiredis. It is targeted at speeding up parsing multi bulk replies from
+ redis-server.
+ .
+ Hiredis is a minimalistic C client library for the Redis database, a
+ persistent key-value database with support for atomically manipulating and
+ querying data structures such as lists and sets.
+ .
+ python-hiredis is not a stand-alone redis client library and requires other
+ code to perform low-level I/O with redis.

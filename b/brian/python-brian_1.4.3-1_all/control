@@ -1,0 +1,30 @@
+Package: python-brian
+Source: brian
+Version: 1.4.3-1
+Architecture: all
+Maintainer: NeuroDebian Team <team@neuro.debian.net>
+Installed-Size: 2456
+Depends: python-matplotlib (>= 0.90.1), python-numpy (>= 1.3.0), python-scipy (>= 0.7.0), python:any (<< 2.8), python:any (>= 2.7.5-5~), python-brian-lib (>= 1.4.3-1)
+Recommends: python-sympy
+Suggests: python-brian-doc, python-nose, python-cherrypy
+Section: python
+Priority: extra
+Homepage: http://www.briansimulator.org/
+Description: simulator for spiking neural networks
+ Brian is a clock-driven simulator for spiking neural networks. It is
+ designed with an emphasis on flexibility and extensibility, for rapid
+ development and refinement of neural models. Neuron models are
+ specified by sets of user-specified differential equations, threshold
+ conditions and reset conditions (given as strings). The focus is
+ primarily on networks of single compartment neuron models (e.g. leaky
+ integrate-and-fire or Hodgkin-Huxley type neurons). Features include:
+  - a system for specifying quantities with physical dimensions
+  - exact numerical integration for linear differential equations
+  - Euler, Runge-Kutta and exponential Euler integration for nonlinear
+    differential equations
+  - synaptic connections with delays
+  - short-term and long-term plasticity (spike-timing dependent plasticity)
+  - a library of standard model components, including integrate-and-fire
+    equations, synapses and ionic currents
+  - a toolbox for automatically fitting spiking neuron models to
+    electrophysiological recordings

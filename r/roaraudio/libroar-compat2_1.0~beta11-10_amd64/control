@@ -1,0 +1,22 @@
+Package: libroar-compat2
+Source: roaraudio
+Version: 1.0~beta11-10
+Architecture: amd64
+Maintainer: Patrick Matthäi <pmatthaei@debian.org>
+Installed-Size: 190
+Depends: libc6 (>= 2.16), libroar2
+Conflicts: libroar-compat0, libroar-compat1
+Breaks: roaraudio (<< 0.3~beta7-pr2-1)
+Replaces: libroar-compat0, libroar-compat1
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://roaraudio.keep-cool.org/
+Description: drop-in replacements for other sound libraries
+ RoarAudio is a system for audio mixing. Its main purpose is to mix audio from
+ different clients before sending it to its outputs (for example a soundcard).
+ It is completely network transparent (UNIX sockets, TCP/IP, DECnet) and
+ supports many common codecs like Ogg Vorbis, Speex or FLAC.
+ .
+ To get programs which use the PulseAudio or YIFF API running, you can install
+ this package and replace the appropriate libraries.

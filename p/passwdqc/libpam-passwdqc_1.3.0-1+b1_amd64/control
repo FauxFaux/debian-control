@@ -1,0 +1,21 @@
+Package: libpam-passwdqc
+Source: passwdqc (1.3.0-1)
+Version: 1.3.0-1+b1
+Architecture: amd64
+Maintainer: Jackson Doak <noskcaj@ubuntu.com>
+Installed-Size: 47
+Depends: libc6 (>= 2.2.5), libpam0g (>= 0.99.7.1), libpasswdqc0 (>= 1.3.0), libpam-runtime (>= 1.0.1-6)
+Recommends: passwdqc
+Section: admin
+Priority: optional
+Homepage: http://www.openwall.com/passwdqc/
+Description: PAM module for password strength policy enforcement
+ passwdqc is a password/passphrase strength checking and policy
+ enforcement toolset, including a PAM module (libpam-passwdqc),
+ command-line programs (pwqcheck and pwqgen), and a library (libpasswdqc0).
+ .
+ pam_passwdqc (optionally) integrates with PAM such that it gets invoked
+ when users change their passwords. The module is capable of checking
+ password or passphrase strength, enforcing a policy, and offering
+ randomly-generated passphrases, with all of these features being
+ optional and easily (re-)configurable.

@@ -1,0 +1,20 @@
+Package: libfile-userconfig-perl
+Version: 0.06-4
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: perl, libfile-homedir-perl, libfile-sharedir-perl, libfile-copy-recursive-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/File-UserConfig
+Description: provides configuration directory for applications
+ Many modules or applications maintain a user-spec configuration data
+ directory. And the implementation pattern is generally the same.
+ .
+ A directory like /home/myuser/.application is created and populating by a set
+ of default files the first time an application runs, and from there on, the
+ files in that directory are modified.
+ .
+ File::UserConfig provides standard, light and sub-classable default
+ implementation of this concept that Does The Right Thing with the directory
+ names.

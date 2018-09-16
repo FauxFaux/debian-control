@@ -1,0 +1,24 @@
+Package: dma
+Source: dma (0.11-1)
+Version: 0.11-1+b1
+Architecture: amd64
+Maintainer: Arno Töll <arno@debian.org>
+Installed-Size: 148
+Depends: ucf (>= 0.28), debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.14), libssl1.1 (>= 1.1.0)
+Conflicts: mail-transport-agent
+Replaces: mail-transport-agent
+Provides: mail-transport-agent
+Section: mail
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/corecode/dma
+Description: lightweight mail transport agent
+ The DragonFly Mail Agent is a small Mail Transport Agent (MTA),
+ designed for home and office use.  It accepts mails from local Mail
+ User Agents (MUA) and delivers them either to local mailboxes or
+ remote SMTP servers.  Remote delivery includes support for features
+ such as TLS/SSL and SMTP authentication.
+ .
+ dma is not intended as a replacement for full-featured MTAs like
+ Sendmail, Postfix, or Exim.  Consequently, dma does not listen on
+ port 25 for incoming connections.

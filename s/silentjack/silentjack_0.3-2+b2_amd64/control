@@ -1,0 +1,14 @@
+Package: silentjack
+Source: silentjack (0.3-2)
+Version: 0.3-2+b2
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 31
+Depends: libc6 (>= 2.2.5), libjack-jackd2-0 (>= 1.9.10+20150825) | libjack-0.125
+Section: sound
+Priority: optional
+Homepage: http://www.aelius.com/njh/silentjack/
+Description: silence detector for the JACK audio system
+ SilentJack listens, using the JACK audio system, for silence. When silence is
+ detected, it runs the command specified. Once the command has been run, a grace
+ period is observed before resuming the silence detection.

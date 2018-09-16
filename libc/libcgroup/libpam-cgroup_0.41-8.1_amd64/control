@@ -1,0 +1,22 @@
+Package: libpam-cgroup
+Source: libcgroup
+Version: 0.41-8.1
+Architecture: amd64
+Maintainer: Christian Kastner <ckk@debian.org>
+Installed-Size: 33
+Depends: libc6 (>= 2.4), libcgroup1 (>= 0.36.2), libpam0g (>= 0.99.7.1)
+Section: admin
+Priority: optional
+Multi-Arch: same
+Homepage: http://libcg.sourceforge.net/
+Description: control and monitor control groups (PAM)
+ Control Groups (cgroups) provide a mechanism for aggregating/partitioning sets
+ of tasks, and all their future children, into hierarchical groups with
+ specialized behaviour.
+ .
+ libcgroup allows one to manipulate, control, administrate and monitor cgroups
+ and the associated controllers.
+ .
+ This package contains the PAM module to move a user session into an existing
+ cgroup by attempting to match uid and gid against the defined cgroup rules
+ configuration.

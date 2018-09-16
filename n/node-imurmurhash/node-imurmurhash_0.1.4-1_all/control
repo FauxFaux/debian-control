@@ -1,0 +1,21 @@
+Package: node-imurmurhash
+Version: 0.1.4-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: nodejs
+Section: javascript
+Priority: optional
+Homepage: https://github.com/jensyt/imurmurhash-js
+Description: incremental implementation of MurmurHash3 hashing algorithm
+ This module is an incremental implementation of the MurmurHash3 (32-bit)
+ hashing algorithm for JavaScript based on Gary Court's implementation with
+ kazuyukitanimura's modifications.
+ .
+ This version works significantly faster than the non-incremental version if
+ you need to hash many small strings into a single hash, since string
+ concatenation (to build the single string to pass the non-incremental version)
+ is fairly costly. In one case tested, using the incremental version was about
+ 50% faster than concatenating 5-10 strings and then hashing.
+ .
+ Node.js is an event-based server-side JavaScript engine.

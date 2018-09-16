@@ -1,0 +1,28 @@
+Package: ruby-standalone
+Source: ruby-standalone (2.5.0)
+Version: 2.5.0+b1
+Architecture: amd64
+Maintainer: Antonio Terceiro <terceiro@debian.org>
+Installed-Size: 36
+Depends: libc6 (>= 2.2.5), ruby
+Section: ruby
+Priority: optional
+Description: Ruby interpreter that won't integrate with Debian packages
+ Ruby is the interpreted scripting language for quick and easy
+ object-oriented programming.  It has many features to process text
+ files and to do system management tasks (as in perl).  It is simple,
+ straight-forward, and extensible.
+ .
+ This package provides a Ruby interpreter without providing support for other
+ Debian-provided Ruby packages, i.e. it won't use any code from Debian packages
+ that provide Ruby libraries, Rubygems won't recognize libraries installed with
+ Debian packages etc.
+ .
+ This package is mostly useful for server deployments or development
+ environments where one wants or needs to obtain the Ruby interpreter from
+ Debian (and thus benefit from having security updates, not having to build
+ from source, obtaining pre-built binaries from a trusted source etc.), but
+ install everything else from sources external to Debian such as rubygems.org.
+ .
+ No official Debian Ruby packages, application or library, should depend on this
+ package.

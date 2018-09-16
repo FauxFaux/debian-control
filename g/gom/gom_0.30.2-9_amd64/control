@@ -1,0 +1,25 @@
+Package: gom
+Version: 0.30.2-9
+Architecture: amd64
+Maintainer: Stephan Sürken <absurd@debian.org>
+Installed-Size: 175
+Pre-Depends: debconf (>= 1.5.11)
+Depends: libc6 (>= 2.7), libncurses6 (>= 6), libtinfo6 (>= 6)
+Recommends: osspd
+Conflicts: gom-x
+Replaces: gom-x
+Section: sound
+Priority: optional
+Homepage: http://software.installiert.net
+Description: Command line and interactive ncurses-based OSS audio mixer
+ gom is a command line mixer utility with optional built-in ncurses
+ interactive interface.
+ .
+ Its main feature is an exhaustive command line interface that makes
+ it ideal for scripting (e.g. for audio recording, running at user
+ and/or system login time, setting/restoring of settings, etc).
+ .
+ It supports OSS only, so if you want to use it with ALSA, you will
+ need its OSS-compatible modules. If you want to use all possible
+ features of ALSA however, you would need to use a mixer program
+ dedicated for ALSA.

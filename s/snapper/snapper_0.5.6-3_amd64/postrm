@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+install|upgrade)
+  if dpkg --compare-versions "$2" lt-nl 0.3.3-0.1; then
+    rm /etc/cron.daily/snapper /etc/cron.hourly/snapper || true
+  fi
+esac
+# Automatically added by dh_installsystemd/11.3.5
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'snapper-boot.timer' 'snapper-cleanup.timer' 'snapper-timeline.timer' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'snapper-boot.timer' 'snapper-cleanup.timer' 'snapper-timeline.timer' >/dev/null || true
+		deb-systemd-helper unmask 'snapper-boot.timer' 'snapper-cleanup.timer' 'snapper-timeline.timer' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+exit 0

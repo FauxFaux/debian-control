@@ -1,0 +1,17 @@
+Package: libdbix-class-optimisticlocking-perl
+Version: 0.02-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: perl, libdbix-class-perl (>= 0.08195)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/DBIx-Class-OptimisticLocking
+Description: Optimistic locking support for DBIx::Class
+ Optimistic locking is an alternative to using exclusive locks when you
+ have the possibility of concurrent, conflicting updates in your database.
+ The basic principle is you allow any and all clients to issue updates and
+ rather than preemptively synchronizing all data  modifications (which is
+ what happens with exclusive locks) you are "optimistic" that updates won't
+ interfere with one another and the updates will only fail when they do
+ in fact interfere with one another.

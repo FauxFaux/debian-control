@@ -1,0 +1,24 @@
+Package: libcgi-application-plugin-authentication-perl
+Version: 0.23-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 331
+Depends: perl, libcgi-application-perl, libcgi-pm-perl | perl (<< 5.19), libuniversal-require-perl
+Recommends: libcgi-application-basic-plugin-bundle-perl
+Suggests: libapache-htpasswd-perl, libauthen-simple-perl, libcgi-application-extra-plugin-bundle-perl (>= 0.3), libclass-dbi-perl, libcolor-calc-perl, libdbix-class-perl
+Enhances: libcgi-application-extra-plugin-bundle-perl (>= 0.3)
+Breaks: libcgi-application-extra-plugin-bundle-perl (<< 0.3)
+Replaces: libcgi-application-extra-plugin-bundle-perl (<< 0.3)
+Provides: libcgi-application-plugin-authentication-driver-cdbi-perl, libcgi-application-plugin-authentication-driver-dbic-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Application-Plugin-Authentication
+Description: authentication framework for CGI::Application
+ CGI::Application::Plugin::Authentication adds the ability to authenticate
+ users in your CGI::Application modules. The module separates authentication
+ into Drivers (backend logic), Store (cookie management etc) and Display
+ (formulation of the login form). The following drivers are bundled with this
+ package:
+ .
+  - CGI::Application::Plugin::Authentication::Driver::DBIC
+  - CGI::Application::Plugin::Authentication::Driver::CDBI

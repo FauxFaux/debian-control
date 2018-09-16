@@ -1,0 +1,17 @@
+Package: rs
+Version: 20140609-5
+Architecture: amd64
+Maintainer: Thorsten Glaser <tg@mirbsd.de>
+Installed-Size: 36
+Depends: libbsd0 (>= 0.2.0), libc6 (>= 2.4)
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Description: reshape a data array
+ rs reads the standard input, interpreting each line as a row of
+ blank-separated entries in an array, transforms the array
+ according to the options, and writes it on the standard output.
+ Numerous options control input, reshaping and output processing;
+ the simplest usage example is "ls -1 | rs", which outputs the
+ same (on an 80-column terminal) as the modern "ls" with no "-1"
+ argument.

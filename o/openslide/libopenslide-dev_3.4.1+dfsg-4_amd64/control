@@ -1,0 +1,34 @@
+Package: libopenslide-dev
+Source: openslide
+Version: 3.4.1+dfsg-4
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 59
+Depends: libopenslide0 (= 3.4.1+dfsg-4)
+Provides: libopenslide0-dev
+Section: libdevel
+Priority: optional
+Homepage: http://openslide.org
+Description: Development files for the OpenSlide library
+ OpenSlide is a C library that provides a simple interface to read whole-slide
+ images also known as virtual slides.
+ .
+ Whole-slide images, also known as virtual slides, are large, high resolution
+ images used in digital pathology. Reading these images using standard image
+ tools or libraries is a challenge because these tools are typically designed
+ for images that can comfortably be uncompressed into RAM or a swap file.
+ Whole-slide images routinely exceed RAM sizes, often occupying tens of
+ gigabytes when uncompressed. Additionally, whole-slide images are typically
+ multi-resolution, and only a small amount of image data might be needed at a
+ particular resolution.
+ .
+ This library currently supports:
+  - Aperio (.svs, .tif)
+  - Hamamatsu (.vms, .vmu, .ndpi)
+  - Leica (.scn)
+  - MIRAX (.mrxs)
+  - Sakura (.svslide)
+  - Trestle (.tif)
+  - Generic tiled TIFF (.tif)
+ .
+ This package contains development files needed to build OpenSlide applications.

@@ -1,0 +1,20 @@
+Package: deets
+Version: 0.2.1-5
+Architecture: amd64
+Maintainer: Clint Adams <clint@debian.org>
+Installed-Size: 162
+Depends: libc6 (>= 2.14), liblua5.1-0, lua-md5, lua-cosmo (>= 10.04.06), lua-augeas, augeas-tools
+Built-Using: dpkg (= 1.19.0.5)
+Section: admin
+Priority: optional
+Homepage: https://salsa.debian.org/clint/deets
+Description: decentralized model-based administration tool
+ Deets provides a way to manage Debian packages and files
+ on your systems using Lua-based configuration files.  A
+ specialized Lua interpreter called luau is capable of
+ validating your specifications and optionally enforcing
+ them.
+ .
+ In addition, it can scan your system and generate a
+ crude model configuration based on the current state
+ of the Debian package database and all conffiles.

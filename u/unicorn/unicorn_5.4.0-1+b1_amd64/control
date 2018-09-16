@@ -1,0 +1,17 @@
+Package: unicorn
+Source: unicorn (5.4.0-1)
+Version: 5.4.0-1+b1
+Architecture: amd64
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 332
+Depends: ruby (>= 1:2.5~0), ruby-kgio (>= 2.10.0~), ruby-rack, ruby-raindrops (>= 0.16.0~), libc6 (>= 2.14), libgmp10, libruby2.5 (>= 2.5.0~preview1), ruby (<< 1:2.6~)
+Section: ruby
+Priority: optional
+Homepage: http://unicorn.bogomips.org/
+Description: Rack HTTP server for fast clients
+ Unicorn is an HTTP server for Rack applications designed to only serve fast
+ clients on low-latency, high-bandwidth connections and take advantage of
+ features in Unix and Unix-like kernels. Slow clients should only be served by
+ placing a reverse proxy capable of fully buffering both request and response
+ in between Unicorn and slow clients.
+Ruby-Versions: ruby2.5

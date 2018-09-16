@@ -1,0 +1,29 @@
+Package: cmake-fedora
+Version: 2.7.2-1
+Architecture: all
+Maintainer: ChangZhuo Chen (陳昌倬) <czchen@debian.org>
+Installed-Size: 397
+Depends: cmake
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://fedorahosted.org/cmake-fedora/
+Description: Set of scripts and cmake modules that simplify the release process
+ cmake-fedora is designed to relieve you from chores of releasing software by:
+ .
+   - Keeping the consistency of release information such as version and update
+     messages in:
+     - Release notes
+     - ChangeLog
+     - Tags
+     - Spec file
+     - Fedpkg commit message
+     - Bodhi notes
+   - Source archive depends on the files to be packed.
+   - Run rpmlint and koji scratch build before tag as sanity checks.
+   - Easy upload to scp, sftp hosting services sites.
+   - Translation targets like gettext and Zanata.
+   - Provide license information and templates of CMakeLists.txt, spec files for
+    new packages.
+ .
+ while avoid some pitfalls like all junk files are packed.

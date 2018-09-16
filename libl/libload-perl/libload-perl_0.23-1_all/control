@@ -1,0 +1,30 @@
+Package: libload-perl
+Version: 0.23-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 80
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/load/
+Description: pragma for controlling when subroutines will be loaded
+ The "load" pragma allows a module developer to give the application developer
+ more options with regards to optimize for memory or CPU usage. The "load"
+ pragma gives more control on the moment when subroutines are loaded and start
+ taking up memory. This allows the application developer to optimize for CPU
+ usage (by loading all of a module at compile time and thus reducing the
+ amount of CPU used during the execution of an application). Or allow the
+ application developer to optimize for memory usage, by loading subroutines
+ only when they are actually needed, thereby however increasing the amount of
+ CPU needed during execution.
+ .
+ The "load" pragma combines the best of both worlds from AutoLoader and
+ SelfLoader. And adds some more features.
+ .
+ In a situation where you want to use as little memory as possible, the "load"
+ pragma (in the context of a module) is a drop-in replacement for AutoLoader.
+ But for situations where you want to have a module load everything it could
+ ever possibly need (e.g. when starting a mod_perl server in pre-fork mode),
+ the "load" pragma can be used (in the context of an application) to have all
+ subroutines of a module loaded without having to make any change to the
+ source of the module in question.

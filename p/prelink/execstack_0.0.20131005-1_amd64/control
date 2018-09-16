@@ -1,0 +1,15 @@
+Package: execstack
+Source: prelink
+Version: 0.0.20131005-1
+Architecture: amd64
+Maintainer: Geoffrey Thomas <geofft@ldpreload.com>
+Installed-Size: 229
+Depends: libc6 (>= 2.14), libelf1 (>= 0.131), libselinux1 (>= 1.32)
+Conflicts: prelink (<< 0.0.20090311-2)
+Replaces: prelink
+Section: admin
+Priority: optional
+Description: ELF GNU_STACK program header editing utility
+ The execstack package contains a utility which modifies (or adds) the
+ GNU_STACK program header to ELF binaries, and allows changing the executable
+ flag.

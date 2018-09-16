@@ -1,0 +1,22 @@
+Package: blcr-util
+Source: blcr (0.8.5-2.3)
+Version: 0.8.5-2.3+b1
+Architecture: amd64
+Maintainer: Alan Woodland <awoodland@debian.org>
+Installed-Size: 93
+Depends: libc6 (>= 2.2.5), libcr0 (>= 0.8.2)
+Section: misc
+Priority: optional
+Homepage: https://ftg.lbl.gov/projects/CheckpointRestart/
+Description: Userspace tools to Checkpoint and Restart Linux processes
+ BLCR (Berkeley Lab Checkpoint/Restart) allows programs running on
+ Linux to be "checkpointed" (written entirely to a file), and then
+ later "restarted".
+ .
+ BLCR can checkpoint both single- and multithreaded (pthreads)
+ programs linked with the NPTL implementation of pthreads. BLCR is
+ also able to save and restore groups of related processes together
+ with the pipes that connect them.
+ .
+ This package contains utilities needed to launch and restart
+ unmodified processes with checkpointing support.

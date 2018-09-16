@@ -1,0 +1,23 @@
+Package: python-carrot
+Version: 0.10.7-1.1
+Architecture: all
+Maintainer: David Watson <dwatson@debian.org>
+Installed-Size: 494
+Depends: python-amqplib, python-anyjson, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Recommends: python-stompy
+Section: python
+Priority: optional
+Homepage: http://pypi.python.org/pypi/carrot
+Description: AMQP messaging queue framework
+ AMQP is the Advanced Message Queuing Protocol, an open standard protocol
+ for message orientation, queuing, routing, reliability and security.
+ .
+ The aim of carrot is to make messaging in Python as easy as possible by
+ providing a high-level interface for producing and consuming messages.
+ At the same time it is a goal to re-use what is already available as much
+ as possible.
+ .
+ carrot has pluggable messaging back-ends, so it is possible to support
+ several messaging systems. Currently, there is support for AMQP (py-amqplib)
+ and STOMP (python-stomp). There is also a in-memory backend for testing
+ purposes that uses the Python queue module.

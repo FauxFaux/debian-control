@@ -1,0 +1,34 @@
+Package: python3-mwclient
+Source: mwclient
+Version: 0.8.7-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 110
+Depends: python3-requests-oauthlib, python3-six, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/mwclient/mwclient
+Description: MediaWiki API client in Python
+ mwclient is a lightweight Python client library to the MediaWiki API
+ which provides access to most API functionality. It works with Python
+ 2.7, 3.3 and above, and supports MediaWiki 1.16 and above. For
+ functions not available in the current MediaWiki, a
+ MediaWikiVersionError is raised.
+ .
+ Most properties and generators accept the same parameters as the API,
+ without their two-letter prefix. Exceptions to this rule:
+ .
+  * Image.imageinfo is the imageinfo of the latest image. Earlier
+    versions can be fetched using imagehistory()
+  * Site.all*: parameter  [ap]from renamed to start
+  * categorymembers is implemented as Category.members
+  * deletedrevs is deletedrevisions
+  * usercontribs is usercontributions
+  * First parameters of search and usercontributions are search and
+    user respectively
+ .
+ Properties and generators are implemented as Python generators. Their
+ limit parameter is only an indication of the number of items in one
+ chunk. It is not the total limit. Doing list(generator(limit =
+ limit)) will return ALL items of generator, and not be limited by the
+ limit value. Default chunk size is generally the maximum chunk size.

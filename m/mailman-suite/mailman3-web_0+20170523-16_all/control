@@ -1,0 +1,31 @@
+Package: mailman3-web
+Source: mailman-suite
+Version: 0+20170523-16
+Architecture: all
+Maintainer: Debian Mailman Team <pkg-mailman-hackers@lists.alioth.debian.org>
+Installed-Size: 117
+Depends: dbconfig-sqlite3 | dbconfig-pgsql | dbconfig-mysql | dbconfig-no-thanks, lsb-base, node-less, python (<< 2.8), python-django-hyperkitty, python-django-postorius, python-psycopg2 | python-pymysql, python-whoosh, ruby-sass, ucf, uwsgi, uwsgi-plugin-python, debconf (>= 0.5) | debconf-2.0
+Recommends: libapache2-mod-proxy-uwsgi | nginx
+Suggests: postgresql | default-mysql-server | virtual-mysql-server
+Breaks: mailman3-suite (<< 0+20170523-12~)
+Replaces: mailman3-suite (<< 0+20170523-12~)
+Provides: mailman3-suite (= 0+20170523-11)
+Section: web
+Priority: optional
+Homepage: https://gitlab.com/mailman/mailman-suite
+Description: Django project integrating Mailman3 Postorius and HyperKitty
+ This django web application provides the Mailman3 Postorius web interface
+ and the HyperKitty mailinglist archiver integrated into one project.
+ .
+ The package automates most of the necessary configuration for the Django
+ project (database setup, webserver configuration, secret and API key
+ generation, Django project configuration) to get a ready-to-use Mailman3
+ web suite.
+ .
+ The Mailman3 Django project runs as uWSGI daemon and optionally a webserver
+ is configured as reverse proxy. In this case, the service can be accessed
+ at '/mailman3'.
+ .
+ Default database backend is SQLite3 in order to not break automated
+ installations. For productive setups, PostgreSQL or MySQL are much better
+ options though. See README.Debian for further information.

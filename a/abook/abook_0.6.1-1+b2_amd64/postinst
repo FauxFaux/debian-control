@@ -1,0 +1,66 @@
+#!/bin/sh
+# postinst for abook
+# copyright 2003-2012 by Rhonda D'Vine <rhonda@debian.org>
+# Licenced under WTFPLv2
+
+set -e
+
+# Source debconf library.
+if [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+fi
+
+action=$1
+if [ "${DEBCONF_RECONFIGURE}" = "1" ]; then
+	# workaround until reconfigure is really available
+	action=reconfigure
+fi
+version=$2
+
+# if we got reinstalled after a remove, enable the config snippet again
+if [ "$action" = 'configure' ] && [ -e /etc/Muttrc.d/abook.rc.removed ] && [ ! -e /etc/Muttrc.d/abook.rc ]; then
+	mv /etc/Muttrc.d/abook.rc.removed /etc/Muttrc.d/abook.rc || true
+fi
+
+# fix for #394532 breakage
+if grep "abook --mutt-query '%s'" /etc/Muttrc.d/abook.rc >/dev/null 2>/dev/null ; then
+	sed -i "s/abook --mutt-query '%s'/abook --mutt-query %s/" /etc/Muttrc.d/abook.rc
+fi
+
+# only on new install, upgrade from < 0.5.6 or reconfigure
+if dpkg --compare-versions "$version" lt "0.5.6" || [ "$action" = "reconfigure" ]; then
+	mutt=true
+	if [ -e /usr/share/debconf/confmodule ]; then
+		db_get abook/muttrc.d
+		mutt="$RET"
+	fi
+
+	case "$mutt" in
+	    true)
+		if [ ! -e /etc/Muttrc.d/abook.rc ] ; then
+			mkdir /etc/Muttrc.d 2> /dev/null || true
+			cat > /etc/Muttrc.d/abook.rc << EOF
+set query_command="abook --mutt-query %s"
+macro pager A |'abook --add-email'\n
+EOF
+		fi
+		;;
+	    false)
+		rm /etc/Muttrc.d/abook.rc 2> /dev/null || true
+		rmdir /etc/Muttrc.d 2> /dev/null || true
+		;;
+	esac
+fi
+
+
+# menu entry
+if [ "$action" = 'configure' ] && [ -x "`which update-menus`" ]; then
+	update-menus
+fi
+
+# Automatically added by dh_installmenu/11.2.1
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

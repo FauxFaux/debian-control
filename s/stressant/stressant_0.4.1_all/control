@@ -1,0 +1,17 @@
+Package: stressant
+Version: 0.4.1
+Architecture: all
+Maintainer: Antoine Beaupré <anarcat@debian.org>
+Installed-Size: 52
+Depends: python-colorlog, python-humanize, python:any (<< 2.8), python:any (>= 2.7~)
+Recommends: smartctl, lshw, hdparm, fio, stress-ng, iperf3
+Section: admin
+Priority: optional
+Homepage: https://gitlab.com/anarcat/stressant
+Description: simple stress testing and burn-in tool
+ stressant is designed to run on new machines to make sure they will
+ work reliably by testing various parts of the system (CPU, RAM, disk,
+ network) by putting them under heavy load and try to detect failures.
+ .
+ As much as possible, stressant tries to reuse existing tools to
+ perform the various tasks and aims to be run automatically.

@@ -1,0 +1,24 @@
+Package: glusterfs-common
+Source: glusterfs
+Version: 4.1.3-1
+Architecture: amd64
+Maintainer: Patrick Matthäi <pmatthaei@debian.org>
+Installed-Size: 18680
+Depends: libacl1 (>= 2.2.51-8), libaio1 (>= 0.3.93), libc6 (>= 2.16), libibverbs1 (>= 1.1.6), liblvm2app2.2 (>= 2.02.176), libncurses6 (>= 6), libpython2.7 (>= 2.7), librdmacm1 (>= 1.0.15), libreadline7 (>= 6.0), libsqlite3-0 (>= 3.5.9), libssl1.1 (>= 1.1.0), libtinfo6 (>= 6), liburcu6 (>= 0.10.0), libuuid1 (>= 2.16), libxml2 (>= 2.7.4), zlib1g (>= 1:1.1.4), python:any, libacl1-dev, python-prettytable, python-requests, python-jwt, attr, xfsprogs, e2fsprogs, psmisc
+Conflicts: libglusterfs-dev, libglusterfs0
+Breaks: glusterfs-server (<< 3.4.0~qa5)
+Replaces: glusterfs-server (<< 3.4.0~qa5), libglusterfs-dev, libglusterfs0
+Section: admin
+Priority: optional
+Homepage: https://www.gluster.org/
+Description: GlusterFS common libraries and translator modules
+ GlusterFS is a clustered file-system capable of scaling to several
+ petabytes. It aggregates various storage bricks over Infiniband RDMA
+ or TCP/IP interconnect into one large parallel network file
+ system. GlusterFS is one of the most sophisticated file system in
+ terms of features and extensibility. It borrows a powerful concept
+ called Translators from GNU Hurd kernel. Much of the code in GlusterFS
+ is in userspace and easily manageable.
+ .
+ This package includes libglusterfs and glusterfs translator modules
+ common to both GlusterFS server and client framework.

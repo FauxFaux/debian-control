@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = purge ]; then
+    delgroup apt-dater || true
+fi
+
+# Automatically added by dh_installmenu/11.2.1
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+

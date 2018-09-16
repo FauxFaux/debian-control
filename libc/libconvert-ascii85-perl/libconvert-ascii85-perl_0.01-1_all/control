@@ -1,0 +1,17 @@
+Package: libconvert-ascii85-perl
+Version: 0.01-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 49
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Convert-Ascii85
+Description: module for encoding and decoding of ascii85/base85 strings
+ Convert::Ascii85 implements the Ascii85 (also known as Base85) algorithm for
+ encoding binary data as text. This is done by interpreting each group of four
+ bytes as a 32-bit integer, which is then converted to a five-digit base-85
+ representation using the digits from ASCII 33 (!) to 117 (u).
+ .
+ This is similar to MIME::Base64 but more space efficient: The overhead is
+ only 1/4 of the original data (as opposed to 1/3 for Base64).

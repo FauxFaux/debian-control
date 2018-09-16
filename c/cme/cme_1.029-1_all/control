@@ -1,0 +1,36 @@
+Package: cme
+Version: 1.029-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 196
+Depends: perl, libapp-cmd-perl, libconfig-model-perl (>= 2.124), libjson-perl, liblog-log4perl-perl, libpath-tiny-perl, libpod-pom-perl, libyaml-perl
+Recommends: libconfig-model-approx-perl, libconfig-model-dpkg-perl, libconfig-model-lcdproc-perl, libconfig-model-openssh-perl, libconfig-model-systemd-perl, libconfig-model-tkui-perl
+Suggests: libconfig-model-cursesui-perl, libconfig-model-itself-perl
+Breaks: libconfig-model-perl (<< 2.071-2~)
+Replaces: libconfig-model-perl (<< 2.071-2~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/App-Cme
+Description: Check or edit configuration data with Config::Model
+ cme provides a command to check or edit configuration data with
+ Config::Model.
+ .
+ cme and Config::Model are quite modular: the configuration data that
+ you can edit depend on installed packages. I.e.:
+  - ssh client or ssh daemon config: libconfig-model-openssh-perl
+  - approx config: libconfig-model-approx-perl
+  - lcdproc config: libconfig-model-lcdproc-perl
+  - popcon config: provided with libconfig-model-perl
+  - systemd config: provided with libconfig-model-systemd-perl
+ .
+ Some applications can be handled by cme:
+  - Debian package files: libconfig-model-dpkg-perl
+  - multistrap files: provided with libconfig-model-perl
+ .
+ You can also choose a user interface:
+  - graphical, based on Tk: libconfig-model-tkui-perl
+  - curses based: libconfig-model-cursesui-perl
+  - simple shell: provided with libconfig-model-perl
+ .
+ Last but not least, you can also take a stab at maintaining
+ configuration model with libconfig-model-itself-perl.

@@ -1,0 +1,24 @@
+Package: librarian-puppet-simple
+Version: 0.0.5-3
+Architecture: all
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 44
+Depends: ruby | ruby-interpreter, ruby-thor, git
+Conflicts: librarian-puppet
+Section: ruby
+Priority: optional
+Homepage: https://github.com/bodepd/librarian-puppet-simple
+Description: simple version of librarian-puppet with most of its commands
+ librarian-puppet-simple was created out of its author's frustration with the
+ dependency management in librarian-puppet. Librarian-puppet offers to simplify
+ deployment of a Puppet infrastructure by automatically pulling in modules from
+ the forge and git repositories with a single command. This package only
+ allows one to pin revisions for a collection of modules, and it is also less
+ heavy than librarian-puppet.
+ .
+ librarian-puppet-simple has fewer commands, but they should be compatible with
+ the original librarian-puppet.
+ .
+ Note that you cannot currently install both librarian-puppet and
+ librarian-puppet-simple at the same time.
+Ruby-Versions: all

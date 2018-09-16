@@ -1,0 +1,39 @@
+Package: flwm
+Version: 1.02+git2015.10.03+7dbb30-6
+Architecture: amd64
+Maintainer: Axel Beckert <abe@debian.org>
+Installed-Size: 113
+Depends: libc6 (>= 2.4), libfltk1.3 (>= 1.3.1), libgcc1 (>= 1:3.0), libstdc++6 (>= 5), libx11-6
+Recommends: libfile-desktopentry-perl, libfile-which-perl, libpath-tiny-perl, libset-scalar-perl, menu, perl
+Provides: x-window-manager
+Section: x11
+Priority: optional
+Homepage: http://flwm.sourceforge.net/
+Description: Fast Light Window Manager
+ Flwm is an attempt to combine the best ideas from several
+ window managers. The primary influence and code base is from
+ wm2 by Chris Cannam. Primary features copied from wm2 are:
+ .
+  - Does not look like Windows.
+  - Nifty sideways title bars.
+  - No icons. You deiconify by picking off a pop-up menu.
+    This means no space is wasted by icons.
+  - Really small and fast code.
+ .
+ It is enhanced by the author's own further nutty ideas:
+ .
+  - Does not use shape extension, more standard resize handles.
+  - Occupies as little screen space as possible. The border and titles
+    are as thin as you could possibly make them. And maximized
+    windows waste only 15 pixels horizontally and zero (count'em)
+    pixels vertically!
+  - Independent maximize buttons for width & height, close button.
+  - Understands Motif, KDE, and GNOME window manager hints.
+  - Multiple desktops, controlled from the same menu as the icons.
+ .
+ The recommended packages are needed to generate flwm's application
+ menus:
+  - For the old style debian-specific menu: menu
+  - For the FreeDesktop menu based on .desktop files:
+    libfile-desktopentry-perl, libfile-which-perl,
+    libpath-tiny-perl, libset-scalar-perl, and perl.

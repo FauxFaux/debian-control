@@ -1,0 +1,22 @@
+Package: libodbc1
+Source: unixodbc
+Version: 2.3.6-0.1
+Architecture: amd64
+Maintainer: Steve Langasek <vorlon@debian.org>
+Installed-Size: 626
+Depends: libc6 (>= 2.14), libltdl7 (>= 2.4.6)
+Suggests: libmyodbc, odbc-postgresql, tdsodbc, unixodbc-bin
+Breaks: unixodbc (<< 2.2.14p2-3)
+Replaces: unixodbc (<< 2.2.14p2-3)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.unixodbc.org/
+Description: ODBC library for Unix
+ UnixODBC is an implementation of the Open DataBase Connectivity standard,
+ a database abstraction layer that allows applications to be used with
+ many different relational databases by way of a single library.
+ .
+ This package provides the UnixODBC shared library, libodbc; and
+ libodbctxt.so, a sample driver that reads from and writes to flat text
+ files.

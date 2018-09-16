@@ -1,0 +1,22 @@
+Package: duc-nox
+Source: duc
+Version: 1.4.3-4
+Architecture: amd64
+Maintainer: Jonathan Dowland <jmtd@debian.org>
+Installed-Size: 135
+Depends: libc6 (>= 2.14), libncursesw6 (>= 6), libtinfo6 (>= 6), libtokyocabinet9 (>= 1.4.47)
+Conflicts: duc
+Section: utils
+Priority: optional
+Homepage: http://duc.zevv.nl/
+Description: high-performance disk usage analyzer (without X support)
+ Duc maintains a database of accumulated sizes of directories of the file
+ system, and allows you to query this database with some tools.
+ .
+ Duc comes with console utilities, ncursesw and a CGI wrapper for disk
+ usage querying and visualisation.
+ .
+ Duc is designed to scale to huge filesystems: it will index and display
+ hundreds of millions of files on petabytes of storage without problems.
+ .
+ This package provides the console version of the duc.

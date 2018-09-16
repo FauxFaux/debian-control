@@ -1,0 +1,19 @@
+Package: vblade
+Version: 24-2
+Architecture: amd64
+Maintainer: Christoph Biedl <debian.axhn@manchmal.in-ulm.de>
+Installed-Size: 72
+Depends: libc6 (>= 2.7), systemd | daemon, systemd | lsb-base
+Section: admin
+Priority: optional
+Homepage: https://github.com/OpenAoE/vblade
+Description: virtual AoE blade emulator
+ The vblade is the virtual EtherDrive (R) blade, a program that makes a
+ seekable file available over an ethernet local area network (LAN) via
+ the ATA over Ethernet (AoE) protocol.
+ .
+ The seekable file is typically a block device like /dev/md0 but even
+ regular files will work.  Sparse files can be especially convenient.
+ When vblade exports the block storage over AoE it becomes a storage
+ target.  Another host on the same LAN can access the storage if it has
+ a compatible aoe kernel driver.

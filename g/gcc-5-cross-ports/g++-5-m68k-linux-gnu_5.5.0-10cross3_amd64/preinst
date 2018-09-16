@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove m68k-linux-gnu-g++ /usr/bin/m68k-linux-gnu-g++-5
+fi
+
+
+
+exit 0

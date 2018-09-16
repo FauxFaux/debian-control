@@ -1,0 +1,21 @@
+Package: iva
+Version: 1.0.9+ds-6
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 8766
+Depends: fastaq (>= 1.6), python3-networkx, python3-pysam, python3:any, kmc, mummer, smalt, samtools, python3-numpy, default-jre-headless
+Recommends: r-base-core, bioperl, trimmomatic
+Section: science
+Priority: optional
+Homepage: https://github.com/sanger-pathogens/iva
+Description: iterative virus sequence assembler
+ IVA is a de novo assembler designed to assemble
+ virus genomes that have no repeat sequences,
+ using Illumina read pairs sequenced from mixed
+ populations at extremely high depth.
+ .
+ IVA's main algorithm works by iteratively extending
+ contigs using aligned read pairs. Its input can be
+ just read pairs, or additionally you can provide an
+ existing set of contigs to be extended. Alternatively,
+ it can take reads together with a reference sequence.

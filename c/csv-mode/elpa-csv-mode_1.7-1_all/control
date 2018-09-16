@@ -1,0 +1,35 @@
+Package: elpa-csv-mode
+Source: csv-mode
+Version: 1.7-1
+Architecture: all
+Maintainer: Debian Emacsen team <debian-emacsen@lists.debian.org>
+Installed-Size: 84
+Depends: emacsen-common
+Recommends: emacs (>= 46.0)
+Enhances: emacs, emacs25
+Section: lisp
+Priority: optional
+Homepage: https://elpa.gnu.org/packages/csv-mode.html
+Description: Emacs major mode for editing comma/char separated values
+ This package implements CSV mode, a major mode for editing records
+ in a generalised CSV (character-separated values) format. CSV mode
+ supports operations such as the following:
+ .
+   * sort lexicographically and numerically on a specified
+     field or column.
+   * kill and yank by field or column.  C-c C-k can kill more than one
+     field at once, but multiple killed fields can be yanked only as a
+     fixed group equivalent to a single field.
+   * align fields into columns
+   * interchange between rows and columns.
+ .
+ CSV mode can recognise fields separated by a number of individual
+ characters, configurable in `csv-separators'.  CSV data fields can be
+ delimited with quote characters.  This implementation supports quoted
+ fields, where all permitted quote characters are specified in the
+ customisable user option `csv-field-quotes'.  By default, the only
+ separator is a comma and the only field quote is a double quote.
+ .
+ The global minor mode `csv-field-index-mode' displays the current
+ field index in the mode line, cf. `line-number-mode' and
+ `column-number-mode'.  It is on by default.

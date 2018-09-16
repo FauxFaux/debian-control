@@ -1,0 +1,23 @@
+Package: libtry-tiny-smartcatch-perl
+Version: 0.5-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 36
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://github.com/mysz/try-tiny-smartcatch
+Description: lightweight Perl module for powerful exceptions handling
+ Try::Tiny::SmartCatch's goals are mostly the same as Try::Tiny module,
+ but there are few changes to it's specification.  Main difference is
+ possibility to catch just some kinds of exceptions in place of catching
+ everything.  Another one is slightly changed syntax.
+ .
+ When raised exception is an object, Try::Tiny::SmartCatch will test for
+ exception type (using UNIVERSAL::isa).  When raised exception is just a
+ text message (like "die ('message')"), there can be specified part of
+ message to test for.
+ .
+ There are also explicit sub blocks.  In opposite to Try::Tiny, every
+ block in Try::Tiny::SmartCatch's "try", "catch_when", "catch_default",
+ "then" and "finally" must have explicit subroutines specified.

@@ -1,0 +1,20 @@
+Package: vpnc
+Version: 0.5.3r550-3
+Architecture: amd64
+Maintainer: Florian Schlichting <fsfs@debian.org>
+Installed-Size: 216
+Depends: libc6 (>= 2.15), libgcrypt20 (>= 1.7.0), libgnutls30 (>= 3.5.0), perl:any, vpnc-scripts
+Recommends: iproute2
+Suggests: resolvconf
+Section: net
+Priority: extra
+Homepage: https://www.unix-ag.uni-kl.de/~massar/vpnc/
+Description: Cisco-compatible VPN client
+ vpnc is a VPN client compatible with cisco3000 VPN Concentrator (also
+ known as Cisco's EasyVPN equipment). vpnc runs entirely in userspace
+ and does not require kernel modules except for the tun driver to
+ communicate with the network layer.
+ .
+ It supports most of the features needed to establish connection to the
+ VPN concentrator: MD5 and SHA1 hashes, 3DES and AES ciphers, PFS and
+ various IKE DH group settings.

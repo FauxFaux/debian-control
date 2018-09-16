@@ -1,0 +1,18 @@
+Package: isight-firmware-tools
+Version: 1.6-3
+Architecture: amd64
+Maintainer: Debian Mactel <team+pkg-mactel-devel@tracker.debian.org>
+Installed-Size: 112
+Depends: libc6 (>= 2.4), libgcrypt20 (>= 1.7.0), libglib2.0-0 (>= 2.14.0), libusb-0.1-4 (>= 2:0.1.12), debconf (>= 0.5) | debconf-2.0, udev
+Section: contrib/graphics
+Priority: optional
+Homepage: https://launchpad.net/isight-firmware-tools/
+Description: tools for dealing with Apple iSight firmware
+ Apple Built-in iSight requires firmware that can be extracted from
+ the Mac OS X USBVideo driver. This package provides tools for extracting
+ the firmware from the driver and installing udev rules and tools to
+ automatically load the firmware when needed.
+ .
+ A convenient tool for converting firmware binaries to Intel HEX format
+ is also provided. This may be required later for use with a
+ generic firmware loader such as fxload.

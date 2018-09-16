@@ -1,0 +1,17 @@
+Package: libcatalyst-plugin-compress-perl
+Version: 0.5-1
+Architecture: all
+Maintainer: Alexander Wirt <formorer@debian.org>
+Installed-Size: 52
+Depends: libcatalyst-perl, libmro-compat-perl, perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Catalyst-Plugin-Compress/
+Description: Catalyst plugin to compress the response
+ This module combines Catalyst::Plugin::Deflate
+ Catalyst::Plugin::Gzip Catalyst::Plugin::Zlib into one.
+ .
+ It compress response to [gzip bzip2 zlib deflate] if client supports it.
+ .
+ NOTE: If you want to use this module with Catalyst::Plugin::Unicode,
+ You MUST load this plugin AFTER Catalyst::Plugin::Unicode.

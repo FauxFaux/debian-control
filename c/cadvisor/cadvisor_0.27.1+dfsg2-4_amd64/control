@@ -1,0 +1,26 @@
+Package: cadvisor
+Version: 0.27.1+dfsg2-4
+Architecture: amd64
+Maintainer: pkg-go <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 16166
+Depends: libc6 (>= 2.3.2), lsb-base, libjs-bootstrap, libjs-jquery (>= 1.11.3)
+Built-Using: docker.io (= 18.03.1+dfsg1-2), golang-1.10 (= 1.10.3-1), golang-dbus (= 4.1.0-1), golang-github-abbot-go-http-auth (= 0.0~git20150714.0.46b9627-2), golang-github-aws-aws-sdk-go (= 1.12.79+dfsg-1), golang-github-beorn7-perks (= 0.0~git20160804.0.4c0e845-1), golang-github-blang-semver (= 3.5.1-1), golang-github-coreos-go-systemd (= 16-1), golang-github-coreos-pkg (= 3-1), golang-github-davecgh-go-spew (= 1.1.0-4), golang-github-docker-go-connections (= 0.3.0-3), golang-github-docker-go-units (= 0.3.3-1), golang-github-eapache-go-xerial-snappy (= 0.0~git20160609.bb955e0-1), golang-github-garyburd-redigo (= 0.0~git20150901.0.d8dbe4d-2), golang-github-go-ini-ini (= 1.32.0-2), golang-github-golang-snappy (= 0.0+git20160529.d9eb7a3-2), golang-github-jmespath-go-jmespath (= 0.2.2-2), golang-github-mrunalp-fileutils (= 0.0~git20160930.0.4ee1cc9-1), golang-github-opencontainers-go-digest (= 1.0.0~rc1-1), golang-github-opencontainers-image-spec (= 1.0.1-1), golang-github-opencontainers-selinux (= 1.0.0~rc1+git20170621.5.4a2974b-1), golang-github-pierrec-lz4 (= 0.0~git20170519.0.5a3d224-2), golang-github-pierrec-xxhash (= 0.1.1-4), golang-github-pkg-errors (= 0.8.0+git20180311.816c908-1), golang-github-seandolphin-bqschema (= 0.0~git20150424.0.f92a08f-3), golang-github-shopify-sarama (= 1.17.0-1), golang-glog (= 0.0~git20160126.23def4e-2), golang-go-zfs (= 2.1.1-2), golang-gogoprotobuf (= 1.0.0+git20180330.1ef32a8b-1), golang-google-cloud (= 0.9.0-5), golang-gopkg-eapache-go-resiliency.v1 (= 1.0.0-4), golang-gopkg-eapache-queue.v1 (= 1.0.2-4), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-2), golang-protobuf-extensions (= 1.0.0-2), influxdb (= 1.5.3-2)
+Section: devel
+Priority: optional
+Homepage: https://github.com/google/cadvisor
+Description: analyze resource usage and performance characteristics of running containers
+ cAdvisor (Container Advisor) provides container users an understanding of
+ the resource usage and performance characteristics of their running
+ containers.
+ .
+ cAdvisor has native support for Docker containers and should support just
+ about any other container type out of the box.
+ .
+ cAdvisor also exposes container stats as Prometheus (http://prometheus.io)
+ metrics.
+ .
+ This package provides daemon that collects, aggregates, processes, and
+ exports information about running containers. Specifically, for each
+ container it keeps resource isolation parameters, historical resource
+ usage, histograms of complete historical resource usage and network
+ statistics. This data is exported by container and machine-wide.

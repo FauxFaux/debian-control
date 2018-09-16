@@ -1,0 +1,20 @@
+Package: miredo-server
+Source: miredo
+Version: 1.2.6-6
+Architecture: amd64
+Maintainer: Tomasz Buchert <tomasz@debian.org>
+Installed-Size: 231
+Pre-Depends: adduser
+Depends: lsb-base, libc6 (>= 2.14), libcap2 (>= 1:2.10)
+Suggests: miredo (= 1.2.6-6)
+Section: net
+Priority: optional
+Homepage: http://www.remlab.net/miredo/
+Description: Teredo IPv6 tunneling server
+ The Teredo IPv6 tunneling protocol encapsulates IPv6 packets into UDP/IPv4
+ datagrams, to allow hosts behind NAT devices to access the IPv6 Internet.
+ .
+ Miredo-server provides a Teredo server. Teredo servers help Teredo clients
+ determine their NAT configuration, maintain their NAT binding, and perform
+ hole punching when transmitting IPv6 packets to other Teredo clients and/or
+ Teredo relays.

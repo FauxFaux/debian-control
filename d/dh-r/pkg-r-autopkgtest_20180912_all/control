@@ -1,0 +1,16 @@
+Package: pkg-r-autopkgtest
+Source: dh-r
+Version: 20180912
+Architecture: all
+Maintainer: Debian R Packages Maintainers <r-pkg-team@alioth-lists.debian.net>
+Installed-Size: 14
+Depends: dctrl-tools, r-cran-testthat
+Section: science
+Priority: optional
+Description: Script for the automatic testing of R packages
+ This package contains the pkg-r-autopkgtest script that runs the unit tests
+ contained in the source tree from which it is launched. It is intended to be
+ used by the support for R packages, which is implemented in autodep8.
+ .
+ Packages using the tests with autopkgtests in this package need to
+ simply set "Testsuite: autopkgtest-pkg-r" in debian/control.

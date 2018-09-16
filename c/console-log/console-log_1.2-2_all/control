@@ -1,0 +1,16 @@
+Package: console-log
+Version: 1.2-2
+Architecture: all
+Maintainer: Marc Haber <mh+debian-packages@zugschlus.de>
+Installed-Size: 41
+Depends: lsb-base, less, daemon, kbd, passwd (>= 1:4.0.3-23), adduser (>> 3.51)
+Section: admin
+Priority: optional
+Homepage: http://git.debian.org/?p=collab-maint/console-log.git;a=summary
+Description: Puts logfile pagers on virtual consoles
+ console-log keeps logfile pagers open on virtual consoles. The
+ default configuration puts exim's mainlog on tty8, and the syslog on
+ tty9, in a less process. It can also make sure that this console is visible
+ automatically after system boot so that a crashed system at least
+ leaves the syslog readable on the console before reset. Using a pager
+ makes searching, tagging and highlighting possible.

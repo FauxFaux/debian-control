@@ -1,0 +1,27 @@
+Package: libstemmer-tools
+Source: snowball (0+svn585-1)
+Version: 0+svn585-1+b2
+Architecture: amd64
+Maintainer: Stefano Rivera <stefanor@debian.org>
+Installed-Size: 21
+Depends: libstemmer0d (= 0+svn585-1+b2), libc6 (>= 2.3.4)
+Section: text
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://snowball.tartarus.org/
+Description: Simple word stemming utility using Snowball
+ Snowball provides access to efficient algorithms for calculating a
+ "stemmed" form of a word.  This is a form with most of the common
+ morphological endings removed; hopefully representing a common
+ linguistic base form.  This is most useful in building search engines
+ and information retrieval software; for example, a search with stemming
+ enabled should be able to find a document containing "cycling" given the
+ query "cycles".
+ .
+ Snowball provides algorithms for several (mainly European) languages.
+ It also provides access to the classic Porter stemming algorithm for
+ English: although this has been superseded by an improved algorithm, the
+ original algorithm may be of interest to information retrieval
+ researchers wishing to reproduce results of earlier experiments.
+ .
+ This package contains "stemwords", a simple utility for stemming words.

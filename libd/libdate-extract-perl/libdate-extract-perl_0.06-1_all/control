@@ -1,0 +1,18 @@
+Package: libdate-extract-perl
+Version: 0.06-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 29
+Depends: perl, libclass-data-inheritable-perl, libdatetime-format-natural-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Date-Extract
+Description: module to extract probable dates from strings
+ Date::Extract extracts dates from arbitrary strings. It will take an
+ arbitrary block of text, search it for something that looks like a date
+ string, and build a DateTime object out of it.
+ .
+ By design it will produce few false positives. This means it will not catch
+ nearly everything that looks like a date string. So if you have the string
+ "do homework for class 2019" it won't return a DateTime object with the year
+ set to 2019.

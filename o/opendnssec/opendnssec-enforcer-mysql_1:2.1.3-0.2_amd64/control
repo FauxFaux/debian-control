@@ -1,0 +1,27 @@
+Package: opendnssec-enforcer-mysql
+Source: opendnssec
+Version: 1:2.1.3-0.2
+Architecture: amd64
+Maintainer: Debian DNS Packaging <pkg-dns-devel@lists.alioth.debian.org>
+Installed-Size: 866
+Depends: default-mysql-client | mariadb-client | mysql-client, libdbd-mysql-perl, opendnssec-common (= 1:2.1.3-0.2), libc6 (>= 2.15), libgcc1 (>= 1:4.2), libldns2 (>= 1.6.11), libmariadbclient18 (>= 5.5.36), libxml2 (>= 2.7.4)
+Recommends: opendnssec, softhsm2
+Conflicts: opendnssec-enforcer-backend
+Breaks: opendnssec-enforcer (<< 1:1.4.5-2~)
+Replaces: opendnssec-enforcer (<< 1:1.4.5-2~), opendnssec-enforcer-backend
+Provides: opendnssec-enforcer-backend
+Section: admin
+Priority: extra
+Homepage: http://www.opendnssec.org/
+Description: tool to prepare DNSSEC keys (MySQL backend)
+ OpenDNSSEC is a complete DNSSEC zone signing system which is very
+ easy to use with stability and security in mind.  There are a lot of
+ details in signing zone files with DNSSEC and OpenDNSSEC covers most
+ of it.
+ .
+ OpenDNSSEC Enforcer, which is a tool to make sure that there are
+ enough keys for all of the zones, and take the policy and key
+ information from the KASP database and turn it into an xml file that
+ the signer can use.
+ .
+ The package contains OpenDNSSEC Enforcer binaries with MySQL backend.

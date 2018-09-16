@@ -1,0 +1,25 @@
+Package: ripit
+Version: 4.0.0~beta20140508-1
+Architecture: all
+Maintainer: Elimar Riesebieter <riesebie@lxtec.de>
+Installed-Size: 569
+Depends: perl, libwww-perl, libcddb-get-perl, libxml-simple-perl, libdigest-md5-file-perl, libunicode-utf8-perl, libtext-unidecode-perl, libmime-base64-urlsafe-perl, libwebservice-musicbrainz-perl, libmusicbrainz-discid-perl, libmp3-tag-perl, cdparanoia | cdda2wav | icedax, vorbis-tools | lame | flac | bladeenc | faac | wavpack | ffmpeg, normalize-audio
+Recommends: exim4 | mail-transport-agent
+Suggests: eject, id3, id3v2
+Section: sound
+Priority: optional
+Homepage: http://www.suwald.com/ripit/news.php
+Description: Textbased audio CD ripper
+ ripit runs in text mode (no fancy GUI here) and does everything required to
+ produce a set of mp3, ogg, flac, m4a files without any user-intervention.
+ .
+ ripit does the following with an Audio CD:
+  - Get the audio CD Album/Artist/Tracks information from CDDB
+  - Get the audio CD Album/Artist/Tracks information from Musicbrainz
+  - Rip the audio CD Tracks (using cdparanoia or other cdrippers)
+  - Encode the files (using lame, oggvorbis flac and/or faac)
+  - ID3 tag them (v1 & v2)
+  - Optional: creates a playlist (M3U) file (lists MP3s created,
+    used by various MP3 players)
+  - Optional: Prepares and sends a CDDB submission.
+  - Optional: Saves the CDDB file.

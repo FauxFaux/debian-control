@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit/11.2.1
+if [ -x "/etc/init.d/avahi-dnsconfd" ] && [ "$1" = remove ]; then
+	invoke-rc.d avahi-dnsconfd stop || exit 1
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.2.1
+dpkg-maintscript-helper rm_conffile /etc/default/avahi-dnsconfd 0.6.26-1\~ avahi-dnsconfd -- "$@"
+# End automatically added section

@@ -1,0 +1,42 @@
+Package: ibverbs-providers
+Source: rdma-core
+Version: 20.0-1
+Architecture: amd64
+Maintainer: Benjamin Drung <benjamin.drung@profitbricks.com>
+Installed-Size: 709
+Depends: libc6 (>= 2.14), libibverbs1 (>= 20)
+Breaks: libcxgb3-1 (<< 15), libipathverbs1 (<< 15), libmlx4-1 (<< 15), libmlx5-1 (<< 15), libmthca1 (<< 15), libnes1 (<< 15)
+Replaces: libcxgb3-1 (<< 15), libipathverbs1 (<< 15), libmlx4-1 (<< 15), libmlx5-1 (<< 15), libmthca1 (<< 15), libnes1 (<< 15)
+Provides: libcxgb3-1, libipathverbs1, libmlx4-1, libmlx5-1, libmthca1, libnes1
+Section: net
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/linux-rdma/rdma-core
+Description: User space provider drivers for libibverbs
+ libibverbs is a library that allows userspace processes to use RDMA
+ "verbs" as described in the InfiniBand Architecture Specification and
+ the RDMA Protocol Verbs Specification.  iWARP ethernet NICs support
+ RDMA over hardware-offloaded TCP/IP, while InfiniBand is a
+ high-throughput, low-latency networking technology.  InfiniBand host
+ channel adapters (HCAs) and iWARP NICs commonly support direct
+ hardware access from userspace (kernel bypass), and libibverbs
+ supports this when available.
+ .
+ A RDMA driver consists of a kernel portion and a user space portion.
+ This package contains the user space verbs drivers:
+ .
+  - bnxt_re: Broadcom NetXtreme-E RoCE HCAs
+  - cxgb3: Chelsio T3 iWARP HCAs
+  - cxgb4: Chelsio T4 iWARP HCAs
+  - hfi1verbs: Intel Omni-Path HFI
+  - hns: HiSilicon Hip06 SoC
+  - i40iw: Intel Ethernet Connection X722 RDMA
+  - ipathverbs: QLogic InfiniPath HCAs
+  - mlx4: Mellanox ConnectX-3 InfiniBand HCAs
+  - mlx5: Mellanox Connect-IB/X-4+ InfiniBand HCAs
+  - mthca: Mellanox InfiniBand HCAs
+  - nes: Intel NetEffect NE020-based iWARP adapters
+  - ocrdma: Emulex OneConnect RDMA/RoCE device
+  - qedr: QLogic QL4xxx RoCE HCAs
+  - rxe: A software implementation of the RoCE protocol
+  - vmw_pvrdma: VMware paravirtual RDMA device

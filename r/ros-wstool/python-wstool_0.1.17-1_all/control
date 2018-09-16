@@ -1,0 +1,24 @@
+Package: python-wstool
+Source: ros-wstool
+Version: 0.1.17-1
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 223
+Depends: python-vcstools, python-yaml, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://wiki.ros.org/wstool
+Description: Commands to manage multi-VCS repositories (for Robot OS) Python 2
+ This package is part of Robot OS (ROS). It provides commands to
+ manage several local VCS repositories based on a single workspace
+ definition file (.rosinstall). Git, Mercurial, Subversion, and Bazaar
+ are supported.
+ .
+ wstool replaces the rosws tool for catkin workspaces. As catkin
+ workspaces create their own setup file and environment, wstool is
+ reduced to version control functions only. So wstool does not have a
+ "regenerate" command, and does not allow adding non-version
+ controlled elements to workspaces. In all other respects, it behaves
+ the same as rosws.
+ .
+ This package installs the library for Python 2.

@@ -1,0 +1,25 @@
+Package: libghc-microlens-ghc-prof
+Source: haskell-microlens-ghc
+Version: 0.4.8.0-2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 399
+Depends: libghc-microlens-ghc-dev (= 0.4.8.0-2), libghc-array-prof-0.5.2.0-26dc0, libghc-base-prof-4.10.1.0-35a7f, libghc-bytestring-prof-0.10.8.2-4a9e2, libghc-containers-prof-0.5.10.2-cc496, libghc-microlens-prof-0.4.8.3-c565b, libghc-transformers-prof-0.5.2.0-e0457
+Provides: libghc-microlens-ghc-prof-0.4.8.0-b9865
+Section: haskell
+Priority: optional
+Homepage: http://github.com/aelve/microlens
+Description: microlens + array, bytestring, containers, transformers; profiling libraries
+ Use this package instead of microlens if you don't mind depending on
+ all dependencies here – Lens.Micro.GHC reexports everything from
+ Lens.Micro and additionally provides orphan instances of microlens
+ classes for packages coming with GHC (array, bytestring, containers,
+ transformers).
+ .
+ The minor and major versions of microlens-ghc are incremented
+ whenever the minor and major versions of microlens are incremented,
+ so you can depend on the exact version of microlens-ghc without
+ specifying the version of microlens you need.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

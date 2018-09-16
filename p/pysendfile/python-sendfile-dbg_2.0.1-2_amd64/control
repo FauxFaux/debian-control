@@ -1,0 +1,20 @@
+Package: python-sendfile-dbg
+Source: pysendfile
+Version: 2.0.1-2
+Architecture: amd64
+Maintainer: Ghe Rivero <ghe@debian.org>
+Installed-Size: 27
+Depends: python-sendfile (= 2.0.1-2), libc6 (>= 2.4), python-dbg (<< 2.8), python-dbg (>= 2.7~), python-dbg:any (<< 2.8), python-dbg:any (>= 2.7~)
+Provides: python2.7-sendfile-dbg
+Section: debug
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/giampaolo/pysendfile
+Description: Python interface to sendfile(2) (debug)
+ Python library which provides a "zero-copy" way of copying data from one
+ file descriptor to another (a socket). The phrase "zero-copy" refers to
+ the fact that all of the copying of data between the two descriptors is
+ done entirely by the kernel, with no copying of data into userspace buffers.
+ This is particularly useful when sending a file over a socket (e.g. FTP).
+ .
+ This package contains the extension built for the Python 2 debug interpreter.

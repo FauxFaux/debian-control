@@ -1,0 +1,39 @@
+Package: cupt
+Version: 2.10.2
+Architecture: amd64
+Maintainer: Eugene V. Lyubimkin <jackyf@debian.org>
+Installed-Size: 1366
+Depends: libboost-program-options1.62.0, libc6 (>= 2.14), libcupt4-2 (>= 2.10.2), libgcc1 (>= 1:3.4), libstdc++6 (>= 5.2)
+Suggests: sensible-utils, libreadline7
+Section: admin
+Priority: optional
+Homepage: http://wiki.debian.org/Cupt
+Description: flexible package manager -- console interface
+ This package provides a console interface to Cupt library, which implements
+ high-level package manager for Debian and derivatives. Cupt is written with
+ flexibility and reliability in mind and uses dpkg as the back-end.
+ .
+ Cupt uses the same APT infrastructure, e.g. index files, deb cache archive
+ files, configuration files. It understands some of widely used APT options.
+ .
+ Some features:
+  - strict full-case resolver;
+  - resolver reasons tracking;
+  - command-line and 'cupt::*' option name checker;
+  - case-sensitive search;
+  - pinning by source package name;
+  - pinning by package groups using shell-like patterns;
+  - configurable 'depends' and 'rdepends' subcommands;
+  - 'satisfy' subcommand;
+  - support of LZMA-compressed indexes;
+  - source versions synchronization;
+  - 'shell' subcommand (to get command history, search etc. working, install
+    the package 'libreadline7');
+  - integration with debdelta (to get it, install the package 'debdelta');
+  - system snapshots (needs packages 'dpkg-dev' and 'dpkg-repack').
+ .
+ Its interface is mostly like apt-get/aptitude console interface.
+ .
+ Cupt has built-in support for APT repositories using the file:// or copy://
+ URL schemas. For access to remote repositories using HTTP or FTP, install a
+ download method such as libcupt4-2-downloadmethod-curl.

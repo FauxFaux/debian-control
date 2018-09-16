@@ -1,0 +1,20 @@
+Package: mkelfimage
+Source: mkelfimage (2.7-7)
+Version: 2.7-7+b1
+Architecture: amd64
+Maintainer: Uwe Hermann <uwe@debian.org>
+Installed-Size: 53
+Depends: libc6 (>= 2.14), zlib1g (>= 1:1.1.4)
+Section: devel
+Priority: optional
+Homepage: http://www.coreboot.org/Mkelfimage
+Description: utility to create ELF boot images from Linux kernel images
+ mkelfImage is a program that makes an ELF boot image from a Linux
+ kernel image.
+ .
+ The image should work with any i386 multiboot compliant ELF boot loader
+ that passes no option. The image is compliant with the coreboot (previously
+ LinuxBIOS) ELF booting spec and compatible with the Linux kexec kernel patch.
+ .
+ A key feature of mkelfImage is that nothing relies upon BIOS calls, but they
+ can be made when necessary. This is useful for systems running on coreboot.

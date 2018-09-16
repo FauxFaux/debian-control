@@ -1,0 +1,76 @@
+#! /bin/sh
+set -e
+
+# source debconf library
+. /usr/share/debconf/confmodule
+
+# priority 1 is even lower than the netlib reference implementation
+# This should be safe enough if the package depends on a free alternative.
+_mkl_rt_priority=1
+
+# MKL has no all-in-one static library.
+update-alternatives --install /usr/lib/x86_64-linux-gnu/libblas.so \
+                    libblas.so-x86_64-linux-gnu \
+                    /usr/lib/x86_64-linux-gnu/libmkl_rt.so \
+                    $_mkl_rt_priority \
+                    --slave /usr/include/x86_64-linux-gnu/cblas.h \
+                    cblas.h-x86_64-linux-gnu \
+                    /usr/include/mkl/mkl_cblas.h \
+                    --slave /usr/lib/x86_64-linux-gnu/pkgconfig/blas.pc \
+                    blas.pc-x86_64-linux-gnu \
+                    /usr/lib/x86_64-linux-gnu/pkgconfig/mkl-rt.pc
+
+update-alternatives --install /usr/lib/x86_64-linux-gnu/liblapack.so \
+                    liblapack.so-x86_64-linux-gnu \
+                    /usr/lib/x86_64-linux-gnu/libmkl_rt.so \
+                    $_mkl_rt_priority \
+                    --slave /usr/lib/x86_64-linux-gnu/pkgconfig/lapack.pc \
+                    lapack.pc-x86_64-linux-gnu \
+                    /usr/lib/x86_64-linux-gnu/pkgconfig/mkl-rt.pc
+
+db_get libmkl-rt/use-as-default-blas-lapack
+if [ "$RET" = "true" ]; then
+
+  # When user says "yes", we point the symlinks to MKL, and set the
+  # alternative in manual mode.
+  echo "Setting MKL as default BLAS/LAPACK implementation as requested." 1>&2
+  db_get libmkl-rt/exact-so-3-selections
+
+  if (echo "$RET" | grep "libblas.so" 2>&1 1>/dev/null); then
+  update-alternatives --set libblas.so-x86_64-linux-gnu \
+                      /usr/lib/x86_64-linux-gnu/libmkl_rt.so
+  fi
+
+  if (echo "$RET" | grep "liblapack.so" 2>&1 1>/dev/null); then
+  update-alternatives --set liblapack.so-x86_64-linux-gnu \
+                      /usr/lib/x86_64-linux-gnu/libmkl_rt.so
+  fi
+
+else
+
+  # When user says "no", we do nothing. However if the user says "no" when
+  # MKL is selected, we should literally unselect it even if it's in manual
+  # mode.
+  echo "Unselecting MKL if they were previously selected." 1>&2
+
+  realblas=$(update-alternatives --query libblas.so-x86_64-linux-gnu \
+             | grep ^Value: | cut -d ' ' -f 2)
+  reallapack=$(update-alternatives --query liblapack.so-x86_64-linux-gnu \
+               | grep ^Value: | cut -d ' ' -f 2)
+
+  if [ "$realblas" = "/usr/lib/x86_64-linux-gnu/libmkl_rt.so" ]; then
+    update-alternatives --auto libblas.so-x86_64-linux-gnu
+  fi
+
+  if [ "$reallapack" = "/usr/lib/x86_64-linux-gnu/libmkl_rt.so" ]; then
+    update-alternatives --auto liblapack.so-x86_64-linux-gnu
+  fi
+
+  # We are sure that MKL will be unselected by putting these alternatives
+  # back into auto mode, because this package depends on free alternatives.
+
+fi
+
+
+
+exit 0

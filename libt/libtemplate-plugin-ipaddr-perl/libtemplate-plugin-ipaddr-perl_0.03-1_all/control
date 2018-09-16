@@ -1,0 +1,23 @@
+Package: libtemplate-plugin-ipaddr-perl
+Version: 0.03-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 25
+Depends: perl, libnetaddr-ip-perl, libtemplate-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Template-Plugin-IPAddr
+Description: plugin handling IP addresses for the Template Toolkit
+ Template::Plugin::IPAddr implements an IPAddr class for handling IPv4 and
+ IPv6 addresses in an object-orientated way. The module is based on NetAddr::IP
+ and works on IPv4 as well as IPv6 addresses.
+ .
+ You can create a IPAddr object via the USE directive, adding any initial
+ prefix as an argument:
+ .
+ [% USE IPAddr %]
+ .
+ [% USE IPAddr(prefix) %]
+ .
+ Once you've got an IPAddr object, you can use it as a prototype to create
+ other IPAddr objects with the new() method.

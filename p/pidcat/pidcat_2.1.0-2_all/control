@@ -1,0 +1,24 @@
+Package: pidcat
+Version: 2.1.0-2
+Architecture: all
+Maintainer: Hans-Christoph Steiner <hans@eds.org>
+Installed-Size: 35
+Depends: python
+Recommends: android-tools-adb
+Section: devel
+Priority: optional
+Homepage: https://github.com/JakeWharton/pidcat
+Description: Colored adb logcat that shows entries for specific apps
+ An update to Jeff Sharkey's excellent logcat color script which only shows
+ log entries for processes from a specific application package.
+ .
+ During application development you often want to only display log messages
+ coming from your app. Unfortunately, because the process ID changes every
+ time you deploy to the phone it becomes a challenge to grep for the right
+ thing.
+ .
+ This script solves that problem by filtering by application package. Supply
+ the target package as the sole argument to the Python script and enjoy a more
+ convenient development process.
+ .
+  pidcat com.oprah.bees.android

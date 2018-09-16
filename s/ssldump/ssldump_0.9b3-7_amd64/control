@@ -1,0 +1,18 @@
+Package: ssldump
+Version: 0.9b3-7
+Architecture: amd64
+Maintainer: Debian Security Tools Packaging Team <pkg-security-team@lists.alioth.debian.org>
+Installed-Size: 103
+Depends: libc6 (>= 2.14), libpcap0.8 (>= 0.9.8), libssl1.1 (>= 1.1.0)
+Suggests: tcpdump
+Section: net
+Priority: optional
+Description: SSLv3/TLS network protocol analyzer
+ This program will dump the traffic on a network and analyze it for
+ SSLv3/TLS network traffic, typically used to secure TCP connections.
+ When it identifies this traffic, it decodes the results.  When
+ provided with the appropriate keying material, it will also decrypt
+ the connections and display the application data traffic.
+ .
+ ssldump is based on tcpdump, a network monitoring and data acquisition
+ tool.

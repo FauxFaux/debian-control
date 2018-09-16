@@ -1,0 +1,27 @@
+Package: libformat-human-bytes-perl
+Version: 0.06-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 12
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Format-Human-Bytes
+Description: Format a bytecount and make it human readable
+ Format::Human::Bytes is used to convert bytecount values to human-readable
+ strings. It will return you a printable string which is more readable by
+ humans than a simple bytecount.
+ .
+ For example:
+    use Format::Human::Bytes;
+    $readable = Format::Human::Bytes::base2($bytecount[,$decimals]);
+ It will convert in base 2 format.
+ .
+    $readable = Format::Human::Bytes::base10($bytecount[,$decimals]);
+ It will convert in base 10 format.
+ .
+ Another way is to create constructor for example:
+ .
+    $fhb = Format::Human::Bytes->new();
+    $readable = $fhb->base2($bytecount[,$decimals]);
+    $readable = $fhb->base10($bytecount[,$decimals]);

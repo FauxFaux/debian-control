@@ -1,0 +1,26 @@
+Package: python3-pyvcf
+Source: python-pyvcf
+Version: 0.6.8+git20170215.476169c-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 259
+Depends: libc6 (>= 2.4), python3 (<< 3.8), python3 (>= 3.6~), python3-pkg-resources, python3:any
+Section: python
+Priority: optional
+Homepage: https://pypi.python.org/pypi/PyVCF
+Description: Variant Call Format (VCF) parser for Python 3
+ The Variant Call Format (VCF) specifies the format of a text file used
+ in bioinformatics for storing gene sequence variations. The format has
+ been developed with the advent of large-scale genotyping and DNA
+ sequencing projects, such as the 1000 Genomes Project.
+ .
+ The intent of this module is to mimic the ``csv`` module in the Python
+ stdlib, as opposed to more flexible serialization formats like JSON or
+ YAML. ``vcf`` will attempt to parse the content of each record based on
+ the data types specified in the meta-information lines -- specifically
+ the ##INFO and
+ ##FORMAT lines. If these lines are missing or incomplete, it will check
+ against the reserved types mentioned in the spec. Failing that, it will
+ just return strings.
+ .
+ This package provides the Python 3 modules.

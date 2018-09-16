@@ -1,0 +1,23 @@
+Package: python3-svipc
+Source: yp-svipc (0.16-2)
+Version: 0.16-2+b4
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 111
+Depends: python3-numpy (>= 1:1.14.3), python3-numpy-abi9, python3 (<< 3.8), python3 (>= 3.6~), libc6 (>= 2.14)
+Suggests: yorick-svipc, python-svipc
+Section: python
+Priority: extra
+Homepage: https://github.com/mdcb/yp-svipc
+Description: interprocess communication (shared memory...) for Python 3
+ This package allows one to access the System V Interprocess
+ communication mechanisms from within Python 3:
+   + message queues;
+   + semaphore sets;
+   + shared memory segments.
+ .
+ This plug-in serves primarily two use cases:
+   + parallel (multiprocess) computing;
+   + mixed applications (e.g. python/yorick).
+ .
+ A sibling package is available for Yorick: yorick-svipc

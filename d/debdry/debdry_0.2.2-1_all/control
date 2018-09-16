@@ -1,0 +1,27 @@
+Package: debdry
+Version: 0.2.2-1
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 60
+Depends: python3:any (>= 3.3.2-2~), python3-apt
+Conflicts: python3-debdry
+Replaces: python3-debdry
+Section: devel
+Priority: optional
+Homepage: https://anonscm.debian.org/cgit/collab-maint/debdry.git
+Description: Semi-assisted automatic Debian packaging
+ debdry is for debian/ directories what debhelper7 is for debian/rules.
+ .
+ It applies the Don't Repeat Yourself idea to packaging, attempting to reuse as
+ much as possible of upstream's metadata and standard packaging practices.
+ .
+ debdry runs an appropriate auto-debianisation tool for a given source
+ directory, then applies manual overrides from a debian.in directory.
+ .
+ debdry supports the following types of packages (in brackets you will find
+ extra packages that need to be installed for each type of package):
+ .
+ - Perl [dh-make-perl]
+ - Python [python-stdeb, python3-stdeb]
+ - Ruby [gem2deb]
+ - Haskell [cabal-debian]

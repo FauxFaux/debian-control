@@ -1,0 +1,17 @@
+Package: libdontdie0
+Source: libdontdie
+Version: 1.2.0-2
+Architecture: amd64
+Maintainer: Thorsten Alteholz <debian@alteholz.de>
+Installed-Size: 37
+Depends: libc6 (>= 2.4)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/flonatel/libdontdie
+Description: library that sets the TCP keep-alive flag when applications call socket(2)
+ libdontdie is a shared library that can be injected into  any  application
+ with the LD_PRELOAD mechanism.
+ It is completely transparent to the application and therefore works equally
+ well with closed-source programs and with languages like Java that do not
+ natively allow changing the TCP keep-alive parameters.

@@ -1,0 +1,18 @@
+Package: libcgi-emulate-psgi-perl
+Version: 0.23-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 32
+Depends: perl, libcgi-pm-perl (>= 3.63), libwww-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Emulate-PSGI
+Description: PSGI adapter for CGI
+ CGI::Emulate::PSGI allows an application designed for the CGI environment to
+ run in a PSGI environment, and thus on any of the backends that PSGI
+ supports.
+ .
+ It works by translating the environment provided by the PSGI specification
+ to one expected by the CGI specification. Likewise, it captures output as
+ it would be prepared for the CGI standard, and translates it to the format
+ expected for the PSGI standard using CGI::Parse::PSGI module.

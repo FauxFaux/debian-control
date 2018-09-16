@@ -1,0 +1,24 @@
+Package: python3-zc.customdoctests
+Source: python-zc.customdoctests
+Version: 1.0.1-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 46
+Depends: python3-pkg-resources, python3:any (>= 3.3.2-2~)
+Recommends: python3-manuel, python3-spidermonkey
+Section: python
+Priority: optional
+Homepage: https://github.com/zopefoundation/zc.customdoctests
+Description: Use doctest with other languages (Python 3)
+ doctest (and recently manuel) provide hooks for using custom doctest
+ parsers. zc.customdoctests helps to leverage this to support other
+ languages, such as JavaScript (with python-spidermonkey):
+ .
+     js> function double (x) {
+     ...     return x*2;
+     ... }
+     js> double(2)
+     4
+ .
+ And with python-manuel, it facilitates doctests that mix multiple languages,
+ such as Python, JavaScript, and sh.

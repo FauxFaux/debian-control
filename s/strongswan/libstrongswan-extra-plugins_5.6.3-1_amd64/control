@@ -1,0 +1,36 @@
+Package: libstrongswan-extra-plugins
+Source: strongswan
+Version: 5.6.3-1
+Architecture: amd64
+Maintainer: strongSwan Maintainers <pkg-swan-devel@lists.alioth.debian.org>
+Installed-Size: 629
+Depends: libstrongswan (= 5.6.3-1), libc6 (>= 2.14), libcurl4 (>= 7.16.2), libgcrypt20 (>= 1.8.0), libgpg-error0 (>= 1.14), libldap-2.4-2 (>= 2.4.7)
+Breaks: libcharon-extra-plugins (<= 5.5.3-1), libstrongswan (<= 5.1.1-1), strongswan-ike (<= 5.1.1-1)
+Replaces: libcharon-extra-plugins (<= 5.5.3-1), libstrongswan (<= 5.1.1-1), strongswan-ike (<= 5.1.1-1)
+Section: net
+Priority: optional
+Homepage: http://www.strongswan.org
+Description: strongSwan utility and crypto library (extra plugins)
+ The strongSwan VPN suite uses the native IPsec stack in the standard
+ Linux kernel. It supports both the IKEv1 and IKEv2 protocols.
+ .
+ This package provides extra plugins for the strongSwan utility and
+ cryptographic library.
+ .
+ Included plugins are:
+  - af-alg [linux] (AF_ALG Linux crypto API interface, provides
+    ciphers/hashers/hmac/xcbc)
+  - ccm (CCM cipher mode wrapper)
+  - cmac (CMAC cipher mode wrapper)
+  - ctr (CTR cipher mode wrapper)
+  - curl (libcurl based HTTP/FTP fetcher)
+  - curve25519 (support for Diffie-Hellman group 31 using Curve25519 and
+    support for the Ed25519 digital signature algorithm for IKEv2)
+  - gcrypt (Crypto backend based on libgcrypt, provides
+    RSA/DH/ciphers/hashers/rng)
+  - ldap (LDAP fetching plugin based on libldap)
+  - padlock (VIA padlock crypto backend, provides AES128/SHA1)
+  - pkcs11 (PKCS#11 smartcard backend)
+  - rdrand (High quality / high performance random source using the Intel
+    rdrand instruction found on Ivy Bridge processors)
+  - test-vectors (Set of test vectors for various algorithms)

@@ -1,0 +1,23 @@
+Package: libattr1-dev
+Source: attr (1:2.4.47-2)
+Version: 1:2.4.47-2+b2
+Architecture: amd64
+Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
+Installed-Size: 101
+Depends: libc6-dev | libc-dev, libattr1 (= 1:2.4.47-2+b2)
+Conflicts: attr (<< 2.0.0), attr-dev
+Replaces: attr-dev
+Provides: attr-dev
+Section: libdevel
+Priority: extra
+Multi-Arch: same
+Homepage: http://savannah.nongnu.org/projects/attr/
+Description: Extended attribute static libraries and headers
+ attr-dev contains the libraries and header files needed to develop
+ programs which make use of extended attributes.  For Linux programs,
+ the documented system call API is the recommended interface, but an
+ SGI IRIX compatibility interface is also provided.
+ .
+ Currently only ext2, ext3, JFS and XFS support extended attributes.
+ The SGI IRIX compatibility API built above the Linux system calls is
+ used by programs such as xfsdump(8), xfsrestore(8) and xfs_fsr(8).

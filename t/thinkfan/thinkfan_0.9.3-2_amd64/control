@@ -1,0 +1,18 @@
+Package: thinkfan
+Version: 0.9.3-2
+Architecture: amd64
+Maintainer: Evgeni Golov <evgeni@debian.org>
+Installed-Size: 101
+Depends: libatasmart4 (>= 0.13), libc6 (>= 2.14), init-system-helpers (>= 1.18~)
+Section: misc
+Priority: extra
+Homepage: https://github.com/vmatare/thinkfan
+Description: simple and lightweight fan control program
+ Some hardware has a kind of broken fan-control and lets the fan run
+ faster than really needed. Thinkfan will prevent this by controlling
+ the fan on its own (the fan speed for each temperature interval can be
+ adjusted in the configuration file).
+ .
+ Originally designed specifically for IBM/Lenovo Thinkpads,
+ it supports any kind of system via the sysfs hwmon interface.
+ It is designed to eat as little CPU power as possible.

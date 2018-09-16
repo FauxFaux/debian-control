@@ -1,0 +1,20 @@
+Package: btrfs-compsize
+Version: 1.2-1
+Architecture: amd64
+Maintainer: Adam Borowski <kilobyte@angband.pl>
+Installed-Size: 34
+Depends: libc6 (>= 2.4)
+Suggests: btrfs-progs
+Section: admin
+Priority: optional
+Homepage: http://github.com/kilobyte/compsize
+Description: calculate compression ratio of a set of files on btrfs
+ Compsize takes a list of files on a btrfs filesystem (recursing directories)
+ and measures used compression types and the effective compression ratio.
+ .
+ Because of partially used extents on one hand, and multiple reflinks to an
+ extent on the other, the definition of used space can be quite unintuitive.
+ This program provides answers at different stages:
+  * blocks on the disk
+  * uncompressed extents
+  * apparent file sizes (sans holes)

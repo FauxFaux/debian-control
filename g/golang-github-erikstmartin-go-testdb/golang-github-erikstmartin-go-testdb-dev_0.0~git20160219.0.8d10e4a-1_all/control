@@ -1,0 +1,23 @@
+Package: golang-github-erikstmartin-go-testdb-dev
+Source: golang-github-erikstmartin-go-testdb
+Version: 0.0~git20160219.0.8d10e4a-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 49
+Section: devel
+Priority: extra
+Homepage: https://github.com/erikstmartin/go-testdb
+Description: Framework for stubbing responses from go's driver.Driver interface
+ go-testdb Framework for stubbing responses from go's driver.Driver
+ interface.
+ .
+ This can be used to sit in place of your sql.Db so that you can stub
+ responses for sql calls, and remove database dependencies for your
+ test suite.
+ .
+ This project is in its infancy, but has worked well for all the use
+ cases i've had so far, and continues to evolve as new scenarios are
+ uncovered. Please feel free to send pull-requests, or submit feature
+ requests if you have scenarios that are not accounted for yet.  Setup The
+ only thing needed for setup is to include the go-testdb package, then
+ you can create your db connection specifying "testdb" as your driver.

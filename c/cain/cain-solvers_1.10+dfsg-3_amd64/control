@@ -1,0 +1,31 @@
+Package: cain-solvers
+Source: cain
+Version: 1.10+dfsg-3
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 6438
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:4.0), libstdc++6 (>= 5.2), libeigen3-dev
+Section: science
+Priority: optional
+Homepage: http://cain.sourceforge.net
+Description: solvers for cain
+ Cain performs stochastic and deterministic simulations of chemical reactions.
+ It can spawn multiple simulation processes to utilize multi-core computers.
+ It stores models, methods, and simulation output (populations and reaction
+ counts) in an XML format. In addition, SBML models can be imported and
+ exported. The models and methods can be read from input files or edited
+ within the program.
+ .
+ The GUI (Graphical User Interface) is written in Python and uses the wxPython
+ toolkit. Most of the solvers are implemented as command line executables,
+ written in C++, which are driven by Cain. This makes it easy to launch batch
+ jobs. It also simplifies the process of adding new solvers. Cain offers a
+ variety of solvers:
+  * Gillespie's direct method.
+  * Gillespie's first reaction method.
+  * Gibson and Bruck's next reaction method.
+  * Tau-leaping.
+  * Hybrid direct/tau-leaping.
+  * ODE integration.
+ .
+ This package provides the solver libraries

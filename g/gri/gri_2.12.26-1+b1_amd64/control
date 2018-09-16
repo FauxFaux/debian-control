@@ -1,0 +1,34 @@
+Package: gri
+Source: gri (2.12.26-1)
+Version: 2.12.26-1+b1
+Architecture: amd64
+Maintainer: Peter S Galbraith <psg@debian.org>
+Installed-Size: 1401
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libnetcdf13 (>= 3.6.1), libreadline7 (>= 6.0), libstdc++6 (>= 5.2), dpkg (>= 1.15.4) | install-info, perl
+Suggests: gri-html-doc, gri-pdf-doc, gri-el, gv
+Section: science
+Priority: optional
+Homepage: http://gri.sourceforge.net/
+Description: a language for scientific illustration
+ Gri is an open-source language for scientific graphics programming. It is
+ command-driven, as opposed to point/click. Some users consider Gri similar
+ to LaTeX, since both provide extensive power as a reward for tolerating a
+ learning curve. The output is industry-standard PostScript as output,
+ suitable for inclusion in other documents.
+ .
+ Gri can make x-y graphs, contour graphs, and image graphs. Fine control is
+ provided over all aspects of drawing, e.g. line widths, colors, fonts,
+ etc. Greek letters and mathematical symbols are available in a TeX-like
+ syntax.
+ .
+ Folks who write 1000-line Gri scripts usually start with something as
+ simple as the following:
+ .
+   open file.dat        # open a file
+   read columns x * y   # read the 1st column as x and the 3rd as y
+   draw curve           # draw the data and autoscale the axes
+ .
+ A full manual is also available in HTML (gri-html-doc package), in
+ PDF suitable for printing (gri-pdf-doc package) and on-line by
+ following links from the gri home page:
+   http://gri.sourceforge.net/

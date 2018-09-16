@@ -1,0 +1,19 @@
+Package: sshcommand
+Version: 0~20160110.1~2795f65-1
+Architecture: all
+Maintainer: Alessio Treglia <alessio@debian.org>
+Installed-Size: 15
+Depends: openssh-server | ssh-server
+Section: admin
+Priority: optional
+Homepage: https://github.com/dokku/sshcommand
+Description: turn SSH into a thin client specifically for your command
+ Simplifies running a single command over SSH, and manages
+ authorized keys (ACL) and users in order to do so.
+ .
+ It basically simplifies running:
+ .
+   ssh user@server 'ls -l <your-args>'
+ into:
+ .
+   ssh ls@server <your-args>

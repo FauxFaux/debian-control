@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    purge)
+        # remove the user database
+        rm -f /var/spool/jabber-muc/rooms/*
+        # the application should remove these on exit
+        rm -f /var/run/jabberd2/muc.pid
+        # need better way of detecting whether these exist or not
+        rm -f /var/log/jabberd2/mu-conference.log*
+        # remove any empty directories
+        for DIR in /var/spool/jabber-muc/rooms /var/spool/jabber-muc \
+           /etc/jabberd2/component.d /etc/jabberd2 \
+           /var/run/jabberd2 /var/log/jabberd2; do
+              if [ -d ${DIR} ]; then
+                 #rmdir -p --ignore-fail-on-non-empty ${DIR} > /dev/null 2>&1
+                 rmdir --ignore-fail-on-non-empty ${DIR} > /dev/null 2>&1
+              fi
+        done
+    ;;
+    remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

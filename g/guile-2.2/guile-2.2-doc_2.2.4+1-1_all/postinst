@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" != upgrade ] ; then
+    update-alternatives \
+        --install /usr/share/info/guile.info.gz \
+        guile.info.gz \
+        /usr/share/info/guile-2.2/guile.info.gz \
+        2202 \
+        --slave /usr/share/info/guile.info-1.gz guile.info-1.gz \
+                /usr/share/info/guile-2.2/guile.info-1.gz \
+        --slave /usr/share/info/guile.info-2.gz guile.info-2.gz \
+                /usr/share/info/guile-2.2/guile.info-2.gz \
+        --slave /usr/share/info/guile.info-3.gz guile.info-3.gz \
+                /usr/share/info/guile-2.2/guile.info-3.gz \
+        --slave /usr/share/info/guile.info-4.gz guile.info-4.gz \
+                /usr/share/info/guile-2.2/guile.info-4.gz \
+        --slave /usr/share/info/guile.info-5.gz guile.info-5.gz \
+                /usr/share/info/guile-2.2/guile.info-5.gz \
+        --slave /usr/share/info/guile.info-6.gz guile.info-6.gz \
+                /usr/share/info/guile-2.2/guile.info-6.gz \
+        --slave /usr/share/info/guile.info-7.gz guile.info-7.gz \
+                /usr/share/info/guile-2.2/guile.info-7.gz \
+        --slave /usr/share/info/guile.info-8.gz guile.info-8.gz \
+                /usr/share/info/guile-2.2/guile.info-8.gz \
+        --slave /usr/share/info/guile.info-9.gz guile.info-9.gz \
+                /usr/share/info/guile-2.2/guile.info-9.gz \
+        --slave /usr/share/info/guile.info-10.gz guile.info-10.gz \
+                /usr/share/info/guile-2.2/guile.info-10.gz
+fi
+
+

@@ -1,0 +1,27 @@
+Package: zvbi
+Version: 0.2.35-13
+Architecture: amd64
+Maintainer: Joao Eriberto Mota Filho <eriberto@debian.org>
+Installed-Size: 567
+Depends: libc6 (>= 2.15), libzvbi0 (>= 0.2.35), lsb-base (>= 3.0-6)
+Section: utils
+Priority: optional
+Homepage: http://zapping.sf.net/ZVBI
+Description: Vertical Blanking Interval (VBI) utilities
+ Television broadcasts use the VBI to transmit text such as closed captioning
+ (NTSC), Teletext (PAL/SECAM), and now Intercast and the ATVEC Internet
+ television encodings.  The zvbi library is used to capture and decode raw
+ VBI data.
+ .
+ This package contains the following utilities:
+  * zvbid, a proxy for VBI devices. It forwards VBI data streams to one or
+    more connected clients and manages channel change requests.
+  * zvbi-atsc-cc, a command-line utility that captures  ATSC TV transmissions
+    using a Linux DVB device and decodes the enclosed Closed Caption data.
+    It can record both NTSC caption (EIA 608-B) and DTVCC caption (CEA 708-C).
+  * zvbi-chains, a wrapper which executes the VBI application given on the
+    command line while overloading several C library calls so that the
+    application can be forced to access VBI devices via the VBI proxy instead
+    of device files directly.
+  * zvbi-ntsc-cc, a command-line utility for decoding and capturing closed
+    captioning (CC) for NTSC and webtv.

@@ -1,0 +1,32 @@
+Package: golang-github-gorilla-handlers-dev
+Source: golang-github-gorilla-handlers
+Version: 1.3.0-1
+Architecture: all
+Maintainer: pkg-go <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 92
+Section: devel
+Priority: optional
+Homepage: https://github.com/gorilla/handlers
+Description: collection of useful handlers for Go's net/http package
+ Package handlers is a collection of handlers (aka "HTTP middleware") for use
+ with Go's net/http package (or any framework supporting http.Handler),
+ including:
+ .
+  • LoggingHandler for logging HTTP requests in the Apache Common Log Format
+    (http://httpd.apache.org/docs/2.2/logs.html#common).
+  • CombinedLoggingHandler for logging HTTP requests in the Apache Combined Log
+    Format (http://httpd.apache.org/docs/2.2/logs.html#combined) commonly used
+    by both Apache and nginx.
+  • CompressHandler for gzipping responses.
+  • ContentTypeHandler for validating requests against a list of accepted
+    content types.
+  • MethodHandler for matching HTTP methods against handlers in a
+    map[string]http.Handler
+  • ProxyHeaders for populating r.RemoteAddr and r.URL.Scheme based on the
+    X-Forwarded-For, X-Real-IP, X-Forwarded-Proto and RFC7239 Forwarded headers
+    when running a Go server behind a HTTP reverse proxy.
+  • CanonicalHost for re-directing to the preferred host when handling multiple
+    domains (i.e. multiple CNAME aliases).
+ .
+ Other handlers are documented on the Gorilla website
+ (http://www.gorillatoolkit.org/pkg/handlers).

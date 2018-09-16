@@ -1,0 +1,24 @@
+Package: suck
+Version: 4.3.4-1
+Architecture: amd64
+Maintainer: Christian Marillat <marillat@debian.org>
+Installed-Size: 445
+Depends: libc6 (>= 2.26), libssl1.1 (>= 1.1.0), debconf (>= 0.5) | debconf-2.0
+Recommends: perl
+Suggests: news-transport-system, news-reader
+Section: news
+Priority: optional
+Homepage: https://github.com/lazarus-pkgs/suck
+Description: small newsfeed from an NNTP server with standard NNTP commands
+ This package contains software for copying news from an NNTP server to your
+ local machine, and copying replies back up to an NNTP server.
+ .
+ The suck/rpost combination allows you to run your own INN/CNEWS site,
+ controlling where you get your news, and where you post outgoing articles.
+ Suck/rpost use only standard NNTP commands that are used by your favorite
+ news reader (like tin, knews, trn) such as POST and ARTICLE. If you can
+ use tin or knews against an NNTP site, than you can use Suck/Rpost and have
+ multiple site feeds.
+ .
+ NOTE: Suck will not work with obsolete NNTP servers that can't handle the
+ xhdr command.

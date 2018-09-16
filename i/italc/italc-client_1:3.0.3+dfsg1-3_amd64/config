@@ -1,0 +1,186 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+db_input high italc-client/create-keypairs || true
+db_go
+db_get italc-client/create-keypairs
+create_keypairs=$RET
+
+# remember the formerly used (or default) group names, if any
+db_get italc-client/group-italc-teacher && db_set italc-client/last-group-teacher $RET || true
+db_get italc-client/group-italc-student && db_set italc-client/last-group-student $RET || true
+db_get italc-client/group-italc-supporter && db_set italc-client/last-group-supporter $RET || true
+db_get italc-client/group-italc-admin && db_set italc-client/last-group-admin $RET || true
+
+# set the confirmation questions for group deletions always to false before we begin...
+db_set italc-client/del-last-group-teacher false
+db_set italc-client/del-last-group-student false
+db_set italc-client/del-last-group-supporter false
+db_set italc-client/del-last-group-admin false
+
+if [ "$create_keypairs" = "true" ]; then
+
+	db_input high italc-client/create-groups-for-roles || true
+	db_go
+	db_get italc-client/create-groups-for-roles
+	create_groups=$RET
+
+	# always allow usage of existing groups (also when $create_groups is set)
+	db_set italc-client/use-existing-groups-for-roles true
+
+	if [ "$create_groups" = "false" ]; then
+
+		db_get italc-client/group-italc-teacher
+		if [ -z "$RET" ] || ! getent group $RET 1>/dev/null; then
+			db_set italc-client/group-italc-teacher "root"
+		fi
+		db_get italc-client/group-italc-student
+		if [ -z "$RET" ] || ! getent group $RET 1>/dev/null; then
+			db_set italc-client/group-italc-student "root"
+		fi
+		db_get italc-client/group-italc-supporter
+		if [ -z "$RET" ] || ! getent group $RET 1>/dev/null; then
+			db_set italc-client/group-italc-supporter "root"
+		fi
+		db_get italc-client/group-italc-admin
+		if [ -z "$RET" ] || ! getent group $RET 1>/dev/null; then
+			db_set italc-client/group-italc-admin "root"
+		fi
+
+		db_input high italc-client/use-existing-groups-for-roles || true
+		db_go
+	fi
+
+	db_get italc-client/use-existing-groups-for-roles
+	use_existing_groups=$RET
+
+	if [ "$create_groups" = "true" ] || [ "$use_existing_groups" = "true" ]; then
+
+		loop=1
+		while [ $loop -eq 1 ]; do
+			db_input high italc-client/group-italc-teacher || true
+			db_go
+
+			db_get italc-client/group-italc-teacher
+			italc_group_teacher=$RET
+			if getent group $italc_group_teacher 1>/dev/null; then
+				loop=0
+			else
+				if [ "$create_groups" = "true" ]; then
+					loop=0
+				else
+					db_input critical italc-client/no-such-group || true
+					db_go
+					continue
+				fi
+			fi
+
+			db_get italc-client/last-group-teacher
+			if [ -z "$RET" ] || ! getent group $RET 1>/dev/null; then
+				RET="root"
+			fi
+			if [ "$RET" != "$italc_group_teacher" ] && [ $(getent group $RET | cut -d ":" -f 3) -ge 100 ]; then
+				db_input critical italc-client/del-last-group-teacher || true
+				db_go
+			fi
+		done
+
+		loop=1
+		while [ $loop -eq 1 ]; do
+			db_input high italc-client/group-italc-student || true
+			db_go
+
+			db_get italc-client/group-italc-student
+			italc_group_student=$RET
+			if getent group $italc_group_student 1>/dev/null; then
+				loop=0
+			else
+				if [ "$create_groups" = "true" ]; then
+					loop=0
+				else
+					db_input critical italc-client/no-such-group || true
+					db_go
+					continue
+				fi
+			fi
+
+			db_get italc-client/last-group-student
+			if [ -z "$RET" ] || ! getent group $RET 1>/dev/null; then
+				RET="root"
+			fi
+			if [ "$RET" != "$italc_group_student" ] && [ $(getent group $RET | cut -d ":" -f 3) -ge 100 ]; then
+				db_input critical italc-client/del-last-group-student || true
+				db_go
+			fi
+		done
+
+		loop=1
+		while [ $loop -eq 1 ]; do
+			db_input high italc-client/group-italc-supporter || true
+			db_go
+
+			db_get italc-client/group-italc-supporter
+			italc_group_supporter=$RET
+			if getent group $italc_group_supporter 1>/dev/null; then
+				loop=0
+			else
+				if [ "$create_groups" = "true" ]; then
+					loop=0
+				else
+					db_input critical italc-client/no-such-group || true
+					db_go
+					continue
+				fi
+			fi
+
+			db_get italc-client/last-group-supporter
+			if [ -z "$RET" ] || ! getent group $RET 1>/dev/null; then
+				RET="root"
+			fi
+			if [ "$RET" != "$italc_group_supporter" ] && [ $(getent group $RET | cut -d ":" -f 3) -ge 100 ]; then
+				db_input critical italc-client/del-last-group-supporter || true
+				db_go
+			fi
+		done
+
+		loop=1
+		while [ $loop -eq 1 ]; do
+			db_input high italc-client/group-italc-admin || true
+			db_go
+
+			db_get italc-client/group-italc-admin
+			italc_group_admin=$RET
+			if getent group $italc_group_admin 1>/dev/null; then
+				loop=0
+			else
+				if [ "$create_groups" = "true" ]; then
+					loop=0
+				else
+					db_input critical italc-client/no-such-group || true
+					db_go
+					continue
+				fi
+			fi
+
+			db_get italc-client/last-group-admin
+			if [ -z "$RET" ] || ! getent group $RET 1>/dev/null; then
+				RET="root"
+			fi
+			if [ "$RET" != "$italc_group_admin" ] && [ $(getent group $RET | cut -d ":" -f 3) -ge 100 ]; then
+				db_input critical italc-client/del-last-group-admin || true
+				db_go
+			fi
+		done
+
+		db_input high italc-client/key-access-for-groups || true
+		db_go
+	fi
+
+fi
+
+db_input high italc-client/autostart-on-login || true
+db_go

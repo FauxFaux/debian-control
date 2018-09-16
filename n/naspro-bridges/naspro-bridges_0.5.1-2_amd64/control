@@ -1,0 +1,31 @@
+Package: naspro-bridges
+Version: 0.5.1-2
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 264
+Depends: libasound2 (>= 1.0.16), libc6 (>= 2.2.5), libnabrit3 (>= 0.3.0), libnacore5 (>= 0.3.0)
+Conflicts: naspro-bridges-bad
+Replaces: naspro-bridges-bad
+Section: libs
+Priority: optional
+Homepage: http://naspro.sourceforge.net/
+Description: collection of bridges to LV2
+ NASPRO bridges is a collection of bridges to LV2 which, once installed,
+ allow users to use plugins developed for other plugin standards in LV2
+ hosts.
+ .
+ This release contains two such bridges: a LADSPA (+ LRDF) and a
+ DSSI one.
+ .
+ The LADSPA bridge supports every feature of LADSPA and LRDF except:
+  * run_adding() and set_run_adding_gain().
+  * LRDF factory presets.
+ The DSSI bridge does not support:
+  * GUIs;
+  * MIDI programs;
+  * maximum number of events per run_synth() - it is 4096, should be
+    enough in most cases;
+  * run_synth_adding() - as before;
+  * run_multiple_synths() and run_multiple_synths_adding() - no
+    extension to do that and it may also be impossible to support
+    those.

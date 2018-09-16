@@ -1,0 +1,39 @@
+Package: libnet-google-safebrowsing2-perl
+Version: 1.07-6
+Architecture: all
+Maintainer: Cyril Bouthors <cyb@debian.org>
+Installed-Size: 181
+Depends: libtext-trim-perl, libnet-ipaddress-perl, libmime-base64-urlsafe-perl, libtext-string-hexconvert-perl, libwww-perl, liburi-perl, libdigest-hmac-perl, libfile-slurp-perl
+Suggests: libdbd-sqlite3-perl
+Section: perl
+Priority: extra
+Homepage: http://search.cpan.org/~jsobrier/Net-Google-SafeBrowsing2/
+Description: Perl extension for the Google Safe Browsing v2 API
+ The library passes most of the unit tests listed in the API documentation. See
+ the documentation
+ (http://code.google.com/apis/safebrowsing/developers_guide_v2.html) for more
+ details about the failed tests.
+ .
+ The Google Safe Browsing database must be stored and managed locally.
+ Net::Google::SafeBrowsing2::Sqlite uses Sqlite as the storage back-end,
+ Net::Google::SafeBrowsing2::MySQL uses MySQL. Other storage mechanisms
+ (databases, memory, etc.) can be added and used transparently with this module.
+ .
+ You may want to look at "Google Safe Browsing v2: Implementation Notes"
+ (http://www.zscaler.com/research/Google%20Safe%20Browsing%20v2%20API.pdf), a
+ collection of notes and real-world numbers about the API. This is intended for
+ people who want to learn more about the API, whether as a user or to make their
+ own implementation.
+ .
+ The source code is available on github at
+ https://github.com/juliensobrier/Net-Google-SafeBrowsing2.
+ .
+ If you do not need to inspect more than 10,000 URLs a day, you can use
+ Net::Google::SafeBrowsing2::Lookup with the Google Safe Browsing v2 Lookup API
+ which does not require to store and maintain a local database.
+ .
+ IMPORTANT: If you start with an empty database, you will need to perform
+ several updates to retrieve all the Google Safe Browsing information. This may
+ require up to 24 hours. This is a limitation of the Google API, not of this
+ module. See "Google Safe Browsing v2: Implementation Notes" at
+ http://www.zscaler.com/research/Google%20Safe%20Browsing%20v2%20API.pdf.

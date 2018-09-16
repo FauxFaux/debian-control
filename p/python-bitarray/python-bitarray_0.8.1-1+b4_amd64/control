@@ -1,0 +1,22 @@
+Package: python-bitarray
+Source: python-bitarray (0.8.1-1)
+Version: 0.8.1-1+b4
+Architecture: amd64
+Maintainer: Jan Dittberner <jandd@debian.org>
+Installed-Size: 237
+Depends: python (<< 2.8), python (>= 2.7~), python:any (<< 2.8), python:any (>= 2.7.5-5~), libc6 (>= 2.14)
+Section: python
+Priority: optional
+Homepage: http://pypi.python.org/pypi/bitarray
+Description: Python module for efficient boolean array handling
+ The bitarry module provides an object type which efficiently represents an
+ array of booleans. Bitarrays are sequence types and behave very much like
+ usual lists. Eight bits are represented by one byte in contiguous block of
+ memory. The user can select between two representations; little-endian and
+ big-endian.
+ .
+ Most of the functionality is implemented in C. Methods for accessing the
+ machine representation are provided. This can be useful when bit level access
+ to binary files is required, such as portable bitmap image files (.pbm). Also,
+ when dealing with compressed data which uses variable bit length encoding, you
+ may find this module useful.

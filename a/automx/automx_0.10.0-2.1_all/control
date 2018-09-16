@@ -1,0 +1,16 @@
+Package: automx
+Version: 0.10.0-2.1
+Architecture: all
+Maintainer: Walter Reiner <walter.reiner@wreiner.at>
+Installed-Size: 277
+Depends: libapache2-mod-wsgi | httpd-wsgi, python-dateutil, python-ipaddr, python-lxml, python-m2crypto, python-memcache, python (>= 2.7), python (<< 2.8)
+Recommends: python-ldap | python-sqlalchemy
+Suggests: python-ldap, python-mysqldb, python-sqlalchemy
+Section: mail
+Priority: optional
+Homepage: http://automx.org
+Description: Provides account configuration data to mailclients
+ automx runs as a WSGI webservice and generates XML output which is used by the
+ users mail client to determine the configuration values needed to use the mail
+ service, like address of IMAP or SMTP service, the username syntax to login
+ and so on.

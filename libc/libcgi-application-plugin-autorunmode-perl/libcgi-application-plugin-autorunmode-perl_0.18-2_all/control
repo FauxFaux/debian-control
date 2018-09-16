@@ -1,0 +1,21 @@
+Package: libcgi-application-plugin-autorunmode-perl
+Version: 0.18-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 46
+Depends: perl, libcgi-application-perl
+Breaks: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Replaces: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Application-Plugin-AutoRunmode
+Description: CGI::App plugin to automatically register runmodes
+ The CGI::Application::Plugin::AutoRunmode plugin for CGI::Application
+ provides easy ways to setup run modes. You can just write the method that
+ implements a run mode. You do not have to explicitly register it with
+ CGI::Application anymore.
+ .
+ You can either flag methods in your CGI::App subclass with the "Runmode" or
+ "StartRunmode" attributes or simply declare that every method in a class is a
+ run mode. You can also assign a delegate object, all whose methods will
+ become runmodes. You can also mix both approaches.

@@ -1,0 +1,18 @@
+Package: libnetapp-perl
+Version: 500.002-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 228
+Depends: perl, libclass-std-perl, libclone-perl, libnet-telnet-perl, libparams-validate-perl, libregexp-common-perl, openssh-client
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/NetApp
+Description: Perl modules for managing NetApp's NAS devices
+ NetApp provides a suite of modules for managing NetApp's NAS devices,
+ commonly referred to as "filers".
+ .
+ Both SSH and telnet are supported, but only SSH is really recommended. NetApp
+ doesn't support concurrent access via telnet, and the error checking using
+ SSH is far more robust. Not to mention, you can configure secure access via
+ SSH without using passwords, but telnet access will always require a
+ password.

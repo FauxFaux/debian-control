@@ -1,0 +1,18 @@
+Package: bootstrap-vz
+Version: 0.9.11+20180121git-1
+Architecture: all
+Maintainer: Debian Cloud Team <debian-cloud@lists.debian.org>
+Installed-Size: 932
+Depends: debootstrap, python-boto, python-boto3, python-docopt, python-fysom, python-jsonschema, python-requests, python-rfc3339, python-termcolor, python-yaml, python2-pyro4, python:any (>= 2.7.5-5~), fdisk | util-linux (<< 2.29.2-3~), e2fsprogs
+Recommends: qemu-utils, kpartx, git
+Suggests: bootstrap-vz-doc, euca2ools, parted, virtualbox-guest-additions-iso, wget, zerofree, puppet (>= 4.8.2-5), ansible, chef, salt-minion
+Section: admin
+Priority: optional
+Homepage: https://github.com/andsens/bootstrap-vz
+Description: tool for creating Debian images for cloud platforms (CLI)
+ It's a software for creating Debian images to run on public or private clouds
+ (Amazon, Google, OpenStack, Eucaliptus, etc).
+ It's using bootstraping as a method for creating images. Images created by this
+ tool are fully operational Debian Images for Cloud.
+ .
+ Provisioning may be also be done with Salt, Puppet, Chef and Ansible.

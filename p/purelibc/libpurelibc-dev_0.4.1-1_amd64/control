@@ -1,0 +1,23 @@
+Package: libpurelibc-dev
+Source: purelibc
+Version: 0.4.1-1
+Architecture: amd64
+Maintainer: Debian VSquare Team <pkg-vsquare-devel@lists.alioth.debian.org>
+Installed-Size: 103
+Depends: libpurelibc1 (= 0.4.1-1)
+Conflicts: libpurelibc0-dev
+Replaces: libpurelibc0-dev
+Section: libdevel
+Priority: optional
+Description: Development files for the purelibc library
+ purelibc is an overlay library that converts the glibc, the GNU standard C
+ library, into a pure library, i.e. a library that can upcall instead of
+ running the system calls. With purelibc a process can trace (and virtualize)
+ its own calls. It is used, for instance, by the UMView modules to support
+ the recursion of virtual environments.
+ .
+ purelibc, along with UMView, is part of the View-OS project:
+ http://wiki.virtualsquare.org
+ .
+ This package contains the files needed to compile applications that link
+ purelibc.

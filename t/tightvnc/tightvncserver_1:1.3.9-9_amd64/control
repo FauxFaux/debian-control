@@ -1,0 +1,31 @@
+Package: tightvncserver
+Source: tightvnc
+Version: 1:1.3.9-9
+Architecture: amd64
+Maintainer: Ola Lundqvist <opal@debian.org>
+Installed-Size: 1810
+Depends: libc6 (>= 2.14), libjpeg62-turbo (>= 1.3.1), libx11-6, libxext6, zlib1g (>= 1:1.1.4), perl:any, x11-common | xserver-common, x11-utils, xauth
+Recommends: xfonts-base, x11-xserver-utils
+Suggests: tightvnc-java
+Provides: vnc-server, xserver
+Section: x11
+Priority: optional
+Homepage: http://www.tightvnc.com
+Description: virtual network computing server software
+ VNC stands for Virtual Network Computing. It is, in essence, a remote
+ display system which allows you to view a computing `desktop' environment
+ not only on the machine where it is running, but from anywhere on the
+ Internet and from a wide variety of machine architectures.
+ .
+ This package provides a server to which X clients can connect and the
+ server generates a display that can be viewed with a vncviewer.
+ .
+ The difference between the tightvncserver and the normal vncserver is the
+ data encoding, optimized for low bandwidth connections. If the client do not
+ support jpeg or zlib encoding it can use the default one. Later versions of
+ vncserver (> 3.3.3r2) support a new automatic encoding that should be equally
+ good as the tightvnc encoding.
+ .
+ Note: This server does not support or need a display. You need a vncviewer to
+ see something. However, this viewer may also be on a computer running other
+ operating systems in the local net.

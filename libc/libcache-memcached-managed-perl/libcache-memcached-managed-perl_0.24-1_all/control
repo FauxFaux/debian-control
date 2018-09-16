@@ -1,0 +1,32 @@
+Package: libcache-memcached-managed-perl
+Version: 0.24-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 164
+Depends: perl, libcache-memcached-perl, memcached
+Recommends: libsocket6-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Cache-Memcached-Managed/
+Description: API for managing cached information
+ The Cache::Memcached::Managed module provides an API to values, cached in
+ one or more memcached servers.  Apart from being very similar to the API
+ of Cache::Memcached, the Cached::Memcached::Managed API allows for
+ management of groups of values, for simplified key generation and expiration,
+ as well as version and namespace management and a few other goodies.
+ .
+ Over the functionality provided by the Cache::Memcached module, this module
+ provides: automatic key generation, ID refinement, version management,
+ namespace support, group management, easy (default) expiration specification,
+ automatic fork() detection, magical increment, instant invalidation,
+ dead memcached server detection, starting/stopping memcached servers and an
+ extensive test-suite.
+ .
+ The basic premise is that each piece of information that is to be cached,
+ can be identified by a key, an optional ID, a version and a namespace.
+ The key determines the basic identification of the value to be cached.
+ The ID specifies a refinement on the basic identification.  The version
+ ensures that differently formatted values with the same key and ID do not
+ interfere with each other.  The namespace ensures that different realms
+ of information (for instance, for different users) do not interfere with each
+ other.

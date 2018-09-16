@@ -1,0 +1,24 @@
+Package: python3-osprofiler
+Source: python-osprofiler
+Version: 2.3.0-2
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 293
+Depends: python3-netaddr, python3-oslo.concurrency (>= 3.26.0), python3-oslo.serialization (>= 2.18.0), python3-oslo.utils (>= 3.33.0), python3-prettytable, python3-requests (>= 2.14.2), python3-six (>= 1.10.0), python3-webob (>= 1.7.1), python3:any
+Section: python
+Priority: optional
+Homepage: https://github.com/stackforge/osprofiler
+Description: OpenStack Profiler Library - Python 3.x
+ OpenStack consists of multiple projects. Each project, in turn, is composed of
+ multiple services. To process some request, e.g. to boot a virtual machine,
+ OpenStack uses multiple services from different projects. In the case somethin
+ works too slowly, it's extremely complicated to understand what exactly goes
+ wrong and to locate the bottleneck.
+ .
+ To resolve this issue, a tiny but powerful library, osprofiler, has been
+ interoduced, and can be used by all OpenStack projects and their Python
+ clients. To be able to generate one trace per request, that goes through all
+ involved services, and builds a tree of calls (see an example
+ http://pavlovic.me/rally/profiler/).
+ .
+ This package contains the Python 3.x module.

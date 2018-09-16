@@ -1,0 +1,19 @@
+Package: lua-gall
+Source: gall (1.3-1)
+Version: 1.3-1+b2
+Architecture: amd64
+Maintainer: Daniel Silverstone <dsilvers@digital-scurf.org>
+Installed-Size: 135
+Depends: libc6 (>= 2.4), libgit2-27 (>= 0.26.0), git, lua-luxio0
+Provides: lua5.1-gall, lua5.2-gall
+Section: interpreters
+Priority: optional
+Multi-Arch: same
+Homepage: https://git.gitano.org.uk/gall.git/
+Description: Git Abstraction Layer for Lua
+ Gall is a Git abstraction layer for Lua which implements a set of Lua objects
+ which can interact with git repositories (via libgit2 where possible).
+ .
+ Gall allows a Lua program to examine refs and objects, and to fully create
+ git commits without needing to create a working tree on disk.
+Lua-Versions: 5.1 5.2

@@ -1,0 +1,17 @@
+Package: libncap44
+Source: ncap (1.9.2-2.2)
+Version: 1.9.2-2.2+b1
+Architecture: amd64
+Maintainer: Robert S. Edmonds <edmonds@debian.org>
+Installed-Size: 72
+Depends: libc6 (>= 2.14), libpcap0.8 (>= 0.9.8)
+Section: libs
+Priority: optional
+Description: network capture library
+ ncap is a network capture library like libpcap (on which it is based)
+ and tcpdump. It produces binary data in its own ncap format, which can
+ be stored in a dump file or transmitted over a UDP socket. Unlike
+ libpcap, it discards data link headers and only supports IPv4 and IPv6
+ packets, but it can perform reassembly of IP datagrams.
+ .
+ This package contains the shared library.

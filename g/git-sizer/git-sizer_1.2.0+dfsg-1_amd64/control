@@ -1,0 +1,28 @@
+Package: git-sizer
+Version: 1.2.0+dfsg-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 2195
+Depends: libc6 (>= 2.3.2)
+Built-Using: golang-1.10 (= 1.10.3-1), golang-github-spf13-pflag (= 1.0.1-1)
+Section: devel
+Priority: optional
+Homepage: https://github.com/github/git-sizer
+Description: compute various size metrics for a Git repository
+ git-sizer computes various size metrics for a Git repository, flagging
+ those that might cause problems or inconvenience. For example:
+ .
+  • Is the repository too big overall?
+  • Does the repository have too many references (branches and/or tags)?
+  • Does the repository include too many objects?
+  • Does the repository include gigantic blobs (files)?
+  • Does the repository include many slightly different large text files?
+  • Does the repository include gigantic trees (directories)?
+  • Does the repository have many identical files?
+  • Does the repository include absurdly long path names?
+  • Are there other bizarre and questionable things in the repository?
+    • Annotated tags pointing at one another in long chains?
+    • Octopus merges with dozens of parents?
+    • Commits with gigantic log messages?
+ .
+ git-sizer can help to reveal the problems described above.

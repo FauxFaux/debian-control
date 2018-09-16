@@ -1,0 +1,68 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+	if id coquelicot >/dev/null 2>&1; then
+		if dpkg --compare-versions "$2" lt 0.9.4-1~; then
+			# Change owner of stored files now that we will run
+			# as 'coquelicot' and not root.
+			find /var/lib/coquelicot /var/log/coquelicot -type f -uid 0 -print0 | xargs -0r chown coquelicot
+			find /var/lib/coquelicot /var/log/coquelicot -type f -gid 0 -print0 | xargs -0r chgrp "$(id -g coquelicot)"
+		fi
+	else
+		adduser --system --group --gecos "Coquelicot web application" \
+			--no-create-home \
+			--home /var/lib/coquelicot coquelicot >/dev/null
+	fi
+	if ! dpkg-statoverride --list "/var/lib/coquelicot"; then
+		chown coquelicot:coquelicot /var/lib/coquelicot
+		chmod 750 /var/lib/coquelicot
+	fi
+	if ! dpkg-statoverride --list "/var/cache/coquelicot"; then
+		chown coquelicot:coquelicot /var/cache/coquelicot
+		chmod 750 /var/cache/coquelicot
+	fi
+	if ! dpkg-statoverride --list "/var/log/coquelicot"; then
+		chown root:coquelicot /var/log/coquelicot
+		chmod 770 /var/log/coquelicot
+		touch /var/log/coquelicot/coquelicot.log
+		chmod 660 /var/log/coquelicot/coquelicot.log
+		chown coquelicot:coquelicot /var/log/coquelicot/coquelicot.log
+	fi
+	if ! dpkg-statoverride --list "/etc/coquelicot"; then
+		chown root:coquelicot /etc/coquelicot
+		chmod 750 /etc/coquelicot
+	fi
+	;;
+    *)
+	;;
+esac
+
+# Automatically added by dh_systemd_enable/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'coquelicot.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'coquelicot.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'coquelicot.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'coquelicot.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/coquelicot" ]; then
+		update-rc.d coquelicot defaults >/dev/null
+		invoke-rc.d coquelicot start || exit 1
+	fi
+fi
+# End automatically added section
+

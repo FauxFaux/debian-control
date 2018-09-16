@@ -1,0 +1,23 @@
+Package: libraw1394-tools
+Source: libraw1394 (2.1.2-1)
+Version: 2.1.2-1+b1
+Architecture: amd64
+Maintainer: Guus Sliepen <guus@debian.org>
+Installed-Size: 89
+Depends: libraw1394-11 (= 2.1.2-1+b1), libc6 (>= 2.4)
+Suggests: libraw1394-doc
+Breaks: libraw1394-dev (<= 2.0.7-1ubuntu1)
+Replaces: libraw1394-dev (<= 2.0.7-1ubuntu1)
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://ieee1394.wiki.kernel.org/
+Description: library for direct access to IEEE 1394 bus (aka FireWire)
+ libraw1394 is the only supported interface to the kernel side raw1394
+ of the Linux IEEE-1394 subsystem, which provides direct access to the
+ connected 1394 buses to user space.  Through libraw1394/raw1394,
+ applications can directly send to and receive from other nodes without
+ requiring a kernel driver for the protocol in question.
+ .
+ This package contains various utilities for that use libraw1394, including
+ the testlibraw program.

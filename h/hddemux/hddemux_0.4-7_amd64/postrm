@@ -1,0 +1,35 @@
+#!/bin/sh
+set -e
+
+case $1 in
+    purge)
+	if which deluser >/dev/null 2>&1 ; then
+	    deluser --quiet --system hddemux > /dev/null || true
+	else
+	    echo >&2 "not removing hddemux system account because deluser command was not found"
+	fi
+        ;;
+esac
+
+# Automatically added by dh_installsystemd/11.3.5
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'hddemux.service' 'hddemux.socket' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'hddemux.service' 'hddemux.socket' >/dev/null || true
+		deb-systemd-helper unmask 'hddemux.service' 'hddemux.socket' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

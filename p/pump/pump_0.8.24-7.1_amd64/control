@@ -1,0 +1,24 @@
+Package: pump
+Version: 0.8.24-7.1
+Architecture: amd64
+Maintainer: Philippe Coval <rzr@gna.org>
+Installed-Size: 75
+Depends: libc6 (>= 2.14), libpopt0 (>= 1.14), netbase
+Suggests: resolvconf
+Conflicts: dhcpcd
+Provides: dhcp-client
+Section: admin
+Priority: optional
+Description: BOOTP and DHCP client for automatic IP configuration
+ This is the BOOTP/DHCP client written by RedHat.
+ .
+ DHCP (Dynamic Host Configuration Protocol) and BOOTP (Boot Protocol)
+ are protocols which allow individual devices on an IP network to get
+ their own network configuration information (IP address, subnetmask,
+ broadcast address, etc.) from network servers. The overall purpose of
+ DHCP and BOOTP is to make it easier to administer a large network.
+ .
+ Pump is a combined BOOTP and DHCP client daemon, which allows your
+ machine to retrieve configuration information from a server. You
+ should install this package if you are on a network which uses BOOTP
+ or DHCP.

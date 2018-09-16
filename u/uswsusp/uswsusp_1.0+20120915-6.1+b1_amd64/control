@@ -1,0 +1,29 @@
+Package: uswsusp
+Source: uswsusp (1.0+20120915-6.1)
+Version: 1.0+20120915-6.1+b1
+Architecture: amd64
+Maintainer: Rodolfo García Peñas (kix) <kix@debian.org>
+Installed-Size: 699
+Depends: libblkid1 (>= 2.16), libc6 (>= 2.15), liblzo2-2, libpci3 (>= 1:3.5.2-1), libx86-1 (>= 0.99-1), debconf (>= 0.5) | debconf-2.0
+Recommends: initramfs-tools (>= 0.74), mount (>= 2.12r-17)
+Section: admin
+Priority: optional
+Homepage: http://suspend.sourceforge.net/
+Description: tools to use userspace software suspend provided by Linux
+ This package (also known as µswsusp, suspend-utils or simply suspend)
+ contains the programs to use the userspace software suspend facility
+ available in Linux kernels 2.6.17-rc1 and higher. It allows the system
+ to have its state saved to disk and be powered off. On restarting,
+ it will be put back in the state it was left in (this is sometimes
+ called hibernation).
+ .
+ It also includes a program to suspend the system to RAM after the
+ state is saved to disk. In that state, the system still uses power,
+ but resuming is faster. If the battery depletes, the state is
+ resumed from disk without data loss.
+ .
+ Optional features include encrypting the system snapshot.
+ .
+ To use this package you need a Linux kernel version 2.6.17-rc1 or newer
+ configured to use an initramfs. Hooks and scripts to integrate with
+ initramfs-tools are provided.

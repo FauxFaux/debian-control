@@ -1,0 +1,19 @@
+Package: ruby-em-redis
+Version: 0.3.0+gh-2
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 70
+Depends: ruby | ruby-interpreter, ruby-eventmachine
+Section: ruby
+Priority: optional
+Homepage: http://github.com/libc/em-redis
+Description: eventmachine-based implementation of the Redis protocol
+ Modeled after eventmachine's implementation of the memcached protocol,
+ and influenced by Ezra Zygmuntowicz's redis-rb library (distributed as
+ part of Redis).
+ .
+ This library is only useful when used as part of an application that
+ relies on Event Machine's event loop.  It implements an EM-based client
+ protocol, which leverages the non-blocking nature of the EM interface
+ to achieve significant parallelization without threads.
+Ruby-Versions: all

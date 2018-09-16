@@ -1,0 +1,16 @@
+Package: liblazymap-clojure
+Source: lazymap-clojure
+Version: 3.1.1-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 16
+Depends: libclojure-java
+Section: java
+Priority: optional
+Homepage: https://bitbucket.org/kotarak/lazymap
+Description: transparent wrapper around Clojure's map types
+ LazyMap is a transparent wrapper around the map types of Clojure. It works
+ similar to lazy-seq for sequences: the value associated with a key via
+ lazy-assoc is not evaluated until it is actually accessed. So if the value is
+ dissoc'd before it is accessed the code necessary to generate the value is not
+ executed at all.

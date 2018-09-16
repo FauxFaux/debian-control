@@ -1,0 +1,17 @@
+Package: zzuf
+Source: zzuf (0.15-1)
+Version: 0.15-1+b1
+Architecture: amd64
+Maintainer: Sam Hocevar <sho@debian.org>
+Installed-Size: 175
+Depends: libc6 (>= 2.15)
+Section: devel
+Priority: optional
+Description: transparent application fuzzer
+ Zzuf is a transparent fuzzer. It works by intercepting applications' file
+ and network operations and changing random bits in their input. Its behaviour
+ is deterministic, making it easy to reproduce bugs.
+ .
+ Zzuf has support for variable fuzzing ratio, character filtering, fuzzing
+ decision based on filenames and optional network fuzzing. It can also stop
+ processes that run for too long or that output too much data.

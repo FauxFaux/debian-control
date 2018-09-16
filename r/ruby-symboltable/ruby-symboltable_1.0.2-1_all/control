@@ -1,0 +1,19 @@
+Package: ruby-symboltable
+Version: 1.0.2-1
+Architecture: all
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 22
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: http://mjijackson.github.com/symboltable
+Description: symbols-only hash for Ruby
+ SymbolTable is a handy little Ruby class that was conceived from the union of
+ Hash and Symbol. SymbolTable directly extends Hash, but it stores all keys
+ internally as symbols. Any key that cannot be converted to a Symbol is not
+ valid.
+ .
+ While this may seem restrictive, it does have the nice side effect of making
+ all keys slightly more memorable and usable. For example, values may be set
+ and retrieved using any key that resolves to the same symbol.
+Ruby-Versions: all

@@ -1,0 +1,18 @@
+Package: stacks
+Version: 2.2+dfsg-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 4887
+Depends: libc6 (>= 2.17), libgcc1 (>= 1:3.0), libgomp1 (>= 4.9), libhts2 (>= 1.0), libstdc++6 (>= 5.2), zlib1g (>= 1:1.2.6), python:any (>= 2.6.6-7~), samtools, libdbi-perl
+Recommends: libspreadsheet-writeexcel-perl
+Section: science
+Priority: optional
+Homepage: http://creskolab.uoregon.edu/stacks/
+Description: pipeline for building loci from short-read DNA sequences
+ Stacks is a software pipeline for building loci from short-read sequences,
+ such as those generated on the Illumina platform. Stacks was developed to work
+ with restriction enzyme-based data, such as RAD-seq, for the purpose of
+ building genetic maps and conducting population genomics and phylogeography.
+ .
+ Note that this package installs Stacks such that all commands must be run as:
+ $ stacks <cmdname> <args>

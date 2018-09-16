@@ -1,0 +1,69 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+        configure)
+            [ ! -f /etc/usbguard/rules.conf ] && touch /etc/usbguard/rules.conf
+	    chmod og-rwx /etc/usbguard/rules.conf
+            [ ! -f /etc/usbguard/usbguard-daemon.conf ] && touch /etc/usbguard/usbguard-daemon.conf
+	    chmod og-rwx -f /etc/usbguard/usbguard-daemon.conf
+        ;;
+        abort-upgrade|abort-remove|abort-deconfigure)
+            exit 0
+        ;;
+        *)
+            echo "postinst called with unknown argument $1"
+            exit 1
+        ;;
+esac
+
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'usbguard-dbus.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'usbguard-dbus.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'usbguard-dbus.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'usbguard-dbus.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'usbguard.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'usbguard.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'usbguard.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'usbguard.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		deb-systemd-invoke $_dh_action 'usbguard-dbus.service' 'usbguard.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+exit 0

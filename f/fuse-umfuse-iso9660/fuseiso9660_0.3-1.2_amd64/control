@@ -1,0 +1,18 @@
+Package: fuseiso9660
+Source: fuse-umfuse-iso9660
+Version: 0.3-1.2
+Architecture: amd64
+Maintainer: Debian VSquare Team <pkg-vsquare-devel@lists.alioth.debian.org>
+Installed-Size: 29
+Depends: libc6 (>= 2.14), libcdio17 (>= 1.0.0), libfuse2 (>= 2.8), libiso9660-10 (>= 0.94), libumlib0, zlib1g (>= 1:1.1.4), fuse
+Section: misc
+Priority: optional
+Homepage: http://view-os.sourceforge.net
+Description: File System in User Space - Module for ISO9660
+ This module for the FUSE kernel service allows any FUSE-enabled user to mount
+ ISO9660 file systems, e.g. CDROM disk images.
+ .
+ The module has been initially written for UMView, the user-mode
+ implementation of View-OS. If you want to allow completely user-mode disk
+ images mounting (with no kernel/superuser support at all), take a look at
+ umview-mod-umfuseiso9660 and its dependencies.

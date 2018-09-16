@@ -1,0 +1,18 @@
+Package: roslang
+Source: ros-ros
+Version: 1.14.4-3
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 23
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://wiki.ros.org/ROS
+Description: Common metapackage for all Robot OS client libraries
+ This package is part of Robot OS (ROS). It is mainly used to find
+ client libraries (via 'rospack depends-on1 roslang'). The roslang
+ package is only of interest to those implementing a ROS client
+ library. Client libraries mark themselves as such by depending on
+ the roslang package, which allows rosbuild and other tools to perform
+ appropriate actions, such as msg- and srv-based code generation. The
+ roslang package itself contains no actual code.

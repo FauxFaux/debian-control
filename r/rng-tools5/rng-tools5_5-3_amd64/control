@@ -1,0 +1,27 @@
+Package: rng-tools5
+Version: 5-3
+Architecture: amd64
+Maintainer: Michael Stone <mstone@debian.org>
+Installed-Size: 69
+Depends: libc6 (>= 2.14), libgcrypt20 (>= 1.8.0)
+Conflicts: rng-tools
+Section: utils
+Priority: optional
+Description: Daemon to use a Hardware TRNG
+ The rngd daemon acts as a bridge between a Hardware TRNG (true random number
+ generator) such as the ones in some Intel/AMD/VIA chipsets, and the kernel's
+ PRNG (pseudo-random number generator).
+ .
+ It tests the data received from the TRNG using the FIPS 140-2 (2002-10-10)
+ tests to verify that it is indeed random, and feeds the random data to the
+ kernel entropy pool.
+ .
+ This increases the bandwidth of the /dev/random device, from a source that
+ does not depend on outside activity. This may improve the behavior of systems
+ which experience low values in /proc/sys/kernel/random/entropy_avail
+ It may also improve the quality (entropy) of the randomness of /dev/random.
+ .
+ A TRNG kernel module such as hw_random, or some other source of true
+ entropy that is accessible as a device or fifo, is required to use this
+ package. It will take advantage of the RDRAND and RDSEED instructions
+ included in some Intel & AMD CPUs.

@@ -1,0 +1,20 @@
+Package: dhcp-helper
+Source: dhcp-helper (1.2-1)
+Version: 1.2-1+b1
+Architecture: amd64
+Maintainer: Simon Kelley <simon@thekelleys.org.uk>
+Installed-Size: 47
+Depends: netbase, libc6 (>= 2.14)
+Conflicts: dhcp3-relay, dhcp3-server, isc-dhcp-relay, isc-dhcp-server, udhcpd
+Section: net
+Priority: optional
+Description: A DHCP relay agent
+ dhcp-helper is a DHCP and BOOTP relay agent. It listens for DHCP
+ and BOOTP broadcasts on directly connected subnets and relays
+ them to DHCP or BOOTP servers elsewhere. dhcp-helper is much smaller
+ than dhcp3-relay package and it does not require the Packet Filter
+ kernel facility to be present. This makes it a good choice for use
+ on small or embedded systems. Unlike dhcp3-relay, dhcp-helper can be
+ configured to forward DHCP requests as broadcasts, and therefore does
+ not need to be given the IP address of the DHCP server, only the
+ network in which it resides.

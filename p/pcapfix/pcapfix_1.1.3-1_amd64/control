@@ -1,0 +1,30 @@
+Package: pcapfix
+Version: 1.1.3-1
+Architecture: amd64
+Maintainer: Joao Eriberto Mota Filho <eriberto@debian.org>
+Installed-Size: 89
+Depends: libc6 (>= 2.14)
+Enhances: tcpdump, wireshark
+Section: net
+Priority: optional
+Homepage: http://f00l.de/pcapfix
+Description: repairs broken pcap and pcapng files
+ libpcap (Packet CAPture) provides a portable framework for low-level network
+ monitoring. Network dumps based on libpcap can be made by tcpdump, wireshark
+ and other tools. Sometimes those dumps can get corrupted by several reasons.
+ Examples of this are a copy from Linux to Windows with a conversion to DOS/
+ Windows text file line ending (CR-LF) or a transfer over FTP in ASCII mode
+ instead of BINARY mode.
+ .
+ pcapfix tries to repair your broken pcap files, fixing the global header and
+ recovering the packets by searching and guessing the packet headers.
+ .
+ pcapfix will first step through the packets top down until it recognizes a
+ corrupted one by using plausibility checks. After that the tool will brute
+ force further pcap packet headers by reading the file byte by byte. If another
+ proper packet is found, pcapfix restores the data in between by adding a
+ well-formed pcap packet header.
+ .
+ The PCAP Next Generation Dump File Format (or pcapng for short) is an attempt
+ to overcome the limitations of the currently widely used (but limited) libpcap
+ format. Since 1.0.0 version, pcapfix works with pcapng format too.

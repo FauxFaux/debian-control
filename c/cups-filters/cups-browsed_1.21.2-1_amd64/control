@@ -1,0 +1,28 @@
+Package: cups-browsed
+Source: cups-filters
+Version: 1.21.2-1
+Architecture: amd64
+Maintainer: Debian Printing Team <debian-printing@lists.debian.org>
+Installed-Size: 364
+Depends: libavahi-client3 (>= 0.6.16), libavahi-common3 (>= 0.6.16), libavahi-glib1 (>= 0.6.16), libc6 (>= 2.4), libcups2 (>= 2.0.2), libcupsfilters1 (>= 1.12.0), libglib2.0-0 (>= 2.37.3), libldap-2.4-2 (>= 2.4.7), cups-daemon, lsb-base
+Recommends: avahi-daemon (>= 0.6.31-3~)
+Enhances: cups
+Breaks: cups-daemon (<< 1.6.4), cups-filters (<< 1.4.0~)
+Replaces: cups-filters (<< 1.4.0~)
+Section: net
+Priority: optional
+Homepage: https://wiki.linuxfoundation.org/openprinting/
+Description: OpenPrinting CUPS Filters - cups-browsed
+ This package provides cups-browsed, a daemon which browses the Bonjour
+ broadcasts of shared remote CUPS printers and makes the printers
+ available locally, replacing the CUPS broadcasting/browsing which was
+ dropped in CUPS 1.6.x. This way the old behavior of having the remote
+ printers available automatically is now re-implemented with Bonjour.
+ .
+ cups-browsed is also useful with a CUPS >= 1.6 client to allow the
+ latter to browse the printer list of CUPS < 1.6 servers (by using the
+ old 'cups' protocol in BrowseRemoteProtocols).
+ .
+ cups-browsed is also useful with a CUPS >= 1.6 server to allow CUPS <
+ 1.6 clients to browse its printer list (by using the old 'cups'
+ protocol in BrowseLocalProtocols).

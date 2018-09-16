@@ -1,0 +1,27 @@
+Package: cuetools
+Source: cuetools (1.4.0-2)
+Version: 1.4.0-2+b1
+Architecture: amd64
+Maintainer: Guo Yixuan (郭溢譞) <culu.gyx@gmail.com>
+Installed-Size: 247
+Depends: libc6 (>= 2.14), python-mutagen | id3v2
+Recommends: flac, vorbis-tools
+Enhances: shntool
+Section: utils
+Priority: extra
+Homepage: https://github.com/svend/cuetools
+Description: tools for manipulating CUE/TOC files
+ cuetools is a set of programs that are useful for manipulating CUE sheet
+ (cue) files and Table of Contents (toc) files. CUE and TOC files are a way
+ to represent the layout of a data or audio CD in a machine-readable ASCII
+ format. The package includes these utilities:
+ .
+    - cueconvert: convert between CUE and TOC formats
+    - cuebreakpoints: print the breakpoints from a CUE or TOC file
+    - cueprint: print disc and track information for a CUE or TOC file
+    - cuetag: tag files based on CUE/TOC file information
+ .
+ Probably the most popular use is to split a large audio file into many
+ small files according to a CUE or TOC, for example:
+ .
+ cuebreakpoints disc.cue | shnsplit disc.wav

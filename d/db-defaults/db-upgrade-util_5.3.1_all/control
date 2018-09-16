@@ -1,0 +1,20 @@
+Package: db-upgrade-util
+Source: db-defaults
+Version: 5.3.1
+Architecture: all
+Maintainer: Debian Berkeley DB Group <pkg-db-devel@lists.alioth.debian.org>
+Installed-Size: 8
+Depends: db5.3-util
+Section: utils
+Priority: extra
+Description: Berkeley Database Utilities (old versions)
+ This empty package depends on the old (from previous stable release)
+ utilities package containing different tools for manipulating
+ databases and installs unversioned links to current database
+ utilities.
+ .
+ This package exists to help package maintainers which need to upgrade
+ Berkeley DB database file.  The package which needs to perform an
+ database upgrade will need to depend on db-util and db-upgrade-util
+ and call commands as described in:
+ http://docs.oracle.com/cd/E17076_02/html/upgrading/upgrade_process.html

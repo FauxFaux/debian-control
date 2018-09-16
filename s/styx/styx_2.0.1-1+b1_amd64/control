@@ -1,0 +1,24 @@
+Package: styx
+Source: styx (2.0.1-1)
+Version: 2.0.1-1+b1
+Architecture: amd64
+Maintainer: Frederik Schüler <fs@debian.org>
+Installed-Size: 183
+Depends: libc6 (>= 2.4), libstyx2 (>= 2.0.1)
+Recommends: styx-dev (= 2.0.1-1+b1)
+Suggests: styx-doc (= 2.0.1-1)
+Section: devel
+Priority: optional
+Homepage: http://speculate.de/styx/
+Description: combined parser/scanner generator for C/C++
+ The package facilitates application development including
+ user-defined context free languages.
+ .
+ Its development model deviates from the traditional lex/yacc pair
+ (flex/bison in Debian) by automating tedious tasks which are
+ commonly implemented in yacc's actions.
+ .
+ Styx automatically derives a depth grammar, generates reentrant
+ parsers that support persistent derivation trees, preserve full
+ source information, support Unicode and are thread safe.
+Tag: devel::{code-generator,lang:c,lang:c++,lang:php,lang:c#}, implemented-in::c, interface::commandline, role::program, scope::utility, suite::gnu, works-with::software:source

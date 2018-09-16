@@ -1,0 +1,22 @@
+Package: ruby-rethtool
+Version: 0.0.5-1
+Architecture: all
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 63
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: http://theshed.hezmatt.org/rethtool
+Description: partial wrapper around the SIOCETHTOOL ioctl
+ Have you ever needed to get at some details about a network interface from
+ inside a Ruby script, but got stuck trying to parse the output of ethtool? If
+ so, you're one-in-a-million, but at least you don't have to write an ethtool
+ parser any more. use Rethtool instead!
+ .
+ At present, Rethtool only supports a couple of things:
+  * Retrieve various details about the interface (link speed, duplex, etc).
+  * Determine if the link is currently up or down.
+ .
+ Adding extra SIOCETHTOOL features is relatively straightforward, thanks to
+ cstruct and the base infrastructure already in place.
+Ruby-Versions: all

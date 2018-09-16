@@ -1,0 +1,21 @@
+Package: dh-make-perl
+Version: 0.103
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 279
+Depends: debhelper (>= 10), dpkg-dev, fakeroot, libapt-pkg-perl, libarray-unique-perl, libclass-accessor-perl, libconfig-ini-perl, libdpkg-perl, libdebian-source-perl, libemail-address-xs-perl, libemail-date-format-perl, libfile-which-perl, liblist-moreutils-perl, libmodule-depends-perl (>= 0.15), libparse-debianchangelog-perl, libsoftware-license-perl, libtie-ixhash-perl, libwww-mechanize-perl, libwww-perl, libyaml-perl, libyaml-libyaml-perl, make, perl, perl (>= 5.13.10) | libcpan-meta-perl
+Recommends: apt-file (>= 3), apt (>= 1.1.8), git, libdpkg-parse-perl, libmodule-build-perl, libsys-cpu-perl, pristine-tar
+Section: perl
+Priority: optional
+Description: helper for creating Debian packages from perl modules
+ dh-make-perl will create the files required to build a Debian source
+ package out of a perl package.  This works for most simple packages
+ and is also useful for getting started with packaging perl modules.
+ Given a perl package name, it can also automatically download it from
+ CPAN.
+ .
+ dh-make-perl can also help keeping the debian/ content current when upstream
+ dependencies or Debian practices change. It can also help improve existing
+ Perl module packages.
+ .
+ Includes the cpan2deb and cpan2dsc flavours.

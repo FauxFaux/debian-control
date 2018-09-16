@@ -1,0 +1,17 @@
+Package: openscap-daemon
+Version: 0.1.10-3
+Architecture: all
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 338
+Depends: dbus, libopenscap8, lsb-base, python3-dbus, python3-docker, python3-lxml, python3-gi, ssg-base, python3:any (>= 3.5~)
+Recommends: openssh-client, ssg-debian
+Suggests: docker, ssg-debderived, ssg-nondebian, ssg-applications
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.open-scap.org/tools/openscap-daemon
+Description: Daemon for infrastructure continuous SCAP compliance checks
+ This service is a daemon that allows periodic compliance scans of a complete
+ infrastructure, supporting local checks, remote checks, VM or Docker checks.
+ The daemon is associated with a CLI allowing easy configuration of targets and
+ security profiles to evaluate and easy results and reports management

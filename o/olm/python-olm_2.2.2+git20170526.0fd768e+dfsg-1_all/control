@@ -1,0 +1,24 @@
+Package: python-olm
+Source: olm
+Version: 2.2.2+git20170526.0fd768e+dfsg-1
+Architecture: all
+Maintainer: Hubert Chathi <uhoreg@debian.org>
+Installed-Size: 65
+Depends: libolm2 (>= 2.2.2+git20170526.0fd768e+dfsg-1), libolm2 (<< 2.2.2+git20170526.0fd768e+dfsg-1.1~), python:any (<< 2.8), python:any (>= 2.7.5-5~), python-yaml
+Section: python
+Priority: optional
+Homepage: https://matrix.org/git/olm/
+Description: Python bindings for the olm Double Ratchet implementation
+ Olm is an implementation of the Double Ratchet cryptographic ratchet described
+ by https://whispersystems.org/docs/specifications/doubleratchet/, written in C
+ and C++11 and exposed as a C API.
+ .
+ This library also includes an implementation of the Megolm cryptographic
+ ratchet which is intended for encrypted messaging applications where there
+ may be a large number of recipients of each message, thus precluding the use of
+ peer-to-peer encryption systems such as Olm.
+ .
+ Megolm is the end-to-end encryption system for the Matrix communications
+ protocol.
+ .
+ This package contains the Python bindings for libolm.

@@ -1,0 +1,18 @@
+Package: apparmor
+Version: 2.13-8
+Architecture: amd64
+Maintainer: Debian AppArmor Team <pkg-apparmor-team@lists.alioth.debian.org>
+Installed-Size: 1808
+Depends: debconf, lsb-base, debconf (>= 0.5) | debconf-2.0, python3:any, libc6 (>= 2.26)
+Suggests: apparmor-profiles-extra, apparmor-utils
+Breaks: fcitx-data (<< 1:4.2.9.1-1ubuntu2), media-hub, mediascanner2.0, messaging-app, webbrowser-app
+Replaces: fcitx-data (<< 1:4.2.9.1-1ubuntu2)
+Section: admin
+Priority: optional
+Homepage: http://apparmor.net/
+Description: user-space parser utility for AppArmor
+ apparmor provides the system initialization scripts needed to use the
+ AppArmor Mandatory Access Control system, including the AppArmor Parser
+ which is required to convert AppArmor text profiles into machine-readable
+ policies that are loaded into the kernel for use with the AppArmor Linux
+ Security Module.

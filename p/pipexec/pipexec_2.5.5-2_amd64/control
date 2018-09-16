@@ -1,0 +1,22 @@
+Package: pipexec
+Version: 2.5.5-2
+Architecture: amd64
+Maintainer: Thorsten Alteholz <debian@alteholz.de>
+Installed-Size: 74
+Depends: libc6 (>= 2.10)
+Section: utils
+Priority: optional
+Homepage: https://github.com/flonatel/pipexec
+Description: create a directed graph of processes and pipes
+ pipexec creates an arbitrary network (directed graph) of processes and
+ pipes in between - even cycles are possible.
+ It overcomes the short comings of shells that are typically only able
+ to create non cyclic trees.
+ .
+ pipexec also monitors all its child processes and is able to restart
+ the whole network of processes and pipes if one crashes.
+ Therefore pipexec can be used in SYSV-init or systemd configuration to
+ run a network of processes.
+ .
+ The package also contains two tools 'ptee' and 'peet' which are the piped
+ version of the 'tee' and 'eet' (reverse tee) commands.

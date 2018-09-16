@@ -1,0 +1,28 @@
+Package: libhighwayhash-dev
+Source: highwayhash
+Version: 0~20180209-g14dedec-6
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 490
+Depends: libhighwayhash0 (= 0~20180209-g14dedec-6)
+Section: libdevel
+Priority: optional
+Homepage: https://github.com/google/highwayhash
+Description: Fast strong hash functions: SipHash/HighwayHash (development)
+ Highwayhash provides three 'strong' (well-distributed and unpredictable)
+ hash functions: a faster version of SipHash, a data-parallel variant of
+ SipHash using tree hashing, and an even faster algorithm called HighwayHash.
+ .
+ SipHash is a fast but 'cryptographically strong' pseudo-random function by
+ Aumasson and Bernstein [https://www.131002.net/siphash/siphash.pdf].
+ .
+ SipTreeHash slices inputs into 8-byte packets and computes their SipHash in
+ parallel, which is faster when processing at least 96 bytes.
+ .
+ HighwayHash is a new way of mixing inputs which may inspire new
+ cryptographically strong hashes. Large inputs are processed at a rate of
+ 0.3 cycles per byte, and latency remains low even for small inputs.
+ HighwayHash is faster than SipHash for all input sizes, with about 3.8 times
+ higher throughput at 1 KiB.
+ .
+ This package ships the static library and development files.

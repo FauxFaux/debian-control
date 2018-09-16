@@ -1,0 +1,24 @@
+Package: didjvu
+Version: 0.8.2-1
+Architecture: all
+Maintainer: Daniel Stender <stender@debian.org>
+Installed-Size: 127
+Depends: djvulibre-bin, minidjvu, python (>= 2.7) | python-argparse, python-gamera, python-pil, python:any
+Suggests: gir1.2-gexiv2-0.10 (>= 0.10.3), python-gi | python-libxmp
+Section: graphics
+Priority: optional
+Homepage: http://jwilk.net/software/didjvu
+Description: DjVu encoder with foreground/background separation
+ The DjVu graphics format is very effective because it uses
+ multiple layers which are differently compressed. For the
+ derivation of the bitonal foreground layer ("mask") of
+ (scanned document) images ("segmentation") didjvu uses the
+ Gamera framework.
+ .
+ In the same process didjvu encodes the foreground mask together
+ with the background counterpart into DjVu. That's also possible
+ for a stack of images which can be processes into a bundled DjVu
+ container very easily. The results are suitable for getting high-
+ quality OCR data even from problematic scans from old documents.
+ Furthermore, didjvu is capable of processing bitonal segmentation on
+ colour scans.

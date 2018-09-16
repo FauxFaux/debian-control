@@ -1,0 +1,30 @@
+Package: golang-github-hashicorp-yamux-dev
+Source: golang-github-hashicorp-yamux
+Version: 0.0~git20180605.35205983-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 100
+Section: devel
+Priority: optional
+Homepage: https://github.com/hashicorp/yamux
+Description: Golang connection multiplexing library
+ Yamux (Yet another Multiplexer) is a multiplexing library for Golang. It relies
+ on an underlying connection to provide reliability and ordering, such as TCP or
+ Unix domain sockets, and provides stream-oriented multiplexing. It is inspired
+ by SPDY but is not interoperable with it.
+ .
+ Yamux features include:
+ .
+   - Bi-directional streams
+     - Streams can be opened by either client or server
+     - Useful for NAT traversal
+     - Server-side push support
+   - Flow control
+     - Avoid starvation
+     - Back-pressure to prevent overwhelming a receiver
+   - Keep Alives
+     - Enables persistent connections over a load balancer
+   - Efficient
+     - Enables thousands of logical streams with low overhead
+ .
+ This package contains the source.

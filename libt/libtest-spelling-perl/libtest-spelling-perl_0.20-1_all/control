@@ -1,0 +1,19 @@
+Package: libtest-spelling-perl
+Version: 0.20-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 61
+Depends: perl, libipc-run3-perl (>= 0.044), libpod-spell-perl
+Recommends: spell | aspell | ispell | hunspell
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Spelling
+Description: Perl module for spellchecking pod formatted text
+ Test::Spelling lets you check the spelling of a POD file, and report
+ its results in standard Test::More fashion. This module requires a
+ spellcheck program such as spell, aspell, ispell, or hunspell.
+ .
+ You can add your own stopwords, which are words that should be ignored by the
+ spell check. See libpod-spell-perl (which this module is built upon) for a
+ variety of ways to add per-file stopwords to each .pm file. If you have a lot
+ of stopwords, it's useful to put them in your test file's DATA section.

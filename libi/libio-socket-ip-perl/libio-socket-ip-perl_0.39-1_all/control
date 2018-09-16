@@ -1,0 +1,23 @@
+Package: libio-socket-ip-perl
+Version: 0.39-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 74
+Depends: netbase
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/IO-Socket-IP
+Description: module for using IPv4 and IPv6 sockets in a protocol-independent way
+ IO::Socket::IP provides a protocol-independent way to use IPv4 and IPv6
+ sockets. It allows new connections to be made by specifying the hostname and
+ service name or port number. It allows for connections to be accepted by
+ sockets listening on local ports, by service name or port number.
+ .
+ It uses Socket::GetAddrInfo's getaddrinfo function to convert
+ hostname/service name pairs into sets of possible addresses to connect to.
+ This allows it to work for IPv6 where the system supports it, while still
+ falling back to IPv4-only on systems which don't.
+ .
+ It provides an API which, for most typical cases, should be a drop-in
+ replacement for IO::Socket::INET; most constructor arguments and methods are
+ provided in a compatible way.

@@ -1,0 +1,51 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        if ! id -u dkimpy-milter >/dev/null 2>&1; then
+            adduser --quiet --system --group --no-create-home --home /nonexistent dkimpy-milter
+        elif [ -n "$2" ]; then
+            addgroup --quiet --system dkimpy-milter
+            usermod -g dkimpy-milter dkimpy-milter
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p dkimpy-milter 
+fi
+
+# End automatically added section
+# Automatically added by dh_installsystemd/11.2.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'dkimpy-milter.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'dkimpy-milter.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'dkimpy-milter.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'dkimpy-milter.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0
+

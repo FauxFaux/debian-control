@@ -1,0 +1,27 @@
+Package: libtermkey1
+Source: libtermkey
+Version: 0.20-3
+Architecture: amd64
+Maintainer: James McCoy <jamessan@debian.org>
+Installed-Size: 55
+Depends: libc6 (>= 2.14), libunibilium4 (>= 1.0)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.leonerd.org.uk/code/libtermkey/
+Description: library for processing keyboard input
+ This library allows easy processing of keyboard entry from terminal-based
+ programs. It handles all the necessary logic to recognise special keys, UTF-8
+ combining, and so on, with a simple interface.  It provides the following
+ features:
+ .
+  * Follows terminfo for every sequence listed there, only falling back on
+    other methods to deal with unrecognised input.
+  * Recognises special keys (such as arrow and function keys), including
+    "modified" keys like Ctrl-Left.
+  * Recognises XTerm-style mouse position/button reporting.
+  * MIT licenced to allow almost all projects to use it; both Open Source
+    and Commercial.
+  * Small API - just three functions are needed in simple common cases.
+  * Both synchronous (blocking) and asynchronous (non-blocking) APIs are
+    supported.

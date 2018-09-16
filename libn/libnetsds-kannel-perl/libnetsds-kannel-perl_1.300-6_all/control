@@ -1,0 +1,19 @@
+Package: libnetsds-kannel-perl
+Version: 1.300-6
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 57
+Depends: perl, libnetsds-perl, libnetsds-util-perl, libwww-perl, libxml-libxml-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/NetSDS-Kannel/
+Description: Service Delivery Suite framework - Kannel SMS gateway API
+ NetSDS::Kannel module provides API to Kannel SMS gateway.
+ .
+ To decrease innecessary problems we use a lot of predefined parameters
+ while sending and receiving messages via Kannel HTTP API. It's not so
+ flexible as direct HTTP processing but less expensive in development
+ time ;-)
+ .
+ This modules uses LWP to send messages and CGI.pm to process messages
+ from Kannel.

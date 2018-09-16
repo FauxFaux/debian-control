@@ -1,0 +1,23 @@
+Package: libpgobject-util-pseudocsv-perl
+Version: 2-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/PGObject-Util-PseudoCSV
+Description: PostgreSQL text representations parser
+ PostgreSQL can represent tuples and arrays in a text format that is almost
+ like CSV. Unfortunately this format has a number of gotchas which render
+ existing CSV-parsers useless. PGObject::Util::PseudoCSV provides basic
+ parsing functions to other programs for db interface purposes. With this
+ module you can both parse pseudocsv representations of tuples and arrays and
+ you can create them from a list.
+ .
+ The API's here assume you send one (and only one) pseudo-csv record to the
+ API at once. These may be nested, so a single tuple can contain arrays of
+ tuples which can contain arrays of tuples ad infinitum but the parsing only
+ goes one layer deep tuple-wise so that handling classes have an opportunity to
+ re-parse with appropriate type information. Naturally this has performance
+ implications, so depth in SQL structures passed should be reasonably limited.

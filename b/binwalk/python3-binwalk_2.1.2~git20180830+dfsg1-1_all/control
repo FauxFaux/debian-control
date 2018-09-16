@@ -1,0 +1,26 @@
+Package: python3-binwalk
+Source: binwalk
+Version: 2.1.2~git20180830+dfsg1-1
+Architecture: all
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 531
+Depends: libmagic1, python3:any
+Recommends: arj, bzip2, cramfsswap, mtd-utils, ncompress, p7zip, p7zip-full (>= 16.02+dfsg-1~), python3-pyqtgraph, sleuthkit, squashfs-tools
+Breaks: binwalk (<< 2.1.1-7~)
+Replaces: binwalk (<< 2.1.1-7~)
+Section: python
+Priority: optional
+Homepage: https://github.com/ReFirmLabs/binwalk
+Description: Python3 library for analyzing binary blobs and executable code
+ Binwalk is a tool for searching a given binary image for embedded files
+ and executable code. Specifically, it is designed for identifying files
+ and code embedded inside of firmware images. Binwalk uses the libmagic
+ library, so it is compatible with magic signatures created for the Unix
+ file utility.
+ .
+ Binwalk also includes a custom magic signature file which contains
+ improved signatures for files that are commonly found in firmware images
+ such as compressed/archived files, firmware headers, Linux kernels,
+ bootloaders, filesystems, etc.
+ .
+ This is the Python 3 version of the package.

@@ -1,0 +1,18 @@
+Package: fileschanged
+Version: 0.6.5-2
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 70
+Depends: libc6 (>= 2.3), libfam0, fam (>= 2.7.0-10) | gamin (>= 0.1.7-4)
+Section: utils
+Priority: optional
+Homepage: http://fileschanged.sourceforge.net/
+Description: command-line utility that reports when files have been altered
+ This software is a client to FAM (File Alteration Monitor).
+ You can use fileschanged in shell scripts to take action when monitored files
+ become altered. In it's simplest form, you can give filenames to monitor from
+ standard-input, and it will report when those files have changed via
+ standard-output. In a more complex usage, fileschanged can monitor
+ command-line specified files recursively, while following symbolic links,
+ while staying on the current filesystem, and reporting deleted files as well
+ as created and changed files that haven't been written to for 2 seconds.

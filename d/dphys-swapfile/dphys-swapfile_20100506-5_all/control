@@ -1,0 +1,21 @@
+Package: dphys-swapfile
+Version: 20100506-5
+Architecture: all
+Maintainer: Axel Beckert <abe@debian.org>
+Installed-Size: 66
+Depends: dc, lsb-base (>= 3.0-6)
+Section: admin
+Priority: optional
+Homepage: http://neil.franklin.ch/Projects/dphys-swapfile/
+Description: Autogenerate and use a swap file
+ This init.d script exists so one does not need to have a fixed size
+ swap partition. Instead install without swap partition and then run this,
+ with file size (re-)computed automatically to fit the current RAM size.
+ .
+ By default (and hence on installation) it creates swapfile twice as
+ big as the present RAM amount with an upper limit of 2 GB.
+ .
+ It's also very helpful when included in SD card, USB stick or disk
+ images which are distributed and run on many machines with different
+ amount of RAM, e.g. different models of the Raspberry Pi or cloud
+ images.

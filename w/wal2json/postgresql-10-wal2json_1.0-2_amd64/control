@@ -1,0 +1,21 @@
+Package: postgresql-10-wal2json
+Source: wal2json
+Version: 1.0-2
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <pkg-postgresql-public@lists.alioth.debian.org>
+Installed-Size: 39
+Depends: postgresql-10, libc6 (>= 2.4)
+Section: database
+Priority: optional
+Homepage: https://github.com/eulerto/wal2json
+Description: PostgreSQL logical decoding JSON output plugin
+ wal2json is an output plugin for PostgreSQL's logical decoding. The plugin has
+ access to tuples produced by INSERT and UPDATE. Also, UPDATE/DELETE old row
+ versions can be accessed depending on the configured replica identity. Changes
+ can be consumed using the streaming protocol (logical replication slots) or by
+ a special SQL API.
+ .
+ The wal2json output plugin produces a JSON object per transaction. All of the
+ new/old tuples are available in the JSON object. Also, there are options to
+ include properties such as transaction timestamp, schema-qualified, data
+ types, and transaction ids.

@@ -1,0 +1,32 @@
+Package: bugs-everywhere
+Version: 1.1.1-4
+Architecture: all
+Maintainer: maxigas <maxigas@anargeek.net>
+Installed-Size: 2385
+Depends: python-yaml, python-jinja2, python:any (<< 2.8), python:any (>= 2.7.5-5~), libjs-sphinxdoc (>= 1.0)
+Recommends: bzr | git | mercurial | tla | bazaar | darcs | monotone | rcs
+Section: devel
+Priority: optional
+Homepage: http://bugseverywhere.org/
+Description: distributed bug tracking system using VCS storage
+ Bugs Everywhere is a “distributed bug tracker”, designed to
+ complement a distributed version control system (VCS). By using a
+ distributed VCS as a back-end for bug state, it gains several
+ convenient features:
+ .
+  * Bugs and code that live on branches are tracked together.
+  * Users can fully modify bug state while offline.
+  * When a user checks out a project’s source code, she gets the current
+    bug state for free.
+  * A web interface to the bug database becomes just another client that
+    merges with the main repository.
+ .
+ Bugs Everywhere currently supports the following VCS back-ends:
+ .
+  * GNU Arch (tla, baz)
+  * Bazaar (bzr)
+  * git
+  * Mercurial (hg)
+  * Darcs
+  * Monotone (mtn)
+  * GNU RCS

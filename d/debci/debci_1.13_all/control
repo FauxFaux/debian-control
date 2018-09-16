@@ -1,0 +1,23 @@
+Package: debci
+Version: 1.13
+Architecture: all
+Maintainer: Debian CI team <team+ci@tracker.debian.org>
+Installed-Size: 1059
+Depends: adduser, amqp-tools, bsdmainutils, curl, dctrl-tools, debootstrap, devscripts, fonts-font-awesome (>= 4.0.3~), libjs-bootstrap, libjs-jquery, libjs-jquery-flot, patchutils, ruby, ruby-activerecord, ruby-bunny, ruby-sinatra, ruby-sinatra-contrib, ruby-sqlite3 | ruby-pg, ruby-thor, sudo, jq
+Recommends: moreutils, ntp | time-daemon
+Suggests: apt-cacher-ng
+Section: devel
+Priority: optional
+Homepage: http://ci.debian.net/
+Description: continuous integration system for Debian
+ debci will scan the Debian archive for packages that contain DEP-8 compliant
+ test suites, and run those test suites whenever a new version of the package,
+ or of any package in its dependency chain (modulo the base system), is
+ available.
+ .
+ The requests are distributed to worker machines through AMQP queues. You need
+ rabbitmq-server for this; but it is also possible to run RabbitMQ on a
+ different server than debci, in which case you do not need to install that
+ recommendation.
+ .
+ This package contains the debci core.

@@ -1,0 +1,28 @@
+Package: corekeeper
+Version: 1.6
+Architecture: amd64
+Maintainer: Paul Wise <pabs@debian.org>
+Installed-Size: 33
+Depends: procps
+Conflicts: core-dump-handler
+Replaces: core-dump-handler
+Provides: core-dump-handler
+Section: admin
+Priority: extra
+Description: enable core files and report crashes to the sysadmin
+ corekeeper enables core files, reports crashes to the sysadmin and
+ deletes old core files after 7 days.
+ .
+ Core file dumping is enabled for all users, to restrict that, please
+ remove or edit the config file at /etc/security/limits.d/corekeeper.conf
+ .
+ On Linux core files are written to private per-userid dirs in /var/crash.
+ Linux 3.6 and earlier have an issue that means all core files are written
+ to the directory for root. If your system is running Linux 3.6 or earlier
+ and is single-user (or you don't care about the privacy of core file names),
+ you can avoid this issue by editing /etc/sysctl.d/corekeeper.conf.
+ .
+ On kFreeBSD files are written to /var/crash, kernel limitations prevent
+ core files from being written to private per-userid dirs.
+ .
+ To fully remove this package it needs to be purged and the system rebooted.

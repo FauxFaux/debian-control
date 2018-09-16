@@ -1,0 +1,23 @@
+Package: openstack-tempest-ci
+Source: openstack-meta-packages
+Version: 0.22
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 41
+Depends: ipmitool, lsb-release, nmap, openstack-clients
+Section: net
+Priority: optional
+Homepage: http://openstack.alioth.debian.org/
+Description: validate OpenStack Debian packages using tempest and openstack-deploy
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to
+ implement and massively scalable.
+ .
+ This package is to be used to validate OpenStack packages against the tempest
+ functional testing suite. It uses openstack-deploy to install a full OpenStack
+ deployment on a single virtual machine running itself on an OpenStack cloud,
+ using Qemu as hypervisor. Then the Tempest unit tests will be run.
+ .
+ Typically, this package is to be installed on a Jenkins machine and it's
+ script shall be run on regular basis.

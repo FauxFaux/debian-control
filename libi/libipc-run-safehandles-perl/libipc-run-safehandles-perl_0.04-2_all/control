@@ -1,0 +1,16 @@
+Package: libipc-run-safehandles-perl
+Version: 0.04-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: perl (>= 5.8.0), liblist-moreutils-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/IPC-Run-SafeHandles/
+Description: Use IPC::Run and IPC::Run3 safely
+ IPC::Run and IPC::Run3 are both very upset when you try to use them under
+ environments where you have STDOUT and/or STDERR tied to something else, such
+ as under fastcgi.
+ .
+ The module adds safe-guarding code when you call IPC::Run or IPC::Run3 under
+ such environment to make sure it always works.

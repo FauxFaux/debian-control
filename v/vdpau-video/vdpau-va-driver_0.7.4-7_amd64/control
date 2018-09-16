@@ -1,0 +1,22 @@
+Package: vdpau-va-driver
+Source: vdpau-video
+Version: 0.7.4-7
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 111
+Depends: libc6 (>= 2.14), libgl1, libvdpau1 (>= 0.2), libx11-6, libva-driver-abi-1.0
+Enhances: libva2
+Provides: va-driver
+Section: video
+Priority: optional
+Multi-Arch: same
+Homepage: http://freedesktop.org/wiki/Software/vaapi/
+Description: VDPAU-based backend for VA API
+ The VA-API (Video Acceleration API) enables hardware accelerated video
+ decode/encode at various entry-points (VLD, IDCT, Motion Compensation
+ etc.) for the prevailing coding standards today (MPEG-2, MPEG-4
+ ASP/H.263, MPEG-4 AVC/H.264, and VC-1/VMW3). It provides an interface
+ to fully expose the video decode capabilities in today's GPUs.
+ .
+ This package contains the VDPAU-based backend driver for use with the VA API
+ library.

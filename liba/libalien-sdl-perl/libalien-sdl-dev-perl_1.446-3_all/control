@@ -1,0 +1,24 @@
+Package: libalien-sdl-dev-perl
+Source: libalien-sdl-perl
+Version: 1.446-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 15
+Depends: freeglut3-dev, libalien-sdl-perl (= 1.446-3), libgl1-mesa-dev | libgl-dev, libjpeg-dev, libpng-dev, libsdl-gfx1.2-dev, libsdl-image1.2-dev, libsdl-mixer1.2-dev, libsdl-net1.2-dev, libsdl-pango-dev, libsdl-ttf2.0-dev, libsdl1.2-dev, libsmpeg-dev, libtiff-dev
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Alien-SDL
+Description: helper  to build  Perl program using SDL libraries
+ Perl's idea of a metapackage to provide C library dependencies for
+ Perl SDL application.
+ .
+ When building from source, this package can be used to detect and get
+ configuration settings from an installed SDL and related libraries. As
+ a binary package, it provides information on native libs used when
+ building this package.
+ .
+ Regarding the native C libraries, all packages built with
+ libalien-sdl-perl must have at least the same build dependencies than
+ libalien-sdl-perl. Since this list if not fun to maintain, this
+ metapackage depends on all packages used to build libalien-sdl-perl
+ (and also depends on libalien-sdl-perl).

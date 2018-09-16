@@ -1,0 +1,45 @@
+Package: libleveldb1v5
+Source: leveldb
+Version: 1.20-2
+Architecture: amd64
+Maintainer: Alessio Treglia <alessio@debian.org>
+Installed-Size: 403
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libsnappy1v5, libstdc++6 (>= 5.2)
+Conflicts: libleveldb1
+Replaces: libleveldb1
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/google/leveldb
+Description: fast key-value storage library
+ LevelDB is a fast key-value storage library written at Google that
+ provides an ordered mapping from string keys to string values.
+ .
+ Features:
+  * Keys and values are arbitrary byte arrays.
+  * Data is stored sorted by key.
+  * Callers can provide a custom comparison function to override
+    the sort order.
+  * The basic operations are Put(key,value), Get(key), Delete(key).
+  * Multiple changes can be made in one atomic batch.
+  * Users can create a transient snapshot to get a consistent view of
+    data.
+  * Forward and backward iteration is supported over the data.
+  * Data is automatically compressed using the Snappy compression
+    library.
+  * External activity (file system operations etc.) is relayed through
+    a virtual interface so users can customize the operating system
+    interactions.
+  * Detailed documentation about how to use the library is included with
+    the source code.
+ .
+ Limitations:
+  * This is not a SQL database. It does not have a relational data model,
+    it does not support SQL queries, and it has no support for indexes.
+  * Only a single process (possibly multi-threaded) can access a
+    particular database at a time.
+  * There is no client-server support builtin to the library.
+    An application that needs such support will have to wrap their own
+    server around the library.
+ .
+ This package provides the shared library.

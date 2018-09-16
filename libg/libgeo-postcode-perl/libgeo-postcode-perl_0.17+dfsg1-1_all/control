@@ -1,0 +1,26 @@
+Package: libgeo-postcode-perl
+Version: 0.17+dfsg1-1
+Architecture: all
+Maintainer: Dominic Hargreaves <dom@earth.li>
+Installed-Size: 112
+Depends: perl, libdbi-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Geo-Postcode/
+Description: UK Postcode validation and location
+ Geo::Postcode will accept full or partial UK postcodes, validate them against
+ the official spec, separate them into their significant parts, translate them
+ into map references or co-ordinates and calculate distances between them.
+ .
+ The last two features require a postcode database to be supplied separately.
+ .
+ It does not check whether the supplied postcode exists: only whether it is
+ well-formed according to British Standard 7666, which you can find here:
+ .
+ http://www.govtalk.gov.uk/gdsc/html/frames/PostCode.htm
+ .
+ Geo::Postcode will also work with partial codes, ie areas, districts and
+ sectors. They won't validate, but you can test them for legitimacy with a
+ call to valid_fragment, and you can still turn them into grid references.
+ .
+ To work with US zipcodes, you need Geo::Postalcode instead.

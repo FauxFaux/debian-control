@@ -1,0 +1,30 @@
+Package: scour
+Version: 0.37-1
+Architecture: all
+Maintainer: Martin Pitt <mpitt@debian.org>
+Installed-Size: 36
+Depends: python3:any, python3-scour
+Suggests: gir1.2-rsvg-2.0, python3-gi-cairo
+Conflicts: python-scour (<< 0.32-3~), python3-scour (<< 0.36-2~)
+Replaces: python-scour (<< 0.32-3~), python3-scour (<< 0.36-2~)
+Section: graphics
+Priority: optional
+Homepage: https://github.com/codedread/scour
+Description: SVG scrubber and optimizer (CLI and debhelper)
+ Scour is a Python module that aggressively cleans SVG files, removing a lot of
+ unnecessary information that certain tools or authors embed into their
+ documents.  The goal of scour is to provide an identically rendered image
+ (i.e. a scoured document should have no discernible visible differences from
+ the original file) while minimizing the file size.
+ .
+ WARNING: Scour is intended to be run on files that have been edited in Vector
+ Graphics editors such as Inkscape or Adobe Illustrator.  Scour attempts to
+ optimize the file, and as result, it will change the file's structure and
+ (possibly) its semantics.  If you have hand-edited your SVG files, you will
+ probably not be happy with the output of Scour.
+ .
+ This package provides the "scour" command line utility and a dh_scour
+ debhelper extension which optimizes all shipped SVGs during package build. If
+ gir1.2-rsvg-2.0 and python3-gi-cairo are available, it will also do a
+ before/after comparison and discard the optimized image if they differ by more
+ than 0.05%.

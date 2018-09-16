@@ -1,0 +1,19 @@
+Package: zita-resampler
+Version: 1.6.0-2
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 54
+Depends: libzita-resampler1 (= 1.6.0-2), libc6 (>= 2.15), libgcc1 (>= 1:3.0), libsndfile1 (>= 1.0.20), libstdc++6 (>= 4.9)
+Section: sound
+Priority: optional
+Homepage: http://kokkinizita.linuxaudio.org/linuxaudio/zita-resampler/resampler.html
+Description: resampler application written with libzita-resampler
+ Input format is any file readable by libsndfile, output is either WAV
+ (WAVEX for more than 2 channels)  or CAF. Apart from resampling, users
+ can change the sample format to 16-bit, 24-bit or float, and for 16-bit
+ output, add dithering.
+ .
+ Available dithering types are rectangular, triangular and Lipschitz'
+ optimised error feedback filter. Some examples of dithering can be seen
+ here:
+ http://www.kokkinizita.net/linuxaudio/dithering.html

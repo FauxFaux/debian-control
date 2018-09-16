@@ -1,0 +1,21 @@
+Package: arno-iptables-firewall
+Version: 2.0.1.f-1.1
+Architecture: all
+Maintainer: Michael Hanke <mih@debian.org>
+Installed-Size: 726
+Depends: iptables, gawk, debconf | cdebconf, debconf (>= 0.5) | debconf-2.0, iproute2
+Recommends: curl, dnsutils, rsyslog (>= 5.8.1-1~)
+Conflicts: iptables-persistent
+Section: net
+Priority: optional
+Homepage: http://rocky.eld.leidenuniv.nl/
+Description: single- and multi-homed firewall script with DSL/ADSL support
+ Unlike other lean iptables frontends in Debian, arno-iptables-firewall
+ will setup and load a secure, restrictive firewall by just asking a few
+ question. This includes configuring internal networks for internet access
+ via NAT and potential network services (e.g. http or ssh).
+ .
+ However, it is in no way restricted to this simple setup. Some catch words
+ of additional features, that can be enabled in the well documented
+ configuration file are: DSL/ADSL, Port forwarding, DMZ's,
+ portscan detection, MAC address filtering.

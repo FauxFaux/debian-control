@@ -1,0 +1,20 @@
+Package: ckport
+Version: 0.1~rc1-7
+Architecture: all
+Maintainer: Patrick Matthäi <pmatthaei@debian.org>
+Installed-Size: 31
+Depends: perl:any, ckport-database (>= 0.1~rc1-7), binutils-multiarch | binutils
+Recommends: manpages-dev
+Suggests: cppcheck
+Section: devel
+Priority: optional
+Homepage: http://software.keep-cool.org/ckport.html
+Description: portability analysis and security checking tool
+ ckport is a tool to check already compiled binaries and libraries for porting
+ and security problems.
+ .
+ It uses objdump to read the binaries and analyses calls and jumps to functions.
+ .
+ This package is architecture independent and can be used on non-host
+ architecture binaries if an objdump tool for the target architecture
+ is installed.

@@ -1,0 +1,21 @@
+Package: ulogd2-pcap
+Source: ulogd2
+Version: 2.0.7-1
+Architecture: amd64
+Maintainer: Debian Netfilter Packaging Team <pkg-netfilter-team@lists.alioth.debian.org>
+Installed-Size: 25
+Depends: ulogd2 (= 2.0.7-1), libc6 (>= 2.4), libpcap0.8 (>= 0.9.8)
+Suggests: tcpdump, tshark, wireshark
+Section: net
+Priority: optional
+Homepage: https://www.netfilter.org/projects/ulogd/
+Description: pcap extension to ulogd
+ ulogd is an advanced netfilter logging daemon. It can act as a replacement for
+ syslog for logging netfilter ruleset violations (via the NFLOG or ULOG iptables
+ targets), can gather per-connection accounting using NFCT, or gather per-rule
+ accounting using NFACCT. Output can be sent to plain text log files, a variety
+ of SQL database formats, XML files, pcap files, syslog, and many other formats.
+ .
+ This module add pcap file support to ulogd. If you install this package, you
+ can use ulogd to dump packets to a file for later analysis using tools such
+ as tcpdump or wireshark.

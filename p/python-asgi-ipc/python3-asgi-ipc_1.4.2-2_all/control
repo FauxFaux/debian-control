@@ -1,0 +1,20 @@
+Package: python3-asgi-ipc
+Source: python-asgi-ipc
+Version: 1.4.2-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 42
+Depends: python3-asgiref, python3-msgpack, python3-posix-ipc, python3-six, python3:any (>= 3.4~)
+Section: python
+Priority: optional
+Homepage: https://github.com/django/asgi_ipc/
+Description: ASGI channel layer that uses POSIX shared memory IPC (Python3 version)
+ An ASGI (Asynchronous Server Gateway Interface) channel layer that uses POSIX
+ shared memory IPC as its backing store (only works between processes on the
+ same machine).
+ .
+ You'll need to instantiate the channel layer with a path prefix to create IPC
+ objects underneath; any channel layers with the same prefix will talk to each
+ other as long as they're on the same machine.
+ .
+ This package contains the Python 3 version of the library.

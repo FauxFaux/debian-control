@@ -1,0 +1,23 @@
+Package: lua-rrd
+Source: rrdtool (1.7.0-1)
+Version: 1.7.0-1+b2
+Architecture: amd64
+Maintainer: Debian RRDtool Team <pkg-rrdtool-maint@lists.alioth.debian.org>
+Installed-Size: 184
+Depends: libc6 (>= 2.4), librrd8 (>= 1.4~rc2)
+Breaks: liblua5.1-rrd0 (<< 1.5.4-3~)
+Replaces: liblua5.1-rrd0 (<< 1.5.4-3~)
+Provides: liblua5.1-rrd0, lua5.1-rrd, lua5.2-rrd, lua5.3-rrd
+Section: interpreters
+Priority: optional
+Multi-Arch: same
+Homepage: http://oss.oetiker.ch/rrdtool/
+Description: time-series data storage and display system (Lua interfaces)
+ The Round Robin Database Tool (RRDtool) is a system to store and display
+ time-series data (e.g. network bandwidth, machine-room temperature,
+ server load average). It stores the data in Round Robin Databases (RRDs),
+ a very compact way that will not expand over time. RRDtool processes the
+ extracted data to enforce a certain data density, allowing for useful
+ graphical representation of data values.
+ .
+ This package contains the Lua interfaces to RRDs.

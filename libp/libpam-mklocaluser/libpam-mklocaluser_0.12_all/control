@@ -1,0 +1,17 @@
+Package: libpam-mklocaluser
+Version: 0.12
+Architecture: all
+Maintainer: Debian Edu Developers <debian-edu@lists.debian.org>
+Installed-Size: 27
+Depends: python:any (>= 2.7.5-5~), libpam-python
+Suggests: libpam-ccreds (>= 10-4) | libpam-sss
+Section: misc
+Priority: optional
+Homepage: http://www.skolelinux.org/
+Description: Configure PAM to create a local user if it do not exist already
+ When the user log in for the first time, a local user is created in
+ /etc/passwd and primary group created in /etc/group, and a local home
+ directory is created in /home.  This is useful on roaming computers when
+ the password is set up to be cached by for example libpam-ccreds or sssd
+ to allow login without network connectivity using the password provided
+ by a network authentication service like Kerberos or LDAP.

@@ -1,0 +1,23 @@
+Package: flawfinder
+Version: 1.31-1
+Architecture: all
+Maintainer: Javier Fernandez-Sanguino Peña <jfs@debian.org>
+Installed-Size: 175
+Depends: python
+Section: utils
+Priority: optional
+Homepage: http://www.dwheeler.com/flawfinder/
+Description: examines source code and looks for security weaknesses
+ Flawfinder searches through C/C++ source code looking for potential
+ security flaws and produces a report describing the potential flaws
+ found in source code, ranking them by likely severity.
+ .
+ Like RATS, Flawfinder reports are not a direct indication of a
+ vulnerability, but provide a reasonable starting point for performing manual
+ security audits in source code.
+ .
+ Flawfinder can also generate differential reports by pointing it to
+ a patch (diff) file describing the code changes. This way it can be used
+ to determine if the potential flaws found in code have increased or
+ decreased after a commit to a source code management system like
+ CVS or Subversion.

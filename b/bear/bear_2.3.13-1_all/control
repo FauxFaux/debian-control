@@ -1,0 +1,17 @@
+Package: bear
+Version: 2.3.13-1
+Architecture: all
+Maintainer: Sebastian Ramacher <sramacher@debian.org>
+Installed-Size: 50
+Depends: libear (>= 2.3.13-1), libear (<< 2.3.13.0~), python3:any
+Section: devel
+Priority: optional
+Homepage: https://github.com/rizsotto/Bear
+Description: generate compilation database for Clang tooling
+ Bear records the flags passed to the compiler for each translation unit and
+ stores them in a JSON file. This file can be used by Clang's tooling interface
+ and programs like clang-check to process a translation unit.
+ .
+ cmake supports the generation of JSON compilation databases out of the box.
+ For any other build system that does not support this, Bear can be used
+ instead to intercept the invocation of the compiler.

@@ -1,0 +1,20 @@
+Package: dpt-i2o-raidutils
+Source: raidutils
+Version: 0.0.6-22
+Architecture: amd64
+Maintainer: Barak A. Pearlmutter <bap@debian.org>
+Installed-Size: 550
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5)
+Conflicts: raidutils (<< 0.0.6-6)
+Provides: dtp-i2o-raidutils
+Section: admin
+Priority: optional
+Homepage: http://i2o.shadowconnect.com
+Description: Adaptec I2O hardware RAID management utilities
+ Suite of programs to manage some I2O-compliant RAID controllers; in
+ particular some Adaptec hardware; to be very specific those using the
+ dpt_i2o kernel module or CONFIG_SCSI_DPT_I2O driver, or (for more
+ recent kernels) the i2o_block and i2o_config modules, or
+ CONFIG_I2O_BLOCK and CONFIG_I2O_CONFIG drivers.  One can
+ create/delete a RAID array, add/remove a hot spare drive to/from an
+ array, activate/silence the alarm, and query array/disk status.

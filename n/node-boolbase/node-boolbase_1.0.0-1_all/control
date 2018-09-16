@@ -1,0 +1,19 @@
+Package: node-boolbase
+Version: 1.0.0-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 15
+Depends: nodejs
+Section: web
+Priority: extra
+Homepage: https://github.com/fb55/boolbase
+Description: two functions: One that returns true, one that returns false
+ This very simple module provides two basic functions, one that always
+ returns true (trueFunc) and one that always returns false (falseFunc).
+ .
+ By having only a single instance of these functions around, it's possible
+ to do some nice optimizations. Eg. CSSselect uses these functions to
+ determine whether a selector won't match any elements. If that's the case,
+ the DOM doesn't even have to be touched.
+ .
+ Node.js is an event-based server-side JavaScript engine.

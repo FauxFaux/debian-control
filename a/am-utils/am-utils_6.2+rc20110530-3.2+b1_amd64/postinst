@@ -1,0 +1,252 @@
+#!/bin/bash -e
+
+PATH=/usr/sbin:/sbin:/usr/bin:/bin
+export PATH
+
+# Defaults
+CONFIG=/etc/default/am-utils
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# Simple function to escape single quotes
+escape_single_quotes() {
+    echo "$@" | sed -e "s!'!'\"'\"'!g"
+}
+
+if [[ $1 = configure ]]; then
+
+  # Complain if we cannot connect to the amq service for localhost
+  if amq-check-wrap
+  then
+    :
+  else
+    db_input high am-utils/rpc-localhost
+    db_go
+  fi
+
+  TMPFILE=$(mktemp /tmp/am-utils-postinst.XXXXXX)
+  trap "rm -f $TMPFILE" 0
+
+  db_get am-utils/use-nis
+  AM_UTILS_USE_NIS="`escape_single_quotes \"$RET\"`"
+  db_get am-utils/nis-master-map
+  AM_UTILS_NIS_MASTER_MAP="`escape_single_quotes \"$RET\"`"
+  db_get am-utils/nis-master-map-key-style
+  AM_UTILS_NIS_MASTER_MAP_KEY_STYLE="`escape_single_quotes \"$RET\"`"
+  db_get am-utils/nis-key
+  AM_UTILS_NIS_KEY="`escape_single_quotes \"$RET\"`"
+  db_get am-utils/nis-custom
+  AM_UTILS_NIS_CUSTOM="`escape_single_quotes \"$RET\"`"
+  db_get am-utils/map-net
+  AM_UTILS_MAP_NET="`escape_single_quotes \"$RET\"`"
+  db_get am-utils/map-home
+  AM_UTILS_MAP_HOME="`escape_single_quotes \"$RET\"`"
+  db_get am-utils/map-others
+  AM_UTILS_MAP_OTHERS="`escape_single_quotes \"$RET\"`"
+  db_get am-utils/clustername
+  AM_UTILS_CLUSTERNAME="`escape_single_quotes \"$RET\"`"
+
+  echo '# Am-utils configuration generated automatically by am-utils.config $Revision: 1.9 $' > $TMPFILE
+  cat >> "$TMPFILE" <<+++EOD+++
+#
+# Change this file using "dpkg-reconfigure am-utils"
+#
+AM_UTILS_USE_NIS='$AM_UTILS_USE_NIS'
+AM_UTILS_NIS_MASTER_MAP='$AM_UTILS_NIS_MASTER_MAP'
+AM_UTILS_NIS_MASTER_MAP_KEY_STYLE='$AM_UTILS_NIS_MASTER_MAP_KEY_STYLE'
+AM_UTILS_NIS_KEY='$AM_UTILS_NIS_KEY'
+AM_UTILS_NIS_CUSTOM='$AM_UTILS_NIS_CUSTOM'
+AM_UTILS_MAP_NET='$AM_UTILS_MAP_NET'
+AM_UTILS_MAP_HOME='$AM_UTILS_MAP_HOME'
+AM_UTILS_MAP_OTHERS='$AM_UTILS_MAP_OTHERS'
+AM_UTILS_CLUSTERNAME='$AM_UTILS_CLUSTERNAME'
++++EOD+++
+
+  ucf --debconf-ok $TMPFILE $CONFIG
+
+fi
+
+# Stop any debconf pipes
+db_stop
+
+# Kill the old and start the new am-utils.
+# This is done here to keep am-utils alive across the update, in case
+# the archives are on an automounted directory!
+
+pid=""
+tmpfile=""
+wasrunning=no
+
+if [ -s /var/run/am-utils-upgrade.pid ]; then
+    tmpfile=/var/run/am-utils-upgrade.pid
+    pid=`cat $tmpfile`
+fi
+
+if [ -n "$pid" ]; then
+    echo "Stopping amd (pid $pid)."
+    wasrunning=yes
+    kill -s TERM $pid || true
+    # let it cleanly shut down...
+    while kill -s 0 $pid >/dev/null 2>&1; do
+	sleep 1
+    done
+else
+    # Run the the stop amd only if there's a current one running
+    # (in case we're reconfiguring)
+    if [ -n "`amq -p 2>/dev/null`" ]
+    then
+	wasrunning=yes
+	invoke-rc.d am-utils stop
+    fi
+fi
+
+if [ -n "$tmpfile" ]; then
+	rm -f $tmpfile
+fi
+
+# Automatically added by dh_installinit/11.1.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/am-utils" ]; then
+		update-rc.d am-utils defaults >/dev/null
+		invoke-rc.d am-utils start || exit 1
+	fi
+fi
+# End automatically added section
+
+
+### Begin autodetect stuck amds...
+# These are functions to try killing runaway amds
+waittodie() {
+    pid="$1"
+    i=0
+    while [ $i -le 30 ]
+    do
+	if ! kill -s 0 "$pid" > /dev/null 2>&1
+	then
+	    break
+	fi
+	sleep 1
+	echo -n "."
+	i="`expr $i + 1`"
+    done
+}
+
+trykill() {
+    how="$1"
+    sig="$2"
+    pid="$3"
+    echo -n "Trying to kill $how $pid... [max 30 seconds wait] "
+    kill -s "$sig" "$pid" > /dev/null 2>&1 || true
+    waittodie "$pid"
+}
+
+instabort() {
+    echo
+    echo "Aborting am-utils's installation..."
+    echo "You might want to reboot to clear up amd's state before"
+    echo "attempting to reconfigure this package..."
+    echo
+    exit 1
+}
+
+# Try to find amd-managed mount points.
+mntpts=""
+pids=""
+if [ "$1" = install ]
+then
+    while read fs mntpt other
+    do
+	pid="`echo $fs | sed -e 's/^.*(pid\([0-9]\+\))$/\1/'`"
+	case "$pid" in
+	    [0-9]*)
+		mntpts="$mntpts $mntpt"
+		if echo "$pids" |egrep -vq "(^|[[:space:]])$pid(\$|[[:space:]])"
+		then
+		    pids="$pids $pid"
+		fi
+		;;
+	esac
+    done < /proc/mounts
+fi
+
+if test -n "$mntpts"
+then
+    while true
+    do
+	cat <<+++EOD+++
+
+WARNING: I found some amd-managed mount-points still active...
+	 This could be due to some problems with the old amd package
+	 and a glibc upgrade...
+
++++EOD+++
+	echo -n "Should I try to fix the problem (yes/no) ? "
+	read ans
+	echo
+	case "$ans" in
+	    [yY][eE][sS])
+		echo "Found amd mount points from PIDs: $pids."
+		for pid in $pids
+		do
+		    echo -n "Examining pid $pid... "
+		    if kill -s 0 "$pid" > /dev/null 2>&1
+		    then
+			echo "alive"
+			trykill "normally" TERM "$pid"
+			if kill -s 0 "$pid" > /dev/null 2>&1
+			then
+			    echo " did not work... trying harder..."
+			    trykill "violently" KILL "$pid"
+			    if kill -s 0 "$pid" > /dev/null 2>&1
+			    then
+				echo " did not work either..."
+				instabort
+			    fi
+			else
+			    echo " dead !"
+			fi
+		    else
+			echo "dead"
+		    fi
+		done
+		echo "Found amd mount points at: $mntpts"
+		for mntpt in $mntpts
+		do
+		    echo -n "Trying to umount $mntpt... [max 30 seconds wait] "
+		    umount "$mntpt" > /dev/null 2>&1 &
+		    pid="$!"
+		    waittodie "$pid"
+		    if kill -s 0 "$pid" > /dev/null 2>&1
+		    then
+			echo " umount stuck..."
+			instabort
+		    else
+			if fgrep -q " $mntpt " /proc/mounts
+			then
+			    echo " can't umount..."
+			    instabort
+			else
+			    echo " done"
+			fi
+		    fi
+		done
+		echo
+		echo "Everything should be fixed... proceeding..."
+		echo
+		break
+		;;
+	    [nN][oO])
+		instabort
+		;;
+	    *)
+		echo "Please answer \"yes\" or \"no\"..."
+		;;
+	esac
+    done
+fi
+### End autodetect stuck amds...
+
+invoke-rc.d am-utils start || :
+
+exit 0

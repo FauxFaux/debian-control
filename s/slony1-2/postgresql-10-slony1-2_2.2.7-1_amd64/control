@@ -1,0 +1,26 @@
+Package: postgresql-10-slony1-2
+Source: slony1-2
+Version: 2.2.7-1
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <team+postgresql@tracker.debian.org>
+Installed-Size: 64
+Depends: postgresql-10, libc6 (>= 2.14), libpq5
+Suggests: slony1-2-bin
+Conflicts: postgresql-10-slony1
+Provides: postgresql-10-slony1
+Section: database
+Priority: optional
+Homepage: http://slony.info/
+Description: replication system for PostgreSQL: PostgreSQL 10 server plug-in
+ Slony-I is an asynchronous master-to-multiple-slaves replication system
+ for PostgreSQL with cascading and slave promotion.
+ .
+ This package contains the support functions that are loaded into the
+ PostgreSQL database server.  It needs to be installed on the hosts where
+ the database server nodes are running.  This package works with version
+ 10 of the PostgreSQL server; you need the package that corresponds to
+ the version of your database server.
+ .
+ The actual replication daemon and the administration tools are in the
+ package slony1-2-bin.  This package is useless without slony1-2-bin installed
+ somewhere in the network.

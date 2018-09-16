@@ -1,0 +1,26 @@
+Package: natpmpc
+Source: libnatpmp
+Version: 20150609-5
+Architecture: amd64
+Maintainer: Thomas Goirand <zigo@debian.org>
+Installed-Size: 30
+Depends: libc6 (>= 2.15), libnatpmp1 (>= 20150609)
+Breaks: natpmp-utils (<< 20150609)
+Replaces: natpmp-utils (<< 20150609)
+Section: net
+Priority: optional
+Homepage: http://miniupnp.free.fr/libnatpmp.html
+Description: portable and fully compliant implementation of NAT-PMP (client)
+ NAT-PMP is the direct concurrent to the UPnP IGD specification. It is
+ providing a way to do NAT traversal. It is part of the Bonjour protocol
+ specifications. At the moment it is mainly supported by Apple software and
+ hardware. For a way to add NAT-PMP capabilities to your *BSD, Linux or
+ (Open)Solaris Router, you should have a look at MiniUPnPd which is
+ supporting NAT-PMP in addition to UPnP since December 2007 !
+ .
+ libnatpmp is an attempt to make a portable and fully compliant
+ implementation of the protocol NAT-PMP for the client side. It is based on non
+ blocking sockets and all calls of the API are asynchronous. It is therefore
+ very easy to integrate the NAT-PMP code to any event driven code.
+ .
+ This package contains the natpmpc test client.

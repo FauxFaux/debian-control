@@ -1,0 +1,18 @@
+Package: libplack-middleware-deflater-perl
+Version: 0.12-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 27
+Depends: perl, libplack-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Plack-Middleware-Deflater
+Description: middleware to compress response body with gzip or deflate
+ Plack::Middleware::Deflater is a middleware to encode your response body in
+ gzip or deflate, based on the Accept-Encoding HTTP request header. While
+ saving a little bandwidth it will increase the Plack server load, so ideally
+ you should handle this on the frontend reverse proxy servers.
+ .
+ This middleware removes Content-Length and streams encoded content, which
+ means the server should support HTTP/1.1 chunked response or downgrade to
+ HTTP/1.0 and close the connection.

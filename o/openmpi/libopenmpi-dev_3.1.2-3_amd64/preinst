@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Leave set -e here for lintian to grep, but don't use it
+#set -e
+
+
+# mpicc seemed to be used as a master alternative by some MPI package. But
+# currently, all MPI packages have the mpicc alternative installed as a slave
+# link. We remove the link here in order to resolve bugs #531184 and #532910.
+
+update-alternatives --quiet --remove-all mpicc >/dev/null 2>&1 || true
+
+# Similarly, see #886644
+update-alternatives --quiet --remove-all mpiCC >/dev/null 2>&1 || true
+
+# Splitting mpi and mpi-$MULTIARCH  requires this
+(update-alternatives --query mpi 2>/dev/null | grep -q mpi-fort.pc )
+if [ $? -eq 0 ] ; then 
+    update-alternatives --quiet --remove-all mpi >/dev/null 2>&1 
+    update-alternatives --quiet --remove-all mpi-x86_64-linux-gnu >/dev/null 2>&1 
+fi
+
+# This may be left hanging on the upgrade to multi-arch.
+rm -f /usr/lib/libpmix.so
+
+
+
+exit 0

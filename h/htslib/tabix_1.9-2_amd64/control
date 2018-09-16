@@ -1,0 +1,19 @@
+Package: tabix
+Source: htslib
+Version: 1.9-2
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 1754
+Depends: libbz2-1.0, libc6 (>= 2.15), libcurl3-gnutls (>= 7.18.0), liblzma5 (>= 5.1.1alpha+20120614), libssl1.1 (>= 1.1.0), zlib1g (>= 1:1.2.0)
+Section: science
+Priority: optional
+Homepage: https://github.com/samtools/htslib
+Description: generic indexer for TAB-delimited genome position files
+ Tabix indexes files where some columns indicate sequence coordinates: name
+ (usually a chromosome), start and stop. The input data file must be position
+ sorted and compressed by bgzip (provided in this package), which has a gzip
+ like interface. After indexing, tabix is able to quickly retrieve data lines by
+ chromosomal coordinates. Fast data retrieval also works over network if an URI
+ is given as a file name.
+ .
+ This version of tabix is built from the HTSlib source.

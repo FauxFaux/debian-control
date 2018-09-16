@@ -1,0 +1,17 @@
+Package: rmail
+Source: sendmail
+Version: 8.15.2-12
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 316
+Depends: sendmail-bin | mail-transport-agent, libc6 (>= 2.15), libldap-2.4-2 (>= 2.4.7)
+Conflicts: courier-mta, exim, exim-tls, exim4, exim4-daemon-custom, exim4-daemon-heavy, exim4-daemon-light, masqmail, postfix, smail, zmailer
+Section: mail
+Priority: optional
+Homepage: http://www.sendmail.org
+Description: MTA->UUCP remote mail handler
+ Rmail handles mail received via uucp and passes it to the local
+ sendmail (or workalike).
+ .
+ This version comes from the sendmail source package and the only
+ change is the call to sendmail (from -obq to -obi).

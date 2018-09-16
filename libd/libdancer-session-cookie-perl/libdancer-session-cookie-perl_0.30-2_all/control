@@ -1,0 +1,19 @@
+Package: libdancer-session-cookie-perl
+Version: 0.30-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 29
+Depends: libcrypt-cbc-perl, libcrypt-rijndael-perl, libdancer-perl (>= 1.3113), libperlx-maybe-perl, libsession-storage-secure-perl, libstring-crc32-perl, libtime-duration-parse-perl, perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Dancer-Session-Cookie
+Description: encrypted cookie-based session backend for Dancer
+ Dancer::Session::Cookie implements a session engine for sessions stored
+ entirely in cookies. Usually only session id is stored in cookies and the
+ session data itself is saved in some external storage, e.g. database. This
+ module allows one to avoid using external storage at all.
+ .
+ Since server cannot trust any data returned by client in cookies, this module
+ uses cryptography to ensure integrity and also secrecy. The data your
+ application stores in sessions is completely protected from both tampering
+ and analysis on the client-side.

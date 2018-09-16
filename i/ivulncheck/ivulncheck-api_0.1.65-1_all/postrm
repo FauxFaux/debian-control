@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+if [ "{$1}" = "purge" ] ; then
+	rm -rf /var/lib/ivulncheck-api/debsecan
+	rm -rf /var/lib/ivulncheck-api/fake-repos
+	rm -rf /var/lib/ivulncheck-api/ubuntu-cve-tracker
+        rmdir --ignore-fail-on-non-empty /var/lib/ivulncheck-api || true	
+	rmdir --ignore-fail-on-non-empty /etc/ivulncheck || true
+	rm -f /var/log/ivulncheck/ivulncheck-api.log*
+	rmdir --ignore-fail-on-non-empty /var/log/ivulncheck || true
+	if [ -x ""$(which a2dissite) ] ; then
+		a2dissite ivulncheck_api.conf || true
+	fi
+fi
+
+
+
+exit 0

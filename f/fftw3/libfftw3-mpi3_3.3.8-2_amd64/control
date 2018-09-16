@@ -1,0 +1,21 @@
+Package: libfftw3-mpi3
+Source: fftw3
+Version: 3.3.8-2
+Architecture: amd64
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 312
+Depends: libc6 (>= 2.14), libfftw3-double3 (>= 3.3.5), libfftw3-long3 (>= 3.3.5), libfftw3-single3 (>= 3.3.5), libopenmpi3
+Suggests: libfftw3-mpi-dev
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://fftw.org
+Description: MPI Library for computing Fast Fourier Transforms
+ The FFTW library computes Fast Fourier Transforms (FFT) in one or more
+ dimensions. It is extremely fast. This package contains the shared library
+ versions of the fftw libraries in single, double and long double precisions.
+ Note that on some architectures double is the same as long double in which
+ case there is no long double library.
+ .
+ To get the static library and the header files, you need to install
+ libfftw3-mpi-dev. For documentation, see libfftw3-doc.

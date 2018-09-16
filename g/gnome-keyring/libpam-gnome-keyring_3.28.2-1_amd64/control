@@ -1,0 +1,24 @@
+Package: libpam-gnome-keyring
+Source: gnome-keyring
+Version: 3.28.2-1
+Architecture: amd64
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Installed-Size: 341
+Depends: libc6 (>= 2.14), libpam0g (>= 0.99.7.1), libselinux1 (>= 1.32), libpam-runtime (>= 1.0.1-6)
+Recommends: gnome-keyring
+Section: admin
+Priority: optional
+Multi-Arch: same
+Homepage: https://wiki.gnome.org/GnomeKeyring
+Description: PAM module to unlock the GNOME keyring upon login
+ gnome-keyring is a daemon in the session, similar to ssh-agent,
+ and other applications can use it to store passwords and other
+ sensitive information.
+ .
+ This package contains a PAM module that will automatically unlock the
+ keyrings using your login password, making gnome-keyring usage
+ transparent without losing its security benefits.
+ .
+ When installed, this module will automatically be used by GDM and
+ gnome-screensaver to unlock your keyrings when logging in and when
+ unlocking the screen saver.

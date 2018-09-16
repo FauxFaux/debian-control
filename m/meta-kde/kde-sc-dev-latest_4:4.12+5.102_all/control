@@ -1,0 +1,21 @@
+Package: kde-sc-dev-latest
+Source: meta-kde (5:102)
+Version: 4:4.12+5.102
+Architecture: all
+Maintainer: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Installed-Size: 24
+Depends: automoc (>= 1.0~version-0.9.88), cmake (>= 2.8.6), debhelper (>= 9), pkg-kde-tools (>= 0.12)
+Conflicts: kdebase-workspace-dev
+Breaks: kde-workspace-dev (<< 4:4.11.6), kdelibs5-dev (<< 4:4.12), kdepimlibs5-dev (<< 4:4.12), libakonadi-dev (<< 1.9.0), libanalitza-dev (<< 4:4.11.3), libkactivities-dev (<< 4:4.12), libkdcraw-dev (<< 4:4.11.3), libkdeedu-dev (<< 4:4.11.3), libkexiv2-dev (<< 4:4.11.3), libkipi-dev (<< 4:4.11.3), libkonq5-dev (<< 4:4.11.3), libksane-dev (<< 4:4.11.3), libmarble-dev (<< 4:4.11.3), okular-dev (<< 4:4.11.3)
+Section: metapackages
+Priority: optional
+Homepage: http://www.kde.org
+Description: ensure that the latest KDE Development Platform is installed
+ This package ensures that the latest version of the KDE Development Platform
+ packages are installed on the system.
+ .
+ This metapackage is intended to be used only in the Build-Depends of the KDE
+ Software Compilation packages. If the "Breaks" effect of this package is not
+ desired on the maintainer system, it can be overridden by installing a custom
+ version of this package with the pkgkde-override-sc-dev-latest command from
+ the pkg-kde-tools package.

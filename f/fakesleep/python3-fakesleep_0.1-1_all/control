@@ -1,0 +1,18 @@
+Package: python3-fakesleep
+Source: fakesleep
+Version: 0.1-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 18
+Depends: python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: http://github.com/wearpants/fakesleep
+Description: Fake version of time.sleep() for use in tests
+ The fakesleep module helps testing code that use `time.sleep()`. Sleeping in
+ tests is generally considered bad (as it makes tests run slow). Using
+ sleep with `time.time()` can lead to spurious failures, as clock
+ precision / interpreter overhead can cause small differences in reported
+ times.
+ .
+ This package provides the Python 3.x module.

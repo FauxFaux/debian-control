@@ -1,0 +1,23 @@
+Package: libdomain-publicsuffix-perl
+Version: 0.14.1-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 242
+Depends: perl, libclass-accessor-perl, libnet-idn-encode-perl
+Recommends: publicsuffix
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Domain-PublicSuffix
+Description: module for parsing a domain to determine the public suffix
+ Domain::PublicSuffix utilizes the "effective_tld_names.dat" provided by
+ Mozilla as a way to effectively reduce a fully qualified domain name down to
+ the absolute root. The Mozilla PublicSuffix file is an open source, fully
+ documented format that shows absolute root TLDs, primarily for Mozilla's
+ browser products to be able to determine how far a cookie's security
+ boundaries go.
+ .
+ This module will attempt to search etc directories in
+ /usr/share/publicsuffix, /usr, /usr/local, and /opt/local for the
+ effective_tld_names.dat file. If a file is not found, a default file
+ is loaded from Domain::PublicSuffix::Default, which is current at the
+ time of the module's release.

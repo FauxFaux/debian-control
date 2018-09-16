@@ -1,0 +1,34 @@
+Package: torch-trepl
+Source: lua-torch-trepl
+Version: 0~20170619-ge5e17e3-7
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: lua-torch-trepl (>= 0~20170619-ge5e17e3-7), lua-torch-trepl (<< 0~20170619-ge5e17e3-7.1~), luajit | lua5.1
+Section: interpreters
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/torch/trepl
+Description: REPL Wrapper Package for Torch Framework
+ A pure Lua REPL (Read,Eval,Print-Loop) for LuaJIT, with heavy
+ support for Torch types. It uses Readline for tab completion.
+ .
+ This package also installs command line frontend `th`, which
+ comes packed with all these features:
+ .
+  * Tab-completion on nested namespaces
+  * Tab-completion on disk files (when opening a string)
+  * History
+  * Pretty print (table introspection and coloring)
+  * Auto-print after eval (can be stopped with ;)
+  * Each command is profiled, timing is reported
+  * No need for '=' to print
+  * Easy help with: `? funcname`
+  * Self help: `?`
+  * Shell commands with: $ cmd (example: `$ ls`)
+  * Print all user globals with `who()`
+  * Import a package's symbols globally with `import(package)`
+  * Require is overloaded to provide relative search paths:
+      `require('./mylocallib/')`
+  * [Optional] strict global namespace monitoring
+  * [Optional] async repl

@@ -1,0 +1,20 @@
+Package: bamfdaemon
+Source: bamf
+Version: 0.5.3-3
+Architecture: amd64
+Maintainer: Debian+Ubuntu MATE Packaging Team <debian-mate@lists.debian.org>
+Installed-Size: 422
+Depends: libbamf3-2 (= 0.5.3-3), libc6 (>= 2.4), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.43.2), libgtk-3-0 (>= 3.9.10), libgtop-2.0-11 (>= 2.22.3), libstartup-notification0 (>= 0.11), libwnck-3-0 (>= 3.4.7), libx11-6
+Section: libs
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://launchpad.net/bamf
+Description: Window matching library - daemon
+ Bamf matches application windows to desktop files. It removes the
+ headache of applications matching into a simple DBus daemon and C
+ wrapper library. It currently features application matching at amazing
+ levels of accuracy (covering nearly every corner case).
+ .
+ This package contains the daemon used by the library and a GIO
+ module that facilitates the matching of applications started
+ through GDesktopAppInfo.

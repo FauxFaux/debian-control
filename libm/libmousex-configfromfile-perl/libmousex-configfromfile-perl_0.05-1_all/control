@@ -1,0 +1,21 @@
+Package: libmousex-configfromfile-perl
+Version: 0.05-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 49
+Depends: perl, libmouse-perl, libmousex-types-path-class-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MouseX-ConfigFromFile
+Description: abstract Mouse role for setting attributes from a configfile
+ MouseX::ConfigFromFile is an abstract role which provides an alternate
+ constructor for creating objects using parameters passed in from a
+ configuration file. The actual implementation of reading the configuration
+ file is left to concrete subroles.
+ .
+ It declares an attribute configfile and a class method new_with_config, and
+ requires that concrete roles derived from it implement the class method
+ get_config_from_file.
+ .
+ Attributes specified directly as arguments to new_with_config supercede those
+ in the configfile.

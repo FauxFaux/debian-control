@@ -1,0 +1,19 @@
+Package: lfc-server-mysql
+Source: lcgdm
+Version: 1.10.0-2
+Architecture: amd64
+Maintainer: Mattias Ellert <mattias.ellert@physics.uu.se>
+Installed-Size: 335
+Depends: liblfc1 (= 1.10.0-2), adduser, libc6 (>= 2.15), liblcgdm1, libmariadbclient18 (>= 10.1.28), libstdc++6 (>= 4.1.1), libuuid1 (>= 2.16), finger, default-mysql-client | virtual-mysql-client
+Conflicts: lfc-mysql (<< 1.8.1.2-2~)
+Replaces: lfc-mysql (<< 1.8.1.2-2~)
+Provides: lfc-mysql
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://glite.web.cern.ch/glite/
+Description: LCG File Catalog (LFC) server with MySQL database backend
+ The LCG File Catalog (LFC) keeps track of the locations of the physical
+ replicas of the logical files in a distributed storage system.
+ This package provides an LFC server that uses MySQL as its database
+ backend.

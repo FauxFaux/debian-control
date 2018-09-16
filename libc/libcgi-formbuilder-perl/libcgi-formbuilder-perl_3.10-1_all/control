@@ -1,0 +1,70 @@
+Package: libcgi-formbuilder-perl
+Version: 3.10-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 588
+Depends: libcgi-pm-perl | perl (<< 5.19), perl
+Recommends: libhtml-parser-perl
+Suggests: libhtml-template-perl, libtemplate-perl, libtext-template-perl, libcgi-session-perl, libcgi-ssi-perl
+Section: perl
+Priority: optional
+Homepage: http://www.formbuilder.org/
+Description: Easily generate and process stateful CGI forms
+ CGI::FormBuilder is a Perl module for generating, processing, and validating
+ CGI forms. It's an extremely fast and robust module with a ridiculous set of
+ features.
+ .
+ Highlights:
+ .
+  * DWIMmery
+ FormBuilder tries to do what you mean. Tell it the fields you care
+ about, and it takes care of all the stupid HTML and JavaScript
+ generation and processing for you. It also gives you back the correct
+ values that you want. It will even label your fields automatically with
+ human-readable names.
+ .
+  * Input field abstraction
+ Simply define your fields and their options, and FormBuilder will
+ take care of figuring out what the best HTML representation is. It will
+ then generate the appropriate input fields (text, select, radio, etc),
+ even changing any JavaScript actions appropriately.
+ .
+  * Easy handling of defaults
+ Just specify a hash of values to use as the defaults for your fields.
+ This will be searched case-insensitively and displayed in the form.
+ What's more, if the user enters something via the CGI that overrides a
+ default, when you use the field() method to get the data you'll get the
+ correct value.
+ .
+  * Correct stickiness
+ Stickiness is a PITA. FormBuilder correctly handles even multiple
+ values selected in a multiple select list, completely integrated with
+ proper handling of defaults.
+ .
+  * Robust field validation
+ Form validation sucks, and this is where FormBuilder is a big help. It
+ has tons of builtin patterns, and will even generate gobs of JavaScript
+ validation code for you. It is possible to specify your own regexps as well,
+ and FormBuilder will even check multivalued select lists correctly.
+ .
+  * Multiple submit mode support
+ FormBuilder allows one to reliably tell whether the person clicked on
+ the "Update" or "Delete" button of your form, normally a big pain.
+ .
+  * Template driver support
+ FormBuilder can natively "drive" several major templating engines:
+  * HTML::Template
+  * CGI::FastTemplate
+  * Text::Template
+  * Template Toolkit
+ FormBuilder can help building a complete form application with a template in
+ less that 20 lines of Perl.
+ .
+  * Internationalized, Customizable Messaging
+ FormBuilder allows customization of every single message that ot outputs for
+ given locale.
+ .
+  * Simple Interface
+ The author has specialized in User Interface Design.
+ .
+  * Extensive Documentation

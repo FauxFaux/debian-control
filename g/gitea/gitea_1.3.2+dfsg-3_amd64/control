@@ -1,0 +1,58 @@
+Package: gitea
+Version: 1.3.2+dfsg-3
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 28082
+Pre-Depends: debconf
+Depends: adduser, git, gitea-common (= 1.3.2+dfsg-3), libcap2-bin, debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.3.2), libpam0g (>= 0.99.7.1), libsqlite3-0 (>= 3.7.15)
+Built-Using: golang-1.9 (= 1.9.3-1), golang-barcode (= 0.0~git20140830-1), golang-code.gitea-git (= 0.0~git20171222.4ec3654-1), golang-code.gitea-sdk (= 0.0~git20171220.79eee8f-1), golang-context (= 1.1-2), golang-github-andybalholm-cascadia (= 0.0~git20161224.0.349dd02-1), golang-github-blevesearch-bleve (= 0.5.0+git20170912.278.6eea5b78-2), golang-github-blevesearch-go-porterstemmer (= 1.0.1+git20141230.9.23a2c8e-3), golang-github-blevesearch-segment (= 0.0~git20160915.0.762005e-3), golang-github-boltdb-bolt (= 1.3.1-4), golang-github-chaseadamsio-goorgeous (= 2.0.0-1), golang-github-davecgh-go-spew (= 1.1.0-3), golang-github-denisenkom-go-mssqldb (= 0.0~git20170717.0.8fccfc8-3), golang-github-dgrijalva-jwt-go-v3 (= 3.0.0+v3-1), golang-github-facebookgo-clock (= 0.0~git20150410.0.600d898-3), golang-github-facebookgo-grace (= 0.0~git20170218.0.4afe952-4), golang-github-facebookgo-httpdown (= 0.0~git20160323.0.a3b1354-5), golang-github-facebookgo-stats (= 0.0~git20151006.0.1b76add-3), golang-github-go-macaron-binding (= 0.0~git20170611.0.ac54ee2-3), golang-github-go-macaron-cache (= 0.0~git20151013.0.5617353-2), golang-github-go-macaron-captcha (= 0.0~git20170330.0.cbfb9d9-2), golang-github-go-macaron-csrf (= 0.0~git20170207.0.428b7c6-2), golang-github-go-macaron-gzip (= 0.0~git20151014.0.4938e9b-2), golang-github-go-macaron-i18n (= 0.0~git20160612.0.ef57533-3), golang-github-go-macaron-inject (= 0.0~git20160627.0.d8a0b86-3), golang-github-go-macaron-session (= 0.0~git20151014.0.66031fc-2), golang-github-go-macaron-toolbox (= 0.0~git20170220.0.6766b8f-3), golang-github-go-sql-driver-mysql (= 1.3-1), golang-github-go-xorm-builder (= 0.0~git20170519.0.c8871c8-2), golang-github-go-xorm-core (= 0.5.7+git20170909.0.da1adaf-3), golang-github-go-xorm-xorm (= 0.6.4-2), golang-github-gogits-chardet (= 0.0~git20150115.0.2404f77+dfsg-2), golang-github-gogits-cron (= 0.0~git20170309.60.c803a08-2), golang-github-gorilla-mux (= 1.1-4), golang-github-gorilla-securecookie (= 1.1+git20170224.6.e59506c-2), golang-github-gorilla-sessions (= 1.1+git20170802.7.b61c93c-1), golang-github-issue9-identicon (= 0.0~git20170630.0.5196591-2), golang-github-jaytaylor-html2text (= 0.0~git20170918.0.0ee88d3-1), golang-github-kballard-go-shellquote (= 0.0~git20150810.0.d8ec1a6-2), golang-github-klauspost-compress (= 1.2.1-4), golang-github-klauspost-cpuid (= 1.1+dfsg1-3), golang-github-klauspost-crc32 (= 1.1-3), golang-github-lib-pq (= 0.0~git20151007.0.ffe986a-1), golang-github-markbates-goth (= 1.42.0-3), golang-github-puerkitobio-goquery (= 1.1.0+git20170324.3.ed7d758-1), golang-github-unknwon-cae (= 0.0~git20160715.0.c6aac99-2), golang-github-unknwon-com (= 1+git20170819.13.7677a1d-3), golang-github-unknwon-i18n (= 0.0~git20170218.0.8372b90-4), golang-github-unknwon-paginater (= 0.0~git20170405.0.45e5d63-3), golang-gomemcache (= 0.0~git20141109-2), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-1)
+Section: contrib/devel
+Priority: extra
+Homepage: https://github.com/go-gitea/gitea
+Description: Painless self-hosted git service
+ Gitea is a self-hosted git service aiming to provide a full suite of
+ features similar to Gitlab or Github. It aims to be light weight,
+ feature rich, and easily maintained.
+ .
+ Features:
+   * User dashboard:
+     + Context switching (organization / current user)
+     + Activity timeline
+     + Repository list
+   * Issues dashboard
+   * Pull requests
+   * Notification (web / email)
+   * Repository types
+     + Mirror
+     + Normal
+     + Migrated
+   * Custom templates
+   * TLS support
+   * Detailed logging
+   * Database support:
+     + MySQL
+     + PostgreSQL
+     + SQLite3
+     + MSSQL
+   * Admin panel(s)
+     + Repository/Organization/User management
+     + Statisticts
+     + Server status
+     + System notices
+   * Authentication sources:
+     + OAuth
+     + PAM
+     + LDAP
+     + SMTP
+   * Multi-language support
+   * Release management / issue (ticket) tracking
+     + Milestones
+     + Labels
+     + Assign
+     + Search / sort / filter
+     + Comments / attachments
+     + Pull requests
+   * Project wiki
+   * Per-project settings
+ .
+ Documentation: https://docs.gitea.io/en-US/

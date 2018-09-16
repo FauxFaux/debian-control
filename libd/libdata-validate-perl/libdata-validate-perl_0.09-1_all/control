@@ -1,0 +1,19 @@
+Package: libdata-validate-perl
+Version: 0.09-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 57
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Data-Validate
+Description: module providing common data validation routines for strings/numbers
+ Data::Validate collects common validation routines to make input validation,
+ and untainting easier and more readable. Most of the functions are not much
+ shorter than their direct perl equivalent (and are much longer in some
+ cases), but their names make it clear what you're trying to test for (e.g.
+ is_integer(), is_hex(), is_alphanumeric()...).
+ .
+ Almost all functions return an untainted value if the test passes, and undef
+ if it fails. This means that you should always check for a defined status
+ explicitly. Don't assume the return will be true. (e.g. is_integer(0))

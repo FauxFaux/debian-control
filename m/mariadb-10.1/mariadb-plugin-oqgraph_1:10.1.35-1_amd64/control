@@ -1,0 +1,17 @@
+Package: mariadb-plugin-oqgraph
+Source: mariadb-10.1
+Version: 1:10.1.35-1
+Architecture: amd64
+Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Installed-Size: 256
+Depends: libjudydebian1, mariadb-server-10.1, libc6 (>= 2.14), libstdc++6 (>= 5.2)
+Conflicts: mariadb-oqgraph-engine-10.0, mariadb-oqgraph-engine-10.1
+Breaks: mariadb-oqgraph-engine-10.0, mariadb-oqgraph-engine-10.1, mariadb-server-10.0, mariadb-server-10.1 (<< 1:10.1.35-1)
+Replaces: mariadb-oqgraph-engine-10.0, mariadb-oqgraph-engine-10.1, mariadb-server-10.0, mariadb-server-10.1 (<< 1:10.1.35-1)
+Section: database
+Priority: optional
+Homepage: https://mariadb.org/
+Description: OQGraph storage engine for MariaDB
+ The OQGraph engine is a computation engine plugin for handling hierarchies
+ (trees) and graphs (friend-of-a-friend, etc) cleanly through standard SQL.
+ This package contains the OQGraph plugin for MariaDB.

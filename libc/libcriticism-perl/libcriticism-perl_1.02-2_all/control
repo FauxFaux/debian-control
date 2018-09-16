@@ -1,0 +1,18 @@
+Package: libcriticism-perl
+Version: 1.02-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 25
+Depends: perl
+Recommends: libperl-critic-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/criticism
+Description: Perl pragma to enforce coding standards and best-practices
+ The cristicism pragma enforces coding standards and promotes best-practices
+ by running your file through Perl::Critic before every execution. In a
+ production system, this usually isn't feasible because it adds a lot of
+ overhead at start-up. If you have a separate development environment,
+ you can effectively bypass the "criticism" pragma by not installing
+ Perl::Critic in the production environment. If Perl::Critic can't be
+ loaded, then "criticism" just fails silently.

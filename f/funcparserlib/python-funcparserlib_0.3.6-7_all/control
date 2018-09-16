@@ -1,0 +1,28 @@
+Package: python-funcparserlib
+Source: funcparserlib
+Version: 0.3.6-7
+Architecture: all
+Maintainer: Kouhei Maeda <mkouhei@palmtb.net>
+Installed-Size: 65
+Depends: python2.7, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://github.com/vlasovskikh/funcparserlib
+Description: Recursive descent parsing library based on functional combinators
+ Parser combinators are just higher-order functions that take parsers as
+ their arguments and return them as result values. Parser combinators are:
+ .
+ First-class values. Extremely composable. Tend to make the code quite compact.
+ Resemble the readable notation of xBNF grammars.
+ .
+ Parsers made with funcparserlib are pure-Python LL(*) parsers. It means that
+ it's very easy to write them without thinking about look-aheads and all that
+ hardcore parsing stuff. But the recursive descent parsing is a rather slow
+ method compared to LL(k) or LR(k) algorithms.
+ .
+ So the primary domain for funcparserlib is parsing little languages or external
+ DSLs (domain specific languages).
+ .
+ The library itself is very small. Its source code is only 0.5 KLOC, with lots
+ of comments included. It features the longest parsed prefix error reporting,
+ as well as a tiny lexer generator for token position tracking.

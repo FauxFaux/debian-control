@@ -1,0 +1,23 @@
+Package: pius
+Version: 2.2.6-2
+Architecture: all
+Maintainer: Felix Lechner <felix.lechner@lease-up.com>
+Installed-Size: 159
+Depends: python, gnupg (>= 2), python-six, python:any (<< 2.8), python:any (>= 2.7~)
+Section: utils
+Priority: optional
+Homepage: http://www.phildev.net/pius/
+Description: Tools to help before and after key-signing parties
+ After a key-signing party, pius (the PGP Individual UID Signer) signs each
+ uid on a GPG key individually. Each signature is encrypted and mailed to
+ the email address associated with that particular uid. As a result of this
+ process, the recipient can choose which signatures to import. Also,
+ signatures of inactive uids are not delivered. This tool greatly reduces
+ time and error when signing keys.
+ .
+ Other tools herein are useful for organizers: pius-keyring-mgr builds a party
+ keyring from a CSV file or by scanning mailboxes, and pius-party-worksheet
+ generates a worksheet as a hand out. If someone has not signed your key,
+ pius-report can analyze a party keyring and remind them.
+ .
+ This version supports GPGv2 and uses it by default.

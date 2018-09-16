@@ -1,0 +1,29 @@
+Package: filetea
+Version: 0.1.18-1
+Architecture: amd64
+Maintainer: Alberto Garcia <berto@igalia.com>
+Installed-Size: 931
+Depends: libc6 (>= 2.4), libevd-0.2-0 (>= 0.2.0), libgcrypt20 (>= 1.7.0), libglib2.0-0 (>= 2.37.3), libgnutls30 (>= 3.5.0), libjson-glib-1.0-0 (>= 0.12.0), libsoup2.4-1 (>= 2.26.1), libuuid1 (>= 2.16), adduser, shared-mime-info, lsb-base (>= 3.0-6)
+Suggests: ssl-cert
+Section: net
+Priority: optional
+Homepage: https://github.com/elima/FileTea
+Description: Web-based file sharing system
+ FileTea is a simple way to send files among different users.
+ .
+ FileTea functions as a web server. Users can drag files into their
+ web browser and a URL will be generated for each one. Those URLs can
+ be sent to other people, who will be able to start downloading the
+ files immediately.
+ .
+ An HTML5 capable browser is required in order to share the files, but
+ any HTTP client can download them, including command-line tools such
+ as curl or wget.
+ .
+ Files are sent through the server, but no data is stored there:
+ FileTea is only used to route the traffic. This also means that
+ there's no limit to the size of shared files.
+ .
+ The service is anonymous and does not require user registration.
+ Since it's completely web-based, it works in networks with proxies,
+ firewalls, etc., as long as all users can reach the FileTea server.

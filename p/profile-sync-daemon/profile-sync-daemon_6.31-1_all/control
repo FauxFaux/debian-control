@@ -1,0 +1,19 @@
+Package: profile-sync-daemon
+Version: 6.31-1
+Architecture: all
+Maintainer: Jan Luca Naumann <j.naumann@fu-berlin.de>
+Installed-Size: 91
+Depends: rsync
+Suggests: libpam-systemd, systemd-sysv
+Section: utils
+Priority: optional
+Homepage: https://github.com/graysky2/profile-sync-daemon
+Description: Symlink and sync browser profile directories into RAM
+ Profile-sync-daemon (psd) is a tiny pseudo-daemon designed
+ to manage your browsers profile in tmpfs and periodically
+ sync it back to disk.
+ .
+ This is accomplished by symlinking and the innovative use
+ of rsync to maintain a backup and synchronization between
+ tmpfs and disk. One of the major design goals of psd is a
+ completely transparent user experience.

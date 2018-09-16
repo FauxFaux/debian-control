@@ -1,0 +1,17 @@
+Package: libident
+Version: 0.22-3.1
+Architecture: amd64
+Maintainer: Paul Slootman <paul@debian.org>
+Installed-Size: 48
+Depends: libc6 (>= 2.14)
+Suggests: libident-dev
+Section: libs
+Priority: important
+Description: simple RFC1413 client library - runtime
+ This is a small library to interface to the Ident protocol server;
+ "ident" enables a remote host to find out who's the owner of a
+ network connection.
+ .
+ /usr/sbin/in.identtestd is a small daemon (to be started from inetd)
+ that does an ident lookup on you if you telnet into it. Can be used
+ to verify that your Ident server is working correctly.

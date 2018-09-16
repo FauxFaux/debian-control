@@ -1,0 +1,30 @@
+Package: iptables-nftables-compat
+Source: iptables
+Version: 1.6.2-1.1
+Architecture: amd64
+Maintainer: Debian Netfilter Packaging Team <pkg-netfilter-team@lists.alioth.debian.org>
+Installed-Size: 415
+Depends: arptables, ebtables, iptables (= 1.6.2-1.1), libxtables12 (= 1.6.2-1.1), libc6 (>= 2.15), libmnl0 (>= 1.0.3-4~), libnetfilter-conntrack3, libnfnetlink0, libnftnl7 (>= 1.0.8)
+Recommends: nftables
+Suggests: kmod
+Section: net
+Priority: optional
+Homepage: http://www.netfilter.org/
+Description: iptables compat tools for nftables
+ this package includes the compat tools to load iptables, ip6tables, arptables
+ and ebtables rules to the nf_tables kernel subsystem.
+ .
+ The tools are called: 'iptables-compat', 'iptables-compat-save',
+ 'iptables-compat-restore', 'ip6tables-compat', 'ip6tables-compat-save',
+ 'ip6tables-compat-restore', 'arptables-compat' and 'ebtables-compat'.
+ .
+ A basic way to understand this compat stuff is to load the ruleset
+ skeleton, i.e: a first call `iptables-compat -L'. Then, you can use nft,
+ i.e: `nft list ruleset'. Same for the other families.
+ .
+ Also, this package contains the translation tools, which are
+ 'iptables-translate', 'ip6tables-translate', 'iptables-restore-translate',
+ and 'ip6tables-restore-translate'.
+ .
+ These translation tools works by reading an input in iptables native syntax
+ and then  printing the nftables syntax equivalent.

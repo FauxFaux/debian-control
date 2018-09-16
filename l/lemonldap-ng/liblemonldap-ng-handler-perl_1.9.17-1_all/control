@@ -1,0 +1,24 @@
+Package: liblemonldap-ng-handler-perl
+Source: lemonldap-ng
+Version: 1.9.17-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 336
+Depends: perl, liblemonldap-ng-common-perl (= 1.9.17-1), libmoose-perl, liburi-perl, libwww-perl
+Recommends: libhttp-message-perl, liblwp-protocol-https-perl
+Suggests: libcache-memcached-perl, libdigest-hmac-perl, liblemonldap-ng-portal-perl, libsoap-lite-perl
+Section: perl
+Priority: optional
+Homepage: https://lemonldap-ng.org/
+Description: Lemonldap::NG handler common libraries
+ Lemonldap::NG is a complete Web-SSO system that can run with reverse-proxies
+ or directly on application webservers. It can be used in conjunction with
+ OpenID-Connect, CAS and SAML systems as identity or service provider. It can
+ also be used as proxy between those federation systems.
+ .
+ It manages both authentication and authorization and provides headers for
+ accounting. So you can have a full AAA protection. Authorization are built by
+ associating a regular expression and a rule. Regular expression is applied on
+ the requested URL and the rule calculates if the user is authorized.
+ .
+ Lemonldap::NG::Handler provides Perl libraries used by web server handlers.

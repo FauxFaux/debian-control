@@ -1,0 +1,26 @@
+Package: spl
+Source: spl-linux
+Version: 0.7.9-3
+Architecture: amd64
+Maintainer: Debian ZFS on Linux maintainers <pkg-zfsonlinux-devel@alioth-lists.debian.net>
+Installed-Size: 47
+Depends: libc6 (>= 2.4)
+Recommends: spl-modules | spl-dkms
+Conflicts: spl-dev, splat
+Section: kernel
+Priority: optional
+Homepage: http://www.zfsonlinux.org/
+Description: Solaris Porting Layer user-space utilities for Linux
+ The Solaris Porting Layer (SPL) is a Linux kernel module which provides
+ many of the Solaris kernel APIs. This shim layer makes it possible to
+ run Solaris kernel code in the Linux kernel with relatively minimal
+ modification. The Solaris Porting LAyer Tests (SPLAT) is a Linux kernel
+ module which provides a testing harness for the SPL module.
+ .
+ SPL can be particularly useful when you want to track upstream Illumos
+ (or any other OpenSolaris fork) development closely and don't want the
+ overhead of maintaining a large patch which converts Solaris primitives
+ to Linux primitives.
+ .
+ This package includes the user space utilities needed to test and debug
+ the SPL and SPLAT kernel modules.

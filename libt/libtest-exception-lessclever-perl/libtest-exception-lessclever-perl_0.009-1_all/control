@@ -1,0 +1,17 @@
+Package: libtest-exception-lessclever-perl
+Version: 0.009-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 24
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Exception-LessClever
+Description: simplified Test::Exception alternative
+ Test::Exception::LessClever is an alternative to Test::Exception that is much
+ simpler. This alternative does not use fancy stack tricks to hide itself. The
+ idea here is to keep it simple. This also solves the Test::Exception bug
+ where some dies will be hidden when a DESTROY method calls eval. If a DESTROY
+ method masks $@ a warning will be generated as well.
+ .
+ This module is deprecated.

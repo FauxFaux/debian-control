@@ -1,0 +1,22 @@
+Package: servefile
+Version: 0.4.4-1
+Architecture: all
+Maintainer: Sebastian Lohff <seba@someserver.de>
+Installed-Size: 54
+Depends: python-argparse | python2.7, python (>= 2.7), python (<< 2.8)
+Recommends: python-openssl, net-tools | iproute2 | freebsd-net-tools
+Section: net
+Priority: optional
+Homepage: http://seba-geek.de/stuff/servefile/
+Description: serve or receive files from shell via a small HTTP server
+ servefile is a small HTTP-server intended for temporary file transfer mostly
+ in the local network. By default the server redirects all HTTP requests to a
+ file given as first argument, so only IP and port must be given to another
+ user to access it.
+ .
+ servefile is also able to list directories, generate SSL certificates for
+ HTTPS on-the-fly, do HTTP basic auth and provide a platform for uploads
+ via either a HTML formular or a simple POST/PUT.
+ .
+ Note that this HTTP-server's purpose is not production grade static file
+ serving or running as a daemon.

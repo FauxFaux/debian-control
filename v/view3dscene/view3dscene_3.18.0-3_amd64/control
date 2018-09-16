@@ -1,0 +1,32 @@
+Package: view3dscene
+Version: 3.18.0-3
+Architecture: amd64
+Maintainer: Pascal Packaging Team <pkg-pascal-devel@lists.alioth.debian.org>
+Installed-Size: 23830
+Depends: libatk1.0-0 (>= 1.12.4), libc6 (>= 2.2.5), libcairo2 (>= 1.2.4), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.12.0), libgtk2.0-0 (>= 2.24.32), libgtkglext1, libpango-1.0-0 (>= 1.14.0), libx11-6, libgl1-mesa-swx11 | libgl1-mesa-glx | libgl1-nvidia-glx, zlib1g
+Recommends: libopenal1, libvorbisfile3
+Suggests: graphicsmagick-imagemagick-compat | imagemagick, libav-tools | ffmpeg
+Section: misc
+Priority: optional
+Homepage: https://castle-engine.sourceforge.io/view3dscene.php
+Description: VRML / X3D browser, and a viewer for other 3D model formats
+ view3dscene is a viewer for many 3D model formats:
+  - X3D
+  - VRML (1.0 and 2.0, aka VRML 97)
+  - Collada
+  - OpenInventor
+  - 3DS
+  - MD3
+  - Wavefront OBJ
+  - Videoscape GEO
+  - KAnim (Castle Game Engine animations)
+ .
+ Various navigation modes are available, like Examine, Walk (with gravity), Fly.
+ Collision detection is done. Models can be animated and interactive. Many
+ graphic effects are possible, thanks to using Castle Game Engine underneath.
+ .
+ view3dscene may also be used to convert many 3D model formats to X3D
+ (in classic and XML encoding). This package includes also a command-line
+ tovrmlx3d program, that performs the same conversions as view3dscene,
+ but doesn't use X or OpenGL (so it's nice to use in scripts to convert
+ 3D models in batch mode).

@@ -1,0 +1,19 @@
+Package: olpc-kbdshim
+Source: olpc-kbdshim (27-1)
+Version: 27-1+b2
+Architecture: amd64
+Maintainer: Andres Salomon <dilinger@debian.org>
+Installed-Size: 74
+Depends: libc6 (>= 2.7), libudev1 (>= 183), udev
+Conflicts: olpc-kbdshim-common, olpc-kbdshim-hal
+Replaces: olpc-kbdshim-common, olpc-kbdshim-hal
+Provides: olpc-kbdshim-common, olpc-kdbshim-hal
+Section: admin
+Priority: optional
+Description: OLPC XO keyboard support daemon
+ The olpc-kbdshim daemon is used to handle keyboard events on the somewhat
+ unique OLPC XO hardware.  It does this by monitoring the keyboard and
+ touchpad, enabling the XO "grab" keys and touchpad rotation (to match
+ screen rotation), and reporting user (in)activity.  It can also bind the XO
+ screen rotate, brightness, and volume keys to appropriate commands (which are
+ provided).

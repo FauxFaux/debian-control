@@ -1,0 +1,17 @@
+Package: libnet-https-any-perl
+Version: 0.12-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 27
+Depends: perl, libnet-ssleay-perl, libtie-ixhash-perl, liburi-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Net-HTTPS-Any
+Description: wrapper around Net::SSLeay
+ This is a wrapper around Net::SSLeay providing a simple interface for the use
+ of Business::OnlinePayment.
+ .
+ It used to allow switching between Net::SSLeay and Crypt::SSLeay
+ implementations, but that was obsoleted.  If you need to do that, use LWP
+ instead.  You can set $Net::HTTPS::SSL_SOCKET_CLASS = "Net::SSL" for
+ Crypt::SSLeay instead of the default Net::SSLeay (since 6.02).

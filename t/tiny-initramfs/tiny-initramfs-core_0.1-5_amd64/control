@@ -1,0 +1,26 @@
+Package: tiny-initramfs-core
+Source: tiny-initramfs
+Version: 0.1-5
+Architecture: amd64
+Maintainer: Christian Seiler <christian@iwakd.de>
+Installed-Size: 109
+Depends: cpio
+Built-Using: dietlibc (= 0.34~cvs20160606-7)
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/chris-se/tiny-initramfs/
+Description: Minimalistic initramfs implementation (core tools)
+ A very minimalistic initramfs implementation for booting Linux
+ systems. It is designed for systems where a full initramfs (such as
+ dracut or initramfs-tools) is too large, but where at least some
+ functionality of an initramfs (e.g. mounting the /usr filesystem) is
+ required. Without kernel modules it is less than 16 kiB in size.
+ .
+ tiny-initramfs has less features and is less extensible than
+ full-fledged initramfs implementations, and supports only specific use
+ cases.
+ .
+ This package contains the init binary as well as the mktirfs script
+ that may be used to create working initramfs images, while not
+ replacing the initramfs implementation used on the current system.

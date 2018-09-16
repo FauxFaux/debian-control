@@ -1,0 +1,35 @@
+Package: libghc-thyme-prof
+Source: haskell-thyme (0.3.5.5-2)
+Version: 0.3.5.5-2+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 12701
+Depends: libghc-thyme-dev (= 0.3.5.5-2+b1), libghc-quickcheck-prof-2.10.1-914b9, libghc-aeson-prof-1.2.4.0-171c1, libghc-attoparsec-prof-0.13.2.2-eb13e, libghc-base-prof-4.10.1.0-35a7f, libghc-bytestring-prof-0.10.8.2-4a9e2, libghc-containers-prof-0.5.10.2-cc496, libghc-deepseq-prof-1.4.3.0-38379, libghc-mtl-prof-2.2.2-ada79, libghc-old-locale-prof-1.0.0.7-cd490, libghc-profunctors-prof-5.2.2-b89bb, libghc-random-prof-1.1-bddaa, libghc-text-prof-1.2.3.0-81981, libghc-time-prof-1.8.0.2-7cc03, libghc-vector-prof-0.12.0.1-c53f0, libghc-vector-space-prof-0.13-c2009, libghc-vector-th-unbox-prof-0.2.1.6-e1888
+Provides: libghc-thyme-prof-0.3.5.5-addff
+Section: haskell
+Priority: optional
+Homepage: https://github.com/liyang/thyme
+Description: faster time library; profiling libraries
+ Thyme is a rewrite of the fine time library, with a particular focus
+ on performance for applications that make heavy use of timestamps. For
+ example, UTCTime is represented with μs precision as an Int64, which
+ gives a usable range from -290419-11-07 19:59:05.224192 UTC to
+ 294135-11-26 04:00:54.775807 UTC in the future.
+ .
+ Conversions are provided as Iso's from the lens package, while
+ AdditiveGroup, VectorSpace and AffineSpace from vector-space allow for
+ more principled operations instead of Num, Fractional & al.
+ .
+ Thyme uses strict and unpacked tuples throughout, e.g. YearMonthDay or
+ WeekDate. Descriptive Int synonyms such as Year and DayOfMonth are
+ also provided.
+ .
+ On platforms where Int is 64-bits wide, types with an Enum instance
+ can be used as Keys for IntMap, preferably via the EnumMap wrapper
+ provided by enummapset-th. In any case the Ord instances are much
+ faster, if you must use Map.
+ .
+ Data.Thyme.Time is a drop-in compatibility module for existing code.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

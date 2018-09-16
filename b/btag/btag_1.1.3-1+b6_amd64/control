@@ -1,0 +1,24 @@
+Package: btag
+Source: btag (1.1.3-1)
+Version: 1.1.3-1+b6
+Architecture: amd64
+Maintainer: Fernando Tarlá Cardoso Lemos <fernandotcl@gmail.com>
+Installed-Size: 156
+Depends: libboost-filesystem1.62.0, libboost-system1.62.0, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), libtag1v5 (>= 1.9.1-2.2~)
+Section: sound
+Priority: optional
+Homepage: https://github.com/fernandotcl/btag
+Description: interactive command-line based multimedia tag editor
+ btag is an interactive utility for tagging multimedia files in batches.
+ tries to automate most of the process by stripping away stray whitespace
+ guessing the best capitalization style for the text fields and keeping
+ state on the current album being tagged.
+ .
+ btag can change the capitalization of text fields even when those contain
+ non-ASCII characters, relying on the standard library to perform the
+ appropriate case conversions. It works on directories containing complete
+ albums as well as on individual files.
+ .
+ All tag formats supported by TagLib should be supported by btag. This
+ includes (among others) ID3v1 and ID3v2 tags found in MP3 files, Ogg
+ Vorbis comments, ID3 tags and Vorbis comments in FLAC files.

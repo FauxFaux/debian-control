@@ -1,0 +1,30 @@
+Package: syslog-ng-mod-mongodb
+Source: syslog-ng
+Version: 3.13.2-4.1
+Architecture: amd64
+Maintainer: syslog-ng maintainers <syslog-ng@tracker.debian.org>
+Installed-Size: 115
+Depends: libbson-1.0-0, libc6 (>= 2.14), libmongoc-1.0-0, libsnappy1v5, libssl1.1 (>= 1.1.0), syslog-ng-abi-3.13-0, zlib1g (>= 1:1.1.4)
+Suggests: mongodb-server
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.syslog-ng.org/
+Description: Enhanced system logging daemon (MongoDB plugin)
+ syslog-ng is an enhanced log daemon, supporting a wide range of input
+ and output methods: syslog, unstructured text, message queues,
+ databases (SQL and NoSQL alike) and more.
+ .
+ Key features:
+ .
+  * receive and send RFC3164 and RFC5424 style syslog messages
+  * work with any kind of unstructured data
+  * receive and send JSON formatted messages
+  * classify and structure logs with builtin parsers (csv-parser(),
+    db-parser(), etc.)
+  * normalize, crunch and process logs as they flow through the system
+  * hand on messages for further processing using message queues (like
+    AMQP), files or databases (like PostgreSQL or MongoDB).
+ .
+ This package provides the MongoDB destination plugin, which allows
+ one to log system messages to MongoDB.

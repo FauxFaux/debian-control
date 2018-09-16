@@ -1,0 +1,28 @@
+Package: libpugixml1v5
+Source: pugixml
+Version: 1.9-2
+Architecture: amd64
+Maintainer: Vasudev Kamath <vasudev@copyninja.info>
+Installed-Size: 276
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Conflicts: libpugixml1
+Replaces: libpugixml1
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://pugixml.org/
+Description: Light-weight C++ XML processing library
+ pugixml is a lightweight C++ XML processing library with XPath
+ support. It features:
+  * DOM like interface with rich traversal/modification capabilities
+  * Extermely fast non-validating XML parser which constructs the DOM
+    tree from an XML file/buffer.
+  * XPath 1.0 implementation for complex data-driven tree queries
+  * Full Unicode support with Unicode interface variants and automatic
+    encoding conversions.
+ .
+ This library is extremely portable and easy to integrate and use.
+ .
+ Since pugixml has a DOM parser, it can't process XML documents that do
+ not fit in memory; also the parser is a non-validating one, so if you
+ need DTD or XML Schema validation, the library is not for you.

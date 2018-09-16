@@ -1,0 +1,30 @@
+Package: lua-luxio
+Source: luxio
+Version: 13-1
+Architecture: amd64
+Maintainer: Daniel Silverstone <dsilvers@digital-scurf.org>
+Installed-Size: 349
+Depends: libc6 (>= 2.14)
+Breaks: lua-luxio0 (<< 9)
+Replaces: lua-luxio0 (<< 9)
+Provides: lua-luxio0, lua5.1-luxio, lua5.2-luxio, lua5.3-luxio
+Section: interpreters
+Priority: optional
+Multi-Arch: same
+Homepage: https://git.gitano.org.uk/luxio.git/
+Description: Posix bindings for Lua
+ Lightweight UNIX I/O and POSIX binding for Lua
+ .
+  * Reasonably good coverage of POSIX and BSD Sockets, including IPv6,
+    and some GNU extensions.
+  * Low-level.  You get the return values and the errno for the bound
+    functions where possible.  Others take a table to fill in, or
+    may return tables.
+  * High-level wrapper library providing nice IO access and to misc.
+    utility functions.  Generates useful errors in assert()able form,
+    and provides meaningful __tostring metamethods to aid debugging.
+  * A high-level poll()-based event dispatch library.
+  * Sub-process handling library (read/write io.popen with job control).
+  * A prototype POSIX Message Queue-based IPC scheme that can serialise
+    most simple Lua values.  (No closures, userdata, etc)
+Lua-Versions: 5.1 5.2 5.3

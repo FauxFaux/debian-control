@@ -1,0 +1,39 @@
+Package: python3-gabbi
+Source: python-gabbi
+Version: 1.40.0-4
+Architecture: all
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 233
+Depends: python3-colorama, python3-httplib2, python3-jsonpath-rw, python3-pbr, python3-six (>= 1.7.0), python3-testtools, python3-wsgi-intercept (>= 1.0.0), python3-yaml, python3-jsonpath-rw-ext, python3-pytest, python3-urllib3, python3:any (>= 3.3.2-2~)
+Suggests: python-gabbi-doc
+Section: python
+Priority: optional
+Homepage: https://github.com/cdent/gabbi
+Description: declarative HTTP testing library - Python 3.x
+ Gabbi is a tool for running HTTP tests where requests and responses are
+ represented in a declarative form.
+ .
+ Gabbi works to bridge the gap between human readable YAML files that represent
+ HTTP requests and expected responses and the obscured realm of Python-based,
+ object-oriented unit tests in the style of the unittest module and its
+ derivatives.
+ .
+ Each YAML file represents an ordered list of HTTP requests along with the
+ expected responses. This allows a single file to represent a process in the
+ API being tested. For example:
+ .
+  * Create a resource.
+  * Retrieve a resource.
+  * Delete a resource.
+  * Retrieve a resource again to confirm it is gone.
+ .
+ At the same time it is still possible to ask gabbi to run just one request.
+ If it is in a sequence of tests, those tests prior to it in the YAML file will
+ be run (in order). In any single process any test will only be run once.
+ Concurrency is handled such that one file runs in one process.
+ .
+ These features mean that it is possible to create tests that are useful for
+ both humans (as tools for improving and developing APIs) and automated CI
+ systems.
+ .
+ This package contains the Python 3.x module.

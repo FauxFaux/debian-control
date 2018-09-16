@@ -1,0 +1,27 @@
+Package: python3-ffc
+Source: ffc
+Version: 2018.1.0-4
+Architecture: all
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 1493
+Depends: python3-fiat (>= 2018.1), python3-fiat (<< 2018.2~), python3-ufl (>= 2018.1), python3-ufl (<< 2018.2~), python3-dijitso (>= 2018.1), python3-dijitso (<< 2018.2~), python3-numpy, python3:any
+Conflicts: python-ffc (<< 2018.1~)
+Replaces: python-ffc
+Section: python
+Priority: optional
+Homepage: http://fenicsproject.org
+Description: compiler for finite element variational forms (Python 3)
+ The FEniCS Form Compiler FFC provides state-of-the-art automatic and
+ efficient evaluation of general multilinear forms (variational
+ formulations) for FEniCS. FFC functions as the form evaluation
+ system for DOLFIN but can also be used to compile forms for other
+ systems.
+ .
+ FFC works as a compiler for multilinear forms by generating code (C
+ or C++) for the evaluation of a multilinear form given in
+ mathematical notation. This new approach to form evaluation makes it
+ possible to combine generality with efficiency; the form can be given
+ in mathematical notation and the generated code is as efficient as
+ hand-optimized code.
+ .
+ This package installs the library for Python 3.

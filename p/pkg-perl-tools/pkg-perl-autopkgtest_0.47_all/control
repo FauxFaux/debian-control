@@ -1,0 +1,22 @@
+Package: pkg-perl-autopkgtest
+Source: pkg-perl-tools
+Version: 0.47
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 57
+Depends: perl
+Provides: pkg-perl-autopkgtest-heavy
+Section: devel
+Priority: optional
+Homepage: https://wiki.debian.org/Teams/DebianPerlGroup
+Description: collection of autopktest scripts for Perl packages
+ This package contains test runners to be used with the autopkgtest
+ infrastructure for perl packages.
+ .
+ Packages using the tests with autopkgtests in this package need to
+ depend on it in their debian/tests/control file, not in their
+ debian/control file, or can simply set "Testsuite: autopkgtest-pkg-perl"
+ in debian/control.
+ .
+ Cf. /usr/share/doc/pkg-perl-autopkgtest/README.autopkgtest for information on
+ the tests and how to tweak them.

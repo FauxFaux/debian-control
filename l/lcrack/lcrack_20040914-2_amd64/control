@@ -1,0 +1,26 @@
+Package: lcrack
+Version: 20040914-2
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 129
+Depends: libc6 (>= 2.4)
+Section: utils
+Priority: optional
+Homepage: http://usuarios.lycos.es/reinob/
+Description: A generic password cracker
+ Lepton's Crack is a generic password cracker, easily customizable with
+ a simple plug-in system. It can perform a dictionary-based (wordlist)
+ attack, as well as a brute-force (incremental) password scan.
+ .
+ For the incremental scan, the user can provide a regex-like expression
+ that will be enumerated, thus checking every possible combination. This
+ powerful feature effectively combines `shoulder-surfing' with standard
+ brute-forcing.
+ .
+ By default it comes with the following modules:
+        * md4  : standard MD4 hash
+        * md5  : standard MD5 hash
+        * nt4  : NT MD4/Unicode
+        * dom  : Lotus Domino HTTP password
+        * sha1 : standard SHA-1 hash
+        * null : trivial 1-byte hash

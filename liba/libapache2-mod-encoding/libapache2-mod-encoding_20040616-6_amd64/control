@@ -1,0 +1,20 @@
+Package: libapache2-mod-encoding
+Version: 20040616-6
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 37
+Depends: libc6 (>= 2.4), libiconv-hook1, apache2-api-20120211, apache2-bin (>= 2.4.16)
+Section: net
+Priority: optional
+Description: Apache2 module for non-ascii filename interoperability
+ This module improves non-ascii filename interoperability of
+ apache (and mod_dav).
+ .
+ It seems many WebDAV clients send filename in its platform-local
+ encoding. But since mod_dav expects everything, even HTTP request
+ line, to be in UTF-8, this causes an interoperability problem.
+ .
+ I believe this is a future issue for specification (RFC?) to
+ standardize encoding used in HTTP request-line and HTTP header,
+ but life would be much easier if mod_dav (and others) can handle
+ various encodings sent by clients, TODAY. This module does just that.

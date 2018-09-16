@@ -1,0 +1,25 @@
+Package: smarty-lexer
+Version: 3.1.32+dfsg1-2
+Architecture: all
+Maintainer: Mike Gabriel <sunweaver@debian.org>
+Installed-Size: 516
+Depends: php-common, php-cli, php-pear
+Section: web
+Priority: optional
+Homepage: https://github.com/smarty-php/smarty-lexer
+Description: Smarty Lexer/Parser generator
+ The smarty-lexer package is used to generate the lexer and
+ parser class files for Debian package smarty3.
+ .
+ To generate the template lexer and parser run
+ Create_Template_Parser.php. It will create
+ smarty_internal_templatelexer.php from
+ smarty_internal_templatelexer.plex smarty_internal_templateparser.php
+ from smarty_internal_templateparser.y
+ .
+ To generate the config file lexer and parser run
+ Create_Template_Parser.php. It will create
+ smarty_internal_configfilelexer.php from
+ smarty_internal_configfilelexer.plex
+ smarty_internal_configfileparser.php from
+ smarty_internal_configfileparser.y

@@ -1,0 +1,21 @@
+Package: golang-github-juju-errors-dev
+Source: golang-github-juju-errors
+Version: 0.0~git20170703.0.c7d06af-4
+Architecture: all
+Maintainer: QA Group <packages@qa.debian.org>
+Installed-Size: 73
+Depends: golang-gopkg-check.v1-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/juju/errors
+Description: Common juju errors and functions to annotate errors
+ The juju/errors library provides an easy way to annotate errors without
+ losing the original error context.
+ .
+ The exported 'New' and 'Errorf' functions are designed to replace the
+ 'errors.New' and 'fmt.Errorf' functions respectively. The same underlying
+ error is there, but the package also records the location at which the
+ error was created.
+ .
+ A primary use case for this library is to add extra context any time an error
+ is returned from a function.

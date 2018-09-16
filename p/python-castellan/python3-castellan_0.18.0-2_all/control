@@ -1,0 +1,19 @@
+Package: python3-castellan
+Source: python-castellan
+Version: 0.18.0-2
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 295
+Depends: python3-babel, python3-barbicanclient (>= 4.5.2), python3-cryptography (>= 2.1), python3-keystoneauth1 (>= 3.4.0), python3-oslo.config (>= 1:5.2.0), python3-oslo.context (>= 2.19.2), python3-oslo.i18n (>= 3.15.3), python3-oslo.log (>= 3.36.0), python3-oslo.utils (>= 3.33.0), python3-pbr (>= 2.0.0), python3-stevedore (>= 1.20.0), python3:any
+Suggests: python-castellan-doc
+Section: python
+Priority: optional
+Homepage: https://github.com/openstack/castellan
+Description: generic key manager interface for OpenStack - Python 3.x
+ The Castellan module provides a generic key manager interface so that
+ OpenStack projects can use Barbican, but also have the flexibilty to choose an
+ alternative Key Manager as needed. This is helpful during development, for
+ example, where a simple implementation of the Key Manager Interface can be
+ used instead of having to spin up a Barbican instance.
+ .
+ This package contains the Python 3.x module.

@@ -1,0 +1,25 @@
+Package: tinydyndns
+Source: tinydyndns (0.4.2.debian1-1)
+Version: 0.4.2.debian1-1+b2
+Architecture: amd64
+Maintainer: Gerrit Pape <pape@smarden.org>
+Installed-Size: 107
+Depends: libc6 (>= 2.2.5)
+Recommends: djbdns, mailfront, daemontools, ucspi-tcp, runit | daemontools-run, cvm, make
+Section: net
+Priority: optional
+Description: pop-before-dyndns service using djbdns
+ tinydyndns is a simple but powerful dynamic DNS solution that uses
+ djbdns.  It cooperates with the djbdns package to publish dynamic IP
+ addresses authenticated through POP connections.  On successfully
+ authenticated POP connections, the tinydyndns-update program manipulates
+ tinydns' constant database "data.cdb" directly without rebuilding it;
+ this makes the dynamic DNS solution use very few system resources.
+ .
+ Using a POP service for authentication saves the work for installing
+ special client software, since POP clients are available for every
+ common network-aware operating system.  To provide the DNS and POP
+ services, tinydyndns cooperates with djbdns, mailfront, and cvm.
+ .
+ The POP service can easily be replaced with other services that provide
+ authentication, such as APOP, IMAPS, ...

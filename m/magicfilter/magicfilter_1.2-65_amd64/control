@@ -1,0 +1,22 @@
+Package: magicfilter
+Version: 1.2-65
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 482
+Depends: libc6 (>= 2.3)
+Recommends: bzip2, djtools, enscript | a2ps, ghostscript, lpr | lprng, poppler-utils | xpdf-utils, recode
+Suggests: groff, libjpeg-progs, libtiff-tools, netpbm, texlive, transfig
+Conflicts: apsfilter, printfilters-ppd
+Section: text
+Priority: optional
+Homepage: http://www.ibiblio.org/pub/linux/system/printing/magicfilter-1.2.lsm
+Description: automatic printer filter
+ Magicfilter is a customizable, extensible automatic printer filter.
+ .
+ It translates the files that you send to a printer to a "language" that
+ your printer can "understand". To accomplish this goal, it determines
+ the type of the file that is to be printed and uses its "knowledge" to
+ convert the file to something that is printable.
+ .
+ This is done by use of magicfilter's own magic database (a la file(1))
+ to decide how to print out a given print job.

@@ -1,0 +1,31 @@
+Package: python3-scruffy
+Source: python-scruffy
+Version: 0.3.3-1.1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 54
+Depends: python3-six, python3-yaml, python3:any (>= 3.3.2-2~), python3-pkg-resources
+Section: python
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/snare/scruffy
+Description: framework for taking care of a bunch of boilerplate in Python3 apps
+ Scruffy is a framework for taking care of a bunch of boilerplate in
+ Python apps. It handles the loading of configuration files, the loading
+ and management of plugins, and the management of other filesystem
+ resources such as temporary files and directories, log files, etc.
+ .
+ A typical use case for Scruffy is a command-line Python tool with some
+ or all of the following requirements:
+ .
+  * Read a set of configuration defaults
+  * Read a local configuration file and apply it on top of the defaults
+  * Allow overriding some configuration options with command line flags
+    or at runtime
+  * Load a core set of Python-based plugins
+  * Load a set of user-defined Python-based plugins
+  * Generate log files whose name, location and other logging settings
+    are based on configuration
+  * Store application state between runs in a file or database
+ .
+ This package installs the library for Python 3.

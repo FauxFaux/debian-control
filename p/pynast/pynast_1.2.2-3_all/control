@@ -1,0 +1,27 @@
+Package: pynast
+Version: 1.2.2-3
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 301
+Depends: python (<< 2.8), python (>= 2.7), python:any (>= 2.6.6-7~), libjs-jquery, libjs-underscore
+Recommends: blast2, clustalw, mafft, muscle, python-mpi4py
+Suggests: uclust
+Conflicts: python-pynast
+Replaces: python-pynast
+Provides: python-pynast
+Section: python
+Priority: optional
+Homepage: https://github.com/biocore/pynast
+Description: alignment of short DNA sequences
+ The package provices a reimplementation of the Nearest Alignment
+ Space Termination tool in Python. It was prepared for next generation
+ sequencers.
+ .
+ Given a set of sequences and a template alignment, PyNAST will align the
+ input sequences against the template alignment, and return a multiple
+ sequence alignment which contains the same number of positions (or
+ columns) as the template alignment. This facilitates the analysis of new
+ sequences in the context of existing alignments, and additional data
+ derived from existing alignments such as phylogenetic trees. Because
+ any protein or nucleic acid sequences and template alignments can be
+ provided, PyNAST is not limited to the analysis of 16s rDNA sequences.

@@ -1,0 +1,53 @@
+Package: fasta3
+Version: 36.3.8g-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 5653
+Depends: libc6 (>= 2.14), zlib1g (>= 1:1.1.4)
+Section: non-free/science
+Priority: optional
+Homepage: http://fasta.bioch.virginia.edu
+Description: tools for searching collections of biological sequences
+ The FASTA programs find regions of local or global similarity between
+ Protein or DNA sequences, either by searching Protein or DNA databases,
+ or by identifying local duplications within a sequence. Other
+ programs provide information on the statistical significance of an
+ alignment. Like BLAST, FASTA can be used to infer functional and
+ evolutionary relationships between sequences as well as help identify
+ members of gene families.
+ .
+  * Protein
+ .
+  - Protein-protein FASTA
+  - Protein-protein Smith-Waterman (ssearch)
+  - Global Protein-protein (Needleman-Wunsch) (ggsearch)
+  - Global/Local protein-protein (glsearch)
+  - Protein-protein with unordered peptides (fasts)
+  - Protein-protein with mixed peptide sequences (fastf)
+ .
+  * Nucleotide
+ .
+  - Nucleotide-Nucleotide (DNA/RNA fasta)
+  - Ordered Nucleotides vs Nucleotide (fastm)
+  - Un-ordered Nucleotides vs Nucleotide (fasts)
+ .
+  * Translated
+ .
+  - Translated DNA (with frameshifts, e.g. ESTs)
+    vs Proteins (fastx/fasty)
+  - Protein vs Translated DNA (with frameshifts)
+    (tfastx/tfasty)
+  - Peptides vs Translated DNA (tfasts)
+ .
+  * Statistical Significance
+ .
+  - Protein vs Protein shuffle (prss)
+  - DNA vs DNA shuffle (prss)
+  - Translated DNA vs Protein shuffle (prfx)
+ .
+  * Local Duplications
+ .
+  - Local Protein alignments (lalign)
+  - Plot Protein alignment "dot-plot" (plalign)
+  - Local DNA alignments (lalign)
+  - Plot DNA alignment "dot-plot" (plalign)

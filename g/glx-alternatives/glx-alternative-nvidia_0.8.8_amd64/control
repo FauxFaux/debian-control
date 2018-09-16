@@ -1,0 +1,23 @@
+Package: glx-alternative-nvidia
+Source: glx-alternatives
+Version: 0.8.8
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 47
+Pre-Depends: dpkg (>= 1.17.21)
+Depends: update-glx (= 0.8.8), glx-diversions (= 0.8.8), glx-alternative-mesa
+Suggests: nvidia-driver
+Breaks: bumblebee-nvidia (<< 3.2.1-10~), nvidia-alternative (<< 390.67-3~), nvidia-alternative-legacy-173xx (<< 304), nvidia-alternative-legacy-71xx (<< 304), nvidia-alternative-legacy-96xx (<< 304), nvidia-legacy-304xx-alternative (<< 304.132-1~), nvidia-legacy-340xx-alternative (<< 340.93-2~)
+Section: contrib/libs
+Priority: optional
+Multi-Arch: foreign
+Description: allows the selection of NVIDIA as GLX provider
+ In setups with several GLX providers (e.g. the free MESA implementation and
+ proprietary graphics hardware vendor implementations) this metapackage
+ allows one to switch to the non-free NVIDIA driver and libraries.
+ .
+ Use 'update-glx --config glx' to select an implementation.
+ .
+ This package does not depend on the corresponding NVIDIA libraries.
+ In order to install the NVIDIA driver and libraries, install the
+ nvidia-driver package instead.

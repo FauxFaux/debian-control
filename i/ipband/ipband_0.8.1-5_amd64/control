@@ -1,0 +1,17 @@
+Package: ipband
+Version: 0.8.1-5
+Architecture: amd64
+Maintainer: Mats Erik Andersson <mats.andersson@gisladisker.se>
+Installed-Size: 83
+Depends: exim4 | mail-transport-agent, lsb-base (>= 3.0-6), libc6 (>= 2.15), libpcap0.8 (>= 0.9.8)
+Section: net
+Priority: optional
+Homepage: http://ipband.sourceforge.net/
+Description: daemon for subnet bandwidth monitoring with reporting via email
+ This is a daemon which can monitor as many different subnets (or individual
+ hosts, by specifying a "subnet" of /32) as you'd like. The reporting facility
+ will only be triggered when a defined bandwidth level had been exceeded for a
+ defined time.
+ .
+ Information reported includes the connections which are taking up the most
+ bandwidth (ip address and port pairs). Reporting is done via email.

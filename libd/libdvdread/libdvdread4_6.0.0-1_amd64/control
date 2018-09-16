@@ -1,0 +1,21 @@
+Package: libdvdread4
+Source: libdvdread
+Version: 6.0.0-1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 175
+Depends: libc6 (>= 2.14)
+Recommends: libdvdnav4
+Suggests: libdvdcss2
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://dvdnav.mplayerhq.hu/
+Description: library for reading DVDs
+ libdvdread provides the functionality that is required to access many DVDs. It
+ parses IFO files, reads NAV-blocks, and performs CSS authentication and
+ descrambling.
+ .
+ libdvdread probes for libdvdcss at runtime and if found, will use it to
+ decrypt sections of the DVD as necessary. libdvdcss needs to be installed from
+ third-party repositories (see README.css), it's not included in Debian.

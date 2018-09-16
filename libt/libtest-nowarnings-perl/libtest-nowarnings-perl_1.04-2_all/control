@@ -1,0 +1,23 @@
+Package: libtest-nowarnings-perl
+Version: 1.04-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 30
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-NoWarnings
+Description: module to make sure you didn't emit any warnings while testing
+ In general, your tests shouldn't produce warnings. This module causes any
+ warnings to be captured and stored. It automatically adds an extra test that
+ will run when your script ends to check that there were no warnings. If there
+ were any warnings, the test will give a "not ok" and diagnostics of where, when
+ and what the warning was, including a stack trace of what was going on when
+ it occurred.
+ .
+ If some of your tests are supposed to produce warnings then you should be
+ capturing and checking them with Test::Warn, that way Test::NoWarnings will
+ not see them and so not complain.
+ .
+ The test is run by an END block in Test::NoWarnings. It will not be run when
+ any forked children exit.

@@ -1,0 +1,38 @@
+Package: python-storm-dbg
+Source: storm
+Version: 0.19-2
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 165
+Depends: python-storm (= 0.19-2), python-dbg (<< 2.8), python-dbg (>= 2.7~), python-dbg:any (<< 2.8), python-dbg:any (>= 2.7~), libc6 (>= 2.4)
+Suggests: python-psycopg2 | python-mysqldb | python-pysqlite2
+Section: debug
+Priority: optional
+Homepage: http://storm.canonical.com/
+Description: object-relational mapper (ORM) for Python - debugging files
+ Storm is an object-relation mapper (ORM) for the Python language. In
+ simple terms, that kind of system allows rows from a relational
+ database to be seen as objects in an object-oriented language like
+ Python.
+ .
+ Features:
+  * Clean and lightweight API offers a short learning curve and long-
+    erm maintainability.
+  * Storm is developed in a test-driven manner. An untested line of
+    code is considered a bug.
+  * Storm needs no special class constructors, nor imperative base
+    classes.
+  * Storm is well designed (different classes have very clear
+    boundaries, with small and clean public APIs).
+  * Designed from day one to work both with thin relational databases,
+    such as SQLite, and big iron systems like PostgreSQL and MySQL.
+  * Storm is easy to debug, since its code is written with a KISS
+    principle, and thus is easy to understand.
+  * Designed from day one to work both at the low end, with trivial
+    small databases, and the high end, with applications accessing
+    billion row tables and committing to multiple database backends.
+  * It's very easy to write and support backends for Storm (current
+    backends have around 100 lines of code).
+ .
+ This package contains the extension built for the Python debug interpreter.
+Build-Ids: 631627d949e76721a07ed51214e5c89cd72e90c1 6e4bce552a966d69743aa4e80a1af644d4f1e0db

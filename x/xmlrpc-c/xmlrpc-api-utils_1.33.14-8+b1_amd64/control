@@ -1,0 +1,23 @@
+Package: xmlrpc-api-utils
+Source: xmlrpc-c (1.33.14-8)
+Version: 1.33.14-8+b1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 88
+Depends: libc6-dev, libfrontier-rpc-perl, libxmlrpc-c++8v5 (= 1.33.14-8+b1), libxmlrpc-core-c3 (= 1.33.14-8+b1), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Conflicts: xml-rpc-api2cpp, xml-rpc-api2txt
+Replaces: xml-rpc-api2cpp, xml-rpc-api2txt
+Provides: xml-rpc-api2cpp, xml-rpc-api2txt
+Section: devel
+Priority: optional
+Homepage: http://xmlrpc-c.sourceforge.net
+Description: Generate C++ wrapper classes for XML-RPC servers
+ XML-RPC is a quick-and-easy way to make procedure calls over the Internet.
+ It converts the procedure call into an XML document, sends it to a remote
+ server using HTTP, and gets back the response as XML.
+ .
+ This package contains two programs:
+  * xml-rpc-api2cpp, a utility for generating C++ wrapper classes based
+    on an XML-RPC API, obtained by interrogating an XML-RPC server.
+  * xml-rpc-api2txt, a utility for printing out an XML-RPC API as a
+    text file.  The API is obtained by interrogating an XML-RPC server.

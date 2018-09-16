@@ -1,0 +1,24 @@
+Package: uw-mailutils
+Source: uw-imap
+Version: 8:2007f~dfsg-5
+Architecture: amd64
+Maintainer: Magnus Holmgren <holmgren@debian.org>
+Installed-Size: 133
+Depends: libc-client2007e, libc6 (>= 2.2.5), libcomerr2 (>= 1.01), libgssapi-krb5-2 (>= 1.6.dfsg.2), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.6.dfsg.2), libpam0g (>= 0.99.7.1), libssl1.1 (>= 1.1.0)
+Section: mail
+Priority: optional
+Homepage: http://www.washington.edu/imap/
+Description: c-client support programs
+ IMAP (Internet Message Access Protocol) is a method of accessing
+ electronic messages kept on a (possibly shared) mail server.
+ .
+ The UW (University of Washington) IMAP toolkit provides the c-client
+ mail-handling library supporting various network transport methods,
+ file system storage formats, and authentication and authorization
+ methods.
+ .
+ This package contains helper tools for the libc-client library:
+  - mailutil: utility program which helps manage email mailboxes (both
+              local and IMAP/POP3/NNTP);
+  - dmail:    MDA (Mail Delivery Agent) for use with procmail;
+  - tmail:    MDA for use with the system mailer (such as Sendmail or Postfix).

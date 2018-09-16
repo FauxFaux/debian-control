@@ -1,0 +1,24 @@
+Package: gdbmtool
+Source: gdbm (1.14.1-6)
+Version: 1.14.1-6+b1
+Architecture: amd64
+Maintainer: Dmitry Bogatov <KAction@gnu.org>
+Installed-Size: 199
+Depends: libc6 (>= 2.14), libgdbm5 (>= 1.14), libncurses6 (>= 6), libreadline7 (>= 6.0), libtinfo6 (>= 6)
+Suggests: gdbm-l10n (= 1.14.1-6)
+Section: utils
+Priority: optional
+Homepage: https://gnu.org/software/gdbm
+Description: GNU dbm database routines (command line tools) 
+ GNU dbm ('gdbm') is a library of database functions that use extendible
+ hashing and works similarly to the standard UNIX 'dbm' functions.
+ .
+ The basic use of 'gdbm' is to store key/data pairs in a data file, thus
+ providing a persistent version of the 'dictionary' Abstract Data Type
+ ('hash' to perl programmers).
+ .
+ This package includes following command line tools:
+ .
+  * gdbm_dump -- dump database content into system-independant format
+  * gdbm_load -- recreate database from dump, created by gdbm_dump
+  * gdbmtool -- view and modify an existing database or to create a new one.

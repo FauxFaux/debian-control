@@ -1,0 +1,16 @@
+Package: yrmcds
+Version: 1.1.8-1.1
+Architecture: amd64
+Maintainer: Kouhei Maeda <mkouhei@palmtb.net>
+Installed-Size: 393
+Depends: libatomic1 (>= 4.8), libc6 (>= 2.24), libgcc1 (>= 1:3.0), libstdc++6 (>= 6), libtcmalloc-minimal4, adduser, logrotate, libgoogle-perftools4
+Recommends: keepalived
+Section: web
+Priority: optional
+Homepage: http://cybozu.github.io/yrmcds/
+Description: memcached compatible KVS with master/slave replication
+ yrmcds is a memory object caching system with master/slave replication and
+ server-side locking. Since its protocol is perfectly compatible with that of
+ memcached, yrmcds can be used as a drop-in replacement for memcached.
+ .
+ A companion client library libyrmcds and a PHP extension are also available.

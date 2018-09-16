@@ -1,0 +1,17 @@
+Package: pd-ableton-link
+Version: 0.4~repack-1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 441
+Depends: libc6 (>= 2.17), libgcc1 (>= 1:3.0), libstdc++6 (>= 6)
+Built-Using: ableton-link (= 3.0.1+dfsg-1)
+Section: sound
+Priority: optional
+Homepage: https://www.ableton.com/en/link/
+Description: integration of Ableton Link into Pure Data
+ [abl_link~] is a Pd object that integrates Ableton Link into Pure Data (Pd). It
+ has four outlets, which emit the index of the current step (at the beginning of
+ each step), the current phase and beat time on each DSP tick, as well as the
+ tempo on tempo changes. Phase and beat time are Link concepts. The purpose of
+ the step feature is to generate events in Pd at a given rate (measured in steps
+ per beat).

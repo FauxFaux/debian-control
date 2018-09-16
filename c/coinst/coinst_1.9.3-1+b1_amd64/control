@@ -1,0 +1,25 @@
+Package: coinst
+Source: coinst (1.9.3-1)
+Version: 1.9.3-1+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 5825
+Depends: libc6 (>= 2.14)
+Recommends: coinst-viewer, dot
+Section: devel
+Priority: extra
+Homepage: http://coinst.irill.org
+Description: computes the co-installability kernel of a deb or RPM repository
+ This package is useful when you are interested in analyzing
+ co-installability of packages in a large package repository.  A set
+ of packages is called co-installable if it can be extended to a set
+ that satisfies all inter-package relations (dependencies, conflicts,
+ etc.).
+ .
+ This tool reduces a repository to a much smaller one, its so-called
+ co-installability  kernel, that behaves exactly the same as far as
+ co-installability of package is concerned. This is achieved by
+ - dropping all relations that are not relevant for this purpose
+ - identifying all packages that behave the same.
+ The kernel is typically orders of magnitude smaller than the original
+ repository.

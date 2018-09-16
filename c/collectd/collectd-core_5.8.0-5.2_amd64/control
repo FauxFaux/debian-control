@@ -1,0 +1,160 @@
+Package: collectd-core
+Source: collectd
+Version: 5.8.0-5.2
+Architecture: amd64
+Maintainer: Sebastian Harl <tokkee@debian.org>
+Installed-Size: 5079
+Depends: libc6 (>= 2.17), libcap2 (>= 1:2.10), debconf (>= 0.5) | debconf-2.0, lsb-base
+Recommends: perl, rrdtool
+Suggests: collectd-dev, librrds-perl, liburi-perl, libhtml-parser-perl, libregexp-common-perl, libconfig-general-perl, httpd-cgi, apache2, apcupsd, bind9, ceph, chrony, default-mysql-server, gpsd, hddtemp, iptables, ipvsadm, lm-sensors, mbmon, memcached, nginx, notification-daemon, nut, openvpn, olsrd, pdns-server, postgresql, redis-server, slapd, time-daemon, varnish, zookeeper, intel-cmt-cat, libatasmart4 (>= 0.13), libcurl3-gnutls (>= 7.16.2), libdbi1 (>= 0.9.0), libesmtp6, libganglia1, libgcc1 (>= 1:3.0), libgcrypt20 (>= 1.8.0), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.16.0), libgps23 (>= 3.3), libgrpc++1, libhiredis0.13 (>= 0.13.1), libi2c0, libip4tc0 (>= 1.6.0+snapshot20161117), libip6tc0 (>= 1.6.0+snapshot20161117), libldap-2.4-2 (>= 2.4.7), liblua5.3-0, liblvm2app2.2 (>= 2.02.176), libmariadbclient18 (>= 10.1.28), libmemcached11, libmicrohttpd12 (>= 0.9.50), libmnl0 (>= 1.0.3-4~), libmodbus5 (>= 3.0.2), libmosquitto1 (>= 1.2), libnotify4 (>= 0.7.0), libnspr4 (>= 2:4.9-2~), libnss3 (>= 2:3.13.4-2~), libopenipmi0, liboping0 (>= 0.3.3), libowcapi-3.1-5, libpcap0.8 (>= 1.0.0), libperl5.26 (>= 5.26.0~rc1), libpq5, libprotobuf-c1 (>= 1.0.1), libprotobuf10, libpython2.7 (>= 2.7), librabbitmq4 (>= 0.6.0), librdkafka1 (>= 0.9.1), libriemann-client0 (>= 1.8.0), librrd8 (>= 1.4~rc2), librte-acl17.11 (>= 16.04), librte-bitratestats17.11 (>= 17.05), librte-bus-pci17.11 (>= 17.11), librte-bus-vdev17.11 (>= 17.11), librte-cfgfile17.11 (>= 16.04), librte-cmdline17.11 (>= 16.04), librte-cryptodev17.11 (>= 16.04), librte-distributor17.11 (>= 16.04), librte-eal17.11 (>= 16.04), librte-efd17.11 (>= 17.05), librte-ethdev17.11 (>= 16.07~rc1), librte-eventdev17.11 (>= 17.05), librte-flow-classify17.11 (>= 17.11), librte-gro17.11, librte-gso17.11 (>= 17.11), librte-hash17.11 (>= 16.04), librte-ip-frag17.11 (>= 16.04), librte-jobstats17.11 (>= 16.04), librte-kni17.11 (>= 16.04), librte-kvargs17.11 (>= 16.04), librte-latencystats17.11 (>= 17.05), librte-lpm17.11 (>= 16.04), librte-mbuf17.11 (>= 16.04), librte-member17.11 (>= 17.11), librte-mempool-octeontx17.11 (>= 17.11), librte-mempool-ring17.11 (>= 17.05), librte-mempool-stack17.11 (>= 17.05), librte-mempool17.11 (>= 16.07~rc1), librte-meter17.11 (>= 16.04), librte-metrics17.11 (>= 17.05), librte-net17.11 (>= 16.11), librte-pci17.11 (>= 17.11), librte-pdump17.11 (>= 16.07~rc1), librte-pipeline17.11 (>= 16.04), librte-pmd-af-packet17.11 (>= 16.04), librte-pmd-ark17.11 (>= 17.05), librte-pmd-avp17.11 (>= 17.05), librte-pmd-bnxt17.11 (>= 17.08), librte-pmd-bond17.11 (>= 16.04), librte-pmd-crypto-scheduler17.11 (>= 17.05), librte-pmd-cxgbe17.11 (>= 16.04), librte-pmd-e1000-17.11 (>= 16.04), librte-pmd-ena17.11 (>= 16.04), librte-pmd-enic17.11 (>= 16.04), librte-pmd-failsafe17.11, librte-pmd-fm10k17.11 (>= 16.04), librte-pmd-i40e17.11 (>= 16.04), librte-pmd-ixgbe17.11 (>= 16.04), librte-pmd-kni17.11 (>= 17.05), librte-pmd-lio17.11 (>= 17.05), librte-pmd-mlx4-17.11 (>= 17.11), librte-pmd-mlx5-17.11 (>= 17.11.3), librte-pmd-nfp17.11 (>= 17.05), librte-pmd-null-crypto17.11 (>= 16.04), librte-pmd-null17.11 (>= 16.04), librte-pmd-octeontx-ssovf17.11 (>= 17.05), librte-pmd-octeontx17.11, librte-pmd-pcap17.11 (>= 16.04), librte-pmd-qede17.11 (>= 16.11), librte-pmd-ring17.11 (>= 16.04), librte-pmd-sfc-efx17.11 (>= 17.05), librte-pmd-skeleton-event17.11 (>= 17.05), librte-pmd-softnic17.11 (>= 17.11), librte-pmd-sw-event17.11 (>= 17.05), librte-pmd-tap17.11 (>= 17.05), librte-pmd-thunderx-nicvf17.11 (>= 17.05), librte-pmd-vhost17.11 (>= 16.04), librte-pmd-virtio17.11 (>= 16.04), librte-pmd-vmxnet3-uio17.11 (>= 16.04), librte-port17.11 (>= 16.07~rc1), librte-power17.11 (>= 16.04), librte-reorder17.11 (>= 16.04), librte-ring17.11 (>= 16.04), librte-sched17.11 (>= 16.04), librte-security17.11 (>= 17.11), librte-table17.11 (>= 17.11), librte-timer17.11 (>= 16.04), librte-vhost17.11 (>= 16.07~rc1), libsensors4 (>= 1:3.0.0), libsnmp30 (>= 5.7.3+dfsg-3~dfsg), libstdc++6 (>= 5.2), libtokyotyrant3, libudev1 (>= 183), libupsclient4 (>= 2.7.2), libvirt0 (>= 1.2.11~rc1), libxen-4.8 (>= 4.8.3+xsa267+shim4.10.1+xsa267), libxml2 (>= 2.7.4), libyajl2 (>= 2.0.4), zlib1g (>= 1:1.1.4), default-jre-headless
+Replaces: collectd (<< 4.8.2-1~)
+Section: utils
+Priority: optional
+Homepage: https://collectd.org/
+Description: statistics collection and monitoring daemon (core system)
+ collectd is a small daemon which collects system information periodically and
+ provides mechanisms to monitor and store the values in a variety of ways.
+ Since the daemon doesn't need to startup every time it wants to update the
+ values it's very fast and easy on the system. Also, the statistics are very
+ fine grained since the files are updated every 10 seconds by default.
+ .
+ The collected information can be used to find current performance bottlenecks
+ (performance analysis) and predict future system load (capacity planning).
+ .
+ This package contains the main program file and the plugins listed below (some
+ of those plugins require additional libraries - for more details see
+ /usr/share/doc/collectd-core/README.Debian.plugins) but no configuration. For
+ a full installation (including configuration), see the "collectd" package.
+ This package allows sites to, e.g., provide customizations (like a custom
+ default configuration) on top of it without having to modify the "collectd"
+ package.
+ .
+   * AMQP output plugin: amqp
+   * Apache and lighttpd statistics provided by mod_status: apache
+   * APC UPS's charge, load, input/output/battery voltage, etc.: apcups
+   * Ascent server statistics: ascent
+   * Bosch and Freescale barometers: barometer
+   * battery status: battery
+   * bind9 name-server and zone statistics: bind
+   * Ceph distributed storage system statitics: ceph
+   * CGroups resource usage: cgroups
+   * Chrony daemon statistics: Local clock drift, offset to peers: chrony
+   * connection tracking table size: conntrack
+   * number of context switches done by the operating system: contextswitch
+   * CPU utilization: cpu
+   * CPU frequency: cpufreq
+   * CPU sleep: Time spent in suspend : cpusleep
+   * output to comma separated values (CSV) files: csv
+   * parse statistics from websites: curl
+   * parse JSON files: curl_json
+   * parse XML data: curl_xml
+   * query data from a relational database: dbi
+   * disk space usage: df
+   * disk and partition throughput: disk
+   * DNS traffic information: dns
+   * DPDK link status and keep alive events: dpdkevents
+   * DPDK interface statistics: dpdkstat
+   * Distributed Replicated Block Device status: drbd
+   * E-Mail statistics (count, traffic, spam scores and checks): email
+   * amount of available entropy: entropy
+   * execution of external programs: exec
+   * count the number of open file handles: fhcount
+   * count the number of files in directories: filecount
+   * Linux file-system based caching framework statistics: fscache
+   * Monitor gps related data through gpsd: gps
+   * Send or receive values over the network using the gRPC framework: grpc
+   * query data from Java processes using JMX: GenericJMX (Java based plugin)
+   * receive and interpret Ganglia multicast traffic: gmond
+   * harddisk temperature: hddtemp
+   * Report the number of used and free hugepages: hugepages
+   * Intel Resource Director Technology statistics: intel_rdt
+   * network traffic: interface
+   * IPC statistics: ipc
+   * IPMI sensors information: ipmi
+   * iptables statistics: iptables
+   * IPVS connection statistics: ipvs
+   * IRQ counters: irq
+   * embedded Java Virtual Machine: java
+   * system load averages: load
+   * logging to files, STDOUT and STDERR: logfile
+   * logging in logstash's JSON event format: log_logstash
+   * embedded Lua interpreter: lua
+   * Logical Volume Manager usage: lvm
+   * Machine Check Exceptions notifications: mcelog
+   * Atheros wireless LAN chipset statistics: madwifi
+   * motherboard monitor: mbmon
+   * query and parse data from a memcache daemon: memcachec
+   * statistics of the memcached distributed caching system: memcached
+   * memory usage: memory
+   * read values from Modbus/TCP enabled devices: modbus
+   * statistics from mon.itor.us: Monitorus (Perl based plugin)
+   * Publishes and subscribes to MQTT topics: mqtt
+   * multimeter statistics: multimeter
+   * MySQL statistics provided by MySQL's "show status" command: mysql
+   * detailed Linux network interface and routing statistics: netlink
+   * IO via the network: network
+   * NFS utilization: nfs
+   * Nginx (a HTTP and E-Mail server/proxy) statistics: nginx
+   * send desktop notifications to a notification daemon: notify_desktop
+   * send notification E-mails: notify_email
+   * send notifications to nagios: notify_nagios
+   * NTP daemon's local clock drift, offset to peers, etc.: ntpd
+   * UPS information: nut
+   * Optimized Link State Routing daemon statistics: olsrd
+   * OpenLDAP's cn=Monitor statistics: openldap
+   * OpenVPN traffic and compression statistics: openvpn
+   * OpenVZ statistics: OpenVZ (Perl based plugin)
+   * Open vSwitch link state events: ovs_events
+   * Open vSwitch bridge / interface statistics: ovs_stats
+   * embedded Perl interpreter: perl
+   * timing values from Pinba: pinba
+   * network latency statistics: ping
+   * PostgreSQL database statistics: postgresql
+   * PowerDNS name server statistics: powerdns
+   * number of processes: processes
+   * information about network protocols: protocols
+   * embedded Python interpreter: python
+   * Redis server statistics: redis
+   * write data via the RRD accelerator daemon: rrdcached
+   * output to RRD files: rrdtool
+   * lm_sensors information (e.g. CPU temperature, fan speeds): sensors
+   * serial port traffic: serial
+   * values from SNMP enabled network devices: snmp
+   * receive and handle queries from SNMP master agent: snmp_agent
+   * aggregate values received with the StatsD protocol: statsd
+   * SMART statistics: smart
+   * swap usage: swap
+   * Linux synproxy statistics: synproxy
+   * logging to syslog: syslog
+   * parse table-like structured files: table
+   * incremental parsing of logfiles: tail
+   * incremental parsing of CSV files: tail_csv
+   * number of TCP connections to specific ports: tcpconns
+   * TeamSpeak2 server statistics: teamspeak2
+   * power consumption measurements from "The Energy Detective" (TED): ted
+   * Linux ACPI thermal zone information: thermal
+   * check thresholds and for missing values: threshold
+   * statistics from Intel turbo-capable processors: turbostat
+   * Tokyo Tyrant server statistics: tokyotyrant
+   * external runtime interface: unixsock
+   * system uptime: uptime
+   * number of users logged into the system: users
+   * set the hostname to an unique identifier: uuid
+   * Varnish HTTP accelerator daemon statistics: varnish
+   * CPU, disk, network statistics of guest systems: virt
+   * detailed virtual memory statistics: vmem
+   * system resources used by Linux-VServers: vserver
+   * wireless network stats: wireless
+   * send collected values to a graphite server: write_graphite
+   * send collected values to a web-server: write_http
+   * send collected values to an Apache Kafka message broker: write_kafka
+   * send collected values to the logging subsystem: write_log
+   * send collected values to MongoDB, a NoSQL database: write_mongodb
+   * publish collected values as a Prometheus exporter: write_prometheus
+   * send collected values to a Redis server: write_redis
+   * send collected values to a Riemann server: write_riemann
+   * send collected values to a Sensu client: write_sensu
+   * send collected values to an OpenTSDB server: write_tsdb
+   * XEN Hypervisor CPU stats: xencpu
+   * ZFS's Adaptive Replacement Cache statistics: zfs_arc
+   * data from Zookeeper's MNTR command: zookeeper

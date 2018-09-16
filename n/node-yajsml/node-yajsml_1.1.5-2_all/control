@@ -1,0 +1,25 @@
+Package: node-yajsml
+Version: 1.1.5-2
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 114
+Depends: nodejs (>= 0.6.19~dfsg1-3~)
+Suggests: libjs-jquery, libjs-underscore
+Section: web
+Priority: extra
+Homepage: https://github.com/cweider/yajsml
+Description: Yet another (Common)JS module loader
+ Yajsml is a server-side component that allows JavaScript code to be
+ distributed in a reliable and performant way. Its three features are:
+ .
+   - Proxy pass through for individual resource requests.
+   - Bulk responses for requests of closely associated resources
+     (e.g. dependencies) when a request specifies a JSONP-style callback.
+   - Canonical packaged resources where requests for disparate resources
+     may be fulfilled through a redirect to one canonical packaged resource
+     (which exploits warmed caches).
+ .
+ The tool’s interface is simple enough that there is no need for a prescribed
+ implementation on the client-side. That said, the require-kernel is a terse
+ implementation of a CommonJS module manager that can use all the features in
+ yajsml.

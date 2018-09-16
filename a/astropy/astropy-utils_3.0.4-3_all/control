@@ -1,0 +1,28 @@
+Package: astropy-utils
+Source: astropy
+Version: 3.0.4-3
+Architecture: all
+Maintainer: Debian Astronomy Maintainers <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 49
+Depends: python3-astropy (<< 3.0.4-3.1~), python3-astropy (>= 3.0.4-3), python3-pkg-resources, python3:any (>= 3.5~)
+Breaks: fitscheck (<< 1:3.1.2-1~), pyfits-utils (<< 1:3.3-4~), python-pyfits (<< 1:3.0.7-4~)
+Replaces: fitscheck (<< 1:3.1.2-1~), pyfits-utils (<< 1:3.3-4~), python-pyfits (<< 1:3.0.7-4~)
+Section: science
+Priority: optional
+Homepage: https://astropy.org
+Description: Command line tools from astropy
+ The astropy package contains core functionality and some common tools
+ needed for performing astronomy and astrophysics research with Python.
+ .
+ This package contains the tools that come with astropy:
+ .
+  * fitscheck: Detect and fix FITS standards violations
+  * fits2bitmap: Create a bitmap file from a FITS image.
+  * fitsdiff: Compare two FITS image files and report the differences in
+    header keywords and data.
+  * fitsheader: Print the header(s) of one or more FITS file(s) to the
+    standard output in a human-readable format.
+  * samp_hub: SAMP Hub Server.
+  * volint: Check a VOTable file for compliance to the VOTable specification
+  * wcslint: Check the WCS keywords in a FITS file for compliance against
+    the standards

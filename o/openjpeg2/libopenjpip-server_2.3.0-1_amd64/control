@@ -1,0 +1,27 @@
+Package: libopenjpip-server
+Source: openjpeg2
+Version: 2.3.0-1
+Architecture: amd64
+Maintainer: Debian PhotoTools Maintainers <pkg-phototools-devel@lists.alioth.debian.org>
+Installed-Size: 154
+Depends: libwww-perl, spawn-fcgi (>= 1.6.1), libc6 (>= 2.14), libcurl3-gnutls (>= 7.16.2), libfcgi0ldbl
+Recommends: apache2 (>= 2.4.6-4~) | httpd
+Conflicts: openjpip-server
+Section: graphics
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.openjpeg.org
+Description: JPIP server for JPEG 2000 files
+ OpenJPIP software is an implementation of JPEG 2000 Part9: Interactivity tools,
+ APIs and protocols (JPIP). For more info about JPIP, check the website:
+ http://www.jpeg.org/jpeg2000/j2kpart9.html. The current implementation uses
+ some results from the 2KAN project (http://www.2kan.org).
+ .
+ First Version covers:
+ .
+  - JPT-stream (Tile based) and JPP-stream (Precinct based) media types
+  - Session, channels, cache model managements
+  - JPIP over HTTP
+  - Indexing JPEG 2000 files
+  - Embedding XML formatted metadata
+  - Region Of Interest (ROI) requests

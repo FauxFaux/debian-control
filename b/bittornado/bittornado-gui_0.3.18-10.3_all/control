@@ -1,0 +1,33 @@
+Package: bittornado-gui
+Source: bittornado
+Version: 0.3.18-10.3
+Architecture: all
+Maintainer: Cameron Dale <camrdale@gmail.com>
+Installed-Size: 157
+Depends: python:any, bittornado (= 0.3.18-10.3), python-wxgtk3.0
+Recommends: mime-support, python-crypto
+Suggests: python-psyco
+Conflicts: bittorrent (<= 3.4.2-2), libfreetype6 (= 2.1.7-2.4)
+Replaces: bittorrent
+Section: net
+Priority: optional
+Homepage: http://bittornado.com
+Description: bittorrent client with GUI interface
+ The GUI interface to the BitTornado bittorrent client.
+ BitTornado is a bittorrent client built on the original BitTorrent
+ client from BitTorrent Inc. This client features a GUI interface,
+ lots of features, and is one of the original bittorrent clients
+ created.
+ .
+ Features include:
+   * upload/download speed limitation
+   * prioritised downloading when downloading batches (several files)
+   * detailed information about connections to other peers
+   * encryption (PE/MSE) support (with the recommended python-crypto)
+   * console mode for running from scripts
+   * curses mode for running interactively
+   * tracker for the distribution of files
+ .
+ This package contains the GUI interface, install only the bittornado
+ package to get a console and curses interface and a bittorrent tracker.
+ See the bittorrent package for a description of what bittorrent is.

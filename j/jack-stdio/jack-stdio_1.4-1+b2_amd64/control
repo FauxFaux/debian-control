@@ -1,0 +1,20 @@
+Package: jack-stdio
+Source: jack-stdio (1.4-1)
+Version: 1.4-1+b2
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 56
+Depends: libc6 (>= 2.3.2), libjack-jackd2-0 (>= 1.9.10+20150825) | libjack-0.125, jackd
+Suggests: sox
+Section: sound
+Priority: optional
+Homepage: http://rg42.org/oss/jackstdout/
+Description: program to pipe audio-data from and to JACK
+ jack-stdout is a small tool that writes JACK audio-sample data to
+ buffered standard output. jack-stdin reads raw audio data from
+ standard input and writes it to a JACK audio port.
+ .
+ By default jack-stdout writes 16 bit signed integer raw audio data
+ (much like mpg123 -s at JACK's samplerate, but it can output
+ signed/unsigned 8/16/24/32 bit integer and 32bit floating-point
+ data, both big/little endian.

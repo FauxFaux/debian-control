@@ -1,0 +1,29 @@
+Package: libcrypt-dh-gmp-perl
+Source: libcrypt-dh-gmp-perl (0.00012-1)
+Version: 0.00012-1+b5
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 60
+Depends: perl (>= 5.26.0-4), perlapi-5.26.0, libc6 (>= 2.14), libgmp10
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Crypt-DH-GMP
+Description: Crypt::DH replacement that uses GMP directly
+ Crypt::DH::GMP is a (somewhat) portable replacement to Crypt::DH, implemented
+ mostly in C.
+ .
+ In the beginning, there was Crypt::DH. However, Crypt::DH suffers from a
+ couple of problems: GMP/Pari libraries are almost always required; Crypt::DH
+ additionally has Math::BigInt in between GMP. Instantiating an object
+ comes with a relatively high cost, and if you make many computations in one
+ go, your program will suffer dramatically because of this.
+ .
+ Crypt::DH::GMP attempts to alleviate these problems by providing a
+ Crypt::DH-compatible layer, which, instead of doing calculations via
+ Math::BigInt, directly works with libgmp in C.
+ .
+ This means that essentially 2 call stacks worth of expensive Perl method
+ calls are eliminated and also only load 1 (Crypt::DH::GMP) module instead of
+ 3 (Crypt::DH + Math::BigInt + Math::BigInt::GMP) is needed.
+ .
+ These add up to a fairly significant increase in performance.

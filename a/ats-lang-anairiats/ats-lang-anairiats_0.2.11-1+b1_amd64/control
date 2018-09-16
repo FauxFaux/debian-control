@@ -1,0 +1,33 @@
+Package: ats-lang-anairiats
+Source: ats-lang-anairiats (0.2.11-1)
+Version: 0.2.11-1+b1
+Architecture: amd64
+Maintainer: Matthew Danish <mrd@debian.org>
+Installed-Size: 7142
+Depends: libc6 (>= 2.14), libgmp10
+Recommends: libgmp3-dev, libpcre3-dev, libsdl1.2-dev, libgtk2.0-dev, libcairo2-dev
+Suggests: ats-lang-anairiats-examples, ats-lang-anairiats-doc, ats2-lang
+Section: devel
+Priority: optional
+Homepage: http://www.ats-lang.org
+Description: Legacy ATS v1 language compiler, named Anairiats
+ ATS is a programming language with a highly expressive type system
+ rooted in the framework Applied Type System. In particular, both
+ dependent types and linear types are available in ATS. The current
+ implementation of ATS (ATS/Anairiats) is written in ATS itself. It
+ can be as efficient as C/C++ and supports a variety of programming
+ paradigms.
+ .
+ In addition, ATS contains a component ATS/LF that supports a form of
+ (interactive) theorem proving, where proofs are constructed as total
+ functions. With this component, ATS advocates a programming style
+ that combines programming with theorem proving. Furthermore, this
+ component may be used as a logical framework to encode various
+ deduction systems and their (meta-)properties.
+ .
+ This package contains the compiler atsopt, the frontend atscc, and
+ the lexer atslex.
+ .
+ This is the final release of ATS1. Please migrate your code to ATS2/Postiats,
+ the compiler frontend patscc (patsopt), in the package ats2-lang.  This
+ package is for legacy code and bootstrapping purposes.

@@ -1,0 +1,17 @@
+Package: libthread-conveyor-monitored-perl
+Version: 0.14-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 79
+Depends: perl, libload-perl, libthread-conveyor-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Thread-Conveyor-Monitored
+Description: module to monitor a conveyor belt for specific content
+ The Thread::Conveyor::Monitored module implements a single worker thread that
+ takes of boxes of values from a belt created with Thread::Conveyor and which
+ checks the boxes for specific content.
+ .
+ It can be used for simply logging actions that are placed on the belt. Or
+ only output warnings if a certain value is encountered in a box. Or create a
+ safe sandbox for Perl modules that are not thread-safe yet.

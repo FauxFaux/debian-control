@@ -1,0 +1,34 @@
+Package: libcommons-launcher-java
+Version: 1.1-8
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 665
+Depends: libcommons-collections3-java, libcommons-logging-java
+Section: java
+Priority: optional
+Homepage: http://commons.apache.org/launcher/
+Description: Apache Commons Launcher - Cross platform Java application launcher
+ Commons-launcher eliminates the need for a batch or shell script to
+ launch a Java class. Some situations where elimination of a batch or
+ shell script may be desirable are:
+ .
+  * You want to avoid having to determining where certain application
+    paths are e.g. your application's home directory, etc. Determining this
+    dynamically in a Windows batch scripts is very tricky on some versions
+    of Windows or when softlinks are used on Unix platforms.
+ .
+  * You want to avoid having to handle native file and path separators
+    or native path quoting issues.
+ .
+  * You need to enforce certain system properties
+    e.g. java.endorsed.dirs when running with JDK 1.4.
+ .
+  * You want to allow users to pass in custom JVM arguments or system
+    properties without having to parse and reorder arguments in your
+    script. This can be tricky and/or messy in batch and shell scripts.
+ .
+  * You want to bootstrap system properties from a configuration file
+    instead hard-coding them in your batch and shell scripts.
+ .
+  * You want to provide localized error messages which is very tricky
+    to do in batch and shell scripts.

@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+# source debconf stuff
+. /usr/share/debconf/confmodule
+# source dbconfig-common stuff
+. /usr/share/dbconfig-common/dpkg/prerm.mysql
+dbc_sql_substitutions="true"
+dbc_go cacti $@
+
+# Automatically added by dh_installdeb/11.2.1
+dpkg-maintscript-helper dir_to_symlink /usr/share/cacti/site/include/js/themes /usr/share/javascript/jstree/themes 0.8.8h\+ds1-10\~ cacti -- "$@"
+# End automatically added section
+# Automatically added by dh_usrlocal/11.2.1
+(
+	while read dir; do
+		rmdir "$dir" 2>/dev/null || true
+	done
+) << DATA
+/usr/local/share/cacti/resource/script_queries
+/usr/local/share/cacti/resource/script_server
+/usr/local/share/cacti/resource/snmp_queries
+/usr/local/share/cacti/resource
+/usr/local/share/cacti/scripts
+/usr/local/share/cacti
+DATA
+# End automatically added section
+

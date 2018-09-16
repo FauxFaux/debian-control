@@ -1,0 +1,38 @@
+Package: python-blessed
+Version: 1.15.0-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 247
+Depends: python-six (>= 1.9.0), python-wcwidth, python:any (<< 2.8), python:any (>= 2.7~)
+Section: python
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/jquast/blessed
+Description: Thin, practical wrapper around terminal capabilities in Python2
+ Blessed is a thin, practical wrapper around terminal capabilities in
+ Python. It provides:
+ .
+  * Styles, color, and maybe a little positioning without necessarily
+    clearing the whole screen first.
+  * Works great with standard Python string formatting.
+  * Provides up-to-the-moment terminal height and width, so you can
+    respond to terminal size changes.
+  * Avoids making a mess if the output gets piped to a non-terminal:
+    outputs to any file-like object such as StringIO, files, or pipes.
+  * Uses the terminfo(5) database so it works with any terminal type and
+    supports any terminal capability: No more C-like calls to tigetstr
+    and tparm.
+  * Keeps a minimum of internal state, so you can feel free to mix and
+    match with calls to curses or whatever other terminal libraries you
+    like.
+  * Provides plenty of context managers to safely express terminal modes,
+    automatically restoring the terminal to a safe state on exit.
+  * Act intelligently when somebody redirects your output to a file,
+    omitting all of the terminal sequences such as styling, colors, or
+    positioning.  Dead-simple keyboard handling: safely decoding unicode
+    input in your system's preferred locale and supports
+    application/arrow keys.
+  * Allows the printable length of strings containing sequences to be
+    determined.
+ .
+ This package installs the library for Python 2.

@@ -1,0 +1,20 @@
+Package: libmyproxy-voms
+Source: myproxy
+Version: 6.1.31-1
+Architecture: amd64
+Maintainer: Mattias Ellert <mattias.ellert@physics.uu.se>
+Installed-Size: 45
+Depends: libmyproxy6 (= 6.1.31-1), libc6 (>= 2.14), libglobus-gssapi-gsi4 (>= 13), libssl1.1 (>= 1.1.0), libvomsapi1v5, voms-clients | voms-clients-java
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://grid.ncsa.illinois.edu/myproxy/
+Description: Credential Management Service VOMS Library
+ MyProxy is open source software for managing X.509 Public Key Infrastructure
+ (PKI) security credentials (certificates and private keys). MyProxy
+ combines an online credential repository with an online certificate
+ authority to allow users to securely obtain credentials when and where needed.
+ Users run myproxy-logon to authenticate and obtain credentials, including
+ trusted CA certificates and Certificate Revocation Lists (CRLs).
+ .
+ This package contains runtime libs for MyProxy to use VOMS.

@@ -1,0 +1,20 @@
+Package: slt
+Source: slt (0.0.git20140301-4)
+Version: 0.0.git20140301-4+b1
+Architecture: amd64
+Maintainer: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+Installed-Size: 4431
+Depends: dpkg-dev, libc6 (>= 2.3.2)
+Built-Using: golang-1.10 (= 1.10-1), golang-vhost (= 0.0~git20140120-2), golang-yaml.v2 (= 0.0+git20170407.0.cd8b52f-1)
+Section: devel
+Priority: extra
+Homepage: https://github.com/inconshreveable/slt
+Description: TLS reverse-proxy with SNI multiplexing (TLS virtual hosts)
+ slt lets a user accept TLS/SSL connections for multiple different
+ applications on the same port and the server can forward them all to
+ the appropriate backend hosts depending on the intended destination.
+ .
+ slt is capable of either terminating the TLS and passing the
+ cleartext traffic to the origin server (if it has appropriate key
+ material), or just passing the encrypted traffic along (if it has no
+ key material).

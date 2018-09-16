@@ -1,0 +1,22 @@
+Package: libmoosex-traitfor-meta-class-betteranonclassnames-perl
+Version: 0.002003-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: perl, libautobox-core-perl, libmoose-perl, libnamespace-autoclean-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MooseX-TraitFor-Meta-Class-BetterAnonClassNames
+Description: helper for MooseX::Util to generate anonymous class names
+ MooseX::TraitFor::Meta::Class::BetterAnonClassNames helps MooseX::Util's
+ with_traits() method to create better named anonymous classes.
+ .
+  my $anon_class_name = with_traits('Zombie::Catcher', 'SomeTrait');
+ .
+ now becomes
+ .
+  Zombie::Catcher::__ANON__::SERIAL::1
+ .
+ rather than
+ .
+  Moose::Meta::Class::__ANON__::SERIAL::1

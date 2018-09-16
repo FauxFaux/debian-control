@@ -1,0 +1,33 @@
+Package: inn
+Source: inn (1:1.7.2q-45)
+Version: 1:1.7.2q-45+b2
+Architecture: amd64
+Maintainer: Marco d'Itri <md@linux.it>
+Installed-Size: 2052
+Depends: libc6 (>= 2.15), libperl5.26 (>= 5.26.0~rc1), libsystemd0, init-system-helpers (>= 1.18~), cron, default-mta | mail-transport-agent, bsd-mailx | mailx, lsb-base, time, perl, perlapi-5.26.0
+Suggests: gnupg (>= 1.0.5)
+Conflicts: inewsinn, inn2, inn2-dev, inn2-inews, news-transport-system
+Replaces: inewsinn
+Provides: inews, news-transport-system
+Section: news
+Priority: extra
+Description: News transport system `InterNetNews' by the ISC and Rich Salz
+ This is INN version 1.x, provided for smaller sites which do not need
+ the complexity of INN 2.x.
+ Large sites should use Debian's inn2 package instead.
+ .
+ The news transport is the part of the system that stores the articles
+ and the lists of which groups are available and so on, and provides
+ those articles on request to users.  It receives news (either posted
+ locally or from a newsfeed site), files it, and passes it on to any
+ downstream sites.  Each article is kept for a period of time and then
+ deleted (this is known as `expiry').
+ .
+ By default Debian's INN will install in a fairly simple `local-only'
+ configuration.
+ .
+ In order to make use of the services provided by INN you'll have to
+ use a user-level newsreader program such as pan.  The newsreader is
+ the program that fetches articles from the server and shows them to
+ the user, remembering which the user has seen so that they don't get
+ shown again.  It also provides the posting interface for the user.

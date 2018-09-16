@@ -1,0 +1,22 @@
+Package: elpa-git-annex
+Source: git-annex-el
+Version: 1.1-2
+Architecture: all
+Maintainer: Debian Emacs addons team <pkg-emacsen-addons@lists.alioth.debian.org>
+Installed-Size: 34
+Depends: emacsen-common (>= 2.0.8), git-annex
+Recommends: emacs (>= 46.0)
+Enhances: emacs, emacs24, emacs25, git-annex
+Section: lisp
+Priority: optional
+Homepage: https://github.com/jwiegley/git-annex-el
+Description: Emacs integration for git-annex
+ This Emacs addon enhances dired and read-only-mode to be more useful
+ in git-annex repositories.
+ .
+ In dired, long annex symlinks are replaced by the name of the file,
+ coloured green.  There are also keybindings to execute the `add` and
+ `edit` git-annex subcommands.
+ .
+ In read-only-mode, C-x C-q will execute `git annex edit`, and killing
+ the buffer will call `git annex add && git commit -m Updated`.

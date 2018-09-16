@@ -1,0 +1,27 @@
+Package: monotone-extras
+Source: monotone
+Version: 1.1-9
+Architecture: all
+Maintainer: Debian Maintainers for Monotone <monotone-debian@nongnu.org>
+Installed-Size: 67
+Depends: monotone (= 1.1-9)
+Recommends: mime-construct, source-highlight, perl, python
+Section: vcs
+Priority: optional
+Homepage: http://monotone.ca/
+Description: Distributed version (revision) control system - extras
+ Monotone is a free, distributed version control system. It provides
+ fully disconnected operation, manages complete tree versions, keeps
+ its state in a local transactional database, supports overlapping
+ branches and extensible metadata, uses an efficient peer-to-peer
+ network protocol, performs history-sensitive merging, and delegates
+ trust functions to client-side RSA certificates.
+ .
+ This package contains scripts, monotone hooks and more:
+ .
+   * mtn-cleanup
+     (please install perl to use this)
+   * monotone-mail-notify.lua + monotone-mail-notify
+     (please install mime-construct and source-highlight to use this)
+   * get_passphrase_from_file.lua
+   * authorize_remote_automate.lua

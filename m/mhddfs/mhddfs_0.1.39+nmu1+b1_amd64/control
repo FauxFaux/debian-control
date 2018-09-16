@@ -1,0 +1,16 @@
+Package: mhddfs
+Source: mhddfs (0.1.39+nmu1)
+Version: 0.1.39+nmu1+b1
+Architecture: amd64
+Maintainer: Dmitry E. Oboukhov <unera@debian.org>
+Installed-Size: 66
+Depends: libc6 (>= 2.14), libfuse2 (>= 2.8), fuse
+Section: utils
+Priority: extra
+Homepage: http://mhddfs.uvw.ru
+Description: file system for unifying several mount points into one
+ This FUSE-based file system allows mount points (or directories) to be
+ combined, simulating a single big volume which can merge several hard
+ drives or remote file systems. It is like unionfs, but can choose the
+ drive with the most free space to create new files on, and can move
+ data transparently between drives.

@@ -1,0 +1,34 @@
+Package: jets3t
+Version: 0.8.1+dfsg-4
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 2007
+Depends: default-jre | java5-runtime, libcommons-codec-java, libcommons-httpclient-java, libcommons-logging-java, libjets3t-java (= 0.8.1+dfsg-4), liblog4j1.2-java
+Recommends: libbcprov-java
+Section: net
+Priority: optional
+Homepage: https://jets3t.s3.amazonaws.com/index.html
+Description: graphical and command-line tools for Amazon S3 and CloudFront
+ The JetS3t toolkit provides several applications for interacting and managing
+ data stored in Amazon Simple Storage Service and Amazon CloudFront content
+ delivery network. Features:
+  - jets3t-cockpitlite: A graphical application that Service Providers with S3
+    accounts may provide to clients or customers without S3 accounts.
+    jets3t-cockpitlite allows users to manage the content of an S3 account to
+    upload files, download files, delete S3 objects and make objects publicly
+    accessible. All these operations are mediated by a Gatekeeper service.
+  - jets3t-cockpit: graphical application for transferring files, viewing and
+    managing the contents of an Amazon S3 account.
+  - jets3t-synchronize: A command-line application for synchronizing
+    directories on your computer with an Amazon S3 account. Ideal for
+    performing back-ups or synchronizing files between different computers.
+  - jets3t-uploader: A graphical application that Service Providers with S3
+    accounts may provide to clients or customers without S3 accounts.
+    jets3t-uploader allows users to upload files to S3 using a simple
+    wizard-based workflow, but all uploads must first be authorized by a
+    Gatekeeper service
+  - gatekeeper: A servlet that acts as an authorization service running on a
+    Service Provider's server to mediate access to S3 accounts.
+    It processes requests from client applications such as JetS3t Uploader &
+    CockpitLite, and authorizes the client application to perform operations
+    such as uploads, downloads and deletes.

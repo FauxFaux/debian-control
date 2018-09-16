@@ -1,0 +1,18 @@
+Package: apticron-systemd
+Source: apticron
+Version: 1.2.1
+Architecture: all
+Maintainer: Tiago Bortoletto Vaz <tiago@debian.org>
+Installed-Size: 51
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: bsd-mailx | mailx, apt (>= 1.1~exp9), systemd, bzip2
+Recommends: apt-listchanges, iproute2, gpg
+Conflicts: apticron
+Section: admin
+Priority: optional
+Description: Simple tool to mail about pending package updates - systemd version
+ Apticron is a simple script which sends daily emails about pending package
+ updates such as security updates, properly handling packages on hold both by
+ dselect and aptitude.
+ .
+ This package uses a systemd timer instead of a cron job to run apticron.

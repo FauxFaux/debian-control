@@ -1,0 +1,27 @@
+Package: python-editor
+Version: 1.0.3-1
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 20
+Depends: python-six, python:any (<< 2.8), python:any (>= 2.7~)
+Section: python
+Priority: optional
+Homepage: https://github.com/fmoo/python-editor
+Description: programmatically open an editor, capture the result - Python 2.7
+ python-editor is a library that provides the editor module for
+ programmatically interfacing with your system's $EDITOR. The user can then
+ enter a commit message for example.
+ .
+ Editor first looks for the  environment variable.  If set, it uses
+ the value as-is, without fallbacks. If no $EDITOR is set, editor will search
+ through a list of known editors, and use the first one that exists on the
+ system. For example, on Linux, editor will look for the following editors in
+ order:
+  * vim
+  * emacs
+  * nano
+ .
+ When calling the edit() function, editor will open the editor in a
+ subprocess, inheriting the parent process's stdin, stdout
+ .
+ This package contains the Python 2.7 module.

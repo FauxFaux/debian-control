@@ -1,0 +1,24 @@
+Package: lldpad
+Version: 1.0.1+git20180808.4e642bd-1
+Architecture: amd64
+Maintainer: Debian FCoE Maintainers <team+fcoe@tracker.debian.org>
+Installed-Size: 721
+Depends: lsb-base, libc6 (>= 2.15), libconfig9, libnl-3-200 (>= 3.2.7)
+Section: net
+Priority: optional
+Homepage: http://open-lldp.org/
+Description: Link Layer Discovery Protocol Implementation (Runtime)
+ The lldpad package is an implementation of the Link Layer Discovery
+ Protocol (LLDP).  It originated from Intel's Data Center Bridging (DCB)
+ software - the dcbd package.  The lldpad package adds LLDP support
+ for all ports in addition to DCB Exchange protocol (DCBX) support on DCB
+ capable ports (as was provided by dcbd).  Also, support for additional
+ LLDP TLVs has been added.
+ .
+ DCB is a collection of emerging standards-based technologies designed to
+ allow Ethernet to support multiple types of traffic classes in the Data
+ Center.  The DCBX functionality of this package is designed to work with
+ the DCB kernel interface (dcbnl in rtnetlink) that is included in the Linux
+ kernel 2.6.29 or higher.  The Intel ixgbe driver supports the dcbnl interface.
+ .
+ This package contains lldpad runtime binaries.

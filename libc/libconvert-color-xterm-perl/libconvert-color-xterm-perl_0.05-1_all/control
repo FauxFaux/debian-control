@@ -1,0 +1,17 @@
+Package: libconvert-color-xterm-perl
+Version: 0.05-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: perl, libconvert-color-perl (>= 0.06)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Convert-Color-XTerm
+Description: indexed colors used by XTerm
+ This subclass of Convert::Color::RGB8 provides lookup of the colors that
+ xterm uses by default. Note that the module is not intelligent enough to
+ actually parse the XTerm configuration on a machine, nor to query a running
+ terminal for its actual colors. It simply implements the colors that are
+ present as defaults in the XTerm source code.
+ .
+ It implements the complete 256-color model in XTerm. This range consists of:

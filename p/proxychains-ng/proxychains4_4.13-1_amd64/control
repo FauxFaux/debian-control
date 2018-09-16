@@ -1,0 +1,21 @@
+Package: proxychains4
+Source: proxychains-ng
+Version: 4.13-1
+Architecture: amd64
+Maintainer: Boyuan Yang <073plan@gmail.com>
+Installed-Size: 44
+Depends: libproxychains4 (= 4.13-1), libc6 (>= 2.4)
+Breaks: proxychains (<< 3.1-8)
+Replaces: proxychains
+Provides: proxychains
+Section: net
+Priority: optional
+Homepage: https://github.com/rofl0r/proxychains-ng
+Description: redirect connections through socks/http proxies
+ Proxychains is a UNIX program, that hooks network-related libc functions
+ in dynamically linked programs via a preloaded DLL (dlsym(), LD_PRELOAD)
+ and redirects the connections through SOCKS4a/5 or HTTP proxies.
+ It supports TCP only (no UDP/ICMP etc).
+ .
+ This project, proxychains-ng, is the continuation of the unmaintained
+ proxychains project (known as proxychains package in Debian).

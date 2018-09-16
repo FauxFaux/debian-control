@@ -1,0 +1,35 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+	install)
+		for FILE in zcat zcmp zdiff zegrep zfgrep zgrep
+		do
+			dpkg-divert --package zutils --quiet --add --rename --divert /bin/${FILE}.gzip /bin/${FILE}
+			dpkg-divert --package zutils --quiet --add --rename --divert /usr/share/man/man1/${FILE}.gzip.1.gz /usr/share/man/man1/${FILE}.1.gz
+		done
+		;;
+
+	upgrade)
+		# upgrading from zutils 1.7-2
+		if [ ! -e /bin/zcat.gzip ]
+		then
+			dpkg-divert --package zutils --quiet --add --rename --divert /bin/zcat.gzip /bin/zcat
+			dpkg-divert --package zutils --quiet --add --rename --divert /usr/share/man/man1/zcat.gzip.1.gz /usr/share/man/man1/zcat.1.gz
+		fi
+		;;
+
+	abort-upgrade)
+
+		;;
+
+	*)
+		echo "preinst called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+
+
+exit 0

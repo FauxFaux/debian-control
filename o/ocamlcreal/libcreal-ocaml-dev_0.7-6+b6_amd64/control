@@ -1,0 +1,24 @@
+Package: libcreal-ocaml-dev
+Source: ocamlcreal (0.7-6)
+Version: 0.7-6+b6
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 611
+Depends: libgmp-ocaml-dev-ah7j9, ocaml-nox-4.05.0
+Provides: libcreal-ocaml-dev-ormx7
+Section: ocaml
+Priority: optional
+Description: O'Caml library that implements exact real arithmetic
+ This  module  implements  exact  real  arithmetic,  following  Valerie
+ Menissier-Morain Ph.D. thesis (http://www-calfor.lip6.fr/~vmm/).
+ .
+ A  real  x  is  represented  as  a function  giving,  for  any  n,  an
+ approximation zn/4^n of x  such that |zn/4^n - x| < 1,  where zn is an
+ arbitrary precision integer (of type Gmp.Z.t).
+ .
+ Coercions from type int, Gmp.Z.t, Gmp.Q.t, basic operations (addition,
+ subtraction,  multiplication,   division,  power,  square   root)  and
+ transcendental  functions (sin,  cos, tan,  log, exp,  arcsin, arccos,
+ etc.) and a few constants (pi, e) are provided.
+ .
+ A small reverse-polish calculator is provided to test the library.

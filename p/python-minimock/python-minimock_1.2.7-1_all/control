@@ -1,0 +1,23 @@
+Package: python-minimock
+Version: 1.2.7-1
+Architecture: all
+Maintainer: Ben Finney <ben+debian@benfinney.id.au>
+Installed-Size: 97
+Depends: python2.7 | python2.6, python (>= 2.6.6-7~), python (<< 2.8)
+Provides: python2.6-minimock, python2.7-minimock
+Section: python
+Priority: optional
+Homepage: http://pypi.python.org/pypi/MiniMock
+Description: simple library for Python mock objects
+ minimock is a simple Python library for using mock objects.
+ .
+ Its mock objects will report any access made to the mock object's
+ interfaces. The programmer can easily make assertions about how mock
+ objects are used in the test cases, by using the standard-library
+ ‘doctest’ module to match the reported access against expected
+ behaviour.
+ .
+ Mock objects can return specified values, raise exceptions, etc.
+ to simulate the mocked behaviour. Existing objects can optionally
+ be replaced in-place in their namespace by a mock object, and
+ restored safely after testing.

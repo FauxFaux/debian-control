@@ -1,0 +1,32 @@
+Package: python-nemu
+Version: 0.3.1-1
+Architecture: all
+Maintainer: Martín Ferrari <tincho@debian.org>
+Installed-Size: 147
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~), python-unshare, python-passfd, iproute2, bridge-utils, procps
+Suggests: xauth
+Provides: python2.7-nemu
+Section: python
+Priority: optional
+Homepage: https://github.com/TheTincho/nemu/
+Description: lightweight network emulator embedded in a small python library
+ Nemu (Netwok EMUlator) is a small Python library to create emulated networks
+ and run and test programs in them.
+ .
+ Different programs, or copies of the same program, can run in different
+ emulated nodes, using only the emulated network to communicate, without ever
+ noticing they all run in the same computer.
+ .
+ Nemu provides a very simple interface to create nodes, connect them arbitrarily
+ with virtual interfaces, configure IPv4 and IPv6 addresses and routes, and
+ start programs in the nodes. The virtual interfaces also support emulation of
+ delays, loss, and reordering of packets, and bandwidth limitations.
+ .
+ More advanced configurations, like setting up netfilter (iptables) rules,
+ starting VPN tunnels, routing daemons, etc, are simply supported by executing
+ the appropriate commands in the emulated nodes, exactly as if they were
+ executed in real machines in a real network.
+ .
+ You can even start interactive sessions by opening xterms on different nodes,
+ Nemu has special support for forwarding X sessions to the emulated nodes.
+Python-Version: 2.7

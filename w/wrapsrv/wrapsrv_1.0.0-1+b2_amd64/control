@@ -1,0 +1,16 @@
+Package: wrapsrv
+Source: wrapsrv (1.0.0-1)
+Version: 1.0.0-1+b2
+Architecture: amd64
+Maintainer: Robert S. Edmonds <edmonds@debian.org>
+Installed-Size: 29
+Depends: libc6 (>= 2.9)
+Section: net
+Priority: optional
+Description: DNS SRV record command line wrapper
+ wrapsrv adds support for connecting to a network service based on DNS SRV
+ record lookups to commands that do not support the DNS SRV record. wrapsrv
+ implements the weighted priority client connection algorithm in RFC 2782.
+ The specified command line will be invoked one or more times with %h and %p
+ sequences in the command line substituted for the hostname and port elements
+ of the selected SRV record.

@@ -1,0 +1,32 @@
+Package: libmaven-enforcer-plugin-java
+Source: maven-enforcer
+Version: 1.4.2-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 177
+Depends: libbsh-java (>= 2.0b4), libcommons-codec-java, libcommons-lang-java (>= 2.6), libcommons-lang3-java, libmaven-common-artifact-filters-java (>= 3.0.1), libmaven-dependency-tree-java, libmaven3-core-java (>= 3.5.0), libplexus-container-default1.5-java (>= 1.5.5), libplexus-i18n-java, libplexus-utils-java
+Section: java
+Priority: optional
+Homepage: https://maven.apache.org/enforcer/maven-enforcer-plugin/
+Description: Maven build rule execution framework
+ Enforcer is a Maven build rule execution framework.
+ Maven Enforcer Plugin provides goals to control certain environmental
+ constraints such as Maven version, JDK version and OS family along with many
+ more standard rules:
+  * alwaysPass - Always passes... used to test plugin configuration.
+  * alwaysFail - Always fail... used to test plugin configuration.
+  * bannedDependencies - enforces that excluded dependencies aren't included.
+  * evaluateBeanshell - evaluates a beanshell script.
+  * requireReleaseDeps - enforces that no snapshots are included as
+    dependencies.
+  * requireReleaseVersion - enforces that the artifact is not a snapshot.
+  * requireMavenVersion - enforces the Maven version.
+  * requireJavaVersion - enforces the JDK version.
+  * requireOS - enforces the OS / CPU Archictecture.
+  * requirePluginVersions - enforces that all plugins have a specified version.
+  * requireProperty - enforces the existence and values of properties.
+  * requireFilesDontExist - enforces that the list of files do not exist.
+  * requireFilesExist - enforces that the list of files do exist.
+  * requireFilesSize - enforces that the list of files exist and are within a
+    certain size range.
+ Custom rules are easy to make with the maven-enforcer-rule-api.

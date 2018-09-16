@@ -1,0 +1,25 @@
+Package: wicd
+Version: 1.7.4+tb2-6
+Architecture: all
+Maintainer: Debian WICD Packaging Team <pkg-wicd-maint@lists.alioth.debian.org>
+Installed-Size: 35
+Depends: wicd-daemon (= 1.7.4+tb2-6), wicd-gtk (= 1.7.4+tb2-6) | wicd-curses (= 1.7.4+tb2-6) | wicd-cli (= 1.7.4+tb2-6) | wicd-client
+Section: net
+Priority: optional
+Homepage: https://launchpad.net/wicd
+Description: wired and wireless network manager - metapackage
+ Wicd is a general-purpose network configuration server which aims
+ to provide a simple but flexible interface for connecting to networks.
+ Its features include:
+  * wide variety of settings;
+  * ability to connect to (and maintain profiles for) both wired and
+    wireless networks;
+  * support for many encryption schemes, including WEP, WPA, WPA2 and
+    custom schemes;
+  * wireless-tools compatibility;
+  * tray icon showing network activity and signal strength;
+  * lack of GNOME dependencies (although it does require GTK+), making it
+    easy to use in Xfce, Fluxbox, Openbox, Enlightenment, etc.
+ .
+ This is a metapackage, it allows installation of all the components of
+ Wicd, including one of the clients, which must be manually chosen.

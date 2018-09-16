@@ -1,0 +1,20 @@
+Package: mailfront
+Version: 2.12-0.1
+Architecture: amd64
+Maintainer: Gerrit Pape <pape@smarden.org>
+Installed-Size: 501
+Depends: libbg2 (>= 2.03), libc6 (>= 2.14), libcvm1
+Recommends: runit, ipsvd
+Section: mail
+Priority: extra
+Description: mail server network protocol front-ends
+ mailfront is a set of customizable network front-ends for mail servers.
+ It contains complete SMTP, QMQP, QMTP, and POP3 front-ends as well as an
+ authentication module for IMAP.  The mail delivery front-ends also contain
+ internal address filtering features.
+ .
+ Two SMTP back-ends are provided.  One delivers mail to qmail-queue,
+ mimicking most of the behavior of qmail-smtpd, with the addition of
+ support for SMTP AUTH.  The other rejects all SMTP commands if $SMTPREJECT
+ is set, and execs its command line otherwise (in order to run the above
+ program).

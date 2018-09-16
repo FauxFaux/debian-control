@@ -1,0 +1,18 @@
+Package: fwsnort
+Version: 1.6.7-3
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 234
+Depends: perl:any, debconf (>= 0.5) | debconf-2.0, iptables, libnetaddr-ip-perl, libiptables-parse-perl, libnet-rawip-perl
+Recommends: snort-rules-default
+Section: admin
+Priority: optional
+Homepage: https://www.cipherdyne.org/fwsnort/
+Description: Snort-to-iptables rule translator
+ Fwsnort translates Snort rules into equivalent iptables rules and
+ generates a shell script that implements the resulting iptables
+ commands.
+ .
+ This allows network traffic that matches Snort signatures to be logged
+ and/or dropped by iptables directly without putting any interface into
+ promiscuous mode or queuing packets from kernel to user space.

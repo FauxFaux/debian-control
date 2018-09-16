@@ -1,0 +1,21 @@
+Package: libfile-finder-perl
+Version: 0.53-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 55
+Depends: perl, libtext-glob-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/File-Finder
+Description: wrapper for File::Find à la find(1)
+ File::Find is great, but constructing the wanted routine can sometimes be a
+ pain. File::Finder provides a wanted-writer, using syntax that is directly
+ mappable to the find command's syntax.
+ .
+ A File::Finder object contains a hash of File::Find options, and a series of
+ steps that mimic find's predicates. Initially, a File::Finder object has no
+ steps. Each step method clones the previous object's options and steps, and
+ then adds the new step, returning the new object. In this manner, an object
+ can be grown, step by step, by chaining method calls. Furthermore, a partial
+ sequence can be created and held, and used as the head of many different
+ sequences.

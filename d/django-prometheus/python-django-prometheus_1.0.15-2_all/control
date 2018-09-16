@@ -1,0 +1,20 @@
+Package: python-django-prometheus
+Source: django-prometheus
+Version: 1.0.15-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 240
+Depends: python-django, python-prometheus-client, python:any (<< 2.8), python:any (>= 2.7~)
+Section: python
+Priority: optional
+Homepage: https://github.com/korfuri/django-prometheus
+Description: Django middlewares to enable monitoring with Prometheus (Python 2)
+ The django-prometheus library provides integrations to monitor database
+ interaction, usage of models, and HTTP requests. Any custom metrics are also
+ handled directly by the Python Prometheus client library.
+ .
+ This library just facilitates gathering and exporting the data. A separate
+ service (or set of services) must be used to gather, store and process this
+ data.
+ .
+ This package contains the Python 2 library.

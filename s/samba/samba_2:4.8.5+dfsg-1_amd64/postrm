@@ -1,0 +1,75 @@
+#! /bin/sh -e
+
+set -e
+
+if [ "$1" = purge ]; then
+
+	if [ -e /usr/share/debconf/confmodule ]; then
+		. /usr/share/debconf/confmodule
+		db_purge
+	fi
+
+	if [ "$(readlink /etc/systemd/system/samba-ad-dc.service)" = '/dev/null' ]; then
+		# Remove masking done by postinst (#832352)
+		rm /etc/systemd/system/samba-ad-dc.service
+	fi
+fi
+
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "purge" ] ; then
+	update-rc.d samba-ad-dc remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "purge" ] ; then
+	update-rc.d nmbd remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "purge" ] ; then
+	update-rc.d smbd remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper rm_conffile /etc/init.d/samba 2:4.6.5\+dfsg-5\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/nmbd.conf 2:4.6.5\+dfsg-5\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/reload-smbd.conf 2:4.6.5\+dfsg-5\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/samba-ad-dc.conf 2:4.6.5\+dfsg-5\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/smbd.conf 2:4.6.5\+dfsg-5\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'nmbd.service' 'samba-ad-dc.service' 'smbd.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'nmbd.service' 'samba-ad-dc.service' 'smbd.service' >/dev/null || true
+		deb-systemd-helper unmask 'nmbd.service' 'samba-ad-dc.service' 'smbd.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

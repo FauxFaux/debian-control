@@ -1,0 +1,61 @@
+Package: debian-goodies
+Version: 0.81
+Architecture: all
+Maintainer: Javier Fernández-Sanguino Peña <jfs@debian.org>
+Installed-Size: 215
+Recommends: apt, curl, dctrl-tools, elfutils, libipc-system-simple-perl, man-db, perl, popularity-contest, procps, python3, sensible-utils, whiptail | dialog | zenity
+Suggests: apt-file, konqueror, libgnome2-bin, lsb-release, lsof, x-www-browser | www-browser, xdg-utils
+Conflicts: bikeshed, debget
+Replaces: bikeshed, debget
+Section: utils
+Priority: optional
+Description: Small toolbox-style utilities for Debian systems
+ These programs are designed to integrate with standard shell tools,
+ extending them to operate on the Debian packaging system.
+ .
+  dglob  - Generate a list of package names which match a pattern
+           [dctrl-tools, apt*, apt-file*, perl*]
+  dgrep  - Search all files in specified packages for a regex
+           [dctrl-tools, apt-file (both via dglob)]
+ .
+ These are also included, because they are useful and don't justify
+ their own packages:
+ .
+  check-enhancements
+             - find packages which enhance installed packages [apt,
+                dctrl-tools]
+  checkrestart
+             - Help to find and restart processes which are using old versions
+               of upgraded files (such as libraries) [python3, procps, lsof*]
+  debget     - Fetch a .deb for a package in APT's database [apt]
+  debman     - Easily view man pages from a binary .deb without extracting
+               [man, apt* (via debget)]
+  debmany    - Select manpages of installed or uninstalled packages [man |
+               sensible-utils, whiptail | dialog | zenity, apt*, konqueror*,
+               libgnome2-bin*, xdg-utils*]
+  dhomepage  - Open homepage of a package in a web browser [dctrl-tools,
+               sensible-utils*, www-browser* | x-www-browser*]
+  dman       - Fetch manpages from online manpages.debian.org service [curl,
+               man, lsb-release*]
+  dpigs      - Show which installed packages occupy the most space
+               [dctrl-tools]
+  find-dbgsym-packages
+             - Get list of dbgsym packages from core dump or PID [dctrl-tools,
+               elfutils, libipc-system-simple-perl]
+  popbugs    - Display a customized release-critical bug list based on
+               packages you use (using popularity-contest data) [python3,
+               popularity-contest]
+  which-pkg-broke
+             - find which package might have broken another [python3, apt]
+  which-pkg-broke-build
+             - find which package might have broken the build of another
+               [python3 (via which-pkg-broke), apt]
+ .
+ Package name in brackets denote (non-essential) dependencies of the
+ scripts. Packages names with an asterisk ("*") denote optional
+ dependencies, all other are hard dependencies.
+ .
+ Hard dependencies of single tools are listed in the Recommends field
+ of the package and optional dependencies of single tools in the
+ Suggests field -- as common with many "collection" style Debian
+ packages.

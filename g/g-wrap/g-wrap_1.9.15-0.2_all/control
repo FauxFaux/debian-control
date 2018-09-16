@@ -1,0 +1,18 @@
+Package: g-wrap
+Version: 1.9.15-0.2
+Architecture: all
+Maintainer: Andreas Rottmann <rotty@debian.org>
+Installed-Size: 212
+Depends: guile-2.0, guile-library (>= 0.1.1), dpkg (>= 1.15.4) | install-info
+Recommends: indent, libgwrap-runtime-dev (>= 1.9.15-0.2)
+Conflicts: guile-g-wrap (<< 1.9.9-1), libgwrapguile-dev
+Section: lisp
+Priority: optional
+Homepage: http://www.nongnu.org/g-wrap/
+Description: scripting interface generator for C
+ G-Wrap is a tool (and Guile library) for generating function wrappers
+ for inter-language calls. It currently only supports generating Guile
+ wrappers for C functions.
+ .
+ G-Wrap takes a set of interface declarations (written in Scheme) and
+ wraps the described interface for Guile.

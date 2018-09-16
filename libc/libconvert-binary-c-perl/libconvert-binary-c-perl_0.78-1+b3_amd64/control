@@ -1,0 +1,23 @@
+Package: libconvert-binary-c-perl
+Source: libconvert-binary-c-perl (0.78-1)
+Version: 0.78-1+b3
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 713
+Depends: perl (>= 5.26.0-4), perlapi-5.26.0, libc6 (>= 2.14)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Convert-Binary-C
+Description: Binary Data Conversion using C Types
+ Convert::Binary::C is a preprocessor and parser for C type definitions. It is
+ highly configurable and supports arbitrarily complex data structures. Its
+ object-oriented interface has pack and unpack methods that act as replacements
+ for Perl's pack and unpack and allow one to use C types instead of a string
+ representation of the data structure for conversion of binary data from and to
+ Perl's complex data structures.
+ .
+ Actually, what Convert::Binary::C does is not very different from what a C
+ compiler does, just that it doesn't compile the source code into an object
+ file or executable, but only parses the code and allows Perl to use the
+ enumerations, structs, unions and typedefs that have been defined within your
+ C source for binary data conversion, similar to Perl's pack and unpack.

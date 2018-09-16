@@ -1,0 +1,44 @@
+Package: libccp4-dev
+Source: libccp4 (6.5.1-1)
+Version: 6.5.1-1+b1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 215
+Depends: libccp4c0 (= 6.5.1-1+b1), libccp4f0 (= 6.5.1-1+b1)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.ccp4.ac.uk/
+Description: CCP4 core functionality - development files
+ The CCP4 software suite is based around a library of routines which
+ cover common tasks, such as file opening, parsing keyworded input,
+ reading and writing of standard data formats, applying symmetry
+ operations, etc. Programs in the suite call these routines which, as
+ well as saving the programmer some effort, ensure that the varied
+ programs in the suite have a similar look-and-feel.
+ .
+ The library contains several sub components:
+ .
+  * CMTZ library -- Contains a variety of functions for manipulating
+    the data structure, for example adding crystals, datasets or
+    columns. The data structure can be dumped to an output MTZ data
+    file.
+ .
+  * CMAP library -- Functions defining the C-level API for accessing
+   CCP4 map files.
+ .
+  * CSYM library -- a collection of functions centered around a data
+   file syminfo.lib which is auto-generated from sgtbx (the Space
+   Group Toolbox of cctbx).
+ .
+  * CCP4 utility library -- many utility functions which either give
+   specific CCP4 or platform independent functionality.
+ .
+  * CCP4 Parser library -- provides CCP4-style parsing, as used for
+   processing keywords of CCP4 programs, MTZ header records, etc.
+ .
+  * CCP4 resizable arrays -- defines an object and methods which looks
+   just like a simple C array, but can be resized at will without
+   incurring excessive overheads. This package contains the shared
+   library components needed for programs that have been compiled with
+   the libccp4 library.

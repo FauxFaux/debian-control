@@ -1,0 +1,23 @@
+Package: python3-pex
+Source: python-pex
+Version: 1.1.14-2
+Architecture: all
+Maintainer: Barry Warsaw <barry@debian.org>
+Installed-Size: 320
+Depends: python3-pkg-resources, python3:any (>= 3.4~)
+Suggests: python-pex-doc
+Section: python
+Priority: optional
+Homepage: https://github.com/pantsbuild/pex
+Description: library for generating Python executable zip files
+ pex is a library for generating .pex (Python EXecutable) files which
+ are executable Python environments in the spirit of virtualenvs.  pex
+ is an expansion upon the ideas outlined in PEP 441 and makes the
+ deployment of Python applications as simple as cp.  pex files may even
+ include multiple platform-specific Python distributions, meaning that
+ a single pex file can be portable across Linux and OS X.
+ .
+ pex files can be built using the pex tool.  Build systems such as
+ Pants and Buck also support building .pex files directly.
+ .
+ This is the Python 3 library version.

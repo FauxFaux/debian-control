@@ -1,0 +1,21 @@
+Package: liblwp-protocol-psgi-perl
+Version: 0.08-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 35
+Depends: perl, libwww-perl, libplack-perl, libguard-perl
+Suggests: libcrypt-ssleay-perl | libio-socket-ssl-perl
+Section: perl
+Priority: optional
+Homepage: https://github.com/miyagawa/LWP-Protocol-PSGI
+Description: override LWP's HTTP/HTTPS backend with your own PSGI application
+ PSGI is a specification to decouple web server environments from web
+ application framework code.
+ .
+ LWP::Protocol::PSGI is a module to hijack *any* code that uses
+ LWP::UserAgent underneath such that any HTTP or HTTPS requests can be
+ routed to your own PSGI application.
+ .
+ Because it works with any code that uses LWP, you can override various
+ WWW::*, Net::* or WebService::* modules such as WWW::Mechanize, without
+ modifying the calling code or its internals.

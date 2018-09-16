@@ -1,0 +1,30 @@
+Package: libghc-ixset-typed-prof
+Source: haskell-ixset-typed (0.3.1.1-2)
+Version: 0.3.1.1-2+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 693
+Depends: libghc-ixset-typed-dev (= 0.3.1.1-2+b1), libghc-base-prof-4.10.1.0-35a7f, libghc-containers-prof-0.5.10.2-cc496, libghc-deepseq-prof-1.4.3.0-38379, libghc-safecopy-prof-0.9.4.1-aa56f, libghc-syb-prof-0.7-06df4, libghc-template-haskell-prof-2.12.0.0-22576
+Provides: libghc-ixset-typed-prof-0.3.1.1-311a6
+Section: haskell
+Priority: optional
+Homepage: http://hackage.haskell.org/package/ixset-typed
+Description: efficient relational queries on Haskell sets; profiling libraries
+ This Haskell package provides a data structure of sets that are indexed by
+ potentially multiple indices.
+ .
+ Sets can be created, modified, and queried in various ways.
+ .
+ The package is a variant of the ixset package. The ixset package makes use of
+ run-time type information to find a suitable index on a query, resulting in
+ possible run-time errors when no suitable index exists. In ixset-typed, the
+ types of all indices available or tracked in the type system.  Thus,
+ ixset-typed should be safer to use than ixset, but in turn requires more GHC
+ extensions.
+ .
+ At the moment, the two packages are relatively compatible. As a consequence of
+ the more precise types, a few manual tweaks are necessary when switching from
+ one to the other, but the interface is mostly the same.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

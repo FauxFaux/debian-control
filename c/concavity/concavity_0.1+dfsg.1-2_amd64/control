@@ -1,0 +1,24 @@
+Package: concavity
+Version: 0.1+dfsg.1-2
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 577
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5)
+Suggests: conservation-code, pymol
+Section: science
+Priority: optional
+Homepage: http://compbio.cs.princeton.edu/concavity/
+Description: predictor of protein ligand binding sites from structure and conservation
+ ConCavity predicts protein ligand binding sites by combining evolutionary
+ sequence conservation and 3D structure.
+ .
+ ConCavity takes as input a PDB format protein structure and optionally
+ files that characterize the evolutionary sequence conservation of the chains
+ in the structure file.
+ .
+ The following result files are produced by default:
+  * Residue ligand binding predictions for each chain (*.scores).
+  * Residue ligand binding predictions in a PDB format file (residue
+    scores placed in the temp. factor field, *_residue.pdb).
+  * Pocket prediction locations in a DX format file (*.dx).
+  * PyMOL script to visualize the predictions (*.pml).

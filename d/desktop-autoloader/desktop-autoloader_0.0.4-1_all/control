@@ -1,0 +1,36 @@
+Package: desktop-autoloader
+Version: 0.0.4-1
+Architecture: all
+Maintainer: Debian Edu Packaging Team <debian-edu-pkg-team@lists.alioth.debian.org>
+Installed-Size: 40
+Depends: adduser, xvfb
+Suggests: x11vnc
+Section: misc
+Priority: optional
+Homepage: https://code.it-zukunft-schule.de/cgit/desktop-autoloader/about/
+Description: Accelerate Diskless Workstation systems by pre-loading a dummy Desktop Session
+ This package is for diskless Linux clients as you often find them in
+ school class rooms running an LTSP based fat client environment.
+ .
+ The logon into and the initial session startup on such diskless
+ workstations can be considerably slow, because all applications need to
+ be fetched from one server hosting the fat clients' filesystem.
+ .
+ The situation gets worse, if 24 computers in the same class room get
+ switched on simultaneously or the teacher tells the students to open the
+ same application (e.g. Libreoffice) at the same time.
+ .
+ However, this issue only occurs to the first student using a diskless
+ workstation that day. If the diskless machine is equipped with enough
+ RAM, other students see all applications being launched within a couple
+ of seconds.
+ .
+ Reason: once an application has been launched, it ends up in the
+ diskless machine's filesystem cache in RAM.
+ .
+ So, this package pre-loads a desktop session of the admin's choice plus
+ some extra popular applications. It does this before 7:30 in the
+ morning, only. So, combine this package with Wake-On-LAN or an RTC Timer
+ to make sure systems are booted before 7:30am. With such a setup in
+ place, the diskless machines will have been prepared for work before the
+ first students enter the class room.

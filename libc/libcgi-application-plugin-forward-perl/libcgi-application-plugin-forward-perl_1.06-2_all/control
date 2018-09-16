@@ -1,0 +1,17 @@
+Package: libcgi-application-plugin-forward-perl
+Version: 1.06-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: perl, libcgi-application-perl
+Suggests: libcgi-application-plugin-autorunmode-perl
+Breaks: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Replaces: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Application-Plugin-Forward
+Description: plugin to allow one run mode pass control to another
+ CGI::Application::Plugin::Forward adds the forward method to your
+ CGI::Application module, which passes control to another run mode and returns
+ its output. This is equivalent to calling $self->$other_runmode, except that
+ CGI::Application's internal value of the current run mode is updated.

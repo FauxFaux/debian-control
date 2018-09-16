@@ -1,0 +1,28 @@
+Package: cudf-tools
+Source: cudf (0.7-3)
+Version: 0.7-3+b2
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 1331
+Depends: ocaml-base-nox, libc6 (>= 2.17)
+Section: devel
+Priority: optional
+Homepage: http://www.mancoosi.org/cudf/
+Description: command line tools for package upgrade problem descriptions
+ A CUDF document describe an upgrade problem, as faced by package
+ managers in popular package-based GNU/Linux distributions.
+ .
+ A CUDF document consists of a package universe and of a user request.
+ The package universe describes all packages known to the package
+ manager, a subset of which (the package status) denotes the package
+ being currently installed on the target machine.  The user request
+ denotes a change to the package status as requested by the user.
+ .
+ A CUDF document is naturally complemented by a solution describing
+ the resulting package status (if any) implementing the user request,
+ as found by a package manager.
+ .
+ This package contains command line tools to manipulate CUDF and
+ related documents. In particular it contains cudf-check, which
+ enables checking of document properties such as installation
+ consistency and matching of problems with their solutions.

@@ -1,0 +1,18 @@
+Package: golang-github-jacobsa-syncutil-dev
+Source: golang-github-jacobsa-syncutil
+Version: 0.0~git20150615-3
+Architecture: all
+Maintainer: pkg-go <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 32
+Depends: golang-github-jacobsa-oglematchers-dev, golang-github-jacobsa-ogletest-dev, golang-golang-x-net-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/jacobsa/syncutil
+Description: code that supplements the Go stdlib sync package
+ This package contains code that supplements the sync package from the Go
+ standard library. In particular:
+ .
+  * Bundle, which makes it easy to write code that spawns multiple
+    cancellation-aware workers that may fail.
+  * InvariantMutex, which makes it possible to automatically check your
+    invariants at lock and unlock time.

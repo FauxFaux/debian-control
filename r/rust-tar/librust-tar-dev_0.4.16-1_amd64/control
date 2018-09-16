@@ -1,0 +1,22 @@
+Package: librust-tar-dev
+Source: rust-tar
+Version: 0.4.16-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 291
+Depends: librust-filetime-0.2+default-dev, librust-libc-0.2+default-dev, librust-redox-syscall-0.1+default-dev
+Recommends: librust-tar+default-dev (= 0.4.16-1)
+Suggests: librust-tar+xattr-dev (= 0.4.16-1)
+Provides: librust-tar-0-dev (= 0.4.16-1), librust-tar-0.4-dev (= 0.4.16-1), librust-tar-0.4.16-dev (= 0.4.16-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/alexcrichton/tar-rs
+Description: A TAR file reader and writer - Rust source code
+ This library does not currently handle compression, but it is abstract over all
+ I/O readers and writers. Additionally, great lengths are taken to ensure that
+ the entire contents are never required to be entirely resident in memory all at
+ once.
+ .
+ This package contains the source for the Rust tar crate, packaged by debcargo
+ for use with cargo and dh-cargo.

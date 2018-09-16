@@ -1,0 +1,25 @@
+Package: ecryptfs-utils
+Version: 111-4
+Architecture: amd64
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 396
+Depends: libassuan0 (>= 2.0.1), libc6 (>= 2.14), libecryptfs1, libgpg-error0 (>= 1.14), libgpgme11 (>= 1.1.2), libkeyutils1 (>= 1.4), libpam0g (>= 0.99.7.1), libtspi1 (>= 0.3.1), gettext-base, keyutils, libpam-runtime
+Suggests: cryptsetup
+Section: misc
+Priority: optional
+Homepage: https://launchpad.net/ecryptfs
+Description: ecryptfs cryptographic filesystem (utilities)
+ eCryptfs is a POSIX-compliant enterprise-class stacked cryptographic
+ filesystem for Linux.
+ .
+ It provides advanced key management and policy features. eCryptfs stores
+ cryptographic metadata in the header of each file written, so that encrypted
+ files can be copied between hosts; the file will be decryptable with the
+ proper key, and there is no need to keep track of any additional information
+ aside from what is already in the encrypted file itself. Think of eCryptfs as
+ a sort of "gnupgfs".
+ .
+ eCryptfs is a native Linux filesystem. The kernel module component of
+ eCryptfs is part of the Linux kernel since 2.6.19.
+ .
+ This package contains the userland utilities.

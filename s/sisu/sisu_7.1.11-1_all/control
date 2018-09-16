@@ -1,0 +1,54 @@
+Package: sisu
+Version: 7.1.11-1
+Architecture: all
+Maintainer: SiSU Project <sisu@lists.sisudoc.org>
+Installed-Size: 5341
+Depends: ruby | ruby-interpreter, rsync, unzip, zip, xz-utils
+Recommends: sisu-pdf, sisu-sqlite, sisu-postgresql, imagemagick | graphicsmagick, keychain, openssh-client | lsh-client, openssl, po4a, qrencode, rake, ruby-rmagick, ruby-thor, tidy, tree, vim-addon-manager
+Suggests: sisu-markup-samples, lv, calibre, pinfo, poedit, texinfo, trang
+Section: text
+Priority: optional
+Homepage: http://www.sisudoc.org/
+Description: documents - structuring, publishing in multiple formats and search
+ SiSU is a lightweight markup based, command line oriented, document
+ structuring, publishing and search, static content tool for document
+ collections.
+ .
+ With minimal preparation of a plain-text (UTF-8) file, using sisu markup syntax
+ in your text editor of choice, SiSU can generate various document formats, most
+ of which share a common object numbering system for locating content, including
+ plain text, HTML, XHTML, XML, EPUB, OpenDocument text (ODF:ODT), LaTeX, PDF
+ files, and populate an SQL database with objects (roughly paragraph-sized
+ chunks) so searches may be performed and matches returned with that degree of
+ granularity. Think of being able to finely match text in documents, using
+ common object numbers, across different output formats and across languages if
+ you have translations of the same document. For search, your criteria is met
+ by these documents at these locations within each document (equally relevant
+ across different output formats and languages). To be clear (if obvious) page
+ numbers provide none of this functionality. Object numbering is particularly
+ suitable for "published" works (finalized texts as opposed to works that are
+ frequently changed or updated) for which it provides a fixed means of reference
+ of content. Document outputs can also share provided semantic meta-data.
+ .
+ SiSU also provides concordance files, document content certificates and
+ manifests of generated output and the means to make book indexes that make use
+ of its object numbering.
+ .
+ Syntax highlighting and folding (outlining) files are provided for the Vim and
+ Emacs editors.
+ .
+ Dependencies for various features are taken care of in sisu related packages.
+ The package sisu-complete installs the whole of SiSU.
+ .
+ Additional document markup samples are provided in the package
+ sisu-markup-samples which is found in the non-free archive. The licenses for
+ the substantive content of the marked up documents provided is that provided
+ by the author or original publisher.
+ .
+ SiSU uses utf-8 & parses left to right. Currently supported languages:
+ am bg bn br ca cs cy da de el en eo es et eu fi fr ga gl he hi hr hy ia is it
+ ja ko la lo lt lv ml mr nl nn no oc pl pt pt_BR ro ru sa se sk sl sq sr sv ta
+ te th tk tr uk ur us vi zh (see XeTeX polyglossia & cjk)
+ .
+ SiSU works well under po4a translation management, for which an administrative
+ sample Rakefile is provided with sisu_manual under markup-samples.

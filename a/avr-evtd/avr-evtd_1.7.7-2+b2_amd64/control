@@ -1,0 +1,21 @@
+Package: avr-evtd
+Source: avr-evtd (1.7.7-2)
+Version: 1.7.7-2+b2
+Architecture: amd64
+Maintainer: Rogério Brito <rbrito@ime.usp.br>
+Installed-Size: 72
+Depends: libc6 (>= 2.7)
+Section: misc
+Priority: optional
+Homepage: http://sourceforge.net/projects/ppc-evtd
+Description: AVR watchdog daemon for Linkstation/Kuroboxes
+ avr-evtd is a simple and small user space interface to the Linkstation
+ AVR micro-controller. It doesn't have a lot of special features, but
+ it's main task is to provide 'keep-alive' messages to the Linkstation's
+ on-board AVR device.
+ .
+ This device controls/monitors the fan, various LEDs, timed power up and
+ two buttons. This daemon provides the necessary initialisation to the
+ device and also stimulates the LEDs depending on various fault
+ conditions. It also monitors a power button (located at the front) and
+ a reset button (located at the rear).

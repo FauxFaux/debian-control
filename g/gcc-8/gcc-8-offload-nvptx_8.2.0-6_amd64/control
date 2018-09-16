@@ -1,0 +1,14 @@
+Package: gcc-8-offload-nvptx
+Source: gcc-8
+Version: 8.2.0-6
+Architecture: amd64
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 52407
+Depends: gcc-8-base (= 8.2.0-6), gcc-8 (= 8.2.0-6), libc6-dev (>= 2.13-5), nvptx-tools, libgomp-plugin-nvptx1 (>= 8.2.0-6), libc6 (>= 2.14), libgmp10 (>= 2:5.0.1~), libmpc3, libmpfr6 (>= 3.1.3), zlib1g (>= 1:1.1.4)
+Section: devel
+Priority: optional
+Homepage: http://gcc.gnu.org/
+Description: GCC offloading compiler to NVPTX
+ The package provides offloading support for NVidia PTX.  OpenMP and OpenACC
+ programs linked with -fopenmp will by default add PTX code into the binaries,
+ which can be offloaded to NVidia PTX capable devices if available.

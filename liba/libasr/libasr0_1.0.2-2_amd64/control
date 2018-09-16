@@ -1,0 +1,16 @@
+Package: libasr0
+Source: libasr
+Version: 1.0.2-2
+Architecture: amd64
+Maintainer: Ryan Kavanagh <rak@debian.org>
+Installed-Size: 81
+Depends: libc6 (>= 2.17)
+Section: libs
+Priority: optional
+Homepage: https://github.com/OpenSMTPD/libasr
+Description: asynchronous DNS resolver
+ libasr provides a simple interface for asynchronous address resolution and
+ nameserver querying. It should be used in place of the classical resolver
+ functions of libc when blocking is not desirable. libasr is thread-safe and
+ lock-free internally except for the two atypical use cases listed in
+ asr_run(3).

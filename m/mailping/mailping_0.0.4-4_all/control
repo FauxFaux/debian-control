@@ -1,0 +1,19 @@
+Package: mailping
+Version: 0.0.4-4
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 140
+Depends: munin-node, adduser, python:any (<< 2.8), python:any (>= 2.7~)
+Section: mail
+Priority: optional
+Description: monitor email service availability and functioning
+ Monitor email service availability and functioning. Tests the whole
+ route from SMTP submission to local delivery, not just whether an
+ SMTP server accepts TCP connections.
+ .
+ Multiple email servers can be tested by creating a remote alias that
+ points back to a local address, and sending test emails to it.
+ .
+ The results of this monitoring are available as graphs via Munin
+ plugins, and can be connected to Nagios to send alerts when the test
+ emails no longer get delivered, or if the delivery takes too long.

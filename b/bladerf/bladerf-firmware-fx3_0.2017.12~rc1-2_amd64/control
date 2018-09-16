@@ -1,0 +1,23 @@
+Package: bladerf-firmware-fx3
+Source: bladerf
+Version: 0.2017.12~rc1-2
+Architecture: amd64
+Maintainer: A. Maitland Bottoms <bottoms@debian.org>
+Installed-Size: 38
+Depends: ca-certificates, libbladerf1, wget
+Recommends: bladerf
+Suggests: bladerf-fpga
+Provides: bladerf-firmware
+Section: contrib/comm
+Priority: optional
+Homepage: http://www.nuand.com/bladeRF
+Description: nuand bladeRF firmware downloader (FX3)
+ This empty package will, at the time of installation, download an appropriate
+ firmware image for using the nuand bladeRF with a Cypress FX3 USB
+ controller.  The image will be downloaded from http://nuand.com/fx3/
+ and saved to /usr/share/Nuand/bladeRF.
+ .
+ This bitstream will work for either the nuand bladeRF x40 or the x115.
+ .
+ Note that this will not upgrade the bladeRF itself.  That can be done
+ with the bladeRF-cli utility.

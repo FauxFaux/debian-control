@@ -1,0 +1,26 @@
+Package: ferm
+Version: 2.4-1
+Architecture: all
+Maintainer: Alexander Wirt <formorer@debian.org>
+Installed-Size: 302
+Depends: debconf (>= 1.2.0), iptables (>= 1.3), lsb-base (>= 3.0-6), perl (>= 5.6), init-system-helpers (>= 1.18~)
+Recommends: libnet-dns-perl
+Section: net
+Priority: optional
+Homepage: http://ferm.foo-projects.org/
+Description: maintain and setup complicated firewall rules
+ ferm is a frontend for iptables. It reads the rules from a
+ structured configuration file and calls iptables(8) to insert them
+ into the running kernel.
+ .
+ ferm's goal is to make firewall rules easy to write and easy to
+ read. It tries to reduce the tedious task of writing down rules, thus
+ enabling the firewall administrator to spend more time on developing
+ good rules than the proper implementation of the rule.
+ .
+ To achieve this, ferm uses a simple but powerful configuration
+ language, which allows variables, functions, arrays, blocks. It also
+ allows you to include other files, allowing you to create libraries
+ of commonly used structures and functions.
+ .
+ ferm, pronounced "firm", stands for "For Easy Rule Making".

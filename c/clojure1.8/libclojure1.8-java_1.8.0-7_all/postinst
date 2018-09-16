@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]
+then
+        CLOJUREVER=1.8
+        PRIORITY=180
+        update-alternatives --install /usr/share/java/clojure.jar \
+            libclojure /usr/share/java/clojure-${CLOJUREVER}.jar ${PRIORITY}
+fi
+

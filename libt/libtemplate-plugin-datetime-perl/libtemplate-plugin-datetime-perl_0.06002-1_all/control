@@ -1,0 +1,22 @@
+Package: libtemplate-plugin-datetime-perl
+Version: 0.06002-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: perl, libdatetime-format-strptime-perl, libdatetime-perl, libtemplate-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Template-Plugin-DateTime
+Description: plugin to use DateTime objects in the Template Toolkit
+ Basic usage for Template::Plugin::DateTime is as follows:
+ .
+ USE date = DateTime(year = 2004, month = 4, day = 1);
+ .
+ -OR-
+ .
+ by passing a pattern to parse a date by string using
+ DateTime::Format::Strptime
+ .
+ USE date = DateTime(from_string => '2008-05-30 00:00:00',
+                     pattern     => '%Y-%m-%d %H:%M:%S',
+                     time_zone   => 'America/New_York');

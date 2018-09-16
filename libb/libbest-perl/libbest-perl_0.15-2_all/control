@@ -1,0 +1,20 @@
+Package: libbest-perl
+Version: 0.15-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 37
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Best
+Description: fallbackable module loader
+ Best.pm attempts to load Perl modules from a list, stopping at the first
+ successful load and failing only if no alternative was found.
+ .
+ Often there are several possible providers of some functionality your program
+ needs, but you don't know which is available at the run site. For example,
+ one of the modules may be implemented with XS, or not in the core Perl
+ distribution and thus not necessarily installed. With Best.pm, this can
+ be as simple as:
+ .
+  use Best qw/YAML::Syck YAML/;

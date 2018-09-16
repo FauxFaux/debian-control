@@ -1,0 +1,22 @@
+Package: gir1.2-gtk-vnc-2.0
+Source: gtk-vnc
+Version: 0.9.0-1
+Architecture: amd64
+Maintainer: Debian Libvirt Maintainers <pkg-libvirt-maintainers@lists.alioth.debian.org>
+Installed-Size: 89
+Depends: gir1.2-glib-2.0, gir1.2-gtk-3.0, libgtk-vnc-2.0-0 (>= 0.7.1), libgvnc-1.0-0 (>= 0.5.3)
+Provides: gir1.2-gvnc-1.0
+Section: introspection
+Priority: optional
+Multi-Arch: same
+Homepage: https://wiki.gnome.org/Projects/gtk-vnc
+Description: GObject introspection data for GTK-VNC
+ This package contains introspection data for the GTK-VNC library.
+ .
+ It is built using coroutines, allowing it to be completely asynchronous while
+ remaining single threaded. It supports RFB protocols 3.3 through 3.8 and the
+ VeNCrypt authentication extension providing SSL/TLS encryption with x509
+ certificate authentication.
+ .
+ It can be used by packages using the GIRepository format to generate
+ dynamic bindings.

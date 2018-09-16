@@ -1,0 +1,22 @@
+Package: php-net-nntp
+Version: 1.5.0-2
+Architecture: all
+Maintainer: Debian PHP PEAR Maintainers <pkg-php-pear@lists.alioth.debian.org>
+Installed-Size: 230
+Depends: php-common, php-pear (>= 1.4.0)
+Recommends: php-log (>= 1.8.7)
+Section: php
+Priority: optional
+Homepage: http://pear.php.net/package/Net_NNTP/
+Description: NNTP implementation
+ PEAR's package for communication with NNTP/Usenet servers.
+ Net_NNTP handles the connection and protocol level commands (RFC977),
+ including many commonly implemented non-standard commands (RFC2980).
+ Net_NNTP includes an unserfriendly API for intermediate user, who don't want
+ to work directly at the command level. However, Net_NNTP does require some
+ knowlege about the NNTP protocol (RFC 977), and general knowledge about email
+ (RFC(2)822) and MIME (2045-2048), since any handling of both content and
+ headers is left up to the user!
+ The protocol implementation does not parse the actual article data, but at the
+ command level it splits returned data at protocol specified boundaries where
+ appropriate.

@@ -1,0 +1,23 @@
+Package: texvc
+Source: mediawiki-math
+Version: 2:3.0.0+git20160613-2
+Architecture: amd64
+Maintainer: MediaWiki packaging team <mediawiki-debian@lists.wikimedia.org>
+Installed-Size: 1057
+Depends: libc6 (>= 2.17), texlive-latex-base, ghostscript, imagemagick, texlive-latex-extra
+Recommends: latex-cjk-all
+Enhances: mediawiki
+Conflicts: mediawiki-math (<< 1:1.18), mediawiki-math-texvc
+Replaces: mediawiki-math (<< 1:1.18), mediawiki-math-texvc
+Section: web
+Priority: optional
+Homepage: https://www.mediawiki.org/wiki/Extension:Math
+Description: validates and converts LaTeX expressions into HTML, MathML or PNG
+ texvc takes LaTeX-compatible equations and produces formatted output in HTML,
+ MathML, and (via LaTeX/dvipng) rasterized PNG images.
+ .
+ Input data is parsed and scrutinized for safety, and the output includes an
+ estimate of whether the code is simple enough that HTML rendering will look
+ acceptable.
+ .
+ texvc was written for math support in MediaWiki, but can be used standalone.

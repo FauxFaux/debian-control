@@ -1,0 +1,19 @@
+Package: python-versuchung
+Version: 1.1-3
+Architecture: all
+Maintainer: Christoph Egger <christoph@debian.org>
+Installed-Size: 760
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~), libjs-sphinxdoc (>= 1.0)
+Section: python
+Priority: optional
+Homepage: https://github.com/stettberger/versuchung
+Description: toolbox for reproducible research
+ Versuchung is a toolbox for reproducible research. It automates the
+ execution of scripted experiment workflows, while keeping track of
+ input parameters, output parameters, and the resulting datasets.
+ .
+ Experiments, which are expressed as python scripts, can be chained:
+ The output parameter of one experiment can be used as an input
+ parameter for another experiment. During the whole work-flow,
+ versuchung keeps track of all input parameters and condeses the
+ information into a SHA1 sum that identifies the resulting dataset.

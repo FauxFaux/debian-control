@@ -1,0 +1,25 @@
+Package: libclass-dbi-loader-relationship-perl
+Version: 1:1.2-5
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: perl, libclass-dbi-loader-perl, liblingua-en-inflect-number-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Class-DBI-Loader-Relationship
+Description: Easier relationship specification in Class::DBI::Loader
+ The Class::DBI::Loader::Relationship module acts as a mix-in, adding the
+ relationship() method to Class::DBI::Loader. Since Class::DBI::Loader knows
+ how to map between table names and class names, there ought to be no need to
+ replicate the names.
+ .
+ In addition, it is common (but not universal) to want reverse
+ relationships defined for has-many relationships, and for has-a
+ relationships to be defined for the linkages surrounding a
+ many-to-many table.
+ .
+ The aim of this module is to simplify the declaration of common
+ database relationships by providing both of these features.
+ .
+ The relationship takes a string. It recognises table names (singular
+ or plural, for convenience) and extracts them from the "sentence".

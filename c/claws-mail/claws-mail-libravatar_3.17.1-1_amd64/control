@@ -1,0 +1,23 @@
+Package: claws-mail-libravatar
+Source: claws-mail
+Version: 3.17.1-1
+Architecture: amd64
+Maintainer: Ricardo Mones <mones@debian.org>
+Installed-Size: 244
+Depends: libatk1.0-0 (>= 1.12.4), libc6 (>= 2.7), libcairo2 (>= 1.2.4), libcurl3-gnutls (>= 7.16.2), libdb5.3, libetpan20 (>= 1.0), libexpat1 (>= 2.0.1), libfontconfig1 (>= 2.12.6), libfreetype6 (>= 2.2.1), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.16.0), libgnutls30 (>= 3.5.0), libgtk2.0-0 (>= 2.12.0), liblockfile1 (>= 1.0), libpango-1.0-0 (>= 1.14.0), libpangocairo-1.0-0 (>= 1.14.0), libpangoft2-1.0-0 (>= 1.14.0), libsasl2-2, zlib1g (>= 1:1.1.4), claws-mail (= 3.17.1-1)
+Section: mail
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.claws-mail.org
+Description: Display sender avatar from a libravatar server
+ This plugin for the Claws Mail mailer allows retrieval of profile
+ images from libravatar servers, either federated servers (running
+ on sender's domain) or the main libravatar.org server.
+ .
+ Currently supports all default missing icon modes on libravatar.org
+ service, and makes extensive use of disk caching to minimize the
+ number of network requests.
+ .
+ Nevertheless, it may add several network requests per message, so
+ if you're on a high latency network you may experience some delay
+ displaying messages.

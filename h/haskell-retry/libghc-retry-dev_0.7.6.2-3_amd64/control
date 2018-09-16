@@ -1,0 +1,26 @@
+Package: libghc-retry-dev
+Source: haskell-retry
+Version: 0.7.6.2-3
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 383
+Depends: libghc-base-dev-4.10.1.0-35a7f, libghc-data-default-class-dev-0.1.2.0-ef3b6, libghc-exceptions-dev-0.8.3-23c90, libghc-ghc-prim-dev-0.5.1.1-c8f3d, libghc-random-dev-1.1-bddaa, libghc-transformers-dev-0.5.2.0-e0457, libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-retry-doc, libghc-retry-prof
+Provides: libghc-retry-dev-0.7.6.2-4db77
+Section: haskell
+Priority: optional
+Homepage: https://github.com/Soostone/retry
+Description: Retry combinators for monadic actions that may fail
+ This package exposes combinators that can wrap arbitrary monadic actions. They
+ run the action and potentially retry running it with some configurable delay
+ for a configurable number of times.
+ .
+ The purpose is to make it easier to work with IO and especially network IO
+ actions that often experience temporary failure and warrant retrying of the
+ original action. For example, a database query may time out for a while, in
+ which case we should hang back for a bit and retry the query instead of simply
+ raising an exception.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: retry-0.7.6.2-KF6jOphFE1GFKlVKoYkGtR

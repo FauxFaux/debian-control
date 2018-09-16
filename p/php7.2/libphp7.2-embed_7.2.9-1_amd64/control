@@ -1,0 +1,26 @@
+Package: libphp7.2-embed
+Source: php7.2
+Version: 7.2.9-1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 4832
+Depends: libmagic1, libpcre3 (>= 2:8.35), mime-support, php7.2-cli, php7.2-common (= 7.2.9-1), php7.2-json, php7.2-opcache, tzdata, ucf, libargon2-1 (>= 0~20171227), libc6 (>= 2.27), libsodium23 (>= 1.0.14), libssl1.1 (>= 1.1.0), libxml2 (>= 2.8.0), zlib1g (>= 1:1.1.4)
+Suggests: php-pear
+Provides: libphp-embed, phpapi-20170718
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: HTML-embedded scripting language (Embedded SAPI library)
+ This package provides the library /usr/lib/libphp7.2.so which can
+ be used by application developers to embed PHP scripting functionality.
+ .
+ The following extensions are built in: Core date filter hash libxml openssl
+ pcntl pcre Reflection session sodium SPL standard zlib.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+ .
+ WARNING: The embed SAPI is experimental and there's no guarantee that
+ the API/ABI will be kept compatible even between minor releases.  You
+ have been warned.

@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+# there are no guarantees on unpack order, so when the pyshared egg
+# folder is extracted before the symlinks in /usr/lib/.../dist-packages
+# the upgrade will fail due to policy 6.6.4  when there are more than
+# one supported python version as it will try to overwrite a directory
+# after following the symlink
+# => remove egg symlink installed by 0.6.1-1 before unpacking
+if [ "$1" = upgrade ] && dpkg --compare-versions "$2" lt "0.6.1-4"; then
+  for f in /usr/lib/python2.*; do
+    # if egg is a link and not pointing to a directory
+    if [ -L "$f/dist-packages/foolscap-0.6.1.egg-info" ] &&
+       [ -f "$f/dist-packages/foolscap-0.6.1.egg-info" ]; then
+      rm -f "$f/dist-packages/foolscap-0.6.1.egg-info";
+    fi
+  done
+fi
+
+

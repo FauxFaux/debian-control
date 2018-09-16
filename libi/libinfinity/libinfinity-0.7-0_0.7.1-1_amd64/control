@@ -1,0 +1,22 @@
+Package: libinfinity-0.7-0
+Source: libinfinity
+Version: 0.7.1-1
+Architecture: amd64
+Maintainer: Philipp Kern <pkern@debian.org>
+Installed-Size: 1133
+Pre-Depends: dpkg (>= 1.15.6)
+Depends: libavahi-client3 (>= 0.6.16), libavahi-common3 (>= 0.6.16), libc6 (>= 2.14), libdaemon0 (>= 0.10), libglib2.0-0 (>= 2.41.1), libgnutls30 (>= 3.5.6), libgsasl7 (>= 1.1), libpam0g (>= 0.99.7.1), libxml2 (>= 2.7.4)
+Breaks: infinoted (<< 0.6.7-2)
+Replaces: infinoted (<< 0.6.7-2)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://gobby.github.io
+Description: infinote-based collaborative editing
+ libinfinity is library to build collaborative text editors. Changes
+ to the text buffers are synced to all other clients over a central server.
+ Even though a central server is involved, the local user sees his changes
+ applied instantly and the merging is done on the individual clients.
+ .
+ This package contains the shared object files used at runtime by
+ libinfinity-based application.

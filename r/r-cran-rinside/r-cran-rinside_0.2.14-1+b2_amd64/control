@@ -1,0 +1,30 @@
+Package: r-cran-rinside
+Source: r-cran-rinside (0.2.14-1)
+Version: 0.2.14-1+b2
+Architecture: amd64
+Maintainer: Dirk Eddelbuettel <edd@debian.org>
+Installed-Size: 756
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), r-base-core (>= 3.5.0-5), r-api-3.5, r-cran-rcpp
+Section: gnu-r
+Priority: optional
+Homepage: http://dirk.eddelbuettel.com/code/rinside.html
+Description: GNU R package to embed R in C++ application
+ The 'RInside' packages makes it easier to have "R inside" your C++
+ application by providing a C++ wrapper class providing the R
+ interpreter.
+ .
+ As R itself is embedded into your application, a shared library build
+ of R is required. This works on Linux, OS X and even on Windows
+ provided you use the same tools used to build R itself.
+ .
+ Numerous examples are provided in the eight subdirectories of the
+ examples/ directory of the installed package: standard, mpi (for
+ parallel computing) qt (showing how to embed 'RInside' inside a Qt
+ GUI application), wt (showing how to build a "web-application" using
+ the Wt toolkit), armadillo (for 'RInside' use with 'RcppArmadillo')
+ and eigen (for 'RInside' use with 'RcppEigen').  The example use
+ GNUmakefile(s) with GNU extensions, so a GNU make is required (and
+ will use the GNUmakefile automatically).
+ .
+ Doxygen-generated documentation of the C++ classes is available at
+ the 'RInside' website as well.

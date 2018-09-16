@@ -1,0 +1,52 @@
+Package: golang-github-tendermint-go-wire-dev
+Source: go-wire
+Version: 1.0~rc+git20161223.40.2f3b7aa-2
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 145
+Depends: golang-github-tendermint-go-common-dev, golang-github-tendermint-go-logger-dev, golang-golang-x-crypto-dev
+Section: devel
+Priority: extra
+Homepage: http://github.com/tendermint/go-wire
+Description: Go bindings for the Wire encoding protocol
+ This software implements Go bindings for the Wire
+ encoding protocol. The goal of the Wire encoding
+ protocol is to be a simple language-agnostic
+ encoding protocol for rapid prototyping of
+ blockchain applications.
+ .
+  * Supported types:
+   - Primary types: uvarint, varint, byte,
+     uint[8,16,32,64], int[8,16,32,64], string,
+     and time types are supported
+   - Arrays: Arrays can hold items of any arbitrary
+     type. For example, byte-arrays and
+     byte-array-arrays are supported.
+   -  Structs: Struct fields are encoded by value
+     (without the key name) in the order that they
+     are declared in the struct. In this way it is
+     similar to Apache Avro.
+   - Interfaces: Interfaces are like union types
+     where the value can be any non-interface type.
+     The actual value is preceded by a single "type
+     byte" that shows which concrete is encoded.
+   - Pointers: Pointers are like optional fields.
+     The first byte is 0x00 to denote a null pointer
+     (e.g. no value), otherwise it is 0x01.
+  * Unsupported types:
+   - Maps: Maps are not supported because for most
+     languages, key orders are nondeterministic. If
+     you need to encode/decode maps of arbitrary
+     key-value pairs, encode an array of {key,value}
+     structs instead.
+   - Floating points: Floating point number types are
+     discouraged because of reasons. If you need to
+     use them, use the field tag wire:"unsafe".
+   - Enums: Enum types are not supported in all
+     languages, and they're simple enough to model
+     as integers anyways.
+ .
+ A compatible (and slower) JSON codec is included.
+ .
+ This package includes the source code and development
+ files to compile applications.

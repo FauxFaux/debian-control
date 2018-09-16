@@ -1,0 +1,20 @@
+Package: libtcpcrypt0
+Source: tcpcrypt (0.5-1)
+Version: 0.5-1+b1
+Architecture: amd64
+Maintainer: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+Installed-Size: 38
+Depends: libc6 (>= 2.14)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://tcpcrypt.org/
+Description: Library to retrieve the tcpcrypt session ID where available
+ Tcpcrypt offers opportunistic security for TCP network traffic.  All
+ traffic between two tcpcrypt-enabled peers will be encrypted to
+ protect against passive monitoring.  tcpcrypt also exposes a strong
+ session identifier to tcpcrypt-aware clients and servers, which can
+ be used as a hook for authentication.
+ .
+ This package contains a library useful for clients and servers
+ interested in using the session ID for higher-level authentication.

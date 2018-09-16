@@ -1,0 +1,28 @@
+Package: libxdffileio0-dbg
+Source: xdffileio (0.3-1)
+Version: 0.3-1+b2
+Architecture: amd64
+Maintainer: Nicolas Bourdaud <nicolas.bourdaud@gmail.com>
+Installed-Size: 97
+Depends: libxdffileio0 (= 0.3-1+b2)
+Section: debug
+Priority: extra
+Multi-Arch: same
+Homepage: http://cnbi.epfl.ch/software/xdffileio.html
+Description: Library to read/write EEG data file formats (debugging symbols)
+ xdffileio is a library that provides a unified interface for writing and
+ reading various biosignal file formats in realtime (i.e. streaming). It has
+ been designed to provide a flexible, consistent and generic interface to
+ all supported file formats while minimizing the overhead the function
+ calls: the heaviest operations (type casting, scaling and formatting) are
+ offloaded into a separated thread. This design makes its particularly
+ suitable to be directly used in a data acquisition loop (like in
+ electrophysiology recording or in Brain-Computer Interfaces (BCI)).
+ .
+ The genericity of the interface makes trivial various operations like
+ transformation of a recorded file or its conversion to another file format.
+ xdffileio currently supports EDF, BDF, GDF1 and GDF2 file formats and more
+ will be added in future.
+ .
+ This package provides the debugging symbols of the library.
+Build-Ids: 02a6654273b2b66b33a076a53d46e6589791010f

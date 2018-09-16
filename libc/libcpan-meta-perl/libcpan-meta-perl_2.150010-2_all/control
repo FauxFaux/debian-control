@@ -1,0 +1,20 @@
+Package: libcpan-meta-perl
+Version: 2.150010-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 370
+Depends: perl, perl (>= 5.17.1) | libcpan-meta-requirements-perl (>= 2.121), perl (>= 5.19.9) | libcpan-meta-yaml-perl (>= 0.011), perl (>= 5.21.5) | libjson-pp-perl (>= 2.27300)
+Breaks: libparse-cpan-meta-perl (<< 1.4414+)
+Replaces: libparse-cpan-meta-perl (<< 1.4414+)
+Provides: libparse-cpan-meta-perl (= 2.150010)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CPAN-Meta
+Description: Perl module to access CPAN distributions metadata
+ Software distributions released to the CPAN include a META.json or, for older
+ distributions, META.yml which describes the distribution, its contents, and
+ the requirements for building and installing the distribution. The data
+ structure stored in the META.json file is described in CPAN::Meta::Spec.
+ .
+ CPAN::Meta provides a simple class to represent this distribution metadata
+ (or distmeta), along with some helpful methods for interrogating that data.

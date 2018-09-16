@@ -1,0 +1,36 @@
+Package: python-tables-dbg
+Source: pytables (3.4.4-1)
+Version: 3.4.4-1+b1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 9018
+Depends: python-numpy (>= 1:1.14.3), python-numpy-abi9, python-dbg (<< 2.8), python-dbg (>= 2.7~), python-dbg:any (<< 2.8), python-dbg:any (>= 2.7~), libblosc1, libbz2-1.0, libc6 (>= 2.14), libhdf5-100, liblzo2-2, python-tables (= 3.4.4-1), python-tables-lib (= 3.4.4-1+b1), python-numpy-dbg, python-numexpr-dbg
+Suggests: python-tables-doc, python-netcdf4
+Section: debug
+Priority: optional
+Homepage: http://www.pytables.org
+Description: hierarchical database for Python based on HDF5 (debug extension)
+ PyTables is a package for managing hierarchical datasets and designed
+ to efficiently cope with extremely large amounts of data.
+ .
+ It is built on top of the HDF5 library and the NumPy package. It
+ features an object-oriented interface that, combined with C extensions
+ for the performance-critical parts of the code (generated using
+ Cython), makes it a fast, yet extremely easy to use tool for
+ interactively save and retrieve very large amounts of data. One
+ important feature of PyTables is that it optimizes memory and disk
+ resources so that they take much less space (between a factor 3 to 5,
+ and more if the data is compressible) than other solutions, like for
+ example, relational or object oriented databases.
+ .
+  - Compound types (records) can be used entirely from Python (i.e. it
+    is not necessary to use C for taking advantage of them).
+  - The tables are both enlargeable and compressible.
+  - I/O is buffered, so you can get very fast I/O, specially with
+    large tables.
+  - Very easy to select data through the use of iterators over the
+    rows in tables. Extended slicing is supported as well.
+  - It supports the complete set of NumPy objects.
+ .
+ This package contains the extension built for the Python 2 debug interpreter.
+Build-Ids: 58054060961979ce523dddbbf1f5063dadb3a538 7539bbc12cf23282f92b68376b0fbe4ef306e76a 76dd6042576ef0e12fc5332383205bdefc5add78 adc3c151de0ca259fbe93955bde13f37b3801492 b56bfc8748405dc75b96e719ebcec15bbfc37929 b5a0a8598de96e58e8ac583550166b6a0f0527ff c7c14c75d8424eed84a212d90eb81d19ad6201fb d43fe09cf7701065b55c7f7b972b454402ffb947

@@ -1,0 +1,17 @@
+Package: miniasm
+Version: 0.3+dfsg-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 70
+Depends: libc6 (>= 2.14), zlib1g (>= 1:1.1.4)
+Recommends: minimap
+Section: science
+Priority: optional
+Homepage: https://github.com/lh3/miniasm
+Description: ultrafast de novo assembler for long noisy DNA sequencing reads
+ Miniasm is an experimental very fast OLC-based de novo assembler for noisy
+ long reads. It takes all-vs-all read self-mappings (typically by minimap)
+ as input and outputs an assembly graph in the GFA format. Different from
+ mainstream assemblers, miniasm does not have a consensus step. It simply
+ concatenates pieces of read sequences to generate the final unitig sequences.
+ Thus the per-base error rate is similar to the raw input reads.

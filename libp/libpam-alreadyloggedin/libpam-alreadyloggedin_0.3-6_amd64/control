@@ -1,0 +1,16 @@
+Package: libpam-alreadyloggedin
+Version: 0.3-6
+Architecture: amd64
+Maintainer: Jakub Wilk <jwilk@debian.org>
+Installed-Size: 64
+Depends: libc6 (>= 2.4), libpam0g (>= 0.99.7.1)
+Recommends: login (>= 1:4.1.3.1-1)
+Section: admin
+Priority: extra
+Homepage: http://ilya-evseev.narod.ru/posix/pam_alreadyloggedin/
+Description: PAM module to skip password authentication for logged users
+ libpam-alreadloggedin is a PAM module which allows users to skip
+ authentication if they are already logged in on another console.
+ .
+ Note that this module trades a bit of security for users' convenience and
+ thus should be used cautiously.

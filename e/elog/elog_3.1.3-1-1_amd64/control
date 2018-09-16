@@ -1,0 +1,34 @@
+Package: elog
+Version: 3.1.3-1-1
+Architecture: amd64
+Maintainer: Roger Kalt <roger.kalt@gmail.com>
+Installed-Size: 3797
+Depends: libc6 (>= 2.15), libkrb5-3 (>= 1.6.dfsg.2), libssl1.1 (>= 1.1.0), adduser, net-tools, libjs-jquery, lsb-base (>= 3.0-6)
+Recommends: imagemagick, ckeditor
+Section: web
+Priority: optional
+Homepage: http://midas.psi.ch/elog
+Description: Logbook system to manage notes through a Web interface
+ The Electronic Logbook (ELOG) provides a Web interface to manage notes.  Its
+ general purpose is to make it easy for people to put and access information
+ online; in the form of short, time stamped text messages with optional HTML
+ markup for presentation, and optional file attachments.  ELOG has its own
+ daemon, there is no need for a full-fledged server (e.g. Apache).  It stores
+ notes as simple as plain text; no special formatting.  Its features:
+ .
+   * Personal logbooks: Personal notes can be written into ELOG and can then be
+     retrieved from anywhere with a Web browser.
+   * Shared logbooks: Logbooks can be shared by several people, for reading and
+     optionally for writing.  Work groups can share and exchange information
+     like in a (simplified) news group.
+   * Small databases: Since arbitrary attributes can be defined for a logbook,
+     it can be used as a small database with search facilities.
+   * Problem collections: A system can consist of two logbooks, in one of which
+     users enter bugs or problems.  Whenever someone adds a problem, an email
+     is automatically sent to the administrator.
+   * Shift logbooks: If the Allow delete and Allow edit flags are off, an entry
+     cannot be modified once it's been entered.  This can be useful for shift
+     logbooks for example in Physics experiments where each entry becomes a
+     "document" with a time and author stamp.
+   * File collections: Since files can be attached to ELOG entries, the system
+     can be used to store and retrieve files.

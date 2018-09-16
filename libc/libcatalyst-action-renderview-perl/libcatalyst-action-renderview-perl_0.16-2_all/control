@@ -1,0 +1,21 @@
+Package: libcatalyst-action-renderview-perl
+Version: 0.16-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 12
+Depends: perl, libcatalyst-perl (>= 5.80030), libdata-visitor-perl (>= 0.24), libmro-compat-perl
+Breaks: libcatalyst-modules-perl (<< 48~)
+Replaces: libcatalyst-modules-perl (<< 48~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-Action-RenderView
+Description: Sensible default end action for Catalyst
+ Catalyst::Action::RenderView module implements a sensible default end action
+ for Catalyst, which will forward to the first available view, unless
+ $c->res->status is a 3xx code (redirection, not modified, etc.), 204 (no
+ content), or $c->res->body has already been set. It also allows you to
+ pass 'dump_info=1' to the url in order to force a debug screen, while in
+ debug mode.
+ .
+ Catalyst is an elegant Model-View-Controller web application framework
+ written in Perl.

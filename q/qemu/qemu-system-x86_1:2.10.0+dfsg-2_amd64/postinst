@@ -1,6 +1,0 @@
-#!/bin/sh
-set -e
-dpkg-maintscript-helper rm_conffile /etc/init.d/qemu-system-x86 1:2.2+dfsg-3~ -- "$@"
-if [ configure = "$1" ] && dpkg --compare-versions "$2" le-nl 1:2.2+dfsg-3~; then update-rc.d qemu-system-x86 remove >/dev/null; fi
-dpkg-maintscript-helper rm_conffile /etc/qemu/target-x86_64.conf 1:2.4+dfsg-1~ -- "$@"
-[ -d /etc/qemu ] && rmdir /etc/qemu 2>/dev/null || :

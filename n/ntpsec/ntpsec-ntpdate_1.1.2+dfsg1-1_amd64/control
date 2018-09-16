@@ -1,0 +1,30 @@
+Package: ntpsec-ntpdate
+Source: ntpsec
+Version: 1.1.2+dfsg1-1
+Architecture: amd64
+Maintainer: Richard Laager <rlaager@wiktel.com>
+Installed-Size: 115
+Depends: netbase, python3 (>= 3.3), python3-ntp
+Conflicts: ntpdate
+Replaces: ntpdate
+Section: net
+Priority: optional
+Homepage: https://www.ntpsec.org
+Description: client for setting system time from NTP servers
+ NTP, the Network Time Protocol, is used to keep computer clocks
+ accurate by synchronizing them over the Internet or a local network,
+ or by following an accurate hardware receiver that interprets GPS,
+ DCF-77, or similar time signals.
+ .
+ ntpdate is a simple NTP client that sets a system's clock to match
+ the time obtained by communicating with one or more NTP servers.  It
+ is not sufficient, however, for maintaining an accurate clock in the
+ long run.  ntpdate by itself is useful for occasionally setting the
+ time on machines that do not have full-time network access, such as
+ laptops.
+ .
+ This is the NTPsec version of ntpdate.  NTPsec is a secure, hardened,
+ and improved implementation derived from the original NTP project.
+ .
+ If the full NTP daemon from the package "ntpsec" is installed, then
+ ntpsec-ntpdate is not necessary.

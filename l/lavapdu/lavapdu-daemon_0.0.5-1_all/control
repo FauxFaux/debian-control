@@ -1,0 +1,21 @@
+Package: lavapdu-daemon
+Source: lavapdu
+Version: 0.0.5-1
+Architecture: all
+Maintainer: Debian LAVA team <pkg-linaro-lava-devel@lists.alioth.debian.org>
+Installed-Size: 93
+Depends: python, python-daemon, python-lockfile, python-pexpect, python-psycopg2, python2.7, python:any (<< 2.8), python:any (>= 2.7.5-5~), postgresql, postgresql-client, telnet
+Conflicts: lavapdu
+Replaces: lavapdu
+Section: net
+Priority: optional
+Homepage: http://www.linaro.org/projects/test-validation/
+Description: LAVA PDU control daemon
+ The Linaro Automated Validation Architecture (LAVA)
+ PDU daemon supports a number of APC power distribution
+ units which allow control over the power supplied
+ to individual devices. Operations are recorded in a
+ postgres database for the runner daemon to process.
+ .
+ This package contains the daemons to control
+ the PDU. One daemon can manage multiple PDUs.

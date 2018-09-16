@@ -1,0 +1,22 @@
+Package: libhtml-formattext-withlinks-andtables-perl
+Version: 0.07-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 39
+Depends: perl, libhtml-format-perl, libhtml-formattext-withlinks-perl, libhtml-tree-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/HTML-FormatText-WithLinks-AndTables
+Description: Perl module to converts HTML to Text with tables intact
+ HTML::FormatText::WithLinks::AndTables was inspired by
+ HTML::FormatText::WithLinks which has proven to be a useful `lynx -dump`
+ work-alike.
+ .
+ This module can in a rudimentary sense do so. The aim was to provide
+ facility to take a simple HTML based email template, and to also convert
+ it to text with the <TABLE> structure intact for inclusion as
+ "multipart/alternative" content.
+ .
+ Further, it will preserve both the formatting specified by the <TD> tag's
+ "align" attribute, and will also preserve multiline text inside of a <TD>
+ element provided it is broken using <BR/> tags.

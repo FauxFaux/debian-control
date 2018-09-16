@@ -1,0 +1,19 @@
+Package: irony-server
+Source: irony-mode
+Version: 1.2.0-6
+Architecture: amd64
+Maintainer: Debian Emacsen team <debian-emacsen@lists.debian.org>
+Installed-Size: 98
+Depends: libc6 (>= 2.14), libclang1-6.0 (>= 1:5.0~svn298832-1~), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Breaks: irony-mode (<< 1.2.0-1)
+Replaces: irony-mode (<< 1.2.0-1)
+Section: editors
+Priority: optional
+Homepage: https://github.com/Sarcasm/irony-mode/
+Description: Emacs C/C++ minor mode powered by libclang (server)
+ irony-mode is an Emacs minor-mode that aims at improving the editing
+ experience for the C, C++ and Objective-C languages. It works by
+ using a combination of an Emacs package and a C++ program
+ (irony-server) that uses libclang.
+ .
+ This package contains the architecture-specific irony-server.

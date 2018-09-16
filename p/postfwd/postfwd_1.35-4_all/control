@@ -1,0 +1,17 @@
+Package: postfwd
+Version: 1.35-4
+Architecture: all
+Maintainer: Jan Wagner <waja@cyconet.org>
+Installed-Size: 550
+Depends: adduser, libnet-dns-perl, libnet-server-perl, lsb-base, perl:any
+Conflicts: postfwd2
+Section: mail
+Priority: optional
+Homepage: http://www.postfwd.org/
+Description: Postfix policyd to combine complex restrictions in a ruleset
+ Postfwd is written in perl to combine complex postfix restrictions in a
+ ruleset similar to those of the most firewalls. The program uses the postfix
+ policy delegation protocol to control access to the mail system before a
+ message has been accepted. It allows you to choose an action (e.g. reject,
+ dunno) for a combination of several smtp parameters (like sender and recipient
+ address, size or the client's TLS fingerprint).

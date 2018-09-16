@@ -1,0 +1,32 @@
+Package: sqlcl-package
+Version: 0.1.1
+Architecture: all
+Maintainer: Lazarus Long <lazarus.long@sapo.pt>
+Installed-Size: 63
+Depends: devscripts, file, unzip
+Section: contrib/misc
+Priority: optional
+Homepage: https://lazarusllong.github.io/sqlcl-package/
+Description: Oracle SQL Developer Command-Line Debian package builder
+ This utility makes it possible to build a Debian package from Oracle SQL
+ Developer Command-Line (SQLcl). The Oracle SQL Developer program is governed
+ by the copyright holder (Oracle USA, Inc.), so you may be limited as to what
+ you can do with the resulting package (i.e. no redistribution, etc). This
+ utility will simply help you create the Debian package, it is your
+ responsibility to use the resulting package accordingly with the OTN license,
+ a copy of which is included in the created package, that you must agree on
+ when downloading the source.
+ .
+ This utility will require you to download the architecture independent archive
+ from <http://www.oracle.com/technetwork/developer-tools/sqlcl/overview>,
+ identified as "Oracle SQL Developer Command-Line for All Platforms", to create
+ the Debian package from.
+ .
+ Due to a conflicting name with content of package "parallel" the upstream
+ binary "sql" will be renamed. Multiple versions can coexist so
+ "sql.[upstream version].standalone" will invoke a specific version of
+ Oracle SQL Developer Command-Line, "sql.[upstram version]" will invoke
+ either the standalone or bundled Oracle SQL Developer Command-Line version
+ (in this order), while "sqlcl" (the recommended way) and
+ "sqlcl.standalone" take advantage of Debian's alternatives system and,
+ when left in auto mode, will always invoke the highest version installed.

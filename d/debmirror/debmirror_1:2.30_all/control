@@ -1,0 +1,15 @@
+Package: debmirror
+Version: 1:2.30
+Architecture: all
+Maintainer: Colin Watson <cjwatson@debian.org>
+Installed-Size: 145
+Depends: perl (>= 5.10), libnet-perl, libdigest-md5-perl, libdigest-sha-perl, liblockfile-simple-perl, rsync, bzip2, libwww-perl (>= 5.815), perl (>= 5.22) | libnet-inet6glue-perl, xz-utils
+Recommends: gpgv, patch, ed
+Suggests: gnupg
+Section: net
+Priority: optional
+Description: Debian partial mirror script, with ftp and package pool support
+ This program downloads and maintains a partial local Debian mirror.
+ It can mirror any combination of architectures, distributions and
+ sections. Files are transferred by ftp, http, hftp or rsync, and package
+ pools are fully supported. It also does locking and updates trace files.

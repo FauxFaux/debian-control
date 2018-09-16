@@ -1,0 +1,29 @@
+Package: irssi-plugin-otr
+Source: irssi-plugin-otr (1.0.2-4)
+Version: 1.0.2-4+b1
+Architecture: amd64
+Maintainer: Debian Privacy Tools Maintainers <pkg-privacy-maintainers@lists.alioth.debian.org>
+Installed-Size: 86
+Depends: irssi (>= 0.8.20-1~), libc6 (>= 2.8), libgcrypt20 (>= 1.8.0), libotr5 (>= 4.0.0)
+Enhances: irssi
+Section: net
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/cryptodotis/irssi-otr
+Description: Off-The-Record messaging plugin for Irssi
+ This plugin adds Off-The-Record (OTR) messaging support to the Irssi IRC
+ client. Although primarily designed for use with the BitlBee IRC2IM
+ gateway, it works within any query window, provided that your
+ conversation partner's IRC client supports OTR.
+ .
+ OTR allows you to have private conversations over IM by providing:
+  * Encryption - no one else can read your instant messages.
+  * Authentication - you are assured the correspondent is who you think
+    it is.
+  * Deniability - the messages you send do _not_ have digital signatures
+    that are checkable by a third party. Anyone can forge messages after
+    a conversation to make them look like they came from you. However,
+    _during_ a conversation, correspondents are assured the messages
+    they see are authentic and unmodified.
+  * Forward secrecy - if you lose control of your private keys,
+    no previous conversation is compromised.

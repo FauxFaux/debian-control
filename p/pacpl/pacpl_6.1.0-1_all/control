@@ -1,0 +1,34 @@
+Package: pacpl
+Version: 6.1.0-1
+Architecture: all
+Maintainer: Matteo Cypriani <mcy@lm7.fr>
+Installed-Size: 336
+Depends: perl:any, libcddb-perl, libcddb-get-perl, libmp3-tag-perl, libaudio-scan-perl, libaudio-flac-header-perl, libparallel-forkmanager-perl, vorbis-tools
+Recommends: cdparanoia, faad, ffmpeg, flac, lame, mplayer, musepack-tools, normalize-audio, opus-tools, sndfile-programs, sox, speex, wavpack
+Suggests: faac, flake, twolame
+Section: sound
+Priority: optional
+Homepage: http://vorzox.wixsite.com/pacpl
+Description: multi-purpose audio converter/ripper/tagger script
+ Perl Audio Converter is a tool for converting multiple audio types from one
+ format to another using various external encoders/decoders.
+ .
+ It supports the following audio formats (but the backend program that handles
+ a given format might not be packaged in Debian): 3G2, 3GP, 8SVX, AAC, AC3,
+ ADTS, AIFF, AL, AMB, AMR, APE, AU, AVR, BONK, CAF, CDR, CVU, DAT, DTS, DVMS,
+ F32, F64, FAP, FLA, FLAC, FSSD, GSRT, HCOM, IMA, IRCAM, LA, MAT, MAUD, MAT4,
+ MAT5, M4A, MP2, MP3, MP4, MPC, MPP, NIST, OFF, OFR, OFS, OPUS, OGA, OGG, PAF,
+ PRC, PVF, RA, RAM, RAW, RF64, SD2, SF, SHN, SMP, SND, SOU, SPX, SRN, TAK, TTA,
+ TXW, VOC, VMS, VQF, W64, WAV, WMA, and WV.
+ .
+ It can also convert audio from the following video extensions: RM, RV, ASF,
+ DivX, MPG, MKV, MPEG, AVI, MOV, OGM, OGV, QT, VCD, SVCD, M4V, NSV, NUV, PSP,
+ SMK, VOB, FLV, WEBM, and WMV.
+ .
+ Pacpl also features parallel processing, a CD ripping function with CDDB
+ support, batch conversion, tag preservation for most supported formats and
+ independent tag reading & writing. Service menus for KDE (Dolphin/Konqueror),
+ GNOME Nautilus script, and Nemo action script are also provided (see
+ README.Debian).
+ .
+ You can write your own modules in order to add support for new file formats.

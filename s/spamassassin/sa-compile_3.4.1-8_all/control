@@ -1,0 +1,16 @@
+Package: sa-compile
+Source: spamassassin
+Version: 3.4.1-8
+Architecture: all
+Maintainer: Noah Meyerhans <noahm@debian.org>
+Installed-Size: 84
+Depends: spamassassin, re2c, gcc, libc6-dev, make
+Enhances: spamassassin
+Section: mail
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.spamassassin.org/
+Description: Tools for compiling SpamAssassin rules into C
+ sa-compile uses "re2c" to compile the site-wide parts of the
+ SpamAssassin ruleset into C code for more efficient processing by
+ spamd or spamassassin.

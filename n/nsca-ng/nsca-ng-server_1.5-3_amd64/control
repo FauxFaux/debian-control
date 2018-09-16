@@ -1,0 +1,20 @@
+Package: nsca-ng-server
+Source: nsca-ng
+Version: 1.5-3
+Architecture: amd64
+Maintainer: Debian Nagios Maintainer Group <pkg-nagios-devel@lists.alioth.debian.org>
+Installed-Size: 136
+Depends: adduser, lsb-base, libbsd0 (>= 0.2.0), libc6 (>= 2.14), libconfuse2 (>= 3.2.1~), libev4 (>= 1:4.04), libssl1.1 (>= 1.1.0), libsystemd0
+Recommends: icinga-core
+Section: net
+Priority: optional
+Homepage: http://www.nsca-ng.org/
+Description: Monitoring command acceptor
+ The NSCA-ng server makes the Icinga command file accessible from remote
+ systems.  This allows for submitting passive check results, downtimes, and many
+ other commands to Icinga.
+ .
+ The communication with clients is TLS
+ encrypted and authenticated using pre-shared keys (as per RFC 4279).  The
+ NSCA-ng server supports per-client passwords and fine-grained authorization
+ control.

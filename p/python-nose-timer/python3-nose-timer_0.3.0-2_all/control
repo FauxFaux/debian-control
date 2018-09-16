@@ -1,0 +1,24 @@
+Package: python3-nose-timer
+Source: python-nose-timer
+Version: 0.3.0-2
+Architecture: all
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 32
+Depends: python3-nose, python3:any (>= 3.3.2-2~)
+Suggests: python-nose-timer-doc
+Section: python
+Priority: optional
+Homepage: https://github.com/mahmoudimus/nose-timer
+Description: timer plugin for nosetests - Python 3.x
+ A timer plugin for nosetests that answers the question: how much time does
+ every test take? Run nosetests with the --with-timer flag, and you will see
+ a list of the tests and the time spent by each one (in seconds):
+ .
+  myapp.tests.ABigTestCase.test_the_world_is_running: 56.0010s
+  myapp.tests.ABigTestCase.test_the_rest_of_the_galaxy_is_running: 2356.0010s
+ .
+ It is also possible to list the 10 slowest tests this way:
+ .
+  nosetests --with-timer --timer-top-n 10
+ .
+ This package contains the Python 3.x module.

@@ -1,0 +1,21 @@
+Package: libtie-dxhash-perl
+Version: 1.05-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 30
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Tie-DxHash
+Description: Perl module that keeps insertion order in hash
+ Tie::DxHash implements a hash which preserves insertion order and allows
+ duplicate keys.
+ .
+ Tie::DxHash works by storing the hash data in an array of hash references
+ (containing the key/value pairs). This preserves insertion order. A
+ separate set of iterators (one per distinct key) keeps track of the last
+ retrieved value for a given key, thus allowing the successive retrieval of
+ multiple values for the same key to work as expected.
+ .
+ Tie::DxHash was originally written to facilitate the use of more complex
+ mod_rewrite rules in Apache configuration files written with Perl Sections.

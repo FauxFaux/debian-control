@@ -1,0 +1,21 @@
+Package: libgpuarray2
+Source: libgpuarray (0.6.9-2)
+Version: 0.6.9-2+b1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 285
+Depends: libc6 (>= 2.14)
+Section: libs
+Priority: optional
+Homepage: https://github.com/Theano/libgpuarray
+Description: library to manipulate tensors on the GPU
+ libgpuarray provides a ndarray (multi-dimensional array) object which
+ is computed on the GPU. It supports int, single and double precision
+ floats.
+ .
+ libgpuarray supports Nvidia's CUDA interface as well as OpenCL. The
+ Debian packages have been build against OpenCL. However, the source
+ package could be rebuild locally also for CUDA (which is non-free)
+ without changes, if that's needed.
+ .
+ This package provides the shared library.

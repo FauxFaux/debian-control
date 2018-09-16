@@ -1,0 +1,26 @@
+Package: librdmacm1
+Source: rdma-core
+Version: 20.0-1
+Architecture: amd64
+Maintainer: Benjamin Drung <benjamin.drung@profitbricks.com>
+Installed-Size: 193
+Depends: libc6 (>= 2.15), libibverbs1 (>= 20)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/linux-rdma/rdma-core
+Description: Library for managing RDMA connections
+ librdmacm is a library that allows applications to set up reliable
+ connected and unreliable datagram transfers when using RDMA adapters.
+ It provides a transport-neutral interface in the sense that the same
+ code can be used for both InfiniBand and iWARP adapters.  The
+ interface is based on sockets, but adapted for queue pair (QP) based
+ semantics: communication must use a specific RDMA device, and data
+ transfers are message-based.
+ .
+ librdmacm only provides communication management (connection setup
+ and tear-down) and works in conjunction with the verbs interface
+ provided by libibverbs, which provides the interface used to actually
+ transfer data.
+ .
+ This package contains the shared library.

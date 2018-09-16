@@ -1,0 +1,18 @@
+Package: libperl-minimumversion-perl
+Version: 1.38-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 78
+Depends: perl, libfile-find-rule-perl, libfile-find-rule-perl-perl, libparams-util-perl, libperl-critic-perl, libppi-perl (>= 1.215), libppix-regexp-perl (>= 0.033)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Perl-MinimumVersion
+Description: module to determine minimum required version of perl required
+ Perl::MinimumVersion is a module that inspects arbitrary Perl source code and
+ determines the minimum version of perl required to be able to run it. Because
+ it is based on PPI, it can do this without having to actually load the code.
+ .
+ Currently it tests both the syntax of your code, and the use of explicit
+ version dependencies such as "require 5.005".
+ .
+ Future plans are to also add support for tracing module dependencies.

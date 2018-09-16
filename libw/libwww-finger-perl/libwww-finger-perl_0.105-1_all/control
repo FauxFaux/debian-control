@@ -1,0 +1,24 @@
+Package: libwww-finger-perl
+Version: 0.105-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 116
+Depends: perl, libcommon-sense-perl, libhttp-link-parser-perl, libhttp-lrdd-perl, libjson-perl, libwww-perl, libnamespace-clean-perl, librdf-query-perl, librdf-query-client-perl, librdf-trine-perl, libxrd-parser-perl, liburi-perl, libmodule-pluggable-perl | perl (<< 5.17.0), librole-commons-perl | libobject-authority-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/WWW-Finger
+Description: get useful data from e-mail addresses
+ This module is *not* an implementation of the finger protocol (RFC
+ 1288). Use Net::Finger for that. Instead it is a set of implementations
+ of *other* methods for getting information from an e-mail address, or
+ e-mail-like identifier. This package includes four such
+ implementations, and it's pretty easy to create your own additional
+ implementations:
+ .
+  * WebFinger
+  * Fingerpoint
+  * cpan.org scraper (for user@cpan.org)
+  * Unnamed finger protocol described on bitworking.org
+ .
+ Only the first two implementations are enabled by default. See
+ "IMPLEMENTATIONS" on how to enable others, and for more details.

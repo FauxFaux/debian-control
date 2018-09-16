@@ -1,0 +1,23 @@
+Package: python-django-markupfield
+Source: django-markupfield
+Version: 1.4.3-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 72
+Depends: python-django (>= 1.8), python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Suggests: python-docutils, python-markdown, python-textile
+Section: python
+Priority: optional
+Homepage: https://pypi.python.org/pypi/django-markupfield/
+Description: custom Django field for easy use of markup in text fields
+ An implementation of a custom MarkupField for Django. A MarkupField is in
+ essence a TextField with an associated markup type. The field also caches
+ its rendered value.
+ .
+ It supports these markup types by default:
+  * html: allows HTML, potentially unsafe
+  * plain: plain text markup, calls urlize and replaces text with linebreaks
+ And these markups if the appropriate Python module is installed:
+  * markdown: default markdown renderer (requires python-markdown)
+  * restructuredtext: default ReST renderer (requires python-docutils)
+  * textile: default textile renderer (requires python-textile)

@@ -1,0 +1,21 @@
+Package: standardskriver
+Version: 0.0.3-2
+Architecture: all
+Maintainer: Debian Edu Packaging Team <debian-edu-pkg-team@lists.alioth.debian.org>
+Installed-Size: 32
+Depends: cups-client, net-tools, python3, python3-netaddr
+Section: admin
+Priority: optional
+Homepage: https://code.it-zukunft-schule.de/cgit/standardskriver/
+Description: Tool for dynamically setting a user's default printer at desktop session logon
+ The Standard Skriver Tool ('standardskriver' is Norwegian, i.e. Bokmål,
+ for "default printer") allows the site admin to dynamically update
+ a user's default printer setting at logon time.
+ .
+ At desktop session startup, a new default printer gets automatically
+ configured based on the location of the client host in use and/or also
+ based on POSIX group memberships of the current user.
+ .
+ Standard Skriver uses an easy-to-setup INI configuration file. The
+ configuration syntax also supports for configuring of multiple sites, so
+ one configuration file can be deployed to multiple sites.

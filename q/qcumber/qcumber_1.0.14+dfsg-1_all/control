@@ -1,0 +1,20 @@
+Package: qcumber
+Version: 1.0.14+dfsg-1
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 168
+Depends: python3:any (>= 3.3.2-2~), debconf (>= 0.5) | debconf-2.0, python3-jinja2, python3-matplotlib, python3-biopython, libjs-angularjs, libjs-bootstrap, libjs-d3, libjs-jquery, r-base-core, r-bioc-savr, r-cran-ggplot2, r-cran-quantreg
+Conflicts: qc-pipeline
+Replaces: qc-pipeline
+Provides: qc-pipeline
+Section: science
+Priority: optional
+Homepage: https://gitlab.com/RKIBioinformaticsPipelines/QCumber
+Description: quality control of genomic sequences
+ QCPipeline is a tool for quality control. The workflow is as follows:
+ .
+  1. Quality control with FastQC
+  2. Trim Reads with Trimmomatic
+  3. Quality control of trimmed reads with FastQC
+  4. Map reads against reference using bowtie2
+  5. Classify reads with Kraken

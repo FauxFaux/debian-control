@@ -1,0 +1,27 @@
+Package: haskell-debian-utils
+Source: haskell-debian (3.93.2-2)
+Version: 3.93.2-2+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 18968
+Depends: libbz2-1.0, libc6 (>= 2.27), libffi6 (>= 3.0.4), libgmp10, zlib1g (>= 1:1.1.4)
+Recommends: apt-file
+Section: devel
+Priority: optional
+Homepage: https://github.com/ddssff/debian-haskell
+Description: Various helpers to work with Debian packages
+ This package contains tools shipped with the Haskell library “debian”:
+ .
+   * fakechanges:
+     Sometimes you have the .debs, .dsc, .tar.gz, .diff.gz, etc from a package
+     build, but not the .changes file. This package lets you create a fake
+     .changes file in case you need one.
+ .
+   * debian-report:
+     Analyze Debian repositories and generate reports about their contents and
+     relations. For example, a list of all packages in a distribution that are
+     trumped by another distribution.
+ .
+   * apt-get-build-depends:
+     Tool which will parse the Build-Depends{-Indep} lines from debian/control
+     and apt-get install the required packages

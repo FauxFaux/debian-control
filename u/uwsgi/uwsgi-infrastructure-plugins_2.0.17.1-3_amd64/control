@@ -1,0 +1,33 @@
+Package: uwsgi-infrastructure-plugins
+Source: uwsgi
+Version: 2.0.17.1-3
+Architecture: amd64
+Maintainer: uWSGI packaging team <pkg-uwsgi-devel@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: uwsgi-plugin-alarm-curl (= 2.0.17.1-3), uwsgi-plugin-alarm-xmpp (= 2.0.17.1-3), uwsgi-plugin-curl-cron (= 2.0.17.1-3), uwsgi-plugin-emperor-pg (= 2.0.17.1-3), uwsgi-plugin-geoip (= 2.0.17.1-3), uwsgi-plugin-glusterfs (= 2.0.17.1-3), uwsgi-plugin-graylog2 (= 2.0.17.1-3), uwsgi-plugin-ldap (= 2.0.17.1-3), uwsgi-plugin-rados (= 2.0.17.1-3), uwsgi-plugin-router-access (= 2.0.17.1-3), uwsgi-plugin-sqlite3 (= 2.0.17.1-3), uwsgi-plugin-xslt (= 2.0.17.1-3)
+Section: httpd
+Priority: optional
+Homepage: http://projects.unbit.it/uwsgi/
+Description: infrastructure plugins for uWSGI
+ uWSGI presents a complete stack for networked/clustered web applications,
+ implementing message/object passing, caching, RPC and process management.
+ It is designed to be fully modular. This means that different plugins can be
+ used in order to add compatibility with tons of different technology on top of
+ the same core.
+ .
+ This dependency package provides infrastructure plugins for uWSGI:
+  * alarm cURL
+  * alarm XMPP
+  * cURL cron
+  * PostgreSQL emperor
+  * graylog2
+  * GeoIP
+  * LDAP
+  * router access
+  * SQLite 3
+  * XSLT request
+  * GlusterFS storage
+  * Ceph/RADOS storage
+ .
+ GlusterFS and Ceph/RADOS plugins are provided only on
+ supported architectures.

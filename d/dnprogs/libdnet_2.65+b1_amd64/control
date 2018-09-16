@@ -1,0 +1,27 @@
+Package: libdnet
+Source: dnprogs (2.65)
+Version: 2.65+b1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 232
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5)
+Suggests: dnet-common (>= 2.65+b1)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Description: DECnet Libraries
+ This package contains the libraries necessary for a functioning DECnet
+ system. Most DECnet programs require these libraries to be present on
+ the system. The libraries are:
+ libdnet        - the basic DECnet API as featured on Ultrix(R) systems
+ libdnet_daemon - useful calls for writing DECnet daemons
+ libdap         - DAP (Data Access Protocol) C++ classes
+ librms         - High level library for programmatic access VMS files
+                  from Linux.
+ .
+ To do useful work with DECnet you will also need the dnet-common
+ package.
+ .
+ If you're looking for libdnet, the "dumb" networking library from
+ libdnet.sf.net by Dug Song then you should install libdumbnet instead.
+ Sorry for any confusion caused!

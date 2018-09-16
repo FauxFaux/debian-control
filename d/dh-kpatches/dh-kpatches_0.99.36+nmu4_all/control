@@ -1,0 +1,19 @@
+Package: dh-kpatches
+Version: 0.99.36+nmu4
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 216
+Depends: perl:any, debhelper (>= 2.0.14)
+Suggests: kernel-package
+Enhances: debhelper
+Section: devel
+Priority: extra
+Description: Debhelper script to help packaging kernel patches
+ The dh_installkpatches script produces the "apply" and "unpatch" scripts
+ that kernel-package uses to automatically handle kernel patches.  It
+ provides a number of useful features like:
+  * does its best to never break your kernel source tree
+  * allows you to select any provided version of a patch
+  * handle patch inter-dependencies
+ .
+ Patches are described in a Debian-standard control-file-like format.

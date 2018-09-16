@@ -1,0 +1,22 @@
+Package: printer-driver-cups-pdf
+Source: cups-pdf
+Version: 3.0.1-5
+Architecture: amd64
+Maintainer: Debian CUPS Maintainers <debian-printing@lists.debian.org>
+Installed-Size: 243
+Depends: cups, cups-client, ghostscript, libpaper-utils, libc6 (>= 2.7), libcups2 (>= 1.4.0)
+Suggests: system-config-printer
+Replaces: cups-pdf
+Provides: cups-pdf
+Section: graphics
+Priority: optional
+Homepage: http://www.cups-pdf.de
+Description: printer driver for PDF writing via CUPS
+ CUPS-PDF provides a PDF Writer backend to CUPS. This can be used as a
+ virtual printer in a paperless network or to perform testing on CUPS.
+ .
+ Documents are written to a configurable directory (by default to ~/PDF)
+ or can be further manipulated by a post-processing command.
+ .
+ Desktop users might find it simpler to use the Print To File feature
+ provided by GTK+ and QT or the LibreOffice's Export to PDF feature.

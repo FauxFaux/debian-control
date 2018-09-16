@@ -1,0 +1,22 @@
+Package: python3-ldappool
+Source: python-ldappool
+Version: 2.2.0-3
+Architecture: all
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 55
+Depends: python3-six, python3-ldap (>= 3.0.0~b4), python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://git.openstack.org/cgit/openstack/ldappool
+Description: connection pool for python-ldap - Python 3.x
+ A simple connector pool for python-ldap. The pool keeps LDAP connectors alive
+ and let you reuse them, drastically reducing the time spent to initiate a ldap
+ connection.
+ .
+ The pool has useful features like:
+  * transparent reconnection on failures or server restarts
+  * configurable pool size and connectors timeouts
+  * configurable max lifetime for connectors
+  * a context manager to simplify acquiring and releasing a connector
+ .
+ This package provides the Python 3.x module.

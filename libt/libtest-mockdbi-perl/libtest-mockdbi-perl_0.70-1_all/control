@@ -1,0 +1,27 @@
+Package: libtest-mockdbi-perl
+Version: 0.70-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 99
+Depends: perl, libclone-perl, libdbi-perl, libtest-differences-perl, libtest-mockobject-perl, libtest-warn-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-MockDBI
+Description: mocked DBI interface for testing purposes
+ Test::MockDBI has a major advantage over DBI::trace()
+ or DBD::Mock -- Test::MockDBI lets you change how the
+ mocked DBI functions behave, along with modifying
+ what data is returned by the mocked DBI functions.
+ These changes and modifications can be made specific
+ to particular SQL statement patterns.
+ .
+ This ability to modify DBI function behavior and
+ DBI-returned data makes it easier to test code that has
+ different branches for different DBI behaviors -- you
+ can test that a failure within DBI or returned DB data
+ that is different than normal is processed correctly by
+ your module or program.  If you are taking over a large
+ code base, Test::MockDBI will help in understanding the
+ code by allowing you to safely check how the code behaves
+ under different database conditions without modifying any
+ databases (production or otherwise).

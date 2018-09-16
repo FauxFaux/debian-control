@@ -1,0 +1,24 @@
+Package: libdevel-callsite-perl
+Version: 1.0.1-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 43
+Depends: perl (>= 5.26.2-6), perlapi-5.26.2, libc6 (>= 2.4)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Devel-Callsite
+Description: Perl module to get caller return OP address and Perl interpreter context
+ Devel::Callsite module provides subroutines to get the caller return OP
+ address and perl interpreter context.
+ .
+ The callsite() function returns the OP address of the caller, a number,
+ one level up from where it was called. It's useful for functions that
+ need to uniquely know where they were called, such as Every::every();
+ see Every. Or it can be used to pinpoint a location with finer
+ granularity than a line number (see
+ http://www.perlmonks.com/?node_id=987268). In conjunction with an OP
+ tree disassembly you can know exactly where the caller is located in
+ the Perl source.
+ .
+ The context() function returns the interpreter context as a number.
+ This is a fairly unique number together with the call site.

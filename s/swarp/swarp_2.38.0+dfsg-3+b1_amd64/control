@@ -1,0 +1,34 @@
+Package: swarp
+Source: swarp (2.38.0+dfsg-3)
+Version: 2.38.0+dfsg-3+b1
+Architecture: amd64
+Maintainer: Debian Astronomy Maintainers <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 460
+Depends: libc6 (>= 2.14)
+Section: science
+Priority: optional
+Homepage: http://www.astromatic.net/software/swarp
+Description: Resample and co-add together FITS images
+ Resample and co-add together FITS images using any arbitrary astrometric
+ projection defined in the WCS standard. The main features of SWarp
+ are:
+ .
+  * FITS format (including multi-extensions) in input and output,
+  * Full handling of weight-maps in input and output,
+  * Ability to work with very large images (up to 500 Mpixels on
+    32-bit machines and 10^6 Tpixels with 64-bits), thanks to customized
+    virtual-memory-mapping and buffering,
+  * Works with arrays in up to 9 dimensions (including or not two spherical
+    coordinates),
+  * Selectable high-order interpolation method (up to 8-tap filters) in any
+    dimension,
+  * Compatible with WCS and TNX (IRAF) astrometric descriptions,
+  * Support for equatorial, galactic and equatorial coordinate systems,
+  * Astrometric and photometric parameters are read from FITS headers or
+    external ASCIIfiles,
+  * Built-in background subtraction,
+  * Built-in noise-level measurement for automatic weighting,
+  * Automatic centering and sizing functions of the output field,
+  * Multi-threaded code with load-balancing to take advantageof multiple
+    processors.
+  * XML VOTable-compliant output of meta-data.

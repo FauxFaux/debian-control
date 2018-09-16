@@ -1,0 +1,30 @@
+Package: weightwatcher
+Version: 1.12+dfsg-1
+Architecture: amd64
+Maintainer: Debian Astronomy Maintainers <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 272
+Depends: libc6 (>= 2.14)
+Section: science
+Priority: optional
+Homepage: https://www.astromatic.net/software/weightwatcher
+Description: Combine maps and polygon data for astronomical image processing
+ WeightWatcher is a program that combines weight-maps, flag-maps and polygon
+ data in order to produce control maps which can directly be used in
+ astronomical image-processing packages like Drizzle, Swarp or SExtractor.
+ .
+ Weight-thresholding and/or specific flag selections are applied by
+ WeightWatcher through a configuration file: this alleviates other programs
+ from such interpretation work. WeightWatcher will mostly be useful as part of
+ an imaging survey pipeline. Its main features are:
+ .
+  * Processing speed: limited by the I/O performances of the machine
+    (typically 50 Mpixel/s on a workstation),
+  * Ability to work with very large images (up to, say, 10^8 × 10^9 pixels on
+    a 64 bit system),
+  * FITS format (including Multi-Extension) is used for input and
+    output. Output flag-map format selection is automatic (8, 16 or 32bits),
+  * Up to 30 weight-maps, 30 flag-maps, and thousands of polygons can be
+    handled simultaneously.
+  * Automatic rasterizing of DS9 .reg files,
+  * Statistics of flagged and weighted areas,
+  * Metadata output in XML-VOTable format.

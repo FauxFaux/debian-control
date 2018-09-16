@@ -1,0 +1,30 @@
+Package: teem-apps
+Source: teem
+Version: 1.12.0~20160122-3
+Architecture: amd64
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 286
+Depends: libteem2 (= 1.12.0~20160122-3), libbz2-1.0, libc6 (>= 2.4), libpng16-16 (>= 1.6.2-1), zlib1g (>= 1:1.1.4)
+Section: science
+Priority: optional
+Homepage: http://teem.sourceforge.net/
+Description: Tools to process and visualize scientific data and images - command line tools
+ Teem is a coordinated group of libraries for representing, processing, and
+ visualizing scientific raster data. Teem includes command-line tools that
+ permit the library functions to be quickly applied to files and streams,
+ without having to write any code. The most important and useful libraries in
+ Teem are:
+ .
+  * Nrrd (and the unu command-line tool on top of it) supports a range of
+    operations for transforming N-dimensional raster data (resample, crop,
+    slice, project, histogram, etc.), as  well as the NRRD file format for
+    storing arrays and their meta-information.
+  * Gage: fast convolution-based measurements at arbitrary point locations in
+    volume datasets (scalar, vector, tensor, etc.)
+  * Mite: a multi-threaded ray-casting volume render with transfer functions
+    based on any quantity Gage can measure
+  * Ten: for estimating, processing, and visualizing diffusion tensor fields,
+    including fiber tractography methods.
+ .
+ This package contains some simple command-line tools which provide fast and
+ easy access to the functionality in the various libraries.

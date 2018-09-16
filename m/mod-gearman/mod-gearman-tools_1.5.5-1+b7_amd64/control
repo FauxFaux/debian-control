@@ -1,0 +1,22 @@
+Package: mod-gearman-tools
+Source: mod-gearman (1.5.5-1)
+Version: 1.5.5-1+b7
+Architecture: amd64
+Maintainer: Bernd Zeimetz <bzed@debian.org>
+Installed-Size: 411
+Depends: libc6 (>= 2.14), libgearman8 (>= 1.1.13), libncurses6 (>= 6), libperl5.26 (>= 5.26.0~rc1), libtinfo6 (>= 6)
+Section: net
+Priority: extra
+Homepage: http://labs.consol.de/nagios/mod-gearman/
+Description: Tools for mod-gearman
+ This package also includes a set of extra tools to send check results to
+ Icinga/Nagios via a Gearman job server, and a plugin to monitor the Gearman
+ job server itself:
+ .
+  - check_gearman - Icinga/Nagios service check to monitor the Gearman job
+    server
+  - gearman_top - Monitor the Gearman job server from the console
+  - send_gearman - Submit active and passive check results to a
+    Gearman job server
+  - send_multi - Submit check results from the check_multi to a Gearman
+    job server

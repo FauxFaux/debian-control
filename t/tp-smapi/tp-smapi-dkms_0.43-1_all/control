@@ -1,0 +1,22 @@
+Package: tp-smapi-dkms
+Source: tp-smapi
+Version: 0.43-1
+Architecture: all
+Maintainer: Evgeni Golov <evgeni@debian.org>
+Installed-Size: 131
+Depends: dkms (>= 2.1.0.0)
+Section: kernel
+Priority: optional
+Homepage: https://github.com/evgeni/tp_smapi/
+Description: ThinkPad hardware/firmware access modules source - dkms version
+ The tp_smapi kernel module exposes some features of the ThinkPad
+ hardware/firmware via a sysfs interface. Currently, the main implemented
+ functionality is control of battery charging and extended battery status.
+ The underlying hardware interfaces are SMAPI and direct access to the
+ embedded controller.
+ .
+ This package also brings the source for an improved version of HDAPS
+ which should work on newer ThinkPads too (the stock kernel version does
+ not).
+ .
+ This package contains the source to be built with dkms.

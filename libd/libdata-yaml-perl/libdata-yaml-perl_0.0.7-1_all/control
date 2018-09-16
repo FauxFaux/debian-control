@@ -1,0 +1,25 @@
+Package: libdata-yaml-perl
+Version: 0.0.7-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 49
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Data-YAML
+Description: Easy YAML serialisation of Perl data structures
+ In the spirit of YAML::Tiny, Data::YAML::Reader and Data::YAML::Writer
+ provide lightweight, dependency-free YAML handling. While YAML::Tiny is
+ designed principally for working with configuration files Data::YAML
+ concentrates on the transparent round-tripping of YAML serialized Perl data
+ structures.
+ .
+ As an example of why this distinction matters consider that YAML::Tiny
+ doesn't handle hashes with keys containing non-printable characters. This is
+ fine for configuration files but likely to cause problems when handling
+ arbitrary Perl data structures. Data::YAML handles exotic hash keys
+ correctly.
+ .
+ The syntax accepted by Data::YAML is a subset of YAML. Specifically it is the
+ same subset of YAML that Data::YAML::Writer produces. See Data::YAML for more
+ information.

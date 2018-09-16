@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+        update-alternatives --install /usr/share/puppet/modules/keystone puppet-module-keystone /usr/share/puppet/modules.available/keystone 500
+fi
+
+
+
+exit 0

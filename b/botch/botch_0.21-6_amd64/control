@@ -1,0 +1,29 @@
+Package: botch
+Version: 0.21-6
+Architecture: amd64
+Maintainer: Johannes 'josch' Schauer <josch@debian.org>
+Installed-Size: 75376
+Depends: libbz2-1.0, libc6 (>= 2.17), zlib1g (>= 1:1.1.4), python3:any (>= 3.3.2-2~), dose-builddebcheck (>= 5.0.1-1), dose-extra (>= 5.0.1-1), dctrl-tools, aspcud, python3-apt, python3-debian, python3-networkx (>= 2.1-1), python3-yaml, python3-pygraphviz (>= 1.4~rc1), zutils, dpkg-dev, libyojson-ocaml-dev
+Recommends: libjs-jquery-tablesorter, libjs-jquery
+Suggests: libgraph-easy-perl, devscripts, www-browser, libsoap-lite-perl, botch-doc
+Section: utils
+Priority: optional
+Homepage: https://gitlab.mister-muffin.de/debian-bootstrap/botch/wikis/home
+Description: tools to create and analyse dependency graphs
+ botch is a collection of tools to create and analyze dependency graphs. This
+ task is facilitated by a range of individual tools which use the deb822 and
+ graphml formats to exchange information with each other.
+ .
+ The tools installed by this package provide these features:
+ .
+  - analyze graphs
+  - transform Packages and Sources control files
+  - create graphs of different types
+  - analysis of Packages and Sources control files
+  - handling of botch-internal formats
+  - dose3 wrappers
+  - set operations on Packages or Sources files
+  - create build orders
+  - conversion of graphs
+  - shell scripts connecting the tools for meaningful operations
+  - extract regions from graphs

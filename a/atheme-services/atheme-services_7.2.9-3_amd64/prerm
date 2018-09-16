@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit/11.3.5
+if [ -x "/etc/init.d/atheme-services" ] && [ "$1" = remove ]; then
+	invoke-rc.d atheme-services stop || exit 1
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper rm_conffile /etc/default/atheme-services 7.2.9-2\~ -- "$@"
+# End automatically added section

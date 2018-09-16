@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+update-alternatives \
+	--install /usr/include/x86_64-linux-gnu/mpi mpi-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/openmpi/include 50 \
+	--slave /usr/lib/x86_64-linux-gnu/libmpi.so libmpi.so-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/openmpi/lib/libmpi.so \
+	--slave /usr/lib/x86_64-linux-gnu/libmpi++.so libmpi++.so-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/openmpi/lib/libmpi_cxx.so \
+	--slave /usr/lib/x86_64-linux-gnu/pkgconfig/mpi.pc mpi.pc-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/pkgconfig/ompi.pc \
+	--slave /usr/lib/x86_64-linux-gnu/pkgconfig/mpi-fort.pc mpi-fort.pc-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/pkgconfig/ompi-fort.pc \
+	--slave /usr/lib/x86_64-linux-gnu/pkgconfig/mpi-c.pc mpi-c.pc-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/pkgconfig/ompi-c.pc \
+	--slave /usr/lib/x86_64-linux-gnu/pkgconfig/mpi-cxx.pc mpi-cxx.pc-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/pkgconfig/ompi-cxx.pc
+
+
+
+
+exit 0

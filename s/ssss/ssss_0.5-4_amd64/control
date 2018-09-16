@@ -1,0 +1,25 @@
+Package: ssss
+Version: 0.5-4
+Architecture: amd64
+Maintainer: Tomasz Buchert <tomasz@debian.org>
+Installed-Size: 75
+Depends: libc6 (>= 2.4), libgmp10
+Section: utils
+Priority: optional
+Homepage: http://point-at-infinity.org/ssss/
+Description: Shamir's secret sharing scheme implementation
+ Implementation of Shamir's Secret Sharing Scheme. The program suite
+ does both: the generation of shares for a known secret, and the
+ reconstruction of a secret using user-provided shares.
+ .
+ Shamir's Secret Sharing Scheme allows a secret to be split in to shares.
+ These shares can then be distributed to different people. When the time comes
+ to retrieve the secret then a preset number of the shares need to be combined.
+ The number of shares created, and the number needed to retrieve the secret
+ are set at splitting time. The number of shares required to re-create the
+ secret can be chosen to be less that the number of shares created, so any
+ large enough subset of the shares can retrieve the secret.
+ .
+ This scheme allows a secret to be shared, either to reduce the chances that
+ the secret is lost, or to increase the number of parties that must cooperate
+ to reveal the secret.

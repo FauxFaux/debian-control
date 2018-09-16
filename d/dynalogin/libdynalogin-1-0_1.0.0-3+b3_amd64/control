@@ -1,0 +1,26 @@
+Package: libdynalogin-1-0
+Source: dynalogin (1.0.0-3)
+Version: 1.0.0-3+b3
+Architecture: amd64
+Maintainer: Debian Authentication Maintainers <pkg-auth-maintainers@lists.alioth.debian.org>
+Installed-Size: 72
+Depends: libapr1 (>= 1.2.7), libc6 (>= 2.2.5), libgnutls30 (>= 3.5.0), liboath0 (>= 1.10.0), libodbc1 (>= 2.3.1), libpam0g (>= 0.99.7.1)
+Section: libs
+Priority: optional
+Homepage: http://www.dynalogin.org/
+Description: two-factor HOTP/TOTP authentication - implementation libs
+ dynalogin is a two-factor authentication framework based on HOTP/TOTP
+ (Open Authentication) algorithms.  Dynalogin can store credentials in
+ any database supported by UNIXODBC, which makes the solution
+ robust and scalable.  It can also store credentials in flat files
+ if desired.  dynalogin has been successfully integrated in solutions
+ for OpenID, making it possible to use two-factor authentication with
+ hundreds of other web applications and public web sites.  There is a
+ dynalogin soft-token for Android and it also works with Google
+ Authenticator.
+ .
+ This library is used by a dynalogin authentication server or any other
+ software component that wants to implement the HOTP/TOTP algorithm
+ internally.  The package also includes various storage modules (file
+ storage and UNIXODBC) for retaining the user credentials and algorithm
+ data.

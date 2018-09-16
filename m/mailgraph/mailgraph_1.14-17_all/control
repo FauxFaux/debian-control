@@ -1,0 +1,15 @@
+Package: mailgraph
+Version: 1.14-17
+Architecture: all
+Maintainer: Jörg Frings-Fürst <debian@jff.email>
+Installed-Size: 111
+Pre-Depends: debconf (>= 0.5) | debconf-2.0
+Depends: perl:any, libfile-tail-perl, librrds-perl, lsb-base (>= 3.0-6), ucf (>= 0.28)
+Recommends: httpd | apache2, default-mta | exim4 | postfix | sendmail | mail-transport-agent
+Section: admin
+Priority: optional
+Homepage: https://mailgraph.schweikert.ch
+Description: RRDtool frontend for Mail statistics
+ Mailgraph is a very simple mail statistics RRDtool frontend for
+ Postfix, Sendmail or Exim that produces daily, weekly, monthly and
+ yearly graphs of received/sent and bounced/rejected mail.

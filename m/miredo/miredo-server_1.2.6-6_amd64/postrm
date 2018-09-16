@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  purge)
+    userdel miredo-server >/dev/null 2>&1 || true
+  ;;
+esac
+
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "purge" ] ; then
+	update-rc.d miredo-server remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+

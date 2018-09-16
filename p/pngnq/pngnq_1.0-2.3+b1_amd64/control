@@ -1,0 +1,21 @@
+Package: pngnq
+Source: pngnq (1.0-2.3)
+Version: 1.0-2.3+b1
+Architecture: amd64
+Maintainer: Nelson A. de Oliveira <naoliv@debian.org>
+Installed-Size: 79
+Depends: libc6 (>= 2.11), libpng16-16 (>= 1.6.2-1), zlib1g (>= 1:1.1.4)
+Section: graphics
+Priority: optional
+Homepage: http://pngnq.sourceforge.net
+Description: tool for optimizing PNG (Portable Network Graphics) images
+ Pngnq is a tool for quantizing 32-bit RGBA PNG images to 8-bit RGBA pallete
+ PNG. It's is an adaptation by Stuart Coyle of Greg Roelf's pnqquant. While
+ pngquant uses a median cut algorithm, Pngnq uses Anthony Dekker's neuquant
+ algorithm (http://members.ozemail.com.au/~dekker/NEUQUANT.HTML), generally
+ resulting in better looking results than pngquant.
+ .
+ Optimizers (like pngcrush and optipng) optimize the compression, usually
+ losslessly. pngnq quantizes colors down to 256 (or fewer) distinct RGBA
+ combinations, which is quite lossy. Optimized PNGs are usually two to four
+ times smaller than the 32-bit versions.

@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+
+DEFAULT_CONF='/etc/softflowd/default.conf'
+LEGACY_CONF='/etc/default/softflowd'
+
+case "$1" in
+install)
+    ;;
+upgrade)
+    if \
+        dpkg --compare-versions "$2" lt 0.9.9-4~ &&
+        [ -f "$LEGACY_CONF" ] &&
+        [ ! -f "$DEFAULT_CONF" ]
+    then
+        # create /etc/softflowd/default.conf from /etc/default/softflowd
+        # lower-case key names
+        mkdir -p "$(dirname "$DEFAULT_CONF")"
+        sed  -e '
+            s/^INTERFACE=/interface=/ ;
+            s/^OPTIONS=/options=/ ;
+        ' <"$LEGACY_CONF" >"$DEFAULT_CONF"
+    fi
+    ;;
+abort-upgrade)
+    ;;
+*)
+    echo "preinst called with unknown argument '$1'"
+    exit 1
+    ;;
+esac
+
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper mv_conffile /etc/default/softflowd /etc/softflowd/default.conf 0.9.9-4\~ -- "$@"
+# End automatically added section
+
+exit 0

@@ -1,0 +1,19 @@
+Package: ruby-forwardable-extended
+Version: 2.6.0-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: http://github.com/envygeeks/forwardable-extended
+Description: Forwardable with hash and instance variable extensions
+ Provides more Forwardable methods for your source as
+ Forwardable::Extended.
+ .
+  - Any delegation can accept `alias_of' which will be the message sent
+    to the object.
+  - You can send arguments by attaching the keyword `:args => [:my_arg]',
+    these are sent a `#to_s message.'
+  - Any delegation can be boolean if you wish it to be, even `:reverse'.
+Ruby-Versions: all

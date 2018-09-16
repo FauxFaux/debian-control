@@ -1,0 +1,23 @@
+Package: libdist-zilla-util-configdumper-perl
+Version: 0.003009-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: libsub-exporter-progressive-perl, libtry-tiny-perl, perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Dist-Zilla-Util-ConfigDumper
+Description: simplify extraction of plugin settings for Dist::Zilla plugin authors
+ Dist::Zilla::Util::ConfigDumper contains a utility function for use
+ within the Dist::Zilla plugin ecosystem, to simplify extraction of
+ plugin settings for plugin authors, in order for plugins like
+ Dist::Zilla::Plugin::MetaConfig to expose those values to consumers.
+ .
+ Primarily, it specializes in:
+ .
+   * Making propagating configuration from the plugins inheritance
+     hierarchy nearly foolproof.
+   * Providing simple interfaces to extract values of lists of named
+     methods or accessors
+   * Providing a way to intelligently and easily probe the value of lazy
+     attributes without triggering their vivification.

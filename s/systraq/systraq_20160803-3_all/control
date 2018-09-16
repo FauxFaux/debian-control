@@ -1,0 +1,23 @@
+Package: systraq
+Version: 20160803-3
+Architecture: all
+Maintainer: Joost van Baal-Ilić <joostvb@debian.org>
+Installed-Size: 338
+Depends: exim4 | mail-transport-agent, adduser, filetraq (>= 0.2-10), procps, net-tools, debsums, make, bsd-mailx | heirloom-mailx
+Section: admin
+Priority: optional
+Homepage: http://mdcc.cx/systraq/
+Description: monitor your system and warn when system files change
+ Systraq weekly sends you an email listing the state of your system.
+ Furthermore, if critical files have changed, you'll get an email within a
+ shorter notice. Systraq consists of few very small shell scripts.
+ .
+ It can help you implementing a not too strict security policy.  For more
+ demanding systems, you'd better use something like tripwire or tiger. Make
+ sure you really want to do the monitoring this script offers: it might not
+ comply with your site's privacy policy. Getting informed when users' config
+ file change might be too intrusive.
+ .
+ Other similar tools are available in Debian (`diffmon' for instance), but
+ systraq is less intrusive because it can warn for file changes without mailing
+ a complete diff (which is not desirable for e.g. /etc/shadow).

@@ -1,0 +1,29 @@
+Package: mairix
+Version: 0.24-2
+Architecture: amd64
+Maintainer: Benjamin Mako Hill <mako@debian.org>
+Installed-Size: 202
+Depends: libbz2-1.0, libc6 (>= 2.14), zlib1g (>= 1:1.1.4)
+Section: mail
+Priority: optional
+Homepage: https://github.com/vandry/mairix
+Description: indexes and searches locally-stored email
+ mairix is a program for indexing and searching email messages stored
+ offline on your computer.  mairix supports the Maildir, MH folders,
+ and mbox formats.
+ .
+ Some features:
+ .
+  * Indexing is fast. It runs incrementally on new messages - any
+    particular message only gets scanned once in the lifetime of the
+    index file.
+ .
+  * Searching is fast.
+ .
+  * The search mode populates a "virtual" maildir folder with symlinks
+    which point to the real messages. This folder can be opened as usual
+    in your mail program.
+ .
+  * Indexing and searching is based on words. The index file tabulates
+    which words occur in which parts (particular headers + body) of which
+    messages.

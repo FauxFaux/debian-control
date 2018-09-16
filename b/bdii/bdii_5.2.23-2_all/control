@@ -1,0 +1,16 @@
+Package: bdii
+Version: 5.2.23-2
+Architecture: all
+Maintainer: Mattias Ellert <mattias.ellert@physics.uu.se>
+Installed-Size: 113
+Depends: slapd, ldap-utils, glue-schema (>= 2.0.10), whois, ucf, python:any, lsb-base (>= 3.0-6)
+Suggests: logrotate
+Section: net
+Priority: optional
+Homepage: http://gridinfo.web.cern.ch/
+Description: Berkeley Database Information Index (BDII)
+ The Berkeley Database Information Index (BDII) consists of a standard
+ LDAP database which is updated by an external process. The update process
+ obtains LDIF from a number of sources and merges them. It then compares
+ this to the contents of the database and creates an LDIF file of the
+ differences. This is then used to update the database.

@@ -1,0 +1,27 @@
+Package: physamp
+Version: 1.1.0-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 466
+Depends: libbpp-core4 (>= 2.4.0), libbpp-phyl12 (>= 2.4.0), libbpp-seq12 (>= 2.4.0), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Breaks: bppsuite (<< 2.3.0-1)
+Replaces: bppsuite (<< 2.3.0-1)
+Section: science
+Priority: optional
+Homepage: https://jydu.github.io/physamp/
+Description: sample sequence alignment corresponding to phylogeny
+ The PhySamp package currently contains two programs: bppphysamp, which
+ samples sequences according to their similarity, and bppalnoptim, which
+ samples a sequence alignment by removing sequences in order to maximize
+ the number of sites suitable for a given analysis. The bppalnoptim
+ program has three running modes:
+  * Interactive: the user will be iteratively proposed a set of choices
+    for sequence removal, with their corresponding site gains. The
+    procedure stops when the user does not want to remove more sequences,
+    and the resulting filtered alignment is written.
+  * Automatic: the user enters an a priori criterion for stopping
+    the filtering procedure (for instance a minimum number of
+    sequences to keep).
+  * Diagnostic: this mode allows one to plot the trade-off curve, by
+    showing the site gain as a function of the number of removed
+    sequences.

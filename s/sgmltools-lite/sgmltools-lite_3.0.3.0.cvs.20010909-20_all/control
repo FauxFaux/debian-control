@@ -1,0 +1,42 @@
+Package: sgmltools-lite
+Version: 3.0.3.0.cvs.20010909-20
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 144
+Depends: sgml-base (>= 1.10), docbook (>= 4.1-1), docbook-dsssl (>= 1.71-1), python (>= 1.5), openjade
+Recommends: w3m | w3mmee
+Suggests: jadetex, lynx, linuxdoc-tools
+Conflicts: sgmltools-2 (<= 2.0.2-4)
+Replaces: sgmltools-2
+Provides: sgmltools-2
+Section: text
+Priority: optional
+Multi-Arch: foreign
+Description: convert DocBook SGML source into HTML using DSSSL
+ A text-formatting package based on SGML (Standard Generalized Markup
+ Language), which allows you to produce TeX/DVI/PS/PDF, HTML, RTF, and
+ plain ASCII (currently via w3m by default) from a single source with
+ other recommended and suggested packages; due to the flexible nature
+ of SGML, many other target formats are possible.
+ .
+ This tool can not handle DocBook XML yet.  For DocBook SGML only.
+ .
+ HTML can be generated without any other Debian text processing package,
+ but for the other formats the appropriate packages have to be installed.
+ You need to install lynx or w3m for ASCII text output (w3m is the default
+ txt backend).  Also jadetex is required for PS and PDF, and
+ linuxdoc-tools for ld2db conversion.
+ .
+ This system is tailored for writing technical software documentation,
+ an example of which are the Linux HOWTO documents.  However, there is
+ nothing Linux-specific about this package; it can be used for many
+ other types of documentation on many other systems.  It should be
+ useful for all kinds of printed and online documentation.
+ .
+ The package was formerly called linuxdoc-sgml because it originates
+ from the Linux Documentation Project (LDP).  The name has been changed
+ into sgmltools to make it clearer that there is no Linux-specific
+ stuff included in this package.
+ .
+ This is the latest version of the sgmltools series and the successor of
+ sgmltools v2.

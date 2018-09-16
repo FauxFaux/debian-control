@@ -1,0 +1,20 @@
+Package: libxml-filter-saxt-perl
+Version: 0.01-8
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 24
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/XML-Filter-SAXT
+Description: Perl module for replicating events to several event handlers
+ The XML::Filter::SAXT module is like the Unix 'tee' command in that it
+ multiplexes the input stream to several output streams.  In this case, the
+ input stream is a PerlSAX event producer (like XML::Parser::PerlSAX) and
+ the output streams are PerlSAX handlers or filters.
+ .
+ The SAXT constructor takes a list of hash references.  Each hash
+ specifies an output handler.  The hash keys can be: DocumentHandler,
+ DTDHandler, EntityResolver or Handler, where Handler is a combination
+ of the previous three and acts as the default handler.  E.g. if
+ DocumentHandler is not specified, it will try to use Handler.

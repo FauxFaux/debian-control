@@ -1,0 +1,86 @@
+Package: fence-agents
+Version: 4.2.1-1
+Architecture: amd64
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Installed-Size: 700
+Depends: python3:any (>= 3.3.2-2~), libc6 (>= 2.15), python3-boto3, python3-googleapi, python3-pycurl, python3-pexpect, python3-requests, python3-suds
+Recommends: libnet-telnet-perl, openssh-client, sg3-utils, snmp
+Suggests: python3-adal, python3-azure
+Breaks: cman (<= 3.0.12-2ubuntu4)
+Replaces: cman (<= 3.0.12-2ubuntu4)
+Section: admin
+Priority: optional
+Homepage: https://github.com/ClusterLabs/fence-agents
+Description: Fence Agents for Red Hat Cluster
+ Red Hat Fence Agents is a collection of scripts to handle remote
+ power management for several devices.  They allow failed or
+ unreachable nodes to be forcibly restarted and removed from the
+ cluster.
+ .
+ Fence agents included:
+  fence_alom: Sun ALOM
+  fence_amt: AMT
+  fence_amt_ws: AMT (WS)
+  fence_apc: APC over telnet/ssh
+  fence_apc_snmp: APC, Tripplite PDU over SNMP
+  fence_aws: AWS (Amazon Web Services)
+  fence_azure_arm: Azure Resource Manager
+  fence_bladecenter: IBM BladeCenter
+  fence_brocade: HP Brocade over telnet/ssh
+  fence_cisco_mds: Cisco MDS
+  fence_cisco_ucs: Cisco UCS
+  fence_compute: the automatic resurrection of OpenStack compute instances
+  fence_docker: Docker
+  fence_drac: Dell DRAC IV
+  fence_drac5: Dell DRAC CMC/5
+  fence_dummy: Dummy fence agent
+  fence_eaton_snmp: Eaton over SNMP
+  fence_emerson: Emerson over SNMP
+  fence_eps: ePowerSwitch
+  fence_evacuate: the automatic resurrection of OpenStack compute instances
+  fence_gce: GCE (Google Cloud Engine)
+  fence_hds_cb: Hitachi Compute Blade systems
+  fence_heuristics_ping: ping-heuristic based fencing
+  fence_hpblade: HP BladeSystem
+  fence_ibmblade: IBM BladeCenter over SNMP
+  fence_idrac: IPMI
+  fence_ifmib: IF MIB
+  fence_ilo: HP iLO
+  fence_ilo2: HP iLO
+  fence_ilo3: IPMI
+  fence_ilo3_ssh: HP iLO over SSH
+  fence_ilo4: IPMI
+  fence_ilo4_ssh: HP iLO over SSH
+  fence_ilo_moonshot: HP Moonshot iLO
+  fence_ilo_mp: HP iLO MP
+  fence_ilo_ssh: HP iLO over SSH
+  fence_imm: IPMI
+  fence_intelmodular: Intel Modular
+  fence_ipdu: iPDU over SNMP
+  fence_ipmilan: IPMI
+  fence_ironic: OpenStack's Ironic (Bare Metal as a service)
+  fence_ldom: Sun LDOM
+  fence_lpar: IBM LPAR
+  fence_mpath: multipath persistent reservation
+  fence_netio: Koukaam NETIO-230B
+  fence_ovh: OVH
+  fence_powerman: Fence Agent for Powerman
+  fence_pve: the Proxmox Virtual Environment
+  fence_raritan: Raritan Dominion PX
+  fence_rcd_serial: rcd_serial fence agent
+  fence_rhevm: RHEV-M REST API
+  fence_rsa: IBM RSA
+  fence_rsb: Fujitsu-Siemens RSB
+  fence_sanbox2: QLogic SANBox2 FC switches
+  fence_sbd: sbd
+  fence_scsi: SCSI persistent reservation
+  fence_tripplite_snmp: APC, Tripplite PDU over SNMP
+  fence_vbox: VirtualBox
+  fence_virsh: virsh
+  fence_vmware: VMWare
+  fence_vmware_rest: VMware REST API
+  fence_vmware_soap: VMWare over SOAP API
+  fence_vmware_vcloud: VMware vCloud Director API
+  fence_wti: WTI
+  fence_xenapi: Citrix XenServer over XenAPI
+  fence_zvmip: use with z/VM Virtual Machines

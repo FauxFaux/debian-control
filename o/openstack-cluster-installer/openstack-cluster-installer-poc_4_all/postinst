@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] || [ "${1}" = "reconfigure" ] ; then
+	mkdir -p /var/lib/openstack-cluster-installer-poc/templates
+	mkdir -p /var/lib/openstack-cluster-installer-poc/runtime
+fi
+
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/oci-poc-virtual-network" ]; then
+		update-rc.d oci-poc-virtual-network defaults >/dev/null
+		invoke-rc.d oci-poc-virtual-network start || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/oci-poc-vms" ]; then
+		update-rc.d oci-poc-vms defaults >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

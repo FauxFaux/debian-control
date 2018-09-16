@@ -1,0 +1,27 @@
+Package: blktrace
+Version: 1.2.0-2
+Architecture: amd64
+Maintainer: Bas Zoetekouw <bas@debian.org>
+Installed-Size: 1056
+Depends: libaio1 (>= 0.3.93), libc6 (>= 2.15), python3
+Recommends: libtheora-bin, ffmpeg, librsvg2-bin
+Suggests: gnuplot-x11
+Section: utils
+Priority: optional
+Homepage: http://brick.kernel.dk/snaps/
+Description: utilities for block layer IO tracing
+ blktrace is a block layer IO tracing mechanism which provides detailed
+ information about request queue operations up to user space. There are
+ three major components that are provided:
+ .
+ blktrace: A utility which transfers event traces from the kernel
+ into either long-term on-disk storage, or provides direct formatted
+ output (via blkparse).
+ .
+ blkparse: A utility which formats events stored in files, or when
+ run in live mode directly outputs data collected by blktrace.
+ .
+ iowatcher: A utility to visualize block I/O patterns. It generates graphs
+ from blktrace runs to help visualize IO patterns and performance. It can
+ plot multiple blktrace runs together, making it easy to compare the
+ differences between different benchmark runs.

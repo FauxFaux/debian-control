@@ -1,0 +1,22 @@
+Package: sftpcloudfs
+Version: 0.12.2-3
+Architecture: all
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 96
+Pre-Depends: dpkg (>= 1.15.6~)
+Depends: adduser, debconf, openssh-client, python-cloudfiles, python-daemon, python-ftp-cloudfs (>= 0.23.1), python-memcache, python-paramiko, debconf (>= 0.5) | debconf-2.0, lsb-base, python (<< 2.8), python (>= 2.7), python-swiftclient, python:any (>= 2.6.6-7~)
+Section: net
+Priority: optional
+Homepage: https://github.com/Memset/sftpcloudfs
+Description: SFTP interface to Rackspace/OpenStack storage services
+ This package provides an SFTP (Secure File Transfer Protocol) interface to
+ Rackspace Cloud Files and OpenStack Object Storage, acting as a proxy between
+ an SFTP client and a remote storage service.
+ .
+ The username/password pair used to open the SFTP session is validated using the
+ authentication service of the storage service to get an authentication
+ token.
+ .
+ The communication between the client and the SFTP daemon is encrypted all the
+ time, and the SFTP service supports HTTPS communication with the remote
+ storage service.

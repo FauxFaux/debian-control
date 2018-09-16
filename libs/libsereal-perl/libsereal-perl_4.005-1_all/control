@@ -1,0 +1,20 @@
+Package: libsereal-perl
+Version: 4.005-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 25
+Depends: perl, libsereal-decoder-perl (>= 4.005), libsereal-encoder-perl (>= 4.005)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Sereal
+Description: fast, compact, powerful binary (de-)serialization module wrapper
+ Sereal is an efficient, compact-output, binary and feature-rich serialization
+ protocol. The Perl encoder is implemented as the Sereal::Encoder module, the
+ Perl decoder correspondingly as Sereal::Decoder. They are distributed
+ separately, in Debian as libsereal-decoder-perl and libsereal-encoder-perl.
+ .
+ This Sereal module is a very thin wrapper around both Sereal::Encoder and
+ Sereal::Decoder. It depends on both and loads both. So if you have a user of
+ both encoder and decoder, it is enough to depend on a particular version of
+ Sereal and you'll get the most recent released versions of Sereal::Encoder
+ and Sereal::Decoder.

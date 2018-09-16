@@ -1,0 +1,25 @@
+Package: yorick-svipc
+Source: yp-svipc (0.16-2)
+Version: 0.16-2+b4
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 91
+Depends: yorick, libc6 (>= 2.14)
+Suggests: python-svipc, python3-svipc
+Section: science
+Priority: extra
+Homepage: https://github.com/mdcb/yp-svipc
+Description: interprocess communication (shared memory...) for Yorick
+ This package allows one to access the System V Interprocess
+ communication mechanisms from within Yorick:
+   + message queues;
+   + semaphore sets;
+   + shared memory segments.
+ It also exposes related functionality, in particular fork().
+ .
+ This plug-in serves primarily two use cases:
+   + parallel (multiprocess) computing;
+   + mixed applications (eg. yorick/python).
+ .
+ Sibling packages are available for Python: python-svipc and
+ python3-svipc.

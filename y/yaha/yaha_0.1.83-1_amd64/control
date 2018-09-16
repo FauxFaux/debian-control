@@ -1,0 +1,23 @@
+Package: yaha
+Version: 0.1.83-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 109
+Depends: libc6 (>= 2.14)
+Section: science
+Priority: optional
+Homepage: https://github.com/GregoryFaust/yaha
+Description: find split-read mappings on single-end queries
+ yaha is an open source, flexible, sensitive and accurate DNA aligner
+ designed for single-end reads. It supports three major modes of
+ operation:
+  * The default “Optimal Query Coverage” (-OQC) mode reports the
+    best set of alignments that cover the length of each query.
+  * Using “Filter By Similarity” (-FBS), along with the best set of
+    alignments, yaha will also output alignments that are highly similar
+    to an alignment in the best set.
+  * Finally, yaha can output all the alignments found for each query.
+ The -OQC and -FBS modes are specifically tuned to form split read
+ mappings that can be used to accurately identify structural variation
+ events (deletions, duplications, insertions or inversions) between the
+ subject query and the reference genome.

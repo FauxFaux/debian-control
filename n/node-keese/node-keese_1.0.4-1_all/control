@@ -1,0 +1,23 @@
+Package: node-keese
+Version: 1.0.4-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 46
+Depends: nodejs
+Section: web
+Priority: extra
+Homepage: https://github.com/thejoshwolfe/node-keese
+Description: arbitrary-precision floats encoded as strings - Node.js module
+ keese is a Node.js module that generates well-ordered values, appropriate for
+ use as sorting keys.
+ .
+ keese can always generate a bigger value, a smaller value, and a value
+ between two other values. This is trivial using numbers with x+1, x-1, and
+ (x+y)/2 respectively. However, numbers have limited precision in JavaScript,
+ so instead keese uses strings.
+ .
+ The string values are comparable with the builtin comparison operators (such
+ as <), and keese can always generate a new value that satisfies the
+ constraints (limited only by system resources).
+ .
+ Node.js is an event-based server-side JavaScript engine.

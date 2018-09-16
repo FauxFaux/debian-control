@@ -1,0 +1,34 @@
+Package: rmlint-gui
+Source: rmlint
+Version: 2.6.1-1
+Architecture: all
+Maintainer: Carlos Maddela <e7appew@gmail.com>
+Installed-Size: 327
+Depends: gir1.2-gtksource-3.0, gir1.2-polkit-1.0, gir1.2-rsvg-2.0, python3-cairo, python3-gi, rmlint:any (>= 2.6.1-1), dconf-gsettings-backend | gsettings-backend, python3:any (>= 3.3.2-2~)
+Recommends: python3-colorlog
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://rmlint.readthedocs.io/
+Description: GTK+ frontend to rmlint
+ rmlint-gui (a.k.a. Shredder) is a graphical user interface to rmlint
+ using GTK+. It uses rmlint to find space waste and other broken things
+ on your filesystem and offers to remove them.
+ .
+ It is able to find:
+  * Duplicate files & directories.
+  * Non-stripped binaries.
+  * Broken symlinks.
+  * Empty files.
+  * Recursive empty directories.
+  * Files with broken user or group ID.
+ .
+ Key Features:
+  * Extremely fast.
+  * Flexible and easy command-line options.
+  * Choice of several hashes for hash-based duplicate detection.
+  * Option for exact byte-by-byte comparison (only slightly slower).
+  * Numerous output options.
+  * Option to store time  of last run; next time will only scan new files.
+  * Many options for original selection/prioritisation.
+  * Can handle very large file sets (millions of files).

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if update-alternatives --list git | fgrep /usr/bin/git.transition >/dev/null
+then
+    update-alternatives --auto git
+    update-alternatives --remove git /usr/bin/git.transition
+fi
+
+

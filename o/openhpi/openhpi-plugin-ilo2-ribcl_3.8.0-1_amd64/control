@@ -1,0 +1,22 @@
+Package: openhpi-plugin-ilo2-ribcl
+Source: openhpi
+Version: 3.8.0-1
+Architecture: amd64
+Maintainer: Mohan Devarajulu <mohan.devarajulu@hpe.com>
+Installed-Size: 421
+Depends: libc6 (>= 2.14), libglib2.0-0 (>= 2.31.8), libopenhpi3 (= 3.8.0-1), libxml2 (>= 2.7.4)
+Conflicts: libopenhpi, libopenhpi2
+Breaks: libopenhpi3 (<< 3.8.0-1~)
+Replaces: libopenhpi, libopenhpi2, libopenhpi3 (<< 3.8.0-1~)
+Section: libs
+Priority: optional
+Homepage: http://openhpi.org
+Description: OpenHPI plugin module for HP's ProLiant rackmount servers
+ OpenHPI is an implementation of the Service Availability Forum's Hardware
+ Platform Interface specification.  (See http://www.saforum.org)  As
+ such, OpenHPI facilitates the development of computer manageability
+ applications which are not tied to a single hardware vendor's products.
+ .
+ This package contains a plugin module that provides hardware information
+ from many HP ProLiant rackmount servers, accessing this information
+ using RIBCL to an iLO2, over a LAN.

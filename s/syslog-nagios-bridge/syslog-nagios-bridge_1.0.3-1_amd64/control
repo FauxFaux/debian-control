@@ -1,0 +1,17 @@
+Package: syslog-nagios-bridge
+Version: 1.0.3-1
+Architecture: amd64
+Maintainer: Debian Monitoring Maintainers <pkg-monitoring-maintainers@lists.alioth.debian.org>
+Installed-Size: 38
+Depends: python, icinga2 | icinga | nagios3, python-pynag (>= 0.9.1), python-netsyslog, lsb-base
+Section: net
+Priority: optional
+Homepage: https://github.com/dpocock/syslog-nagios-bridge
+Description: Syslog to Nagios integration
+ syslog-nagios-bridge brings Syslog and Nagios together, listening for
+ Syslog events from the network, determining when they meet an error
+ threshold, mapping the host and syslog tag value to a Nagios service
+ definition and submitting a passive checkresult to Nagios.
+ .
+ Users clear the alerts manually through the Nagios web UI after checking
+ the log and resolving the problem.

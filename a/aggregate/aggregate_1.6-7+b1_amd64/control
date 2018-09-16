@@ -1,0 +1,18 @@
+Package: aggregate
+Source: aggregate (1.6-7)
+Version: 1.6-7+b1
+Architecture: amd64
+Maintainer: Erik Wenzel <erik@debian.org>
+Installed-Size: 32
+Depends: libc6 (>= 2.3)
+Section: net
+Priority: optional
+Description: ipv4 cidr prefix aggregator
+ takes a list of prefixes in conventional format on stdin, and performs two
+ optimisations to reduce the length of the prefix list. It removes any
+ supplied prefixes which are supurfluous because they are already included in
+ another supplied prefix (e.g., 203.97.2.0/24 would be removed if
+ 203.97.0.0/17 was also supplied), and identifies adjacent prefixes that can
+ be combined under a single, shorter-length prefix (e.g., 203.97.2.0/24 and
+ 203.97.3.0/24 can be combined into the single prefix 203.97.2.0/23).
+Tag: implemented-in::c, interface::commandline, network::configuration, network::routing, protocol::ip, role::program, scope::utility, use::analysing, use::configuring, use::converting, use::routing, works-with-format::plaintext, works-with::network-traffic, works-with::text

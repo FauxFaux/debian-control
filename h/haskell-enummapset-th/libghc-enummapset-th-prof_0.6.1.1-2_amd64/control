@@ -1,0 +1,27 @@
+Package: libghc-enummapset-th-prof
+Source: haskell-enummapset-th
+Version: 0.6.1.1-2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 1611
+Depends: libghc-enummapset-th-dev (= 0.6.1.1-2), libghc-base-prof-4.10.1.0-35a7f, libghc-containers-prof-0.5.10.2-cc496, libghc-deepseq-prof-1.4.3.0-38379, libghc-template-haskell-prof-2.12.0.0-22576
+Provides: libghc-enummapset-th-prof-0.6.1.1-0e047
+Section: haskell
+Priority: optional
+Homepage: https://github.com/tsurucapital/enummapset-th
+Description: TH-generated EnumSet/EnumMap wrappers around IntSet/IntMap; profiling libraries
+ This package wraps IntSet and IntMap from containers, and provides
+ fast sets and maps keyed on any data type with a well-behaved Enum
+ instance. Useful for derived Enums, newtype'd Ints, or any data type
+ that can be packed into an Int: just implement fromEnum and toEnum.
+ .
+ The boilerplate is generated using Template Haskell, so unlike
+ enummapset it's easier to maintain and keep up-to-date with
+ containers. On the downside, it's less portable.
+ .
+ Note that "Data.EnumMap.Lazy" and "Data.EnumMap.Strict" provide distinct
+ newtype wrappers, and their respective 'Functor' instances behave as
+ expected, unlike that of IntMap which is alway lazy.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

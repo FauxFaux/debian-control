@@ -1,0 +1,37 @@
+Package: cmucl-source
+Source: cmucl
+Version: 21c-4
+Architecture: all
+Maintainer: Debian Common Lisp Team <debian-common-lisp@lists.debian.org>
+Installed-Size: 20208
+Replaces: cmucl-clx, cmucl-defsystem, cmucl-graystream, cmucl-hemlock
+Section: lisp
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.cons.org/cmucl/
+Description: CMUCL lisp sources
+ These are the CMUCL sources, provided so that the
+ debugger can show useful source information at appropriate
+ times.
+ .
+ This version includes common-lisp-controller compatible
+ replacements for defsystem, graystream, clx and hemlock.
+ .
+ defsystem provides a "make" type system for Lisp. This is
+ a patched version from clocc.
+ .
+ Gray streams are the usual Lisp streams, but re-implemented
+ as a Object hierarchy. Users can subclass existing classes and
+ adapt them for their own needs.
+ .
+ cmucl-clx is the clx library adapted for CMUCL. clx is an
+ interface to X11, just like xlib.
+ .
+ Hemlock is an emacs clone for CMUCL.
+ .
+ Note that this version only works in X, the tty interface
+ is broken: the system can't parse /etc/termcap.
+ .
+ To open the editor, type "(ed)".
+ .
+ Note that to recompile CMUCL you need a working CMUCL system :-(

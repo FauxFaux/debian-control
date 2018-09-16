@@ -1,0 +1,88 @@
+#!/bin/sh
+
+set -e
+
+RUNDIR=/var/run/opendmarc
+USER=opendmarc
+GROUP=opendmarc
+
+pathfind() {
+  OLDIFS="$IFS"
+  IFS=:
+  for p in $PATH; do
+    if [ -x "$p/$*" ]; then
+      IFS="$OLDIFS"
+      return 0
+    fi
+  done
+  IFS="$OLDIFS"
+  return 1
+}
+
+if [ "$1" = "configure" ]; then
+	if ! id -u opendmarc >/dev/null 2>&1; then
+		adduser --quiet --system --group --home /var/run/opendmarc opendmarc
+	fi
+
+	# Create the run directory if it doesn't exist
+	if [ ! -d "$RUNDIR" ]; then
+	install -o "$USER" -g "$GROUP" -m 755 -d "$RUNDIR" || exit 2
+		if pathfind restorecon; then restorecon "$RUNDIR"
+		fi
+	fi
+
+	# Set ownership if the admin has not overriden it.
+	if ! dpkg-statoverride --list /var/run/opendmarc >/dev/null; then
+		chown opendmarc:opendmarc /var/run/opendmarc
+	fi
+
+	# Upgrade /etc/default to systemd override files
+	if [ -d /run/systemd/system ] && [ -f /etc/default/opendmarc ]; then
+		if [ -f /etc/tmpfiles.d/opendmarc.conf ]; then
+			systemd-tmpfiles --create /etc/tmpfiles.d/opendmarc.conf
+		fi
+	fi
+fi
+
+# Automatically added by dh_systemd_enable/11.1.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'opendmarc.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'opendmarc.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'opendmarc.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'opendmarc.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.1.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/opendmarc.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.1.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/opendmarc" ]; then
+		update-rc.d opendmarc defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d opendmarc $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

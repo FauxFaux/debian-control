@@ -1,0 +1,21 @@
+Package: debiman
+Version: 0.0~git20180905.9955035-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 25838
+Depends: mandoc, libc6 (>= 2.3.2)
+Built-Using: golang-1.10 (= 1.10.3-1), golang-github-kjk-lzma (= 1.0.0-4), golang-github-xi2-xz (= 0.0~git20171230.48954b6-1), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-net-dev (= 1:0.0+git20180124.0ed95ab+dfsg-2), golang-golang-x-sync (= 0.0~git20171101.fd80eb9-1), golang-golang-x-sys (= 0.0~git20180510.7dfd129-1), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-2), golang-pault-go-archive (= 1.0-1), golang-pault-go-blobstore (= 0.0~git20180314.d6d187c-1), golang-pault-go-debian (= 0.9-1), golang-pault-go-topsort (= 0.0~git20150602.0.a54e6e0-3), golang-x-text (= 0.3.0-2)
+Section: devel
+Priority: optional
+Homepage: https://github.com/Debian/debiman
+Description: generate a static manpage HTML repository out of a Debian archive
+ debiman makes (Debian) manpages accessible in a web browser. Its
+ goals are, in order:
+ .
+ completeness: all manpages in Debian should be available.
+ .
+ visually appealing and convenient: reading manpages should be fun, convenience
+ features (e.g. permalinks, URL redirects, easy navigation) should be available
+ .
+ speed: manpages should be quick to load, new manpages should be quickly
+ ingested, the program should run quickly for pleasant development

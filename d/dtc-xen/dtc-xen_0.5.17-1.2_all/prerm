@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit/11.1.4
+if [ -x "/etc/init.d/dtc-xen" ]; then
+	invoke-rc.d dtc-xen stop || exit 1
+fi
+# End automatically added section
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p dtc-xen 
+else
+	dpkg -L dtc-xen | grep '\.py$' | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section

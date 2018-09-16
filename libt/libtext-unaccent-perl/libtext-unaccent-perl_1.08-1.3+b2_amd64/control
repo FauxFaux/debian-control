@@ -1,0 +1,16 @@
+Package: libtext-unaccent-perl
+Source: libtext-unaccent-perl (1.08-1.3)
+Version: 1.08-1.3+b2
+Architecture: amd64
+Maintainer: Loic Dachary (OuoU) <loic@debian.org>
+Installed-Size: 88
+Depends: perl (>= 5.26.0-4), perlapi-5.26.0, libc6 (>= 2.2.5)
+Section: interpreters
+Priority: optional
+Description: provides functions to remove accents using UTF16 as a pivot
+ Text::Unaccent is a module that provides functions to remove accents
+ from a string.  For instance the string été will become ete.  The
+ charset of the input string is specified as an argument. The input is
+ converted to UTF-16 using iconv(3), accents are stripped and the
+ result is converted back to the original charset. The iconv -l
+ command on GNU/Linux will show all charset supported.

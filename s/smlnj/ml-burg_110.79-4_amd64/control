@@ -1,0 +1,22 @@
+Package: ml-burg
+Source: smlnj
+Version: 110.79-4
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 700
+Depends: ml-lex (= 110.79-4)
+Section: devel
+Priority: optional
+Homepage: http://www.smlnj.org/
+Description: Code generator for Standard ML
+ ml-burg generates a Standard ML program to perform bottom-up
+ rewriting of an input tree.  Cost information associated with each
+ rewrite rule is used to derive the minimum rewrite cost for the
+ entire tree.  A successful reduction corresponds to rewriting the
+ input tree to a special non-terminal symbol called the "start"
+ non-terminal.  Upon successful reduction, facilities are provided to
+ walk the tree emitting semantic actions corresponding to the rules
+ that matched.
+ .
+ Install this package if you want to write a compiler in SML using a
+ burg specification.

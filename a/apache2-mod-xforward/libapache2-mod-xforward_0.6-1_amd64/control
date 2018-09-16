@@ -1,0 +1,17 @@
+Package: libapache2-mod-xforward
+Source: apache2-mod-xforward
+Version: 0.6-1
+Architecture: amd64
+Maintainer: Andrew Lee (李健秋) <ajqlee@debian.org>
+Installed-Size: 61
+Depends: libc6 (>= 2.4), apache2-api-20120211
+Section: httpd
+Priority: optional
+Homepage: https://github.com/openSUSE/apache2-mod_xforward
+Description: Apache module implements redirection based on X-Forward response header
+ When this header is seen by Apache it uses the apache mod_proxy
+ module to proxy the given URL.
+ .
+ This is not visible for the client process and can be used to free the
+ cgi/rails process pool by long running requests after initial check
+ routines.

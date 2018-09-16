@@ -1,0 +1,45 @@
+#!/bin/sh
+
+set -e
+
+USER=memcache
+GROUP=memcache
+
+if [ "$1" = "purge" ]
+	then
+		rm -f /etc/memcached.conf
+		rm -f /var/log/memcached.log
+
+        deluser --system $USER || true
+        delgroup --system --only-if-empty $GROUP || true
+fi
+
+	rm -f /var/run/memcached.pid
+
+# Automatically added by dh_installinit/11.1.5
+if [ "$1" = "purge" ] ; then
+	update-rc.d memcached remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/11.1.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'memcached.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'memcached.service' >/dev/null || true
+		deb-systemd-helper unmask 'memcached.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

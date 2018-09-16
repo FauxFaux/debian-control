@@ -1,0 +1,15 @@
+Package: elida
+Version: 0.4+nmu1
+Architecture: all
+Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
+Installed-Size: 116
+Depends: bzip2, devscripts, diffstat, lintian, mpack, patchutils, pbuilder, piuparts, sudo
+Section: devel
+Priority: optional
+Description: pbuilder mail interface
+ elida accepts the URL of a .dsc file from the subject of a email
+ message and downloads the rest of the files of the corresponding
+ Debian source package. If there is a previous version in Debian,
+ a diff between the old and new source packages is reported. It
+ then runs pbuilder, piuparts, and lintian. The reports are
+ compressed and emailed back to the user.

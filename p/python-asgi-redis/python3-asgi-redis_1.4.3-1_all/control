@@ -1,0 +1,24 @@
+Package: python3-asgi-redis
+Source: python-asgi-redis
+Version: 1.4.3-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 75
+Depends: python3-asgiref, python3-msgpack, python3-redis, python3-six, python3:any (>= 3.4~)
+Section: python
+Priority: optional
+Homepage: https://github.com/django/asgi_redis/
+Description: Redis-py backend for ASGI, with built-in sharding (Python3 version)
+ An ASGI channel layer that uses Redis as its backing store, and supports both a
+ single-server and sharded configurations, as well as group support.
+ .
+ A "local and remote" mode is also supported, where the Redis channel layer
+ works in conjunction with a machine-local channel layer (asgi_ipc) in order to
+ route all normal channels over the local layer, while routing all single-reader
+ and process-specific channels over the Redis layer.
+ .
+ "Sentinel" mode is also supported, where the Redis channel layer will connect
+ to a redis sentinel cluster to find the present Redis master before writing or
+ reading data.
+ .
+ This package contains the Python 3 version of the library.

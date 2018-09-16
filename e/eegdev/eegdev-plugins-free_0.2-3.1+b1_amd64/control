@@ -1,0 +1,29 @@
+Package: eegdev-plugins-free
+Source: eegdev (0.2-3.1)
+Version: 0.2-3.1+b1
+Architecture: amd64
+Maintainer: Nicolas Bourdaud <nicolas.bourdaud@gmail.com>
+Installed-Size: 99
+Depends: libeegdev0 (= 0.2-3.1+b1), libc6 (>= 2.17), libexpat1 (>= 2.0.1), libusb-1.0-0 (>= 2:1.0.8), libxdffileio0 (>= 0.0)
+Section: libs
+Priority: extra
+Multi-Arch: same
+Homepage: http://cnbi.epfl.ch/software/eegdev.html
+Description: Biosignal acquisition device library (free plugins)
+ eegdev is a library that provides a unified interface for accessing various
+ EEG (and other biosignals) acquisition systems. This interface has been
+ designed to be both flexible and efficient. The device specific part is
+ implemented by the mean of plugins which makes adding new device backend
+ fairly easy even if the library does not support them yet officially.
+ .
+ The core library not only provides to users a unified and consistent
+ interfaces to the acquisition device but it also provides many
+ functionalities to the device backends (plugins) ranging from configuration
+ to data casting and scaling making writing new device backend an easy task.
+ .
+ This library is particularly useful to handle the acquisition part of a
+ Brain Computer Interface (BCI) or any realtime multi-electrode acquisition
+ in neurophysiological research.
+ .
+ This package contains the devices plugins that depends only on free
+ components.

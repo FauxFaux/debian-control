@@ -1,0 +1,67 @@
+Package: prosody-modules
+Version: 0.0~hg20180420.902ecd6400bd+dfsg-1
+Architecture: all
+Maintainer: Debian XMPP Maintainers <pkg-xmpp-devel@alioth-lists.debian.net>
+Installed-Size: 724
+Depends: lua-ldap, prosody (>= 0.10.0)
+Section: net
+Priority: optional
+Homepage: http://hg.prosody.im/prosody-modules/
+Description: Selection of community modules for Prosody
+ This package contains extensions to the Prosody XMPP server.
+ This is a selection of the community provided archive at
+ http://hg.prosody.im/prosody-modules/
+ .
+ modules included:
+   - mod_auth_dovecot: dovecot authentication
+   - mod_auth_ha1: HA1 based authentication
+   - mod_auth_ldap: LDAP authentication with several features
+   - mod_auth_ldap2: LDAP authentication
+   - mod_auth_sql: SQL Database authentication module
+   - mod_blocking: XEP-0191: Blocking Command
+   - mod_block_strangers: block messages from jids not in roster
+   - mod_broadcast: broadcast a message to online users, like mod_announce
+   - mod_c2s_conn_throttle: c2s connections throttling module
+   - mod_carbons_adhoc: XEP-0280: adhoc command for Message Carbons
+   - mod_carbons_copies: XEP-0280: Message Carbons, v0 style copy support
+   - mod_cloud_notify: XEP-0357: Push Notifications
+   - mod_csi/mod_csi_battery_saver/mod_filter_chatstates/mod_throttle_presence:
+     XEP-0352: Client State Indication
+   - mod_default_bookmarks: default bookmarks for users
+   - mod_delegation: XEP-0355: Namespace Delegation
+   - mod_firewall: block, bounce, drop, forward, copy, redirect stanzas
+   - mod_host_guard: granular remote host blacklisting plugin
+   - mod_http_upload: XEP-0363: upload files over HTTP for clients
+   - mod_http_muc_log: web interface to stored chatroom logs
+   - mod_invite: allows users with an account to generate single-use
+     invite URLs using an ad-hoc command
+   - mod_ipcheck: XEP-0279: server IP check
+   - mod_lastlog: stores the timestamp of when a user logs in
+   - mod_lib_ldap: LDAP lib
+   - mod_list_inactive: lists users, who haven't used their account in a
+     defined time-frame
+   - mod_log_auth: log failed authentication attempts with their IP address
+   - mod_mam_adhoc: XEP-0313: adhoc command for Message Archive Management
+   - mod_mam_muc: XEP-0313: Message Archive Management for chatrooms
+   - mod_muc_log: logs the conversation of chatrooms running on the server
+     to Prosody’s data store
+   - mod_muc_log_http: provides a built-in web interface to view chatroom logs
+     stored by mod_muc_log
+   - mod_omemo_all_access: disable access control for OMEMO related PEP nodes
+   - mod_pastebin: redirect long messages to built-in pastebin
+   - mod_privacy_lists: XEP-0016: privacy lists
+   - mod_private_adhoc: retrieve private XML data via adhoc command
+   - mod_privilege: XEP-0356: allows entity/component to have privileged
+     access
+   - mod_profile: replacement for mod_vcard
+   - mod_register_json: token based JSON registration & verification servlet
+   - mod_register_redirect: XEP-077: IBR Registration Redirect
+   - mod_reload_modules: automatically reload modules with the config
+   - mod_require_otr: enforce a policy for OTR-encrypted messages
+   - mod_s2s_idle_timeout: close idle server-to-server connections
+   - mod_server_status/mod_stanza_counter: server status plugin
+   - mod_smacks: XEP-0198: Stream Management
+   - mod_storage_ldap: LDAP storage (read-only) for rosters and vCards.
+   - mod_support_contact: add a support contact to new registrations
+   - mod_vjud: XEP-0055: Jabber Search
+   - mod_webpresence: display your online status in web pages

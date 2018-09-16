@@ -1,0 +1,20 @@
+Package: nvidia-xconfig
+Version: 390.25-1
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 236
+Pre-Depends: nvidia-installer-cleanup
+Depends: libc6 (>= 2.14)
+Recommends: libgl1-nvidia-glx-any
+Section: contrib/x11
+Priority: optional
+Homepage: https://download.nvidia.com/XFree86/nvidia-xconfig/
+Description: deprecated X configuration tool for non-free NVIDIA drivers
+ This tool is deprecated. The NVIDIA drivers now automatically integrate with
+ the Xorg Xserver configuration. Creating an xorg.conf is no longer needed for
+ normal setups.
+ .
+ The nvidia-xconfig program helps with manipulation of X configuration
+ files, primarily for systems that use the non-free drivers provided by
+ NVIDIA.  It automatically changes the configuration to use the NVIDIA
+ driver and can add additional options given on the command line.

@@ -1,0 +1,22 @@
+Package: node-flagged-respawn
+Version: 1.0.0-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: nodejs (>= 6)
+Section: javascript
+Priority: optional
+Homepage: https://github.com/js-cli/js-flagged-respawn
+Description: tool for respawning node binaries when special flags are present
+ This Node.js module can be useful for command-line scripts
+ written in JavaScript. It can selectively apply flags to
+ the interpreter, by re-spawning it and passing it only  
+ the required flags - the rest are passed to the script.
+ .
+ Flagged-respawn also handles all the edge cases such as:
+  - Providing a method to determine if a respawn is needed.
+  - Piping stderr/stdout from the child into the parent.
+  - Making the parent process exit with the same code as the child.
+  - If the child is killed, making the parent exit with the same signal.
+ .
+ Node.js is an event-based server-side JavaScript engine.

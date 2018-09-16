@@ -1,0 +1,19 @@
+Package: node-rw
+Version: 1.3.3-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 27
+Depends: nodejs
+Section: javascript
+Priority: optional
+Homepage: https://github.com/mbostock/rw
+Description: provide file like interface to stdin and stdout
+ The rw provides an interface just like readFile, readFileSync, writeFile and
+ writeFileSync, but with implementations that work the way you expect on stdin
+ and stdout.
+ .
+ If you use these methods on files other than /dev/stdin or
+ /dev/stdout, they simply delegate to the fs methods, so you can trust that
+ they behave identically to the methods you’re used to.
+ .
+ Node.js is an event-based server-side JavaScript engine.

@@ -1,0 +1,42 @@
+Package: klone
+Version: 2.1.0~rc1-1
+Architecture: all
+Maintainer: Kari Pahula <kaol@debian.org>
+Installed-Size: 572
+Recommends: klone-package
+Suggests: klone-doc
+Conflicts: klone-package (<= 0.2), klone-source
+Replaces: klone-source
+Section: web
+Priority: extra
+Homepage: http://www.koanlogic.com/klone/
+Description: embedded web application development framework
+ This package contains KLone's source code, to be used to build custom
+ kloned servers.
+ .
+ KLone is a fully-featured, multiplatform, web application development
+ framework, targeted especially for embedded systems and appliances.
+ .
+ It is a self-contained solution which includes a web server and an SDK
+ for creating WWW sites with both static and dynamic content. When
+ using KLone, there's absolutely no need for any additional component:
+ neither the HTTP/S server (e.g. Apache, Netscape, Roxen), nor the
+ typical active pages engine (PHP, Perl, ASP, Python).
+ .
+ KLone does everything, and does it fast and small.
+ .
+ KLone blends the HTTP/S server application together with its content
+ and configuration into a single executable file. The site developer
+ writes his/her dynamic pages in C/C++ (in usual scripting style: <% /*
+ code */ %>) and uses KLone to transform them into embeddable,
+ compressed native code with the native C/C++ compiler. The result is
+ then linked to the HTTP/S server skeleton to obtain one single,
+ ROM-able, binary file. This means that he/she can get:
+  - easy, complete and unfiltered interaction with the host operating
+      system
+  - dynamic pages in native compiled code, which in turn implies
+  - fast execution and
+  - small overall application footprint
+  - all of this without giving up the common functionality of web
+      application frameworks such as sessions, parsing of form
+      variables, cookies, etc

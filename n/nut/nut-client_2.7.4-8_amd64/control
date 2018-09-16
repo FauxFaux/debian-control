@@ -1,0 +1,25 @@
+Package: nut-client
+Source: nut
+Version: 2.7.4-8
+Architecture: amd64
+Maintainer: Arnaud Quette <aquette@debian.org>
+Installed-Size: 503
+Depends: adduser, lsb-base (>= 3.0-6), libc6 (>= 2.15), libupsclient4 (>= 2.7.2)
+Recommends: bash-completion
+Suggests: nut-monitor
+Conflicts: ups-monitor
+Breaks: nut (<< 2.6.1-2~), nut-server (<< 2.6.3-1~)
+Replaces: nut (<< 2.6.1-2~), nut-server (<< 2.6.3-1~), ups-monitor
+Provides: ups-monitor
+Section: admin
+Priority: optional
+Homepage: http://www.networkupstools.org/
+Description: network UPS tools - clients
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides NUT's clients that allows the user to control
+ and monitor the UPS.

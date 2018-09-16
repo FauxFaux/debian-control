@@ -1,0 +1,30 @@
+Package: python3-pyicloud
+Source: pyicloud
+Version: 0.9.1-3
+Architecture: all
+Maintainer: Debian IoT Maintainers <debian-iot-maintainers@lists.alioth.debian.org>
+Installed-Size: 82
+Depends: python3-bitstring, python3-certifi, python3-click, python3-keyring, python3-keyrings.alt, python3-requests, python3-six (>= 1.9.0), python3-tzlocal, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/picklepete/pyicloud
+Description: wrapper to access iPhone and Calendar data in the iCloud
+ PyiCloud is a module which allows one to interact with iCloud webservices.
+ It is written in Python and you can access your iCloud either with
+ password/username or with Two-factor authentication (2FA).
+ You can:
+  - list which devices are associated with your account
+  - obtain the device's last known location. The Find My iPhone app
+    must have been installed and initialized.
+  - send a request to the device to play a sound
+  - activate the 'lost mode'
+    Lost mode is slightly different to the "Play Sound" functionality
+    in that it allows the person who picks up the phone to call a
+    specific phone number without having to enter the passcode. Just
+    like "Play Sound" you may pass a custom message which the device
+    will display, if it's not overridden the custom message of
+    "This iPhone has been lost. Please call me." is used.
+  - fetch events from the calendar webservice
+  - access your iCloud contacts/address book
+  - access documents stored in your iCloud account
+  - access the iCloud Photo Library

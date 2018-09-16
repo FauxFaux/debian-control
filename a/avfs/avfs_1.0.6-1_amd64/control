@@ -1,0 +1,18 @@
+Package: avfs
+Version: 1.0.6-1
+Architecture: amd64
+Maintainer: Michael Meskes <meskes@debian.org>
+Installed-Size: 1050
+Depends: libbz2-1.0, libc6 (>= 2.17), libfuse2 (>= 2.6), liblzma5 (>= 5.1.1alpha+20120614), libzstd1 (>= 1.3.2), zlib1g (>= 1:1.1.4), fuse
+Suggests: unzip, zip, arj, lha, rpm, p7zip | p7zip-full, cdparanoia, wget
+Section: utils
+Priority: optional
+Homepage: http://sourceforge.net/projects/avf
+Description: virtual filesystem to access archives, disk images, remote locations
+ This FUSE-base VFS (Virtual FileSystem) enables all programs to look inside
+ archived or compressed files, or access remote files without recompiling the
+ programs or changing the kernel.
+ .
+ At the moment it supports floppies, tar and gzip files, zip, bzip2, ar and rar
+ files, ftp sessions, http, webdav, rsh/rcp, ssh/scp. Quite a few other
+ handlers are implemented with the Midnight Commander's external FS.

@@ -1,0 +1,18 @@
+Package: apt-show-versions
+Version: 0.22.8
+Architecture: all
+Maintainer: Christoph Martin <christoph.martin@uni-mainz.de>
+Installed-Size: 91
+Depends: perl:any | perl-5.005 | perl-5.004, apt, libapt-pkg-perl (>= 0.1.21), libstorable-perl
+Section: admin
+Priority: optional
+Homepage: http://alioth.debian.org/projects/pkg-asv/
+Description: lists available package versions with distribution
+ apt-show-versions parses the dpkg status file and the APT lists for
+ the installed and available package versions and distribution and
+ shows upgrade options within the specific distribution of the selected
+ package.
+ .
+ This is really useful if you have a mixed stable/testing environment
+ and want to list all packages which are from testing and can be
+ upgraded in testing.

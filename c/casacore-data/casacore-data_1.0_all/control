@@ -1,0 +1,22 @@
+Package: casacore-data
+Version: 1.0
+Architecture: all
+Maintainer: Debian Astro Team <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 15
+Depends: casacore-data-igrf, casacore-data-lines, casacore-data-observatories, casacore-data-sources, casacore-data-tai-utc
+Suggests: casacore-data-eop, casacore-data-jplde, casacore-data-predict
+Section: metapackages
+Priority: optional
+Homepage: https://github.com/casacore
+Description: Data for Common Astronomy Software Applications core library
+ This package will install a basic set of data tables to be used by
+ Common Astronomy Software Applications core library at runtime and
+ test:
+ .
+  * IGRF: International Geomagnetic Reference Field data
+  * Sources: Table of ICRF2 reference source coordinates
+  * Lines: Table of spectral line frequencies
+  * Observatories: Table of radio observatory coordinates
+  * TAI_UTC: Difference table between TAI and UTC
+ .
+ Note that the ephemerides and earth orientation data are not available yet.

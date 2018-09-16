@@ -1,0 +1,20 @@
+Package: nfs-common
+Source: nfs-utils
+Version: 1:1.3.4-2.2
+Architecture: amd64
+Maintainer: Debian kernel team <debian-kernel@lists.debian.org>
+Installed-Size: 722
+Depends: libc6 (>= 2.15), libcap2 (>= 1:2.10), libcom-err2 (>= 1.01), libdevmapper1.02.1 (>= 2:1.02.97), libevent-2.1-6 (>= 2.1.8-stable), libgssapi-krb5-2 (>= 1.14+dfsg), libk5crypto3 (>= 1.6.dfsg.2), libkeyutils1 (>= 1.5.9), libkrb5-3 (>= 1.6.dfsg.2), libmount1 (>= 2.19.1), libnfsidmap2, libtirpc1 (>= 0.2.4), libwrap0 (>= 7.6-4~), rpcbind, adduser, ucf, lsb-base (>= 1.3-9ubuntu3), keyutils
+Recommends: python
+Suggests: open-iscsi, watchdog
+Conflicts: nfs-client
+Breaks: nfs-kernel-server (<< 1:1.2.8-6~)
+Replaces: mount (<< 2.13~), nfs-client, nfs-kernel-server (<< 1:1.2.8-6~)
+Provides: nfs-client
+Section: net
+Priority: standard
+Homepage: http://nfs.sourceforge.net/
+Description: NFS support files common to client and server
+ Use this package on any machine that uses NFS, either as client or
+ server.  Programs included: lockd, statd, showmount, nfsstat, gssd,
+ idmapd and mount.nfs.

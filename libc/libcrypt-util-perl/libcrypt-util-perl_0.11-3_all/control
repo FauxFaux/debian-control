@@ -1,0 +1,23 @@
+Package: libcrypt-util-perl
+Version: 0.11-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 151
+Depends: libdata-guid-perl, libmoose-perl, libsub-exporter-perl, libnamespace-clean-perl, perl
+Recommends: libcrypt-cbc-perl, libcrypt-rijndael-perl, libdigest-hmac-perl, libmime-base32-perl, libmime-base64-urlsafe-perl, liburi-perl
+Suggests: libcrypt-crypt-cfb-perl, libcrypt-crypt-des-perl, libcrypt-crypt-eax-perl, libcrypt-crypt-rc6-perl, libcrypt-crypt-ripemd160-perl, libcrypt-crypt-blowfish-perl, libcrypt-crypt-serpent-perl, libcrypt-crypt-twofish-perl, libcrypt-crypt-ofb-perl, libcrypt-crypt-ctr-perl, libcrypt-digest-cmac-perl, libcrypt-digest-whirlpool-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Crypt-Util/
+Description: lightweight Crypt/Digest convenience API
+ Crypt::Util provides an easy, intuitive and forgiving API for wielding
+ crypto-fu.
+ .
+ The API is designed as a cascade, with rich features built using
+ simpler ones. This means that the option processing is uniform
+ throughout, and the behaviors are generally predictable.
+ .
+ Note that Crypt::Util doesn't do any crypto on its own, but delegates
+ the actual work to the various other crypto modules on the CPAN.
+ Crypt::Util merely wraps these modules, providing uniform parameters,
+ and building on top of their polymorphism with higher level features.

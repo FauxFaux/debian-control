@@ -1,0 +1,23 @@
+Package: libmems-dev
+Source: libmems
+Version: 1.6.0+4725-8
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 6747
+Depends: libmems1 (= 1.6.0+4725-8), libboost-filesystem1.62-dev, libboost-iostreams1.62-dev, libboost-system1.62-dev, libgenome-dev, libmuscle-dev
+Provides: libmems-1.6-dev
+Section: libdevel
+Priority: optional
+Homepage: http://sourceforge.net/p/mauve/code/HEAD/tree/libMems/trunk/
+Description: development library to support DNA string matching and comparative genomics
+ libMems is a freely available software development library to support DNA
+ string matching and comparative genomics. Among other things, libMems
+ implements an algorithm to perform approximate multi-MUM and multi-MEM
+ identification. The algorithm uses spaced seed patterns in conjunction
+ with a seed-and-extend style hashing method to identify matches. The method
+ is efficient, requiring a maximum of only 16 bytes per base of the largest
+ input sequence, and this data can be stored externally (i.e. on disk) to
+ further reduce memory requirements.
+ .
+ This is the development package containing the statically linked
+ library and the header files.

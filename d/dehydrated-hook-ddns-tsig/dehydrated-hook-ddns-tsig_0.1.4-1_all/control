@@ -1,0 +1,21 @@
+Package: dehydrated-hook-ddns-tsig
+Version: 0.1.4-1
+Architecture: all
+Maintainer: Debian Let's Encrypt Team <team+letsencrypt@tracker.debian.org>
+Installed-Size: 49
+Depends: dehydrated, python, python-dnspython
+Section: misc
+Priority: optional
+Homepage: https://github.com/eferdman/dehydrated-hook-ddns-tsig
+Description: dehydrated dns-01 challenge response support
+ This package provides a hook script to serve dns-01 challenge responses for
+ dehydrated.
+ .
+ It uses the dnspython API to perform dynamic DNS updates, creating a temporary
+ TXT record for the given domain, thereby proving ownership of the domain.
+ It requires a DNS-server capable of performing dynamic DNS updates, like bind9.
+ There is no need for the DNS-server to run on the local machine.
+ .
+ This is useful if you want to create ACME certificates for servers that do not
+ serve HTTP and/or are not exposed to the public internet.
+ Another important use case are wildcard certificates.

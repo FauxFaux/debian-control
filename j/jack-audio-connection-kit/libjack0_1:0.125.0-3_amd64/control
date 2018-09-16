@@ -1,0 +1,21 @@
+Package: libjack0
+Source: jack-audio-connection-kit
+Version: 1:0.125.0-3
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 337
+Depends: libc6 (>= 2.17), libdb5.3
+Suggests: jackd1 (= 1:0.125.0-3)
+Conflicts: jackd1 (>> 1:0.125.0-3), jackd1 (<< 1:0.125.0-3), libjack-0.116, libjack-0.125
+Breaks: jackd1 (<< 1:0.125.0-3)
+Replaces: jackd1 (<< 1:0.125.0-3), libjack-0.116, libjack-0.125
+Provides: libjack-0.116, libjack-0.125
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://jackaudio.org/
+Description: JACK Audio Connection Kit (libraries)
+ JACK is a low-latency sound server, allowing multiple applications to
+ connect to one audio device, and to share audio between themselves.
+ .
+ This package contains the shared libraries.

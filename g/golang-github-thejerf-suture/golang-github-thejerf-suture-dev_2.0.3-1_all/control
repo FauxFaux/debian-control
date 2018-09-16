@@ -1,0 +1,18 @@
+Package: golang-github-thejerf-suture-dev
+Source: golang-github-thejerf-suture
+Version: 2.0.3-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 63
+Depends: golang-go
+Section: devel
+Priority: optional
+Homepage: https://github.com/thejerf/suture
+Description: supervisor trees for Go
+ Suture provides Erlang-ish supervisor trees for Go.
+ "Supervisor trees" -> "sutree" -> "suture" -> holds your code together
+ when it's trying to die. It is intended to deal gracefully with the real
+ failure cases that can occur with supervision trees (such as burning all
+ your CPU time endlessly restarting dead services), while also making no
+ unnecessary demands on the "service" code, and providing hooks to perform
+ adequate logging with in a production environment.

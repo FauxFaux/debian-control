@@ -1,0 +1,21 @@
+Package: golang-gopkg-xmlpath.v2-dev
+Source: golang-gopkg-xmlpath.v2
+Version: 0.0~git20150820.0.860cbec-5
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 65
+Depends: golang-golang-x-net-dev, golang-gopkg-check.v1-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/go-xmlpath/xmlpath
+Description: strict subset of the XPath specification for the Go language
+ Package xmlpath implements a strict subset of the XPath specification
+ for the Go language. At the moment, xmlpath is compatible with the
+ XPath specification to the following extent:
+  - All axes are supported ("child", "following-sibling", etc)
+  - All abbreviated forms are supported (".", "//", etc)
+  - All node types except for namespace are supported
+  - Predicates may be [N], [path], [not(path)], [path=literal]
+    or [contains(path, literal)]
+  - Predicates may be joined with "or", "and", and parenthesis
+  - Richer expressions and namespaces are not supported

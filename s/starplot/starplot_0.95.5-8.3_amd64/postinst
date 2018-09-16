@@ -1,0 +1,29 @@
+#!/bin/sh
+set -e
+
+
+case "$1" in
+    configure)
+	if [ -x /usr/sbin/register-stardata ] ; then
+            register-stardata install all starplot
+	fi
+    ;;
+    
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installmenu/11.1.4
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+exit 0
+

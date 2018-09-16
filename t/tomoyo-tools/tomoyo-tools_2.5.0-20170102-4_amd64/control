@@ -1,0 +1,21 @@
+Package: tomoyo-tools
+Version: 2.5.0-20170102-4
+Architecture: amd64
+Maintainer: Hideki Yamane <henrich@debian.org>
+Installed-Size: 504
+Pre-Depends: debconf
+Depends: debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.7), libncurses6 (>= 6), libtinfo6 (>= 6), libtomoyotools3 (>= 2.5.0)
+Conflicts: tomoyo-ccstools, tomoyo-ccstools1.7
+Replaces: tomoyo-ccstools, tomoyo-ccstools1.7
+Section: admin
+Priority: optional
+Homepage: https://tomoyo.osdn.jp/
+Description: lightweight Linux Mandatory Access Control system
+ TOMOYO Linux is a lightweight and easy-to-use path-based Mandatory
+ Access Control (MAC) implementation with:
+  * automatic policy configuration via "learning" mode;
+  * an administrator-friendly policy language;
+  * no need for SELinux, or userland program modifications.
+ .
+ This package provides the audit daemon and administrative utilities for
+ use on a Linux kernel with TOMOYO support (standard in Debian kernels).

@@ -1,0 +1,24 @@
+Package: golang-github-vishvananda-netlink-dev
+Source: golang-github-vishvananda-netlink
+Version: 1.0.0-1
+Architecture: all
+Maintainer: pkg-go <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 597
+Depends: golang-github-vishvananda-netns-dev, golang-golang-x-sys-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/vishvananda/netlink
+Description: netlink library for go
+ The netlink package provides a simple netlink library for go. Netlink is the
+ interface a user-space program in Linux uses to communicate with the kernel. It
+ can be used to add and remove interfaces, set ip addresses and routes, and
+ configure ipsec. Netlink communication requires elevated privileges, so in most
+ cases this code needs to be run as root. Since low-level netlink messages are
+ inscrutable at best, the library attempts to provide an API that is loosely
+ modeled on the CLI provied by iproute2. Actions like ip link add will be
+ accomplished via a similarly named function like AddLink(). This library began
+ its life as a fork of the netlink functionality in docker/libcontainer but was
+ heavily rewritten to improve testability, performance, and to add new
+ functionality like ipsec xfrm handling.
+ .
+ This package contains the source.

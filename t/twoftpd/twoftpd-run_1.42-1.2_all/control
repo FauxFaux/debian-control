@@ -1,0 +1,21 @@
+Package: twoftpd-run
+Source: twoftpd
+Version: 1.42-1.2
+Architecture: all
+Maintainer: Gerrit Pape <pape@smarden.org>
+Installed-Size: 76
+Depends: twoftpd, runit (>= 1.8.0-2), ipsvd, cvm, adduser
+Suggests: runit-run
+Conflicts: ftp-server
+Provides: ftp-server
+Section: admin
+Priority: optional
+Description: a simple secure efficient FTP server
+ This is twoftpd, an FTP server that strives to be secure, simple, and
+ efficient.  None of the commands can cause execution of other programs,
+ and the normal model of execution does a chroot to the logged in user's
+ directory immediately after authentication.
+ .
+ This package sets up the twoftpd service to listen on 0.0.0.0:21, and
+ additionally provides a service directory to run an anonymous twoftpd
+ service.

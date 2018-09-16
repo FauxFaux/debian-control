@@ -1,0 +1,33 @@
+Package: elpa-geiser
+Source: geiser
+Version: 0.8.1-3
+Architecture: all
+Maintainer: Debian Emacs addons team <pkg-emacsen-addons@lists.alioth.debian.org>
+Installed-Size: 569
+Depends: emacsen-common, emacs | emacsen, install-info
+Suggests: racket
+Breaks: geiser (<< 0.7-1)
+Replaces: geiser (<< 0.7-1)
+Provides: geiser
+Section: lisp
+Priority: optional
+Homepage: http://www.nongnu.org/geiser/
+Description: enhanced Scheme interaction mode for Emacs
+ Geiser features an enhanced REPL and a set of minor modes improving
+ Emacs' basic scheme major mode. The main functionalities provided
+ are:
+    - Evaluation of forms in the namespace of the current module.
+    - Macro expansion.
+    - File/module loading.
+    - Namespace-aware identifier completion (including local bindings,
+      names visible in the current module, and module names).
+    - Autodoc: the echo area shows information about the signature of
+      the procedure/macro around point automatically.
+    - Jump to definition of identifier at point.
+    - Access to documentation (including docstrings when the
+      implementation provides it).
+    - Listings of identifiers exported by a given module.
+    - Listings of callers/callees of procedures.
+    - Rudimentary support for debugging (list of
+      evaluation/compilation error in an Emacs' compilation-mode
+      buffer).

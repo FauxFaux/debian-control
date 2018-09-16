@@ -1,0 +1,25 @@
+Package: wcslib-dev
+Source: wcslib
+Version: 5.19.1-1
+Architecture: amd64
+Maintainer: Debian Astronomy Team <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 2378
+Depends: libpgsbox5 (= 5.19.1-1), libwcs5 (= 5.19.1-1)
+Recommends: giza-dev
+Suggests: wcslib-doc
+Breaks: libpgsbox-dev (<< 5.15-2~)
+Replaces: libpgsbox-dev (<< 5.15-2~)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.atnf.csiro.au/people/mcalabre/WCS/
+Description: Header files and static library for wcslib and pgsbox
+ WCSLIB is a C library, supplied with a full set of Fortran wrappers, that
+ implements the "World Coordinate System" (WCS) standard in FITS (Flexible
+ Image Transport System).
+ .
+ PGSBOX draws and labels a curvilinear coordinate grid.  The caller
+ must provide a separate external function, NLFUNC, to define the
+ non-linear coordinate transformation.
+ .
+ This package contains the static libraries and the C header files.

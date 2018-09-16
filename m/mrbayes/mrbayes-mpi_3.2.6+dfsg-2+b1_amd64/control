@@ -1,0 +1,21 @@
+Package: mrbayes-mpi
+Source: mrbayes (3.2.6+dfsg-2)
+Version: 3.2.6+dfsg-2+b1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 1620
+Depends: libc6 (>= 2.14), libhmsbeagle1v5, libopenmpi3, libreadline7 (>= 6.0), mpi-default-bin, ssh
+Suggests: mpi-default, mrbayes-doc
+Section: science
+Priority: optional
+Homepage: http://mrbayes.csit.fsu.edu/
+Description: Bayesian Inference of Phylogeny - mpi version
+ Bayesian inference of phylogeny is based upon a quantity called the posterior
+ probability distribution of trees, which is the probability of a tree
+ conditioned on the observations. The conditioning is accomplished using
+ Bayes's theorem. The posterior probability distribution of trees is
+ impossible to calculate analytically; instead, MrBayes uses a simulation
+ technique called Markov chain Monte Carlo (or MCMC) to approximate the
+ posterior probabilities of trees.
+ .
+ This package offers a binary compiled for parallel computation with MPI.

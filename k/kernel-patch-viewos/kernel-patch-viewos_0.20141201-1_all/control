@@ -1,0 +1,27 @@
+Package: kernel-patch-viewos
+Version: 0.20141201-1
+Architecture: all
+Maintainer: Debian VSquare Team <pkg-vsquare-devel@lists.alioth.debian.org>
+Installed-Size: 482
+Depends: bash (>= 2.0), patch, grep-dctrl
+Enhances: umview
+Section: kernel
+Priority: optional
+Homepage: http://view-os.sourceforge.net
+Description: View-OS - Kernel patch for better UMView performances
+ View-OS is a novel approach to the process/kernel interface.  The semantics of
+ each system call can be assigned process by process giving the user the right
+ to decide which view of the system each process has to join.  Each process can
+ "see" a different file system structure, networking resources, processor,
+ devices.  Moreover some of the resources can be provided by the user
+ him/herself, thus these resource can be private to the single process and are
+ not known a priori by the system.  Groups of processes can share the same view
+ but this is just an optimization to share management methods.
+ .
+ For more information, see http://wiki.virtualsquare.org
+ .
+ This package contains a couple of kernel patches that should be used together
+ with UMView.  Though not required, they consent dramatic improvements in
+ performances.  These patches are quite general and can also be used by other
+ virtualization software (as User Mode Linux, or everything that uses the
+ ptrace() system call) to increase performances.

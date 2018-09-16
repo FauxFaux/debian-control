@@ -1,0 +1,19 @@
+Package: libdbd-ldap-perl
+Version: 0.20-1
+Architecture: all
+Maintainer: Jonas Genannt <jonas.genannt@capi2name.de>
+Installed-Size: 119
+Depends: perl, libnet-ldap-perl, libdbi-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/DBD-LDAP/
+Description: Perl extension for LDAP access via an SQL/Perl DBI interface
+ DBD::LDAP is a DBI extension module adding an SQL database interface to
+ standard LDAP databases to Perl's database-independent database interface.
+ You will need access to an existing LDAP database or set up your own using
+ an LDAP server, ie. "OpenLDAP", see (http://www.openldap.org).
+ .
+ The main advantage of DBD::LDAP is the ability to query LDAP databases via
+ standard SQL queries in leu of cryptic LDAP "filters".  LDAP is optimized for
+ quick lookup of existing data, but DBD::LDAP does support entry inserts,
+ updates, and deletes with commit/rollback via the standard SQL commands!

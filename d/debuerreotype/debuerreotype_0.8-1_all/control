@@ -1,0 +1,22 @@
+Package: debuerreotype
+Version: 0.8-1
+Architecture: all
+Maintainer: Tianon Gravi <tianon@debian.org>
+Installed-Size: 61
+Depends: debian-archive-keyring
+Recommends: debootstrap
+Suggests: diffoscope
+Section: admin
+Priority: optional
+Homepage: https://github.com/debuerreotype/debuerreotype
+Description: reproducible, snapshot-based Debian rootfs builder
+ A set of scripts for building reproducible Debian rootfs tarballs based on
+ snapshot.debian.org, especially for the purposes of Docker base images.
+ .
+ The goal is to create an auditable, reproducible process for creating rootfs
+ tarballs (especially for use in Docker) of Debian releases, based on
+ point-in-time snapshots from snapshot.debian.org.
+ .
+ The only strictly Docker-specific script is debuerreotype-minimizing-config,
+ which applies many configuration tweaks which are useful for Docker users and
+ may or may not be useful outside of that context.

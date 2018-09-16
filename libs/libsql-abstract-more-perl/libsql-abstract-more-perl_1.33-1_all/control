@@ -1,0 +1,22 @@
+Package: libsql-abstract-more-perl
+Version: 1.33-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 97
+Depends: perl, libmro-compat-perl, libnamespace-clean-perl, libparams-validate-perl, libsql-abstract-perl (>= 1.84)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/SQL-Abstract-More
+Description: extension of SQL::Abstract with more constructs and more flexible API
+ Sql::Abstract::More generates SQL from Perl datastructures. This is a
+ subclass of SQL::Abstract, fully compatible with the parent class, but with
+ some additions:
+ .
+ 1) additional SQL constructs like -union, -group_by, join, etc;
+ .
+ 2) methods take arguments as named parameters instead of positional
+ parameters, so that various SQL fragments are more easily identified;
+ .
+ 3) values passed to select, insert or update can directly incorporate
+ information about datatypes, in the form of arrayrefs of shape [$value,
+ \%type].

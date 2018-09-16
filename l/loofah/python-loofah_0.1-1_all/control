@@ -1,0 +1,17 @@
+Package: python-loofah
+Source: loofah
+Version: 0.1-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 58
+Depends: python (>= 2.7), python (<< 2.8), python-pymongo, python-ricky, mongodb
+Section: python
+Priority: optional
+Homepage: https://github.com/paultag/loofah
+Description: debile helper to rebuild a set of existing packages
+ Loofah can be used to upload a subset of the Debian archive to the
+ Debile infrastructure for rebuilding. It syncs down the apt Sources
+ list and places it in mongodb for fast queries. This then allows the
+ user to manually run rebuilds on any source package that fits a set
+ of critera (written in the form of a mongo query), which get pulled
+ and uploaded by ricky.

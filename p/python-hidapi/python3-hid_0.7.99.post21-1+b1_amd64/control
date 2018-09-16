@@ -1,0 +1,26 @@
+Package: python3-hid
+Source: python-hidapi (0.7.99.post21-1)
+Version: 0.7.99.post21-1+b1
+Architecture: amd64
+Maintainer: Richard Ulrich <richi@paraeasy.ch>
+Installed-Size: 296
+Depends: python3 (<< 3.8), python3 (>= 3.6~), python3-pkg-resources, libc6 (>= 2.4), libhidapi-hidraw0 (>= 0.8.0~rc1+git20140201.3a66d4e+dfsg), libhidapi-libusb0 (>= 0.8.0~rc1+git20140201.3a66d4e+dfsg), libudev1 (>= 183), libusb-1.0-0 (>= 2:1.0.8)
+Provides: python3.6-hid, python3.7-hid
+Section: python
+Priority: optional
+Homepage: https://github.com/trezor/cython-hidapi
+Description: cython3 interface to hidapi
+ This has been tested with:
+ .
+ * the PIC18F4550 on the development board from CCS with their example program.
+ * the Fine Offset WH3081 Weather Station.
+ .
+ It works on Linux, Windows XP and OS X.
+ .
+ HIDAPI is a multi-platform library which allows an application to interface
+ with USB and Bluetooth HID-Class devices on Windows, Linux, FreeBSD, and Mac
+ OS X.  HIDAPI can be either built as a shared library (.so or .dll) or
+ can be embedded directly into a target application by adding a single source
+ file (per platform) and a single header.
+ .
+ This package contains HIDAPI for Python 3.

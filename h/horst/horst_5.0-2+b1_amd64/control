@@ -1,0 +1,40 @@
+Package: horst
+Source: horst (5.0-2)
+Version: 5.0-2+b1
+Architecture: amd64
+Maintainer: Antoine Beaupré <anarcat@debian.org>
+Installed-Size: 142
+Depends: libc6 (>= 2.17), libncurses6 (>= 6), libnl-3-200 (>= 3.2.7), libnl-genl-3-200 (>= 3.2.7), libtinfo6 (>= 6)
+Section: net
+Priority: optional
+Homepage: https://github.com/br101/horst
+Description: Highly Optimized Radio Scanning Tool
+ horst is a small, lightweight IEEE802.11 WLAN analyzer with a text
+ interface. Its basic function is similar to tcpdump, Wireshark or
+ Kismet, but it's much smaller and shows different, aggregated
+ information which is not easily available from other tools. It is
+ made for debugging wireless LANs with a focus on getting a quick
+ overview instead of deep packet inspection and has special features
+ for Ad-hoc (IBSS) mode and mesh networks. It can be useful to get a
+ quick overview of what's going on all wireless LAN channels and to
+ identify problems.
+ .
+  * Shows signal (RSSI) values per station, something hard to get,
+    especially in IBSS mode
+  * Calculates channel utilization ("usage") by adding up the amount of
+    time the packets actually occupy the medium
+  * "Spectrum Analyzer" shows signal levels and usage per channel
+  * Graphical packet history, with signal, packet type and physical rate
+  * Shows all stations per ESSID and the live TSF per node as it is
+    counting
+  * Detects IBSS "splits" (same ESSID but different BSSID – this is/was
+    a common driver problem on IBSS mode)
+  * Statistics of packets/bytes per physical rate and per packet type
+  * Has some support for mesh protocols (OLSR and batman)
+  * Can filter specific packet types, operating modes, source addresses
+    or BSSIDs
+  * Client/server support for monitoring on remote nodes
+  * Automatically adds and removes monitor interface
+  .
+  horst is a Linux program and can be used on any wireless LAN interface
+  which supports monitor mode.

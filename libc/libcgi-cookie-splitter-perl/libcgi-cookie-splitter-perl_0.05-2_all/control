@@ -1,0 +1,17 @@
+Package: libcgi-cookie-splitter-perl
+Version: 0.05-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 31
+Depends: perl, libnamespace-clean-perl (>= 0.19), libcgi-simple-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Cookie-Splitter
+Description: module for splitting big cookies into smaller ones
+ RFC 2109 stipulates that user agents support a cookie size of "at least 4096
+ bytes per cookie". However, this value has become the standard maximum cookie
+ size supported by many implementations, so if your server sends larger
+ cookies considerable breakage may occur.
+ .
+ CGI::Cookie::Splitter provides a pretty simple interface to generate small
+ cookies that are under a certain limit, without wasting too much effort.

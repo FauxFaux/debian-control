@@ -1,0 +1,25 @@
+Package: libczmq4
+Source: czmq
+Version: 4.1.1-2
+Architecture: amd64
+Maintainer: Luca Boccassi <bluca@debian.org>
+Installed-Size: 485
+Depends: libc6 (>= 2.17), libsystemd0, libuuid1 (>= 2.16), libzmq5 (>= 4.1.2)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://czmq.zeromq.org/
+Description: High-level C binding for ZeroMQ
+ czmq (previously known as libzapi) provides a high-level C binding for
+ 0MQ, a lightweight messaging library.
+ .
+ This library provides higher level abstractions on top of the base
+ library, with features such as:
+  * Work with messages as strings, individual frames, or multipart messages.
+  * Automatic closure of any open sockets at context termination.
+  * Automatic LINGER configuration of all sockets for context termination.
+  * Portable API for creating child threads and ØMQ pipes to talk to them.
+  * Simple reactor with one-off and repeated timers, and socket readers.
+  * System clock functions for sleeping and calculating timers.
+  * Easy API to get/set all socket options.
+  * Includes generic hash and list containers.

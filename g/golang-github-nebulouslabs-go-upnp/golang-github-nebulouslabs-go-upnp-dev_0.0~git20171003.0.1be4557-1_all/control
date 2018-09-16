@@ -1,0 +1,39 @@
+Package: golang-github-nebulouslabs-go-upnp-dev
+Source: golang-github-nebulouslabs-go-upnp
+Version: 0.0~git20171003.0.1be4557-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 191
+Depends: golang-go, golang-golang-x-net-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/nebulouslabs/go-upnp
+Description: Opinionated interface to Internet Gateway Devices
+ The upnp package upnp provides a simple and opinionated interface to
+ UPnP-enabled routers, allowing users to forward ports and discover their
+ external IP address.
+ .
+ Specific quirks:
+ .
+   - When attempting to discover UPnP-enabled routers on the network, only
+     the first such router is returned. If you have multiple routers, this may
+     cause some trouble. But why would you do that?
+   - Forwarded ports are always symmetric, e.g. the router's port 9980 will
+     be mapped to the client's port 9980. This will be unacceptable for some
+     purposes, but too bad. Symmetric mappings are the desired behavior 99%
+     of the time, and they save a function argument.
+   - TCP and UDP protocols are forwarded together.
+   - Ports are forwarded permanently. Some other implementations lease a port
+     mapping for a set duration, and then renew it periodically. This is nice,
+     because it means mappings won't stick around after they've served their
+     purpose. Unfortunately, some routers only support permanent mappings,
+     so this package has chosen to support the lowest common denominator. To
+     un-forward a port, you must use the Clear function (or do it manually).
+ .
+ Once you've discovered your router, you can retrieve its address by
+ calling its Location method. This address can be supplied to Load
+ to connect to the router directly, which is much faster than calling
+ Discover.
+ .
+ See the godoc (http://godoc.org/github.com/NebulousLabs/upnp) for full
+ documentation.

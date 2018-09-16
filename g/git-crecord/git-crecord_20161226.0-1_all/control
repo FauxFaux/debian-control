@@ -1,0 +1,21 @@
+Package: git-crecord
+Version: 20161226.0-1
+Architecture: all
+Maintainer: Andrew Shadura <andrewsh@debian.org>
+Installed-Size: 179
+Depends: python-docutils, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: vcs
+Priority: optional
+Homepage: https://github.com/andrewshadura/git-crecord
+Description: interactively select chunks to commit with Git
+ git-crecord is a Git subcommand which allows users to interactively
+ select changes to commit or stage using a ncurses-based text user
+ interface.  It is a port of the Mercurial crecord extension originally
+ written by Mark Edgington.
+ .
+ git-crecord allows you to interactively choose among the changes you
+ have made (with line-level granularity), and commit, stage or unstage
+ only those changes you select.  After committing or staging the selected
+ changes, the unselected changes are still present in your working copy,
+ so you can use crecord multiple times to split large changes into
+ several smaller changesets.

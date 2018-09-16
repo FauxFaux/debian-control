@@ -1,0 +1,27 @@
+Package: python-tvrage
+Version: 0.4.1-1
+Architecture: all
+Maintainer: Hans-Christoph Steiner <hans@eds.org>
+Installed-Size: 80
+Depends: python (>= 2.7), python (<< 2.8), python-beautifulsoup
+Section: python
+Priority: optional
+Homepage: https://pypi.python.org/pypi/tvrage/
+Description: python client for the tvrage.com XML API
+ python-tvrage is a python based object oriented client interface for
+ tvrage.com's XML based api feeds.
+ .
+ The tvrage package consists of three modules
+ .
+  * the tvrage.feeds module provides a wrapper function for each of tvrage's
+    XML-feeds
+  * the tvrage.api module provides an clean and object oriented interface on top
+    of those services
+  * the tvrage.quickinfo module is a simple pythonic wrapper for tvrage's
+    quickinfo api. Values are returned as python dictionaries rather than
+    dedicated objects for tv shows and episodes
+ .
+ The tvrage.feeds module provides very basic and low level access to the
+ tvrage.com data feeds. For more complex use cases it is recomended to use the
+ object oriented module tvrage.api. Note: All functions in the tvrage.feeds
+ module return XML data as ElementTree objects.

@@ -1,0 +1,23 @@
+Package: clang-format-3.9
+Source: llvm-toolchain-3.9 (1:3.9.1-19)
+Version: 1:3.9.1-19+b1
+Architecture: amd64
+Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
+Installed-Size: 1645
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libllvm3.9 (>= 1:3.9.1-6~), libstdc++6 (>= 5.2), python
+Breaks: clang-format-3.3
+Replaces: clang-format-3.3
+Section: devel
+Priority: optional
+Homepage: http://www.llvm.org/
+Description: Tool to format C/C++/Obj-C code
+ Clang-format is both a library and a stand-alone tool with the goal of
+ automatically reformatting C++ sources files according to configurable
+ style guides. To do so, clang-format uses Clang's Lexer to transform an
+ input file into a token stream and then changes all the whitespace around
+ those tokens. The goal is for clang-format to both serve both as a user
+ tool (ideally with powerful IDE integrations) and part of other
+ refactoring tools, e.g. to do a reformatting of all the lines changed
+ during a renaming.
+ .
+ This package also provides vim and emacs plugins.

@@ -1,0 +1,16 @@
+Package: lintex
+Source: lintex (1.14-1)
+Version: 1.14-1+b1
+Architecture: amd64
+Maintainer: Ryan Kavanagh <rak@debian.org>
+Installed-Size: 42
+Depends: libc6 (>= 2.14), libconfig9
+Suggests: texlive-base
+Section: tex
+Priority: extra
+Homepage: http://github.com/ryanakca/lintex
+Description: automatic cleanup of old TeX-related files
+ Removes unneeded files after a (La)TeX run: .aux, .log, .dvi, etc, if their
+ timestamp is more recent than the TeX file's. Also removes the backup files
+ created by your text editor. This keeps a directory containing multiple (La)TeX
+ documents from becoming unmanageable.

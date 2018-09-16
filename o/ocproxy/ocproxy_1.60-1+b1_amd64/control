@@ -1,0 +1,23 @@
+Package: ocproxy
+Source: ocproxy (1.60-1)
+Version: 1.60-1+b1
+Architecture: amd64
+Maintainer: Kevin Cernekee <cernekee@gmail.com>
+Installed-Size: 133
+Depends: libc6 (>= 2.14), libevent-2.1-6 (>= 2.1.8-stable)
+Recommends: openconnect
+Suggests: dante-client
+Section: net
+Priority: optional
+Homepage: https://github.com/cernekee/ocproxy
+Description: SOCKS proxy for openconnect
+ ocproxy is a SOCKS and port-forwarding proxy for use with openconnect.
+ It implements its own userland IP stack, allowing a non-administrator to
+ establish VPN connections without a need for tunnel devices. Instead
+ of adding the host machine to the network at the other end of the VPN,
+ ocproxy listens for local connections and forwards their traffic over the
+ VPN, similar to "ssh -D" and "ssh -L".  Web browsers, remote login utilities
+ and other programs can then access resources on the VPN through the
+ proxy.  Applications that are unaware of the proxy cannot accidentally send
+ traffic over the VPN, and multiple ocproxy instances may be connected to
+ different VPNs concurrently.

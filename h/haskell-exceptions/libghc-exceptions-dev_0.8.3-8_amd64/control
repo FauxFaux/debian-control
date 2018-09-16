@@ -1,0 +1,31 @@
+Package: libghc-exceptions-dev
+Source: haskell-exceptions
+Version: 0.8.3-8
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 838
+Depends: libghc-base-dev-4.10.1.0-35a7f, libghc-mtl-dev-2.2.2-ada79, libghc-stm-dev-2.4.5.0-2739c, libghc-template-haskell-dev-2.12.0.0-22576, libghc-transformers-dev-0.5.2.0-e0457, libghc-transformers-compat-dev-0.5.1.4-4baae, libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-exceptions-doc, libghc-exceptions-prof
+Provides: libghc-exceptions-dev-0.8.3-23c90
+Section: haskell
+Priority: optional
+Homepage: http://github.com/ekmett/exceptions/
+Description: extensible optionally-pure exceptions
+ This library supports monads that can throw extensible exceptions.
+ The exceptions are the very same from Control.Exception, and the
+ operations offered very similar, but here they are not limited to
+ IO.
+ .
+ This code is in the style of both transformers and mtl, and is
+ compatible with them, though doesn't mimic the module structure or
+ offer the complete range of features in those packages.
+ .
+ This is very similar to ErrorT and MonadError, but based on features
+ of Control.Exception. In particular, it handles the complex case of
+ asynchronous exceptions by including mask in the typeclass. Note that
+ the extensible extensions feature relies the RankNTypes language
+ extension.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: exceptions-0.8.3-AA4ua2DZ32SL2ccqv3kHrx

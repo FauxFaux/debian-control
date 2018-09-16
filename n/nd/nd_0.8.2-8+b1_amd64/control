@@ -1,0 +1,27 @@
+Package: nd
+Source: nd (0.8.2-8)
+Version: 0.8.2-8+b1
+Architecture: amd64
+Maintainer: Mats Erik Andersson <mats.andersson@gisladisker.se>
+Installed-Size: 66
+Depends: libc6 (>= 2.4), libmhash2, libxml2 (>= 2.7.4)
+Section: net
+Priority: optional
+Homepage: http://gohome.org/nd/
+Description: small command line interface to WebDAV servers
+ nd is a command line tool to issue queries to a WebDAV server.
+ .
+ WebDAV stands for "Web-based Distributed Authoring and Versioning"
+ (RFC 2518). It is a protocol built on top of HTTP, allowing users
+ to collaboratively edit and manage files on remote web servers.
+ .
+ nd can be used to retrieve, submit, remove, and lock individual
+ files, as well as retrieving information about them. It also
+ supports proxying, as well as the authentication methods 'Basic'
+ and now 'Digest' for protecting against unsolicited access.
+ .
+ It is smaller than the alternative tool Cadaver. However, nd has
+ neither an interactive mode, nor has it support for SSL or TLS
+ encrypted transmissions, but it is well suited for use in scripts.
+ .
+ nd is dependent on libxml2 and libmhash2.

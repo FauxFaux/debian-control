@@ -1,0 +1,24 @@
+Package: libcneartree-dev
+Source: neartree (3.1.1-2.1)
+Version: 3.1.1-2.1+b2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 407
+Depends: libcneartree5 (= 3.1.1-2.1+b2)
+Conflicts: libcneartree3-dev
+Section: libdevel
+Priority: extra
+Multi-Arch: same
+Homepage: http://neartree.sourceforge.net/
+Description: Library and headers for solving the Nearest Neighbor Problem
+ Neartree is an API and a library for finding nearest neighbors among
+ points in spaces of arbitrary dimensions. This package provides a C++
+ template, TNear.h, and C library and header files for compiling
+ programs using Neartree.
+ .
+ The library uses the Nearest Neighbor algorithm after Kalantari and
+ McDonald, (IEEE Transactions on Software Engineering, v. SE-9, pp.
+ 631-634,1983) modified to use recursion instead of a double-linked tree
+ and simplified so that it does less checking for things like is the
+ distance to the right less than the distance to the left; it was found
+ that these checks make little to no difference.

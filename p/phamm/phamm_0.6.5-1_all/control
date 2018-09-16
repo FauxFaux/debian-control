@@ -1,0 +1,22 @@
+Package: phamm
+Version: 0.6.5-1
+Architecture: all
+Maintainer: Phamm Team <team@phamm.org>
+Installed-Size: 1497
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: php, php-ldap, debconf (>= 0.5) | debconf-2.0
+Recommends: phamm-ldap, apache2 (>= 2.4.23~) | httpd
+Section: web
+Priority: extra
+Homepage: http://www.phamm.org
+Description: PHP front-end to manage virtual services on LDAP - main package
+ Phamm is a useful PHP front-end providing role-based administrative
+ access to virtual services using an LDAP back-end.
+ .
+ If you are looking for a Postfix LDAP Front-end Phamm could be a good solution.
+ Other MTA's can be used like qmail-ldap, Courier, Exim and Dovecot.
+ .
+ Phamm works with a plug-in system: the typical service is a mail
+ server with virtual mail domain support, but plug-ins are also
+ available for FTP, web proxying, and so on. The use of XML descriptor
+ files simplifies creating new plugins or customizing existing ones.

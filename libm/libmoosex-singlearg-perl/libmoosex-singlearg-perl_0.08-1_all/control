@@ -1,0 +1,18 @@
+Package: libmoosex-singlearg-perl
+Version: 0.08-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: perl, libmoose-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MooseX-SingleArg
+Description: module to instantiate Moose objects using a single argument
+ MooseX::SingleArg allows Moose instances to be constructed with a single
+ argument. Your class or role must use this module and then use the single_arg
+ method to declare which attribute will be assigned the single argument value.
+ .
+ If the class is constructed using the typical argument list name/value pairs,
+ or with a hashref, then things work as is usual. But, if the arguments are a
+ single non-hashref value then that argument will be assigned to whatever
+ attribute you have declared.

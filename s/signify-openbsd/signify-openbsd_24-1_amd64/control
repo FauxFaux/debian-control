@@ -1,0 +1,26 @@
+Package: signify-openbsd
+Version: 24-1
+Architecture: amd64
+Maintainer: Tomasz Buchert <tomasz@debian.org>
+Installed-Size: 206
+Depends: libbsd0 (>= 0.7.0), libc6 (>= 2.25)
+Section: utils
+Priority: optional
+Homepage: https://github.com/aperezdc/signify
+Description: Lightweight cryptographic signing and verifying tool
+ Similar to GNU Privacy Guard (GPG), signify is the tool which
+ OpenBSD uses to cryptographically sign its releases, so that
+ you can be sure that you are actually getting a release made by
+ OpenBSD, as opposed to a malicious forgery designed to look
+ the same.
+ .
+ Signify's usage is not limited to OpenBSD's releases, however -
+ it can be used to sign anything.
+ .
+ So that it will work on Linux, the version of signify provided
+ in this package is not exactly the same as the version provided
+ in OpenBSD's CVS tree.
+ .
+ Please note that OpenBSD's public keys are not included with
+ this package; you will have to find your own version in order
+ to verify their releases.

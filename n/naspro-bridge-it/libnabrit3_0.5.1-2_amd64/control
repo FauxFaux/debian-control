@@ -1,0 +1,28 @@
+Package: libnabrit3
+Source: naspro-bridge-it
+Version: 0.5.1-2
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 41
+Depends: libc6 (>= 2.4), libnacore5 (>= 0.3.0)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://naspro.sourceforge.net/
+Description: LV2 bridging helper library
+ NASPRO Bridge it is a little helper library to develop insert-your-API-here
+ to LV2 bridges.
+ .
+ As of now, it basically offers a few utility functions and Turtle/RDF
+ serialization for LV2 dynamic manifest generation, supporting the
+ following LV2 specifications/extensions:
+  * LV2 revision 4.0;
+  * LV2 Dynamic Manifest revision 1.0;
+  * Extended Port Information draft revision 3 (only for the logarithmic port
+    property);
+  * LV2 Events revision 1.0;
+  * LV2 MIDI Events revision 1.0.
+ .
+ It is written in C99 and is almost entirely reentrant and thread-safe.
+ .
+ This package includes the shared library object.

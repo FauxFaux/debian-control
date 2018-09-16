@@ -1,0 +1,21 @@
+Package: canid
+Version: 0.0~git20180613.007c9af-2
+Architecture: amd64
+Maintainer: Internet Measurement Packaging Team <pkg-netmeasure-discuss@lists.alioth.debian.org>
+Installed-Size: 4501
+Depends: libc6 (>= 2.3.2)
+Built-Using: golang-1.10 (= 1.10.3-1)
+Section: devel
+Priority: optional
+Homepage: https://github.com/britram/canid
+Description: Caching Additional Network Information Daemon
+ canid the Caching Additional Network Information Daemon provides a simple
+ HTTP API for getting information about Internet names and numbers from
+ a given vantage point.
+ .
+ canid looks up BGP AS number and country code associated with the
+ smallest prefix announced which contains the address in the RIPEstat
+ database. It caches the results by prefix in memory. It returns a JSON
+ object with four keys. It also looks up the IPv4 and IPv6 addresses associated
+ with a given name. It caches the results by name in memory, and precaches
+ prefix results for a subsequent prefix call.

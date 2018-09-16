@@ -1,0 +1,18 @@
+Package: mono-fpm-server
+Source: xsp
+Version: 4.2-2.1
+Architecture: all
+Maintainer: Debian Mono Group <pkg-mono-group@lists.alioth.debian.org>
+Installed-Size: 92
+Depends: libfpm-helper0 (>= 4.2-2.1), mono-runtime (>= 3.0~), libmono-corlib4.5-cil (>= 4.6.1.3), libmono-posix4.0-cil (>= 4.6.1.3), libmono-system-core4.0-cil (>= 4.6.1.3), libmono-system4.0-cil (>= 4.6.1.3), mono-xsp4-base (>= 4.2)
+Section: web
+Priority: optional
+Homepage: http://www.mono-project.com/ASP.NET
+Description: ASP.NET backend for FastCGI Process Manager
+ mono-fpm-server contains the backend for FPM. It lets you run ASP.NET
+ web applications via HTTP servers such as Lighttpd or Apache.
+ The FastCGI webserver shouldbe configured to run fastcgi-mono-server to
+ parse and compile the aspx code.
+ .
+ This package requires you to install any FPM webserver, such as
+ Lighttpd or Apache (see libapache2-mod-fastcgi).

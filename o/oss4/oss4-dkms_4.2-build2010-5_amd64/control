@@ -1,0 +1,15 @@
+Package: oss4-dkms
+Source: oss4
+Version: 4.2-build2010-5
+Architecture: amd64
+Maintainer: Debian OSS4 Maintainers <pkg-oss4-maintainers@lists.alioth.debian.org>
+Installed-Size: 4804
+Depends: dkms (>= 2.1.0.0), dpkg-dev, oss4-base, libc-dev
+Recommends: linux-headers-686-pae | linux-headers-amd64 | linux-headers-generic
+Provides: oss4-modules
+Section: kernel
+Priority: optional
+Description: Open Sound System - DKMS module sources
+ This package contains the source for the OSS4 kernel modules,
+ packaged with approriate configuration for DKMS to build new
+ modules dynamically.

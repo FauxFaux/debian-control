@@ -1,0 +1,22 @@
+Package: gnome-packagekit
+Version: 3.30.0-1
+Architecture: amd64
+Maintainer: Matthias Klumpp <mak@debian.org>
+Installed-Size: 622
+Depends: gnome-packagekit-data (>= 3.30.0-1), packagekit (>= 1.0.4), dconf-gsettings-backend | gsettings-backend, libc6 (>= 2.4), libglib2.0-0 (>= 2.37.3), libgtk-3-0 (>= 3.16.2), libpackagekit-glib2-18 (>= 0.9.4), libpolkit-gobject-1-0 (>= 0.101)
+Recommends: software-properties-gtk
+Breaks: gnome-packagekit-session (<< 3.16.0), gnome-software-manager (<< 3.6.0-2), update-notifier (<< 3.24)
+Replaces: gnome-packagekit-session (<< 3.16.0), gnome-software-manager (<< 3.6.0-2)
+Provides: update-notifier
+Section: gnome
+Priority: optional
+Homepage: https://help.gnome.org/users/gnome-packagekit/stable/
+Description: Graphical distribution neutral package manager for GNOME
+ PackageKit allows performing simple software management tasks over a DBus
+ interface  e.g. refreshing the cache, updating, installing and removing
+ software packages or searching for multimedia codecs and file handlers.
+ .
+ This package contains a GTK+ based application for package installation
+ and removal, an application to view system updates, a simple
+ repository editor and PackageKit configuration tool and a viewer for
+ package installation history.

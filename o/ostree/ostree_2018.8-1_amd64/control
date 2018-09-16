@@ -1,0 +1,21 @@
+Package: ostree
+Version: 2018.8-1
+Architecture: amd64
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 428
+Depends: libarchive13 (>= 3.0.4), libc6 (>= 2.27), libfuse2 (>= 2.9), libglib2.0-0 (>= 2.43.91), libostree-1-1 (>= 2018.6)
+Section: admin
+Priority: optional
+Homepage: https://github.com/ostreedev/ostree/
+Description: content-addressed filesystem for operating system binaries
+ libostree provides a library and tools for managing bootable, immutable,
+ versioned filesystem trees. It is like git in that it checksums
+ individual files and has a content-addressed object store; unlike git,
+ it "checks out" the files using hardlinks into an immutable directory
+ tree. This can be used to provide atomic upgrades with rollback, history
+ and parallel-installation, particularly useful on "fixed purpose"
+ systems such as embedded devices.
+ .
+ This package contains the executables used to manage and create
+ filesystem trees. It does not affect the boot process for the system
+ on which it is installed.

@@ -1,0 +1,18 @@
+Package: gccgo-5-multilib
+Source: gcc-5
+Version: 5.5.0-12
+Architecture: amd64
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 68152
+Depends: gcc-5-base (= 5.5.0-12), gccgo-5 (= 5.5.0-12), gcc-5-multilib (= 5.5.0-12), lib32go7 (>= 5.5.0-12), libx32go7 (>= 5.5.0-12)
+Breaks: lib32go7 (<< 5.5.0-6), lib64go7 (<< 5.5.0-6), libn32go7 (<< 5.5.0-6), libx32go7 (<< 5.5.0-6)
+Replaces: lib32go7 (<< 5.5.0-6), lib64go7 (<< 5.5.0-6), libn32go7 (<< 5.5.0-6), libx32go7 (<< 5.5.0-6)
+Section: devel
+Priority: optional
+Homepage: http://gcc.gnu.org/
+Description: GNU Go compiler (multilib support)
+ This is the GNU Go compiler, which compiles Go on platforms supported
+ by the gcc compiler.
+ .
+ This is a dependency package, depending on development packages
+ for the non-default multilib architecture(s).

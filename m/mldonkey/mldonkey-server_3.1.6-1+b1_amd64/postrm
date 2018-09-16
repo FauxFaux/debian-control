@@ -1,0 +1,61 @@
+#!/bin/sh
+
+set -e
+
+# This script is called twice during the removal of the package; once
+# after the removal of the package's files from the system, and as
+# the final step in the removal of this package, after the package's
+# conffiles have been removed.
+
+#set -x
+
+DEBUG=false
+CONF=/etc/default/mldonkey-server
+
+case "$1" in
+    remove|disappear|upgrade|failed-upgrade|abort-install|abort-upgrade)
+    ;;
+
+    purge)
+
+    for EXT in '~' '%' .bak .dpkg-tmp .dpkg-new .dpkg-old .dpkg-dist;  do
+        rm -f "$CONF$EXT"
+    done
+
+    rm -f "$CONF"
+
+    if which ucf > /dev/null; then
+        ucf --purge "$CONF"
+    fi
+
+    rm -rf /var/lib/mldonkey
+    rm -rf /var/log/mldonkey
+    rm -rf /var/run/mldonkey
+
+    ;;
+
+    *)
+    echo "$0: didn't understand being called with \`$1'" 1>&2
+    exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit/11.2.1
+if [ "$1" = "purge" ] ; then
+	update-rc.d mldonkey-server remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.2.1
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

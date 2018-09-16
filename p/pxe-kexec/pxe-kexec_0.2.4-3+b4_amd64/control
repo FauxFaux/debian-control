@@ -1,0 +1,16 @@
+Package: pxe-kexec
+Source: pxe-kexec (0.2.4-3)
+Version: 0.2.4-3+b4
+Architecture: amd64
+Maintainer: Dave Walker (Daviey) <DaveWalker@ubuntu.com>
+Installed-Size: 273
+Depends: kexec-tools, libc6 (>= 2.3), libcurl3-gnutls (>= 7.16.2), libgcc1 (>= 1:3.0), libncurses6 (>= 6), libreadline7 (>= 6.0), libstdc++6 (>= 5.2), libtinfo6 (>= 6)
+Section: admin
+Priority: extra
+Homepage: http://developer.berlios.de/projects/pxe-kexec/
+Description: Fetch PXE configuration file and netboot using kexec
+ Tool that fetches PXE configuration file (SysLinux' PXELinux format),
+ prompts the user for a boot entry (label), (supports interactive
+ editing of the kernel parameters), downloads the selected kernel and
+ initrd over the network using TFTP, FTP or HTTP and finally reboots
+ into the kernel using kexec.

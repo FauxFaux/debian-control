@@ -1,0 +1,21 @@
+Package: libpod-pseudopod-perl
+Version: 0.18-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 132
+Depends: perl, libhtml-parser-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Pod-PseudoPod
+Description: framework for parsing PseudoPod
+ PseudoPod is an extended set of Pod tags used for book manuscripts. Standard
+ Pod doesn't have all the markup options you need to mark up files for
+ publishing production. PseudoPod adds a few extra tags for footnotes, tables,
+ sidebars, etc.
+ .
+ Pod::PseudoPod adds parsing support for the PseudoPod tags. It also overrides
+ Pod::Simple's _handle_element_start, _handle_text, and _handle_element_end
+ methods so that parser events are turned into method calls.
+ .
+ In general, you'll only want to use this module as the base class for a
+ PseudoPod formatter/processor.

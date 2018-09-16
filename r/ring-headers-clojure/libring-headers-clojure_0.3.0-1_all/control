@@ -1,0 +1,20 @@
+Package: libring-headers-clojure
+Source: ring-headers-clojure
+Version: 0.3.0-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 27
+Depends: libclojure-java, libring-core-clojure
+Section: java
+Priority: optional
+Homepage: https://github.com/ring-clojure/ring-headers
+Description: Ring middleware for common response headers
+ ring-headers is a Ring middleware collection for adding and manipulating
+ common response headers. It provides middleware for:
+ .
+  * replacing relative redirects with absolute redirects. Useful
+    for clients that do not yet implement RFC 7231.
+  * automatically adding a charset to the content-type header in
+    response maps.
+  * handling headers set by HTTP proxies.
+  * adding various 'X-' response headers.

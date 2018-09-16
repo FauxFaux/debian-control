@@ -1,0 +1,21 @@
+Package: ruby-grack
+Version: 2.0.2-2
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 39
+Depends: ruby | ruby-interpreter, ruby-rack (>= 1.5.1), git
+Section: ruby
+Priority: optional
+Homepage: https://github.com/gitlabhq/grack
+Description: Git Smart HTTP Server Rack implementation in Ruby/Rack
+ Rack application replacement for the builtin git-http-backend CGI
+ handler distributed with Git.
+ .
+ The default git-http-backend only runs as a CGI script, and
+ specifically is only targeted for Apache 2.x usage (it requires
+ PATH_INFO to be set and specifically formatted).  This Rack
+ application can run on nearly every major and minor webserver out
+ there by making it Rack capable.
+ .
+ This the GITLAB version of the library.
+Ruby-Versions: all

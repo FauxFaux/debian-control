@@ -1,0 +1,31 @@
+Package: libslingshot-clojure
+Source: slingshot-clojure
+Version: 0.12.2-2
+Architecture: all
+Maintainer: Debian Clojure Maintainers <pkg-clojure-maintainers@lists.alioth.debian.org>
+Installed-Size: 54
+Depends: libclojure-java
+Section: java
+Priority: optional
+Homepage: https://github.com/scgilardi/slingshot/
+Description: Enhanced throw and catch library for Clojure
+ Slingshot is a Clojure library providing enhanced throw and catch replacements
+ try+ and throw+.
+ .
+ Each is 100% compatible with Clojure's and Java's native try and throw both in
+ source code and at runtime. Each also provides new capabilities intended to
+ improve ease of use by leveraging Clojure's features like maps, records, and
+ destructuring. Among them:
+ .
+    * throw+ can throw any Java object, not just those whose class is derived
+      from java.lang.Throwable (e.g. Clojure maps or records)
+ .
+    * catch clauses within try+ can catch any Java object thrown by throw+,
+      Clojure's throw, or Java's throw
+ .
+    * selectors in catch clauses allow matching on class name, key-value
+      vectors, predicates and more
+ .
+    * Information about the context of a throw site is accessible via a hidden
+      argument that includes information on, for example, the caught object,
+      exception messages and stack traces

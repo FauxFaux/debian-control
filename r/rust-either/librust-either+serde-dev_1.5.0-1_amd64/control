@@ -1,0 +1,14 @@
+Package: librust-either+serde-dev
+Source: rust-either
+Version: 1.5.0-1
+Architecture: amd64
+Maintainer: Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-either-dev (= 1.5.0-1), librust-serde-1+default-dev, librust-serde-1+derive-dev
+Provides: librust-either-1+serde-dev (= 1.5.0-1), librust-either-1.5+serde-dev (= 1.5.0-1), librust-either-1.5.0+serde-dev (= 1.5.0-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Enum `Either` with variants `Left` and `Right` is a general purpose sum type with two cases - feature "serde"
+ This metapackage enables feature serde for the Rust either crate, by pulling in
+ any additional dependencies needed by that feature.

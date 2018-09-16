@@ -1,0 +1,30 @@
+Package: sysbench
+Version: 1.0.15+ds-1
+Architecture: amd64
+Maintainer: JCF Ploemen (jcfp) <linux@jcf.pm>
+Installed-Size: 348
+Depends: libaio1 (>= 0.3.93), libc6 (>= 2.17), libck0, libluajit-5.1-2 (>= 2.0.4+dfsg), libmariadbclient18 (>= 10.1.28), libpq5, zlib1g (>= 1:1.1.4)
+Section: misc
+Priority: optional
+Homepage: https://github.com/akopytov/sysbench
+Description: multi-threaded benchmark tool for database systems
+ SysBench is a modular, scriptable and multi-threaded benchmark tool based on
+ LuaJIT. It is most frequently used for database benchmarks, but can also be
+ used to create arbitrarily complex workloads that do not involve a database
+ server.
+ .
+ The idea of this benchmark suite is to quickly get an impression about system
+ performance without setting up complex database benchmarks or even without
+ installing a database at all.
+ .
+ Current features allow one to test the following system parameters:
+ .
+  * file I/O performance
+  * scheduler performance
+  * memory allocation and transfer speed
+  * POSIX threads implementation performance
+  * database server performance (OLTP benchmark)
+ .
+ Primarily written for MySQL server benchmarking, SysBench will be further
+ extended to support multiple database backends, distributed benchmarks and
+ third-party plug-in modules.

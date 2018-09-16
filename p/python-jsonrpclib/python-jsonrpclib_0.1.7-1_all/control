@@ -1,0 +1,21 @@
+Package: python-jsonrpclib
+Version: 0.1.7-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 62
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://pypi.python.org/pypi/jsonrpclib
+Description: implementation of the JSON-RPC v2.0 specification
+ This library implements the JSON-RPC 2.0 proposed specification in pure
+ Python. It is designed to be as compatible with the syntax of xmlrpclib as
+ possible (it extends where possible), so that projects using xmlrpclib could
+ easily be modified to use JSON and experiment with the differences.
+ .
+ It is backwards-compatible with the 1.0 specification, and supports all of the
+ new proposed features of 2.0, including:
+  * Batch submission (via MultiCall)
+  * Keyword arguments
+  * Notifications (both in a batch and 'normal')
+  * Class translation using the 'jsonclass' key.

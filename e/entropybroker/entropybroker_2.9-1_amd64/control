@@ -1,0 +1,30 @@
+Package: entropybroker
+Version: 2.9-1
+Architecture: amd64
+Maintainer: Thorsten Alteholz <debian@alteholz.de>
+Installed-Size: 7167
+Depends: libasound2 (>= 1.0.16), libc6 (>= 2.15), libcrypto++6, libftdi1, libgcc1 (>= 1:3.0), libgd3 (>= 2.1.0~alpha~), libpcsclite1 (>= 1.3.0), libpng16-16 (>= 1.6.2-1), libstdc++6 (>= 5.2), libusb-1.0-0 (>= 2:1.0.8), zlib1g (>= 1:1.1.4), init-system-helpers (>= 1.18~)
+Section: utils
+Priority: optional
+Homepage: https://www.vanheusden.com/entropybroker/
+Description: infrastructure for distributing random numbers (entropy data)
+ Entropy Broker is an infrastructure for distributing cryptographically secure
+ random numbers (entropy data) from one or more servers to one or more clients.
+ .
+ It allows you to distribute entropy data (random values) to /dev/random
+ devices from other systems (real servers or virtualised systems).
+ It helps preventing that the /dev/random device gets depleted; an empty
+ /dev/random-device can cause programs to hang (waiting for entropy data to
+ become available).
+ .
+ This is useful for systems that need to generate encryption keys, run VPN
+ software or run a casino website. Also virtual systems that have no good
+ sources of entropy like virtual servers (e.g. VMware, XEN and KVM (although
+ KVM has the virtio_rnd driver)).
+ .
+ Entropy Broker is an infrastructure consisting of client-daemons that fill
+ /dev/random and server-daemons that feed the central entropy broker-server.
+ The server-daemons can gather random values by measuring timer frequency
+ noise, analysing noise from a unused audio-device, noise from a video source
+ (webcam, tv-card) and random values from a real hardware RNG (random number
+ generator).

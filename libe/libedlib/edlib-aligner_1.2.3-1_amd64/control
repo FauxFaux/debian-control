@@ -1,0 +1,31 @@
+Package: edlib-aligner
+Source: libedlib
+Version: 1.2.3-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 56
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), libedlib0 (= 1.2.3-1)
+Section: science
+Priority: optional
+Homepage: https://github.com/Martinsos/edlib
+Description: edlib sequence alignment tool using edit distance
+ Edlib is a lightweight and super fast C/C++ library for sequence
+ alignment using edit distance.  This package provides an aligner
+ using this library.
+ .
+ Features of libedlib
+ .
+  * Calculates edit distance (Levehnstein distance).
+  * It can find optimal alignment path (instructions how to transform
+    first sequence into the second sequence).
+  * It can find just the start and/or end locations of alignment path -
+    can be useful when speed is more important than having exact
+    alignment path.
+  * Supports multiple alignment methods: global(NW), prefix(SHW) and
+    infix(HW), each of them useful for different scenarios.
+  * You can extend character equality definition, enabling you to e.g.
+    have wildcard characters, to have case insensitive alignment or to
+    work with degenerate nucleotides.
+  * It can easily handle small or very large sequences, even when finding
+    alignment path, while consuming very little memory.
+  * Super fast thanks to Myers's bit-vector algorithm.

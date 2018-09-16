@@ -1,0 +1,18 @@
+Package: librust-textwrap+term-size-dev
+Source: rust-textwrap
+Version: 0.10.0-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-textwrap-dev (= 0.10.0-1), librust-term-size-0.3+default-dev
+Provides: librust-textwrap-0+term-size-dev (= 0.10.0-1), librust-textwrap-0.10+term-size-dev (= 0.10.0-1), librust-textwrap-0.10.0+term-size-dev (= 0.10.0-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Small library for word wrapping, indenting, and dedenting strings - feature "term_size"
+ You can use it to format strings (such as help and error messages) for display
+ in commandline applications. It is designed to be efficient and handle Unicode
+ characters correctly.
+ .
+ This metapackage enables feature term_size for the Rust textwrap crate, by
+ pulling in any additional dependencies needed by that feature.

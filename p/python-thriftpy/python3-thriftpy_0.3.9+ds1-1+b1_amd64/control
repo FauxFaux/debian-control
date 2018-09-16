@@ -1,0 +1,44 @@
+Package: python3-thriftpy
+Source: python-thriftpy (0.3.9+ds1-1)
+Version: 0.3.9+ds1-1+b1
+Architecture: amd64
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 993
+Depends: python3 (<< 3.8), python3 (>= 3.6~), python3-ply, python3:any (>= 3.3.2-2~), libc6 (>= 2.14)
+Section: python
+Priority: optional
+Homepage: https://thriftpy.readthedocs.org/
+Description: Pure Python implementation of Apache Thrift
+ ThriftPy is a pure Python implementation of
+ Apache Thrift <http://thrift.apache.org/> in a pythonic way.
+ .
+ Documentation: https://thriftpy.readthedocs.org/
+ .
+ Currently ThriftPy have these features (also advantages over the upstream
+ Python lib):
+ .
+   - Pure Python implementation. No longer need to compile & install the
+     'thrift' package. All you need is thriftpy and thrift file.
+ .
+   - Compatible with Apache Thrift. You can use ThriftPy together with the
+     official implementation servers and clients, such as a upstream server
+     with a thriftpy client or the opposite.
+ .
+   - Currently implemented protocols and transports:
+ .
+     * binary protocol (Python and cython)
+ .
+     * compact protocol (Python and cython)
+ .
+     * json protocol
+ .
+     * buffered transport (Python & cython)
+ .
+     * framed transport
+ .
+     * tornado server and client (with tornado 4.0)
+ .
+   - Can directly load thrift file as module, the sdk code will be generated
+     on the fly.
+ .
+   - Easy RPC server/client setup.

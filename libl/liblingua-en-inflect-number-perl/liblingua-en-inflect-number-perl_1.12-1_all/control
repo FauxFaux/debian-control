@@ -1,0 +1,23 @@
+Package: liblingua-en-inflect-number-perl
+Version: 1.12-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 24
+Depends: perl, liblingua-en-inflect-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Lingua-EN-Inflect-Number
+Description: Perl module to force number of words to singular or plural
+ The Lingua::EN::Inflect::Number module extends the functionality of
+ Lingua::EN::Inflect (the liblingua-en-inflect-perl package) with three new
+ functions.
+ .
+ number() takes a word, and determines its number. It returns whether
+ the word is singular, plural, or ambiguous for words that can be
+ either singular or plural.
+ .
+ Based on the number() function there are to_S() and to_PL() which
+ take a word and convert it forcefully either to singular or to
+ plural. In Lingua::EN::Inflect funny things happen if you try to
+ pluralise an already-plural word, but this module does the right
+ thing.

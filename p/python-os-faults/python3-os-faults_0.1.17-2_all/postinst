@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/os-inject-fault os-inject-fault /usr/bin/python3-os-inject-fault 200
+	update-alternatives --install /usr/bin/os-faults os-faults /usr/bin/python3-os-faults 200
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-os-faults 
+fi
+
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,18 @@
+Package: libjson-maybexs-perl
+Version: 1.004000-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 31
+Depends: perl, libcpanel-json-xs-perl | libjson-xs-perl (>= 3), perl (>= 5.21.5) | libjson-pp-perl (>= 2.27300)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/JSON-MaybeXS
+Description: interface to the best available JSON module
+ JSON::MaybeXS first checks to see if either Cpanel::JSON::XS or JSON::XS is
+ already loaded, in which case it uses that module. Otherwise it tries to load
+ Cpanel::JSON::XS, then JSON::XS, then JSON::PP in order, and either uses the
+ first module it finds or throws an error.
+ .
+ It then exports the encode_json and decode_json functions from the loaded
+ module, along with a JSON constant that returns the class name for calling
+ new on.

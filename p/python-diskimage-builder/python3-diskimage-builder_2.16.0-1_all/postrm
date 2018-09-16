@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "disappear" ] ; then
+	update-alternatives --remove dib-block-device /usr/bin/python3-dib-block-device
+	update-alternatives --remove dib-lint /usr/bin/python3-dib-lint
+	update-alternatives --remove disk-image-create /usr/bin/python3-disk-image-create
+	update-alternatives --remove element-info /usr/bin/python3-element-info
+	update-alternatives --remove ramdisk-image-create /usr/bin/python3-ramdisk-image-create
+fi
+
+
+
+exit 0

@@ -1,0 +1,18 @@
+Package: muttdown
+Version: 0.2-1
+Architecture: all
+Maintainer: gustavo panizzo <gfa@zumbi.com.ar>
+Installed-Size: 37
+Depends: python-markdown, python-pynliner, python-yaml, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: contrib/mail
+Priority: optional
+Homepage: https://github.com/Roguelazer/muttdown
+Description: Compiles annotated text mail into html using the Markdown standard
+ muttdown is a sendmail-replacement designed for use with the mutt email
+ client which will transparently compile annotated text/plain mail into
+ text/html using the Markdown standard.
+ It will recursively walk the MIME tree and compile any text/plain or
+ text/markdown part which begins with the sigil "!m" into Markdown,
+ which it will insert alongside the original in a multipart/alternative container.
+ .
+ It's also smart enough not to break multipart/signed

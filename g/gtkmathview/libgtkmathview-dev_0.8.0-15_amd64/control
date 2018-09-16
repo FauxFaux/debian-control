@@ -1,0 +1,32 @@
+Package: libgtkmathview-dev
+Source: gtkmathview
+Version: 0.8.0-15
+Architecture: amd64
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 6180
+Depends: libgtkmathview0c2a (= 0.8.0-15), libc6-dev, libxml2-dev, libgdome2-cpp-smart-dev (>= 0.2.3-4), libglib2.0-dev (>= 2.2.3), libgtk2.0-dev (>= 2.2.1), libgdome2-dev (>= 0.8.1)
+Section: libdevel
+Priority: optional
+Homepage: http://helm.cs.unibo.it/mml-widget/
+Description: rendering engine for MathML documents
+ GtkMathView is a C++ rendering engine for MathML documents. It
+ provides an interactive view that can be used for browsing and
+ editing MathML markup.
+ .
+ GtkMathView reads MathML documents by means of a frontend whose
+ purpose is to traverse the MathML document (or part of it) and
+ to appropriately instantiate GtkMathView's internal data
+ structures that are suitable for rendering it.  Currently the
+ following frontends are supported: libxml2 (tree view using
+ libxml2 API), libxml2 reader (event view using libxml2 reader
+ API), GMetaDOM (tree view using DOM API), custom
+ (application-specific view with application-provided callbacks).
+ .
+ GtkMathView renders MathML documents through a backend whose
+ purpose is to provide an interface between the portable
+ rendering engine and the platform-specific capabilities (like
+ retrieving fonts, drawing on the screen, and so on). Currently
+ the following backends are provided: GTK+, GTK+ widget,
+ PostScript, SVG, AbiWord.
+ .
+ This package includes the development support files.

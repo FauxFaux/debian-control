@@ -1,0 +1,19 @@
+Package: ruby-rack-pjax
+Version: 0.7.0-2
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 71
+Depends: ruby | ruby-interpreter, ruby-rack, ruby-nokogiri
+Section: ruby
+Priority: optional
+Homepage: https://github.com/eval/rack-pjax
+Description: serve pjax responses through rack middleware
+ Rack-pjax is middleware that lets you serve 'chrome-less' pages in response
+ to pjax-requests.
+ .
+ It does this by stripping the generated body; only the title and inner-html
+ of the pjax-container are sent to the client.
+ .
+ While this won't save you any time rendering the page, it gives you more
+ flexibility where and how to define the pjax-container.
+Ruby-Versions: all

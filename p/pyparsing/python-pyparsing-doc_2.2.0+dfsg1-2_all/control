@@ -1,0 +1,24 @@
+Package: python-pyparsing-doc
+Source: pyparsing
+Version: 2.2.0+dfsg1-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 1064
+Section: doc
+Priority: optional
+Homepage: http://pyparsing.wikispaces.com/
+Description: alternative to creating and executing simple grammars - doc
+ The parsing module is an alternative approach to creating and
+ executing simple grammars, vs. the traditional lex/yacc approach, or
+ the use of regular expressions.  The parsing module provides a
+ library of classes that client code uses to construct the grammar
+ directly in Python code.
+ .
+ Here's an example:
+ .
+  from pyparsing import Word, alphas
+  greet = Word(alphas) + "," + Word(alphas) + "!"
+  hello = "Hello, World!"
+  print hello, "->", greet.parseString(hello)
+ .
+ This package contains documentation for python-pyparsing.

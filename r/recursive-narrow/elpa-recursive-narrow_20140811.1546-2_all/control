@@ -1,0 +1,18 @@
+Package: elpa-recursive-narrow
+Source: recursive-narrow
+Version: 20140811.1546-2
+Architecture: all
+Maintainer: Debian Emacs addons team <pkg-emacsen-addons@lists.alioth.debian.org>
+Installed-Size: 32
+Depends: emacsen-common, emacs
+Recommends: emacs (>= 46.0)
+Enhances: emacs, emacs24, emacs25
+Section: lisp
+Priority: optional
+Homepage: https://github.com/nflath/recursive-narrow
+Description: narrow-to-region that operates recursively
+ This package defines two functions, recursive-narrow-or-widen-dwim and
+ recursive-widen-dwim that replace the builtin functions narrow-to-region and
+ widen. These functions operate the same way, except in the case of multiple
+ calls to recursive-narrow-to-region-dwim. In this case, recursive-widen-dwim
+ will go to the previous buffer visibility, not make the entire buffer visible.

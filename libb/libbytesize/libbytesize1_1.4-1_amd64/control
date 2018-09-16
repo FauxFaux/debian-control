@@ -1,0 +1,24 @@
+Package: libbytesize1
+Source: libbytesize
+Version: 1.4-1
+Architecture: amd64
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 44
+Depends: libc6 (>= 2.14), libgmp10, libmpfr6 (>= 3.1.3), libpcre3
+Section: libs
+Priority: optional
+Homepage: https://github.com/storaged-project/libbytesize
+Description: library for common operations with sizes in bytes
+ Many projects need to work with sizes in bytes (be it sizes of storage
+ space, memory,...) and all of them need to deal with the same issues
+ like:
+ .
+  * How to get a human-readable string for the given size?
+  * How to store the given size so that no significant information is lost?
+  * If we store the size in bytes, what if the given size gets over the
+    MAXUINT64 value?  How to interpret sizes entered by users according
+    to their locale and typing conventions?
+  * How to deal with the decimal/binary units (MB vs. MiB) ambiguity?
+  .
+  This library aims to be as much generally usable as possible, small, fast and
+  be easily interfaced from other languages.

@@ -1,0 +1,20 @@
+Package: libdogleg2
+Source: libdogleg
+Version: 0.14-1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 38
+Depends: libc6 (>= 2.14), libcholmod3 (>= 1:4.5.2), liblapack3 | liblapack.so.3, libsuitesparseconfig5 (>= 1:5.0.0)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/dkogan/libdogleg
+Description: Powell's dog-leg nonlinear least squares solver for sparse matrices
+ Solves unconstrained nonlinear least squares problems using Powell's dog-leg
+ method. The user specifies a callback C function that returns the value and
+ gradients of the model function at a particular operating point. This library
+ takes a series of dog-leg steps to find a local minimum of the residual
+ surface.
+ .
+ This library works with sparse matrices, which makes it suitable for
+ efficiently solving very large problems.

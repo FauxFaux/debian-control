@@ -1,0 +1,28 @@
+Package: liblexical-var-perl
+Source: liblexical-var-perl (0.009-3)
+Version: 0.009-3+b3
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 63
+Depends: perl (>= 5.26.0-4), perlapi-5.26.0, libc6 (>= 2.4), liblexical-sealrequirehints-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Lexical-Var
+Description: Perl module for using static variables without namespace pollution
+ Lexical::Var implements lexical scoping of subroutines. Although it can be
+ used directly, it is mainly intended to be infrastructure for modules that
+ manage namespaces.
+ .
+ This module influences the meaning of single-part subroutine names that
+ appear directly in code, such as "&foo" and "foo(123)". Normally, in the
+ absence of any particular declaration, these would refer to the subroutine of
+ that name located in the current package. A Lexical::Sub declaration can
+ change this to refer to any particular subroutine, bypassing the package
+ system entirely. A subroutine name that includes an explicit package part,
+ such as "&main::foo", always refers to the subroutine in the specified
+ package, and is unaffected by this module. A symbolic reference through a
+ string value, such as "&{'foo'}", also looks in the package system, and so is
+ unaffected by this module.
+ .
+ The types of name that can be influenced are scalar ("$foo"), array
+ ("@foo"), hash ("%foo"), subroutine ("&foo"), and glob ("*foo").

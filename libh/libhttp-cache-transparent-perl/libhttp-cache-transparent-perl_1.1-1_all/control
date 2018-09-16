@@ -1,0 +1,22 @@
+Package: libhttp-cache-transparent-perl
+Version: 1.1-1
+Architecture: all
+Maintainer: Bart Martens <bartm@debian.org>
+Installed-Size: 67
+Depends: perl, libwww-perl (>= 5.805)
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/HTTP-Cache-Transparent/
+Description: Perl module used to transparently cache HTTP requests
+ This is the CPAN module HTTP::Cache::Transparent.
+ .
+ HTTP::Cache::Transparent is an implementation of HTTP GET that keeps a
+ local cache of fetched pages to avoid fetching the same data from the
+ server if it hasn't been updated. The cache is stored on disk and is
+ thus persistent between invocations.
+ .
+ The http-headers If-Modified-Since and ETag are used to let the server
+ decide if the version in the cache is up-to-date or not.  All
+ http-requests are made through the LWP module. Data is stored on disk
+ by the Storable module. Digest::MD5 is used for creating a hash of the
+ URL.

@@ -1,0 +1,40 @@
+Package: med-config
+Source: debian-med
+Version: 3.1
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 46
+Depends: adduser, debconf (>= 0.5) | debconf-2.0, menu, blends-common (>= 0.6.15)
+Conflicts: med-common
+Replaces: med-common
+Provides: med-common
+Section: misc
+Priority: optional
+Description: Debian Med general config package
+ This package provides the basic infrastructure of all metapackages assembled
+ by the Debian Med team.
+ .
+ This metapackage provides common features shared between the different
+ metapackages of the project. Moreover it introduces a method to handle a
+ 'med' system users group using debconf.
+ .
+ The Debian Med Project include metapackages for different tasks, which are:
+  * applications for microbiological research and support for development of
+    biological applications
+  * cloud computing in microbiological research
+  * drug databases
+  * dental surgery practice
+  * epidemiology and medical statistics
+  * image processing and support for imaging application development
+  * pharmacological research
+  * radiation oncology, diagnostic imaging and related fields
+  * medical practice
+  * psychological research and practice
+  * rehabilitation
+  * typesetting and publishing
+  * miscellaneous tools
+ .
+ Each task is represented by a metapackage. Metapackages do not contain
+ executable programs, but rather dependencies from other packages. This way
+ you will conveniently get all free medical software which is available for
+ Debian by simply installing the relevant metapackage

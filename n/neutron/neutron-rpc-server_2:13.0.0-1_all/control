@@ -1,0 +1,19 @@
+Package: neutron-rpc-server
+Source: neutron
+Version: 2:13.0.0-1
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 36
+Depends: adduser, neutron-common (= 2:13.0.0-1), lsb-base (>= 3.0.6)
+Breaks: neutron-server (<< 2:12.0.2-5~)
+Replaces: neutron-server (<< 2:12.0.2-5~)
+Section: net
+Priority: optional
+Homepage: http://neutron.openstack.org/
+Description: OpenStack virtual network service - RPC service
+ Neutron provides an API to dynamically request and configure virtual networks.
+ These networks connect "interfaces" from other OpenStack services (such as
+ vNICs from Nova VMs). The Neutron API supports extensions to provide advanced
+ network capabilities, including QoS, ACLs, and network monitoring.
+ .
+ This package provides the Neutron RPC server.

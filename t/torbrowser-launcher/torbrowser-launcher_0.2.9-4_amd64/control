@@ -1,0 +1,25 @@
+Package: torbrowser-launcher
+Version: 0.2.9-4
+Architecture: amd64
+Maintainer: Debian Privacy Tools Maintainers <pkg-privacy-maintainers@lists.alioth.debian.org>
+Installed-Size: 367
+Depends: python:any (<< 2.8), python:any (>= 2.7~), ca-certificates, gnupg, libdbus-glib-1-2, python-gtk2, python-lzma, python-parsley (>= 1.2), python-psutil, python-twisted, python-txsocksx (>= 1.13.0.1)
+Recommends: tor
+Suggests: apparmor, python-pygame
+Section: contrib/web
+Priority: optional
+Homepage: https://micahflee.com/torbrowser-launcher/
+Description: helps download and run the Tor Browser Bundle
+ Tor Browser Launcher is intended to make the Tor Browser Bundle (TBB) easier
+ to maintain and use for GNU/Linux users. torbrowser-launcher handles
+ downloading the most recent version of TBB for you, in your language and for
+ your architecture. It also adds a "Tor Browser" application launcher to your
+ operating system's menu.
+ .
+ When you first launch Tor Browser Launcher, it will download TBB from
+ https://www.torproject.org/ and extract it to ~/.local/share/torbrowser,
+ and then execute it.
+ Cache and configuration files will be stored in ~/.cache/torbrowser and
+ ~/.config/torbrowser.
+ Each subsequent execution after installation will simply launch the most
+ recent TBB, which is updated using Tor Browser's own update feature.

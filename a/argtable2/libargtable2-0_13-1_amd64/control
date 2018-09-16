@@ -1,0 +1,25 @@
+Package: libargtable2-0
+Source: argtable2
+Version: 13-1
+Architecture: amd64
+Maintainer: Shachar Shemesh <shachar@debian.org>
+Installed-Size: 46
+Depends: libc6 (>= 2.4)
+Conflicts: argtable, argtable2
+Section: libs
+Priority: optional
+Homepage: http://argtable.sourceforge.net
+Description: Library for parsing GNU style command line arguments
+ Argtable is an ANSI C library for parsing GNU style command line arguments.
+ It enables a program's command line syntax to be defined in the source code as
+ an array of argtable structs. The command line is then parsed according to that
+ specification and the resulting values are returned in those same structs where
+ they are accessible to the main program. Both tagged (-v, --verbose, --foo=bar)
+ and untagged arguments are supported, as are multiple instances of each
+ argument. Syntax error handling is automatic and the library also provides the
+ means for displaying the command line syntax directly from the array of
+ argument specifications.
+ .
+ argtable can function as a "getopt_long" replacement, without the user of the
+ program noticing the difference. Unlike "getopt_long", however, argtable is
+ cross platform, working on all Posix systems, as well as Windows and Mac.

@@ -1,0 +1,28 @@
+Package: mate-user-share-common
+Source: mate-user-share
+Version: 1.20.1-1
+Architecture: all
+Maintainer: Debian+Ubuntu MATE Packaging Team <debian-mate@lists.debian.org>
+Installed-Size: 1540
+Depends: dconf-gsettings-backend | gsettings-backend
+Breaks: mate-user-share (<< 1.11.0)
+Replaces: mate-user-share (<< 1.11.0)
+Section: x11
+Priority: optional
+Homepage: http://www.mate-desktop.org
+Description: User level public file sharing via WebDAV or ObexFTP (common files)
+ MATE user share is a small tool that binds together various free
+ software projects to bring easy to use user-level file sharing to the
+ masses.
+ .
+ The program is meant to run in the background when the user is logged
+ in, and when file sharing is enabled a webdav server is started that
+ shares the $HOME/Public folder. The share is then published to all
+ computers on the local network using mDNS/rendezvous, so that it shows
+ up in the Network location in GNOME.
+ .
+ The dav server used is Apache, so you need that installed. Avahi or
+ Howl is used for mDNS support, so you need to have that installed and
+ mDNSResolver running.
+ .
+ This package contains the architecture independent files.

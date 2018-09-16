@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+    update-alternatives \
+	--install /usr/lib/libphp7.so libphp7 /usr/lib/libphp7.2.so 72
+fi
+
+[ "$1" = "configure" ] && ldconfig
+
+CONFDIR=/etc/php/7.2/embed/conf.d
+
+if [ "$1" = "configure" ]; then
+    phpini="/etc/php/7.2/embed/php.ini"
+
+    if [ "embed" = "cli" ]; then
+	ucf /usr/lib/php/7.2/php.ini-production.embed $phpini
+    else
+	ucf /usr/lib/php/7.2/php.ini-production $phpini
+    fi
+    ucfr libphp7.2-embed $phpini
+
+    if [ -e /usr/lib/php/php-maintscript-helper ]; then
+	. /usr/lib/php/php-maintscript-helper
+	
+	mods=$(phpquery -M -v 7.2)
+	for mod in $mods; do
+	    php_invoke enmod 7.2 embed $mod
+	done
+    fi
+
+    if [ -n "$2" ] && dpkg --compare-versions "$2" lt "7.0.3-2~"; then
+	rm -f /etc/php/7.2/embed/conf.d/20-opcache.ini;
+    fi	    
+fi
+
+
+
+exit 0

@@ -1,0 +1,33 @@
+Package: golang-github-docker-notary-dev
+Source: notary
+Version: 0.6.1~ds1-2
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 2181
+Depends: golang-github-bugsnag-bugsnag-go-dev, golang-github-cloudflare-cfssl-dev, golang-github-docker-go-connections-dev (>= 0.3.0~), golang-github-docker-go-dev, golang-github-dvsekhvalnov-jose2go-dev, golang-github-go-sql-driver-mysql-dev, golang-github-gorilla-mux-dev, golang-github-jinzhu-gorm-dev, golang-github-lib-pq-dev, golang-github-mattn-go-sqlite3-dev, golang-github-miekg-pkcs11-dev (>= 0.0~git20160602~), golang-github-prometheus-client-golang-dev, golang-github-shopify-logrus-bugsnag-dev (>= 0.0~git20171204~), golang-github-sirupsen-logrus-dev (>= 1.0.2~), golang-github-spf13-cobra-dev, golang-github-spf13-viper-dev, golang-github-stretchr-testify-dev, golang-golang-x-crypto-dev, golang-golang-x-net-dev (>= 0.0+git20160110~), golang-golang-x-sys-dev, golang-google-grpc-dev (>= 0.0~git20151002~), golang-gopkg-gorethink-gorethink.v3-dev, golang-goprotobuf-dev
+Provides: golang-github-theupdateframework-notary-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/theupdateframework/notary
+Description: library for running and interacting with trusted collections
+ Notary is a project that allows anyone to have trust over arbitrary
+ collections of data.
+ .
+ The Notary project comprises a server (cmd/notary-server) and a client
+ (cmd/notary) for running and interacting with trusted collections.
+ .
+ Notary aims to make the internet more secure by making it easy for people to
+ publish and verify content. We often rely on TLS to secure our communications
+ with a web server which is inherently flawed, as any compromise of the server
+ enables malicious content to be substituted for the legitimate content.
+ .
+ With Notary, publishers can sign their content offline using keys kept highly
+ secure. Once the publisher is ready to make the content available, they can
+ push their signed trusted collection to a Notary Server.
+ .
+ Consumers, having acquired the publisher's public key through a secure
+ channel, can then communicate with any notary server or (insecure) mirror,
+ relying only on the publisher's key to determine the validity and integrity
+ of the received content.
+ .
+ This package contains the source.

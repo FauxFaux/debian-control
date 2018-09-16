@@ -1,0 +1,22 @@
+Package: libhtml-defang-perl
+Version: 1.04-4
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 98
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/HTML-Defang/
+Description: cleans HTML and CSS of scripting, executable contents and XSS attacks
+ HTML::Defang accepts an input HTML and/or CSS string and removes any
+ executable code including scripting, embedded objects, applets, etc.,
+ and neutralises any XSS attacks. A whitelist based approach is used
+ which means only HTML known to be safe is allowed through.
+ .
+ HTML::Defang uses a custom html tag parser. The parser has been
+ designed and tested to work with nasty real world html and to try and
+ emulate as close as possible what browsers actually do with strange
+ looking constructs. The test suite has been built based on examples
+ from a range of sources such as <http://ha.ckers.org/xss.html> and
+ <http://imfo.ru/csstest/css_hacks/import.php> to ensure that as many as
+ possible XSS attack scenarios have been dealt with.

@@ -1,0 +1,20 @@
+Package: libdanga-socket-perl
+Version: 1.61-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 71
+Depends: perl, libsys-syscall-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Danga-Socket
+Description: event loop and event-driven async socket base class
+ Danga::Socket is an abstract base class for objects backed by a socket which
+ provides the basic framework for event-driven asynchronous IO, designed to be
+ fast. Danga::Socket is both a base class for objects, and an event loop.
+ .
+ Callers subclass Danga::Socket. Danga::Socket's constructor registers
+ itself with the Danga::Socket event loop, and invokes callbacks on the
+ object for readability, writability, errors, and other conditions.
+ .
+ Because Danga::Socket uses the "fields" module, your subclasses must
+ too.

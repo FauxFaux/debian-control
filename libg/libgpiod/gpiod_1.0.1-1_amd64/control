@@ -1,0 +1,20 @@
+Package: gpiod
+Source: libgpiod
+Version: 1.0.1-1
+Architecture: amd64
+Maintainer: SZ Lin (林上智) <szlin@debian.org>
+Installed-Size: 88
+Depends: libc6 (>= 2.16), libgpiod1 (>= 1.0)
+Section: misc
+Priority: optional
+Homepage: https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git
+Description: Tools for interacting with Linux GPIO character device - binary
+ libgpiod encapsulates the ioctl calls and data structures
+ behind a straightforward API. This new character device
+ interface guarantees all allocated resources are freed after
+ closing the device file descriptor and adds several new
+ features that are not present in the obsolete sysfs interface
+ (like event polling, setting/reading multiple values at once or
+ open-source and open-drain GPIOs).
+ .
+ This package contains the gpiod binary tools.

@@ -1,0 +1,19 @@
+Package: trac-spamfilter
+Version: 1.0.9-1
+Architecture: all
+Maintainer: W. Martin Borgert <debacle@debian.org>
+Installed-Size: 556
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~), trac (>= 0.10), python-pkg-resources
+Recommends: python-dnspython (>= 1.3.5), spambayes
+Section: python
+Priority: optional
+Homepage: https://trac.edgewall.org/wiki/SpamFilter
+Description: Spam-prevention plugin for Trac
+ This plugin attempts to reject contributions to Trac environments that contain
+ spam. It can use the following techniques:
+ .
+  * Regular expressions
+  * Akismet web service
+  * IP throttling
+  * IP blacklisting (requires python-dnspython package)
+  * Bayesian filtering (requires spambayes package)

@@ -1,0 +1,23 @@
+Package: httpry
+Version: 0.1.8-1
+Architecture: amd64
+Maintainer: Janos Guljas <janos@debian.org>
+Installed-Size: 86
+Depends: libc6 (>= 2.4), libpcap0.8 (>= 0.9.8)
+Suggests: httpry-daemon, httpry-tools
+Section: net
+Priority: optional
+Homepage: http://dumpsterventures.com/jason/httpry/
+Description: HTTP logging and information retrieval tool
+ httpry is a tool designed for displaying and logging HTTP traffic. It is not
+ intended to perform analysis itself, but instead to capture, parse and/or
+ log the traffic for later analysis. It can be run in real-time displaying
+ the live traffic on the wire, or as a daemon process that logs to an output
+ file. It is written to be as lightweight and flexible as possible, so that
+ it can be easily adaptable to different applications. It does not display
+ the raw HTTP data transferred, but instead focuses on parsing and displaying
+ the request/response line along with associated header fields.
+ .
+ This package contains the httpry executable. Package httpry-daemon contains
+ required init script for running httpry as a daemon. Scripts for parsing
+ log files are provided by httpry-tools.

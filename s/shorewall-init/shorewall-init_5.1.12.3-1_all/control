@@ -1,0 +1,24 @@
+Package: shorewall-init
+Version: 5.1.12.3-1
+Architecture: all
+Maintainer: Roberto C. Sanchez <roberto@connexer.com>
+Installed-Size: 79
+Depends: shorewall | shorewall6 | shorewall-lite | shorewall6-lite, lsb-base (>= 3.0-6)
+Section: net
+Priority: optional
+Homepage: http://www.shorewall.net
+Description: Shorewall initialization
+ This package provides two related features:
+ .
+    a)  It allows the firewall to be closed prior to bringing up
+        network devices. This insures that unwanted connections are not
+        allowed between the time that the network comes up and when the
+        firewall is started.
+ .
+    b)  It integrates with NetworkManager and distribution ifup/ifdown
+        systems to allow for 'event-driven' startup and shutdown.
+ .
+ The two facilities can be enabled separately.
+ .
+ When Shorewall-init is first installed, it does nothing until you
+ configure it.

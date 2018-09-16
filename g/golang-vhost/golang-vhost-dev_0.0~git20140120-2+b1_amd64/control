@@ -1,0 +1,18 @@
+Package: golang-vhost-dev
+Source: golang-vhost (0.0~git20140120-2)
+Version: 0.0~git20140120-2+b1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 42
+Depends: dpkg-dev
+Built-Using: golang-1.10 (= 1.10-1)
+Section: devel
+Priority: extra
+Homepage: https://github.com/inconshreveable/go-vhost
+Description: Go library to implement virtual hosting for different protocols
+ This is a simple library that lets you implement virtual hosting
+ functionality for different protocols (HTTP and TLS so far). go-vhost
+ has a high-level and a low-level interface. The high-level interface
+ lets you wrap existing net.Listeners with "muxer" objects. The
+ lower-level interface returns an object implementing net.Conn which
+ works as if no bytes had been consumed.

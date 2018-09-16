@@ -1,0 +1,22 @@
+Package: libanfo0-dev
+Source: anfo
+Version: 0.98-6
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 2108
+Depends: libanfo0 (= 0.98-6), libbz2-dev, libelk0-dev, libpopt-dev, libprotobuf-dev, zlib1g-dev
+Conflicts: libanfo-dev
+Provides: libanfo-dev
+Section: libdevel
+Priority: optional
+Homepage: http://bioinf.eva.mpg.de/anfo/
+Description: Development files for Short Read Aligner/Mapper from MPG
+ Anfo is a mapper in the spirit of Soap/Maq/Bowtie, but its implementation takes
+ more after BLAST/BLAT. It's most useful for the alignment of sequencing reads
+ where the DNA sequence is somehow modified (think ancient DNA or bisulphite
+ treatment) and/or there is more divergence between sample and reference than
+ what fast mappers will handle gracefully (say the reference genome is missing
+ and a related species is used instead).
+ .
+ This package contains the development files that might be used in connection
+ with the anfo binaries.

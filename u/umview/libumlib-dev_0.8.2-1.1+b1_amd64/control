@@ -1,0 +1,33 @@
+Package: libumlib-dev
+Source: umview (0.8.2-1.1)
+Version: 0.8.2-1.1+b1
+Architecture: amd64
+Maintainer: Debian VSquare Team <pkg-vsquare-devel@lists.alioth.debian.org>
+Installed-Size: 58
+Depends: libumlib0 (= 0.8.2-1.1+b1)
+Conflicts: libumlib0-dev
+Replaces: libumlib0-dev
+Section: libdevel
+Priority: optional
+Homepage: http://view-os.sourceforge.net
+Description: View-OS in user space - Development files
+ View-OS is a novel approach to the process/kernel interface.  The semantics of
+ each system call can be assigned process by process giving the user the right
+ to decide which view of the system each process has to join.  Each process can
+ "see" a different file system structure, networking resources, processor,
+ devices.  Moreover some of the resources can be provided by the user
+ him/herself, thus these resource can be private to the single process and are
+ not known a priori by the system.  Groups of processes can share the same view
+ but this is just an optimization to share management methods.
+ .
+ For more information, see http://wiki.virtualsquare.org
+ .
+ UMView is a user-mode implementation of View-OS.  Processes are run with a
+ controlling daemon that captures all the system calls (at present using the
+ ptrace() system call) and uses dynamically loadable modules to change their
+ semantic.
+ .
+ This package contains headers and library needed to write and compile new
+ UMView modules. For some simple module examples, you can take a look to the
+ existing modules (expecially in the um_testmodule directory of the source
+ tree).

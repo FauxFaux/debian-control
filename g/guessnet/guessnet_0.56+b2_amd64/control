@@ -1,0 +1,29 @@
+Package: guessnet
+Source: guessnet (0.56)
+Version: 0.56+b2
+Architecture: amd64
+Maintainer: Andrew Shadura <andrewsh@debian.org>
+Installed-Size: 422
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libiw30 (>= 30~pre1), libnet1 (>= 1.1.2.1), libpcap0.8 (>= 0.9.8), libstdc++6 (>= 5.2)
+Suggests: pppoe, ifplugd
+Enhances: ifupdown
+Section: net
+Priority: optional
+Description: Guess which LAN a network device is connected to
+ Guessnet is a non-aggressive network detection tool to use when moving
+ a machine among networks which don't necessarily provide DHCP.
+ .
+ Guessnet takes in input a list of candidate network profiles,
+ each of which includes a test description; then it runs all
+ the tests in parallel and prints the name of the profile whose
+ test was the first one to succeed.
+ .
+ Available tests are:
+  * ARP probes to check for known hosts in the network
+  * link beat check, to check if the interface is connected to anything
+  * PPPOE check to see if there is a concentrator accessible via PPPOE
+  * Checks provided by custom arbitrary scripts.
+ .
+ Guessnet can be used in either native mode or "ifupdown mode".
+ In the latter case guessnet integrates nicely with ifupdown
+ as a "mapping script".

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_settitle powerline/title
+db_input low powerline/enable || true
+db_go
+
+db_stop

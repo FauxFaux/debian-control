@@ -1,0 +1,25 @@
+Package: lightdm
+Version: 1.26.0-2
+Architecture: amd64
+Maintainer: Debian Xfce Maintainers <debian-xfce@lists.debian.org>
+Installed-Size: 825
+Depends: adduser, dbus, libpam-systemd | consolekit, lightdm-gtk-greeter | lightdm-greeter, lsb-base (>= 3.0-6), debconf (>= 0.5) | debconf-2.0, libaudit1 (>= 1:2.2.1), libc6 (>= 2.14), libgcrypt20 (>= 1.7.0), libglib2.0-0 (>= 2.39.4), libpam0g (>= 0.99.7.1), libxcb1, libxdmcp6
+Recommends: xserver-xorg
+Suggests: accountsservice, upower, xserver-xephyr
+Provides: x-display-manager
+Section: x11
+Priority: optional
+Homepage: https://launchpad.net/lightdm
+Description: simple display manager
+ An X display manager that:
+  * Has a lightweight codebase
+  * Is standards compliant (PAM, ConsoleKit, etc)
+  * Has a well defined interface between the server and user interface
+  * Fully themeable
+  * Cross-desktop (greeters can be written in any toolkit)
+ .
+ Additional software can be useful along with LightDM:
+  * xserver-xephyr can be used to add a nested X display by calling
+   'dm-tool add-nested-seat`
+  * upower can be used to suspend the computer from the display manager
+  * accountsservice is used to populate a user list with addition information.

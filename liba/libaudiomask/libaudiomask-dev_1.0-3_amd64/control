@@ -1,0 +1,25 @@
+Package: libaudiomask-dev
+Source: libaudiomask
+Version: 1.0-3
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 3749
+Depends: mffm-fftw-dev, libfftw3-dev, libaudiomask1 (= 1.0-3)
+Section: libdevel
+Priority: extra
+Description: Audio masking threshold estimation lib headers, docs and examples
+ Evaluates the simultaneous masking threshold for audio. The masking threshold
+ is a psychoacoustics property of the perception of sound. This threshold
+ determines the cut-off in perception. Any Fourier signal below the threshold
+ is not perceived by listeners.
+ .
+ Simultaneous masking is the basis of mp3 audio compression. This GPL
+ implementation allows arbitrary sample rate and window sizes. It is extremely
+ simple to use, rather cheap in computation complexity and gives great results.
+ To alter the degree of masking (quality of the playback after compression),
+ simply shift the threshold this library generates up and down.
+ .
+ The development files are found in the documentation directory under
+ /usr/share/doc.
+ It includes a good API, as well as examples. The examples include C++ and an
+ octave file to view the result.

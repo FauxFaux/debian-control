@@ -1,0 +1,22 @@
+Package: scamper
+Version: 20180504-2
+Architecture: amd64
+Maintainer: Internet Measurement Packaging Team <pkg-netmeasure-discuss@lists.alioth.debian.org>
+Installed-Size: 1755
+Depends: libc6 (>= 2.15), libscamperfile0
+Section: admin
+Priority: optional
+Homepage: https://www.caida.org/tools/measurement/scamper/
+Description: parallel Internet measurement utility
+ scamper is a program that is able to conduct Internet measurement
+ tasks to large numbers of IPv4 and IPv6 addresses, in parallel, to
+ fill a specified packets-per-second rate. Currently, it supports the
+ well-known ping and traceroute techniques, as well as MDA traceroute,
+ alias resolution, some parts of tbit, sting, and neighbour discovery.
+ .
+ scamper can do ICMP-based Path MTU discovery. scamper starts with the
+ outgoing interface's MTU and discovers the location of Path MTU
+ bottlenecks. scamper performs a PMTUD search when an ICMP
+ fragmentation required message is not returned to establish the PMTU
+ to the next point in the network, followed by a TTL limited search to
+ infer where the failure appears to occur.

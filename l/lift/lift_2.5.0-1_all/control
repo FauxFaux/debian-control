@@ -1,0 +1,26 @@
+Package: lift
+Version: 2.5.0-1
+Architecture: all
+Maintainer: Nicolas Delvaux <contact@nicolas-delvaux.org>
+Installed-Size: 84
+Depends: python3-junit.xml, python3-paramiko, python3-yaml, python3:any (>= 3.3.2-2~)
+Section: devel
+Priority: optional
+Homepage: https://github.com/Malizor/lift
+Description: Integration and functional testing framework
+ Lift provides an integration/functional test platform which handles executable
+ tests easily and generically.
+ .
+  * Lift only deals with executables and their return code
+    - A particular test can be written in the language that fit it the most
+  * Test declaration in a simple YAML syntax
+    - No need to learn a programming language to integrate a test in a suite
+  * Easily declare a test as running locally or on a remote machine
+  * Remote tests: upload needed assets automatically and cleanup afterward
+  * Naturally organize a test suite in multiple sub-folders/sub-test suites
+  * Easily run a sub-test suite or specific tests from the command line
+  * Pass environment variables to tests
+  * Inheritance of remotes and environment across sub-test suites
+    - For example, remotes can be defined in the top folder and used below
+  * Only one command to run all or specific tests: lift
+  * Export XUnit reports, for easy integration with Jenkins & friends

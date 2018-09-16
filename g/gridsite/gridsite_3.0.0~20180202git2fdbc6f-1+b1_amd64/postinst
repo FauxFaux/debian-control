@@ -1,0 +1,50 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper mv_conffile \
+    /var/lib/gridsite/.gacl /etc/gridsite/.gacl \
+    1.7.25-2~ gridsite -- "$@"
+dpkg-maintscript-helper mv_conffile \
+    /var/lib/gridsite/gridsitefoot.txt /etc/gridsite/gridsitefoot.txt \
+    1.7.25-2~ gridsite -- "$@"
+dpkg-maintscript-helper mv_conffile \
+    /var/lib/gridsite/gridsitehead.txt /etc/gridsite/gridsitehead.txt \
+    1.7.25-2~ gridsite -- "$@"
+
+if [ "$1" = "configure" ] &&
+	dpkg --compare-versions "$2" le "1.7.25-2~" ; then
+    if [ ! -r /var/lib/gridsite/.gacl -a -r /etc/gridsite/.gacl ] ; then \
+	ln -s /etc/gridsite/.gacl /var/lib/gridsite/.gacl
+    fi
+    if [ ! -r /var/lib/gridsite/gridsitefoot.txt -a \
+	-r /etc/gridsite/gridsitefoot.txt ] ; then
+	ln -s /etc/gridsite/gridsitefoot.txt /var/lib/gridsite/gridsitefoot.txt
+    fi
+    if [ ! -r /var/lib/gridsite/gridsitehead.txt -a \
+	-r /etc/gridsite/gridsitehead.txt ] ; then
+	ln -s /etc/gridsite/gridsitehead.txt /var/lib/gridsite/gridsitehead.txt
+    fi
+fi
+
+# Automatically added by dh_apache2/UNDECLARED
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in zgridsite  ; do
+			apache2_invoke enmod $conf  || exit 1
+		done
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_apache2/UNDECLARED
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in gridsite.conf  ; do
+			apache2_invoke ensite $conf  || exit 1
+		done
+	fi
+fi
+# End automatically added section
+

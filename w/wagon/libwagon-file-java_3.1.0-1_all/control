@@ -1,0 +1,27 @@
+Package: libwagon-file-java
+Source: wagon
+Version: 3.1.0-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 36
+Depends: libslf4j-java, libwagon-provider-api-java (>= 3.1.0-1)
+Breaks: libwagon-java (<< 3.0.0-2~)
+Replaces: libwagon-java (<< 3.0.0-2~)
+Section: java
+Priority: optional
+Homepage: http://maven.apache.org/wagon/
+Description: Artifact transport abstraction used in Maven (file provider)
+ The Wagon project defines a simple API for transferring resources
+ (artifacts) to and from repositories. The word repository is used in this
+ context as it is commonly used in Maven and means a storage of artifacts.
+ It is also used to deploy the Maven generated site to a server.
+ .
+ Wagon defines a unified API, and it currently has the following providers:
+  * File
+  * HTTP
+  * HTTP lightweight
+  * FTP
+  * SSH/SCP
+  * WebDAV
+ .
+ This package contains the wagon-file library.

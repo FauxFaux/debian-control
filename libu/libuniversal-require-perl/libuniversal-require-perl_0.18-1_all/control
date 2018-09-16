@@ -1,0 +1,31 @@
+Package: libuniversal-require-perl
+Version: 0.18-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 24
+Depends: perl
+Replaces: libuniversal-exports-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/UNIVERSAL-require
+Description: Load modules from a variable
+ This works exactly like the standard require in Perl, except without
+ the bareword restriction, and it does not die.  Since require() is
+ placed in the UNIVERSAL namespace, it will work on any module.  You
+ just have to use UNIVERSAL::require somewhere in your code.
+ .
+ If you have ever had to do this...
+ .
+    eval "require $module";
+ .
+ to get around the bareword caveats on require(), this module is for
+ you. It creates a universal require() class method that will work
+ with every Perl module and it is secure. So instead of doing some
+ arcane eval() work, you can do this:
+ .
+    $module->require;
+ .
+ It does not save you much typing, but it will make a lot more sense
+ to someone who is not a ninth level Perl acolyte.
+ .
+ Also provided is a use() method which works in a similar way.

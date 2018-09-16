@@ -1,0 +1,23 @@
+Package: postgresql-10-postgis-2.4
+Source: postgis
+Version: 2.4.4+dfsg-4
+Architecture: amd64
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 2116
+Depends: postgresql-10, libc6 (>= 2.14), libgdal20 (>= 2.0.1), libgeos-c1v5 (>= 3.6.0), libjson-c3 (>= 0.11), liblwgeom-2.4-0 (>= 2.4.0~rc1), libpcre3, libproj13 (>= 4.9.0), libprotobuf-c1 (>= 1.0.1), libxml2 (>= 2.7.4)
+Recommends: postgresql-10-postgis-2.4-scripts
+Suggests: postgis
+Breaks: postgis (<< 1.2.1)
+Section: misc
+Priority: optional
+Homepage: http://postgis.net/
+Description: Geographic objects support for PostgreSQL 10
+ PostGIS adds support for geographic objects to the PostgreSQL
+ object-relational database. In effect, PostGIS "spatially enables"
+ the PostgreSQL server, allowing it to be used as a backend spatial
+ database for geographic information systems (GIS), much like ESRI's
+ SDE or Oracle's Spatial extension. PostGIS follows the OpenGIS
+ "Simple Features Specification for SQL".
+ .
+ To create the PostGIS extensions in a PostgreSQL 10 database, the
+ postgresql-10-postgis-2.4-scripts package must be installed as well.

@@ -1,0 +1,24 @@
+Package: deps-tools-cli
+Source: deps
+Version: 0.13-3
+Architecture: all
+Maintainer: Yann Dirson <dirson@debian.org>
+Installed-Size: 17
+Depends: libdeps-perl, libdeps-renderer-dot-perl | libdeps-renderer, perl:any
+Conflicts: graph-includes (<< 0.12)
+Replaces: graph-includes (<< 0.12)
+Section: devel
+Priority: optional
+Description: DEPS command-line tools
+ Currently only contains the limited "graph-includes" tool.
+ .
+ Graph-includes creates a graph of dependencies between source-files
+ and/or groups of source-files, with an emphasis on getting readable
+ and usable graphs even for large projects.
+ .
+ Usability of the dependency graphs are currently improved by:
+  - customizable grouping of several source files into a single node
+  - transitive reduction of the graph
+ .
+ It currently supports graphing the C/C++ #include relationship, using
+ graphviz by default.

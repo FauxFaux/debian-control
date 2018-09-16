@@ -1,0 +1,27 @@
+Package: pypy-unidecode
+Source: unidecode
+Version: 1.0.22-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 946
+Depends: pypy
+Section: python
+Priority: optional
+Homepage: https://pypi.python.org/pypi/Unidecode
+Description: ASCII transliterations of Unicode text (PyPy module)
+ It often happens that you have text data in Unicode, but you need to represent
+ it in ASCII for display. One could represent non-roman Unicode characters as
+ "???" or "\\15BA\\15A0\\1610", but neither is useful to the user reading the
+ text.
+ .
+ Unidecode tries to represent it in ASCII characters (i.e., the universally
+ displayable characters between 0x00 and 0x7F), where the compromises taken
+ when mapping between two character sets are chosen to be near what a human
+ with a US keyboard would choose.
+ .
+ This module generally produces better results than simply stripping accents
+ from characters (which can be done in Python with built-in functions). It is
+ based on hand-tuned character mappings that for example also contain ASCII
+ approximations for symbols and non-Latin alphabets.
+ .
+ unidecode is a Python port of the Text::Unidecode Perl module for PyPy.

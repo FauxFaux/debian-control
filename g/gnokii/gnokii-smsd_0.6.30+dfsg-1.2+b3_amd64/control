@@ -1,0 +1,25 @@
+Package: gnokii-smsd
+Source: gnokii (0.6.30+dfsg-1.2)
+Version: 0.6.30+dfsg-1.2+b3
+Architecture: amd64
+Maintainer: Leo Costela <costela@debian.org>
+Installed-Size: 70
+Depends: libc6 (>= 2.3.2), libglib2.0-0 (>= 2.12.0), libgnokii6, libical3 (>= 3.0.0), gnokii-common (= 0.6.30+dfsg-1.2)
+Conflicts: smstools
+Section: comm
+Priority: extra
+Homepage: http://gnokii.org
+Description: SMS Daemon for mobile phones
+ Gnokii is a suite of programs that allows communication with mobile phones.
+ It currently supports many Nokia mobile phones, all AT capable ones as well as
+ many Symbian based.
+ For a list of compatible phones, please visit:
+ http://wiki.gnokii.org
+ .
+ The SMSD (SMS daemon) handles automated sending and receiving of short messages
+ using a storage backend. It is designed to use modules (plugins) to work with
+ different backends, and shares Gnokii's runtime configuration and libraries.
+ .
+ This package contains the actual daemon and a file based backend. You will
+ need to install the appropriate module packages to add support for other
+ backends.

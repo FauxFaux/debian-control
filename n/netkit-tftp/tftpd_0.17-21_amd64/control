@@ -1,0 +1,19 @@
+Package: tftpd
+Source: netkit-tftp
+Version: 0.17-21
+Architecture: amd64
+Maintainer: Alberto Gonzalez Iniesta <agi@inittab.org>
+Installed-Size: 45
+Depends: openbsd-inetd | inet-superserver, libc6 (>= 2.3)
+Replaces: netstd
+Section: net
+Priority: optional
+Description: Trivial file transfer protocol server
+ Tftpd is a server which supports the Internet Trivial File Transfer Protocol
+ (RFC 783).  The TFTP server operates at the port indicated in the `tftp'
+ service description; see services(5).  The server is normally started by
+ inetd(8).
+ .
+ Warning: Does not support 'tsize', which is required by some tftp clients,
+ especially PXE, and various other network boot clients. For those, use atftpd
+ or tftpd-hpa.

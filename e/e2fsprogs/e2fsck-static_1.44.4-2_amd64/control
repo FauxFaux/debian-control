@@ -1,0 +1,19 @@
+Package: e2fsck-static
+Source: e2fsprogs
+Version: 1.44.4-2
+Architecture: amd64
+Maintainer: Theodore Y. Ts'o <tytso@mit.edu>
+Installed-Size: 1604
+Recommends: sash | bash-static | zsh-static | busybox-static
+Section: admin
+Priority: optional
+Homepage: http://e2fsprogs.sourceforge.net
+Description: statically-linked version of the ext2/ext3/ext4 filesystem checker
+ This may be of some help to you if your filesystem gets corrupted enough
+ to break the shared libraries used by the dynamically linked checker.
+ .
+ This binary takes much more space than its dynamic counterpart located
+ in e2fsprogs, though.
+ .
+ You may want to install a statically-linked shell as well, to be able
+ to run this program if something like your C library gets corrupted.

@@ -1,0 +1,83 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+set -u
+
+PKG=bgoffice-dict-downloader
+
+DEST="/usr/share/bgoffice"
+
+extract_dict() {
+    FILE=$1
+    DICT=$2
+
+    tar --no-same-owner -C $TMP -xjf $FILE
+
+    chmod 0644 $TMP/$DICT/data/*
+    cp $TMP/$DICT/data/* $DEST/
+
+    rm -rf $TMP/$DICT
+}
+
+download() {
+    local RESULT="$1"
+    local DICT="$2"
+    local FILE="$3"
+
+    if ! echo $RESULT | grep -Eq "(^|, )$DICT(, |\$)"; then
+        return 0
+    fi
+
+    echo "Downloading $DICT"
+
+    if bgoffice-dict-download --dict $FILE --output $TMP/$FILE.tar.bz2; then
+        echo "Download complete."
+        # check if the downloaded file is a bzip2-compressed tar
+        # containing $FILE root dir with a data/ subdir
+        if tar tjf $TMP/$FILE.tar.bz2 $FILE/data > /dev/null; then
+            extract_dict $TMP/$FILE.tar.bz2 $FILE
+        else
+            echo "Error: downloaded file either is not a bzip2-compressed"
+            echo "       tar arcive, or does not contain $FILE/data member"
+            echo "*** File not extracted"
+        fi
+        break
+    else
+        echo "*** Failed to download $DICT ($FILE)"
+        return 1
+    fi
+}
+
+D_BE="Bulgarian-English dual dictionary"
+F_BE="bg-en_dual"
+D_NW_DIAL="Dictionary of north-western dialect"
+F_NW_DIAL="dialect"
+D_POLYTECH="Polytechnical dictionary"
+F_POLYTECH="polytechnical"
+D_THES="Thesaurus"
+F_THES="thesaurus"
+
+RESULT=0
+
+if [ "$1" = "configure" ]; then
+    db_get $PKG/dict-list
+    LIST=$RET
+    db_go || true
+
+    db_fset $PKG/dict-list seen false
+    db_stop || true
+
+    TMP=`mktemp -d`
+    trap "rm -rf $TMP" INT QUIT TERM
+    download "$LIST" "$D_BE" $F_BE              || RESULT=1
+    download "$LIST" "$D_NW_DIAL" $F_NW_DIAL    || RESULT=1
+    download "$LIST" "$D_POLYTECH" $F_POLYTECH  || RESULT=1
+    download "$LIST" "$D_THES" $F_THES          || RESULT=1
+fi
+
+
+
+exit $RESULT

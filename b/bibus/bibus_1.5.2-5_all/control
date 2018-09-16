@@ -1,0 +1,26 @@
+Package: bibus
+Version: 1.5.2-5
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 4307
+Depends: python:any (>= 2.6.6-7~), python-wxgtk3.0
+Recommends: libreoffice-writer | openoffice.org-writer, python-uno
+Suggests: python-mysqldb, unixodbc, odbcinst1 | odbcinst1debian2, libmyodbc | libsqliteodbc, bibus-doc-en
+Section: science
+Priority: optional
+Homepage: http://bibus-biblio.sourceforge.net/
+Description: bibliographic database
+ Bibus is a bibliographic database which has been developed with LibreOffice/
+ OpenOffice.org in mind. It can directly insert citations and format the
+ bibliographic index in an open OpenOffice.org Writer document. The main
+ features are
+  * hierarchical organization of the references with user-defined keys
+  * designed for multiuser-environments (share databases between users)
+  * a search engine supporting live queries
+  * on-line PubMed access
+  * import of PubMed (Medline), EndNote/Refer, RIS and BibTeX records.
+ .
+ Bibus will use an SQLite-database by default for storage (via the SQLite3
+ module available in Python >2.5). But it also supports MySQL-databases.
+ If you want to use a MySQL-database, make sure, that you have the
+ python-mysqldb package installed.

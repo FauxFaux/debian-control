@@ -1,0 +1,20 @@
+Package: librbd-dev
+Source: ceph
+Version: 10.2.5-7.2
+Architecture: amd64
+Maintainer: Ceph Maintainers <ceph-maintainers@lists.ceph.com>
+Installed-Size: 26952
+Depends: librados-dev, librbd1 (= 10.2.5-7.2)
+Conflicts: librbd1-dev
+Replaces: librbd1-dev
+Section: libdevel
+Priority: optional
+Homepage: http://ceph.com/
+Description: RADOS block device client library (development files)
+ RBD is a block device striped across multiple distributed objects
+ in RADOS, a reliable, autonomic distributed object storage cluster
+ developed as part of the Ceph distributed storage system.  This is a
+ shared library allowing applications to manage these block devices.
+ .
+ This package contains development files needed for building applications that
+ link against librbd1.

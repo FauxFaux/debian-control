@@ -1,0 +1,21 @@
+Package: bio-tradis
+Version: 1.3.3+dfsg-3
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 165
+Depends: perl, smalt, samtools, tabix, r-base-core, r-cran-getopt, r-cran-mass
+Suggests: artemis, r-bioc-edger
+Section: perl
+Priority: optional
+Homepage: https://github.com/sanger-pathogens/Bio-Tradis
+Description: analyse the output from TraDIS analyses of genomic sequences
+ Bio-Tradis contains a set of tools to analyse the output from
+ TraDIS analyses.
+ .
+ The Bio-Tradis analysis pipeline is implemented as an extensible Perl
+ library which can either be used as is, or as a basis for the
+ development of more advanced analysis tools.
+ .
+ Please note: You need to manually install BioConductor Edger which can
+ not be distributed by Debian in recent version since it is using
+ non-distributable code locfit.

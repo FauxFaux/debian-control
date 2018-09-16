@@ -1,0 +1,24 @@
+Package: docx2txt
+Version: 1.4-1
+Architecture: all
+Maintainer: Barak A. Pearlmutter <bap@debian.org>
+Installed-Size: 48
+Depends: unzip
+Section: text
+Priority: extra
+Multi-Arch: foreign
+Homepage: http://docx2txt.sourceforge.net
+Description: Convert Microsoft OOXML files to plain text
+ This tool attempts to generate equivalent plain text files from
+ Microsoft .docx documents, preserving some formatting and document
+ information (which MS text conversion drops) along with appropriate
+ character conversions for a good (ascii or utf-8) text experience.
+ It is a platform independent solution consisting of (core) Perl and
+ (wrapper) Unix/Windows shell scripts and a configuration file to
+ control the output text appearance to a fair extent.  It can very
+ conveniently be used to build a Web-based docx document conversion
+ service.  Some Makefiles and Windows batch files are provided for
+ easy installation of the scripts.  With unzippers like CakeCmd that
+ can deal with corrupt Zip archives, this tool can extract text from
+ corrupt docx documents in many cases, where MS Word fails to even
+ open them.

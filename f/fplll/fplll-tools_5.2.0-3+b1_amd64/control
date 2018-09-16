@@ -1,0 +1,24 @@
+Package: fplll-tools
+Source: fplll (5.2.0-3)
+Version: 5.2.0-3+b1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 152
+Depends: libfplll4 (= 5.2.0-3+b1), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgmp10, libmpfr6 (>= 3.1.3), libstdc++6 (>= 5.2)
+Section: math
+Priority: optional
+Homepage: https://github.com/fplll/fplll/
+Description: Tools to compute LLL-reduction of Euclidian lattices
+ fpLLL is a library for computing reduced (nearly orthogonal) bases
+ for Euclidean lattices using the floating-point LLL algorithm.
+ .
+ fpLLL contains multiple different implementations of the
+ floating-point LLL reduction algorithm, offering multiple different
+ speed/guarantees ratios.
+ .
+ It contains a 'wrapper' that chooses the estimated best sequence of
+ variants in order to provide a guaranteed output as fast as possible.
+ In the case of the wrapper, the succession of variants is oblivious
+ to the user.
+ .
+ This package contains the base tools using libfplll.

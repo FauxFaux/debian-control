@@ -1,0 +1,17 @@
+Package: libautovivification-perl
+Version: 0.18-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 66
+Depends: perl (>= 5.26.1-5), perlapi-5.26.1, libc6 (>= 2.4)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/autovivification
+Description: pragma for lexically disabling autovivification
+ autovivication is a Perl pragma that enables developers to control whether
+ variables can be created automatically on their first use, rather than
+ requiring them to be defined beforehand. While occasionally useful, this
+ behaviour can result in subtle bugs that are difficult to debug.
+ .
+ This pragma lets you disable autovivification for some constructs and can
+ optionally also emit a warning or error when it would have happened.

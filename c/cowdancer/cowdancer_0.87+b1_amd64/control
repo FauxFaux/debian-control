@@ -1,0 +1,21 @@
+Package: cowdancer
+Source: cowdancer (0.87)
+Version: 0.87+b1
+Architecture: amd64
+Maintainer: Debian pbuilder maintenance team <team+pbuilder@tracker.debian.org>
+Installed-Size: 100
+Depends: libc6 (>= 2.8), libncurses6 (>= 6), libtinfo6 (>= 6)
+Section: utils
+Priority: optional
+Homepage: https://www.netfort.gr.jp/~dancer/software/cowdancer.html
+Description: Copy-on-write directory tree utility
+ Tries to make copy-on-write semantics upon hard-link copied
+ directory trees generated with 'cp -la'
+ .
+ 'cow-shell' command invokes a shell session. Within that session,
+ under the directory cow-shell was invoked,
+ cowdancer will create a new file when existing i-nodes are opened for
+ write.
+ Useful for quick scratch workspace and experimentation.
+ .
+ For a useful Debian tool, try cowbuilder.

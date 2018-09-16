@@ -1,0 +1,17 @@
+Package: libnet-frame-perl
+Version: 1.19-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 159
+Depends: perl, libbit-vector-perl, libclass-gomor-perl, libnet-ipv6addr-perl, perl (>= 5.23.0) | libsocket-perl (>= 2.019)
+Recommends: libnet-frame-device-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Net-Frame
+Description: framework for crafting raw frames
+ Net::Frame is a Perl framework for crafting raw frames (Layers 2 through 7).
+ Out of the box, it can be used to produce ARP, Ethernet, IPv4, PPP, TCP and
+ UDP frames. It has an extensible design for new frame implementations.
+ .
+ This module only creates frames; Net::Write (see libnet-write-perl) can be
+ used to write frames directly to wire.

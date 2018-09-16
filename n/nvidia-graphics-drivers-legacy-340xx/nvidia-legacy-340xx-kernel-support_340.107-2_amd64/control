@@ -1,0 +1,20 @@
+Package: nvidia-legacy-340xx-kernel-support
+Source: nvidia-graphics-drivers-legacy-340xx
+Version: 340.107-2
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 102
+Depends: nvidia-legacy-340xx-alternative (= 340.107-2), nvidia-legacy-340xx-alternative--kmod-alias, nvidia-kernel-common (>= 20151021), nvidia-modprobe
+Breaks: glx-alternative-nvidia (<< 0.6.91)
+Replaces: glx-alternative-nvidia (<< 0.6.91)
+Provides: nvidia-kernel-support-any, nvidia-legacy-340xx-kernel-support--v1
+Section: non-free/kernel
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.nvidia.com
+Description: NVIDIA binary kernel module support files (340xx legacy version)
+ The NVIDIA binary driver provides optimized hardware acceleration of
+ OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
+ for graphics cards using NVIDIA chip sets.
+ .
+ This package provides supporting configuration for the kernel module.

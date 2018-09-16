@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+case "$1" in
+configure)
+    db_get ipset-persistent/autosave_done || true
+    if [ "x$RET" != "xtrue" ]; then
+        db_get ipset-persistent/autosave || true
+        if [ "x$RET" = "xtrue" ]; then
+		ipset save > /etc/iptables/ipsets
+        fi
+
+        db_set ipset-persistent/autosave_done true || true
+    fi
+
+;;
+esac
+
+

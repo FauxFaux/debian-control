@@ -1,0 +1,18 @@
+Package: dhis-client
+Source: dhis-client (5.5-5)
+Version: 5.5-5+b1
+Architecture: amd64
+Maintainer: Guus Sliepen <guus@debian.org>
+Installed-Size: 72
+Depends: libc6 (>= 2.4), libgmp10, debconf (>= 0.5.00) | debconf-2.0
+Recommends: dhis-tools-genkeys
+Conflicts: dhid (<< 5.1-5)
+Replaces: dhid (<< 5.1-5)
+Provides: dhid
+Section: net
+Priority: optional
+Homepage: http://www.dhis.org/
+Description: Dynamic Host Information System - client
+ dhid is the DHIS client daemon. After setting up with a DHIS provider,
+ each machine may run a dhid daemon (in background) in order to
+ update its dynamic IP address within the server.

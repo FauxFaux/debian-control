@@ -1,0 +1,24 @@
+Package: atm-tools
+Source: linux-atm
+Version: 1:2.5.1-2
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 1089
+Depends: lsb-base, libatm1 (= 1:2.5.1-2), libc6 (>= 2.15), init-system-helpers (>= 1.18~)
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://linux-atm.sourceforge.net/
+Description: Base programs for ATM in Linux, the net-tools for ATM
+ This package provides all the basic programs needed for setting up,
+ monitoring and tuning ATM networks. Such as:
+  * atmsigd, an ATM signal daemon that implements the ATM UNI protocol.
+  * atmtcp, a tool to setup ATM over TCP connections.
+  * atmarpd, an implementation of the ATMARP protocol (RFC1577, RFC1755)
+  * zeppelin, an ATM LAN Emulation client daemon
+  * les and bus, ATM LAN Emulation service daemons
+ .
+ Notice that upstream still flags these tools as experimental software and
+ says that there is still a number of known bugs and issues. The
+ software is, however, in productive use at a number of sites and is
+ working reliably.

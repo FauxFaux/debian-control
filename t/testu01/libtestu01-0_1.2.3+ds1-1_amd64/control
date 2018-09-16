@@ -1,0 +1,33 @@
+Package: libtestu01-0
+Source: testu01
+Version: 1.2.3+ds1-1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 1212
+Depends: testu01-data (= 1.2.3+ds1-1), libc6 (>= 2.23), libgmp10
+Suggests: testu01-doc (= 1.2.3+ds1-1)
+Conflicts: libtestu01
+Provides: libtestu01
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://simul.iro.umontreal.ca/testu01/tu01.html
+Description: testing suite for uniform random number generators -- libs
+ TestU01 is a software library, implemented in the ANSI C language, and
+ offering a collection of utilities for the empirical statistical testing
+ of uniform random number generators.
+ .
+ TestU01 implements several types of random number generators in generic
+ form, as well as many specific generators proposed in the literature or
+ found in widely-used software. It provides general implementations of the
+ classical statistical tests for random number generators, as well as several
+ others proposed in the literature, and some original ones. These tests can
+ be applied to the generators predefined in the library and to user-defined
+ generators. Specific tests suites for either sequences of uniform random
+ numbers in [0,1] or bit sequences are also provided, as well as basic tools
+ for plotting vectors of points produced by generators and more advanced
+ tools for more involved tests and usage.
+ .
+ This package provides the shared libraries required to run programs
+ compiled against the TestU01 library. To compile your own programs you
+ also need to install the libtestu01-0-dev package.

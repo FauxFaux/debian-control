@@ -1,0 +1,19 @@
+Package: sxid
+Source: sxid (4.20130802-1)
+Version: 4.20130802-1+b1
+Architecture: amd64
+Maintainer: Timur Birsh <taem@linukz.org>
+Installed-Size: 75
+Depends: libc6 (>= 2.4), exim4 | mail-transport-agent
+Section: admin
+Priority: extra
+Homepage: http://linukz.org/sxid.shtml
+Description: suid, sgid file and directory checking
+ This program runs as a cronjob. Basically it tracks any changes in
+ your s[ug]id files and folders. If there are any new ones, ones that
+ aren't set any more, or they have changed bits or other modes, then it
+ reports the changes. You can also run this manually for spot checking.
+ .
+ It tracks s[ug]id files by SHA-256 checksums. This helps detect if your files
+ have been tampered with, would not show under normal name and permissions
+ checking. Directories are tracked by inodes.

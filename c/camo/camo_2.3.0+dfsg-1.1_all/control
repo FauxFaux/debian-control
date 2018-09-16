@@ -1,0 +1,39 @@
+Package: camo
+Version: 2.3.0+dfsg-1.1
+Architecture: all
+Maintainer: Zulip Debian Packaging Team <debian@zulip.com>
+Installed-Size: 39
+Depends: nodejs (>= 0.10.0), openssl
+Section: web
+Priority: extra
+Homepage: https://github.com/atmos/camo
+Description: SSL/TLS image proxy to prevent mixed-content warnings
+ Camo is an image proxy to prevent mixed content warnings on secure
+ pages.
+ .
+ It should not be installed by an end-user; instead people who operate
+ websites that allow user-specified image embeds by URL can run this as
+ a daemon to proxy such images through their own servers and serve the
+ resulting content over SSL/TLS.
+ .
+ This provides integrity protection and last-mile confidentiality to
+ images, thus preventing a local network attacker from seeing the images
+ you request (allowing for possible disclosure of the content you're
+ viewing) or changing their content (to misinform, confuse, or shock).
+ .
+ It of course does not prevent an attacker from modifying the content or
+ noticing its access if the attacker is in the path between your
+ datacentre and the image source.
+ .
+ However, even in this case, it provides some security insofar as it
+ may prevent the attacker from knowing who is accessing the image.
+ .
+ Using a shared key, proxy URLs are encrypted with hmac so we can bust
+ caches/ban/rate limit if needed.
+ .
+ Features include:
+  * Proxy Google charts
+  * Proxy images under 5 MB
+  * Follow redirects to a configurable depth
+  * Proxy remote images with a content-type of image/*
+  * Disallows proxying to private IP ranges

@@ -1,0 +1,60 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+
+# Choose to configure Apache webserver
+db_input high hoteldruid/configure-apache || true
+db_go || true
+
+# Choose to restart Apache webserver
+db_get hoteldruid/configure-apache
+if [ "$RET" = "true" ]; then
+  db_input high hoteldruid/restrict-localhost || true
+  db_input medium hoteldruid/restart-webserver || true
+  db_go || true
+fi
+
+# Ask username and password for HotelDruid administrator
+if [ -e "/var/lib/hoteldruid/data/dati_connessione.php" ]; then
+  db_set hoteldruid/administrator-username ""
+else
+  db_input high hoteldruid/administrator-username || true
+  db_go || true
+  db_get hoteldruid/administrator-username
+  if [ -n "$RET" ]; then
+    CHECK=$(echo $RET | grep "[^A-Za-z0-9]") || true
+    if [ -n "$CHECK" ]; then
+      db_set hoteldruid/administrator-username ""
+    else
+      PASS_MATCH=''
+      while [ ! "$PASS_MATCH" ]; do
+        set +e
+        db_input high hoteldruid/administrator-password
+        EXIT_CODE=$?
+        set -e
+        if [ $EXIT_CODE -ne 0 ]; then
+          db_set hoteldruid/administrator-username ""
+          PASS_MATCH=1
+        else
+          db_input high hoteldruid/confirm-password || true
+          db_go || true
+          db_get hoteldruid/administrator-password
+          PASS1=$RET
+          db_get hoteldruid/confirm-password
+          if [ "$PASS1" = "$RET" ]; then
+            PASS_MATCH=1
+          else
+            db_reset hoteldruid/administrator-password
+            db_input high hoteldruid/administrator-failpass || true
+            db_go || true
+          fi
+          db_reset hoteldruid/confirm-password
+        fi
+      done
+    fi
+  fi
+fi

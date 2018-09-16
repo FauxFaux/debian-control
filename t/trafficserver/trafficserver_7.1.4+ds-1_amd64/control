@@ -1,0 +1,24 @@
+Package: trafficserver
+Version: 7.1.4+ds-1
+Architecture: amd64
+Maintainer: Aron Xu <aron@debian.org>
+Installed-Size: 11420
+Depends: libbrotli1 (>= 0.6.0), libc6 (>= 2.17), libcap2 (>= 1:2.10), libcurl4 (>= 7.16.2), libgcc1 (>= 1:3.0), libgeoip1, libhwloc5 (>= 1.11.10), libluajit-5.1-2 (>= 2.0.4+dfsg), liblzma5 (>= 5.1.1alpha+20110809), libncursesw6 (>= 6), libpcre3, libssl1.1 (>= 1.1.0), libstdc++6 (>= 5.2), libtcl8.6 (>= 8.6.0), libtinfo6 (>= 6), libunwind8, zlib1g (>= 1:1.1.4), lsb-base (>= 3.2-14), adduser, perl
+Suggests: trafficserver-experimental-plugins (= 7.1.4+ds-1)
+Breaks: trafficserver-experimental-plugins (<< 7.0.0~), trafficserver-plugin-conf-remap (<< 3.2~)
+Replaces: trafficserver-experimental-plugins (<< 7.0.0), trafficserver-plugin-conf-remap (<< 3.2~)
+Provides: trafficserver-plugin-conf-remap
+Section: web
+Priority: optional
+Homepage: http://trafficserver.apache.org/
+Description: fast, scalable and extensible HTTP/1.1 compliant caching proxy server
+ This package provides the Apache Traffic Server. A fast, scalable reverse
+ proxy server which may operate as forward proxy as well. Apache Traffic Server
+ supports:
+ .
+   * Caching: Improves response time by caching and reusing frequently-
+     requested web content.
+   * Proxying: Supports filtering, anonymization, load balancing and more.
+   * Scaling: Scales well on modern SMP hardware.
+   * Extensions: Use the API to modify anything from the HTTP headers to your
+     own cache algorithm.

@@ -1,0 +1,20 @@
+Package: drbdlinks
+Version: 1.22-1
+Architecture: all
+Maintainer: Thierry Randrianiriana <thierry@debian.org>
+Installed-Size: 99
+Depends: python
+Suggests: drbd8-utils
+Section: admin
+Priority: optional
+Homepage: http://www.tummy.com/Community/software/drbdlinks/
+Description: Manages symlinks into a shared DRBD partition
+ Manages symlinks into a DRBD partition which is shared among several
+ machines.  A simple configuration file, "/etc/drbdlinks.conf",
+ specifies the links.  This can be used to manage links for
+ /etc/apache, /var/lib/pgsql, and other system directories that need
+ to appear as if they are local to the system when running
+ applications after a drbd shared partition has been mounted.
+ .
+ DRBD is a RAID 1 over TCP/IP solution, please have a look at the
+ packages drbd-utils and drbd-module-source for more information.

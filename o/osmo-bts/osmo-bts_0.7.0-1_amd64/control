@@ -1,0 +1,22 @@
+Package: osmo-bts
+Version: 0.7.0-1
+Architecture: amd64
+Maintainer: Debian Mobcom Maintainers <Debian-mobcom-maintainers@lists.alioth.debian.org>
+Installed-Size: 599
+Depends: libc6 (>= 2.14), libosmoabis6 (>= 0.4.0), libosmocodec0 (>= 0.9.6), libosmocore9 (>= 0.10.2-6), libosmoctrl0 (>= 0.9.6), libosmogsm8 (>= 0.10.2), libosmotrau2 (>= 0.4.0), libosmovty4 (>= 0.10.2), libtalloc2 (>= 2.0.4~git20101213)
+Section: net
+Priority: optional
+Homepage: http://openbsc.osmocom.org/trac/wiki/OsmoBTS
+Description: Base Transceiver Station for GSM
+ OsmoBTS is a software implementation of Layer2/3 of a BTS. It implements the
+ following protocols/interfaces:
+    LAPDm (GSM 04.06)
+    RTP
+    A-bis/IP in IPA multiplex
+    OML (GSM TS 12.21)
+    RSL (GSM TS 08.58)
+ .
+ OsmoBTS is modular and has support for multiple back-ends. A back-end talks to
+ a specific L1/PHY implementation of the respective BTS hardware. Based on this
+ architecture, it should be relatively easy to add a new back-end to support
+ so-far unsupported GSM PHY/L1 and associated hardware.

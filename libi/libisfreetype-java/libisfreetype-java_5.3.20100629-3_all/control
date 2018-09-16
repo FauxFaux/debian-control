@@ -1,0 +1,29 @@
+Package: libisfreetype-java
+Version: 5.3.20100629-3
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 81
+Depends: libisnativec-java, libisrt-java, libjna-java
+Conflicts: libisfreetype-5.2-java
+Replaces: libisfreetype-5.2-java
+Section: java
+Priority: extra
+Homepage: http://opensource.intarsys.de/home/en/index.php?n=OpenSource.IsFreeType
+Description: Java wrapper for FreeType font handling library
+ The PDF rendering of the Open Source efforts of the company intarsys
+ was in demand of a good font handling library. This new development was
+ motivated by observations that current solutions
+  * only have poor support for VM
+  * there is no plain Java library around
+  * extends the de factor standard C library FreeType
+ This library wraps around the functions that were important for
+ using isNativeC (another library of the same company) and were ready
+ to run on all FreeType supported platforms.
+ .
+ While this wrapper-library binds and uses only a very small subset
+ of the FreeType features available, to the degree that it is needed
+ for the jPodRenderer, it should be no problem to use and enhance
+ this implementation in other contexts.
+ .
+ This package provides a only a link to the very latest
+ version of libisfreetype.

@@ -1,0 +1,24 @@
+Package: freebsd-glue
+Version: 0.2.22
+Architecture: amd64
+Maintainer: GNU/kFreeBSD Maintainers <debian-bsd@lists.debian.org>
+Installed-Size: 230
+Depends: libfreebsd-glue-0 (= 0.2.22), original-awk, libbsd-dev (>= 0.7.0-1~), libdb-dev, zlib1g-dev, libexpat-dev, libgdbm-dev, byacc
+Recommends: freebsd-buildutils
+Conflicts: kfreebsd-kernel-headers (<< 0.80)
+Breaks: freebsd-buildutils (<< 9.0-10)
+Replaces: freebsd-buildutils (<< 10.0~svn259404-4~)
+Section: devel
+Priority: extra
+Description: Emulate a FreeBSD build environment
+ This package provides a set of glue headers and symbolic links to emulate
+ a FreeBSD build environment.
+ .
+ Its goal is to make it as easy as possible to build source code written for
+ FreeBSD on Debian, by adding the necessary glue so that equivalent interfaces
+ in packages like freebsd-buildutils, libbsd-dev or libexpat-dev are directly
+ available to pristine FreeBSD code.
+ .
+ freebsd-glue strives for bug-for-bug compatibility and will even attempt
+ to accommodate for unspecified features (such as implicit header inclusion),
+ as long as this doesn't cause breakage in other areas.

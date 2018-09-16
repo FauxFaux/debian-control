@@ -1,0 +1,28 @@
+Package: impose+
+Version: 0.2-12
+Architecture: all
+Maintainer: Yaroslav Halchenko <debian@onerussian.com>
+Installed-Size: 180
+Depends: psutils, perl
+Suggests: ghostscript
+Section: text
+Priority: optional
+Homepage: http://freshmeat.net/projects/impose/
+Description: Postscript utilities for two-up printing, bbox, etc
+ A set of utilities for manipulating DSC compliant postscript. The
+ following programs are included:
+ .
+ impose: A preprocessor to pstops for creating 2-up printouts. It
+ tries to remove white space from the printout by probing the original
+ postscript for the printed area's bounding box.  This makes the
+ output more esthetic than a simplistic layout of non-cropped original
+ pages.
+ .
+ bboxx: Extracts the bounding boxes of a postscript file, with the
+ option of entering the bounding box into the file. This program uses
+ the ghostscript bbox device.
+ .
+ fixtd: Sets options in a Postscript file asking the printer to turn
+ on tumbling or duplex printing.
+ .
+ psbl: Rearranges pages in a file to create booklets.

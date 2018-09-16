@@ -1,0 +1,24 @@
+Package: wig
+Version: 0.6-1
+Architecture: all
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 6521
+Depends: python3:any (>= 3.3.2-2~)
+Section: misc
+Priority: optional
+Homepage: https://github.com/jekyc/wig
+Description: WebApp Information Gatherer
+ This package contains a web application information gathering tool, which can
+ identify numerous Content Management Systems and other administrative
+ applications.
+ .
+ The application fingerprinting is based on checksums and string matching of
+ known files for different versions of CMSes. This results in a score being
+ calculated for each detected CMS and its versions. Each detected CMS is
+ displayed along with the most probable version(s) of it. The score calculation
+ is based on weights and the amount of "hits" for a given checksum.
+ .
+ wig also tries to guess the operating system on the server based on the
+ 'server' and 'x-powered-by' headers. A database containing known header values
+ for different operating systems is included in wig, which allows wig to guess
+ Microsoft Windows versions and Linux distribution and version.

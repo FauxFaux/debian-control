@@ -1,0 +1,27 @@
+Package: avarice
+Version: 2.13+svn372-2
+Architecture: amd64
+Maintainer: Christian Kastner <ckk@debian.org>
+Installed-Size: 555
+Depends: libc6 (>= 2.15), libgcc1 (>= 1:3.0), libhidapi-libusb0 (>= 0.8.0~rc1+git20140201.3a66d4e+dfsg), libstdc++6 (>= 5), libusb-0.1-4 (>= 2:0.1.12)
+Recommends: gdb-avr
+Section: electronics
+Priority: optional
+Homepage: http://avarice.sourceforge.net/
+Description: use GDB with Atmel AVR debuggers
+ AVaRICE is a program which interfaces the GNU Debugger with the AVR JTAG ICE,
+ and other debuggers, available from Atmel. It connects to gdb via a TCP socket
+ and communicates via gdb's "serial debug protocol".
+ .
+ This protocol allows gdb to send commands like "set/remove breakpoint" and
+ "read/write memory". AVaRICE translates this commands into the Atmel protocol
+ used to control the JTAG ICE (or other) debugger.
+ .
+ Because the GDB-AVaRICE connection is via a TCP socket, the two programs do
+ not need to run on the same machine.
+ .
+ The currently supported debuggers are:
+ .
+  * JTAG ICE mkI
+  * JTAG ICE mkII
+  * AVR Dragon

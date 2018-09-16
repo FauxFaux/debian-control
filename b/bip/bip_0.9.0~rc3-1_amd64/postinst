@@ -1,0 +1,67 @@
+#!/bin/sh
+
+set -e
+
+BIPUSER=bip
+BIPGROUP=bip
+BIPHOME=/var/lib/bip
+
+if [ "$1" = "configure" -a "$2" = "" ]
+then
+    chgrp "$BIPGROUP" "$BIPHOME" 2>/dev/null || addgroup --system "$BIPGROUP"
+    chown "$BIPUSER"."$BIPGROUP" "$BIPHOME" 2>/dev/null || \
+        adduser --system --home "$BIPHOME" --disabled-password \
+        --ingroup "$BIPGROUP" "$BIPUSER"
+
+    if [ ! -e /var/log/bip ]
+    then
+        mkdir /var/log/bip
+        chown "$BIPUSER":"$BIPGROUP" /var/log/bip
+        chmod 750 /var/log/bip
+    fi
+
+    chown root:"$BIPGROUP" /etc/bip/bip.conf
+    chmod 640 /etc/bip/bip.conf
+fi
+
+dpkg-maintscript-helper mv_conffile \
+	/etc/bip.conf /etc/bip/bip.conf 0.9.0~rc2-1~ bip -- "$@"
+
+# Automatically added by dh_installinit/11.1.6
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/bip" ]; then
+		update-rc.d bip defaults >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.1.6
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'bip.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'bip.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'bip.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'bip.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.1.6
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		deb-systemd-invoke $_dh_action 'bip-config.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

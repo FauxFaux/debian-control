@@ -1,0 +1,21 @@
+Package: mccs
+Version: 1:1.1-8
+Architecture: amd64
+Maintainer: Ralf Treinen <treinen@debian.org>
+Installed-Size: 904
+Depends: libc6 (>= 2.14), libcolamd2 (>= 1:4.5.2), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), coinor-cbc
+Provides: cudf-solver
+Section: admin
+Priority: optional
+Description: multi-critera CUDF solver
+ mccs is a solver for package dependencies expressed in the CUDF
+ format.  It takes as input a CUDF problem and computes the best
+ solution according to a combination of optimization criteria chosen
+ by the user. Basic criteria to be maximized or minimized may be
+ selected from a list of pre-defined criteria, and these can be
+ combined using various aggregation operators. It relies on an Integer
+ Programming solver or a Pseudo Boolean solver to achieve its
+ task. The version of mccs distributed with this package can be used
+ together with two different solving engines available in Debian, that
+ is lpsolve or cbc. Furthermore, mccs may also be used together with
+ other solvers like Cplex, Gurobi, Glpk, SCIP or WBO.

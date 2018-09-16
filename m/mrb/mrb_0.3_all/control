@@ -1,0 +1,29 @@
+Package: mrb
+Version: 0.3
+Architecture: all
+Maintainer: Ron Lee <ron@debian.org>
+Installed-Size: 99
+Depends: make, rsync
+Suggests: git, perl-modules, libjson-xs-perl
+Section: admin
+Priority: optional
+Description: Manage incremental data snapshots with make/rsync
+ mrb is a single, self-documenting, executable makefile, which aims to make
+ trivial the task of maintaining a set of compact, incremental, rsync mirrors
+ of your important (and sometimes rapidly changing) data.
+ .
+ It relies only on the time-hardened industry tools GNU make and rsync.
+ Snapshots may be taken at any opportune interval.  Multiple snapshot targets
+ can be configured in a modular fashion, so fast changing data can be separated
+ from static bulk data, with snapshots of each scheduled or triggered on demand,
+ as may be appropriate for each.
+ .
+ This package also includes gitkeeper, which is a tool for easy bidirectional
+ mirroring of 'installed' data files from a remote system to a local git
+ repository.  It doesn't actually require you to keep the local files in git,
+ but if you do it supports restoring the remote system to any snapshot from
+ the repository.  Likewise it allows you to explicitly configure the owner and
+ access permission that should be applied when pushing to the remote system
+ since they are not preserved by the versions stored in git.
+ .
+ To use gitkeeper you will need to install the suggested perl packages too.

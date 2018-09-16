@@ -1,0 +1,13 @@
+#! /bin/sh
+
+set -e
+
+# Automatically added by dh_installinit/11.3.2
+if [ -x "/etc/init.d/chef-client" ] && [ "$1" = remove ]; then
+	invoke-rc.d chef-client stop || exit 1
+fi
+# End automatically added section
+
+
+rm -rf /var/lib/chef/cookbook_index
+rmdir /var/lib/chef || true

@@ -1,0 +1,20 @@
+Package: libstring-dirify-perl
+Version: 1.03-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/String-Dirify
+Description: utility converting string to a safe format
+ String::Dirify converts a string (possibly containing high ASCII characters,
+ and even HTML) into another, lower-cased, string which can be used as a
+ directory name or URL.
+ .
+ The algorithm is as follows:
+  * Each high ASCII character is replaced by its normal equivalent
+  * The string is converted to lower case
+  * Any HTML (including HTML entities) in the string is removed
+  * Any characters which are not (Perl) words, spaces or hyphens, are removed
+  * Runs of spaces are converted to the separator character

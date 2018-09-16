@@ -1,0 +1,13 @@
+Package: rwalld
+Source: netkit-rwall (0.17-7)
+Version: 0.17-7+b2
+Architecture: amd64
+Maintainer: Alberto Gonzalez Iniesta <agi@inittab.org>
+Installed-Size: 30
+Depends: rpcbind | portmap, openbsd-inetd | inet-superserver, libc6 (>= 2.2.5)
+Section: net
+Priority: optional
+Description: Write messages to users currently logged in server
+ rpc.rwalld is a server which will send a message to users currently logged in
+ to the system.  This server invokes the wall(1) command to actually write the
+ messages to the system.

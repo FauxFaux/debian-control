@@ -1,0 +1,29 @@
+Package: gvpe
+Version: 3.0-2
+Architecture: amd64
+Maintainer: TANIGUCHI Takaki <takaki@debian.org>
+Installed-Size: 327
+Depends: libc6 (>= 2.17), libgcc1 (>= 1:3.0), libssl1.1 (>= 1.1.0), libstdc++6 (>= 5), zlib1g (>= 1:1.1.4), lsb-base
+Section: net
+Priority: optional
+Homepage: http://software.schmorp.de/pkg/gvpe.html
+Description: creates a virtual ethernet between multiple endpoints
+ GVPE creates a virtual ethernet (broadcasts supported, any protocol that
+ works with a normal ethernet should work with GVPE) by creating encrypted
+ host-to-host tunnels between multiple endpoints.
+ .
+ Unlike other virtual private "network" solutions which merely create a
+ single tunnel, GVPE creates a real network with multiple endpoints.
+ .
+ It is designed to be very simple and robust (cipher selection done at
+ compiletime etc.), and easy to setup (only a single config file shared
+ unmodified between all hosts).
+ .
+ VPN hosts can neither sniff nor fake packets, that is, you can use
+ MAC-based filtering to ensure authenticity of packets even from member
+ nodes.
+ .
+ GVPE can also be used to tunnel into some vpn network using a variety
+ of protocols (raw IP, UDP, TCP, HTTPS-proxy-connect, ICMP and DNS). It
+ is, however, primarily designed to sit on the gateway machines of
+ company branches to connect them together.

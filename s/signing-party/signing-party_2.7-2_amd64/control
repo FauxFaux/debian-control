@@ -1,0 +1,31 @@
+Package: signing-party
+Version: 2.7-2
+Architecture: amd64
+Maintainer: Guilhem Moulin <guilhem@debian.org>
+Installed-Size: 517
+Depends: perl:any, python:any, libc6 (>= 2.14), libmd0 (>= 0.0.0), gnupg, libclass-methodmaker-perl, libgnupg-interface-perl, libmailtools-perl, libmime-tools-perl, libnet-idn-encode-perl, libterm-readkey-perl, libtext-template-perl, qprint
+Recommends: default-mta | mail-transport-agent, dialog | whiptail, libgd-gd2-noxpm-perl | libgd-gd2-perl, libpaper-utils
+Suggests: fonts-noto-cjk, fonts-noto-mono, imagemagick | graphicsmagick-imagemagick-compat, mutt, qrencode, texlive-font-utils, texlive-latex-extra, texlive-latex-recommended, texlive-xetex, wipe
+Provides: keyanalyze, sig2dot, springgraph
+Section: misc
+Priority: optional
+Description: Various OpenPGP related tools
+ signing-party is a collection for all kinds of PGP/GnuPG related things,
+ including tools for signing keys, keyring analysis, and party preparation.
+ .
+  * caff: CA - Fire and Forget signs and mails a key
+  * pgp-clean: removes all non-self signatures from key
+  * pgp-fixkey: removes broken packets from keys
+  * gpg-mailkeys: simply mail out a signed key to its owner
+  * gpg-key2ps: generate PostScript file with fingerprint paper slips
+  * gpgdir: recursive directory encryption tool
+  * gpglist: show who signed which of your UIDs
+  * gpgsigs: annotates list of GnuPG keys with already done signatures
+  * gpgparticipants: create list of party participants for the organiser
+  * gpgwrap: a passphrase wrapper
+  * keyanalyze: minimum signing distance (MSD) analysis on keyrings
+  * keylookup: ncurses wrapper around gpg --search
+  * sig2dot: converts a list of GnuPG signatures to a .dot file
+  * springgraph: creates a graph from a .dot file
+  * keyart: creates a random ASCII art of a PGP key file
+  * gpg-key2latex: generate LaTeX file with fingerprint paper slips

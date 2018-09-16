@@ -1,0 +1,19 @@
+Package: pmacct
+Version: 1.7.0-1
+Architecture: amd64
+Maintainer: Bernd Zeimetz <bzed@debian.org>
+Installed-Size: 10260
+Pre-Depends: dpkg (>= 1.15.8)
+Depends: libc6 (>= 2.16), libjansson4 (>= 2.0.1), libmariadbclient18 (>= 10.1.28), libmaxminddb0 (>= 1.0.2), libnetfilter-log1, libnfnetlink0, libpcap0.8 (>= 1.0.0), libpq5 (>= 9.1~), librabbitmq4 (>= 0.6.0), librdkafka1 (>= 0.8.4), libsqlite3-0 (>= 3.5.9), libzmq5 (>= 4.0.1+dfsg), zlib1g (>= 1:1.1.4), net-tools, psmisc, lsb-base (>= 3.2-14)
+Section: net
+Priority: optional
+Homepage: http://www.pmacct.net/
+Description: promiscuous mode traffic accountant
+ pmacct is a tool designed to gather traffic information (bytes and number
+ of packets) by listening on a promiscuous interface or for Netflow data,
+ which may facilitate billing, bandwidth management, traffic analysis, or
+ creating usage graphs.
+ .
+ Data can be stored in memory and queried, displayed directly, or written
+ to a database; storage methods are quite flexible and may aggregate totals
+ or keep them separate.

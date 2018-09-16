@@ -1,0 +1,15 @@
+Package: libwww-indexparser-perl
+Version: 0.91-1.1
+Architecture: all
+Maintainer: James Bromberger <jeb@debian.org>
+Installed-Size: 40
+Depends: perl, libwww-perl, libdatetime-locale-perl, libhtml-parser-perl
+Section: perl
+Priority: optional
+Description: Fetch and parse the directory index from a web server
+ WWW::IndexParser is a module that uses LWP to fetch a URL from a web
+ server. It then atempts to parse this page as if it were an auto generated
+ index page.  It returns an array of WWW::IndexParser::Entry objects, one
+ per entry in the directory index that it has found. Each Entry has a
+ set of methods: filename(), time(), size(), and others if supported
+ by the autoindex generated: type() and size_units().

@@ -1,0 +1,28 @@
+Package: golang-github-lucasb-eyer-go-colorful-dev
+Source: golang-github-lucasb-eyer-go-colorful
+Version: 1.0-2
+Architecture: all
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Installed-Size: 503
+Section: devel
+Priority: optional
+Homepage: https://github.com/lucasb-eyer/go-colorful
+Description: Library for handling color spaces in Go
+ Colorful is a library for handling color spaces in Go by implementing the
+ color.Color interface. Colorful stores colors in RGB and provides methods from
+ converting these to various color spaces. Currently supported colorspaces are:
+ .
+   RGB: All three of Red, Green and Blue in [0..1].
+   HSL: Hue in [0..360], Saturation and Luminance in [0..1].
+   HSV: Hue in [0..360], Saturation and Value in [0..1].
+   Hex RGB: The "internet" color format, as in #FF00FF.
+   Linear RGB (read about Gamma-Correct Rendering).
+   CIE-XYZ: CIE's standard color space, almost in [0..1].
+   CIE-xyY: encodes chromacity in x and y and luminance in Y, all in [0..1]
+   CIE-L*a*b*: Perceptually uniform. L* in [0..1] and a*, b* almost in [-1..1].
+   CIE-L*u*v*: Very similar to CIE-L*a*b*.
+   CIE-L*C*h° (HCL): CIE-L*a*b* space in polar coordinates.
+ .
+ For the colorspaces where it makes sense (XYZ, Lab, Luv, HCl), the D65 is used
+ as reference white by default but methods for using your own reference white
+ are provided.

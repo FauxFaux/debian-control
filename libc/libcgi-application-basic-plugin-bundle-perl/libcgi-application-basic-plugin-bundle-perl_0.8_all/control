@@ -1,0 +1,15 @@
+Package: libcgi-application-basic-plugin-bundle-perl
+Version: 0.8
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 32
+Depends: libcgi-application-perl, libcgi-application-dispatch-perl, libcgi-application-plugin-autorunmode-perl, libcgi-application-plugin-configauto-perl, libcgi-application-plugin-dbh-perl, libcgi-application-plugin-devpopup-perl, libcgi-application-plugin-fillinform-perl, libcgi-application-plugin-forward-perl, libcgi-application-plugin-logdispatch-perl, libcgi-application-plugin-session-perl, libcgi-application-plugin-stream-perl, libcgi-application-plugin-validaterm-perl, libcgi-application-plugin-viewcode-perl
+Breaks: libcgi-application-plugins-perl (<< 0.11)
+Replaces: libcgi-applications-plugins-perl (<< 0.11)
+Section: perl
+Priority: optional
+Description: bundle of basic plugins for CGI::Application
+ This is a dummy transition depending on the core CGI::Application plugins
+ such as DBH, Session, ValidateRM, DevPopup, Dispatch, LogDispatch and so on.
+ This package is only needed for packages that have not yet had their
+ dependencies updated, and otherwise can be removed.

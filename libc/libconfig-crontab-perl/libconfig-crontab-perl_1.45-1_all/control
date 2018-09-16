@@ -1,0 +1,20 @@
+Package: libconfig-crontab-perl
+Version: 1.45-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 132
+Depends: perl
+Recommends: cron
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Config-Crontab
+Description: module to read/write Vixie-compatible crontab(5) files
+ Config::Crontab provides an object-oriented interface to Vixie-style
+ crontab(5) files for Perl.
+ .
+ In short, Config::Crontab reads and writes crontab(5) files (and does a
+ little pretty-printing too) using objects. The general idea is that you
+ create a Config::Crontab object and associate it with a file (if
+ unassociated, it will work over a pipe to crontab -l). From there, you can
+ add lines to your crontab object, change existing line attributes, and write
+ everything back to file.

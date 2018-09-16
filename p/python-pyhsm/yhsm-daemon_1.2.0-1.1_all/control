@@ -1,0 +1,16 @@
+Package: yhsm-daemon
+Source: python-pyhsm
+Version: 1.2.0-1.1
+Architecture: all
+Maintainer: Debian Authentication Maintainers <pkg-auth-maintainers@lists.alioth.debian.org>
+Installed-Size: 44
+Depends: python:any, adduser, lsb-base, python-pyhsm (= 1.2.0-1.1), python-argparse, python-setuptools, python-daemon
+Section: net
+Priority: optional
+Homepage: https://developers.yubico.com/python-pyhsm/
+Description: YubiHSM server daemon
+ Provides a TCP based server allowing multiple processes to use a
+ single YubiHSM in parallel.
+ .
+ To utilize the YubiHSM via the server instead of using it directly,
+ pass yhsm://localhost:5348 as the device to python-pyhsm.

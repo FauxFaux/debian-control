@@ -1,0 +1,23 @@
+Package: beef
+Version: 1.0.2-3
+Architecture: amd64
+Maintainer: Andrea Bolognani <eof@kiyuko.org>
+Installed-Size: 35
+Depends: libc6 (>= 2.14), libcattle-1.0-0 (>= 1.2.0), libglib2.0-0 (>= 2.16.0), libreadline7 (>= 6.0)
+Suggests: gvfs, gvfs-backends
+Section: devel
+Priority: optional
+Homepage: https://kiyuko.org/software/beef
+Description: flexible Brainfuck interpreter
+ Beef is an interpreter for the Brainfuck programming language.
+ .
+ Its main goals are to be comfortable for the user and to run most
+ Brainfuck programs unchanged; speed is generally quite good.
+ .
+ Beef performs thorough error checking to make sure malformed programs are
+ not executed; it also supports a bunch of command-line options that can be
+ used for configuration or compatibility purposes.
+ .
+ If GVFS is installed, Beef can use any available backend as either output
+ or (where it makes sense) input source. GNU readline is used for
+ interactive input.

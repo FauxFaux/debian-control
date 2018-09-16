@@ -1,0 +1,18 @@
+Package: dms-wsgi
+Source: dms
+Version: 1.0.8.1-1
+Architecture: amd64
+Maintainer: DMS Maintainers <dms-maintainers@lists.alioth.debian.org>
+Installed-Size: 57
+Depends: python3:any (>= 3.3.2~), dms-core (= 1.0.8.1-1), apache2, libapache2-mod-wsgi-py3
+Section: admin
+Priority: extra
+Homepage: https://github.com/grantma/dms
+Description: bind9 DNS Management System, WSGI JSON http RPC backend.
+ This is the bind9 DNS Management system, WSGI JSON RPC layer.
+ .
+ This installs the WSGI layer needed to access the DMS backend via JSON
+ RPC over http.  It is split from the core package to allow the DMS to be set
+ up on a small scale, with command line only editing.
+ .
+ For setup, see the README.Debian in /usr/share/doc/dms-core

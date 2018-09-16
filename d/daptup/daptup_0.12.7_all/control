@@ -1,0 +1,18 @@
+Package: daptup
+Version: 0.12.7
+Architecture: all
+Maintainer: Eugene V. Lyubimkin <jackyf@debian.org>
+Installed-Size: 142
+Depends: perl, liblocale-gettext-perl, apt | cupt
+Suggests: aptitude
+Section: admin
+Priority: extra
+Homepage: http://sourceforge.net/projects/daptup
+Description: reporter of changes in list of available packages from repositories
+ Daptup is the apt hook which runs automatically within 'apt-get update' or
+ 'cupt update' and outputs four lists:
+  - packages came to archive with this update;
+  - new upgradeable packages;
+  - changes in "watched" packages (not installed, such packages have to be
+   specified in configuration file);
+  - outdated packages that have a new install candidate (optionally).

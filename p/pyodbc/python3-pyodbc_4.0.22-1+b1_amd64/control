@@ -1,0 +1,21 @@
+Package: python3-pyodbc
+Source: pyodbc (4.0.22-1)
+Version: 4.0.22-1+b1
+Architecture: amd64
+Maintainer: Deepak Tripathi <apenguinlinux@gmail.com>
+Installed-Size: 304
+Depends: python3 (<< 3.8), python3 (>= 3.6~), python3:any (>= 3.2~), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libodbc1 (>= 2.3.1), libstdc++6 (>= 4.1.1)
+Provides: python3.6-pyodbc, python3.7-pyodbc
+Section: python
+Priority: optional
+Homepage: http://mkleehammer.github.io/pyodbc/
+Description: Python3 module for ODBC database access
+ A Python3 DB API 2 module for ODBC. No 3rd party libraries are required.
+ Only native Python datatypes are used, such as decimal and datetime.
+ It implements the Python Database API Specification v2.0.
+ For example:
+   import pyodbc
+ Next, create a connection by passing an ODBC connection string to the
+ connect method. This step causes ODBC to load the database driver (the SQL
+ Server driver in this example) and connect to the database.
+   cnxn = pyodbc.connect('DSN=northwind')

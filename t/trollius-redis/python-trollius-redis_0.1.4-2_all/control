@@ -1,0 +1,28 @@
+Package: python-trollius-redis
+Source: trollius-redis
+Version: 0.1.4-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 163
+Depends: python-hiredis, python-mock, python-six, python-trollius, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://github.com/benjolitz/trollius-redis/
+Description: Redis client for Python Trollius (Python 2)
+ Completely asynchronous, non-blocking client for a Redis server. It
+ depends on trollius (asyncio compatible for PEP 3156). It supports
+ Python 2 Trollius-using developers.
+ .
+ Features
+ .
+  * Works for the trollius asyncio-compatible (PEP3156) event loop
+  * No dependencies except trollius
+  * Connection pooling
+  * Automatic conversion from unicode (Python) to bytes (inside Redis.)
+  * Bytes and str protocols.
+  * Completely tested
+  * Blocking calls and transactions supported
+  * Streaming of some multi bulk replies
+ * Pubsub support
+ .
+ This package installs the library for Python 2.

@@ -1,0 +1,21 @@
+Package: golang-github-kr-pretty-dev
+Source: golang-pretty
+Version: 0.0~git20160325.0.add1dbc-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 40
+Depends: golang-github-kr-text-dev
+Breaks: golang-pretty-dev (<< 0.0~git20160325.0.add1dbc-1~)
+Replaces: golang-pretty-dev (<< 0.0~git20160325.0.add1dbc-1~)
+Provides: golang-pretty-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/kr/pretty/
+Description: Pretty printing for Go values
+ Go library package github.com/kr/pretty provides pretty-printing
+ for Go values. This is useful during debugging, to avoid wrapping
+ long output lines in the terminal.
+ .
+ It provides a function, Formatter, that can be used with any function
+ that accepts a format string. It also provides convenience wrappers
+ for functions in packages fmt and log.

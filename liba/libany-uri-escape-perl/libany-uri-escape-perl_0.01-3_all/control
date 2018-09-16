@@ -1,0 +1,13 @@
+Package: libany-uri-escape-perl
+Version: 0.01-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 19
+Depends: perl, liburi-perl | liburi-escape-xs-perl
+Recommends: liburi-escape-xs-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Any-URI-Escape
+Description: module to load URI::Escape::XS preferentially over URI::Escape
+ URI::Escape is great, but URI::Escape::XS is faster. Any::URI::Escape loads
+ URI::Escape::XS and imports the two most common methods if XS is installed.

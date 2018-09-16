@@ -1,0 +1,11 @@
+#!/bin/sh    
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+  rm -f /var/lib/xine/xine.desktop /var/lib/xine/xine.desktop.new
+fi
+
+# Automatically added by dh_installmenu/11.2.1
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+

@@ -1,0 +1,19 @@
+Package: dh-octave
+Version: 0.6.0
+Architecture: all
+Maintainer: Debian Octave Group <team+pkg-octave-team@tracker.debian.org>
+Installed-Size: 61
+Depends: liboctave-dev (>= 4.2.1-5), debhelper (>= 11), cme, libparse-debcontrol-perl, libmime-tools-perl, dh-octave-autopkgtest, perl
+Section: devel
+Priority: optional
+Description: Debhelper-based infrastructure for building Octave add-on packages
+ Since version 3.0 of Octave (a numerical computation software),
+ add-ons can be installed through the pkg.m system.  This package
+ provides the infrastructure for packaging such add-ons for Debian,
+ based on debhelper.  It replaces the deprecated octave-pkg-dev
+ package. This package contains debhelper-like scripts for building,
+ checking and cleaning the add-on package as well as for generating
+ the substitution variables in debian/control.
+ .
+ This package is intended to be used by the Debian Octave Group
+ and should be of little interest to general users.

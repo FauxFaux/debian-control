@@ -1,0 +1,29 @@
+Package: firmware-ivtv
+Source: firmware-nonfree
+Version: 20180825+dfsg-1
+Architecture: all
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 844
+Pre-Depends: debconf | debconf-2.0
+Depends: debconf (>= 0.5) | debconf-2.0
+Recommends: firmware-linux-nonfree (>= 0.38~)
+Suggests: initramfs-tools
+Section: non-free/kernel
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://web.archive.org/web/20150508162618/http://dl.ivtvdriver.org:80/ivtv/firmware/
+Description: Binary firmware for iTVC15-family MPEG codecs (ivtv and pvrusb2 drivers)
+ This package contains the binary firmware for TV cards with Conexant
+ iTVC15-family MPEG codecs, supported by the ivtv and pvrusb2 drivers.
+ .
+ Contents:
+  * Conexant CX23415/CX23416 MPEG codec (decoder) (v4l-cx2341x-dec.fw)
+  * Conexant CX23415/CX23416 MPEG codec (encoder) (v4l-cx2341x-enc.fw)
+  * Conexant CX23415/CX23416 MPEG codec (initialization)
+    (v4l-cx2341x-init.mpg)
+  * Hauppauge PVR USB2 24xxx models (v4l-pvrusb2-24xxx-01.fw)
+  * Hauppauge PVR USB2 29xxx models (v4l-pvrusb2-29xxx-01.fw)
+ .
+ This firmware is covered by the Hauppauge End-User Firmware License
+ Agreement.  You must agree to the terms of this license before it is
+ installed.

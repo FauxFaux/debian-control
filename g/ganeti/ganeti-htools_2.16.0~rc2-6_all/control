@@ -1,0 +1,31 @@
+Package: ganeti-htools
+Source: ganeti
+Version: 2.16.0~rc2-6
+Architecture: all
+Maintainer: Debian Ganeti Team <ganeti@packages.debian.org>
+Installed-Size: 49
+Depends: ganeti-htools-2.16
+Breaks: ganeti2 (<< 2.4)
+Section: admin
+Priority: optional
+Homepage: http://www.ganeti.org/
+Description: cluster virtualization manager - tools (stand-alone)
+ Ganeti is a virtual server cluster management tool built on top of the
+ Xen and KVM virtualization technologies and other free software. It
+ provides an automated environment to manage highly available virtual
+ machine instances.
+ .
+ This package provides additional tools used for enhanced allocation,
+ maintenance and capacity calculation on Ganeti clusters.
+ .
+ The tools provided are:
+  * hail: advanced instance allocator;
+  * harep: tool for automatically repairing Ganeti clusters;
+  * hbal: automatic cluster balancing tool;
+  * hinfo: print cluster information;
+  * hroller: rolling maintenance/reboot scheduler for Ganeti nodes;
+  * hscan: used to gather cluster files for offline use in hbal/hspace;
+  * hspace: cluster capacity calculator.
+ .
+ This package provides the version intended for stand-alone systems that
+ are not part of a Ganeti cluster.

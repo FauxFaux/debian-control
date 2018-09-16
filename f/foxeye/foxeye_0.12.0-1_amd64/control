@@ -1,0 +1,24 @@
+Package: foxeye
+Version: 0.12.0-1
+Architecture: amd64
+Maintainer: Andriy Grytsenko <andrej@rep.kiev.ua>
+Installed-Size: 1156
+Depends: libc6 (>= 2.17), libidn11 (>= 1.13), liblua5.2-0, libssl1.1 (>= 1.1.0), libtcl8.6 (>= 8.6.0), zlib1g (>= 1:1.1.4)
+Provides: ircd
+Section: net
+Priority: optional
+Homepage: https://sourceforge.net/projects/foxeye/
+Description: Universal modular network agent - binary package
+ FoxEye is a multipurpose generic modular base to create clients or servers
+ for client-server type networks such as IRC, ICQ, etc.  All what you need
+ to make an IRC bot or ICQ client is few modules that implement functionality
+ you require.  The FoxEye written in pure C with small resource requirements
+ in mind.
+ .
+ This package contains main daemon and few modules.  Available modules are:
+ autolog, irc, irc-channel, irc-ctcp, ircd, logs, lua, modes, tcl, ziplink.
+ With this set of modules FoxEye can serve two purposes:
+  - IRC bot (similar to Eggdrop);
+  - IRC server (ircd, RFC2810...2813 compliant).
+ More purposes are under development now and third-party modules are available
+ to create using foxeye-dev package.

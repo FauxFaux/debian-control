@@ -1,0 +1,18 @@
+Package: node-yazl
+Version: 2.0.2-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 58
+Depends: nodejs, node-buffer-crc32 (>= 0.2.1)
+Section: web
+Priority: extra
+Homepage: https://github.com/thejoshwolfe/yazl
+Description: yet another zip library - Node.js module
+ yazl is a Node.js module which provides the ability to generate zip files.
+ It uses async APIs to avoid blocking the JavaScript thread, avoids buffering
+ entire files in RAM, and opens input files one at a time to avoid EMFILE
+ errors. yazl supports adding files, buffers, and streams. The output is a
+ stream. If all the files in the zip file are uncompressed, the final size is
+ known before the stream starts.
+ .
+ Node.js is an event-based server-side JavaScript engine.

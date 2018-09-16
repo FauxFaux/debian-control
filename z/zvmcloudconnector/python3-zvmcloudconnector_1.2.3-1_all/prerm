@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] ; then
+	update-alternatives --remove gen-token /usr/bin/python3-gen-token
+	update-alternatives --remove sdkserver /usr/bin/python3-sdkserver
+	update-alternatives --remove zvmsdk-wsgi /usr/bin/python3-zvmsdk-wsgi
+fi
+
+
+# Automatically added by dh_python3:
+if which py3clean >/dev/null 2>&1; then
+	py3clean -p python3-zvmcloudconnector 
+else
+	dpkg -L python3-zvmcloudconnector | perl -ne 's,/([^/]*)\.py$,/__pycache__/\1.*, or next; unlink $_ or die $! foreach glob($_)'
+	find /usr/lib/python3/dist-packages/ -type d -name __pycache__ -empty -print0 | xargs --null --no-run-if-empty rmdir
+fi
+
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+
+remove)
+    for plugin in /etc/munin/plugins/*;
+    do
+        # no plugins at all then break
+        if [  $plugin = "/etc/munin/plugins/*" ]; then break; fi
+
+        if [ $(readlink $plugin) = "/usr/lib/munin-c/plugins/munin-plugins-c" ];
+        then
+            # remove link to munin-plugins-c
+            rm $plugin
+
+            plugin_name=$(basename $plugin)
+
+            # check if there is a traditional munin plugin
+            # and activate it
+            if [ -e /usr/share/munin/plugins/$plugin_name ];
+            then
+                 ln -s /usr/share/munin/plugins/$plugin_name $plugin
+            fi
+        fi
+    done
+;;
+
+esac
+
+

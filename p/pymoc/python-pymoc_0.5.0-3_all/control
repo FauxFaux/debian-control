@@ -1,0 +1,32 @@
+Package: python-pymoc
+Source: pymoc
+Version: 0.5.0-3
+Architecture: all
+Maintainer: Debian Astro Team <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 85
+Depends: python-astropy, python:any (<< 2.8), python:any (>= 2.7~)
+Suggests: python-healpy
+Section: python
+Priority: optional
+Homepage: https://github.com/grahambell/pymoc
+Description: Python 2 Multi-Order Coverage maps for Virtual Observatory
+ PyMOC provides a Python 2-compatible library for handling MOCs.
+ .
+ Frequently astronomical survey catalogues or images are sparse and
+ cover only a small part of the sky.  In a Multi-Order Coverage map
+ the extent of data in a particular dataset is cached as a
+ pre-calculated mask image.  The hierarchical nature enables fast
+ boolean operations in image space, without needing to perform complex
+ geometrical calculations.  Services such as VizieR generally offer the
+ MOC masks, allowing a faster experience in graphical applications
+ such as Aladin, or for researchers quickly needing to locate which
+ datasets may contain overlapping coverage.
+ .
+ The MOC mask image itself is tessellated and stored in NASA HealPix
+ format, encoded inside a FITS image container.  Using the HealPix
+ (Hierarchical Equal Area isoLatitude Pixelization) tessellation
+ method ensures that more precision (pixels) in the mask are available
+ when describing complex shapes such as approximating survey or
+ polygon edges, while only needing to store a single big cell/pixel
+ when an coverage is either completely inside, or outside of the mask.
+ Catalogues can be rendered on the mask as circles.

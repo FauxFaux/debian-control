@@ -1,0 +1,28 @@
+Package: firefox-esr-dev
+Source: firefox-esr
+Version: 52.9.0esr-1
+Architecture: amd64
+Maintainer: Maintainers of Mozilla-related packages <team+pkg-mozilla@tracker.debian.org>
+Installed-Size: 55956
+Depends: libc6 (>= 2.17), libgcc1 (>= 1:3.3), libgtk-3-0 (>= 3.0.0), libstdc++6 (>= 5.2), python-ply, libnss3-dev, libnspr4-dev, firefox-esr (= 52.9.0esr-1)
+Conflicts: firefox-dev, xulrunner-dev
+Breaks: iceweasel-dev (<< 45)
+Replaces: iceweasel-dev (<< 45)
+Provides: iceweasel-dev
+Section: libdevel
+Priority: optional
+Homepage: http://wiki.mozilla.org/XUL:Lib_XUL
+Description: Development files for the Gecko engine library
+ This library provides an  API for XUL applications and Gecko embedders.
+ The Gecko engine is the core of the mozilla.org applications such as
+ Firefox, Thunderbird or SeaMonkey.
+ .
+ Gecko features include XPCOM, networking, DOM editing and transaction
+ support, XBL, XUL, SVG, XSLT, XML Extras (XMLHttpRequest and DOMParser),
+ Web Services (SOAP), accessibility support, IPC services, gtkmozembed, etc.
+ .
+ Install this package if you wish to embed the Gecko engine in your
+ program or want to develop XPCOM components.
+ .
+ This package also provides the Xulrunner Software Development Kit in the
+ same form as the one you may find on mozilla.org in /usr/lib/xulrunner/sdk.

@@ -1,0 +1,23 @@
+Package: python-staticconf-doc
+Source: pystaticconfiguration
+Version: 0.10.3-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 538
+Depends: libjs-sphinxdoc (>= 1.0), sphinx-rtd-theme-common
+Section: doc
+Priority: optional
+Homepage: https://github.com/dnephin/PyStaticConfiguration
+Description: Python library for loading and reading configuration (documentation)
+ This package contains PyStaticConfiguration, a Python library for loading,
+ validating and reading configuration from many heterogeneous formats.
+ Configuration is split into two phases.
+   * Configuration Loading: configuration is read from files or Python objects,
+     flattened, and merged into a container called a `namespace`. Namespaces
+     are used to separate unrelated configuration groups. If configuration is
+     changed frequently, it can also be reloaded easily with very little change
+     to the existing code.
+   * Configuration Reading: a configuration value is looked up in the
+     `namespace`. It is validating and converted to the requested type.
+ .
+ This is the common documentation package.

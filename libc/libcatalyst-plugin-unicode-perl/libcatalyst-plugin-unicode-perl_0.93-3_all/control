@@ -1,0 +1,33 @@
+Package: libcatalyst-plugin-unicode-perl
+Version: 0.93-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 8
+Depends: perl, libcatalyst-perl (>= 5.70), libmro-compat-perl (>= 0.10)
+Breaks: libcatalyst-modules-perl (<< 48~)
+Replaces: libcatalyst-modules-perl (<< 48~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-Plugin-Unicode
+Description: Unicode support for Catalyst (old style)
+ At request time Catalyst::Plugin::Unicode decodes all params from UTF-8
+ octets into a sequence of logical characters. On response, encodes body into
+ UTF-8 octets.
+ .
+ Note that this plugin tries to autodetect if your response is encoded into
+ characters before trying to encode it into a byte stream. This is *bad*
+ as sometimes it can guess wrongly and cause problems.
+ .
+ As an example, latin1 characters such as é (e-accute) will not actually
+ cause the output to be encoded as utf8.
+ .
+ Using Catalyst::Plugin::Unicode::Encoding (part of Catalyst 5.90042, packaged
+ in libcatalyst-perl) is much more recommended, and that also does additional
+ things (like decoding file upload filenames and request parameters which this
+ plugin does not).
+ .
+ This plugin should be considered deprecated, but is maintained as a large
+ number of applications are using it already.
+ .
+ Catalyst is an elegant Model-View-Controller web application framework
+ written in Perl.

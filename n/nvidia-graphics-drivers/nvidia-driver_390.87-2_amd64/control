@@ -1,0 +1,34 @@
+Package: nvidia-driver
+Source: nvidia-graphics-drivers
+Version: 390.87-2
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 1178
+Pre-Depends: nvidia-installer-cleanup, nvidia-legacy-check (>= 343)
+Depends: nvidia-driver-libs (= 390.87-2) | nvidia-driver-libs-nonglvnd (= 390.87-2), nvidia-driver-bin (= 390.87-2), xserver-xorg-video-nvidia (= 390.87-2), nvidia-vdpau-driver (= 390.87-2), nvidia-alternative (= 390.87-2), nvidia-kernel-dkms (= 390.87-2) | nvidia-kernel-390.87, nvidia-support
+Recommends: nvidia-settings (>= 390), nvidia-persistenced
+Suggests: nvidia-kernel-dkms (>= 390.87) | nvidia-kernel-source (>= 390.87)
+Breaks: nvidia-glx
+Replaces: nvidia-glx
+Provides: nvidia-glx-any
+Section: non-free/x11
+Priority: optional
+Homepage: https://www.nvidia.com
+Description: NVIDIA metapackage
+ This metapackage depends on the NVIDIA binary driver and libraries
+ that provide optimized hardware acceleration of
+ OpenGL/GLX/EGL/GLES/Vulkan applications via a direct-rendering X Server.
+ .
+ Please see the nvidia-kernel-dkms or
+ nvidia-kernel-source packages
+ for building the kernel module required by this package.
+ This will provide nvidia-kernel-390.87.
+ .
+ This version only supports GeForce, Quadro, NVS, Tesla, ... GPUs based on the
+ Fermi, Kepler, Maxwell, or newer architectures.  Look at the legacy packages
+ for older cards.
+ .
+ See /usr/share/doc/nvidia-driver/README.txt.gz
+ for a complete list of supported GPUs and PCI IDs.
+ .
+ Building the kernel module has been tested up to Linux 4.19.

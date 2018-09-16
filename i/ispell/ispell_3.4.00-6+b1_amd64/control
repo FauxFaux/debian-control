@@ -1,0 +1,26 @@
+Package: ispell
+Source: ispell (3.4.00-6)
+Version: 3.4.00-6+b1
+Architecture: amd64
+Maintainer: Robert Luberda <robert@debian.org>
+Installed-Size: 353
+Depends: libc6 (>= 2.14), libtinfo6 (>= 6)
+Recommends: iamerican | ispell-dictionary, wamerican | wordlist
+Suggests: spell
+Breaks: iamerican (<= 3.1.20.0-9), ibritish (<= 3.1.20.0-9), ibulgarian (<= 3.0-12), iczech (<= 20040229-5), idanish (<= 1.6.25-1), iestonian (<= 1:20030606-12.1), ifinnish (<= 0.7-17.3), ifinnish-large (<= 0.7-17.3), ifrench (<= 1.4-25), ifrench-gut (<= 1:1.0-27), igaelic (<= 0.50-7), ihungarian (<= 0.99.4-2), iirish (<= 2.0-20), iitalian (<= 1:2.3-2), imanx (<= 0.50-8), inorwegian (<= 2.0.10-3.2), iogerman (<= 1:2-26), ipolish (<= 20100612-1), irussian (<= 0.99g5-8.1), iswedish (<= 1.4.5-2), iukrainian (<= 1.6.0-1)
+Section: text
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.lasr.cs.ucla.edu/geoff/ispell.html
+Description: International Ispell (an interactive spelling corrector)
+ Ispell corrects spelling in plain text, LaTeX, sgml/html/xml, and nroff files.
+ [x]Emacs and jed have nice interfaces to ispell, and ispell works from many
+ other tools and from the command line as well.
+ .
+ No ispell dictionaries are included in this package; you must install
+ at least one of them ("iamerican" is recommended by default for no good
+ reason); install the "ispell-dictionary" package(s) for the language(s)
+ you and your users will want to spell-check.
+ .
+ It's a good idea to install "word list" package(s) for the same language(s),
+ because they'll be used by ispell's (L)ookup command.

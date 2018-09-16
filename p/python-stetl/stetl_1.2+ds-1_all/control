@@ -1,0 +1,28 @@
+Package: stetl
+Source: python-stetl
+Version: 1.2+ds-1
+Architecture: all
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 22
+Depends: python-stetl (>= 1.2+ds-1), python:any
+Section: utils
+Priority: optional
+Homepage: http://stetl.org/
+Description: Streaming ETL - Commandline utility
+ Stetl, streaming ETL, pronounced "staedl", is a lightweight ETL-framework
+ for the conversion of rich (as GML) geospatial data conversion.
+ .
+ It basically glues together existing parsing and transformation tools
+ like GDAL/OGR (ogr2ogr) and XSLT. By using native tools like libxml and
+ libxslt (via Python lxml) Stetl is speed-optimized.
+ .
+ Stetl has a similar design as Spring (Java) and other modern frameworks
+ based on IoC (Inversion of Control). A configuration file (in Python
+ config format) specifies your chain of ETL steps. This chain is formed
+ by a series of Python modules/objects and their parameters. These are
+ symbolically specified in the config file. You just invoke etl.py the
+ main program with a config file. The config file specifies the input
+ modules (e.g. PostGIS), transformers (e.g. XSLT) and outputs (e.g. a GML
+ file or even WFS-T a geospatial protocol to publish GML to a server).
+ .
+ This package contains the stetl utility.

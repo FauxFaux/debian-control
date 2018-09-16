@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" ] ; then
+  for dir in /etc/spf-milter-python/ /var/log/spf-milter-python; do
+    if [ -d "$dir" ]; then
+      rmdir "$dir" --ignore-fail-on-non-empty || true
+    fi
+  done
+fi
+
+
+# Automatically added by dh_installinit/11.1.4
+if [ "$1" = "purge" ] ; then
+	update-rc.d spf-milter-python remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0
+

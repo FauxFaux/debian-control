@@ -1,0 +1,55 @@
+#!/bin/sh
+
+set -e
+
+system_locale=$(echo ${LANG%.*} | tr '[:upper:]_' '[:lower:]-')
+
+. /usr/share/debconf/confmodule
+
+if [ -f /usr/share/dbconfig-common/dpkg/config ]; then
+  dbc_dbtypes="sqlite3, pgsql, mysql"
+  . /usr/share/dbconfig-common/dpkg/config
+
+  db_get redmine/current-instances || true
+  original_instances="$RET"
+
+  db_input medium redmine/current-instances || true
+  if db_go; then
+    db_get redmine/current-instances || true
+    current_instances="$RET"
+    if [ -z "$current_instances" ]; then
+      current_instances='default'
+    fi
+
+    for inst in $current_instances; do
+      # use redmine_${instance} as database name by default
+      db_rc=0
+      db_get redmine/instances/$inst/dbname || db_rc=$?
+      if [ $db_rc -eq 0 -a -n "$RET" ]; then
+        dbc_dbname="$RET"
+      else
+        dbc_dbname="redmine_${inst}"
+      fi
+
+      # choose language
+      lang_question="redmine/instances/${inst}/default-language"
+      lang_rc=0
+      db_get "$lang_question" || lang_rc=$?
+      if [ $lang_rc -eq 10 ]; then
+        # question not instantiated yet
+        db_register redmine/default-language "$lang_question"
+        db_metaget redmine/default-language Choices || true
+        for lang in $(echo "$RET" | sed -e 's/,\s*/\n/g'); do
+          if [ "$system_locale" = "$lang" ]; then
+            db_set "$lang_question" "$system_locale"
+          fi
+        done
+      fi
+      db_input medium "$lang_question" || true
+
+      dbc_go redmine/instances/$inst "$@"
+    done
+
+  fi
+
+fi

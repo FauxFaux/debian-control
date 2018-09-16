@@ -1,0 +1,18 @@
+Package: xserver-xorg-input-evdev
+Version: 1:2.10.6-1
+Architecture: amd64
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Installed-Size: 186
+Depends: libc6 (>= 2.7), libevdev2 (>= 0.9.1), libmtdev1 (>= 1.1.0), libudev1 (>= 183), xorg-input-abi-24, xserver-xorg-core (>= 2:1.18.99.901)
+Breaks: xserver-xorg-core (<< 2:1.18.0-1)
+Replaces: xserver-xorg-core (<< 2:1.18.0-1)
+Provides: xorg-driver-input
+Section: x11
+Priority: optional
+Homepage: https://www.x.org
+Description: X.Org X server -- evdev input driver
+ This package provides the driver for input devices using evdev, the Linux
+ kernel's event delivery mechanism.  This driver allows for multiple keyboards
+ and mice to be treated as separate input devices.
+ .
+ This package is built from the X.org xf86-input-evdev driver module.

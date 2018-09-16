@@ -1,0 +1,24 @@
+Package: doclava-aosp
+Source: android-platform-external-doclava
+Version: 6.0.1+r55-1
+Architecture: all
+Maintainer: Android Tools Maintainers <android-tools-devel@lists.alioth.debian.org>
+Installed-Size: 651
+Depends: default-jre-headless (>= 2:1.7) | java7-runtime-headless, libantlr3-runtime-java, libguava-java, libjsilver-aosp-java, libtagsoup-java
+Section: java
+Priority: optional
+Homepage: https://android.googlesource.com/platform/external/doclava
+Description: Custom Javadoc doclet by Google
+ Key differences between Doclava and the standard doclet include:
+   * Refreshed look and feel, including search capabilities
+   * Embeds versioning information in the documentation
+   * Uses a templating engine for user customizations
+   * Throw build errors for things that can easily be caught, like @param tags
+     that don't match the parameter names.
+   * Ability to include snippets of code from real source code
+   * Federate documentation between multiple sites
+   * Ability to embed javadocs in a larger web page.
+ .
+ This package is a fork of Doclava by The Android Open Source Project with
+ special features for generating the source files of the Android platform
+ framework API stubs "android.jar".

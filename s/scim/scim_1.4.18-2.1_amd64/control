@@ -1,0 +1,42 @@
+Package: scim
+Version: 1.4.18-2.1
+Architecture: amd64
+Maintainer: Rolf Leggewie <foss@rolf.leggewie.biz>
+Installed-Size: 1742
+Depends: libatk1.0-0 (>= 1.12.4), libc6 (>= 2.15), libcairo-gobject2 (>= 1.10.0), libcairo2 (>= 1.2.4), libgcc1 (>= 1:3.0), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.31.8), libgtk-3-0 (>= 3.11.5), libpango-1.0-0 (>= 1.14.0), libpangocairo-1.0-0 (>= 1.14.0), libscim8v5 (>= 1.4), libstdc++6 (>= 5.2), libx11-6
+Recommends: scim-gtk-immodule, im-config | im-switch, scim-im-agent
+Suggests: scim-uim, scim-pinyin, scim-hangul, scim-chewing, scim-m17n, scim-prime, scim-anthy, scim-skk, scim-canna, scim-tables-additional, scim-tables-ja, scim-tables-ko, scim-tables-zh, scim-thai
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/scim-im/scim
+Description: smart common input method platform
+ Smart Common Input Method (SCIM) is an input method (IM) platform.  Input
+ methods are needed to enter complex characters in many non-latin languages.
+ SCIM provides a common platform for various plugin modules and independent IM
+ programs, as well as a set of modules and programs on its own.  It is highly
+ modularized and exposes abstract interfaces, so that plugin modules with
+ different functions can easily communicate with each other.  The currently
+ supported module types are configuration, IM engine, front end, filter, and
+ setup GUI.
+ .
+ SCIM achieves the communication between IM engines and front ends through
+ both shared library linking and server/client mode.  It supports XIM
+ protocol, as well as GTK+ IM module and Qt IM module.
+ .
+ This package is the main binary package of SCIM.  It includes: the main
+ program scim (GTK+ based) and other support programs; simple configuration
+ module, X11 front end module, rawcode IM engine module,
+ simplified/traditional Chinese conversion filter module, and their
+ corresponding setup GUI modules; GTK+ panel and its setup GUI module; and a
+ GTK+ based setup tool.
+ .
+ SCIM is a well accepted platform and features various input method engines
+ for many languages.  In Debian you can find the following separately packaged
+ IMs useful: scim-tables-{additional,ja,ko,zh}, scim-pinyin, scim-uim,
+ scim-m17n, scim-chewing, scim-anthy, scim-canna, scim-prime, and scim-skk.
+ GTK+ users would also find package scim-gtk-immodule useful for GTK+ IM
+ module support.
+ .
+ For development on SCIM platform, please see the description of scim-dev
+ package.

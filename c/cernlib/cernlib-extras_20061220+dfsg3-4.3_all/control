@@ -1,0 +1,24 @@
+Package: cernlib-extras
+Source: cernlib
+Version: 20061220+dfsg3-4.3
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 6
+Depends: cernlib-base (= 20061220+dfsg3-4.3), pawserv, zftp
+Section: science
+Priority: optional
+Homepage: http://cernlib.web.cern.ch/cernlib/
+Description: CERNLIB data analysis suite - extra programs
+ CERNLIB is a suite of data analysis tools and libraries created for
+ use in physics experiments, but also with applications to other
+ fields such as the biological sciences.
+ .
+ This metapackage provides a few additional CERNLIB programs not included
+ in any other CERNLIB package. Very few people are likely to be
+ interested in them; currently they include zftp, pawserv and zserv.
+ The latter two programs run as daemons through inetd and may
+ raise concerns about the system's security.
+ .
+ Installing this package along with the 'cernlib' metapackage will supply
+ a complete set of all CERNLIB programs and libraries, except for those
+ not included in Debian due to licensing reasons.

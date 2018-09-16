@@ -1,0 +1,35 @@
+Package: neutron-bgp-dragent
+Source: neutron-dynamic-routing
+Version: 2:13.0.0-1
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 26
+Depends: neutron-dynamic-routing-common (= 2:13.0.0-1)
+Section: net
+Priority: optional
+Homepage: https://github.com/openstack/neutron-dynamic-routing
+Description: OpenStack Neutron Dynamic Routing - Agent
+ Neutron provides an API to dynamically request and configure virtual networks.
+ These networks connect "interfaces" from other OpenStack services (such as
+ vNICs from Nova VMs). The Neutron API supports extensions to provide advanced
+ network capabilities, including QoS, ACLs, and network monitoring.
+ .
+ Neutron dynamic routing enables advertisement of self-service (private)
+ network prefixes to physical network devices that support dynamic routing
+ protocols such as routers, thus removing the conventional dependency on static
+ routes.
+ .
+ It advertises three classes of routes:
+  * Host routes for floating IP addresses hosted on non-DVR routers, the
+    nexthop is the centralized router.
+  * Host routes for floating IP addresses hosted on DVR routers, the nexthop is
+    the appropriate compute node.
+  * Prefix routes for directly routable tenant networks with address scopes,
+    the nexthop is the centralized router, the same for DVR and CVR.
+ .
+ Neutron dynamic routing consists of service plug-in and agent. The service
+ plug-in implements the Networking service extension and the agent manages
+ dynamic routing protocol peering sessions. The plug-in communicates with the
+ agent through RPC.
+ .
+ This package contains the Dynamic Routing agent.

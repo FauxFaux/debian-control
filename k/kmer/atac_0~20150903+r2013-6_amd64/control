@@ -1,0 +1,27 @@
+Package: atac
+Source: kmer
+Version: 0~20150903+r2013-6
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 2763
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), python2.7, python:any, perl:any, libfile-which-perl, leaff, meryl, gnuplot
+Recommends: kmer-examples
+Section: science
+Priority: optional
+Homepage: http://kmer.sourceforge.net
+Description: genome assembly-to-assembly comparison
+ atac computes a one-to-one pairwise alignment of large DNA sequences. It first
+ finds the unique k-mers in each sequence, chains them to larger blocks, and
+ fills in spaces between blocks. It was written primarily to transfer
+ annotations between different assemblies of the human genome.
+ .
+ The output is a set of ungapped 'matches', and a set of gapped 'runs' formed
+ from the matches. Each match or run associates one sequence with the other
+ sequence. The association is 'unique', in that there is no other (sizeable)
+ associations for either sequence. Thus, large repeats and duplications are not
+ present in the output - they appear as unmapped regions.
+ .
+ Though the output is always pairwise, atac can cache intermediate results to
+ speed a comparisons of multiple sequences.
+ .
+ This package is part of the Kmer suite.

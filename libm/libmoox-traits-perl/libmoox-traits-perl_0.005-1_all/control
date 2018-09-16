@@ -1,0 +1,19 @@
+Package: libmoox-traits-perl
+Version: 0.005-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 35
+Depends: perl, libexporter-tiny-perl, libmodule-runtime-perl, librole-tiny-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MooX-Traits
+Description: module to automatically apply roles at object creation time
+ Like MooseX::Traits, the MooX::Traits module provides a method to add some
+ roles to a class when creating it (during new), only for Moo.
+ .
+ Although called MooX::Traits, this module actually uses Role::Tiny, so
+ doesn't really require Moo. If you use it in a non-Moo class, you should be
+ able to safely consume any Role::Tiny-based traits.
+ .
+ If you use it in a Moo class, you should also be able to consume
+ Moo::Role-based traits and Moose::Role-based traits.

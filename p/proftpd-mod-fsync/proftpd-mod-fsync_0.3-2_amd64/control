@@ -1,0 +1,16 @@
+Package: proftpd-mod-fsync
+Version: 0.3-2
+Architecture: amd64
+Maintainer: ProFTPD Maintainance Team <pkg-proftpd-maintainers@alioth-lists.debian.net>
+Installed-Size: 94
+Depends: proftpd-basic (>= 1.3.3d-4~), libc6 (>= 2.4), proftpd-abi-1.3.6
+Section: net
+Priority: optional
+Homepage: http://www.castaglia.org/proftpd/modules/mod_fsync.html
+Description: ProFTPD module mod_fsync
+ The mod_fsync module attempts to prevent such bottlenecks by forcibly
+ flushing to disk the buffers used for files open for writing after a
+ certain number of bytes have been written (for example, after 128 KB
+ has been written to a file). This prevents the buffer cache from being
+ dominated by data from files being written, freeing up space for data
+ for files being read.

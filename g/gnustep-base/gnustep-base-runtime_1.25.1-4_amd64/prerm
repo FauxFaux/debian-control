@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit/11.3
+if [ -x "/etc/init.d/gdomap" ] && [ "$1" = remove ]; then
+	invoke-rc.d gdomap stop || exit 1
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.3
+dpkg-maintscript-helper symlink_to_dir /usr/share/doc/gnustep-base-runtime /usr/share/doc/gnustep-base-common 1.25.0-1\~ gnustep-base-runtime -- "$@"
+# End automatically added section

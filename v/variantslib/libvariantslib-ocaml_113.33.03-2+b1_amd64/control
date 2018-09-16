@@ -1,0 +1,25 @@
+Package: libvariantslib-ocaml
+Source: variantslib (113.33.03-2)
+Version: 113.33.03-2+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 24
+Depends: ocaml-base-nox-4.05.0, libc6 (>= 2.2.5)
+Breaks: libvariants-camlp4-dev
+Replaces: libvariants-camlp4-dev
+Provides: libvariantslib-ocaml-a1ma0
+Section: ocaml
+Priority: extra
+Homepage: http://janestreet.github.io/
+Description: OCaml syntax extension for supporting variants as first class values (runtime)
+ Variantslib generates code to support variants as first class by
+ adding "with variants" suffix to variants definition, e.g.,
+ .
+ type t =
+ | First
+ | Second
+ | Third
+ .
+ with variants
+ .
+ This package contains runtime files.

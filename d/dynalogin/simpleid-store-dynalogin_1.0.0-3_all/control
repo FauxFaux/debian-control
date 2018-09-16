@@ -1,0 +1,25 @@
+Package: simpleid-store-dynalogin
+Source: dynalogin
+Version: 1.0.0-3
+Architecture: all
+Maintainer: Debian Authentication Maintainers <pkg-auth-maintainers@lists.alioth.debian.org>
+Installed-Size: 27
+Depends: simpleid, dynalogin-client-php
+Section: web
+Priority: optional
+Homepage: http://www.dynalogin.org/
+Description: two-factor HOTP/TOTP authentication - OpenID provider
+ dynalogin is a two-factor authentication framework based on the HOTP/TOTP
+ (Open Authentication) algorithm.  Dynalogin can store credentials in
+ any database supported by UNIXODBC, which makes the solution
+ robust and scalable.  It can also store credentials in flat files
+ if desired.  dynalogin has been successfully integrated in solutions
+ for OpenID, making it possible to use two-factor authentication with
+ hundreds of other web applications and public web sites.  There is a
+ dynalogin soft-token for Android and it also works with Google
+ Authenticator.
+ .
+ This package provides a datastore extension for the OpenID provider
+ SimpleID, which is implemented entirely in PHP and has minimal other
+ dependencies.  The extension allows SimpleID users (configured in flat
+ files) to authenticate against a dynalogin server.

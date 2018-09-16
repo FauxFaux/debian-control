@@ -1,0 +1,21 @@
+Package: percol
+Version: 0.2.1-2
+Architecture: all
+Maintainer: Antoine Beaupré <anarcat@debian.org>
+Installed-Size: 117
+Depends: python3-six (>= 1.7.3), python3:any
+Recommends: cmigego
+Section: utils
+Priority: optional
+Homepage: https://github.com/mooz/percol
+Description: interactive selection for UNIX pipes
+ An interactive grep tool in your terminal. Percol does the following:
+ .
+ 1. receives input lines from stdin or a file,
+ 2. lists up the input lines,
+ 3. waits for your input that filter/select the line(s),
+ 4. and finally outputs the selected line(s) to stdout.
+ .
+ Since percol just filters the input and output the result to stdout,
+ it can be used in command-chains with | in your shell (UNIX
+ philosophy!).

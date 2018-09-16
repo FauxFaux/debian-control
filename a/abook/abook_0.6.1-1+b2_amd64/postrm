@@ -1,0 +1,42 @@
+#!/bin/sh
+# postrm for abook
+# copyright 2003-2012 by Rhonda D'Vine <rhonda@debian.org>
+# Licenced under WTFPLv2
+
+set -e
+
+if [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+
+action=$1
+
+case "$action" in
+    remove)
+	if [ ! -e /etc/Muttrc.d/abook.rc.removed ]; then
+		# only disable the config snippet
+		mv /etc/Muttrc.d/abook.rc /etc/Muttrc.d/abook.rc.removed || true
+	fi
+	;;
+    purge)
+	rm /etc/Muttrc.d/abook.rc.removed 2> /dev/null || true
+	rm /etc/Muttrc.d/abook.rc 2> /dev/null || true
+	rmdir /etc/Muttrc.d 2> /dev/null || true
+	# remove debconf data on purge
+	if [ -e /usr/share/debconf/confmodule ]; then
+		. /usr/share/debconf/confmodule
+		db_purge
+	fi
+	;;
+esac
+
+# Automatically added by dh_installmenu/11.2.1
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.2.1
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

@@ -1,0 +1,20 @@
+Package: cyrus-nntpd
+Source: cyrus-imapd (2.5.10-3)
+Version: 2.5.10-3+b1
+Architecture: amd64
+Maintainer: Debian Cyrus Team <pkg-cyrus-imapd-debian-devel@lists.alioth.debian.org>
+Installed-Size: 190
+Pre-Depends: dpkg (>= 1.17.14~)
+Depends: cyrus-common (= 2.5.10-3+b1), libc6 (>= 2.4), libicu57 (>= 57.1-1~), libsasl2-2, libwrap0 (>= 7.6-4~)
+Conflicts: news-transport-system
+Breaks: cyrus-nntpd-2.4
+Replaces: cyrus-nntpd-2.4
+Provides: news-transport-system
+Section: mail
+Priority: extra
+Homepage: http://www.cyrusimap.org/
+Description: Cyrus mail system - NNTP support
+ This package contains the NNTP (Network News Transfer Protocol) portion of
+ the Cyrus IMAPd suite.
+ .
+ For more information, please see the cyrus-common package.

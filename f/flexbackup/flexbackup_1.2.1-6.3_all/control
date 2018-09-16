@@ -1,0 +1,24 @@
+Package: flexbackup
+Version: 1.2.1-6.3
+Architecture: all
+Maintainer: Kurt B. Kaiser <kbk@shore.net>
+Installed-Size: 242
+Depends: perl, cpio | mt-st
+Recommends: dump | star | pax | zip | sharutils | binutils | lzma (>= 4.43-2) | rsync | afio, buffer
+Suggests: ssh, lha
+Section: admin
+Priority: optional
+Homepage: http://www.edwinh.org/flexbackup/
+Description: Flexible backup tool for small to medium sized installations
+ Flexbackup is a flexible backup tool that works well for small to medium
+ sized tasks for which solutions like amanda are overkill.
+ .
+ It features:
+  * Easy configuration
+  * Uses afio, dump, GNU tar, cpio, star, pax, lha, or zip archivers
+  * Full and numbered levels of incremental backup (similar to "dump")
+  * Compression and buffering options for all backup types
+  * Handles remote filesystems with ssh/rsh; no special services required
+  * Writes to tapes, on-disk archive files, or on-disk directory trees
+  * Keeps a table of contents so you know what archives are on each tape
+  * Extensive logging options

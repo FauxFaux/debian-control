@@ -1,0 +1,26 @@
+Package: golang-github-spf13-afero-dev
+Source: golang-github-spf13-afero
+Version: 1.1.1-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 182
+Depends: golang-github-pkg-sftp-dev, golang-golang-x-text-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/spf13/afero
+Description: FileSystem Abstraction System for Go
+ Package Afero provides types and methods for interacting with the filesystem
+ as an abstraction layer for the Go Programming Language.
+ .
+ It provides a few implementations that are largely interoperable. One that
+ uses the operating system filesystem, one that uses memory to store files
+ (cross platform) and an interface that should be implemented if you want
+ to provide your own filesystem.
+ .
+ It is suitable for use in any situation where you would consider using
+ the OS package as it provides an additional abstraction that makes it
+ easy to use a memory-backed file system during testing. It also adds
+ support for the http filesystem for full interoperability.
+ .
+ Afero has an exceptionally clean interface and simple design without
+ needless constructors or initialization methods.

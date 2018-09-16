@@ -1,0 +1,39 @@
+Package: elk-lapw
+Source: elkcode (4.0.15-2)
+Version: 4.0.15-2+b4
+Architecture: amd64
+Maintainer: Debichem Team <debichem-devel@lists.alioth.debian.org>
+Installed-Size: 4773
+Depends: libblas3 | libblas.so.3, libc6 (>= 2.14), libfftw3-double3 (>= 3.3.5), libgcc1 (>= 1:4.0), libgfortran5 (>= 8), libgomp1 (>= 4.9), liblapack3 | liblapack.so.3, libopenmpi3, libquadmath0 (>= 4.6), libxc4 (>= 3.0.0)
+Suggests: gnuplot, xcrysden
+Section: science
+Priority: optional
+Homepage: http://elk.sourceforge.net
+Description: All-Electron Density-Functional Electronic Structure Code
+ Elk is an all-electron full-potential linearised augmented-plane wave
+ (FP-LAPW) code. By not including pseudo-potentials, Elk can provide very
+ reliable high-precision results and works for every chemical element. Features
+ include:
+ .
+  * FP-LAPW basis with local-orbitals
+  * APW radial derivative matching to arbitrary orders at muffin-tin surface
+    (super-LAPW, etc.)
+  * Arbitrary number of local-orbitals allowed (all core states can be made
+    valence for example)
+  * Total energies resolved into components
+  * Forces - including incomplete basis set (IBS) and core corrections work
+    with spin-orbit coupling, non-collinear magnetism and LDA+U
+  * LSDA, GGA and (potential-only) meta-GGA functionals available
+  * LDA+U: fully localised limit (FLL), around mean field (AFM) and
+    interpolation between the two; works with SOC, NCM and spin-spirals
+  * Isolated molecules or periodic systems
+  * Core states treated with the radial Dirac equation
+  * Spin-orbit coupling (SOC) included in second-variational scheme
+  * Non-collinear magnetism (NCM) with arbitrary on-site magnetic fields
+  * Fixed spin-moment calculations (with SOC and NCM)
+  * Time-dependent density functional theory (TDDFT) for linear optical
+    response calculations
+  * First-order optical response
+  * Non-linear optical (NLO) second harmonic generation
+ .
+ Elk is parallelized via hybrid OpenMP/OpenMPI.

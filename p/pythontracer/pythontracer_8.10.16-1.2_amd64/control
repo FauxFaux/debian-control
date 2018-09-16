@@ -1,0 +1,21 @@
+Package: pythontracer
+Version: 8.10.16-1.2
+Architecture: amd64
+Maintainer: TANIGUCHI Takaki <takaki@debian.org>
+Installed-Size: 105
+Depends: python (<< 2.8), python (>= 2.7~), python:any (>= 2.7.5-5~), libc6 (>= 2.4), python-gtk2
+Section: python
+Priority: extra
+Homepage: http://code.google.com/p/pythontracer/
+Description: Python programs' execution tracer and profiler
+ Lets you see your Python program's execution as a tree of function
+ invocations, each tree node exposing the real time, and CPU time (user/sys)
+ of that call.
+ .
+ This project consists of two main components: A Python tracer that can run
+ your Python programs (much like "cProfile" and friends). A Gtk+ based GUI
+ that can show the trace results.
+ .
+ It uses a tiny auxiliary library written for it "graphfile" to allow
+ append-only writing and reading static DAG's directly from file without
+ reading it whole into memory at any stage.

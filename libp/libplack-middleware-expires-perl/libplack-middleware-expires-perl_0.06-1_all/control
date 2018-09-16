@@ -1,0 +1,22 @@
+Package: libplack-middleware-expires-perl
+Version: 0.06-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: libhttp-date-perl, libhttp-message-perl, libplack-perl, libtry-tiny-perl, perl
+Section: perl
+Priority: optional
+Homepage: https://github.com/kazeburo/Plack-Middleware-Expires
+Description: mod_expires for plack
+ Plack is a set of tools similar to Ruby's Rack or Python's Paste for
+ WSGI. It implements the Perl Server Gateway Interface (PSGI) standard
+ interface, which allows developers to decouple their web application
+ framework from the local web server environment.
+ .
+ Plack::Middleware::Expires is Apache's mod_expires for Plack.
+ .
+ This middleware controls the setting of Expires HTTP header and the
+ max-age directive of the Cache-Control HTTP header in server responses.
+ .
+ Note: Expires works only for successful response and If exists Expires
+ HTTP header already, this middleware does not override.

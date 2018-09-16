@@ -1,0 +1,17 @@
+Package: libtest-indistdir-perl
+Version: 1.112071-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 60
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Test-InDistDir/
+Description: test environment setup for development with IDE
+ Test::InDistDir helps run test scripts in IDEs like Komodo.
+ .
+ It automatically moves up one directory when it cannot see the
+ test script in "t/$scriptname" and includes 'lib' in @INC when
+ when there's no blib present. That way the test ends up with
+ almost the same environment it'd get from EUMM/prove/etc.,
+ even when it's actually run inside the t/ directory.

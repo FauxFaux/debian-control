@@ -1,0 +1,27 @@
+Package: python3-zake
+Source: python-zake
+Version: 0.2.2-2
+Architecture: all
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 87
+Depends: python3-kazoo, python3-zope.interface, python3-six, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/yahoo/Zake
+Description: provides a set of testing utilities for the kazoo library - Python 3.x
+ Zake is a Python package that works to provide a nice set of testing utilities
+ for the kazoo library.
+ .
+ It includes the following functionality:
+  * Storage access (for viewing what was saved/created).
+  * Kazoo *mostly* compatible client API.
+  * Sync/transaction/create/get/delete... commands.
+  * Listener support.
+  * And more...
+ .
+ It simplifies testing by providing a client that has a similar API as the
+ kazoo client so that your tests (or applications/libraries that use kazoo) do
+ not require a real zookeeper server to be  tested with (since this is not
+ available in all testing environments).
+ .
+ This package contains the Python 3.x module.

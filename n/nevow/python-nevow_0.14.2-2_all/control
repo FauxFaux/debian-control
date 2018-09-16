@@ -1,0 +1,33 @@
+Package: python-nevow
+Source: nevow
+Version: 0.14.2-2
+Architecture: all
+Maintainer: Vincent Bernat <bernat@debian.org>
+Installed-Size: 2520
+Depends: dpkg (>= 1.14.17~), python-twisted-core, python:any (<< 2.8), python:any (>= 2.7.5-5~), libjs-sphinxdoc (>= 1.0)
+Provides: python2.7-nevow
+Section: python
+Priority: optional
+Homepage: https://github.com/twisted/nevow
+Description: Web application templating system for Python and Twisted
+ Nevow's main focus is on separating the HTML template from both the
+ business logic and the display logic, while allowing the programmer
+ to write pure Python code as much as possible. It separates your code
+ into 'data' and 'render' functions, a simplified implementation of
+ traditional MVC. It has various parts which can be used individually
+ or as a whole, integrated web solution:
+ .
+  - XHTML templates: contain no programming logic, only nodes tagged
+    with nevow attributes
+  - data/render methods: simplified MVC
+  - stan: An s-expression-like syntax for expressing xml in pure Python
+  - formless: For describing the types of objects which may be passed
+    to methods of your classes, validating and coercing string input from
+    either web or command-line sources, and calling your methods
+    automatically once validation passes
+  - freeform: For rendering web forms based on formless type
+    descriptions, accepting form posts and passing them to formless
+    validators, and rendering error forms in the event validation fails
+  - livepage: Cross-browser JavaScript glue for sending client side
+    events to the server and server side events to the client after the
+    page has loaded, without causing the entire page to refresh

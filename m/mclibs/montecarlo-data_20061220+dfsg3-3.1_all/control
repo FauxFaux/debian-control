@@ -1,0 +1,25 @@
+Package: montecarlo-data
+Source: mclibs
+Version: 20061220+dfsg3-3.1
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 348
+Depends: cernlib-base (>= 2006.dfsg.2-7), montecarlo-base (= 20061220+dfsg3-3.1)
+Section: science
+Priority: optional
+Homepage: http://wwwasd.web.cern.ch/wwwasd/cernlib/mc.html
+Description: [Physics] data for CERNLIB Monte Carlo libraries
+ CERNLIB is a suite of data analysis tools and libraries created for
+ use in physics experiments, but also with applications to other
+ fields such as the biological sciences.
+ .
+ This package provides data files for three Monte Carlo frameworks: COJETS,
+ Eurodec, and ISAJET.  Although these data files are not strictly required
+ (programs based on these frameworks may use locally supplied data instead),
+ most people using one of these Monte Carlo generators will probably want
+ to install this package.
+ .
+ The paths to the data files typically must be supplied to programs that are
+ written to use these frameworks, either in the source code or interactively
+ at runtime.  This package places the data files cojets.dat, eurodec.dat and
+ isajet.dat into the directory /usr/share/montecarlo-data.

@@ -1,0 +1,20 @@
+Package: lua-torch-sundown
+Version: 0~20161027-g4324669-2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 117
+Depends: libc6 (>= 2.14), luajit
+Section: interpreters
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/torch/sundown-ffi
+Description: Sundown Library (a Markdown implementation) for Torch Framework
+ This is a LuaJIT interface to the Sundown library (a Markdown implementation).
+ .
+ To render into HTML, the easiest is to use the provided `renderHTML()`
+ function (aliased to `render()`), which interfaces Sundown renderer with
+ Houdini HTML default renderer.
+ .
+ This package also provides an extra renderer `renderASCII()` which outputs
+ pretty colored ASCII for Markdown pages.
+Lua-Versions: 5.1

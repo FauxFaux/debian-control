@@ -1,0 +1,40 @@
+Package: fex
+Version: 20160919-1
+Architecture: all
+Maintainer: Kilian Krause <kilian@debian.org>
+Installed-Size: 2109
+Depends: debconf (>= 0.5) | debconf-2.0, perl:any, adduser, xinetd | inet-superserver, libdigest-md5-file-perl, ucf, libjs-jquery, exim4 | postfix | mail-transport-agent
+Recommends: perl, libnet-dns-perl, fex-utils, libsocket6-perl, wget
+Section: non-free/web
+Priority: optional
+Homepage: http://fex.rus.uni-stuttgart.de/
+Description: web service for transferring very large files
+ F*EX (Frams's Fast File EXchange) is a service that can be used to allow
+ users anywhere on the Internet to exchange very large files quickly and
+ conveniently.
+ .
+ The sender uploads the file to the F*EX-server and the recipient
+ automatically gets a notification e-mail with a download-URL.
+ .
+ Main features of F*EX:
+ .
+  * file transfer of virtually unlimited file size
+  * sender and recipient only need an e-mail program and a web browser
+    (of any kind; they do not have to install any software)
+  * RESEND and REGET for resuming after link failures at last sent byte
+  * auto-notification of recipient
+  * auto-deletion after download
+  * auto-deletion after expiration date (default: 5 days)
+  * full-users can create one time upload URLs for foreign users
+  * full-users can create sub-users, who can send only to this full-user
+  * full-users can create groups, an analogy to mailing lists, but for files
+  * admin can allow (internal or external) user self-registration
+  * admin can allow upload to public recipients without authentication
+  * admin can allow upload for LAN users without registration (anonymous upload)
+  * maintenance-free: no administration necessary beyond creating new
+    F*EX accounts
+  * multiple recipients only require one stored copy
+  * F*EX uses HTTP and needs no firewall tunnels
+  * support for streams, too (SEX: Stream EXchange)
+  * shell clients provided for commandline users: fexsend and fexget.
+    (fex-utils package)

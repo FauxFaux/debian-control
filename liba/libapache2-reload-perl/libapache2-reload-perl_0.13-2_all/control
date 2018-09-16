@@ -1,0 +1,20 @@
+Package: libapache2-reload-perl
+Version: 0.13-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 39
+Depends: perl, libapache2-mod-perl2
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Apache-Reload
+Description: module for reloading Perl modules when changed on disk
+ Apache2::Reload reloads modules that change on the disk.
+ .
+ When Perl pulls a file via "require", it stores the filename in the global
+ hash %INC. The next time Perl tries to "require" the same file, it sees the
+ file in %INC and does not reload from disk. This module's handler can be
+ configured to iterate over the modules in %INC and reload those that have
+ changed on disk. It can also monitor only specific modules that have
+ registered themselves with Apache2::Reload. It is possible to trigger the
+ check only when a special touch-file has been modified, minimizing the number
+ of stat() calls per request.

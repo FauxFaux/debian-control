@@ -1,0 +1,25 @@
+Package: libppx-driver-ocaml
+Source: ppx-driver
+Version: 113.33.03-1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 221
+Depends: libppx-core-ocaml-rni22, libppx-optcomp-ocaml-4ver8, ocaml-base-nox-4.02.3, libc6 (>= 2.2.5)
+Provides: libppx-driver-ocaml-y6yw6
+Section: ocaml
+Priority: optional
+Homepage: https://github.com/janestreet/ppx_driver
+Description: feature-full driver for OCaml AST transformers (runtime files)
+ A driver is an executable created from a set of OCaml AST
+ transformers linked together with a command line frontend.
+ .
+ The aim is to provide a tool that can be used to:
+ .
+  * easily view the pre-processed version of a file, no need to
+    construct a complex command line: `ppx file.ml` will do
+  * use a single executable to run several transformations: no need to
+    fork many times just for pre-processing
+  * improved errors for misspelled/misplaced attributes and extension
+    points
+ .
+ This package contains runtime files.

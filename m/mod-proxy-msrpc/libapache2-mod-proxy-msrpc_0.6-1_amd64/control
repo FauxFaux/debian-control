@@ -1,0 +1,21 @@
+Package: libapache2-mod-proxy-msrpc
+Source: mod-proxy-msrpc
+Version: 0.6-1
+Architecture: amd64
+Maintainer: Micha Lenk <micha@debian.org>
+Installed-Size: 73
+Depends: libc6 (>= 2.15), libuuid1 (>= 2.16), apache2-api-20120211
+Section: httpd
+Priority: extra
+Homepage: https://github.com/bombadil/mod_proxy_msrpc
+Description: Apache module for Outlook Anywhere support in reverse proxy setups
+ This module intends to make Apache httpd work in a reverse proxy setup in front
+ of a MS Exchange server offering Outlook Anywhere services. Without it, Apache
+ would block any Outlook Anywhere requests as the used protocol does not fully
+ comply with HTTP standards.
+ .
+ The mod_proxy_msrpc module detects the used MSRPC messages and forwards them
+ to the server or client as needed. As soon as the initial handshake completed,
+ i.e.  Exchange accepted the connecting client, the mod_proxy_msrpc module
+ switches into tunnel mode and forwards all data from client to server and vice
+ versa.

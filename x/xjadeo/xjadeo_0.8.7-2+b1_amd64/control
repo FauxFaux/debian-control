@@ -1,0 +1,26 @@
+Package: xjadeo
+Source: xjadeo (0.8.7-2)
+Version: 0.8.7-2+b1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 490
+Depends: libasound2 (>= 1.0.16), libavcodec58 (>= 7:4.0) | libavcodec-extra58 (>= 7:4.0), libavformat58 (>= 7:4.0), libavutil56 (>= 7:4.0), libc6 (>= 2.15), libfreetype6 (>= 2.2.1), libgl1, libimlib2 (>= 1.4.5), libjack-jackd2-0 (>= 1.9.10+20150825) | libjack-0.125, liblo7 (>= 0.26~repack), libltc11 (>= 1.2.0), libportmidi0, libsdl1.2debian (>= 1.2.11), libswscale5 (>= 7:4.0), libx11-6, libxext6, libxpm4, libxv1
+Recommends: mencoder, transcode
+Section: video
+Priority: optional
+Homepage: http://xjadeo.sourceforge.net/
+Description: Video player with JACK sync
+ Simple video player that receives sync from jackd or MTC.
+ It has applications in soundtrack creation, video monitoring or any task that
+ requires to associate movie frames with audio events.
+ .
+ For instance when a jack-client (like Muse, Rosegarden or Ardour) acts as a
+ timebase master, xjadeo will display the video synchronized to JACK transport.
+ xjadeo is capable to read Midi Time Clock as an alternate sync source and comes
+ along with an optional QT-GUI.
+ .
+ xjadeo reads only seekable media by default. Installing a transcoding utility
+ like mencoder or transcode is highly recommended.
+ .
+ On-line documentation:
+ http://xjadeo.sourceforge.net/main.html

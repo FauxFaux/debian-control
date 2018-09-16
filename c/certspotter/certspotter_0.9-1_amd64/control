@@ -1,0 +1,29 @@
+Package: certspotter
+Version: 0.9-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 8822
+Depends: libc6 (>= 2.3.2)
+Built-Using: golang-1.10 (= 1.10.2-1), golang-github-mreiferson-go-httpclient (= 0.0~git20160630.0.31f0106-2), golang-golang-x-net-dev (= 1:0.0+git20180124.0ed95ab+dfsg-1), golang-x-text (= 0.3.0-1)
+Section: devel
+Priority: optional
+Homepage: https://github.com/SSLMate/certspotter
+Description: Certificate Transparency Log Monitor
+ Cert Spotter is a Certificate Transparency log monitor from SSLMate that
+ alerts you when a SSL/TLS certificate is issued for one of your domains.
+ Cert Spotter is easier than other open source CT monitors, since it does
+ not require a database. It's also more robust, since it uses a special
+ certificate parser that ensures it won't miss certificates.
+ .
+ Cert Spotter is also available as a hosted service by SSLMate,
+ <https://sslmate.com/certspotter>
+ .
+ You can use Cert Spotter to detect:
+  * Certificates issued to attackers who have compromised a certificate
+    authority and want to impersonate your site.
+  * Certificates issued to attackers who are using your infrastructure
+    to serve malware.
+  * Certificates issued in violation of your corporate policy
+    or outside of your centralized certificate procurement process.
+  * Certificates issued to your infrastructure providers without your
+    consent.

@@ -1,0 +1,17 @@
+Package: clang-tidy-3.9
+Source: llvm-toolchain-3.9 (1:3.9.1-19)
+Version: 1:3.9.1-19+b1
+Architecture: amd64
+Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
+Installed-Size: 21229
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.4), libllvm3.9 (>= 1:3.9.1-6~), libstdc++6 (>= 5.2), python
+Breaks: clang-3.9 (<< 1:3.9~svn250696-1), clang-modernize-3.9
+Replaces: clang-3.9 (<< 1:3.9~svn250696-1), clang-modernize-3.9
+Section: devel
+Priority: optional
+Homepage: http://www.llvm.org/
+Description: clang-based C++ linter tool
+ Provide an extensible framework for diagnosing and fixing typical programming
+ errors, like style violations, interface misuse, or bugs that can be deduced
+ via static analysis. clang-tidy is modular and provides a convenient interface
+ for writing new checks.

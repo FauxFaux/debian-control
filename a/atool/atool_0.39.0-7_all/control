@@ -1,0 +1,21 @@
+Package: atool
+Version: 0.39.0-7
+Architecture: all
+Maintainer: Francois Marier <francois@debian.org>
+Installed-Size: 139
+Depends: perl:any
+Recommends: bash-completion, binutils, bzip2, file, lbzip2 | pbzip2, unzip, zip
+Suggests: arc, arj, cpio, lzip, lzma, lzop, nomarch, p7zip-full, rar, rpm, unace, unalz, unrar, xz-utils
+Section: utils
+Priority: optional
+Homepage: http://www.nongnu.org/atool/
+Description: tool for managing file archives of various types
+ atool is a script for managing file archives of various types (tar,
+ tar+gzip, zip etc). The main command is probably aunpack,
+ extracting files from an archive. It overcomes the dreaded "multiple
+ files in archive root" problem by first extracting to a unique
+ subdirectory, and then moving back the files if possible. aunpack
+ also prevents local files from being overwritten by mistake.
+ .
+ Other commands provided are apack (create archives), als (list files
+ in archives), and acat (extract files to standard out).

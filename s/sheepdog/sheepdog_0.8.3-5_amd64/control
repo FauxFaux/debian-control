@@ -1,0 +1,16 @@
+Package: sheepdog
+Version: 0.8.3-5
+Architecture: amd64
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 1018
+Pre-Depends: dpkg (>= 1.15.6~)
+Depends: debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.16), libcfg6 (>= 1.99.9), libcpg4 (>= 1.0.0), libcurl3-gnutls (>= 7.16.2), libfcgi0ldbl, libfuse2 (>= 2.6), libzookeeper-mt2
+Recommends: corosync
+Section: admin
+Priority: optional
+Homepage: http://sheepdog.github.io/sheepdog
+Description: distributed storage system for QEMU
+ Sheepdog provides highly available block level storage volumes that can be
+ attached to QEMU virtual machines. Sheepdog scales to several hundred
+ nodes, and supports advanced volume management features such as snapshots,
+ cloning, and thin provisioning.

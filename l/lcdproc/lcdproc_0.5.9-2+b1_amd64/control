@@ -1,0 +1,26 @@
+Package: lcdproc
+Source: lcdproc (0.5.9-2)
+Version: 0.5.9-2+b1
+Architecture: amd64
+Maintainer: Dominique Dumont <dod@debian.org>
+Installed-Size: 1096
+Depends: cme, debconf (>= 0.5) | debconf-2.0, libconfig-model-lcdproc-perl (>= 2.040), libc6 (>= 2.15), libncurses6 (>= 6), libtinfo6 (>= 6), libusb-1.0-0 (>= 2:1.0.8), libx11-6, lsb-base, udev
+Recommends: lcdproc-extra-drivers
+Section: utils
+Priority: extra
+Homepage: http://www.lcdproc.org/
+Description: LCD display driver daemon and clients
+ Lcdproc is a client/server suite including drivers for all kinds of
+ nifty LCD displays. The server supports several serial devices: Matrix
+ Orbital, Crystal Fontz, Bayrad, LB216, LCDM001 (kernelconcepts.de),
+ Wirz-SLI and PIC-an-LCD; and some devices connected to the LPT port:
+ HD44780, STV5730, T6963, SED1520 and SED1330.
+ .
+ Various clients are available that display things like CPU load, system
+ load, memory usage, uptime, and a lot more. Custom clients can be
+ written using the simple client-server protocol and provided example
+ code.
+ .
+ This package contains the LCD drivers which need no extra libraries to
+ run. In the lcdproc-extra-drivers package some USB and VGA on-screen
+ displays are also supported.

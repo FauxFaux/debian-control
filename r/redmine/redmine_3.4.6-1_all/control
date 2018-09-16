@@ -1,0 +1,36 @@
+Package: redmine
+Version: 3.4.6-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 9182
+Pre-Depends: debconf
+Depends: dbconfig-common, redmine-sqlite | redmine-mysql | redmine-pgsql, ruby | ruby-interpreter, ruby-actionpack-action-caching, ruby-actionpack-xml-parser, ruby-bundler, ruby-coderay (>= 1.0.6), ruby-i18n (>= 0.6.9-1~), ruby-jquery-rails (>= 4.0.5), ruby-mimemagic, ruby-mime-types (>= 1.25), ruby-net-ldap (>= 0.3.1), ruby-openid, ruby-protected-attributes, ruby-rack (>= 1.4.5~), ruby-rack-openid, ruby-rails (>= 2:4.2.5), ruby-rails-observers, ruby-rbpdf, ruby-redcarpet, ruby-request-store, ruby-rmagick, ruby-roadie-rails, libjs-raphael, debconf (>= 0.5) | debconf-2.0
+Recommends: passenger
+Suggests: bzr, cvs, darcs, git, mercurial, ruby-fcgi, subversion
+Breaks: redmine-plugin-botsfilter (<= 1.02-2), redmine-plugin-recaptcha (<= 0.1.0+git20121018)
+Section: web
+Priority: optional
+Homepage: https://www.redmine.org
+Description: flexible project management web application
+ Redmine is a flexible project management web application. Written using Ruby
+ on Rails framework, it is cross-platform and cross-database.
+ .
+ Dependencies for database support are provided by these metapackages:
+ redmine-mysql, redmine-pgsql, redmine-sqlite.
+ .
+ Features
+   * Multiple projects support
+   * Flexible role based access control
+   * Flexible issue tracking system
+   * Gantt chart and calendar
+   * News, documents & files management
+   * Feeds & email notifications
+   * Per project wiki
+   * Per project forums
+   * Time tracking
+   * Custom fields for issues, time-entries, projects and users
+   * SCM integration (SVN, CVS, Git, Mercurial, Bazaar and Darcs)
+   * Issue creation via email
+   * Multiple LDAP authentication support
+   * User self-registration support
+   * Multilanguage support

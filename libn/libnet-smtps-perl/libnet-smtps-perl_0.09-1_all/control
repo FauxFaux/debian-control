@@ -1,0 +1,20 @@
+Package: libnet-smtps-perl
+Version: 0.09-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 24
+Depends: perl, libauthen-sasl-perl, libio-socket-ssl-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Net-SMTPS
+Description: SSL/STARTTLS support for Net::SMTP
+ Net::SMTPS implements a wrapper for Net::SMTP, enabling over-SSL/STARTTLS
+ support. This module inherits all the methods from Net::SMTP. You may use all
+ the friendly options that came bundled with Net::SMTP. You can control the
+ SSL usage with the options of new() constructor method. 'doSSL' option is the
+ switch, and, If you would like to control detailed SSL settings, you can set
+ SSL_* options that are brought from IO::Socket::SSL. Please see the document
+ of IO::Socket::SSL about these options detail.
+ .
+ Just one method difference from the Net::SMTP, you may select SMTP AUTH
+ mechanism as the third option of auth() method.

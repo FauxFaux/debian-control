@@ -1,0 +1,32 @@
+Package: lam-runtime
+Source: lam
+Version: 7.1.4-3.1
+Architecture: amd64
+Maintainer: Camm Maguire <camm@debian.org>
+Installed-Size: 1363
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:4.1.1), liblam4, libstdc++6 (>= 4.4.0), openssh-client | ssh-client | rsh-client, openssh-server | ssh-server | rsh-server
+Conflicts: lam, lam1-runtime, lam4-dev (<= 7.1.2-2)
+Replaces: lam, lam1-runtime, lam4-dev (<= 7.1.2-2)
+Section: utils
+Priority: extra
+Description: LAM runtime environment for executing parallel programs
+ LAM (Local Area Multicomputer) is an open source implementation of the
+ Message Passing Interface (MPI) standard.
+ .
+ Some enhancements in LAM 6.3 are:
+  o Added the MPI-2 C++ bindings package (chapter 10 from the MPI-2
+      standard) from the Laboratory for Scientific Computing at the
+      University of Notre Dame.
+  o Added ROMIO MPI I/O package (chapter 9 from the MPI-2 standard)
+      from the Argonne National Laboratory.
+  o Pseudo-tty support for remote IO (e.g., line buffered output).
+  o Ability to pass environment variables through mpirun.
+  o Ability to mpirun shell scripts/debuggers/etc. (that eventually
+      run LAM/MPI programs).
+  o Ability to execute non-MPI programs across the multicomputer.
+  o Added configurable ability to zero-fill internal LAM buffers
+      before they are used (for development tools such as Purify).
+  o Greatly expanded error messages; provided for customizable
+      local help files.
+  o Expanded and updated documentation.
+  o Various bug fixes and minor enhancements.

@@ -1,0 +1,19 @@
+Package: nsca-ng-client
+Source: nsca-ng
+Version: 1.5-3
+Architecture: amd64
+Maintainer: Debian Nagios Maintainer Group <pkg-nagios-devel@lists.alioth.debian.org>
+Installed-Size: 120
+Depends: libc6 (>= 2.14), libev4 (>= 1:4.04), libssl1.1 (>= 1.1.0)
+Conflicts: nsca-client
+Breaks: nsca (<< 2.9.1-1)
+Replaces: nsca (<< 2.9.1-1)
+Section: net
+Priority: optional
+Homepage: http://www.nsca-ng.org/
+Description: Send monitoring commands to NSCA-ng server
+ The send_nsca utility transmits one or more check results or
+ monitoring commands to an NSCA-ng server.
+ .
+ The communication with the server is TLS encrypted and
+ authenticated using pre-shared keys.

@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+	remove)
+		for FILE in /usr/share/powerline/config_files/colorschemes/default.json \
+			    /usr/share/powerline/config_files/themes/shell/default.json \
+			    /usr/share/powerline/config_files/themes/shell/default_leftonly.json
+		do
+			DIVERTION="/usr/share/powerline-gitstatus/divert/$(basename $(dirname ${FILE}))_$(basename ${FILE}).powerline"
+
+			dpkg-divert --package powerline-gitstatus --quiet --remove --rename --divert "${DIVERTION}" "${FILE}"
+		done
+
+		rmdir -p --ignore-fail-on-non-empty /usr/share/powerline-gitstatus/divert > /dev/null 2>&1 || true
+		;;
+
+	purge|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+
+		;;
+
+	*)
+		echo "postrm called with unknown argument \`$1'" >&2
+		exit 1
+		;;
+esac
+
+
+
+exit 0

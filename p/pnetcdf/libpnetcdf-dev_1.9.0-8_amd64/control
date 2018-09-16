@@ -1,0 +1,22 @@
+Package: libpnetcdf-dev
+Source: pnetcdf
+Version: 1.9.0-8
+Architecture: amd64
+Maintainer: Alastair McKinstry <mckinstry@debian.org>
+Installed-Size: 11113
+Depends: gfortran-8 | gfortran-mod-15, libpnetcdf0d (= 1.9.0-8)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://trac.mcs.anl.gov/projects/parallel-netcdf
+Description: Development files for the parallel netCDF library
+ PnetCDF is a library providing high-performance parallel I/O while still
+ maintaining file-format compatibility with  Unidata's NetCDF,
+ specifically the formats of CDF-1 and CDF-2.
+ Although NetCDF supports parallel I/O starting from version 4, the files
+ must be in HDF5 format. PnetCDF is currently the only choice for carrying
+ out parallel I/O on files that are in classic formats (CDF-1 and 2).
+ .
+ In addition, PnetCDF supports the CDF-5 file format, an extension of CDF-2,
+ that supports more data types and allows users to define large dimensions,
+ attributes, and variables (>2B elements).

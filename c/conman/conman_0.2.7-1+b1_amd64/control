@@ -1,0 +1,26 @@
+Package: conman
+Source: conman (0.2.7-1)
+Version: 0.2.7-1+b1
+Architecture: amd64
+Maintainer: Yao-Po Wang <blue119@gmail.com>
+Installed-Size: 386
+Depends: libc6 (>= 2.15), libipmiconsole2 (>= 1.1.5), libwrap0 (>= 7.6-4~)
+Suggests: expect
+Section: comm
+Priority: optional
+Homepage: https://github.com/dun/conman
+Description: serial console management program
+ ConMan is a serial console management program designed to support a large
+ number of console devices and simultaneous users.
+ It supports:
+     - local serial devices
+     - remote terminal servers (via the telnet protocol)
+     - IPMI Serial-Over-LAN (via FreeIPMI)
+     - Unix domain sockets
+     - external processes (e.g., using Expect for telnet / ssh / ipmi-sol
+             connections)
+ Its features include:
+     - logging (and optionally timestamping) console device output to file
+     - connecting to consoles in monitor (R/O) or interactive (R/W) mode
+     - allowing clients to share or steal console write privileges
+     - broadcasting client output to multiple consoles

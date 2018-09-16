@@ -1,0 +1,26 @@
+Package: boinc-client-opencl
+Source: boinc
+Version: 7.12.0+dfsg-1
+Architecture: amd64
+Maintainer: Debian BOINC Maintainers <pkg-boinc-devel@lists.alioth.debian.org>
+Installed-Size: 90
+Depends: ocl-icd-libopencl1 | libopencl-1.1-1
+Recommends: amd-opencl-icd | opencl-icd
+Breaks: boinc-amd-opencl
+Replaces: boinc-amd-opencl
+Section: contrib/net
+Priority: optional
+Homepage: https://boinc.berkeley.edu/
+Description: metapackage for AMD/ATI OpenCL-savvy BOINC client and manager
+ The Berkeley Open Infrastructure for Network Computing (BOINC) is a
+ software platform for distributed computing: several initiatives of
+ various scientific disciplines all compete for the idle time of
+ desktop computers. The developers' web site at the University of
+ Berkeley serves as a common portal to the otherwise independently run
+ projects.
+ .
+ Regular users (righteously) often find it an unbearable nuisance to
+ care for the configuration of BOINC for the OpenCL-savvy AMD/ATI
+ graphics cards.  This package adds a series of dependencies from the
+ non-free section to the regular boinc package. This also meant this
+ binary package to be redistributed in the contrib section of Debian.

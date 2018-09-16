@@ -1,0 +1,22 @@
+Package: reel
+Version: 0.6.1-4
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 89
+Depends: ruby | ruby-interpreter, ruby-celluloid (>= 0.15.1), ruby-celluloid-io (>= 0.15.0), ruby-http (>= 0.6.0~pre), ruby-http-parser.rb (>= 0.6.0), ruby-websocket-driver (>= 0.5.1)
+Section: ruby
+Priority: optional
+Homepage: https://github.com/celluloid/reel
+Description: Celluloid::IO-powered HTTP server
+ Reel is a fast, non-blocking "evented" web server built on http_parser.rb,
+ websocket_parser, Celluloid::IO, and nio4r. Thanks to Celluloid, Reel also
+ works great for multithreaded applications and provides traditional
+ multithreaded blocking I/O support too.
+ .
+ Connections to Reel can be either non-blocking and handled entirely within the
+ Reel::Server thread (handling HTTP, HTTPS, or UNIX sockets), or the same
+ connections can be dispatched to worker threads where they will perform
+ ordinary blocking IO. Reel provides no built-in thread pool, however you can
+ build one yourself using Celluloid.pool, or because Celluloid already pools
+ threads to begin with, you can simply use an actor per connection.
+Ruby-Versions: all

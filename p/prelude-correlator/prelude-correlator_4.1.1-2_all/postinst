@@ -1,0 +1,87 @@
+#!/bin/sh
+
+set -e
+
+DAEMON_USER="prelude"
+
+add_sysuser()
+{
+        if ! getent passwd $DAEMON_USER >/dev/null; then
+                adduser --system --disabled-login --no-create-home --home /nonexistent --group $DAEMON_USER 2>&1 > /dev/null
+        fi
+}
+
+add_sysuser
+
+if [ -d "/var/spool/prelude/prelude-correlator" ]; then
+  chown $DAEMON_USER: /var/spool/prelude/prelude-correlator
+  if [ "$(ls -A /var/spool/prelude/prelude-correlator)" ]; then
+    chown $DAEMON_USER: /var/spool/prelude/prelude-correlator/*
+  fi
+fi
+if [ -d "/var/lib/prelude-correlator" ]; then
+  chown $DAEMON_USER: /var/lib/prelude-correlator
+  if [ -d "/var/lib/prelude-correlator/prelude-correlator" ]; then
+    chown $DAEMON_USER: /var/lib/prelude-correlator/prelude-correlator
+    if [ "$(ls -A /var/lib/prelude-correlator/prelude-correlator)" ]; then
+      chown $DAEMON_USER: /var/lib/prelude-correlator/prelude-correlator/*
+    fi
+  fi
+fi
+
+if [ -s /var/lib/prelude-correlator/context.dat ]; then
+        sed -i "s/PreludeCorrelator/preludecorrelator/g" /var/lib/prelude-correlator/context.dat
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p prelude-correlator 
+fi
+
+# End automatically added section
+# Automatically added by dh_installsystemd/11.1.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create /usr/lib/tmpfiles.d/prelude-correlator.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.1.5
+dpkg-maintscript-helper rm_conffile /etc/init.d/prelude-correlator 3.1.0-1\~ prelude-correlator -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/default/prelude-correlator 3.1.0-1\~ prelude-correlator -- "$@"
+# End automatically added section
+# Automatically added by dh_installsystemd/11.1.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if deb-systemd-helper debian-installed 'prelude-correlator.service'; then
+		# This will only remove masks created by d-s-h on package removal.
+		deb-systemd-helper unmask 'prelude-correlator.service' >/dev/null || true
+
+		if deb-systemd-helper --quiet was-enabled 'prelude-correlator.service'; then
+			# Create new symlinks, if any.
+			deb-systemd-helper enable 'prelude-correlator.service' >/dev/null || true
+		fi
+	fi
+
+	# Update the statefile to add new symlinks (if any), which need to be cleaned
+	# up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'prelude-correlator.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.1.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			deb-systemd-invoke try-restart 'prelude-correlator.service' >/dev/null || true
+		fi
+	fi
+fi
+# End automatically added section
+
+
+exit 0
+
+

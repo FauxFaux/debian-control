@@ -1,0 +1,46 @@
+Package: node-typescript-types
+Source: typescript-types
+Version: 20170519-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 2081
+Section: libs
+Priority: extra
+Homepage: http://definitelytyped.org/
+Description: Supposedly "high quality" TypeScript type definitions
+ TypeScript type definitions supplied by the DefinitelyTyped project, for
+ JavaScript packages that don't supply their own type definitions.
+ .
+ This description would be longer, but upstream does not give one on their
+ website nor on their Github page. After some very painful experience using
+ NPM, one can eventually deduce that these definitions are needed for certain
+ typescript packages that build on top of javascript packages, where these
+ latter packages don't themselves define any typescript types.
+ .
+ This package contains a subset of the upstream type definitions because there
+ are a ridiculous amount (a few hundred megabytes) and the vast majority of
+ them are probably never going to be needed for Debian. Currently these are:
+ .
+    @types/backbone                         1.3.33
+    @types/chai                             3.5.2
+    @types/expect.js                        0.3.29
+    @types/fs-extra                         3.0.1
+    @types/handlebars                       4.0.32
+    @types/highlight.js                     9.1.9
+    @types/jquery                           2.0.45
+    @types/jsdom                            2.0.30
+    @types/lodash                           4.14.64
+    @types/marked                           0.0.28
+    @types/mathjax                          0.0.31
+    @types/minimatch                        2.0.29
+    @types/minimist                         1.2.0
+    @types/mocha                            2.2.41
+    @types/node                             7.0.18
+    @types/requirejs                        2.1.29
+    @types/semver                           5.3.31
+    @types/shelljs                          0.7.1
+    @types/sinon                            2.2.2
+    @types/underscore                       1.8.0
+ .
+ If you need more than these, please file a bug report asking for git access so
+ that you can update this package yourself.

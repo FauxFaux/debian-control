@@ -1,0 +1,24 @@
+Package: golang-etcd-server-dev
+Source: etcd
+Version: 3.2.18+dfsg-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 4793
+Depends: golang-github-bgentry-speakeasy-dev (>= 0.1.0~), golang-github-coreos-bbolt-dev, golang-github-cockroachdb-cmux-dev, golang-github-coreos-go-semver-dev (>= 0.2.0~), golang-github-coreos-go-systemd-dev, golang-github-coreos-pkg-dev, golang-github-dgrijalva-jwt-go-v3-dev, golang-github-dustin-go-humanize-dev, golang-github-ghodss-yaml-dev (>= 1.0.0~), golang-github-gogo-protobuf-dev, golang-github-golang-groupcache-dev (>= 0.0~git20160516.0.02826c3~), golang-github-google-btree-dev, golang-github-grpc-ecosystem-go-grpc-prometheus-dev, golang-github-grpc-ecosystem-grpc-gateway-dev (>= 1.2.0~), golang-github-jonboulle-clockwork-dev, golang-github-kr-pty-dev (>= 1.0.0~), golang-github-mattn-go-runewidth-dev (>= 0.0.2~), golang-github-olekukonko-tablewriter-dev (>= 0.0~git20170122.0.a0225b3), golang-github-prometheus-client-golang-dev, golang-github-prometheus-common-dev (>= 0+git20170220.49fee29), golang-github-spf13-cobra-dev, golang-github-spf13-pflag-dev, golang-github-ugorji-go-codec-dev (>= 1.1.1~), golang-github-urfave-cli-dev, golang-github-xiang90-probing-dev, golang-golang-x-crypto-dev, golang-golang-x-net-dev, golang-golang-x-sys-dev, golang-golang-x-time-dev, golang-google-grpc-dev, golang-gopkg-cheggaaa-pb.v1-dev, golang-goprotobuf-dev, golang-procfs-dev (>= 0+git20170216.a1dba9c)
+Provides: golang-github-coreos-etcd-dev
+Section: net
+Priority: optional
+Homepage: https://github.com/coreos/etcd
+Description: highly-available key value store -- source
+ A highly-available key value store for shared configuration and service
+ discovery. etcd is inspired by zookeeper and doozer, with a focus on:
+ .
+  * Simple: curl'able user facing API (HTTP+JSON)
+  * Secure: optional SSL client cert authentication
+  * Fast: benchmarked 1000s of writes/s per instance
+  * Reliable: Properly distributed using Raft
+ .
+ Etcd uses the Raft consensus algorithm to manage a highly-available replicated
+ log.
+ .
+ This package contains the source.

@@ -1,0 +1,18 @@
+Package: libnss-ldapd
+Source: nss-pam-ldapd
+Version: 0.9.10-1
+Architecture: amd64
+Maintainer: Arthur de Jong <adejong@debian.org>
+Installed-Size: 147
+Depends: debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.17), nslcd (>= 0.9.0) | nslcd-2
+Conflicts: libnss-ldap
+Provides: libnss-ldap
+Section: admin
+Priority: optional
+Multi-Arch: same
+Homepage: https://arthurdejong.org/nss-pam-ldapd/
+Description: NSS module for using LDAP as a naming service
+ This package provides a Name Service Switch module that allows using an LDAP
+ server to provide user account, group, host name, alias, netgroup, and
+ basically any other information that would normally be retrieved from /etc
+ flat files or NIS.

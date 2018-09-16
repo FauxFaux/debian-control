@@ -1,0 +1,22 @@
+Package: di-netboot-assistant
+Version: 0.56
+Architecture: all
+Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Installed-Size: 144
+Depends: wget | curl
+Recommends: grub-efi-amd64-bin, tftpd-hpa | atftpd | dnsmasq
+Suggests: dnsmasq | isc-dhcp-server | udhcpd, syslinux, vim-addon-manager
+Section: utils
+Priority: optional
+Homepage: https://wiki.debian.org/DebianInstaller/NetbootAssistant
+Description: Debian-Installer netboot assistant
+ di-netboot-assistant is a tool to simplify the preparation of files
+ for TFTP net booting. It downloads and extracts the files needed and
+ takes care of organizing them. In addition, it prepares a top level
+ menu for PXElinux and grub-efi, which allows one to choose from all
+ installed netboot images at boot time.
+ .
+ di-netboot-assistant supports preseeding the installer in order to
+ set up systems completely automatically.
+ .
+ To build EFI boot images, install grub-efi-amd64-bin.

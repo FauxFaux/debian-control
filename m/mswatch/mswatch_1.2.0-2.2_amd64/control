@@ -1,0 +1,28 @@
+Package: mswatch
+Version: 1.2.0-2.2
+Architecture: amd64
+Maintainer: Jonas Smedegaard <dr@jones.dk>
+Installed-Size: 99
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libglib2.0-0 (>= 2.12.0), libstdc++6 (>= 5.2)
+Recommends: openssh-client | ssh-client
+Enhances: imap-client
+Section: mail
+Priority: optional
+Homepage: http://mswatch.sourceforge.net/
+Description: watch mailstores for changes and initiate mailbox syncs - client tools
+ mswatch is a command line Unix program that keeps two mailboxes
+ synchronized more efficiently and with shorter delays than periodically
+ synchronizing them.
+ .
+ mswatch watches mailboxes for changes to know when to initiate mailbox
+ syncs. Using mswatch, your mail synchronization program can be called
+ on demand instead of through polling, resulting in prompter mail
+ delivery and lower bandwidth usage and server load.
+ .
+ mswatch is designed to work in conjunction with mailbox synchronization
+ programs, and currently supports watching Linux (2.4+) hosted Maildirs
+ (including Maildir folders, Maildir++). Future support for additional
+ mailbox formats, especially for mbox, is planned.
+ .
+ This package provides the mswatch tools for use on the imap client
+ host.

@@ -1,0 +1,26 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        # To fix permissions of /etc/rear in versions earlier than 2.2
+        if [ "$2" != ""  ] && dpkg --compare-versions "$2" lt 2.3; then
+            echo -n "Updating /etc/rear permissions... "
+            chmod 0700 /etc/rear || chmod 0700 /etc/rear/cert
+	    chmod 0600 /etc/rear/local.conf
+            echo "[Done]"
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

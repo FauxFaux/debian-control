@@ -1,0 +1,29 @@
+Package: prover9
+Source: ladr (0.0.200911a-2.1)
+Version: 0.0.200911a-2.1+b2
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 303
+Depends: libc6 (>= 2.7), libladr4 (>= 0.0.200911a-1)
+Suggests: ladr4-apps (= 0.0.200911a-2.1+b2), prover9-doc (>> 0.0.200902a), prover9-doc (<< 0.0.200902b)
+Section: math
+Priority: optional
+Homepage: http://www.cs.unm.edu/~mccune/mace4/
+Description: theorem prover and countermodel generator
+ This package provides the Prover9 resolution/paramodulation theorem
+ prover and the Mace4 countermodel generator.
+ .
+ Prover9 is an automated theorem prover for first-order and equational
+ logic. It is a successor of the Otter prover.  Prover9 uses the
+ inference techniques of ordered resolution and paramodulation with
+ literal selection.
+ .
+ The program Mace4 searches for finite structures satisfying first-order
+ and equational statements, the same kind of statement that Prover9
+ accepts. If the statement is the denial of some conjecture, any
+ structures found by Mace4 are counterexamples to the conjecture.
+ .
+ Mace4 can be a valuable complement to Prover9, looking for
+ counterexamples before (or at the same time as) using Prover9 to search
+ for a proof. It can also be used to help debug input clauses and formulas
+ for Prover9.

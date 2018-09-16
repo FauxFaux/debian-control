@@ -1,0 +1,47 @@
+#!/bin/sh
+set -e
+
+# in <= 0.2 iwd.service used WantedBy=network-pre.target
+# but in 0.3 this was changed to WantedBy=multi-user.target
+# remove the old state so we get the upgraded state
+# (as the debhelper generated enabling code will only
+# act on new installs, we simply purge current state first).
+if [ "$1" = "configure" ] && [ -n "$2" ] && \
+		dpkg --compare-versions "$2" lt 0.3; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'iwd.service' >/dev/null || true
+		deb-systemd-helper unmask 'iwd.service' >/dev/null || true
+	fi
+fi
+
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'iwd.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'iwd.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'iwd.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'iwd.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		deb-systemd-invoke $_dh_action 'iwd.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

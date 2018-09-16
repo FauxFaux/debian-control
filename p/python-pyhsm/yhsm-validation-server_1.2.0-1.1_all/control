@@ -1,0 +1,19 @@
+Package: yhsm-validation-server
+Source: python-pyhsm
+Version: 1.2.0-1.1
+Architecture: all
+Maintainer: Debian Authentication Maintainers <pkg-auth-maintainers@lists.alioth.debian.org>
+Installed-Size: 97
+Depends: python (<< 2.8), python (>= 2.7), python:any (>= 2.6.6-7~), adduser, lsb-base, python-pyhsm (= 1.2.0-1.1), python-argparse, python-setuptools, yhsm-tools
+Section: net
+Priority: optional
+Homepage: https://developers.yubico.com/python-pyhsm/
+Description: Validation server using YubiHSM
+ This package validates YubiKey OTP's, OATH codes or password hashes
+ using YubiHSM.
+ .
+ The interface is a REST API with a simple web server listening on
+ localhost only (per default). It can function as a drop-in replacement
+ for the traditional PHP based Yubico validation server, except that
+ it does not provide the advanced replication features of that server.
+Python-Version: 2.7

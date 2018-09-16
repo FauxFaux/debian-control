@@ -1,0 +1,22 @@
+Package: libdbix-class-uuidcolumns-perl
+Version: 0.02006-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 111
+Depends: perl, libclass-accessor-grouped-perl, libdbix-class-perl, libuuid-perl | libossp-uuid-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/DBIx-Class-UUIDColumns/
+Description: Implicit uuid columns
+ DBIx::Class provides a behaviour similar to Class::DBI::UUID. It
+ impments globally unique columns values. When an object is created, the
+ columns specified are given unique IDs.
+ .
+ When loaded, UUIDColumns will search for a suitable uuid generation module
+ from the following list of supported modules:
+ .
+  * Data::UUID
+  * APR::UUID*
+  * UUID
+ .
+ If no supporting module can be found, an exception will be thrown.

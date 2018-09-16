@@ -1,0 +1,24 @@
+Package: libmpack-dev
+Source: libmpack
+Version: 1.0.5-3
+Architecture: amd64
+Maintainer: James McCoy <jamessan@debian.org>
+Installed-Size: 49
+Depends: libmpack0 (= 1.0.5-3)
+Section: libdevel
+Priority: optional
+Homepage: https://github.com/libmpack/libmpack/
+Description: small binary serialization/RPC library (development files)
+ libmpack is a small binary serialization/RPC library that implements both the
+ msgpack and msgpack-rpc specifications.
+ .
+ Differences from msgpack-c:
+ .
+  * Callback-based API to simplify (de)serialization directly to/from
+    application-specific objects.
+  * C89 compatible code
+  * No allocation performed by the library, but helpers to simplify dynamic
+    allocation if the application needs it.
+  * Non-backtracking, incremental/iterative parse/serialization API
+ .
+ This package contains the headers files needed for developing with mpack

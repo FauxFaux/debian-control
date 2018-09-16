@@ -1,0 +1,23 @@
+Package: libtntdb4v5
+Source: tntdb
+Version: 1.3-4
+Architecture: amd64
+Maintainer: Kari Pahula <kaol@debian.org>
+Installed-Size: 410
+Depends: libc6 (>= 2.14), libcxxtools9v5, libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Recommends: tntdb-mysql4v5 | tntdb-postgresql4v5 | tntdb-sqlite4v5
+Suggests: tntdb-mysql4v5, tntdb-postgresql4v5, tntdb-sqlite4v5, libtntdb-dev
+Breaks: libtntdb4
+Replaces: libtntdb4
+Section: libs
+Priority: optional
+Homepage: http://www.tntnet.org/tntdb.html
+Description: C++ class library for easy database access
+ This library provides a thin, database independent layer over an SQL
+ database.  It lacks complex features like schema queries or wrapper
+ classes like active result sets or data bound controls.  Instead you
+ get to access the database directly with SQL queries.  The library is
+ suited for application programming, not for writing generic database
+ handling tools.
+ .
+ Currently has support for MySQL, PostgreSQL and SQLite.

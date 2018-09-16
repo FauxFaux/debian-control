@@ -1,0 +1,25 @@
+Package: libgc1c2
+Source: libgc
+Version: 1:7.6.4-0.4
+Architecture: amd64
+Maintainer: Christoph Egger <christoph@debian.org>
+Installed-Size: 396
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 4.1.1)
+Conflicts: libgc1
+Replaces: libgc1, libgc1c3
+Section: libs
+Priority: standard
+Multi-Arch: same
+Homepage: http://www.hboehm.info/gc/
+Description: conservative garbage collector for C and C++
+ Boehm-Demers-Weiser's GC is a garbage collecting storage allocator that is
+ intended to be used as a plug-in replacement for C's malloc or C++'s new().
+ .
+ It allows you to allocate memory basically as you normally would without
+ explicitly deallocating memory that is no longer useful. The collector
+ automatically recycles memory when it determines that it can no longer be
+ used.
+ .
+ This version of the collector is thread safe, has C++ support and uses the
+ defaults for everything else. However, it does not work as a drop-in malloc(3)
+ replacement.

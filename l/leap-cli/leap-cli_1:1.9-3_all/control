@@ -1,0 +1,26 @@
+Package: leap-cli
+Version: 1:1.9-3
+Architecture: all
+Maintainer: Micah Anderson <micah@debian.org>
+Installed-Size: 98
+Depends: capistrano (>= 2.15), ruby | ruby-interpreter, ruby-gli (>= 2.12), ruby-json (>= 1.8), ruby-net-ssh (>= 2.7), ruby-ya2yaml (>= 0.31), ruby-base32, ruby-faraday, ruby-fog-aws, ruby-sshkit, ruby-gpgme
+Section: utils
+Priority: optional
+Homepage: https://leap.se
+Description: command-line tool for managing LEAP platform service provider infrastrucutre
+ The leap command line tool is used by sysadmins to manage everything about a
+ service provider’s infrastructure, including:
+ .
+        * Create, initialize, and deploy nodes.
+        * Manage keys and certificates.
+        * Query information about the node configurations.
+        * Everything about your provider is managed by editing JSON
+          configuration files and running leap commands.
+ .
+ The leap command-line tool is run on your workstation, and never on a server
+ you are deploying to.
+ .
+ It is also run from within a provider instance: The leap command requires that
+ the current working directory is a valid provider instance, except when running
+ leap new to create a new provider instance.
+Ruby-Versions: all

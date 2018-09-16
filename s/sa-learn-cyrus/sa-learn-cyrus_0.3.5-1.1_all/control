@@ -1,0 +1,21 @@
+Package: sa-learn-cyrus
+Version: 0.3.5-1.1
+Architecture: all
+Maintainer: Jan Hauke Rahm <jhr@debian.org>
+Installed-Size: 126
+Depends: cyrus-imapd-2.4 | kolab-cyrus-imapd, spamassassin, perl
+Section: web
+Priority: extra
+Homepage: http://www.pollux.franken.de/mail-server-tools/sa-learn-cyrus/
+Description: Train SpamAssassin with spam/ham from user's imap mailbox(es)
+ sa-learn-cyrus is a perl script using sa-learn from the SpamAssassin package
+ to train it knowing spam and ham. sa-learn-cyrus gets its spam and ham
+ messages from Cyrus-imapd mailboxes instead of mbox files or Maildirs as
+ sa-learn does. This is useful for Cyrus users who for example sort their
+ missed spam into a subfolder and let sa-learn-cyrus read it out (e.g. using a
+ cron job).
+ .
+ SpamAssassin is spam filter with numerous features including automatic
+ white-listing, RBL testing, Bayesian analysis, header and body text analysis.
+ .
+ Cyrus is a fully-featured IMAP daemon.

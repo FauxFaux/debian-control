@@ -1,0 +1,16 @@
+Package: jdresolve
+Version: 0.6.1-5.1
+Architecture: all
+Maintainer: Frederic Peters <fpeters@debian.org>
+Installed-Size: 59
+Depends: perl:any, libnet-dns-perl
+Section: utils
+Priority: extra
+Description: fast alternative to apache logresolve
+ The jdresolve application resolves IP addresses into hostnames. To
+ reduce the time necessary to resolve large batches of addresses,
+ jdresolve opens many concurrent connections to the DNS servers, and
+ keeps a large number of text lines in memory. These lines can have
+ any content, as long as the IP addresses are the first field to the
+ left. This is usually the case with most formats of HTTP and FTP log
+ files.

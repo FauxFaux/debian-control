@@ -1,0 +1,27 @@
+Package: libpqtypes-dev
+Source: libpqtypes
+Version: 1.5.1-4
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <pkg-postgresql-public@lists.alioth.debian.org>
+Installed-Size: 94
+Depends: libpq-dev, libpqtypes0 (= 1.5.1-4)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Description: parameterized queries libpq extension - development
+ libpqtypes is a libpq extension that offers a new way of handling
+ parameterized queries and getting result field values. Both putting
+ parameters and getting values use a printf/scanf style interface, with
+ consistent specifiers for both.
+ .
+  * Full support for binary and text format. (parameter and result)
+  * Full support for composites, arrays and composite arrays. (binary format
+    only)
+  * printf style interface to libpq's binary parameterized API. (PQputf)
+  * scanf style interface for getting values: PQgetvalue extension. (PQgetf)
+  * Ability to register user-defined types, aliases and data type sub-classes
+    for use with printf style interfaces: ex. "%mytype".
+  * Per-thread global error message. (PQgeterror)
+  * Online docs as well as man pages.
+ .
+ This package contains the headers and manpages.

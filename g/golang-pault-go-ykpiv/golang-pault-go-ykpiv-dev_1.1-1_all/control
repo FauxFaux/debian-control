@@ -1,0 +1,19 @@
+Package: golang-pault-go-ykpiv-dev
+Source: golang-pault-go-ykpiv
+Version: 1.1-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 75
+Depends: golang-golang-x-crypto-dev, libykpiv-dev, libykpiv1
+Section: devel
+Priority: extra
+Homepage: https://github.com/paultag/go-ykpiv
+Description: high level cgo wrapper around libykpiv.so.1
+ go-ykpiv implements an idiomatic go API fit for use when applications need to
+ communicate with a Yubikey in PIV mode.
+ .
+ Most PIV tokens, Yubikeys included, can be used as a PKCS#11 device using
+ OpenSC, and Yubikeys are even capable of doing Signing and Decryption through
+ that interface. However, some management functions are not exposed in the
+ PKCS#11 OpenSC interface, so this library may be of use when one wants to write
+ a new Certificate, or set PINs.

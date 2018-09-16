@@ -1,0 +1,26 @@
+Package: liblibrary-callnumber-lc-perl
+Version: 0.23-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 34
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Library-CallNumber-LC
+Description: utility functions to deal with Library-of-Congress call numbers
+ Library::CallNumber::LC is mostly designed to do call number normalization,
+ with the following goals:
+ .
+  * The normalized call numbers are comparable with each other, for proper
+    sorting
+  * The normalized call number is a short as possible, so left-anchored
+    wildcard searches are possible (e.g., searching on "A11*" should give you
+    all the A11 call numbers)
+  * A range defined by start_of_range and end_of_range should be correct,
+    assuming that the string given for the end of the range is, in fact, a
+    left prefix
+ .
+ That last point needs some explanation. The idea is that if someone gives a
+ range of, say, A-AZ, what they really mean is A - AZ9999.99. The end_of_range
+ method pads the given call number out to three cutters if need be. There is no
+ attempt to make end_of_range normalization correspond to anything in real life.

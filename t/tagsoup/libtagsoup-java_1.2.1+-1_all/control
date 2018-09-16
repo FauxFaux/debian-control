@@ -1,0 +1,28 @@
+Package: libtagsoup-java
+Source: tagsoup
+Version: 1.2.1+-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 170
+Suggests: libtagsoup-java-doc
+Section: java
+Priority: optional
+Homepage: http://home.ccil.org/~cowan/XML/tagsoup/
+Description: SAX-compliant parser for real-life HTML
+ TagSoup, a SAX-compliant parser written in Java that, instead of parsing
+ well-formed or valid XML, parses HTML as it is found in the wild: poor,
+ nasty and brutish, though quite often far from short. TagSoup is designed
+ for people who have to process this stuff using some semblance of a
+ rational application design.
+ .
+ By providing a SAX interface, it allows standard XML tools to be applied
+ to even the worst HTML. TagSoup also includes a command-line processor
+ that reads HTML files and can generate either clean HTML or well-formed
+ XML that is a close approximation to XHTML.
+ .
+ TagSoup is designed as a parser, not a whole application; it isn't
+ intended to permanently clean up bad HTML, as HTML Tidy does, only to
+ parse it on the fly. Therefore, it does not convert presentation HTML
+ to CSS or anything similar. It does guarantee well-structured results:
+ tags will wind up properly nested, default attributes will
+ appear appropriately, and so on.

@@ -1,0 +1,18 @@
+Package: xen-utils-4.8
+Source: xen
+Version: 4.8.3+xsa267+shim4.10.1+xsa267-1+deb9u9
+Architecture: amd64
+Maintainer: Debian Xen Team <pkg-xen-devel@lists.alioth.debian.org>
+Installed-Size: 1694
+Depends: e2fslibs (>= 1.37), libc6 (>= 2.14), libncurses5 (>= 6), libtinfo5 (>= 6), libxen-4.8 (>= 4.8.3+xsa267+shim4.10.1+xsa267), libxenstore3.0 (>= 4.1.0~rc6), libyajl2 (>= 2.0.4), python2.7, python2.7:any, python:any (>= 2.6.6-7~), xen-utils-common (>= 4.8.3+xsa267+shim4.10.1+xsa267-1+deb9u9)
+Recommends: bridge-utils, xen-hypervisor-4.8, qemu-system-x86, grub-xen-host
+Suggests: qemu-utils, seabios
+Provides: xen-utils
+Built-Using: seabios (= 1.10.2-1)
+Section: kernel
+Priority: optional
+Description: XEN administrative tools
+ The userspace tools to manage a system virtualized through the XEN virtual
+ machine monitor.
+ .
+ qemu-utils and seabios are neded for "Xen HVM" (amd64 and i386)

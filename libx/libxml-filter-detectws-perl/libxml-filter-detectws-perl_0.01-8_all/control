@@ -1,0 +1,30 @@
+Package: libxml-filter-detectws-perl
+Version: 0.01-8
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 36
+Depends: perl, libxml-filter-saxt-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/XML-Filter-DetectWS
+Description: Perl module for detecting ignorable whitespace
+ The XML::Filter::DetectWS module is a PerlSAX filter that detects which
+ character data contains ignorable whitespace and optionally filters it.
+ .
+ The XML spec defines ignorable whitespace as the character data found
+ in elements that were defined in an <!ELEMENT> declaration with a model
+ of 'EMPTY' or 'Children' (Children is the rule that does not contain
+ '#PCDATA').
+ .
+ In addition, XML::Filter::DetectWS allows the user to define other
+ whitespace to be ignorable.  The ignorable whitespace is passed to
+ the PerlSAX Handler with the ignorable_whitespace handler, provided
+ that the Handler implements this method.  Otherwise it is passed to
+ the characters handler.  If the SkipIgnorableWS is set, the ignorable
+ whitespace is simply discarded.  XML::Filter::DetectWS also takes
+ xml:space attributes into account.
+ .
+ CDATA sections are passed in the standard PerlSAX way (i.e. with
+ surrounding start_cdata and end_cdata events), unless the Handler
+ does not implement these methods.  In that case, the CDATA section is
+ simply passed to the characters method.

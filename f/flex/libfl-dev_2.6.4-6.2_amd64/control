@@ -1,0 +1,24 @@
+Package: libfl-dev
+Source: flex
+Version: 2.6.4-6.2
+Architecture: amd64
+Maintainer: Manoj Srivastava <srivasta@debian.org>
+Installed-Size: 145
+Depends: flex (= 2.6.4-6.2), libfl2 (= 2.6.4-6.2)
+Breaks: flex (<< 2.5.39), flex-old (<= 2.5.4a-10)
+Replaces: flex (<< 2.5.39), flex-old (<= 2.5.4a-10)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/westes/flex
+Description: static library for flex (a fast lexical analyzer generator)
+ Flex is a tool for generating scanners: programs which recognized lexical
+ patterns in text. It reads the given input files for a description of a
+ scanner to generate. The description is in the form of pairs of regular
+ expressions and C code, called rules. Flex generates as output a C source
+ file, lex.yy.c, which defines a routine yylex().  This file is compiled
+ and linked with the -lfl library to produce an executable. When the
+ executable is run, it analyzes its input for occurrences of the regular
+ expressions. Whenever it finds one, it executes the corresponding C code.
+ .
+ This package contains the static library for flex.

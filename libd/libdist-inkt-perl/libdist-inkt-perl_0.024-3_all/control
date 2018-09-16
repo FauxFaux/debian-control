@@ -1,0 +1,23 @@
+Package: libdist-inkt-perl
+Version: 0.024-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 92
+Depends: libcpan-changes-perl, libdata-dump-perl, libfile-chdir-perl, liblist-moreutils-perl, libmodule-cpanfile-perl, libmodule-runtime-perl, libmodule-signature-perl, libmoose-perl, libpath-finddev-perl, libpath-iterator-rule-perl, libpath-tiny-perl, librdf-doap-lite-perl, libsoftware-license-perl, libtypes-path-tiny-perl, libtype-tiny-perl, libnamespace-autoclean-perl, libtext-sprintfn-perl, perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Dist-Inkt
+Description: yet another distribution builder
+ Dist::Inkt itself does virtually nothing; it creates an empty
+ directory, generates a MANIFEST file, and then wraps it all up into a
+ gzipped tarball.  But it provides various hooks along the way for
+ subclasses to grab hold of.  So the general idea is that you write a
+ subclass of Dist::Inkt, which consumes various Moose::Roles to do the
+ actual work of populating the distribution with files.
+ .
+ As such, Dist::Inkt is not so much a distribution builder, as it is a
+ framework for writing your own distribution builder.
+ .
+ Several roles of varying utility are bundled with Dist::Inkt, as is
+ Dist::Inkt::Profile::Simple, a subclass of Dist::Inkt which consumes
+ most of these roles.

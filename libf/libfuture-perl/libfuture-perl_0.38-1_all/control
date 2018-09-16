@@ -1,0 +1,30 @@
+Package: libfuture-perl
+Version: 0.38-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 170
+Depends: perl (>= 5.15.8)
+Breaks: libio-async-perl (<< 0.62~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Future
+Description: module for operations awaiting completion
+ A Future object represents an operation that is currently in progress, or
+ has recently completed. It can be used in a variety of ways to manage the
+ flow of control, and data, through an asynchronous program.
+ .
+ Some futures represent a single operation and are explicitly marked as ready
+ by calling the done or fail methods. These are called "leaf" futures here,
+ and are returned by the new constructor.
+ .
+ Other futures represent a collection sub-tasks, and are implicitly marked as
+ ready depending on the readiness of their component futures as required.
+ These are called "dependent" futures here, and are returned by the various
+ wait_* and need_* constructors.
+ .
+ It is intended that library functions that perform asynchronous operations
+ would use Future objects to represent outstanding operations, and allow their
+ calling programs to control or wait for these operations to complete. The
+ implementation and the user of such an interface would typically make use of
+ different methods on the class. The methods below are documented in two
+ sections; those of interest to each side of the interface.

@@ -1,0 +1,24 @@
+Package: python-fuzzywuzzy
+Source: fuzzywuzzy
+Version: 0.16.0-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 67
+Depends: python-levenshtein (>= 0.12), python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Provides: python2.7-fuzzywuzzy
+Section: python
+Priority: optional
+Homepage: https://github.com/seatgeek/fuzzywuzzy
+Description: Python module for fuzzy string matching
+ Various methods for fuzzy matching of strings in Python, including:
+ .
+   - String similarity: Gives a measure of string similarity between 0 and 100.
+   - Partial string similarity: Inconsistent substrings are a common problem
+     when string matching. To get around it, use a "best partial" heuristic
+     when two strings are of noticeably different lengths.
+   - Token sort: This approach involves tokenizing the string in question,
+     sorting the tokens alphabetically, and then joining them back into a
+     string.
+   - Token set: A slightly more flexible approach. Tokenize both strings, but
+     instead of immediately sorting and comparing, split the tokens into two
+     groups: intersection and remainder.

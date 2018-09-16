@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ]
+then
+	for exe in /usr/share/sphinx/scripts/python3/*
+	do
+		# --force is needed for upgrades from older versions which did not
+		# use the alternatives mechanism
+		update-alternatives --force --install /usr/bin/${exe##*/} ${exe##*/} $exe 30
+	done
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-sphinx 
+fi
+
+# End automatically added section
+

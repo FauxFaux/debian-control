@@ -1,0 +1,14 @@
+Package: librust-bytecount+simd-dev
+Source: rust-bytecount
+Version: 0.3.1-1
+Architecture: amd64
+Maintainer: Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-bytecount-dev (= 0.3.1-1), librust-simd-0.2+default-dev
+Provides: librust-bytecount+avx-accel-dev (= 0.3.1-1), librust-bytecount+simd-accel-dev (= 0.3.1-1), librust-bytecount-0+avx-accel-dev (= 0.3.1-1), librust-bytecount-0+simd-accel-dev (= 0.3.1-1), librust-bytecount-0+simd-dev (= 0.3.1-1), librust-bytecount-0.3+avx-accel-dev (= 0.3.1-1), librust-bytecount-0.3+simd-accel-dev (= 0.3.1-1), librust-bytecount-0.3+simd-dev (= 0.3.1-1), librust-bytecount-0.3.1+avx-accel-dev (= 0.3.1-1), librust-bytecount-0.3.1+simd-accel-dev (= 0.3.1-1), librust-bytecount-0.3.1+simd-dev (= 0.3.1-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Count occurrences of a given byte, or the number of UTF-8 code points, in a byte slice, fast - feature "simd"
+ This metapackage enables feature simd for the Rust bytecount crate, by pulling
+ in any additional dependencies needed by that feature.

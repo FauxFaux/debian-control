@@ -1,0 +1,34 @@
+Package: libcgi-application-plugin-captcha-perl
+Version: 0.04-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 32
+Depends: perl, libcgi-application-perl, libgd-securityimage-perl, libdata-random-perl
+Enhances: libcgi-application-perl
+Breaks: libcgi-application-extra-plugin-bundle-perl (<< 0.5)
+Replaces: libcgi-application-extra-plugin-bundle-perl (<< 0.5)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Application-Plugin-CAPTCHA
+Description: module providing CAPTCHA support in CGI::Application
+ CGI::Application::Plugin::CAPTCHA allows programmers to easily add and
+ verify CAPTCHAs in their CGI::Application-derived web applications.
+ A CAPTCHA (or Completely Automated Public Turing Test to Tell Computers
+ and Humans Apart) is an image with a random string of characters.  A user
+ must successfully enter the random string in order to submit a form. This
+ is a simple (yet annoying) procedure for humans to complete, but one that is
+ significantly more difficult for a form-stuffing script to complete without
+ having to integrate some sort of OCR.
+ .
+ CAPTCHAs are not a perfect solution.  Any skilled, diligent cracker will
+ eventually be able to bypass a CAPTCHA, but it should be able to shut down
+ your average script-kiddie.
+ .
+ When a CAPTCHA is created with this module, raw image data is transmitted
+ from your web application to the client browser. A cookie containing a
+ checksum is also transmitted with the image. When the client submits their
+ form for processing (along with their verification of the random string),
+ captcha_verify() generates a checksum of the verification string the user
+ entered. If the newly generated checksum matches the checksum found in the
+ cookie, the CAPTCHA is assumed to have been successfully entered, and the
+ user is allowed to continue processing their form.

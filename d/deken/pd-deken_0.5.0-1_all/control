@@ -1,0 +1,25 @@
+Package: pd-deken
+Source: deken
+Version: 0.5.0-1
+Architecture: all
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 1438
+Depends: puredata-gui
+Recommends: pd-deken-apt, tcllib, tcl-tls
+Suggests: deken
+Section: sound
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/pure-data/deken
+Description: Externals wrangler for Pure Data
+ deken is a simple and easy to use package manager for Pure Data (Pd).
+ .
+ The deken-plugin integrates with the Pd user interface, where you can search
+ for externals and install them with a single click.
+ Since Pd-0.47, the deken-plugin is integrated into Pure Data (but the Debian
+ package provides an updated plugin)
+ .
+ Available backends that provide packages are:
+  - puredata.info (downloads packages via the Pure Data community website and
+    installs them into the per-user installation directory (~/pd-externals))
+  - apt (installs Pd packages the Debian way; packaged as "pd-deken-apt")

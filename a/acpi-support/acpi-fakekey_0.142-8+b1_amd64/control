@@ -1,0 +1,16 @@
+Package: acpi-fakekey
+Source: acpi-support (0.142-8)
+Version: 0.142-8+b1
+Architecture: amd64
+Maintainer: Debian Acpi Team <pkg-acpi-devel@lists.alioth.debian.org>
+Installed-Size: 64
+Depends: libc6 (>= 2.15), libsystemd0, init-system-helpers (>= 1.18~)
+Breaks: acpi-support (<< 0.136-1)
+Replaces: acpi-support (<< 0.136-1)
+Section: admin
+Priority: optional
+Description: tool to generate fake key events
+ This package contains a small tool that can be used to generate key events as
+ if the corresponding key was pressed. It is used by scripts processing ACPI
+ events to translate these events to key presses but can also be used
+ separately.

@@ -1,0 +1,32 @@
+Package: exult-studio
+Source: exult
+Version: 1.2-18
+Architecture: amd64
+Maintainer: Michael Banck <mbanck@debian.org>
+Installed-Size: 1801
+Depends: libc6 (>= 2.14), libfreetype6 (>= 2.2.1), libgcc1 (>= 1:3.0), libgimp2.0 (>= 2.4.0), libglade2-0 (>= 1:2.6.4-2~), libglib2.0-0 (>= 2.24.0), libgtk2.0-0 (>= 2.8.0), libpng16-16 (>= 1.6.2-1), libstdc++6 (>= 5.2), exult
+Recommends: gimp
+Section: contrib/games
+Priority: extra
+Homepage: http://exult.sourceforge.net/
+Description: tools for editing and viewing exult games
+ Includes:
+ .
+   expack       - Command line tool for creating and extracting Flex (.flx)
+                  files. Flex files are used by Ultima 7 to store most
+                  of its data.
+   splitshp     - Command line tool to take a multi-frame shp file and
+                  split it into its individual frames.
+   shp2pcx      - Command line tool to convert shp files to pcx format;
+                  the shp files can be extracted using expack.
+   ucxt         - Tool to translate usecode back into `human readable',
+                  roughly assembly like code. The output can be presented
+                  in a variety of different format, including one which
+                  will, later, have a suitable compiler back into usecode.
+   ucc          - A usecode compiler.
+   exult_studio - An editor for games using the Exult engine.
+ .
+ These are all works in progress.
+ .
+ A GIMP plugin is provided, so that if you have the GIMP installed you
+ can edit and create game graphics with it.

@@ -1,0 +1,15 @@
+Package: golang-github-dchest-safefile-dev
+Source: golang-github-dchest-safefile
+Version: 0.0~git20151022.0.855e8d9-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Section: devel
+Priority: extra
+Homepage: https://github.com/dchest/safefile
+Description: Implements safe "atomic" saving of files for Go
+ Go package safefile implements safe "atomic" saving of files.
+ .
+ Instead of truncating and overwriting the destination file, it creates
+ a temporary file in the same directory, writes to it, and then renames
+ the temporary file to the original name when calling Commit.

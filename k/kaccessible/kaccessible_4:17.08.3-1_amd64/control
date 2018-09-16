@@ -1,0 +1,19 @@
+Package: kaccessible
+Version: 4:17.08.3-1
+Architecture: amd64
+Maintainer: Debian/Kubuntu Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Installed-Size: 129
+Depends: kde-runtime (>> 4:4.10), libc6 (>= 2.14), libkdecore5 (>= 4:4.4.0), libkdeui5 (>= 4:4.3.4), libqt4-dbus (>= 4:4.5.3), libqtcore4 (>= 4:4.8.0), libqtgui4 (>= 4:4.5.3), libspeechd2 (>= 0.7.1), libstdc++6 (>= 5)
+Section: utils
+Priority: optional
+Homepage: http://www.kde.org
+Description: accessibility services for Qt applications
+ kaccessible implements a QAccessibleBridgePlugin to provide accessibility
+ services like focus tracking and a screen reader.
+ .
+ Components:
+  * kaccessibleapp: a D-Bus activation service that acts as proxy.
+  * kaccessiblebridge: a Qt plugin which will be loaded by the QAccessible
+    framework in each Qt and KDE application.
+ .
+ This package is part of the KDE accessibility module.

@@ -1,0 +1,22 @@
+Package: viewvc-query
+Source: viewvc
+Version: 1.1.26-1
+Architecture: all
+Maintainer: Lev Lamberov <dogsleg@debian.org>
+Installed-Size: 70
+Depends: viewvc (= 1.1.26-1), python, python-mysqldb
+Suggests: default-mysql-server
+Section: vcs
+Priority: optional
+Homepage: http://www.viewvc.org/
+Description: utility to query CVS and Subversion commit database
+ ViewVC is a browser (web) interface for CVS and Subversion version
+ control repositories.  It generates templatized HTML to present
+ navigable directory, revision, and change log listings.  It can display
+ specific versions of files as well as diffs between those versions.
+ .
+ This package includes query.cgi (and equivalent FastCGI and mod-python
+ variants): a utility to query a separate CVS and Subversion commit database.
+ You can search for multiple matches by typing comma-separated lists into the
+ text fields.  Regular expressions and wildcards are also supported.  It
+ requires a stand-alone MySQL database server.

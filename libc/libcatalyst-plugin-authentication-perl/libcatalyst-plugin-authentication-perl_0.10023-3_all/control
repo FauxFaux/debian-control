@@ -1,0 +1,29 @@
+Package: libcatalyst-plugin-authentication-perl
+Version: 0.10023-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 219
+Depends: perl, libcatalyst-perl, libcatalyst-plugin-session-perl, libclass-inspector-perl, libmoose-perl, libmoosex-emulate-class-accessor-fast-perl, libmro-compat-perl, libnamespace-autoclean-perl, libstring-rewriteprefix-perl, libtry-tiny-perl
+Breaks: libcatalyst-modules-perl (<< 48~)
+Replaces: libcatalyst-modules-perl (<< 48~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-Plugin-Authentication
+Description: Infrastructure plugin for the Catalyst authentication framework
+ Catalyst::Plugin::Authentication provides generic user support for Catalyst
+ apps. It is the basis for both authentication (checking the user is who they
+ claim to be), and authorization (allowing the user to do what the system
+ authorises them to do).
+ .
+ Using authentication is split into two parts. A Store is used to actually
+ store the user information, and can store any amount of data related to the
+ user. Credentials are used to verify users, using information from the store,
+ given data from the frontend. A Credential and a Store are paired to form a
+ 'Realm'. A Catalyst application using the authentication framework must have
+ at least one realm, and may have several.
+ .
+ To implement authentication in a Catalyst application you need to add this
+ module, and specify at least one realm in the configuration.
+ .
+ Catalyst is an elegant Model-View-Controller web application framework
+ written in Perl.

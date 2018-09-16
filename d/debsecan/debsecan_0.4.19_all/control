@@ -1,0 +1,17 @@
+Package: debsecan
+Version: 0.4.19
+Architecture: all
+Maintainer: Florian Weimer <fw@deneb.enyo.de>
+Installed-Size: 111
+Depends: debconf (>= 0.5) | debconf-2.0, python (>= 2.3), python-apt, ca-certificates
+Recommends: cron, exim4 | mail-transport-agent
+Section: admin
+Priority: optional
+Homepage: https://security-team.debian.org/security_tracker.html
+Description: Debian Security Analyzer
+ debsecan is a tool to generate a list of vulnerabilities which affect
+ a particular Debian installation.  debsecan runs on the host which is
+ to be checked, and downloads vulnerability information over the
+ Internet.  It can send mail to interested parties when new
+ vulnerabilities are discovered or when security updates become
+ available.

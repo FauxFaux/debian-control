@@ -1,0 +1,16 @@
+Package: ssl-cert
+Version: 1.0.39
+Architecture: all
+Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Installed-Size: 63
+Depends: debconf (>= 0.5) | debconf-2.0, openssl (>= 0.9.8g-9), adduser
+Suggests: openssl-blacklist
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Description: simple debconf wrapper for OpenSSL
+ This package enables unattended installs of packages that
+ need to create SSL certificates.
+ .
+ It is a simple wrapper for OpenSSL's certificate request utility that
+ feeds it with the correct user variables.

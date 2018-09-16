@@ -1,0 +1,150 @@
+#!/bin/sh
+# postinst script for prosody
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+case "$1" in
+  configure)
+ 	if ! getent passwd prosody >/dev/null; then
+ 	  adduser --disabled-password --quiet --system \
+ 	    --home "/var/lib/prosody" --no-create-home \
+ 	    --gecos "Prosody XMPP Server" --group prosody
+ 	fi
+
+	# Adding prosody user to the ssl-cert group to use the snakeoil
+	# SSL certificate
+	if getent group ssl-cert >/dev/null ; then
+	    adduser --quiet prosody ssl-cert
+	fi
+
+ 	# Create directory for log files
+ 	if [ ! -d "/var/log/prosody" ]; then
+ 		install -d -o prosody -g adm -m 750 "/var/log/prosody";
+ 	fi
+	if ! dpkg-statoverride --list "/var/log/prosody" >/dev/null; then
+		chown prosody:adm "/var/log/prosody"
+		chmod 750 "/var/log/prosody"
+	fi
+
+ 	# Create data directory
+ 	if [ ! -d "/var/lib/prosody" ]; then
+ 		install -d -o prosody -g prosody -m 750 "/var/lib/prosody";
+ 	fi
+	if ! dpkg-statoverride --list "/var/lib/prosody" >/dev/null; then
+		chown prosody:prosody "/var/lib/prosody"
+		chmod 750 "/var/lib/prosody"
+	fi
+
+	# Fix config directory permissions
+	if ! dpkg-statoverride --list "/etc/prosody" >/dev/null; then
+		chown root:root "/etc/prosody"
+		chmod 755 "/etc/prosody"
+	fi
+
+	# Fix config file permissions
+	if ! dpkg-statoverride --list "/etc/prosody/prosody.cfg.lua" >/dev/null; then
+		for f in "/etc/prosody/prosody.cfg.lua" \
+			 /etc/prosody/prosody.cfg.lua.dpkg*; do
+			if [ -f $f ]; then
+			    chown root:prosody $f
+			    chmod 640 $f
+			fi
+		done
+	fi
+
+	# Create subdirs for conf files
+ 	if [ ! -d "/etc/prosody/conf.d" ]; then
+ 		install -d -o root -g prosody -m 754 "/etc/prosody/conf.d";
+ 	fi
+	if ! dpkg-statoverride --list "/etc/prosody/conf.d" >/dev/null; then
+		chown root:prosody "/etc/prosody/conf.d"
+		chmod 754 "/etc/prosody/conf.d"
+	fi
+
+ 	if [ ! -d "/etc/prosody/conf.avail" ]; then
+ 		install -d -o root -g prosody -m 754 "/etc/prosody/conf.avail";
+ 	fi
+	if ! dpkg-statoverride --list "/etc/prosody/conf.avail" >/dev/null; then
+		chown root:prosody "/etc/prosody/conf.avail"
+		chmod 754 "/etc/prosody/conf.avail"
+	fi
+
+	# Create config symlink
+	# Do it only if it's a fresh install or upgrade from version
+	# less than 0.8.2-2~, allowing admin to safely remove it.
+	if dpkg --compare-versions "$2" lt "0.8.2-2~" ; then
+	    if [ ! -f /etc/prosody/conf.d/localhost.cfg.lua ] ; then
+		ln -s ../conf.avail/localhost.cfg.lua /etc/prosody/conf.d/
+	    fi
+	fi
+
+	# Create directory for SSL certificate and key
+ 	if [ ! -d "/etc/prosody/certs" ]; then
+ 		install -d -o root -g prosody -m 750 "/etc/prosody/certs";
+ 	fi
+	if ! dpkg-statoverride --list "/etc/prosody/certs" >/dev/null; then
+		chown root:prosody "/etc/prosody/certs"
+		chmod 750 "/etc/prosody/certs"
+	fi
+
+	if grep -q 'require "util.ztact"' /etc/prosody/prosody.cfg.lua; then
+		# Upgrade config from pre-0.8.0 (removes util.ztact usage)
+		echo "Deprecated method for including conf.d/* detected in"\
+		     "prosody.cfg.lua. Fixing config file in-place, current version"\
+		     "will be saved as /etc/prosody/prosody.cfg.lua.dpkg-bak" >&2;
+		sed -e 's|^local ztact = require "util.ztact"$||'\
+		-e 'T;: loop;N;s|^--------*$||m;t end;b loop;:end; i\' \
+		-e 'Include "conf.d/*.cfg.lua"' \
+		-e 'd' -i.dpkg-bak /etc/prosody/prosody.cfg.lua;
+	fi
+  ;;
+  abort-upgrade|abort-remove|abort-deconfigure)
+  ;;
+  *)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+  ;;
+esac
+
+# Automatically added by dh_installinit/11.3.2
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/prosody" ]; then
+		update-rc.d prosody defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d prosody $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.2
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'prosody.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'prosody.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'prosody.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'prosody.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

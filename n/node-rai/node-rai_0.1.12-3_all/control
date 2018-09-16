@@ -1,0 +1,21 @@
+Package: node-rai
+Version: 0.1.12-3
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 39
+Depends: nodejs, ssl-cert
+Section: web
+Priority: extra
+Homepage: https://github.com/andris9/rai
+Description: Request-Answer-Interface for generating text based command servers (SMTP,POP)
+ rai is a node.js module to easily generate text based command line servers.
+ When a client sends something to the server, the first word of the line is
+ treated as a command and the rest of the line as binary payload.
+ .
+ In addition to line based commands, there's also a data mode, to transmit
+ everygting received. And there's also an option to switch to TLS mode for
+ secure connections.
+ .
+ This way it is trivial to create SMTP, POP3 or similar servers.
+ .
+ Node.js is an event-based server-side JavaScript engine.

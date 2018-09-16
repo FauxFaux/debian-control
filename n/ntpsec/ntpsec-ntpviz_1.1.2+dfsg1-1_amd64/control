@@ -1,0 +1,24 @@
+Package: ntpsec-ntpviz
+Source: ntpsec
+Version: 1.1.2+dfsg1-1
+Architecture: amd64
+Maintainer: Richard Laager <rlaager@wiktel.com>
+Installed-Size: 220
+Depends: adduser, fonts-liberation, gnuplot, python3 (>= 3.3), python3-ntp, systemd | cron | cron-daemon
+Recommends: ntpsec, systemd | python3-psutil, apache2 (>= 2.4.6-4~) | httpd
+Suggests: python, python-gps
+Section: net
+Priority: optional
+Homepage: https://www.ntpsec.org
+Description: NTP statistics graphing utility
+ NTP, the Network Time Protocol, is used to keep computer clocks
+ accurate by synchronizing them over the Internet or a local network,
+ or by following an accurate hardware receiver that interprets GPS,
+ DCF-77, or similar time signals.
+ .
+ ntpviz analyzes NTP log files and generates statistical plots from
+ them.  The output is in the form of HTML with images.  If Apache is
+ installed, it will be served at: /ntpviz
+ .
+ This is part of NTPsec.  NTPsec is a secure, hardened, and improved
+ implementation derived from the original NTP project.

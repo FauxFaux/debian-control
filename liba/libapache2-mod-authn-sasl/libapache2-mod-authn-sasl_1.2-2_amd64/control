@@ -1,0 +1,19 @@
+Package: libapache2-mod-authn-sasl
+Version: 1.2-2
+Architecture: amd64
+Maintainer: Ulises Vitulli <dererk@debian.org>
+Installed-Size: 95
+Depends: libapr1 (>= 1.2.7), libc6 (>= 2.2.5), libsasl2-2 (>= 2.1.24), sasl2-bin, apache2-api-20120211
+Section: httpd
+Priority: extra
+Homepage: http://mod-authn-sasl.sourceforge.net/
+Description: SASL authentication backend provider for Apache
+ This module provides the mod_auth_basic authentication front-end
+ a way to authenticate users by checking credentials via the Cyrus SASL library.
+ .
+ Username and password are checked against the SASL password checking backends,
+ kerberos5, pam, rimap, shadow and ldap are some of the supported mechanisms.
+ .
+ One of the interesting parts of using a SASL backend is that you do not need
+ to elevate Apache HTTPD's access rights to superuser privileges, even when
+ validating through shadow database.

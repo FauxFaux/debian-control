@@ -1,0 +1,22 @@
+Package: node-nan
+Version: 2.10.0-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 288
+Depends: nodejs (>= 6.11.2~dfsg-1~)
+Section: javascript
+Priority: optional
+Homepage: https://github.com/nodejs/nan
+Description: Native Abstractions for Node.js
+ A header file filled with macro and utility goodness for making addon
+ development for Node.js easier across versions 0.8, 0.10 and 0.11, and
+ eventually 0.12.
+ .
+ Thanks to the crazy changes in V8 (and some in Node core), keeping
+ native addons compiling happily across versions, particularly 0.10 to
+ 0.11/0.12, is a minor nightmare. The goal of this project is to store
+ all logic necessary to develop native Node.js addons without having to
+ inspec NODE_MODULE_VERSION and get yourself into a macro-tangle.
+ .
+ This project also contains some helper utilities that make addon
+ development a bit more pleasant.

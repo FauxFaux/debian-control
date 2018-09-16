@@ -1,0 +1,44 @@
+Package: lua-torch-nn
+Version: 0~20171002-g8726825+dfsg-4
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 1381
+Depends: libtorch-thnn-dev (>= 0~20171002-g8726825+dfsg-4), lua-torch-torch7, lua-moses (>= 2.0.0~), luajit | lua5.1
+Suggests: luajit
+Section: interpreters
+Priority: optional
+Homepage: https://github.com/torch/nn
+Description: Neural Network Package for Torch Framework
+ This package provides an easy and modular way to build and train
+ simple or complex neural networks using Torch Framework:
+ .
+  * Modules are the bricks used to build neural networks.
+    Each are themselves neural networks, but can be combined with
+    other networks using containers to create complex neural networks:
+ .
+    + Module: abstract class inherited by all modules.
+    + Containers: container classes.
+    + Transfer functions: non-linear functions.
+    + Simple layers: simple network layer like `Linear`.
+    + Table layers: layers for manipulating `table`s.
+    + Convolution layers: several kinds of convolutions.
+ .
+  * Criterions compute a gradient according to a given loss function
+    given an input and a target:
+ .
+    + Criterions: a list of all criterions.
+    + `MSECriterion`: the Mean Squared Error criterion used for regression;
+    + `ClassNLLCriterion`: the Negative Log Likelihood criterion used for
+      classification.
+ .
+  * Additional documentation:
+ .
+   + Overview of the package essentials including modules, containers
+     and training.
+   + Training: how to train a neural network using optim.
+   + Testing: how to test your modules.
+   + Experimental Modules: a package containing experimental modules and
+     criteria.
+ .
+ This package is a core part of the Torch Framework.
+Lua-Versions: 5.1

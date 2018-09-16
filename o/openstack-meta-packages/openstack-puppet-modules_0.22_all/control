@@ -1,0 +1,19 @@
+Package: openstack-puppet-modules
+Source: openstack-meta-packages
+Version: 0.22
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 11
+Depends: puppet-module-aodh, puppet-module-arioch-redis, puppet-module-barbican, puppet-module-camptocamp-openssl, puppet-module-ceilometer, puppet-module-ceph, puppet-module-cinder, puppet-module-cloudkitty, puppet-module-congress, puppet-module-designate, puppet-module-glance, puppet-module-gnocchi, puppet-module-heat, puppet-module-horizon, puppet-module-ironic, puppet-module-keystone, puppet-module-manila, puppet-module-michaeltchapman-galera, puppet-module-murano, puppet-module-neutron, puppet-module-nova, puppet-module-openstack-extras, puppet-module-openstacklib, puppet-module-oslo, puppet-module-ovn, puppet-module-puppetlabs-apache (>= 3.1.0), puppet-module-puppetlabs-haproxy, puppet-module-puppetlabs-concat, puppet-module-puppetlabs-mongodb, puppet-module-puppetlabs-ntp, puppet-module-puppetlabs-rabbitmq, puppet-module-puppetlabs-rsync, puppet-module-puppetlabs-tftp, puppet-module-puppetlabs-vcsrepo, puppet-module-richardc-datacat, puppet-module-sahara, puppet-module-saz-rsyslog, puppet-module-saz-ssh, puppet-module-sbitio-monit, puppet-module-swift, puppet-module-theforeman-dns, puppet-module-voxpupuli-corosync, puppet-module-vswitch
+Section: net
+Priority: optional
+Homepage: http://openstack.alioth.debian.org/
+Description: Metapackage to install all OpenStack puppet modules
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ This metapackage will install all puppet modules needed to deploy an OpenStack
+ cloud. This is to install on a puppet-master node, then you can use Hiera to
+ compose your roles.

@@ -1,0 +1,23 @@
+Package: prometheus-varnish-exporter
+Source: prometheus-varnish-exporter (1.2-1)
+Version: 1.2-1+b3
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 5273
+Depends: libc6 (>= 2.3.2), daemon
+Built-Using: golang-1.10 (= 1.10-1), golang-github-beorn7-perks (= 0.0~git20160804.0.4c0e845-1), golang-github-prometheus-client-golang (= 0.8.0-2), golang-github-prometheus-client-model (= 0.0.2+git20150212.12.fa8ad6f-2), golang-github-prometheus-common (= 0+git20180110.89604d1-1), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-1), golang-procfs (= 0+git20170703.e645f4e-1), golang-protobuf-extensions (= 1.0.0-2)
+Section: devel
+Priority: extra
+Homepage: https://github.com/jonnenauha/prometheus_varnish_exporter
+Description: Prometheus exporter for Varnish
+ Prometheus exporter for Varnish metrics.
+ .
+ prometheus-varnish-exporter scrapes the varnishstat -j JSON output on
+ each Prometheus collect and exposes all reported metrics. Metrics with
+ multiple backends or Varnish defined identifiers (e.g. VBE.*.happy
+ SMA.*.c_bytes LCK.*.creat) and other metrics with similar structure
+ (e.g. MAIN.fetch_*) are combined under a single metric name with
+ distinguishable labels. Vanish naming conventions are preserved as much
+ as possible to be familiar to Varnish users when building queries,
+ while at the same time trying to following Prometheus conventions like
+ lower casing and using _ separators.

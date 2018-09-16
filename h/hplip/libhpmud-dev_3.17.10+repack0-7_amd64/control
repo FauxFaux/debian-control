@@ -1,0 +1,30 @@
+Package: libhpmud-dev
+Source: hplip
+Version: 3.17.10+repack0-7
+Architecture: amd64
+Maintainer: Debian Printing Team <debian-printing@lists.debian.org>
+Installed-Size: 124
+Depends: libhpmud0 (= 3.17.10+repack0-7)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://developers.hp.com/hp-linux-imaging-and-printing
+Description: HP Multi-Point Transport Driver (hpmud) development libraries
+ The HP Linux Printing and Imaging System provides full support for
+ printing on most HP SFP (single function peripheral) inkjets and many
+ LaserJets, and for scanning, sending faxes and for photo-card access on
+ most HP MFP (multi-function peripheral) printers.
+ .
+ Shared library that provides direct I/O for each process. Prior to
+ hpmud, all I/O was serialized through hpiod, a monolithic I/O processor.
+ The new hpmud direct I/O is faster. Hpmud supports parallel, USB and
+ JetDirect connectivity.
+ .
+ With hpmud, HPLIP no longer has Linux specific libusb extensions. This
+ means any UNIX/Linux derivative that supports libusb may work with
+ HPLIP. A public HPLIP "C" API is exposed through hpmud. See hpmud.h
+ for documentation. A Python wrapper for hpmud, called hpmudext, is also
+ available.
+ .
+ This package contains the development headers necessary if you wish
+ to build packages depending on libhpmud.

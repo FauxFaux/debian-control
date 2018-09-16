@@ -1,0 +1,25 @@
+Package: python-ptrace
+Version: 0.9.3-2.1
+Architecture: all
+Maintainer: Pierre Chifflier <pollux@debian.org>
+Installed-Size: 309
+Depends: python (<< 2.8), python (>= 2.7), python:any (>= 2.6.6-7~)
+Provides: python2.7-ptrace
+Section: python
+Priority: optional
+Homepage: https://github.com/vstinner/python-ptrace
+Description: Python bindings for ptrace
+ This package provides Python bindings for the ptrace library. It allows
+ controlling, debugging, or modifying processes using the ptrace syscall.
+ .
+ Features:
+  * High level Python object API
+  * Able to control multiple processes: catch fork events
+  * Read/write bytes to arbitrary addresses
+  * Execution step by step using ptrace_singlestep() or hardware int 3
+  * Can use distorm disassembler
+  * Dump registers, memory mappings, stack, etc.
+  * Syscall tracer and parser (strace command)
+ .
+ This package provides the ptrace Python module for Python 2.x.
+Python-Version: 2.7

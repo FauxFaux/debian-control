@@ -1,0 +1,23 @@
+Package: libshell-posix-select-perl
+Version: 0.08-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 118
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Shell-POSIX-Select
+Description: POSIX Shell's "select" loop for Perl
+ Shell::POSIX::Select implements the select loop of the "POSIX" shells (Bash,
+ Korn, and derivatives) for Perl. That loop is unique in two ways: it's by far
+ the friendliest feature of any UNIX shell, and it's the only UNIX shell loop
+ that's missing from the Perl language. Until now!
+ .
+ What's so great about this loop? It automates the generation of a numbered
+ menu of choices, prompts for a choice, proofreads that choice and complains if
+ it's invalid (at least in this enhanced implementation), and executes a
+ code-block with a variable set to the chosen value. That saves a lot of coding
+ for interactive programs -- especially if the menu consists of many values!
+ .
+ The benefit of bringing this loop to Perl is that it obviates the need for
+ future programmers to reinvent the Choose-From-A-Menu wheel.

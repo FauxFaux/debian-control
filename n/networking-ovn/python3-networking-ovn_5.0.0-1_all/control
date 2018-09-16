@@ -1,0 +1,22 @@
+Package: python3-networking-ovn
+Source: networking-ovn
+Version: 5.0.0-1
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 1302
+Depends: python3-babel, python3-futurist (>= 1.2.0), python3-netaddr (>= 0.7.13), python3-neutron (>= 2:13.0.0~rc1), python3-sqlalchemy (>= 1.2.0), python3-neutron-lib (>= 1.18.0), python3-openssl (>= 17.1.0), python3-openvswitch (>= 2.8.0), python3-oslo.config (>= 1:5.2.0), python3-ovsdbapp (>= 0.10.0), python3-pbr (>= 2.0.0), python3-six (>= 1.10.0), python3-tenacity (>= 4.4.0), python3:any
+Breaks: python-networking-ovn
+Replaces: python-networking-ovn
+Section: python
+Priority: optional
+Homepage: http://github.com/openstack/networking-ovn
+Description: OpenStack virtual network service - OVN driver
+ Neutron provides an API to dynamically request and configure virtual networks.
+ These networks connect "interfaces" from other OpenStack services (such as
+ vNICs from Nova VMs). The Neutron API supports extensions to provide advanced
+ network capabilities, including QoS, ACLs, and network monitoring.
+ .
+ OVN provides virtual networking for Open vSwitch and is a component of the
+ Open vSwitch project.
+ .
+ This package provides the OpenStack driver for the Open vSwitch OVN SDN.

@@ -1,0 +1,19 @@
+Package: lua-torch-nngraph
+Version: 0~20170208-g3ed3b9b-3
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 1796
+Depends: lua5.1 | luajit, lua-torch-torch7, lua-torch-nn, lua-torch-graph
+Suggests: graphviz
+Section: interpreters
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/torch/nngraph
+Description: Neural Network Graph Package for Torch Framework
+ This package provides graphical computation for `nn` library in Torch.
+ The aim of this library is to provide users of `nn` package with tools to
+ easily create complicated architectures. Any given `nn` `module` is going
+ to be bundled into a graph node. The `__call__` operator of an instance of
+ `nn.Module` is used to create architectures as if one is writing function
+ calls.
+Lua-Versions: 5.1

@@ -1,0 +1,17 @@
+Package: dracut
+Version: 048+80-1
+Architecture: all
+Maintainer: Thomas Lange <lange@debian.org>
+Installed-Size: 26
+Depends: dracut-core (>= 048+80-1), dracut-core (<< 048+80-1+b+~)
+Suggests: dracut-network
+Conflicts: initramfs-tools, live-tools
+Provides: linux-initramfs-tool
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.kernel.org/pub/linux/utils/boot/dracut/dracut.html
+Description: dracut is an event driven initramfs infrastructure
+ This package builds a bootable initramfs for Linux kernel packages.  The
+ initramfs is loaded along with the kernel and is responsible for
+ mounting the root filesystem and starting the main init system.

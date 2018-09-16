@@ -1,0 +1,29 @@
+Package: python3-buildbot-worker
+Source: buildbot
+Version: 1.4.0-1
+Architecture: all
+Maintainer: Python Applications Packaging Team <python-apps-team@lists.alioth.debian.org>
+Installed-Size: 266
+Depends: python3-future, python3-twisted (>= 17.9.0), python3:any, passwd, lsb-base
+Recommends: bzr | subversion | cvs | mercurial | darcs | git
+Breaks: buildbot (<< 1.0), buildbot-slave (<< 1.0)
+Section: devel
+Priority: optional
+Homepage: https://buildbot.net
+Description: System to automate the compile/test cycle (worker agent)
+ The BuildBot is a system to automate the compile/test cycle required
+ by most software projects to validate code changes. By automatically
+ rebuilding and testing the tree each time something has changed,
+ build problems are pinpointed quickly, before other developers are
+ inconvenienced by the failure. The guilty developer can be identified
+ and harassed without human intervention.
+ .
+ By running the builds on a variety of platforms, developers who do
+ not have the facilities to test their changes everywhere before
+ checkin will at least know shortly afterwards whether they have
+ broken the build or not. Warning counts, lint checks, image size,
+ compile time, and other build parameters can be tracked over time,
+ are more visible, and are therefore easier to improve.
+ .
+ This package contains the worker, which performs the actual builds.
+ It is recommended to run the worker on behalf of a non-privileged user.

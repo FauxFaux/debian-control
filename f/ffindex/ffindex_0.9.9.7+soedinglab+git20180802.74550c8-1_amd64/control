@@ -1,0 +1,17 @@
+Package: ffindex
+Version: 0.9.9.7+soedinglab+git20180802.74550c8-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 217
+Depends: libffindex0 (= 0.9.9.7+soedinglab+git20180802.74550c8-1), libc6 (>= 2.15), libopenmpi3
+Section: science
+Priority: optional
+Homepage: http://www.splashground.de/~andy/programs/FFindex/
+Description: simple index/database for huge amounts of small files
+ FFindex is a very simple index/database for huge amounts of small files. The
+ files are stored concatenated in one big data file, separated by '\0'. A
+ second file contains a plain text index, giving name, offset and length of
+ the small files. The lookup is currently done with a binary search on an
+ array made from the index file.
+ .
+ This package provides the executables.

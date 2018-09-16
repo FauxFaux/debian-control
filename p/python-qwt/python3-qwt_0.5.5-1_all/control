@@ -1,0 +1,29 @@
+Package: python3-qwt
+Source: python-qwt
+Version: 0.5.5-1
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 807
+Depends: python3-numpy, python3:any (>= 3.3.2-2~), python3-pyqt4
+Section: python
+Priority: extra
+Homepage: https://github.com/PierreRaybaut/qwt
+Description: Pure Python implementation of Qwt - Python 3
+ The qwt package is a pure Python implementation of Qwt C++ library
+ with the following limitations.
+ .
+ The following `Qwt` classes won't be reimplemented in `qwt` because most
+ powerful features already exist in `guiqwt`:
+   * QwtPlotZoomer
+   * QwtCounter
+   * QwtEventPattern
+   * QwtPicker
+   * QwtPlotPicker
+ .
+ QwtClipper is not implemented yet (and it will probably be very
+ difficult or impossible to implement it in pure Python without
+ performance issues).  As a consequence, when zooming in a plot curve,
+ the entire curve is still painted (in other words, when working with
+ large amount of data, there is no performance gain when zooming in).
+ .
+ This is the Python 3 version of the package.

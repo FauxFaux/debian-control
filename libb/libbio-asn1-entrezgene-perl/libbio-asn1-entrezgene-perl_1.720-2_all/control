@@ -1,0 +1,24 @@
+Package: libbio-asn1-entrezgene-perl
+Version: 1.720-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 103
+Depends: perl, libbio-perl-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Bio-ASN1-EntrezGene
+Description: parser for NCBI Entrez Gene and NCBI Sequence records
+ Bio::ASN1::EntrezGene and Bio::ASN1::Sequence are regular expression-based
+ parsers for NCBI Entrez Gene genome databases
+ (<http://www.ncbi.nih.gov/entrez/query.fcgi?db=gene>).
+ .
+ They parse ASN.1-formatted Entrez Gene records and NCBI sequences,
+ returning data structures that contain all data items from the gene records
+ or the sequence records.
+ .
+ The parser will report error & line number if input data does not conform to
+ the NCBI Entrez Gene genome or NCBI Sequence annotation file format.
+ .
+ Bio::ASN1::Sequence is basically a modified version of the high-performance
+ Bio::ASN1::EntrezGene parser. However this standalone module exists since it
+ is more efficient to keep Sequence-specific code out of EntrezGene.pm.

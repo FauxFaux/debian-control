@@ -1,0 +1,21 @@
+Package: mpdscribble
+Version: 0.22-5
+Architecture: amd64
+Maintainer: mpd maintainers <pkg-mpd-maintainers@lists.alioth.debian.org>
+Installed-Size: 89
+Depends: libc6 (>= 2.4), libglib2.0-0 (>= 2.16.0), libmpdclient2 (>= 2.9), libsoup2.4-1 (>= 2.4.0), debconf (>= 0.5) | debconf-2.0, init-system-helpers (>= 1.18~), ucf, adduser, lsb-base
+Suggests: mpd
+Provides: mpd-client
+Section: sound
+Priority: optional
+Homepage: http://mpd.wikia.com/wiki/Client:Mpdscribble
+Description: Last.fm reporting client for mpd
+ Music Player Daemon client which collects information about played tracks and
+ submits them to the Last.fm social music network (formerly known as
+ Audioscrobbler). If submission servers are not reachable, submissions are
+ enqueued and stored on disk cache.
+ .
+ The client can be also configured to use other scrobbling services like
+ Libre.fm.
+ .
+ This package contains daemon which can be optionally installed system wide.

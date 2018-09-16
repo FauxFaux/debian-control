@@ -1,0 +1,37 @@
+Package: xfonts-traditional
+Version: 1.8.0
+Architecture: all
+Maintainer: Ian Jackson <ijackson@chiark.greenend.org.uk>
+Installed-Size: 117
+Depends: xfonts-utils, pcf2bdf, libsys-cpu-perl, debconf (>= 0.5) | debconf-2.0, perl:any
+Section: x11
+Priority: optional
+Description: Traditional fixed-width fonts for X
+ Provides "traditional" versions of fixed-width fonts.
+ .
+ These are a set of fonts (including 6x13 "fixed"), with foundry name
+ "trad" instead of "misc", with several glyphs replaced with earlier
+ versions from before Markus Kuhn's changes:
+  - balanced  ` '
+  - less tall  [ ] ( ) { }
+  - centred  *
+  - high  ~
+  - slightly higher  &
+  - traditional appearance of  W a
+  - in 10x20, versions of ; : , . matching ` ' and each other
+ .
+ These changes make the fonts compatible with the US-ASCII character
+ set.  (UTF-8 is not compatible with ASCII in its usage of the
+ backquote and some other characters.)  With these fonts, pre-2000
+ documents (including ASCII art and GNU manuals) will render
+ correctly.
+ .
+ Additionally, we provide ASCII-compatible versions of several Neep
+ fonts (replacing "jmk" with "trad.jmk" in the foundry name).
+ .
+ Optionally, this package will edit your system configuration to make
+ the default fonts used by xterm refer to the traditional font.
+ .
+ (This package does not actually contain the bulk of the font data;
+ rather, it automatically generates the required modified fonts for
+ each relevant font you have installed.)

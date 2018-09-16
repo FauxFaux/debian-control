@@ -1,0 +1,19 @@
+Package: libchipcard-tools
+Source: libchipcard
+Version: 5.1.0beta-2
+Architecture: amd64
+Maintainer: Micha Lenk <micha@debian.org>
+Installed-Size: 146
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: libc6 (>= 2.14), libchipcard6 (>= 4.99.4), libgcc1 (>= 1:3.0), libgwenhywfar60 (>= 4.17.0), libstdc++6 (>= 5.2), libchipcard-data (>= 5.1.0beta-2)
+Breaks: libchipcardd0 (<< 4.2.7)
+Replaces: libchipcardd0 (<< 4.2.7)
+Section: misc
+Priority: optional
+Homepage: http://www.aquamaniac.de/sites/libchipcard/
+Description: tools for accessing chipcards
+ libchipcard provides an API for accessing smartcards. Examples are
+ memory cards, as well as HBCI (home banking), German GeldKarte
+ (electronic small change), and KVK (health insurance) cards.
+ .
+ This package contains tools for chipcards, e.g. geldkarte.

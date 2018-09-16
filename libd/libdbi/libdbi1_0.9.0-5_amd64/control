@@ -1,0 +1,19 @@
+Package: libdbi1
+Source: libdbi
+Version: 0.9.0-5
+Architecture: amd64
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 93
+Depends: libc6 (>= 2.14)
+Breaks: libapache2-mod-log-sql-dbi (<= 1.100-11), libdbd-freetds (<< 0.9.0-2), libdbd-mysql (<< 0.9.0-2), libdbd-pgsql (<< 0.9.0-2), libdbd-sqlite (<< 0.9.0-2), libdbd-sqlite3 (<< 0.9.0-2)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://libdbi.sourceforge.net/
+Description: DB Independent Abstraction Layer for C -- shared library
+ libdbi implements a database-independent abstraction layer in C, similar to
+ the DBI/DBD layer in Perl. Writing one generic set of code, programmers can
+ leverage the power of multiple databases and multiple simultaneous database
+ connections by using this framework.
+ .
+ This package is the shared library.

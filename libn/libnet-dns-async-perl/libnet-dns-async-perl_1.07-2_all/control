@@ -1,0 +1,26 @@
+Package: libnet-dns-async-perl
+Version: 1.07-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 24
+Depends: perl, libnet-dns-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Net-DNS-Async
+Description: Asynchronous DNS helper for high volume perl applications
+ Net::DNS::Async is a fire-and-forget asynchronous DNS helper.
+ That is, the user application adds DNS questions to the helper, and
+ the callback will be called at some point in the future without
+ further intervention from the user application. The application need
+ not handle selects, timeouts, waiting for a response or any other
+ such issues.
+ .
+ If the same query is added to the queue more than once, the module
+ may combine the queries; that is, it will perform the query only
+ once, and will call each callback registered for that query in turn,
+ passing the same Net::DNS::Response object to each query. For this
+ reason, you should not modify the Net::DNS::Response object in any
+ way lest you break things horribly for a subsequent callback.
+ .
+ This module is similar in principle to POE::Component::Client::DNS, but
+ does not require POE.

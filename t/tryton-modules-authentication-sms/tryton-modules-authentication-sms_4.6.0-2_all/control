@@ -1,0 +1,27 @@
+Package: tryton-modules-authentication-sms
+Version: 4.6.0-2
+Architecture: all
+Maintainer: Debian Tryton Maintainers <team+tryton-team@tracker.debian.org>
+Installed-Size: 83
+Depends: python3-pkg-resources, tryton-server (>= 4.6), python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: http://www.tryton.org/
+Description: Tryton Application Platform (Authentication SMS Module)
+ Tryton is a high-level general purpose application platform. It is the base
+ of a complete business solution as well as a comprehensive health and hospital
+ information system (GNUHealth).
+ .
+ This module allows one to authenticate users via SMS. There are two
+ authentication methods which can be used in the authentications list of the
+ session section in the configuration:
+ .
+ The sms method just sends a code via SMS to the user. This code can directly
+ be used in the login dialog.
+ .
+ The password_sms method sends a code only after the user entered a valid
+ password providing a two-factor authentication method
+ (https://en.wikipedia.org/wiki/Two-factor_authentication).
+ .
+ Both methods require that the user has a *mobile* phone number defined
+ otherwise he can not be authenticated with those methods.

@@ -1,0 +1,17 @@
+Package: olpc-powerd
+Source: olpc-powerd (23-2)
+Version: 23-2+b2
+Architecture: amd64
+Maintainer: Andres Salomon <dilinger@debian.org>
+Installed-Size: 713
+Depends: libc6 (>= 2.7), ethtool
+Recommends: iptables
+Section: admin
+Priority: optional
+Description: OLPC XO power management support daemon
+ The powerd daemon can function as an easily customizable replacement for ohmd
+ (independent of X, dbus, and hald).  This package provides the powerd
+ and olpc-switchd daemons, and related utilities.  The olpc-switchd daemon
+ simply provides notifications about lid and switch events.  The powerd daemon
+ controls display dimming, automatically putting an XO to sleep after a period
+ of idleness, etc.

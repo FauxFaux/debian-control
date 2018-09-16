@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ]
+then
+	for exe in /usr/share/sphinx/scripts/python2/*
+	do
+		# --force is needed for upgrades from older versions which did not
+		# use the alternatives mechanism
+		update-alternatives --force --install /usr/bin/${exe##*/} ${exe##*/} $exe 20
+	done
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-sphinx 
+fi
+
+# End automatically added section
+

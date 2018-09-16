@@ -1,0 +1,25 @@
+Package: liblemonldap-ng-manager-perl
+Source: lemonldap-ng
+Version: 1.9.17-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 1597
+Pre-Depends: debconf
+Depends: perl, libconvert-pem-perl, libcrypt-openssl-rsa-perl, libhtml-template-perl, libjs-angularjs (>= 1.4), libjs-bootstrap, libjs-es5-shim, libjs-jquery, libjson-perl, liblemonldap-ng-common-perl (= 1.9.17-1), liblemonldap-ng-handler-perl (= 1.9.17-1), libmoose-perl, libplack-perl, libwww-perl
+Recommends: lemonldap-ng-doc (= 1.9.17-1), libapache-session-browseable-perl, lemonldap-ng-fastcgi-server (= 1.9.17-1) | libapache2-mod-fcgid | libapache2-mod-fastcgi, libjson-xs-perl, libhttp-parser-xs-perl, liblwp-protocol-https-perl, libmouse-perl, libxml-libxml-perl, libxml-libxslt-perl, libxml-simple-perl
+Suggests: libclone-perl
+Section: perl
+Priority: optional
+Homepage: https://lemonldap-ng.org/
+Description: Lemonldap::NG manager part
+ Lemonldap::NG is a complete Web-SSO system that can run with reverse-proxies
+ or directly on application webservers. It can be used in conjunction with
+ OpenID-Connect, CAS and SAML systems as identity or service provider. It can
+ also be used as proxy between those federation systems.
+ .
+ It manages both authentication and authorization and provides headers for
+ accounting. So you can have a full AAA protection. Authorization are built by
+ associating a regular expression and a rule. Regular expression is applied on
+ the requested URL and the rule calculates if the user is authorized.
+ .
+ Lemonldap::NG::Manager provides the administration interface.

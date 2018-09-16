@@ -1,0 +1,22 @@
+Package: systemtap-client
+Source: systemtap
+Version: 3.3-1
+Architecture: amd64
+Maintainer: Ritesh Raj Sarraf <rrs@debian.org>
+Installed-Size: 36
+Depends: avahi-utils, unzip, zip, dnsutils, systemtap-runtime (= 3.3-1)
+Suggests: systemtap-server
+Section: devel
+Priority: optional
+Homepage: http://sourceware.org/systemtap/
+Description: instrumentation system for Linux (client for compile server)
+ This package contains client for SystemTap compile server. It can be
+ used to compile probes on a remote machine running systemtap-server.
+ This client can be run on a machine without full kernel debug information
+ and development environment required for 'systemtap' package.
+ .
+ If you only want to compile systemtap probes locally just install
+ 'systemtap'  package.
+ .
+ SystemTap provides infrastructure to simplify the gathering of
+ information about the running Linux system.

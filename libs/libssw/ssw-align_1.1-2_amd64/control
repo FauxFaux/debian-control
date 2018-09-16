@@ -1,0 +1,17 @@
+Package: ssw-align
+Source: libssw
+Version: 1.1-2
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 41
+Depends: libc6 (>= 2.14), libssw0 (= 1.1-2), zlib1g (>= 1:1.1.4)
+Section: science
+Priority: optional
+Homepage: https://github.com/mengyao/Complete-Striped-Smith-Waterman-Library
+Description: Smith-Waterman aligner based on libssw
+ This package provides a command-line aligner based on the libssw library,
+ a fast SIMD accelerated implementation of the Smith-Waterman algorithm.
+ The input files can be in FASTA or FASTQ format. Both target and query files
+ can contain multiple sequences. Each sequence in the query file will be
+ aligned with all sequences in the target file. Output is provided in SAM or
+ BLAST-like text format.

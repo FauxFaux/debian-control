@@ -1,0 +1,24 @@
+Package: libghc-src-exts-simple-dev
+Source: haskell-src-exts-simple
+Version: 1.20.0.0-1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 1873
+Depends: libghc-base-dev-4.10.1.0-35a7f, libghc-haskell-src-exts-dev-1.20.2-90c5f, libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-src-exts-simple-doc, libghc-src-exts-simple-prof
+Provides: libghc-haskell-src-exts-simple-dev-1.20.0.0-536a8
+Section: haskell
+Priority: optional
+Homepage: https://github.com/int-e/haskell-src-exts-simple
+Description: simplified view on the haskell-src-exts AST
+ This package provides a shim for haskell-src-exts (HSE), exposing the
+ same AST but without annotations, using ghc's pattern synonyms.
+ .
+ This package is useful for synthesizing and manipulating HSE ASTs that
+ don't carry source location information. It may also aid in porting
+ packages from haskell-src-exts 1.17 to 1.18, but it is not a drop-in
+ replacement for the old annotation-free AST.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: haskell-src-exts-simple-1.20.0.0-KGUftYlp40NEiOI1bgu0Hn

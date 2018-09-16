@@ -1,0 +1,62 @@
+Package: pd-fftease
+Version: 2.5.2.git20121005-2
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 1149
+Depends: libc6 (>= 2.14), puredata-core | pd, pd-libdir
+Recommends: pd-import
+Suggests: perl
+Section: sound
+Priority: optional
+Homepage: http://www.somasa.qub.ac.uk/~elyon/LyonSoftware/MaxMSP/FFTease/
+Description: live spectral sound processors for Pd
+ FFTease is a collection of Pd objects implementing various forms of
+ spectral sound processing. These include an additive-synthesis phase vocoder,
+ noise reduction, cross synthesis, and more unusual forms of spectral
+ processing.
+ .
+  * bthresher~ similar to thresher~ but with more control
+  * burrow~ a cross-referenced filtering object
+  * cavoc~ an 8-rule cellular automata that generates spectra
+  * cavoc27~ a 27-rule cellular automata object
+  * centerring~ a spectral modulation object
+  * codepend~ a classic block convolution object
+  * crossx~ a cross synthesis object with gating
+  * dentist~ a partial knockout object
+  * disarrain~ an interpolating version of disarray~
+  * disarray~ a spectral redistribution object
+  * drown~ a noise reduction (or increase) object
+  * ether~ another spectral compositing object
+  * leaker~ a sieve-based cross fader
+  * mindwarp~ a spectral formant warping object
+  * morphine~ a morphing object
+  * multyq~ a four band filter
+  * presidency~ a spectral sampler with pitch control
+  * pvcompand~ a spectral compressor/expander object
+  * pvgrain~ a spectrum analyzer for granular resynthesis
+  * pvharm~ a harmonizer
+  * pvoc~ an additive synthesis phase vocoder
+  * pvtuner~ a spectrum quantizer for tuning to arbitrary scales
+  * pvwarp~ a non-linear frequency warper
+  * reanimator~ an audio texture mapper
+  * resent~ similar to residency~ but with independent bin control
+  * residency~ a spectral sampler useful for time scaling
+  * residency_buffer~ a spectral sampler that writes to an MSP buffer
+  * scrape~ a noise reduction (or increase) object with frequency control
+  * shapee~ a frequency shaping object
+  * swinger~ a phase swapping object
+  * taint~ a cross synthesis object
+  * thresher~ an amplitude/frequency sensitive gating object
+  * vacancy~ a spectral compositing object
+  * xsyn~ a cross synthesis with compression object
+ .
+ FFTease 2.5 objects will reconfigure themselves in response to changes in FFT
+ size or signal vector size. Therefore, they may now be used in MaxMSP poly~
+ objects with downsampling or upsampling. Changes in vector size remain
+ subject to limitations imposed by the current poly~ (and Pluggo)
+ architecture.
+ .
+ Caveat: these objects are CPU intensive. A few of these objects in a patch
+ could push your computer to its limits. Be very careful with playback volume
+ as some of the objects produce dramatically different (lower or higher)
+ overall levels.

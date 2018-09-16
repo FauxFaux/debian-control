@@ -1,0 +1,24 @@
+Package: airspy
+Source: airspy-host
+Version: 1.0.9-3
+Architecture: amd64
+Maintainer: A. Maitland Bottoms <bottoms@debian.org>
+Installed-Size: 144
+Depends: libairspy0 (= 1.0.9-3), libc6 (>= 2.7), libusb-1.0-0 (>= 2:1.0.8)
+Section: comm
+Priority: optional
+Homepage: http://airspy.com
+Description: Tiny and efficient software defined radio receiver - utilities
+ Airspy is an open source Software Defined Radio that can receive
+ between 24 MHz and 1750 MHz. Airspy has a 10 MHz bandwidth.
+ 12bit ADC @ 20 MSPS (80dB SFDR, 64dB SNR, 10.4 ENOB)
+ It is a High Speed USB device powered by the USB bus.
+ .
+ This package contains a set of command line utilities:
+  * airspy_cpldjtag: program CLPD
+  * airspy_info: probe device and show configuration
+  * airspy_max2837: chip register read/write tool
+  * airspy_rffc5071: chip register read/write tool
+  * airspy_si5351c: chip register read/write tool
+  * airspy_spiflash: read and write flash data from file.
+  * airspy_transfer: file based transmit and receive sdr

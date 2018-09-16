@@ -1,8 +1,0 @@
-#!/bin/sh
-set -e
-# Automatically added by dh_systemd_start/10.8
-if [ -d /run/systemd/system ]; then
-	systemctl --system daemon-reload >/dev/null || true
-	deb-systemd-invoke start tarantool.service >/dev/null || true
-fi
-# End automatically added section

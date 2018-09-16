@@ -1,0 +1,15 @@
+Package: libdbicx-testdatabase-perl
+Version: 0.05-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 25
+Depends: perl, libsql-translator-perl, libdbd-sqlite3-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/DBICx-TestDatabase
+Description: module for testing a DBIx::Class::Schema
+ DBICx::TestDatabase is a Perl module useful for testing applications built
+ with DBIx::Class (see libdbix-class-perl). It creates a temporary in-memory
+ SQLite database, deploys your DBIC Schema, and then connects to it. This lets
+ you easily test your schema using a fresh database for every test, ensuring
+ that the ordering of tests will not affect failure.

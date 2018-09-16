@@ -1,0 +1,17 @@
+Package: libnfsidmap2
+Source: libnfsidmap
+Version: 0.25-5.1
+Architecture: amd64
+Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
+Installed-Size: 103
+Depends: libc6 (>= 2.14), libldap-2.4-2 (>= 2.4.7)
+Conflicts: libnfsidmap1
+Breaks: nfs-common (<< 1:1.2.2-1)
+Replaces: nfs-common (<< 1:1.2.2-1)
+Section: libs
+Priority: standard
+Multi-Arch: same
+Homepage: http://www.citi.umich.edu/projects/nfsv4/linux/
+Description: NFS idmapping library
+ libnfsidmap provides functions to map between NFSv4 names (which are
+ of the form user@domain) and local uid's and gid's.

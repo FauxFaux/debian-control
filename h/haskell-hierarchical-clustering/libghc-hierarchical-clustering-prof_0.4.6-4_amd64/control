@@ -1,0 +1,31 @@
+Package: libghc-hierarchical-clustering-prof
+Source: haskell-hierarchical-clustering
+Version: 0.4.6-4
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 634
+Depends: libghc-hierarchical-clustering-dev (= 0.4.6-4), libghc-array-prof-0.5.2.0-26dc0, libghc-base-prof-4.10.1.0-35a7f, libghc-containers-prof-0.5.10.2-cc496
+Provides: libghc-hierarchical-clustering-prof-0.4.6-02d23
+Section: haskell
+Priority: optional
+Homepage: http://hackage.haskell.org/package/hierarchical-clustering
+Description: fast algorithms for single, average/UPGMA and complete linkage clustering; profiling libraries
+ This package provides a function to create a dendrogram from a
+ list of items and a distance function between them.  Initially
+ a singleton cluster is created for each item, and then new,
+ bigger clusters are created by merging the two clusters with
+ least distance between them.  The distance between two clusters
+ is calculated according to the linkage type.  The dendrogram
+ represents not only the clusters but also the order on which
+ they were created.
+ .
+ This package has many implementations with different
+ performance characteristics.  There are SLINK and CLINK
+ algorithm implementations that are optimal in both space and
+ time.  There are also naive implementations using a distance
+ matrix.  Using the dendrogram function from
+ Data.Clustering.Hierarchical automatically chooses the best
+ implementation we have.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

@@ -1,0 +1,29 @@
+Package: libxml-libxml-debugging-perl
+Version: 0.103-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 33
+Depends: perl, libhtml-html5-entities-perl, libxml-libxml-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/XML-LibXML-Debugging
+Description: get debugging information from XML::LibXML
+ XML::LibXML::Debugging is a Perl library which adds a couple of
+ additional methods to XML::LibXML::Node objects which are mostly aimed
+ at helping figure out what's going on with the DOM's namespaces and
+ structure. "toClarkML" produces a string of XML-like markup with
+ explicit namespaces. The following XML:
+ .
+      <foo xmlns="http://example.com/1"
+           xmlns:bar="http://example.com/2"
+           bar:baz="quux" />
+ .
+ Might be represented as:
+ .
+      <{http://example.com/1}foo
+           {http://www.w3.org/2000/xmlns/}XMLNS="http://example.com/1"
+           {http://www.w3.org/2000/xmlns/}bar="http://example.com/2"
+           {http://example.com/2}baz="quux" />
+ .
+ Another method "toDebuggingHash" returns a hashref suitable for dumping
+ using Data::Dumper.

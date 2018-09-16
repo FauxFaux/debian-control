@@ -1,0 +1,29 @@
+Package: ruby-zentest
+Version: 4.11.0-2
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 169
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: https://github.com/seattlerb/zentest
+Description: ZenTest provides 4 different tools: zentest, unit_diff, autotest, and multiruby
+ zentest scans your target and unit-test code and writes your missing
+ code based on simple naming rules, enabling XP at a much quicker pace.
+ zentest only works with Ruby and Minitest or Test::Unit. There is
+ enough evidence to show that this is still proving useful to users, so
+ it stays.
+ .
+ unit_diff is a command-line filter to diff expected results from
+ actual results and allow you to quickly see exactly what is wrong.
+ Do note that minitest 2.2+ provides an enhanced assert_equal obviating
+ the need for unit_diff
+ .
+ autotest is a continuous testing facility meant to be used during
+ development. As soon as you save a file, autotest will run the
+ corresponding dependent tests.
+ .
+ multiruby runs anything you want on multiple versions of ruby. Great
+ for compatibility checking! Use multiruby_setup to manage your
+ installed versions.
+Ruby-Versions: all

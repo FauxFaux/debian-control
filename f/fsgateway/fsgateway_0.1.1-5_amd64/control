@@ -1,0 +1,29 @@
+Package: fsgateway
+Version: 0.1.1-5
+Architecture: amd64
+Maintainer: Debian CLI Applications Packaging Team <pkg-cli-apps-team@lists.alioth.debian.org>
+Installed-Size: 143
+Depends: libc6 (>= 2.2.5), libfuse2 (>= 2.8), libglib2.0-0 (>= 2.12.0), mono-runtime (>= 3.0~), libmono-corlib4.5-cil (>= 4.2.0), libmono-posix4.0-cil (>= 4.0.0~alpha1), libmono-sqlite4.0-cil (>= 3.0.6), libmono-system-data4.0-cil (>= 4.2.0), libmono-system-xml4.0-cil (>= 4.2.0), libmono-system4.0-cil (>= 4.2.0), libmysql6.4-cil (>= 6.4.3), libnpgsql2.2-cil
+Section: utils
+Priority: optional
+Homepage: http://code.google.com/p/fsgateway/
+Description: FUSE module to browse database's metadata, sugar datastores and xml files
+ FsGateway allows you to use your preferred directory navigation tool
+ to inspect a database's metadata, sugar datastores and xml files.
+ .
+ It allows you to compare two database structures in an easy way using
+ the diff tool, or to find where a field is defined using the grep
+ tool.
+ .
+ At the moment it supports the following mode of operation:
+ .
+ tagfs: Rewrites a directory tree using directory names as tags
+ .
+ xmlfs: Map the structure of an xml file as a directory tree. It
+ supports elements, attributes and texts. The resulting path of a node
+ is similar to its XPath path.
+ .
+ sugar datastore: Access a sugar datastore as a normal filesystem.
+ .
+ databases: Access a database's metadata as a directory tree.  Drivers
+ are available for PostgreSQL, MySql, Sqlite and SqlServer

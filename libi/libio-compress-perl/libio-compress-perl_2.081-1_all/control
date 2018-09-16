@@ -1,0 +1,43 @@
+Package: libio-compress-perl
+Version: 2.081-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 835
+Depends: perl, libcompress-raw-bzip2-perl (>= 2.081), libcompress-raw-zlib-perl (>= 2.081)
+Recommends: libio-compress-lzma-perl (>= 2.081)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/IO-Compress
+Description: bundle of IO::Compress modules
+ This package contains the following IO::Compress and IO::Uncompress modules:
+ .
+  - Compress::Zlib
+  - IO::Compress::Base
+  - IO::Compress::Bzip2
+  - IO::Compress::Deflate
+  - IO::Compress::Gzip
+  - IO::Compress::RawDeflate
+  - IO::Compress::Zip
+  - IO::Uncompress::Base
+  - IO::Uncompress::Bunzip2
+  - IO::Uncompress::Gunzip
+  - IO::Uncompress::Inflate
+  - IO::Uncompress::RawInflate
+  - IO::Uncompress::Unzip
+ .
+ Compress::Zlib is a Perl external module which provides an interface to
+ the info-zip zlib compression library. zlib is a general purpose
+ compression library.
+ .
+ Some of the features provided by Compress::Zlib include:
+ .
+    * in-memory compression and decompression
+    * read and write gzip (.gz) files directly.
+ .
+ IO::Compress::Bunzip2 and IO::Uncompress::Bunzip2 provide a Perl interface
+ that allows transparent reading and writing bzip2 compressed data to files or
+ buffers.
+ .
+ IO::Compress::Base is the base class for all IO::Compress and IO::Uncompress
+ modules. It is not intended for direct use in application code. Its sole
+ purpose is to be sub-classed by IO::Compress modules.

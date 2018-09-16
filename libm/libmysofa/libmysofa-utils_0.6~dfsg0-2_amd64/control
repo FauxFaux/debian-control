@@ -1,0 +1,21 @@
+Package: libmysofa-utils
+Source: libmysofa
+Version: 0.6~dfsg0-2
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 86
+Depends: libc6 (>= 2.14), zlib1g (>= 1:1.1.4)
+Section: utils
+Priority: optional
+Homepage: https://github.com/hoene/libmysofa
+Description: library to read HRTFs stored in the AES69-2015 SOFA format - utilities
+ libmysofa is a light weight C-library intended to read SOFA (Spatially Oriented
+ Format for Acoustics) files for spatial rendering.
+ It hardly has any library dependencies and is suitable for embedded devices.
+ .
+ It reads SOFA files and checks whether the data complies to the
+ "SimpleFreeFieldHRIR" conventions. In addition, it provides functions to
+ look-up and interpolate the filters for a given orientation and to normalize
+ the HRTFs (Head-Related Transfer Functions) to a reference level.
+ .
+ This package contains the mysofa2json utility.

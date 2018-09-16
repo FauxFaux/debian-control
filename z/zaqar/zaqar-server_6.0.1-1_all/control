@@ -1,0 +1,26 @@
+Package: zaqar-server
+Source: zaqar
+Version: 6.0.1-1
+Architecture: all
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 123
+Depends: adduser, debconf, python3-keystoneclient, q-text-as-data, zaqar-common (= 6.0.1-1), debconf (>= 0.5) | debconf-2.0, lsb-base
+Section: net
+Priority: optional
+Homepage: https://github.com/openstack/zaqar/
+Description: OpenStack Queueing as a Service - API server
+ Zaqar is a multi-tenant cloud messaging service for web developers. It
+ combines the ideas pioneered by Amazon's SQS product with additional semantics
+ to support event broadcasting.
+ .
+ The service features a fully RESTful API, which developers can use to send
+ messages between various components of their SaaS and mobile applications, by
+ using a variety of communication patterns. Underlying this API is an efficient
+ messaging engine designed with scalability and security in mind.
+ .
+ Other OpenStack components can integrate with Zaqar to surface events to end
+ users and to communicate with guest agents that run in the "over-cloud" layer.
+ Cloud operators can leverage Zaqar to provide equivalents of SQS and SNS to
+ their customers.
+ .
+ This package contains the API server on which clients will connect.

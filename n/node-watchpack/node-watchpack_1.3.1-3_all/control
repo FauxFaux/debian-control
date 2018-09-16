@@ -1,0 +1,20 @@
+Package: node-watchpack
+Version: 1.3.1-3
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 34
+Depends: nodejs, node-chokidar (>= 1.4.3), node-graceful-fs (>= 4.1.2), node-async (>= 0.8)
+Section: javascript
+Priority: optional
+Homepage: https://github.com/webpack/watchpack
+Description: Wrapper library for directory and file watching
+ The watchpack high level API doesn't map directly to watchers. Instead a
+ three level architecture ensures that for each directory only a single
+ watcher exists.
+ .
+ This library is a dependency for webpack. Webpack takes code targeted at
+ node.js and makes it run in the browser. Node.js comes with API of its own
+ that is not available in the browsers. Webpack exposes this code
+ to programs that are unaware they are running in a browser.
+ .
+ Node.js is an event-based server-side JavaScript engine.

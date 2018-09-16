@@ -1,0 +1,72 @@
+#! /bin/sh
+set -e
+
+isDigit() {
+	test -n "$1" || return 1
+	string="$1"
+	while [ "${string#[[:digit:]]}" != "$string" ]; do
+		string="${string#[[:digit:]]}"
+	done
+	[ -z "$string" ] || return 1
+}
+
+# Remove cron.daily file which has been installed by old (and bugged)
+# apticron versions. (see #587597)
+DPKG_MAINTSCRIPT_NAME=${DPKG_MAINTSCRIPT_NAME:-postinst} \
+dpkg-maintscript-helper rm_conffile /etc/cron.daily/apticron "1.1.44" apticron -- "$@"
+
+case "$1" in
+    configure)
+
+	# Move the old timestamp file
+	tsfile_new='/var/lib/apticron/cron_run'
+	tsfile_old='/var/lib/misc/apticron.cron'
+	if [ -f "$tsfile_old" ] ; then
+		if [ ! -e "$tsfile_new" ] ; then
+			mv "$tsfile_old" "$tsfile_new"
+		else
+			rm -f "$tsfile_old"
+		fi
+	fi
+
+	# read time from cron.d job, if any
+	if [ -f /etc/cron.d/apticron ] ; then
+
+		min=$( grep -v '^[[:space:]]*\(\#\|$\)' /etc/cron.d/apticron \
+			2>/dev/null | {
+			read min null
+			isDigit "$min" && echo "$min"
+			} ) || true
+
+	fi
+
+	# get random time if cron.d snippet doesn't exist or is malformed
+	if ! isDigit "$min" ; then
+		min=$(( $( od -vAn -N2 -tu4 < /dev/urandom ) % 60 ))
+	fi
+
+	tmpfile="$( mktemp -t apticron.crond.XXXXXXXXXX )"
+	chmod 0644 "$tmpfile"
+
+	cat <<EOF >"$tmpfile"
+# cron entry for apticron
+
+$min * * * * root if test -x /usr/sbin/apticron; then /usr/sbin/apticron --cron; else true; fi
+EOF
+	ucf --debconf-ok --three-way "$tmpfile" /etc/cron.d/apticron
+	rm -f "$tmpfile"
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

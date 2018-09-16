@@ -1,0 +1,29 @@
+Package: python3-bx
+Source: python-bx (0.8.1-2)
+Version: 0.8.1-2+b1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 4810
+Depends: libc6 (>= 2.14), zlib1g (>= 1:1.1.4), python3 (<< 3.8), python3 (>= 3.6~), python3-numpy, python3-six, python3:any (>= 3.3.2-2~)
+Recommends: python-bx-tools
+Section: python
+Priority: optional
+Homepage: https://github.com/bxlab/bx-python
+Description: library to manage genomic data and its alignment
+ The bx-python project is a python library and associated set of scripts to
+ allow for rapid implementation of genome scale analyses. The library contains
+ a variety of useful modules, but the particular strengths are:
+  * Classes for reading and working with genome-scale multiple local
+  alignments (in MAF, AXT, and LAV formats)
+  * Generic data structure for indexing on disk files that contain blocks of
+  data associated with intervals on various sequences (used, for example, to
+  provide random access to individual alignments in huge files; optimized for
+  use over network filesystems)
+  * Data structures for working with intervals on sequences
+  * "Binned bitsets" which act just like chromosome sized bit arrays, but
+  lazily allocate regions and allow large blocks of all set or all unset bits
+  to be stored compactly
+  * "Intersecter" for performing fast intersection tests that preserve both
+  query and target intervals and associated annotation
+ .
+ This package provides the Python 3 library.

@@ -1,0 +1,16 @@
+Package: vrfydmn
+Version: 0.9.1-2
+Architecture: all
+Maintainer: Scott Kitterman <scott@kitterman.com>
+Installed-Size: 203
+Depends: python:any, python-milter, lsb-base, adduser
+Recommends: python-setproctitle
+Suggests: python-ldap, python-mysqldb, memcached
+Section: mail
+Priority: optional
+Homepage: https://github.com/croessner/vrfydmn
+Description: Milter for ensuring email message from matches mail from
+ This milter is used with postfix or sendmail to either reject mail from/body
+ from mismatches or to fix up the body from to match mail from.  This is
+ intended for applications where local constraints on domains in use are
+ required for sending mail.

@@ -1,0 +1,20 @@
+Package: libb-hooks-op-annotation-perl
+Source: libb-hooks-op-annotation-perl (0.44-2)
+Version: 0.44-2+b5
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 51
+Depends: perl (>= 5.26.0-4), perlapi-5.26.0, libc6 (>= 2.2.5), libextutils-depends-perl (>= 0.304)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/B-Hooks-OP-Annotation
+Description: module to allow annotation and delegation of hooked OPs
+ B::Hooks::OP::Annotation provides a way for XS code that hijacks OP op_ppaddr
+ functions to delegate to (or restore) the previous functions, whether they
+ are assigned by perl or by another module. Typically this should be used in
+ conjunction with B::Hooks::OP::Check (see libb-hooks-op-check-perl).
+ .
+ B::Hooks::OP::Annotation makes its types and functions available to XS code
+ by means of ExtUtils::Depends (libextutils-depends-perl). Modules that wish
+ to use these exports in their XS code should use B::OP::Hooks::Annotation in
+ the Perl module that loads the XS.

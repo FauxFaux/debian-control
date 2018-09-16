@@ -1,0 +1,23 @@
+Package: fondu
+Version: 0.0.20060102-4.1
+Architecture: amd64
+Maintainer: Jari Aalto <jari.aalto@cante.net>
+Installed-Size: 240
+Depends: libc6 (>= 2.14)
+Breaks: dgen (<< 1.23-7)
+Section: utils
+Priority: extra
+Homepage: http://www.sourceforge.net/projects/fondu
+Description: convert between Mac and UNIX font formats
+ Fondu is a set of programs to convert between Mac font formats and
+ PFB, TTF, OTF and BDF files on UNIX.
+ .
+ Fondu will read a series of mac files, check their resource forks and
+ extract all font related items into separate files.
+ .
+ The input files may be either macbinary files (.bin), binhex files
+ (.hqx), bare mac resource forks or data fork resource files (.dfont,
+ used by Mac OS/X). A bare resource fork may be generated easily be
+ copying a file with a resource fork onto a floppy (or zip) with a DOS
+ format. The mac will create an (invisible on the mac) folder called
+ resource.frk in which the resource fork will reside as a bare file.

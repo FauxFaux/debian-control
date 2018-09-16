@@ -1,0 +1,22 @@
+Package: afew
+Version: 1.3.0-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 97
+Depends: python3-chardet, python3-dkim, python3-notmuch, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/afewmail/afew
+Description: Tagging script for notmuch mail
+ The basic task of afew is to provide automatic tagging each time new
+ mail is registered with notmuch. In a classic setup, you might call it
+ after 'notmuch new' in an offlineimap post sync hook.
+ .
+ In addition to more elementary features such as adding tags based on
+ email headers or maildir folders, handling killed threads and spam, it
+ can do some heavy magic in order to /learn/ how to initially tag your
+ mails based on their content.
+ .
+ In move mode, afew will move mails between maildir folders according to
+ configurable rules that can contain arbitrary notmuch queries to match
+ against any searchable attributes.

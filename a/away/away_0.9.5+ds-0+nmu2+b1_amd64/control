@@ -1,0 +1,24 @@
+Package: away
+Source: away (0.9.5+ds-0+nmu2)
+Version: 0.9.5+ds-0+nmu2+b1
+Architecture: amd64
+Maintainer: Rene Engelhard <rene@debian.org>
+Installed-Size: 57
+Depends: libc6 (>= 2.14), libpam0g (>= 0.99.7.1), libpam-modules
+Section: utils
+Priority: optional
+Description: Terminal locking program
+ Away is a simple program that locks your terminal, checks for new
+ mail in any given number of mailboxes, and lets others know why you
+ are inactive.
+ .
+ Away puts the message specified why your are away into the output of
+ the 'w' command, so that users looking for you can see that and why you
+ are away (and not only idle for some time)
+ .
+ Away will also notify you if you have new mail. By default Away only
+ checks for mail in a user's $MAIL file, but by using the awayrc file,
+ a user can configure any given number of mailboxes to be checked.
+ .
+ Away also uses PAM to lock your terminal in the way xlock locks an X11
+ session.

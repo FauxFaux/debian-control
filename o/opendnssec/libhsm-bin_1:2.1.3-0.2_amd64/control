@@ -1,0 +1,24 @@
+Package: libhsm-bin
+Source: opendnssec
+Version: 1:2.1.3-0.2
+Architecture: amd64
+Maintainer: Debian DNS Packaging <pkg-dns-devel@lists.alioth.debian.org>
+Installed-Size: 208
+Depends: opendnssec-common (= 1:2.1.3-0.2), libc6 (>= 2.14), libldns2 (>= 1.6.0), libxml2 (>= 2.7.4)
+Recommends: opendnssec, softhsm2
+Conflicts: libhsm-dev, libhsm0
+Section: misc
+Priority: extra
+Homepage: http://www.opendnssec.org/
+Description: library for interfacing PKCS#11 Hardware Security Modules
+ OpenDNSSEC is a complete DNSSEC zone signing system which is very
+ easy to use with stability and security in mind.  There are a lot of
+ details in signing zone files with DNSSEC and OpenDNSSEC covers most
+ of it.
+ .
+ Support library for interfacing PKCS#11 compatible Hardware Security
+ Modules (HSM).  This library allows programs to use cryptografic
+ secure storages for keying material such as softhsm2 (HSM implemented
+ in software), SCA6000, Aladdin eToken, OpenSC, nCipher or AEP Keyper.
+ .
+ This package contains command line tools.

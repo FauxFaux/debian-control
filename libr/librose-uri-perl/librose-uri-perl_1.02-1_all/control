@@ -1,0 +1,25 @@
+Package: librose-uri-perl
+Version: 1.02-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 39
+Depends: perl, librose-object-perl, liburi-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Rose-URI
+Description: module for an easy  manipulation of URI components
+ Rose::URI perl module is an alternative to URI with more
+ functionalities like:
+  * a rich set of query string manipulation methods
+  * query parameters with multiple values
+  * usage of Apache's C-based URI parsing and HTML escaping functions
+    when run in a mod_perl 1.x web server environment.
+ .
+ Rose::URI stores each URI "in pieces" (scheme, host, path, etc.) and
+ then assembles those pieces when the entire URI is needed as a
+ string. This technique is based on the assumption that the URI will be
+ manipulated many more times than it is stringified. If this is not the
+ case in your usage scenario, then URI may be a better alternative.
+ .
+ Rose::URI actually uses the URI class to do the heavy lifting of
+ parsing URIs when not running in a mod_perl 1.x environment.

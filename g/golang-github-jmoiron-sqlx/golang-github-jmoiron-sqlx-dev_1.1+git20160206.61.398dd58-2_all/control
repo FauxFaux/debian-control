@@ -1,0 +1,22 @@
+Package: golang-github-jmoiron-sqlx-dev
+Source: golang-github-jmoiron-sqlx
+Version: 1.1+git20160206.61.398dd58-2
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 141
+Depends: golang-github-go-sql-driver-mysql-dev, golang-github-lib-pq-dev, golang-github-mattn-go-sqlite3-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/jmoiron/sqlx
+Description: General purpose extensions to Golang's database/sql library
+ sqlx is a library which provides a set of extensions on Go's standard
+ database/sql library. The sqlx versions of sql.DB, sql.TX, sql.Stmt,
+ et al. all leave the underlying interfaces untouched, so that their
+ interfaces are a superset on the standard ones.  This makes it relatively
+ painless to integrate existing codebases using database/sql with sqlx.
+ .
+ Major additional concepts are:
+ .
+   * Marshal rows into structs (with embedded struct support), maps, and slices
+   * Named parameter support including prepared statements
+   * Get and Select to go quickly from query to struct/slice

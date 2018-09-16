@@ -1,0 +1,17 @@
+Package: open-infrastructure-system-config
+Version: 20161101-lts1-2
+Architecture: all
+Maintainer: Daniel Baumann <daniel.baumann@progress-linux.org>
+Installed-Size: 153
+Depends: systemd, init-system-helpers (>= 1.18~)
+Recommends: dbus, iproute2 | iproute, keyboard-configuration, locales | locales-all, sudo, user-setup
+Suggests: pciutils, wget
+Conflicts: live-config, live-config-doc, live-config-systemd, live-config-sysvinit
+Replaces: live-config, live-config-doc, live-config-systemd, live-config-sysvinit
+Provides: system-config
+Section: admin
+Priority: optional
+Homepage: https://open-infrastructure.net/software/system-config
+Description: System integration for configuring a read-only root filesystem
+ system-config provides the system integration for configuring a read-only root
+ filesystem such as a live system.

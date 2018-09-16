@@ -1,0 +1,15 @@
+Package: libtest-prereq-perl
+Version: 2.002-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 42
+Depends: perl (>= 5.22.0), libmodule-build-perl, libmodule-extract-use-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Prereq
+Description: Perl module to check if Makefile.PL has the right pre-requisites
+ Test::Prereq examines the modules looking on blib/lib/,
+ blib/script, and the test files t/*  (and test.pl).
+ then figures out which modules they use, skips the modules that are
+ in the Perl core, and compares the remaining list of modules to those
+ in the PREREQ_PM section of Makefile.PL.

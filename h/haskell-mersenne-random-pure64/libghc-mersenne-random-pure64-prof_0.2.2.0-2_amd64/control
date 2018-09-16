@@ -1,0 +1,25 @@
+Package: libghc-mersenne-random-pure64-prof
+Source: haskell-mersenne-random-pure64
+Version: 0.2.2.0-2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 184
+Depends: libghc-mersenne-random-pure64-dev (= 0.2.2.0-2), libghc-base-prof-4.10.1.0-35a7f, libghc-random-prof-1.1-bddaa, libghc-time-prof-1.8.0.2-7cc03
+Provides: libghc-mersenne-random-pure64-prof-0.2.2.0-1c389
+Section: haskell
+Priority: optional
+Homepage: http://code.haskell.org/~dons/code/mersenne-random-pure64/
+Description: Fast pure pseudorandom number generator; profiling libraries
+ The Mersenne twister is a pseudorandom number generator developed by Makoto
+ Matsumoto and Takuji Nishimura that is based on a matrix linear recurrence
+ over a finite binary field. It provides for fast generation of very high
+ quality pseudorandom numbers.
+ .
+ This library provides a purely functional binding to the 64 bit classic
+ mersenne twister, along with instances of RandomGen, so the generator can be
+ used with System.Random. The generator should typically be a few times faster
+ than the default StdGen (but a tad slower than the impure 'mersenne-random'
+ library based on SIMD instructions and destructive state updates.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

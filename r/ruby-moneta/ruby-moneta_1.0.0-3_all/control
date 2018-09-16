@@ -1,0 +1,23 @@
+Package: ruby-moneta
+Version: 1.0.0-3
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 220
+Depends: ruby | ruby-interpreter
+Suggests: ruby-activerecord (>= 3.2), ruby-fog, ruby-multi-json, ruby-rack, ruby-rack-cache, ruby-sequel, ruby-sqlite3, ruby-tokyocabinet
+Breaks: chef (<= 10.12.0-3)
+Section: ruby
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/minad/moneta
+Description: Ruby interface to multiple key/value stores
+ Moneta is a Ruby library to interface with a variety of key/value stores.
+ A short overview of its features:
+  - support a lot of backends with consistent behaviour,
+  - allows a full configuration of the serialization -> compression -> adapter
+    stack using proxies (similar to Rack middlewares),
+  - expiration for all stores,
+  - atomic operations,
+  - includes a simple pure-ruby key/value server and client,
+  - integration with Rails, Rack/Rack-Cache, Sinatra and Ramaze.
+Ruby-Versions: all

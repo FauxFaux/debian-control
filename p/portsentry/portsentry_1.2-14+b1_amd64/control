@@ -1,0 +1,22 @@
+Package: portsentry
+Source: portsentry (1.2-14)
+Version: 1.2-14+b1
+Architecture: amd64
+Maintainer: Dario Minnucci <midget@debian.org>
+Installed-Size: 175
+Depends: libc6 (>= 2.15), debconf (>= 1.2.9) | debconf-2.0, net-tools, procps, libfile-temp-perl
+Recommends: tcpd
+Suggests: logcheck
+Section: net
+Priority: optional
+Homepage: http://sentrytools.sourceforge.net/
+Description: Portscan detection daemon
+ PortSentry has the ability to detect portscans(including stealth scans) on
+ the network interfaces of your machine. Upon alarm it can block the
+ attacker via hosts.deny, dropped route or firewall rule. It is part of the
+ Abacus program suite.
+ .
+ Note: If you  have no idea what a port/stealth scan is, It's recommended to
+ have a look at http://sf.net/projects/sentrytools/ before installing this
+ package. Otherwise you might easily block hosts you'd better not (e.g. your
+ NFS-server, name-server, etc.).

@@ -1,0 +1,36 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+	remove)
+		# if we're removing, we need to save "nuke-graph-directory.sh" so that
+		# we can still purge "/var/lib/docker" later if necessary
+		# see also docker.io.postrm
+		if \
+			[ -d /var/lib/docker ] \
+			&& [ -x /usr/share/docker.io/contrib/nuke-graph-directory.sh ] \
+		; then
+			if cp -v /usr/share/docker.io/contrib/nuke-graph-directory.sh /var/lib/docker/; then
+				chmod +x /var/lib/docker/nuke-graph-directory.sh || :
+			fi
+		fi
+		;;
+
+	*)
+		;;
+esac
+
+# Automatically added by dh_installinit/11.3.5
+if [ -x "/etc/init.d/docker" ] && [ "$1" = remove ]; then
+	invoke-rc.d docker stop || exit 1
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper mv_conffile /etc/bash_completion.d/docker.io /etc/bash_completion.d/docker 1.2.0\~ -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/default/docker.io /etc/default/docker 1.2.0\~ -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/init.d/docker.io /etc/init.d/docker 1.2.0\~ -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/init/docker.io.conf /etc/init/docker.conf 1.2.0\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/bash_completion.d/docker 1.11.2\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/docker.conf 18.06.0\~ -- "$@"
+# End automatically added section
+

@@ -1,0 +1,81 @@
+#!/bin/sh
+# vim: ts=4:et:sts=4
+
+set -e
+
+PACKAGE=dictd
+DEFAULTSFILE=/etc/default/$PACKAGE
+
+updateRunMode()
+{
+    RUN_MODE="$1"
+    TMPFILE="$DEFAULTSFILE.dpkg-tmp"
+    TEMPLATEFILE="/usr/share/$PACKAGE/ucf/default.template"
+    MD5SUMSFILE="/usr/share/$PACKAGE/ucf/default.md5sums"
+
+    sed -e "s/^[[:space:]]*RUN_MODE[[:space:]]*=.*/RUN_MODE=\"${RUN_MODE}\"/" \
+                < "$TEMPLATEFILE" > "$TMPFILE"
+    chmod 0644 "$TMPFILE"
+    ucf --debconf-ok --sum-file "$MD5SUMSFILE" --three-way "$TMPFILE" "$DEFAULTSFILE"
+    ucfr "$PACKAGE" "$DEFAULTSFILE"
+    rm -f "$TMPFILE"
+
+    DICTD_ARGS=""
+    . "$DEFAULTSFILE"
+
+    if [ "$RUN_MODE" = "inetd" ] ; then
+        # Add service to /etc/inetd.conf
+        update-inetd \
+            --group OTHER \
+            --add "dict\tstream\ttcp\tnowait\tdictd.dictd\t/usr/sbin/tcpd\t/usr/sbin/dictd $DICTD_ARGS --inetd" && \
+        update-inetd --enable dict
+    else
+        (
+          [ -r /etc/inetd.conf ] || exec 2>/dev/null
+          update-inetd --disable dict || true
+        )
+    fi
+}
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+     configure)
+        # Create dictd system user
+        getent passwd dictd >/dev/null || \
+            adduser --quiet --system --home /var/lib/dictd  --no-create-home \
+            --gecos 'Dictd Server' --group dictd
+
+        db_get dictd/run_mode || true
+        updateRunMode "$RET"
+
+        # Run our config script
+        ! which dictdconfig >/dev/null || dictdconfig -w
+
+        ;;
+
+    failed-upgrade|abort-upgrade|abort-remove|abort-deconfigure|in-favour|removing)
+        ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2;
+        exit 1;
+        ;;
+esac
+
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/dictd" ]; then
+		update-rc.d dictd defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d dictd $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

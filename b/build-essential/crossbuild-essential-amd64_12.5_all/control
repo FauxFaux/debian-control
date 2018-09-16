@@ -1,0 +1,24 @@
+Package: crossbuild-essential-amd64
+Source: build-essential
+Version: 12.5
+Architecture: all
+Maintainer: Matthias Klose <doko@debian.org>
+Installed-Size: 15
+Depends: gcc-x86-64-linux-gnu (>= 4:7.3), g++-x86-64-linux-gnu (>= 4:7.3), dpkg-cross
+Section: devel
+Priority: optional
+Description: Informational list of cross-build-essential packages
+ If you do not plan to cross build Debian packages, you don't need
+ this package.  Starting with sbuild (>= 0.63.0) this package is
+ required for cross building Debian packages in a chroot.
+ .
+ This package contains an informational list of packages which are
+ considered essential for cross building Debian packages.  This
+ package also depends on the packages on that list, to make it easy to
+ have the cross-build-essential packages installed.
+ .
+ If you have this package installed, you only need to install whatever
+ a package specifies as its build-time dependencies to cross build the
+ package.  Conversely, if you are determining what your package needs
+ to build-depend on, you can always leave out the packages this
+ package depends on.

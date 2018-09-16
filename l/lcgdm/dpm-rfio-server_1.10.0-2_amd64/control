@@ -1,0 +1,19 @@
+Package: dpm-rfio-server
+Source: lcgdm
+Version: 1.10.0-2
+Architecture: amd64
+Maintainer: Mattias Ellert <mattias.ellert@physics.uu.se>
+Installed-Size: 245
+Depends: libdpm1 (= 1.10.0-2), libc6 (>= 2.15), liblcgdm1
+Conflicts: dpm-rfiod (<< 1.8.1.2-2~)
+Replaces: dpm-rfiod (<< 1.8.1.2-2~)
+Provides: dpm-rfiod
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://glite.web.cern.ch/glite/
+Description: DPM RFIO (Remote File IO) server
+ The LCG Disk Pool Manager (DPM) creates a storage element from a set
+ of disks. It provides several interfaces for storing and retrieving
+ data such as RFIO and SRM version 1, version 2 and version 2.2.
+ This package provide a Remote File IO (RFIO) server for DPM.

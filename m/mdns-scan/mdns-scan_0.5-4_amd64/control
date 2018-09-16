@@ -1,0 +1,19 @@
+Package: mdns-scan
+Version: 0.5-4
+Architecture: amd64
+Maintainer: Thorsten Alteholz <debian@alteholz.de>
+Installed-Size: 32
+Depends: libc6 (>= 2.15)
+Section: utils
+Priority: optional
+Homepage: https://github.org/alteholz/mdns-scan
+Description: Scan for mDNS/DNS-SD services published on the local network
+ mdns-scan is a tool for scanning for mDNS/DNS-SD services published
+ on the local network.
+ .
+ It works by issuing a mDNS PTR query to the special RR
+ _services._dns-sd._udp.local for retrieving a list of all currently
+ registered services on the local link.
+ .
+ mDNS/DNS-SD is part of Apple's Zeroconf strategy (a.k.a. Bonjour).
+ The avahi-daemon package is an implementation of mDNS/DNS-SD.

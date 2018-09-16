@@ -1,0 +1,20 @@
+Package: libzerg-perl
+Version: 1.0.4-6
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 63
+Depends: libc6 (>= 2.4), libzerg0 (>= 1.0.7), perl (>= 5.26.0-8), perlapi-5.26.0
+Section: perl
+Priority: optional
+Homepage: https://tracker.debian.org/libzerg-perl
+Description: fast perl module for parsing the output of NCBI BLAST programs
+ The Zerg library contains a C/flex lexical scanner for BLAST reports
+ and a set of supporting functions. It is centered on a "get_token"
+ function that scans the input for specified lexical elements and, when
+ one is found, returns its code and value to the user.
+ .
+ It is intended to be fast: for that the authors used flex, which provides
+ simple regular expression matching and input buffering in the
+ generated C scanner. And it is intended to be simple in the sense of
+ providing just a lexical scanner, with no features whose support could
+ slow down its main function.

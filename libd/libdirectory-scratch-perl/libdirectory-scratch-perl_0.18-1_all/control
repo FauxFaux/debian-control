@@ -1,0 +1,19 @@
+Package: libdirectory-scratch-perl
+Version: 0.18-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 49
+Depends: perl, libpath-class-perl, libpath-tiny-perl (>= 0.060)
+Recommends: libstring-random-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Directory-Scratch
+Description: easy-to-use self-cleaning scratch space
+ When writing test suites for modules that operate on files,
+ it's often inconvenient to correctly create a platform-independent
+ temporary storage space, manipulate files inside it, then clean it
+ up when the test exits. The inconvenience usually results in tests
+ that don't work everywhere, or worse, no tests at all.
+ .
+ Directory::Scratch aims to eliminate that problem by making it easy to
+ do things right.

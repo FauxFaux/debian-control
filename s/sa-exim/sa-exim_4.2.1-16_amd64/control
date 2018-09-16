@@ -1,0 +1,23 @@
+Package: sa-exim
+Version: 4.2.1-16
+Architecture: amd64
+Maintainer: Magnus Holmgren <holmgren@debian.org>
+Installed-Size: 195
+Depends: exim4-localscanapi-2.0, spamc, libc6 (>= 2.11), debconf (>= 1.2.0) | debconf-2.0, libnetaddr-ip-perl
+Recommends: perl
+Suggests: spamassassin
+Section: mail
+Priority: optional
+Homepage: http://marc.merlins.org/linux/exim/sa.html
+Description: SpamAssassin filter for Exim
+ SA-Exim integrates SpamAssassin filtering at SMTP time with the Exim
+ v4 MTA. It may be used to reject incoming mails before they arrive, or
+ even to tie up the sender's resources by slowing down the connection
+ ("teergrubing").
+ .
+ Most of the functionality of this package can also be achieved
+ using the exiscan ACL conditions built into the "heavy" Exim daemon,
+ exim-daemon-heavy. Use this package if you need SpamAssassin's
+ report_safe feature, or if you want to have easier control over the
+ header fields added, without using the report template to add multiple
+ fields.

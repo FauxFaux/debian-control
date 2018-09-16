@@ -1,0 +1,15 @@
+Package: node-base64id
+Version: 0.1.0-3
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 37
+Depends: nodejs (>= 0.6.19~dfsg1-3~)
+Section: web
+Priority: extra
+Homepage: https://github.com/faeldt/base64id
+Description: Node.js module that generates a base64 id
+ Node.js module that generates a base64 id. It uses crypto.randomBytes when
+ available, but falls back to unsafe methods for node.js <= 0.4.
+ .
+ To increase performance, random bytes are buffered to minimize the number of
+ synchronous calls to crypto.randomBytes.

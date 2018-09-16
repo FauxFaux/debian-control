@@ -1,0 +1,24 @@
+Package: afl-cov
+Version: 0.6.1-2
+Architecture: all
+Maintainer: Daniel Stender <stender@debian.org>
+Installed-Size: 466
+Depends: gcc, lcov, python-subprocess32, python:any
+Recommends: afl
+Enhances: afl
+Section: devel
+Priority: optional
+Homepage: https://github.com/mrash/afl-cov
+Description: code coverage for afl (American Fuzzy Lop)
+ afl-cov uses test cases produced by the fuzzer afl to produce gcov code
+ coverage results (what parts of program are actually executed) of the
+ targeted binary.
+ .
+ afl-cov can be used to analyze the test results of afl after fuzzing has
+ been completed. However, a typical workflow is to run afl-cov while afl-fuzz
+ builds test cases during the fuzzing cycle runs on the same system, and to
+ review the cumulative code coverage results.
+ .
+ Analyzing code coverage results of afl test cases can help to maximize its
+ effectiveness, e.g. when its needed to patch the project code to help the
+ fuzzer to reach code that would be otherwise inaccessible.

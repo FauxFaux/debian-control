@@ -1,0 +1,22 @@
+Package: ddms
+Source: android-platform-tools-swt
+Version: 2.0.0-1
+Architecture: all
+Maintainer: Android Tools Maintainers <android-tools-devel@lists.alioth.debian.org>
+Installed-Size: 193
+Depends: adb, eclipse-rcp, libandroid-ddms-java, libandroid-ddms-ui-java (>= 2.0.0-1), libandroid-tools-common-java, libandroid-tools-sdkstats-java (>= 2.0.0-1), libandroid-tools-swtmenubar-java (>= 2.0.0-1)
+Breaks: androidsdk-ddms
+Replaces: androidsdk-ddms
+Section: devel
+Priority: optional
+Homepage: https://android.googlesource.com/platform/tools/swt
+Description: Dalvik Debug Monitor Server
+ Android Studio includes a debugging tool called the Dalvik Debug Monitor Server
+ (DDMS), which provides port-forwarding services, screen capture on the device,
+ thread and heap information on the device, logcat, process, and radio state
+ information, incoming call and SMS spoofing, location data spoofing, and more.
+ .
+ See also: <https://developer.android.com/studio/profile/ddms.html>
+ .
+ This package provides the standalone launcher of DDMS. However it is
+ deprecated, please use Android Device Monitor instead.

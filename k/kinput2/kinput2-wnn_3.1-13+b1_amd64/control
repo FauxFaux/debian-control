@@ -1,0 +1,21 @@
+Package: kinput2-wnn
+Source: kinput2 (3.1-13)
+Version: 3.1-13+b1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 362
+Depends: libc6 (>= 2.14), libice6 (>= 1:1.0.0), libsm6, libwnn6-1 (>= 1.0.0), libx11-6, libxaw7, libxext6, libxmu6, libxpm4, libxt6, debconf (>= 0.5) | debconf-2.0, kinput2-common, freewnn-common
+Recommends: xfonts-base
+Suggests: freewnn-jserver (>= 1.1.0+1.1.1-a017-4) | wnn6
+Section: x11
+Priority: optional
+Description: input server for X11 applications that want Japanese text input
+ Kinput2 is an input server for X11 applications that want Japanese
+ text input.
+ .
+ A client that wants kana-kanji conversion service for Japanese text
+ sends a request to kinput2.  Kinput2 receives the request, does
+ kana-kanji conversion, and sends the converted text back to the
+ client.
+ .
+ This package supports Wnn jserver (version 4 or 6).

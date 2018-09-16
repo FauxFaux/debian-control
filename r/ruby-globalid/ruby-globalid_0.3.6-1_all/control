@@ -1,0 +1,22 @@
+Package: ruby-globalid
+Version: 0.3.6-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 48
+Depends: ruby | ruby-interpreter, ruby-activesupport (>= 2:4.1.0)
+Recommends: ruby-railties
+Section: ruby
+Priority: optional
+Homepage: http://www.rubyonrails.org
+Description: reference models by URI for Ruby on Rails
+ A Global ID is an app wide URI of the form gid://YourApp/Some::Model/id
+ that uniquely identifies a model instance.
+ .
+ This is helpful when you need a single identifier to reference different
+ classes of objects, for example in job scheduling, when one needs to reference
+ a model object rather than serialize the object itself. Another example is a
+ drop-down list of options, consisting of both Users and Groups. One has then a
+ universal identifier that works for objects of both classes.
+ .
+ This package is part of the dependencies for the Ruby on Rails framework.
+Ruby-Versions: all

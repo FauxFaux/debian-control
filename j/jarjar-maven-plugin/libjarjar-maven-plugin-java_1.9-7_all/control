@@ -1,0 +1,21 @@
+Package: libjarjar-maven-plugin-java
+Source: jarjar-maven-plugin
+Version: 1.9-7
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 91
+Depends: libasm4-java, libmaven-common-artifact-filters-java (>= 3.0.1), libmaven3-core-java (>= 3.5.0), libplexus-archiver-java (>= 3.5), libplexus-utils2-java (>= 2.x)
+Suggests: ant
+Section: java
+Priority: optional
+Homepage: http://sonatype.github.com/jarjar-maven-plugin/
+Description: Maven plugin to repackage third-party jars
+ Utility that makes it easy to repackage Java libraries and embed them into
+ your own distribution. This is useful for two reasons:
+ - You can easily ship a single jar file with no external dependencies.
+ - You can avoid problems where your library depends on a specific
+   version of a library, which may conflict with the dependencies of
+   another library.
+ .
+ This package provide a Maven plugin for Java to allow plug this
+ into Maven build system.

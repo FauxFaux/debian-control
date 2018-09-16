@@ -1,0 +1,19 @@
+Package: libykpers-1-1
+Source: yubikey-personalization
+Version: 1.19.0-1
+Architecture: amd64
+Maintainer: Debian Authentication Maintainers <team+auth@tracker.debian.org>
+Installed-Size: 144
+Depends: libc6 (>= 2.14), libjson-c3 (>= 0.10), libusb-1.0-0 (>= 2:1.0.8), libyubikey0 (>= 1.5)
+Breaks: yubikey-personalization (<< 1.12.0-4)
+Replaces: yubikey-personalization (<< 1.12.0-4)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://developers.yubico.com/yubikey-personalization/
+Description: Library for personalization of YubiKey OTP tokens
+ YubiKeys are USB tokens that act like keyboards and generate one-time
+ or static passwords.
+ .
+ This package contains the run-time shared library needed for the
+ personalization tool.  You normally don't need to install it manually.

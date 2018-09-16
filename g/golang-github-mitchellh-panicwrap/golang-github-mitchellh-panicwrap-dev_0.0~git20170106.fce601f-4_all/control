@@ -1,0 +1,16 @@
+Package: golang-github-mitchellh-panicwrap-dev
+Source: golang-github-mitchellh-panicwrap
+Version: 0.0~git20170106.fce601f-4
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 31
+Depends: golang-go
+Section: devel
+Priority: optional
+Homepage: https://github.com/mitchellh/panicwrap
+Description: library for catching and handling panics in Go applications
+ panicwrap is a Go library that re-executes a Go binary and monitors
+ stderr output from the binary for a panic. When it finds a panic, it
+ executes a user-defined handler function. Stdout, stderr, stdin, signals,
+ and exit codes continue to work as normal, making the existence of
+ panicwrap mostly invisible to the end user until a panic actually occurs.

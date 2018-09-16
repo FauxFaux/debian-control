@@ -1,0 +1,41 @@
+Package: python3-pretty-yaml
+Source: python-pretty-yaml
+Version: 17.12.1-1
+Architecture: all
+Maintainer: Sascha Steinbiss <satta@debian.org>
+Installed-Size: 56
+Depends: python3-yaml, python3:any (>= 3.5~), python3-unidecode
+Section: python
+Priority: optional
+Homepage: https://github.com/mk-fg/pretty-yaml
+Description: module to produce pretty and readable YAML-serialized data (Python 3)
+ YAML is generally nice and easy format to read if it was written by humans.
+ PyYAML can a do fairly decent job of making stuff readable. pyaml tries to
+ improve on that a bit, with the following tweaks:
+ .
+   - Most human-friendly representation options in PyYAML get picked as
+     defaults.
+   - Does not dump "null" values, if possible, replacing these with just empty
+     strings, which have the same meaning but reduce visual clutter and are
+     easier to edit.
+   - Dicts, sets, OrderedDicts, defaultdicts, namedtuples, etc are
+     representable and get sorted on output (OrderedDicts and namedtuples keep
+     their ordering), so that output would be as diff-friendly as possible,
+     and not arbitrarily depend on Python internals.
+   - It appears that at least recent PyYAML versions also do such sorting for
+     Python dicts.
+   - List items get indented, as they should be.
+   - bytestrings that can't be auto-converted to unicode raise error, as yaml
+     has no "binary bytes" (i.e. unix strings) type.
+   - Attempt is made to pick more readable string representation styles,
+     depending on the value.
+   - "force_embed" option to avoid having &id stuff scattered all over the
+     output (which might be beneficial in some cases, hence the option).
+   - "&id" anchors, if used, get labels from the keys they get attached to, not
+     just use meaningless enumerators.
+   - "string_val_style" option to only apply to strings that are values, not
+     keys.
+   - Has an option to add vertical spacing (empty lines) between keys on
+     different depths, to make output much more seekable.
+ .
+ This package installs the Python 3 version.

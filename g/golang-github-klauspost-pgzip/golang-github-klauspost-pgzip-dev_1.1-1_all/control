@@ -1,0 +1,17 @@
+Package: golang-github-klauspost-pgzip-dev
+Source: golang-github-klauspost-pgzip
+Version: 1.1-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 290
+Depends: golang-github-klauspost-compress-dev, golang-github-klauspost-crc32-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/klauspost/pgzip
+Description: parallel gzip (de)compression library for Go
+ pgzip is a parallel compression/decompression library for Google Go
+ which is a compatible drop-in for "compress/gzip". It splits compression
+ into blocks that are processed in parallel. The output is a standard
+ gzip file. The standard Go decompression of modified so it decompresses ahead
+ of the current reader. The library is useful especially if large amounts
+ of data (>1MB) are being processed.

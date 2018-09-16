@@ -1,0 +1,21 @@
+Package: node-accepts
+Version: 1.1.1-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 46
+Depends: nodejs, node-negotiator, node-mime-types
+Section: web
+Priority: extra
+Homepage: https://github.com/jshttp/accepts
+Description: higher-level content negotiation for Node.js
+ Higher level content negotiation based on negotiator.
+ .
+ In addition to negotatior, it allows:
+  - Allows types as an array or arguments list, ie
+    `(['text/html', 'application/json'])`
+    as well as `('text/html', 'application/json')`.
+  - Allows type shorthands such as `json`.
+  - Returns `false` when no types match
+  - Treats non-existent headers as `*`
+ .
+ Node.js is an event-based server-side JavaScript engine.

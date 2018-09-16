@@ -1,0 +1,30 @@
+#! /bin/sh
+# postrm script for usemod-wiki
+
+set -e
+
+case "$1" in
+    purge)
+        rm -Rf /var/lib/usemod-wiki/
+        ;;
+esac
+
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper mv_conffile /etc/apache2/conf.d/usemod-wiki /etc/apache2/conf-available/usemod-wiki.conf 1.0.5-1 -- "$@"
+# End automatically added section
+# Automatically added by dh_apache2/UNDECLARED
+if [ "$1" = "purge" ] ; then
+	if true; then
+		if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+			. /usr/share/apache2/apache2-maintscript-helper
+
+			for conf in usemod-wiki  ; do
+				apache2_invoke disconf $conf  || exit 1
+			done
+		fi
+	fi
+fi
+# End automatically added section
+
+
+exit 0

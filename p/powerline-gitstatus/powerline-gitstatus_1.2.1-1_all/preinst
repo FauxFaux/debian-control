@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+	install)
+		mkdir -p /usr/share/powerline-gitstatus/divert
+
+		for FILE in /usr/share/powerline/config_files/colorschemes/default.json \
+			    /usr/share/powerline/config_files/themes/shell/default.json \
+			    /usr/share/powerline/config_files/themes/shell/default_leftonly.json
+		do
+			DIVERTION="/usr/share/powerline-gitstatus/divert/$(basename $(dirname ${FILE}))_$(basename ${FILE}).powerline"
+
+			dpkg-divert --package powerline-gitstatus --quiet --add --rename --divert "${DIVERTION}" "${FILE}"
+		done
+		;;
+
+	upgrade|abort-upgrade)
+
+		;;
+
+	*)
+		echo "preinst called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+
+
+exit 0

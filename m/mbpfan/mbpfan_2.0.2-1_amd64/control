@@ -1,0 +1,20 @@
+Package: mbpfan
+Version: 2.0.2-1
+Architecture: amd64
+Maintainer: Chow Loong Jin <hyperair@debian.org>
+Installed-Size: 62
+Depends: lsb-base, libc6 (>= 2.14)
+Section: utils
+Priority: optional
+Homepage: https://github.com/dgraziotin/mbpfan
+Description: fan control daemon for Apple Macbooks
+ mbpfan is a daemon that uses input from coretemp module and sets the fan speed
+ using the applesmc module. This enhanced version assumes any number of
+ processors and fans (max. 10).
+ .
+  * It only uses the temperatures from the processors as input.
+  * It requires coretemp and applesmc kernel modules to be loaded.
+  * It requires root use
+  * It daemonizes or stays in foreground
+  * Verbose mode for both syslog and stdout
+  * Users can configure it using the file /etc/mbpfan.conf

@@ -1,0 +1,27 @@
+Package: snacc
+Version: 1.3.1-7
+Architecture: amd64
+Maintainer: Balint Reczey <balint@balintreczey.hu>
+Installed-Size: 689
+Depends: libc6 (>= 2.14), libsnacc0c2 (>= 1.3.1)
+Recommends: libsnacc-dev, snacc-doc
+Suggests: automake
+Section: devel
+Priority: optional
+Homepage: https://github.com/nexgenta/snacc
+Description: ASN.1 to C or C++ or IDL compiler
+ Snacc is short for "Sample Neufeld ASN.1 to C Compiler" and ASN.1
+ stands for Abstract Syntax Notation One (ITU-T X.208/ISO 8824).
+ Snacc supports a subset of ASN.1 1988.  If you need features of
+ ASN.1 1992 or later, snacc is not for you.
+ .
+ Given an ASN.1 source file(s) snacc can produce:
+ .
+ 1. C routines for BER encoding, decoding, printing and freeing.
+ 2. C++ routines for BER encoding, decoding, and printing.
+ 3. A type table that can be used with C driver routines
+    for BER encoding, decoding, printing and freeing.
+ .
+ If you want to build snacc based applications, you want to install
+ the libsnacc-dev package, too.  Your application will then depend on
+ the snacc libraries, you find in the libsnacc0c2 package.

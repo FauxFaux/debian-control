@@ -1,0 +1,29 @@
+Package: amtterm
+Version: 1.4-2
+Architecture: amd64
+Maintainer: Reinhard Tartler <siretart@tauware.de>
+Installed-Size: 59
+Depends: libc6 (>= 2.14), xdg-utils
+Recommends: libsoap-lite-perl
+Section: net
+Priority: extra
+Homepage: https://www.kraxel.org/blog/linux/amtterm/
+Description: Serial-over-lan (sol) client for Intel AMT, console version
+ AMT (included in Intel vPro and Centrino Pro) provides out-of-band (OOB)
+ management for Desktops and Laptops, using an agent integrated in the
+ network adapter and in the motherboard.
+ .
+ Serial-over-lan provides a secure way to connect a remote computer, through
+ a pseudo serial interface.
+ .
+ amtterm and gamt are two terminal tools to connect to that pseudo serial
+ interface from a remote computer.
+ .
+ amttool is a script to gather information about and remotely
+ control AMT managed computers.
+ .
+ Starting with AMT 9.0 Intel has removed support for
+ the old SOAP protocol which is used by amttool.
+ Only WS Management (added in AMT 3.0) is supported by recent
+ machines.  You can use wsmancli (see http://openwsman.sf.net)
+ instead.

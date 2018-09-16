@@ -1,0 +1,17 @@
+Package: libtest-exception-perl
+Version: 0.43-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 41
+Depends: perl, libsub-uplevel-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Exception
+Description: module for testing exception-based code
+ Test::Exception is a Perl test module that provides a few convenience methods
+ for testing exception-based code. It is built with Test::Builder and plays
+ happily with Test::More and friends.
+ .
+ Note that this module only checks for exceptions, so it ignores other methods
+ of halting program executing - including exit(). If your code causes the Perl
+ interpreter to exit, Test::Exception won't be able to catch it.

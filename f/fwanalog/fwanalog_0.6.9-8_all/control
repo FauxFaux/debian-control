@@ -1,0 +1,18 @@
+Package: fwanalog
+Version: 0.6.9-8
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 371
+Depends: debconf (>= 0.5) | debconf-2.0, perl, analog (>= 5.21), mailutils | mailx, adduser
+Suggests: iptables
+Section: net
+Priority: optional
+Description: firewall log-file report generator (using analog)
+ fwanalog is a shell script that parses and summarizes firewall logfiles.
+ It is able to work on firewall logs from ipchains (Linux 2.2), iptables
+ (Linux 2.4), ipf (OpenBSD, FreeBSD and NetBSD) and some ZyXEL/NetGear
+ routers.
+ .
+ It uses analog to generate the log-files, which includes daily statistics and
+ such,  and is both formatted in html and text (for online perusing, and a
+ daily email, for instance).

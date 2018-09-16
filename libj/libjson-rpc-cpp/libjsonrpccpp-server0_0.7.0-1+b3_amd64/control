@@ -1,0 +1,24 @@
+Package: libjsonrpccpp-server0
+Source: libjson-rpc-cpp (0.7.0-1)
+Version: 0.7.0-1+b3
+Architecture: amd64
+Maintainer: Peter Spiess-Knafl <dev@spiessknafl.at>
+Installed-Size: 85
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libjsoncpp1 (>= 1.7.4), libjsonrpccpp-common0, libmicrohttpd12 (>= 0.9.50), libstdc++6 (>= 5.2)
+Suggests: libjsonrpccpp-tools
+Section: libs
+Priority: extra
+Homepage: https://github.com/cinemast/libjson-rpc-cpp
+Description: library implementing json-rpc C++ servers
+ This library provides classes to easily implement JSON-RPC C++ Server
+ applications. It comes with a built in HTTP-Server connector
+ (based on libmicrohttpd) for easy data exchange. It is fully JSON-RPC 2.0 and
+ JSON-RPC 1.0 compatible, including:
+ .
+  * Type checking
+  * Malformed request handling
+  * Handling batch procedure calls
+  * JSON-RPC Method invocation
+  * JSON-RPC Notification invocation
+  * Simple Interface for implementing additional Server-Connectors beside HTTP
+  * Positional and named parameters

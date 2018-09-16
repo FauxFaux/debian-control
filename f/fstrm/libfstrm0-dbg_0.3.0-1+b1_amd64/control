@@ -1,0 +1,28 @@
+Package: libfstrm0-dbg
+Source: fstrm (0.3.0-1)
+Version: 0.3.0-1+b1
+Architecture: amd64
+Maintainer: Robert Edmonds <edmonds@debian.org>
+Installed-Size: 78
+Depends: libfstrm0 (= 0.3.0-1+b1)
+Section: debug
+Priority: extra
+Multi-Arch: same
+Homepage: https://github.com/farsightsec/fstrm
+Description: Frame Streams (fstrm) library (debug symbols)
+ Frame Streams is a light weight, binary clean protocol that allows for the
+ transport of arbitrarily encoded data payload sequences with minimal framing
+ overhead -- just four bytes per data frame. Frame Streams does not specify an
+ encoding format for data frames and can be used with any data serialization
+ format that produces byte sequences, such as Protocol Buffers, XML, JSON,
+ MessagePack, YAML, etc. Frame Streams can be used as both a streaming
+ transport over a reliable byte stream socket (TCP sockets, TLS connections,
+ AF_UNIX sockets, etc.) for data in motion as well as a file format for data
+ at rest. A "Content Type" header identifies the type of payload being carried
+ over an individual Frame Stream and allows cooperating programs to determine
+ how to interpret a given sequence of data payloads.
+ .
+ This is the "fstrm" implementation of Frame Streams in C.
+ .
+ This package contains detached debugging symbols for the shared library.
+Build-Ids: 8ef1eeef3d76dabc1f25435ea3b5047e32a2b55a

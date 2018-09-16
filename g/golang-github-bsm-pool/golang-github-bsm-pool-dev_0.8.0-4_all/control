@@ -1,0 +1,19 @@
+Package: golang-github-bsm-pool-dev
+Source: golang-github-bsm-pool
+Version: 0.8.0-4
+Architecture: all
+Maintainer: QA Group <packages@qa.debian.org>
+Installed-Size: 22
+Depends: golang-ginkgo-dev, golang-gomega-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/bsm/pool
+Description: simple connection pool library for Golang
+ BSM Pool implements a simple connection pool for Go.
+ .
+ Features:
+   - thread-safe
+   - lock-free
+   - stack-based rather than queue-based
+     + connections that have been used recently are more likely to be re-used
+   - supports pool shrinking (reap idle connections)

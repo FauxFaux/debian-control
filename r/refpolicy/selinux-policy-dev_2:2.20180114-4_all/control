@@ -1,0 +1,31 @@
+Package: selinux-policy-dev
+Source: refpolicy
+Version: 2:2.20180114-4
+Architecture: all
+Maintainer: Debian SELinux maintainers <selinux-devel@lists.alioth.debian.org>
+Installed-Size: 9687
+Depends: checkpolicy (>= 2.4), gawk, m4, make, policycoreutils (>= 2.4), policycoreutils-dev (>= 2.4), policycoreutils-python-utils (>= 2.4), python3, selinux-utils (>= 2.4)
+Recommends: setools
+Section: admin
+Priority: optional
+Homepage: https://github.com/TresysTechnology/refpolicy/wiki
+Description: Headers from the SELinux reference policy for building modules
+ The SELinux Reference Policy (refpolicy) is a complete SELinux
+ policy, as an alternative to the existing strict and targeted
+ policies available from http://selinux.sf.net. The goal is to have
+ this policy as the system policy, be and used as the basis for
+ creating other policies. Refpolicy is based on the current strict and
+ targeted policies, but aims to accomplish many additional
+ goals:
+  + Strong Modularity
+  + Clearly stated security Goals
+  + Documentation
+  + Development Tool Support
+  + Forward Looking
+  + Configurability
+  + Flexible Base Policy
+  + Application Policy Variations
+  + Multi-Level Security
+ .
+ This package provides header files for building your own SELinux
+ policy packages compatible with official policy packages.

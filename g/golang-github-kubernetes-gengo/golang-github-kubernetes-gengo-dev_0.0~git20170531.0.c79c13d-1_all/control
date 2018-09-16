@@ -1,0 +1,25 @@
+Package: golang-github-kubernetes-gengo-dev
+Source: golang-github-kubernetes-gengo
+Version: 0.0~git20170531.0.c79c13d-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 622
+Depends: golang-go, golang-glog-dev, golang-github-gogo-protobuf-dev, golang-github-spf13-pflag-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/kubernetes/gengo
+Description: Library for generating code based on Go files
+ The gengo library implements a code generation system for Go files
+ used by Kubernetes. It is more than a dumb template library and is
+ informed by the Go language's syntax, type and naming conventions
+ when generating code.
+ .
+ The gengo library can build code using the following generators:
+ .
+   * set
+   * deep-copy
+   * defaulter
+   * go-to-protobuf
+ .
+ Gengo was first used in Kubernetes and is split out into a separate
+ library for ease of reuse and maintainability.

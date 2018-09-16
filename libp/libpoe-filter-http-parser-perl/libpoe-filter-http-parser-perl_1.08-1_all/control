@@ -1,0 +1,23 @@
+Package: libpoe-filter-http-parser-perl
+Version: 1.08-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 31
+Depends: perl, libhttp-parser-perl (>= 0.06), libwww-perl, libpoe-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/POE-Filter-HTTP-Parser
+Description: POE filter for HTTP clients or servers
+ POE::Filter::HTTP::Parser is a filter for the Perl Object Environment (POE)
+ system based on HTTP::Parser. It can be used to easily create POE-based HTTP
+ servers or clients.
+ .
+ With the type set to client, which is the default behaviour, 'get' will parse
+ HTTP::Response objects from HTTP streams and 'put' will accept HTTP::Request
+ objects and convert them to HTTP streams.
+ .
+ For servers, the reverse will happen; 'get' will parse HTTP::Request objects
+ from HTTP streams and 'put' will accept HTTP::Response objects and convert
+ them to HTTP streams. If there is an error parsing the request, this filter
+ will generate a HTTP::Response object instead, encapsulating an error message
+ suitable for simply sending back to the requesting client.

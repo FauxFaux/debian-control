@@ -1,0 +1,25 @@
+Package: libsox3
+Source: sox
+Version: 14.4.2-3
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 618
+Depends: libc6 (>= 2.22), libgomp1 (>= 4.9), libgsm1 (>= 1.0.13), libltdl7 (>= 2.4.6), libmagic1 (>= 5.12), libpng16-16 (>= 1.6.2-1), zlib1g (>= 1:1.1.4)
+Recommends: libsox-fmt-alsa | libsox-fmt-ao | libsox-fmt-oss | libsox-fmt-pulse, libsox-fmt-base
+Suggests: libsox-fmt-all
+Conflicts: libsox0, libsox0a, libsox1, libsox1a
+Replaces: libsox1b
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://sox.sourceforge.io/
+Description: SoX library of audio effects and processing
+ SoX is the swiss army knife of sound processing.
+ .
+ This package contains the SoX library which enables to convert various formats
+ of computer audio files in to other formats. It also allows you to apply
+ various effects to sound files.
+ .
+ Any format support requires at least libsox-fmt-base.
+ Sound card I/O requires libsox-fmt-alsa, libsox-fmt-ao, libsox-fmt-oss or
+ libsox-fmt-pulse.

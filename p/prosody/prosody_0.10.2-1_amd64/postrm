@@ -1,0 +1,64 @@
+#!/bin/sh
+
+set -e
+
+# Automatically added by dh_installinit/11.3.2
+if [ "$1" = "purge" ] ; then
+	update-rc.d prosody remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.2
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'prosody.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'prosody.service' >/dev/null || true
+		deb-systemd-helper unmask 'prosody.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+if [ "$1" = "purge" ] ; then
+	# Delete stale symlink which was created in postinst script
+	if [ -h "/etc/prosody/conf.d/localhost.cfg.lua" ] && \
+	   ! readlink -e "/etc/prosody/conf.d/localhost.cfg.lua" ; then
+		rm "/etc/prosody/conf.d/localhost.cfg.lua"
+	fi
+
+	# Delete configs directory
+	if [ -d "/etc/prosody/conf.d" ]; then
+		rmdir --ignore-fail-on-non-empty "/etc/prosody/conf.d";
+	fi
+
+	# Delete directory for .pid
+	if [ -d "/run/prosody" ]; then
+		rm -rf "/run/prosody";
+	fi
+
+	# Delete directory for users data
+	if [ -d "/var/lib/prosody" ]; then
+		rm -rf "/var/lib/prosody";
+	fi
+
+	# Delete directory for log files
+	if [ -d "/var/log/prosody" ]; then
+		rm -rf "/var/log/prosody";
+	fi
+
+	# Delete user 'prosody'
+	userdel prosody > /dev/null || true
+	groupdel prosody > /dev/null || true
+
+fi

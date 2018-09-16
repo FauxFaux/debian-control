@@ -1,0 +1,35 @@
+Package: python-libnmap
+Version: 0.7.0-1
+Architecture: all
+Maintainer: Debian Python Modules Team <team+python-modules@tracker.debian.org>
+Installed-Size: 168
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~), nmap
+Suggests: python-libnmap-doc, python-pymongo, python-sqlalchemy, python-boto3
+Section: python
+Priority: optional
+Homepage: https://pypi.python.org/pypi/python-libnmap
+Description: Python 2 NMAP library
+ This package contains a Python library enabling Python developers to
+ manipulate nmap process and data:
+    * automate or schedule nmap scans on a regular basis
+    * manipulate nmap scans results to do reporting
+    * compare and diff nmap scans to generate graphs
+    * batch process scan reports
+    * ...
+ The lib currently offers the following modules:
+    * process: enables you to launch nmap scans
+    * parse: enables you to parse nmap reports or scan results (only XML so
+      far) from a file, a string,…
+    * report: enables you to manipulate a parsed scan result and de/serialize
+      scan results in a json format
+    * diff: enables you to see what changed between two scans
+    * common: contains basic nmap objects like NmapHost and NmapService. It is
+      to note that each object can be “diff()ed” with another similar object.
+    * plugins: enables you to support datastores for your scan results directly
+      in the “NmapReport” object. from report module:
+        * mongodb: insert/get/getAll/delete
+        * sqlalchemy: insert/get/getAll/delete
+        * aws s3: insert/get/getAll/delete (not supported for Python3 since boto
+          is not supporting py3)
+ .
+ This package installs the library for Python 2.

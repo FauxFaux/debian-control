@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# Create openalpr:openalpr if it doesn't already exist
+USER=openalpr
+GROUP=openalpr
+getent group $GROUP >/dev/null || addgroup $GROUP >/dev/null
+getent passwd $USER >/dev/null || adduser --system --no-create-home --home /nonexistent $USER >/dev/null
+
+chown openalpr:openalpr /var/lib/openalpr/plateimages
+
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/openalpr-daemon" ]; then
+		update-rc.d openalpr-daemon defaults >/dev/null
+		invoke-rc.d openalpr-daemon start || exit 1
+	fi
+fi
+# End automatically added section
+
+
+db_stop

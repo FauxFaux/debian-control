@@ -1,0 +1,23 @@
+Package: libhttpcore-java
+Source: httpcomponents-core
+Version: 4.4.10-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 731
+Provides: libhttpcore-nio-java
+Section: java
+Priority: optional
+Homepage: http://hc.apache.org/httpcomponents-core-ga/index.html
+Description: set of low level HTTP transport components for Java
+ HttpCore is a set of low level HTTP transport components that can be used
+ to build custom client and server side HTTP services with a minimal
+ footprint. HttpCore supports two I/O models:
+ .
+  - blocking I/O model, based on the classic Java I/O;
+  - non-blocking, event driven I/O model based on Java NIO.
+ .
+ The blocking I/O model may be more appropriate for data intensive, low
+ latency scenarios, whereas the non-blocking model may be more appropriate
+ for high latency scenarios where raw data throughput is less important
+ than the ability to handle thousands of simultaneous HTTP connections in
+ a resource efficient manner.

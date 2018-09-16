@@ -1,0 +1,23 @@
+Package: libtest-valgrind-perl
+Version: 1.19-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 211
+Depends: perl, libenv-sanctify-perl, libfile-homedir-perl, libperl-destruct-level-perl, libxml-twig-perl, valgrind
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Valgrind
+Description: module to test Perl code through valgrind
+ Test::Valgrind is a module that lets you run Perl code through the memcheck
+ tool of the Valgrind Memory Debugger, to test it for memory errors and leaks.
+ .
+ Due to the nature of perl's memory allocator, this module can't track leaks
+ of Perl objects. This includes non-mortalized scalars and memory cycles.
+ However, it can track leaks of chunks of memory allocated in XS extensions
+ with Newx and friends or malloc. As such, it's complementary to the other
+ very good leak detectors such as Test::LeakTrace.
+ .
+ Additionally, this module can run arbitrary commands (not just Perl code)
+ and provide output compliant with Perl's Test Anything Protocol (TAP).
+ This means that any executable can be run under valgrind and incorporated
+ into your testsuite.

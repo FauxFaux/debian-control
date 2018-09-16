@@ -1,0 +1,33 @@
+Package: libnet-sftp-sftpserver-perl
+Version: 1.1.0-6
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 113
+Depends: perl, libstat-lsmode-perl
+Suggests: libbsd-resource-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Net-SFTP-SftpServer
+Description: Secure File Transfer Protocol Server
+ Net::SFTP::SftpServer is a Perl port of sftp-server from OpenSSH
+ providing access control on a per user and per command basis with
+ improved logging via syslog.
+ .
+ This version of the Net::SFTP::SftpServer Perl module currently
+ implements SSH File Transfer Protocol version 3.
+ .
+ The limitations compared with the OpenSSH implementation are as follows:
+ .
+   - Only files and directories are dealt with - other inode types are not
+     returned on readdir.
+   - A virtual chroot is performed - / (rootfs) is treated as the users home
+     directory from the client perspective and all file access to / will
+     be in /<home_path>/<username>. The <home_path> is defined on object
+     initialisation, it is not obtained from /etc/passwd.
+   - All symlinked files or directories can be hidden and made inaccessible on
+     request. Symlink returns "permission denied" then, readlink returns "file
+     does not exist".
+   - Setting of stats (set_stat or set_fstat) is disabled - the client will
+     receive permission denied.
+   - Permissions for files and dirs are defaulted - the defaults are set on
+     object initialisation.

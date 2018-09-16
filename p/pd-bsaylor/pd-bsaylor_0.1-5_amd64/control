@@ -1,0 +1,25 @@
+Package: pd-bsaylor
+Version: 0.1-5
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 183
+Depends: libc6 (>= 2.14), libfftw3-double3 (>= 3.3.5), libfftw3-single3 (>= 3.3.5), puredata-core | pd
+Recommends: pd-libdir
+Section: sound
+Priority: optional
+Homepage: https://puredata.info
+Description: library of FFT-based Pd objects by Ben Saylor
+ bsaylor is a library of Pure Data objects by Benjamin Saylor:
+ .
+ pvoc~: a phase vocoder based on Pd's 09.pvoc.pd example patch. Advantages
+ over the abstraction include (reportedly) faster execution, instantaneous
+ response to input, and adjustable phase locking. It requires FFTW3.
+ .
+ susloop~: sample player with various loop methods (ping-pong, ... ) like a
+ classic tracker interface.
+ .
+ svf~: a signal-controlled port of Steve Harris' state variable filter
+ LADSPA plugin (http://plugin.org.uk).
+ .
+ zhzhx~: Turns the input signal into a staticky, distorted mess. Comes with
+ tone control

@@ -1,0 +1,23 @@
+Package: appstream-util
+Source: appstream-glib
+Version: 0.7.12-1
+Architecture: amd64
+Maintainer: Matthias Klumpp <mak@debian.org>
+Installed-Size: 448
+Depends: libappstream-glib8 (>= 0.7.10), libc6 (>= 2.4), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.46), libsoup2.4-1 (>= 2.52)
+Breaks: appdata-tools (<< 0.3.4)
+Replaces: appdata-tools (<< 0.3.4)
+Section: admin
+Priority: optional
+Homepage: https://github.com/hughsie/appstream-glib
+Description: Utility to work with AppStream metadata
+ AppStream is a cross-distribution effort for creating and sharing
+ metadata about software components available in the package repositories
+ of a distribution.
+ .
+ This package provides an utility to work with AppStream metadata, which uses
+ libappstream-glib.
+ .
+ It also contains Autotools macros to easily integrate AppStream metadata into
+ an Autotools-based buildsystem, by running 'appstream-util' to validate the
+ files before installing them.

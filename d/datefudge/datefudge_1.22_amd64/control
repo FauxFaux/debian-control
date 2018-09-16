@@ -1,0 +1,19 @@
+Package: datefudge
+Version: 1.22
+Architecture: amd64
+Maintainer: Robert Luberda <robert@debian.org>
+Installed-Size: 27
+Depends: libc6 (>= 2.4)
+Section: devel
+Priority: optional
+Multi-Arch: same
+Description: Fake the system date
+ This program (and preload library) fakes the system date so that
+ programs think the wall clock is ... different.
+ .
+ The faking is not complete; timestamp on files are not affected in any
+ way.
+ .
+ This package is useful if you want to test the date handling of your
+ programs without changing the system clock. Examples: Does it handle
+ expired certificates correctly? Does it work on a leap day?

@@ -1,0 +1,23 @@
+Package: ampliconnoise
+Source: ampliconnoise (1.29-7)
+Version: 1.29-7+b1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 1384
+Depends: libc6 (>= 2.14), libgsl23, libgslcblas0, libopenmpi3, mafft
+Recommends: openmpi-bin
+Section: science
+Priority: optional
+Homepage: http://code.google.com/p/ampliconnoise/
+Description: removal of noise from 454 sequenced PCR amplicons
+ AmpliconNoise is a package of applications to clean up high-throughput
+ sequence data.  It consists of three main parts:
+ .
+ Pyronoise - does flowgram-based clustering to spot misreads
+ SeqNoise - removes PCR point mutations
+ Perseus - removes PCR chimeras without the need for a set of reference
+ sequences
+ .
+ Previously there was a standalone "Pyronoise" by the same authors and
+ this package includes an updated version.  There is also a "Denoiser"
+ in Qiime which is related but distinct.

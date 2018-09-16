@@ -1,0 +1,14 @@
+Package: libstring-compare-constanttime-perl
+Version: 0.320-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 43
+Depends: perl (>= 5.26.2-2), perlapi-5.26.2, libc6 (>= 2.4)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/String-Compare-ConstantTime
+Description: module for protecting string comparison from timing attacks
+ String::Compare::ConstantTime provides one function, equals(), which takes
+ two strings of the same length as arguments. It will return true if they are
+ string-wise identical and false otherwise, just like eq. However, comparing
+ any two differing strings will take a fixed amount of time, unlike eq.

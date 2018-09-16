@@ -1,0 +1,32 @@
+Package: liblog-fast-perl
+Version: 2.0.1-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 41
+Depends: perl, perl (>= 5.15.0) | libsys-syslog-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Log-Fast
+Description: fast and flexible logger
+ Log::Fast is very fast logger, designed for use in applications with thousands
+ high-level events/operations per second (like network servers with thousands
+ clients or web spiders which download hundreds url per second).
+ .
+ For example, on Core2Duo sending about 5000 messages to log on enabled log
+ levels or 20000 messages on disabled log levels in one second will slow down
+ your application only by 2-3%.
+ .
+ Comparing to some other CPAN modules, this one (in average): faster than
+ Log::Dispatch in about 45 times, faster than Log::Handler in about 15 times,
+ faster than Sys::Syslog in about 7 times, and slower than Log::Syslog::Fast in
+ about 2 times.
+ .
+ Features:
+ .
+  * Global and local logger objects
+  * Output to any open filehandle or local syslog
+  * 5 log levels: ERR, WARN, NOTICE, INFO, DEBUG
+  * Configurable prefix (log level, date/time, caller function name)
+  * sprintf() support
+  * Unicode support (UTF8)
+  * Can avoid calculating log message content on disabled log levels

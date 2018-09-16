@@ -1,0 +1,19 @@
+Package: dh-r
+Version: 20180912
+Architecture: all
+Maintainer: Debian R Packages Maintainers <r-pkg-team@alioth-lists.debian.net>
+Installed-Size: 119
+Depends: r-base-dev, debhelper (>= 9), dctrl-tools, libfile-which-perl, libswitch-perl
+Recommends: devscripts
+Section: science
+Priority: optional
+Description: Debian helper tools for packaging R libraries
+ Provides the R package buildsystem for debhelper.
+ .
+ Additional tools:
+ .
+  convert-to-dh-r: convert the dependencies of an existing R package
+                   from using CDBS to use dh-r
+  dh-make-R:       generate packaging skeletons for R packages
+  dh-update-R:     update (versioned) dependencies of R packages,
+                   Vcs-fields and Maintainer field

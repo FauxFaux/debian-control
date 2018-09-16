@@ -1,0 +1,24 @@
+Package: mariadb-server-10.1
+Source: mariadb-10.1
+Version: 1:10.1.35-1
+Architecture: amd64
+Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Installed-Size: 73942
+Pre-Depends: adduser (>= 3.40), debconf, mariadb-common (>= 1:10.1.35-1)
+Depends: galera-3 (>= 25.3), gawk, iproute2, libdbi-perl, lsb-base (>= 3.0-10), lsof, mariadb-client-10.1 (>= 1:10.1.35-1), mariadb-server-core-10.1 (>= 1:10.1.35-1), passwd, perl (>= 5.6), psmisc, rsync, socat, debconf (>= 0.5) | debconf-2.0, libaio1 (>= 0.3.93), libc6 (>= 2.17), libpam0g (>= 0.99.7.1), libstdc++6 (>= 5.2), libsystemd0, zlib1g (>= 1:1.2.0)
+Recommends: libhtml-template-perl
+Suggests: mailx, mariadb-test, netcat-openbsd, tinyca
+Conflicts: mariadb-tokudb-engine-10.0, mariadb-tokudb-engine-10.1, mariadb-tokudb-engine-5.5, mysql-server-core-5.5, mysql-server-core-5.6, mysql-server-core-5.7, virtual-mysql-server
+Breaks: cqrlog (<< 1.9.0-5~), mariadb-galera-server, mariadb-galera-server-10.0, mariadb-galera-server-5.5, mariadb-server-10.0, mariadb-server-5.5, mariadb-tokudb-engine-10.0, mariadb-tokudb-engine-10.1, mariadb-tokudb-engine-5.5, mysql-client-5.5, mysql-server-5.5, mysql-server-5.6, mysql-server-5.7
+Replaces: mariadb-galera-server, mariadb-galera-server-10.0, mariadb-galera-server-5.5, mariadb-server-10.0, mariadb-server-5.5, mariadb-tokudb-engine-10.0, mariadb-tokudb-engine-10.1, mariadb-tokudb-engine-5.5, mysql-client-5.5, mysql-server-5.5, mysql-server-5.6, mysql-server-5.7, virtual-mysql-server
+Provides: virtual-mysql-server
+Section: database
+Priority: optional
+Homepage: https://mariadb.org/
+Description: MariaDB database server binaries
+ MariaDB is a fast, stable and true multi-user, multi-threaded SQL database
+ server. SQL (Structured Query Language) is the most popular database query
+ language in the world. The main goals of MariaDB are speed, robustness and
+ ease of use.
+ .
+ This package includes the server binaries.

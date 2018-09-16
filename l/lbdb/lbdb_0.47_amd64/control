@@ -1,0 +1,37 @@
+Package: lbdb
+Version: 0.47
+Architecture: amd64
+Maintainer: Roland Rosenfeld <roland@debian.org>
+Installed-Size: 230
+Depends: perl:any, libc6 (>= 2.14), libvformat0 (>= 1.13-6~)
+Suggests: abook, elpa-lbdb, finger, goobook, khard, libauthen-sasl-perl, libnet-ldap-perl, libpalm-perl, maildir-utils, mutt, procmail
+Enhances: mutt
+Section: mail
+Priority: optional
+Homepage: http://www.spinnaker.de/lbdb/
+Description: Little Brother's DataBase for the mutt mail reader
+ This package consists of a set of small tools, which collect mail
+ addresses from several sources and offer these addresses to the mutt
+ external query feature. At the moment the following modules are
+ supported:
+  - m_finger (uses the finger(1) command)
+  - m_inmail (scans incoming mail for addresses)
+  - m_passwd (searches /etc/passwd)
+  - m_yppasswd (searches the YP password database)
+  - m_nispasswd (searches the NIS password database)
+  - m_getent (searches the configured password database)
+  - m_pgp2, m_pgp5, m_gpg (searches your PGP or GnuPG keyrings)
+  - m_fido (searches the Fidonet nodelist)
+  - m_abook (uses the address book application abook(1))
+  - m_goobook (uses goobook to read Google contacts)
+  - m_addr_email (uses addr-email from the addressbook Tk program)
+  - m_muttalias (searches your Mutt mail aliases)
+  - m_pine (searches your Pine addressbook files)
+  - m_wanderlust (search the WanderLust alias database)
+  - m_palm (uses your Palm database; needs libpalm-perl package)
+  - m_gnomecard (uses GnomeCard database files)
+  - m_ldap (query some LDAP server)
+  - m_evolution (search in the Evolution addressbook)
+  - m_vcf (search in vcard files using libvformat)
+  - m_khard (search a CardDAV address book via khard)
+  - m_mu (search maidir-utils using mu-cfind)

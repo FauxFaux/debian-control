@@ -1,0 +1,52 @@
+#!/bin/bash
+set -eu
+
+case "$1" in
+
+remove)
+    # remove watchquagga masking for systemd
+    if [ "$(readlink -f /lib/systemd/system/watchquagga.service)" == "/dev/null" ]; then
+        rm /lib/systemd/system/watchquagga.service
+    fi
+    ;;
+esac
+
+# Automatically added by dh_installinit/11.2.1
+if [ "$1" = "purge" ] ; then
+	update-rc.d zebra remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.2.1
+if [ "$1" = "purge" ] ; then
+	update-rc.d watchquagga remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/11.2.1
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'zebra.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'zebra.service' >/dev/null || true
+		deb-systemd-helper unmask 'zebra.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

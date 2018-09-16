@@ -1,0 +1,18 @@
+Package: libcgi-application-plugin-configauto-perl
+Version: 1.33-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: perl, libcgi-application-perl, libconfig-auto-perl
+Breaks: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Replaces: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Application-Plugin-ConfigAuto
+Description: plugin that adds Config::Auto support to CGI::Application
+ CGI::Application::Plugin::ConfigAuto adds easy access to config file
+ variables to your CGI::Application modules. Lazy loading is used to
+ prevent the config file from being parsed if no configuration variables are
+ accessed during the request.  In other words, the config file is not parsed
+ until it is actually needed. The Config::Auto package provides
+ the framework for this plugin.

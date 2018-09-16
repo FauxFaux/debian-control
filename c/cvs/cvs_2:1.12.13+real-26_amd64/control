@@ -1,0 +1,34 @@
+Package: cvs
+Version: 2:1.12.13+real-26
+Architecture: amd64
+Maintainer: Thorsten Glaser <tg@mirbsd.de>
+Installed-Size: 4597
+Depends: libbsd0 (>= 0.0), libc6 (>= 2.17), libgssapi-krb5-2 (>= 1.14+dfsg), libkrb5-3 (>= 1.6.dfsg.2), zlib1g (>= 1:1.1.4), adduser, dpkg (>= 1.15.4) | install-info
+Recommends: openssh-client
+Suggests: mksh (>= 40~), rcs
+Enhances: cvs2svn (>= 2.4.0-4~), rcs
+Conflicts: cvs-doc
+Replaces: cvs-doc
+Provides: cvs-doc
+Section: vcs
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.nongnu.org/cvs/
+Description: Concurrent Versions System
+ CVS is a version control system, which allows you to keep access
+ to old versions  of files (usually source code), keep a log of
+ who, when, and why changes occurred, etc., like RCS or SCCS.
+ It handles multiple developers, multiple directories, triggers to
+ enable/log/control various operations, and can work over a wide
+ area network. The texinfo manual provides further information on
+ more tasks that it can perform.
+ .
+ There are some tasks that are not covered by CVS. They can be done in
+ conjunction with CVS but will tend to require some script-writing and
+ software other than CVS. These tasks are bug-tracking, build management
+ (that is, make and make-like tools), and automated testing. However,
+ CVS makes these tasks easier.
+ .
+ This package contains a CVS binary which can act as both client and
+ server, although there is no CVS dæmon; to access remote repositories,
+ please use :extssh: not :pserver: any more.

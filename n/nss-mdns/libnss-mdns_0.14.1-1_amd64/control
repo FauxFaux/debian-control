@@ -1,0 +1,17 @@
+Package: libnss-mdns
+Source: nss-mdns
+Version: 0.14.1-1
+Architecture: amd64
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 119
+Depends: avahi-daemon (>= 0.6.16-1), base-files (>= 3.1.10), libc6 (>= 2.14)
+Suggests: avahi-autoipd | zeroconf
+Section: admin
+Priority: optional
+Multi-Arch: same
+Description: NSS module for Multicast DNS name resolution
+ nss-mdns is a plugin for the GNU Name Service Switch (NSS) functionality
+ of the GNU C Library (glibc) providing host name resolution via Multicast
+ DNS (using Zeroconf, aka Apple Bonjour / Apple Rendezvous ), effectively
+ allowing name resolution by common Unix/Linux programs in the ad-hoc mDNS
+ domain .local.

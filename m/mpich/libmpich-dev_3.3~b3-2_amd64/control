@@ -1,0 +1,25 @@
+Package: libmpich-dev
+Source: mpich
+Version: 3.3~b3-2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 9022
+Depends: gfortran, g++, libmpich12 (= 3.3~b3-2), gfortran-8 | gfortran-mod-15, mpich (= 3.3~b3-2)
+Breaks: libmpich2-dev, libmpl-dev, libopa-dev
+Replaces: libmpich2-dev, libmpl-dev, libopa-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.mpich.org/
+Description: Development files for MPICH
+ MPICH is a high-performance and widely portable implementation of the
+ MPI-3.1 standard from the Argonne National Laboratory.
+ It efficiently supports different computation and communication platforms
+ including commodity clusters, SMPs, massively parallel systems, and
+ high-speed networks.
+ This release has all MPI 3.1 functions and features required by the standard
+ with the exception of support for the "external32" portable I/O format and
+ user-defined data representations for I/O.
+ .
+ This package includes the MPICH headers and static libraries, as well
+ as the compiler wrappers needed to build MPICH programs.

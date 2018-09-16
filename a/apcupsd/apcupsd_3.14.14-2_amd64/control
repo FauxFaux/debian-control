@@ -1,0 +1,21 @@
+Package: apcupsd
+Version: 3.14.14-2
+Architecture: amd64
+Maintainer: Thorsten Alteholz <debian@alteholz.de>
+Installed-Size: 883
+Depends: libc6 (>= 2.27), libgcc1 (>= 1:4.2), libusb-0.1-4 (>= 2:0.1.12), libwrap0 (>= 7.6-4~), lsb-base
+Recommends: apcupsd-doc, s-nail | mailx
+Suggests: apcupsd-cgi, udev
+Conflicts: ups-monitor
+Provides: ups-monitor
+Section: admin
+Priority: optional
+Homepage: http://www.apcupsd.org/
+Description: APC UPS Power Management (daemon)
+ apcupsd provides UPS power management for APC products, including most BackUPS
+ series models (including USB), SmartUPS V/S, SmartUPS (NET/RM), and Matrix
+ series.
+ .
+ It controls and monitors the status of UPS and allows your computer to run for
+ a specified length of time on UPS power, and then executes a controlled
+ shutdown in the case of an extended power failure.

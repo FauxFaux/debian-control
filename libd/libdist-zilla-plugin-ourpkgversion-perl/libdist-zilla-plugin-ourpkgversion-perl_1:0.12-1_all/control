@@ -1,0 +1,19 @@
+Package: libdist-zilla-plugin-ourpkgversion-perl
+Version: 1:0.12-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 36
+Depends: libdist-zilla-perl, libmoose-perl, libmoosex-types-perl-perl, libnamespace-autoclean-perl, libpath-class-perl, libppi-perl, perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Dist-Zilla-Plugin-OurPkgVersion
+Description: Alternative to DZP::PkgVersion with "our" and no line insertion
+ Dist::Zilla::Plugin::OurPkgVersion was created as an alternative to
+ Dist::Zilla::Plugin::PkgVersion and uses some code from that module.
+ .
+ This module is designed to use the more readable format "our $VERSION
+ = $version;" as well as to not change then number of lines of code in
+ your files, which will keep your repository more in sync with your
+ CPAN release. It also allows you slightly more freedom in how you
+ specify your version, e.g. better adhere to Perl Best Practices (no
+ code before strictures are enabled, etc.)

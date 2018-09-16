@@ -1,0 +1,17 @@
+Package: runit-helper
+Source: dh-runit
+Version: 2.7.3
+Architecture: all
+Maintainer: Dmitry Bogatov <KAction@gnu.org>
+Installed-Size: 15
+Section: admin
+Priority: optional
+Homepage: https://salsa.debian.org/runit-team/dh-runit
+Description: dh-sysuser implementation detail
+ runit-helper provides code, which actually perform actions on system
+ users on behalf of dh-runit package. This separation allows packages
+ take advantage of improvement or fixes in 'dh-runit' without
+ rebuilding.
+ .
+ This package is implementation detail of 'dh-runit'. It should never
+ be installed manually. No assumption about its content can be made.

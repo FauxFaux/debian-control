@@ -1,0 +1,29 @@
+Package: python-mipp
+Source: mipp
+Version: 1.1.0-1
+Architecture: all
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 1223
+Depends: python-numpy, python-six, python:any (<< 2.8), python:any (>= 2.7.5-5~), libjs-sphinxdoc (>= 1.0), python-lxml, python-gdal, python-pyresample
+Suggests: python-mpop
+Section: python
+Priority: optional
+Homepage: https://github.com/loerum/mipp/tree/master/mipp
+Description: Meteorological data Ingest-Processing Package (mipp)
+ It's main task is to convert low level satellite data into a format
+ understood by mpop (http://github.com/mraspaud/mpop).
+ The primary purpose is to support Geostationary satellite data
+ (level 1.5) but there is also support for the reading of some polar
+ orbiting SAR data.
+ .
+ A more sophisticated interface to satellite data objects is supported
+ by mpop.
+ .
+ Currently it handles data from all current Meteosat Second Generation
+ (MSG) satellites, Meteosat 7, GOES 11-15, MTSAT's, and GOMS, all a
+ retrieved via EUMETCast.
+ .
+ In addition mipp handles Synthetic Apperture Radar (SAR) data from
+ Terrscan-X, Cosmo-Sky Med, and Radarsat 2.
+ .
+ This package is part of the PyTroll toolset.

@@ -1,0 +1,29 @@
+Package: libcpan-reporter-smoker-perl
+Version: 0.29-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 64
+Depends: perl, libcpan-reporter-perl, libprobe-perl-perl, libterm-title-perl, libtest-reporter-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CPAN-Reporter-Smoker
+Description: turnkey CPAN Testers smoking module
+ Rudimentary smoke tester for CPAN Testers, built upon CPAN::Reporter. Use at
+ your own risk. It requires a recent version of CPAN::Reporter to run.
+ .
+ Currently, CPAN::Reporter::Smoker requires zero independent configuration;
+ instead it uses configuration settings from CPAN.pm and CPAN::Reporter.
+ .
+ Once started, it retrieves a list of distributions from the configured CPAN
+ mirror and begins testing them in reverse order of upload. It will skip any
+ distribution which has already had a report sent by CPAN::Reporter.
+ .
+ Features:
+  * No configuration needed
+  * Tests each distribution as a separate CPAN process -- each distribution
+    has prerequisites like build_requires satisfied from scratch
+  * Automatically checks for new distributions every twelve hours or as
+    otherwise specified
+  * Continues until interrupted with CTRL-C
+  * Checks CPAN.pm "distroprefs" to see if distributions should be skipped
+    (before handing off to CPAN)

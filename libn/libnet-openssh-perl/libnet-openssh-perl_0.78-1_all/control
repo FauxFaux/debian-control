@@ -1,0 +1,24 @@
+Package: libnet-openssh-perl
+Version: 0.78-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 280
+Depends: perl, openssh-client
+Suggests: libio-pty-perl, libnet-openssh-gateway-perl, libnet-sftp-foreign-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Net-OpenSSH
+Description: Perl SSH client package implemented on top of OpenSSH
+ Net::OpenSSH is a secure shell client package implemented on top of the
+ OpenSSH binary client (ssh), leveraging the multiplexing feature found
+ in current versions of OpenSSH. That is, when a new Net::OpenSSH object
+ is created, ssh is run in master mode establishing a permanent
+ connection. Then, every time a new operation is requested, a new ssh
+ process is started in slave mode, reusing the master SSH
+ connection to send the request to the remote side. This makes
+ Net::OpenSSH very fast, as most of the latency of ssh is intrinsic to
+ the protocol.
+ .
+ If you like the API of other Perl SSH distributions like Net::SSH,
+ Net::SSH2 or Net::SSH::Perl, and would like to use them with
+ Net::OpenSSH, have a look at the libnet-openssh-compat-perl package.

@@ -1,0 +1,24 @@
+Package: liblaxjson1
+Source: liblaxjson (1.0.5-1)
+Version: 1.0.5-1+b2
+Architecture: amd64
+Maintainer: Andrew Kelley <superjoe30@gmail.com>
+Installed-Size: 33
+Depends: libc6 (>= 2.2.5)
+Section: libs
+Priority: extra
+Multi-Arch: same
+Homepage: https://github.com/andrewrk/liblaxjson
+Description: relaxed streaming JSON parser library
+ Official JSON is almost human-readable and human-writable. Disabling a few of
+ the strict rules makes it significantly more so.
+ .
+ This library is intended for parsing user input, such as a config file. It is
+ not intended for serializing or deserializing, or as a format for computer-to-
+ computer communication.
+ .
+ This relaxed streaming JSON parser allows:
+  * unquoted keys
+  * single quotes `'`
+  * `//` and `/* */` style comments
+  * extra commas `,` in arrays and objects

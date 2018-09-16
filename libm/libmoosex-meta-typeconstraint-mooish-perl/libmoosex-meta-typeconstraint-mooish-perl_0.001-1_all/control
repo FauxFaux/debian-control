@@ -1,0 +1,24 @@
+Package: libmoosex-meta-typeconstraint-mooish-perl
+Version: 0.001-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 39
+Depends: perl, libmoose-perl, libnamespace-autoclean-perl (>= 0.24), libtry-tiny-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MooseX-Meta-TypeConstraint-Mooish
+Description: module to translate Moo-style constraints to Moose-style
+ Moose::Meta::TypeConstraint are expected to return true if the value passes
+ the constraint, and false otherwise; Moo "constraints", on the other hand,
+ die if validation fails.
+ .
+ The MooseX::Meta::TypeConstraint::Mooish metaclass allows for Moo-style
+ constraints; it will wrap them and translate their Moo into a dialect Moose
+ understands.
+ .
+ Note that this is largely to enable functionality in
+ MooseX::AttributeShortcuts; the easiest way use this metaclass is by using
+ that package. Also, as it's not inconceivable that this functionality may be
+ desired in other constraint metaclasses, the bulk of this metaclass'
+ functionality is implemented as a trait
+ (MooseX::TraitFor::Meta::TypeConstraint::Mooish).

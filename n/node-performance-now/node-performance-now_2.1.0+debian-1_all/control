@@ -1,0 +1,22 @@
+Package: node-performance-now
+Version: 2.1.0+debian-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 20
+Depends: nodejs
+Section: web
+Priority: optional
+Homepage: https://github.com/braveg1rl/performance-now
+Description: Implements performance.now (based on process.hrtime)
+ Modern browsers have a `window.performance` object with - among others - a
+ `now` method which gives time in milliseconds, but with sub-millisecond
+ precision. This module offers the same function based on the Node.js native
+ `process.hrtime` function.
+ .
+ Using `process.hrtime` means that the reported time will be monotonically
+ increasing, and not subject to clock-drift.
+ .
+ This library is a dependency of request, the simplest way possible to make
+ http calls.
+ .
+ Node.js is an event-based server-side JavaScript engine.

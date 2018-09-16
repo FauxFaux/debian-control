@@ -1,0 +1,19 @@
+Package: libmoosex-attributeshortcuts-perl
+Version: 0.037-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 94
+Depends: perl, libaliased-perl, libmoose-perl, libmoosex-meta-typeconstraint-mooish-perl, libmoosex-role-parameterized-perl, libmoosex-types-common-perl, libmoosex-types-perl, libmoosex-util-perl, libnamespace-autoclean-perl (>= 0.24), perl (>= 5.19.5) | libscalar-list-utils-perl (>= 1:1.33)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MooseX-AttributeShortcuts
+Description: Moose extension providing shorthands for common attribute options
+ Ever found yourself repeatedly specifying writers and builders, because
+ there's no good shortcut to specifying them? Sometimes you want an
+ attribute to have a read-only public interface, but a private writer. And
+ wouldn't it be easier to just say "builder => 1" and have the attribute
+ construct the canonical "_build_$name" builder name for you?
+ .
+ MooseX::AttributeShortcuts causes an attribute trait to be applied to all
+ attributes  defined to the using class. This trait extends the attribute
+ option processing to handle the above variations.

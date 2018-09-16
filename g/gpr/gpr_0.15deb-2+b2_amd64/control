@@ -1,0 +1,20 @@
+Package: gpr
+Source: gpr (0.15deb-2)
+Version: 0.15deb-2+b2
+Architecture: amd64
+Maintainer: A Mennucc1 <mennucc1@debian.org>
+Installed-Size: 293
+Depends: ppdfilt, lprng | cups-bsd | lpr-ppd | lpr, debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.2.5), libglib2.0-0 (>= 2.37.3), libgtk2.0-0 (>= 2.8.0), libpopt0 (>= 1.14), libppd0 (>= 2:0.10)
+Recommends: a2ps
+Section: utils
+Priority: optional
+Description: GUI for lpr: print files and configure printer-specific options
+ gpr is a graphical interface to lpr that provides for easy configuration
+ of printer-specific options. gpr interfaces with a PostScript
+ printer's PPD file to create a user-interface of configurable
+ options. Based upon user choice, the device-specific option code
+ is then inserted into the PostScript job and sent to the printer.
+ This can be used to tell the printer to duplex or staple the print
+ job, or tell it what paper tray to draw paper from.
+ NOTE: gpr will detect if the file to be print is postscript, and, if not,
+ it will call a2ps to preprocess it before sending it to ppdfilt and to lpr.

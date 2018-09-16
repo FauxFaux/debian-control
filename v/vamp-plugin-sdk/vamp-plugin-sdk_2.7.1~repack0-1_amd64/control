@@ -1,0 +1,29 @@
+Package: vamp-plugin-sdk
+Version: 2.7.1~repack0-1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 835
+Depends: libvamp-hostsdk3v5 (= 2.7.1~repack0-1), libvamp-sdk2v5 (= 2.7.1~repack0-1)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.vamp-plugins.org/
+Description: audio analysis and feature extraction plugins (SDK)
+ Vamp is an audio processing plugin system for plugins that extract
+ descriptive information from audio data - typically referred to as
+ audio analysis plugins or audio feature extraction plugins.
+ .
+ Just like an audio effects plugin (such as a VST), a Vamp plugin is a
+ binary module that can be loaded up by a host application and fed
+ audio data. However, unlike an effects plugin, a Vamp plugin outputs
+ not processed audio but some sort of symbolic information. Typical
+ things that a Vamp plugin might calculate include the locations of
+ moments such as note onset times, visual representations of the audio
+ such as histograms, or curve data such as power or fundamental
+ frequency.
+ .
+ Hosts using Vamp plugins include Audacity and Sonic Visualiser.
+ .
+ This package contains C and C++ header files for developing Vamp
+ plugins and hosts as well as source code of example plugins and a
+ simple host.

@@ -1,0 +1,17 @@
+Package: dgit
+Version: 6.11
+Architecture: all
+Maintainer: Ian Jackson <ijackson@chiark.greenend.org.uk>
+Installed-Size: 369
+Depends: perl, libwww-perl, libdpkg-perl, git-core, devscripts, dpkg-dev, git-buildpackage, liblist-moreutils-perl, coreutils (>= 8.23-1~), libdigest-sha-perl, dput, curl, apt, libjson-perl, ca-certificates, libtext-iconv-perl, libtext-glob-perl
+Recommends: ssh-client
+Suggests: sbuild | pbuilder | cowbuilder
+Section: devel
+Priority: optional
+Description: git interoperability with the Debian archive
+ dgit (with the associated infrastructure) makes it possible to
+ treat the Debian archive as a git repository.
+ .
+ dgit push constructs uploads from git commits
+ .
+ dgit clone and dgit fetch construct git commits from uploads.

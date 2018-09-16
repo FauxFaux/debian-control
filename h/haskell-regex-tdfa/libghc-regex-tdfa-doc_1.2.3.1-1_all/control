@@ -1,0 +1,25 @@
+Package: libghc-regex-tdfa-doc
+Source: haskell-regex-tdfa
+Version: 1.2.3.1-1
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 2472
+Depends: haddock-interface-31
+Recommends: ghc-doc, libghc-parsec3-doc, libghc-regex-base-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: https://github.com/ChrisKuklewicz/regex-tdfa
+Description: Haskell library for a tagged DFA regex engine; documentation
+ A pure Haskell alternative to GHC's Text.Regex module (with some
+ enhancements). The Text.Regex module marshalls the data back and forth to
+ c-arrays to call libc and this is far too slow (and strict).
+ .
+ This module parses regular expression Strings using a Parsec parser and
+ creates an internal data structure (Text.Regex.Lazy.Pattern). This is then
+ transformed a DFA table for matching against the input String or
+ FastPackedString. The input string is consumed lazily, so it may be an
+ arbitrarily long or infinite source.
+ .
+ This package provides the documentation for a library for the Haskell
+ programming language.
+ See http://www.haskell.org/ for more information on Haskell.

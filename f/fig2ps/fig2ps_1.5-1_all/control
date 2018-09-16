@@ -1,0 +1,25 @@
+Package: fig2ps
+Version: 1.5-1
+Architecture: all
+Maintainer: Vincent Fourmond <fourmond@debian.org>
+Installed-Size: 64
+Depends: perl-base (>= 5.10.1-9), transfig, texlive-latex-base | tetex-bin (>= 2.0.2-11), texlive-latex-recommended | tetex-extra, texlive-fonts-recommended | tetex-extra, perl-modules, texlive-latex-extra | tetex-extra, texlive-extra-utils | tetex-extra, ghostscript
+Recommends: gv
+Suggests: cm-super | lmodern, xfig
+Enhances: transfig
+Replaces: texmacs (<= 1.0.3-6)
+Section: tex
+Priority: optional
+Homepage: http://sourceforge.net/projects/fig2ps
+Description: Converts xfig files into ps, eps or pdf files using LaTeX for processing text
+ This perl script takes into advantage the pstex and pstex_t export
+ formats of fig2dev (xfig) to separate special text and the rest of a xfig
+ file. Then, the text is processed separately using LaTeX, and
+ everything is put back together at the end, to make a nice wonderful
+ figure with the text formatted exactly the same way as the article you
+ are typing ! PDF output is also available.
+ .
+ Though gv is strictly speaking not necessary for conversion, it can
+ be called directly by fig2ps depending on the options you choose.
+ For nice PDF output, you should install Type 1 fonts, such as lmodern
+ or cm-super.

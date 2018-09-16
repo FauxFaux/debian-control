@@ -1,0 +1,17 @@
+#! /bin/sh
+set -e
+
+
+
+# Obsolete files
+if dpkg-maintscript-helper supports rm_conffile 2>/dev/null; then
+    for file in /etc/default/fusioninventory-agent \
+        /etc/cron.daily/fusioninventory-agent \
+        /etc/init.d/fusioninventory-agent \
+        /etc/logrotate.d/fusioninventory-agent
+    do
+        dpkg-maintscript-helper rm_conffile $file 1:2.4-1 -- "$@"
+    done
+fi
+
+exit 0

@@ -1,0 +1,16 @@
+Package: libfile-write-rotate-perl
+Version: 0.31-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 52
+Depends: perl, libfile-which-perl, libproc-pid-file-perl, libfile-flock-retry-perl
+Breaks: liblog-dispatch-filewriterotate-perl (<= 0.03)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/File-Write-Rotate
+Description: module to deal with files that archive/rotate themselves
+ File::Write::Rotate can be used to write to file, usually for logging, that
+ can rotate itself. File will be opened in append mode. Locking will be done
+ to avoid conflict when there are multiple writers. Rotation can be done by
+ size (after a certain size is reached), by time (daily/monthly/yearly), or
+ both.

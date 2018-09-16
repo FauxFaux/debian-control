@@ -1,0 +1,27 @@
+Package: python-gpg
+Source: gpgme1.0
+Version: 1.11.1-1
+Architecture: amd64
+Maintainer: Debian GnuPG Maintainers <pkg-gnupg-maint@lists.alioth.debian.org>
+Installed-Size: 1210
+Depends: python (<< 2.8), python (>= 2.7~), python:any (<< 2.8), python:any (>= 2.7.5-5~), libassuan0 (>= 2.0.1), libc6 (>= 2.14), libgpg-error0 (>= 1.14), libgpgme11 (>= 1.11.1)
+Provides: python2.7-gpg
+Section: python
+Priority: optional
+Homepage: https://www.gnupg.org/related_software/gpgme/
+Description: Python interface to the GPGME GnuPG encryption library (Python 2)
+ The "gpg" Python module is, for the most part, a direct interface to
+ the C GPGME library.  However, it is re-packaged in a more Pythonic
+ way -- object-oriented with classes and modules.  Take a look at the
+ classes defined here -- they correspond directly to certain object
+ types in GPGME for C.
+ .
+ Features:
+  * Feature-rich, full implementation of the GPGME library. Supports
+    all GPGME features except interactive editing (coming soon).
+    Callback functions may be written in pure Python.
+  * Ability to sign, encrypt, decrypt, and verify data.
+  * Ability to list keys, export and import keys, and manage the keyring.
+  * Fully object-oriented with convenient classes and modules.
+ .
+ This is the official upstream Python 2 binding for GPGME.

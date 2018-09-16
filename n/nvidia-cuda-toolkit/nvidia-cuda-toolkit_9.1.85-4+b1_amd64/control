@@ -1,0 +1,23 @@
+Package: nvidia-cuda-toolkit
+Source: nvidia-cuda-toolkit (9.1.85-4)
+Version: 9.1.85-4+b1
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 59580
+Depends: nvidia-profiler (= 9.1.85-4+b1), nvidia-cuda-dev (= 9.1.85-4+b1), nvidia-opencl-dev (= 9.1.85-4+b1) | opencl-dev, gcc-6 | clang-4.0 | clang-3.9 | clang-3.8 | clang (<< 1:5~) | gcc-5 | gcc-4.9 | gcc-4.8, g++-6 | clang-4.0 | clang-3.9 | clang-3.8 | clang (<< 1:5~) | g++-5 | g++-4.9 | g++-4.8, libc6 (>= 2.4), libgcc1 (>= 1:3.0), libnvvm3 (>= 7.0), libstdc++6 (>= 4.1.1)
+Recommends: nvidia-cuda-doc (= 9.1.85-4), nvidia-cuda-gdb (= 9.1.85-4+b1), nvidia-visual-profiler (= 9.1.85-4+b1)
+Suggests: libcupti-dev, nvidia-driver (>= 387.26)
+Conflicts: cuda-license-7-5, cuda-repo-ubuntu1204, cuda-repo-ubuntu1404, cuda-repo-ubuntu1404-7-5-local, cuda-repo-ubuntu1410, cuda-repo-ubuntu1504, cuda-repo-ubuntu1504-7-5-local
+Section: non-free/devel
+Priority: optional
+Homepage: https://developer.nvidia.com/cuda-zone
+Description: NVIDIA CUDA development toolkit
+ The Compute Unified Device Architecture (CUDA) enables NVIDIA
+ graphics processing units (GPUs) to be used for massively parallel
+ general purpose computation.
+ .
+ This package contains the nvcc compiler and other tools needed for building
+ CUDA applications.
+ .
+ Running CUDA applications requires a supported NVIDIA GPU and the NVIDIA
+ driver kernel module.

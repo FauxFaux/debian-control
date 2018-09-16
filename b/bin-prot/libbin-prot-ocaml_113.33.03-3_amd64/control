@@ -1,0 +1,26 @@
+Package: libbin-prot-ocaml
+Source: bin-prot
+Version: 113.33.03-3
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 592
+Depends: ocaml-base-nox-4.05.0, libc6 (>= 2.14)
+Breaks: libbin-prot-camlp4-dev
+Replaces: libbin-prot-camlp4-dev
+Provides: libbin-prot-ocaml-dkov5
+Section: ocaml
+Priority: optional
+Homepage: http://janestreet.github.io/
+Description: type-safe binary serialization for OCaml values (runtime)
+ bin-prot provides functionalities for reading and writing OCaml-values
+ in a type-safe binary protocol.
+ .
+ These functions provide a safe way of performing I/O on any
+ extensionally defined data type. Functions, objects, and values whose
+ type is bound through a polymorphic record field are not supported, but
+ everything else is.
+ .
+ There is no support for cyclic or shared values and only little endian
+ computer architectures are supported.
+ .
+ This package contains runtime files.

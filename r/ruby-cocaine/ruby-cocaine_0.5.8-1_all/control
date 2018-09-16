@@ -1,0 +1,19 @@
+Package: ruby-cocaine
+Version: 0.5.8-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: ruby | ruby-interpreter, ruby-climate-control (<< 1.0), ruby-climate-control (>= 0.0.3)
+Section: ruby
+Priority: optional
+Homepage: https://github.com/thoughtbot/cocaine
+Description: library for running command line commands in Ruby
+ cocaine is used to run command line commands in Ruby. Commands are run
+ using backticks(Ruby 1.8) or Process.spawn(Ruby 1.9).
+ .
+ This library supports interpolated arguments and prevents attempts
+ to break system. This library throws exception if the command returns
+ errors.
+ .
+ Performance can be increased by installing posix-spawn gem.
+Ruby-Versions: all

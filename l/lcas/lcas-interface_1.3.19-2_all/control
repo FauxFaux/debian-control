@@ -1,0 +1,21 @@
+Package: lcas-interface
+Source: lcas
+Version: 1.3.19-2
+Architecture: all
+Maintainer: Dennis van Dok <dennisvd@nikhef.nl>
+Installed-Size: 67
+Depends: libglobus-gssapi-gsi-dev
+Section: libs
+Priority: extra
+Homepage: https://wiki.nikhef.nl/grid/Site_Access_Control
+Description: Local Centre Authorization Service API
+ LCAS makes binary ('yes' or 'no') authorization decisions at the site
+ and resource level. In making this decision, it can use a variety of
+ inputs: the 'grid' name of the user (the Subject Distinguished Name),
+ any VO attributes the user has (like VOMS FQANs), the name of the
+ executable the user intends to execute. It supports basic black and
+ white list functionality, but also more complex VOMS-based
+ expressions, based on the GACL language.
+ .
+ This package contains the interface, needed to build plug-ins for
+ LCAS.

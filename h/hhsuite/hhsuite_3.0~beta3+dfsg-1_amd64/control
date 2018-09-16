@@ -1,0 +1,28 @@
+Package: hhsuite
+Version: 3.0~beta3+dfsg-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 7863
+Depends: libc6 (>= 2.27), libffindex0, libgcc1 (>= 1:3.0), libgomp1 (>= 4.9), libstdc++6 (>= 5.2), ffindex, hhsuite-data (= 3.0~beta3+dfsg-1), python
+Breaks: hhsuite-data (<= 2.0.16-1)
+Section: science
+Priority: optional
+Homepage: http://toolkit.genzentrum.lmu.de/sections/search
+Description: sensitive protein sequence searching based on HMM-HMM alignment
+ HH-suite is an open-source software package for sensitive protein sequence
+ searching based on the pairwise alignment of hidden Markov models (HMMs).
+ .
+ This package contains HHsearch and HHblits among other programs and utilities.
+ .
+ HHsearch takes as input a multiple sequence alignment (MSA) or profile HMM
+ and searches a database of HMMs (e.g. PDB, Pfam, or InterPro) for homologous
+ proteins. HHsearch is often used for protein structure prediction to detect
+ homologous templates and to build highly accurate query-template pairwise
+ alignments for homology modeling.
+ .
+ HHblits can build high-quality MSAs starting from single sequences or from
+ MSAs. It transforms these into a query HMM and, using an iterative search
+ strategy, adds significantly similar sequences from the previous search to
+ the updated query HMM for the next search iteration. Compared to PSI-BLAST,
+ HHblits is faster, up to twice as sensitive and produces more accurate
+ alignments.

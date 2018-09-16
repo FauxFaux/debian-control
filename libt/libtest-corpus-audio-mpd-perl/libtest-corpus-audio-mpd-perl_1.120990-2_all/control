@@ -1,0 +1,18 @@
+Package: libtest-corpus-audio-mpd-perl
+Version: 1.120990-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 128
+Depends: perl, libfile-sharedir-perl, libreadonly-perl, libpath-class-perl, mpd (>= 0.16), procps
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Corpus-Audio-MPD
+Description: module to fake mpd for testing purposes
+ Test::Corpus::Audio::MPD is a Perl test harness that tries to launch a new
+ Music Player Daemon (MPD) server using a fake mpd.conf file with correct
+ paths for testing.
+ .
+ If an mpd server is already running, this module will stop it temporarily if
+ the MPD_TEST_OVERRIDE environment variable is true; otherwise, the test will
+ bail. Once the tests are complete, the temporarily launched mpd server will
+ be shut down and the original one relaunched (if there was one).

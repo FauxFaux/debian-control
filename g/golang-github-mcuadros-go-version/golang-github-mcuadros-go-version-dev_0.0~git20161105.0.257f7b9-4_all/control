@@ -1,0 +1,20 @@
+Package: golang-github-mcuadros-go-version-dev
+Source: golang-github-mcuadros-go-version
+Version: 0.0~git20161105.0.257f7b9-4
+Architecture: all
+Maintainer: QA Group <packages@qa.debian.org>
+Installed-Size: 78
+Section: devel
+Priority: extra
+Homepage: https://github.com/mcuadros/go-version
+Description: version normalizer and comparison library for Go
+ Version is a Go library that provides version normalization and
+ comparisons. It can also verify that a provided version string
+ falls within a given range.
+ .
+ Examples:
+   version.CompareSimple("1.2", "1.0.1")
+   version.Compare("2.3.4", "v3.1.2", "<")
+   .
+   c := version.NewConstrainGroupFromString(">2.0,<=3.0")
+   c.Match("2.5.0beta")

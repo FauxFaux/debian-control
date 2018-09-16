@@ -1,0 +1,22 @@
+Package: binfmt-support
+Version: 2.1.8-2
+Architecture: amd64
+Maintainer: Colin Watson <cjwatson@debian.org>
+Installed-Size: 205
+Depends: libc6 (>= 2.14), libpipeline1 (>= 1.0.0), lsb-base (>= 4.1+Debian3)
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://binfmt-support.nongnu.org/
+Description: Support for extra binary formats
+ The binfmt_misc kernel module, contained in versions 2.1.43 and later of the
+ Linux kernel, allows system administrators to register interpreters for
+ various binary formats based on a magic number or their file extension, and
+ cause the appropriate interpreter to be invoked whenever a matching file is
+ executed. Think of it as a more flexible version of the #! executable
+ interpreter mechanism.
+ .
+ This package provides an 'update-binfmts' script with which package
+ maintainers can register interpreters to be used with this module without
+ having to worry about writing their own init.d scripts, and which sysadmins
+ can use for a slightly higher-level interface to this module.

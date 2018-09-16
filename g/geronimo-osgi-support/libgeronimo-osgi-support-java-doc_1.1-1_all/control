@@ -1,0 +1,25 @@
+Package: libgeronimo-osgi-support-java-doc
+Source: geronimo-osgi-support
+Version: 1.1-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 249
+Suggests: libgeronimo-osgi-support-java (= 1.1-1)
+Section: doc
+Priority: optional
+Homepage: http://geronimo.apache.org
+Description: Documentation for libgeronimo-osgi-support-java
+ Documentation for Java libraries that allow the use of OSGi framework with
+ Geronimo existing projects. They allow lookup and registration of components.
+ .
+ - geronimo-osgi-locator.jar: Allow performing class and components lookups
+   with OSGi support.
+   .
+ - geronimo-osgi-registry.jar: Facilitate the use of Geronimo specs providers
+   (components typically plugged in to the JRE through META-INF/services
+   resources) like geronimo-validation-1.0-spec (Geronimo JSR-303 Bean
+   Validation Spec API).
+   .
+   The service created by this library will maintain a registry of factory
+   class that can be used by the spec bundles to locate factory classes that
+   reside in other bundles.

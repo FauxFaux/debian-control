@@ -1,0 +1,30 @@
+Package: lava-tool
+Version: 0.25-2
+Architecture: all
+Maintainer: Debian LAVA team <pkg-linaro-lava-devel@lists.alioth.debian.org>
+Installed-Size: 324
+Depends: python-setuptools, python-jinja2, python-requests, python-xdg (>= 0.19), python-yaml (>= 3.10), python-zmq, python2.7, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Recommends: git, ca-certificates
+Breaks: lava-dashboard-tool (<< 0.8), lava-scheduler-tool (<< 0.6)
+Replaces: lava-dashboard-tool (<< 0.8), lava-scheduler-tool (<< 0.6)
+Section: admin
+Priority: optional
+Homepage: https://www.linaro.org/initiatives/lava/
+Description: deprecated command line utility for LAVA
+ LAVA is a continuous integration system for deploying operating
+ systems onto physical and virtual hardware for running tests.
+ Tests can be simple boot testing, bootloader testing and system
+ level testing, although extra hardware may be required for some
+ system tests. Results are tracked over time and data can be
+ exported for further analysis.
+ .
+ This package provides a Python2 user space connection to any LAVA
+ (Linaro Automated Validation Architecture) instance for
+ submitting test jobs or querying the instance for device and job
+ status over XMLRPC. A user account on the instance is needed to
+ create and use authentication tokens for some calls. The list
+ of calls supported is described on the API section of the LAVA
+ instance.
+ .
+ This package is DEPRECATED in favour of lavacli which uses
+ Python3.

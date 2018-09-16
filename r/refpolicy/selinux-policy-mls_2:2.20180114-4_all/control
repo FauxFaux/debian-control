@@ -1,0 +1,22 @@
+Package: selinux-policy-mls
+Source: refpolicy
+Version: 2:2.20180114-4
+Architecture: all
+Maintainer: Debian SELinux maintainers <selinux-devel@lists.alioth.debian.org>
+Installed-Size: 4666
+Depends: libselinux1 (>= 2.4), libsemanage1 (>= 2.4), libsepol1 (>= 2.4), policycoreutils (>= 2.4), selinux-utils (>= 2.4)
+Recommends: checkpolicy, setools
+Suggests: logcheck, syslog-summary
+Conflicts: mcstrans
+Breaks: selinux-basics (<< 0.5.2~)
+Section: admin
+Priority: optional
+Homepage: https://github.com/TresysTechnology/refpolicy/wiki
+Description: MLS (Multi Level Security) variant of the SELinux policy
+ This is the reference policy for SE Linux built with MLS support.  It allows
+ giving data labels such as "Top Secret" and preventing such data from leaking
+ to processes or files with lower classification.
+ .
+ It was developed for Common Criteria LSPP certification for RHEL.  It will
+ probably never be well supported in Debian and is only recommended for
+ students who want to learn about the security features used by the military.

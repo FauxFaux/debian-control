@@ -1,0 +1,32 @@
+Package: libbackuppc-xs-perl
+Source: libbackuppc-xs-perl (0.54-1)
+Version: 0.54-1+b2
+Architecture: amd64
+Maintainer: Ludovic Drolez <ldrolez@debian.org>
+Installed-Size: 187
+Depends: libc6 (>= 2.14), zlib1g (>= 1:1.1.4), perl (>= 5.26.0-4), perlapi-5.26.0
+Section: perl
+Priority: optional
+Description: Perl module for BackupPC
+ BackupPC is disk based and not tape based. This particularity allows
+ features not found in any other backup solution:
+  * Clever pooling scheme minimizes disk storage and disk I/O.
+    Identical files across multiple backups of the same or different PC are
+    stored only once resulting in substantial savings in disk storage and disk
+    writes. Also known as "data deduplication".
+  * Optional compression provides additional reductions in storage.
+    CPU impact of compression is low since only new files (those not already
+    in the pool) need to be compressed.
+  * A powerful http/cgi user interface allows administrators to view log files,
+    configuration, current status and allows users to initiate and cancel
+    backups and browse and restore files from backups very quickly.
+  * No client-side software is needed. On WinXX the smb protocol is used.
+    On Linux or Unix clients, rsync or tar (over ssh/rsh/nfs) can be used
+  * Flexible restore options. Single files can be downloaded from any backup
+    directly from the CGI interface. Zip or Tar archives for selected files
+    or directories can also be downloaded from the CGI interface.
+  * BackupPC supports mobile environments where laptops are only intermittently
+    connected to the network and have dynamic IP addresses (DHCP).
+  * Flexible configuration parameters allow multiple backups to be performed
+    in parallel.
+  * and more to discover in the manual...

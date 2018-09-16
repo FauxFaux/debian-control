@@ -1,0 +1,26 @@
+Package: libmoops-perl
+Version: 0.034-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 129
+Depends: libimport-into-perl, libkavorka-perl, libkeyword-simple-perl, liblexical-accessor-perl, libmoox-late-perl, libmoosex-mungehas-perl, libparse-keyword-perl, libperlx-assert-perl, libtype-tiny-perl, libvariable-magic-perl, libtrue-perl, libexporter-tiny-perl (>= 0.040), libmodule-runtime-perl (>= 0.013), libmoo-perl (>= 1.006000), libscalar-list-utils-perl (>= 1:0.40), libtry-tiny-perl (>= 0.12), libnamespace-autoclean-perl (>= 0.20), perl (>= 5.14)
+Suggests: libmoosex-xsaccessor-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Moops
+Description: moops object-oriented programming sugar
+ Moops is sugar for declaring and using roles and classes in Perl.
+ .
+ The syntax is inspired by MooseX::Declare, and Stevan Little's
+ p5-mop-redux project (which is in turn partly inspired by Perl 6).
+ .
+ Moops has fewer than half of the dependencies as MooseX::Declare, loads
+ in about 25% of the time, and the classes built with it run
+ significantly faster.  Moops does not use Devel::Declare, instead using
+ Perl's pluggable keyword API.
+ .
+ Moops uses Moo to build classes and roles by default, but allows you to
+ use Moose if you desire. (And Mouse experimentally.)
+ .
+ Install libmoosex-xsaccessor-perl to automatically speedup Moose
+ classes.

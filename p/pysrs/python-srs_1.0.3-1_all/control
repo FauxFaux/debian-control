@@ -1,0 +1,23 @@
+Package: python-srs
+Source: pysrs
+Version: 1.0.3-1
+Architecture: all
+Maintainer: Sandro Knauß <hefee@debian.org>
+Installed-Size: 90
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Recommends: pysrs-bin, python-bsddb3
+Section: python
+Priority: optional
+Homepage: http://bmsi.com/python/pysrs.html
+Description: Python SRS (Sender Rewriting Scheme) library
+ As SPF is implemented, MTAs that check SPF must account for any forwarders.
+ One way to handle forwarding is to have the forwarding MTA rewrite envfrom to
+ a domain they are authorized to use.
+ .
+ The package also include a package for sign and verify sender addresses with
+ message ID (SES). There is also a base class for sendmail socket server
+ (SocketMap) available.
+ .
+ See http://www.openspf.org/SRS for details.
+ .
+ This is the Python 2 version of the module.

@@ -1,0 +1,30 @@
+Package: gadmin-rsync-dbg
+Source: gadmin-rsync (0.1.7-1)
+Version: 0.1.7-1+b2
+Architecture: amd64
+Maintainer: Mahyuddin Susanto <udienz@ubuntu.com>
+Installed-Size: 583
+Depends: gadmin-rsync (= 0.1.7-1+b2)
+Recommends: openssh-client
+Section: debug
+Priority: extra
+Homepage: http://www.gadmintools.org/
+Description: GTK+ configuration tool for rsync (debug)
+ gadmin-rsync is an easy to use GTK+ frontend for the rsync server.
+ .
+ Feature:
+  - Multiple backup sets that can be scheduled to run at specific times via
+    cron.
+  - Each of these backup sets can contain multiple remote or local data
+    backups.
+  - Backup sets that are started via cron schedules will generate log files
+    for each of the data backups in the backup sets.
+  - The backup logfiles will have the same names as the individual backup sets.
+  - Individual backup sets can be run manually and the progress can be viewed
+    in the progress tab.
+  - Remote backups are fully automatic, differential and encrypted.
+  - Keys are created for each host, uploaded and then installed on the remote
+    hosts using a combination of ssh-keygen/scp and ssh.
+  - Makes remote synchronizations scheduleable.
+ .
+ This package contains the debugging symbols.

@@ -1,0 +1,21 @@
+Package: golang-github-modern-go-reflect2-dev
+Source: golang-github-modern-go-reflect2
+Version: 1.0.0-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 118
+Depends: golang-github-modern-go-concurrent-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/modern-go/reflect2
+Description: Reflection API without runtime reflect.Value cost
+ The reflect2 package provides a reflection API that avoids runtime
+ reflect.Value cost:
+ .
+  * reflect get/set interface{}, with type checking
+  * reflect get/set unsafe.Pointer, without type checking
+  * reflect2.TypeByName works like Class.forName found in Java
+ .
+ This package is designed for low level libraries to optimize reflection
+ performance. General applications should still use the standard library
+ reflect.

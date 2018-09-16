@@ -1,0 +1,27 @@
+Package: libtest-most-perl
+Version: 0.35-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 55
+Depends: perl, libexception-class-perl, libtest-deep-perl (>= 0.119), libtest-differences-perl (>= 0.64), libtest-exception-perl (>= 0.43), libtest-warn-perl (>= 0.30), libtest-simple-perl (>= 1.302047) | perl (>= 5.25.4), perl (>= 5.21.8) | libtest-harness-perl (>= 3.35)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Most
+Description: Perl module with the most commonly needed test functions and features
+ Test::Most provides the most commonly used testing functions and gives
+ a bit more fine-grained control over your test suite.
+ .
+ All functions from the following modules will automatically be
+ exported:
+ .
+  * Test::More
+  * Test::Exception
+  * Test::Differences
+  * Test::Deep
+  * Test::Warn
+ .
+ This is useful when one is used to most of the above modules but
+ wouldn't want to bother to load them all explicitly.
+ .
+ Test::Most also provides a couple of routines to control tests
+ behaviour in case of errors.

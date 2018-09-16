@@ -1,0 +1,25 @@
+Package: libmath-nocarry-perl
+Version: 1.112-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 32
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Math-NoCarry
+Description: Perl module for no carry arithmetic
+ The perl module Math::NoCarry implememnts no carry arithmetic which
+ doesn't allow you to carry digits to the next column.  For example,
+ if you add 8 and 4, you normally expect the answer to be 12, but that
+ 1 digit is a carry.  In no carry arithmetic you can't do that, so the
+ sum of 8 and 4 is just 2.  In effect, this is addition modulo 10 in
+ each column. The following example discards all of the carry digits:
+ .
+  1234
+  + 5678
+  ------
+  6802
+ .
+ For multiplication, the result of pair-wise multiplication
+ of digits is the modulo 10 value of their normal, everyday
+ multiplication.

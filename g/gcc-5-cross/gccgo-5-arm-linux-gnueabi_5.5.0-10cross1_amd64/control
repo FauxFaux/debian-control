@@ -1,0 +1,20 @@
+Package: gccgo-5-arm-linux-gnueabi
+Source: gcc-5-cross (32)
+Version: 5.5.0-10cross1
+Architecture: amd64
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 50953
+Depends: gcc-5-arm-linux-gnueabi-base (= 5.5.0-10cross1), gcc-5-arm-linux-gnueabi (= 5.5.0-10cross1), libgo7-armel-cross (>= 5.4.0-6), libc6-dev-armel-cross (>= 2.13-5), libc6 (>= 2.14), libgmp10 (>= 2:5.0.1~), libisl15 (>= 0.15), libmpc3, libmpfr6 (>= 3.1.3), zlib1g (>= 1:1.1.4)
+Suggests: gccgo-5-doc, libgo7-dbg-armel-cross (>= 5.5.0-10cross1)
+Conflicts: golang-go (<< 2:1.3.3-1ubuntu2)
+Breaks: libgo7-armel-cross (<< 5.5.0-6)
+Replaces: libgo7-armel-cross (<< 5.5.0-6)
+Provides: go-compiler
+Built-Using: gcc-5 (= 5.5.0-10)
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://gcc.gnu.org/
+Description: GNU Go compiler
+ This is the GNU Go compiler, which compiles Go on platforms supported
+ by the gcc compiler. It uses the gcc backend to generate optimized code.

@@ -1,0 +1,23 @@
+Package: python-virtualenv-clone
+Source: virtualenv-clone
+Version: 0.3.0-1.2
+Architecture: all
+Maintainer: Jan Dittberner <jandd@debian.org>
+Installed-Size: 37
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Breaks: virtualenv-clone (<< 0.3.0-1.2~)
+Replaces: virtualenv-clone (<< 0.3.0-1.2~)
+Section: python
+Priority: optional
+Homepage: https://pypi.org/project/virtualenv-clone/
+Description: script for cloning a non-relocatable virtualenv (Python2)
+ Virtualenv provides a way to make virtualenv's relocatable which could then be
+ copied as wanted. However making a virtualenv relocatable this way breaks
+ the no-site-packages isolation of the virtualenv as well as other aspects that
+ come with relative paths and '/usr/bin/env' shebangs that may be undesirable.
+ .
+ Also, the .pth and .egg-link rewriting doesn't seem to work as intended. This
+ attempts to overcome these issues and provide a way to easily clone an
+ existing virtualenv.
+ .
+ This is the Python2 package

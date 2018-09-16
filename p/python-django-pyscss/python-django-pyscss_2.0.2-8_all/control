@@ -1,0 +1,22 @@
+Package: python-django-pyscss
+Version: 2.0.2-8
+Architecture: all
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 39
+Depends: libjs-jquery, python-django-compressor, python-django, python-pyscss, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://github.com/fusionbox/django-pyscss
+Description: makes it easier to use PySCSS in Django - Python 2.7
+ Django-pyscss is a collection of tools for making it easier to use pyScss
+ within Django. It overwrites the import system to use Django's staticfiles
+ app. This way you can import SCSS files from any app (or any file that's
+ findable by the STATICFILES_FINDERS) with no hassle. It provides a
+ django-compressor precompile filter class so that you can easily use pyScss
+ with django-compressor without having to bust out to the shell. This has the
+ added benefit of removing the need to configure pyScss through its
+ command-line arguments AND makes it possible for the exceptions and warnings
+ that pyScss emits to bubble up to your process so that you can actually know
+ what's going on.
+ .
+ This package contains the Python 2.7 module.

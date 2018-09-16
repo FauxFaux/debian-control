@@ -1,0 +1,16 @@
+Package: reniced
+Version: 1.21-1
+Architecture: all
+Maintainer: Christian Garbs <debian@cgarbs.de>
+Installed-Size: 41
+Depends: libbsd-resource-perl, perl
+Section: utils
+Priority: extra
+Homepage: https://github.com/mmitch/reniced
+Description: renice running processes based on regular expressions
+ reniced takes a list of regular expressions, looks for processes
+ matching them and renices the processes to given values.
+ .
+ Instead of editing the scripts in /etc/init.d to give daemons the
+ nicelevel you want (and get prompted at every package update because
+ these files are conffiles) you can just run reniced once a day.

@@ -1,0 +1,28 @@
+Package: postbooks-schema-quickstart
+Source: postbooks-schema
+Version: 1:4.11.3-1
+Architecture: all
+Maintainer: Debian xTuple Maintainers <pkg-xtuple-maintainers@lists.alioth.debian.org>
+Installed-Size: 1453
+Depends: postgresql-client, postbooks-schema-common (= 1:4.11.3-1)
+Recommends: postbooks, postbooks-updater
+Suggests: postgresql, postgresql-contrib
+Provides: postbooks-schema
+Section: misc
+Priority: optional
+Homepage: http://www.xtuple.com/postbooks
+Description: multi-user accounting / CRM / ERP suite (quickstart database)
+ A full-featured, fully-integrated business management system, the core of
+ the award winning xTuple ERP Suite. Built with the open source PostgreSQL
+ database and the open source Qt framework for C++, it provides the
+ ultimate in power and flexibility for a range of businesses and
+ industries of any size.
+ .
+ This package provides the quickstart database that can be loaded into
+ PostgreSQL using pg_restore.  Most users should start with the
+ postbooks-schema-quickstart database, while the postbooks-schema-demo
+ database is useful for evaluating the product.
+ .
+ Installing schema packages does not modify PostgreSQL in any way.  They simply
+ put a copy of the schema into /usr/share/postbooks-schema for
+ manual installation.

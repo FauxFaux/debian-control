@@ -1,0 +1,19 @@
+Package: libghc-quickcheck-unicode-prof
+Source: haskell-quickcheck-unicode (1.0.1.0-2)
+Version: 1.0.1.0-2+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 247
+Depends: libghc-quickcheck-unicode-dev (= 1.0.1.0-2+b1), libghc-quickcheck-prof-2.10.1-914b9, libghc-base-prof-4.10.1.0-35a7f
+Provides: libghc-quickcheck-unicode-prof-1.0.1.0-4b254
+Section: haskell
+Priority: optional
+Homepage: https://github.com/bos/quickcheck-unicode
+Description: Generator and shrink functions for testing Unicode-related software.; profiling libraries
+ The default Arbitrary instance for the Char type intentionally generates only
+ ASCII values. This can lead to a false sense of security in cases where
+ Unicode compliance is required, as encodings that span multiple bytes or code
+ units will simply not be exercised at all.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

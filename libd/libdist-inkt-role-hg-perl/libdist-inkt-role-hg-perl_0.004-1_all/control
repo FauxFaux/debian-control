@@ -1,0 +1,14 @@
+Package: libdist-inkt-role-hg-perl
+Version: 0.004-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 24
+Depends: libdist-inkt-perl, libfile-chdir-perl, libmoose-perl, libtype-tiny-perl, libnamespace-autoclean-perl, perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Dist-Inkt-Role-Hg
+Description: Mercurial-related behaviour for Dist::Inkt
+ Dist::Inkt::Role::Hg extends the perl distribution builder Dist::Inkt
+ with the following features:
+  * Prevents a release from being built if there are uncommitted changes.
+  * Does an << hg tag >> and `hg push` after release.

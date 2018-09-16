@@ -1,0 +1,22 @@
+Package: libdpkg-parse-perl
+Version: 0.03-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 54
+Depends: perl, libclass-accessor-perl, libclass-c3-perl, libparams-validate-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/DPKG-Parse
+Description: module to parse various dpkg files into Perl Objects
+ DPKG::Parse contains utilities to parse the various files created by dpkg and
+ turn them into helpful Perl objects. Current files understood by various
+ DPKG::Parse modules:
+ .
+ /var/lib/dpkg/status - DPKG::Parse::Status
+ .
+ /var/lib/dpkg/available - DPKG::Parse::Available
+ .
+ Packages.gz - DPKG::Parse::Packages
+ .
+ See each module's documentation for particulars - You should not be calling
+ DPKG::Parse directly.

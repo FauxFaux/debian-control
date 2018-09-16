@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_usrlocal/11.2.1
+(
+	while read dir; do
+		rmdir "$dir" 2>/dev/null || true
+	done
+) << DATA
+/usr/local/share/ydpdict
+DATA
+# End automatically added section

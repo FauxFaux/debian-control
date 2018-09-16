@@ -1,0 +1,44 @@
+Package: libocamlgraph-viewer-ocaml-dev
+Source: ocamlgraph (1.8.6-1)
+Version: 1.8.6-1+b4
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 1069
+Depends: liblablgtk2-gnome-ocaml-dev-dlf93, liblablgtk2-ocaml-dev-il3k6, libocamlgraph-ocaml-dev-5dnc7, ocaml-nox-4.05.0
+Suggests: graphviz | springgraph
+Breaks: libocamlgraph-ocaml-dev (<< 1.3+debian-2~)
+Replaces: libocamlgraph-ocaml-dev (<< 1.3+debian-2~)
+Provides: libocamlgraph-viewer-ocaml-dev-gbo47
+Section: ocaml
+Priority: optional
+Homepage: http://ocamlgraph.lri.fr/
+Description: graph library for OCaml
+ Ocamlgraph is a graph library for OCaml. Its contribution is
+ three-fold:
+ .
+  * It provides an easy-to-use graph data structure together with
+    several operations and algorithms over graphs.  It is a
+    reasonably efficient imperative data structure for directed
+    graphs with vertices and edges labeled with integers.
+ .
+  * Then ocamlgraph provides several other graph implementations
+    for those not satisfied with the one above. Some are
+    persistent (imutable) and other imperative (mutable). Some
+    are directed and other are not. Some have labels for
+    vertices, or labels for edges, or both. Some have abstract
+    types for vertices. etc.
+    These implementations are written as functors: you give the
+    types of vertices labels, edge labels, etc. and you get the
+    data structure as a result.
+ .
+  * Finally, ocamlgraph provides several classic operations and
+    algorithms over graphs.
+    They are also written as functors i.e. independently of the
+    data structure for graphs. One consequence is that you can
+    define your own data structure for graphs and yet re-use all
+    the algorithms from this library -- you only need to provide
+    a few operations such as iterating over all vertices, over
+    the successors of a vertex, etc.
+ .
+ This package provides viewgraph and dgraph library to build graph
+ viewers.

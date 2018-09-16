@@ -1,0 +1,26 @@
+Package: libxen-dev
+Source: xen
+Version: 4.8.3+xsa267+shim4.10.1+xsa267-1+deb9u9
+Architecture: amd64
+Maintainer: Debian Xen Team <pkg-xen-devel@lists.alioth.debian.org>
+Installed-Size: 3333
+Depends: libxen-4.8 (= 4.8.3+xsa267+shim4.10.1+xsa267-1+deb9u9), libxenstore3.0 (= 4.8.3+xsa267+shim4.10.1+xsa267-1+deb9u9)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Description: Public headers and libs for Xen
+ This package contains the public headers and static libraries for Xen.
+ .
+ The libxenlight library is intended as a common base for all Xen toolstack
+ developers.  The libxlutil library contains additional helpers which may
+ be useful to toolstack developers.
+ .
+ The libxenstore library allows userspace processes to interact with the
+ XenStore database.  XenStore is a shared database used for interdomain
+ communication of configuration and status information.  It is accessible
+ to all domains running on the same Xen host.  See
+ http://wiki.xen.org/wiki/XenStore for more information.
+ .
+ The libxenctrl and libxenguest libraries are internal libraries intended
+ for use by the Xen toolstack and are not intended to be used directly.
+ Toolstack authors should use libxenlight.

@@ -1,0 +1,96 @@
+Package: cp2k
+Version: 5.1-4
+Architecture: amd64
+Maintainer: Debichem Team <debichem-devel@lists.alioth.debian.org>
+Installed-Size: 63835
+Depends: cp2k-data (= 5.1-4), libblas3 | libblas.so.3, libc6 (>= 2.14), libelpa4 (>= 2013.11.008), libfftw3-double3 (>= 3.3.5), libgcc1 (>= 1:4.0), libgfortran4 (>= 7), libint1, liblapack3 | liblapack.so.3, libopenmpi3, libquadmath0 (>= 4.6), libscalapack-openmpi2.0, libxc4 (>= 3.0.0)
+Section: science
+Priority: optional
+Homepage: http://www.cp2k.org
+Description: Ab Initio Molecular Dynamics
+ CP2K is a program to perform simulations of solid state, liquid, molecular and
+ biological systems. It is especially aimed at massively parallel and linear
+ scaling electronic structure methods and state-of-the-art ab-initio molecular
+ dynamics (AIMD) simulations.
+ .
+ CP2K is optimized for the mixed Gaussian and Plane-Waves (GPW) method based on
+ pseudopotentials, but is able to run all-electron or pure plane-wave/Gaussian
+ calculations as well. Features include:
+ .
+ Ab-initio Electronic Structure Theory Methods using the QUICKSTEP module:
+ .
+  * Density-Functional Theory (DFT) energies and forces
+  * Hartree-Fock (HF) energies and forces
+  * Moeller-Plesset 2nd order perturbation theory (MP2) energies and forces
+  * Random Phase Approximation (RPA) energies
+  * Gas phase or Periodic boundary conditions (PBC)
+  * Basis sets include various standard Gaussian-Type Orbitals (GTOs), Pseudo-
+    potential plane-waves (PW), and a mixed Gaussian and (augmented) plane wave
+    approach (GPW/GAPW)
+  * Norm-conserving, seperable Goedecker-Teter-Hutter (GTH) and non-linear core
+    corrected (NLCC) pseudopotentials, or all-electron calculations
+  * Local Density Approximation (LDA) XC functionals including SVWN3, SVWN5,
+    PW92 and PADE
+  * Gradient-corrected (GGA) XC functionals including BLYP, BP86, PW91, PBE and
+    HCTH120 as well as the meta-GGA XC functional TPSS
+  * Hybrid XC functionals with exact Hartree-Fock Exchange (HFX) including
+    B3LYP, PBE0 and MCY3
+  * Double-hybrid XC functionals including B2PLYP and B2GPPLYP
+  * Additional XC functionals via LibXC
+  * Dispersion corrections via DFT-D2 and DFT-D3 pair-potential models
+  * Non-local van der Waals corrections for XC functionals including B88-vdW,
+    PBE-vdW and B97X-D
+  * DFT+U (Hubbard) correction
+  * Density-Fitting for DFT via Bloechl or Density Derived Atomic Point Charges
+    (DDAPC) charges, for HFX via Auxiliary Density Matrix Methods (ADMM) and
+    for MP2/RPA via Resolution-of-identity (RI)
+  * Sparse matrix and prescreening techniques for linear-scaling Kohn-Sham (KS)
+    matrix computation
+  * Orbital Transformation (OT) or Direct Inversion of the iterative subspace
+    (DIIS) self-consistent field (SCF) minimizer
+  * Local Resolution-of-Identity Projector Augmented Wave method (LRIGPW)
+  * Absolutely Localized Molecular Orbitals SCF (ALMO-SCF) energies for linear
+    scaling of molecular systems
+  * Excited states via time-dependent density-functional perturbation theory
+    (TDDFPT)
+ .
+ Ab-initio Molecular Dynamics:
+ .
+  * Born-Oppenheimer Molecular Dynamics (BOMD)
+  * Ehrenfest Molecular Dynamics (EMD)
+  * PS extrapolation of initial wavefunction
+  * Time-reversible Always Stable Predictor-Corrector (ASPC) integrator
+  * Approximate Car-Parrinello like Langevin Born-Oppenheimer Molecular Dynamics
+    (Second-Generation Car-Parrinello Molecular Dynamics)
+ .
+ Mixed quantum-classical (QM/MM) simulations:
+ .
+  * Real-space multigrid approach for the evaluation of the Coulomb
+    interactions between the QM and the MM part
+  * Linear-scaling electrostatic coupling treating of periodic boundary
+    conditions
+  * Adaptive QM/MM
+ .
+ Further Features include:
+ .
+  * Single-point energies, geometry optimizations and frequency calculations
+  * Several nudged-elastic band (NEB) algorithms (B-NEB, IT-NEB, CI-NEB, D-NEB)
+    for minimum energy path (MEP) calculations
+  * Global optimization of geometries
+  * Solvation via the Self-Consistent Continuum Solvation (SCCS) model
+  * Semi-Empirical calculations including the AM1, RM1, PM3, MNDO, MNDO-d, PNNL
+    and PM6 parametrizations, density-functional tight-binding (DFTB) and
+    self-consistent-polarization tight-binding (SCP-TB), with or without
+    periodic boundary conditions
+  * Classical Molecular Dynamics (MD) simulations in microcanonical ensemble
+    (NVE) or canonical ensmble (NVT) with Nose-Hover and canonical sampling
+    through velocity rescaling (CSVR) thermostats
+  * Metadynamics including well-tempered Metadynamics for Free Energy
+    calculations
+  * Classical Force-Field (MM) simulations
+  * Monte-Carlo (MC) KS-DFT simulations
+  * Static (e.g. spectra) and dynamical (e.g. diffusion) properties
+  * ATOM code for pseudopotential generation
+  * Integrated molecular basis set optimization
+ .
+ CP2K does not implement conventional Car-Parrinello Molecular Dynamics (CPMD).

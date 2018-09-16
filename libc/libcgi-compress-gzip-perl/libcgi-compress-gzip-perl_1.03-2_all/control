@@ -1,0 +1,19 @@
+Package: libcgi-compress-gzip-perl
+Version: 1.03-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 48
+Depends: perl, libcgi-pm-perl | perl (<< 5.19)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Compress-Gzip
+Description: module to allow automatically compressed CGI output
+ CGI::Compress::Gzip extends the CGI module to auto-detect whether the client
+ browser wants compressed output and, if so and if the script chooses HTML
+ output, apply gzip compression on any content header for STDOUT.
+ CGI::Compress::Gzip is intended to be a drop-in replacement for CGI.pm.
+ .
+ Apache mod_perl users may wish to consider the Apache::Compress or
+ Apache::GzipChain modules, which allow more transparent output compression
+ than this module can provide. However, as of this writing those modules are
+ more aggressive about compressing, regardless of Content-Type.

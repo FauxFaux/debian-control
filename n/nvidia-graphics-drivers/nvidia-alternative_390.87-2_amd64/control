@@ -1,0 +1,24 @@
+Package: nvidia-alternative
+Source: nvidia-graphics-drivers
+Version: 390.87-2
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 228
+Pre-Depends: dpkg (>= 1.17.21), nvidia-legacy-check (>= 343)
+Depends: glx-alternative-nvidia (>= 0.8.4~)
+Breaks: libcuda1 (<< 352.63), libnvcuvid1 (<< 340.46-2~), libnvidia-encode1 (<< 340.46-2~), libnvidia-fbc1 (<< 340.46-2~), libnvidia-ifr1 (<< 340.46-2~), libnvidia-ml1 (<< 340.46-2~), nvidia-driver (<< 343.22-2~), nvidia-opencl-icd (<< 340.46-2~), nvidia-settings (<< 319.49), nvidia-smi (<< 340.46-2~), nvidia-vdpau-driver (<< 340.46-2~)
+Provides: nvidia-alternative--kmod-alias
+Section: non-free/libs
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.nvidia.com
+Description: allows the selection of NVIDIA as GLX provider
+ In setups with several NVIDIA driver versions installed (e.g. current and
+ legacy) this metapackage registers an alternative to allow easy switching
+ between the different versions.
+ .
+ Use 'update-glx --config nvidia' to select a version.
+ .
+ This package does not depend on the corresponding NVIDIA libraries.
+ In order to install the NVIDIA driver and libraries, install the
+ nvidia-driver package instead.

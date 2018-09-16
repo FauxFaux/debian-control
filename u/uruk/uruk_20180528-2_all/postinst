@@ -1,0 +1,58 @@
+#!/bin/sh
+
+# uruk postinst
+
+set -e
+
+case "$1" in
+  configure)
+    if test -x /etc/init.d/uruk
+    then
+        update-rc.d uruk start 40 S . stop 89 0 1 6 . >/dev/null
+    #
+    # Don't call init script on initial install: we have no sane rules anyway.
+    # We might want to run "invoke-rc.d uruk stop" in prerm.
+    #
+    fi
+
+    if test -n "$2"
+    then
+        # we are called with a second argument, so are upgrading from a prior
+        # version: second argument holds prior version
+        if test -x /usr/sbin/invoke-rc.d
+        then
+            invoke-rc.d uruk force-reload || err=$?
+        else
+            /etc/init.d/uruk force-reload || err=$?
+        fi
+
+        # exit code 6 from init script indicates "program is not configured" per
+        # LSB. we don't want to disable upgrading an unconfigured uruk.
+        if test -n "$err"
+        then
+            test $err -eq 6 || exit $err
+        fi
+    fi
+    ;;
+
+  failed-upgrade|abort-upgrade|abort-remove|abort-deconfigure|in-favour|removing)
+    ;;
+  *)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+# init-system-helpers (priority required since jan 2016) ships
+# deb-systemd-helper
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled uruk.service; then
+        # Enables the unit on first installation, creates new
+        # symlinks on upgrades if the unit file has changed.
+        deb-systemd-helper enable uruk.service >/dev/null || true
+else
+        # Update the statefile to add new symlinks (if any), which need to be
+        # cleaned up on purge. Also remove old symlinks.
+        deb-systemd-helper update-state uruk.service >/dev/null || true
+fi
+

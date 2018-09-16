@@ -1,0 +1,19 @@
+Package: extsmail
+Version: 2.0-2.1
+Architecture: amd64
+Maintainer: Olivier Girondel <olivier@biniou.info>
+Installed-Size: 96
+Depends: libc6 (>= 2.15)
+Section: mail
+Priority: extra
+Homepage: http://tratt.net/laurie/src/extsmail/
+Description: enables the robust sending of e-mail to external commands
+ extsmail masquerades as the standard UNIX sendmail program, reading
+ messages, and later piping them to user-defined commands.
+ .
+ In a sense, extsmail can be thought of as a very simple "tiny" sendmail
+ (Think SSMTP, UUCP, ...)
+ .
+ A typical use is to allow e-mail to be piped via ssh to external servers
+ running a full sendmail-compatible MTA. extsmail is designed to have
+ sensible defaults, and configuring it is a one-off, quick job.

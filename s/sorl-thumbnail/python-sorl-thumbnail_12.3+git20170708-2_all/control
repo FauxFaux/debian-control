@@ -1,0 +1,28 @@
+Package: python-sorl-thumbnail
+Source: sorl-thumbnail
+Version: 12.3+git20170708-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 150
+Depends: python-django, python-pil | python-pgmagick | imagemagick | graphicsmagick, python:any (<< 2.8), python:any (>= 2.7~)
+Suggests: python-redis
+Section: python
+Priority: optional
+Homepage: https://github.com/mariocesar/sorl-thumbnail
+Description: thumbnail support for the Django framework
+ sorl-thumbnail provides a convenient way to create and manage image thumbnails
+ in a Django project. It offers integration into several parts of Django like
+ the admin system by showing thumbnails for ImageFields or through a ImageField
+ that also takes care of deleting thumbnail files when the referencing object
+ is removed.
+ .
+ Other features include:
+  * Django storage support
+  * Pluggable Engine support (PIL, pgmagick, ImageMagick, GraphicsMagick,
+    or Wand)
+  * Pluggable Key Value Store support (Django cache, redis)
+  * Pluggable Backend support (i.e. different thumbnail filename schema)
+  * Dummy generation (placeholders)
+  * Flexible, simple syntax, generates no html
+  * CSS style cropping options
+  * Margin calculation for vertical positioning

@@ -1,0 +1,25 @@
+Package: tau
+Version: 2.17.3.1.dfsg-4.2
+Architecture: amd64
+Maintainer: Yann Dirson <dirson@debian.org>
+Installed-Size: 1511
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Recommends: tau-racy
+Suggests: tau-examples, g++, gfortran
+Section: devel
+Priority: optional
+Homepage: http://www.cs.uoregon.edu/research/tau/
+Description: Tuning and Analysis Utilities - base profiling/tracing toolkit
+ TAU is a profiling toolkit specially made for parallel computing
+ (multi-thread, multi-process, MPI, PVM).  It consists of an
+ instrumentation API, which can be used manually (or added
+ automatically by other instrumentation tools) to get runtime
+ profiling information.
+ .
+ This package provides the API and library, and the command-line
+ analysis tool.  A Tcl/Tk-based GUI is available in package tau-racy.
+ .
+ This version is built with pthread support only.  Support for PVM and
+ MPI, as well as use of PCL or PAPI for the use of hardware counters,
+ and of PDT or DynInst for automatic code instrumentation, are not
+ available in packaged form yet.

@@ -1,0 +1,16 @@
+Package: golang-github-gregjones-httpcache-dev
+Source: golang-github-gregjones-httpcache
+Version: 0.0~git20180305.9cad4c3-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Installed-Size: 84
+Depends: golang-github-bradfitz-gomemcache-dev, golang-github-garyburd-redigo-dev, golang-github-peterbourgon-diskv-dev, golang-github-syndtr-goleveldb-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/gregjones/httpcache
+Description: Transport for http.Client that will cache responses
+ The package httpcache provides a http.RoundTripper implementation that
+ works as a mostly RFC 7234 compliant cache for http responses.
+ .
+ It is only suitable for use as a 'private' cache (i.e. for
+ a web-browser or an API-client and not for a shared proxy).

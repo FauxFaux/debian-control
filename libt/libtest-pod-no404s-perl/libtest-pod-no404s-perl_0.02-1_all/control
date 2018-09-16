@@ -1,0 +1,19 @@
+Package: libtest-pod-no404s-perl
+Version: 0.02-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 35
+Depends: perl, libtest-pod-perl, liburi-find-perl, libwww-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Pod-No404s
+Description: test utility checking POD for HTTP 404 links
+ Test::Pod::No404s looks for any http(s) links in your POD and verifies that
+ they will not return a 404. It uses LWP::UserAgent for the heavy lifting, and
+ simply lets you know if it failed to retrieve the document. More
+ specifically, it uses $response->is_error as the "test."
+ .
+ Normally, you wouldn't want this test to be run during end-user installation
+ because they might have no internet! It is HIGHLY recommended that this be
+ used only for module authors' RELEASE_TESTING phase. To do that, just modify
+ the synopsis to add an env check :)

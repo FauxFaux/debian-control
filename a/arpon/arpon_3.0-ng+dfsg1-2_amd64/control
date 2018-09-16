@@ -1,0 +1,25 @@
+Package: arpon
+Version: 3.0-ng+dfsg1-2
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 96
+Depends: libc6 (>= 2.15), libdumbnet1 (>= 1.8), libnet1 (>= 1.1.2.1), libpcap0.8 (>= 1.0.0), lsb-base
+Section: net
+Priority: optional
+Homepage: http://arpon.sourceforge.net
+Description: versatile anti ARP poisoning daemon
+ ArpON (Arp handler inspectiON) is a portable handler daemon with some nice
+ tools to handle all ARP aspects.
+ It makes Arp a bit safer. This is possible using two kinds of anti Arp
+ Poisoning techniques, the first is based on SARPI or "Static Arp Inspection",
+ the second on DARPI or "Dynamic Arp Inspection" approach.
+ .
+ Features of ArpON include:
+   * Detects and blocks ARP Poisoning/Spoofing attacks in statically
+     configured networks (SARPI)
+   * Detects and blocks ARP Poisoning/Spoofing attacks in dynamically
+     configured (DHCP) networks (DARPI)
+   * Detects and blocks unidirectional and bidirectional ARP attacks
+   * Easily configurable via command line switches
+   * Works in userspace
+   * Can be a passive sniffer and capture all inbound/outbound ARP packets

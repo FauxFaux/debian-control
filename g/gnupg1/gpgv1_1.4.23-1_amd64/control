@@ -1,0 +1,24 @@
+Package: gpgv1
+Source: gnupg1
+Version: 1.4.23-1
+Architecture: amd64
+Maintainer: Debian GnuPG-Maintainers <pkg-gnupg-maint@lists.alioth.debian.org>
+Installed-Size: 430
+Depends: libbz2-1.0, libc6 (>= 2.14), zlib1g (>= 1:1.1.4)
+Suggests: gnupg
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.gnupg.org
+Description: GNU privacy guard - signature verification tool (deprecated "classic" version)
+ GnuPG is GNU's tool for secure communication and data storage.
+ .
+ gpgv is a stripped-down version of gnupg which is only able to check
+ signatures.  It is smaller than the full-blown gnupg and uses a
+ different (and simpler) way to check that the public keys used to
+ make the signature are trustworthy.
+ .
+ gpgv1 is the "classic" version of gpgv. It does not support as many
+ cryptographic primitives as the modern version, so there are
+ signatures it cannot verify.  Please use the "gpgv" package instead
+ where possible.

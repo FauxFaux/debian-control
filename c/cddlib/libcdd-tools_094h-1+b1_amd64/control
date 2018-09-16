@@ -1,0 +1,23 @@
+Package: libcdd-tools
+Source: cddlib (094h-1)
+Version: 094h-1+b1
+Architecture: amd64
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 331
+Depends: libc6 (>= 2.7), libcdd0d, libgmp10
+Recommends: libcdd-doc
+Breaks: libcdd-test (<< 094h-1~)
+Replaces: libcdd-test (<< 094h-1~)
+Section: math
+Priority: optional
+Homepage: http://www.inf.ethz.ch/personal/fukudak/cdd_home/
+Description: Programs using libcdd
+ The cddlib library is a C library for manipulating general convex
+ polyhedra.  It supports converting between the system of linear
+ inequalities representation and a vertices and extreme rays
+ representation of a polyhedron, and also supports solving linear
+ programming problems.
+ .
+ This package contains example programs using libcdd, for example
+ cdd_both_reps, which computes minimal H- and V-representations
+ of a given convex polytope.

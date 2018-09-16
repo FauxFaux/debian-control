@@ -1,0 +1,20 @@
+Package: dnss
+Version: 0.0~git20180721.0.2de63ab0-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 7608
+Depends: libc6 (>= 2.3.2)
+Built-Using: golang-1.10 (= 1.10.3-1), golang-blitiri-go-log (= 0.0+git20170910.0.2b2e1b6-1), golang-github-coreos-go-systemd (= 16-1), golang-github-miekg-dns (= 1.0.4+ds-1), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-net-dev (= 1:0.0+git20180124.0ed95ab+dfsg-2), golang-x-text (= 0.3.0-1)
+Section: net
+Priority: optional
+Homepage: https://blitiri.com.ar/git/r/dnss/b/master/t/f=README.md.html
+Description: Daemon for encapsulating DNS over HTTPS
+ dnss is a daemon for encapsulating DNS over HTTPS.
+ .
+ It can act as a DNS-to-HTTPS proxy, using https://dns.google.com as a server
+ or anything implementing the same API.
+ .
+ It can also act as an HTTPS-to-DNS proxy, implementing the same HTTP API; you
+ can use this instead of https://dns.google.com if you want more control over
+ the servers and the final DNS server used (for example if you are in an
+ isolated environment, such as a test lab or a private network).

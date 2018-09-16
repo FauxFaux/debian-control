@@ -1,0 +1,18 @@
+Package: libexec-maven-plugin-java
+Source: exec-maven-plugin
+Version: 1.6.0-4
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 68
+Depends: libcommons-exec-java, libmaven3-core-java (>= 3.5.0), libplexus-utils-java
+Breaks: libmaven-exec-plugin-java (<< 1.6.0)
+Replaces: libmaven-exec-plugin-java (<< 1.6.0)
+Provides: libmaven-exec-plugin-java
+Section: java
+Priority: optional
+Homepage: http://www.mojohaus.org/exec-maven-plugin/
+Description: Exec Maven Plugin
+ Maven plugin to allow execution of system and Java programs.
+ It provides two goals to help execute system and Java programs:
+  * exec:exec, execute programs and Java programs in a separate process
+  * exec:java, execute Java programs in the same VM.

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = 'purge' ]; then
+	if [ -x '/usr/bin/ucf' ]; then
+		ucf --purge /etc/s5.conf
+	fi
+	rm -f /etc/s5.conf
+fi
+
+

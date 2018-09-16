@@ -1,0 +1,28 @@
+Package: pd-iemnet
+Version: 0.2.1-2
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 218
+Depends: libc6 (>= 2.14), puredata-core | pd
+Recommends: pd-osc
+Provides: pd-net
+Section: sound
+Priority: optional
+Homepage: https://download.puredata.info/iemnet
+Description: Pd library for low-level networking (IEM implementation)
+ This is a re-implementation of the original pd-net library by Martin Peach,
+ focussing on reliability and performance.
+ .
+ This library adds Pure Data objects that allow one to build a networking
+ infrastructure within Pd on OSI-Layer 4 (transport layer).
+ The objects use threads to allow for non-blocking network communication within
+ an audio-realtime environment.
+ .
+  - [tcpreceive], [tcpsend]: unidirectional communication over TCP/IP
+  - [tcpserver], [tcpclient]: bidirectional communication over TCP/IP
+  - [udpreceive], [udpsend]: unidirectional communication over UDP
+  - [udpclient]: bidirectional communication over UDP
+ .
+ Since these objects only send/receive lists of bytes, you will most likely need
+ to add some glue to implement higher-level protocols (and transmit meaningful
+ data).

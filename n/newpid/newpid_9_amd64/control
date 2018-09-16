@@ -1,0 +1,12 @@
+Package: newpid
+Version: 9
+Architecture: amd64
+Maintainer: Christoph Berg <myon@debian.org>
+Installed-Size: 28
+Depends: libcap2-bin, libc6 (>= 2.14)
+Section: utils
+Priority: optional
+Description: run a command in a new PID namespace
+ newpid is a simple suid wrapper around clone(CLONE_NEWPID) that launches a
+ command in a new PID namespace. Optionally it can also use CLONE_NEWNET to
+ request a new network namespace.

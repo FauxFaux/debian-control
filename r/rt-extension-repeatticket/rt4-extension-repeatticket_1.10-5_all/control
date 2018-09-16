@@ -1,0 +1,25 @@
+Package: rt4-extension-repeatticket
+Source: rt-extension-repeatticket
+Version: 1.10-5
+Architecture: all
+Maintainer: Debian Request Tracker Group <pkg-request-tracker-maintainers@lists.alioth.debian.org>
+Installed-Size: 116
+Depends: perl:any, libdatetime-event-ical-perl, request-tracker4 (>= 4.0.6)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/RT-Extension-RepeatTicket
+Description: Repeat tickets in Request Tracker 4 based on schedule
+ The RepeatTicket extension for the Request Tracker trouble-ticket tracking
+ system allows you to set up recurring tickets so new tickets are
+ automatically created based on a schedule. The new tickets are populated
+ with the subject and initial content of the original ticket in the
+ recurrence.
+ .
+ After you activate the plugin by adding it to your RT_SiteConfig.pm file, all
+ tickets will have a Recurrence tab on the create and edit pages. To set up a
+ repeating ticket, click the checkbox to "Enable Recurrence" and fill out the
+ schedule for the new tickets.
+ .
+ New tickets are created when you initially save the recurrence, if new
+ tickets are needed, and when your daily cron job runs the rt-repeat-ticket
+ script.

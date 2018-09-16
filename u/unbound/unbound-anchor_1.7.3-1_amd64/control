@@ -1,0 +1,17 @@
+Package: unbound-anchor
+Source: unbound
+Version: 1.7.3-1
+Architecture: amd64
+Maintainer: unbound packagers <unbound@packages.debian.org>
+Installed-Size: 190
+Depends: libc6 (>= 2.25), libexpat1 (>= 2.0.1), libssl1.1 (>= 1.1.0), libunbound2 (>= 1.4.1)
+Breaks: unbound (<< 1.4.13-1)
+Replaces: unbound (<< 1.4.13-1)
+Section: net
+Priority: optional
+Homepage: https://www.unbound.net/
+Description: utility to securely fetch the root DNS trust anchor
+ unbound-anchor is a utility which securely fetches or updates the root DNS
+ zone trust anchor. A copy of the current root anchor and root update
+ certificate is embedded in unbound-anchor. RFC 5011 trust anchor tracking is
+ performed, with fallback to an SSL fetch if this fails.

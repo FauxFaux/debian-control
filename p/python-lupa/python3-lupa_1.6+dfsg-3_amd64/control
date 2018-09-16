@@ -1,0 +1,27 @@
+Package: python3-lupa
+Source: python-lupa
+Version: 1.6+dfsg-3
+Architecture: amd64
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 675
+Depends: python3 (<< 3.8), python3 (>= 3.6~), python3:any, libc6 (>= 2.4), libluajit-5.1-2 (>= 2.0.4+dfsg)
+Section: python
+Priority: optional
+Homepage: https://github.com/scoder/lupa/
+Description: Python wrapper around LuaJIT or Lua (Python3 version)
+ Lupa integrates the runtimes of Lua or LuaJIT2 into CPython. It is a partial
+ rewrite of LunaticPython in Cython with some additional features such as proper
+ coroutine support.
+ .
+ Features:
+  * separate Lua runtime states through a LuaRuntime class
+  * Python coroutine wrapper for Lua coroutines
+  * iteration support for Python objects in Lua and Lua objects in Python
+  * proper encoding and decoding of strings (configurable per runtime, UTF-8 by
+    default)
+  * frees the GIL and supports threading in separate runtimes when calling into
+    Lua
+  * written for LuaJIT2, but also works with the normal Lua interpreter
+  * easy to hack on and extend as it is written in Cython, not C
+ .
+ This package contains the Python 3 version of the library.

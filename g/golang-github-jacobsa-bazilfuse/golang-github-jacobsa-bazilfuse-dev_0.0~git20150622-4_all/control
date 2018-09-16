@@ -1,0 +1,18 @@
+Package: golang-github-jacobsa-bazilfuse-dev
+Source: golang-github-jacobsa-bazilfuse
+Version: 0.0~git20150622-4
+Architecture: all
+Maintainer: pkg-go <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 288
+Depends: golang-bazil-fuse-dev, golang-golang-x-net-dev, golang-golang-x-sys-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/jacobsa/bazilfuse
+Description: fork of bazil.org/fuse for gcsfuse
+ This package is an implementation detail of github.com/jacobsa/fuse, which is
+ used by gcsfuse. You likely should be using bazil.org/fuse (contained in
+ Debian package golang-bazil-fuse-dev) directly.
+ .
+ Changes from upstream are:
+ .
+  * The function SetOption allows for setting arbitrary mount options.

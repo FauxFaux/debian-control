@@ -1,0 +1,20 @@
+#!/bin/bash 
+
+set -e
+
+action=$1
+version=$2
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+if [ -f /usr/share/dbconfig-common/dpkg/config ]; then
+  dbc_dbtypes="mysql, pgsql"
+  dbc_authmethod_user="password"
+
+  . /usr/share/dbconfig-common/dpkg/config
+  dbc_go prewikka $@
+fi
+
+db_input high prewikka/configuration || true
+db_go

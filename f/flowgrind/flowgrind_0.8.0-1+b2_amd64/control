@@ -1,0 +1,26 @@
+Package: flowgrind
+Source: flowgrind (0.8.0-1)
+Version: 0.8.0-1+b2
+Architecture: amd64
+Maintainer: Arnd Hannemann <arnd.hannemann@credativ.de>
+Installed-Size: 190
+Depends: libc6 (>= 2.17), libcurl3-gnutls (>= 7.16.2), libgsl23, libgslcblas0, libpcap0.8 (>= 0.9.8), libuuid1 (>= 2.16), libxmlrpc-core-c3
+Section: net
+Priority: extra
+Homepage: http://www.flowgrind.net
+Description: Distributed network performance measurement tool
+ Flowgrind is a TCP performance measurement tool similar to iperf
+ and netperf to measure throughput and other metrics for TCP.
+ In Flowgrind's distributed architecture, the flowgrind controller
+ is used to schedule flows between and collect live samples from
+ nodes running the flowgrindd daemon.
+ .
+ Features:
+  * Measure bandwidth, delay, and IAT and sample TCP kernel metrics (tcp_info)
+  * Bulk transfers, rate-limited flows, sophisticated request/response test
+  * Report observed MSS/MTU size
+  * Set buffer size on per flow basis
+  * Set congestion control algorithm, DSCP field, etc.
+  * Uses asynchronous I/O to improve fairness between flows
+  * Gnuplot compatible configureable output format
+Tag: admin::benchmarking, implemented-in::c, interface::commandline, network::client, network::server, protocol::ethernet, protocol::ip, protocol::ipv6, protocol::tcp, role::program, scope::utility, use::analysing, use::checking, use::monitor, works-with::network-traffic

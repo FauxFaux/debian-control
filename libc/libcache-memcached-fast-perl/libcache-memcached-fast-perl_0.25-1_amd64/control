@@ -1,0 +1,20 @@
+Package: libcache-memcached-fast-perl
+Version: 0.25-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 173
+Depends: perl (>= 5.26.0-8), perlapi-5.26.0, libc6 (>= 2.14)
+Enhances: libcache-memcached-perl
+Section: perl
+Priority: optional
+Homepage: http://openhack.ru/Cache-Memcached-Fast
+Description: Perl client for memcached, in C language
+ Cache::Memcached::Fast is a Perl client for memcached, a memory cache
+ daemon (http://www.danga.com/memcached/). Module core is implemented in
+ C and tries hard to minimize number of system calls and to avoid any
+ key/value copying for speed. As a result, it has very low CPU
+ consumption.
+ .
+ API is largely compatible with Cache::Memcached, original pure Perl
+ client, most users of the original module may start using this module
+ by installing it and adding "::Fast" to the old name in their scripts.

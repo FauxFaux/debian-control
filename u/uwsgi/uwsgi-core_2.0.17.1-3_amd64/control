@@ -1,0 +1,105 @@
+Package: uwsgi-core
+Source: uwsgi
+Version: 2.0.17.1-3
+Architecture: amd64
+Maintainer: uWSGI packaging team <pkg-uwsgi-devel@lists.alioth.debian.org>
+Installed-Size: 2365
+Depends: libc6 (>= 2.27), libcap2 (>= 1:2.10), libjansson4 (>= 2.0.1), libmatheval1 (>= 1.1.3), libpam0g (>= 0.99.7.1), libpcre3, libssl1.1 (>= 1.1.0), libsystemd0, libuuid1 (>= 2.16), libxml2 (>= 2.7.4), libyaml-0-2, libzmq5 (>= 3.2.3+dfsg), zlib1g (>= 1:1.2.0)
+Suggests: nginx-full | cherokee | libapache2-mod-proxy-uwsgi | libapache2-mod-uwsgi | libapache2-mod-ruwsgi, uwsgi-dev, uwsgi-extra, uwsgi-plugins-all
+Conflicts: uwsgi-plugin-cache, uwsgi-plugin-carbon, uwsgi-plugin-cgi, uwsgi-plugin-echo, uwsgi-plugin-emperor-zeromq, uwsgi-plugin-fastrouter, uwsgi-plugin-http, uwsgi-plugin-logsocket, uwsgi-plugin-nagios, uwsgi-plugin-ping, uwsgi-plugin-router-static, uwsgi-plugin-rpc, uwsgi-plugin-rrdtool, uwsgi-plugin-rsyslog, uwsgi-plugin-signal, uwsgi-plugin-symcall, uwsgi-plugin-syslog, uwsgi-plugin-ugreen, wsgi-plugin-admin
+Replaces: uwsgi-plugin-cache, uwsgi-plugin-carbon, uwsgi-plugin-cgi, uwsgi-plugin-echo, uwsgi-plugin-emperor-zeromq, uwsgi-plugin-fastrouter, uwsgi-plugin-http, uwsgi-plugin-logsocket, uwsgi-plugin-nagios, uwsgi-plugin-ping, uwsgi-plugin-router-static, uwsgi-plugin-rpc, uwsgi-plugin-rrdtool, uwsgi-plugin-rsyslog, uwsgi-plugin-signal, uwsgi-plugin-symcall, uwsgi-plugin-syslog, uwsgi-plugin-ugreen, wsgi-plugin-admin
+Provides: uwsgi-abi-a411bb8664cd85ae0fd852d2f665558a
+Section: httpd
+Priority: optional
+Homepage: http://projects.unbit.it/uwsgi/
+Description: fast, self-healing application container server (core)
+ uWSGI presents a complete stack for networked/clustered web applications,
+ implementing message/object passing, caching, RPC and process management.
+ It uses the uwsgi protocol for all the networking/interprocess communications.
+ .
+ uWSGI can be run in preforking, threaded, asynchronous/evented modes and
+ supports various forms of green threads/coroutines (such as uGreen, Greenlet,
+ Fiber). uWSGI provides several methods of configuration: via command line,
+ via environment variables, via XML, INI, YAML configuration files, via LDAP
+ and more.
+ .
+ On top of all this, it is designed to be fully modular. This means that
+ different plugins can be used in order to add compatibility with tons of
+ different technology on top of the same core.
+ .
+ This package provides core uWSGI binary (built without any embedded
+ plugins) and plugins with no or few dependencies:
+ .
+  * cache
+  * carbon
+  * cgi
+  * cheaper_backlog2
+  * cheaper_busyness
+  * clock_monotonic
+  * clock_realtime
+  * corerouter
+  * echo
+  * emperor_amqp
+  * emperor_zeromq
+  * fastrouter
+  * forkptyrouter
+  * http
+  * logcrypto
+  * logfile
+  * logpipe
+  * logsocket
+  * logzmq
+  * matheval
+  * mongrel2
+  * msgpack
+  * nagios
+  * notfound
+  * pam
+  * ping
+  * pty
+  * rawrouter
+  * redislog
+  * router_basicauth
+  * router_cache
+  * router_expires
+  * router_hash
+  * router_http
+  * router_memcached
+  * router_metrics
+  * router_radius
+  * router_redirect
+  * router_redis
+  * router_rewrite
+  * router_static
+  * router_uwsgi
+  * router_xmldir
+  * rpc
+  * rrdtool
+  * rsyslog
+  * signal
+  * spooler
+  * ssi
+  * sslrouter
+  * stats_pusher_file
+  * stats_pusher_socket
+  * stats_pusher_statsd
+  * symcall
+  * syslog
+  * systemd_logger
+  * transformation_chunked
+  * transformation_gzip
+  * transformation_offload
+  * transformation_template
+  * transformation_tofile
+  * transformation_toupper
+  * tuntap
+  * ugreen
+  * webdav
+  * xattr
+  * zabbix
+  * zergpool
+ .
+ forkptyrouter, systemd and tuntap are provided
+ only on supported architectures.
+ .
+ Developing external uWSGI plugin requires the package uwsgi-dev.

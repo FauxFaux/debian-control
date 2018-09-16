@@ -1,0 +1,24 @@
+Package: ldm-server
+Source: ldm
+Version: 2:2.18.06-1
+Architecture: all
+Maintainer: Debian LTSP Maintainers <team+ltsp@tracker.debian.org>
+Installed-Size: 37
+Depends: python3, x11-common, openssh-server, update-inetd, openbsd-inetd | inet-superserver
+Recommends: mate-desktop-environment | gnome-session | x-session-manager | x-window-manager, ltspfs, libasound2-plugins, xauth
+Breaks: ltsp-server (<= 5.1.62)
+Replaces: ltsp-server (<= 5.1.62)
+Section: misc
+Priority: optional
+Homepage: http://ltsp.org/
+Description: server components for LTSP display manager
+ ldm is an X11 display manager similar to xdm, gdm and kdm, but unlike
+ those it wraps the X11 traffic within an SSH tunnel to provide a
+ secure login mechanism for remote X sessions.
+ .
+ This package includes the server components used by ldm to discover
+ available sessions and locales on the server. It also recommends
+ packages relevant for local device access, a login session, and remote
+ sound.
+ .
+ LTSP stands for 'Linux Terminal Server Project'.

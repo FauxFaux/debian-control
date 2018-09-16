@@ -1,0 +1,40 @@
+Package: bilibop-rules
+Source: bilibop
+Version: 0.5.4
+Architecture: amd64
+Maintainer: Yann Amar <quidame@poivron.org>
+Installed-Size: 258
+Depends: bilibop-common (= 0.5.4), initramfs-tools, debconf (>= 0.5) | debconf-2.0
+Recommends: lvm2
+Suggests: bilibop-lockfs, cryptsetup, policykit-1, udisks2
+Conflicts: bilibop-udev
+Provides: bilibop-device-policy
+Section: admin
+Priority: optional
+Homepage: https://un.poivron.org/~quidame/wiki/bilibop
+Description: device management rules for OS running from external media
+ Bilibop helps to maintain a Debian GNU/Linux operating system installed
+ on an external media (USB, FireWire, Flash memory, eSATA). It hardens
+ standard rules and policies to make the system more robust in this
+ particular situation.
+ .
+ This package provides a udev rules file to manage the external drive hosting
+ the running system. Its main goal is to forbid low-level write access on this
+ drive and its partitions by any unprivileged user or application, but some
+ other convenient and optional rules have been added for desktop-level
+ management (in desktop environments based on udisks2) of the system disk and
+ partitions, as well as the internal disks of the computer. The 'lsbilibop'
+ command allows the admin to update udev properties of the devices after the
+ configuration file has been modified.
+ .
+ To ease device management, bilibop-rules also provides helper scripts to:
+  * build custom bilibop udev rules running faster than the generic ones
+  * make some persistent and cumulative udev rules files unpersistent
+  * use either a fake or an always-up-to-date grub device map
+  * filter Physical Volumes, to activate only those needed by the system
+ .
+ This package is not designed to be used on internal disks. It works only
+ for OS installed on removable and writable media, including LiveUSB systems.
+ See also the bilibop-udev package.
+ .
+ Some features may require Linux kernel 2.6.37 or higher to work properly.

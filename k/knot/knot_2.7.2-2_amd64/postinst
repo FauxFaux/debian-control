@@ -1,0 +1,68 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+    if ! getent passwd knot > /dev/null; then
+        adduser --quiet --system --group --no-create-home --home /var/lib/knot knot
+    fi
+
+    dpkg-statoverride --list /var/lib/knot > /dev/null || dpkg-statoverride --update --add knot knot 0755 /var/lib/knot
+    dpkg-statoverride --list /etc/knot/knot.conf > /dev/null || dpkg-statoverride --update --add knot knot 0640 /etc/knot/knot.conf
+    dpkg-statoverride --list /etc/knot > /dev/null || dpkg-statoverride --update --add knot knot 0750 /etc/knot    
+fi
+
+if [ "$1" = "configure" ] && [ -n "$2" ] && dpkg --compare-versions "$2" lt "2.5.0-1~"; then
+    KNOT_USER=$(/usr/lib/knot/get_user 2>/dev/null || echo "knot")
+
+    /usr/lib/knot/get_kaspdb | while read KASPDB; do
+	if [ ! -f "${KASPDB}/data.mdb" ]; then
+	    su --shell /bin/bash --command "/usr/lib/knot/kasp_json2lmdb -i '${KASPDB}'" "${KNOT_USER}";
+	fi
+    done
+fi
+
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create knot.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper rm_conffile /etc/init/knot.conf 2.0.0-1\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/knot" ]; then
+		update-rc.d knot defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d knot $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'knot.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'knot.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'knot.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'knot.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

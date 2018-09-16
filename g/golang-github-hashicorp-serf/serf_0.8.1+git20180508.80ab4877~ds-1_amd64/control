@@ -1,0 +1,23 @@
+Package: serf
+Source: golang-github-hashicorp-serf
+Version: 0.8.1+git20180508.80ab4877~ds-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 8621
+Depends: adduser, lsb-base, libc6 (>= 2.3.2)
+Built-Using: golang-1.10 (= 1.10.3-1), golang-github-armon-circbuf (= 0.0~git20150827.0.bbbad09-2), golang-github-armon-go-metrics (= 0.0~git20170601.0.f036747-5), golang-github-armon-go-radix (= 0.0~git20150602.0.fbd82e8-2), golang-github-bgentry-speakeasy (= 0.1.0-1), golang-github-hashicorp-errwrap (= 0.0~git20141028.0.7554cd9-2), golang-github-hashicorp-go-msgpack (= 0.0~git20150518.0.fa3f638-6), golang-github-hashicorp-go-multierror (= 0.0~git20161216.0.ed90515+ds-1), golang-github-hashicorp-go-sockaddr (= 0.0~git20170627.41949a1+ds-1), golang-github-hashicorp-go-syslog (= 0.0~git20150218.0.42a2b57-1), golang-github-hashicorp-logutils (= 0.0~git20150609.0.0dc08b1-1), golang-github-hashicorp-mdns (= 0.0~git20150317.0.2b439d3-2), golang-github-hashicorp-memberlist (= 0.1.0+git20180209.2288bf30-1), golang-github-mattn-go-isatty (= 0.0.3-4), golang-github-miekg-dns (= 1.0.4+ds-1), golang-github-mitchellh-cli (= 0.0~git20171129.33edc47-2), golang-github-mitchellh-mapstructure (= 0.0~git20170523.0.d0303fe-1), golang-github-posener-complete (= 1.1+git20180108.57878c9-3), golang-github-ryanuber-columnize (= 2.1.0-2), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-net-dev (= 1:0.0+git20180124.0ed95ab+dfsg-1)
+Section: devel
+Priority: optional
+Homepage: https://www.serfdom.io
+Description: Service orchestration and management tool
+ Serf is a decentralized solution for service discovery and orchestration that
+ is lightweight, highly available, and fault tolerant.
+ .
+ Serf runs on Linux, Mac OS X, and Windows. An efficient and lightweight gossip
+ protocol is used to communicate with other nodes. Serf can detect node failures
+ and notify the rest of the cluster. An event system is built on top of Serf,
+ letting you use Serf's gossip protocol to propagate events such as deploys,
+ configuration changes, etc. Serf is completely masterless with no single point
+ of failure.
+ .
+ This package contains the tool/service.

@@ -1,0 +1,33 @@
+Package: python-pysynphot
+Source: pysynphot (0.9.12+dfsg-1)
+Version: 0.9.12+dfsg-1+b1
+Architecture: amd64
+Maintainer: Debian Astronomy Team <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 18011
+Depends: python (<< 2.8), python (>= 2.7~), python-astropy, python-numpy (>= 1:1.14.3), python-numpy-abi9, python:any (<< 2.8), python:any (>= 2.7.5-5~), libc6 (>= 2.4)
+Suggests: synphot-data
+Section: python
+Priority: optional
+Homepage: https://ssb.stsci.edu/pysynphot/docs/
+Description: Python Synthetic Photometry Utilities
+ pysynphot simulates photometric data and spectra as they are observed with
+ the Hubble Space Telescope (HST). Passbands for standard photometric systems
+ are available, and users can incorporate their own filters, spectra, and
+ data. pysynphot user interface allows you to:
+ .
+  * Construct complicated composite spectra from various grids of model
+    atmosphere spectra, parameterized spectrum models, and atlases of stellar
+    spectrophotometry.
+  * Simulate observations.
+  * Query the resulting structures for quantities of interest, such as
+    countrate, effective wavelength, effective stimulus, as well as the
+    wavelength and flux arrays.
+  * Plot HST sensitivity curves and calibration target spectra.
+  * Compute photometric calibration parameters for any HST instrument mode.
+ .
+ pysynphot can help HST observers to perform cross-instrument simulations, to
+ examine the transmission curve of the HST Optical Telescope Assembly (OTA),
+ and spectra of HST calibration targets. Expert users can take advantage of
+ the control and data structures available in Python to easily perform
+ repetitive operations such as simulate the observation of multiple type of
+ sources through multiple observing modes.

@@ -1,0 +1,18 @@
+Package: gssproxy
+Version: 0.8.0-1.1
+Architecture: amd64
+Maintainer: Robbie Harwood (frozencemetery) <rharwood@club.cc.cmu.edu>
+Installed-Size: 285
+Depends: libc6 (>= 2.17), libgssapi-krb5-2 (>= 1.16), libgssrpc4 (>= 1.6.dfsg.2), libini-config5 (>= 0.5.0), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.12~alpha1+dfsg), libpopt0 (>= 1.14), libref-array1 (>= 0.4.0), libselinux1 (>= 1.32), libverto1 (>= 0.2.4)
+Provides: gss-proxy
+Section: net
+Priority: optional
+Homepage: https://pagure.io/gssproxy/
+Description: Privilege separation daemon for GSSAPI
+ Applications can choose to use GSS-Proxy for GSSAPI credential management,
+ which means that they will not have direct access to the credentials
+ themselves.  GSSAPI operations are also offloaded to the gssproxy daemon,
+ making it suitable for upcalls from the Kernel as well.
+ .
+ This package includes both the gssproxy daemon itself and the GSSAPI
+ interposer layer for existing applications.

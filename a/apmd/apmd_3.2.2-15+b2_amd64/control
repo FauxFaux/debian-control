@@ -1,0 +1,32 @@
+Package: apmd
+Source: apmd (3.2.2-15)
+Version: 3.2.2-15+b2
+Architecture: amd64
+Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
+Installed-Size: 132
+Depends: libapm1 (>= 3.2.0-7), libc6 (>= 2.7), debconf (>= 1.2.9) | debconf-2.0, powermgmt-base, lsb-base (>= 1.3-9ubuntu3)
+Suggests: xapm
+Section: admin
+Priority: optional
+Homepage: http://alumnit.ca/~apenwarr/apmd/
+Description: Utilities for Advanced Power Management (APM)
+ On laptop computers, the Advanced Power Management (APM) support
+ provides access to battery status information and may help you to
+ conserve battery power, depending on your laptop and the APM
+ implementation.  The apmd program also lets you run arbitrary programs
+ when APM events happen (for example, you can eject PCMCIA devices when
+ you suspend, or change hard drive timeouts when you connect the battery).
+ .
+ This package contains apmd(8), a daemon for logging and acting on APM
+ events; and apm(1), a client that prints the information in /proc/apm
+ in a readable format.
+ .
+ apmd is notified of APM events by the APM driver in the kernel.
+ .
+ Since lenny Debian kernels are not built with APM support anymore. You
+ need to compile a kernel with apm support enabled to use this package.
+ You need to boot the kernel with the "apm=on" option if you
+ want to enable the driver.
+ .
+ In most cases, users may want to know that there are newer power
+ management schemes, like ACPI.

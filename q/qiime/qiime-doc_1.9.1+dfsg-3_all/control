@@ -1,0 +1,44 @@
+Package: qiime-doc
+Source: qiime
+Version: 1.9.1+dfsg-3
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 11246
+Depends: libjs-jquery, libjs-underscore
+Section: doc
+Priority: optional
+Homepage: http://www.qiime.org/
+Description: Quantitative Insights Into Microbial Ecology (tutorial)
+ QIIME (canonically pronounced ‘Chime’) is a pipeline for performing
+ microbial community analysis that integrates many third party tools which
+ have become standard in the field. A standard QIIME analysis begins with
+ sequence data from one or more sequencing platforms, including
+  * Sanger,
+  * Roche/454, and
+  * Illumina GAIIx.
+ QIIME can perform:
+  * library de-multiplexing and quality filtering;
+  * denoising with PyroNoise;
+  * OTU and representative set picking with uclust, cdhit, mothur, BLAST,
+    or other tools;
+  * taxonomy assignment with BLAST or the RDP classifier;
+  * sequence alignment with PyNAST, muscle, infernal, or other tools;
+  * phylogeny reconstruction with FastTree, raxml, clearcut, or other tools;
+  * alpha diversity and rarefaction, including visualization of results,
+    using over 20 metrics including Phylogenetic Diversity, chao1, and
+    observed species;
+  * beta diversity and rarefaction, including visualization of results,
+    using over 25 metrics including weighted and unweighted UniFrac,
+    Euclidean distance, and Bray-Curtis;
+  * summarization and visualization of taxonomic composition of samples
+    using pie charts and histograms
+ and many other features.
+ .
+ QIIME includes parallelization capabilities for many of the
+ computationally intensive steps. By default, these are configured to
+ utilize a mutli-core environment, and are easily configured to run in
+ a cluster environment. QIIME is built in Python using the open-source
+ PyCogent toolkit. It makes extensive use of unit tests, and is highly
+ modular to facilitate custom analyses.
+ .
+ This package contains the documentation and a tutorial.

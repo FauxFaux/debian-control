@@ -1,0 +1,25 @@
+Package: soprano-daemon
+Source: soprano
+Version: 2.9.4+dfsg-5
+Architecture: amd64
+Maintainer: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Installed-Size: 587
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libiodbc2 (>= 3.52.7), libqt4-dbus (>= 4:4.5.3), libqtcore4 (>= 4:4.8.0), libraptor2-0 (>= 2.0.14), librdf0 (>= 1.0.17), libstdc++6 (>= 4.1.1)
+Recommends: libsoprano4 (= 2.9.4+dfsg-5)
+Suggests: virtuoso-minimal
+Breaks: libsoprano-dev (<< 2.3.0+dfsg.1-1), libsoprano4 (<< 2.3.0+dfsg.1-1)
+Replaces: libsoprano-dev (<< 2.3.0+dfsg.1-1), libsoprano4 (<< 2.3.0+dfsg.1-1)
+Section: utils
+Priority: optional
+Homepage: http://soprano.sourceforge.net
+Description: daemon for the Soprano RDF framework
+ Soprano is a pluggable RDF storage, parsing, and serialization framework based
+ on Qt 4. Soprano is targeted at desktop applications that need to store RDF
+ data. Its API has been optimized for simplicity and ease of use, while its
+ modular structure allows it to use various different RDF storage
+ implementations as its backend.
+ .
+ This package contains the Soprano daemon, D-Bus service, parser plugins, and a
+ storage plugin for the Redland RDF Application Framework. This package is not
+ intended to be neither directly installed nor used by end users. It will be
+ installed automatically whenever needed.

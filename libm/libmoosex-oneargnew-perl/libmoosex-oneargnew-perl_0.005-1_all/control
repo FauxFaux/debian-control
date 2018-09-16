@@ -1,0 +1,18 @@
+Package: libmoosex-oneargnew-perl
+Version: 0.005-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: perl, libmoose-perl, libmoosex-role-parameterized-perl (>= 1.01), libnamespace-autoclean-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MooseX-OneArgNew
+Description: Moose role that extends class' constructor to accept single arguments
+ MooseX::OneArgNew lets your constructor take a single argument, which will be
+ translated into the value for a one-entry hashref. It is a parameterized
+ role with two parameters:
+  * type - The Moose type that the single argument must be for the one-arg form
+    to work. This should be an existing type, and may be either a string type or
+    a MooseX::Type.
+  * init_arg - This is the string that will be used as the key for the hashref
+    constructed from the one-arg call to new.

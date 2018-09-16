@@ -1,0 +1,23 @@
+Package: libres-ocaml-dev
+Source: ocaml-res (4.0.3-4)
+Version: 4.0.3-4+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 2371
+Depends: ocaml-nox-4.05.0, libc6 (>= 2.2.5)
+Recommends: ocaml-findlib
+Provides: libres-ocaml-dev-c32d2
+Section: ocaml
+Priority: extra
+Homepage: https://bitbucket.org/mmottl/res
+Description: OCaml library for automatically resizing contiguous data structure
+ This OCaml library consists of a set of modules which implement
+ automatically resizing (i.e. reallocating) data structures that consume
+ a contiguous part of memory.
+ .
+ This allows appending and removing of elements to/from arrays (both
+ boxed and unboxed), strings (i.e. buffers), bit strings and weak arrays
+ while still maintaining fast constant-time access to elements.
+ .
+ There are also functors that allow the generation of similar modules
+ which use different reallocation strategies.

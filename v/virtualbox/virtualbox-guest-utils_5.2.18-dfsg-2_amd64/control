@@ -1,0 +1,24 @@
+Package: virtualbox-guest-utils
+Source: virtualbox
+Version: 5.2.18-dfsg-2
+Architecture: amd64
+Maintainer: Debian Virtualbox Team  <team+debian-virtualbox@tracker.debian.org>
+Installed-Size: 2745
+Depends: adduser, pciutils, virtualbox-guest-dkms (= 5.2.18-dfsg-2) | virtualbox-guest-source (= 5.2.18-dfsg-2) | virtualbox-guest-modules, libc6 (>= 2.3.2), libpam0g (>= 0.99.7.1)
+Suggests: virtualbox-guest-x11 (= 5.2.18-dfsg-2)
+Section: contrib/misc
+Priority: optional
+Homepage: https://www.virtualbox.org
+Description: x86 virtualization solution - non-X11 guest utilities
+ VirtualBox is a free x86 virtualization solution allowing a wide range
+ of x86 operating systems such as Windows, DOS, BSD or Linux to run on a
+ Linux system.
+ .
+ This package provides the non-X11 guest utilities for VirtualBox. These
+ utilities are meant to be run inside the virtual machine.
+ They provide closer integration and allow to share data through shared folders
+ between the host system and the virtual machine.
+ .
+ Either the virtualbox-guest-dkms or the virtualbox-guest-source package is
+ also required in order to compile the kernel modules needed for
+ virtualbox-guest-utils.

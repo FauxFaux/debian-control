@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+	configure)
+		if ! getent passwd snmptt >/dev/null; then
+			adduser --disabled-password --system --group \
+				--home /var/spool/snmptt --no-create-home \
+				--gecos "SNMP Trap Translator" snmptt
+		fi
+
+		[ -d /var/log/snmptt ] || mkdir /var/log/snmptt
+		[ -d /var/spool/snmptt ] || mkdir /var/spool/snmptt
+		chown snmptt:snmptt /var/log/snmptt /var/spool/snmptt
+	;;
+esac
+
+# Automatically added by dh_installinit/11.2.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/snmptt" ]; then
+		update-rc.d snmptt defaults >/dev/null
+		invoke-rc.d snmptt start || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

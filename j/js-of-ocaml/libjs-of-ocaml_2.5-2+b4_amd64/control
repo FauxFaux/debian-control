@@ -1,0 +1,29 @@
+Package: libjs-of-ocaml
+Source: js-of-ocaml (2.5-2)
+Version: 2.5-2+b4
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 1065
+Depends: libderiving-ocsigen-ocaml-s86i0, libfindlib-ocaml-ygtb5, liblwt-ocaml-kj4a8, libreact-ocaml-2kw33, libreactivedata-ocaml-cy2p2, libtyxml-ocaml-c63d2, ocaml-base-nox-4.02.3, libc6 (>= 2.2.5)
+Recommends: ocaml-findlib
+Breaks: libjs-of-ocaml-dev (<< 1.4)
+Replaces: libjs-of-ocaml-dev (<< 1.4)
+Provides: libjs-of-ocaml-24ph1
+Section: ocaml
+Priority: optional
+Homepage: http://ocsigen.org/js_of_ocaml
+Description: OCaml bytecode to JavaScript compiler (runtime)
+ Js_of_ocaml is a compiler of OCaml bytecode to JavaScript. It makes
+ it possible to run OCaml programs in a web browser. Its key features
+ are the following:
+  * the whole language, and most of the standard library are
+    supported;
+  * the generated code can be used with any web server and browser;
+  * you can use a standard installation of OCaml to compile your
+    programs. In particular, you do not have to recompile a library to
+    use it with Js_of_ocaml. You just have to link your program with a
+    specific library to interface with the browser APIs.
+ .
+ This package contains runtime libraries that may be needed by
+ server-side programs communicating with clients compiled with
+ Js_of_ocaml using JSON.

@@ -1,0 +1,23 @@
+Package: libvdpau1
+Source: libvdpau
+Version: 1.1.1-8
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 109
+Depends: libc6 (>= 2.17), libx11-6 (>= 2:1.4.99.1), libxext6
+Recommends: vdpau-driver-all | vdpau-driver
+Conflicts: lib32vdpau1
+Replaces: lib32vdpau1
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://cgit.freedesktop.org/~aplattner/libvdpau
+Description: Video Decode and Presentation API for Unix (libraries)
+ VDPAU (Video Decode and Presentation API for Unix) is an open source
+ library (libvdpau) and API designed by NVIDIA originally for its GeForce
+ 8 series and later GPU hardware, targeted at the X Window System on Unix
+ operating-systems (including Linux, FreeBSD, and Solaris). This VDPAU API
+ allows video programs to offload portions of the video decoding process
+ and video post-processing to the GPU video-hardware.
+ .
+ This package contains the VDPAU wrapper and trace libraries.

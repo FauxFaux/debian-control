@@ -1,0 +1,14 @@
+Package: prometheus-mysqld-exporter
+Version: 0.10.0+git20180201.a71f4bb+ds-2
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 7417
+Depends: daemon, libc6 (>= 2.3.2)
+Suggests: default-mysql-server | virtual-mysql-server
+Built-Using: golang-1.10 (= 1.10-1), golang-github-alecthomas-units (= 0.0~git20151022.0.2efee85-3), golang-github-beorn7-perks (= 0.0~git20160804.0.4c0e845-1), golang-github-go-sql-driver-mysql (= 1.3-1), golang-github-prometheus-client-golang (= 0.8.0-2), golang-github-prometheus-client-model (= 0.0.2+git20150212.12.fa8ad6f-2), golang-github-prometheus-common (= 0+git20180110.89604d1-1), golang-gopkg-alecthomas-kingpin.v2 (= 2.2.3-2), golang-gopkg-ini.v1 (= 1.32.0-1), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-2), golang-logrus (= 1.0.2-2), golang-procfs (= 0+git20170703.e645f4e-1), golang-protobuf-extensions (= 1.0.0-2)
+Section: net
+Priority: optional
+Homepage: https://github.com/prometheus/mysqld_exporter
+Description: Prometheus exporter for MySQL server.
+ Prometheus exporter for MySQL server metrics. Supported MySQL versions: 5.1
+ and up, however not all collection methods are supported on MySQL < 5.6.

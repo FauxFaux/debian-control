@@ -1,0 +1,31 @@
+Package: sidedoor
+Version: 0.2.1-1
+Architecture: all
+Maintainer: Dara Adib <daradib@ocf.berkeley.edu>
+Installed-Size: 50
+Depends: adduser, lsb-base (>= 3.0-6), openssh-client, init-system-helpers (>= 1.18~)
+Recommends: openssh-server
+Suggests: sidedoor-sudo
+Section: net
+Priority: optional
+Homepage: https://github.com/daradib/sidedoor
+Description: SSH connection daemon
+ sidedoor maintains an SSH connection or tunnel
+ with a shell script daemon.
+ .
+ The primary use case is maintaining a remote port forward
+ to the local SSH server (or another port). Thus, the local
+ device can be accessed without using incoming connections
+ that may be blocked by a NAT or firewall or otherwise
+ impractical with mobile devices.
+ .
+ SSH clients can connect to the device via the reverse SSH proxy
+ that sidedoor tunnels to. This proxy server can be untrusted
+ and run by a third party or cloud service.
+ .
+ sidedoor enables SSH keepalives and retries SSH with
+ exponential backoff. In order to reconnect as soon as possible,
+ it resets the backoff when a network interface is brought up
+ (or changed).
+ .
+ Refer to the sidedoor man page to configure and set SSH keys.

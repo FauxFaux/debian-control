@@ -1,0 +1,32 @@
+Package: libconfig-zomg-perl
+Version: 1.000000-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 41
+Depends: perl, libclone-perl, libconfig-any-perl, libhash-merge-simple-perl, libmoo-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Config-ZOMG/
+Description: yet another Catalyst::Plugin::ConfigLoader-style layer over Config::Any
+ Config::ZOMG is a fork of Config::JFDI. It removes a couple of unusual
+ features and passes the same tests three times faster than
+ Config::JFDI.
+ .
+ Config::ZOMG is an implementation of Catalyst::Plugin::ConfigLoader
+ that exists outside of Catalyst.
+ .
+ Config::ZOMG will scan a directory for files matching a certain name.
+ If such a file is found which also matches an extension that
+ Config::Any can read, then the configuration from that file will be
+ loaded.
+ .
+ Config::ZOMG will also look for special files that end with a "_local"
+ suffix. Files with this special suffix will take precedence over any
+ other existing configuration file, if any. The precedence takes place
+ by merging the local configuration with the "standard" configuration
+ via Hash::Merge::Simple.
+ .
+ Finally you can override/modify the path search from outside your
+ application, by setting the "_CONFIG" variable outside your
+ application (where $NAME is the uppercase version of what you passed to
+ Config::ZOMG->new).

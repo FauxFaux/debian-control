@@ -1,0 +1,45 @@
+Package: php-db
+Version: 1.9.2-2
+Architecture: all
+Maintainer: Debian PHP PEAR Maintainers <pkg-php-pear@lists.alioth.debian.org>
+Installed-Size: 563
+Depends: php-common, php-pear (>= 1.10.0)
+Section: php
+Priority: optional
+Homepage: http://pear.php.net/package/DB
+Description: Database Abstraction Layer
+ DB is a database abstraction layer providing:
+  * an OO-style query API
+  * portability features that make programs written for one DBMS work with
+ other DBMS's
+  * a DSN (data source name) format for specifying database servers
+  * prepare/execute (bind) emulation for databases that don't support it
+ natively
+  * a result object for each query response
+  * portable error codes
+  * sequence emulation
+  * sequential and non-sequential row fetching as well as bulk fetching
+  * formats fetched rows as associative arrays, ordered arrays or objects
+  * row limit support
+  * transactions support
+  * table information interface
+  * DocBook and phpDocumentor API documentation
+ .
+ DB layers itself on top of PHP's existing
+ database extensions.
+ .
+ Drivers for the following extensions pass
+ the complete test suite and provide
+ interchangeability when all of DB's
+ portability options are enabled:
+ .
+ fbsql, ibase, informix, msql, mssql,
+ mysql, mysqli, oci8, odbc, pgsql,
+ sqlite and sybase.
+ .
+ There is also a driver for the dbase
+ extension, but it can't be used
+ interchangeably because dbase doesn't
+ support many standard DBMS features.
+ .
+ DB is compatible with PHP 5 and PHP 7.

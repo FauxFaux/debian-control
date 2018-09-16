@@ -1,0 +1,19 @@
+Package: ulogd2-sqlite3
+Source: ulogd2
+Version: 2.0.7-1
+Architecture: amd64
+Maintainer: Debian Netfilter Packaging Team <pkg-netfilter-team@lists.alioth.debian.org>
+Installed-Size: 32
+Depends: ulogd2 (= 2.0.7-1), libc6 (>= 2.4), libsqlite3-0 (>= 3.5.9)
+Section: net
+Priority: optional
+Homepage: https://www.netfilter.org/projects/ulogd/
+Description: SQLite 3 extension to ulogd
+ ulogd is an advanced netfilter logging daemon. It can act as a replacement for
+ syslog for logging netfilter ruleset violations (via the NFLOG or ULOG iptables
+ targets), can gather per-connection accounting using NFCT, or gather per-rule
+ accounting using NFACCT. Output can be sent to plain text log files, a variety
+ of SQL database formats, XML files, pcap files, syslog, and many other formats.
+ .
+ This module adds SQLite 3 support to ulogd. If you install this package, you
+ can send netfilter logs or accounting data to an SQLite 3 database.

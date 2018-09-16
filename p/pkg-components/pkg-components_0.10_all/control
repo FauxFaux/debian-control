@@ -1,0 +1,14 @@
+Package: pkg-components
+Version: 0.10
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 75
+Depends: dh-make-perl (>= 0.77), dpkg-dev, libdebian-copyright-perl (>= 0.2), libperl6-slurp-perl, libreadonly-perl, libreadonly-xs-perl, libxml-libxml-perl, make, perl
+Suggests: devscripts
+Section: devel
+Priority: optional
+Homepage: https://lists.debian.org/debian-devel/2010/09/msg00208.html
+Description: debhelper tool to help maintain bundles
+ Support for additional components in debian/rules
+ To be activated one would need to run 'dh --with components $@' and
+ also there would have to be a 'debian/components' directory.

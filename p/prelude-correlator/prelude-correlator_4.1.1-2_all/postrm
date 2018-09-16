@@ -1,0 +1,34 @@
+#!/bin/sh
+set -e
+
+DAEMON_USER="prelude-correlator"
+
+if [ "$1" = "purge" ]
+then
+    deluser $DAEMON_USER || true
+fi
+
+# Automatically added by dh_installsystemd/11.1.5
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.1.5
+dpkg-maintscript-helper rm_conffile /etc/init.d/prelude-correlator 3.1.0-1\~ prelude-correlator -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/default/prelude-correlator 3.1.0-1\~ prelude-correlator -- "$@"
+# End automatically added section
+# Automatically added by dh_installsystemd/11.1.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'prelude-correlator.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'prelude-correlator.service' >/dev/null || true
+		deb-systemd-helper unmask 'prelude-correlator.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

@@ -1,0 +1,69 @@
+#! /bin/sh
+
+set -e
+
+if ! id -u e2guardian > /dev/null 2>&1 ; then
+    adduser --system --group \
+	--disabled-login \
+	--gecos "e2guardian User" \
+	--home /var/log/e2guardian \
+	--shell /bin/sh \
+	e2guardian
+fi
+
+e2guardian_user=`grep daemonuser /etc/e2guardian/e2guardian.conf|grep -v '^\ *#' \
+	|awk -F = '{print $2}'|tr -d \ \'`
+
+e2guardian_group=`grep daemongroup /etc/e2guardian/e2guardian.conf|grep -v '^\ *#' \
+	|awk -F = '{print $2}'|tr -d \ \'`
+
+logdir=`grep loglocation /etc/e2guardian/e2guardian.conf|grep -v '^\ *#' \
+	|awk -F = '{print $2}'|tr -d \ \'|xargs -r dirname 2>/dev/null`
+
+echo "$logdir"
+test -z "$e2guardian_user" && e2guardian_user=e2guardian
+test -z "$e2guardian_group" && e2guardian_group=e2guardian
+test -z "$logdir" && logdir=/var/log/e2guardian
+
+chown $e2guardian_user:$e2guardian_group $logdir
+chmod u+wrx $logdir
+
+find $logdir -maxdepth 1 -type f -exec chown $e2guardian_user:$e2guardian_group {} \;
+find $logdir -maxdepth 1 -type f -exec chmod u+rw {} \;
+
+init_failed ()
+{
+	echo "WARNING: Starting e2guardian failed. Please check your configuration."
+}
+
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/e2guardian" ]; then
+		update-rc.d e2guardian defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d e2guardian $_dh_action || init_failed
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'e2guardian.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'e2guardian.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'e2guardian.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'e2guardian.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

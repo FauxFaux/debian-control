@@ -1,0 +1,19 @@
+Package: ree
+Version: 1.4.1-1
+Architecture: amd64
+Maintainer: Gürkan Myczko <gurkan@phys.ethz.ch>
+Installed-Size: 47
+Depends: libc6 (>= 2.7)
+Suggests: file, nasm, bc
+Section: admin
+Priority: optional
+Homepage: https://github.com/alexmyczko/ree
+Description: extract ROM extensions
+ ROM extension extractor (ree) is a tool which extracts ROM extensions
+ from the firmware of a PC computer. This package also comes with fontdump,
+ a program to extract the fonts from your video BIOS.
+ .
+ ree will scan the system memory, address c0000 - f0000 in 512 byte steps for
+ identification of ROM extensions (55,aa). If found, it will calculate its
+ size (byte after id, multiplied by 512byte steps) and save the output to
+ a .rom file.

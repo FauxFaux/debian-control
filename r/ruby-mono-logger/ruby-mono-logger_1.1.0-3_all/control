@@ -1,0 +1,14 @@
+Package: ruby-mono-logger
+Version: 1.1.0-3
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: ruby | ruby-interpreter, ruby-logger-application
+Section: ruby
+Priority: optional
+Homepage: http://github.com/steveklabnik/mono_logger
+Description: lock-free logger for Ruby
+ A lock-free logger compatible with latest versions of Ruby. Ruby does not
+ allow you to request a lock in a trap handler because that could deadlock,
+ so Logger is not sufficient.
+Ruby-Versions: all

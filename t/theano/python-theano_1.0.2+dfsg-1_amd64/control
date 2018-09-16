@@ -1,0 +1,25 @@
+Package: python-theano
+Source: theano
+Version: 1.0.2+dfsg-1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 11613
+Depends: python-numpy, python-scipy, python-six (>= 1.9.0), python:any (<< 2.8), python:any (>= 2.7.5-5~), python-dev, libblas-dev | libblas.so
+Recommends: g++, python-pydot | python-pydot-ng, python-nose, python-parameterized, python-pkg-resources, python-pygpu, cython, graphviz
+Suggests: nvidia-cuda-toolkit, python-pycuda, theano-doc
+Breaks: python-lasagne (<< 0.1+git20180322.37ca134)
+Built-Using: d3 (= 3.5.17-2), node-lodash-compat (= 3.10.2-1)
+Section: python
+Priority: optional
+Homepage: http://www.deeplearning.net/software/theano/
+Description: CPU/GPU math expression compiler for Python
+ Theano is a Python library that allows one to define and evaluate mathematical
+ expressions involving multi-dimensional arrays efficiently. It provides a
+ high-level Numpy like expression language for functional description of
+ calculation, rearranges expressions for speed and stability, and generates
+ native machine instructions for fast calculation. Optionally, highly
+ accelerated computations could be carried out on graphics cards processors.
+ .
+ This package contains Theano for Python 2.
+ .
+ Theano development is ending: consider using Caffe or Torch instead.

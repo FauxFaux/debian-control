@@ -1,0 +1,27 @@
+Package: mandos-client
+Source: mandos
+Version: 1.7.20-1
+Architecture: amd64
+Maintainer: Mandos Maintainers <mandos@recompile.se>
+Installed-Size: 501
+Depends: libavahi-common3 (>= 0.6.16), libavahi-core7 (>= 0.6.24), libc6 (>= 2.15), libgnutls30 (>= 3.5.6), libgpgme11 (>= 1.2.0), liblsan0 (>= 8), libnl-3-200 (>= 3.2.7), libnl-route-3-200 (>= 3.2.7), libubsan1 (>= 8), adduser, cryptsetup, initramfs-tools (>= 0.99), dpkg-dev (>= 1.16.0)
+Recommends: ssh, gnutls-bin | openssl
+Enhances: cryptsetup
+Breaks: dropbear (<= 0.53.1-1)
+Section: admin
+Priority: optional
+Homepage: https://www.recompile.se/mandos
+Description: do unattended reboots with an encrypted root file system
+ This is the client part of the Mandos system, which allows
+ computers to have encrypted root file systems and at the
+ same time be capable of remote and/or unattended reboots.
+ .
+ The computers run a small client program in the initial RAM
+ disk environment which will communicate with a server over a
+ network.  All network communication is encrypted using TLS.
+ The clients are identified by the server using an OpenPGP
+ key; each client has one unique to it.  The server sends the
+ clients an encrypted password.  The encrypted password is
+ decrypted by the clients using the same OpenPGP key, and the
+ password is then used to unlock the root file system,
+ whereupon the computers can continue booting normally.

@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -eu
+
+USER=www-data
+GROUP=www-data
+LOG_DIR=/var/log/gunicorn
+
+case "${1}" in
+	configure)
+		# Only change perms if we don't exist
+		if [ ! -d "${LOG_DIR}" ]
+		then
+			mkdir -p ${LOG_DIR}
+			chmod 755 ${LOG_DIR}
+			chown ${USER}:${GROUP} ${LOG_DIR}
+		fi
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper rm_conffile /etc/gunicorn.d/django.example 19.0-3 gunicorn -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/gunicorn.d/wsgi.example 19.0-3 gunicorn -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init.d/gunicorn 19.6.0-3 gunicorn -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/logrotate.d/gunicorn 19.6.0-3 gunicorn -- "$@"
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,18 @@
+Package: phonon
+Version: 4:4.10.1-1
+Architecture: amd64
+Maintainer: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Installed-Size: 41
+Depends: libphonon4 (>= 4:4.10.1-1), debconf (>= 0.5) | debconf-2.0, phonon-backend-gstreamer | phonon-backend
+Suggests: phonon-backend-gstreamer, phonon-backend-vlc
+Breaks: phonon-backend-xine (<< 4:4.6.0.0)
+Section: sound
+Priority: optional
+Multi-Arch: same
+Homepage: http://phonon.kde.org/
+Description: multimedia framework from KDE using Qt 4 - metapackage
+ Phonon is the Qt 4 multimedia API, which provides a task-oriented abstraction
+ layer for capturing, mixing, processing, and playing audio and video content.
+ .
+ This metapackage ensures that the system has a working Phonon configuration
+ installed (the core library and at least one back-end).

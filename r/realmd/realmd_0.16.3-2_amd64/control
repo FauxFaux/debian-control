@@ -1,0 +1,16 @@
+Package: realmd
+Version: 0.16.3-2
+Architecture: amd64
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 1116
+Depends: libc6 (>= 2.14), libcom-err2 (>= 1.01), libglib2.0-0 (>= 2.39.1), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.10+dfsg~alpha1), libldap-2.4-2 (>= 2.4.25), libpolkit-gobject-1-0 (>= 0.99), libsystemd0
+Recommends: policykit-1
+Section: admin
+Priority: optional
+Homepage: https://www.freedesktop.org/software/realmd/
+Description: DBus service for configuring kerberos and other online identities
+ realmd is a D-Bus system service that manages discovery and enrollment in
+ realms/domains like Active Directory or IPA.
+ .
+ realmd can configure either SSSD or Windbind as client software. It will also
+ automatically install the required packages using PackageKit if needed.

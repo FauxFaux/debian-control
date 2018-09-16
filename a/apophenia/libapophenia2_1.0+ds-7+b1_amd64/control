@@ -1,0 +1,34 @@
+Package: libapophenia2
+Source: apophenia (1.0+ds-7)
+Version: 1.0+ds-7+b1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 750
+Depends: libc6 (>= 2.14), libgomp1 (>= 4.9), libgsl23, libgslcblas0, libmariadbclient18 (>= 5.5.36), libsqlite3-0 (>= 3.5.9)
+Suggests: apophenia-doc (= 1.0+ds-7+b1)
+Conflicts: libapophenia
+Provides: libapophenia
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://apophenia.info/
+Description: Apophenia Statistical C Library -- library package
+ The Apophenia Statistical C Library is an open source C library for
+ working with data sets and statistical models. It provides functions
+ on the same level as those of the typical stats packages (such as OLS,
+ probit, or singular value decomposition) but gives the user more
+ flexibility to be creative in model-building.
+ .
+ Apophenia is meant to scale well, to comfortably work with gigabyte
+ data sets, million-step simulations, or computationally-intensive
+ agent-based models.
+ .
+ Apophenia builds upon the GNU Scientific and SQLite libraries,
+ MySQL/mariaDB is also supported. The core functions are written
+ in C, but experience has shown them to be easy to bind in Python,
+ Julia, Perl, Ruby, etc. The source code is distributed under the
+ GNU General Public License version 2 (GPL2).
+ .
+ This package provides the shared libraries required to run programs
+ compiled against the Apophenia Statistical C Library. To compile your
+ own programs you also need to install the libapophenia2-dev package.

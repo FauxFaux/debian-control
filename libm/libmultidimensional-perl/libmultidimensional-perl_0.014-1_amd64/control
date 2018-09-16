@@ -1,0 +1,20 @@
+Package: libmultidimensional-perl
+Version: 0.014-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: perl (>= 5.26.2-3), perlapi-5.26.2, libc6 (>= 2.2.5), libb-hooks-op-check-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/multidimensional
+Description: Perl pragma to disable multidimensional array emulation
+ Perl's multidimensional array emulation stems from the days before the
+ language had references, but these days it mostly serves to bite you
+ when you typo a hash slice by using the $ sigil instead of @.
+ .
+ This module lexically makes using multidimensional array emulation a
+ fatal error at compile time. To enable it, simply say
+ .
+    no multidimensional;
+ .
+ at the beginning of your script.

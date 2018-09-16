@@ -1,0 +1,17 @@
+Package: libshimdandy-java
+Source: shimdandy
+Version: 1.2.0-2
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 64
+Section: java
+Priority: optional
+Homepage: https://github.com/projectodd/shimdandy
+Description: Shim wrapping multiple Clojure runtimes into the same JVM
+ A Clojure runtime shim, allowing for multiple Clojure runtimes in the same JVM.
+ .
+ Clojure has a static runtime (implemented as static methods off of
+ clojure.lang.RT), so to run multiple runtimes in the same JVM, they
+ have to be loaded in isolated ClassLoader trees. ShimDandy provides a
+ mechanism for isolating the runtimes within a non-Clojure application,
+ and for calling in to the runtimes from the app.

@@ -1,0 +1,27 @@
+Package: bacula-director-sqlite3
+Source: bacula
+Version: 9.0.8-1
+Architecture: amd64
+Maintainer: Debian Bacula Team <pkg-bacula-devel@alioth-lists.debian.net>
+Installed-Size: 92
+Depends: bacula-common-sqlite3 (= 9.0.8-1), dbconfig-sqlite3 | dbconfig-no-thanks, file, sqlite3, bacula-common (= 9.0.8-1), debconf (>= 0.5) | debconf-2.0
+Suggests: gawk
+Conflicts: bacula-director-database
+Replaces: bacula-director-database
+Provides: bacula-director-database
+Section: admin
+Priority: optional
+Homepage: http://www.bacula.org/
+Description: network backup service - SQLite 3 storage for Director
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ The Bacula Director service supervises all the backup, restore, verify, and
+ archive operations. It can run as a daemon or as a foreground service which
+ administrators can use to schedule backups and recover files.
+ .
+ This package stores Bacula's catalog in an SQLite 3 database, and thus is
+ only suitable for small or test installations.
+ .
+ Please be aware that using SQLite 3 databases is no longer supported
+ by the author.

@@ -1,0 +1,26 @@
+Package: sgml2x
+Version: 1.0.0-11.4
+Architecture: all
+Maintainer: Yann Dirson <dirson@debian.org>
+Installed-Size: 90
+Depends: opensp, openjade, jadetex, sgml-base (>= 1.26+nmu2)
+Recommends: docbook-dsssl | docbook-stylesheets | alcovebook-sgml | sgmltools-lite | gtk-doc-tools (>= 1.1-1)
+Suggests: docbook-dsssl, sgmltools-lite, gtk-doc-tools, alcovebook-sgml
+Conflicts: alcovebook-sgml (<< 0.0.999)
+Replaces: alcovebook-sgml (<< 0.0.999)
+Section: text
+Priority: optional
+Description: generic formatter for SGML/XML documents using DSSSL stylesheets
+ sgml2x allows to easily format SGML and XML documents using DSSSL
+ stylesheets, and provides the following features:
+  * Multiple possible stylesheets per document class
+  * Easy specification of style-sheets using sort aliases
+  * Easy integration of new stylesheets by adding a simple new
+  definition file in a configuration directory
+  * The caller can specify a PATH-like list of configuration
+  directories, defaulting to one system-wide, one per-user, and
+  one per-project configuration directory
+  * Automatic selection of a default stylesheet to be used
+ .
+ It will currently be most useful with one of the suggested sets of
+ DSSSL stylesheets for DocBook.

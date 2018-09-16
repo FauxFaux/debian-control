@@ -1,0 +1,21 @@
+Package: vmdebootstrap
+Version: 1.11-1
+Architecture: amd64
+Maintainer: Lars Wirzenius <liw@liw.fi>
+Installed-Size: 353
+Depends: debootstrap, qemu-utils, kpartx, parted, libjs-sphinxdoc (>= 1.0), python-cliapp (>= 1.20150829), python-distro-info, python2.7, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Recommends: dosfstools, grub2-common, extlinux, squashfs-tools, python-guestfs, qemu-system, qemu-user-static
+Suggests: cmdtest, mbr, pandoc, u-boot:armhf
+Section: admin
+Priority: extra
+Homepage: https://liw.fi/vmdebootstrap/
+Description: Bootstrap Debian into a (virtual machine) disk image
+ vmdebootstrap is a wrapper around debootstrap to install Debian
+ into a disk image, which can be used with a virtual machine (such as KVM).
+ .
+ syslinux and grub2 bootloaders can be supported, depending on the
+ distribution and the architecture. An example of setting up u-boot
+ for armhf on a beaglebone-black is included.
+ .
+ This package also includes documentation on using vmdebootstrap
+ to create installation images and live images.

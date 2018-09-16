@@ -1,0 +1,32 @@
+Package: qsf
+Source: qsf (1.2.7-1.3)
+Version: 1.2.7-1.3+b1
+Architecture: amd64
+Maintainer: Nelson A. de Oliveira <naoliv@debian.org>
+Installed-Size: 218
+Depends: libc6 (>= 2.14), libgdbm5 (>= 1.14), libmariadbclient18 (>= 10.1.28), libsqlite0 (>= 2.8.17)
+Recommends: procmail | maildrop
+Suggests: mail-transport-agent, default-mysql-server | sqlite, mutt, fetchmail
+Section: mail
+Priority: optional
+Homepage: http://www.ivarch.com/programs/qsf/
+Description: small and fast Bayesian spam filter
+ Quick Spam Filter (QSF) is an Open Source email classification filter,
+ designed to be small, fast, and accurate, which works to classify incoming
+ email as either spam or non-spam.
+ .
+ QSF's targets are speed, accuracy and simplicity:
+  * It is small and is written in C so it starts up quickly, unlike filters
+  written in Perl.
+  * It understands MIME and HTML, so it can intelligently deal with modern
+  spam, unlike older Bayesian filters such as ifile.
+  * It runs as an inline filter rather than as a daemon, so it is simple to
+  install.
+  * It is written to do only one job - decide whether an email is spam or not
+  using the content of the message alone - so it is less complex than filters
+  such as SpamAssassin. Less complexity means bugs and security problems are
+  less likely.
+  * As well as words and word pairs, QSF also spots special patterns in email
+  such as runs of gibberish, HTML comments embedded in text, and other common
+  spam giveaways, and its flexible tokeniser allows more patterns to be added
+  as spammers change their tactics.

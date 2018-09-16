@@ -1,0 +1,23 @@
+Package: cldump
+Source: cldump (0.11~dfsg-1)
+Version: 0.11~dfsg-1+b2
+Architecture: amd64
+Maintainer: Julien BLACHE <jblache@debian.org>
+Installed-Size: 56
+Depends: libc6 (>= 2.3)
+Section: misc
+Priority: extra
+Description: Clarion database files extractor
+ The cldump utility allows you to extract the content of a Clarion database;
+ Clarion is a Windows IDE similar to Delphi and others, and has its own
+ (simple) database format.
+ .
+ cldump can export the content of the database to CSV or SQL, plus its own
+ "format" which dumps all the meta data along with the data contained in
+ the database. When using the SQL output, you'll get a nearly ready-to-go
+ dump of the database that will create the table and the indexes and insert
+ the data into the table.
+ .
+ Note that cldump doesn't support all the datatypes yet; patches welcome.
+ .
+ You may be interested in the dbview package too, which can dump dBase files.

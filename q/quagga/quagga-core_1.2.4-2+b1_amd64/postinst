@@ -1,0 +1,44 @@
+#!/bin/bash
+set -eu
+
+if [ "$1" = "configure" ]; then
+  # Set permissions to allow quagga daemons and vtysh to write config files.
+  dpkg-statoverride --list /etc/quagga || \
+  dpkg-statoverride --add --update quagga quaggavty 775 /etc/quagga
+fi
+
+# remove symlinks to /etc/init.d/quagga from runlevels
+update-rc.d -f quagga remove
+
+# Automatically added by dh_systemd_enable/11.2.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'zebra.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'zebra.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'zebra.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'zebra.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.2.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/watchquagga" ]; then
+		update-rc.d watchquagga defaults >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.2.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/zebra" ]; then
+		update-rc.d zebra defaults >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+

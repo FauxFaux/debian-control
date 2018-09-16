@@ -1,0 +1,45 @@
+#! /bin/sh
+
+# atheme-services
+# Version:	atheme-services 2.2.0  06-08-07
+# Author:	Bradley Smith <brad@brad-smith.co.uk>
+
+set -e
+
+case "$1" in
+
+    configure)
+	    chown irc:irc /var/lib/atheme/
+	    chown irc:irc /var/log/atheme/
+	    chown root:irc /etc/atheme/
+	    chmod 770 /etc/atheme/
+	;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "ERROR: Postinst called with unknown argument!"
+        exit 0
+    ;;
+
+esac
+
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper rm_conffile /etc/default/atheme-services 7.2.9-2\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/atheme-services" ]; then
+		update-rc.d atheme-services defaults-disabled >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d atheme-services $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,22 @@
+Package: memleax
+Version: 1.1.1-1
+Architecture: amd64
+Maintainer: Nicholas D Steeves <nsteeves@gmail.com>
+Installed-Size: 51
+Depends: libc6 (>= 2.14), libdw1 (>= 0.126), libelf1 (>= 0.144), libunwind8
+Section: devel
+Priority: optional
+Homepage: https://github.com/WuBingzheng/memleax
+Description: debug a running process for memory leaks
+ Memleax helps debug memory leaks by attaching to a process that is
+ already running. Memleax then tracks changes to allocated memory,
+ reports memory leaks, and "maybe memory leaks" in real-time.
+ .
+ Where Valgrind excels at formal profiling, Memleax excels at catching
+ difficult to reproduce memory leaks the times when one wasn't
+ prepared for them to occur. Memleax will track new threads, but not
+ forked processes. To debug multiple processes, just run multiple
+ instances of memleax!
+ .
+ It is very convenient to use, and is suitable for production
+ environments.

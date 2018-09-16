@@ -1,0 +1,35 @@
+Package: xhtml2ps
+Source: html2ps
+Version: 1.0b7-3
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 111
+Depends: html2ps (= 1.0b7-3), tk
+Suggests: weblint-perl, mime-support, postscript-viewer, lpr
+Enhances: html2ps
+Section: text
+Priority: optional
+Homepage: http://user.it.uu.se/~jan/html2ps.html
+Description: HTML to PostScript converter (Tcl/Tk GUI frontend)
+ This program converts HTML directly to PostScript. The HTML code can be
+ retrieved from one or more URLs or local files, specified as parameters
+ on the command line. A comprehensive level of HTML is supported,
+ including inline images, CSS 1.0, and some features of HTML 4.0.
+ .
+ This package provides an (outdated) GUI frontend to the html2ps
+ converter.
+ .
+ This is our justification for the suggests list:
+ .
+ We suggest weblint-perl because it is the default method for checking
+ HTML syntax (see Operations | Preferences).
+ .
+ We suggest lpr because it is the default printing command (see
+ Operations | Preferences).
+ .
+ We suggest mime-support because see is the default command used to open
+ the postscript viewer (see Operations | Preferences).
+ .
+ We suggest postscript-viewer because this package generates postscripts
+ which can be viewed with postscript-viewer (see Operations |
+ Preferences).

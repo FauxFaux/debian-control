@@ -1,0 +1,22 @@
+Package: libparams-validationcompiler-perl
+Version: 0.30-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 92
+Depends: perl, libeval-closure-perl, libexception-class-perl, perl (>= 5.19.3) | libscalar-list-utils-perl (>= 1:1.29)
+Recommends: libclass-xsaccessor-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Params-ValidationCompiler
+Description: module to build an optimized subroutine parameter validator
+ Params::ValidationCompiler creates a customized, highly efficient parameter
+ checking subroutine. It can handle named or positional parameters, and can
+ return the parameters as key/value pairs or a list of values.
+ .
+ In addition to type checks, it also supports parameter defaults, optional
+ parameters, and extra "slurpy" parameters.
+ .
+ A parameter specification can be provided as either an arrayref (which expects
+ positional params) or a hashref (which expects named params). Parameter types
+ can be specified as Moose, Type::Tiny or Specio type objects. Parameters can
+ be specified as being optional and can be provided with default values.

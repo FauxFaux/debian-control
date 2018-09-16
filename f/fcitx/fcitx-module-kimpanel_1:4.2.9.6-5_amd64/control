@@ -1,0 +1,29 @@
+Package: fcitx-module-kimpanel
+Source: fcitx
+Version: 1:4.2.9.6-5
+Architecture: amd64
+Maintainer: Debian Input Method Team <debian-input-method@lists.debian.org>
+Installed-Size: 86
+Depends: fcitx-module-dbus, libc6 (>= 2.8), libdbus-1-3 (>= 1.9.14)
+Suggests: kdialog, plasma-widgets-kimpanel
+Breaks: fcitx (<< 1:4.2.9.6)
+Replaces: fcitx (<< 1:4.2.9.6), fcitx-ui-kimpanel
+Provides: fcitx-ui-kimpanel
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://gitlab.com/fcitx/fcitx
+Description: Flexible Input Method Framework - KIMPanel protocol module
+ Fcitx is a input method framework with extension support, which provides
+ an interface for entering characters of different scripts in applications
+ using a variety of mapping systems.
+ .
+ It offers a pleasant and modern experience, with intuitive graphical
+ configuration tools and customizable skins and mapping tables. It is
+ highly modularized and extensible, with GTK+ 2/3 and Qt4 IM Modules, support
+ for UIs based on Fbterm, pure Xlib, GTK+, or KDE, and a developer-friendly
+ API.
+ .
+ This package provides the KIMPanel protocol module of Fcitx, which
+ implements a protocol to talk with D-Bus and is usually needed by the
+ plugin for environments like KIMPanel/(Q)KIMToy, GNOME Shell and Unity.

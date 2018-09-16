@@ -1,0 +1,53 @@
+#! /bin/sh
+
+set -e
+
+# summary of how this script can be called:
+#        * <new-preinst> `install'
+#        * <new-preinst> `install' <old-version>
+#        * <new-preinst> `upgrade' <old-version>
+#        * <old-preinst> `abort-upgrade' <new-version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+
+check_seedd_conf()
+{
+    local oldconf='/etc/default/seedd'
+
+    # Check that the old file hasn't already been removed, and that it hasn't
+    # been usurped by some other package (which is unlikely, but would be Bad
+    # for what we're going to do next).
+    [ -e "$oldconf" ] || return 0
+    dpkg-query -L bit-babbler | grep -F -q -x "$oldconf" || return 0
+
+    local sys_sum=$(md5sum "$oldconf" | sed -e 's/ .*//')
+    local pkg_sum=$(dpkg-query -W -f='${Conffiles}' bit-babbler | sed -n -e "\'^ $oldconf ' { s/ obsolete$//; s/.* //; p }")
+
+    # If it's unmodified, move it aside for deletion if the upgrade succeeds.
+    [ "$sys_sum" != "$pkg_sum" ] || mv -f "$oldconf" "${oldconf}.dpkg-remove"
+
+    # Otherwise, we'll migrate it to the new form in postinst.
+}
+
+case "$1" in
+    install|upgrade)
+	# Version 0.8 adds /etc/bit-babbler/seedd.conf, replacing the previous
+	# daemon configuration options which were set in /etc/default/seedd.
+	dpkg --compare-versions -- "$2" ge-nl '0.8~' || check_seedd_conf
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+	echo "preinst called with unknown argument \`$1'" >&2
+	exit 1
+    ;;
+esac
+
+
+
+exit 0
+
+# vi:sts=4:sw=4:noet

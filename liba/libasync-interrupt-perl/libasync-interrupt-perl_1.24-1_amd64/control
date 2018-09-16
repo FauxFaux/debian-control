@@ -1,0 +1,21 @@
+Package: libasync-interrupt-perl
+Version: 1.24-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 93
+Depends: perl (>= 5.26.2-3), perlapi-5.26.2, libc6 (>= 2.7), libcommon-sense-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Async-Interrupt
+Description: module to allow C/XS libraries to interrupt perl
+ Async::Interrupt is a Perl module that implements asynchronous interruptions,
+ similar in nature to UNIX signals, in a cross-platform manner. Modules might
+ want to run code asynchronously (in another thread or from a signal handler)
+ and then signal the interpreter on certain events. One common way is to write
+ data to a pipe and use an event handling toolkit to watch for I/O events.
+ Another way is to send a signal. Those methods are slow, and in the case of a
+ pipe, also not asynchronous - it won't interrupt a running Perl interpreter.
+ .
+ This module implements asynchronous notifications that enable you to signal
+ running Perl code from another thread, asynchronously, and sometimes even
+ without using a single syscall.

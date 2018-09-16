@@ -1,0 +1,32 @@
+Package: libghc-abstract-deque-dev
+Source: haskell-abstract-deque
+Version: 0.3-8
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 310
+Depends: libghc-array-dev-0.5.2.0-26dc0, libghc-base-dev-4.10.1.0-35a7f, libghc-containers-dev-0.5.10.2-cc496, libghc-random-dev-1.1-bddaa, libghc-time-dev-1.8.0.2-7cc03, libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-abstract-deque-doc, libghc-abstract-deque-prof
+Provides: libghc-abstract-deque-dev-0.3-39866
+Section: haskell
+Priority: optional
+Homepage: https://github.com/rrnewton/haskell-lockfree/wiki
+Description: abstract, parameterized interface to mutable Deques
+ An abstract interface to highly-parameterizable queues/deques.
+ .
+ Background: There exists a feature space for queues that extends between:
+   * simple, single-ended, non-concurrent, bounded queues
+   * double-ended, threadsafe, growable queues
+ with important points inbetween (such as the queues used for
+ work-stealing).
+ .
+ This package includes an interface for Deques that allows the
+ programmer to use a single API for all of the above, while using
+ the type-system to select an efficient implementation given the
+ requirements (using type families).
+ .
+ This package also includes a simple reference implementation based
+ on IORef and Data.Sequence.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: abstract-deque-0.3-LnfzYWYDAxhIboroxPPZHQ

@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/gen-token gen-token /usr/bin/python3-gen-token 200
+	update-alternatives --install /usr/bin/sdkserver sdkserver /usr/bin/python3-sdkserver 200
+	update-alternatives --install /usr/bin/zvmsdk-wsgi zvmsdk-wsgi /usr/bin/python3-zvmsdk-wsgi 200
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-zvmcloudconnector 
+fi
+
+# End automatically added section
+
+
+exit 0

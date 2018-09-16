@@ -1,0 +1,24 @@
+Package: keysync
+Version: 0.2.2-1
+Architecture: all
+Maintainer: Hans-Christoph Steiner <hans@eds.org>
+Installed-Size: 923
+Depends: python (>= 2.7), python (<< 2.8), python-bs4, python-psutil, python-potr, python-pyasn1, python-crypto, python-pyjavaproperties, python-pyparsing, python-pgpdump, python-qrcode, python-six, python-imaging, python-pymtp (>= 0.0.6~), python-imaging-tk, python-pkg-resources, python-tk
+Section: python
+Priority: optional
+Homepage: https://guardianproject.info/apps/keysync
+Description: Syncs OTR identities between the different chat programs
+ There are many chat apps that support OTR encryption for verifying messages.
+ Many use multiple chat apps, including one for desktop and another for
+ mobile, or one for Mac OS X and another for GNU/Linux or Windows.  The trust
+ relationships are only stored locally in the app in a format that is specific
+ to that app.  Switching between all of them means that you have to manage
+ your trust relationships for each app that you use.
+ .
+ KeySync addresses this problem by allowing you to sync your OTR identity and
+ trust relationships between multiple apps.  It currently works with
+ ChatSecure on Android, and Pidgin, Adium, and Jitsi on desktop.  This project
+ is for converting the various OTR file formats between each other.
+ Currently, KeySync is focused on the two major OTR implementations: libotr
+ and otr4j, but it is modular enough to allow adding support for any OTR
+ implementation.

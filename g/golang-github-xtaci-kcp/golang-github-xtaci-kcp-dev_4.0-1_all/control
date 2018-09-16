@@ -1,0 +1,42 @@
+Package: golang-github-xtaci-kcp-dev
+Source: golang-github-xtaci-kcp
+Version: 4.0-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 113
+Depends: golang-github-klauspost-reedsolomon-dev (>= 1.3), golang-github-pkg-errors-dev, golang-golang-x-crypto-dev, golang-github-templexxx-xor-dev, golang-github-tjfoc-gmsm-dev, golang-golang-x-net-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/xtaci/kcp-go
+Description: Full-Featured Reliable-UDP Library for golang
+ KCP (golang-github-xtaci-kcp-dev) is a Production-Grade Reliable-UDP
+ library for golang. It provides fast, ordered, and error-checked delivery
+ of stream over UDP packets.
+ .
+ It has been well tested with opensource project kcptun, which runs on
+ millions of devices, from low-end MIPS routers to high-end servers. It also
+ runs well for applications like online games, live broadcasting, file
+ synchronization and network acceleration.
+ .
+ Features:
+   * Optimized for Realtime Multiplayer Games, Audio/Video Streaming.
+   * Compatible with skywind3000's (https://github.com/skywind3000)
+     C version with optimizations.
+   * Cache friendly and Memory optimized design in golang.
+   * Compatible with net.Conn (https://golang.org/pkg/net/#Conn)
+     and net.Listener (https://golang.org/pkg/net/#Listener).
+   * FEC (Forward Error Correction)
+     (https://en.wikipedia.org/wiki/Forward_error_correction)
+     Support with Reed-Solomon Codes
+     (https://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction)
+   * Packet level encryption support with AES, TEA, 3DES, Blowfish, Cast5,
+     Salsa20, etc., in CFB mode.
+   * O(1) goroutines created for the entire server application, minimized
+     goroutine context switch.
+ .
+ Conventions:
+   Control messages like SYN/FIN/RST in TCP are not defined in KCP.
+   You need some keepalive/heartbeat mechanims in the application-level.
+   A real world example is to use some multiplexing protocol over session,
+   such as smux (golang-github-xtaci-smux-dev) with embedded keepalive
+   mechanism. See kcptun (https://github.com/xtaci/kcptun) for example.

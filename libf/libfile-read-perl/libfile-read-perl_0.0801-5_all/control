@@ -1,0 +1,19 @@
+Package: libfile-read-perl
+Version: 0.0801-5
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 29
+Depends: perl, libfile-slurp-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/File-Read
+Description: interface for reading one or more files
+ File::Read mainly proposes functions for reading one or more files, with
+ different options.
+ .
+ This module was created to address a quite specific need: reading many files,
+ some as a normal user and others as root, and eventually do a little more
+ processing, all while being at the same time compatible with Perl 5.004.
+ File::Slurp addresses the first point, but not the others, hence the creation
+ of File::Read. If you don't need reading files as root or the post-processing
+ features, then it's faster to directly use File::Slurp.

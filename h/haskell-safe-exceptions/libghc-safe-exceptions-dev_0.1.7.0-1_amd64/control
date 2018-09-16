@@ -1,0 +1,29 @@
+Package: libghc-safe-exceptions-dev
+Source: haskell-safe-exceptions
+Version: 0.1.7.0-1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 324
+Depends: libghc-base-dev-4.10.1.0-35a7f, libghc-deepseq-dev-1.4.3.0-38379, libghc-exceptions-dev-0.8.3-23c90, libghc-transformers-dev-0.5.2.0-e0457, libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-safe-exceptions-doc, libghc-safe-exceptions-prof
+Provides: libghc-safe-exceptions-dev-0.1.7.0-4411a
+Section: haskell
+Priority: optional
+Homepage: https://github.com/fpco/safe-exceptions
+Description: safe, consistent, and easy exception handling
+ This package provides additional safety and simplicity versus
+ Control.Exception by having its functions recognize the difference
+ between synchronous and asynchronous exceptions. As described below,
+ synchronous exceptions are treated as recoverable, allowing you to
+ catch and handle them as well as clean up after them, whereas
+ asynchronous exceptions can only be cleaned up after. In particular,
+ this library prevents you from making the following mistakes:
+ .
+  * Catching and swallowing an asynchronous exception
+  * Throwing an asynchronous exception synchronously
+  * Throwing a synchronous exception asynchronously
+  * Swallowing asynchronous exceptions via failing cleanup handlers
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: safe-exceptions-0.1.7.0-5oicbexkzeI2NujSJjFJRy

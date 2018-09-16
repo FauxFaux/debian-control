@@ -1,0 +1,17 @@
+Package: ziptime
+Source: android-platform-build
+Version: 1:7.0.0+r33-1
+Architecture: amd64
+Maintainer: Android Tools Maintainers <android-tools-devel@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: libc6 (>= 2.7), libgcc1 (>= 1:3.0), libstdc++6 (>= 5)
+Section: devel
+Priority: optional
+Homepage: https://android.googlesource.com/platform/build
+Description: Zip archive timestamp remover
+ ziptime normalizes the timestamps in the header of a Zip file.  It
+ was created as part of the Android SDK to help make reproducible
+ builds of Android application (.apk) files. It replaces all
+ timestamps in the Zip headers with a static time (Jan 1 2008). The
+ extra fields are not changed, so you'll need to use the -X option to
+ zip so that it doesn't create the 'universal time' extra.

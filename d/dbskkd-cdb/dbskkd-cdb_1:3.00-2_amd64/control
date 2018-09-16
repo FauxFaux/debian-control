@@ -1,0 +1,26 @@
+Package: dbskkd-cdb
+Version: 1:3.00-2
+Architecture: amd64
+Maintainer: Tatsuya Kinoshita <tats@debian.org>
+Installed-Size: 48
+Depends: libc6 (>= 2.2.5), libcdb1, openbsd-inetd | inet-superserver, skkdic-cdb
+Recommends: tinycdb
+Enhances: skk
+Conflicts: skkserv
+Replaces: skkserv
+Provides: skkserv
+Section: utils
+Priority: optional
+Homepage: http://github.com/jj1bdx/dbskkd-cdb
+Description: SKK dictionary server using cdb for faster access
+ dbskkd-cdb is a dictionary server for SKK Japanese input systems,
+ using D. J. Bernstein's cdb database for faster dictionary access.
+ .
+ dbskkd-cdb is compatible with skkserv on the protocol behavior.
+ It is called from an internet super-server.
+ .
+ This package uses the SKK dictionary cdb file `SKK-JISYO.cdb' that
+ is provided by the skkdic-cdb package.
+ .
+ If you want to convert your own dictionary to cdb, use the
+ `makeskkcdbdic' command.  This command requires the tinycdb package.

@@ -1,0 +1,26 @@
+Package: adequate
+Version: 0.15.1
+Architecture: all
+Maintainer: Jakub Wilk <jwilk@debian.org>
+Installed-Size: 79
+Depends: perl (>= 5.14), debconf
+Recommends: pkg-config (>= 0.27)
+Section: utils
+Priority: optional
+Homepage: http://jwilk.net/software/adequate
+Description: Debian package quality testing tool
+ adequate checks packages installed on the system and reports bugs and policy
+ violations.
+ .
+ The following checks are currently implemented:
+  * broken symlinks;
+  * missing copyright file;
+  * obsolete conffiles;
+  * Python modules not byte-compiled;
+  * /bin and /sbin binaries requiring /usr/lib libraries;
+  * missing libraries, undefined symbols, symbol size mismatches;
+  * license conflicts;
+  * program name collisions;
+  * missing alternatives;
+  * missing binfmt interpreters and detectors;
+  * missing pkg-config dependencies.

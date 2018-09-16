@@ -1,0 +1,28 @@
+Package: libpcre-ocaml
+Source: pcre-ocaml (7.2.3-2)
+Version: 7.2.3-2+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 323
+Depends: ocaml-base-nox-4.05.0, libc6 (>= 2.14), libpcre3
+Breaks: libpcre-ocaml-dev (<< 7)
+Replaces: libpcre-ocaml-dev (<< 7)
+Provides: libpcre-ocaml-2h5n2
+Section: ocaml
+Priority: optional
+Homepage: http://mmottl.github.io/pcre-ocaml/
+Description: OCaml bindings for PCRE (runtime)
+ This OCaml-library interfaces the PCRE (Perl-compatibility
+ regular expressions) C library. it can be used for matching
+ regular expressions which are written in Perl style.
+ .
+ Compared with the OCaml standard library "Str" module, this
+ library:
+  * uses Perl style rather than Emacs one
+  * is reentrant and thus thread safe
+  * is faster (when compiled to native code is even faster than
+    Perl regular expressions)
+  * returns data on which you can safely use destructive updates
+  * gives more "programming comfort" through a better API
+ .
+ This package contains only the shared runtime stub libraries.

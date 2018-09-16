@@ -1,0 +1,113 @@
+#!/bin/sh
+
+if [ -e /usr/share/debconf/confmodule ]
+then
+    . /usr/share/debconf/confmodule
+    db_version 2.0
+fi
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+DESTFILE=/etc/imapproxy.conf
+SRCFILE=/usr/share/imapproxy/imapproxy.conf.default
+
+case "$1" in
+    configure)
+        if [ -e /usr/share/debconf/confmodule ]
+        then
+            db_get imapproxy/imap-server || true
+            server_hostname="$RET"
+
+            # this should really be a debconf setting too, but it's too
+            # late to do that for lenny, so parse it here <ntyni>
+            if [ -r $DESTFILE ]
+            then
+                CONFIGURED_PORT=$(perl -ne '/^\s*listen_port\s*(\S+)$/ && print $1' $DESTFILE)
+            fi
+
+            if [ "$server_hostname" = "localhost" ]
+            then
+                # change bind port if localhost (#470431)
+                listen_port=${CONFIGURED_PORT:-1143}
+            else
+                listen_port=${CONFIGURED_PORT:-143}
+            fi
+
+            TMPFILE=$(tempfile)
+
+            sed "s/^server_hostname .*/server_hostname ${server_hostname}/; \
+                s/^listen_port .*/listen_port ${listen_port}/" \
+                < $SRCFILE > $TMPFILE
+            chmod 644 $TMPFILE
+            ucf --debconf-ok $TMPFILE $DESTFILE
+
+            # register configfile with UCF
+            ucfr imapproxy $DESTFILE
+
+            rm -f $TMPFILE
+        else
+            # this should never happen, really
+            test -f $DESTFILE || cp $SRCFILE $DESTFILE
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#db_reset imapproxy/imap-server
+if [ -e /usr/share/debconf/confmodule ]
+then
+    db_stop
+fi
+
+# Automatically added by dh_systemd_enable/11.2.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'imapproxy.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'imapproxy.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'imapproxy.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'imapproxy.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.2.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/imapproxy" ]; then
+		update-rc.d imapproxy defaults 98 >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

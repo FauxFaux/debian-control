@@ -1,0 +1,23 @@
+Package: libnetty-reactive-streams-java
+Source: netty-reactive-streams
+Version: 2.0.1-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 94
+Depends: libnetty-java (>= 4.1.29.Final), libreactive-streams-java (>= 1.0.1)
+Section: java
+Priority: optional
+Homepage: https://github.com/playframework/netty-reactive-streams
+Description: Netty Reactive Streams
+ This library provides a reactive streams implementation for Netty.
+ Essentially it comes in the form of two channel handlers, one that
+ publishes inbound messages received on a channel to a Publisher,
+ and another that writes messages received by a Subscriber outbound.
+ .
+ Features include:
+  * Full backpressure support, as long as the AUTO_READ channel option
+    is disabled.
+  * Publishers/subscribers can be dynamically added and removed from
+    the pipeline.
+  * Multiple publishers/subscribers can be inserted into the pipeline.
+  * Customisable cancel/complete/failure handling.

@@ -1,0 +1,35 @@
+Package: libjline2-java
+Source: jline2
+Version: 2.14.6-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 179
+Depends: libjansi-java (>= 1.16)
+Section: java
+Priority: optional
+Homepage: https://github.com/jline/jline2
+Description: console input handling in Java
+ JLine is a Java library for handling console input. It is similar in
+ functionality to BSD editline and GNU readline. People familiar with the
+ readline/editline capabilities for modern shells (such as bash and tcsh) will
+ find most of the command editing features of JLine to be familiar.
+ .
+ Jline2 suppors the current features:
+ .
+  * Command history - Lines that have been previously entered may be recalled
+  and edited and can be persisted so that they are available across sessions
+  of your program.
+  * Line editing - JLine allows full editing of the current command line and
+  attempts to mimic as much of the behavior of GNU Readline as possible,
+  including support for both emacs and vi key mappings.
+  * Completion - JLine provides a pluggable mechanism for implementing
+  command line tab completion (of course completion can be bound to any key
+  you wish).
+  * Custom Key bindings - Keys may be arbitrarily remapped to perform a
+  specific action, and JLine attempts to honor any mapping that is set in
+  your existing readline .inputrc file.
+  * Character Masking - Input may be gathered from the user without any
+  visual feedback. This is useful for prompting for passwords.
+  * 99.99% Java - The vast portion of JLine is all Java, using only some
+  small bit of native code, provided by the Jansi project, to support
+  Windows.

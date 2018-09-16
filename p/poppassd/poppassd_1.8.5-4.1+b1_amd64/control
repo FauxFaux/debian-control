@@ -1,0 +1,19 @@
+Package: poppassd
+Source: poppassd (1.8.5-4.1)
+Version: 1.8.5-4.1+b1
+Architecture: amd64
+Maintainer: Adam Conrad <adconrad@0c3.net>
+Installed-Size: 37
+Depends: netbase, libpam-runtime (>= 0.76-14), update-inetd, openbsd-inetd | inet-superserver, libc6 (>= 2.7), libpam0g (>= 0.99.7.1)
+Section: mail
+Priority: optional
+Description: password change server for Eudora and NUPOP
+ This package provides a daemon for changing passwords on POP mail accounts,
+ a feature common to Eudora and other MacOS/Win32 mail user agents.  This
+ feature is also commonly used for TCP loopback password changing from web
+ scripting languages like PHP or Perl, so that the webserver process doesn't
+ need to be run as root (on in the shadow group).
+ .
+ This version of poppassd changes passwords via PAM (as opposed to other
+ versions of the same daemon that used the newusers(8) application to change
+ passwords), allowing for great flexibility.

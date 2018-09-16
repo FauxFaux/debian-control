@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "disappear" ] ; then
+	update-alternatives --remove gen-token /usr/bin/python3-gen-token
+	update-alternatives --remove sdkserver /usr/bin/python3-sdkserver
+	update-alternatives --remove zvmsdk-wsgi /usr/bin/python3-zvmsdk-wsgi
+fi
+
+
+
+exit 0

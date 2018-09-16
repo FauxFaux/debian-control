@@ -1,0 +1,35 @@
+Package: ace
+Source: golang-github-yosssi-ace
+Version: 0.0.5-3
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 2636
+Suggests: golang-github-yosssi-ace-dev
+Conflicts: libace-perl
+Built-Using: golang-1.10 (= 1.10.1-1), golang-github-yosssi-gohtml (= 0.0~git20180130.97fbf36-1), golang-golang-x-net-dev (= 1:0.0+git20180124.0ed95ab+dfsg-1)
+Section: text
+Priority: optional
+Homepage: https://github.com/yosssi/ace
+Description: HTML template engine for Go (command-line tool)
+ Ace is an HTML template engine for Go.  This is inspired by
+ Slim (http://slim-lang.com/) and Jade (http://jade-lang.com/).
+ This is a refinement of Gold (http://gold.yoss.si/).
+ .
+ Example:
+ .
+   = doctype html
+   html lang=en
+   head
+     title Hello Ace
+     = css
+       h1 { color: blue; }
+   body
+     h1 {{.Msg}}
+     #container.wrapper
+       p..
+         Ace is an HTML template engine for Go.
+         This engine simplifies HTML coding in Go web application development.
+     = javascript
+       console.log('Welcome to Ace');
+ .
+ This package provides the /usr/bin/ace command-line tool and example files.

@@ -1,0 +1,28 @@
+Package: parcimonie
+Version: 0.11.0-1
+Architecture: all
+Maintainer: Debian Privacy Tools Maintainers <pkg-privacy-maintainers@lists.alioth.debian.org>
+Installed-Size: 136
+Depends: perl (>= 5.20), dirmngr, gnupg (>= 2.1~), libclone-perl, libconfig-general-perl, libfile-homedir-perl, libfile-which-perl, libgnupg-interface-perl (>= 0.52-3), libipc-system-simple-perl, liblist-moreutils-perl, libmoo-perl (>= 1.003001), libmoox-late-perl, libmoox-options-perl, libmoox-strictconstructor-perl, libnamespace-clean-perl, libpath-tiny-perl, libtime-duration-parse-perl, libtry-tiny-perl, libtypes-path-tiny-perl, libtype-tiny-perl, torsocks
+Recommends: libglib-perl, libgtk3-perl (>= 0.011), liblocale-gettext-perl, libnet-dbus-perl, libnet-dbus-glib-perl, libpango-perl, libtime-duration-perl, tor
+Section: net
+Priority: optional
+Homepage: https://gaffer.ptitcanardnoir.org/intrigeri/code/parcimonie/
+Description: privacy-friendly helper to refresh a GnuPG keyring
+ parcimonie is a daemon that slowly refreshes a gpg public keyring
+ from a keyserver.
+ .
+ Its refreshes one OpenPGP key at a time; between every key update,
+ parcimonie sleeps a random amount of time, long enough for the
+ previously used Tor circuit to expire.
+ .
+ This process is meant to make it hard for an attacker to correlate
+ the multiple performed key update operations.
+ .
+ See the included design document to learn more about the threat
+ and risk models parcimonie attempts to help coping with.
+ .
+ parcimonie also ships a deprecated desktop applet that allows one
+ to monitor the background daemon's activities with a graphical
+ user interface. It may or may not work for you, depending on
+ your desktop environment.

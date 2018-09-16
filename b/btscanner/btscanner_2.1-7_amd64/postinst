@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+generate_oui_file() {
+    cp /usr/share/ieee-data/oui.txt /var/lib/btscanner/oui.txt.in
+    cd /var/lib/btscanner && /usr/share/btscanner/mk_oui_list.pl
+    rm /var/lib/btscanner/oui.txt.in
+}
+
+if [ "$1" = "configure" ]; then
+    generate_oui_file
+fi
+
+if [ "$1" = "triggered" ]; then
+    echo "Update specific oui.txt for btscanner"
+    generate_oui_file
+fi
+
+# Automatically added by dh_installmenu/11.3.5
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

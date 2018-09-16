@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/ipaclient puppet-module-ipaclient /usr/share/puppet/modules.available/joshuabaird-ipaclient 500
+fi
+
+
+
+exit 0

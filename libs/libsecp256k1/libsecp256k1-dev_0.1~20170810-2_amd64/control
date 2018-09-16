@@ -1,0 +1,27 @@
+Package: libsecp256k1-dev
+Source: libsecp256k1
+Version: 0.1~20170810-2
+Architecture: amd64
+Maintainer: Debian Cryptocoin Team <team+cryptocoin@tracker.debian.org>
+Installed-Size: 204
+Depends: libsecp256k1-0 (= 0.1~20170810-2), libgmp-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/bitcoin/secp256k1
+Description: library for EC operations on curve secp256k1 - development headers
+ An optimized C library for EC operations on curve secp256k1.
+ .
+ NB! This library is a work in progress and is being used to research
+ best practices. Use at your own risk.
+ .
+ Features:
+  * secp256k1 ECDSA signing/verification and key generation.
+  * Adding/multiplying private/public keys.
+  * Serialization/parsing of private keys, public keys, signatures.
+  * Constant time, constant memory access signing and pubkey generation.
+  * Derandomized DSA (via RFC6979 or with a caller provided function.)
+  * Very efficient implementation.
+ .
+ This package provides header files for developing your applications to
+ use libbitcoin template engine.

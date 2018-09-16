@@ -1,0 +1,17 @@
+Package: ruby-rack-timeout
+Version: 0.4.2-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 62
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: https://github.com/heroku/rack-timeout
+Description: Abort requests that are taking too long.
+ A generous timeout of 15s is the default. It's recommended to set the timeout
+ as low as realistically viable for your application. Most applications will
+ do fine with a setting between 2 and 5 seconds.
+ Rack::Timeout is not a solution to the problem of long-running requests,
+ it's a debug and remediation tool. App developers should track rack-timeout's
+ data and address recurring instances of particular timeouts.
+Ruby-Versions: all

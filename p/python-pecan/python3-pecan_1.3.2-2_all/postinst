@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/pecan pecan /usr/bin/python3-pecan 200
+	update-alternatives --install /usr/bin/gunicorn_pecan gunicorn_pecan /usr/bin/python3-gunicorn_pecan 200
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-pecan 
+fi
+
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,15 @@
+Package: ssh-cron
+Version: 1.01.00-2
+Architecture: amd64
+Maintainer: Frank B. Brokken <f.b.brokken@rug.nl>
+Installed-Size: 217
+Depends: libbobcat4 (>= 4.08.03), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 6), openssh-client
+Recommends: ssh-askpass
+Section: admin
+Priority: optional
+Homepage: https://fbb-git.github.io/ssh-cron/
+Description: cron daemon allowing ssh keys with passphrases to be used
+ ssh-cron acts like cron, but utilizes ssh-agent to obtain ssh key
+ passphrases. Thus it allows scheduled commands to run on remote systems
+ without requiring the ssh key passphrase to be stored in a clear-text
+ file, or resorting to ssh keys without passphrases.

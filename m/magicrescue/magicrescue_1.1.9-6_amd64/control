@@ -1,0 +1,25 @@
+Package: magicrescue
+Version: 1.1.9-6
+Architecture: amd64
+Maintainer: Debian Forensics <forensics-devel@lists.alioth.debian.org>
+Installed-Size: 224
+Depends: dcraw, flac, libjpeg-turbo-progs, mpg123, sqlite3, unzip, zip, libc6 (>= 2.14), libgdbm-compat4
+Section: utils
+Priority: optional
+Homepage: http://www.itu.dk/people/jobr/magicrescue
+Description: recover files by looking for magic bytes
+ Magic Rescue scans a block device for file types it knows how to recover
+ and calls an external program to extract them. It looks at "magic bytes"
+ (file patterns) in file contents, so it can be used both as an undelete
+ utility and for recovering a corrupted drive or partition. As long as
+ the file data is there, it will find it.
+ .
+ Magic Rescue uses files called 'recipes'. These files have strings and
+ commands to identify and extract data from devices or forensics images.
+ So, you can write your own recipes. Currently, there are the following
+ recipes: avi, canon-cr2, elf, flac, gpl, gzip, jpeg-exif, jpeg-jfif,
+ mbox, mbox-mozilla-inbox, mbox-mozilla-sent, mp3-id3v1, mp3-id3v2,
+ msoffice, nikon-raw, perl, png, ppm, sqlite and zip.
+ .
+ This package provides magicrescue, dupemap and magicsort commands.
+ magicrescue is a carver and is useful in forensics investigations.

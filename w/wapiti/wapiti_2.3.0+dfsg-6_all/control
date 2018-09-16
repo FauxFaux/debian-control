@@ -1,0 +1,25 @@
+Package: wapiti
+Version: 2.3.0+dfsg-6
+Architecture: all
+Maintainer: Debian Security Tools Packaging Team <pkg-security-team@lists.alioth.debian.org>
+Installed-Size: 886
+Depends: libjs-jquery, python-beautifulsoup, python-requests, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: web
+Priority: optional
+Homepage: http://wapiti.sourceforge.net/
+Description: web application vulnerability scanner
+ Wapiti allows you to audit the security of your web applications.
+ It performs "black-box" scans, i.e. it does not study the source code of the
+ application but will scan the web pages of the deployed web applications,
+ looking for scripts and forms where it can inject data.
+ Once it gets this list, Wapiti acts like a fuzzer, injecting payloads to see
+ if a script is vulnerable.
+ .
+ Wapiti can detect the following vulnerabilities:
+  - file handling errors (local and remote include/require, fopen,
+    readfile...)
+  - database injection (PHP/JSP/ASP SQL Injections and XPath Injections)
+  - XSS (Cross Site Scripting) injection
+  - LDAP injection
+  - command execution detection (eval(), system(), passtru()...)
+  - CRLF injection (HTTP response splitting, session fixation...)

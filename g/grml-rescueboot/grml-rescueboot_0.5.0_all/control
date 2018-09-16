@@ -1,0 +1,15 @@
+Package: grml-rescueboot
+Version: 0.5.0
+Architecture: all
+Maintainer: Grml Team <team@grml.org>
+Installed-Size: 39
+Depends: grub-pc | grub-efi-amd64
+Recommends: debian-keyring, gpgv, wget
+Section: admin
+Priority: extra
+Homepage: http://git.grml.org/?p=grml-rescueboot.git
+Description: Integrates Grml ISO booting into GRUB
+ This package provides a script for update-grub which looks for
+ Grml ISO images in /boot/grml and automatically adds an entry
+ for each image. The purpose is to use one of those images to
+ boot a Grml rescue system without using a CD or USB stick.

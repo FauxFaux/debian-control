@@ -1,0 +1,71 @@
+#!/bin/sh
+
+set -e
+
+ODOO_CONFIGURATION_FILE=/etc/odoo/odoo.conf
+ODOO_GROUP="odoo"
+ODOO_DATA_DIR=/var/lib/odoo
+ODOO_LOG_DIR=/var/log/odoo
+ODOO_USER="odoo"
+
+case "${1}" in
+    configure)
+        if ! getent passwd | grep -q "^odoo:"; then
+            adduser --system --home $ODOO_DATA_DIR --quiet --group $ODOO_USER
+        fi
+        # Register "$ODOO_USER" as a postgres user with "Create DB" role attribute
+        su - postgres -c "createuser -d -R -S $ODOO_USER" 2> /dev/null || true
+        # Configuration file
+        chown $ODOO_USER:$ODOO_GROUP $ODOO_CONFIGURATION_FILE
+        chmod 0640 $ODOO_CONFIGURATION_FILE
+        # Log
+        mkdir -p $ODOO_LOG_DIR
+        chown $ODOO_USER:$ODOO_GROUP $ODOO_LOG_DIR
+        chmod 0750 $ODOO_LOG_DIR
+        # Data dir
+        chown $ODOO_USER:$ODOO_GROUP $ODOO_DATA_DIR
+        ;;
+    *)
+        ;;
+esac
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p oca-core 
+fi
+
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'oca-core.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'oca-core.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'oca-core.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'oca-core.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		deb-systemd-invoke $_dh_action 'oca-core.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

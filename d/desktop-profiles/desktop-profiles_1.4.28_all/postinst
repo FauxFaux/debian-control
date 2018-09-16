@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+configure)
+    if [ -x "$(which update-profile-cache 2>/dev/null)" ] ; then
+      update-profile-cache;
+    fi
+    ;;
+esac
+
+

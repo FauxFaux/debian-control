@@ -1,0 +1,19 @@
+Package: dh-linktree
+Version: 0.6
+Architecture: all
+Maintainer: Raphaël Hertzog <hertzog@debian.org>
+Installed-Size: 32
+Depends: debhelper, libdpkg-perl, perl
+Section: devel
+Priority: optional
+Description: Create symlink trees within a Debian package
+ Many developers bundle PHP or JavaScript libraries in the software that
+ they provide. The Debian packager must then replace those "embedded copies"
+ with symlinks to the packaged copy of those files. This operation is not
+ without risks. A version mismatch can be the source of bugs that are hard to
+ track.
+ .
+ dh_linktree is a tool that can assist you in this task. It can either
+ unconditionally install a symlink tree of a given directory at the place
+ of your choice, or it can only replace existing files with symlinks, or it
+ can only replace existing identical files with symlinks.

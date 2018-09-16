@@ -1,0 +1,59 @@
+#!/bin/sh
+
+set -e
+
+DEFAULT_FILE="/etc/default/minissdpd"
+
+. /usr/share/debconf/confmodule
+
+read_config () {
+	sed -rn '
+s|^\s*'"${2}"'='\''([^'\'']+)'\''\s*$|\1|g
+t hold
+s|^\s*'"${2}"'='\"'([^'\"']+)'\"'\s*$|\1|g
+t hold
+s|^\s*'"${2}"'=(\S+)\s*$|\1|
+t hold
+b
+: hold
+p
+	' "${1}"
+}
+
+
+if [ -r "${DEFAULT_FILE}" ] ; then
+	. "${DEFAULT_FILE}"
+fi
+
+# fetch anything in debconf
+db_get minissdpd/start_daemon
+if [ "$RET" = 'true' ] ; then
+	START_DAEMON=1
+else
+	START_DAEMON=0
+fi
+
+db_get minissdpd/listen
+if [ -n "$RET" ] ; then
+	MiniSSDPd_INTERFACE_ADDRESS="$RET"
+else
+	db_set minissdpd/listen "${MiniSSDPd_INTERFACE_ADDRESS}"
+fi
+
+if [ -z "${MiniSSDPd_INTERFACE_ADDRESS}" ] ; then
+	# If none found, then we shouldn't start the daemon.
+	START_DAEMON=0
+fi
+
+if [ "${START_DAEMON}" = 1 ] ; then
+	db_set minissdpd/start_daemon true
+else
+	db_set minissdpd/start_daemon false
+fi
+
+db_input high minissdpd/start_daemon || true
+db_input high minissdpd/listen || true
+db_input low minissdpd/ip6 || true
+db_go
+
+exit 0

@@ -1,0 +1,26 @@
+Package: winbind
+Source: samba
+Version: 2:4.8.5+dfsg-1
+Architecture: amd64
+Maintainer: Debian Samba Maintainers <pkg-samba-maint@lists.alioth.debian.org>
+Installed-Size: 1953
+Depends: lsb-base (>= 3.0-6), samba-common (= 2:4.8.5+dfsg-1), samba-common-bin (= 2:4.8.5+dfsg-1), libbsd0 (>= 0.6.0), libc6 (>= 2.14), libldap-2.4-2 (>= 2.4.7), libpopt0 (>= 1.14), libtalloc2 (>= 2.0.4~git20101213), libtdb1 (>= 1.2.7+git20101214), libtevent0 (>= 0.9.36), libwbclient0 (= 2:4.8.5+dfsg-1), samba-libs (= 2:4.8.5+dfsg-1)
+Suggests: libnss-winbind, libpam-winbind
+Enhances: libkrb5-26-heimdal
+Section: net
+Priority: optional
+Multi-Arch: allowed
+Homepage: http://www.samba.org
+Description: service to resolve user and group information from Windows NT servers
+ Samba is an implementation of the SMB/CIFS protocol for Unix systems,
+ providing support for cross-platform file sharing with Microsoft Windows, OS X,
+ and other Unix systems.  Samba can also function as a domain controller
+ or member server in both NT4-style and Active Directory domains.
+ .
+ This package provides winbindd, a daemon which integrates authentication
+ and directory service (user/group lookup) mechanisms from a Windows
+ domain on a Linux system.
+ .
+ Winbind based user/group lookups via /etc/nsswitch.conf can be enabled via
+ the libnss-winbind package. Winbind based Windows domain authentication can
+ be enabled via the libpam-winbind package.

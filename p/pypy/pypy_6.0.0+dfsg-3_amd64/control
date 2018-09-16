@@ -1,0 +1,27 @@
+Package: pypy
+Version: 6.0.0+dfsg-3
+Architecture: amd64
+Maintainer: Stefano Rivera <stefanor@debian.org>
+Installed-Size: 68467
+Pre-Depends: dpkg (>= 1.15.6~)
+Depends: pypy-lib (= 6.0.0+dfsg-3), libbz2-1.0, libc6 (>= 2.14), libexpat1 (>= 2.0.1), libffi6 (>= 3.0.4), libgcc1 (>= 1:4.2), libgdbm5 (>= 1.14), libncurses6 (>= 6), libsqlite3-0 (>= 3.5.9), libssl1.1 (>= 1.1.0), libtinfo6 (>= 6), zlib1g (>= 1:1.1.4)
+Suggests: pypy-doc, pypy-tk (= 6.0.0+dfsg-3)
+Breaks: pypy-dev (<< 6.0.0+dfsg-3)
+Provides: pypy-abi-41
+Section: python
+Priority: optional
+Homepage: http://pypy.org/
+Description: fast alternative implementation of Python - PyPy interpreter
+ PyPy is a fast, compliant alternative implementation of the Python language
+ (2.7). It has several advantages and distinct features:
+  * Speed: thanks to its Just-in-Time compiler (on x86), Python programs often
+    run faster on PyPy.
+  * Memory usage: large, memory-hungry Python programs might end up taking less
+    space than they do in CPython.
+  * Compatibility: PyPy is highly compatible with existing Python code.
+    It supports ctypes and can run popular Python libraries like twisted and
+    django.
+  * Stackless: PyPy supports stackless mode on most platforms, providing
+    micro-threads for massive concurrency.
+ .
+ This package contains the PyPy interpreter.

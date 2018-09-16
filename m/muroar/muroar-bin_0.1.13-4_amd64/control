@@ -1,0 +1,26 @@
+Package: muroar-bin
+Source: muroar
+Version: 0.1.13-4
+Architecture: amd64
+Maintainer: Patrick Matthäi <pmatthaei@debian.org>
+Installed-Size: 36
+Depends: libc6 (>= 2.4), libmuroar0
+Breaks: libmuroar0 (<< 0.1.13-3)
+Replaces: libmuroar0 (<< 0.1.13-3)
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://roaraudio.keep-cool.org/
+Description: minimalist RoarAudio client library (binary package)
+ RoarAudio is a sound-server for audio mixing. Its main purpose is to mix audio
+ from different clients before sending it to its outputs (for example a
+ soundcard).
+ .
+ It is completely network transparent (UNIX sockets, TCP/IP and DECnet) and
+ supports many common codecs like Ogg Vorbis, Speex or FLAC.
+ .
+ This is a minimalist client library for RoarAudio.
+ It exists because it allows non-GPL applications to use
+ the RoarAudio sound system.
+ .
+ This package contains the binary applications, like muroarstream.

@@ -1,0 +1,15 @@
+Package: libalien-gnuplot-perl
+Version: 1.033-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 27
+Depends: perl, gnuplot-qt | gnuplot-x11 | gnuplot-nox
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Alien-Gnuplot
+Description: module to find and validate the gnuplot executable
+ Alien::Gnuplot verifies existence and sanity of the gnuplot external
+ application. It only declares one access method, Alien::Gnuplot::load_gnuplot,
+ which does the actual work and is called automatically at load time.
+ Alien::Gnuplot doesn't have any actual plotting methods - making use of
+ gnuplot, once it is found and verified, is up to you or your client module.

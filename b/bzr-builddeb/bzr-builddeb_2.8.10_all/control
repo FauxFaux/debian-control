@@ -1,0 +1,18 @@
+Package: bzr-builddeb
+Version: 2.8.10
+Architecture: all
+Maintainer: Debian Bazaar Maintainers <pkg-bazaar-maint@lists.alioth.debian.org>
+Installed-Size: 898
+Depends: bzr (>= 2.1~), python-debian (>= 0.1.11), python-apt, python (>= 2.7), python (<< 2.8), python:any (>= 2.6.6-7~), dpkg-dev, fakeroot, devscripts (>= 2.10.59), patchutils, pristine-tar, quilt
+Recommends: python-launchpadlib, libalgorithm-merge-perl, python-distro-info
+Suggests: python-lzma
+Provides: bzr-buildpackage
+Section: vcs
+Priority: optional
+Description: bzr plugin for Debian package management
+ bzr-builddeb is a plugin for the bzr version control system that helps to
+ automate the task of maintaining Debian packages using bzr. It is similar
+ in intent to cvs-buildpackage, svn-buildpackage and the similar scripts.
+ .
+ It builds a Debian package from a bzr branch, optionally using a separate
+ upstream tarball.

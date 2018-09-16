@@ -1,0 +1,20 @@
+Package: libtemplate-plugin-digest-md5-perl
+Version: 0.05-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 33
+Depends: perl, libtemplate-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Template-Plugin-Digest-MD5
+Description: interface to the MD5 Algorithm for the Template Toolkit
+ Template::Plugin::Digest::MD5 provides access to the MD5 algorithm
+ via the Digest::MD5 module. It is used like a plugin but installs filters and
+ vmethods into the current context.
+ .
+ When you invoke
+ .
+ [% USE Digest.MD5 %]
+ .
+ the following filters (and vmethods of the same name) are installed into the
+ current context: md5, md5_hex, md5_base64.

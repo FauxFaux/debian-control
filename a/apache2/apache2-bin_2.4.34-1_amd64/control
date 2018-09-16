@@ -1,0 +1,22 @@
+Package: apache2-bin
+Source: apache2
+Version: 2.4.34-1
+Architecture: amd64
+Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Installed-Size: 4808
+Depends: perl:any, libapr1 (>= 1.6.2), libaprutil1 (>= 1.6.0), libaprutil1-dbd-sqlite3 | libaprutil1-dbd-mysql | libaprutil1-dbd-odbc | libaprutil1-dbd-pgsql | libaprutil1-dbd-freetds, libaprutil1-ldap, libbrotli1 (>= 0.6.0), libc6 (>= 2.14), libcurl4 (>= 7.16.2), libjansson4 (>= 2.4), libldap-2.4-2 (>= 2.4.7), liblua5.2-0, libnghttp2-14 (>= 1.15.0), libpcre3, libssl1.1 (>= 1.1.0), libxml2 (>= 2.7.4), zlib1g (>= 1:1.1.4)
+Suggests: apache2-doc, apache2-suexec-pristine | apache2-suexec-custom, www-browser
+Breaks: gridsite (<< 3.0.0~20170225gitd51b2fd-1~), libapache2-mod-dacs (<= 1.4.38a-2), libapache2-mod-md (<< 2.4.33), libapache2-mod-proxy-uwsgi (<< 2.4.33)
+Replaces: libapache2-mod-md (<< 2.4.33), libapache2-mod-proxy-uwsgi (<< 2.4.33)
+Provides: apache2-api-20120211, apache2-api-20120211-openssl1.1
+Section: httpd
+Priority: optional
+Homepage: http://httpd.apache.org/
+Description: Apache HTTP Server (modules and other binary files)
+ The Apache HTTP Server Project's goal is to build a secure, efficient and
+ extensible HTTP server as standards-compliant open source software. The
+ result has long been the number one web server on the Internet.
+ .
+ This package contains the binaries only and does not set up a working
+ web-server instance. Install the "apache2" package to get a fully working
+ instance.

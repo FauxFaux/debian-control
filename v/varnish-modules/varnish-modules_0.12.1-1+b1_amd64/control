@@ -1,0 +1,24 @@
+Package: varnish-modules
+Source: varnish-modules (0.12.1-1)
+Version: 0.12.1-1+b1
+Architecture: amd64
+Maintainer: Varnish Package Maintainers <pkg-varnish-devel@lists.alioth.debian.org>
+Installed-Size: 189
+Depends: libc6 (>= 2.14), libvarnishapi1 (>= 5.2.0), varnishabi-6.1
+Section: web
+Priority: optional
+Homepage: https://github.com/varnish/varnish-modules
+Description: Varnish module collection
+ This is a collection of modules ("vmods") extending Varnish VCL used
+ for describing HTTP request/response policies with additional
+ capabilities. Included:
+ .
+  * Simpler handling of HTTP cookies
+  * Variable support
+  * Request and bandwidth throttling
+  * Modify and change complex HTTP headers
+  * 3.0-style saint mode
+  * Advanced cache invalidations, and more.
+ .
+ This collection contains the following vmods: cookie, vsthrottle,
+ header, saintmode, softpurge, tcp, var, xkey

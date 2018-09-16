@@ -1,0 +1,26 @@
+Package: libguac-client-rdp0
+Source: guacamole-server
+Version: 0.9.9-2
+Architecture: amd64
+Maintainer: Debian Remote Maintainers <pkg-remote-team@lists.alioth.debian.org>
+Installed-Size: 318
+Depends: ghostscript, libc6 (>= 2.15), libcairo2 (>= 1.6.0), libfreerdp-cache1.1 (>= 1.1.0~beta1+git20130629), libfreerdp-client1.1 (>= 1.1.0~beta1+git20130629), libfreerdp-codec1.1 (>= 1.1.0~beta1+git20130629), libfreerdp-common1.1.0 (>= 1.1.0~beta1+git20130629), libfreerdp-core1.1 (>= 1.1.0~beta1+git20130629), libfreerdp-utils1.1 (>= 1.1.0~beta1+git20130629), libgcrypt20 (>= 1.7.0), libguac11 (>= 0.9.9), libssh2-1 (>= 1.2.8), libssl1.1 (>= 1.1.0), libwinpr-utils0.1 (>= 1.1.0~beta1+git20130629)
+Recommends: libfreerdp-plugins-standard
+Section: libs
+Priority: extra
+Multi-Arch: same
+Homepage: http://guacamole.incubator.apache.org/
+Description: HTML5 web application for accessing remote desktops (RDP support)
+ Guacamole is an HTML5 web application that provides access to a desktop
+ environment using remote desktop protocols. A centralized server acts as a
+ tunnel and proxy, allowing access to multiple desktops through a web browser.
+ No plugins are needed: the client requires nothing more than a web browser
+ supporting HTML5 and AJAX.
+ .
+ The Guacamole proxy daemon, guacd, translates between remote desktop
+ protocols (like VNC) and the Guacamole protocol using protocol plugins.
+ Once a user is authenticated with the Guacamole web application, a tunnel
+ is established through the web application to guacd, allowing the JavaScript
+ client to communicate to an arbitrary remote desktop server through guacd.
+ .
+ This package contains protocol support for RDP backends.

@@ -1,0 +1,31 @@
+Package: libghc-wizards-dev
+Source: haskell-wizards (1.0.2-8)
+Version: 1.0.2-8+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 853
+Depends: libghc-base-dev-4.10.1.0-35a7f, libghc-containers-dev-0.5.10.2-cc496, libghc-control-monad-free-dev-0.6.1-15cd2, libghc-haskeline-dev-0.7.4.0-24b77, libghc-mtl-dev-2.2.2-ada79, libghc-transformers-dev-0.5.2.0-e0457, libc6 (>= 2.2.5), libgmp10, libtinfo6 (>= 6)
+Suggests: libghc-wizards-doc, libghc-wizards-prof
+Provides: libghc-wizards-dev-1.0.2-d5345
+Section: haskell
+Priority: optional
+Homepage: http://hackage.haskell.org/package/wizards
+Description: library for interrogative programs
+ This library is a package designed for the quick and painless development of
+ interrogative programs, which revolve around a "dialogue" with the user, who
+ is asked a series of questions in a sequence much like an installation wizard.
+ .
+ Everything from interactive system scripts, to installation wizards, to
+ full-blown shells can be implemented with the support of wizards.
+ .
+ It is developed transparently on top of a free monad, which separates out the
+ semantics of the program from any particular interface. A variety of backends
+ exist, including console-based System.Console.Wizard.Haskeline and
+ System.Console.Wizard.BasicIO, and the pure System.Console.Wizard.Pure. It is
+ also possible to write your own backends, or extend existing back-ends with
+ new features. While both built-in IO backends operate on a console, there is
+ no reason why wizards cannot also be used for making GUI wizard interfaces.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: wizards-1.0.2-Dcq9i19xxqfPwQredUcWs

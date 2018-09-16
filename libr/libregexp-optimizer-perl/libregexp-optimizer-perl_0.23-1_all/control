@@ -1,0 +1,21 @@
+Package: libregexp-optimizer-perl
+Version: 0.23-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 70
+Depends: perl, libregexp-assemble-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Regexp-Optimizer/
+Description: modules for optimizing regular expressions
+ This contains two modules, Regexp::List and Regexp::Optimizer.
+ .
+ Regexp::List offers a method which turns a list of words into an
+ optimized regular expression which matches all words therein.
+ The optimized regular expression is much more efficient than a
+ simple-minded '|'-concatenation.
+ .
+ Regexp:Optimizer factors out common suffices/prefices in regular
+ expressions (trie optimization). Currently, the user has to optimize
+ "foo|far" and "foo|goo" into "f(?:oo|ar)" and "[fg]oo" by hand;
+ this module does it automatically.

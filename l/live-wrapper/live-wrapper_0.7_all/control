@@ -1,0 +1,17 @@
+Package: live-wrapper
+Version: 0.7
+Architecture: all
+Maintainer: Debian Live <debian-live@lists.debian.org>
+Installed-Size: 87
+Depends: python-apt, python-cliapp, python-pycurl, python-requests, python:any (<< 2.8), python:any (>= 2.7.5-5~), vmdebootstrap, debian-archive-keyring, isolinux, python-distro-info, squashfs-tools, xorriso
+Suggests: cmdtest, live-wrapper-doc
+Section: misc
+Priority: optional
+Homepage: https://debian-live.alioth.debian.org/live-wrapper/
+Description: Wrapper for vmdebootstrap for creating live images
+ live-wrapper is a wrapper around vmdebootstrap to install a live Debian
+ system into an ISO image, which can be used by booting from optical media or a
+ USB device.
+ .
+ isolinux and grub2 bootloaders can be supported, depending on the distribution
+ and the architecture.

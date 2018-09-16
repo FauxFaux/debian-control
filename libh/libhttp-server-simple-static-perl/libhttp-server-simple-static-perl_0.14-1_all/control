@@ -1,0 +1,18 @@
+Package: libhttp-server-simple-static-perl
+Version: 0.14-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 27
+Depends: perl, libcgi-pm-perl, libfile-libmagic-perl, libhttp-date-perl, libhttp-server-simple-perl, liburi-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/HTTP-Server-Simple-Static
+Description: Serve static files with HTTP::Server::Simple
+ HTTP::Server::Simple::Static is a mixin that adds a method to serve
+ static files from your HTTP::Server::Simple subclass.
+ .
+ The Date and Last-Modified HTTP headers are set when sending a response
+ for a valid file. The method supports clients which send an If-Modified-Since
+ HTTP header in the request, returning a 304 Not Modified response if the file
+ is unchanged. If the client makes a HEAD request no message body will be
+ returned in the response.

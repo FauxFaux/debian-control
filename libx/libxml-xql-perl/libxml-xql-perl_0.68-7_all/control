@@ -1,0 +1,25 @@
+Package: libxml-xql-perl
+Version: 0.68-7
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 334
+Depends: perl, libdate-manip-perl, libparse-yapp-perl, libxml-dom-perl, libxml-regexp-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/XML-XQL
+Description: Perl module for querying XML tree structures with XQL
+ The XML::XQL module implements the XQL (XML Query Language) proposal
+ submitted to the XSL Working Group in September 1998.  The spec can
+ be found at: http://www.w3.org/TandS/QL/QL98/pp/xql.html.  Most of
+ the contents related to the XQL syntax can also be found in the
+ XML::XQL::Tutorial that comes with this distribution.  Note that XQL
+ is not the same as XML-QL!
+ .
+ The current implementation only works with the XML::DOM module, but
+ once the design is stable and the major bugs are flushed out, other
+ extensions might follow, e.g. for XML::Grove.
+ .
+ XQL was designed to be extensible and this implementation tries to
+ stick to that.  Users can add their own functions, methods,
+ comparison operators and data types.  Plugging in a new XML tree
+ structure (like XML::Grove) should be a piece of cake.

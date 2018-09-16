@@ -1,0 +1,26 @@
+Package: simple-cdd
+Version: 0.6.6
+Architecture: all
+Maintainer: Simple-CDD Developers <simple-cdd@packages.debian.org>
+Installed-Size: 122
+Depends: rsync, debian-cd (>= 3.1.15), reprepro, wget, lsb-release, dctrl-tools, python3, python3-simple-cdd
+Recommends: dose-distcheck
+Suggests: qemu-system | qemu-kvm
+Section: misc
+Priority: optional
+Description: create customized debian-installer CDs
+ Simple-CDD is a limited though relatively easy tool to create a
+ customized debian-installer CD.
+ .
+ It includes simple mechanisms to create "profiles" that define common
+ system configurations, which can be selected during system
+ installation. Simple-CDD also makes it easy to build CDs with
+ language and country settings pre-configured.
+ .
+ This can be used to create a crude "Custom Debian Distribution" using
+ packages from Debian, with pre-configuration of packages that use
+ debconf.  Custom configuration scripts can be specified to handle
+ packages that don't support debconf pre-configuration.
+ .
+ Testing CD images with qemu is also made simple with a provided
+ script.

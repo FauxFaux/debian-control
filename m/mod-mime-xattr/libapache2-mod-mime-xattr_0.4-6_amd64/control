@@ -1,0 +1,21 @@
+Package: libapache2-mod-mime-xattr
+Source: mod-mime-xattr
+Version: 0.4-6
+Architecture: amd64
+Maintainer: Guus Sliepen <guus@debian.org>
+Installed-Size: 71
+Depends: libapr1 (>= 1.2.7), libattr1 (>= 1:2.4.46-8), libc6 (>= 2.4), apache2-api-20120211
+Section: web
+Priority: optional
+Description: Apache2 module to get MIME info from filesystem extended attributes
+ This is a module for the Apache HTTPD 2.4 which may be used to set a range of
+ MIME properties of files served from a document tree with extended attributes
+ (EAs) as supported by the underlying file system. The following attributes may
+ be used:
+ .
+  - user.mime_type: set the MIME type of a file explicitly. This attribute is
+    compatible with the shared MIME database specification as published by
+    freedesktop.org.
+  - user.charset: set the charset used in a file.
+  - user.mime_encoding: set the MIME encoding of a file (e.g. gzip).
+  - user.apache_handler: set the apache handler of a file explicitly.

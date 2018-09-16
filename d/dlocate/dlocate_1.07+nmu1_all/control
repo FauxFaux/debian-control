@@ -1,0 +1,13 @@
+Package: dlocate
+Version: 1.07+nmu1
+Architecture: all
+Maintainer: Craig Sanders <cas@taz.net.au>
+Installed-Size: 69
+Depends: dctrl-tools | grep-dctrl (>= 0.11), util-linux, dpkg (>= 1.8.0), perl:any
+Section: utils
+Priority: optional
+Description: fast alternative to dpkg -L and dpkg -S
+ Uses GNU grep and text dumps of dpkg's data to greatly speed up finding out which
+ package a file belongs to (i.e. a very fast dpkg -S). Many other uses,
+ including options to view all files in a package, calculate disk space
+ used, view and check md5sums, list man pages, etc.

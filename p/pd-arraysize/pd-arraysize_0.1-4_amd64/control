@@ -1,0 +1,22 @@
+Package: pd-arraysize
+Version: 0.1-4
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 27
+Depends: libc6 (>= 2.2.5), puredata-core | pd
+Recommends: pd-pddp
+Section: sound
+Priority: optional
+Homepage: https://puredata.info
+Description: Pd object to report the size of an array
+ This provides a simple object for Pure Data that reports the size of an array
+ by name. For historical reasons, it is packaged as a standalone object.  It
+ is a very simple object, but has always been distributed by itself.  It is
+ packaged alone in keeping with the one-library-per-package style of all other
+ pd libraries.
+ .
+ This is a tiny package that might otherwise be lumped into a 'goodies'
+ package, but it is the only tiny one like this, so a 'goodies' package would
+ end up being just this single object anyway.
+ .
+ Since Pd>=0.47, this object can be replaced with the built-in [array size].

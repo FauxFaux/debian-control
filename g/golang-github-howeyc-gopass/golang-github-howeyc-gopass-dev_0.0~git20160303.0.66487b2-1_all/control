@@ -1,0 +1,33 @@
+Package: golang-github-howeyc-gopass-dev
+Source: golang-github-howeyc-gopass
+Version: 0.0~git20160303.0.66487b2-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 24
+Depends: golang-go, golang-golang-x-crypto-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/howeyc/gopass
+Description: getpasswd for Go
+ getpasswd in Go GoDoc (https://godoc.org/github.com/howeyc/gopass) Build
+ Status (http://travis-ci.org/howeyc/gopass) Retrieve password from user
+ terminal or piped input without echo.
+ .
+ Verified on BSD, Linux, and Windows.
+ .
+ Example: ```go package main
+ .
+ import "fmt" import "github.com/howeyc/gopass"
+ .
+ func main() {
+     fmt.Printf("Password: ")
+ // Silent. For printing *'s use gopass.GetPasswdMasked() pass, err :=
+ gopass.GetPasswd() if err != nil {
+     // Handle gopass.ErrInterrupted or getch() read error
+ }
+ .
+ // Do something with pass
+ .
+ } ```
+ .
+ Caution: Multi-byte characters not supported!

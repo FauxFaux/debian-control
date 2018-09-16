@@ -1,0 +1,18 @@
+Package: duplicity
+Version: 0.7.18.1-1
+Architecture: amd64
+Maintainer: Alexander Zangerl <az@debian.org>
+Installed-Size: 1608
+Depends: libc6 (>= 2.4), librsync1 (>= 0.9.6), python (<< 2.8), python (>= 2.7~), python-fasteners, python:any (<< 2.8), python:any (>= 2.7~), python-lockfile (>> 1:0.9), gnupg | gnupg1
+Recommends: rsync, python-paramiko, python-pexpect, python-urllib3, python-oauthlib
+Suggests: python-boto, ncftp, python-cloudfiles, lftp, python-gdata, tahoe-lafs, python-swiftclient, python-pip
+Section: utils
+Priority: optional
+Homepage: http://duplicity.nongnu.org/
+Description: encrypted bandwidth-efficient backup
+ Duplicity backs directories by producing encrypted tar-format volumes
+ and uploading them to a remote or local file server. Because duplicity
+ uses librsync, the incremental archives are space efficient and only
+ record the parts of files that have changed since the last backup.
+ Because duplicity uses GnuPG to encrypt and/or sign these archives, they
+ will be safe from spying and/or modification by the server.

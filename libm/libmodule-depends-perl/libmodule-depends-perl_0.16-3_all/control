@@ -1,0 +1,16 @@
+Package: libmodule-depends-perl
+Version: 0.16-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 34
+Depends: perl, libclass-accessor-chained-perl, perl (>= 5.13.10) | libcpan-meta-perl, libenv-sanctify-perl, libfile-chdir-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Module-Depends
+Description: Perl module to identify the dependencies of a distribution
+ Module::Depends extracts module dependencies from an unpacked
+ distribution tree.
+ .
+ Module::Depends only evaluates the {MY,}META.{json,yml} files shipped with a
+ distribution. This won't be effective until all distributions ship such
+ files, so you should look at Module::Depends::Intrusive.

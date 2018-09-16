@@ -1,0 +1,24 @@
+Package: opensmtpd-extras
+Version: 5.7.1-4
+Architecture: amd64
+Maintainer: Ryan Kavanagh <rak@debian.org>
+Installed-Size: 328
+Depends: libc6 (>= 2.14), libevent-2.1-6 (>= 2.1.8-stable), libhiredis0.13 (>= 0.13.1), libmariadbclient18 (>= 10.1.28), libpq5, libsqlite3-0 (>= 3.5.9), libssl1.1 (>= 1.1.0), opensmtpd
+Enhances: opensmtpd
+Breaks: opensmtpd (<< 5.7.3p1)
+Replaces: opensmtpd (<< 5.7.3p1)
+Section: mail
+Priority: optional
+Homepage: https://opensmtpd.org/
+Description: addons for the OpenSMTPD SMTP server
+ This package provides a subset of addons for OpenSMTPD, including
+ experimental ones. Please see each for a description of additional
+ dependencies.
+  * Tables:
+    + ldap: support lookup against LDAP
+    + mysql: support lookup against MySQL
+    + passwd: support lookup in passwd-format tables
+    + postgres: support lookup against PostgreSQL
+    + redis: support lookup against a Redis server
+    + socketmap: support lookups against sockets
+    + sqlite: support lookup in SQLite tables

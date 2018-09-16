@@ -1,0 +1,28 @@
+Package: cl-trivial-features
+Source: trivial-features
+Version: 20161107.git29ab1da-1
+Architecture: all
+Maintainer: Debian Common Lisp Team <debian-common-lisp@lists.debian.org>
+Installed-Size: 68
+Recommends: cl-rt, cl-cffi, cl-alexandria
+Section: lisp
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.cliki.net/trivial-features
+Description: abstraction layer for the *FEATURES* across Common Lisp implementations
+ trivial-features ensures consistent *FEATURES* across multiple Common
+ Lisp implementations.
+ .
+ For example, on MacOS X platforms, while most Lisps push `:DARWIN` to
+ `*FEATURES*`, CLISP and Allegro push `:MACOS` and `:MACOSX` instead,
+ respectively.  Some Lisps might not push any feature suggesting MacOS
+ X at all.  trivial-features will make sure all Lisps will have
+ `:DARWIN` in the `*FEATURES*` list when running on MacOS X.  This
+ way, you can write
+ .
+    #+darwin foo #-darwin bar
+ .
+ instead of
+ .
+    #+(or darwin macos macosx) foo
+    #-(or darwin macos macosx) bar

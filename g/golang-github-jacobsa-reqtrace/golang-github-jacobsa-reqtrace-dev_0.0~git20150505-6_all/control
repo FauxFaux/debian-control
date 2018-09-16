@@ -1,0 +1,23 @@
+Package: golang-github-jacobsa-reqtrace-dev
+Source: golang-github-jacobsa-reqtrace
+Version: 0.0~git20150505-6
+Architecture: all
+Maintainer: pkg-go <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: golang-golang-x-net-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/jacobsa/reqtrace
+Description: simple request tracing
+ reqtrace is a package for simple request tracing. It requires nothing of its
+ user except:
+ .
+  * They must use golang.org/x/net/context.
+  * They must add a single line to each function they want to be visible in
+    traces.
+ .
+ In particular, reqtrace is console-based and doesn't require an HTTP server.
+ .
+ Warning: This package is still barebones and in its early days. The author
+ reserves the right to make backwards-incompatible changes to its API. But if
+ it's useful to you in your current form, have at it.

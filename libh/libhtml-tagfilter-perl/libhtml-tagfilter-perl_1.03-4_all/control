@@ -1,0 +1,23 @@
+Package: libhtml-tagfilter-perl
+Version: 1.03-4
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 91
+Depends: perl, libhtml-parser-perl, liburi-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/HTML-TagFilter
+Description: fine-grained HTML-filter, XSS-blocker and mailto-obfuscator
+ HTML::TagFilter is a subclass of HTML::Parser with a single purpose: it
+ will remove unwanted HTML tags and attributes from a piece of text. It can
+ act in a more or less fine-grained way: you can specify permitted tags,
+ permitted attributes of each tag, and permitted values for each attribute
+ in as much detail as you like.
+ .
+ Tags which are not allowed are removed. Tags which are allowed are trimmed
+ down to only the attributes which are allowed for each tag. It is possible
+ to allow all or no attributes from a tag, or to allow all or no values for
+ an attribute, and so on.
+ .
+ The filter will also guard against cross-site scripting attacks and
+ obfuscate any mailto:email addresses, unless you tell it not to.

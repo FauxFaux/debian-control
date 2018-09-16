@@ -1,0 +1,30 @@
+Package: golang-github-ngaut-go-zookeeper-dev
+Source: golang-github-ngaut-go-zookeeper
+Version: 0.0~git20150813.0.9c3719e-5
+Architecture: all
+Maintainer: QA Group <packages@qa.debian.org>
+Installed-Size: 93
+Depends: golang-github-samuel-go-zookeeper-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/ngaut/go-zookeeper
+Description: Native ZooKeeper client for Go
+ This package provides a native ZooKeeper (client) library for
+ communicating with ZooKeeper servers.
+ .
+ Example:
+     func main() {
+         c, _, err := zk.Connect([]string{"127.0.0.1"}, time.Second) //*10)
+         if err != nil {
+             panic(err)
+         }
+         children, stat, ch, err := c.ChildrenW("/")
+         if err != nil {
+             panic(err)
+         }
+         fmt.Printf("%+v %+v\n", children, stat)
+         e := <-ch
+         fmt.Printf("%+v\n", e)
+     }
+ .
+ See also: https://godoc.org/github.com/samuel/go-zookeeper/zk

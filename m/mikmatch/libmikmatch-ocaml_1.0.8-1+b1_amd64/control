@@ -1,0 +1,30 @@
+Package: libmikmatch-ocaml
+Source: mikmatch (1.0.8-1)
+Version: 1.0.8-1+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 57
+Depends: libpcre-ocaml-2h5n2, ocaml-base-nox-4.05.0, libtophide-ocaml-dev
+Recommends: ocaml-findlib
+Provides: libmikmatch-ocaml-mlre1
+Section: ocaml
+Priority: optional
+Homepage: https://github.com/mjambon/mikmatch
+Description: camlp4 extension for pattern matching with regexps - runtime
+ Mikmatch provides enhanced pattern matching with regexps for OCaml.
+ .
+ The goal of Mikmatch is to make text-oriented programs even easier to write,
+ read and run without losing the unique and powerful features of OCaml.
+ Mikmatch provides a concise and highly readable syntax for regular
+ expressions, and integrates it into the syntax of OCaml thanks to Camlp4.
+ .
+ The implementation of Mikmatch consists essentially of:
+  * a library which is loaded by the OCaml preprocessor (Camlp4) and
+    defines sophisticated "macros", i.e. the modified syntax;
+  * a traditional library (runtime) which is required by the programs that
+    use the Mikmatch syntax;
+  * a dedicated 'mikmatch' command which can be used as a replacement for
+    'ocaml' in scripts or as an interactive toplevel. It performs automatically
+    these steps: preprocessing, compilation and execution.
+ .
+ This package contains the shared runtime libraries.

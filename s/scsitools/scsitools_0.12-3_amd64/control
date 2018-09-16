@@ -1,0 +1,23 @@
+Package: scsitools
+Version: 0.12-3
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 365
+Depends: libc6 (>= 2.14), sg3-utils (>= 1.24), lsb-base
+Recommends: e2fsprogs
+Suggests: tk
+Conflicts: hwtools (<< 0.6)
+Section: utils
+Priority: optional
+Description: Collection of tools for SCSI hardware management
+ This package is a collection of tools for manipulating SCSI hardware:
+ .
+  scsiinfo: displays SCSI drive low-level information and modifies SCSI
+            drive settings,
+  scsidev: makes permanent SCSI LUN -> devicename connections,
+  scsifmt: low-level SCSI formatter,
+  sraw: benchmarks raw SCSI I/O rates bypassing the buffer cache,
+  scsi-spin: program to manually spin up and down a SCSI device.
+ .
+ Beware that, to be used properly, these tools require some knowledge of
+ what they're doing as they can cause damage to your system.

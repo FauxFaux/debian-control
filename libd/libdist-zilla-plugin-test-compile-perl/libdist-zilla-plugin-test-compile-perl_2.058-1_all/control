@@ -1,0 +1,18 @@
+Package: libdist-zilla-plugin-test-compile-perl
+Version: 2.058-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 55
+Depends: perl, libdata-section-perl, libdist-zilla-perl (>= 4.300039), libmoose-perl, libnamespace-autoclean-perl, libpath-tiny-perl, libsub-exporter-formethods-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Dist-Zilla-Plugin-Test-Compile
+Description: common tests to check syntax of your modules, using only core modules
+ Dist::Zilla::Plugin::Test::Compile is a Dist::Zilla plugin that runs
+ at the gather files (Dist::Zilla::Role::FileGatherer) stage, and
+ creates a test for correct perl file compilation only dependent on
+ core modules.
+ .
+ This test finds all modules and scripts in your distribution and try
+ to compile them one by one. This means it's a bit slower than loading
+ them all at once but it will catch more errors.

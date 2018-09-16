@@ -1,0 +1,21 @@
+Package: opensips-memcached-module
+Source: opensips (2.2.2-3)
+Version: 2.2.2-3+b3
+Architecture: amd64
+Maintainer: Răzvan Crainea <razvan@opensips.org>
+Installed-Size: 182
+Depends: opensips (= 2.2.2-3+b3), libc6 (>= 2.14), libmemcached11
+Section: net
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.opensips.org/
+Description: Interface module to interact with a memcached server
+ OpenSIPS is a very fast and flexible SIP (RFC3261)
+ server. Written entirely in C, OpenSIPS can handle thousands calls
+ per second even on low-budget hardware.
+ .
+ This package provides an implementation of a cache system designed to work
+ with a memcached server. It uses libmemcached client library to connect to
+ several memcached servers that store data. It registers the three functions for
+ storing, fetching and removing a value to the core memcache management
+ interface.

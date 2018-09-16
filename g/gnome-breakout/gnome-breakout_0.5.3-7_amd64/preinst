@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+set -u
+
+if [ "$1" = "upgrade" ] || [ "$1" = "install" ]; then
+    if [ -f /var/games/gnome-breakout.scores ]; then
+        rm /var/games/gnome-breakout.scores
+        rmdir --ignore-fail-on-non-empty /var/games
+    fi
+fi
+
+

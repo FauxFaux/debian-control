@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+PGBINDIR=/usr/lib/postgresql/10/bin
+
+case "$1" in
+  configure)
+    update-alternatives --quiet --install /usr/bin/pg_filedump pg_filedump $PGBINDIR/pg_filedump 100
+    ;;
+esac
+
+

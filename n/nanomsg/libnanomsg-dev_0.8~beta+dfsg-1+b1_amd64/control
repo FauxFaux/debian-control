@@ -1,0 +1,31 @@
+Package: libnanomsg-dev
+Source: nanomsg (0.8~beta+dfsg-1)
+Version: 0.8~beta+dfsg-1+b1
+Architecture: amd64
+Maintainer: Harlan Lieberman-Berg <hlieberman@debian.org>
+Installed-Size: 859
+Depends: libnanomsg4 (= 0.8~beta+dfsg-1+b1)
+Section: libdevel
+Priority: optional
+Homepage: http://nanomsg.org/
+Description: nanomsg development files
+ nanomsg is a socket library that provides several common
+ communication patterns. It aims to make the networking layer fast,
+ scalable, and easy to use. Implemented in C, it works on a wide range
+ of operating systems with no further dependencies.
+ .
+ The communication patterns, also called "scalability protocols", are
+ basic blocks for building distributed systems. By combining them you
+ can create a vast array of distributed applications. The following
+ scalability protocols are currently available:
+ .
+    PAIR - simple one-to-one communication
+    BUS - simple many-to-many communication
+    REQREP - allows one to build clusters of stateless services
+             to process user requests
+    PUBSUB - distributes messages to large sets of interested subscribers
+    PIPELINE - aggregates messages from multiple sources and
+               load balances them among many destinations
+    SURVEY - allows one to query state of multiple applications in a single go
+ .
+ This package contains the development files for nanomsg.

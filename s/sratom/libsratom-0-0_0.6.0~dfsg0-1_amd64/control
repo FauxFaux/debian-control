@@ -1,0 +1,20 @@
+Package: libsratom-0-0
+Source: sratom
+Version: 0.6.0~dfsg0-1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 55
+Depends: libc6 (>= 2.14), libserd-0-0 (>= 0.24.0~dfsg0), libsord-0-0 (>= 0.12.0~dfsg0)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://drobilla.net/software/sratom/
+Description: library for serialising LV2 atoms to/from Turtle
+ Sratom is a new C library for serialising LV2 atoms to/from Turtle.
+ It is intended to be a full serialisation solution for LV2 atoms,
+ allowing implementations to serialise binary atoms to strings and
+ read them back again. This is particularly useful for saving plugin
+ state, or implementing plugin control with network transparency.
+ Sratom uses Serd and Sord to do the work, it is a small library
+ implemented in a single source file, suitable for direct inclusion
+ in projects if avoiding a dependency is desired.

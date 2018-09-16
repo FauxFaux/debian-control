@@ -1,0 +1,25 @@
+Package: mailutils-pop3d
+Source: mailutils (1:3.4-1)
+Version: 1:3.4-1+b1
+Architecture: amd64
+Maintainer: Jordi Mallach <jordi@debian.org>
+Installed-Size: 548
+Depends: mailutils-common (= 1:3.4-1), netbase, update-inetd, libc6 (>= 2.14), libgnutls30 (>= 3.5.0), libgsasl7 (>= 1.1), libkyotocabinet16v5 (>= 1.2.76), libldap-2.4-2 (>= 2.4.7), libmailutils5, libpam0g (>= 0.99.7.1), libwrap0 (>= 7.6-4~)
+Conflicts: pop3-server
+Provides: pop3-server
+Section: net
+Priority: optional
+Homepage: https://www.gnu.org/software/mailutils/
+Description: GNU mailutils-based POP3 Daemon
+ GNU Mailutils is a rich and powerful protocol-independent mail framework.
+ It contains a series of useful mail libraries, clients, and servers.
+ .
+ The GNU mailutils POP3 daemon supports the basic POP3 protocol with the
+ CAPA, RESP-CODES, PIPELINING and UIDL extensions. It also supports APOP
+ authentication. The user credentials for APOP can be stored in a variety
+ of DBM formats. It is able to get the authentication information from
+ the system user database as well as from a SQL database of arbitrary
+ structure. The PAM framework can also be used for authentication
+ purposes. Additionally, mailutils pop3d supports virtual mail domains and
+ has TLS support via GNUtls. GNU mailutils supports the mbox, MH and
+ Maildir mailbox formats.

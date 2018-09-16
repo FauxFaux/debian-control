@@ -1,0 +1,16 @@
+#! /bin/sh
+set -e
+
+# Delete symlink that will be replaced by a directory
+for dir in \
+	/usr/share/spip/squelettes-dist \
+	/usr/share/spip/plugins-dist/jquery_ui/css
+do
+	if [ -L $dir ]; then
+		rm $dir 2>/dev/null
+	fi
+done
+
+
+
+exit 0

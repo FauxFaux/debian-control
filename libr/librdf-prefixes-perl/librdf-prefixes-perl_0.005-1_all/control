@@ -1,0 +1,22 @@
+Package: librdf-prefixes-perl
+Version: 0.005-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 33
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/RDF-Prefixes
+Description: simple way to turn URIs into QNames
+ Resource Description Framework (RDF) is a standard model for data
+ interchange on the Web.
+ .
+ RDF::Prefixes is not so much for managing namespaces/prefixes in code
+ (see RDF::Trine::NamespaceMap for that), but as a helper for code that
+ serialises data using namespaces.
+ .
+ It generates pretty prefixes, reducing "http://purl.org/dc/terms/" to
+ "dc" rather than something too generic like "ns01", and provides a
+ context for keeping track of namespaces already used, so that when
+ "http://purl.org/dc/elements/1.1/" is encountered, it won't stomp on
+ the previous definition of "dc".

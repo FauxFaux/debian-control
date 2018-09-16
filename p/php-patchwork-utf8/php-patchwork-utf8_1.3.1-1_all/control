@@ -1,0 +1,57 @@
+Package: php-patchwork-utf8
+Version: 1.3.1-1
+Architecture: all
+Maintainer: Debian PHP PEAR Maintainers <pkg-php-pear@lists.alioth.debian.org>
+Installed-Size: 3540
+Depends: php-common, libpcre3 (>= 7.3)
+Suggests: php-wfio, php-intl, php-mbstring
+Section: php
+Priority: optional
+Homepage: https://github.com/tchwork/utf8
+Description: UTF-8 strings handling for PHP
+ Patchwork UTF-8 provides both a portability layer for mbstring, iconv, and
+ intl Normalizer and grapheme_* functions, and an UTF-8 grapheme clusters
+ aware replica of native string functions.
+ .
+ Patchwork UTF-8 provides pure PHP implementations for mbstring, iconv, and
+ intl. The following set of portability-fallbacks allows an application to run
+ on a server even if one or more of those extensions are not enabled:
+ .
+  * utf8_encode, utf8_decode,
+  * mbstring: mb_check_encoding, mb_convert_case, mb_convert_encoding,
+    mb_convert_variables, mb_decode_mimeheader, mb_detect_encoding,
+    mb_detect_order, mb_encode_mimeheader, mb_encoding_aliases, mb_get_info,
+    mb_http_input, mb_http_output, mb_internal_encoding, mb_language,
+    mb_list_encodings, mb_output_handler, mb_strlen, mb_strpos, mb_strrpos,
+    mb_strtolower, mb_strtoupper, mb_stripos, mb_stristr, mb_strrchr,
+    mb_strrichr, mb_strripos, mb_strstr, mb_strwidth, mb_substitute_character,
+    mb_substr, mb_substr_count,
+  * iconv: iconv, iconv_mime_decode, iconv_mime_decode_headers,
+    iconv_get_encoding, iconv_set_encoding, iconv_mime_encode,
+    ob_iconv_handler, iconv_strlen, iconv_strpos, iconv_strrpos, iconv_substr,
+  * intl: Normalizer, grapheme_extract, grapheme_stripos, grapheme_stristr,
+    grapheme_strlen, grapheme_strpos, grapheme_strripos, grapheme_strrpos,
+    grapheme_strstr, grapheme_substr.
+ .
+ The Patchwork\Utf8 class implements the quasi-complete set of native string
+ functions that need UTF-8 grapheme clusters awareness. Function names,
+ arguments and behavior carefully replicates native PHP string functions.
+ .
+ Some more functions are also provided to help handling UTF-8 strings:
+  * filter(): normalizes to UTF-8 NFC, converting from CP-1252 when needed,
+  * isUtf8(): checks if a string contains well formed UTF-8 data,
+  * toAscii(): generic UTF-8 to ASCII transliteration,
+  * strtocasefold(): unicode transformation for caseless matching,
+  * strtonatfold(): generic case sensitive transformation for collation
+    matching,
+  * strwidth(): computes the width of a string when printed on a terminal,
+  * wrapPath(): unicode filesystem access under Windows and other OSes.
+ .
+ Mirrored string functions are: strlen, substr, strpos, stripos, strrpos,
+ strripos, strstr, stristr, strrchr, strrichr, strtolower, strtoupper,
+ wordwrap, chr, count_chars, ltrim, ord, rtrim, trim, str_ireplace, str_pad,
+ str_shuffle, str_split, str_word_count, strcmp, strnatcmp, strcasecmp,
+ strnatcasecmp, strncasecmp, strncmp, strcspn, strpbrk, strrev, strspn, strtr,
+ substr_compare, substr_count, substr_replace, ucfirst, lcfirst, ucwords,
+ number_format, utf8_encode, utf8_decode, json_decode,
+ filter_input, filter_input_array.

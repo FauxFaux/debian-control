@@ -1,0 +1,22 @@
+Package: argus-server
+Source: argus (2:3.0.8.2-1)
+Version: 2:3.0.8.2-1+b1
+Architecture: amd64
+Maintainer: Michael Stone <mstone@debian.org>
+Installed-Size: 513
+Depends: libc6 (>= 2.15), libpcap0.8 (>= 1.0.0), libwrap0 (>= 7.6-4~), zlib1g (>= 1:1.1.4), logrotate, net-tools
+Recommends: argus-client
+Section: net
+Priority: optional
+Description: IP network transaction auditing tool
+ argus is a network transaction auditing tool that allows the user
+ to easily classify connections using tcpdump(1) compliant expressions.
+ Argus runs as an application level daemon, promiscuously reading network
+ datagrams from a specified interface, and generates network traffic audit
+ records for the network activity that it encounters.
+ Auditing records can be used to ensure that access control policies are
+ being enforced, identify network problems such as denial of service attacks
+ and more.
+ .
+ This package contains the binaries required for the argus server.
+ Please see the package argus-client for appropriate clients.

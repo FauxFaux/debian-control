@@ -1,0 +1,22 @@
+Package: yaskkserv
+Version: 1.1.0-2
+Architecture: amd64
+Maintainer: KURASHIKI Satoru <lurdan@gmail.com>
+Installed-Size: 255
+Depends: skkdic, lsb-base, libc6 (>= 2.15), libgcc1 (>= 1:3.0), libgnutls-openssl27 (>= 3.0-0), libgnutls30 (>= 3.5.0), libstdc++6 (>= 4.1.1), libsystemd0, init-system-helpers (>= 1.18~)
+Recommends: skkdic-extra
+Enhances: ddskk, ibus-skk, scim-skk, uim-skk
+Conflicts: skkinput, skkserv
+Replaces: skkserv
+Provides: skkserv
+Section: utils
+Priority: extra
+Homepage: http://umiushi.org/~wac/yaskkserv/
+Description: small and fast SKK dictionary server intended for embedded use
+ yaskkserv is a dictionary server for the SKK Japanese input method
+ system. yaskkserv is written in C++ from scratch in consideration of
+ embedded environment, but is compatible with skkserv on the protocol
+ behavior.
+ .
+ yaskkserv can use multiple dictionaries and also supports server
+ completion.

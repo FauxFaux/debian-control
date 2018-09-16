@@ -1,0 +1,16 @@
+Package: python-faulthandler
+Source: faulthandler
+Version: 2.4-1
+Architecture: amd64
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: python (<< 2.8), python (>= 2.7~), python:any (<< 2.8), python:any (>= 2.7~), libc6 (>= 2.4)
+Provides: python2.7-faulthandler
+Section: python
+Priority: optional
+Homepage: https://faulthandler.readthedocs.io/
+Description: Display the Python backtrace on a crash
+ Fault handler for SIGSEGV, SIGFPE, SIGBUS and SIGILL signals: it displays
+ the Python backtrace and restores the previous handler. It allocates an
+ alternate stack for this handler, if signaltstack() is available, to be
+ able to allocate memory on the stack, even on stack overflow.

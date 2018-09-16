@@ -1,0 +1,21 @@
+Package: python3-gpyfft-dbg
+Source: gpyfft (0.7.0-1)
+Version: 0.7.0-1+b1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 1061
+Depends: python3-dbg (<< 3.8), python3-gpyfft (= 0.7.0-1+b1), python3-numpy-dbg, python3-pyopencl-dbg, python3-numpy (>= 1:1.14.3), python3-numpy-abi9, python3-dbg (>= 3.6~), python3-dbg:any (>= 3.2~), libc6 (>= 2.4), libclfft2
+Suggests: python-gpyfft-doc
+Section: debug
+Priority: optional
+Homepage: https://github.com/geggo/gpyfft
+Description: Wrapper for the OpenCL FFT library clFFT (Python 3 debug)
+ This python wrapper is designed to tightly integrate with
+ PyOpenCL. It consists of a low-level Cython based wrapper with an
+ interface similar to the underlying C library. On top of that it
+ offers a high-level interface designed to work on data contained in
+ instances of pyopencl.array.Array, a numpy work-alike array class for
+ GPU computations. The high-level interface takes some inspiration
+ from pyFFTW. For details of the high-level interface see fft.py.
+ .
+ This package installs the library for Python 3 debug.

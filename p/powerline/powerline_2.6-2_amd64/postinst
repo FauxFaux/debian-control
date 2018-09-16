@@ -1,0 +1,44 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+	configure)
+		. /usr/share/debconf/confmodule
+
+		db_get powerline/enable
+		POWERLINE_ENABLE="${RET}" # boolean
+
+		db_stop
+
+		case "${POWERLINE_ENABLE}" in
+			true)
+				ln -sf /usr/share/powerline/integrations/powerline.sh /etc/profile.d/zz-powerline.sh
+				;;
+
+			false)
+				rm -f /etc/profile.d/zz-powerline.sh
+				;;
+		esac
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p powerline /usr/share/powerline
+fi
+
+# End automatically added section
+
+
+exit 0

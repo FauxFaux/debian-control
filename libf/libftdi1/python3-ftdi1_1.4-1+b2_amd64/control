@@ -1,0 +1,21 @@
+Package: python3-ftdi1
+Source: libftdi1 (1.4-1)
+Version: 1.4-1+b2
+Architecture: amd64
+Maintainer: Aurelien Jarno <aurel32@debian.org>
+Installed-Size: 522
+Depends: libc6 (>= 2.14), libftdi1-2 (>= 1.4), libusb-1.0-0 (>= 2:1.0.8), python3 (<< 3.8), python3 (>= 3.6~), python3:any (>= 3.3.2-2~)
+Provides: python3.6-ftdi1, python3.7-ftdi1
+Section: python
+Priority: optional
+Homepage: https://www.intra2net.com/en/developer/libftdi/
+Description: Python module to control and program the FTDI USB controllers
+ This library could talk to FTDI's FT232BM, FT245BM, FT2232C, FT2232D, FT245R,
+ FT232H and FT230X type USB chips from userspace. It uses libusb 1.0 to
+ communicate with the chips.
+ .
+ Functionalities include the possibility to use the chips in standard
+ mode, in bitbang mode, and to read or write the serial EEPROM.
+ .
+ This package provides the ftdi1 module on the Python 3 module path. It
+ is complemented by python-ftdi1.

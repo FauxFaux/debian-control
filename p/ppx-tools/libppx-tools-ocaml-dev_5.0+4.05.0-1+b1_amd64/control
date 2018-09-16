@@ -1,0 +1,28 @@
+Package: libppx-tools-ocaml-dev
+Source: ppx-tools (5.0+4.05.0-1)
+Version: 5.0+4.05.0-1+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 9094
+Depends: libc6 (>= 2.2.5), ocaml-nox-4.05.0
+Recommends: ocaml-findlib
+Provides: libppx-tools-ocaml-dev-fby09
+Section: ocaml
+Priority: optional
+Homepage: https://github.com/alainfrisch/ppx_tools
+Description: tools for authors of OCaml syntactic tools
+ This package includes tools for authors of syntactic tools (such as
+ ppx rewriters):
+  * ppx_metaquot: a ppx filter to help writing programs which
+    manipulate the Parsetree, by allowing the programmer to use
+    concrete syntax for expressions creating Parsetree fragments and
+    patterns deconstructing Parsetree fragments;
+  * rewriter: a utility to help testing ppx rewriters that runs the
+    rewriter on user-provided code and returns the result;
+  * Ast_mapper_class: a generic mapper from Parsetree to Parsetree
+    implementing a deep identity copy, which can be customized with a
+    custom behavior for each syntactic category;
+  * dumpast: parses fragments of OCaml code (or entire source files)
+    and dump the resulting internal Parsetree representation;
+  * genlifter: generates a virtual "lifter" class for one or several
+    OCaml type constructors.

@@ -1,0 +1,34 @@
+Package: ea-utils
+Version: 1.1.2+dfsg-5
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 724
+Depends: libc6 (>= 2.27), libgcc1 (>= 1:3.0), libgsl23, libgslcblas0, libstdc++6 (>= 5.2), zlib1g (>= 1:1.2.3.3), r-base-core, r-cran-getopt, r-cran-hmisc, r-cran-lattice, r-cran-survival, r-cran-formula, r-cran-ggplot2
+Recommends: med-config (>= 2.1)
+Section: science
+Priority: optional
+Homepage: https://expressionanalysis.github.io/ea-utils/
+Description: command-line tools for processing biological sequencing data
+ Ea-utils provides a set of command-line tools for processing biological
+ sequencing data, barcode demultiplexing, adapter trimming, etc.
+ .
+ Primarily written to support an Illumina based pipeline - but should work with
+ any FASTQs.
+ .
+ Main Tools are:
+ .
+  * fastq-mcf
+ Scans a sequence file for adapters, and, based on a log-scaled threshold,
+ determines a set of clipping parameters and performs clipping. Also does
+ skewing detection and quality filtering.
+  * fastq-multx
+ Demultiplexes a fastq. Capable of auto-determining barcode id's based on a
+ master set fields. Keeps multiple reads in-sync during demultiplexing. Can
+ verify that the reads are in-sync as well, and fail if they're not.
+  * fastq-join
+ Similar to audy's stitch program, but in C, more efficient and supports some
+ automatic benchmarking and tuning. It uses the same "squared distance for
+ anchored alignment" as other tools.
+  * varcall
+ Takes a pileup and calculates variants in a more easily parameterized manner
+ than some other tools.

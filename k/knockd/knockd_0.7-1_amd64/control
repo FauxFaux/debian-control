@@ -1,0 +1,17 @@
+Package: knockd
+Version: 0.7-1
+Architecture: amd64
+Maintainer: Leo Antunes <costela@debian.org>
+Installed-Size: 89
+Depends: libc6 (>= 2.14), libpcap0.8 (>= 0.9.8), logrotate, lsb-base (>= 3.0-6)
+Section: net
+Priority: optional
+Homepage: http://www.zeroflux.org/projects/knock
+Description: small port-knock daemon
+ A port-knock server that listens to all traffic on a given network
+ interface (only Ethernet and PPP are currently supported), looking for
+ a special "knock" sequences of port-hits. A remote system
+ makes these port-hits by sending a TCP (or UDP) packet to a port on the
+ server. When the server detects a specific sequence of port-hits, it
+ runs a command defined in its configuration file. This can be used to
+ open up holes in a firewall for quick access.

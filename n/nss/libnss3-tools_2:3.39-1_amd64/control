@@ -1,0 +1,22 @@
+Package: libnss3-tools
+Source: nss
+Version: 2:3.39-1
+Architecture: amd64
+Maintainer: Maintainers of Mozilla-related packages <team+pkg-mozilla@tracker.debian.org>
+Installed-Size: 4275
+Depends: libc6 (>= 2.14), libnspr4 (>= 2:4.12), libnss3 (>= 2:3.39), libsqlite3-0 (>= 3.5.9), zlib1g (>= 1:1.1.4)
+Section: admin
+Priority: optional
+Homepage: http://www.mozilla.org/projects/security/pki/nss/tools/
+Description: Network Security Service tools
+ This is a set of tools on top of the Network Security Service libraries.
+ This package includes:
+  * certutil: manages certificate and key databases (cert7.db and key3.db)
+  * modutil: manages the database of PKCS11 modules (secmod.db)
+  * pk12util: imports/exports keys and certificates between the cert/key
+    databases and files in PKCS12 format.
+  * shlibsign: creates .chk files for use in FIPS mode.
+  * signtool: creates digitally-signed jar archives containing files and/or
+    code.
+  * ssltap: proxy requests for an SSL server and display the contents of
+    the messages exchanged between the client and server.

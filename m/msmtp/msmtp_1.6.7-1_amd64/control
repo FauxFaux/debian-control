@@ -1,0 +1,19 @@
+Package: msmtp
+Version: 1.6.7-1
+Architecture: amd64
+Maintainer: Emmanuel Bouthenot <kolter@debian.org>
+Installed-Size: 303
+Depends: libc6 (>= 2.22), libgnutls30 (>= 3.5.6), libgsasl7 (>= 1.1), debconf (>= 0.5) | debconf-2.0, ucf
+Recommends: ca-certificates
+Suggests: msmtp-mta
+Section: mail
+Priority: optional
+Homepage: https://marlam.de/msmtp/
+Description: light SMTP client with support for server profiles
+ msmtp is an SMTP client that can be used to send mails from Mutt and probably
+ other MUAs (mail user agents). It forwards mails to an SMTP server (for
+ example at a free mail provider), which takes care of the final delivery.
+ Using profiles, it can be easily configured to use different SMTP servers
+ with different configurations, which makes it ideal for mobile clients.
+ .
+ This package is compiled with GSASL and TLS/SSL support.

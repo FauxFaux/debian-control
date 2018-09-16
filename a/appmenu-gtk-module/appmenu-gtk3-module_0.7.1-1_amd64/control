@@ -1,0 +1,24 @@
+Package: appmenu-gtk3-module
+Source: appmenu-gtk-module
+Version: 0.7.1-1
+Architecture: amd64
+Maintainer: Ayatana Packagers <pkg-ayatana-devel@lists.alioth.debian.org>
+Installed-Size: 55
+Depends: libappmenu-gtk3-parser0 (>= 0.7.1-1), libc6 (>= 2.4), libglib2.0-0 (>= 2.50.0), libgtk-3-0 (>= 3.22.0), appmenu-gtk-module-common (>= 0.7.1-1)
+Conflicts: appmenu-gtk3
+Replaces: appmenu-gtk3
+Provides: appmenu-gtk3
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/rilian-la-te/vala-panel-appmenu/tree/master/subprojects/appmenu-gtk-module
+Description: GtkMenuShell D-Bus exporter (GTK+3.0)
+ GTK+ module for exporting old-style menus as GMenuModels.
+ .
+ Many applications implement menus as GtkMenuShells and GtkMenuItems and
+ aren't looking to migrate to the newer GMenuModel API.
+ .
+ The AppMenu GTK+ module watches for these types of menus and exports the
+ appropriate GMenuModel implementation.
+ .
+ This package contains the GTK+3.0 AppMenu module.

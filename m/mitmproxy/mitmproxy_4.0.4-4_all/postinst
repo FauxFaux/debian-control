@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p mitmproxy 
+fi
+
+# End automatically added section
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper dir_to_symlink /usr/lib/python3.5/dist-packages/mitmproxy/addons/onboarding/static/fontawesome ../../../../../../share/fonts-font-awesome 1.0.2+dfsg-1~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper dir_to_symlink /usr/lib/python3.5/dist-packages/mitmproxy/tools/web/static/fonts ../../../../../../share/fonts-font-awesome/fonts 1.0.2+dfsg-1~ -- "$@"
+# End automatically added section

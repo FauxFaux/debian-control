@@ -1,0 +1,17 @@
+Package: perlbrew
+Version: 0.84-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 165
+Depends: perl (>= 5.23.7), curl | wget, gcc, libc6-dev | libc-dev, libcapture-tiny-perl (>= 0.36), libcpan-perl-releases-perl (>= 3.66), libdevel-patchperl-perl (>= 1.52), liblocal-lib-perl (>= 2.000014), make
+Recommends: perl-doc
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/App-perlbrew
+Description: script to manage perl installations in your $HOME
+ perlbrew is a program to automate the building and installation of perl
+ in the users HOME. At the moment, it installs everything to ~/perl5/perlbrew,
+ and requires you to tweak your PATH by including a bashrc/cshrc file it
+ provides, in your shell configuration file. You then can benefit from not
+ having to run 'sudo' commands to install cpan modules because those are
+ installed inside your HOME too. It's a completely separate perl environment.

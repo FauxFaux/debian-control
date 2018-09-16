@@ -1,0 +1,23 @@
+Package: scalapack-mpi-test
+Source: scalapack (2.0.2-7)
+Version: 2.0.2-7+b1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 19406
+Depends: scalapack-test-common, libblas3 | libblas.so.3, libc6 (>= 2.4), libgcc1 (>= 1:4.0), libgfortran5 (>= 8), liblapack3 | liblapack.so.3, libmpich12, libopenmpi3, libscalapack-mpich2.0, libscalapack-openmpi2.0
+Recommends: cmake
+Suggests: scalapack-doc
+Conflicts: scalapack-mpich-test
+Replaces: blacs-mpi-test, scalapack-mpich-test
+Provides: blacs-mpi-test, scalapack-mpich-test
+Section: math
+Priority: optional
+Homepage: http://www.netlib.org/scalapack/
+Description: Scalable Linear Algebra Package - Test files for MPI
+ ScaLAPACK is the parallel version of LAPACK used on clusters.
+ .
+ Also included:
+    - PBLAS, Parallel Basic Linear Algebra Subprograms
+    - BLACS, Basic Linear Algebra Communication Subprograms
+ .
+ This package contains ScaLAPACK, PBLAS and BLACS test programs.

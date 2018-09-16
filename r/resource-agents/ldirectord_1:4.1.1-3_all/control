@@ -1,0 +1,15 @@
+Package: ldirectord
+Source: resource-agents
+Version: 1:4.1.1-3
+Architecture: all
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Installed-Size: 246
+Depends: ipvsadm, lsb-base, libauthen-radius-perl, libcrypt-ssleay-perl, libdbi-perl, libdigest-hmac-perl, libdigest-md5-perl, libio-socket-inet6-perl, libmail-pop3client-perl, libmailtools-perl, libnet-dns-perl, libnet-imap-simple-perl, libnet-imap-simple-ssl-perl, libnet-ldap-perl, libnet-perl, libsocket6-perl, libwww-perl, perl:any
+Recommends: logrotate, rsyslog | system-log-daemon
+Conflicts: libpils0 (<< 2.0.8-3), libstonith0 (<< 2.0.8-3), stonith (<< 2.0.8-3)
+Section: admin
+Priority: optional
+Homepage: https://github.com/ClusterLabs/resource-agents
+Description: Monitors virtual services provided by LVS
+ ldirectord is a stand-alone daemon to monitor real servers behind
+ virtual services provided by The Linux Virtual Server (LVS).

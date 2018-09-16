@@ -1,0 +1,29 @@
+Package: python-jpy
+Source: jpy
+Version: 0.9.0-2
+Architecture: amd64
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 197
+Depends: libc6 (>= 2.14), python (<< 2.8), python (>= 2.7~), python:any (<< 2.8), python:any (>= 2.7.5-5~), default-jre | java7-runtime-headless
+Provides: python2.7-jpy
+Section: python
+Priority: optional
+Homepage: https://github.com/bcdev/jpy.git
+Description: Bi-directional Python-Java bridge
+ jpy is a **bi-directional** Python-Java bridge which you can use to embed
+ Java code in Python programs or the other way round.
+ It has been designed particularly with regard to maximum
+ data transfer speed between the two languages.
+ It comes with a number of outstanding features:
+ .
+  * Fully translates Java class hierarchies to Python
+  * Transparently handles Java method overloading
+  * Support of Java multi-threading
+  * Fast and memory-efficient support of primitive Java array parameters via
+   `Python buffers <http://docs.python.org/3.3/c-api/buffer.html>`_
+  * Support of Java methods that modify primitive Java array parameters
+     (mutable parameters)
+  * Java arrays translate into Python sequence objects
+  * Java API for accessing Python objects (``jpy.jar``)
+ .
+ This package provides the Python interface.

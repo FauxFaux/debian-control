@@ -1,0 +1,26 @@
+Package: yorick-yao
+Version: 5.4.0-1
+Architecture: amd64
+Maintainer: Debian Astronomy Maintainers <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 2202
+Depends: yorick (>= 2.1.05), libc6 (>= 2.4), libfftw3-single3, yorick-imutil (>= 0.5.3), yorick-yutils (>= 1.3.0), python-glade2, python
+Section: science
+Priority: extra
+Homepage: http://www.maumae.net/yao/
+Description: Yorick-based adaptive optics system simulator
+ Yao is a monte-carlo simulation package for adaptive optics. It can
+ be used stand-alone through a GTK-based integrated graphical user
+ interface or as a Yorick language extension. Yao features:
+   * Shack-Hartmann and Curvature WFS, on or off axis;
+   * support for Stackarray (piezostack), curvature (bimorph), modal
+     (zernike) and Tip-Tilt deformable mirrors. The altitude of
+     conjugation is adjustable;
+   * arbitrary number of WFSs and DMs, with the possibility of mixing
+     types. It is therefore possible (and easy) to simulate single DM
+     systems, as well as single non-zero conjugate, GLAO and MCAO
+     systems;
+   * support for Natural and Laser Guide Stars (or a mix), WFS with
+     photon and read-out noise;
+   * multi-layered atmospheric model with geometrical propagation
+     only;
+   * speed-optimized loop: critical routines have been coded in C.

@@ -1,0 +1,38 @@
+Package: libserd-0-0
+Source: serd
+Version: 0.28.0~dfsg0-1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 112
+Depends: libc6 (>= 2.14)
+Suggests: serdi
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://drobilla.net/software/serd/
+Description: lightweight RDF syntax library
+ Serd is a lightweight C library for RDF syntax which supports reading
+ and writing Turtle and NTriples.
+ .
+ Serd is not intended to be a swiss-army knife of RDF syntax, but rather
+ is suited to resource limited applications, or situations where a simple
+ reader/writer with minimal dependencies is ideal (e.g. in LV2 hosts or
+ plugins).
+ .
+ Serd is:
+  * small: Serd is implemented in under 2500 lines1 of standard C code.
+  * portable and dependency-free: Serd uses only the C standard library,
+    and has no external dependencies, making it a lightweight dependency
+    in every sense.
+  * fast and lightweight: Serd (and the included serdi tool) can be used
+    to stream abbreviated Turtle (unlike many other tools which can not
+    stream since they must first build an internal model to abbreviate).
+    In other words, Serd can re-serialise an unbounded amount of Turtle
+    using a fixed amount of memory, preserving the abbreviations in the
+    input.
+  * conformant and well-tested: Serd is written to the Turtle, NTriples
+    and URI specifications, and includes a comprehensive test suite which
+    includes all the normative examples from the Turtle specification, all
+    the "normal" examples from the URI specification, and additional tests
+    added specifically for Serd. The test suite has over 96% code coverage
+    (by line), and runs with zero memory errors or leaks.

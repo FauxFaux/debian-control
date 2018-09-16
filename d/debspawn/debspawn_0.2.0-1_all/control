@@ -1,0 +1,19 @@
+Package: debspawn
+Version: 0.2.0-1
+Architecture: all
+Maintainer: Matthias Klumpp <mak@debian.org>
+Installed-Size: 111
+Depends: debootstrap, systemd-container, zstd, python3:any (>= 3.5~)
+Recommends: build-essential
+Suggests: sudo
+Section: utils
+Priority: optional
+Homepage: https://github.com/lkorigin/debspawn
+Description: Build in nspawn containers
+ Debspawn is a tool to build Debian packages in an isolated environment,
+ using systemd-nspawn containers.
+ By using containers, debspawn can isolate package builds from the host
+ system much further, compared to traditional chroot-based build environments.
+ .
+ Debspawn is designed to be both easy to use by humans, as well as easy
+ to integrate into an automated package build workflow.

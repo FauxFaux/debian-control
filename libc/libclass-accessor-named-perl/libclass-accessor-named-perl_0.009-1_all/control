@@ -1,0 +1,22 @@
+Package: libclass-accessor-named-perl
+Version: 0.009-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 22
+Depends: perl, libclass-accessor-perl, libhook-lexwrap-perl, libsub-name-perl, libuniversal-require-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Class-Accessor-Named
+Description: module to better profiling output for Class::Accessor
+ Class::Accessor is a great way to automate the tedious task of generating
+ accessors and mutators. One small drawback is that due to the details of
+ the implemenetation, you only get one __ANON__ entry in profiling output.
+ That entry contains all your accessors, which can be a real pain if you're
+ attempting to figure out which of your accessors is being called six billion
+ times.
+ .
+ Class::Accessor::Named is a development aid which uses Hook::LexWrap and
+ Sub::Name to talk your accessors into identifying themselves. While it
+ shouldn't add much additional runtime overhead (as it acts only
+ Class::Accessor's generator functions), it has not been designed for
+ production deployment.

@@ -1,0 +1,24 @@
+Package: cups-bsd
+Source: cups
+Version: 2.2.8-5
+Architecture: amd64
+Maintainer: Debian Printing Team <debian-printing@lists.debian.org>
+Installed-Size: 127
+Depends: libc6 (>= 2.4), libcups2 (= 2.2.8-5), debconf (>= 0.5) | debconf-2.0, cups-client (= 2.2.8-5), cups-common (>= 2.2.8-5)
+Suggests: cups, inetutils-inetd | inet-superserver, update-inetd
+Conflicts: lpr, lprng
+Replaces: lpr
+Provides: lpr
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.cups.org/
+Description: Common UNIX Printing System(tm) - BSD commands
+ The Common UNIX Printing System (or CUPS(tm)) is a printing system and
+ general replacement for lpr, lpd and the like.  It supports the
+ Internet Printing Protocol (IPP), and has its own filtering driver
+ model for handling various document types.
+ .
+ This package provides the BSD commands for interacting with CUPS.  It
+ is provided separately to allow CUPS to coexist with other printing
+ systems (to a small degree).

@@ -1,0 +1,22 @@
+Package: ganeti-os-noop
+Version: 0.2-4
+Architecture: all
+Maintainer: Debian Ganeti Team <ganeti-os-noop@packages.debian.org>
+Installed-Size: 20
+Enhances: ganeti
+Section: admin
+Priority: optional
+Homepage: https://github.com/grnet/ganeti-os-noop
+Description: Dummy no-op OS provider for Ganeti
+ Ganeti is a virtual server cluster management software tool built on top
+ of the Xen and KVM virtualization technologies and other Free Software.
+ After setting it up it will provide you with an automated environment to
+ manage highly available virtual machine instances.
+ .
+ This package provides a no-op OS for Ganeti. If virtual machines use this
+ no-op OS, then a "Reinstall" action in Ganeti will not have any effect,
+ virtual machines will not be re-installed (i.e., wiped) if a reinstall
+ action is requested via gnt-instance.
+ .
+ Setting the OS of an instance to "no-op" is ideal for virtual machines
+ that have been installed from ISO CD/DVD image.

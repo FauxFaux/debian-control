@@ -1,0 +1,30 @@
+Package: python3-pyfftw
+Source: pyfftw (0.10.4+dfsg1-3)
+Version: 0.10.4+dfsg1-3+b1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 572
+Depends: python3-numpy (>= 1:1.14.3), python3-numpy-abi9, python3 (<< 3.8), python3 (>= 3.6~), python3:any (>= 3.3.2-2~), libc6 (>= 2.4), libfftw3-double3 (>= 3.3.5), libfftw3-long3 (>= 3.3.5), libfftw3-single3 (>= 3.3.5)
+Conflicts: python3-fftw3
+Replaces: python3-fftw3
+Provides: python3-fftw3
+Section: python
+Priority: optional
+Homepage: http://hgomersall.github.io/pyFFTW/
+Description: Pythonic wrapper around FFTW - Python 3
+ Pythonic wrapper around FFTW, the speedy FFT library. The ultimate
+ aim is to present a unified interface for all the possible transforms
+ that FFTW can perform.
+ .
+ Both the complex DFT and the real DFT are supported, as well as
+ arbitrary axes of abitrary shaped and strided arrays, which makes it
+ almost feature equivalent to standard and real FFT functions of
+ numpy.fft (indeed, it supports the clongdouble dtype which numpy.fft
+ does not).
+ .
+ pyFFTW is BSD-licensed and should not be confused with python-fftw, a
+ GPL-licensed python module with the same aim of providing python
+ bindings to FFTW3. Or python3-gpyfft, which provides bindings to the
+ OpenCL FFT library clFFT.
+ .
+ This package provides the Python 3 bindings.

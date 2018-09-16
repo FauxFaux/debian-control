@@ -1,0 +1,19 @@
+Package: libxml-sax-expat-incremental-perl
+Version: 0.05-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 24
+Depends: perl, libxml-parser-perl, libxml-sax-expat-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/XML-SAX-Expat-Incremental/
+Description: XML::SAX::Expat subclass for non-blocking (incremental) parsing
+ Most XML parsers give a callback interface within an encapsulated loop and
+ eventually, when the XML source is depleted by the parser, the parse function
+ will return.
+ .
+ Sometimes you don't want the parser to control the loop for you. For example,
+ if you need to retrieve your XML in chunks in a funny way, you might need to
+ use a kind of iterator to get your XML data.
+ .
+ This module provides this possibility.

@@ -1,0 +1,23 @@
+Package: poppler-data
+Version: 0.4.9-2
+Architecture: all
+Maintainer: Hideki Yamane <henrich@debian.org>
+Installed-Size: 12219
+Pre-Depends: dpkg (>= 1.15.6~)
+Suggests: poppler-utils, ghostscript, fonts-japanese-mincho | fonts-ipafont-mincho, fonts-japanese-gothic | fonts-ipafont-gothic, fonts-arphic-ukai, fonts-arphic-uming, fonts-nanum (>= 20131007~)
+Enhances: ghostscript
+Breaks: cmap-adobe-cns1 (<= 0+20090930-2), cmap-adobe-gb1 (<= 0+20090930-2), cmap-adobe-japan1 (<= 0+20090930-2), cmap-adobe-japan2 (<= 0+20090930-2), cmap-adobe-korea1 (<= 1.20100103-3), gs-aladdin (<= 6.50-5), gs-cjk-resource (<= 1.20100103-3)
+Replaces: cmap-adobe-cns1 (<= 0+20090930-2), cmap-adobe-gb1 (<= 0+20090930-2), cmap-adobe-japan1 (<= 0+20090930-2), cmap-adobe-japan2 (<= 0+20090930-2), cmap-adobe-korea1 (<= 1.20100103-3), gs-cjk-resource (<= 1.20100103-3)
+Provides: cmap-adobe-cns1, cmap-adobe-gb1, cmap-adobe-japan1, cmap-adobe-japan2, cmap-adobe-korea1, gs-cjk-resource
+Section: misc
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://poppler.freedesktop.org/
+Description: encoding data for the poppler PDF rendering library
+ This package provides the CMap tables required to display PDF documents
+ containing CJK characters with libpoppler. They were previously provided
+ by the packages cmap-adobe-{cns1,gb1,japan1,japan2,korea1} and
+ gs-cjk-resource.
+ .
+ Users who want to view or create PDF files in Chinese, Japanese, or
+ Korean without embedded fonts will need this package.

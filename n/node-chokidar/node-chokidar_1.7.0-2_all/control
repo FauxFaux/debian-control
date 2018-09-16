@@ -1,0 +1,15 @@
+Package: node-chokidar
+Version: 1.7.0-2
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 78
+Depends: nodejs, node-is-glob (>= 2.0.0), node-is-binary-path (>= 1.0.0), node-anymatch (>= 1.3.0), node-readdirp (>= 2.0.0), node-async-each (>= 1.0.0), node-path-is-absolute (>= 1.0.0), node-glob-parent (>= 2.0.0), node-inherits (>= 2.0.1)
+Section: javascript
+Priority: optional
+Homepage: https://github.com/paulmillr/chokidar
+Description: wrapper around watch / watchFile / fsevents
+ Chokidar does still rely on the Node.js core fs module, but when using
+ fs.watch and fs.watchFile for watching, it normalizes the events it receives,
+ often checking for truth by getting file stats and/or dir contents.
+ .
+ Node.js is an event-based server-side JavaScript engine.

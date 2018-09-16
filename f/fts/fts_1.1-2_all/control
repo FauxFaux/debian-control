@@ -1,0 +1,21 @@
+Package: fts
+Version: 1.1-2
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 42
+Pre-Depends: adduser
+Depends: python (>= 2.7), python (<< 2.8), python-fuse, debconf (>= 0.5) | debconf-2.0, fuse, python-argparse, ucf, python-pkg-resources
+Recommends: tftpd | atftpd | tftpd-hpa
+Section: utils
+Priority: optional
+Homepage: https://github.com/gonicus/fts
+Description: Modular TFTP/Fuse supplicant
+ FTS is a modular fuse-tftp-supplicant which allows one to create
+ pxelinux configurations for different types of clients
+ using external modules on the fly.
+ .
+ It ships with modules for FAI (Fully automated install),
+ OPSI (OpenPc integration), LTSP5 (Linux Terminal server project)
+ and the clacks infrastructure daemon.
+ .
+ This package provides the main FUSE filesystem.

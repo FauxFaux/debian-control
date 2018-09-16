@@ -1,0 +1,21 @@
+Package: lxc-tests
+Source: lxc
+Version: 1:2.0.9-6.1
+Architecture: amd64
+Maintainer: pkg-lxc <pkg-lxc-devel@lists.alioth.debian.org>
+Installed-Size: 443
+Depends: liblxc1 (= 1:2.0.9-6.1), lxc (= 1:2.0.9-6.1), libapparmor1 (>= 2.6~devel), libc6 (>= 2.14), libcap2 (>= 1:2.10), libgnutls30 (>= 3.5.0)
+Breaks: lxc-dev (<< 1:2.0.5-2~)
+Replaces: lxc-dev (<< 1:2.0.5-2~)
+Section: admin
+Priority: optional
+Homepage: https://linuxcontainers.org/
+Description: Linux Containers userspace tools (test binaries)
+ Containers are insulated areas inside a system, which have their own namespace
+ for filesystem, network, PID, IPC, CPU and memory allocation and which can be
+ created using the Control Group and Namespace features included in the Linux
+ kernel.
+ .
+ This package contains the test binaries. Those binaries are primarily
+ used for autopkgtest and by some developers. They are not meant to be
+ installed on regular user systems.

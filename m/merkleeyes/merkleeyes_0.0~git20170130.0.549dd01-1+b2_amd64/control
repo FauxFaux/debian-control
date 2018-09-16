@@ -1,0 +1,22 @@
+Package: merkleeyes
+Source: merkleeyes (0.0~git20170130.0.549dd01-1)
+Version: 0.0~git20170130.0.549dd01-1+b2
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 7886
+Depends: libc6 (>= 2.3.2)
+Built-Using: abci (= 0.0~git20170124.0.f94ae5e-2), go-wire (= 1.0~rc+git20161223.40.2f3b7aa-1), golang-1.10 (= 1.10-1), golang-github-go-stack-stack (= 1.5.2-2), golang-github-golang-snappy (= 0.0+git20160529.d9eb7a3-2), golang-github-mattn-go-colorable (= 0.0.9-3), golang-github-mattn-go-isatty (= 0.0.3-4), golang-github-urfave-cli (= 1.20.0-1), golang-go.crypto (= 1:0.0~git20170629.0.5ef0053-2), golang-golang-x-net-dev (= 1:0.0+git20170629.c81e7f2+dfsg-2), golang-goleveldb (= 0.0~git20170725.0.b89cc31-2), golang-google-genproto (= 0.0~git20171123.7f0da29-1), golang-google-grpc (= 1.6.0-3), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-1), golang-x-text (= 0.0~git20170627.0.6353ef0-1), tendermint-go-common (= 0~20170309~0gitdcb015d-1), tendermint-go-db (= 0.1~20170131~0git72f6dac-2), tendermint-go-logger (= 0~20161018~0gitcefb3a4-2), tendermint-go-merkle (= 0.1~20170131~0git7a86b44-1), tendermint-log15 (= 2.3-67-g9545b24-2)
+Section: devel
+Priority: extra
+Homepage: https://github.com/tendermint/merkleeyes
+Description: ABCI application serving a merkle-tree data store
+ Simple ABCI application serving a merkle-tree key-value store.
+ Merkleeyes allows inserts and removes by key, and queries by key
+ or index. Inserts and removes happen through the DeliverTx message,
+ while queries happen through the Query message. CheckTx simply
+ mirrors DeliverTx.
+ .
+ ABCI is Tendermint's Serverside Blockchain API, whilst Tendermint
+ Core is Byzantine Fault Tolerant (BFT) middleware that takes a
+ state transition machine, written in any programming language, and
+ replicates it on manymachines.

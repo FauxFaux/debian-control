@@ -1,0 +1,19 @@
+Package: ruby-proxifier
+Version: 1.0.3-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 43
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: https://github.com/samuelkadolph/ruby-proxifier
+Description: add support for HTTP or SOCKS proxies
+ Proxifier enable ruby programmers to use HTTP or SOCKS proxies
+ interchangeably when using TCPSockets. Either manually with
+ `Proxifier::Proxy#open` or by `require "proxifier/env"`.
+ .
+ Allows one to use ruby code that doesn't user proxies for users that
+ have to use proxies. The pruby and pirb executables are simple wrappers
+ for  their respective ruby executables that support proxies from
+ environment variables.
+Ruby-Versions: all

@@ -1,0 +1,27 @@
+Package: cssc
+Version: 1.4.0-6
+Architecture: amd64
+Maintainer: Yann Dirson <dirson@debian.org>
+Installed-Size: 2035
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Suggests: groff
+Section: vcs
+Priority: extra
+Homepage: http://www.gnu.org/software/cssc/
+Description: Clone of the Unix SCCS revision-control system
+ SCCS is a per-file revision-control system. It is a de-facto standard
+ on commercial Unices, being shipped with most of those.
+ .
+ GNU-based systems usually use RCS instead of SCCS - indeed it has been
+ a choice to design RCS instead of implementing a free SCCS clone.  RCS
+ was designed to address some problems with SCCS (eg. extraction time
+ grows linearly with the size of the history file), but it has anyway
+ problems of its own (eg. extraction time of branches grows with trunk
+ length).
+ .
+ Some project-wide revision-control systems, like Aegis, can make use
+ of CSSC instead of RCS.
+ .
+ This package also provides a web frontend to navigate the history of
+ files under SCCS control, with optional support for formatting of
+ manpages using groff.

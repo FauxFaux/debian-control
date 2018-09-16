@@ -1,0 +1,19 @@
+Package: cfingerd
+Source: cfingerd (1.4.3-3.2)
+Version: 1.4.3-3.2+b1
+Architecture: amd64
+Maintainer: Martin Schulze <joey@debian.org>
+Installed-Size: 164
+Depends: libc6 (>= 2.14), update-inetd, netbase (>= 2.00)
+Conflicts: finger-server
+Provides: finger-server
+Section: net
+Priority: extra
+Homepage: http://www.infodrom.org/projects/cfingerd/
+Description: configurable finger daemon
+ This is a free replacement for standard finger daemons such as GNU
+ fingerd and MIT fingerd.  Cfingerd can enable/disable finger services
+ to individual users, rather than to all users on a given host.  It is
+ able to respond to a finger request to a specified user by running a
+ shell script (e.g., finger doorbell@mysite.mydomain might cause a
+ sound file to be sent) rather than just a plain text file.

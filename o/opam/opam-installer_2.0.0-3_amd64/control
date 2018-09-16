@@ -1,0 +1,23 @@
+Package: opam-installer
+Source: opam
+Version: 2.0.0-3
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 3864
+Depends: libc6 (>= 2.17)
+Breaks: opam (<< 2.0.0-1), opam-docs (<< 2.0.0-1)
+Replaces: opam (<< 2.0.0-1), opam-docs (<< 2.0.0-1)
+Section: ocaml
+Priority: optional
+Homepage: https://opam.ocaml.org
+Description: Utility handling (un)installation of Opam .install files
+ opam-installer is a small utility, part of Opam, that can interpret
+ Opam's .install files and take the appropriate actions.
+ .
+ OPAM stands for OCaml PAckage Manager. It aims to suit to a vast number
+ of users and use cases, and has unique features:
+  * Powerful handling of dependencies: versions constraints, optional
+    dependencies, conflicts, etc.
+  * Multiple repositories backends: HTTP, rsync, git
+  * Ease to create packages and repositories
+  * Ability to switch between different compiler versions

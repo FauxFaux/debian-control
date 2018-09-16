@@ -1,0 +1,20 @@
+Package: node-execa
+Version: 0.10.0+dfsg-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: nodejs, node-cross-spawn, node-get-stream (>= 3.0.0), node-is-stream (>= 1.1.0), node-npm-run-path (>= 2.0.0), node-p-finally (>= 1.0.0), node-signal-exit (>= 3.0.0), node-strip-eof (>= 1.0.0)
+Section: javascript
+Priority: optional
+Homepage: https://github.com/sindresorhus/execa#readme
+Description: better `child_process`
+ This is better in the following ways:
+  - Promise interface.
+  - Strips EOF from the output so you don't have to `stdout.trim()`.
+  - Supports shebang binaries cross-platform.
+  - Improved Windows support.
+  - Higher max buffer. 10 MB instead of 200 KB.
+  - Executes locally installed binaries by name.
+  - Cleans up spawned processes when the parent process dies.
+ .
+ Node.js is an event-based server-side JavaScript engine.

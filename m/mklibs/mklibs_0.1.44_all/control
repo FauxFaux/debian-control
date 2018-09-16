@@ -1,0 +1,14 @@
+Package: mklibs
+Version: 0.1.44
+Architecture: all
+Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Installed-Size: 42
+Depends: python (>= 2.4), binutils, gcc, dpkg-dev, mklibs-copy (>= 0.1.44)
+Recommends: libc6-pic | libc6.1-pic | libc0.1-pic | libc0.3-pic
+Section: devel
+Priority: optional
+Description: Shared library reduction script
+ mklibs produces cut-down shared libraries that contain only the
+ routines required by a particular set of executables.  This is
+ useful when building closed systems where disk space is at a premium,
+ such as the Debian installer.

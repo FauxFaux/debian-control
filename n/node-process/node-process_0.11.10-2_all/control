@@ -1,0 +1,24 @@
+Package: node-process
+Version: 0.11.10-2
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 22
+Depends: nodejs
+Section: web
+Priority: optional
+Homepage: https://github.com/shtylman/node-process#readme
+Description: process information for node.js and browsers
+ Works in node.js and browsers via the browser.js shim provided with the module.
+ .
+ The goal of this module is not to be a full-fledged alternative to the builtin
+ process module. This module mostly exists to provide the nextTick functionality
+ and little more. We keep this module lean because it will often be included by
+ default by tools like browserify when it detects a module has used the
+ `process` global.
+ .
+ It also exposes a "browser" member (i.e. `process.browser`) which is `true` in
+ this implementation but `undefined` in node. This can be used in isomorphic
+ code that adjusts it's behavior depending on which environment it's running
+ in.
+ .
+ Node.js is an event-based server-side JavaScript engine.

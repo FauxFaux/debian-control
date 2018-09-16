@@ -1,0 +1,19 @@
+Package: golang-github-nfnt-resize-dev
+Source: golang-github-nfnt-resize
+Version: 0.0~git20180221.83c6a99-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 92
+Section: devel
+Priority: optional
+Homepage: https://github.com/nfnt/resize
+Description: Pure golang image resizing
+ The resize package provides 2 functions:
+ - resize.Resize creates a scaled image with new dimensions
+   (width, height) using the interpolation function interp.
+   If either width or height is set to 0, it will be set to
+   an aspect ratio preserving value.
+ - resize.Thumbnail downscales an image preserving its aspect
+   ratio to the maximum dimensions (maxWidth, maxHeight).  It
+   will return the original image if original sizes are smaller
+   than the provided dimensions.

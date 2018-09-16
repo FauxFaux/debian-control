@@ -1,0 +1,18 @@
+Package: libclass-whitehole-perl
+Version: 0.04-7
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 19
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/~mschwern/Class-WhiteHole/
+Description: base class to treat unhandled method calls as errors
+ It is possible to accidentally inherit an AUTOLOAD method. Often this
+ will happen if a class somewhere in the chain uses AutoLoader or
+ defines one of their own. This can lead to confusing error messages
+ when method lookups fail.
+ .
+ Sometimes you want to avoid this accidental inheritance. In that
+ case, inherit from Class::WhiteHole. All unhandled methods will
+ produce normal Perl error messages.

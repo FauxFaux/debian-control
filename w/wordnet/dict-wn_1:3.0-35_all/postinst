@@ -1,0 +1,32 @@
+#! /bin/sh
+
+set -e
+
+PACKAGE=dict-wn
+
+case "$1" in 
+     configure)
+	if [ -x /usr/sbin/dictdconfig ]; then dictdconfig -w ;fi
+
+	if which invoke-rc.d >/dev/null 2>&1; then
+            if invoke-rc.d --query dictd restart; [ $? = 104 ]; then
+               invoke-rc.d dictd restart
+            fi
+	else
+	    [ -x /etc/init.d/dictd ] && /etc/init.d/dictd restart
+	fi
+
+	exit 0
+    ;;
+
+    failed-upgrade/abort-upgrade|abort-remove|abort-deconfigure|in-favour|removing)
+        exit 0;
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2;
+        exit 0;
+    ;;
+esac
+
+

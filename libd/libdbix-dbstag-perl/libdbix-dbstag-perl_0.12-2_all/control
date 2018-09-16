@@ -1,0 +1,32 @@
+Package: libdbix-dbstag-perl
+Version: 0.12-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 293
+Depends: perl, libdata-stag-perl, libdbd-pg-perl, libdbi-perl, libdbix-dbschema-perl, libparse-recdescent-perl, libxml-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/DBIx-DBStag
+Description: module providing relational database to hierarchical mapping
+ The module DBIx::DBStag is for mapping from databases to Stag objects
+ (Structured Tags - see the Data::Stag manpage), which can also be
+  represented as XML. It has two main uses:
+ .
+ Querying
+   This module can take the results of any SQL query and decompose the
+   flattened results into a tree data structure which reflects the
+   foreign keys in the underlying relational schema. It does this by
+   looking at the SQL query and introspecting the database schema,
+   rather than requiring metadata or an object model.
+ .
+   In this respect, the module works just like a regular the DBI
+   manpage handle, with some extra methods provided.
+ .
+ Storing Data
+   DBStag objects can store any tree-like datastructure (such as XML
+   documents) into a database using normalized schema that reflects the
+   structure of the tree being stored. This is done using little or no
+   metadata.
+ .
+   XML can also be imported, and a relational schema automatically
+   generated.

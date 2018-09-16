@@ -1,0 +1,28 @@
+Package: rush
+Version: 1.8+dfsg-1.1
+Architecture: amd64
+Maintainer: Mats Erik Andersson <mats.andersson@gisladisker.se>
+Installed-Size: 572
+Depends: libc6 (>= 2.14)
+Suggests: xinetd | inetutils-inetd
+Section: shells
+Priority: extra
+Homepage: http://puszcza.gnu.org.ua/software/rush/
+Description: restricted user shell
+ GNU Rush is a restricted shell designed for sites providing only
+ limited access to resources for remote users. The main binary
+ executable is configurable as a user login shell, intended for
+ users that only are allowed remote login to the system at hand.
+ .
+ A notification service can be implemented individually for each
+ provided client service, using the TCPMUX support found within
+ xinetd, or inetutils-inetd.
+ .
+ The standard use is to create access to a chrooted target directory,
+ typically providing arbitrary combinations of scp, sftp, rsync,
+ cvs, svn, and git. Each service may be further restricted in its
+ capabilities. The administrator configures pattern matching rules
+ for manipulating any incoming request.
+ .
+ The present restricted shell is an alternative to the well known
+ "rssh" package, which provides similar capabilities.

@@ -1,0 +1,22 @@
+Package: node-encodeurl
+Version: 1.0.1-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 21
+Depends: nodejs
+Section: web
+Priority: optional
+Homepage: https://github.com/pillarjs/encodeurl#readme
+Description: Encode URL to a percent-encoded form
+ Encode a URL to a percent-encoded form, excluding already-encoded
+ sequences
+ .
+ Encodeurl will take an already-encoded URL and
+ encode all the non-URL code points (as UTF-8 byte sequences).
+ .
+ This encode is meant to be "safe" and does not throw errors.
+ It will try as hard as it can to properly encode the given URL,
+ including replacing any raw, unpaired surrogate pairs with the
+ Unicode replacement character prior to encoding.
+ .
+ Node.js is an event-based server-side JavaScript engine.

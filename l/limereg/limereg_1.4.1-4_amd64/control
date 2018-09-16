@@ -1,0 +1,17 @@
+Package: limereg
+Version: 1.4.1-4
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 179
+Depends: libboost-program-options1.62.0, libc6 (>= 2.15), libgcc1 (>= 1:3.0), liblimereg1, libopencv-core3.2, libopencv-highgui3.2, libopencv-imgcodecs3.2, libstdc++6 (>= 5.2)
+Section: science
+Priority: optional
+Homepage: https://github.com/RoelofBerg/limereg
+Description: Lightweight Image Registration
+ Command line application for image registration.
+ Automatically finds an optimal alignment of two input images, that makes both
+ most similar to each other. Outputs the rigid transformation parameters
+ (shift and rotation) and/or the registered (transformed/aligned) image.
+ .
+ Fast algorithm based on analytical derivative based optimization with a
+ multilevel approach and without expensive sparse-matrices.

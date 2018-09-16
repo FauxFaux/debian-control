@@ -1,0 +1,22 @@
+Package: libiconv-hook1
+Source: libapache-mod-encoding
+Version: 0.0.20021209-11
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 446
+Depends: libc6 (>= 2.14)
+Section: libs
+Priority: optional
+Description: extension of iconv for libapache-mod-encoding
+ This code is iconv compatible interface routine for mod_encoding.
+ Taisuke Yamada writes sample code for hooking iconv() for mod_encoding.
+ .
+ In mod_encoding configuration directive,
+ supports following encoding names additionally:
+ .
+  MSSJIS
+  - This is almost same as SJIS, but is a Microsoft variant of it.
+ .
+  JA-AUTO-SJIS-MS
+  - This is a special converter which does autodetection between
+    UTF-8/JIS/MSSJIS/SJIS/EUC-JP. This itself does not do conversion.

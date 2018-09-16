@@ -1,0 +1,22 @@
+Package: liblapack-pic
+Source: lapack (3.8.0-1)
+Version: 3.8.0-1+b1
+Architecture: amd64
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 11820
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.netlib.org/lapack/
+Description: Library of linear algebra routines 3 - static PIC version
+ LAPACK version 3.X is a comprehensive FORTRAN library that does
+ linear algebra operations including matrix inversions, least
+ squared solutions to linear sets of equations, eigenvector
+ analysis, singular value decomposition, etc. It is a very
+ comprehensive and reputable package that has found extensive
+ use in the scientific community.
+ .
+ Normally one would want to use non-PIC code for static linking.  In
+ this case, install liblapack-dev.  This package is provided for other
+ packages, such as ATLAS, needing access to PIC versions of the lapack
+ objects in their own build process.

@@ -1,0 +1,19 @@
+Package: python-bandit
+Source: bandit
+Version: 1.1.0-5
+Architecture: all
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 353
+Depends: python-git (>= 2.0.2), python-six (>= 1.9.0), python-stevedore (>= 1.16.0), python-yaml, python2.7:any, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Breaks: bandit (<< 0.13)
+Replaces: bandit (<< 0.13)
+Section: python
+Priority: optional
+Homepage: https://wiki.openstack.org/wiki/Security/Projects/Bandit
+Description: Security oriented static analyzer for Python code - Python 2.7
+ Bandit is a tool designed to find common security issues in Python code. To
+ do this Bandit processes each file, builds an Abstract Syntaxt Tree (AST),
+ and runs appropriate plugins against the AST nodes.  Once Bandit has
+ finished scanning all the files it generates a report.
+ .
+ This package contains the Python 2.7 module.

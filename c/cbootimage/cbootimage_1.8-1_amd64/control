@@ -1,0 +1,16 @@
+Package: cbootimage
+Version: 1.8-1
+Architecture: amd64
+Maintainer: Marc Dietrich <marvin24@gmx.de>
+Installed-Size: 588
+Depends: libc6 (>= 2.14)
+Section: utils
+Priority: optional
+Homepage: https://github.com/NVIDIA/cbootimage
+Description: Tools to dump and generate boot config table on Tegra devices
+ This package contains two programs to parse the boot config table (bct)
+ of Tegra SoC based devices and to generate a new bct with appended
+ bootloader (e.g. u-boot) read to be flashed to a storage device.
+ The boot config table is used in the early boot process to setup
+ the sdhci, DRAM memory controller and also points to the position of the
+ bootloader.

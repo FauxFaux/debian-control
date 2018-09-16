@@ -1,0 +1,27 @@
+Package: libcgi-application-perl
+Version: 4.61-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 201
+Depends: perl, libcgi-pm-perl (>= 4.21), libclass-isa-perl, libparams-validate-perl
+Suggests: libcgi-psgi-perl, libhtml-template-perl
+Breaks: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Replaces: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Provides: libcgi-application-plugin-errorpage-perl, libcgi-application-plugin-redirect-perl, libcgi-application-standard-config-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Application
+Description: framework for building reusable web-applications
+ CGI::Application is intended to make it easier to create sophisticated,
+ reusable web-based applications. This module implements a methodology
+ which, if followed, will make your web software easier to design,
+ easier to document, easier to write, and easier to evolve.
+ .
+ This package comes bundled with three extra modules providing useful glue
+ run modes:
+ .
+ CGI::Application::Plugin::ErrorPage - automatic handling of errors
+ .
+ CGI::Application::Plugin::Redirect - external header based redirects
+ .
+ CGI::Application::Standard::Config - defines a standard interface for config

@@ -1,0 +1,20 @@
+Package: policykit-1-gnome
+Version: 0.105-7
+Architecture: amd64
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 496
+Depends: policykit-1, libc6 (>= 2.4), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.37.3), libgtk-3-0 (>= 3.0.0), libpolkit-agent-1-0 (>= 0.99), libpolkit-gobject-1-0 (>= 0.99)
+Provides: polkit-1-auth-agent
+Section: gnome
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://wiki.gnome.org/Projects/PolicyKit
+Description: authentication agent for PolicyKit
+ PolicyKit-gnome provides a D-Bus session bus service that is used to
+ bring up authentication dialogs used for obtaining privileges.
+ .
+ This implementation was originally designed for GNOME 2, but most
+ GNOME-based desktop environments, including GNOME 3, GNOME Flashback,
+ and MATE, have their own built-in PolicyKit agents and no longer use
+ this one. The remaining users of this implementation are Cinnamon, XFCE
+ and Unity.

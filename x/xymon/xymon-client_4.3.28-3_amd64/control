@@ -1,0 +1,23 @@
+Package: xymon-client
+Source: xymon
+Version: 4.3.28-3
+Architecture: amd64
+Maintainer: Christoph Berg <myon@debian.org>
+Installed-Size: 1151
+Pre-Depends: debconf (>= 0.5) | debconf-2.0
+Depends: adduser, lsb-base, net-tools, procps, libc6 (>= 2.17), libssl1.1 (>= 1.1.0)
+Suggests: xymon-plugins | hobbit-plugins
+Breaks: hobbit (<= 4.2.0-1), hobbit-client (<< 4.2.2), hobbit-plugins (<< 20140519~), xymon (<< 4.3.7-1~)
+Replaces: hobbit-client (<< 4.2.2)
+Provides: hobbit-client
+Section: net
+Priority: optional
+Homepage: http://xymon.sourceforge.net/
+Description: client for the Xymon network monitor
+ Client data collection package for Xymon (previously known as Hobbit).
+ .
+ This gathers statistics and data from a single system and reports it to
+ the Xymon monitor. You should install this package on all systems if you
+ have a Xymon server running.
+ .
+ Additional checks are available in the package hobbit-plugins.

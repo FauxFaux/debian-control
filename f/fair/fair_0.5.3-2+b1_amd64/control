@@ -1,0 +1,17 @@
+Package: fair
+Source: fair (0.5.3-2)
+Version: 0.5.3-2+b1
+Architecture: amd64
+Maintainer: Guus Sliepen <guus@debian.org>
+Installed-Size: 106
+Depends: libavl1, libc6 (>= 2.15)
+Section: net
+Priority: extra
+Description: high availability load balancer for TCP connections
+ Fair is a system for implementing load balancers; it consists of two daemons:
+ carrousel and transponder. Carrousel, which performs load balancing services,
+ typically runs on a load balancer; transponder runs on the servers.
+ .
+ Fair understands network topologies where one node is reachable via more than
+ one IP address; this allows not only the servers, but the network to be
+ redundant as well. This distinguishes fair from other load balancers.

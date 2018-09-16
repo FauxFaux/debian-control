@@ -1,0 +1,42 @@
+Package: libranlip-dev
+Source: libranlip
+Version: 1.0-4.2
+Architecture: amd64
+Maintainer: Juan Esteban Monsalve Tobon <esteban@v7w.com>
+Installed-Size: 61
+Depends: libc6 (>= 2.2.5), libgcc1 (>= 1:3.0), libstdc++6 (>= 4.1.1), libtnt-dev, libranlip1c2 (= 1.0-4.2)
+Section: libdevel
+Priority: optional
+Homepage: http://www.deakin.edu.au/~gleb/ranlip.html
+Description: generates random variates with multivariate Lipschitz density
+ RanLip generates random variates with an arbitrary multivariate
+ Lipschitz density.
+ .
+ While generation of random numbers from a variety of distributions is
+ implemented in many packages (like GSL library
+ http://www.gnu.org/software/gsl/  and UNURAN library
+ http://statistik.wu-wien.ac.at/unuran/), generation of random variate
+ with an arbitrary distribution, especially in the multivariate case, is
+ a very challenging task. RanLip is a method of generation of random
+ variates with arbitrary Lipschitz-continuous densities,  which works in
+ the univariate and multivariate cases, if the dimension is not very
+ large (say 3-10 variables).
+ .
+ Lipschitz condition implies that the rate of change of the function (in
+ this case, probability density p(x)) is bounded:
+ .
+ |p(x)-p(y)|<M||x-y||.
+ .
+ From this condition, we can build an overestimate of the density, so
+ called hat function h(x)>=p(x), using a number of values of p(x) at some
+ points. The more values we use, the better is the hat function. The
+ method of acceptance/rejection then works as follows: generatea  random
+ variate X with density h(x); generate an independent uniform on (0,1)
+ random number Z; if p(X)<=Z h(X), then return X, otherwise repeat all
+ the above steps.
+ .
+ RanLip constructs a piecewise constant hat function of the required
+ density p(x) by subdividing the domain of p (an n-dimensional rectangle)
+ into many smaller rectangles, and computes the upper bound on p(x)
+ within each of these rectangles, and uses this upper bound as the value
+ of the hat function.

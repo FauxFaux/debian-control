@@ -1,0 +1,24 @@
+Package: ndiswrapper
+Version: 1.60-6
+Architecture: amd64
+Maintainer: Julian Andres Klode <jak@debian.org>
+Installed-Size: 83
+Depends: libc6 (>= 2.14), perl:any
+Recommends: ndiswrapper-dkms
+Suggests: ndiswrapper-source
+Breaks: ndiswrapper-common (<< 1.59-4~), ndiswrapper-utils-1.9 (<< 1.59-4~)
+Replaces: ndiswrapper-common (<< 1.59-4~), ndiswrapper-utils-1.9 (<< 1.59-4~)
+Provides: ndiswrapper-common, ndiswrapper-utils-1.9
+Section: misc
+Priority: optional
+Homepage: http://ndiswrapper.sourceforge.net/
+Description: Userspace utilities for the ndiswrapper Linux kernel module
+ Some vendors do not release specifications of the hardware or provide a
+ Linux driver for their wireless network cards. This project implements
+ Windows kernel API and NDIS (Network Driver Interface Specification) API
+ within Linux kernel. A Windows driver for wireless network card is then
+ linked to this implementation so that the driver runs natively, as though
+ it is in Windows, without binary emulation.
+ .
+ This package contains the userspace tools. You will also need the kernel
+ module package.

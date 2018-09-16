@@ -1,0 +1,23 @@
+Package: keepass2-plugin-keepasshttp
+Version: 1.8.4.2+dfsg1-2
+Architecture: all
+Maintainer: Debian CLI Applications Team <pkg-cli-apps-team@lists.alioth.debian.org>
+Installed-Size: 77
+Depends: keepass2, libmono-corlib4.5-cil (>= 4.6.1.3), libmono-system-core4.0-cil (>= 4.6.1.3), libmono-system-drawing4.0-cil (>= 4.6.1.3), libmono-system-windows-forms4.0-cil (>= 1.0), libmono-system4.0-cil (>= 4.6.1.3), libnewtonsoft-json5.0-cil (>= 5.0r6)
+Section: utils
+Priority: optional
+Homepage: https://github.com/pfn/keepasshttp
+Description: KeePass2 plugin to expose password entries securely over HTTP
+ KeePassHttp is a plugin for KeePass 2.x and provides a secure means of
+ exposing KeePass entries via HTTP for clients to consume.
+ Features:
+  - returns all matching entries for a given URL
+  - updates entries
+  - secure exchange of entries
+  - notifies user if entries are delivered
+  - user can allow or deny access to single entries
+  - works only if the database is unlocked
+  - request for unlocking the database if it is locked while connecting
+  - searches in all opened databases (if user activates this feature)
+  - Whenever events occur, the user is prompted either by tray notification or
+    requesting interaction (allow/deny/remember).

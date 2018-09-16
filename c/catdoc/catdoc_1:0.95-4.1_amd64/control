@@ -1,0 +1,25 @@
+Package: catdoc
+Version: 1:0.95-4.1
+Architecture: amd64
+Maintainer: Martín Ferrari <tincho@debian.org>
+Installed-Size: 675
+Depends: libc6 (>= 2.14)
+Suggests: tk | wish
+Section: text
+Priority: optional
+Homepage: http://www.wagner.pp.ru/~vitus/software/catdoc/
+Description: text extractor for MS-Office files
+ The catdoc program reads one or more Microsoft Word files and outputs
+ their contents to standard output as text.
+ .
+ It is accompanied by xls2csv, a program which converts Excel spreadsheets
+ into comma-separated-values format, and catppt, a utility to extract textual
+ information from PowerPoint files.
+ .
+ It doesn't try to preserve Word formatting; its goal is to extract plain
+ text and allow you to read it (and, probably, reformat it with TeX).
+ .
+ This package suggests tk because it also includes wordview, an
+ optional Tk-based GUI for catdoc.  The MIME config provided in this
+ package will use wordview if X is running, or catdoc directly if it
+ is not.

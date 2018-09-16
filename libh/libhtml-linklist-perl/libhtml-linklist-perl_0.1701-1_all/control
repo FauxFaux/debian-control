@@ -1,0 +1,27 @@
+Package: libhtml-linklist-perl
+Version: 0.1701-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 69
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/HTML-LinkList
+Description: module that creates a 'smart' list of HTML links
+ HTML::LinkList contains a number of functions for taking sets of URLs and
+ labels and creating suitably formatted HTML. These links are "smart" because,
+ if given the url of the current page, if any of the links in the list equal
+ it, that item in the list will be formatted as a special label, not as a
+ link; this is a Good Thing, since the user would be confused by clicking on a
+ link back to the current page.
+ .
+ While many website systems have plugins for "smart" navbars, they are
+ specialized for that system only, and can't be reused elsewhere, forcing
+ people to reinvent the wheel. This is one of the wheels, free to be reused
+ by anybody; just the simple functions, a backend, which can be plugged into
+ whatever system you want.
+ .
+ The default format for the HTML is to make an unordered list, but there are
+ many options, enabling one to have a flatter layout with any separators you
+ desire, or a more complicated list with differing formats for different
+ levels.

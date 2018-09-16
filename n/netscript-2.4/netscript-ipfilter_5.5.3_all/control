@@ -1,0 +1,19 @@
+Package: netscript-ipfilter
+Source: netscript-2.4
+Version: 5.5.3
+Architecture: all
+Maintainer: Matthew Grant <matt@mattgrant.net.nz>
+Installed-Size: 103
+Depends: iptables, netbase, bash (>= 2.03), lsb-base
+Conflicts: netscript-2.4
+Provides: netscript-ipfilter
+Section: net
+Priority: optional
+Description: Linux 2.6/3.x iptables management system.
+ This is a cut down version of netscript-2.4, which is just the ipfilter
+ iptables/ip6tables management implementation.  This provides iptables and
+ ip6tables management with a cyclic backup history, via iptables-restore
+ and iptables-save.
+ .
+ This is designed to work with ifupdown, and is better than iptables-persistent
+ as you can roll back filter changes if you have made a mistake.

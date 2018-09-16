@@ -1,0 +1,20 @@
+Package: libdevel-checklib-perl
+Version: 1.13-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 48
+Depends: perl, gcc | c-compiler
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Devel-CheckLib
+Description: module for checking the availability of a library
+ Devel::CheckLib is a perl module that checks whether a particular C library
+ and its headers are available.
+ .
+ It works by trying to compile some code and linking it to the specified
+ libraries. If something pops out the end which looks executable, it gets
+ executed. That tiny program is built once for each specified library, and
+ (without linking) once for each header file.
+ .
+ It is also possible to check for the presence of particular functions in a
+ library, or even that those functions return particular results.

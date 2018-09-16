@@ -1,0 +1,19 @@
+Package: liblexical-accessor-perl
+Version: 0.009-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 57
+Depends: libtype-tiny-perl, libexporter-tiny-perl, libhash-fieldhash-perl, perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Lexical-Accessor
+Description: true private attributes for Moose/Moo/Mouse
+ Lexical::Accessor generates coderefs which can be used as methods to
+ access private attributes for objects.
+ .
+ The private attributes are stored inside-out, and do not add any
+ accessors to the class' namespace, so are completely invisible to any
+ outside code, including any subclasses. This gives your attribute
+ complete privacy:  subclasses can define a private (or even public)
+ attribute with the same name as your private one and they will not
+ interfere with each other.

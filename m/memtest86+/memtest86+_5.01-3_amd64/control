@@ -1,0 +1,26 @@
+Package: memtest86+
+Version: 5.01-3
+Architecture: amd64
+Maintainer: Yann Dirson <dirson@debian.org>
+Installed-Size: 2391
+Depends: debconf (>= 0.5) | debconf-2.0
+Suggests: hwtools, memtester, kernel-patch-badram, memtest86, grub-pc | grub-legacy, mtools
+Section: misc
+Priority: optional
+Homepage: http://www.memtest.org/
+Description: thorough real-mode memory tester
+ Memtest86+ scans your RAM for errors.
+ .
+ This tester runs independently of any OS - it is run at computer
+ boot-up, so that it can test *all* of your memory.  You may want to
+ look at `memtester', which allows to test your memory within Linux,
+ but this one won't be able to test your whole RAM.
+ .
+ It can output a list of bad RAM regions usable by the BadRAM kernel
+ patch, so that you can still use your old RAM with one or two bad bits.
+ .
+ Memtest86+ is based on memtest86 3.0, and adds support for recent
+ hardware, as well as a number of general-purpose improvements,
+ including many patches to memtest86 available from various sources.
+ .
+ Both memtest86 and memtest86+ are being worked on in parallel.

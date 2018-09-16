@@ -1,0 +1,28 @@
+Package: python-chemfp
+Source: chemfp
+Version: 1.1p1-2.1
+Architecture: amd64
+Maintainer: Debichem Team <debichem-devel@lists.alioth.debian.org>
+Installed-Size: 797
+Depends: python (>= 2.7), python (<< 2.8), libc6 (>= 2.14), libgomp1 (>= 4.9)
+Recommends: python-openbabel, python-rdkit
+Provides: python2.7-chemfp
+Section: python
+Priority: optional
+Homepage: http://code.google.com/p/chem-fingerprints/
+Description: cheminformatics fingerprints file formats and tools
+ Chem-fingerprints is a set of formats and related tools for the storage,
+ exchange, and search of cheminformatics fingerprint data sets.
+ .
+ It translates fingerprints from the OpenBabel and RDKIT and
+ cheminformatics packages (as well as the proprietary OEChem package)
+ into the binary FPS format.
+ .
+ Besides Python modules, it provides the following tools:
+ .
+  * sdf2fps - Extract fingerprint data from SD tags
+  * ob2fps - Use OpenBabel to generate fingerprints from structures
+  * rdkit2fps - Use RDKit to generate fingerprints from structures
+  * oe2fps - Use OEChem/OEGraphSim to generate fingerprints from structures
+  * simsearch - Do threshold or k-nearest neighbor Tanimoto similarity searches
+    between two FPS files

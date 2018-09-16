@@ -1,0 +1,26 @@
+#! /bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ -f /etc/default/mumble-server ] ; then
+	MURMUR_USE_CAPABILITIES=0
+	. /etc/default/mumble-server
+
+	if [ "$MURMUR_USE_CAPABILITIES" = "1" ] ; then
+		db_set mumble-server/use_capabilities true
+	else
+		db_set mumble-server/use_capabilities false
+	fi
+fi
+
+db_input medium mumble-server/start_daemon || true
+db_input medium mumble-server/use_capabilities || true
+db_input medium mumble-server/password || true
+
+db_go
+
+
+
+exit 0

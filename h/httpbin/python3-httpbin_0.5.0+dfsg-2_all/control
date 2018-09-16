@@ -1,0 +1,19 @@
+Package: python3-httpbin
+Source: httpbin
+Version: 0.5.0+dfsg-2
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 162
+Depends: python3-decorator (>= 3.4.0), python3-flask, python3-gevent (>= 1.0.2), python3-greenlet (>= 0.4.2), python3-itsdangerous, python3-jinja2 (>= 2.7.2), python3-markupsafe (>= 0.23), python3-six (>= 1.6.1), python3-werkzeug (>= 0.9.4), python3:any (>= 3.3.2-2~)
+Recommends: gunicorn3 (>= 19.2)
+Section: web
+Priority: optional
+Homepage: https://github.com/Runscope/httpbin
+Description: HTTP request and response service (Python 3 package)
+ httpbin is a test server for testing HTTP libraries and apps. It
+ features several endpoints to cover a multitude of HTTP scenarios.
+ httpbin ships as a Python library and could be run directly by
+ the Python interpreter, or as a WSGI app e.g. with Gunicorn. The
+ endpoint responses are JSON-encoded.
+ .
+ This package provides httpbin in the Python 3 module path.

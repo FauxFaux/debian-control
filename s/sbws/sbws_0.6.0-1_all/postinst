@@ -1,0 +1,63 @@
+#!/bin/sh
+set -e
+case $1 in
+    configure)
+    if ! getent passwd sbws > /dev/null ; then
+        echo "Adding sbws user..."
+        adduser \
+          --quiet \
+          --system \
+          --group \
+          --home "/var/lib/sbws" \
+          --gecos "sbws system user,,," \
+          sbws
+    fi
+    ;;
+esac
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p sbws 
+fi
+
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create sbws.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if deb-systemd-helper debian-installed 'sbws.service'; then
+		# This will only remove masks created by d-s-h on package removal.
+		deb-systemd-helper unmask 'sbws.service' >/dev/null || true
+
+		if deb-systemd-helper --quiet was-enabled 'sbws.service'; then
+			# Create new symlinks, if any.
+			deb-systemd-helper enable 'sbws.service' >/dev/null || true
+		fi
+	fi
+
+	# Update the statefile to add new symlinks (if any), which need to be cleaned
+	# up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'sbws.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			deb-systemd-invoke try-restart 'sbws.service' >/dev/null || true
+		fi
+	fi
+fi
+# End automatically added section
+
+
+exit 0

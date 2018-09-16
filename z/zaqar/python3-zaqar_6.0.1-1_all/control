@@ -1,0 +1,27 @@
+Package: python3-zaqar
+Source: zaqar
+Version: 6.0.1-1
+Architecture: all
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 1979
+Depends: alembic (>= 0.8.10), python3-autobahn (>= 0.10.1), python3-babel, python3-falcon (>= 1.0.0), python3-futurist (>= 1.2.0), python3-iso8601 (>= 0.1.11), python3-jsonschema (>= 2.6.0), python3-keystonemiddleware (>= 4.17.0), python3-memcache (>= 1.56), python3-msgpack (>= 0.5.1), python3-oslo.cache (>= 1.26.0), python3-oslo.config (>= 1:5.1.0), python3-oslo.context (>= 2.19.2), python3-oslo.db (>= 4.27.0), python3-oslo.i18n (>= 3.15.3), python3-oslo.log (>= 3.36.0), python3-oslo.messaging (>= 5.29.0), python3-oslo.policy (>= 1.30.0), python3-oslo.reports (>= 1.18.0), python3-oslo.serialization (>= 2.18.0), python3-oslo.utils (>= 3.33.0), python3-osprofiler (>= 1.4.0), python3-pbr (>= 2.0.0), python3-requests (>= 2.14.2), python3-six (>= 1.10.0), python3-sqlalchemy, python3-stevedore (>= 1.20.0), python3-webob (>= 1.7.1), python3-alembic, python3:any (>= 3.3.2-2~)
+Conflicts: python-zaqar
+Section: python
+Priority: optional
+Homepage: https://github.com/openstack/zaqar/
+Description: OpenStack Queueing as a Service - Python libraries
+ Zaqar is a multi-tenant cloud messaging service for web developers. It
+ combines the ideas pioneered by Amazon's SQS product with additional semantics
+ to support event broadcasting.
+ .
+ The service features a fully RESTful API, which developers can use to send
+ messages between various components of their SaaS and mobile applications, by
+ using a variety of communication patterns. Underlying this API is an efficient
+ messaging engine designed with scalability and security in mind.
+ .
+ Other OpenStack components can integrate with Zaqar to surface events to end
+ users and to communicate with guest agents that run in the "over-cloud" layer.
+ Cloud operators can leverage Zaqar to provide equivalents of SQS and SNS to
+ their customers.
+ .
+ This package contains the Python libraries that are part of Zaqar.

@@ -1,0 +1,20 @@
+Package: kamailio-extra-modules
+Source: kamailio
+Version: 5.1.5-1
+Architecture: amd64
+Maintainer: Debian VoIP Team <pkg-voip-maintainers@lists.alioth.debian.org>
+Installed-Size: 779
+Depends: kamailio (= 5.1.5-1), libc6 (>= 2.14), libev4 (>= 1:4.04), libevent-2.1-6 (>= 2.1.8-stable), libjansson4 (>= 2.0.1), libuuid1 (>= 2.20.1), zlib1g (>= 1:1.1.4)
+Section: net
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.kamailio.org/
+Description: Extra modules for the Kamailio SIP Server
+ Kamailio is a very fast and flexible SIP (RFC3261)
+ server. Written entirely in C, Kamailio can handle thousands calls
+ per second even on low-budget hardware.
+ .
+ This package provides a set of modules for compression of SIP attachments,
+ UUID usage, JSON data structure support, HTTP restful API asynchronous
+ access and a few more functions:
+ gzcompress uuid ev jansson janssonrpc-c http_async

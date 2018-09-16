@@ -1,0 +1,24 @@
+Package: tmispell-voikko
+Source: tmispell-voikko (0.7.1-4)
+Version: 0.7.1-4+b2
+Architecture: amd64
+Maintainer: Timo Jyrinki <timo@debian.org>
+Installed-Size: 194
+Depends: voikko-fi, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libglib2.0-0 (>= 2.12.0), libglibmm-2.4-1v5 (>= 2.54.0), libncursesw6 (>= 6), libsigc++-2.0-0v5 (>= 2.2.0), libstdc++6 (>= 5.2), libtinfo6 (>= 6), libvoikko1
+Suggests: ispell
+Conflicts: tmispell, tmispell-soikko
+Section: text
+Priority: optional
+Homepage: http://voikko.sourceforge.net/
+Description: Ispell wrapper which uses Voikko for spell-checking
+ Voikko is a Finnish spell-checker and hyphenator based on Malaga and
+ Suomi-Malaga.
+ .
+ Tmispell is an Ispell wrapper that provides an Ispell-like interface for other
+ programs that need spelling checker. Many programs (e.g. mail clients, text
+ editors, and word processors) use Ispell for spell-checking. This package
+ makes it possible for such programs to use Voikko for Finnish spell-checking.
+ .
+ This package will set up Tmispell so that the command "ispell" actually starts
+ "tmispell". The real Ispell will be launched only if Tmispell does not support
+ the selected language.

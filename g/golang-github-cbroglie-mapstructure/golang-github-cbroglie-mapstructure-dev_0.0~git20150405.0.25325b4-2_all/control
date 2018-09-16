@@ -1,0 +1,23 @@
+Package: golang-github-cbroglie-mapstructure-dev
+Source: golang-github-cbroglie-mapstructure
+Version: 0.0~git20150405.0.25325b4-2
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 69
+Section: devel
+Priority: extra
+Homepage: https://github.com/cbroglie/mapstructure
+Description: Go library for decoding generic map values into native structures
+ Mapstructure is a Go library for decoding generic map values to structures and
+ vice versa, while providing helpful error handling.
+ .
+ This library is most useful when decoding values from some data stream (JSON,
+ Gob, etc.) where you don't quite know the structure of the underlying data
+ until you read a part of it. You can therefore read a map[string]interface{}
+ and use this library to decode it into the proper underlying native Go
+ structure.
+ .
+ This package is a fork of the golang-github-mitchellh-mapstructure
+ package to more elegantly support decoding data with an unknown
+ structure by using the runtime reflection features of the Go
+ language.

@@ -1,0 +1,18 @@
+Package: libdist-zilla-plugin-metaprovides-package-perl
+Version: 2.004003-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 38
+Depends: perl, libdata-dump-perl, libdist-zilla-perl (>= 5.000), libdist-zilla-plugin-metaprovides-perl, libdist-zilla-role-modulemetadata-perl, libmoose-perl, libmoosex-lazyrequire-perl, libmoosex-types-perl, libnamespace-autoclean-perl, libppi-perl, libsafe-isa-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Dist-Zilla-Plugin-MetaProvides-Package
+Description: Dist::Zilla plugin to extract provides from traditional packages
+ Dist::Zilla::Plugin::MetaProvides::Package is a Dist::Zilla plugin that
+ populates the provides property of META.json and META.yml by absorbing
+ it from your shipped modules, in a manner similar to how PAUSE itself
+ does it.
+ .
+ This allows you to easily create an authoritative index of what module
+ provides what version in advance of PAUSE indexing it, which PAUSE in
+ turn will take verbatim.

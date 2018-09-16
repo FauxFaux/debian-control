@@ -1,0 +1,26 @@
+Package: pidgin-otr
+Version: 4.0.2-2
+Architecture: amd64
+Maintainer: Debian Privacy Tools Maintainers <pkg-privacy-maintainers@lists.alioth.debian.org>
+Installed-Size: 585
+Depends: libc6 (>= 2.4), libgcrypt20 (>= 1.7.0), libotr5 (>= 4.0.0)
+Section: net
+Priority: optional
+Homepage: https://otr.cypherpunks.ca/
+Description: Off-the-Record Messaging plugin for Pidgin
+ OTR allows you to have private conversations over IM by providing:
+  - Encryption
+    - No one else can read your instant messages.
+  - Authentication
+    - You are assured the correspondent is who you think it is.
+  - Deniability
+    - The messages you send do _not_ have digital signatures that are
+      checkable by a third party.  Anyone can forge messages after a
+      conversation to make them look like they came from you.  However,
+      _during_ a conversation, your correspondent is assured the messages
+      they see are authentic and unmodified.
+  - Perfect forward secrecy
+    - If you lose control of your private keys, no previous conversation
+      is compromised.
+ .
+ This is a Pidgin plugin which implements Off-the-Record (OTR) Messaging.

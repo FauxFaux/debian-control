@@ -1,0 +1,32 @@
+Package: gerris
+Source: gerris (20131206+dfsg-18)
+Version: 20131206+dfsg-18+b2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 1219
+Depends: gcc, libc6 (>= 2.27), libgcc1 (>= 1:3.0), libgfortran5 (>= 8), libgfs-1.3-2, libglib2.0-0 (>= 2.12.0), libgts-0.7-5 (>= 0.7.6), libopenmpi3, libquadmath0 (>= 4.6)
+Recommends: gfsview
+Suggests: python
+Breaks: gerris-mpi (<< 20131206+dfsg-7)
+Replaces: gerris-mpi (<< 20131206+dfsg-7)
+Section: science
+Priority: optional
+Homepage: http://gfs.sourceforge.net/
+Description: Fluid Flow Solver
+ Gerris is a system for the solution of the partial differential
+ equations describing fluid flow.
+ .
+ A brief summary of its main (current) features:
+ .
+   * Solves the time-dependent incompressible variable-density Euler,
+     Stokes or Navier-Stokes equations
+   * Adaptive mesh refinement: the resolution is adapted dynamically to
+     the features of the flow
+   * Entirely automatic mesh generation in complex geometries
+   * Second-order in space and time
+   * Unlimited number of advected/diffused passive tracers
+   * Flexible specification of additional source terms
+   * Portable parallel support using the MPI library
+   * Volume of Fluid advection scheme for interfacial flows
+ .
+ This package has MPI support built in.

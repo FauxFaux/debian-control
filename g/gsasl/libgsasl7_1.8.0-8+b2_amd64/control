@@ -1,0 +1,24 @@
+Package: libgsasl7
+Source: gsasl (1.8.0-8)
+Version: 1.8.0-8+b2
+Architecture: amd64
+Maintainer: Debian XMPP Maintainers <pkg-xmpp-devel@lists.alioth.debian.org>
+Installed-Size: 620
+Depends: libc6 (>= 2.14), libcomerr2 (>= 1.01), libgssapi-krb5-2 (>= 1.14+dfsg), libidn11 (>= 1.13), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.6.dfsg.2), libntlm0 (>= 1.2)
+Conflicts: libgsasl1
+Replaces: libgsasl1
+Section: libs
+Priority: optional
+Homepage: http://www.gnu.org/software/gsasl/
+Description: GNU SASL library
+ GNU SASL is an implementation of the Simple Authentication and
+ Security Layer framework and a few common SASL mechanisms. SASL is
+ used by network servers (e.g., IMAP, SMTP) to request authentication
+ from clients, and in clients to authenticate against servers.
+ .
+ Supported mechanisms are ANONYMOUS, EXTERNAL, LOGIN, PLAIN, SECURID, NTLM,
+ DIGEST-MD5, CRAM-MD5, SCRAM-SHA-1, SCRAM-SHA-1-PLUS, GS2-KRB5, GSSAPI.
+ .
+ This package includes the GNU SASL shared library that is required
+ by applications using GNU SASL.  You normally don't need to install
+ it manually.

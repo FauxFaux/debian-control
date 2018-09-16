@@ -1,0 +1,38 @@
+Package: python3-django-sass-processor
+Source: django-sass-processor
+Version: 0.5.4-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 69
+Depends: python3-libsass, python3:any (>= 3.3.2-2~), python3-django
+Section: python
+Priority: optional
+Homepage: https://github.com/jrief/django-sass-processor
+Description: compile files from markup languages such as SASS/SCSS
+ django-sass-processor converts *.scss or *.sass files into *.css
+ while rendering templates. For performance reasons this is done only
+ once, since the preprocessor keeps track on the timestamps and only
+ recompiles, if any of the imported SASS/SCSS files is younger than
+ the corresponding generated CSS file.
+ .
+ This Django app provides a templatetag {% sass_src
+ 'path/to/file.scss' %}, which can be used instead of the built-in
+ templatetag static. Since version 0.3.4 this also works for Jinja2
+ templates.
+ .
+ If SASS/SCSS files shall be referenced through the Media class, or
+ media property, the SASS processor can be used directly.
+ .
+ Additionally, django-sass-processor is shipped with a management
+ command, which can convert the content of all occurrences inside the
+ templatetag sass_src as an offline operation. Hence the libsass
+ compiler is not required in a production environment.
+ .
+ During development, a `sourcemap <https://developer.chrome.com=""
+ devtools="" docs="" css-preprocessors="">`__ is generated along side
+ with the compiled *.css file. This allows to debug style sheet errors
+ much easier.
+ .
+ With this tool, you can safely remove your Ruby installations
+ "Compass" and "SASS" from your Django projects. You neither need any
+ directory "watching" daemons based on node.js.

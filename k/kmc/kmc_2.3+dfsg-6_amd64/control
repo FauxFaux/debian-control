@@ -1,0 +1,31 @@
+Package: kmc
+Version: 2.3+dfsg-6
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 2140
+Depends: libbz2-1.0, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgomp1 (>= 4.9), libstdc++6 (>= 6), zlib1g (>= 1:1.2.6)
+Section: science
+Priority: optional
+Homepage: http://sun.aei.polsl.pl/kmc
+Description: count kmers in genomic sequences
+ The kmc software is designed for counting k-mers (sequences of
+ consecutive k symbols) in a set of reads. K-mer counting is
+ important for many bioinformatics applications, e.g. developing de Bruijn
+ graph assemblers.
+ .
+ Building de Bruijn graphs is a commonly used approach for genome
+ assembly with data from second-generation sequencing.
+ Unfortunately, sequencing errors (frequent in practice)
+ result in huge memory requirements for de Bruijn graphs, as well
+ as long build time. One of the popular approaches to handle this
+ problem is filtering the input reads in such a way that unique k-mers
+ (very likely obtained as a result of an error) are discarded.
+ .
+ Thus, KMC scans the raw reads and produces a compact representation
+ of all non-unique reads accompanied with number of their occurrences.
+ The algorithm implemented in KMC makes use mostly of disk space rather
+ than RAM, which allows one to use KMC even on rather typical personal
+ computers. When run on high-end servers (what is necessary for KMC
+ competitors) it outperforms them in both memory requirements and
+ speed of computation. The disk space necessary for computation is in
+ order of the size of input data (usually it is smaller).

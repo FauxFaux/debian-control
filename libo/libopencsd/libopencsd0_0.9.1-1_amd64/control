@@ -1,0 +1,19 @@
+Package: libopencsd0
+Source: libopencsd
+Version: 0.9.1-1
+Architecture: amd64
+Maintainer: Wookey <wookey@debian.org>
+Installed-Size: 624
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/Linaro/OpenCSD
+Description: ARM CoreSight Trace decode library
+ This library provides an API suitable for the decode of ARM(r) CoreSight(tm)
+ trace streams. It supports ETMv3 data & instruction trace, ETMv4 instruction
+ trace, PTM (v1.1) instruction trace, STM (v1.1) software trace, and support for
+ external/custom decoders.
+ .
+ This library is trypically used via perf, but libopencsd-bin also contains a
+ test binary.

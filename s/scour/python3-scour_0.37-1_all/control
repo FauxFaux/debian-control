@@ -1,0 +1,24 @@
+Package: python3-scour
+Source: scour
+Version: 0.37-1
+Architecture: all
+Maintainer: Martin Pitt <mpitt@debian.org>
+Installed-Size: 222
+Depends: python3-six (>= 1.9.0), python3:any, python3-pkg-resources
+Section: python
+Priority: optional
+Homepage: https://github.com/codedread/scour
+Description: SVG scrubber and optimizer (Python 3 module)
+ Scour is a Python module that aggressively cleans SVG files, removing a lot of
+ unnecessary information that certain tools or authors embed into their
+ documents.  The goal of scour is to provide an identically rendered image
+ (i.e. a scoured document should have no discernible visible differences from
+ the original file) while minimizing the file size.
+ .
+ WARNING: Scour is intended to be run on files that have been edited in Vector
+ Graphics editors such as Inkscape or Adobe Illustrator.  Scour attempts to
+ optimize the file, and as result, it will change the file's structure and
+ (possibly) its semantics.  If you have hand-edited your SVG files, you will
+ probably not be happy with the output of Scour.
+ .
+ Never use scour to overwrite your original file!

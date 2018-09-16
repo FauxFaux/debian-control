@@ -1,0 +1,16 @@
+Package: postgresql-10-pgextwlist
+Source: pgextwlist
+Version: 1.6-1
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <pkg-postgresql-public@lists.alioth.debian.org>
+Installed-Size: 40
+Depends: libc6 (>= 2.14), postgresql-10
+Section: libs
+Priority: optional
+Homepage: https://github.com/dimitri/pgextwlist
+Description: PostgreSQL Extension Whitelisting
+ This extension implements extension whitelisting, and will actively prevent
+ users from installing extensions not in the provided list. Also, this
+ extension implements a form of sudo facility in that the whitelisted
+ extensions will get installed as if superuser. Privileges are dropped before
+ handing the control back to the user.

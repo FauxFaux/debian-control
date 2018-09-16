@@ -1,0 +1,59 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = purge ]; then
+	if [ -e /etc/.etckeeper ]; then
+		. /usr/share/debconf/confmodule
+	
+		# uninit on purge is tricky because etckeeper's configuration
+		# and code has been removed at this point. This relies on a
+		# stashed away copy.
+		if [ -e /var/cache/etckeeper/stash/etckeeper.conf ] &&
+		   [ -d /var/cache/etckeeper/stash/uninit.d ] &&
+		   [ -x /var/cache/etckeeper/stash/etckeeper ]; then
+			. /var/cache/etckeeper/stash/etckeeper.conf
+			if [ -n "$VCS" ]; then
+				db_subst etckeeper/purge VCS "$VCS"
+				db_input critical etckeeper/purge || true
+				db_go || true
+				db_get etckeeper/purge
+				if [ "$RET" = true ]; then
+					ETCKEEPER_CONF_DIR=/var/cache/etckeeper/stash
+					export ETCKEEPER_CONF_DIR
+					/var/cache/etckeeper/stash/etckeeper uninit -f || true
+				fi
+			fi
+		fi
+	fi
+	rm -rf /var/cache/etckeeper
+fi
+
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper rm_conffile /etc/bash_completion.d/etckeeper 1.18.3-1\~ etckeeper -- "$@"
+# End automatically added section
+# Automatically added by dh_systemd_start/11.3.5
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/11.3.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'etckeeper.timer' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'etckeeper.timer' >/dev/null || true
+		deb-systemd-helper unmask 'etckeeper.timer' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.3.5
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

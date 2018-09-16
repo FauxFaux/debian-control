@@ -1,0 +1,18 @@
+Package: python-traceback2
+Version: 1.4.0-5
+Architecture: all
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 81
+Depends: python-six, python-linecache2, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://github.com/testing-cabal/traceback2
+Description: backports of the traceback module - Python 2.7
+ This package offers a backport of the traceback package to older supported
+ Pythons. Users would typically do: "import traceback2 as traceback" then use
+ the module as if it was the system traceback.
+ .
+ In Python 2.x, unlike traceback, traceback2 creates unicode output (because it
+ depends on the linecache2 module).
+ .
+ This package contains the Python 2.7 module.

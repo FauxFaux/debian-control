@@ -1,0 +1,28 @@
+#!/bin/sh -e
+
+DEB_HOST_MULTIARCH=x86_64-linux-gnu
+
+PETSC_VERSION=3.9.3
+PETSC_ARCH=${DEB_HOST_MULTIARCH}
+PETSC_DEBUG_ARCH=${PETSC_ARCH}-real-debug
+PETSC_SONAME_VERSION=3.9
+PETSC_NAME=petsc${PETSC_SONAME_VERSION}
+
+# Remove alternatives links
+if [ "$1" = "remove" ]; then
+  update-alternatives --remove petsc /usr/lib/petscdir/${PETSC_NAME}/${PETSC_DEBUG_ARCH}
+fi
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p libpetsc-real3.9-dbg 
+else
+	dpkg -L libpetsc-real3.9-dbg | grep '\.py$' | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+

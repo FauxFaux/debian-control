@@ -1,0 +1,26 @@
+Package: node-url-parse
+Version: 1.2.0-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 55
+Depends: nodejs, node-requires-port (>= 0.0.1), node-querystringify (>= 0.0.3)
+Section: javascript
+Priority: optional
+Homepage: https://github.com/unshiftio/url-parse#readme
+Description: Parse URL in node using the URL module and in the browser using the DOM
+ The url-parse method exposes two different API interfaces. The url interface
+ that you know from Node.js and the new URL interface that is available in
+ the latest browsers.
+ .
+ Since 0.1 we've moved away from using the DOM's <a> element for URL parsing
+ and moving to a full Regular Expression solution. The main reason for this
+ change is to make the URL parser available in different JavaScript
+ environments as you don't always have access to the DOM like Worker
+ environments.  This module still have a really small foot print as this
+ module's main intention is to be bundled with client-side code. The only
+ problem however with a RegExp based solution is that it required a lot of
+ lookups causing major problems in FireFox. So the last and the current
+ solution was a pure string parsing solution which chops up the URL in
+ smaller pieces.
+ .
+ Node.js is an event-based server-side JavaScript engine.

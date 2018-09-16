@@ -1,0 +1,25 @@
+Package: govendor
+Version: 1.0.9+ds1-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 7596
+Depends: libc6 (>= 2.3.2)
+Built-Using: golang-1.10 (= 1.10.1-3), golang-github-bowery-prompt (= 0.0~git20160808.0.d43c270-1), golang-github-dchest-safefile (= 0.0~git20151022.0.855e8d9-1), golang-github-google-shlex (= 0.0~git20150127.0.6f45313-2), golang-github-pkg-errors (= 0.8.0+git20180311.816c908-1), golang-golang-x-tools (= 1:0.0~git20180222.0.f8f2f88+ds-1), golang-yaml.v2 (= 2.2.1-1)
+Section: devel
+Priority: optional
+Homepage: https://github.com/kardianos/govendor
+Description: Go vendor tool that works with the standard vendor file
+ govendor is a vendoring tool that fetches, annotates, and synchronizes
+ dependencies for the Go programming language. It can be useful as a
+ stand-alone tool even if it is not the primary vendoring tool. Inspection
+ sub-commands such as "govendor list" and "govendor license" can be useful
+ to find information on dependencies and their statuses. "govendor fetch"
+ will update or add new dependencies directly from remotes. If you choose
+ to not check in your dependency source code, use "govendor sync" to pull
+ the correct revision into the vendor folder.
+ .
+ Frustrated by not being able to run "go test ./..." anymore? Run
+ "govendor test +local" even if you do not use govendor elsewhere. Look
+ into the different statuses that can be assigned to packages, they are
+ useful. Still using godep or glock? Migrate them over including manifest
+ file using "govendor migrate".

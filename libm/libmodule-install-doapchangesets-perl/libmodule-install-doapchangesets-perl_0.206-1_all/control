@@ -1,0 +1,28 @@
+Package: libmodule-install-doapchangesets-perl
+Version: 0.206-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 106
+Depends: libfile-slurp-perl, libwww-perl, libmodule-install-perl, libperl-version-perl, librdf-query-perl, librdf-trine-perl, liburi-perl, liblist-moreutils-perl, perl
+Recommends: libmodule-install-doap-perl, libmodule-package-perl, libmodule-install-rdf-perl (>= 0.006)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Module-Install-DOAPChangeSets
+Description: write your distribution change log in RDF
+ Resource Description Framework (RDF) is a standard model for data
+ interchange on the Web.
+ .
+ Module::Install::DOAPChangeSets allows you to write your Changes file
+ in Turtle or RDF/XML and autogenerate a human-readable text file.
+ .
+ To do this, create an RDF file called "meta/changes.ttl" (or something
+ like that) and describe your distribution's changes in RDF using the
+ Dublin Core, DOAP, and DOAP Change Sets vocabularies. Then in your
+ Makefile.PL, include:
+ .
+  write_doap_changes "meta/changes.ttl", "Changes", "turtle";
+ .
+ This line will read your data from the file named as the first
+ argument, parse it using either Turtle or RDFXML parsers (the third
+ argument), and output a human-readable changelog to the file named as
+ the second argument.

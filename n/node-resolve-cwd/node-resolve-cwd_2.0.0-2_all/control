@@ -1,0 +1,20 @@
+Package: node-resolve-cwd
+Version: 2.0.0-2
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 16
+Depends: nodejs, node-resolve-from (>= 3.0.0)
+Section: javascript
+Priority: optional
+Homepage: https://github.com/sindresorhus/resolve-cwd#readme
+Description: Resolve the path of a module from current directory
+ This module can be used to determine the path of a module starting from the
+ current working directory.
+ .
+ For an input of moduleId to resolveCwd(moduleId), it gives an error when the
+ module can't be found, which is similar to how require() works.
+ .
+ If moduleId is called as resolveCwd.silent(moduleId) then it returns null
+ instead of giving an error when the module can't be found.
+ .
+ Node.js is an event-based server-side JavaScript engine.

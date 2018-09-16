@@ -1,0 +1,25 @@
+Package: libtest-distmanifest-perl
+Version: 1.014-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 46
+Depends: perl, libmodule-manifest-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-DistManifest
+Description: Perl module for verifying CPAN MANIFEST files
+ Test::DistManifest provides a simple method of testing that a MANIFEST
+ matches the distribution. It is similar to Test::CheckManifest, but differs
+ in that it has native support for the MANIFEST.SKIP file.
+ .
+ It tests three things:
+ .
+  1. Everything in MANIFEST exists
+  2. Everything in the package is listed in MANIFEST, or subsequently matches
+     a regular expression mask in MANIFEST.SKIP
+  3. Nothing exists in MANIFEST that also matches a mask in MANIFEST.SKIP,
+     which is an unsatisfiable condition
+ .
+ Much of the functionality is provided by Module::Manifest, so developers
+ wishing to manipulate MANIFEST files in a similar way are encouraged to look
+ at that distribution.

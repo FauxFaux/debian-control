@@ -1,0 +1,18 @@
+Package: packaging-dev
+Version: 0.8
+Architecture: all
+Maintainer: Benjamin Drung <bdrung@debian.org>
+Installed-Size: 26
+Depends: build-essential, debhelper, devscripts, dput | dput-ng | dupload, lintian, pbuilder | cowbuilder | sbuild, quilt
+Recommends: apt-file, autoconf, automake, autopkgtest, autotools-dev, bzr-builddeb, cdbs, cmake, debian-policy, developers-reference | developers-reference-de | developers-reference-fr | developers-reference-ja, dh-autoreconf, dh-make, git-buildpackage, gnome-pkg-tools, gnupg, libtool, piuparts, pkg-kde-tools, svn-buildpackage
+Suggests: mercurial-buildpackage
+Section: metapackages
+Priority: optional
+Description: convenient tools to develop packages
+ This metapackage depends on common packages useful for the development of
+ Debian-format packages, including patch management systems, build systems,
+ packaging macros, helpful scripts for developers, and tools for building and
+ testing packages.
+ .
+ This metapackage provides tools for packaging, rather than the development of
+ software. No other package should depend or build-depend on this package.

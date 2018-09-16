@@ -1,0 +1,17 @@
+Package: flannel
+Version: 0.9.1~ds1-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 33288
+Depends: libc6 (>= 2.3.2)
+Built-Using: etcd (= 3.2.9+dfsg-2), golang-1.9 (= 1.9.2-3), golang-github-coreos-go-iptables (= 0.1.0-1), golang-github-coreos-go-systemd (= 14-1), golang-github-coreos-pkg (= 3-1), golang-github-coreos-semver (= 0.2.0-2), golang-github-davecgh-go-spew (= 1.1.0-1), golang-github-denverdino-aliyungo (= 0.0~git20170721.0.80ceb80-1), golang-github-ghodss-yaml (= 1.0.0-1), golang-github-go-ini-ini (= 1.28.2-1), golang-github-go-openapi-jsonpointer (= 1:0.0~git20160704.0.46af16f-1), golang-github-go-openapi-jsonreference (= 1:0.0~git20160704.0.13c6e35-1), golang-github-go-openapi-spec (= 1:0.0~git20160808.0.6aced65-1), golang-github-go-openapi-swag (= 1:0.0~git20160704.0.1d0bd11-1), golang-github-google-gofuzz (= 0.0~git20150903.0.e4af62d-2), golang-github-howeyc-gopass (= 0.0~git20160303.0.66487b2-1), golang-github-imdario-mergo (= 0.2.2-2), golang-github-jmespath-go-jmespath (= 0.2.2-2), golang-github-joho-godotenv (= 1.2.0-1), golang-github-jonboulle-clockwork (= 0.1.0-4), golang-github-juju-ratelimit (= 0.0~git20170523.0.5b9ff86-1), golang-github-mailru-easyjson (= 0.0~git20161103.0.159cdb8-1), golang-github-opennota-urlesc (= 0.0~git20160726.0.5bd2802-1), golang-github-puerkitobio-purell (= 1.1.0-1), golang-github-spf13-pflag (= 0.0~git20170508.0.e57e3ee-1), golang-github-ugorji-go-codec (= 0.0~git20151130.0.357a44b-1), golang-github-vishvananda-netlink (= 0.0~git20170407.0.1e86b2b-1), golang-github-vishvananda-netns (= 0.0~git20170707.0.86bef33-1), golang-glog (= 0+git20150801.fca8c88-1), golang-go.crypto (= 1:0.0~git20170629.0.5ef0053-1), golang-gogoprotobuf (= 0.5-1), golang-golang-x-net-dev (= 1:0.0+git20170629.c81e7f2+dfsg-1), golang-golang-x-oauth2 (= 0.0~git20170901.d89af98-1), golang-google-api (= 0.0~git20170907.b1ecfb3-1), golang-google-cloud (= 0.9.0-2), golang-gopkg-inf.v0 (= 0.9.0-1), golang-x-text (= 0.0~git20170627.0.6353ef0-1), golang-yaml.v2 (= 0.0+git20170407.0.cd8b52f-1)
+Section: devel
+Priority: optional
+Homepage: https://github.com/coreos/flannel
+Description: Etcd backed network fabric for containers
+ Flannel is a virtual network that gives a subnet to each host for
+ use with container runtimes.
+ .
+ Platforms like Google's Kubernetes assume that each container (pod)
+ has a unique, routable IP inside the cluster. The advantage of this
+ model is that it reduces the complexity of doing port mapping.

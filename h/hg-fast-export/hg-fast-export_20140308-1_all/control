@@ -1,0 +1,19 @@
+Package: hg-fast-export
+Version: 20140308-1
+Architecture: all
+Maintainer: Andrey Rahmatullin <wrar@wrar.name>
+Installed-Size: 89
+Depends: python:any (>= 2.6.6-7~), git, mercurial
+Section: vcs
+Priority: optional
+Homepage: http://repo.or.cz/w/fast-export.git
+Description: mercurial to git converter using git-fast-import
+ hg-fast-export tool allows incremental import of mercurial repositories
+ to git repositories.
+ .
+ It can automatically import a local hg repo into a local git repo using
+ just one command. Subsequent importing of new changesets is supported.
+ .
+ Included git-hg wrapper script can be used to transparently track Mercurial
+ repositories without a separate checkout. It also includes experimental
+ support for pushing back to Mercurial.

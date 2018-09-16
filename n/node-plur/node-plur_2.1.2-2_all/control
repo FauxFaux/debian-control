@@ -1,0 +1,25 @@
+Package: node-plur
+Version: 2.1.2-2
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 16
+Depends: nodejs, node-irregular-plurals (>= 1.0.0)
+Section: web
+Priority: optional
+Homepage: https://github.com/sindresorhus/plur
+Description: Pluralize a word
+ This package works only for English language currently.
+ Default:
+     - Irregular nouns will use this [list]
+       (https://github.com/sindresorhus/irregular-plurals/
+                blob/master/irregular-plurals.json).
+     - Words ending in *s*, *x*, *z*, *ch*, *sh*
+       will be pluralized with *-es* (eg. *foxes*).
+     - Words ending in *y* that are preceded by a consonant
+       will be pluralized by replacing *y* with *-ies* (eg. *puppies*).
+     - All other words will have "s" added to the end (eg. *days*).
+ Pluralized word.
+ The plural suffix will match the case of the last letter in the word.
+ This option is only for extreme edge-cases. You probably won't need it.
+ .
+ Node.js is an event-based server-side JavaScript engine.

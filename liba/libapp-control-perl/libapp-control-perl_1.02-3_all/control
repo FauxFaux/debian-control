@@ -1,0 +1,18 @@
+Package: libapp-control-perl
+Version: 1.02-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 27
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/App-Control
+Description: Perl module for apachectl style control of another executable
+ App::Control is a simple module to replicate the kind of functionality you get
+ with apachectl to control Apache, but for any script or executable. There is a
+ very simple OO interface, where the constructor is used to specify the
+ executable, command line arguments, and pidfile, and various methods (start,
+ stop, etc.) are used to control the executable in the obvious way.  The module
+ is intended to be used in a simple wrapper control script. Currently the
+ module does a fork and exec to start the executable, and sets the signal
+ handler for SIGCHLD to 'IGNORE' to avoid zombie processes.

@@ -1,0 +1,23 @@
+Package: desproxy
+Version: 0.1.0~pre3-10
+Architecture: amd64
+Maintainer: Jari Aalto <jari.aalto@cante.net>
+Installed-Size: 155
+Depends: libc6 (>= 2.15)
+Section: net
+Priority: optional
+Homepage: https://sourceforge.net/projects/desproxy
+Description: tunnel TCP traffic through a HTTP proxy
+ Browsers (in general HTTP clients) use HTTP proxies to request web pages. The
+ proxy forwards those request to the destination server. All
+ the negotiation is done via the HTTP protocol, which is designed just
+ to carry HTTP requests and no generic (TCP/IP) traffic. That is why you
+ can't (normally) use Internet applications beside your browser if
+ you are behind a HTTP proxy.
+ .
+ That is what desproxy is good for. Desproxy is a TCP tunnel, which
+ means desproxy can forward TCP/IP traffic via a HTTP proxy. Desproxy
+ uses a HTTP/1.1 method (CONNECT) to establish TCP/IP connections on
+ demand. CONNECT is used for SSL connections when accessing to secure
+ sites. So if you can access sites that support SSL (www.hotmail.com for
+ example) you can use desproxy.

@@ -1,0 +1,27 @@
+Package: libghc-typed-process-prof
+Source: haskell-typed-process
+Version: 0.2.2.0-1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 682
+Depends: libghc-typed-process-dev (= 0.2.2.0-1), libghc-async-prof-2.1.1.1-3e78d, libghc-base-prof-4.10.1.0-35a7f, libghc-bytestring-prof-0.10.8.2-4a9e2, libghc-process-prof-1.6.1.0-df30c, libghc-stm-prof-2.4.5.0-2739c, libghc-transformers-prof-0.5.2.0-e0457
+Provides: libghc-typed-process-prof-0.2.2.0-983eb
+Section: haskell
+Priority: optional
+Homepage: https://haskell-lang.org/library/typed-process
+Description: run external processes, with strong typing of streams; profiling libraries
+ This library provides the ability to launch and interact with
+ external processes. It wraps around the process library, and intends
+ to improve upon it by:
+ .
+  * Using type variables to represent the standard streams, making
+    them easier to manipulate
+  * Use proper concurrency (e.g., the async library) in place of the
+    weird lazy I/O tricks for such things as consuming output streams
+  * Allow for more complex concurrency by providing STM-based functions
+  * Using binary I/O correctly
+  * Providing a more composable API, designed to be easy to use for
+    both simple and complex use cases
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

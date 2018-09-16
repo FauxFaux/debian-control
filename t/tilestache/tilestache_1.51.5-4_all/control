@@ -1,0 +1,25 @@
+Package: tilestache
+Version: 1.51.5-4
+Architecture: all
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 575
+Depends: fonts-dejavu-core, python-modestmaps, python-pil, python-simplejson, python-werkzeug, python:any (<< 2.8), python:any (>= 2.7~)
+Recommends: libjs-modestmaps (>= 2.0.0), python-blit, python-gdal, python-mapnik, python-psycopg2, python-pyproj, python-pysolr, python-shapely
+Suggests: python-boto, python-memcache, python-redis
+Section: web
+Priority: optional
+Homepage: http://tilestache.org
+Description: map tiles caching system
+ TileStache is a Python-based server application that can serve up map tiles
+ based on rendered geographic data.
+ .
+ TileStache features:
+ .
+  - Renders Mapnik maps.
+  - Serves pre-rendered tiles out of MBTiles tilesets.
+  - Generates vector tiles from OGR datasources in GeoJSON usable in Polymaps.
+  - Caches to disk, Memcache, Amazon S3, MBTiles, and elsewhere.
+  - Serves tiles in Google-style spherical mercator projection and WGS84
+    lat/lon projection.
+  - Runs from CGI, mod_python, or Gunicorn WSGI.
+  - Uses metatiles.

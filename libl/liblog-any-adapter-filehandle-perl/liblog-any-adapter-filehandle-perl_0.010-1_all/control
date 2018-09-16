@@ -1,0 +1,17 @@
+Package: liblog-any-adapter-filehandle-perl
+Version: 0.010-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 58
+Depends: perl, liblog-any-perl (>= 1.00) | liblog-any-adapter-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Log-Any-Adapter-FileHandle
+Description: basic Log::Any::Adapter to forward messages to a filehandle
+ Log::Any::Adapter::FileHandle is a basic adapter that will simply forward log
+ messages to a filehandle, or any object that supports a 'print' method
+ (IO::String, IO::Socket::INET, Plack's $env->{psgi.errors} object, etc).
+ .
+ It was created so that scripts running under daemontools or runit can
+ output messages to locally defined logs. It does not timestamp messages, that
+ responsibility is delegated to the external log capture mechanism.

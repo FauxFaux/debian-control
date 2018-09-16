@@ -1,0 +1,23 @@
+Package: liblcmaps-without-gsi0
+Source: lcmaps
+Version: 1.6.6-2
+Architecture: amd64
+Maintainer: Dennis van Dok <dennisvd@nikhef.nl>
+Installed-Size: 217
+Depends: libc6 (>= 2.14)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://wiki.nikhef.nl/grid/Site_Access_Control
+Description: Grid mapping service without GSI
+ The Local Centre MAPping Service (LCMAPS) is a security middleware
+ component that processes the users Grid credentials (typically X.509
+ proxy certificates and VOMS attributes) and maps the user to a local
+ account based on the site local policy.
+ .
+ It is a highly configurable pluggable interface, and many plugins are
+ available to tailor almost every need. Since this is middleware, it
+ does not interact with the user directly; to use it in a program please
+ see the lcmaps-interface package.
+ .
+ This package contains an implementation without GSI protocol support.

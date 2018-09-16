@@ -1,0 +1,22 @@
+Package: postgresql-10-pgmp
+Source: postgresql-pgmp
+Version: 1.0.2-5
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <pkg-postgresql-public@lists.alioth.debian.org>
+Installed-Size: 161
+Depends: libc6 (>= 2.14), libgmp10, postgresql-10
+Section: database
+Priority: optional
+Homepage: https://github.com/dvarrazzo/pgmp
+Description: arbitrary precision integers and rationals for PostgreSQL 10
+ pgmp is a PostgreSQL extension to add the GMP data types and functions
+ directly into the database.
+ .
+ The extension adds the types mpz (arbitrary size integers) and mpq (arbitrary
+ precision rationals) to PostgreSQL and exposes to the database all the
+ functions available in the GMP library for these data types, allowing:
+ .
+  * higher performance arithmetic on integers respect to the numeric data type
+  * a rational data type for absolute precision storage and arithmetic
+  * using specialized functions to deal with prime numbers, random numbers,
+    factorization directly into the database.

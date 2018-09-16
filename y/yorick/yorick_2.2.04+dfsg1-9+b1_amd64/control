@@ -1,0 +1,33 @@
+Package: yorick
+Source: yorick (2.2.04+dfsg1-9)
+Version: 2.2.04+dfsg1-9+b1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 1880
+Depends: yorick-data (= 2.2.04+dfsg1-9), libc6 (>= 2.14), libx11-6, debconf
+Recommends: rlwrap, yorick-z
+Suggests: yorick-full, yorick-mpy-openmpi | yorick-mpy-mpich2, emacsen, curl
+Section: science
+Priority: optional
+Homepage: http://yorick.sourceforge.net
+Description: interpreted language and scientific graphics
+ Yorick is an interpreted programming language for:
+  * scientific simulations or calculations
+  * postprocessing or steering large simulation codes
+  * interactive scientific graphics
+  * reading, writing, and translating large files of numbers
+ .
+ The language features a compact syntax for many common array
+ operations, so it processes large arrays of numbers very quickly and
+ efficiently.  Superficially, yorick code resembles C code, but yorick
+ variables are never explicitly declared and have a dynamic scoping
+ similar to many Lisp dialects.  The yorick language is designed to be
+ typed interactively at a keyboard, as well as stored in files for
+ later use.
+ .
+ This package includes an emacs-based development environment, which
+ you can launch by typing M-x yorick in emacs.
+ .
+ Many add-on packages and plug-ins are available for Yorick (the
+ package names begin with "yorick-"). You may want to install the
+ yorick-full metapackage which depends on the vast majority of them.

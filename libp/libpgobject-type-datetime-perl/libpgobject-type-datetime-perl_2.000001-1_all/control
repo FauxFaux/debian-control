@@ -1,0 +1,29 @@
+Package: libpgobject-type-datetime-perl
+Version: 2.000001-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: libdatetime-perl, libdatetime-timezone-perl, libpgobject-perl, perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/PGObject-Type-DateTime
+Description: DateTime Wrappers for PGObject
+ PGObject::Type::DateTime provides a basic wrapper around DateTime to allow
+ PGObject-framework types to automatically tie date/time related objects, but
+ date and timestamp formats are handled in the 'from_db' routines.
+ .
+ This specific module only supports the ISO YMD datestyle. The MDY or DMY
+ datestyles may be usable in future versions but datestyles other than ISO
+ raise ambiguity issues, sufficient that they cannot always even be used in
+ PostgreSQL as input.
+ .
+ This module also provides basic default handling. Times are assigned a date
+ of '0001-01-01' and dates are assigned a time of midnight. Whether this is
+ set is persisted, along with whether timezones are set, and these are
+ returned to a valid ISO YMD format on export, if a date component was
+ initially set.
+ .
+ This means you can use this for general math without worrying about many of
+ the other nicities. Parsing ISO YMD dates and standard times (24 hr format)
+ is supported via the from_db interface, which also provides a useful way of
+ handing dates in.

@@ -1,0 +1,24 @@
+Package: reapr
+Version: 1.0.18+dfsg-4
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 1061
+Depends: libbamtools2.5.1, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libhts2 (>= 1.0), libstdc++6 (>= 5.2), libtabixpp0, zlib1g (>= 1:1.1.4), samtools (>= 1.3), bamtools, smalt, r-base, snpomatic, tabix, libfile-copy-link-perl
+Section: science
+Priority: optional
+Homepage: http://www.sanger.ac.uk/science/tools/reapr
+Description: universal tool for genome assembly evaluation
+ REAPR is a tool that evaluates the accuracy of a genome assembly using mapped
+ paired end reads, without the use of a reference genome for comparison. It can
+ be used in any stage of an assembly pipeline to automatically break incorrect
+ scaffolds and flag other errors in an assembly for manual inspection. It
+ reports mis-assemblies and other warnings, and produces a new broken assembly
+ based on the error calls.
+ .
+ The software requires as input an assembly in FASTA format and paired reads
+ mapped to the assembly in a BAM file. Mapping information such as the fragment
+ coverage and insert size distribution is analysed to locate mis-assemblies.
+ REAPR works best using mapped read pairs from a large insert library (at least
+ 1000bp). Additionally, if a short insert Illumina library is also available,
+ REAPR can combine this with the large insert library in order to score each
+ base of the assembly.

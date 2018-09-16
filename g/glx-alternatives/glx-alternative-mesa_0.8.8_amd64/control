@@ -1,0 +1,24 @@
+Package: glx-alternative-mesa
+Source: glx-alternatives
+Version: 0.8.8
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 34
+Pre-Depends: dpkg (>= 1.17.21)
+Depends: update-glx (= 0.8.8)
+Recommends: glx-diversions
+Suggests: libgl1-mesa-glx | libgl1
+Breaks: nvidia-alternative (<< 390.67-3~)
+Section: contrib/libs
+Priority: optional
+Multi-Arch: foreign
+Description: allows the selection of MESA as GLX provider
+ In setups with several GLX providers (e.g. the free MESA implementation and
+ proprietary graphics hardware vendor implementations) this metapackage
+ allows one to switch back to MESA.
+ .
+ Use 'update-glx --config glx' to select an implementation.
+ .
+ This package does not depend on the corresponding MESA libraries.
+ In order to install the MESA libraries, install the libgl1-mesa-glx package
+ instead.

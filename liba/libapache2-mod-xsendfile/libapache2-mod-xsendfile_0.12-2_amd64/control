@@ -1,0 +1,20 @@
+Package: libapache2-mod-xsendfile
+Version: 0.12-2
+Architecture: amd64
+Maintainer: Marco Nenciarini <mnencia@debian.org>
+Installed-Size: 84
+Depends: libc6 (>= 2.3), apache2-api-20120211
+Section: web
+Priority: extra
+Homepage: http://tn123.org/mod_xsendfile/
+Description: Serve large static files efficiently from web applications
+ This package provides the xsendfile module for the Apache 2 webserver.
+ xsendfile is a small Apache2 module that processes X-SENDFILE header
+ sent by the original output handler.
+ .
+ If it encounters the presence of such header it will discard all output
+ and send the file specified by that header instead using Apache internals
+ including all optimizations like caching-headers and sendfile or mmap if
+ configured.
+ .
+ It is useful for processing script-output of e.g. php, perl or any cgi.

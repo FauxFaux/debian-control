@@ -1,0 +1,28 @@
+Package: api-sanity-checker
+Version: 1.98.7-2
+Architecture: all
+Maintainer: Mathieu Malaterre <malat@debian.org>
+Installed-Size: 660
+Depends: abi-compliance-checker (>= 1.99), perl:any
+Suggests: doc-base
+Section: devel
+Priority: optional
+Homepage: https://github.com/lvc/api-sanity-checker
+Description: automatic generator of basic unit tests for a C/C++ library API
+ API Sanity Checker is an automatic generator of basic unit tests for a C/C++
+ library. It helps to quickly generate simple ("sanity" or "shallow" quality)
+ tests for every function in an API using their signatures, data type
+ definitions and relationships between functions straight from the library
+ header files ("Header-Driven Generation"). Each test case contains a function
+ call with reasonable (in most, but unfortunately not all, cases) input
+ parameters. The quality of generated tests allows one to check absence of
+ critical errors in simple use cases and can be greatly improved by involving of
+ highly reusable specialized types for the library.
+ .
+ The tool can execute generated tests and detect crashes, aborts, all kinds of
+ emitted signals, non-zero program return code, program hang‐ ing and
+ requirement failures (if specified). The tool can be considered as a tool for
+ out-of-box low-cost sanity checking of library API or as a test development
+ framework for initial generation of templates for advanced tests. Also it
+ supports universal Template2Code format of tests, splint specifications, random
+ test generation mode and other useful features.

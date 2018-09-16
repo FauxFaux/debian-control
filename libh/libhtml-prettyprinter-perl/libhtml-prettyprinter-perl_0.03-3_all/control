@@ -1,0 +1,24 @@
+Package: libhtml-prettyprinter-perl
+Version: 0.03-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 87
+Depends: perl, libhtml-tree-perl, libhtml-tagset-perl, libhtml-parser-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/HTML-PrettyPrinter
+Description: module that generates nice HTML files from HTML syntax trees
+ HTML::PrettyPrinter produces nicely formatted HTML code from a HTML syntax
+ tree. It is especially useful if the produced HTML file shall be read or
+ edited manually afterwards. Various parameters let you adapt the output to
+ different styles and requirements.
+ .
+ If you don't care how the HTML source looks like as long as it is valid and
+ readable by browsers, you should use the as_HTML() method of HTML::Element
+ instead of the pretty printer. It is about five times faster.
+ .
+ The pretty printer will handle line wrapping, indention and structuring by
+ the way the whitespace in the tree is represented in the output. Furthermore
+ upper/lowercase markup and markup minimization, quoting of attribute values,
+ the encoding of entities and the presence of optional end tags are
+ configurable.

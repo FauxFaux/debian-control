@@ -1,0 +1,26 @@
+Package: grub-efi-ia32
+Source: grub2
+Version: 2.02+dfsg1-6
+Architecture: amd64
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 213
+Depends: debconf (>= 0.5) | debconf-2.0, grub-common (= 2.02+dfsg1-6), grub2-common (= 2.02+dfsg1-6), grub-efi-ia32-bin (= 2.02+dfsg1-6), ucf
+Conflicts: elilo, grub (<< 0.97-54), grub-coreboot, grub-efi-amd64, grub-ieee1275, grub-legacy, grub-pc, grub-xen
+Replaces: grub, grub-common (<= 1.97~beta2-1), grub-coreboot, grub-efi, grub-efi-amd64, grub-ieee1275, grub-legacy, grub-pc, grub2 (<< 2.02+dfsg1-6)
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader, version 2 (EFI-IA32 version)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+ .
+ This package contains a version of GRUB that has been built for use with
+ EFI-IA32 architecture, such as the one provided by Intel Macs (that is, unless
+ a BIOS interface has been activated).

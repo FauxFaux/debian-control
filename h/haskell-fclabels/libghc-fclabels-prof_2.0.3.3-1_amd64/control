@@ -1,0 +1,38 @@
+Package: libghc-fclabels-prof
+Source: haskell-fclabels
+Version: 2.0.3.3-1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 1396
+Depends: libghc-fclabels-dev (= 2.0.3.3-1), libghc-base-prof-4.10.1.0-35a7f, libghc-mtl-prof-2.2.2-ada79, libghc-template-haskell-prof-2.12.0.0-22576, libghc-transformers-prof-0.5.2.0-e0457
+Provides: libghc-fclabels-prof-2.0.3.3-0ae59
+Section: haskell
+Priority: optional
+Homepage: https://github.com/sebastiaanvisser/fclabels
+Description: first-class accessor labels; profiling libraries
+ This package provides first class labels that can act as
+ bidirectional record fields. The labels can be derived
+ automatically using Template Haskell which means you don't have
+ to write any boilerplate yourself. The labels are implemented as
+ lenses and are fully composable. Labels can be used to /get/,
+ /set/ and /modify/ parts of a datatype in a consistent way.
+ .
+ See "Data.Label" for an introductory explanation.
+ .
+ Internally lenses are not tied to Haskell functions directly,
+ but are implemented as arrows. Arrows allow the lenses to be run
+ in custom computational contexts. This approach allows us to
+ make partial lenses that point to fields of multi-constructor
+ datatypes in an elegant way.
+ .
+ See the "Data.Label.Maybe" module for the use of partial labels.
+ .
+ > 1.1.1.0 -> 1.1.2
+ >   - Added partial set/modify versions that act as identity
+ >     when the constructor field is not available.
+ .
+  Author: Sebastiaan Visser, Erik Hesselink, Chris Eidhof, Sjoerd Visscher
+ with lots of help and feedback from others.
+  Upstream-Maintainer: Sebastiaan Visser <code@fvisser.nl>
+ .
+ This package contains the libraries compiled with profiling enabled.

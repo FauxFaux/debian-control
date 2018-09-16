@@ -1,0 +1,20 @@
+Package: libpackage-variant-perl
+Version: 1.003002-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 43
+Depends: libimport-into-perl, libmodule-runtime-perl (>= 0.013), libstrictures-perl (>= 2), perl
+Section: perl
+Priority: optional
+Homepage: http://git.shadowcat.co.uk/gitweb/gitweb.cgi?p=p5sagit/Package-Variant.git
+Description: parameterizable packages
+ Package::Variant allows you to build a variable package that contains a
+ package template and can use it to build variant packages at runtime.
+ .
+ Your variable package will export a subroutine which will build a
+ variant package, combining its arguments with the template, and return
+ the name of the new variant package.
+ .
+ The implementation does not care about what kind of packages it builds,
+ be they simple function exporters, classes, singletons or something
+ entirely different.

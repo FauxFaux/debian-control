@@ -1,0 +1,46 @@
+Package: libarchive-dev
+Source: libarchive
+Version: 3.2.2-5
+Architecture: amd64
+Maintainer: Peter Pentchev <roam@debian.org>
+Installed-Size: 1582
+Depends: libarchive13 (= 3.2.2-5)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.libarchive.org/
+Description: Multi-format archive and compression library (development files)
+ The libarchive library provides a flexible interface for reading and writing
+ archives in various formats such as tar and cpio. libarchive also supports
+ reading and writing archives compressed using various compression filters such
+ as gzip and bzip2. The library is inherently stream-oriented; readers serially
+ iterate through the archive, writers serially add things to the archive.
+ .
+ Archive formats supported are:
+ .
+    * tar (read and write, including GNU extensions)
+    * pax (read and write, including GNU and star extensions)
+    * cpio (read and write, including odc and newc variants)
+    * iso9660 (read and write, including Joliet and Rockridge extensions, with
+      some limitations)
+    * zip (read only, with some limitations, uses zlib)
+    * mtree (read and write)
+    * shar (write only)
+    * ar (read and write, including BSD and GNU/SysV variants)
+    * empty (read only; in particular, note that no other format will accept an
+      empty file)
+    * raw (read only)
+    * xar (read only)
+    * rar (read only, with some limitations)
+    * 7zip (read and write, with some limitations)
+ .
+ Filters supported are:
+ .
+    * gzip (read and write, uses zlib)
+    * bzip2 (read and write, uses bzlib)
+    * compress (read and write, uses an internal implementation)
+    * uudecode (read only)
+    * separate command-line compressors with fixed-signature auto-detection
+    * xz and lzma (read and write using liblzma)
+ .
+ This package provides the files necessary for development with libarchive.

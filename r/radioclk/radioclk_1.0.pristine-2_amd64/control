@@ -1,0 +1,15 @@
+Package: radioclk
+Version: 1.0.pristine-2
+Architecture: amd64
+Maintainer: Paride Legovini <pl@ninthfloor.org>
+Installed-Size: 66
+Depends: libc6 (>= 2.11), debconf (>= 0.5) | debconf-2.0
+Recommends: ntp (>= 1:4.2.2+dfsg-1) | ntpsec | chrony
+Section: net
+Priority: optional
+Homepage: http://www.buzzard.me.uk/jonathan/radioclock.html
+Description: simple ntp refclock daemon for MSF/WWVB/DCF77 time signals
+ radioclkd takes the demodulated time signals from simple MSF/WWVB/DCF77
+ time signal receivers on the control lines of a serial port, decodes
+ the signals, and provides an interface to ntp via the shared memory
+ refclock driver.

@@ -1,0 +1,17 @@
+Package: ppp-gatekeeper
+Version: 0.1.0-201406111015-1
+Architecture: all
+Maintainer: Nigel Kukard <nkukard@lbsd.net>
+Installed-Size: 161
+Depends: perl, libconfig-inifiles-perl, libio-pty-perl, ppp, iptables, conntrack
+Suggests: shorewall
+Section: net
+Priority: optional
+Homepage: http://gitlab.devlabs.linuxassist.net/ppp-gatekeeper/ppp-gatekeeper
+Description: PPP manager for handling balanced, redundant and failover links
+ PPP Gatekeeper is a daemon that manages PPPOE connections supporting
+ various levels of redundancy and failover.
+ .
+ Traffic can be routed using round-robin and random strategies over links
+ of similar priority. Static IP route lists can also be provided for specific
+ routing purposes. DNS can also be load balanced over multiple links.

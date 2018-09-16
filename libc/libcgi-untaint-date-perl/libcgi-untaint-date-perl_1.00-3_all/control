@@ -1,0 +1,16 @@
+Package: libcgi-untaint-date-perl
+Version: 1.00-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 22
+Depends: perl, libcgi-untaint-perl, libdate-manip-perl, libdate-simple-perl
+Recommends: libcgi-pm-perl | perl (<< 5.19)
+Section: perl
+Priority: extra
+Homepage: https://metacpan.org/release/CGI-Untaint-date
+Description: CGI::Untaint input handler for date validation
+ CGI::Untaint::date is an input handler for CGI::Untaint that verifies that it
+ is dealing with a reasonable date. Reasonably means anything that Date::Manip
+ thinks is sensible, so you could use any of (for example): "December 12,
+ 2001" "12th December, 2001" "2001-12-12" "next Tuesday" "third Wednesday in
+ March".

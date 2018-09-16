@@ -1,0 +1,29 @@
+Package: rifiuti2
+Version: 0.6.1-6
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 108
+Depends: libc6 (>= 2.4), libglib2.0-0 (>= 2.16.0)
+Section: utils
+Priority: optional
+Homepage: https://abelcheung.github.io/rifiuti2
+Description: replacement for rifiuti, a MS Windows recycle bin analysis tool
+ Rifiuti2 analyses recycle bin files from Windows. Analysis of Windows
+ recycle bin is usually carried out during Windows computer forensics.
+ .
+ Rifiuti2 can extract file deletion time, original path and size of deleted
+ files and whether the deleted files have been moved out from the recycle
+ bin since they are trashed.
+ .
+ Rifiuti2 is a rewrite of rifiuti, which is originally written for identical
+ purpose. Then it was extended to cover more functionalities, such as:
+ .
+   * Handles recycle bin up to Windows 10;
+   * Handles ancient Windows like 95, NT4 and ME;
+   * Supports all localized versions of Windows - both Unicode-based ones
+     and legacy ones (using ANSI code page);
+   * Supports output in XML format as well as original tab-delimited text.
+ .
+ Rifiuti2 is designed to be portable and runs on command line environment. Two
+ programs rifiuti and rifiuti-vista are chosen depending on relevant Windows
+ recycle bin format.

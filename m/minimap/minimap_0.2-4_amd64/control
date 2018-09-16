@@ -1,0 +1,20 @@
+Package: minimap
+Version: 0.2-4
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 71
+Depends: libc6 (>= 2.14), zlib1g (>= 1:1.1.4)
+Section: science
+Priority: optional
+Homepage: https://github.com/lh3/minimap
+Description: tool for approximate mapping of long biosequences such as DNA reads
+ Minimap is an experimental tool to efficiently find multiple approximate
+ mapping positions between two sets of long biological sequences, such as
+ between DNA reads and reference genomes, between genomes and between long
+ noisy reads.
+ Minimap does not generate alignments as of now and because of this, it is
+ usually tens of times faster than mainstream aligners.
+ It does not replace mainstream aligners, but it can be useful when you
+ want to quickly identify long approximate matches at moderate divergence among
+ a huge collection of sequences. For this task, it is much faster than most
+ existing tools.

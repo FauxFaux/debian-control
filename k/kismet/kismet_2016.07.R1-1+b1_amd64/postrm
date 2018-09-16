@@ -1,0 +1,38 @@
+#!/bin/sh
+set -e
+
+GROUP=kismet
+
+if [ "$1" = "purge" ] ; then
+      if getent group $GROUP >/dev/null; then
+		if command -v delgroup > /dev/null; then
+			echo "Removing kismet group..."
+			delgroup --system $GROUP || echo "Could not remove kismet group."
+		else
+			echo "Cannot remove group $GROUP because delgroup command is not found"
+		fi
+	fi
+fi
+
+# Automatically added by dh_installdeb/11.2.1
+dpkg-maintscript-helper rm_conffile /etc/kismet/ap_manuf -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.2.1
+dpkg-maintscript-helper rm_conffile /etc/kismet/client_manuf -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.2.1
+dpkg-maintscript-helper rm_conffile /etc/kismet/kismet_ui.conf -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.2.1
+dpkg-maintscript-helper mv_conffile /etc/kismet_drone.conf /etc/kismet/kismet_drone.conf -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.2.1
+dpkg-maintscript-helper mv_conffile /etc/kismet.conf /etc/kismet/kismet.conf -- "$@"
+# End automatically added section
+# Automatically added by dh_installdebconf/11.2.1
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

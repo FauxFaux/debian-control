@@ -1,0 +1,17 @@
+Package: ros-robot
+Source: ros-metapackages
+Version: 1.12
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 8
+Depends: ros-base, tf-tools, tf2-tools, joint-state-publisher
+Section: metapackages
+Priority: optional
+Description: Python Robot OS robot metapackage
+ This package is part of Robot OS (ROS). It is a metapackage which
+ provides all the ROS robot system (including ROS base).
+ .
+ Different to upstream, this package does not provide:
+ control_msgs, diagnostics, executive_smach, filters, robot_state_publisher,
+ xacro.
+ Please install them from source, if you need them.

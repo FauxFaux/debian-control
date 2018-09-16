@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+# source debconf library
+. /usr/share/debconf/confmodule
+
+if [ "$1" != "upgrade" ]; then
+
+    update-alternatives --remove libblas.so-x86_64-linux-gnu \
+                        /usr/lib/x86_64-linux-gnu/libmkl_rt.so
+
+    update-alternatives --remove liblapack.so-x86_64-linux-gnu \
+                        /usr/lib/x86_64-linux-gnu/libmkl_rt.so
+
+fi
+
+
+
+exit 0

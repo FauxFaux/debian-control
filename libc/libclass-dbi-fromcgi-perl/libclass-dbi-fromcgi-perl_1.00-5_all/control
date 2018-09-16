@@ -1,0 +1,27 @@
+Package: libclass-dbi-fromcgi-perl
+Version: 1.00-5
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 29
+Depends: perl, libclass-dbi-perl, libcgi-untaint-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Class-DBI-FromCGI
+Description: Perl module to update Class::DBI data using CGI::Untaint
+ Lots of times, Class::DBI is used in web-based applications. (In
+ fact, coupled with a templating system that allows you to pass
+ objects, such as Template::Toolkit, Class::DBI is very much your
+ friend for these.)
+ .
+ One of the most irritating things about writing web-based applications
+ is the monotony of writing much of the same stuff over and over again.
+ And, where there's monotony there's a tendency to skip over stuff that
+ is really important, but is a pain to write - like Taint Checking and
+ sensible input validation. (Especially as you can still show a 'working'
+ application without it!). CGI::Untaint can take care of a lot of that
+ for us.
+ .
+ It so happens that CGI::Untaint also plays well with Class::DBI. All
+ you need to do is to 'use Class::DBI::FromCGI' in your class (or in
+ your local Class::DBI subclass that all your other classes inherit
+ from. You do that, don't you?).

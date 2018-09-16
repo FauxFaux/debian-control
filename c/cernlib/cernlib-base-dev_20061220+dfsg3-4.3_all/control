@@ -1,0 +1,24 @@
+Package: cernlib-base-dev
+Source: cernlib
+Version: 20061220+dfsg3-4.3
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 308
+Depends: dpkg-dev, cernlib-base (= 20061220+dfsg3-4.3)
+Conflicts: blas2-dev, lapack2-dev
+Breaks: libcojets1-dev (<= 2004.11.04.dfsg-0sarge1), libgeant1-dev (<= 2004.11.04.dfsg-0sarge1), libherwig59-dev (<= 2004.11.04.dfsg-0sarge1), libisajet758-dev (<= 2004.11.04.dfsg-0sarge1), libkuipx11-1-dev (<= 2004.11.04.dfsg-0sarge1), libmathlib1-dev (<= 2004.11.04.dfsg-0sarge1), libpaw1-dev (<= 2004.11.04.dfsg-0sarge1), libpdflib804-dev (<= 2004.11.04.dfsg-0sarge1), libphtools1-dev (<= 2004.11.04.dfsg-0sarge1)
+Replaces: cernlib-base (<< 2005.dfsg-6), libcojets1-dev (<= 2004.11.04.dfsg-0sarge1), libgeant1-dev (<= 2004.11.04.dfsg-0sarge1), libherwig59-dev (<= 2004.11.04.dfsg-0sarge1), libisajet758-dev (<= 2004.11.04.dfsg-0sarge1), libkuipx11-1-dev (<= 2004.11.04.dfsg-0sarge1), libmathlib1-dev (<= 2004.11.04.dfsg-0sarge1), libpaw1-dev (<= 2004.11.04.dfsg-0sarge1), libpdflib804-dev (<= 2004.11.04.dfsg-0sarge1), libphtools1-dev (<= 2004.11.04.dfsg-0sarge1)
+Section: devel
+Priority: optional
+Homepage: http://cernlib.web.cern.ch/cernlib/
+Description: CERNLIB data analysis suite - dependencies checking script
+ CERNLIB is a suite of data analysis tools and libraries created for
+ use in physics experiments, but also with applications to other
+ fields such as the biological sciences.
+ .
+ This package includes the "cernlib" script that lists the command-line options
+ needed for linking against CERNLIB libraries. The script has been rewritten
+ from the upstream version to calculate dependencies recursively. Also
+ included are a contributed set of Autoconf macros to test for CERNLIB
+ libraries, and a set of Imake macros to allow CERNLIB modules to be built
+ out-of-tree.

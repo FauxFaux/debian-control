@@ -1,0 +1,18 @@
+Package: libdaemon-generic-perl
+Version: 0.85-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 61
+Depends: perl, libfile-flock-perl (>= 2013.06), libfile-slurp-perl
+Recommends: libanyevent-perl, libevent-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Daemon-Generic
+Description: framework to provide start/stop/reload for a daemon
+ Daemon::Generic provides a framework for starting, stopping and reconfiguring
+ daemon-like programs. The framework provides for standard commands that work
+ for init.d files and as apachectl-like commands.
+ .
+ Programs that use Daemon::Generic subclass Daemon::Generic to override its
+ behavior. Almost everything that Generic::Daemon does can be overridden as
+ needed.

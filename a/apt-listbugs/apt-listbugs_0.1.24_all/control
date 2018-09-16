@@ -1,0 +1,26 @@
+Package: apt-listbugs
+Version: 0.1.24
+Architecture: all
+Maintainer: Francesco Poli (wintermute) <invernomuto@paranoici.org>
+Installed-Size: 449
+Depends: ruby | ruby-interpreter, ruby-debian (>= 0.3.3), apt (>= 0.9.11), ruby-gettext (>= 3.0.2), ruby-xmlparser, ruby-soap4r, ruby-unicode
+Recommends: ruby-httpclient (>= 2.1.5.2-1)
+Suggests: reportbug, w3m | www-browser, sensible-utils
+Breaks: libapt-pkg4.12 (<< 0.9.11)
+Section: admin
+Priority: optional
+Homepage: https://alioth.debian.org/projects/apt-listbugs/
+Description: tool which lists critical bugs before each APT installation
+ apt-listbugs is a tool which retrieves bug reports from the Debian Bug
+ Tracking System and lists them. Especially, it is intended to be invoked
+ before each installation/upgrade by APT in order to check whether the
+ installation/upgrade is safe.
+ .
+ Many developers and users prefer the unstable version of Debian for its new
+ features and packages.  APT, the usual upgrade tool, can break your system by
+ installing a buggy package.
+ .
+ apt-listbugs lists critical bug reports from the Debian Bug Tracking System.
+ Run it from within the APT session, in order to see whether an installation
+ or upgrade is known to be unsafe.
+Ruby-Versions: all

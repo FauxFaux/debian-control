@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]
+then
+        CLOJUREVER=1.9
+        PRIORITY=180
+        update-alternatives --install \
+          /usr/bin/clojure clojure /usr/bin/clojure${CLOJUREVER} ${PRIORITY} \
+	      --slave /usr/share/man/man1/clojure.1.gz clojure.1.gz /usr/share/man/man1/clojure${CLOJUREVER}.1.gz
+        update-alternatives --install \
+          /usr/bin/clojurec clojurec /usr/bin/clojurec${CLOJUREVER} ${PRIORITY} \
+	      --slave /usr/share/man/man1/clojurec.1.gz clojurec.1.gz /usr/share/man/man1/clojurec${CLOJUREVER}.1.gz
+fi
+

@@ -1,0 +1,17 @@
+Package: lib32mpx2
+Source: gcc-8
+Version: 8.2.0-6
+Architecture: amd64
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 51
+Depends: gcc-8-base (= 8.2.0-6), libc6-i386 (>= 2.17)
+Conflicts: libc6-i386 (<< 2.9-22)
+Replaces: lib32mpx0 (<< 6-20160120-1)
+Section: libs
+Priority: optional
+Homepage: http://gcc.gnu.org/
+Description: Intel memory protection extensions (32bit)
+ Intel MPX is a set of processor features which, with compiler,
+ runtime library and OS support, brings increased robustness to
+ software by checking pointer references whose compile time normal
+ intentions are usurped at runtime due to buffer overflow.

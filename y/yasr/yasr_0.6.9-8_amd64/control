@@ -1,0 +1,27 @@
+Package: yasr
+Version: 0.6.9-8
+Architecture: amd64
+Maintainer: Debian Accessibility Team <pkg-a11y-devel@lists.alioth.debian.org>
+Installed-Size: 132
+Depends: libc6 (>= 2.15)
+Recommends: eflite
+Section: admin
+Priority: optional
+Homepage: http://yasr.sourceforge.net/
+Description: General-purpose console screen reader
+ Yasr is a general-purpose console screen reader for GNU/Linux and
+ other Unix-like operating systems.  The name "yasr" is an acronym that
+ can stand for either "Yet Another Screen Reader" or "Your All-purpose
+ Screen Reader".
+ .
+ Currently, yasr attempts to support the Speak-out, DEC-talk, BNS, Apollo,
+ and DoubleTalk synthesizers.  It is also able to communicate with
+ Emacspeak servers and can thus be used with synthesizers not directly
+ supported, such as Festival Lite (via eflite) or FreeTTS.
+ .
+ Yasr is written in C and works by opening a pseudo-terminal and running a
+ shell, intercepting all input and output.  It looks at the escape
+ sequences being sent and maintains a virtual "window" containing what
+ it believes to be on the screen.  It thus does not use any features
+ specific to Linux and can be ported to other Unix-like operating
+ systems without too much trouble.

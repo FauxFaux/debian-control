@@ -1,0 +1,29 @@
+Package: libghc-pipes-safe-prof
+Source: haskell-pipes-safe (2.2.9-1)
+Version: 2.2.9-1+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 584
+Depends: libghc-pipes-safe-dev (= 2.2.9-1+b1), libghc-base-prof-4.10.1.0-35a7f, libghc-containers-prof-0.5.10.2-cc496, libghc-exceptions-prof-0.8.3-23c90, libghc-monad-control-prof-1.0.2.3-18c64, libghc-mtl-prof-2.2.2-ada79, libghc-pipes-prof-4.3.9-446b3, libghc-primitive-prof-0.6.4.0-ae1a7, libghc-transformers-prof-0.5.2.0-e0457, libghc-transformers-base-prof-0.4.4-a16aa
+Provides: libghc-pipes-safe-prof-2.2.9-ba777
+Section: haskell
+Priority: optional
+Homepage: http://hackage.haskell.org/package/pipes-safe
+Description: safety for the pipes ecosystem; profiling libraries
+ This package adds resource management and exception handling to the
+ pipes ecosystem.
+ .
+ Notable features include:
+ .
+  * Resource Safety: Guarantee finalization using `finally`, `bracket`
+    and more
+  * Exception Safety: Even against asynchronous exceptions!
+  * Laziness: Only acquire resources when you need them
+  * Promptness: Finalize resources early when you are done with them
+  * Native Exception Handling: Catch and resume from exceptions
+    inside pipes
+  * No Buy-in: Mix resource-safe pipes with unmanaged pipes using
+    `hoist`
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

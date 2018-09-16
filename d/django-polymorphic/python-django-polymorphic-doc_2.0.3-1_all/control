@@ -1,0 +1,27 @@
+Package: python-django-polymorphic-doc
+Source: django-polymorphic
+Version: 2.0.3-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 639
+Depends: libjs-sphinxdoc (>= 1.0), sphinx-rtd-theme-common (>= 0.4.0+dfsg)
+Section: doc
+Priority: optional
+Homepage: https://github.com/django-polymorphic/django-polymorphic
+Description: Seamless Polymorphic Inheritance for Django Models (Documentation)
+ Django-polymorphic simplifies using inherited models in Django projects. When a
+ query is made at the base model, the inherited model classes are returned.
+ .
+ Features:
+  * Full admin integration.
+  * ORM integration:
+    + Support for ForeignKey, ManyToManyField, OneToOneField descriptors.
+    + Support for proxy models.
+    + Filtering/ordering of inherited models (ArtProject___artist).
+    + Filtering model types: instance_of(...) and not_instance_of(...)
+    + Combining querysets of different models (qs3 = qs1 | qs2)
+    + Support for custom user-defined managers.
+  * Uses the minimum amount of queries needed to fetch the inherited models.
+  * Disabling polymorphic behavior when needed.
+ .
+ This package contains the documentation.

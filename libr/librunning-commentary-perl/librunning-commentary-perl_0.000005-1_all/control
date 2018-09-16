@@ -1,0 +1,17 @@
+Package: librunning-commentary-perl
+Version: 0.000005-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 72
+Depends: libkeyword-simple-perl, liblexical-failure-perl, perl (>= 5.14.0)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Running-Commentary
+Description: Perl module to call system() with tracking messages
+ Running::Commentary provides a single subroutine: run() which is
+ designed to be a more informative and less error-prone replacement for
+ the built-in system(). run() acts like system(), except that it returns
+ true on success and false on failure, and it announces what it's doing.
+ .
+ It also provides a compile-time keyword: run_with with which you can set
+ lexically scoped default options for run().

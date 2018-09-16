@@ -1,0 +1,32 @@
+Package: ghdl
+Version: 0.35+git20180503+dfsg-2
+Architecture: amd64
+Maintainer: Debian Electronics Team <pkg-electronics-devel@lists.alioth.debian.org>
+Installed-Size: 800
+Depends: ghdl-mcode | ghdl-gcc | ghdl-llvm
+Suggests: gtkwave
+Section: electronics
+Priority: optional
+Homepage: https://github.com/ghdl/ghdl
+Description: VHDL compiler/simulator
+ GHDL is a compiler and simulator for VHDL, a Hardware Description Language.
+ GHDL is not an interpreter: it allows you to analyse and elaborate sources to
+ generate machine code from your design. Native program execution is the only
+ way for high speed simulation.
+ .
+ GHDL offers three machine code generation backends: one based on GCC, one
+ using the LLVM compiler suite and a GHDL specific one called mcode. These are
+ available in the ghdl-gcc, ghdl-llvm and ghdl-mcode packages respectively.
+ Both the GCC and LLVM backends create highly optimized code for excellent
+ simulation performance while simulations compiled with the GCC backend also
+ allow coverage testing using gcov. The mcode backend creates less performant
+ code but makes up for it with much faster compilation. It is therefore
+ preferable for smaller projects without large or long running simulations.
+ .
+ Multiple backends can be installed at the same time and selected by either
+ invoking the desired GHDL directly (as ghdl-gcc, ghdl-llvm or ghdl-mcode) or
+ by providing a GHDL_BACKEND environment variable (containing gcc, llvm or
+ mcode) while invoking ghdl.
+ .
+ This package contains the common files for all backends and requires at least
+ one backend to be installed.

@@ -1,0 +1,24 @@
+Package: libghc-mueval-doc
+Source: haskell-mueval
+Version: 0.9.3-2
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 239
+Depends: haddock-interface-31
+Recommends: ghc-doc, libghc-hint-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: https://github.com/gwern/mueval
+Description: safely evaluate pure Haskell expressions; documentation
+ Mueval is a Haskell interpreter. It uses the GHC API to evaluate arbitrary
+ Haskell expressions.  Importantly, mueval takes many precautions to defang and
+ avoid "evil" code.  It uses resource limits, whitelisted modules and Safe
+ Haskell, special Show instances for IO, threads, processes, and changes of
+ directory to sandbox the Haskell code.
+ .
+ It is, in short, intended to be a standalone version of Lambdabot's famous
+ evaluation functionality.
+ .
+ This package provides the documentation for a library for the Haskell
+ programming language.
+ See http://www.haskell.org/ for more information on Haskell.

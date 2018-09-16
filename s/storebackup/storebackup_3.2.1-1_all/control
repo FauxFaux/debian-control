@@ -1,0 +1,25 @@
+Package: storebackup
+Version: 3.2.1-1
+Architecture: all
+Maintainer: Ryan Niebur <ryan@debian.org>
+Installed-Size: 1368
+Depends: bzip2, debianutils (>= 1.16.9), perl
+Recommends: libio-compress-bzip2-perl
+Section: utils
+Priority: optional
+Homepage: http://www.nongnu.org/storebackup/
+Description: fancy compressing managing checksumming deduplicating hard-linking cp -ua
+ Copies directory hierarchies recursively into another location,
+ by date (e.g.  /home/ => /var/bkup/2002.12.13_04.27.56/).
+ Permissions are preserved, so users with access to the backup
+ directory can recover their files themselves.
+ .
+ File comparisons are done with MD5 checksums, so no changes go
+ unnoticed.
+ .
+ Hard-links unchanged backuped files to old versions and
+ identical files within the backuped tree.
+ .
+ Compresses large files (that don't match exclusion patterns).
+ .
+ Manages backups and removes old ones.

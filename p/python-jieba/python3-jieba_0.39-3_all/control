@@ -1,0 +1,27 @@
+Package: python3-jieba
+Source: python-jieba
+Version: 0.39-3
+Architecture: all
+Maintainer: Debian Chinese Team <chinese-developers@lists.alioth.debian.org>
+Installed-Size: 24719
+Depends: python3:any (>= 3.3.2-2~)
+Suggests: python-jieba-doc
+Section: python
+Priority: optional
+Homepage: https://github.com/fxsjy/jieba
+Description: Jieba Chinese text segmenter (Python 3)
+ "Jieba" (Chinese for "to stutter")is a high-accuracy Chinese text segmenteran
+ based on HMM-model and Viterbi algorithm. It uses dynamic programming to find
+ the most probable combination based on the word frequency.
+ .
+ It supports three types of segmentation mode:
+  * Accurate Mode attempts to cut the sentence into the most accurate
+    segmentations, which is suitable for text analysis.
+  * Full Mode gets all the possible words from the sentence. Fast but not
+    accurate.
+  * Search Engine Mode, based on the Accurate Mode, attempts to cut long words
+    into several short words, which can raise the recall rate. Suitable for
+    search engines.
+ Traditional Chinese and customized dictionaries are also supported.
+ .
+ This package installs the library for Python 3.

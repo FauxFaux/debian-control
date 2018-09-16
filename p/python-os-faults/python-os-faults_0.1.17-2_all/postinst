@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/os-inject-fault os-inject-fault /usr/bin/python2-os-inject-fault 300
+	update-alternatives --install /usr/bin/os-faults os-faults /usr/bin/python2-os-faults 300
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-os-faults 
+fi
+
+# End automatically added section
+
+
+exit 0

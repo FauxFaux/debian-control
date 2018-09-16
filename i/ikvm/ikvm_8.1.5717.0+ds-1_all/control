@@ -1,0 +1,29 @@
+Package: ikvm
+Version: 8.1.5717.0+ds-1
+Architecture: all
+Maintainer: Debian CLI Libraries Team <pkg-cli-libs-team@lists.alioth.debian.org>
+Installed-Size: 53452
+Depends: mono-runtime (>= 3.0~), cli-common (>= 0.5.1), libikvm-native (= 8.1.5717.0+ds-1), libmono-corlib4.5-cil (>= 4.2.0), libmono-sharpzip4.84-cil (>= 1.0), libmono-system-configuration4.0-cil (>= 4.0.0~alpha1), libmono-system-data4.0-cil (>= 4.2.0), libmono-system-drawing4.0-cil (>= 3.0.6), libmono-system-security4.0-cil (>= 1.0), libmono-system-windows-forms4.0-cil (>= 1.0), libmono-system-xml4.0-cil (>= 4.2.0), libmono-system4.0-cil (>= 4.2.0), java-common
+Section: interpreters
+Priority: optional
+Homepage: http://www.ikvm.net/
+Description: Java virtual machine for the CLI
+ IKVM.NET is a free implementation of Java for the Common Language
+ Infrastructure (CLI) like Mono and the Microsoft .NET Framework.
+ .
+ There are two main ways of using IKVM.NET:
+  - Dynamically:
+    In this mode, Java classes and jars are used directly to execute Java
+    applications on the CLI runtime.
+    Java bytecode is translated on the fly into Common Intermediate Language
+    (CIL) by running on the IKVM.NET runtime.
+    The full Java class loader model is supported in this mode.
+  - Statically:
+    In order to allow Java code to be used by CLI applications, it must be
+    compiled down to an assembly and used directly.
+    The Java bytecode is translated to CIL and is stored in this form. The
+    assemblies can be referenced and used directly by the CLI applications
+    by only using the CLI runtime.
+    While the static mode does not support the full Java class loader
+    mechanism, it is possible for statically compiled code to create a class
+    loader and load classes dynamically.

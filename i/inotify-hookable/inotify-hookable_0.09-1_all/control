@@ -1,0 +1,21 @@
+Package: inotify-hookable
+Version: 0.09-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: perl, libclass-inspector-perl, libdata-bitmask-perl, liblinux-inotify2-perl, liblist-moreutils-perl, libmoose-perl, libmoosex-getopt-perl, libmoosex-types-perl, libtry-tiny-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/App-Inotify-Hookable/
+Description: blocking command-line interface to inotify
+ inotify-hookable is a program that monitor files with Linux inotify. This
+ program accepts options to specify the files to be monitored and the command
+ to run when a file has changed (based in kernel inotify)
+ .
+ inotify-hookable main advantage over inotifywait are:
+  - command to run after watch can be specified with an option
+  - emacs and vi backup files are ignored by default
+ .
+ Example:
+ .
+  inotify-hookable -f foo.c -c 'gcc -o foo foo.c'

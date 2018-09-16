@@ -1,0 +1,81 @@
+#!/bin/sh
+# based on arpwatch.postinst: v11 2004/09/15 KELEMEN Peter <fuji@debian.org>
+# arpalert.postinst: v1 2006/01/12 Jan Wagner <waja@cyconet.org>
+
+set -e
+
+AAUSER="arpalert"
+AAGROUP="arpalert"
+AAHOME="/var/lib/$AAUSER"
+AAGECOS="ARP Alerter"
+
+case "$1" in
+	configure)
+		# Take care of group.
+		if AAGROUP_ENTRY=`getent group $AAGROUP`; then
+			# group exists
+			:
+		else
+			# group does not exist yet
+			addgroup --quiet --system $AAGROUP
+		fi
+
+		# Take care of user.
+		if AAUSER_ENTRY=`getent passwd $AAUSER`; then
+			# user exists
+			adduser --quiet $AAUSER $AAGROUP
+		else
+			# user does not exist yet
+			adduser --quiet --system	\
+				--ingroup $AAGROUP	\
+				--gecos "$AAGECOS"	\
+				--home $AAHOME		\
+				--no-create-home	\
+				--shell /bin/sh		\
+				--disabled-login	\
+				--disabled-password	\
+				$AAUSER
+		fi
+
+#		# Set up home directory.
+#		if [ -d $AAHOME ]; then
+#			chown -R ${AAUSER}:${AAGROUP} $AAHOME
+#			chmod -R o-rwX $AAHOME
+#		fi
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+		;;
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+		;;
+esac
+
+NAME=arpalert
+DBDIR=/var/lib/$NAME
+DBFILE=arp.dat
+BACKUPDIR=/var/backups
+
+# Restore backed up ARP databases.
+if [ -d $BACKUPDIR -a -d $BACKUPDIR/$NAME ]; then
+	cp $BACKUPDIR/$NAME/* $DBDIR 2>/dev/null || true
+fi
+if [ -d $DBDIR ]; then
+	touch $DBDIR/$DBFILE
+fi
+
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/arpalert" ]; then
+		update-rc.d arpalert defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d arpalert $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+

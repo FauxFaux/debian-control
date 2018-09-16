@@ -1,0 +1,36 @@
+Package: netscript-2.4
+Version: 5.5.3
+Architecture: all
+Maintainer: Matthew Grant <matt@mattgrant.net.nz>
+Installed-Size: 204
+Depends: iproute2, bridge-utils (>= 0.9.3), iptables, netbase, bash (>= 2.03), isc-dhcp-client | dhcpcd | pump, lsb-base
+Suggests: whereami, dnsmasq, resolvconf, wpasupplicant, wicd, quagga, radvd, bird
+Conflicts: ifupdown, netscript, netscript-2.2, netscript-ipfilter
+Replaces: ifupdown, netscript
+Provides: ifupdown, netscript
+Section: net
+Priority: optional
+Description: Linux 2.4/2.6/3.x router/firewall/VM host network config system.
+ This is a router and firewall network configuration system.  It is specific to
+ the 2.4.x and 2.6.x kernel series. This system is in production use, even
+ though this is an experimental version.
+ .
+ It offers much finer grained control of the network setup than the standard
+ system in netbase, with support for bridge configuration, iptables, ip route
+ and tc traffic control.  It is optimised for use on high traffic routers with
+ interfaces being reconfigured individually while the rest of the machine is
+ routing traffic 24x7.  Common boiler plate filter creation functions are
+ provided to ease the task of constructing iptables filters in the context
+ of operation within an ISP network.
+ .
+ Since this package is designed for a heavy duty network router, it is designed
+ to work in conjunction with a routing daemon as found in the quagga package.
+ .
+ DON'T use this on a pure server - it is VERY useful for a Virtual Machine
+ server with complex networking needs.  This is because of its comprehensive
+ network configuration capabilities.  Thus it is a tempting replacement
+ when you have to rip out NetworkManager on a server.
+ .
+ It was originally designed for dedicated routers and firewalls, and hence its
+ lightweight scripting footprint. When it comes to firewall configuration
+ though, have a look at the mason package if you are faint of heart.

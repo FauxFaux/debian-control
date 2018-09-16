@@ -1,0 +1,24 @@
+Package: librostlab-blast0-dev
+Source: librostlab-blast
+Version: 1.0.1-8
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 1416
+Depends: librostlab-blast0v5 (= 1.0.1-8), librostlab-dev
+Suggests: librostlab-blast-doc
+Conflicts: librostlab-blast-dev
+Provides: librostlab-blast-dev
+Section: libdevel
+Priority: optional
+Homepage: http://rostlab.org/
+Description: very fast C++ library for parsing the output of NCBI BLAST programs (devel)
+ This package provides a very fast library for parsing the default output of
+ NCBI BLAST programs into a C++ structure.
+ .
+ libzerg is faster, but it provides only lexing (i.e. it only returns pairs
+ of token identifiers and token string values).  librostlab-blast uses a
+ parser generated with bison on top of a flex-generated lexer very similar to
+ that of libzerg.
+ .
+ This package contains files necessary for developing applications with
+ librostlab-blast.

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+mandir=/usr/share/man
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/pyscss pyscss /usr/bin/python2-pyscss 200 \
+		--slave $mandir/man1/pyscss.1.gz pyscss.1.gz $mandir/man1/python2-pyscss.1.gz
+	update-alternatives --install /usr/bin/less2scss less2scss /usr/bin/python2-less2scss 200 \
+		--slave $mandir/man1/less2scss.1.gz less2scss.1.gz $mandir/man1/python2-less2scss.1.gz
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-pyscss 
+fi
+
+# End automatically added section
+
+
+exit 0

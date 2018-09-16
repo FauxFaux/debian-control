@@ -1,0 +1,27 @@
+Package: htcondor-dev
+Source: condor (8.6.8~dfsg.1-2)
+Version: 8.6.8~dfsg.1-2+b1
+Architecture: amd64
+Maintainer: HTCondor Developers <condor-debian@cs.wisc.edu>
+Installed-Size: 1700
+Breaks: condor-dev (<< 8.0.5~)
+Replaces: condor-dev (<< 8.0.5~)
+Section: libdevel
+Priority: extra
+Homepage: http://research.cs.wisc.edu/htcondor
+Description: distributed workload management system - development files
+ Like other full-featured batch systems, HTCondor provides a job queueing
+ mechanism, scheduling policy, priority scheme, resource monitoring, and
+ resource management. Users submit their serial or parallel jobs to HTCondor;
+ HTCondor places them into a queue. It chooses when and where to run the jobs
+ based upon a policy, carefully monitors their progress, and ultimately
+ informs the user upon completion.
+ .
+ Unlike more traditional batch queueing systems, HTCondor can also effectively
+ harness wasted CPU power from otherwise idle desktop workstations. HTCondor
+ does not require a shared file system across machines - if no shared file
+ system is available, HTCondor can transfer the job's data files on behalf of
+ the user.
+ .
+ This package provides headers and libraries for development of HTCondor
+ add-ons.

@@ -1,0 +1,20 @@
+Package: vlock
+Version: 2.2.2-8
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 118
+Depends: libc6 (>= 2.15), libpam0g (>= 0.99.7.1), libpam-modules, adduser
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Description: Virtual Console locking program
+ vlock either locks the current terminal (which may be any kind of terminal,
+ local or remote), or locks the entire virtual console system, completely
+ disabling all console access. vlock gives up these locks when either the
+ password of the user who started vlock or the root password is typed.
+ .
+ vlock is interesting on multi user system environments. vlock allows users
+ to lock their sessions while other users can still use the same system via
+ other virtual terminal.
+ .
+ vlock is very useful for users security.

@@ -1,0 +1,15 @@
+Package: pgqd
+Version: 3.3-1
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <pkg-postgresql-public@lists.alioth.debian.org>
+Installed-Size: 94
+Depends: lsb-base, postgresql-common, libc6 (>= 2.14), libevent-2.1-6 (>= 2.1.8-stable), libpq5
+Conflicts: skytools3-ticker (<< 3.3)
+Replaces: skytools3-ticker
+Section: database
+Priority: optional
+Description: Queue maintenance daemon for PgQ
+ PgQ provides generic queues for PostgreSQL. It allows multiple queues in one
+ database, each queue can be consumed by multiple consumers.
+ .
+ This package contains the queue maintenance daemon pgdq.

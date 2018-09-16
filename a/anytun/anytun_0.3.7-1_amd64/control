@@ -1,0 +1,23 @@
+Package: anytun
+Version: 0.3.7-1
+Architecture: amd64
+Maintainer: Darshaka Pathirana <dpat@syn-net.org>
+Installed-Size: 2499
+Depends: adduser, lsb-base (>= 3.0-6), libboost-date-time1.62.0, libboost-serialization1.62.0, libboost-system1.62.0, libboost-thread1.62.0, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgcrypt20 (>= 1.8.0), libgpg-error0 (>= 1.14), libstdc++6 (>= 5.2)
+Suggests: quagga
+Section: net
+Priority: optional
+Homepage: http://www.anytun.org/
+Description: secure anycast tunneling protocol
+ Anytun is an implementation of the secure anycast tunneling protocol. It
+ uses an easy openvpn style interface and makes it possible to build
+ redundant VPN clusters with load balancing between servers. VPN servers
+ share a single IP address. Adding and removing VPN Servers is done by the
+ routing protocol, so no client changes have to be made when additional VPN
+ servers are added or removed. It is possible to realise global load
+ balancing based on shortest BGP routes by simply announcing the address
+ space of the tunnel servers at multiple locations.
+ .
+ Currently ethernet, ipv4 and ipv6 tunnels are supported by the
+ implementation. However the protocol allows one to tunnel every ETHERTYPE
+ protocol.

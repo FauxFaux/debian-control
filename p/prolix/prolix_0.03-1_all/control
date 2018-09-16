@@ -1,0 +1,17 @@
+Package: prolix
+Version: 0.03-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 79
+Depends: perl, libdata-munge-perl, libipc-run-perl, libjson-perl, libmoose-perl, libmoosex-configfromfile-perl, libmoosex-getopt-perl (>= 0.39), libstring-shellquote-perl, libterm-readkey-perl, libtry-tiny-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/App-Prolix/
+Description: tool to interactively filter chatty command output
+ prolix launches a command and captures its standard output and error,
+ suppressing uninteresting lines according to a pattern. Yet unlike grep -v,
+ prolix is an interactive program: When you find that the output you're being
+ shown is still too verbose, simply hit enter and add additional suppression
+ patterns. Suppression patterns can be full or substring line matches as well
+ as regular expressions. You can also apply substitutions to lines, for example
+ shorten overly chatty fields.

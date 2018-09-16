@@ -1,0 +1,26 @@
+Package: libghc-say-dev
+Source: haskell-say
+Version: 0.1.0.0-3
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 130
+Depends: libghc-base-dev-4.10.1.0-35a7f, libghc-bytestring-dev-0.10.8.2-4a9e2, libghc-text-dev-1.2.3.0-81981, libghc-transformers-dev-0.5.2.0-e0457, libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-say-doc, libghc-say-prof
+Provides: libghc-say-dev-0.1.0.0-04e95
+Section: haskell
+Priority: optional
+Homepage: https://github.com/fpco/say#readme
+Description: send textual messages to a Handle in a thread-friendly way
+ When writing a line to a Handle,
+ .
+  * Properly handle character encoding settings on the Handle
+  * For reasonably sized messages, ensure that the entire message
+    is written in one chunk to avoid interleaving data with other threads
+  * This includes the trailing newline character
+  * Avoid unnecessary memory allocations and copies
+  * Minimize locking
+  * Provide a simple API
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: say-0.1.0.0-8HH2yLgwWQ62EhDxLv6ItE

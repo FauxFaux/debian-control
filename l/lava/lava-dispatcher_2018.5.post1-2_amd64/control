@@ -1,0 +1,26 @@
+Package: lava-dispatcher
+Source: lava
+Version: 2018.5.post1-2
+Architecture: amd64
+Maintainer: Debian LAVA team <pkg-linaro-lava-devel@lists.alioth.debian.org>
+Installed-Size: 2232
+Depends: file, systemd-sysv, python3-serial (>= 2.6), python3-setuptools, lava-common (>= 2018.5.post1-2), python3-guestfs (>= 1.32.7), tar (>= 1.27), python3-configobj, python3-magic, python3-netifaces (>= 0.10.0), python3-nose, python3-pexpect (>= 4.2), python3-pyudev (>= 0.21), python3-requests, python3-setproctitle (>= 1.1.8), python3-tz, python3-yaml, python3-zmq, sudo, telnet, python3:any (>= 3.5~)
+Recommends: ntp, git, tftpd-hpa, openbsd-inetd, ser2net, qemu-system-x86 (>= 2.8.0), qemu-system-arm (>= 2.8.0), libguestfs-tools (>= 1.32.7), nfs-kernel-server, rpcbind, u-boot-tools, unzip, xz-utils, lxc (>= 1:2.0.7), debootstrap (>= 1.0.86), bridge-utils, rsync, dfu-util
+Suggests: apache2, bzr, img2simg, simg2img
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.linaro.org/initiatives/lava/
+Description: Linaro Automated Validation Architecture dispatcher
+ LAVA is a continuous integration system for deploying operating
+ systems onto physical and virtual hardware for running tests.
+ Tests can be simple boot testing, bootloader testing and system
+ level testing, although extra hardware may be required for some
+ system tests. Results are tracked over time and data can be
+ exported for further analysis.
+ .
+ This package provides lava-dispatcher to dispatch
+ LAVA jobs to configured devices, for Python3 only.
+ .
+ A range of devices are supported for ARM and
+ x86 architectures.

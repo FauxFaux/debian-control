@@ -1,0 +1,24 @@
+Package: libseqlib-dev
+Source: libseqlib
+Version: 1.1.2+dfsg-2
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 926
+Depends: libseqlib1 (= 1.1.2+dfsg-2), libhts-dev (>= 1.3.2-3), libhts-private-dev, libjsoncpp-dev, libbwa-dev, libfml-dev
+Section: libdevel
+Priority: optional
+Homepage: https://github.com/walaj/SeqLib
+Description: C++ htslib/bwa-mem/fermi interface for interrogating sequence data (dev)
+ C++ API and command line tool that provides a rapid and user-friendly
+ interface to BAM/SAM/CRAM files, global sequence alignment operations
+ and sequence assembly. Four C libraries perform core operations in
+ SeqLib: HTSlib for BAM access, BWA-MEM and BLAT for sequence alignment
+ and Fermi for error correction and sequence assembly. Benchmarking
+ indicates that SeqLib has lower CPU and memory requirements than leading
+ C++ sequence analysis APIs. Minimal SeqLib code can extract, error-correct
+ and assemble reads from a CRAM file and then align with BWA-MEM.
+ SeqLib also provides additional capabilities, including chromosome-aware
+ interval queries and read plotting. Command line tools are available for
+ performing integrated error correction, micro-assemblies and alignment.
+ .
+ This package contains the header files and static library.

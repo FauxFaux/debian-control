@@ -1,0 +1,17 @@
+Package: enscribe
+Version: 0.1.0-3
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 48
+Depends: libc6 (>= 2.4), libgd3 (>= 2.1.0~alpha~), libsndfile1 (>= 1.0.20)
+Section: sound
+Priority: extra
+Description: convert images into sounds
+ Enscribe converts the scanlines of the input image into frequency
+ components and then using an inverse Fast Fourier Transform, converts
+ them into sound. The left side of the image is the low frequency end,
+ and the right is the high end, up to just under the Nyquist limit if
+ you want it to. There are several tunable parameters as to how colour
+ is converted into stereo sound and the frequency range to be used.
+ This conversion can be used to create resilient audio watermarks or to
+ simply create interesting sounds from images.

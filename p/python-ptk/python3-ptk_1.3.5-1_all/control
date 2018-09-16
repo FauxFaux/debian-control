@@ -1,0 +1,22 @@
+Package: python3-ptk
+Source: python-ptk
+Version: 1.3.5-1
+Architecture: all
+Maintainer: Nicolas Boulenguez <nicolas@debian.org>
+Installed-Size: 102
+Depends: python3-six, python3:any (>= 3.5~)
+Recommends: python3-async-generator
+Suggests: python-ptk-doc, python3 (>= 3.5), python3-twisted
+Section: python
+Priority: optional
+Homepage: https://bitbucket.org/fraca7/ptk
+Description: parser for Python 3 with support for asynchronous input
+ PTK implements LR(1) parsing in Python. Compared to compiled tools
+ like Bison, it attempts to spare programmer's time. Python sources
+ describe both the grammar and the callbacks, avoiding code
+ generation.  Various inputs are accepted: Python 3 asynchronous
+ streams, PyZipFile archives, Twisted Deferred objects.
+ .
+ python3-async-generator is required for asynchronous streams.
+ .
+ This package installs the library for Python 3.

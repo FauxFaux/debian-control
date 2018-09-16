@@ -1,0 +1,28 @@
+Package: libghc-these-dev
+Source: haskell-these (0.7.4-2)
+Version: 0.7.4-2+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 2221
+Depends: libghc-quickcheck-dev-2.10.1-914b9, libghc-aeson-dev-1.2.4.0-171c1, libghc-base-dev-4.10.1.0-35a7f, libghc-bifunctors-dev-5.5.2-1934f, libghc-binary-dev-0.8.5.1-efb65, libghc-containers-dev-0.5.10.2-cc496, libghc-data-default-class-dev-0.1.2.0-ef3b6, libghc-deepseq-dev-1.4.3.0-38379, libghc-hashable-dev-1.2.7.0-6cb51, libghc-keys-dev-3.12-2b207, libghc-mtl-dev-2.2.2-ada79, libghc-profunctors-dev-5.2.2-b89bb, libghc-semigroupoids-dev-5.2.2-088ba, libghc-transformers-dev-0.5.2.0-e0457, libghc-transformers-compat-dev-0.5.1.4-4baae, libghc-unordered-containers-dev-0.2.9.0-d1c8f, libghc-vector-dev-0.12.0.1-c53f0, libghc-vector-instances-dev-3.4-8521c, libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-these-doc, libghc-these-prof
+Provides: libghc-these-dev-0.7.4-5e060
+Section: haskell
+Priority: optional
+Homepage: https://github.com/isomorphism/these
+Description: either-or-both data type
+ Package provides a data type `These a b' which can hold a value of either
+ type or values of each type. This is usually thought of as an "inclusive or"
+ type (contrasting `Either a b' as "exclusive or") or as an "outer join" type
+ (contrasting `(a, b)' as "inner join").
+ .
+ The major use case of this is provided by the Align class, representing a
+ generalized notion of "zipping with padding" that combines structures without
+ truncating to the size of the smaller input.
+ .
+ Also included is ChronicleT, a monad transformer based on the Monad instance
+ for `These a', along with the usual monad transformer bells and whistles.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: these-0.7.4-2LHqBpAOLB973wijgZKc9s

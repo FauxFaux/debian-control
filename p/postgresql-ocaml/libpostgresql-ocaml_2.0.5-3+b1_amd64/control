@@ -1,0 +1,21 @@
+Package: libpostgresql-ocaml
+Source: postgresql-ocaml (2.0.5-3)
+Version: 2.0.5-3+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 365
+Depends: ocaml-base-nox-4.05.0, libc6 (>= 2.14), libpq5
+Breaks: libpostgresql-ocaml-dev (<< 1.11.1), nurpawiki (<< 1.2.3-2~)
+Replaces: libpostgresql-ocaml-dev (<< 1.11.1)
+Provides: libpostgresql-ocaml-v8s45
+Section: ocaml
+Priority: optional
+Homepage: http://mmottl.github.io/postgresql-ocaml/
+Description: OCaml bindings to PostgreSQL's libpq (runtime)
+ This OCaml-library provides an interface to PostgreSQL, an
+ efficient and reliable, open source, relational database.
+ Almost all functionality available through the C-API (libpq) is
+ replicated in a type-safe way. This library uses objects for
+ representing database connections and results of queries.
+ .
+ This package contains the shared runtime stub libraries and plugins.

@@ -1,0 +1,23 @@
+Package: eurephia
+Source: eurephia (1.1.0-6)
+Version: 1.1.0-6+b2
+Architecture: amd64
+Maintainer: Alberto Gonzalez Iniesta <agi@inittab.org>
+Installed-Size: 533
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libsqlite3-0 (>= 3.5.9), libssl1.1 (>= 1.1.0), libxml2 (>= 2.7.4), libxslt1.1 (>= 1.1.25), openvpn (>= 2)
+Recommends: sqlite3
+Section: net
+Priority: extra
+Homepage: http://www.eurephia.net/
+Description: flexible OpenVPN authentication module
+ This plug-in enhances OpenVPN by adding user name and password authentication.
+ An eurephia user account is a combination of minimum one OpenVPN SSL
+ certificate and a user name with a password assigned. It is also possible to
+ setup several eurephia user names to use a shared OpenVPN certificate.
+ .
+ In addition, eurephia will blacklist IP addresses, certificates and user names
+ on too many failed attempts and it supports dynamic update of iptables rules
+ which restricts network access per connection.
+ .
+ All information is stored in a database and all changes to the accounts will
+ be effective immediately. At the moment eurephia supports the SQLite database.

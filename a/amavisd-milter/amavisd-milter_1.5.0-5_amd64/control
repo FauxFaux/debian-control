@@ -1,0 +1,21 @@
+Package: amavisd-milter
+Version: 1.5.0-5
+Architecture: amd64
+Maintainer: Harald Jenny <harald@a-little-linux-box.at>
+Installed-Size: 114
+Depends: libc6 (>= 2.4), libmilter1.0.1 (>= 8.14.3-9.5), amavisd-new
+Recommends: sendmail | postfix
+Breaks: amavisd-new-milter (<= 1:2.6.4-2)
+Replaces: amavisd-new-milter (<= 1:2.6.4-2)
+Provides: amavisd-new-milter
+Section: mail
+Priority: extra
+Homepage: http://amavisd-milter.sourceforge.net/
+Description: amavisd-new interface for milter-capable MTAs
+ This package provides a milter for amavisd-new that works with
+ Sendmail or Postfix, using the AM.PDP protocol.
+ .
+ Replacing the older amavisd-new-milter program, amavisd-milter makes
+ use of the full functionality of amavisd-new. It supports using spam
+ and virus information header fields, rewriting message subjects,
+ adding address extensions, and selectively removing recipients.

@@ -1,0 +1,27 @@
+Package: python3-pyorick
+Source: python-pyorick
+Version: 1.4-2
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 141
+Depends: python3:any (>= 3.3.2-2~), yorick (>= 2.2.04+dfsg-2~), python3-numpy
+Suggests: python-pyorick
+Section: python
+Priority: optional
+Homepage: https://github.com/dhmunro/pyorick/
+Description: Python 3 module to execute Yorick code
+ The pyorick package starts Yorick as a subprocess and provides an
+ interface between Python and Yorick interpreted code.
+ .
+ Features:
+  + exec or eval arbitrary Yorick code strings
+  + get or set Yorick variables
+  + call Yorick functions or subroutines with Python arguments
+  + get or set slices of large Yorick arrays
+  + terminal mode to interact with Yorick by keyboard through Python
+ .
+ Most of the data is exchanged via binary pipes between the two
+ interpreters. Yorick runs in a request-reply mode. Python prints
+ anything Yorick sends to stdout or stderr except prompts.
+ .
+ This package contains the module for Python 3.

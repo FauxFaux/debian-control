@@ -1,0 +1,20 @@
+Package: firewalld
+Version: 0.6.1-2
+Architecture: all
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 3198
+Depends: dbus, gir1.2-glib-2.0, iptables, policykit-1, python3-dbus, python3-gi, python3-slip-dbus, python3:any
+Recommends: ebtables (>= 2.0.10.4-3.1~), ipset
+Breaks: cockpit-ws (<< 176)
+Replaces: cockpit-ws (<< 176)
+Section: net
+Priority: optional
+Homepage: http://www.firewalld.org/
+Description: dynamically managed firewall with support for network zones
+ firewalld is a dynamically managed firewall daemon with support for
+ network/firewall zones to define the trust level of network connections
+ or interfaces. It has support for IPv4, IPv6 firewall settings and for
+ ethernet bridges and has a separation of runtime and persistent
+ configuration options.
+ It also provides a D-Bus interface for services or applications to add
+ and apply firewall rules on-the-fly.

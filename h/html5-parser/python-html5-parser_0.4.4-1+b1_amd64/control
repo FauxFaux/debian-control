@@ -1,0 +1,18 @@
+Package: python-html5-parser
+Source: html5-parser (0.4.4-1)
+Version: 0.4.4-1+b1
+Architecture: amd64
+Maintainer: Norbert Preining <preining@debian.org>
+Installed-Size: 481
+Depends: python (<< 2.8), python (>= 2.7~), python-chardet, python-lxml, python:any (<< 2.8), python:any (>= 2.7.5-5~), libc6 (>= 2.14), libxml2 (>= 2.7.4)
+Section: python
+Priority: optional
+Homepage: https://github.com/kovidgoyal/html5-parser
+Description: fast, standards compliant, C based, HTML 5 parser for python
+ A fast implementation of the HTML 5 parsing spec for Python. Parsing is
+ done in C using a variant of the gumbo parser. The gumbo parse tree is
+ then transformed into an lxml tree, also in C, yielding parse times that
+ can be a thirtieth of the html5lib parse times. That is a speedup of 30x.
+ This differs, for instance, from the gumbo python bindings, where the
+ initial parsing is done in C but the transformation into the final
+ tree is done in python.

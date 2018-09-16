@@ -1,0 +1,30 @@
+Package: tclws
+Version: 2.6.0-1
+Architecture: all
+Maintainer: Massimo Manghi <mxmanghi@apache.org>
+Installed-Size: 741
+Depends: tcl (>= 8.5), tdom, tcllib, tcl-tls
+Suggests: libapache2-mod-rivet, aolserver4
+Section: net
+Priority: optional
+Homepage: http://core.tcl.tk/tclws/
+Description: Tcl Web Services
+ The package provides a Tcl implementation of
+ both client side access to Web Services and
+ server side creation of Web Services.
+ Currently only document/literal and rpc/encoded with
+ HTTP Soap transport are supported on the client side.
+ The server side code currently works with several web
+ servers
+ .
+    - TclHttpd
+    - Apache with Rivet (Debian package libapache2-mod-rivet)
+    - AOLserver (Debian package aolserver4)
+    - WUB
+    - wibble
+    - Microsoft Internet Information Server
+ .
+ The server side code can also be embedded in other
+ application (see Tcl Web services provide all services
+ as document/literal over HTTP Soap transport. The package
+ ships also HTML documentation and coding examples

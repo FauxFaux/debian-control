@@ -1,0 +1,18 @@
+Package: libfakechroot
+Source: fakechroot
+Version: 2.19-3
+Architecture: amd64
+Maintainer: Piotr Roszatycki <dexter@debian.org>
+Installed-Size: 143
+Depends: libc6 (>= 2.14)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/dex4er/fakechroot
+Description: gives a fake chroot environment - runtime
+ This package provides a library which overrides libc functions, so
+ it is possible to use root-specific tools without root privileges.
+ .
+ In fake chroot you can install i.e. Debian bootstrap, create developer's
+ environment and build packages inside chroot'ed system using standard
+ non-root user account.

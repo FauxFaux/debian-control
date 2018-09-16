@@ -1,0 +1,24 @@
+Package: sugarplum
+Version: 0.9.10-18
+Architecture: all
+Maintainer: Dmitry Smirnov <onlyjob@debian.org>
+Installed-Size: 128
+Depends: wbritish | wamerican | wordlist, perl
+Recommends: apache2 (>= 2.4.12~) | nginx | httpd, logrotate
+Suggests: fcgiwrap
+Section: misc
+Priority: optional
+Homepage: http://www.devin.com/sugarplum/
+Description: automated and intelligent spam trap/cache-poisoner
+ Sugarplum is an automated spam-poisoner. Its purpose is to feed realistic
+ and enticing, but totally useless or hazardous data to wandering address
+ harvesters such as EmailSiphon, Cherry Picker, etc.  The idea is to so
+ contaminate spammers' databases as to require that they be discarded,
+ or at least that all data retrieved from your site (including actual
+ email addresses) be removed.
+ .
+ Sugarplum employs a combination of Apache's mod_rewrite URL rewriting
+ rules and perl code. It combines several anti-spambot tactics,
+ includling fictitious (but RFC822-compliant) email address poisoning,
+ injection with the addresses of known spammers (let them all spam each
+ other), deterministic output, and "teergrube" spamtrap addressing.

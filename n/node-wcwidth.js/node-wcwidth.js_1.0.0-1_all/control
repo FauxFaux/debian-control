@@ -1,0 +1,24 @@
+Package: node-wcwidth.js
+Version: 1.0.0-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: nodejs, node-defaults (>= 1.0.0)
+Section: web
+Priority: optional
+Homepage: http://code.woong.org/wcwidth.js
+Description: wcwidth.js is a javascript porting of C's wcwidth()
+ wcwidth.js is a simple javascript porting of wcwidth()
+ implemented in C by Markus Kuhn.
+ .
+ wcwidth() and its string version, wcswidth() are defined by
+ IEEE Std 1002.1-2001, a.k.a. POSIX.1-2001, and return the
+ number of columns used to represent a wide character and
+ string on fixed-width output devices like terminals.
+ Markus's implementation assumes wide characters to be
+ encoded in ISO 10646, which is almost true for JavaScript;
+ almost because JavaScript uses UCS-2 and has problems
+ with surrogate pairs. wcwidth.js converts surrogate pairs
+ to Unicode code points to handle them correctly.
+ .
+ Node.js is an event-based server-side JavaScript engine.

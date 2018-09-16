@@ -1,0 +1,27 @@
+Package: wicd-daemon
+Source: wicd
+Version: 1.7.4+tb2-6
+Architecture: all
+Maintainer: Debian WICD Packaging Team <pkg-wicd-maint@lists.alioth.debian.org>
+Installed-Size: 962
+Pre-Depends: debconf (>= 1.5.34)
+Depends: adduser, dbus, dhcpcd5 | isc-dhcp-client | pump | udhcpc, iputils-ping | inetutils-ping, lsb-base (>= 3.2-13), psmisc, python-dbus, python-gobject-2, python-wicd (= 1.7.4+tb2-6), wireless-tools, wpasupplicant, python:any (>= 2.7.5-5~)
+Recommends: rfkill, wicd-gtk (= 1.7.4+tb2-6) | wicd-curses (= 1.7.4+tb2-6) | wicd-cli (= 1.7.4+tb2-6) | wicd-client
+Suggests: pm-utils
+Breaks: wicd (<= 1.6.2.2-4)
+Replaces: wicd (<= 1.6.2.2-4)
+Section: net
+Priority: optional
+Homepage: https://launchpad.net/wicd
+Description: wired and wireless network manager - daemon
+ Wicd is a general-purpose network configuration server which aims
+ to provide a simple but flexible interface for connecting to networks.
+ Its features include:
+  * wide variety of settings;
+  * ability to connect to (and maintain profiles for) both wired and
+    wireless networks;
+  * support for many encryption schemes, including WEP, WPA, WPA2 and
+    custom schemes;
+  * wireless-tools compatibility.
+ .
+ This package contains the daemon needed to run Wicd.

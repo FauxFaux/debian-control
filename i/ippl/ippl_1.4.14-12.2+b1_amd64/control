@@ -1,0 +1,32 @@
+Package: ippl
+Source: ippl (1.4.14-12.2)
+Version: 1.4.14-12.2+b1
+Architecture: amd64
+Maintainer: Marc Haber <mh+debian-packages@zugschlus.de>
+Installed-Size: 111
+Depends: libc6 (>= 2.14), logrotate, adduser (>> 3.51), lsb-base (>= 3.0-6)
+Section: net
+Priority: extra
+Homepage: http://pltplp.net/ippl/
+Description: IP protocols logger
+ writes information about incoming ICMP messages, TCP connections and
+ UDP datagrams to syslog.
+ .
+ It is highly configurable and has a built-in DNS cache.
+ .
+ Please note that upstream is rather inactive lately (no release since
+ 2001), and that there are some rather nasty bugs.
+ .
+ An incomplete list of the bugs includes:
+   - random packets don't get logged sometimes
+   - stops logging at all after some weeks
+   - ipv6 never got implemented
+   - documentation is out of sync.
+ .
+ Trying to fix these bugs is not easy. Please do not expect the Debian
+ maintainer to do this, but patches are appreciated.
+ .
+ Please consider using a fully-grown intrusion detection system (like
+ snort) instead of ippl.
+ .
+ Upstream URL: http://pltplp.net/ippl/

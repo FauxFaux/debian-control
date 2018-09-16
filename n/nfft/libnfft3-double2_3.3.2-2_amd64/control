@@ -1,0 +1,39 @@
+Package: libnfft3-double2
+Source: nfft
+Version: 3.3.2-2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 788
+Depends: libc6 (>= 2.17), libfftw3-double3, libgomp1 (>= 4.9)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www-user.tu-chemnitz.de/~potts/nfft
+Description: library for computing non-uniform Fourier transforms (double precision)
+ NFFT3 is a software library written in C for computing nonequispaced fast
+ Fourier and related transformations. In detail, NFFT3 implements:
+ .
+ 1) The nonequispaced fast Fourier transform (NFFT)
+    - the forward transform (NFFT)
+    - the adjoint transform (adjoint NFFT)
+ .
+ 2) Generalisations of the NFFT
+    - to arbitrary knots in time and frequency domain (NNFFT)
+    - to the sphere S^2 (NFSFT)
+    - to the hyperbolic cross (NSFFT)
+    - to real-valued data, i.e. (co)sine transforms, (NFCT, NFST)
+    - to the rotation group (NFSOFT)
+ .
+ 3) Generalised inverses based on iterative methods, e.g. CGNR, CGNE
+ .
+ 4) Applications in
+    - medical imaging
+         (i) magnetic resonance imaging
+        (ii) computerised tomography
+    - summation schemes
+          (i) fast Gauss transform (FGT)
+         (ii) singular kernels
+        (iii) zonal kernels
+    - polar FFT, discrete Radon transform, ridgelet transform
+ .
+ This package provides the shared library compiled with double precision.

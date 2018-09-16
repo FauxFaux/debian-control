@@ -1,0 +1,18 @@
+Package: gitlab-workhorse
+Version: 4.3.1+debian-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 26891
+Depends: libc6 (>= 2.3.2)
+Built-Using: golang-1.10 (= 1.10.3-1), golang-github-beorn7-perks (= 0.0~git20160804.0.4c0e845-1), golang-github-dgrijalva-jwt-go-v3 (= 3.1.0-2), golang-github-garyburd-redigo (= 0.0~git20150901.0.d8dbe4d-2), golang-github-mitchellh-copystructure (= 0.0~git20161013.0.5af94ae-2), golang-github-mitchellh-reflectwalk (= 0.0~git20170726.63d60e9-3), golang-github-prometheus-client-model (= 0.0.2+git20171117.99fa1f4-1), golang-github-prometheus-common (= 0+git20180518.7600349-1), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-net-dev (= 1:0.0+git20180124.0ed95ab+dfsg-1), golang-golang-x-sys (= 0.0~git20180510.7dfd129-1), golang-google-genproto (= 0.0~git20171123.7f0da29-1), golang-google-grpc (= 1.6.0-3), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-2), golang-procfs (= 0+git20180613.7d6f385-1), golang-protobuf-extensions (= 1.0.0-2), golang-raven-go (= 0.0~git20150721.0.74c334d-4), golang-toml (= 0.3.0+git20170626.7.a368813-1), golang-websocket (= 1.2.0-1), golang-x-text (= 0.3.0-1)
+Section: httpd
+Priority: optional
+Homepage: https://gitlab.com/gitlab-org/gitlab-workhorse/
+Description: unloads Git HTTP traffic from the GitLab Rails app (Unicorn)
+ gitlab-workhorse was designed to unload Git HTTP traffic from the GitLab Rails
+ app (Unicorn) to a separate daemon. It also serves 'git archive' downloads for
+ GitLab. All authentication and authorization logic is still handled by the
+ GitLab Rails app.
+ .
+ Architecture: Git client -> NGINX -> gitlab-workhorse (makes auth request to
+ GitLab Rails app) -> git-upload-pack

@@ -1,0 +1,17 @@
+Package: libcatalyst-view-tt-perl
+Version: 0.44-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 74
+Depends: perl, libcatalyst-perl, libclass-accessor-perl, libdata-dump-perl, libmro-compat-perl, libpath-class-perl, libtemplate-perl, libtemplate-timer-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-View-TT
+Description: Template View Class for Catalyst
+ Catalyst::View::TT is the Catalyst view class for the Template toolkit. Your
+ application subclass should inherit from this class. This plugin renders the
+ template specified in $c->stash->{template}, or $c->request->match. The
+ template variables are set up from the contents of $c->stash, augmented with
+ template variable base set to Catalyst's $c->req->base, template variable c to
+ Catalyst's $c, and template variable name to Catalyst's $c->config->{name}.
+ The output is stored in $c->response->output.

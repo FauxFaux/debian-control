@@ -1,0 +1,29 @@
+Package: cloudsql-proxy
+Version: 1.11+git20180420.74e2f41-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 5100
+Depends: libc6 (>= 2.3.2)
+Recommends: fuse
+Built-Using: golang-1.9 (= 1.9.4-1), golang-bazil-fuse (= 0.0~git20160811.0.371fbbd-2), golang-github-go-sql-driver-mysql (= 1.3-1), golang-github-lib-pq (= 0.0~git20151007.0.ffe986a-1), golang-go.crypto (= 1:0.0~git20180322.88942b9-1), golang-golang-x-net-dev (= 1:0.0+git20180124.0ed95ab+dfsg-1), golang-golang-x-oauth2 (= 0.0~git20180207.543e378-1), golang-google-api (= 0.0~git20170907.b1ecfb3-1), golang-google-cloud (= 0.9.0-5)
+Section: devel
+Priority: optional
+Homepage: https://github.com/GoogleCloudPlatform/cloudsql-proxy
+Description: connect securely to a 2nd generation Cloud SQL DB
+ The Cloud SQL Proxy allows a user with the appropriate permissions to
+ connect to a Second Generation Google Cloud SQL database without having
+ to deal with IP whitelisting or SSL certificates manually. It works by
+ opening unix/tcp sockets on the local machine and proxying
+ connections to the associated Cloud SQL instances when the sockets
+ are used.
+ .
+ Optional functionality can be enabled (--fuse) with access to `/dev/fuse`
+ as well as the `fusermount` binary.
+ .
+ By default, the proxy will authenticate under the default service account
+ of the Compute Engine VM it is running on. Therefore, the VM must have at
+ least the sqlservice.admin API scope
+ ("https://www.googleapis.com/auth/sqlservice.admin")
+ and the associated project must have the SQL Admin API enabled.  The default
+ service account must also have at least WRITER/EDITOR privileges to any
+ projects of target SQL instances.

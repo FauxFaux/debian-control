@@ -1,0 +1,27 @@
+Package: libcatalyst-plugin-session-perl
+Version: 0.40-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 102
+Depends: perl, libcatalyst-perl (>= 5.71001), libmoose-perl (>= 0.76), libmoosex-emulate-class-accessor-fast-perl (>= 0.00801), libmro-compat-perl, libnamespace-clean-perl (>= 0.10), libobject-signature-perl
+Breaks: libcatalyst-modules-perl (<< 48~)
+Replaces: libcatalyst-modules-perl (<< 48~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-Plugin-Session
+Description: generic Session plugin for Catalyst
+ Catalyst::Plugin::Session is the base of two related parts of functionality
+ required for session management in web applications.
+ .
+ The first part, the State, is getting the browser to repeat back a session
+ key, so that the web application can identify the client and logically string
+ several requests together into a session.
+ .
+ The second part, the Store, deals with the actual storage of information
+ about the client. This data is stored so that the it may be revived for every
+ request made by the same client.
+ .
+ This plugin links the two pieces together.
+ .
+ Catalyst is an elegant Model-View-Controller web application framework
+ written in Perl.

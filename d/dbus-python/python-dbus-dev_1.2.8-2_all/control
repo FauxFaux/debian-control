@@ -1,0 +1,22 @@
+Package: python-dbus-dev
+Source: dbus-python
+Version: 1.2.8-2
+Architecture: all
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 249
+Depends: libdbus-1-dev (>= 1.6)
+Breaks: python-dbus (<< 1.0), python-dbus-common (<< 1.0)
+Replaces: python-dbus (<< 1.0), python-dbus-common (<< 1.0)
+Section: python
+Priority: optional
+Homepage: http://www.freedesktop.org/wiki/Software/DBusBindings#Python
+Description: main loop integration development files for python-dbus
+ D-Bus is a message bus, used for sending messages between applications.
+ Conceptually, it fits somewhere in between raw sockets and CORBA in
+ terms of complexity.
+ .
+ This package provides development files required to compile main-loop
+ integration modules for python-dbus, such as dbus.mainloop.pyqt5 provided
+ by PyQt. It is Python-version-independent: packages that build-depend
+ on python-dbus-dev should also build-depend on python-dbus,
+ python3-dbus, python-dbus-dbg and/or python3-dbus-dbg.

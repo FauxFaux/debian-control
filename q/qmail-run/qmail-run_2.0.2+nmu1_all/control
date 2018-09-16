@@ -1,0 +1,18 @@
+Package: qmail-run
+Version: 2.0.2+nmu1
+Architecture: all
+Maintainer: Gerrit Pape <pape@smarden.org>
+Installed-Size: 21
+Depends: qmail (>= 1.06-2.1), fastforward (>= 1:0.51-3), daemontools (>> 1:0.76), ucspi-tcp (>> 1:0.88), runit (>> 1.8.0-2) | daemontools-run (>> 1:0.76), procmail
+Suggests: dot-forward, mail-reader
+Conflicts: lsb-core, mail-transport-agent
+Replaces: fastforward (<= 0.51-zarge1), mail-transport-agent
+Provides: mail-transport-agent
+Section: mail
+Priority: extra
+Description: sets up qmail as mail-transfer-agent
+ This package sets up the Debian qmail package as mail-transfer-agent.
+ It follows the most commonly used public documentation
+ http://www.lifewithqmail.org/ almost completely.
+ .
+ See /usr/share/doc/qmail-run/README.Debian for details.

@@ -1,0 +1,18 @@
+Package: nvptx-tools
+Version: 0.20180301-1
+Architecture: amd64
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 98
+Depends: binutils, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Suggests: nvidia-cuda-toolkit
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/MentorEmbedded/nvptx-tools/
+Description: collection of tools for use with nvptx-none GCC toolchains
+ The tools consist of
+  - nvptx-none-as: "assembler" for PTX.
+  - nvptx-none-ld: "linker" for PTX.
+ Additionally, the following symlinks are installed:
+  - nvptx-none-ar: link to the GNU/Linux host system's ar.
+  - nvptx-none-ranlib: link to the GNU/Linux host system's ranlib.

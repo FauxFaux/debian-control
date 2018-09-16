@@ -1,0 +1,30 @@
+Package: mpqc
+Source: mpqc (2.3.1-18)
+Version: 2.3.1-18+b3
+Architecture: amd64
+Maintainer: Debichem Team <debichem-devel@lists.alioth.debian.org>
+Installed-Size: 315
+Depends: libsc-data (= 2.3.1-18), mpi-default-bin, libblas3 | libblas.so.3, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgfortran5 (>= 8), libint1, liblapack3 | liblapack.so.3, libopenmpi3, libquadmath0 (>= 4.6), libsc7v5, libstdc++6 (>= 5.2)
+Suggests: mpqc-support
+Breaks: mpqc-openmpi (<< 2.3.1-7)
+Replaces: mpqc-openmpi (<< 2.3.1-7)
+Section: science
+Priority: optional
+Homepage: http://www.mpqc.org
+Description: Massively Parallel Quantum Chemistry Program
+ MPQC is an ab-inito quantum chemistry program.  It is especially designed
+ to compute molecules in a highly parallelized fashion.
+ .
+ It can compute energies and gradients for the following methods:
+  * Closed shell and general restricted open shell Hartree-Fock (HF)
+  * Density Functional Theory (DFT)
+  * Closed shell second-order Moeller-Plesset pertubation theory (MP2)
+ .
+ Additionally, it can compute energies for the following methods:
+  * Open shell MP2 and closed shell explicitly correlated MP2 theory (MP2-R12)
+  * Second order open shell pertubation theory (OPT2[2])
+  * Z-averaged pertubation theory (ZAPT2)
+ .
+ It also includes an internal coordinate geometry optimizer.
+ .
+ MPQC is built upon the Scientific Computing Toolkit (SC).

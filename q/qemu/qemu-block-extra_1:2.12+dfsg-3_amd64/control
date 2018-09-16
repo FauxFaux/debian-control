@@ -1,0 +1,21 @@
+Package: qemu-block-extra
+Source: qemu
+Version: 1:2.12+dfsg-3
+Architecture: amd64
+Maintainer: Debian QEMU Team <pkg-qemu-devel@lists.alioth.debian.org>
+Installed-Size: 271
+Depends: glusterfs-common, libc6 (>= 2.14), libcurl3-gnutls (>= 7.16.3), libglib2.0-0 (>= 2.24.0), libiscsi7 (>= 1.17.0), libnfs11 (>= 1.11.0), librados2 (>= 0.72.2), librbd1 (>= 0.80.5-2~), libssh2-1 (>= 1.5.0)
+Enhances: qemu-system-arm, qemu-system-mips, qemu-system-misc, qemu-system-sparc, qemu-system-x86, qemu-utils
+Section: otherosfs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.qemu.org/
+Description: extra block backend modules for qemu-system and qemu-utils
+ QEMU is a fast processor emulator: currently the package supports
+ ARM, CRIS, i386, M68k (ColdFire), MicroBlaze, MIPS, PowerPC, SH4,
+ SPARC and x86-64 emulation. By using dynamic translation it achieves
+ reasonable speed while being easy to port on new host CPUs.
+ .
+ This package provides extra block device backend modules for qemu-system
+ emulation and qemu-img from qemu-utils package, which are rarely used and
+ has extra dependencies.

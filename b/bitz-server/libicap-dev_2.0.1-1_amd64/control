@@ -1,0 +1,28 @@
+Package: libicap-dev
+Source: bitz-server
+Version: 2.0.1-1
+Architecture: amd64
+Maintainer: Jörg Frings-Fürst <debian@jff.email>
+Installed-Size: 52
+Depends: libicap1 (= 2.0.1-1)
+Suggests: bitz-server-doc
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/uditha-atukorala/bitz-server
+Description: ICAP server (RFC 3507) implementation in C++ (development files)
+ The main goal of this project is to create an ICAP server (RFC 3507)
+ implementation in C++ to use the power of object oriented programming.
+ .
+ Starting from scratch, the server is developed with a modular architecture
+ in mind. The server core (written in C++) will handle the client requests,
+ manage workers (child processes) etc. and will provide basic handlers to serve
+ ICAP requests.
+ .
+ To extend this core functionality the idea is to have pluggable modules
+ (like Apache server modules). These modules will provide features like
+ content filtering, anti-virus scanning etc. and to make it easier to write
+ (and faster to implement) such modules there is hope to exploit Python
+ programming language.
+ .
+ This package holds the development files.

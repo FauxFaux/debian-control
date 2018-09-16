@@ -1,0 +1,30 @@
+Package: libghc-unicode-transforms-dev
+Source: haskell-unicode-transforms
+Version: 0.3.4-1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 18496
+Depends: libghc-base-dev-4.10.1.0-35a7f, libghc-bitarray-dev-0.0.1.1-b6ca6, libghc-bytestring-dev-0.10.8.2-4a9e2, libghc-text-dev-1.2.3.0-81981, libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-unicode-transforms-doc, libghc-unicode-transforms-prof
+Provides: libghc-unicode-transforms-dev-0.3.4-8685a
+Section: haskell
+Priority: optional
+Homepage: https://github.com/harendra-kumar/unicode-transforms
+Description: Fast Unicode 9.0 normalization in Haskell
+ Unicode characters with adornments (e.g. Á) can be represented in two
+ different forms, as a single composed character (U+00C1 = Á) or as
+ multiple decomposed characters (U+0041(A) U+0301( ́ ) = Á). They are
+ differently encoded byte sequences but for humans they have exactly
+ the same visual appearance.
+ .
+ A regular byte comparison may tell that two strings are different even
+ though they might be equivalent. Both strings need to be converted in
+ a normalized form using the Unicode Character Database before they can
+ be compared for equivalence.
+ .
+ This library implements fast Unicode 9.0 normalization in Haskell (NFC,
+ NFKC, NFD, NFKD).
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: unicode-transforms-0.3.4-8zZxkr7C83qE2vRqYGg3aa

@@ -1,0 +1,18 @@
+Package: grub2-common
+Source: grub2
+Version: 2.02+dfsg1-6
+Architecture: amd64
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 1160
+Depends: grub-common (= 2.02+dfsg1-6), dpkg (>= 1.15.4) | install-info, libc6 (>= 2.14), libdevmapper1.02.1 (>= 2:1.02.36), liblzma5 (>= 5.1.1alpha+20120614)
+Conflicts: grub-legacy
+Breaks: grub (<< 0.97-54), grub-doc (<< 0.97-32), grub-legacy-doc (<< 0.97-59), shim (<< 0.9+1474479173.6c180c6-0ubuntu1~)
+Replaces: grub, grub-common (<< 1.99-1), grub-coreboot (<< 2.00-4), grub-doc (<< 0.97-32), grub-efi (<< 1.99-1), grub-efi-amd64 (<< 2.00-4), grub-efi-ia32 (<< 2.00-4), grub-efi-ia64 (<< 2.00-4), grub-ieee1275 (<< 2.00-4), grub-legacy, grub-legacy-doc (<< 0.97-59), grub-linuxbios (<< 1.99-1), grub-pc (<< 2.00-4), grub-yeeloong (<< 2.00-4)
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.gnu.org/software/grub/
+Description: GRand Unified Bootloader (common files for version 2)
+ This package contains common files shared by the distinct flavours of GRUB.
+ The files in this package are specific to GRUB 2, and would break GRUB
+ Legacy if installed on the same system.

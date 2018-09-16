@@ -1,0 +1,54 @@
+Package: libghc-enumerator-dev
+Source: haskell-enumerator
+Version: 0.4.20-7
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 2127
+Depends: libghc-base-dev-4.10.1.0-35a7f, libghc-bytestring-dev-0.10.8.2-4a9e2, libghc-containers-dev-0.5.10.2-cc496, libghc-text-dev-1.2.3.0-81981, libghc-transformers-dev-0.5.2.0-e0457, libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-enumerator-doc, libghc-enumerator-prof
+Provides: libghc-enumerator-dev-0.4.20-d27ec
+Section: haskell
+Priority: optional
+Homepage: https://john-millikin.com/software/enumerator/
+Description: high-performance left-fold enumerators
+ Typical buffer–based incremental I/O is based around a single loop,
+ which reads data from some source (such as a socket or file),
+ transforms it, and generates one or more outputs (such as a line
+ count, HTTP responses, or modified file). Although efficient and
+ safe, these loops are all single–purpose; it is difficult or
+ impossible to compose buffer–based processing loops.
+ .
+ Haskell's concept of "lazy I/O" allows pure code to operate on data
+ from an external source. However, lazy I/O has several shortcomings.
+ Most notably, resources such as memory and file handles can be
+ retained for arbitrarily long periods of time, causing unpredictable
+ performance and error conditions.
+ .
+ Enumerators are an efficient, predictable, and safe alternative to
+ lazy I/O. Discovered by Oleg Kiselyov, they allow large datasets to
+ be processed in near–constant space by pure code. Although somewhat
+ more complex to write, using enumerators instead of lazy I/O
+ produces more correct programs.
+ .
+ This library contains an enumerator implementation for Haskell,
+ designed to be both simple and efficient. Three core types are
+ defined, along with numerous helper functions:
+ .
+ Iteratee: Data sinks, analogous to left folds. Iteratees consume
+ a sequence of input values, and generate a single output value. Many
+ iteratees are designed to perform side effects (such as printing to
+ stdout), so they can also be used as monad transformers.
+ .
+ Enumerator: Data sources, which generate input sequences. Typical
+ enumerators read from a file handle, socket, random number generator,
+ or other external stream. To operate, enumerators are passed an
+ iteratee, and provide that iteratee with input until either the
+ iteratee has completed its computation, or EOF.
+ .
+ Enumeratee: Data transformers, which operate as both enumerators
+ and iteratees. Enumeratees read from an outer enumerator, and
+ provide the transformed data to an inner iteratee.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: enumerator-0.4.20-5TL9m5Xjcv8AP693ua3GaP

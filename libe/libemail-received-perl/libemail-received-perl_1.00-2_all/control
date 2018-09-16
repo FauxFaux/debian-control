@@ -1,0 +1,18 @@
+Package: libemail-received-perl
+Version: 1.00-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 41
+Depends: perl, libregexp-common-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Email-Received
+Description: Perl module to parse an email Received: header
+ Email::Received is a Perl Email Project rewrite of SpamAssassin's email
+ header parser. This was done so that the great work they did in analysing
+ pretty much every possible Received header format could be used in
+ applications other than SpamAssassin itself.
+ .
+ The module provides one function, parse_received, which takes a single
+ Received line. It then produces either nothing, if the line is unparsable,
+ or a hash reference if it parsed the message.

@@ -1,0 +1,17 @@
+Package: ibacm
+Source: rdma-core
+Version: 20.0-1
+Architecture: amd64
+Maintainer: Benjamin Drung <benjamin.drung@profitbricks.com>
+Installed-Size: 260
+Depends: lsb-base (>= 3.2-14~), rdma-core (>= 15), libc6 (>= 2.17), libibumad3 (>= 1.3.9), libibverbs1 (>= 20), libsystemd0
+Section: net
+Priority: optional
+Homepage: https://github.com/linux-rdma/rdma-core
+Description: InfiniBand Communication Manager Assistant (ACM)
+ The IB ACM implements and provides a framework for name, address, and
+ route (path) resolution services over InfiniBand.
+ It is intended to address connection setup scalability issues running
+ MPI applications on large clusters.  The IB ACM provides information
+ needed to establish a connection, but does not implement the CM protocol.
+ A primary user of the ibacm service is the librdmacm library.

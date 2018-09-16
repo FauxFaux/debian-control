@@ -1,0 +1,23 @@
+#! /bin/sh
+set -e
+
+case "$1" in
+    purge)
+	if [ -d /etc/trn4 ]; then
+	    rmdir /etc/trn4 2>/dev/null || true
+	fi
+	;;
+esac
+
+# Automatically added by dh_installmenu/11.2.1
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.2.1
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

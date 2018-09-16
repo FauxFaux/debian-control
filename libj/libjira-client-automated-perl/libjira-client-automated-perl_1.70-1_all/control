@@ -1,0 +1,23 @@
+Package: libjira-client-automated-perl
+Version: 1.70-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 65
+Depends: perl, libdata-dump-perl, libjson-perl, libjson-xs-perl, liblwp-protocol-https-perl, libwww-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/JIRA-Client-Automated
+Description: JIRA REST Client for automated scripts
+ JIRA::Client::Automated is an adapter between any automated system and JIRA's
+ REST API. JIRA::Client::Automated is explicitly designed to easily create and
+ close issues within a JIRA instance via automated scripts.
+ .
+ For example, if you run nightly batch jobs, you can use
+ JIRA::Client::Automated to have those jobs automatically create issues in
+ JIRA for you when the script runs into errors. You can attach error log files
+ to the issues and then they'll be waiting in someone's open issues list when
+ they arrive at work the next day.
+ .
+ If you want to avoid creating the same issue more than once you can search
+ JIRA for it first, only creating it if it doesn't exist. If it does already
+ exist you can add a comment or a new error log to that issue.

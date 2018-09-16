@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ]; then
+  # until all issues are resolved, this package needs
+  # a link from /opt to the correct directory
+  rm -f /opt/alljoyn
+fi
+
+# Automatically added by dh_installinit/11.1.4
+if [ "$1" = "purge" ] ; then
+	update-rc.d alljoyn-gateway-1504 remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0

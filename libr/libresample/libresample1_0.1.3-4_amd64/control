@@ -1,0 +1,27 @@
+Package: libresample1
+Source: libresample
+Version: 0.1.3-4
+Architecture: amd64
+Maintainer: Jonas Smedegaard <dr@jones.dk>
+Installed-Size: 68
+Depends: libc6 (>= 2.2.5)
+Section: libs
+Priority: optional
+Homepage: http://www-ccrma.stanford.edu/~jos/resample/Free_Resampling_Software.html
+Description: real-time audio resampling library - shared libraries
+ A real-time library for audio sampling rate conversion providing
+ several useful features relative to resample-1.7 on which it is based:
+  - More portable (source includes autoconf script and Visual C++
+    project file, packaging adds CMake script with shared library
+    support).
+  - Memory-based (no need to read or write external files).
+  - Floating-point computations (not fixed-point).
+  - Faster and more accurate results (filter table increased by a factor
+    of 32).
+  - Supports variable resampling ratio (data can be processed in small
+    chunks).
+  - Easily applied to any number of simultaneous data channels
+  - LGPL-licensed (libsamplerate, a GPL-licensed alternative, is
+    considered by the libresample author to be technically superior).
+ .
+ This package contains the shared libraries for resample.

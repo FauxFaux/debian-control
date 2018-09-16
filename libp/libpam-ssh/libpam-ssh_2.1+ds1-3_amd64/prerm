@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+case "$1" in
+	remove)
+		## Remove obsoleted setup files from /usr/share/pam-configs.
+		if [ -f /usr/share/pam-configs/silent-ssh-single-sign-on ]; then
+			pam-auth-update --package --remove silent-ssh-single-sign-on
+		fi
+		## Remove setup files from /usr/share/pam-configs.
+		pam-auth-update --package --remove ssh
+    ;;
+	upgrade|failed-upgrade|deconfigure)
+		## Remove obsoleted setup files from /usr/share/pam-configs.
+		if [ -f /usr/share/pam-configs/silent-ssh-single-sign-on ]; then
+			pam-auth-update --package --remove silent-ssh-single-sign-on
+		fi
+		;;
+	*)
+		echo "prerm called with unknown argument \`$1'" >&2
+		exit 1
+		;;
+esac
+

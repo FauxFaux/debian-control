@@ -1,0 +1,27 @@
+Package: ruby-simple-captcha2
+Version: 0.4.3-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 62
+Depends: ruby | ruby-interpreter, ruby-rails (>= 4.1)
+Section: ruby
+Priority: optional
+Homepage: http://github.com/pludoni/simple-captcha
+Description: simplest and a robust captcha plugin for rails
+ Available with Rails 3 + 4 or above provides backward compatibility. This
+ is a fork of the popular Rubygem ``simple_captcha`` which got abandoned.
+ .
+ Features
+ .
+  * Zero FileSystem usage (secret code moved to db-store and image storage
+ removed).
+  * Provides various image styles.
+  * Provides three level of complexity of images.
+  * Works absolutely fine in distributed environment(session and db based
+ implementation works fine in distributed environment).
+  * Implementation is as easy as just writing a single line in your view.
+ ```<%= show_simple_captcha %>``` within the 'form' tags.
+  * Flexible DOM and CSS handling(There is a separate view partial for
+ rendering SimpleCaptcha DOM elements).
+  * Automated removal of 1 hour old unmatched simple_captcha data.
+Ruby-Versions: all

@@ -1,0 +1,21 @@
+Package: upgrade-system
+Version: 1.7.3.1
+Architecture: all
+Maintainer: Martin-Éric Racine <martin-eric.racine@iki.fi>
+Installed-Size: 45
+Depends: apt (>= 0.7.0), deborphan (>= 1.7)
+Recommends: debsums
+Section: admin
+Priority: optional
+Homepage: http://q-funk.iki.fi/debian
+Description: command for upgrading and sanitizing a Debian system
+ Upgrade-system offers a convenient way to keep a Debian system up-to-date,
+ yet free from accumulated cruft such as obsolete libraries.
+ .
+ It is particularly useful on systems that mix packages from different
+ releases (stable/testing/unstable) and on desktop systems where packages
+ are frequently installed or removed according to evolving user tastes.
+ .
+ By default, it is configured to purge all packages that are not listed
+ as another package's dependency. Less drastic settings are possible by
+ editing /etc/upgrade-system.conf(5).

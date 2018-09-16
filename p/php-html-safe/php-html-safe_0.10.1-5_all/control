@@ -1,0 +1,23 @@
+Package: php-html-safe
+Version: 0.10.1-5
+Architecture: all
+Maintainer: Debian PHP PEAR Maintainers <pkg-php-pear@lists.alioth.debian.org>
+Installed-Size: 42
+Depends: php-common, php-xml-htmlsax3 (>= 3.0.0~RC1)
+Section: php
+Priority: optional
+Homepage: http://pear.php.net/package/HTML_Safe
+Description: strip down all potentially dangerous content within HTML
+ This parser strips down all potentially dangerous content within HTML:
+  * opening tag without its closing tag
+  * closing tag without its opening tag
+  * any of these tags: "base", "basefont", "head", "html", "body", "applet",
+    "object", "iframe", "frame", "frameset", "script", "layer", "ilayer",
+    "embed", "bgsound", "link", "meta", "style", "title", "blink", "xml", etc.
+  * any of these attributes: on*, data*, dynsrc
+  * javascript:/vbscript:/about: etc. protocols
+  * expression/behavior etc. in styles
+  * any other active content
+ .
+ It also tries to convert code to XHTML valid, but htmltidy is far better
+ solution for this task.

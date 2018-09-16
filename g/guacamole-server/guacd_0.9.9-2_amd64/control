@@ -1,0 +1,26 @@
+Package: guacd
+Source: guacamole-server
+Version: 0.9.9-2
+Architecture: amd64
+Maintainer: Debian Remote Maintainers <pkg-remote-team@lists.alioth.debian.org>
+Installed-Size: 65
+Depends: lsb-base (>= 3.0-6), init-system-helpers (>= 1.18~), libc6 (>= 2.15), libguac11 (>= 0.9.9), libssl1.1 (>= 1.1.0)
+Recommends: libguac-client-rdp0, libguac-client-ssh0, libguac-client-vnc0
+Suggests: libguac-client-telnet0
+Section: net
+Priority: extra
+Homepage: http://guacamole.incubator.apache.org/
+Description: HTML5 web application for accessing remote desktops (proxy daemon)
+ Guacamole is an HTML5 web application that provides access to a desktop
+ environment using remote desktop protocols. A centralized server acts as a
+ tunnel and proxy, allowing access to multiple desktops through a web browser.
+ No plugins are needed: the client requires nothing more than a web browser
+ supporting HTML5 and AJAX.
+ .
+ The Guacamole proxy daemon, guacd, translates between remote desktop
+ protocols (like VNC) and the Guacamole protocol using protocol plugins.
+ Once a user is authenticated with the Guacamole web application, a tunnel
+ is established through the web application to guacd, allowing the JavaScript
+ client to communicate to an arbitrary remote desktop server through guacd.
+ .
+ This package contains the daemon binary.

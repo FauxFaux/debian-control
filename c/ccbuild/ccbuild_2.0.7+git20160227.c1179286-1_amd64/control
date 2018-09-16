@@ -1,0 +1,17 @@
+Package: ccbuild
+Version: 2.0.7+git20160227.c1179286-1
+Architecture: amd64
+Maintainer: Jari Aalto <jari.aalto@cante.net>
+Installed-Size: 471
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgnutls30 (>= 3.5.0), libgomp1 (>= 4.9), libstdc++6 (>= 5.2)
+Section: devel
+Priority: optional
+Homepage: http://www.logfish.net/pr/ccbuild
+Description: source scanning build utility for C++
+ Scan the source for main functions and includes. When the file
+ contains a main function it will compile all the files next to that
+ file's includes and link them into a program.
+ .
+ This makes it possible to build entire programs with minimal
+ configuration. Linker and compiler options can be added and will be
+ automatically divided over the compiler and linker.

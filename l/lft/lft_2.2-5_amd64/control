@@ -1,0 +1,18 @@
+Package: lft
+Version: 2.2-5
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 56
+Depends: libc6 (>= 2.14), libpcap0.8 (>= 0.9.8)
+Section: net
+Priority: optional
+Homepage: http://www.mainnerve.com/lft/index.html
+Description: layer-four traceroute
+ lft sends various TCP SYN and FIN probes (differing from Van Jacobson's
+ UDP-based method) utilizing the IP protocol "time to live" field and
+ attempts to elicit an ICMP TIME_EXCEEDED response from each gateway along
+ the path to some host.
+ lft also listens for various TCP and ICMP messages along the way to assist
+ network managers in ascertaining per-protocol heuristic routing information
+ and can optionally retrieve various information about the networks it
+ traverses.

@@ -1,0 +1,26 @@
+Package: python-futurist
+Version: 1.6.0-2
+Architecture: all
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 139
+Depends: python-concurrent.futures (>= 3.0), python-contextlib2 (>= 0.4.0), python-monotonic (>= 0.6), python-pbr (>= 2.0.0), python-prettytable, python-six (>= 1.10.0), python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Suggests: python-futurist-doc
+Section: python
+Priority: optional
+Homepage: http://www.openstack.org/
+Description: useful additions to futures, from the future - Python 2.x
+ Code from the future, delivered to you in the now. For example:
+  * A futurist.GreenThreadPoolExecutor using eventlet green thread pools. It
+    provides a standard executor API/interface and it also gathers execution
+    statistics.
+  * A futurist.ProcessPoolExecutor derivative that gathers execution
+    statistics.
+  * A futurist.SynchronousExecutor that doesn’t run concurrently. It has the
+    same executor API/interface and it also gathers execution statistics.
+  * A futurist.ThreadPoolExecutor derivative that gathers execution statistics.
+  * A futurist.periodics.PeriodicWorker that can use the previously mentioned
+    executors to run asynchronous work periodically in parallel or
+    synchronously.
+  * etc.
+ .
+ This package contains the Python 2.x module.

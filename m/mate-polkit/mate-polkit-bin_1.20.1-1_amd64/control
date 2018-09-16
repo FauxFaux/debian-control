@@ -1,0 +1,21 @@
+Package: mate-polkit-bin
+Source: mate-polkit
+Version: 1.20.1-1
+Architecture: amd64
+Maintainer: Debian+Ubuntu MATE Packaging Team <debian-mate@lists.debian.org>
+Installed-Size: 22
+Depends: mate-polkit (>= 1.20.1-1)
+Breaks: mate-polkit (<< 1.12.0-3~)
+Section: x11
+Priority: optional
+Homepage: http://www.mate-desktop.org/
+Description: MATE authentication agent for PolicyKit-1 (executable wrapper script)
+ The mate-polkit package provides a D-Bus session bus service that is used to
+ bring up authentication dialogs used for obtaining privileges.
+ .
+ This package contains an executable wrapper script for the MATE policy kit
+ authentication agent.
+ .
+ This package eases using mate-polkit as PolicyKit-1 authentication agent on
+ non-MATE desktop environments that don't auto-launch their own authentication
+ agent (e.g., i3, awesome, ratpoison and alike).

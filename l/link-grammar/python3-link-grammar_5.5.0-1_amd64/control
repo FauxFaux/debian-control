@@ -1,0 +1,26 @@
+Package: python3-link-grammar
+Source: link-grammar
+Version: 5.5.0-1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 199
+Depends: liblink-grammar5 (>= 5.5.0), python3 (<< 3.7), python3 (>= 3.6~), python3:any (>= 3.3.2-2~), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libpython3.6 (>= 3.6.5), libstdc++6 (>= 4.1.1)
+Recommends: link-grammar-dictionaries-all, python-link-grammar-examples
+Section: python
+Priority: optional
+Homepage: https://www.abisource.com/projects/link-grammar/
+Description: Carnegie Mellon University's link grammar parser (Python 3)
+ In Sleator, D. and Temperley, D. "Parsing English with a Link Grammar"
+ (1991), the authors defined a new formal grammatical system called a
+ "link grammar". A sequence of words is in the language of a link
+ grammar if there is a way to draw "links" between words in such a way
+ that the local requirements of each word are satisfied, the links do
+ not cross, and the words form a connected graph. The authors encoded
+ English grammar into such a system, and wrote this program to parse
+ English using this grammar.
+ .
+ link-grammar can be used for linguistic parsing for information
+ retrieval or extraction from natural language documents. It can also be
+ used as a grammar checker.
+ .
+ This package contains a Python 3 library for using link-grammar.

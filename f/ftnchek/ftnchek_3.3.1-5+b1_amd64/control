@@ -1,0 +1,26 @@
+Package: ftnchek
+Source: ftnchek (3.3.1-5)
+Version: 3.3.1-5+b1
+Architecture: amd64
+Maintainer: Mark Brown <broonie@debian.org>
+Installed-Size: 711
+Depends: libc6 (>= 2.14)
+Suggests: fortran77-compiler
+Section: devel
+Priority: extra
+Description: Semantic checker for Fortran 77 programs
+ ftnchek (short for Fortran checker) is a tool designed to detect
+ certain errors in a Fortran program that a compiler usually does not,
+ thus assisting users in the debugging of their Fortran programs.
+ .
+ Unlike syntax errors, semantic errors are legal in the Fortran
+ language but are wasteful or may cause incorrect operation. For
+ example, variables which are never used may indicate some omission in
+ the program; uninitialized variables contain garbage which may cause
+ incorrect results to be calculated; and variables which are not
+ declared may not have the intended type.
+ .
+ ftnchek can also be used to provide call-trees, cross-reference of
+ subprogram calls and COMMON blocks usage, source listings, symbol
+ tables and other things you might find useful when debugging a
+ Fortran program.

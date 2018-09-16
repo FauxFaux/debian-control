@@ -1,0 +1,23 @@
+Package: python3-pyodbc-dbg
+Source: pyodbc (4.0.22-1)
+Version: 4.0.22-1+b1
+Architecture: amd64
+Maintainer: Deepak Tripathi <apenguinlinux@gmail.com>
+Installed-Size: 1793
+Depends: python3-pyodbc (= 4.0.22-1+b1), python3-dbg (<< 3.8), python3-dbg (>= 3.6~), python3-dbg:any (>= 3.2~), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libodbc1 (>= 2.3.1), libstdc++6 (>= 4.1.1)
+Section: debug
+Priority: optional
+Homepage: http://mkleehammer.github.io/pyodbc/
+Description: Python3 module for ODBC database access - Debugging symbols
+ A Python3 DB API 2 module for ODBC. No 3rd party libraries are required.
+ Only native Python datatypes are used, such as decimal and datetime.
+ It implements the Python Database API Specification v2.0.
+ For example:
+   import pyodbc
+ Next, create a connection by passing an ODBC connection string to the
+ connect method. This step causes ODBC to load the database driver (the SQL
+ Server driver in this example) and connect to the database.
+   cnxn = pyodbc.connect('DSN=northwind')
+ .
+ This package contains debugging symbols.
+Build-Ids: 2b4bf45b2ac3702b73ee6d71e18fc7e5c9795b81 efdbdf670fd8912ae2ab411cd6918c6e414c8c75

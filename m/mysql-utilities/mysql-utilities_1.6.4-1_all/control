@@ -1,0 +1,49 @@
+Package: mysql-utilities
+Version: 1.6.4-1
+Architecture: all
+Maintainer: Dmitry Smirnov <onlyjob@debian.org>
+Installed-Size: 2086
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~), python-mysql.connector (>= 1.2.1)
+Enhances: mysql-workbench
+Breaks: libmysql-diff-perl (<< 0.43-2)
+Replaces: libmysql-diff-perl (<< 0.43-2)
+Section: database
+Priority: optional
+Homepage: https://launchpad.net/mysql-utilities
+Description: collection of scripts for managing MySQL servers
+ MySQL Utilities is both a set of command-line utilities as well as a
+ Python library for making the common tasks easy to accomplish. The
+ library is written entirely in Python, meaning that it is not
+ necessary to have any other tools or libraries installed to make it
+ work.
+ .
+ MySQL Utilities are intended to make working with servers easier.
+ It is part of the MySQL Workbench.
+ .
+ This package provides the following utilities:
+  mysqlauditadmin  : maintain the audit log
+  mysqlauditgrep   : search an audit log
+  mysqlbinlogmove  : move binlog files to a different location
+  mysqldbcompare   : check two databases and identify any differences
+  mysqldbcopy      : copy databases from one MySQL server to another
+  mysqldbexport    : export a list of databases in a variety of formats
+  mysqldbimport    : import object definitions or data into a database
+  mysqldiff        : identify differences among database objects
+  mysqldiskusage   : show disk usage for one or more databases
+  mysqlfabric      : server farm management framework
+  mysqlfailover    : automatic replication health monitoring and failover
+  mysqlfrm         : show CREATE TABLE from .frm files
+  mysqlgrants      : privilege display utility
+  mysqlindexcheck  : check for redundant or duplicate indexes
+  mysqlmetagrep    : search MySQL servers for objects matching a pattern
+  mysqlprocgrep    : search MySQL servers for processes matching a pattern
+  mysqlreplicate   : setup replication among two MySQL servers
+  mysqlrpladmin    : administration utility for MySQL replication
+  mysqlrplcheck    : check prerequisities for replication
+  mysqlrplms       : establish a multi-source replication topology
+  mysqlrplshow     : show slaves attached to a master
+  mysqlrplsync     : check the data consistency between master and slaves
+  mysqlserverclone : start a new instance of an existing MySQL server
+  mysqlserverinfo  : display common diagnostic information from a server
+  mysqluc          : command line client for running MySQL Utilities
+  mysqluserclone   : copy a MySQL user to new user(s) on another server

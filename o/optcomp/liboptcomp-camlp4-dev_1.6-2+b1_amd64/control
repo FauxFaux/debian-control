@@ -1,0 +1,25 @@
+Package: liboptcomp-camlp4-dev
+Source: optcomp (1.6-2)
+Version: 1.6-2+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 374
+Depends: libcamlp4-ocaml-dev-w0ou6, ocaml-nox-4.05.0, libc6 (>= 2.2.5)
+Recommends: ocaml-findlib
+Provides: liboptcomp-camlp4-dev-xmqj6
+Section: ocaml
+Priority: optional
+Homepage: https://github.com/diml/optcomp
+Description: syntax extension for optional compilation with cpp-like directives (library)
+ Optcomp is a syntax extension which handles #if, #else, ... directives
+ in OCaml source files. Compared to cpp:
+  * it does not interpret //, /*, and */ as comment delimiters
+  * it does not complains about missing '
+  * it is easier to integrate in the build process when using other
+    camlp4 syntax extensions
+  * it does not do macro expansion while cpp does
+ Compared to pa_macro, it does not require code that will be dropped to
+ be valid OCaml code. This can be useful for code that optionnally uses
+ GADTs, but can be compiled with older versions of OCaml.
+ .
+ This package contains the syntax extension as a camlp4 module.

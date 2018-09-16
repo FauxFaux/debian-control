@@ -1,0 +1,20 @@
+Package: ldap-utils
+Source: openldap
+Version: 2.4.46+dfsg-5
+Architecture: amd64
+Maintainer: Debian OpenLDAP Maintainers <pkg-openldap-devel@lists.alioth.debian.org>
+Installed-Size: 687
+Depends: libc6 (>= 2.14), libgnutls30 (>= 3.5.0), libldap-2.4-2 (= 2.4.46+dfsg-5), libsasl2-2
+Recommends: libsasl2-modules
+Suggests: libsasl2-modules-gssapi-mit | libsasl2-modules-gssapi-heimdal
+Conflicts: ldap-client, openldap-utils, umich-ldap-utils
+Replaces: openldap-utils, openldapd, slapd (<< 2.2.23-0.pre6)
+Provides: ldap-client, openldap-utils
+Section: net
+Priority: optional
+Homepage: http://www.openldap.org/
+Description: OpenLDAP utilities
+ This package provides utilities from the OpenLDAP (Lightweight
+ Directory Access Protocol) package. These utilities can access a
+ local or remote LDAP server and contain all the client programs
+ required to access LDAP servers.

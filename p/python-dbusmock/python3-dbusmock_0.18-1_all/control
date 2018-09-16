@@ -1,0 +1,29 @@
+Package: python3-dbusmock
+Source: python-dbusmock
+Version: 0.18-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 351
+Depends: python3:any (>= 3.3.2-2~), python3-dbus, python3-gi, gir1.2-glib-2.0 (>= 1.32), dbus-x11
+Section: python
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/martinpitt/python-dbusmock/
+Description: mock D-Bus objects for tests (Python 3)
+ With python-dbusmock you can easily create mock objects on D-Bus. This is
+ useful for writing tests for software which talks to D-Bus services such as
+ upower, systemd, ConsoleKit, gnome-session or others, and it is hard (or
+ impossible without root privileges) to set the state of the real services to
+ what you expect in your tests.
+ .
+ Mock objects look like the real API (or at least the parts that you actually
+ need), but they do not actually do anything (or only some action that you
+ specify yourself). You can configure their state, behaviour and responses as
+ you like in your test, without making any assumptions about the real system
+ status.
+ .
+ You can use this with any programming language, as you can run the mocker as a
+ normal program. The actual setup of the mock (adding objects, methods,
+ properties, etc.) all happen via D-Bus methods on the
+ org.freedesktop.DBus.Mock interface. You just don't have the convenience
+ D-Bus launch API that way.

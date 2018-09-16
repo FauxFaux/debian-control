@@ -1,0 +1,24 @@
+Package: mono-runtime-boehm
+Source: mono
+Version: 4.6.2.7+dfsg-2
+Architecture: amd64
+Maintainer: Debian Mono Group <pkg-mono-group@lists.alioth.debian.org>
+Installed-Size: 3643
+Depends: libc6 (>= 2.15), libgcc1 (>= 1:3.3), mono-runtime-common (= 4.6.2.7+dfsg-2)
+Section: cli-mono
+Priority: optional
+Homepage: http://www.mono-project.com/
+Description: Mono runtime - Boehm
+ Mono is a platform for running and developing applications based on the
+ ECMA/ISO Standards. Mono is an open source effort led by Xamarin.
+ Mono provides a complete CLR (Common Language Runtime) including compiler and
+ runtime, which can produce and execute CIL (Common Intermediate Language)
+ bytecode (aka assemblies), and a class library.
+ .
+ This package contains the Virtual Machine, JIT (Just-in-Time) and
+ AOT (Ahead-of-Time) code generator "mono-sgen".
+ mono-sgen executes applications for the CLI (Common Language Infrastructure).
+ Mono currently only supports the X86, PowerPC, ARM, S/390x, AMD64 and
+ MIPS architectures.
+ .
+ This package uses Boehm's conservative garbage collector.

@@ -1,0 +1,29 @@
+Package: netpipe-openmpi
+Source: netpipe (3.7.2-7.4)
+Version: 3.7.2-7.4+b4
+Architecture: amd64
+Maintainer: Camm Maguire <camm@debian.org>
+Installed-Size: 144
+Depends: openmpi-bin, libc6 (>= 2.4), libopenmpi3
+Section: net
+Priority: extra
+Description: Network performance tool using OpenMPI
+ NetPIPE is a protocol independent performance tool that encapsulates
+ the best of ttcp and netperf and visually represents the network
+ performance under a variety of conditions. By taking the end-to-end
+ application view of a network, NetPIPE clearly shows the overhead
+ associated with different protocol layers. NetPIPE answers such
+ questions as: how soon will a given data block of size k arrive at its
+ destination? Which network and protocol will transmit size k blocks
+ the fastest? What is a given network's effective maximum throughput
+ and saturation level?  Does there exist a block size k for which the
+ throughput is maximized? How much communication overhead is due to the
+ network communication protocol layer(s)? How quickly will a small (< 1
+ kbyte) control message arrive, and which network and protocol are best
+ for this purpose?
+ .
+ This package measures network performance using the MPI protocol, a
+ Message Passing Interface frequently used in parallel processing, and
+ which uses in turn TCP as its underlying transport.   The implementation
+ of the MPI standard used by this package is that provided by the openmpi
+ set of packages.

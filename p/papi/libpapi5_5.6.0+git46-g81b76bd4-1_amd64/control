@@ -1,0 +1,28 @@
+Package: libpapi5
+Source: papi
+Version: 5.6.0+git46-g81b76bd4-1
+Architecture: amd64
+Maintainer: Debian HPC Team <debian-hpc@lists.debian.org>
+Installed-Size: 723
+Depends: libc6 (>= 2.14), libpfm4 (>= 4.9)
+Breaks: libpapi5.3
+Replaces: libpapi5.3
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://icl.utk.edu/papi/software/index.html
+Description: PAPI runtime (shared libraries)
+ Performance Application Programming Interface (PAPI) provides the tool
+ designer and application engineer with a consistent interface and methodology
+ for use of the performance counter hardware found in most major
+ microprocessors. PAPI enables software engineers to see, in near real time,
+ the relation between software performance and processor events.
+ .
+ In addition Component PAPI provides access to a collection of components that
+ expose performance measurement opportunites across the hardware and software
+ stack.
+ .
+ Accessing performance counters from userspace may require reducing the paranoia
+ level in /proc/sys/kernel/perf_event_paranoid, see README.Debian for details.
+ .
+ This package provides the shared library.

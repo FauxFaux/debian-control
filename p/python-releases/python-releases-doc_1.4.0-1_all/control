@@ -1,0 +1,30 @@
+Package: python-releases-doc
+Source: python-releases
+Version: 1.4.0-1
+Architecture: all
+Maintainer: Zygmunt Krynicki <zygmunt.krynicki@canonical.com>
+Installed-Size: 206
+Depends: libjs-sphinxdoc (>= 1.0), sphinx-rtd-theme-common
+Section: doc
+Priority: optional
+Homepage: https://github.com/bitprophet/releases
+Description: Sphinx extension for changelog manipulation documentation
+ Releases is a Sphinx extension designed to help you keep a source control
+ friendly, merge friendly changelog file & turn it into useful, human readable
+ HTML output.
+ .
+ Specifically:
+ .
+   * The source format (kept in your Sphinx tree as ``changelog.rst``) is a
+     stream-like timeline that plays well with source control & only requires
+     one entry per change (even for changes that exist in multiple release
+     lines).
+   * The output (when you have the extension installed and run your Sphinx
+     build command) is a traditional looking changelog page with a section for
+     every release; multi-release issues are copied automatically into each
+     release.
+   * By default, feature and support issues are only displayed under feature
+     releases, and bugs are only displayed under bugfix releases. This can be
+     overridden on a per-issue basis.
+ .
+ This package contains the documentation for releases.

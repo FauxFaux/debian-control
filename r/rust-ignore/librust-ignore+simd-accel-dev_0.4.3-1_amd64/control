@@ -1,0 +1,15 @@
+Package: librust-ignore+simd-accel-dev
+Source: rust-ignore
+Version: 0.4.3-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-ignore-dev (= 0.4.3-1), librust-globset-0.4+simd-accel-dev
+Provides: librust-ignore-0+simd-accel-dev (= 0.4.3-1), librust-ignore-0.4+simd-accel-dev (= 0.4.3-1), librust-ignore-0.4.3+simd-accel-dev (= 0.4.3-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/BurntSushi/ripgrep/tree/master/ignore
+Description: Fast library for matching ignore files like .gitignore against file paths - feature "simd-accel"
+ This metapackage enables feature simd-accel for the Rust ignore crate, by
+ pulling in any additional dependencies needed by that feature.

@@ -1,0 +1,18 @@
+Package: yank
+Version: 1.0.0-1
+Architecture: amd64
+Maintainer: Sebastien Delafond <seb@debian.org>
+Installed-Size: 39
+Depends: libc6 (>= 2.4), xsel
+Section: utils
+Priority: optional
+Homepage: https://github.com/mptre/yank
+Description: interactively select and yank terminal output to stdout or xsel
+ Read input from stdin and draw a selection interface where all fields
+ in the given input are recognized by using a default or user-supplied
+ set of delimiters.
+ .
+ Using ctrl-n and ctrl-p will move the field selection forward and
+ backward, pressing the return key will invoke the yank command and
+ write the selected field to its stdin. The yank command defaults to
+ xsel, but could be anything that accepts input on stdin.

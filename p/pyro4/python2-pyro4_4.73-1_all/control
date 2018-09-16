@@ -1,0 +1,29 @@
+Package: python2-pyro4
+Source: pyro4
+Version: 4.73-1
+Architecture: all
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 350
+Depends: python2-serpent (>= 1.23), python2-selectors34, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Suggests: pyro4-doc, pyro4
+Conflicts: python3-pyro4
+Replaces: python3-pyro4
+Section: python
+Priority: optional
+Homepage: http://packages.python.org/Pyro4/
+Description: distributed object middleware for Python (RPC), Python2 modules
+ Pyro (PYthon Remote Object) is an easy to use and powerful distributed object
+ system for Python. In a distributed object system, clients send requests to
+ distant servers, which owns the remote objects. Pyro simplifies a lot the
+ creation of clients and servers, and has among its features:
+  - dynamic and static proxies for all remote method invocations,
+  - a naming service which keeps record of the location of objects,
+  - mobile objects support: clients and servers can pass objects around,
+  - exceptions that occur in the remote object is raised on the client too,
+  - multithreaded server support to handle multiple requests simultaneously.
+ .
+ This package contains the core Pyro4 module for Python 2.x .
+ .
+ The documentation is available in the pyro4-doc package.
+ A lot of examples are available in the pyro4-examples package.
+Python-Version: 2.7

@@ -1,0 +1,22 @@
+Package: python-pbgenomicconsensus
+Source: pbgenomicconsensus
+Version: 2.1.0-1
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 327
+Depends: python-h5py, python-numpy, python-pbcommand, python-pbconsensuscore, python-pbcore, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Suggests: python-consensuscore2
+Section: python
+Priority: optional
+Homepage: https://github.com/PacificBiosciences/GenomicConsensus
+Description: Pacific Biosciences variant and consensus caller (Python 2)
+ The GenomicConsensus package provides Quiver, Pacific Biosciences'
+ flagship consensus and variant caller. Quiver is an algorithm that finds
+ the maximum likelihood template sequence given PacBio reads of the template.
+ These reads are modeled using a conditional random field approach that
+ prescribes a probability to a read given a template sequence. In addition to
+ the base sequence of each read, Quiver uses several additional quality value
+ covariates that the base caller provides.
+ .
+ This package is part of the SMRTAnalysis suite and provides the Python 2
+ backend library.

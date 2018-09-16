@@ -1,0 +1,46 @@
+#!/bin/sh
+set -e
+
+# add gnupg-pkcs11-scd-proxy user/group if needed.
+if ! getent group gnupg-pkcs11-scd-proxy >/dev/null; then
+	addgroup --system gnupg-pkcs11-scd-proxy
+fi
+if ! getent passwd gnupg-pkcs11-scd-proxy >/dev/null; then
+	adduser --system --ingroup gnupg-pkcs11-scd-proxy \
+		--home /run/gnupg-pkcs11-scd-proxy --no-create-home \
+		gnupg-pkcs11-scd-proxy
+#		-s /bin/false \
+fi
+
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'gnupg-pkcs11-scd-proxy.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'gnupg-pkcs11-scd-proxy.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'gnupg-pkcs11-scd-proxy.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'gnupg-pkcs11-scd-proxy.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		deb-systemd-invoke $_dh_action 'gnupg-pkcs11-scd-proxy.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+

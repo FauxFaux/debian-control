@@ -1,0 +1,19 @@
+Package: lua-systemd
+Version: 0~git20160517-2
+Architecture: amd64
+Maintainer: Sophie Brun <sophie@freexian.com>
+Installed-Size: 232
+Depends: libc6 (>= 2.4), libsystemd0
+Provides: lua5.1-systemd, lua5.2-systemd, lua5.3-systemd
+Section: interpreters
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/daurnimator/lua-systemd
+Description: Systemd bindings for Lua
+ This package provides a library for working with systemd from scripts and
+ daemons written in Lua.
+ .
+ Where necessary, the low level libsystemd functions have been bound in C.
+ Higher level functions with more idiomatic Lua semantics are written in Lua on
+ top of these C primitives.
+Lua-Versions: 5.1 5.2 5.3

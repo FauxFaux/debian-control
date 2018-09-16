@@ -1,0 +1,30 @@
+Package: python-jwt
+Source: pyjwt
+Version: 1.6.4-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 88
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Recommends: python-cryptography
+Suggests: python-crypto
+Section: python
+Priority: optional
+Homepage: https://github.com/jpadilla/pyjwt
+Description: Python implementation of JSON Web Token
+ PyJWT implements the JSON Web Token draft 01, a way of representing
+ signed content using JSON data structures.
+ .
+ Supported algorithms for cryptographic signing:
+ .
+   * HS256 - HMAC using SHA-256 hash algorithm (default)
+   * HS384 - HMAC using SHA-384 hash algorithm
+   * HS512 - HMAC using SHA-512 hash algorithm
+   * RS256 - RSASSA-PKCS1-v1_5 signature algorithm using SHA-256 hash
+     algorithm
+   * RS384 - RSASSA-PKCS1-v1_5 signature algorithm using SHA-384 hash
+     algorithm
+   * RS512 - RSASSA-PKCS1-v1_5 signature algorithm using SHA-512 hash
+     algorithm
+ .
+ Supported reserved claim names:
+   - "exp" (Expiration Time) Claim

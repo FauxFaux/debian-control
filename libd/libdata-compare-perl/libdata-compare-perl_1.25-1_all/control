@@ -1,0 +1,22 @@
+Package: libdata-compare-perl
+Version: 1.25-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 49
+Depends: perl, libfile-find-rule-perl (>= 0.10)
+Suggests: libscalar-properties-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Data-Compare
+Description: perl module to compare perl data structures recursively
+ The Data::Compare module compares two perl data structures recursively,
+ it natively handles several built-in data types - scalars, references
+ to scalars, references to arrays, references to hashes, references
+ to subroutines, compiled regular expressions, and globs. For objects, it tries
+ to Do The Right Thing and compares the underlying data type.
+ .
+ However, this is not always what you want. This is especially true if you
+ have complex objects which overload stringification and/or numification.
+ So you can extend this module with your own plugins for special data
+ structures, by using Data::Compare::Plugins (this is not an extra package, it
+ is included here).

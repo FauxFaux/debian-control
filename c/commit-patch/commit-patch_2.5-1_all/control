@@ -1,0 +1,23 @@
+Package: commit-patch
+Version: 2.5-1
+Architecture: all
+Maintainer: David Caldwell <david@porkrind.org>
+Installed-Size: 135
+Depends: perl, libipc-run-perl, patch, patchutils
+Suggests: darcs | git | mercurial | bzr | monotone | subversion | cvs
+Section: vcs
+Priority: optional
+Homepage: http://porkrind.org/commit-patch/
+Description: utility to commit fine grained patches to source code control repositories
+ Normally version control systems don't allow fine grained
+ commits. commit-patch allows the user to control exactly what gets
+ committed by letting the user supply a patch to be committed rather than
+ using the files in the current working directory.
+ .
+ commit-patch supports Darcs, Git, Mercurial, Bazaar, Monotone, Subversion,
+ or CVS repositories.
+ .
+ Also included is an Emacs interface to commit-patch. It allows you to just
+ hit C-c C-c in any patch buffer to apply and commit only the changes
+ indicated by the patch, regardless of the changes in your working
+ directory.

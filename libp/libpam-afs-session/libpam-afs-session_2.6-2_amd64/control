@@ -1,0 +1,20 @@
+Package: libpam-afs-session
+Version: 2.6-2
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 99
+Depends: libpam-runtime, libpam0g (>= 0.99.7.1), libc6 (>= 2.26), libkrb5-3 (>= 1.6.dfsg.2)
+Recommends: libpam-krb5 | libpam-heimdal, openafs-client, openafs-krb5 | heimdal-clients
+Section: admin
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.eyrie.org/~eagle/software/pam-afs-session/
+Description: PAM module to set up a PAG and obtain AFS tokens
+ AFS is a distributed network file system.  It uses in-kernel credentials
+ (AFS tokens) obtained from Kerberos tickets for authentication and access
+ control, and controls access to those credentials via PAGs (process
+ authentication groups).  This module provides a PAM session
+ implementation that puts new logins in separate PAGs and optionally runs
+ an external program (usually aklog) to obtain tokens from Kerberos
+ tickets.  It is designed to work with a Kerberos PAM module that obtains
+ the initial Kerberos tickets.

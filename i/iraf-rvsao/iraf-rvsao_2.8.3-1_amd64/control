@@ -1,0 +1,28 @@
+Package: iraf-rvsao
+Version: 2.8.3-1
+Architecture: amd64
+Maintainer: Debian Astro Team <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 15467
+Depends: iraf, libc6 (>= 2.15), libcfitsio5 (>= 3.390~), libcurl3-gnutls (>= 7.16.2), libexpat1 (>= 2.0.1)
+Enhances: iraf
+Section: science
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://tdc-www.harvard.edu/iraf/rvsao/
+Description: IRAF package to obtain radial velocities from spectra
+ This package obtains radial velocities and velocity dispersions using
+ cross-correlation methods or emission line fits.  It consists of
+ several SPP tasks:
+ .
+  * XCSAO and PXCSAO: cross-correlate spectra,
+  * EMSAO and PEMSAO: find emission lines in spectra,
+  * BCVCORR: solar system barycentric velocity correction,
+  * SUMSPEC: add and/or modify spectra,
+  * LINESPEC: synthetic emission line templates,
+  * EQWIDTH: equivalent widths of lines in spectra,
+  * WLRANGE: wavelength overlap range for a list of spectra,
+  * LISTSPEC: list pixel, wavelength, delta wavelength, and/or pixel value for
+    spectrum image,
+  * PIX2WL: wavelength at a given pixel in a spectrum,
+  * WL2PIX: pixel at a given wavelength in a spectrum,
+  * VELSET Artificially change the redshift of (log-wavelength) spectra

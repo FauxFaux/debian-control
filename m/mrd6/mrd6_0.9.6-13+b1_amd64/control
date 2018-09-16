@@ -1,0 +1,30 @@
+Package: mrd6
+Source: mrd6 (0.9.6-13)
+Version: 0.9.6-13+b1
+Architecture: amd64
+Maintainer: Thomas Preud'homme <robotux@debian.org>
+Installed-Size: 948
+Depends: libc6 (>= 2.15), libstdc++6 (>= 5.2), lsb-base
+Recommends: perl:any
+Section: net
+Priority: optional
+Homepage: http://fivebits.net/proj/mrd6/
+Description: IPv6 Multicast Routing Daemon
+ mrd6 is a modular IPv6 Multicast Routing Daemon which implements:
+   * MLDv1 and MLDv2 support
+     - MLD proxying
+   * PIM-SM (ASM and SSM)
+     - Bootstrap (BSR) Mechanism support
+     - Static RP configuration
+     - Embedded-RP support (RFC 3956)
+   * partial MBGP support
+     - Implements basic BGP4 mechanisms (IPv6 Multicast SAFI)
+       to update local MRIB from MBGP info
+     - Uses IPv6 Multicast SAFI prefixes announced by
+       peers to update local MRIB
+     - Is able to announce local prefixes
+     - Filter support
+   * Supports both native and virtual (tunnel) interfaces
+     (tested IPv6-IPv4, IPv6-IPv6 and TUN/TAP tunnels)
+   * Abstract Forwarding Interface (MFA) with user-space module
+   * Remote configuration and online administration

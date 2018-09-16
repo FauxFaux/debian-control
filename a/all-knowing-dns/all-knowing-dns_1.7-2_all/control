@@ -1,0 +1,24 @@
+Package: all-knowing-dns
+Version: 1.7-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 63
+Depends: perl, libmouse-perl, libmousex-nativetraits-perl, libnet-dns-perl, libnetaddr-ip-perl, libprivileges-drop-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/AllKnowingDNS
+Description: tiny DNS server for IPv6 Reverse DNS
+ AllKnowingDNS provides reverse DNS for IPv6 networks which use SLAAC
+ (autoconf), e.g. for a /64 network.
+ .
+ The problem with IPv6 reverse DNS and traditional nameservers is that the
+ nameserver requires you to provide a zone file. Assuming you want to provide
+ RDNS for a /64 network, you have 2**64 = 18446744073709551616 different usable
+ IP addresses (a little less if you are using SLAAC). Providing a zone file for
+ that, even in a very terse notation, would consume a huge amount of disk space
+ and could not possibly be held in the memory of the computers available
+ nowadays.
+ .
+ AllKnowingDNS instead generates PTR and AAAA records on the fly. You only
+ configure which network you want to serve and what your entries should look
+ like.

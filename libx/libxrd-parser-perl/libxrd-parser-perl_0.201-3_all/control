@@ -1,0 +1,30 @@
+Package: libxrd-parser-perl
+Version: 0.201-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 61
+Depends: perl, libossp-uuid-perl, libwww-perl, libxml-libxml-perl, librdf-trine-perl, liburi-perl, libhttp-link-parser-perl, librole-commons-perl | libobject-authority-perl
+Recommends: librdf-trine-node-literal-xml-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/XRD-Parser
+Description: parse XRD and host-meta files into RDF::Trine models
+ Resource Description Framework (RDF) is a standard model for data
+ interchange on the Web.
+ .
+ Extensible Resource Descriptor (XRD) is an XML format for discovery of
+ metadata about a resource – in particular discovery of services
+ associated with the resource.  It is commonly used in relation to
+ OpenID, YADIS and OAuth.
+ .
+ While XRD has a rather different history, it turns out it can mostly be
+ thought of as a serialisation format for a limited subset of RDF.
+ .
+ This package ignores the order of <Link> elements, as RDF is a graph
+ format with no concept of statements coming in an "order". The XRD spec
+ says that grokking the order of <Link> elements is only a SHOULD. That
+ said, if you're concerned about the order of <Link> elements, the
+ callback routines allowed by this package may be of use.
+ .
+ This package aims to be roughly compatible with RDF::RDFa::Parser's
+ interface.

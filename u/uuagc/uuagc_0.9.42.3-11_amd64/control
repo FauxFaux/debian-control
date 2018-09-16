@@ -1,0 +1,28 @@
+Package: uuagc
+Version: 0.9.42.3-11
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 15845
+Depends: libc6 (>= 2.27), libffi6 (>= 3.0.4), libgmp10
+Section: devel
+Priority: optional
+Homepage: http://www.cs.uu.nl/wiki/HUT/AttributeGrammarSystem
+Description: compiler for the Utrecht University Attribute Grammar system
+ The Attribute Grammar system can be used to annotate the production
+ rules of a grammar with inherited and synthesised attributes. The
+ values of the attributes can be determined while parsing/traversing
+ the abstract syntax tree and will give the semantic value of the tree.
+ .
+ The inherited attributes are values which are passed downwards through
+ the abstract syntax tree and the synthesised attributes are passed
+ upwards. Haskell expressions are used to describe the computation of
+ the attributes.
+ .
+ The uuagc compiler takes a set files in which the attribute grammar
+ is defined and generates a Haskell file that contains the data type
+ definitions corresponding to the grammar, semantic functions and
+ catamorphisms (functions that take a syntax tree and return the
+ semantic value of that tree)
+ .
+ The (Utrecht University) Attribute Grammar system is part of the
+ Haskell Utrecht Tools set.

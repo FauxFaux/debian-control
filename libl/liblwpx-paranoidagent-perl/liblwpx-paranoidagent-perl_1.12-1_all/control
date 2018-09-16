@@ -1,0 +1,21 @@
+Package: liblwpx-paranoidagent-perl
+Version: 1.12-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 56
+Depends: perl, ca-certificates, libcrypt-ssleay-perl, libnet-dns-perl, libwww-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/LWPx-ParanoidAgent
+Description: "paranoid" subclass of LWP::UserAgent
+ The LWPx::ParanoidAgent is a class subclassing LWP::UserAgent, but
+ paranoid against attackers. It's to be used when a remote resource is
+ fetched on behalf of a possibly malicious user.
+ .
+ This class can do whatever LWP::UserAgent can (callbacks, uploads
+ from files, etc).
+ .
+ Proxy support has been removed, because in that case you should do
+ your paranoia at your proxy.
+ .
+ The URI scheme are limited to http and https.

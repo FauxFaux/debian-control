@@ -1,0 +1,36 @@
+Package: ciderwebmail
+Version: 1.05+20150729-5
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 1388
+Depends: libmoose-perl, liblog-dispatch-perl, libparse-recdescent-perl, libmail-imapclient-perl, liblog-dispatch-config-perl, libcatalyst-plugin-log-dispatch-perl, libyaml-perl, libyaml-libyaml-perl, libjson-xs-perl, libcatalyst-view-petal-perl, libpetal-utils-perl, libdatetime-perl, libdatetime-format-mail-perl, libmime-tools-perl, libtry-tiny-perl, libtry-tiny-smartcatch-perl, libemail-simple-perl, libemail-sender-perl, libemail-valid-perl, libemail-address-xs-perl, libregexp-common-perl, libtext-iconv-perl, libtext-autoformat-perl, libio-socket-ssl-perl, libnet-managesieve-perl, libclone-perl, libhtml-tidy-perl, liburi-perl, liblocale-maketext-gettext-perl, liblist-moreutils-perl, libdata-ical-perl, libdatetime-format-iso8601-perl, libcrypt-util-perl, libcrypt-cbc-perl, libcrypt-rijndael-perl, libcrypt-random-source-perl, libmime-base64-urlsafe-perl, libhtml-defang-perl, libmoosex-role-withoverloading-perl, libcatalyst-perl, libcatalyst-authentication-credential-http-perl, libcatalyst-plugin-configloader-perl, libcatalyst-plugin-static-simple-perl, libcatalyst-plugin-stacktrace-perl, libcatalyst-plugin-authentication-perl, libcatalyst-plugin-session-store-fastmmap-perl, libcatalyst-plugin-session-state-cookie-perl, libcatalyst-model-dbic-schema-perl, libcatalyst-action-renderview-perl, adduser, perl
+Recommends: libdbd-sqlite3-perl, libauthen-sasl-perl, default-mta | mail-transport-agent
+Suggests: libfcgi-perl, libfcgi-procmanager-perl, dovecot | imap-server, imapproxy
+Section: web
+Priority: optional
+Homepage: http://ciderwebmail.org/
+Description: IMAP webmail service
+ CiderWebmail is a modern, user friendly and maintenance free webmail
+ application. It's targeted at mailserver administrators who need to
+ provide web access for their user's mailboxes and individuals wanting
+ to access their mailboxes via an always available web application.
+ .
+ It currently supports all the basic mail handling features one would
+ expect from such an application:
+ .
+  * Listing your emails with selectable sort order and grouping.
+  * Moving emails between folders and deleting using drag & drop.
+  * Displaying text and HTML emails even if their code is completely
+    broken (which happens quite often in reality)
+  * Keyboard bindings for switching through emails, moving, deleting,
+    replying and forwarding.
+  * Reply to and forward existing emails or write new emails, add
+    attachments and have a copy saved in your "Sent" folder.
+ .
+ As an application written deep in the 21st century, CiderWebmail
+ supports only IMAP mail servers.
+ .
+ It is recommended to use CiderWebmail with the Dovecot IMAP server.
+ CiderWebmail deliberately does little internal caching for security
+ reasons, so if used with an IMAP server less powerful than Dovecot you
+ may benefit from connecting via imapproxy.

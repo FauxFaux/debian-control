@@ -1,0 +1,72 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+django_admin="python2.7 /usr/bin/django-admin"
+django_admin_args="--verbosity 0 --no-color --pythonpath /usr/share/mailman3-web --settings settings"
+
+hyperkitty_cfg_new=
+
+cleanup () {
+    [ "$hyperkitty_cfg_new" ] && rm -f "$hyperkitty_cfg_new"
+}
+
+create_config () {
+    trap cleanup EXIT
+
+    hyperkitty_cfg_new=`tempfile -m 0644`
+    cp -a /usr/share/python3-mailman-hyperkitty/mailman-hyperkitty.cfg \
+            $hyperkitty_cfg_new
+
+    # Get MAILMAN_ARCHIVER_KEY from mailman3-web django project
+    if [ -f /usr/share/mailman3-web/manage.py ] && [ -f /usr/bin/django-admin ]; then
+        archiverkey="$(su --shell /bin/sh --command \
+                "$django_admin print_settings $django_admin_args" www-data | \
+                sed -n -e "s/^MAILMAN_ARCHIVER_KEY\s*=\s*'\(\S\+\)'\s*$/\1/p")"
+    fi
+
+    if [ -n "$archiverkey" ]; then
+        # Set archiver api key in mailman-hyperkitty.cfg
+        sed -i -e "s|\(api_key:\s*\)\S\+\(\s*\)$|\1$archiverkey\2|" \
+                $hyperkitty_cfg_new
+    else
+        db_input high python3-mailman-hyperkitty/no_archiverkey || true
+        db_go
+    fi
+
+    # Register new config file
+    ucf --three-way --debconf-ok "$hyperkitty_cfg_new" /etc/mailman3/mailman-hyperkitty.cfg
+    ucfr python3-mailman-hyperkitty /etc/mailman3/mailman-hyperkitty.cfg
+    chmod 0640 /etc/mailman3/mailman-hyperkitty.cfg
+    chown root:list /etc/mailman3/mailman-hyperkitty.cfg
+    rm -f $hyperkitty_cfg_new
+}
+
+case "$1" in
+    configure)
+        create_config
+
+        db_stop
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-mailman-hyperkitty 
+fi
+
+# End automatically added section
+
+
+exit 0

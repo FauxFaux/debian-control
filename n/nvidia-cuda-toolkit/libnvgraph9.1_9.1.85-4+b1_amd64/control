@@ -1,0 +1,35 @@
+Package: libnvgraph9.1
+Source: nvidia-cuda-toolkit (9.1.85-4)
+Version: 9.1.85-4+b1
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 23061
+Depends: libc6 (>= 2.4), libcublas9.1, libcurand9.1, libcusolver9.1, libcusparse9.1, libgcc1 (>= 1:3.0), libstdc++6 (>= 4.1.1)
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://developer.nvidia.com/cuda-zone
+Description: NVIDIA Graph Analytics library (nvGRAPH)
+ The NVIDIA Graph Analytics library (nvGRAPH) comprises of parallel
+ algorithms for high performance analytics on graphs with up to 2 billion
+ edges. nvGRAPH makes it possible to build interactive and high throughput
+ graph analytics applications.
+ .
+ nvGRAPH supports three widely-used algorithms:
+  * [Page Rank] is most famously used in search engines, and also used in
+    social network analysis, recommendation systems, and for novel uses
+    in natural science when studying the relationship between proteins
+    and in ecological networks.
+  * [Single Source Shortest Path] is used to identify the fastest path from
+    A to B through a road network, and can also be used for a optimizing
+    a wide range of other logistics problems.
+  * [Single Source Widest Path] is used in domains like IP traffic routing
+    and traffic-sensitive path planning.
+ .
+ In addition, the nvGRAPH semi-ring SPMV operations can be used to build
+ a wide range of innovative graph traversal algorithms.
+ .
+ nvGRAPH accelerates analysis of large graphs by making efficient use of
+ the massive parallelism available in NVIDIA Tesla GPUs. The size of a
+ graph in memory is dominated by the number of edges.
+ An M40 with 24 GB can support a graph of up to 2 billion edges.

@@ -1,0 +1,21 @@
+Package: apt-move
+Version: 4.2.27-5
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 131
+Depends: bc, dash, libapt-pkg5.0 (>= 1.1~exp9), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Recommends: apt
+Section: admin
+Priority: optional
+Homepage: http://sourceforge.net/projects/apt-move/
+Description: maintain Debian packages in a package pool
+ apt-move is used to move a collection of Debian package files into a
+ proper archive hierarchy as is used in the official Debian archive. It
+ is intended as a tool to help manage the apt-get(8) file cache, but
+ could be configured to work with any collection of Debian packages.
+ .
+ Running apt-move periodically will assist in managing the resulting
+ partial mirror by optionally removing obsolete packages, and creating
+ valid local Packages.gz files. It can also build a partial or complete
+ local mirror of a Debian binary distribution (including an
+ ``installed-packages only'' mirror).

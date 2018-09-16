@@ -1,0 +1,47 @@
+Package: libcgi-application-plugin-ratelimit-perl
+Version: 1.0-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 38
+Depends: perl, libcgi-application-perl, libclass-accessor-perl
+Recommends: libcgi-application-plugin-dbh-perl
+Enhances: libcgi-application-perl
+Breaks: libcgi-application-extra-plugin-bundle-perl (<< 0.5)
+Replaces: libcgi-application-extra-plugin-bundle-perl (<< 0.5)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Application-Plugin-RateLimit
+Description: Perl module for limiting the runmode call rate per user
+ CGI::Application::Plugin::RateLimit provides protection against a user
+ calling a runmode too frequently. A typical use-case might be a contact form
+ that sends email. You'd like to allow your users to send you messages, but
+ thousands of messages from a single user would be a problem.
+ .
+ This module works by maintaining a database of hits to protected runmodes. It
+ then checks this database to determine if a new hit should be allowed based
+ on past activity by the user. The user's identity is, by default, tied to
+ login (via REMOTE_USER) or IP address (via REMOTE_IP) if login info is not
+ available. You may provide your own identity function via the
+ identity_callback() method.
+ .
+ To use this module you must create a table in your database with the
+ following schema (using MySQL-syntax, although other DBs may work as well
+ with minor alterations):
+ .
+  CREATE TABLE rate_limit_hits (
+      user_id   VARCHAR(255)      NOT NULL,
+      action    VARCHAR(255)      NOT NULL,
+      timestamp UNSIGNED INTEGER  NOT NULL,
+      INDEX (user_id, action, timestamp)
+   );
+ .
+ You may feel free to vary the storage-type and size of user_id and action to
+ match your usage. For example, if your identity_callback() always returns an
+ integer you could make user_id an integer column.
+ .
+ This table should be periodically cleared of old data. Anything older than the
+ maximum timeframe being used can be safely deleted.
+ .
+ IMPORTANT NOTE: The protection offered by this module is not perfect.
+ Identifying a user on the internet is very hard and a sophisticated attacker
+ can work around these checks, by switching IPs or automating login creation.

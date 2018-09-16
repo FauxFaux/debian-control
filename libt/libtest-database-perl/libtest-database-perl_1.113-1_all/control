@@ -1,0 +1,21 @@
+Package: libtest-database-perl
+Version: 1.113-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 111
+Depends: perl, libdbi-perl, libfile-homedir-perl, libyaml-tiny-perl (>= 1.62)
+Suggests: libdbd-csv-perl, libdbd-sqlite2-perl, libdbd-sqlite3-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Database
+Description: support for testing against multiple unspecified databases
+ From the perspective of a module author, this allows you to write tests
+ against a datbase without knowing precisely which databases will be used.
+ You call Test::Database->handles() and you get a number of DBI handles
+ against which you can run your tests. You can specify which Databases you
+ are willing to support.
+ .
+ From the perspective of someone installing a perl module which uses
+ Test::Database, you put a config file in your home directory which
+ explains how to connect to non-file based databases. File based databases
+ do not normally needed configuration so long as the DBD driver is available.

@@ -1,0 +1,21 @@
+Package: metche
+Version: 1:1.2.4-1
+Architecture: all
+Maintainer: metche developers <metche@lists.riseup.net>
+Installed-Size: 104
+Depends: debconf (>= 0.5) | debconf-2.0, mutt | mailx | mail-transport-agent, bzip2, ucf
+Recommends: apt-show-versions, gnupg
+Suggests: util-vserver
+Section: admin
+Priority: optional
+Homepage: https://labs.riseup.net/code/projects/metche
+Description: configuration monitor to ease collective administration
+ metche monitors changes made to a "system state" composed of:
+    - a "watched" directory (typically: /etc)
+    - one or more user maintained changelog files
+      (e.g. /root/Changelog)
+    - the state of Debian packages and versions (using apt-show-versions)
+ by periodically:
+    - saving backups of the corresponding files
+    - emailing the changes in the system state to your administrators'
+      mailing list

@@ -1,0 +1,17 @@
+Package: hash-slinger
+Version: 2.7-1
+Architecture: amd64
+Maintainer: Debian DNS Packaging <pkg-dns-devel@lists.alioth.debian.org>
+Installed-Size: 86
+Depends: python, python-dnspython, python-argparse, python-unbound, python-ipaddr, python-gnupg, openssh-client, python-m2crypto, ca-certificates, dns-root-data
+Conflicts: sshfp
+Replaces: sshfp
+Provides: sshfp
+Section: utils
+Priority: extra
+Description: tools to generate special DNS records
+ This package contains various tools to generate special DNS records:
+ .
+  * sshfp      Generate RFC-4255 SSHFP DNS records
+  * tlsa       Generate RFC-6698 TLSA DNS records via TLS
+  * openpgpkey Generate RFC-<TBD> OPENPGPKEY DNS records

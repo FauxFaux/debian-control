@@ -1,0 +1,18 @@
+Package: python-testing.mysqld
+Version: 1.4.0-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 43
+Depends: default-mysql-server (>= 1.0.2) | virtual-mysql-server, python-pymysql, python-testing.common.database, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://github.com/tk0miya/testing.mysqld
+Description: Python testing.* framework - MySQLd helpers (Python 2)
+ The testing.* Python modules provide a framework for Python unit test suites
+ that need to run tests against servers, like network-based DBMSs.
+ .
+ testing.mysqld contains helper classes to work with a temporary
+ MySQL server. It automatically sets up a MySQL instance in a
+ temporary directory, and destroys it after testing.
+ .
+ This package contains the Python 2 version.

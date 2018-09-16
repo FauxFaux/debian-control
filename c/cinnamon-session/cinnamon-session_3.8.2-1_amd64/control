@@ -1,0 +1,23 @@
+Package: cinnamon-session
+Version: 3.8.2-1
+Architecture: amd64
+Maintainer: Debian Cinnamon Team <debian-cinnamon@lists.debian.org>
+Installed-Size: 398
+Depends: cinnamon-desktop-data (>= 3.8), cinnamon-session-common (= 3.8.2-1), default-dbus-session-bus | dbus-session-bus, upower (>= 0.9.0), dconf-gsettings-backend | gsettings-backend, libc6 (>= 2.17), libcairo2 (>= 1.2.4), libcanberra0 (>= 0.2), libdbus-1-3 (>= 1.9.14), libdbus-glib-1-2 (>= 0.88), libgdk-pixbuf2.0-0 (>= 2.22.0), libgl1, libglib2.0-0 (>= 2.45.3), libgtk-3-0 (>= 3.0.0), libice6 (>= 1:1.0.0), libsm6, libsystemd0, libx11-6, libxapp1 (>= 1.0.4), libxau6, libxcomposite1 (>= 1:0.3-1), libxext6, libxrender1, libxtst6
+Recommends: cinnamon-l10n (>= 3.8)
+Breaks: cinnamon (<< 3.8), cinnamon-core (<< 3.8~), cinnamon-session-common (<< 2.2.2-5~)
+Replaces: cinnamon-session-common (<< 2.2.2-5~)
+Provides: x-session-manager
+Section: x11
+Priority: optional
+Homepage: http://cinnamon.linuxmint.com
+Description: Cinnamon Session Manager - Minimal runtime
+ The Cinnamon Session Manager is in charge of starting the core components
+ of the Cinnamon desktop, and applications that should be launched at
+ login time. It also features a way to save and restore currently
+ running applications.
+ .
+ This package contains the binaries for the Cinnamon Session Manager, but
+ no startup scripts. It is meant for those willing to start
+ cinnamon-session by hand with the components of their choice, and for
+ applications such as MDM that use cinnamon-session internally.

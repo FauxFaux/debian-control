@@ -1,0 +1,19 @@
+Package: hadori
+Version: 1.0-1
+Architecture: amd64
+Maintainer: Timo Weingärtner <timo@tiwe.de>
+Installed-Size: 102
+Depends: libboost-program-options1.62.0, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Section: utils
+Priority: extra
+Homepage: https://git.tiwe.de/hadori.git
+Description: Hardlinks identical files
+ This might look like yet another hardlinking tool, but it is the only one
+ which only memorizes one filename per inode. That results in less merory
+ consumption and faster execution compared to its alternatives. Therefore
+ (and because all the other names are already taken) it's called
+ "HArdlinking DOne RIght".
+ .
+ Advantages over other hardlinking tools:
+  * predictability: arguments are scanned in order, each first version is kept
+  * much lower CPU and memory consumption

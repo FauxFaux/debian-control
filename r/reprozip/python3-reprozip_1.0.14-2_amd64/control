@@ -1,0 +1,23 @@
+Package: python3-reprozip
+Source: reprozip
+Version: 1.0.14-2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 236
+Depends: python3 (<< 3.8), python3 (>= 3.6~), python3-requests, python3-rpaths, python3-usagestats, python3-yaml, python3:any (>= 3.3~), libc6 (>= 2.14), libsqlite3-0 (>= 3.5.9)
+Section: python
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.reprozip.org
+Description: modules for the ReproZip packer
+ ReproZip is a tool aimed at simplifying the process of creating
+ reproducible experiments from command-line executions, a frequently-used
+ common denominator in computational science.
+ .
+ It tracks operating system calls and creates a package that contains
+ all the binaries, files and dependencies required to run a given
+ command on the author’s computational environment (packing step). A
+ reviewer can then extract the experiment in his environment to
+ reproduce the results (unpacking step).
+ .
+ This package provides the modules for Python 3.

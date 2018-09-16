@@ -1,0 +1,22 @@
+Package: libbiblio-endnotestyle-perl
+Version: 0.06-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 30
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Biblio-EndnoteStyle
+Description: Perl module to format bibliographic references using Endnote-like templates
+ Biblio::EndnoteStyle provides a way of formatting bibliographic
+ references using style templates similar to those used by the popular
+ reference management software Endnote (http://www.endnote.com/).  The
+ API is embarrassingly simple: a formatter object is made using the
+ class's constructor, the new() method; format() may then be
+ repeatedly called on this object, using the same or different
+ templates.
+ .
+ (The sole purpose of the object is to cache compiled templates so that
+ multiple format() invocations are more efficient than they would
+ otherwise be. Apart from that, the API might just as well have been a
+ single function.)

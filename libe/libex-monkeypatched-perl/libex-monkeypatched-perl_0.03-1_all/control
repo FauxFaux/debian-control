@@ -1,0 +1,27 @@
+Package: libex-monkeypatched-perl
+Version: 0.03-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 25
+Depends: perl, libsub-name-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/ex-monkeypatched
+Description: experimental API for safe monkey-patching
+ The term "monkey patching" describes injecting additional methods into
+ a class whose implementation you don't control.  If done without care,
+ this is dangerous; the problematic case arises when:
+  * You add a method to a class;
+  * A newer version of the monkey-patched class adds another method of
+    the same name
+  * And uses that new method in some other part of its own
+    implementation.
+ .
+ ex::monkeypatched lets you do this sort of monkey-patching safely:
+ before it injects a method into the target class, it checks whether the
+ class already has a method of the same name.  If it finds such a
+ method, it throws an exception (at compile-time with respect to the
+ code that does the injection).
+ .
+ See <http://aaroncrane.co.uk/talks/monkey_patching_subclassing/> for
+ more details.

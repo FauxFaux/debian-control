@@ -1,0 +1,20 @@
+Package: libcgi-compile-perl
+Version: 0.22-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 35
+Depends: perl, libfile-pushd-perl
+Recommends: libcgi-emulate-psgi-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Compile
+Description: module for compiling .cgi scripts to a code reference
+ CGI::Compile is an utility to compile CGI scripts into a code reference that
+ can run many times on its own namespace, as long as the script is ready to
+ run on a persistent environment.
+ .
+ NOTE: for best results, load CGI::Compile before any modules used by your
+ CGIs.
+ .
+ Combined with CGI::Emulate::PSGI, your CGI script can be turned into a
+ persistent PSGI application.

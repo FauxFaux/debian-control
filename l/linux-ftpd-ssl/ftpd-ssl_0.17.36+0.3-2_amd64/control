@@ -1,0 +1,23 @@
+Package: ftpd-ssl
+Source: linux-ftpd-ssl
+Version: 0.17.36+0.3-2
+Architecture: amd64
+Maintainer: Mats Erik Andersson <mats.andersson@gisladisker.se>
+Installed-Size: 158
+Depends: openbsd-inetd | inet-superserver, libpam-modules, openssl (>= 0.9.8g-9), libc6 (>= 2.14), libpam0g (>= 0.99.7.1), libssl1.1 (>= 1.1.0)
+Conflicts: ftp-server, ftpd
+Replaces: ftpd
+Provides: ftp-server
+Section: net
+Priority: extra
+Description: FTP server with SSL encryption support
+ This is the netkit ftp server with encryption support.
+ .
+ ftpd-ssl replaces normal ftpd using SSL authentication and encryption.
+ It interoperates with normal ftp.
+ It checks if the other side is also talking SSL, if not it falls back
+ to normal ftp protocol.
+ .
+ Advantages over normal ftp(d): Your passwords and the data you send
+ will not go in cleartext over the line. Nobody can get it with
+ tcpdump or similar tools.

@@ -1,0 +1,85 @@
+#!/bin/sh
+
+set -e
+
+updatedpns () {
+    [ -r /etc/default/dpnsdaemon ] && . /etc/default/dpnsdaemon
+    [ -z "$NSCONFIGFILE" ] && NSCONFIGFILE=/etc/DPNSCONFIG
+    [ -r $NSCONFIGFILE ] || return 0
+
+    nscfg=$(cat $NSCONFIGFILE)
+
+    cfg1=$(echo $nscfg | cut -f1 -d@)
+    cfg2=$(echo $nscfg | cut -f2 -d@ -s)
+
+    user=$(echo $cfg1 | cut -f1 -d/)
+    passwd=$(echo $cfg1 | cut -f2 -d/ -s)
+    host=$(echo $cfg2 | cut -f1 -d/)
+    db=$(echo $cfg2 | cut -f2 -d/ -s)
+
+    [ -z "$user" ] && return 0
+    [ -z "$passwd" ] && return 0
+    [ -z "$host" ] && return 0
+    [ -z "$db" ] && db=cns_db
+
+    export PGPASSWORD=$passwd
+    psql="psql -t -q -U $user $db"
+
+    vmajor=$($psql -c "select major from schema_version" 2>/dev/null)
+    vminor=$($psql -c "select minor from schema_version" 2>/dev/null)
+    vpatch=$($psql -c "select patch from schema_version" 2>/dev/null)
+
+    if [ -z "$vmajor" -o -z "$vminor" -o -z "$vpatch" ] ; then
+	return 0
+    fi
+
+    if [ $vmajor -eq 3 -a $vminor -eq 0 -a $vpatch -eq 0 ] ; then
+	$psql <<-EOF
+	ALTER TABLE Cns_groupinfo ADD banned INTEGER;
+	ALTER TABLE Cns_userinfo ADD user_ca VARCHAR(255);
+	ALTER TABLE Cns_userinfo ADD banned INTEGER;
+	CREATE INDEX linkname_idx ON Cns_symlinks(linkname);
+	UPDATE schema_version SET major = 3, minor = 1, patch = 0;
+	EOF
+    fi
+
+    return 0
+}
+
+getent group dpmmgr > /dev/null || \
+    addgroup --quiet --system dpmmgr
+
+getent passwd dpmmgr > /dev/null || \
+    adduser --quiet --system --home /var/lib/dpm --shell /bin/sh \
+    --ingroup dpmmgr --disabled-password --disabled-login \
+    --gecos "DPM manager" dpmmgr
+
+chown dpmmgr:dpmmgr /var/log/dpns
+
+updatedpns
+
+update-alternatives --install /usr/sbin/dpnsdaemon dpnsdaemon \
+          /usr/lib/dpm-postgres/dpnsdaemon 10 \
+  --slave /usr/share/man/man8/dpnsdaemon.8.gz dpnsdaemon.8.gz \
+          /usr/lib/dpm-postgres/dpnsdaemon.8.gz \
+  --slave /usr/share/lcgdm/DPNSCONFIG.templ DPNSCONFIG.templ \
+          /usr/lib/dpm-postgres/DPNSCONFIG.templ \
+  --slave /etc/init.d/dpnsdaemon dpnsdaemon.init \
+          /etc/dpm-postgres/dpnsdaemon.init \
+  --slave /etc/default/dpnsdaemon dpnsdaemon.conf \
+          /etc/dpm-postgres/dpnsdaemon.conf \
+  --slave /etc/logrotate.d/dpnsdaemon dpnsdaemon.logrotate \
+          /etc/dpm-postgres/dpnsdaemon.logrotate \
+  --slave /usr/sbin/dpns-shutdown dpns-shutdown \
+          /usr/lib/dpm-postgres/dpns-shutdown \
+  --slave /usr/share/man/man8/dpns-shutdown.8.gz dpns-shutdown.8.gz \
+          /usr/lib/dpm-postgres/dpns-shutdown.8.gz
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/dpnsdaemon" ]; then
+		update-rc.d dpnsdaemon defaults-disabled >/dev/null
+		invoke-rc.d dpnsdaemon start || exit 1
+	fi
+fi
+
+

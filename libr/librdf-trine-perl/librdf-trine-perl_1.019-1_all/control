@@ -1,0 +1,38 @@
+Package: librdf-trine-perl
+Version: 1.019-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 905
+Depends: perl, libalgorithm-combinatorics-perl, libcache-lru-perl, libdbd-sqlite3-perl, libdbi-perl, libdbix-connector-perl, liberror-perl, libiri-perl, libjson-perl, liblog-log4perl-perl, libmoose-perl, libmoosex-arrayref-perl, libossp-uuid-perl, libset-scalar-perl, libtext-csv-xs-perl, libtext-table-perl, liburi-perl, libwww-perl, libxml-commonns-perl, libxml-namespace-perl, libxml-sax-perl
+Recommends: librdf-perl, librdf-trine-node-literal-xml-perl, libxml-libxml-perl
+Suggests: libdbd-pg-perl, libdbd-mysql-perl, libredis-perl, librdf-rdfa-parser-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/RDF-Trine/
+Description: RDF Framework for Perl
+ Resource Description Framework (RDF) is a standard model for data
+ interchange on the Web.
+ .
+ RDF::Trine provides an RDF framework with an emphasis on extensibility,
+ API stability, and the presence of a test suite. The package consists
+ of several components:
+ .
+  * RDF::Trine::Model - RDF model providing access to a triple store.
+  * RDF::Trine::Parser - Native RDF parsers (RDF/XML, RDFa, Turtle,
+    RDF/JSON, TriG, N-Triples, and N-Quads).
+  * RDF::Trine::Serializer, a set of native RDF serializers for RDF/XML,
+    Turtle, RDF/JSON, N-Triples, Canonical N-Triples, and N-Quads.
+  * RDF::Trine::Store::DBI - A triple store for MySQL and SQLite, based
+    on the Redland schema.
+  * RDF::Trine::Iterator - Iterator classes for variable bindings and
+    RDF statements, used by RDF::Trine::Store, RDF::Trine::Model, and
+    RDF::Query.
+  * RDF::Trine::Namespace - A convenience class for easily constructing
+    RDF node objects from URI namespaces.
+ .
+ RDFa parser requires the package librdf-rdfa-parser-perl.
+ .
+ DBI backends other than SQLite require either of packages
+ libdbd-pg-perl libdbd-mysql-perl.
+ .
+ Redis store requires the package libredis-perl.

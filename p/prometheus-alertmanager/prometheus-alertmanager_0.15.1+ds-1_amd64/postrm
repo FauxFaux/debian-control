@@ -1,0 +1,42 @@
+#!/bin/sh
+# postrm script for prometheus
+# Script executed after the package is removed.
+
+set -e
+
+case "$1" in
+  purge)
+        rm -rf /var/log/prometheus/prometheus-alertmanager.log \
+            /var/lib/prometheus/alertmanager/ \
+            /var/run/prometheus/prometheus-alertmanager.pid
+	# We do NOT remove the system user.
+	;;
+esac
+
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "purge" ] ; then
+	update-rc.d prometheus-alertmanager remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'prometheus-alertmanager.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'prometheus-alertmanager.service' >/dev/null || true
+		deb-systemd-helper unmask 'prometheus-alertmanager.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

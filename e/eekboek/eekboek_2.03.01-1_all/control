@@ -1,0 +1,29 @@
+Package: eekboek
+Version: 2.03.01-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 2099
+Depends: perl, libarchive-zip-perl, libcarp-assert-perl, libdbd-sqlite3-perl, libdbi-perl, libterm-readline-gnu-perl
+Suggests: eekboek-gui
+Section: perl
+Priority: optional
+Homepage: https://www.eekboek.nl/
+Description: Bookkeeping software for small and medium-size businesses
+ EekBoek is a bookkeeping package for Dutch users; it creates reports such as
+ a balance sheet ("Balans"), a general journal ("Journaal"), a general
+ ledger ("Grootboek") and a VAT report ("BTW-aangifte").
+ .
+ Unlike other accounting software, EekBoek has a command-line interface: The
+ EekBoek Shell (with tab completion).  It uses a database as back end: either
+ PostgreSQL (using the eekboek-db-postgresql package) or SQLite.
+ Interoperability is a key feature of EekBoek: editable text dumps of all your
+ data are possible at any time.  EekBoek can generate an "XML Auditfile
+ Financieel" (XAF) as used by Dutch tax office.  Furthermore, it has a
+ complete Perl API to create your own custom applications.
+ .
+ The EekBoek documentation is available in Dutch only.
+ .
+ If you'd like to use EekBoek with a PostgreSQL back end (instead of the
+ default SQLite), install the package eekboek-db-postgresql.
+ If you'd like to use the Eekboek GUI, install the suggested package
+ eekboek-gui.

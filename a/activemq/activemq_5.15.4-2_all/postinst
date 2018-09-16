@@ -1,0 +1,49 @@
+#!/bin/sh
+
+set -e
+
+AMQ_HOME=/var/lib/activemq
+AMQ_GROUP=activemq
+AMQ_USER=activemq
+
+create_group() {
+    if ! getent group $AMQ_GROUP > /dev/null 2>&1; then
+        addgroup --system $AMQ_GROUP
+    fi
+}
+
+create_user() {
+    if ! getent passwd $AMQ_USER > /dev/null 2>&1; then
+        adduser --system --no-create-home --ingroup $AMQ_GROUP \
+                --home $AMQ_HOME --shell /bin/bash $AMQ_USER
+    else
+        AMQ_HOME=`getent passwd $AMQ_USER | cut -f6 -d:`
+        # Renable user (give him a shell)
+        usermod --shell /bin/bash $AMQ_USER
+    fi
+}
+
+if [ "$1" = "configure" ]; then
+    create_group
+    create_user
+
+    # Use dpkg-statoverride instead of direct chmod/chown
+    if ! dpkg-statoverride --list $AMQ_HOME >/dev/null 2>&1; then
+        dpkg-statoverride --update --add $AMQ_USER root 755 $AMQ_HOME
+    fi
+fi
+
+# Automatically added by dh_installinit/11.3.2
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/activemq" ]; then
+		update-rc.d activemq defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d activemq $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+

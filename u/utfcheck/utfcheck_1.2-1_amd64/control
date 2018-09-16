@@ -1,0 +1,23 @@
+Package: utfcheck
+Version: 1.2-1
+Architecture: amd64
+Maintainer: Paul Hardy <unifoundry@unifoundry.com>
+Installed-Size: 49
+Depends: libc6 (>= 2.3.4)
+Section: text
+Priority: optional
+Homepage: http://unifoundry.com/utfcheck/
+Description: check validity of UTF-8 and ASCII files
+ The utfcheck program examines a text file and prints a summary
+ of what the file contains: ASCII, UTF-8, UTF-16 (either big-endian
+ or little-endian based on an initial Byte Order Mark), or binary
+ data.  ASCII and UTF-8 files are processed further; UTF-16 and
+ binary files are not.  For a UTF-8 file, the summary includes
+ whether or not the file begins with the Unicode Byte Order Mark
+ (U+FEFF).  Any following data encountered that is not well-formed
+ ASCII or UTF-8 Unicode is considered to be binary data; upon
+ reading such data the input file is considered not to be a proper
+ text file and the program exits with an error status.
+ .
+ The utfcheck program returns an exit status of EXIT_SUCCESS if
+ the text file was well-formed, and EXIT_FAILURE otherwise.

@@ -1,0 +1,25 @@
+Package: aide-xen
+Source: aide
+Version: 0.16-4
+Architecture: amd64
+Maintainer: Aide Maintainers <aide@packages.debian.org>
+Installed-Size: 2096
+Recommends: aide-common (= 0.16-4)
+Conflicts: aide, aide-dynamic
+Provides: aide-binary
+Built-Using: acl (= 2.2.52-3), attr (= 1:2.4.47-2), audit (= 1:2.8.3-1), e2fsprogs (= 1.44.3-1), glibc (= 2.27-5), libselinux (= 2.8-1), mhash (= 0.9.9.9-7), pcre3 (= 2:8.39-11), zlib (= 1:1.2.11.dfsg-1)
+Section: admin
+Priority: optional
+Homepage: http://aide.sourceforge.net
+Description: Advanced Intrusion Detection Environment - static binary for XEN
+ AIDE is an intrusion detection system that detects changes to files on
+ the local system. It creates a database from the regular expression rules
+ that it finds from the config file. Once this database is initialized
+ it can be used to verify the integrity of the files. It has several
+ message digest algorithms (md5, sha1, rmd160, tiger, haval, etc.) that are
+ used to check the integrity of the file. More algorithms can be added
+ with relative ease. All of the usual file attributes can also be checked
+ for inconsistencies.
+ .
+ This package contains the statically linked binary for XEN-enabled
+ systems and should be used in Dom0 and DomU.

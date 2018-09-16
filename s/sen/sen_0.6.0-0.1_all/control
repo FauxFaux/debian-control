@@ -1,0 +1,26 @@
+Package: sen
+Version: 0.6.0-0.1
+Architecture: all
+Maintainer: Python Applications Packaging Team <python-apps-team@lists.alioth.debian.org>
+Installed-Size: 222
+Depends: python3-docker, python3-urwid, python3-urwidtrees, python3:any (>= 3.3.2-2~)
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/TomasTomecek/sen
+Description: Terminal user interface for docker engine
+ sen is a terminal user interface for docker engine:
+ .
+  * it can interactively manage your containers and images:
+    * manage? start, stop, restart, kill, delete,...
+  * you are able to inspect containers and images
+  * sen can fetch logs of containers and even stream logs real-time
+  * all buffers support searching and filtering
+  * sen receives real-time updates from docker when anything changes
+    * e.g. if you create a container in another terminal, sen will pick
+      it up
+  * sen notifies you whenever something happens (and reports slow queries)
+  * supports a lot of vim-like keybindings (j, k, gg, /, ...)
+  * there is a special buffer which display detailed info about images
+  * you can get interactive tree view of all images (equivalent of
+    docker images --tree)

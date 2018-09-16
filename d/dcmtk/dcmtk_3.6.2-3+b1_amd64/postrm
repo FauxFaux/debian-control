@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e 
+
+# Remove possible leftovers of imagectn -> dcmqrscp transition
+
+if [ "$1" = "purge" ] ; then
+   
+   if [ -e /etc/default/imagectn.dpkg-old ]; then
+      rm -f /etc/default/imagectn.dpkg-old
+   fi
+
+   if [ -e /etc/init.d/imagectn.dpkg-old ]; then
+      rm -f /etc/init.d/imagectn.dpkg-old
+   fi
+fi
+
+	
+

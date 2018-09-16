@@ -1,0 +1,20 @@
+Package: winregfs
+Version: 0.7-2
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 94
+Depends: libc6 (>= 2.14), libfuse2 (>= 2.8)
+Section: utils
+Priority: optional
+Homepage: https://github.com/jbruchon/winregfs
+Description: Windows registry FUSE filesystem
+ Winregfs is a FUSE-based filesystem driver that enables accessing of Windows
+ registry hive files as ordinary filesystems. Registry hive file editing can
+ be performed with ordinary shell scripts and command-line tools once mounted.
+ .
+ fsck.winregfs scans a Windows registry hive file for problems that indicate
+ the hive has been damaged by hardware or software issues, reading recursively
+ the  key  and  value  data structures in the registry hive.
+ .
+ This package provides mount.winregfs and fsck.winregfs commands.
+ Winregfs is useful for pentesters, ethical hackers and forensics experts.

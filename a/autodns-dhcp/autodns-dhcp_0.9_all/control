@@ -1,0 +1,14 @@
+Package: autodns-dhcp
+Version: 0.9
+Architecture: all
+Maintainer: Santiago Garcia Mantinan <manty@debian.org>
+Installed-Size: 74
+Depends: bind9 | bind, dnsutils, perl | perl5, isc-dhcp-server | dhcp
+Conflicts: dhcp-dns
+Section: net
+Priority: extra
+Description: Automatic DNS updates for DHCP
+ autodns-dhcp uses bind's dynamic update features to update a zonefile
+ with hostnames from the dhcp leases file, this is done just once for each
+ hostname as the IP, MAC address and name are settled on the dhcp
+ configuration to have an static zone.

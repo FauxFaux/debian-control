@@ -1,0 +1,21 @@
+Package: python3-cyvcf2
+Source: cyvcf2
+Version: 0.10.0+git20180727-2
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 6632
+Depends: python3 (<< 3.8), python3 (>= 3.6~), python3-numpy, python3:any, libc6 (>= 2.15), libcurl3-gnutls (>= 7.18.0), libssl1.1 (>= 1.1.0), zlib1g (>= 1:1.1.4)
+Suggests: python-cyvcf2-doc
+Section: science
+Priority: optional
+Homepage: https://github.com/brentp/cyvcf2
+Description: VCF parser based on htslib (Python 3)
+ This modules allows fast parsing of VCF and BCF including region-queries
+ with Python. This is essential for efficient analyses of nucleotide
+ variation with Python on high-throughput sequencing data.
+ .
+ cyvcf2 is a cython wrapper around htslib.  Attributes like
+ variant.gt_ref_depths return a numpy array directly so they are
+ immediately ready for downstream use.
+ .
+ This package installs the library for Python 3.

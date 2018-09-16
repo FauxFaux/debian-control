@@ -1,0 +1,19 @@
+Package: nagios-snmp-plugins
+Version: 2.0.0-1
+Architecture: all
+Maintainer: Debian Nagios Maintainer Group <pkg-nagios-devel@lists.alioth.debian.org>
+Installed-Size: 611
+Depends: libnet-snmp-perl, monitoring-plugins-common | nagios-plugins-basic (>= 1.4.5-2), perl-base (>= 5.8.4-8), ucf, perl:any
+Recommends: libcrypt-des-perl, libcrypt-rijndael-perl
+Section: net
+Priority: optional
+Homepage: http://www.manubulon.com/nagios/index_snmp.html
+Description: SNMP Plugins for nagios
+ A set of Nagios plugins to check hosts/devices using snmp protocol
+ .
+ The general idea of these scripts is to check as many things as possible with
+ snmp (how do you install NRPE on Cisco or AS/400 ?) : disks, memory, load,
+ interface, running procsses, etc...
+ .
+ The other idea is to select disks, interfaces, process using regular
+ expressions

@@ -1,0 +1,35 @@
+Package: trn4
+Source: trn4 (4.0-test77-11)
+Version: 4.0-test77-11+b3
+Architecture: amd64
+Maintainer: Colin Watson <cjwatson@debian.org>
+Installed-Size: 936
+Depends: debconf (>= 1.2.0) | debconf-2.0, base-files (>= 2.2.0), libc6 (>= 2.14), libtinfo6 (>= 6)
+Recommends: exim4 | mail-transport-agent, inn2-inews | inews
+Suggests: ispell
+Conflicts: strn
+Breaks: trn (<= 3.6-14)
+Replaces: strn, trn (<= 3.6-14)
+Provides: news-reader, strn, trn
+Section: non-free/news
+Priority: optional
+Homepage: http://trn.sourceforge.net/
+Description: Threaded USENET news reader, based on rn (4.0 beta test)
+ trn is a threaded news reader with a long history, descended from Larry
+ Wall's rn (part of the second generation of newsreaders).  It has a
+ powerful full screen text mode user interface, where most actions are
+ available at the press of a single key.  It is highly configurable.
+ .
+ This version of trn reads news from a news server via NNTP (the Network
+ News Transfer Protocol).  You must have a news server available - large
+ sites usually provide a site-wide server.
+ .
+ If you install a news server on your system (either containing just
+ local newsgroups or with a partial or full USENET feed) you can
+ configure trn to access it.  In this case you will also need to install
+ an appropriate 'inews' package for local posting.
+ .
+ This is a separate package from trn because trn 4.0 has enough
+ substantial changes in its default behaviour (for instance, the group
+ selector is new in 4.0) that some users prefer to stay with an older
+ version of trn.

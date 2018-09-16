@@ -1,0 +1,24 @@
+Package: node-date-now
+Version: 1.0.1-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 16
+Depends: nodejs
+Section: web
+Priority: optional
+Homepage: https://github.com/Raynos/date-now
+Description: requirable version of Date.now()
+ Use-case is to be able to mock out Date.now() using require interception.
+ For example
+ var now = require("date-now")
+ var ts = now()
+ var ts2 = Date.now()
+ assert.equal(ts, ts2)
+ Example of seed:
+ var now = require("date-now/seed")(timeStampFromServer)
+ // ts is in "sync" with the seed value from the server
+ // useful if your users have their local time being a few minutes
+ // out of your server time.
+ var ts = now()
+ .
+ Node.js is an event-based server-side JavaScript engine.

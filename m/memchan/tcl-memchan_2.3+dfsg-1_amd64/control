@@ -1,0 +1,20 @@
+Package: tcl-memchan
+Source: memchan
+Version: 2.3+dfsg-1
+Architecture: amd64
+Maintainer: Sergei Golovan <sgolovan@debian.org>
+Installed-Size: 103
+Depends: libc6 (>= 2.14)
+Conflicts: libmemchan-tcl
+Replaces: libmemchan-tcl
+Provides: libmemchan-tcl
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://memchan.sourceforge.net/
+Description: Tcl extension for in-memory channels - runtime library
+ Allows the creation of I/O channels, which store data in memory, not
+ on disk. It implements the channel types fifo, null, random and
+ zero; and provides a C API for creating custom memory channels.
+ .
+ This package contains the runtime library to be used in Tcl programs.

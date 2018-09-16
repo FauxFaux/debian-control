@@ -1,0 +1,25 @@
+Package: libhamlib-utils
+Source: hamlib
+Version: 3.2-2
+Architecture: amd64
+Maintainer: Debian Hamradio Maintainers <debian-hams@lists.debian.org>
+Installed-Size: 434
+Depends: libc6 (>= 2.14), libhamlib2, libreadline7 (>= 6.0)
+Conflicts: hamlib-utils
+Provides: hamlib-utils
+Section: hamradio
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://sourceforge.net/projects/hamlib/
+Description: Utilities to support the hamlib radio control library
+ Most recent amateur radio transceivers allow external control of their
+ functions through a computer interface. Unfortunately, control commands are
+ not always consistent across a manufacturer's product line and each
+ manufacturer's product line differs greatly from its competitors.
+ .
+ This library addresses that issue by providing a standardised programming
+ interface that applications can talk to and translating that into the
+ appropriate commands required by the radio in use.
+ .
+ This package provides a command-line utility to test the hamlib library and
+ to control transceivers if you're short of anything more sophisticated.

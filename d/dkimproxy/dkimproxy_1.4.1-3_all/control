@@ -1,0 +1,22 @@
+Package: dkimproxy
+Version: 1.4.1-3
+Architecture: all
+Maintainer: Thomas Goirand <zigo@debian.org>
+Installed-Size: 260
+Depends: perl, libtext-wrapper-perl, libmail-dkim-perl (>= 0.34), libnet-server-perl, adduser, ssl-cert, lsb-base, openssl, liberror-perl
+Recommends: amavisd-new
+Conflicts: dkfilter
+Replaces: dkfilter
+Section: mail
+Priority: optional
+Homepage: http://dkimproxy.sourceforge.net/
+Description: an SMTP-proxy that signs and/or verifies emails, using the Mail::DKIM module
+ DKIMproxy is an SMTP-proxy that signs and/or verifies emails, using the
+ Mail::DKIM module. It is designed for Postfix, but should work with any mail
+ server. It comprises two separate proxies, an "outbound" proxy for signing
+ outgoing email, and an "inbound" proxy for verifying signatures of incoming
+ email (administrators can decide if they want to run both, or only one of
+ them). With Postfix, the proxies can operate as either Before-Queue or
+ After-Queue content filters, and they also can be chained with content
+ filter proxies like Amavis, which is the current default configuration of
+ the package.

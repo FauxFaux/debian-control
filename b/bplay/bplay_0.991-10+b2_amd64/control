@@ -1,0 +1,20 @@
+Package: bplay
+Source: bplay (0.991-10)
+Version: 0.991-10+b2
+Architecture: amd64
+Maintainer: Carlos Laviola <claviola@debian.org>
+Installed-Size: 45
+Depends: libc6 (>= 2.2.5)
+Section: sound
+Priority: optional
+Description: Buffered audio file player/recorder
+ The bplay package provides a simple command-line utility for playing
+ and recording audio files in raw sample, VOC and WAV formats.
+ .
+ To use this program you need a soundcard of some kind and the
+ appropriate driver configured into your kernel.
+ .
+ When run the program creates two processes which share a memory
+ buffer.  It does reading/writing on the disk and the sound device
+ simultaneously, in order to be less liable to `pause' because the
+ disk is too slow or too busy.

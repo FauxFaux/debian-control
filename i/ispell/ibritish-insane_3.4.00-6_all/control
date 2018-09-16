@@ -1,0 +1,26 @@
+Package: ibritish-insane
+Source: ispell
+Version: 3.4.00-6
+Architecture: all
+Maintainer: Robert Luberda <robert@debian.org>
+Installed-Size: 1283
+Depends: ienglish-common (= 3.4.00-6), dictionaries-common (>= 1.23~), ispell, debconf (>= 0.5) | debconf-2.0
+Suggests: wbritish-insane
+Provides: ispell-dictionary
+Section: text
+Priority: optional
+Homepage: http://www.lasr.cs.ucla.edu/geoff/ispell.html
+Description: British English dictionary for ispell (insane version)
+ This package provides the british-insane dictionary, based on the britishxlg+
+ dictionary supplied with the source for ispell, with additional words added
+ from the more comprehensive wbritish-insane word list package.
+ .
+ This is an even larger dictionary than the one installed by ibritish-huge,
+ and possibly contains invalid words (as well as words that are very
+ uncommon). Nothing prevents you installing both (and others) at the same time.
+ .
+ There are also -small, -large, -huge, and standard versions of this
+ dictionary, and there are iamerican* packages as well.
+ .
+ The package also suggests wbritish-huge because ispell's (L)ookup command
+ needs a word list.

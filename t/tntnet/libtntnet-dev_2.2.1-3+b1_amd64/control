@@ -1,0 +1,44 @@
+Package: libtntnet-dev
+Source: tntnet (2.2.1-3)
+Version: 2.2.1-3+b1
+Architecture: amd64
+Maintainer: Kari Pahula <kaol@debian.org>
+Installed-Size: 537
+Depends: libc6 (>= 2.14), libcxxtools9v5, libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), libtntnet12v5 (= 2.2.1-3+b1), zlib1g (>= 1:1.1.4), libcxxtools-dev
+Conflicts: tntnet-dev (<< 1.6.3-3)
+Replaces: tntnet-dev (<< 1.6.3-3)
+Section: libdevel
+Priority: extra
+Homepage: http://www.tntnet.org/
+Description: Tntnet library development headers
+ Tntnet has a template-language called ecpp similar to PHP, JSP or
+ Mason, where you can embed c++ code inside a HTML page to generate
+ active content. The ecpp files are precompiled to C++ classes called
+ components and compiled and linked into a shared library. This process
+ is done at compiletime. The web server Tntnet needs only the compiled
+ component library.
+ .
+ Because the web applications are compiled into native code, they are
+ very fast and compact.
+ .
+ Components can call other components. So you can create building blocks
+ of HTML parts and call them in other pages like subprocesses.
+ .
+ Requests are parsed by tntnet and the request information is easily
+ accessible to the components. It supports GET and POST parameters and
+ MIME multipart requests for file upload.
+ .
+ The template language has also support for internationalized
+ applications. You can easily create web applications for different
+ languages.
+ .
+ Other features are: cookies, HTTP upload, automatic request parameter
+ parsing and conversion, automatic session management, scoped variables
+ (application, request and session), internationalisation and keep-alive.
+ .
+ Logging is done through cxxtools, which provides a unique API for
+ log4cpp, log4cxx or simple logging to files or console.
+ .
+ Tntnet is fully multithreaded and much work has been gone into making
+ it scalable. It uses a dynamic pool of worker threads, which answer
+ requests from HTTP clients.

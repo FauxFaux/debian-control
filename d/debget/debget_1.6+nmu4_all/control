@@ -1,0 +1,18 @@
+Package: debget
+Version: 1.6+nmu4
+Architecture: all
+Maintainer: Roderick Schertler <roderick@argon.org>
+Installed-Size: 77
+Depends: perl, libapt-pkg-perl, libnet-perl, libproc-waitstat-perl, libwww-perl
+Suggests: devscripts
+Section: utils
+Priority: optional
+Description: download/compile source and binary Debian packages
+ debget downloads source and binary Debian packages by name.  It doesn't
+ require a local copy of the Packages files, instead it queries
+ packages.debian.org to find out what versions are available.
+ .
+ debget can also optionally unpack and compile source packages, and even
+ install the generated binary packages.  If you intend to use these
+ features you should install the devscripts package for the dscverify
+ script it contains.

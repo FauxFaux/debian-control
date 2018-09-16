@@ -1,0 +1,28 @@
+Package: debaux
+Version: 0.1.12-1
+Architecture: all
+Maintainer: Stefan Hornburg (Racke) <racke@linuxia.de>
+Installed-Size: 83
+Depends: perl, libappconfig-perl, libnet-ssh-perl, libtimedate-perl, libwww-perl, dpkg-dev, rsync
+Suggests: dh-make
+Section: devel
+Priority: optional
+Description: Debian Auxiliary Programs
+ This package contains Perl programs and modules to build
+ and publish Debian packages.
+ .
+ debaux-build automatically downloads APT sources before
+ building, applies patches and additional sources. It
+ has options to build the packages in an existing chroot
+ environment, check the generated packages with lintian, install
+ the created packages on your local system or turn them
+ into RPM packages.
+ .
+ debaux-build has experimental support for downloading
+ Perl modules from CPAN and creating the necessary Debian
+ packaging files.
+ .
+ debaux-publish uploads packages and runs the scripts
+ to create the APT sources and packages files on the
+ remote system. debaux-publish doesn't support the pool
+ structure yet.

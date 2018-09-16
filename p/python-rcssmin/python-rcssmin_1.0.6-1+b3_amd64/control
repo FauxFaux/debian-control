@@ -1,0 +1,26 @@
+Package: python-rcssmin
+Source: python-rcssmin (1.0.6-1)
+Version: 1.0.6-1+b3
+Architecture: amd64
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 63
+Depends: python (<< 2.8), python (>= 2.7~), python:any (<< 2.8), python:any (>= 2.7.5-5~), libc6 (>= 2.4)
+Section: python
+Priority: optional
+Homepage: http://opensource.perlig.de/rcssmin/
+Description: CSS Minifier - Python 2.7
+ The minifier is based on the semantics of the YUI compressor, which itself is
+ based on the rule list by Isaac Schlueter.
+ .
+ This module is a re-implementation aiming for speed instead of maximum
+ compression, so it can be used at runtime (rather than during a preprocessing
+ step). RCSSmin does syntactical compression only (removing spaces, comments
+ and possibly semicolons). It does not provide semantic compression (like
+ removing empty blocks, collapsing redundant properties etc). It does, however,
+ support various CSS hacks (by keeping them working as intended).
+ .
+ rcssmin.c is a reimplementation of rcssmin.py in C and improves runtime up to
+ factor 100 or so (depending on the input). docs/BENCHMARKS in the source
+ distribution contains the details.
+ .
+ This package contains the Python 2.7 module.

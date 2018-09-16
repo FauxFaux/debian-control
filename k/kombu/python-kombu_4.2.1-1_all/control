@@ -1,0 +1,25 @@
+Package: python-kombu
+Source: kombu
+Version: 4.2.1-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 676
+Depends: python-amqp (>= 1.4.6), python-anyjson (>= 0.3.3), python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Recommends: python-yaml
+Suggests: python-beanstalkc, python-boto, python-couchdb, python-django, python-kombu-doc, python-pika, python-pymongo (>= 2.6.2), python-redis, python-sqlalchemy
+Breaks: python-cjson (<= 1.0.5-4+b1)
+Section: python
+Priority: optional
+Homepage: https://github.com/celery/kombu/
+Description: AMQP Messaging Framework for Python
+ The aim of Kombu is to make messaging in Python as easy as possible by
+ providing an idiomatic high-level interface for the AMQP protocol. It is meant
+ to replace the carrot library by providing a compatibility layer.
+ .
+ Features:
+  * Allows application authors to support several message server solutions by
+    using pluggable transports.
+  * Supports automatic encoding, serialization and compression of message
+    payloads.
+  * The ability to ensure that an operation is performed by gracefully handling
+    connection and channel errors.

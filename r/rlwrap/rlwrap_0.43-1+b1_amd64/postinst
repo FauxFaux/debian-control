@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  configure)
+    update-alternatives \
+      --install /usr/bin/readline-editor readline-editor /usr/bin/rlwrap 60 \
+      --slave /usr/share/man/man1/readline-editor.1.gz readline-editor.1.gz /usr/share/man/man1/rlwrap.1.gz
+    ;;
+esac
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p rlwrap /usr/share/rlwrap
+fi
+
+# End automatically added section
+

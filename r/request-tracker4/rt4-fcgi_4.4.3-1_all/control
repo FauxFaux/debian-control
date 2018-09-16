@@ -1,0 +1,29 @@
+Package: rt4-fcgi
+Source: request-tracker4
+Version: 4.4.3-1
+Architecture: all
+Maintainer: Debian Request Tracker Group <pkg-request-tracker-maintainers@lists.alioth.debian.org>
+Installed-Size: 61
+Depends: libfcgi-perl, lsb-base, procps, spawn-fcgi
+Recommends: nginx-full
+Section: misc
+Priority: optional
+Homepage: http://bestpractical.com/rt/
+Description: External FastCGI support for request-tracker4
+ Request Tracker (RT) is a ticketing system which
+ enables a group of people to intelligently and efficiently manage
+ tasks, issues, and requests submitted by a community of users. It
+ features web, email, and command-line interfaces (see the package
+ rt4-clients).
+ .
+ RT manages key tasks such as the identification, prioritization,
+ assignment, resolution, and notification required by
+ enterprise-critical applications, including project management, help
+ desk, NOC ticketing, CRM, and software development.
+ .
+ This package provides the 4 series of RT. It can be installed alongside
+ the 3.8 series without any problems.
+ .
+ This package provides an external FCGI interface for web servers
+ including, but not limited to, nginx, and is not needed for web servers
+ such as Apache which invoke FCGI programs directly.

@@ -1,0 +1,21 @@
+Package: ruby-image-science
+Version: 1.2.2-1.2
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 74
+Depends: ruby | ruby-interpreter, ruby-inline | libinline-ruby, libfreeimage-dev
+Breaks: libimage-science-ruby (<< 1.2.1-1~), libimage-science-ruby-doc (<< 1.2.1-1~), libimage-science-ruby1.8 (<< 1.2.1-1~)
+Replaces: libimage-science-ruby (<< 1.2.1-1~), libimage-science-ruby-doc (<< 1.2.1-1~), libimage-science-ruby1.8 (<< 1.2.1-1~)
+Provides: libimage-science-ruby, libimage-science-ruby-doc, libimage-science-ruby1.8
+Section: ruby
+Priority: optional
+Homepage: http://seattlerb.rubyforge.org/ImageScience.html
+Description: Clean Ruby library to provide simple transformations on images
+ ImageScience is a clean Ruby library allowing for simple
+ transformations on images, mainly geared towards generating thumbnails
+ - The provided functions aim at scaling and cropping images.
+ .
+ Emphasis is made on keeping the code as lean as possible (at less than
+ 200 LoC), and on correctness to avoid memory leaks and similar
+ problems that often accompany similar libraries.
+Ruby-Versions: all

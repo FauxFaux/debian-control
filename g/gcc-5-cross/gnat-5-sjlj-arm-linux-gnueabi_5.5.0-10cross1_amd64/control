@@ -1,0 +1,19 @@
+Package: gnat-5-sjlj-arm-linux-gnueabi
+Source: gcc-5-cross (32)
+Version: 5.5.0-10cross1
+Architecture: amd64
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 19105
+Depends: gcc-5-arm-linux-gnueabi-base (= 5.5.0-10cross1), gnat-5-arm-linux-gnueabi (= 5.5.0-10cross1)
+Built-Using: gcc-5 (= 5.5.0-10)
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://gcc.gnu.org/
+Description: GNU Ada compiler (setjump/longjump runtime library)
+ GNAT is a compiler for the Ada programming language. It produces optimized
+ code on platforms supported by the GNU Compiler Collection (GCC).
+ .
+ This package provides an alternative runtime library that handles
+ exceptions using the setjump/longjump mechanism (as a static library
+ only).  You can install it to supplement the normal compiler.

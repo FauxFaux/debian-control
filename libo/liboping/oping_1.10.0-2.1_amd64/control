@@ -1,0 +1,19 @@
+Package: oping
+Source: liboping
+Version: 1.10.0-2.1
+Architecture: amd64
+Maintainer: Sebastian Harl <tokkee@debian.org>
+Installed-Size: 104
+Depends: libc6 (>= 2.7), libncursesw6 (>= 6), liboping0 (>= 1.10.0), libtinfo6 (>= 6)
+Section: net
+Priority: optional
+Homepage: https://noping.cc
+Description: sends ICMP_ECHO requests to network hosts
+ oping uses ICMP packages (better known as "ping packets") to test the
+ reachability of network hosts. It supports pinging multiple hosts in parallel
+ using IPv4 and/or IPv6 transparently.
+ .
+ This package contains two command line applications: "oping" is a replacement
+ for tools like ping(1), ping6(1) and fping(1). "noping" is an ncurses-based
+ tool which displays statistics while pinging and highlights aberrant
+ round-trip times.

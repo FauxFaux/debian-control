@@ -1,0 +1,24 @@
+Package: libfinance-qif-perl
+Version: 3.02-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 46
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Finance-QIF/
+Description: Parse and create Quicken Interchange Format files
+ Finance::QIF is a module for working with QIF (Quicken Interchange Format)
+ files in Perl. Finance::QIF reads QIF data records from a file passing each
+ successive record to the caller for processing. This module also has the
+ capability of writing QIF records to a file.
+ .
+ The QIF file format typically consists of a header containing a record or
+ transaction type, followed by associated data records. Within a file there
+ may be multiple headers. Headers are usually followed by data records,
+ however data is not required to always follow a header.
+ .
+ A hash reference is returned for each record read from a file. The hash will
+ have a "header" value which contains the header type that was read along with
+ all supported values found for that record. If a value is not specified in
+ the data file, the value will not exist in this hash.

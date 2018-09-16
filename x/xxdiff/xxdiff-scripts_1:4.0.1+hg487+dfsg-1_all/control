@@ -1,0 +1,36 @@
+Package: xxdiff-scripts
+Source: xxdiff
+Version: 1:4.0.1+hg487+dfsg-1
+Architecture: all
+Maintainer: Florian Schlichting <fsfs@debian.org>
+Installed-Size: 532
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~), xxdiff
+Recommends: gnupg, patch
+Section: text
+Priority: optional
+Homepage: http://furius.ca/xxdiff/
+Description: graphical file/directory comparison and merge tool - scripts
+ xxdiff is a powerful tool for viewing the differences between two or three
+ files, or two directories, and can be used to produce a merged version.  The
+ texts of the two or three files are presented side by side with their
+ differences highlighted with colors for easy identification.
+ .
+ This package provides a number of scripts that are used to perform a variety of
+ tasks that all involve getting user verification and feedback using the xxdiff
+ graphical differences viewer.
+ .
+ For example, there are scripts to perform global renaming of strings within a
+ large codebase, where each transformed file is viewed by the user with an
+ xxdiff, accepted, rejected or merged changes written over the original file
+ (making backups is supported).  Also, this infrastructure is mostly provided as
+ modules, in order to allow users to write file transformations in Python and to
+ leverage this interactive confirmation process.
+ .
+ There are also scripts that visualize diffs for a number of SCM systems, like
+ CVS, Subversion, etc.  This package was born after a number of these useful
+ scripts had sprouted, and it became apparent that sharing the common code for
+ the scripts would be a great advantage to tools writers.
+ .
+ See documentation for a full list of the scripts and their role:
+ http://furius.ca/xxdiff/doc/xxdiff-scripts.html
+Python-Version: 2.7

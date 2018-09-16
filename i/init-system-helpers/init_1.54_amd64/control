@@ -1,0 +1,16 @@
+Package: init
+Source: init-system-helpers
+Version: 1.54
+Architecture: amd64
+Maintainer: Debian systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>
+Installed-Size: 21
+Pre-Depends: systemd-sysv | sysvinit-core
+Depends: init-system-helpers (>= 1.25)
+Section: metapackages
+Priority: important
+Multi-Arch: foreign
+Description: metapackage ensuring an init system is installed
+ This package is a metapackage which allows you to select from the available
+ init systems while ensuring that one of these is available on the system at
+ all times.
+Important: yes

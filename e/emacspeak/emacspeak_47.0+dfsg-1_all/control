@@ -1,0 +1,26 @@
+Package: emacspeak
+Version: 47.0+dfsg-1
+Architecture: all
+Maintainer: Debian Accessibility Team <pkg-a11y-devel@lists.alioth.debian.org>
+Installed-Size: 21299
+Depends: adduser, debconf, emacs25 | emacs (>= 47.0~), make, perl, tcl, tclx8.4, debconf (>= 0.5) | debconf-2.0, perl:any
+Recommends: emacspeak-espeak-server, sox
+Suggests: eflite, emacspeak-ss, espeak, psgml, w3m-el, xsltproc
+Breaks: emacs20, emacs21, emacs22, emacs23
+Section: editors
+Priority: optional
+Homepage: http://emacspeak.sf.net
+Description: speech output interface to Emacs
+ Emacspeak is a speech output system that will allow someone who
+ cannot see to work directly on a UNIX system.
+ .
+ Emacspeak is built on top of Emacs. Once Emacs is started with Emacspeak
+ loaded, users get spoken feedback for all actions. As Emacs can do
+ everything, they get speech feedback for everything they do.
+ .
+ This package recommends the speech server for the espeak (software)
+ speech synthesizer, so it should work straight away. However it also
+ contains the source for speech servers to support the DECtalk Express
+ and DECtalk MultiVoice (hardware) speech synthesizers. For other
+ synthesizers, look for speech server packages such as emacspeak-ss and
+ eflite.

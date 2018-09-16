@@ -1,0 +1,22 @@
+Package: liblog-contextual-perl
+Version: 0.008001-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 113
+Depends: perl, libdata-dumper-concise-perl, libexporter-declare-perl, libmoo-perl (>= 1.003)
+Suggests: liblog-log4perl-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Log-Contextual
+Description: module for simple contextual logging
+ Log::Contextual is a Perl module that provides an implementation-independent
+ interface for simple data logging. It supports painless switching between any
+ logger that implements the defined interface, either for the entire program
+ (using set_logger) or for a given section of code (using with_logger).
+ .
+ The framework supports many logging levels that are enabled using environment
+ variables (these are, in order of decreasing verbosity: trace, debug, info,
+ warn, error, and fatal).
+ .
+ This package includes simple loggers that can be seamlessly upgraded to more
+ advanced loggers, such as Log::Dispatchouli (see liblog-dispatchouli-perl).

@@ -1,0 +1,35 @@
+Package: vis
+Version: 0.5+ts-3
+Architecture: amd64
+Maintainer: Paride Legovini <pl@ninthfloor.org>
+Installed-Size: 1156
+Depends: libacl1 (>= 2.2.51-8), libc6 (>= 2.15), liblua5.3-0, libncursesw6 (>= 6), libselinux1 (>= 1.32), libtermkey1 (>= 0.14), libtinfo6 (>= 6), libtre5
+Recommends: lua-lpeg
+Provides: editor
+Section: editors
+Priority: optional
+Homepage: https://github.com/martanne/vis
+Description: Modern, legacy free, simple yet efficient vim-like editor
+ Vis aims to be a modern, legacy free, simple yet efficient editor
+ combining the strengths of both vi(m) and sam. It extends vi's modal
+ editing with support for multiple cursors/selections and combines it
+ with sam's structural regular expression based command language.
+ .
+ As an universal editor it has decent Unicode support and should cope
+ with arbitrary files including: large, binary or single-line ones.
+ Syntax highlighting is provided using Parsing Expression Grammars which
+ can be conveniently expressed using Lua in the form of LPeg.
+ .
+ The editor core is written in a reasonable amount of clean (your mileage
+ may vary), modern and legacy free C code, enabling it to run in resource
+ constrained environments. The implementation should be easy to hack
+ on and encourage experimentation. There also exists a Lua API for
+ in-process extensions.
+ .
+ Vis strives to be simple and focuses on its core task: efficient text
+ management. Clipboard and digraph handling as well as a fuzzy file open
+ dialog are all provided by independent utilities.
+ .
+ The intention is not to be bug for bug compatible with vi(m), instead
+ the aim is to provide powerful editing features based on an elegant
+ design and clean implementation.

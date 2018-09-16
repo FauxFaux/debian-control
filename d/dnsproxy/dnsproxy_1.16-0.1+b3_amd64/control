@@ -1,0 +1,24 @@
+Package: dnsproxy
+Source: dnsproxy (1.16-0.1)
+Version: 1.16-0.1+b3
+Architecture: amd64
+Maintainer: Patrick Schoenfeld <schoenfeld@debian.org>
+Installed-Size: 57
+Depends: libc6 (>= 2.2.5), libevent-2.1-6 (>= 2.1.8-stable), adduser, lsb-base
+Section: net
+Priority: optional
+Homepage: http://wolfermann.org/dnsproxy.html
+Description: proxy for DNS queries
+ dnsproxy forwards DNS queries to two previously configured nameservers:
+ one for authoritative queries and another for recursive queries.
+ The received answers are sent back to the client unchanged.
+ No local caching is done.
+ .
+ Primary motivation for this project was the need to replace Bind servers with
+ djbdns in an ISP environment. These servers get recursive queries from
+ customers and authoritative queries from outside at the same IP address.
+ Now it is possible to run dnscache and tinydns on the same machine with
+ queries dispatched by dnsproxy.
+ .
+ Another possible scenario is a firewall where proxy queries should be
+ forwarded to the real server in a DMZ.

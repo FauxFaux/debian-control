@@ -1,0 +1,355 @@
+#!/bin/sh
+
+set -e
+
+RTVER=4
+RT=request-tracker${RTVER}
+
+write_readconfig_script ()
+{
+    # this Perl script is embedded here because the .config 
+    # will be run before the new version is unpacked, so we
+    # can't ship the script in the .deb
+
+    READ_CONFIG_SCRIPT=$(mktemp -t ${RT}-readconfig.XXXXXXXX) || exit 1
+    chmod 755 $READ_CONFIG_SCRIPT
+    cat > $READ_CONFIG_SCRIPT <<'EOF'
+#!/usr/bin/perl -w
+use strict;
+no strict 'refs';
+
+# This script reads in the current RT configuration
+# and outputs shell code that sets corresponding shell 
+# variables.
+#
+# It is used by the maintainer scripts of RT
+# to get default values for debconf prompts.
+#
+# When invoked without any options, the script will output 
+# dbconfig-common related variables for use by dbconfig-load-include(1).
+#
+# When invoked with the '-s' option, the script will output
+# the rest of the variables needed used by the maintainer scripts.
+
+# Copyright 2007 Niko Tyni <ntyni@iki.fi>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.  You may also can
+# redistribute it and/or modify it under the terms of the Perl
+# Artistic License.
+
+use Getopt::Std;
+
+my %opts;
+getopts('s', \%opts) or die("Usage: $0 [-s]");
+my $dbconfig_mode = not exists $opts{s};
+
+# Note the order; if somebody has overridden RT.pm,
+# we should honor that
+use lib "/usr/local/share/request-tracker4/lib";
+use lib "/usr/share/request-tracker4/lib";
+
+use RT;
+
+# the correspondence between the RT variables and
+# their names in the shell
+my %site_names = (
+    rtname              => "RT_SITE_rtname",
+    Organization        => "RT_SITE_organization",
+    CorrespondAddress   => "RT_SITE_correspondaddress",
+    CommentAddress      => "RT_SITE_commentaddress",
+    WebPath             => "RT_SITE_webpath",
+    WebBaseURL          => "RT_SITE_webbaseurl",
+);
+
+# the special dbconfig-load-include(1) variables
+my %db_names = (
+    DatabaseType        => "dbc_dbtype",
+    DatabaseHost        => "dbc_dbserver",
+    DatabaseUser        => "dbc_dbuser",
+    DatabasePassword    => "dbc_dbpass",
+    DatabaseName        => "dbc_dbname",
+    DatabasePort        => "dbc_dbport",
+);
+
+# map from dbconfig-common database types to their names as known by RT
+my %typemap = reverse (
+    mysql   => 'mysql',
+    pgsql   => 'Pg',
+    sqlite3 => 'SQLite',
+);
+
+# Read in the configuration
+RT::LoadConfig();
+
+# and output the relevant parts of it
+if ($dbconfig_mode) {
+    for my $var (keys %db_names) {
+        my $val = ${"RT::$var"} || "";
+        my $varname = $db_names{$var};
+        $val = $typemap{$val} || "" if $varname eq "dbc_dbtype";
+        print qq($varname="$val"\n);
+    }
+} else {
+    for my $var (sort keys %site_names) {
+        my $val = ${"RT::$var"} || "EMPTY_PLACEHOLDER_VALUE";
+        my $varname = $site_names{$var};
+        print qq($varname="$val"\n);
+    }
+}
+
+EOF
+# end of the embedded Perl script
+} # write_readconfig_script()
+
+# start of the actual command flow
+
+# source debconf library
+. /usr/share/debconf/confmodule
+
+db_version 2.0
+db_capb backup
+
+hostname="$(hostname -f || true)"
+hostname="${hostname:-$(hostname)}"
+
+# sane startup defaults
+RT_SITE_DEFAULT_webpath=/rt
+RT_SITE_DEFAULT_webbaseurl=http://${hostname}
+RT_SITE_DEFAULT_rtname=rt.${hostname}
+RT_SITE_DEFAULT_organization=${hostname}
+RT_SITE_DEFAULT_correspondaddress="rt@${hostname}"
+
+# we always create this to be on the safe side
+# from now on, $READ_CONFIG_SCRIPT is set
+write_readconfig_script
+
+# is this an old installation?
+if [ -e /etc/${RT}/RT_SiteConfig.pm ]
+then
+    if [ "$1" = "configure" ] && [ ! -f /usr/share/${RT}/lib/RT.pm ]
+    then
+        # it's an old installation, but not unpacked, ie. it was removed
+        # but not purged in the meantime
+        # the only sane thing to do is to exit now and retry when we're
+        # re-run from the postinst script
+        echo "${RT}.config: cannot read the old configuration file yet, postponing configuration." 1>&2
+        rm $READ_CONFIG_SCRIPT
+        exit 0
+    fi
+    if [ ! -x "$READ_CONFIG_SCRIPT" ] 
+    then
+        echo "Creating temporary script for loading old configuration failed." 1>&2
+        exit 1
+    fi
+
+    # read in the existing configuration for default values
+    eval $($READ_CONFIG_SCRIPT -s)
+
+    # are we expected to handle the configuration file permissions?
+
+    # if this is an old installation but the permissions aren't what
+    # we expect, we don't want to handle them 
+    if [ "root:www-data" != \
+          $(stat -c %U:%G /etc/${RT}/RT_SiteConfig.pm) ] \
+    || [ "640" != \
+          $(stat -c %a    /etc/${RT}/RT_SiteConfig.pm) ] 
+    then
+        db_set ${RT}/handle-siteconfig-permissions false
+    fi
+fi
+
+# now, default to handling the configuration file permissions
+db_get ${RT}/handle-siteconfig-permissions
+if [ -z "$RET" ]
+then
+    db_set ${RT}/handle-siteconfig-permissions true
+fi
+
+# override the debconf database with the existing configuration
+for i in rtname organization webpath webbaseurl \
+         correspondaddress commentaddress
+do
+    unset value default
+    eval value=\"$(echo \${RT_SITE_$i})\"
+    eval default=\"$(echo \${RT_SITE_DEFAULT_$i})\"
+    if [ -n "$value" ]; then
+        if [ "$value" = "EMPTY_PLACEHOLDER_VALUE" ]; then
+            value="";
+        fi;
+        db_set ${RT}/$i "${value}"
+        # as the value was set in the configuration file, 
+        # mark the question as seen
+        db_fset ${RT}/$i seen true
+    else
+        db_get ${RT}/$i
+        if [ -z "$RET" ]; then
+            db_set ${RT}/$i "${default}"
+        fi
+    fi
+done
+
+# ask the questions
+STATE=1
+set +e
+while true
+do
+    case "$STATE" in
+    1)
+        db_input high ${RT}/rtname
+        ;;
+    2)
+        db_input medium ${RT}/organization
+        ;;
+    3)
+        db_input high ${RT}/handle-siteconfig-permissions
+        ;;
+    4)
+        # This should possibly be in -apache2
+        db_input medium ${RT}/webbaseurl
+        ;;
+    5)
+        # This should possibly be in -apache2
+        db_input medium ${RT}/webpath
+        ;;
+    6)
+        # This should possibly be in -clients
+        db_input medium ${RT}/correspondaddress
+        ;;
+    7)
+        db_get ${RT}/commentaddress
+        if [ -z "$RET" ]
+        then
+            # default to the correspond address with -comment appended
+            db_get ${RT}/correspondaddress
+            ADDRESS="$(echo "$RET" | sed s/@/-comment@/)"
+            db_set ${RT}/commentaddress "$ADDRESS"
+        fi
+        db_input medium ${RT}/commentaddress
+        ;;
+    8)
+        db_input medium ${RT}/install-cronjobs
+        ;;
+    *)
+        break # exit the 'while' loop
+        ;;
+    esac
+    if db_go
+    then
+        STATE=$(($STATE + 1))
+    else
+        STATE=$(($STATE - 1))
+    fi
+done
+if [ $STATE -eq 0 ]
+then
+    # user backed up from the first question
+    # leave the package unconfigured
+    exit 10
+fi
+set -e
+
+# source dbconfig-common library
+if [ -f /usr/share/dbconfig-common/dpkg/config ] && [ ! -e /usr/share/dbconfig-common/internal/dbc-no-thanks ]; then
+    # supported database types
+
+    # we only take the installed -db-* packages into
+    # account on new installs or upgrades from an unconfigured state
+    
+    if [ -z "$2" ]
+    then
+        dbc_dbtypes=""
+        for dbtype in sqlite3 pgsql mysql
+        do
+            case "$dbtype" in
+            mysql)
+                pkg=rt${RTVER}-db-mysql
+                ;;
+            pgsql)
+                pkg=rt${RTVER}-db-postgresql
+                ;;
+            sqlite3)
+                pkg=rt${RTVER}-db-sqlite
+                ;;
+            esac
+            if dpkg-query -W -f='${Status}\n' $pkg 2>/dev/null | \
+               grep -q '^install \| installed$' || \
+               ( db_get ${pkg}/available && [ "$RET" = "true" ] ); then
+                dbc_dbtypes="${dbc_dbtypes}, $dbtype"
+            fi
+            dbc_dbtypes=$(echo $dbc_dbtypes | sed 's/^, //')
+        done
+    else
+        dbc_dbtypes="sqlite3, pgsql, mysql"
+    fi
+    if [ -z "$dbc_dbtypes" ]
+    then
+        # no -db-* packages preconfigured yet
+        #
+        # either apt feeds the list to dpkg-preconfigure in the
+        # wrong order (unlikely), or dpkg-preconfigure was called
+        # manually
+        #
+        # in either case, the only sane thing to do is to exit now and
+        # retry when we're re-run from the postinst script
+        echo "${RT}.config: no rt${RTVER}-db-* package is being installed? postponing configuration." 1>&2
+        rm $READ_CONFIG_SCRIPT
+        exit 0
+    fi
+
+    # we want a password that can be put in the configuration file
+	dbc_authmethod_user="password"
+
+    # some default values
+    dbc_dbuser="rtuser"
+    dbc_dbname="rtdb"
+
+    # this makes dbconfig-common import an existing configuration when
+    # upgrading from a pre-dbconfig-common version
+    #
+    # note that we're calling the same script as the general upgrade logic
+    # above, but without the '-s' argument, so that the script will
+    # return the database related configuration
+	dbc_load_include=exec:$READ_CONFIG_SCRIPT
+
+    # all ready, let's go
+	. /usr/share/dbconfig-common/dpkg/config
+	dbc_go ${RT} $@
+
+    db_get ${RT}/dbconfig-install
+    DBC_INSTALL=$RET
+    if [ -n "$2" ]; then
+        DBC_INSTALL="false"
+    fi
+    db_get ${RT}/dbconfig-reinstall
+    DBC_REINSTALL=$RET
+    if [ "$DBC_INSTALL" = "true" -o "$DBC_REINSTALL" = "true" ]; then
+        while true; do
+            if db_input high ${RT}/initial-root-password; then
+                db_go
+            else
+                if [ $? -eq 30 ]; then
+                    break
+                else
+                    exit $?
+                fi
+            fi
+            db_get ${RT}/initial-root-password
+            if [ -n "$RET" ]; then
+                PW_LENGTH=$(expr length "$RET")
+                # This is only the default $MinimumPasswordLength which could
+                # in theory be overridden by the user by this point, but we'll
+                # ignore this edge case for now; it'll be trapped later.
+                # Let's just say that we don't support passwords shorter than
+                # this
+                if [ "$PW_LENGTH" -ge 5 ]; then
+                    break
+                fi
+            fi
+        done
+    fi
+fi
+ 
+rm $READ_CONFIG_SCRIPT

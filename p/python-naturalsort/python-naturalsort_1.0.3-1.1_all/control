@@ -1,0 +1,29 @@
+Package: python-naturalsort
+Version: 1.0.3-1.1
+Architecture: all
+Maintainer: Cyril Bouthors <cyril@bouthors.org>
+Installed-Size: 59
+Depends: python (>= 2.7), python (<< 2.8)
+Section: python
+Priority: optional
+Description: Simple natural order sorting API for Python that just works
+ The ``natsort.natsort()`` function in the ``naturalsort`` package is a very
+ simple alternative to Python's ``sorted()`` function that implements `natural
+ order sorting`_ in Python. The package is available on PyPI, so getting started
+ is very simple:
+ .
+   $ pip install naturalsort
+   $ python
+   > from natsort import natsort
+   > versions = ['1.8.1-r26', '1.8.1-r30', '2.0-r2', '2.0-r7', '2.0-r11']
+   > natsort(['my-package-%s' % v for v in versions])
+   ['my-package-1.8.1-r26',
+    'my-package-1.8.1-r30',
+    'my-package-2.0-r2',
+    'my-package-2.0-r7',
+    'my-package-2.0-r11']
+ .
+ The main use case that this package was originally created for is sorting of
+ pathnames with versions numbers embedded in them. This is why the sorting key
+ defined by the ``naturalsort`` package ignores filename extensions (not doing
+ so can give unexpected results).

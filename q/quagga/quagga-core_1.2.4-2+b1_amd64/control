@@ -1,0 +1,32 @@
+Package: quagga-core
+Source: quagga (1.2.4-2)
+Version: 1.2.4-2+b1
+Architecture: amd64
+Maintainer: Brett Parker <iDunno@sommitrealweird.co.uk>
+Installed-Size: 2562
+Pre-Depends: adduser, dpkg (>= 1.17.14)
+Depends: iproute2, libc6 (>= 2.15), libcap2 (>= 1:2.10), libpam0g (>= 0.99.7.1), libreadline7 (>= 6.0), libtinfo6 (>= 6)
+Suggests: quagga-bgpd (= 1.2.4-2+b1), quagga-isisd (= 1.2.4-2+b1), quagga-ospf6d (= 1.2.4-2+b1), quagga-ospfd (= 1.2.4-2+b1), quagga-pimd (= 1.2.4-2+b1), quagga-ripd (= 1.2.4-2+b1), quagga-ripngd (= 1.2.4-2+b1), snmpd
+Conflicts: zebra, zebra-pj
+Breaks: libquagga0 (<< 1.1.1-2~), quagga (<< 1.1.0-1)
+Replaces: libquagga0 (<< 1.1.1-2~), quagga (<< 1.1.0-1), zebra, zebra-pj
+Section: net
+Priority: optional
+Homepage: http://www.quagga.net/
+Description: network routing daemons (core abstraction layer)
+ GNU Quagga is free software which manages TCP/IP based routing protocols.
+ It supports BGP4, BGP4+, OSPFv2, OSPFv3, IS-IS, RIPv1, RIPv2, and RIPng as
+ well as the IPv6 versions of these.
+ .
+ As the predecessor Zebra has been considered orphaned, the Quagga project
+ has been formed by members of the zebra mailing list and the former
+ zebra-pj project to continue developing.
+ .
+ Quagga uses threading if the kernel supports it, but can also run on
+ kernels that do not support threading. Each protocol has its own daemon.
+ .
+ It is more than a routed replacement, it can be used as a Route Server and
+ a Route Reflector.
+ .
+ This package provides the zebra daemon, vtysh shell, and framework used by the
+ protocol-specific daemons.

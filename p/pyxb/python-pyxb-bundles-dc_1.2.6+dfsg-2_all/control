@@ -1,0 +1,35 @@
+Package: python-pyxb-bundles-dc
+Source: pyxb
+Version: 1.2.6+dfsg-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 361
+Depends: python-pyxb (= 1.2.6+dfsg-2), python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: http://pyxb.sourceforge.net/
+Description: Python XML Schema Bindings (Dublin Core bindings for Python2)
+ PyXB is a pure Python package that generates Python code for classes that
+ correspond to data structures defined by XMLSchema. In concept it is similar to
+ JAXB for Java and CodeSynthesis XSD for C++.
+ .
+ The major goals of PyXB are:
+  * Provide a generated Python interface that is “Pythonic”, meaning similar to
+    one that would have been hand-written:
+    + Attributes and elements are Python properties, with name conflicts
+      resolved in favor of elements
+    + Elements with maxOccurs larger than 1 are stored as Python lists
+    + Bindings for type extensions inherit from the binding for the base type
+    + Enumeration constraints are exposed as class (constant) variables
+  * Support bi-directional conversion (document to Python and back)
+  * Allow easy customization of the generated bindings to provide functionality
+    along with content
+  * Support all XMLSchema features that are in common use, including:
+    + complex content models (nested all/choice/sequence)
+    + cross-namespace dependencies
+    + include and import directives
+    + constraints on simple types
+  * Validate the documents against their schema
+ .
+ This package contains the prebuilt Dublin Core Metadata Initiative bindings
+ for Python2.

@@ -1,0 +1,23 @@
+Package: libcojets2-gfortran
+Source: mclibs (20061220+dfsg3-3.1)
+Version: 20061220+dfsg3-3.1+b2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 527
+Depends: libc6 (>= 2.27), libgcc1 (>= 1:4.0), libgfortran5 (>= 8), libkernlib1-gfortran, liblapack3 | liblapack.so.3, libmathlib2-gfortran, libpacklib1-gfortran, libquadmath0 (>= 4.6), montecarlo-base
+Recommends: montecarlo-data (>= 2006.dfsg.2)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://wwwasd.web.cern.ch/wwwasd/cernlib/mc.html
+Description: [Physics] COJETS p-p and pbar-p interaction Monte Carlo library
+ COJETS is a Monte Carlo library which simulates pbar-p and p-p interactions at
+ high energy.  The interaction process is first calculated at the parton level
+ by means of perturbative QCD and the Weinberg-Salam model for electroweak
+ interactions.  Partons are then independently fragmented into jets of hadrons,
+ according to the Field-Feynman model, and the beam jets contribution is
+ added, according to a longitudinal phase-space model.  Multiple QCD radiation
+ of initial and final partons is included.
+ .
+ Note that in order to compile and link programs against this library, you
+ must also install the libcojets2-dev package.

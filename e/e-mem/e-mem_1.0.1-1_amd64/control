@@ -1,0 +1,22 @@
+Package: e-mem
+Version: 1.0.1-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 118
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgomp1 (>= 4.9), libstdc++6 (>= 5.2)
+Enhances: mummer
+Section: science
+Priority: optional
+Homepage: http://www.csd.uwo.ca/~ilie/E-MEM/
+Description: Efficient computation of Maximal Exact Matches for very large genomes
+ E-MEM enables efficient computation of Maximal Exact Matches (MEMs) that
+ does not use full text indexes. The algorithm uses much less space and
+ is highly amenable to parallelization. It can compute all MEMs of
+ minimum length 100 between the whole human and mouse genomes on a 12
+ core machine in 10 min and 2 GB of memory; the required memory can be as
+ low as 600 MB. It can run efficiently genomes of any size. Extensive
+ testing and comparison with currently best algorithms is provided.
+ .
+ Mummer has many different scripts where one of the key program is MEM
+ computation. In all the scripts, the MEM computation program can be
+ replaced with e-mem with ease for better performance.

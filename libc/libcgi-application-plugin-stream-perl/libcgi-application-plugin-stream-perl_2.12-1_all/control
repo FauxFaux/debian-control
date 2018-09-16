@@ -1,0 +1,17 @@
+Package: libcgi-application-plugin-stream-perl
+Version: 2.12-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 27
+Depends: perl, libcgi-application-perl, libfile-mmagic-perl
+Breaks: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Replaces: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Application-Plugin-Stream
+Description: plugin that adds file streaming support to CGI::Application
+ CGI::Application::Plugin::Stream provides a way to stream a file back to the
+ user from a CGI::Application module. This is useful if you are creating a PDF
+ or Spreadsheet document dynamically to deliver to the user. The file is read
+ and printed in small chunks to keep memory consumption down. If you pass
+ along a filehandle it will be automatically closed on completion.

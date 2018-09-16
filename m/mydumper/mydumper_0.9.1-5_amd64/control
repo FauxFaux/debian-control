@@ -1,0 +1,29 @@
+Package: mydumper
+Version: 0.9.1-5
+Architecture: amd64
+Maintainer: Mateusz Kijowski <mateusz.kijowski@gmail.com>
+Installed-Size: 123
+Depends: libc6 (>= 2.2.5), libglib2.0-0 (>= 2.31.8), libmariadbclient18 (>= 5.5.36), libpcre3, zlib1g (>= 1:1.2.3.3)
+Suggests: mydumper-doc
+Section: database
+Priority: extra
+Homepage: https://github.com/maxbube/mydumper
+Description: High-performance MySQL backup tool
+ Mydumper (aka. MySQL Data Dumper) is a high-performance multi-threaded
+ backup (and restore) toolset for MySQL and Drizzle.  The main developers
+ originally worked as Support Engineers at MySQL (one has moved to
+ Facebook and another to SkySQL) and this is how they would envisage
+ mysqldump based on years of user feedback.
+ .
+ Mydumper features
+ .
+  Lightweight C source
+  Up to 10x faster dumps compared to mysqldump
+  Consistent snapshots for transactional and non-transactional tables
+  File compression on-the-fly
+  Binary log dumps
+  Multi-threaded restore utility
+  Daemon mode for timed snapshots and continuous binary logs
+ .
+ Mydumper is still under active development but is well tested/used in
+ production on some large installations.

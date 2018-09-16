@@ -1,0 +1,20 @@
+Package: ktap
+Version: 0.4+git20160427-1
+Architecture: amd64
+Maintainer: Azat Khuzhin <a3at.mail@gmail.com>
+Installed-Size: 483
+Depends: libelf1 (>= 0.144), dkms (>= 2.1.1.1), libc6 (>= 2.14)
+Section: devel
+Priority: optional
+Homepage: http://www.ktap.org
+Description: lightweight script-based dynamic tracing tool for Linux
+ ktap is a new script-based dynamic tracing tool for Linux, it uses a scripting
+ language and lets users trace the Linux kernel dynamically. ktap is designed to
+ give operational insights with interoperability that allows users to tune,
+ troubleshoot and extend kernel and application. It's similar with Linux
+ Systemtap and Solaris Dtrace.
+ .
+ ktap have different design principles from Linux mainstream dynamic tracing
+ language in that it's based on bytecode, so it doesn't depend upon GCC, doesn't
+ require compiling kernel module for each script, safe to use in production
+ environment, fulfilling the embedded ecosystem's tracing needs.

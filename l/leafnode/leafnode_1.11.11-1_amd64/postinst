@@ -1,0 +1,163 @@
+#!/bin/sh 
+
+set -e
+
+# we need the debconf library
+. /usr/share/debconf/confmodule
+
+CONFIG=/etc/news/leafnode/config
+SAMPLE=/usr/share/leafnode/config.example
+FETCHNEWS=/usr/sbin/fetchnews
+DEBIAN_CONFIG=/etc/news/leafnode/debian-config
+
+# If we saved the config file, restore it.
+if [ -e /etc/news/leafnode/config.save-upgrade ]; then
+	if [ ! -e /etc/news/leafnode/config ]; then
+		mv /etc/news/leafnode/config.save-upgrade /etc/news/leafnode/config
+	else
+		rm -f /etc/news/leafnode/config.save-upgrade
+	fi
+fi
+
+if [ ! -e ${DEBIAN_CONFIG} ]; then
+	cp -p /usr/share/leafnode/debian-config ${DEBIAN_CONFIG}
+fi
+
+########################################################################
+#
+# User configuration
+#
+########################################################################
+
+if [ "$1" = "configure" ]; then
+# Server - keep as many settings we don't know about as possible
+    db_get leafnode/server || true
+    server=$RET
+ 
+    # Is this a fresh configuration?
+    if [ -e $CONFIG ]; then
+        cp $CONFIG ${CONFIG}.new
+	cp $CONFIG ${CONFIG}.0
+    else
+        # Debhelper may decide to compress the sample file, so we
+        # handle either case.
+        if [ -f ${SAMPLE}.gz ] ; then
+           gunzip -c ${SAMPLE}.gz > ${CONFIG}.new
+        else
+           cp $SAMPLE ${CONFIG}.new
+        fi
+
+	touch ${CONFIG}
+	chown root ${CONFIG}
+	chgrp news ${CONFIG}
+	chmod 640 ${CONFIG}
+    fi
+
+    # Do the substitution (once only - can have multiple server = lines)
+awk '/^server.*=/ { if (x == foo) { print "server = '${server}'"; x= "foo"} else print }
+!/^server.*=/ { print }' < ${CONFIG}.new > ${CONFIG}
+
+    # Perhaps there was no server line?
+    if ! grep "server.*=" ${CONFIG} > /dev/null ; then
+        echo server = $server > ${CONFIG}.tmp
+        cat ${CONFIG}.tmp ${CONFIG}.new > ${CONFIG}
+        rm -f ${CONFIG}.tmp
+    fi
+    rm -f ${CONFIG}.new
+    # Glad that's over...
+
+    # TCP wrappers?
+    db_get leafnode/tcpd || true
+    if [ "$RET" = "true" ]; then
+       if ! grep -q '#-- leafnode begin' /etc/hosts.deny 2>/dev/null; then
+                echo "#-- leafnode begin" >> /etc/hosts.deny
+                echo "leafnode: ALL" >> /etc/hosts.deny
+                echo "#-- leafnode end" >> /etc/hosts.deny
+                echo "#-- leafnode begin" >> /etc/hosts.allow
+                echo "leafnode: 127.0.0.1" >> /etc/hosts.allow
+                echo "#-- leafnode end" >> /etc/hosts.allow
+       fi
+    else
+       if grep -q '#-- leafnode begin' /etc/hosts.deny 2>/dev/null; then
+	  cp /etc/hosts.allow /etc/hosts.allow.new
+          sed -e '/#-- leafnode begin/,/#-- leafnode end/d' \
+                        </etc/hosts.allow.new >/etc/hosts.allow
+          rm -f /etc/hosts.allow.new
+	  cp /etc/hosts.deny /etc/hosts.deny.new
+          sed -e '/#-- leafnode begin/,/#-- leafnode end/d' \
+                        </etc/hosts.deny.new >/etc/hosts.deny
+          rm -f /etc/hosts.deny.new
+       fi
+    fi
+
+    # Network type?
+    db_get leafnode/network || true
+    case "$RET" in
+      "permanent")
+        sed "/NETWORK=/ c\\
+NETWORK=permanent\\" < ${DEBIAN_CONFIG} > ${DEBIAN_CONFIG}.new
+	mv ${DEBIAN_CONFIG}.new ${DEBIAN_CONFIG}
+	;;
+      "PPP")
+        sed "/NETWORK=/ c\\
+NETWORK=PPP\\" < ${DEBIAN_CONFIG} > ${DEBIAN_CONFIG}.new
+	mv ${DEBIAN_CONFIG}.new ${DEBIAN_CONFIG}
+	;;
+      "none")
+        sed "/NETWORK=/ c\\
+NETWORK=none\\" < ${DEBIAN_CONFIG} > ${DEBIAN_CONFIG}.new
+	mv ${DEBIAN_CONFIG}.new ${DEBIAN_CONFIG}
+	;;
+      *)
+      	# FIXME: Error
+        ;;
+    esac
+fi
+
+# Old versions had this line wrong in the config file. Correct.
+if grep -q maxcount /etc/news/leafnode/config; then
+	cp /etc/news/leafnode/config /etc/news/leafnode/config.new
+	sed -e "s/maxcount/maxfetch/" < /etc/news/leafnode/config.new > /etc/news/leafnode/config
+	rm -f /etc/news/leafnode/config.new
+fi
+
+cd /var/spool/news/message.id
+for a in 0 1 2 3 4 5 6 7 8 9 ; do for b in 0 1 2 3 4 5 6 7 8 9 ; do \
+install -g news -o news -d ${a}${b}0 ${a}${b}1 ${a}${b}2 ${a}${b}3 ${a}${b}4 \
+	${a}${b}5 ${a}${b}6 ${a}${b}7 ${a}${b}8 ${a}${b}9 ; \
+done ; done
+
+#
+# This enables leafnode in inetd.conf, so save for "last".
+#
+update-inetd --comment-chars "#disabled#" --disable nntp
+update-inetd --group MAIL --add --comment-chars "#disabled#" \
+                "nntp   stream  tcp     nowait  news    /usr/sbin/tcpd  /usr/sbin/leafnode"
+
+if [ "$1" = "purge" ]; then
+   db_purge || true
+fi
+
+
+
+########################################################################
+#
+# Configuration reprise
+#
+########################################################################
+
+if [ "$1" = "configure" ]; then
+   # Update list of groups if the user decided to do that
+   db_get leafnode/update-groups || true
+   if [ "$RET" = "true" ]; then
+       echo -n "Updating list of active groups... "
+       if ${FETCHNEWS} -f >/dev/null ; then
+          echo done
+       else
+          echo failed
+       fi
+       
+       # But don't do it again unless the user asks for it
+       db_set leafnode/update-groups false
+   fi
+fi

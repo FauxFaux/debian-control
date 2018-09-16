@@ -1,0 +1,19 @@
+Package: xenwatch
+Source: xenwatch (0.5.4-4)
+Version: 0.5.4-4+b1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 271
+Depends: libatk1.0-0 (>= 1.12.4), libavahi-client3 (>= 0.6.16), libavahi-common3 (>= 0.6.16), libavahi-glib1 (>= 0.6.16), libc6 (>= 2.7), libcairo2 (>= 1.2.4), libfontconfig1 (>= 2.11), libfreetype6 (>= 2.2.1), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.16.0), libgtk-vnc-1.0-0 (>= 0.3.10), libgtk2.0-0 (>= 2.8.0), libgvnc-1.0-0 (>= 0.4.1), libpango-1.0-0 (>= 1.14.0), libpangocairo-1.0-0 (>= 1.14.0), libpangoft2-1.0-0 (>= 1.14.0), libvirt0 (>= 0.0.3), libx11-6, libxenstore3.0 (>= 3.2.0), libxext6, libxml2 (>= 2.7.4)
+Section: admin
+Priority: optional
+Description: Virtualization utilities, mostly for Xen
+ This is a bunch of utilities for virtualization hosts. All except xenscreen are
+ using xenstore and thus are xen-specific.
+ .
+  * xenscreen - attach xen domain consoles to screen windows.
+  * xenlog - Log xenstore activity to stdout.
+  * xenstore - gtk xenstore browser.
+  * xenwatch - list running domains with some properties, allow connecting to
+    text and graphical (vnc) consoles.
+  * vnc-client - built-in vnc client from xenwatch as standalone application.

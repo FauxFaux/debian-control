@@ -1,0 +1,21 @@
+Package: cpqarrayd
+Version: 2.3.6
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 50
+Depends: libc6 (>= 2.4), lsb-base
+Section: admin
+Priority: optional
+Description: monitoring tool for HP (Compaq) SmartArray controllers
+ cpqarrayd is a userspace monitoring daemon for HP (Compaq) SmartArray
+ hardware RAID controllers.  These controllers usually come built-in to
+ ProLiant, or as a PCI card for ProLiant or Integrity systems. This
+ daemon reports status changes in the disk array to syslog and,
+ optionally, to a snmp trap host.
+ .
+ The default is to only log to the syslog. You can specify traphosts
+ with the -t parameter at the commandline. Multiple traphosts are
+ allowed.
+ .
+ This tool works with the SmartArray drivers found in Linux kernels
+ (cciss and ida drivers).

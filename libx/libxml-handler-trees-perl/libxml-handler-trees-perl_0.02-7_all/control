@@ -1,0 +1,23 @@
+Package: libxml-handler-trees-perl
+Version: 0.02-7
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 44
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/XML-Handler-Trees
+Description: Perl module for building tree structures using PerlSAX handlers
+ The XML::Handler::Trees module provides three PerlSAX handler classes for
+ building tree structures.  XML::Handler::Tree builds the same type of tree
+ as the "Tree" style in XML::Parser.  XML::Handler::EasyTree builds the same
+ type of tree as the "EasyTree" style added to XML::Parser by
+ XML::Parser::EasyTree.  XML::Handler::TreeBuilder builds the same
+ type of tree as Sean M. Burke's XML::TreeBuilder.  These classes make
+ it possible to construct these tree structures from sources other
+ than XML::Parser.
+ .
+ All three handlers can be driven by either PerlSAX 1 or PerlSAX 2
+ drivers.  In all cases, the end_document() method returns a reference
+ to the constructed tree, which normally becomes the return value of
+ the PerlSAX driver.

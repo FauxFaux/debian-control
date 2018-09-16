@@ -1,0 +1,24 @@
+Package: goi18n
+Source: golang-github-nicksnyder-go-i18n
+Version: 1.10.0-2
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 2982
+Suggests: golang-github-nicksnyder-go-i18n-dev
+Provides: go-i18n
+Built-Using: golang-1.10 (= 1.10.3-1), golang-github-pelletier-go-toml (= 1.1.0-1), golang-yaml.v2 (= 2.2.1-1)
+Section: devel
+Priority: optional
+Homepage: https://github.com/nicksnyder/go-i18n
+Description: Formats and merges translation files for Go
+ go-i18n is a Go package and a command that helps you translate Go programs
+ into multiple languages.
+ .
+  * Supports pluralized strings for all 200+ languages in the Unicode Common
+    Locale Data Repository (CLDR).
+  * Code and tests are automatically generated from CLDR data
+  * Supports strings with named variables using text/template syntax.
+  * Translation files are simple JSON or YAML.
+ .
+ This package contains the /usr/bin/goi18n command which provides
+ functionality for managing the translation process.

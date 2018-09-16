@@ -1,0 +1,22 @@
+Package: python3-paypal
+Source: python-paypal
+Version: 1.2.5-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 72
+Depends: python3-requests, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://pypi.python.org/pypi/paypal
+Description: PayPal API implementation (Python 3)
+ This package implements Paypal's Website Payments Pro NVP API in Python.
+ This currently includes Direct Payments (Credit card payments without a PayPal
+ Account) and PayPal Express Checkout (Payment via a PayPal account).
+ .
+ python-paypal does no real validation, doesn't hold hands, and is generally
+ only going to handle authentication, http-level stuff, and serializing
+ a list of keyword arguments passed to the API methods. You'll need to
+ read the official PayPal documentation for what key/values to pass:
+ https://developer.paypal.com/docs/classic/
+ .
+ This package installs the library for Python 3.

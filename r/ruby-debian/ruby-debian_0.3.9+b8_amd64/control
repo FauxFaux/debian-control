@@ -1,0 +1,20 @@
+Package: ruby-debian
+Source: ruby-debian (0.3.9)
+Version: 0.3.9+b8
+Architecture: amd64
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 90
+Depends: libapt-pkg5.0 (>= 0.8.0), libc6 (>= 2.2.5), libgcc1 (>= 1:3.0), libgmp10, libstdc++6 (>= 4.1.1), libruby2.5 (>= 2.5.0~preview1), ruby (>= 1:2.5~0), ruby (<< 1:2.6~)
+Breaks: dpkg-ruby (<< 0.3.8~), libdpkg-ruby (<< 0.3.7~), libdpkg-ruby1.8 (<< 0.3.7~), libdpkg-ruby1.9.1 (<< 0.3.7~)
+Replaces: dpkg-ruby (<< 0.3.8~), libdpkg-ruby (<< 0.3.7~), libdpkg-ruby1.8 (<< 0.3.7~), libdpkg-ruby1.9.1 (<< 0.3.7~)
+Provides: dpkg-ruby, libdpkg-ruby, libdpkg-ruby1.8, libdpkg-ruby1.9.1
+Section: ruby
+Priority: optional
+Description: ruby interface for dpkg
+ This package provides Debian::Dpkg and Debian::DpkgDeb modules and
+ Debian::Deb, Debian::Dsc, Debian::Archives, Debian::Sources,
+ Debian::Packages and Debian::Status classes for ruby.
+ .
+ It also provides two scripts, dpkg-ruby (a dpkg-awk clone) and
+ dpkg-checkdeps (a utility to check for deb dependency problems).
+Ruby-Versions: ruby2.5

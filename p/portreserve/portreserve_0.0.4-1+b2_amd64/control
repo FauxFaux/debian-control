@@ -1,0 +1,16 @@
+Package: portreserve
+Source: portreserve (0.0.4-1)
+Version: 0.0.4-1+b2
+Architecture: amd64
+Maintainer: Javier Fernandez-Sanguino Pen~a <jfs@computer.org>
+Installed-Size: 50
+Depends: libc6 (>= 2.2.5)
+Section: admin
+Priority: optional
+Homepage: http://cyberelk.net/tim/portreserve/
+Description: Port reservation program
+ The portreserve program aims to help services with well-known ports
+ that lie in the bindresvport() range (currently 600-1023).
+ It prevents programs requesting a port to the libc from occupying
+ a real service's port by occupying it itself, until the real service
+ tells it to release the port (generally in its init script).

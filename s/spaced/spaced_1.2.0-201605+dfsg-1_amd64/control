@@ -1,0 +1,24 @@
+Package: spaced
+Version: 1.2.0-201605+dfsg-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 161
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgomp1 (>= 4.9), libstdc++6 (>= 5.2)
+Section: science
+Priority: optional
+Homepage: http://spaced.gobics.de/
+Description: alignment-free sequence comparison using spaced words
+ Spaced (Words) is a new approach to alignment-free sequence
+ comparison. While most alignment-free algorithms compare the
+ word-composition of sequences, spaced uses a pattern of care and
+ don't care positions. The occurrence of a spaced word in a sequence
+ is then defined by the characters at the match positions only, while
+ the characters at the don't care positions are ignored. Instead of
+ comparing the frequencies of contiguous words in the input sequences,
+ this new approach compares the frequencies of the spaced words according
+ to the pre-defined pattern. An information-theoretic distance measure
+ is then used to define pairwise distances on the set of input sequences
+ based on their spaced-word frequencies. Systematic test runs on real and
+ simulated sequence sets have shown that, for phylogeny reconstruction,
+ this multiple-spaced-words approach is far superior to the classical
+ alignment-free approach based on contiguous word frequencies.

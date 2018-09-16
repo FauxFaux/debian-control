@@ -1,0 +1,31 @@
+Package: libltdl-dev
+Source: libtool
+Version: 2.4.6-4
+Architecture: amd64
+Maintainer: Alastair McKinstry <mckinstry@debian.org>
+Installed-Size: 923
+Depends: libltdl7 (= 2.4.6-4), automake-1.16
+Recommends: libtool
+Suggests: libtool-doc
+Conflicts: libltdl3-dev, libltdl7-dev, libtool (<< 1.5.20), libtool1.4
+Replaces: libltdl3-dev, libltdl7-dev, libtool (<< 1.5.20)
+Provides: libltdl3-dev, libltdl7-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.gnu.org/software/libtool/
+Description: System independent dlopen wrapper for GNU libtool
+ This package contains the header files and static libraries for the
+ libltdl package.
+ .
+ A small library that aims at hiding the various difficulties of
+ dlopening libraries from programmers.  It is a system independent
+ dlopen wrapper for GNU libtool.
+ .
+ It supports the following dlopen interfaces:
+   * dlopen (Solaris, Linux and various BSD flavors)
+   * shl_load (HP-UX)
+   * LoadLibrary (Win16 and Win32)
+   * load_add_on (BeOS)
+   * GNU DLD (emulates dynamic linking for static libraries)
+   * libtool's dlpreopen

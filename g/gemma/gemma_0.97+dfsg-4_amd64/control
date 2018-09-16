@@ -1,0 +1,34 @@
+Package: gemma
+Version: 0.97+dfsg-4
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 1208
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgfortran5 (>= 8), libgsl23 (>= 2.5), libopenblas-base, libstdc++6 (>= 5.2), zlib1g (>= 1:1.1.4)
+Section: science
+Priority: optional
+Homepage: http://www.xzlab.org/software.html
+Description: Genome-wide Efficient Mixed Model Association
+ GEMMA is the software implementing the Genome-wide Efficient Mixed
+ Model Association algorithm for a standard linear mixed model and some
+ of its close relatives for genome-wide association studies (GWAS):
+ .
+  * It fits a univariate linear mixed model (LMM) for marker association
+    tests with a single phenotype to account for population stratification
+    and sample structure, and for estimating the proportion of variance in
+    phenotypes explained (PVE) by typed genotypes (i.e. "chip heritability").
+  * It fits a multivariate linear mixed model (mvLMM) for testing marker
+    associations with multiple phenotypes simultaneously while controlling
+    for population stratification, and for estimating genetic correlations
+    among complex phenotypes.
+  * It fits a Bayesian sparse linear mixed model (BSLMM) using Markov
+    chain Monte Carlo (MCMC) for estimating PVE by typed genotypes,
+    predicting phenotypes, and identifying associated markers by jointly
+    modeling all markers while controlling for population structure.
+  * It estimates variance component/chip heritability, and partitions
+    it by different SNP functional categories. In particular, it uses HE
+    regression or REML AI algorithm to estimate variance components when
+    individual-level data are available. It uses MQS to estimate variance
+    components when only summary statisics are available.
+ .
+ GEMMA is computationally efficient for large scale GWAS and uses freely
+ available open-source numerical libraries.

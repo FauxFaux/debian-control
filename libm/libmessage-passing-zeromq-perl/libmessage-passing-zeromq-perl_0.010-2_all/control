@@ -1,0 +1,33 @@
+Package: libmessage-passing-zeromq-perl
+Version: 0.010-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 97
+Depends: libanyevent-perl, libfile-pushd-perl, libmessage-passing-perl, libmoo-perl, libposix-atfork-perl, libsub-name-perl, libtask-weaken-perl, libtry-tiny-perl, libzmq-ffi-perl, libnamespace-clean-perl, libmoox-types-mooselike-perl, perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Message-Passing-ZeroMQ/
+Description: input and output messages to ZeroMQ
+ Message::Passing::ZeroMQ is a ZeroMQ transport for Message::Passing.
+ .
+ Designed for use as a log transport and aggregation mechanism for perl
+ applications, allowing you to aggregate structured and non-structured
+ log messages across the network in a non-blocking manner.
+ .
+ Clients (i.e. users of the Message::Passing::Output::ZeroMQ class)
+ connect to a server (i.e. a user of the Message::Passing::Input::ZeroMQ
+ class) via ZeroMQ's pub/sub sockets. These are setup to be lossy and
+ non-blocking, meaning that if the log-receiver process is down or slow,
+ then the application will queue a small (and configurable) amount of
+ logs on its side, and after that log messages will be dropped.
+ .
+ Whilst throwing away log messages isn't a good thing to do, or
+ something that you want to happen regularly, in many (especially web
+ application) contexts, network logging being a single point of failure
+ is not acceptable from a reliability and graceful degradation
+ standpoint.
+ .
+ The application grinding to a halt as a non-essential centralised
+ resource is unavailable (e.g. the log aggregation server) is
+ significantly less acceptable than the loss of non-essential logging
+ data.

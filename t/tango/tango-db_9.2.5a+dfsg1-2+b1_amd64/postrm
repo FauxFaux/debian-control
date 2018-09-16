@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+
+if [ -f /usr/share/debconf/confmodule ]; then
+  . /usr/share/debconf/confmodule
+fi
+if [ -f /usr/share/dbconfig-common/dpkg/postrm.mysql ]; then
+  . /usr/share/dbconfig-common/dpkg/postrm.mysql
+  dbc_go tango-db $@
+fi
+
+if [ "$1" = "purge" ]; then
+  rm -f /var/lib/tango/.my.cnf
+  if which ucf >/dev/null 2>&1; then
+    ucf --purge /var/lib/tango/.my.cnf
+  fi
+fi
+
+# Automatically added by dh_installinit/11.3.2
+if [ "$1" = "purge" ] ; then
+	update-rc.d tango-db remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.3.2
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

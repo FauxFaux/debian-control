@@ -1,0 +1,21 @@
+Package: grr-client-templates-installer
+Source: grr
+Version: 3.1.0.2+dfsg-6
+Architecture: all
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 21
+Depends: wget, ca-certificates
+Breaks: grr-server (<< 3.1.0.2+dfsg-5~)
+Section: utils
+Priority: extra
+Homepage: https://github.com/google/grr
+Description: incident response framework - installer for client templates
+ GRR Rapid Response is an incident response framework focused on
+ remote live forensics. It consists of an agent (client) that is
+ installed on target systems, and server infrastructure that can
+ manage and talk to the agent.
+ .
+ This package contains a download script that fetches compoments which
+ are used to build Linux, Windows, and MacOSX client installers are
+ built and which cannot currently be built from source on a Debian
+ system.

@@ -1,0 +1,24 @@
+Package: libcom-hypirion-io-clojure
+Source: com-hypirion-io-clojure
+Version: 0.3.1-3
+Architecture: all
+Maintainer: Debian Clojure Maintainers <pkg-clojure-maintainers@lists.alioth.debian.org>
+Installed-Size: 52
+Depends: libclojure-java | libclojure1.8-java
+Section: java
+Priority: optional
+Homepage: https://github.com/hyPiRion/com.hypirion.io
+Description: I/O redirection, signal handling, and console utilities
+ com-hypirion-io-clojure provides a set of features wrapped in Java classes:
+ .
+  *Pipe: Establish a link between InputStream and OutputStream, also supports
+   Reader and Writer.
+  *SignalInterceptor: Intercept POSIX signals before they are sent to their
+   signal handlers.
+  *RevivableInputStream: Allow canceling blocking read calls to streams
+   without closing them.
+  *ConsoleUtils: Set on/off echoing in the console.
+ .
+ Common usage of this library includes: asynchronous zipping of data from two
+ data sources, redirecting output and input to subprocesses and loggers, and
+ sending messages to threads.

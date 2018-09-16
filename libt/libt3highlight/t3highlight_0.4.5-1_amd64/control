@@ -1,0 +1,24 @@
+Package: t3highlight
+Source: libt3highlight
+Version: 0.4.5-1
+Architecture: amd64
+Maintainer: Gertjan Halkes <debian@ghalkes.nl>
+Installed-Size: 39
+Depends: libt3highlight2 (= 0.4.5-1), libc6 (>= 2.14), libt3config0
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://os.ghalkes.nl/t3/libt3highlight.html
+Description: Command-line syntax highligher
+ The libt3highlight library provides functions for syntax-highlighting different
+ types of text files. Its main design goal is an easily restartable syntax
+ highlighting, suitable for use in interactive text editors.
+ .
+ To make the syntax highlighting restartable, libt3highlight uses a single
+ integer start-of-line state. However, it does provide several advanced
+ features, such as dynamic end-of-state patterns, which make it possible to
+ highlight complex languages like Perl and Bash with high fidelity.
+ .
+ This package contains the t3highlight program, which allows applying the syntax
+ highlighting capabilities of libt3highlight on the command line to produce
+ for example HTML output.

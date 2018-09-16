@@ -1,0 +1,27 @@
+Package: libnetcdf-cxx-legacy-dev
+Source: netcdf-cxx-legacy
+Version: 4.2-11
+Architecture: amd64
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 253
+Depends: libnetcdf-c++4 (= 4.2-11), libnetcdf-dev
+Breaks: libnetcdf-dev (<< 1:4.3.3.1+ds-1~), netcdf-doc (<< 1:4.3.3.1+ds-1~)
+Replaces: libnetcdf-dev (<< 1:4.3.3.1+ds-1~), netcdf-doc (<< 1:4.3.3.1+ds-1~)
+Section: libdevel
+Priority: optional
+Homepage: http://www.unidata.ucar.edu/software/netcdf/
+Description: legacy NetCDF C++ interface - development files
+ NetCDF (network Common Data Form) is a set of interfaces for array-oriented
+ data access and a freely distributed collection of data access libraries for
+ C, Fortran, C++, Java, and other languages. The netCDF libraries support a
+ machine-independent format for representing scientific data. Together, the
+ interfaces, libraries, and format support the creation, access, and sharing of
+ scientific data.
+ .
+ This version of the netCDF C++ library is provided for backwards compatibility
+ as a separate package. It was developed before key C++ concepts like templates,
+ namespaces, and exceptions were widely supported. It's not recommended for new
+ projects, but it still works. This version of the C++ interface only supports
+ the "classic" data model from the netCDF-3 release.
+ .
+ This package contains headers for the legacy C++ library.

@@ -1,0 +1,21 @@
+Package: ceph-mon
+Source: ceph
+Version: 10.2.5-7.2
+Architecture: amd64
+Maintainer: Ceph Maintainers <ceph-maintainers@lists.ceph.com>
+Installed-Size: 10509
+Depends: ceph-base (= 10.2.5-7.2), python-flask, python:any (<< 2.8), python:any (>= 2.7.5-5~), libboost-iostreams1.62.0, libboost-random1.62.0, libboost-system1.62.0, libboost-thread1.62.0, libbz2-1.0, libc6 (>= 2.16), libgcc1 (>= 1:3.0), libgoogle-perftools4, libleveldb1v5, libnspr4 (>= 2:4.9-2~), libnss3 (>= 2:3.13.4-2~), libsnappy1v5, libstdc++6 (>= 6), zlib1g (>= 1:1.1.4)
+Breaks: ceph (<< 10.2.2-0ubuntu2~), ceph-common (<< 10)
+Replaces: ceph (<< 10.2.2-0ubuntu2~), ceph-common (<< 10)
+Section: admin
+Priority: optional
+Homepage: http://ceph.com/
+Description: monitor server for the ceph storage system
+ Ceph is a massively scalable, open-source, distributed
+ storage system that runs on commodity hardware and delivers object,
+ block and file system storage.
+ .
+ This package contains the cluster monitor daemon for the Ceph storage
+ system. One or more instances of ceph-mon form a Paxos part-time parliament
+ cluster that provides extremely reliable and durable storage of cluster
+ membership, configuration, and state.

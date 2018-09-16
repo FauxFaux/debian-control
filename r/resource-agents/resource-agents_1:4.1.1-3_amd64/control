@@ -1,0 +1,131 @@
+Package: resource-agents
+Version: 1:4.1.1-3
+Architecture: amd64
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Installed-Size: 2808
+Depends: libc6 (>= 2.4), libglib2.0-0 (>= 2.12.0), libnet1 (>= 1.1.2.1), libplumb2, libplumbgpl2, cluster-glue, gawk
+Recommends: libxml2-utils, net-tools
+Conflicts: cluster-agents (<= 1:1.0.4-1), resource-agents-dev (<< 1:3.9.6), rgmanager (<= 3.0.12-2+b1)
+Replaces: cluster-agents (<= 1:1.0.4-1), resource-agents-dev (<< 1:3.9.6), rgmanager (<= 3.0.12-2+b1)
+Provides: resource-agents-dev
+Section: admin
+Priority: optional
+Homepage: https://github.com/ClusterLabs/resource-agents
+Description: Cluster Resource Agents
+ This package contains cluster resource agents (RAs) compliant with the Open
+ Cluster Framework (OCF) specification, used to interface with various services
+ in a High Availability environment managed by the Pacemaker resource manager.
+ .
+ Agents included:
+  AoEtarget: Manages ATA-over-Ethernet (AoE) target exports
+  AudibleAlarm: Emits audible beeps at a configurable interval
+  CTDB: CTDB Resource Agent
+  ClusterMon: Runs crm_mon in the background, recording the cluster status to...
+  Delay: Waits for a defined timespan
+  Dummy: Example stateless resource agent
+  EvmsSCC: Manages EVMS Shared Cluster Containers (SCCs) (deprecated)
+  Evmsd: Controls clustered EVMS volume management
+  Filesystem: Manages filesystem mounts
+  ICP: Manages an ICP Vortex clustered host drive
+  IPaddr: Manages virtual IPv4 addresses (portable version)
+  IPaddr2: Manages virtual IPv4 and IPv6 addresses (Linux specific version)
+  IPsrcaddr: Manages the preferred source address for outgoing IP packets
+  IPv6addr: Manages IPv6 aliases
+  LVM: Controls the availability of an LVM Volume Group
+  LVM-activate: This agent activates/deactivates logical volumes.
+  LinuxSCSI: Enables and disables SCSI devices through the
+  MailTo: Notifies recipients by email in the event of resource takeover
+  ManageRAID: Manages RAID devices
+  ManageVE: Manages an OpenVZ Virtual Environment (VE)
+  NodeUtilization: Node Utilization
+  Pure-FTPd: Manages a Pure-FTPd FTP server instance
+  Raid1: Manages Linux software RAID (MD) devices on shared storage
+  Route: Manages network routes
+  SAPDatabase: Manages a SAP database instance as an HA resource.
+  SAPInstance: Manages a SAP instance as an HA resource.
+  SendArp: Broadcasts unsolicited ARP announcements
+  ServeRAID: Enables and disables shared ServeRAID merge groups
+  SphinxSearchDaemon: Manages the Sphinx search daemon.
+  Squid: Manages a Squid proxy server instance
+  Stateful: Example stateful resource agent
+  SysInfo: Records various node attributes in the CIB
+  VIPArip: Manages a virtual IP address through RIP2
+  VirtualDomain: Manages virtual domains through the libvirt virtualization f...
+  WAS: Manages a WebSphere Application Server instance
+  WAS6: Manages a WebSphere Application Server 6 instance
+  WinPopup: Sends an SMB notification message to selected hosts
+  Xen: Manages Xen unprivileged domains (DomUs)
+  Xinetd: Manages a service of Xinetd
+  ZFS: Manages ZFS pools
+  anything: Manages an arbitrary service
+  apache: Manages an Apache Web server instance
+  asterisk: Manages an Asterisk PBX
+  aws-vpc-move-ip: Move IP within a VPC of the AWS EC2
+  aws-vpc-route53: Update Route53 VPC record for AWS EC2
+  awseip: Amazon AWS Elastic IP Address Resource Agent
+  awsvip: Amazon AWS Secondary Private IP Address Resource Agent
+  azure-lb: Answers Azure Load Balancer health probe requests
+  clvm: clvmd
+  conntrackd: This resource agent manages conntrackd
+  db2: Resource Agent that manages an IBM DB2 LUW databases in Standard role ...
+  dhcpd: Chrooted ISC DHCP server resource agent.
+  dnsupdate: IP take-over via dynamic DNS update
+  docker: Docker container resource agent.
+  eDir88: Manages a Novell eDirectory directory server
+  ethmonitor: Monitors network interfaces
+  exportfs: Manages NFS exports
+  fio: fio IO load generator
+  galera: Manages a galara instance
+  garbd: Manages a galera arbitrator instance
+  iSCSILogicalUnit: Manages iSCSI Logical Units (LUs)
+  iSCSITarget: iSCSI target export agent
+  ids: Manages an Informix Dynamic Server (IDS) instance
+  iface-bridge: Manages Bridge network interfaces.
+  iface-vlan: Manages VLAN network interfaces.
+  ipsec: Handles IPSEC tunnels for VIPs
+  iscsi: Manages a local iSCSI initiator and its connections to iSCSI targets
+  jboss: Manages a JBoss application server instance
+  jira: JIRA OCF RA
+  kamailio: Resource agent for Kamailio
+  ldirectord: Wrapper OCF Resource Agent for ldirectord
+  lvmlockd: This agent manages the lvmlockd daemon
+  lxc: Manages LXC containers
+  lxd-info: Records various node attributes in the CIB
+  machine-info: Records various node attributes in the CIB
+  mariadb: Manages a MariaDB master/slave instance
+  minio: OCF Resource Agent compliant Minio server script.
+  mpathpersist: Manages SCSI persistent reservations on multipath devices
+  mysql: Manages a MySQL database instance
+  mysql-proxy: Manages a MySQL Proxy instance
+  nagios: Nagios resource agent
+  named: Manages a named server
+  nfsnotify: sm-notify reboot notifications
+  nfsserver: Manages an NFS server
+  nginx: Manages an Nginx web/proxy server instance
+  oraasm: Oracle ASM resource agent
+  oracle: Manages an Oracle Database instance
+  oralsnr: Manages an Oracle TNS listener
+  ovsmonitor: Monitors ovs bonding bonds
+  pgagent: Controls pgagent
+  pgsql: Manages a PostgreSQL database instance
+  pingd: Monitors connectivity to specific hosts or
+  portblock: Block and unblocks access to TCP and UDP ports
+  postfix: Manages a highly available Postfix mail server instance
+  pound: Manage a Pound instance
+  proftpd: OCF Resource Agent compliant FTP script.
+  rabbitmq-cluster: rabbitmq clustered
+  redis: Redis server
+  rkt: rkt container resource agent.
+  rsyncd: Manages an rsync daemon
+  rsyslog: rsyslog resource agent
+  scsi2reservation: scsi-2 reservation
+  sfex: Manages exclusive access to shared storage using Shared Disk File EXc...
+  sg_persist: Manages SCSI PERSISTENT RESERVATIONS
+  slapd: Manages a Stand-alone LDAP Daemon (slapd) instance
+  symlink: Manages a symbolic link
+  syslog-ng: Syslog-ng resource agent
+  tomcat: Manages a Tomcat servlet environment instance
+  varnish: Manage a Varnish instance
+  vmware: Manages VMWare Server 2.0 virtual machines
+  vsftpd: Manages an vsftpd
+  zabbixserver: Zabbix server resource agent

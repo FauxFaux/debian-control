@@ -1,0 +1,36 @@
+Package: seccure
+Source: seccure (0.5-1)
+Version: 0.5-1+b1
+Architecture: amd64
+Maintainer: Tomasz Buchert <tomasz@debian.org>
+Installed-Size: 501
+Depends: libc6 (>= 2.14), libgcrypt20 (>= 1.7.0)
+Section: utils
+Priority: optional
+Homepage: http://point-at-infinity.org/seccure/
+Description: tools for using algorithms based on elliptic curve cryptography (ECC)
+ The seccure toolset implements a selection of asymmetric algorithms
+ based on elliptic curve cryptography (ECC). In particular, it offers
+ public key encryption / decryption and signature generation /
+ verification. ECC schemes offer a much better key size to security
+ ratio than classical systems (RSA, DSA). Keys are short enough to make
+ direct specification of keys on the command line possible (sometimes
+ this is more convenient than the management of PGP-like key
+ rings). seccure builds on this feature and therefore is the tool of
+ choice whenever lightweight asymmetric cryptography -- independent of
+ key servers, revocation certificates, the Web of Trust, or even
+ configuration files -- is required.
+ .
+ The toolkit implements Diffie-Hellman key exchange, allowing you to agree a
+ key with another party over an insecure channel. The Diffie Helman protocol
+ affords forward secrecy, and requires no previous contact with the other
+ party.
+ .
+ The seccure toolset allows you to select the curve that the operations are
+ performed on, so that different cryptographic needs can be supported. This
+ is currently the only ECC package in Debian GNU/Linux to offer a choice of
+ curves and MAC lengths.
+ .
+ It is currently missing some of the functionality of the sks-ecc package,
+ including encrypting to multiple recipients at once, and creating different
+ signature formats.

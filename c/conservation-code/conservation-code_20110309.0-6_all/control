@@ -1,0 +1,37 @@
+Package: conservation-code
+Version: 20110309.0-6
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 113
+Depends: python:any (>= 2.7.5-5~), python-numpy
+Enhances: concavity
+Section: science
+Priority: optional
+Homepage: http://compbio.cs.princeton.edu/conservation/
+Description: protein sequence conservation scoring tool
+ This package provides score_conservation(1), a tool to score protein sequence
+ conservation.
+ .
+ The following conservation scoring methods are implemented:
+  * sum of pairs
+  * weighted sum of pairs
+  * Shannon entropy
+  * Shannon entropy with property groupings (Mirny and Shakhnovich 1995,
+    Valdar and Thornton 2001)
+  * relative entropy with property groupings (Williamson 1995)
+  * von Neumann entropy (Caffrey et al 2004)
+  * relative entropy (Samudrala and Wang 2006)
+  * Jensen-Shannon divergence (Capra and Singh 2007)
+ .
+ A window-based extension that incorporates the estimated conservation of
+ sequentially adjacent residues into the score for each column is also given.
+ This window approach can be applied to any of the conservation scoring
+ methods.
+ .
+ The program accepts alignments in the CLUSTAL and FASTA formats.
+ .
+ The sequence-specific output can be used as the conservation input for
+ concavity.
+ .
+ Conservation is highly predictive in identifying catalytic sites and
+ residues near bound ligands.

@@ -1,0 +1,17 @@
+Package: libnet-route-perl
+Version: 0.02-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 55
+Depends: perl, libipc-run3-perl, libmoose-perl, libnetaddr-ip-perl, libreadonly-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Net-Route
+Description: portable interface to the routing table
+ Every OS provides its custom interface to the routing table: Linux's
+ "route" utility is different from BSD's "route show", from Windows'
+ "route print", etc. Parsing all these different output styles in an
+ (otherwise portable) script can quickly become inconvenient.
+ .
+ Net::Route abstracts the system specifics and provides a single,
+ portable interface.

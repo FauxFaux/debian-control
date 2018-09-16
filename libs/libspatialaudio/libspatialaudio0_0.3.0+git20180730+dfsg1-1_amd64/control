@@ -1,0 +1,29 @@
+Package: libspatialaudio0
+Source: libspatialaudio
+Version: 0.3.0+git20180730+dfsg1-1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 100
+Depends: libc6 (>= 2.27), libgcc1 (>= 1:3.0), libmysofa0 (>= 0.6~), libstdc++6 (>= 5.2)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/nkoriyama/libspatialaudio
+Description: library for ambisonic encoding and decoding (runtime files)
+ libspatialaudio is an open-source and cross-platform C++ library for Ambisonic
+ encoding and decoding, filtering and binaural rendering. It is targeted to
+ render High-Order Ambisonic (HOA) and VR/3D audio samples in multiple
+ environments, from headphones to classic loudspeakers. Its binaural rendering
+ can be used for classical 5.1/7.1 spatial channels as well as Ambisonics
+ inputs.  It supports Higher Order Ambisonics (HOA) and ACN/SN3D Ambisonics
+ audio streams following the Google spatial audio specification and the IETF
+ codec Ambisonics specification.
+ .
+ The library allows you to encode, decode, rotate, zoom HOA Ambisonics audio
+ streams up to the 3rd order. It can output to standard and custom loudspeakers
+ arrays. To playback with headphones, the binauralizer applies an HRTF (either
+ a SOFA file or the included MIT HRTF) to provide a spatial binaural rendering
+ effect. The binauralization can also be used to render multichannels streams
+ (5.1, 7.1...).
+ .
+ This package contains the shared library.

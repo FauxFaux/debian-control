@@ -1,0 +1,18 @@
+Package: node-resolve-pkg
+Version: 0.2.0-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 16
+Depends: nodejs, node-resolve-from (>= 2.0.0)
+Section: web
+Priority: optional
+Homepage: https://github.com/sindresorhus/resolve-pkg#readme
+Description: Resolve the path of a package regardless of it having an entry point
+ Some packages like CLI tools and grunt tasks don't have a entry point, like
+ `"main": "foo.js"` in package.json, resulting in them not being resolvable by
+ `require.resolve()`. Unlike `require.resolve()`, this module also resolves
+ packages without an entry point, returns `null` instead of throwing when the
+ module can't be found, and resolves from `process.cwd()` instead `__dirname`
+ by default.
+ .
+ Node.js is an event-based server-side JavaScript engine.

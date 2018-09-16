@@ -1,0 +1,23 @@
+Package: python-gobject-2-dbg
+Source: pygobject-2 (2.28.6-13)
+Version: 2.28.6-13+b1
+Architecture: amd64
+Maintainer: Josselin Mouette <joss@debian.org>
+Installed-Size: 2983
+Depends: python-dbg (<< 2.8), python-dbg (>= 2.7), libc6 (>= 2.14), libffi6 (>= 3.0.4), libglib2.0-0 (>= 2.41.1), python-gobject-2 (= 2.28.6-13+b1)
+Breaks: python-gobject-dbg (<< 2.90)
+Replaces: python-gobject-dbg (<< 2.90)
+Section: debug
+Priority: extra
+Description: deprecated static Python bindings for the GObject library (debug extension)
+ GObject is an abstraction layer that allows programming with an object
+ paradigm that is compatible with many languages. It is a part of Glib,
+ the core library used to build GTK+ and GNOME.
+ .
+ This package contains the static Python bindings for gobject, glib, and gio.
+ These are deprecated by dynamic gobject-introspection bindings (which are
+ provided with the python-gobject package), and should not be used in newly
+ written code. These static bindings just exist to provide backwards
+ compatibility for GNOME 2 based software.
+ .
+ This package contains the extensions built for the Python debug interpreter.

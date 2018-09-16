@@ -1,0 +1,23 @@
+Package: python-nameparser
+Version: 0.5.6-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 82
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://github.com/derek73/python-nameparser
+Description: Python 2 module for parsing names into individual components
+ The HumanName class splits a name string up into name parts based on placement
+ in the string and matches against known name pieces like titles. It joins name
+ pieces on conjunctions and special prefixes to last names like "del". Titles
+ can be chained together and include conjunctions to handle titles like
+ "Asst Secretary of State". It can also try to correct capitalization of all
+ upper or lowercase names.
+ .
+ It attempts the best guess that can be made with a simple, rule-based approach.
+ Unicode is supported, but the parser is not likely to be useful for languages
+ that to not share the same structure as English names. It's not perfect, but it
+ gets you pretty far.
+ .
+ This package contains nameparser for Python 2.

@@ -1,0 +1,18 @@
+Package: ddtc
+Version: 0.17.2
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 165
+Depends: perl, libmime-tools-perl, libconfig-general-perl, libalgorithm-diff-perl (>= 1.13), libtext-iconv-perl
+Recommends: liblocale-gettext-perl, libterm-readline-gnu-perl
+Suggests: acheck
+Conflicts: ddts-script
+Section: text
+Priority: optional
+Description: Deal with ddts mails
+ ddtc stands for Debian Description Translation Client. It's a Perl script to
+ help both translators and reviewers to deal with ddts mails. It parses mails
+ from the ddts, splits them into individual package files, sends translations,
+ reviews and patches buggy translations.
+ .
+ Supports only package description (pdesc) for the moment.

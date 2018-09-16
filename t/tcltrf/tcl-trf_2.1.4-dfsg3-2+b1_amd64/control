@@ -1,0 +1,28 @@
+Package: tcl-trf
+Source: tcltrf (2.1.4-dfsg3-2)
+Version: 2.1.4-dfsg3-2+b1
+Architecture: amd64
+Maintainer: Sergei Golovan <sgolovan@debian.org>
+Installed-Size: 243
+Depends: libtcl, libbz2-1.0, libc6 (>= 2.14), libssl1.1 (>= 1.1.0), zlib1g (>= 1:1.1.4)
+Suggests: tcl-trf-doc
+Conflicts: libtrf-tcl
+Provides: libtrf-tcl
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://tcltrf.sourceforge.net/
+Description: Tcl data transformations - runtime library
+ Trf is an extension to Tcl which provides various data
+ transformations. The collection of provided transformation
+ procedures includes:
+  * generation of message digests (hash values, checksums): MD2,
+    MD5, SHA/SHS, SHA-1, HAVAL, RIPEMD-128, -160, CRC (polynomial
+    used by PGP), Adler (based upon zlib);
+  * conversion to and from various data encodings: uuencoding,
+    base64-encoding, or ASCII85-encoding, and binary, octal, or
+    hexadecimal representation;
+  * an error-correcting Reed-Solomon encoder/decoder;
+  * compression/decompression based on zlib and libbz2.
+ .
+ This package contains the runtime library to be used in Tcl programs.

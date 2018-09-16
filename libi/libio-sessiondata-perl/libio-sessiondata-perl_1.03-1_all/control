@@ -1,0 +1,22 @@
+Package: libio-sessiondata-perl
+Version: 1.03-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 46
+Depends: perl
+Breaks: libsoap-lite-perl (<< 0.716-1)
+Replaces: libsoap-lite-perl (<< 0.716-1)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/IO-SessionData
+Description: set of modules for non-blocking I/O
+ This package contains the modules IO::SessionData and IO::SessionSet which
+ deal with non-blocking I/O.
+ .
+ IO::SessionData is a wrapper around IO::Socket handling e.g. partial writes.
+ IO::SessionSet is similar to IO::Select. It handles multiple IO::SessionData
+ objects offers the ability to buffer partial writes.
+ .
+ For a detailed documentation, cf. the original author's book:
+  Lincoln D. Stein: Network Programming with Perl.
+  Addison-Wesley, 2001, pp. 371.

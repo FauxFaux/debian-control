@@ -1,0 +1,18 @@
+Package: libpoe-component-jobqueue-perl
+Version: 0.5710-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 42
+Depends: perl, libpoe-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/POE-Component-JobQueue
+Description: POE component to manage queues and worker pools
+ POE::Component::JobQueue manages a finite pool of worker sessions as they
+ handle an arbitrarily large number of tasks. It often is used as a form of
+ flow control, preventing a large group of tasks from exhausting some sort of
+ resource.
+ .
+ This module implements two kinds of queue: active and passive. Both types of
+ queues use a Worker coderef to spawn sessions that process jobs, but how they
+ use the Worker differs between them.

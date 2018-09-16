@@ -1,0 +1,27 @@
+Package: genisoimage
+Source: cdrkit (9:1.1.11-3)
+Version: 9:1.1.11-3+b2
+Architecture: amd64
+Maintainer: Joerg Jaspert <joerg@debian.org>
+Installed-Size: 1616
+Depends: libbz2-1.0, libc6 (>= 2.14), libmagic1 (>= 5.12), zlib1g (>= 1:1.1.4)
+Suggests: wodim, cdrkit-doc
+Conflicts: mkhybrid, mkisofs (<< 9:1.0)
+Replaces: mkisofs (<< 9:1.0)
+Section: otherosfs
+Priority: optional
+Description: Creates ISO-9660 CD-ROM filesystem images
+ genisoimage is a pre-mastering program for creating ISO-9660 CD-ROM
+ filesystem images, which can then be written to CD or DVD media using
+ the wodim program. genisoimage includes support for making bootable
+ "El Torito" CDs, as well as CDs with support for the
+ Macintosh HFS filesystem.
+ .
+ The package also includes extra tools useful for working with ISO images:
+  * mkzftree - create ISO-9660 image with compressed contents
+  * dirsplit - easily separate large directory contents into disks of
+    predefined size
+  * geteltorito - extract an El Torito boot image from a CD image
+ .
+ Please install cdrkit-doc if you want most of the documentation and
+ README files.

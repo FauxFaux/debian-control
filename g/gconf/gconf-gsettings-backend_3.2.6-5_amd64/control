@@ -1,0 +1,27 @@
+Package: gconf-gsettings-backend
+Source: gconf
+Version: 3.2.6-5
+Architecture: amd64
+Maintainer: Adrian Bunk <bunk@debian.org>
+Installed-Size: 395
+Depends: gconf-service, libc6 (>= 2.4), libgconf-2-4 (= 3.2.6-5), libglib2.0-0 (>= 2.37.3)
+Breaks: libgconf2-4 (<< 3.2)
+Replaces: libgconf2-4 (<< 3.2)
+Provides: gsettings-backend
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://projects.gnome.org/gconf/
+Description: GNOME configuration database system - GSettings back-end
+ GConf is a configuration database system for storing application
+ preferences.
+ .
+ This package contains a backend to enable applications that use the
+ newer GSettings framework to store their preferences to use GConf for
+ storing the actual values.
+ .
+ You will need to explicitly enable it through your environment with
+ GSETTINGS_BACKEND=gconf. It is strongly recommended to not use this
+ backend unless you really know what you’re doing.
+ .
+ This package is for legacy applications and no longer used by GNOME.

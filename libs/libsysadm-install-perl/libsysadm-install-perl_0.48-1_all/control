@@ -1,0 +1,18 @@
+Package: libsysadm-install-perl
+Version: 0.48-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 80
+Depends: libfile-which-perl, liblog-log4perl-perl, libterm-readkey-perl, libwww-perl, perl
+Suggests: libexpect-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Sysadm-Install
+Description: module for typical installation tasks of system administrators
+ Sysadm::Install executes shell-like commands performing typical
+ installation tasks: Copying files, extracting tarballs, calling make.
+ It has a fail once and die policy, meticulously checking the result
+ of every operation and calling die() immeditatly if anything fails.
+ .
+ Sysadm::Install also supports a dry_run mode, in which it
+ logs everything, but suppresses any write actions.

@@ -1,0 +1,21 @@
+Package: libhtml-encoding-perl
+Version: 0.61-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 57
+Depends: perl, libhtml-parser-perl, libwww-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/HTML-Encoding
+Description: perl module determining the encoding of HTML/XML/XHTML documents
+ HTML::Encoding helps to determine the encoding of HTML and XML/XHTML
+ documents. It can export the following functions:
+ .
+  encoding_from_content - Extracts charset from the Content-Type header value.
+  encoding_from_byte_order_mark - Read byte order mark from an octet sequence.
+  encoding_from_xml_declaration - Extract encoding XML or text declaration.
+  encoding_from_first_chars - Can be useful to distinguish UTF-16LE from UTF-8.
+  encoding_from_meta_element - Looks at <meta http-equiv=Content-Type.....>.
+  encoding_from_xml_document - A best guess from a list of suspected encodings.
+  encoding_from_html_document - A best guess from a list of suspected encodings.
+  encoding_from_http_message - Takes an HTTP::Message and returns the encoding.

@@ -1,0 +1,19 @@
+Package: python-audioread
+Source: audioread
+Version: 2.1.5-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 76
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Recommends: python-gst-1.0 | ffmpeg, python-pymad
+Section: python
+Priority: optional
+Homepage: https://github.com/sampsyo/audioread
+Description: Backend-agnostic audio decoding Python package
+ Decode audio files using whichever backend is available. The library
+ currently supports:
+ .
+  * GStreamer via gst-python.
+  * MAD via the pymad bindings.
+  * FFmpeg via the ffmpeg command-line interface.
+  * The standard library wave and aifc modules (for WAV and AIFF files).

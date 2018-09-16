@@ -1,0 +1,20 @@
+Package: namazu2
+Version: 2.0.21-21
+Architecture: amd64
+Maintainer: NOKUBI Takatsugu <knok@daionet.gr.jp>
+Installed-Size: 494
+Depends: libc6 (>= 2.14), libnmz7, namazu2-common, debconf (>= 0.5) | debconf-2.0
+Suggests: www-browser, apache, namazu2-index-tools, emacsen-common, tk
+Conflicts: namazu (<< 2.0), namazu-el, tknamazu
+Breaks: namazu2-index-tools (<< 2.0.21-16)
+Replaces: namazu (<< 2.0), namazu2-index-tools (<< 2.0.21-16)
+Provides: namazu
+Section: text
+Priority: optional
+Description: full text search engine - binary and CGI script
+ Namazu is a full text search engine which is usable via CGI. It features
+ a simple and easy setup, and is written in C and Perl. Namazu uses the
+ text utilities nkf, kakasi or chasen.
+ .
+ This package includes binary only for search index.
+ To create indexes, please install namazu2-index-tools package.

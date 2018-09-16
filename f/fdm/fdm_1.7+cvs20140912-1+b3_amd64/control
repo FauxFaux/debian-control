@@ -1,0 +1,24 @@
+Package: fdm
+Source: fdm (1.7+cvs20140912-1)
+Version: 1.7+cvs20140912-1+b3
+Architecture: amd64
+Maintainer: Frank Terbeck <ft@bewatermyfriend.org>
+Installed-Size: 355
+Depends: libc6 (>= 2.14), libpcre3, libssl1.1 (>= 1.1.0), libtdb1 (>= 1.2.7+git20101214), zlib1g (>= 1:1.1.4), adduser
+Section: mail
+Priority: optional
+Homepage: http://fdm.sf.net
+Description: fetching, filtering and delivering emails
+ fdm is a program to fetch mail and deliver it in various ways
+ depending on a user-supplied ruleset. Mail may be fetched from
+ stdin, IMAP or POP3 servers, or from local maildirs, and filtered
+ based on whether it matches a regexp, its size or age, or the output
+ of a shell command. It can be rewritten by an external process,
+ dropped, left on the server or delivered into maildirs, mboxes, to a
+ file or pipe, or any combination.
+ .
+ fdm is designed to be lightweight but powerful, with a compact but
+ clear configuration syntax. It is primarily designed for single-user
+ uses but may also be configured to deliver mail in a multi-user
+ setup. In this case, it uses privilege separation to minimise the
+ amount of code running as the root user.

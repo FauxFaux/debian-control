@@ -1,0 +1,15 @@
+Package: autolog
+Version: 0.40+debian-3
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 81
+Depends: libc6 (>= 2.14), cron (>= 3.0pl1-42), lsb-base (>= 3.0-6)
+Recommends: default-mta | mail-transport-agent
+Section: admin
+Priority: optional
+Homepage: http://www.ibiblio.org/pub/Linux/system/admin/idle/
+Description: Log out idle users
+ The  program reads the utmp file, entry by entry.  The username for each
+ 'user process' is compared to the entries in the configuration file.
+ The first entry to match both the name, the group, and the tty line
+ of the process will be used to conduct the automatic logout.

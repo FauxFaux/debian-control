@@ -1,0 +1,17 @@
+Package: libauthen-u2f-perl
+Version: 0.003-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 61
+Depends: perl, libcrypt-openssl-x509-perl (>= 1.8.6), libcryptx-perl, libexporter-tiny-perl, libjson-perl, libmath-random-secure-perl, libnamespace-autoclean-perl, libtry-tiny-perl, libtype-tiny-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Authen-U2F
+Description: pure Perl FIDO U2F server library
+ Authen::U2F provides the tools needed to add support for U2F in an application.
+ .
+ This module does not handle the wire encoding of U2F challenges and response,
+ as these are different depending on the U2F host you're using and the style of
+ your application. In the examples dir there are scripts that implement the 1.0
+ wire format, used by Yubico's libu2f-host, and a Plack application that works
+ with Google's JavaScript module.

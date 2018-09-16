@@ -1,0 +1,18 @@
+Package: libmodule-want-perl
+Version: 0.6-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 30
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Module-Want
+Description: module to check @INC only once for wanted modules
+ Sometimes you want to lazy load a module for use in, say, a loop or function.
+ First you do the eval-require but then realize if the module is not available
+ it will re-search @INC each time. So then you add a lexical boolean to your
+ eval and do the same simple logic all over the place.
+ .
+ Module::Want encapsulates that logic so that have_mod() is like eval {
+ require X; 1 } but if the module can't be loaded it will remember that fact
+ and not look in @INC again on subsequent calls.

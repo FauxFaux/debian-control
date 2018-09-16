@@ -1,0 +1,20 @@
+Package: libdist-zilla-plugin-checkbin-perl
+Version: 0.008-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: perl, libdevel-checkbin-perl, libdist-zilla-perl (>= 4.300039), libmoose-perl, libnamespace-autoclean-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Dist-Zilla-Plugin-CheckBin
+Description: Dist::Zilla plugin for checking presence of command at build time
+ Dist::Zilla::Plugin::CheckBin is a Dist::Zilla plugin that modifies
+ the Makefile.PL or Build.PL in a distribution to contain a
+ Devel::CheckBin call which asserts that a particular command is
+ available.  If it is not available, the program exits with a status
+ of zero, which on a CPAN Testers machine will result in a NA result.
+ .
+ This provides an alternative to Dist::Zilla::Plugin::RequiresExternal
+ which instead creates a unit test for the presence of a command and
+ so is interpreted as a package failure or bug instead of incorrectly
+ installed.

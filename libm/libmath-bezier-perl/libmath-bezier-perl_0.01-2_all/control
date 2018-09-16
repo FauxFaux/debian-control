@@ -1,0 +1,22 @@
+Package: libmath-bezier-perl
+Version: 0.01-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Math-Bezier/
+Description: Perl module for the solution of Bezier Curves
+ Math::Bezier implements the algorithm for the solution of Bezier curves as
+ presented by Robert D. Miller in Graphics Gems V, "Quick and Simple Bezier
+ Curve Drawing".
+ .
+ A new Bezier curve is created using the new() constructor, passing a list of
+ (x, y) control points.
+ .
+  use Math::Bezier;
+  my @control = ( 0, 0, 10, 20, 30, -20, 40, 0 );
+  my $bezier = Math::Bezier->new(@control);
+ .
+ Alternately, a reference to a list of control points may be passed.

@@ -1,0 +1,27 @@
+Package: reportbug-gtk
+Source: reportbug
+Version: 7.5.0
+Architecture: all
+Maintainer: Reportbug Maintainers <debian-reportbug@lists.debian.org>
+Installed-Size: 96
+Depends: reportbug (= 7.5.0), python3-gi, python3-gi-cairo, gir1.2-gtk-3.0, gir1.2-vte-2.91, python3-gtkspellcheck
+Section: utils
+Priority: standard
+Description: reports bugs in the Debian distribution (GTK+ UI)
+ reportbug is a tool designed to make the reporting of bugs in Debian
+ and derived distributions relatively painless.  Its features include:
+ .
+  * Integration with mutt and mh/nmh mail readers.
+  * Access to outstanding bug reports to make it easier to identify
+    whether problems have already been reported.
+  * Automatic checking for newer versions of packages.
+  * Optional automatic verification of integrity of packages via debsums.
+  * Support for following-up on outstanding reports.
+  * Optional PGP/GnuPG integration.
+ .
+ reportbug is designed to be used on systems with an installed mail
+ transport agent, like exim or sendmail; however, you can edit the
+ configuration file and send reports using any available mail server.
+ .
+ This package contains a desktop file and icon, and has dependencies
+ to enable the GTK+ UI mode of reportbug to work.

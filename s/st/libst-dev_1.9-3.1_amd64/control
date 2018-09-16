@@ -1,0 +1,24 @@
+Package: libst-dev
+Source: st
+Version: 1.9-3.1
+Architecture: amd64
+Maintainer: Wesley W. Terpstra (Debian) <terpstra@debian.org>
+Installed-Size: 322
+Depends: libst1 (= 1.9-3.1), libc6-dev
+Recommends: pkg-config
+Conflicts: sox (<= 12.17.2-1), sox-dev
+Section: libdevel
+Priority: optional
+Homepage: http://state-threads.sourceforge.net/
+Description: State Threads Library - Development files
+ The State Threads library has an interface similar to POSIX threads.
+ .
+ However, the threads are actually all run in-process. This type of
+ threading allows for controlled schedualing points. It is highly useful
+ for designing robust and extremely scalable internet applications since
+ there is no resource contention and locking is generally unnecessary.
+ .
+ It can be combined with traditional threading or multiple process
+ parallelism to take advantage of multiple processors.
+ .
+ This package contains the development files for compiling programs.

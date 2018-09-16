@@ -1,0 +1,30 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" -a -e /usr/share/debconf/confmodule ]; then
+    # Source debconf library.
+    . /usr/share/debconf/confmodule
+    # Remove my changes to the db.
+    db_purge
+    
+    # Remove files in /etc/codeaster/astkrc
+    rm -f /etc/codeaster/astkrc/config_serveurs
+    rm -f /etc/codeaster/astkrc/outils
+    rm -f /etc/codeaster/astkrc/prefs    
+    rm -f /etc/codeaster/astkrc/ASTKRC_INFO.txt
+    
+    find /etc/codeaster/astkrc  -type d -empty | xargs -r rmdir
+    find /etc/codeaster  -type d -empty | xargs -r rmdir
+fi
+
+# Automatically added by dh_installmenu/11.2.1
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.2.1
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

@@ -1,0 +1,19 @@
+Package: libjson-perl
+Version: 2.97001-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 219
+Depends: perl
+Recommends: libjson-xs-perl (>= 2.340)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/JSON
+Description: module for manipulating JSON-formatted data
+ JSON is a Perl module for manipulating data stored in the format of the same
+ name. JavaScript Object Notation (JSON) is a simple data serialization format
+ (defined in RFC 4627) that serves as an alternative to XML.
+ .
+ The primary purpose of this module is to select an appropriate backend JSON
+ implementation. It prefers either JSON::XS (see libjson-xs-perl) or JSON::PP
+ (see libjson-pp-perl), but will fall back on a backport implementation if
+ neither are available.

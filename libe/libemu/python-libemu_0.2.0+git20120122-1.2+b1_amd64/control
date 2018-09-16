@@ -1,0 +1,34 @@
+Package: python-libemu
+Source: libemu (0.2.0+git20120122-1.2)
+Version: 0.2.0+git20120122-1.2+b1
+Architecture: amd64
+Maintainer: David Martínez Moreno <ender@debian.org>
+Installed-Size: 24
+Depends: libc6 (>= 2.4), libemu2, python (<< 2.8), python (>= 2.7)
+Section: python
+Priority: extra
+Homepage: http://libemu.carnivore.it/
+Description: x86 shellcode detection and emulation - Python bindings
+ libemu is a small library written in C offering basic x86 emulation and
+ shellcode detection using GetPC heuristics.  Intended use is within network
+ intrusion/prevention detections and honeypots.
+ .
+ libemu supports:
+   * executing x86 instructions
+     * reading x86 binary code
+     * register emulation
+     * basic FPU emulation
+   * shellcode execution
+     * shellcode detection
+       * using GetPC heuristics
+       * static analysis
+       * and binary backwards traversal
+      * Win32 API hooking
+ .
+ Using libemu one can:
+   * detect shellcodes
+   * execute the shellcodes
+   * profile shellcode behaviour
+ .
+ This package has the Python bindings.
+Python-Version: 2.7

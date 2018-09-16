@@ -1,0 +1,24 @@
+Package: rdma-core
+Version: 20.0-1
+Architecture: amd64
+Maintainer: Benjamin Drung <benjamin.drung@profitbricks.com>
+Installed-Size: 198
+Depends: lsb-base (>= 3.2-14~), udev, perl:any, libc6 (>= 2.16), libnl-3-200 (>= 3.2.7), libsystemd0, libudev1 (>= 183)
+Recommends: dmidecode, ethtool, iproute2
+Breaks: infiniband-diags (<< 2.0.0)
+Replaces: infiniband-diags (<< 2.0.0)
+Section: net
+Priority: optional
+Homepage: https://github.com/linux-rdma/rdma-core
+Description: RDMA core userspace infrastructure and documentation
+ This package provides the basic boot time support for systems that use the
+ Linux kernel's remote direct memory access (RDMA) subystem which includes
+ InfiniBand, iWARP, and RDMA over Converged Ethernet (RoCE).
+ .
+ Several kernel RDMA support daemons are included:
+  - The rdma-ndd daemon which watches for RDMA device changes and/or hostname
+    changes and updates the Node Description of the RDMA devices based on
+    those changes.
+  - The iWARP Port Mapper Daemon (iwpmd) which provides a kernel support
+    service in userspace for iWARP drivers to claim TCP ports through the
+    standard socket interface.

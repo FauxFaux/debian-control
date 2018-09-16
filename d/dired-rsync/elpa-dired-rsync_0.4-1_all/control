@@ -1,0 +1,18 @@
+Package: elpa-dired-rsync
+Source: dired-rsync
+Version: 0.4-1
+Architecture: all
+Maintainer: Debian Emacsen team <debian-emacsen@lists.debian.org>
+Installed-Size: 36
+Depends: elpa-s (>= 1.12.0), elpa-dash (>= 2.0.0), emacsen-common, rsync
+Recommends: emacs (>= 46.0)
+Enhances: emacs, emacs25
+Section: lisp
+Priority: optional
+Homepage: https://github.com/stsquad/dired-rsync
+Description: support for rsync from Emacs dired buffers
+ This package adds a single command dired-rsync which allows the user
+ to copy marked files in a dired buffer via rsync. This is useful,
+ especially for large files, because the copy happens in the
+ background and doesn’t lock up Emacs. It is also more efficient than
+ using TRAMP's own encoding methods for moving data between systems.

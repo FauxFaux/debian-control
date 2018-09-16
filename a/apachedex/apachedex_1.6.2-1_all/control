@@ -1,0 +1,31 @@
+Package: apachedex
+Version: 1.6.2-1
+Architecture: all
+Maintainer: Arnaud Fontaine <arnau@debian.org>
+Installed-Size: 149
+Depends: python (>= 2.7), python (<< 2.8), libjs-jquery, libjs-jquery-ui (>= 1.10), libjs-jquery-flot
+Section: python
+Priority: optional
+Homepage: http://git.erp5.org/gitweb/apachedex.git
+Description: Compute APDEX from Apache-style logs
+ APacheDEX parses Apache-style logs and generates several statistics
+ intended for a website developer audience:
+ .
+   * APDEX (Application Performance inDEX, see http://www.apdex.org) ratio
+     (plotted) because you want to know how satisfied your users are.
+ .
+   * hit count (plotted) because achieving 100% APDEX is easy when there
+     is nobody around.
+ .
+   * HTTP status codes, with optional detailed output of the most frequent
+     URLs per error status code, along with their most frequent referers
+     because your forgot to update a link to that conditionally-used
+     browser compatibility javascript you renamed.
+ .
+   * Hottest pages (pages which use rendering time the most) because you
+     want to know where to invest time to get highest user experience
+     improvement.
+ .
+   * ERP5 sites: per-module statistics, with module and document views
+     separated because module and document types are not born equal in
+     usage patterns.

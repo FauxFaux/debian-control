@@ -1,0 +1,24 @@
+Package: flashproxy-facilitator
+Source: flashproxy
+Version: 1.7-4
+Architecture: all
+Maintainer: Ximin Luo <infinity0@pwned.gg>
+Installed-Size: 130
+Depends: python, python:any (>= 2.7~), flashproxy-common (= 1.7-4), openssl, adduser
+Recommends: httpd-cgi | apache2
+Suggests: flashproxy-proxy
+Section: net
+Priority: extra
+Homepage: https://crypto.stanford.edu/flashproxy/
+Description: Pluggable transport to circumvent IP address blocking - facilitator
+ Flashproxy is a tool to circumvent censorship by setting up many, generally
+ ephemeral, browser-based proxies, with the goal of outpacing a censor's
+ ability to enumerate and block the IP addresses of those proxies. Censored
+ clients can then connect to a Tor relay via these proxies, by using a
+ hard-to-block, low-bandwidth registration system called the facilitator.
+ .
+ This package contains the facilitator that accepts registrations (requests
+ for service) from clients, and serves them with a browser proxy that provides
+ access to a Tor relay.
+ .
+ Most end-users do not need to install this package.

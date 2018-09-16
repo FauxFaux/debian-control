@@ -1,0 +1,20 @@
+Package: nvidia-legacy-304xx-opencl-icd
+Source: nvidia-graphics-drivers-legacy-304xx
+Version: 304.137-5
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 8818
+Depends: nvidia-opencl-common, ocl-icd-libopencl1 | nvidia-libopencl1 | libopencl1, nvidia-legacy-304xx-alternative (= 304.137-5), libnvidia-legacy-304xx-cuda1 (= 304.137-5), libnvidia-legacy-304xx-compiler (= 304.137-5), libc6 (>= 2.2.5), zlib1g (>= 1:1.1.4)
+Enhances: libopencl1
+Provides: opencl-icd
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: NVIDIA OpenCL installable client driver (ICD) (304xx legacy version)
+ OpenCL (Open Computing Language) is a multivendor open standard for
+ general-purpose parallel programming of heterogeneous systems that include
+ CPUs, GPUs and other processors.
+ .
+ This package provides the NVIDIA installable client driver (ICD) for OpenCL
+ which supports NVIDIA GPUs. This ICD supports OpenCL 1.x only.

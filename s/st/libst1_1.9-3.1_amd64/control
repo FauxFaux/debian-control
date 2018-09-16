@@ -1,0 +1,22 @@
+Package: libst1
+Source: st
+Version: 1.9-3.1
+Architecture: amd64
+Maintainer: Wesley W. Terpstra (Debian) <terpstra@debian.org>
+Installed-Size: 78
+Depends: libc6 (>= 2.15)
+Section: libs
+Priority: optional
+Homepage: http://state-threads.sourceforge.net/
+Description: State Threads Library
+ The State Threads library has an interface similar to POSIX threads.
+ .
+ However, the threads are actually all run in-process. This type of
+ threading allows for controlled schedualing points. It is highly useful
+ for designing robust and extremely scalable internet applications since
+ there is no resource contention and locking is generally unnecessary.
+ .
+ It can be combined with traditional threading or multiple process
+ parallelism to take advantage of multiple processors.
+ .
+ This package provides the library required by dependent programs.

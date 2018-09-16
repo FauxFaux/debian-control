@@ -1,0 +1,20 @@
+Package: mimefilter
+Version: 1.7+nmu2
+Architecture: all
+Maintainer: Davide G. M. Salvetti <salve@debian.org>
+Installed-Size: 67
+Depends: perl, libmailtools-perl, libmime-tools-perl
+Suggests: smartlist
+Section: mail
+Priority: optional
+Description: Strips some unwanted MIME parts out of a MIME message.
+ This program may be useful as a filter on a mailing list.
+ .
+ It strips every unwanted MIME part from a MIME compliant message, warning by
+ email the original author about this, and outputs a MIME compliant cleaned
+ message, to be further processed by a mailing list software.
+ .
+ You may find it useful if you don't want certain attachments on your mailing
+ lists, or if you want to allow just the text part from multipart/alternative
+ messages, and so on.  You can easily fine tune the list of allowed MIME types
+ to suit your particular needs, using normal Perl regexps.

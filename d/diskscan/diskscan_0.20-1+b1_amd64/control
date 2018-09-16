@@ -1,0 +1,30 @@
+Package: diskscan
+Source: diskscan (0.20-1)
+Version: 0.20-1+b1
+Architecture: amd64
+Maintainer: Kyle Robbertze <krobbertze@gmail.com>
+Installed-Size: 114
+Depends: libc6 (>= 2.14), libtinfo6 (>= 6), zlib1g (>= 1:1.2.0)
+Enhances: f3
+Section: utils
+Priority: optional
+Homepage: https://github.com/baruch/diskscan
+Description: scan storage media for bad or near failure sectors
+ diskscan is intended to find sectors of a storage medium
+ (hard disk, flash drive or pendrive, etc.) which are bad
+ or in the process of going bad.
+ .
+ The operation is entirely read-only and does not cause
+ damage to the data on filesystems. As the program reads
+ block device sectors, it will work whether there is a
+ filesystem or not.
+ .
+ diskscan reads the entire block device and notes the time
+ it took to read a block. When there is an error it is
+ immediately noted and also when there is a higher latency
+ to read a block. A histogram of the block latency times is
+ also given to assess the health of the medium.
+ .
+ diskscan can also be used to test the speed and quality of
+ the medium. All sectors of a perfect medium could be read
+ at the same speed.

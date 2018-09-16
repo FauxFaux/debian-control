@@ -1,0 +1,33 @@
+Package: libdbix-fulltextsearch-perl
+Version: 0.73-12
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 128
+Depends: perl, libparse-recdescent-perl, libdbd-mysql-perl, libwww-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/DBIx-FullTextSearch
+Description: Indexing documents with MySQL as storage
+ DBIx::FullTextSearch is a flexible solution for indexing contents of documents.
+ It uses the MySQL database to store the information about words and
+ documents and provides Perl interface for indexing new documents,
+ making changes and searching for matches.  For DBIx::FullTextSearch, a document
+ is nearly anything -- Perl scalar, file, Web document, database field.
+ .
+ The basic style of interface is shown above. What you need is a MySQL
+ database and a DBI with DBD::mysql. Then you create a DBIx::FullTextSearch
+ index  -- a set of tables that maintain all necessary information. Once created
+ it can be accessed many times, either for updating the index (adding
+ documents) or searching.
+ .
+ DBIx::FullTextSearch uses one basic table to store parameters of the index.
+ Second table is used to store the actual information about documents and words,
+ and depending on the type of the index (specified during index creation)
+ there may be more tables to store additional information (like
+ conversion from external string names (eg. URL's) to internal numeric
+ form). For a user, these internal thingies and internal behaviour of the
+ index are not important. The important part is the API, the methods to
+ index document and ask questions about words in documents. However,
+ certain understanding of how it all works may be useful when you are
+ deciding if this module is for you and what type of index will best
+ suit your needs.

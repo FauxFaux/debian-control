@@ -1,0 +1,18 @@
+Package: ecm
+Source: cmdpack (1.03-1)
+Version: 1.03-1+b1
+Architecture: amd64
+Maintainer: Bart Martens <bartm@debian.org>
+Installed-Size: 40
+Depends: libc6 (>= 2.14)
+Section: utils
+Priority: optional
+Homepage: http://www.neillcorlett.com/ecm/
+Description: prepares CD image files so they compress better
+ The ECM format allows you to reduce the size of a typical CD image file
+ (BIN, CDI, NRG, CCD, or any other format that uses raw sectors).
+ It works by eliminating the Error Correction/Detection Codes (ECC/EDC) from
+ each sector whenever possible. The encoder automatically adjusts to
+ different sector types and automatically skips any headers it encounters.
+ Since the data skipped is nearly impossible to compress with traditional
+ tools, the resulting ECM file will compress far better than the raw CD image.

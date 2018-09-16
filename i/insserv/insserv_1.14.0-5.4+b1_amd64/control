@@ -1,0 +1,22 @@
+Package: insserv
+Source: insserv (1.14.0-5.4)
+Version: 1.14.0-5.4+b1
+Architecture: amd64
+Maintainer: Petter Reinholdtsen <pere@debian.org>
+Installed-Size: 140
+Depends: libc6 (>= 2.14)
+Suggests: bootchart2
+Breaks: sysv-rc (<< 2.87dsf-3)
+Section: misc
+Priority: optional
+Homepage: http://savannah.nongnu.org/projects/sysvinit
+Description: boot sequence organizer using LSB init.d script dependency information
+ The insserv program is used by the standard SysV-based init system. It
+ updates the order of symlinks in /etc/rc?.d/ based on dependencies
+ specified by LSB headers in the init.d scripts themselves.
+ .
+ These declared relations between scripts make it possible to optimize
+ the boot sequence for the currently installed set of packages, while
+ detecting and rejecting dependency loops.
+ .
+ Using insserv incorrectly can result in an unbootable system.

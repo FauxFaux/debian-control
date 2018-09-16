@@ -1,0 +1,24 @@
+Package: circle-backend
+Source: libcircle-be-perl
+Version: 0.173320-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 230
+Depends: perl, libattribute-storage-perl (>= 0.09), libclass-method-modifiers-perl, libdata-dump-perl, libfile-sharedir-perl (>= 1.00), libio-async-perl (>= 0.64), libmodule-pluggable-perl (>= 4.1), libnet-async-irc-perl (>= 0.10), libnet-async-tangence-perl (>= 0.13), libstring-tagged-perl (>= 0.11), libstruct-dumb-perl, libtangence-perl (>= 0.20), libyaml-perl
+Provides: libcircle-be-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/circle-be
+Description: server backend for the Circle IRC client
+ Circle is an IRC client which merges the best attributes of a local
+ client and the common screen+irssi recipe:
+ .
+  * Keep IRC connects and state on a backend server, allowing
+    disconnections from local UI.
+  * Interact with a real local GUI for the frontend, instead of
+    incurring SSH roundtrips for every keypress.
+ .
+ Circle uses Tangence for its underlying communications layer.
+ .
+ This package is meant to be used together with a package providing
+ a user-facing frontend, e.g. circle-term or circle-gtk.

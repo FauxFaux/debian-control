@@ -1,0 +1,18 @@
+Package: libgssglue1
+Source: libgssglue (0.4-2)
+Version: 0.4-2+b2
+Architecture: amd64
+Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
+Installed-Size: 66
+Depends: libc6 (>= 2.14)
+Conflicts: libgssapi2 (<= 0.11-1)
+Replaces: libgssapi2 (<= 0.11-1)
+Section: libs
+Priority: standard
+Multi-Arch: same
+Homepage: http://www.citi.umich.edu/projects/nfsv4/linux/
+Description: mechanism-switch gssapi library
+ libgssglue provides a gssapi interface, but does not implement any
+ gssapi mechanisms itself; instead it calls other gssapi functions
+ (e.g., those provided by MIT Kerberos), depending on the requested
+ mechanism, to do the work.

@@ -1,0 +1,23 @@
+Package: libhamlib2-perl
+Source: hamlib
+Version: 3.2-2
+Architecture: amd64
+Maintainer: Debian Hamradio Maintainers <debian-hams@lists.debian.org>
+Installed-Size: 1167
+Depends: libc6 (>= 2.14), libhamlib2, perl (>= 5.26.2-7), perlapi-5.26.2
+Conflicts: hamlib3-perl, hamlib4-perl
+Provides: hamlib4-perl
+Section: perl
+Priority: optional
+Homepage: https://sourceforge.net/projects/hamlib/
+Description: Run-time perl library to control radio transceivers and receivers
+ Most recent amateur radio transceivers allow external control of their
+ functions through a computer interface. Unfortunately, control commands are
+ not always consistent across a manufacturer's product line and each
+ manufacturer's product line differs greatly from its competitors.
+ .
+ This library addresses that issue by providing a standardised programming
+ interface that applications can talk to and translating that into the
+ appropriate commands required by the radio in use.
+ .
+ This package provides the perl bindings of the library.

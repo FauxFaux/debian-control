@@ -1,0 +1,20 @@
+Package: libdist-zilla-plugin-modulebuildtiny-fallback-perl
+Version: 0.025-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 40
+Depends: perl, libdist-zilla-perl, libdist-zilla-plugin-modulebuildtiny-perl, libmoose-perl, libmoosex-types-perl, libnamespace-autoclean-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Dist-Zilla-Plugin-ModuleBuildTiny-Fallback
+Description: Dist::Zilla plugin that generates a Build.PL with fallback on Module::Build
+ Dist::Zilla::Plugin::ModuleBuildTiny::Fallback is a Dist::Zilla
+ plugin that provides a Build.PL in your distribution that attempts to
+ use Module::Build::Tiny when available, falling back to Module::Build
+ when it is missing and printing a warning about it.
+ .
+ This is useful when your distribution is installing on an older perl
+ (before approximately 5.10.1) with a toolchain that has not been
+ updated, where configure_requires metadata is not understood and
+ respected -- or where Build.PL is being run manually without the user
+ having read and understood the contents of META.yml or META.json.

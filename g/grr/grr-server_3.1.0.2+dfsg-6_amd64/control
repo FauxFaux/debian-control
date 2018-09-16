@@ -1,0 +1,17 @@
+Package: grr-server
+Source: grr
+Version: 3.1.0.2+dfsg-6
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 51890
+Depends: python (<< 2.8), python (>= 2.7~), python-binplist, python-crontab, python-crypto (>= 2.6.1), python-dateutil, python-django, python-googleapi, python-ipaddr, python-ipython, python-mock, python-mox, python-oauth2client, python-pexpect, python-pip, python-portpicker, python-pretty-yaml, python-protobuf, python-psutil, python-rekall-core, python-selenium, python-tsk, python-tz, python-urllib3, python-werkzeug, python-wheel, python-yaml, python:any (<< 2.8), python:any (>= 2.7.5-5~), debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.4), python-m2crypto, python-wsgiref, python-artifacts (>= 20170806), python-fusepy, python-mysqldb, rpm, debhelper, fakeroot, fonts-font-awesome, libjs-bootstrap, adduser, debconf (>= 0.2.26)
+Suggests: grr-client-templates-installer | grr-client-templates
+Breaks: grr-client-templates (<< 3.1.0.2-2~), grr-client-templates-installer (<< 3.1.0.2+dfsg-5~)
+Section: utils
+Priority: extra
+Homepage: https://github.com/google/grr
+Description: incident response framework - server
+ GRR Rapid Response is an incident response framework focused on
+ remote live forensics. It consists of an agent (client) that is
+ installed on target systems, and server infrastructure that can
+ manage and talk to the agent.

@@ -1,0 +1,37 @@
+Package: libwiretap8
+Source: wireshark
+Version: 2.6.3-1
+Architecture: amd64
+Maintainer: Balint Reczey <rbalint@ubuntu.com>
+Installed-Size: 558
+Depends: libc6 (>= 2.14), libglib2.0-0 (>= 2.22.0), libwsutil9 (>= 2.5.0), zlib1g (>= 1:1.2.2.4)
+Conflicts: wireshark-common (<< 1.4.0~rc2-1)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.wireshark.org/
+Description: network packet capture library -- shared library
+ Wiretap, part of the Wireshark project, is a library that allows one to
+ read and write several packet capture file formats.
+ .
+ Supported formats are:
+  * Libpcap
+  * Sniffer
+  * LANalyzer
+  * Network Monitor
+  * "snoop"
+  * "iptrace"
+  * Sniffer Basic (NetXRay)/Windows Sniffer Pro
+  * RADCOM WAN/LAN Analyzers
+  * Lucent/Ascend access products
+  * HP-UX nettl
+  * Toshiba ISDN Router
+  * ISDN4BSD "i4btrace" utility
+  * Cisco Secure Intrusion Detection System iplogging facility
+  * pppd logs (pppdump-format files)
+  * VMS TCPTRACE
+  * DBS Etherwatch (text format)
+  * Catapult DCT2000 (.out files)
+ .
+ Wiretap's shortcomings are: no filter capability and no support for packet
+ capture.

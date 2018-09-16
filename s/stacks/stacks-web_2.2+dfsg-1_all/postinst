@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+
+
+if [ "$1" = configure ] ; then
+    #Lintain complains about this, but I do not know what is actually expected
+    #Manpage of a2enconf says that "a2enconf -m" is correct.
+    # a2enconf -m stacks-web
+
+    if [ -e /usr/share/apache2/apache2-maintscript-helper ]
+    then
+        . /usr/share/apache2/apache2-maintscript-helper
+        apache2_invoke enconf stacks-web || exit
+    fi
+
+    # Also sort out perms for export dir
+    chown 'root:www-data' /var/lib/stacks/export
+    chmod 770 /var/lib/stacks/export
+fi

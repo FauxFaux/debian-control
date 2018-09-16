@@ -1,0 +1,24 @@
+Package: bladerf-fpga-hostedx115
+Source: bladerf
+Version: 0.2017.12~rc1-2
+Architecture: amd64
+Maintainer: A. Maitland Bottoms <bottoms@debian.org>
+Installed-Size: 38
+Depends: ca-certificates, libbladerf1, wget
+Recommends: bladerf
+Suggests: bladerf-firmware
+Provides: bladerf-fpga
+Section: contrib/comm
+Priority: optional
+Homepage: http://www.nuand.com/bladeRF
+Description: nuand bladeRF FPGA bitstream downloader (hostedx115)
+ This empty package will, at the time of installation, download an appropriate
+ FPGA bitstream for using the nuand bladeRF in a hosted (USB-controlled)
+ configuration.  The FPGA bitstream will be downloaded from
+ http://nuand.com/fpga/ and saved to /usr/share/Nuand/bladeRF.
+ .
+ This bitstream is for the bladeRF x115 with the Altera Cyclone IV
+ EP4CE115 FPGA.
+ .
+ Note that this will not upgrade the bladeRF itself.  That can be done
+ with the bladeRF-cli utility.

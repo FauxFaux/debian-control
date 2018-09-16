@@ -1,0 +1,21 @@
+Package: libcatalyst-dispatchtype-regex-perl
+Version: 5.90035-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 43
+Depends: perl, libcatalyst-perl (>= 5.90060), libmoose-perl, libtext-simpletable-perl
+Breaks: libcatalyst-perl (<< 5.90030-1)
+Replaces: libcatalyst-perl (<< 5.90030-1)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-DispatchType-Regex
+Description: Regex DispatchType for Catalyst
+ Catalyst::DispatchType::Regex has been deprecated and removed from Catalyst
+ core. If your application depends on regex dispatch, you can install this
+ package to keep things working while migrating to Chained methods or other
+ techniques.
+ .
+ Please note that as part of the refactoring, the dispatch priority of
+ Regex vs Regexp vs LocalRegex vs LocalRegexp may have changed. Priority
+ is now influenced by when the dispatch type is first seen in your
+ application.

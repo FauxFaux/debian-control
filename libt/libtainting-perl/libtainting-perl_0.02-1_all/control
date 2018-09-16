@@ -1,0 +1,17 @@
+Package: libtainting-perl
+Version: 0.02-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 18
+Depends: perl, libtaint-runtime-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/tainting
+Description: Perl pragma to enable taint mode lexically
+ tainting provides a simpler interface to Taint::Runtime. The idea is so that
+ there is no functions or variables to import. Just use or no, like warnings
+ or strict. Tainting of %ENV will be done one time automatically the first
+ time this module is used.
+ .
+ Please (PLEASE) read Taint::Runtime's documentation first about the pro's and
+ con's of enabling/disabling tainting at runtime. Use -T if you can.

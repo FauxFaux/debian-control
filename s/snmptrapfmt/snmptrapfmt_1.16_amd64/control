@@ -1,0 +1,16 @@
+Package: snmptrapfmt
+Version: 1.16
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 64
+Depends: snmpd, libc6 (>= 2.15), libsnmp30 (>= 5.7.3+dfsg-1.8~dfsg)
+Section: net
+Priority: optional
+Homepage: https://alioth.debian.org/projects/snmptrapfmt/
+Description: configurable snmp trap handler daemon for snmpd
+ This package contains a configurable snmp trap handler daemon for snmpd.
+ The output of this trap handler daemon may be specified via a configuration
+ file and written to a logfile or to the syslog daemon. During installation
+ of this package, the configuration file for the snmptrapd daemon is changed
+ (old version is saved) to activate the trap handler. The snmpd and snmptrapd
+ daemons are restarted.

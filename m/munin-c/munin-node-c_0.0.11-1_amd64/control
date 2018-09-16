@@ -1,0 +1,21 @@
+Package: munin-node-c
+Source: munin-c
+Version: 0.0.11-1
+Architecture: amd64
+Maintainer: Matthias Schmitz <matthias@sigxcpu.org>
+Installed-Size: 38
+Depends: openbsd-inetd | inet-superserver, update-inetd, libc6 (>= 2.15)
+Recommends: munin-plugins-c
+Conflicts: munin-node
+Section: net
+Priority: optional
+Homepage: https://github.com/munin-monitoring/munin-c/
+Description: C rewrite of Munin node
+ Munin is a highly flexible and powerful solution used to create graphs of
+ virtually everything imaginable throughout your network, while still
+ maintaining a rattling ease of installation and configuration.
+ .
+ This package contains a C rewrite of the daemon for the nodes being monitored.
+ .
+ The purpose for rewriting the daemon is the reduced resource usage specially
+ when paired with the C rewrite of the core plugins.

@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit/11.1.4
+if [ -x "/etc/init.d/inputlirc" ] && [ "$1" = remove ]; then
+	invoke-rc.d inputlirc stop || exit 1
+fi
+# End automatically added section

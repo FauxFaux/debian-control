@@ -1,0 +1,19 @@
+Package: pamu2fcfg
+Source: pam-u2f
+Version: 1.0.7-1
+Architecture: amd64
+Maintainer: Debian Authentication Maintainers <team+auth@tracker.debian.org>
+Installed-Size: 50
+Depends: libc6 (>= 2.14), libpam0g (>= 0.99.7.1), libu2f-host0 (>= 0.0), libu2f-server0 (>= 0.0.0)
+Breaks: libpam-u2f (<< 1.0.4-0.2)
+Section: admin
+Priority: optional
+Homepage: https://developers.yubico.com/pam-u2f/
+Description: universal 2nd factor (U2F) PAM module command-line helper tool
+ Universal 2nd Factor (U2F) is an authentication mechanism that strengthen
+ other authentications, and through this PAM module it can be used to
+ require a U2F device in order to authenticate.
+ .
+ This package contains the command-line tool pamu2fcfg which is used
+ to generate the information needed by libpam-u2f to perform an U2F
+ authentication.

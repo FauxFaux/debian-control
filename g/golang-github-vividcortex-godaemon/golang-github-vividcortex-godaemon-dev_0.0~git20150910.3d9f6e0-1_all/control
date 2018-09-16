@@ -1,0 +1,17 @@
+Package: golang-github-vividcortex-godaemon-dev
+Source: golang-github-vividcortex-godaemon
+Version: 0.0~git20150910.3d9f6e0-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 35
+Section: devel
+Priority: optional
+Homepage: https://github.com/VividCortex/godaemon
+Description: Daemonize Go applications deviously
+ Daemonize Go applications with exec() instead of fork().
+ .
+ You can't daemonize the usual way in Go. Daemonizing is a Unix concept
+ that requires some specific things (http://goo.gl/vTUsVy) you can't do
+ easily in Go. But you can still accomplish the same goals if you don't
+ mind that your program will start copies of itself several times, as
+ opposed to using fork() the way many programmers are accustomed to doing.

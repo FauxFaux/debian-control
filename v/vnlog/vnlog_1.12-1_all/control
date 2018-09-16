@@ -1,0 +1,23 @@
+Package: vnlog
+Version: 1.12-1
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 176
+Depends: libvnlog-perl (= 1.12-1), perl:any, mawk, libtext-table-perl, liblist-moreutils-perl
+Section: libdevel
+Priority: optional
+Homepage: https://github.com/dkogan/vnlog/
+Description: Toolkit to read/write/manipulate whitespace-separated ASCII logs
+ Vnlog (pronounced "vanillog") is a trivially-simple log format consisting of an
+ ASCII table with comments and labelled fields. This package provides tools to
+ process and manipulate such logs. The tools are:
+ .
+ vnl-filter selects a subset of the rows/columns in a vnlog and/or to
+ manipulates the contents. This is effectively an awk wrapper.
+ .
+ vnl-sort, vnl-join and vnl-tail are wrappers around the corresponding GNU
+ Coreutils tools
+ .
+ vnl-align aligns vnlog columns for easy interpretation by humans
+ .
+ vnl-make-matrix converts a one-point-per-line vnlog to a matrix of data

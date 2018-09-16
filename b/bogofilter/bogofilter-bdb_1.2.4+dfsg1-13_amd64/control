@@ -1,0 +1,24 @@
+Package: bogofilter-bdb
+Source: bogofilter
+Version: 1.2.4+dfsg1-13
+Architecture: amd64
+Maintainer: Adrian Bunk <bunk@debian.org>
+Installed-Size: 680
+Depends: bogofilter-common (= 1.2.4+dfsg1-13), libc6 (>= 2.14), libdb5.3, libgsl23, libgslcblas0
+Suggests: db5.3-util
+Replaces: bogofilter (<< 0.94.14-1)
+Provides: bogofilter-db
+Section: mail
+Priority: optional
+Homepage: http://bogofilter.sourceforge.net/
+Description: fast Bayesian spam filter (Berkeley DB)
+ This package implements a fast Bayesian spam filter along the lines suggested
+ by Paul Graham in his article "A Plan For Spam".
+ .
+ This version substantially improves on Paul's proposal by doing smarter
+ lexical analysis.  In particular, hostnames and IP addresses are retained
+ as recognition features rather than broken up. Various kinds of MTA
+ cruft such as dates and message-IDs are discarded so as not to bloat
+ the word lists.
+ .
+ This package provides the bdb database backend.

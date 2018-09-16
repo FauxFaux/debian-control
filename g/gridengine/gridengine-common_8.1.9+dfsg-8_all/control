@@ -1,0 +1,32 @@
+Package: gridengine-common
+Source: gridengine
+Version: 8.1.9+dfsg-8
+Architecture: all
+Maintainer: Debian HPC Team <debian-hpc@lists.debian.org>
+Installed-Size: 1742
+Depends: debconf (>= 0.5) | debconf-2.0, adduser, bsd-mailx | mailx, ucf, tcsh | c-shell
+Suggests: python, tclsh
+Breaks: gridengine-drmaa-dev (<< 6.2u5-8), libdrmaa-dev
+Replaces: gridengine-client (<< 6.2u5-2), gridengine-drmaa-dev (<< 6.2u5-8), libdrmaa-dev
+Section: utils
+Priority: optional
+Homepage: https://arc.liv.ac.uk/trac/SGE/
+Description: Distributed resource management - common files
+ Grid Engine is software that facilitates "distributed resource
+ management" (DRM).  Far more than just simple load-balancing tools or
+ batch scheduling mechanisms, DRM software typically provides the
+ following key features across large sets of distributed resources:
+ .
+   * Policy based allocation of distributed resources (CPU time,
+     software licenses, etc.)
+   * Batch queuing & scheduling
+   * Support diverse server hardware, OS and architectures
+   * Load balancing & remote job execution
+   * Detailed job accounting statistics
+   * Fine-grained user specifiable resources
+   * Suspend/resume/migrate jobs
+   * Tools for reporting Job/Host/Cluster status
+   * Job Arrays
+   * Integration & control of parallel jobs
+ .
+ This package contains required shared files and the basic configuration.

@@ -1,0 +1,16 @@
+Package: elfrc
+Version: 0.7-2
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 38
+Depends: libc6 (>= 2.4)
+Section: utils
+Priority: optional
+Description: convert arbitrary files into elf objects
+ elfrc is a program which can turn arbitrary files into ELF
+ object files which can then be linked into your program
+ directly and accessed via simple, user-defined symbol names.
+ .
+ For instance, it's possible to embed even huge (16MB+) files
+ directly into the executable and then access the data in constant
+ time without making the compiler or linker eat loads of memory.

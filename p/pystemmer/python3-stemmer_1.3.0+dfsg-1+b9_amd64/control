@@ -1,0 +1,27 @@
+Package: python3-stemmer
+Source: pystemmer (1.3.0+dfsg-1)
+Version: 1.3.0+dfsg-1+b9
+Architecture: amd64
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 153
+Depends: python3 (<< 3.8), python3 (>= 3.6~), python3:any (>= 3.0~), libc6 (>= 2.4), libstemmer0d (>= 0+svn527)
+Suggests: python-stemmer-doc
+Section: python
+Priority: optional
+Homepage: http://snowball.tartarus.org/
+Description: Python 3 bindings for libstemmer - snowball stemming algorithms
+ PyStemmer provides access to efficient algorithms for calculating a "stemmed"
+ form of a word.  This is a form with most of the common morphological endings
+ removed; hopefully representing a common linguistic base form.  This is most
+ useful in building search engines and information retrieval software; for
+ example, a search with stemming enabled should be able to find a document
+ containing "cycling" given the query "cycles".
+ .
+ PyStemmer provides algorithms for several (mainly European) languages, by
+ wrapping the libstemmer library from the Snowball project in a Python 3
+ module.
+ .
+ It also provides access to the classic Porter stemming algorithm for English:
+ although this has been superseded by an improved algorithm, the original
+ algorithm may be of interest to information retrieval researchers wishing to
+ reproduce results of earlier experiments.

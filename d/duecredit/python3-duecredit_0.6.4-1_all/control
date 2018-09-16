@@ -1,0 +1,27 @@
+Package: python3-duecredit
+Source: duecredit
+Version: 0.6.4-1
+Architecture: all
+Maintainer: Yaroslav Halchenko <debian@onerussian.com>
+Installed-Size: 252
+Depends: python3-citeproc, python3-requests, python3-six, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/duecredit/duecredit
+Description: Publications (and donations) tracer
+ duecredit is being conceived to address the problem of inadequate
+ citation of scientific software and methods, and limited visibility of
+ donation requests for open-source software.
+ .
+ It provides a simple framework (at the moment for Python only) to
+ embed publication or other references in the original code so they are
+ automatically collected and reported to the user at the necessary
+ level of reference detail, i.e. only references for actually used
+ functionality will be presented back if software provides multiple
+ citeable implementations.
+ .
+ To get a sense of what duecredit is about, simply run
+ or your analysis script with `-m duecredit`, e.g.
+ .
+     python3 -m duecredit examples/example_scipy.py
+Python-Egg-Name: duecredit

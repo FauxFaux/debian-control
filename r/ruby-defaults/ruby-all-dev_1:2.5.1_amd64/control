@@ -1,0 +1,28 @@
+Package: ruby-all-dev
+Source: ruby-defaults
+Version: 1:2.5.1
+Architecture: amd64
+Maintainer: Antonio Terceiro <terceiro@debian.org>
+Installed-Size: 23
+Depends: ruby2.5:any, ruby2.5-dev
+Section: ruby
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.ruby-lang.org/
+Description: Ruby development environment (all versions supported in Debian)
+ Ruby is the interpreted scripting language for quick and easy
+ object-oriented programming.  It has many features to process text
+ files and to do system management tasks (as in perl).  It is simple,
+ straight-forward, and extensible.
+ .
+ This package depends on the respective development packages for every Ruby
+ version currently supported by Debian. This will usually be a single version
+ (the default one), but during transitions multiple versions might be
+ supported.
+ .
+ To programmatically list all the supported versions, install the `gem2deb`
+ package and run `dh_ruby --print-supported`. To determine which is the default
+ version, just dereference the /usr/bin/ruby symbolic link.
+ .
+ If you are not building Ruby packages for Debian, you probably do not need
+ this package.

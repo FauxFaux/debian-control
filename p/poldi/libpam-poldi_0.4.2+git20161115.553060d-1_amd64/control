@@ -1,0 +1,20 @@
+Package: libpam-poldi
+Source: poldi
+Version: 0.4.2+git20161115.553060d-1
+Architecture: amd64
+Maintainer: NIIBE Yutaka <gniibe@fsij.org>
+Installed-Size: 160
+Depends: libc6 (>= 2.14), libgcrypt20 (>= 1.7.0), libgpg-error0 (>= 1.14), libksba8 (>= 1.2.0), scdaemon
+Recommends: gnupg
+Section: admin
+Priority: extra
+Multi-Arch: same
+Homepage: http://www.g10code.com/p-poldi.html
+Description: PAM module allowing authentication using a OpenPGP smartcard
+ This PAM module will allow you to login, screenlock and validate to
+ services using your GnuPG smartcard.
+ You might have expected to find this with a name of libpam-pgp, libpam-gpg,
+ libpam-openpgp or libpam-gnupg.
+ .
+ This code is considered experimental and needs more testing. It is, however,
+ already used for the daily login.

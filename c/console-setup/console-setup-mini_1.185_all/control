@@ -1,0 +1,24 @@
+Package: console-setup-mini
+Source: console-setup
+Version: 1.185
+Architecture: all
+Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Installed-Size: 1024
+Depends: console-setup-linux | console-setup-freebsd, debconf (>= 0.5) | debconf-2.0, keyboard-configuration (= 1.185)
+Recommends: kbd | console-tools
+Suggests: lsb-base (>= 3.0-6)
+Conflicts: console-setup
+Breaks: lsb (<< 2.0-6), lsb-base (<< 3.0-6), lsb-core (<< 2.0-6)
+Section: utils
+Priority: extra
+Multi-Arch: foreign
+Description: console font and keymap setup program - reduced version for Linux
+ This package provides the console with the same keyboard
+ configuration scheme as the X Window System. As a result, there is no
+ need to duplicate or change the keyboard files just to make simple
+ customizations such as the use of dead keys, the key functioning as
+ AltGr or Compose key, the key(s) to switch between Latin and
+ non-Latin mode, etc.
+ .
+ This package can be useful for handhelds or other devices with small
+ storage space.

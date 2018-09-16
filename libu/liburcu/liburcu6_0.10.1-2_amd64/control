@@ -1,0 +1,17 @@
+Package: liburcu6
+Source: liburcu
+Version: 0.10.1-2
+Architecture: amd64
+Maintainer: Jon Bernard <jbernard@debian.org>
+Installed-Size: 273
+Depends: libc6 (>= 2.6)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://liburcu.org/
+Description: userspace RCU (read-copy-update) library
+ This data synchronization library provides read-side access which scales
+ linearly with the number of cores. It does so by allowing multiples copies of
+ a given data structure to live at the same time, and by monitoring the data
+ structure accesses to detect grace periods after which memory reclamation is
+ possible.

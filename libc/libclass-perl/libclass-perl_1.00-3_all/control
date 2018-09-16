@@ -1,0 +1,18 @@
+Package: libclass-perl
+Version: 1.00-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 17
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CLASS
+Description: module providing aliases for __PACKAGE__
+ CLASS is a minimalistic Perl module that simply provides aliases for the
+ special literal, __PACKAGE__, which represents the current package name at
+ that point during program execution. The aliases are mapped at compile-time,
+ so there is no performance hit except for compilation of the module itself.
+ .
+ This module ensures that CLASS and $CLASS can be used anywhere in place of
+ __PACKAGE__, and since $CLASS is a scalar, it has the additional benefit of
+ working in strings.

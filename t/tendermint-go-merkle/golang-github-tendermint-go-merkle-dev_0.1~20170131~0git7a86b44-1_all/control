@@ -1,0 +1,26 @@
+Package: golang-github-tendermint-go-merkle-dev
+Source: tendermint-go-merkle
+Version: 0.1~20170131~0git7a86b44-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 69
+Depends: golang-github-tendermint-go-common-dev, golang-github-tendermint-go-db-dev, golang-github-tendermint-go-wire-dev, golang-golang-x-crypto-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/tendermint/go-merkle
+Description: Merkle-ized data structures with proofs
+ This package provides two types of merkle trees:
+  * IAVL+ Tree: A snapshottable (immutable) AVL+ tree for persistent
+    data
+  * A simple merkle tree for static dataIAVL+ tree; the purpose of
+    this data structure is to provide persistent storage for
+    key-value pairs (say to store account balances) such that a
+    deterministic merkle root hash can be computed. The tree is
+    balanced using a variant of the AVL algortihm so that all
+    operations are O(log(n)).
+ .
+ This package provides a library used by Tendermint Core.
+ .
+ Tendermint Core is Byzantine Fault Tolerant (BFT) middleware
+ that takes a state transition machine, written in any
+ programming language, and replicates it on many machines.

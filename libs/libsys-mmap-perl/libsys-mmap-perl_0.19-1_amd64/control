@@ -1,0 +1,24 @@
+Package: libsys-mmap-perl
+Version: 0.19-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 51
+Depends: perl (>= 5.26.1-2), perlapi-5.26.1, libc6 (>= 2.4)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Sys-Mmap
+Description: module for using POSIX mmap
+ The Mmap module uses the POSIX mmap call to map in a file as a Perl variable.
+ Memory access by mmap may be shared between threads or forked processes, and
+ may be a disc file that has been mapped into memory. Sys::Mmap depends on
+ your operating system supporting UNIX or POSIX.1b mmap, of course.
+ .
+ Note that PerlIO now defines a :mmap tag and presents mmap'd files as regular
+ files, if that is your cup of joe.
+ .
+ Several processes may share one copy of the file or string, saving memory,
+ and concurrently making changes to portions of the file or string. When not
+ used with a file, it is an alternative to SysV shared memory. Unlike SysV
+ shared memory, there are no arbitrary size limits on the shared memory area,
+ and sparce memory usage is handled optimally on most modern UNIX
+ implementations.

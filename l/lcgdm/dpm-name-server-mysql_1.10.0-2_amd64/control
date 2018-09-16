@@ -1,0 +1,20 @@
+Package: dpm-name-server-mysql
+Source: lcgdm
+Version: 1.10.0-2
+Architecture: amd64
+Maintainer: Mattias Ellert <mattias.ellert@physics.uu.se>
+Installed-Size: 335
+Depends: libdpm1 (= 1.10.0-2), adduser, libc6 (>= 2.15), liblcgdm1, libmariadbclient18 (>= 10.1.28), libstdc++6 (>= 4.1.1), libuuid1 (>= 2.16), finger, default-mysql-client | virtual-mysql-client
+Conflicts: dpm-mysql-nameserver (<< 1.8.1.2-2~)
+Replaces: dpm-mysql-nameserver (<< 1.8.1.2-2~)
+Provides: dpm-mysql-nameserver
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://glite.web.cern.ch/glite/
+Description: DPM nameserver server with MySQL database backend
+ The LCG Disk Pool Manager (DPM) creates a storage element from a set
+ of disks. It provides several interfaces for storing and retrieving
+ data such as RFIO and SRM version 1, version 2 and version 2.2.
+ This package provides a DPM nameserver that uses MySQL as its
+ database backend.

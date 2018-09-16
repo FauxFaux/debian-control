@@ -1,0 +1,29 @@
+Package: python-axiom
+Version: 0.7.5-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 875
+Depends: python-epsilon (>= 0.5.11), python-pysqlite2, python-twisted-core, python-zopeinterface, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Breaks: libsqlite3-0 (<< 3.6.12)
+Section: python
+Priority: extra
+Homepage: https://github.com/twisted/axiom
+Description: Python object database
+ Divmod Axiom is an object database, or alternatively, an
+ object-relational mapper, implemented on top of Python.
+ .
+ Its primary goal is to provide an object-oriented layer with the key
+ aspects of OOP (Object Oriented Programming), i.e. polymorphism and
+ message dispatch, without hindering the power of an RDBMS (Relational
+ DataBase Management System).
+ .
+ Axiom is a live database, not only an SQL generation tool: it includes
+ an implementation of a scheduler service, external file references,
+ automatic upgrades, robust failure handling, and Twisted integration.
+ .
+ Axiom is tightly integrated with Twisted, and can store, start, and
+ stop Twisted services directly from the database using the included
+ 'axiomatic' command-line tool.
+ .
+ Note: Axiom currently supports only SQLite and does NOT have any
+ features for dealing with concurrency.

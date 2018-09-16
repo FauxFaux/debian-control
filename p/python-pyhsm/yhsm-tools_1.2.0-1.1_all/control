@@ -1,0 +1,28 @@
+Package: yhsm-tools
+Source: python-pyhsm
+Version: 1.2.0-1.1
+Architecture: all
+Maintainer: Debian Authentication Maintainers <pkg-auth-maintainers@lists.alioth.debian.org>
+Installed-Size: 73
+Depends: python (<< 2.8), python (>= 2.7), python:any (>= 2.6.6-7~), python-argparse, python-setuptools, python-pyhsm (= 1.2.0-1.1)
+Section: utils
+Priority: optional
+Homepage: https://developers.yubico.com/python-pyhsm/
+Description: Common files for YubiHSM applications
+ YubiHSM is an easy to use and affordable crypto appliance
+ that you connect to the USB port of a server. You can then
+ store cryptographic keys on the YubiHSM and use them from the
+ server without any possibility for an attacker to extract
+ the crypto keys from the YubiHSM.
+ .
+ Supported operations include YubiKey OTP validation, AES ECB
+ encrypt/decrypt/decrypt-compare, HMAC-SHA1 hashing (enabling OATH code
+ validation), and Random number entropy generation.
+ .
+ This package includes the following utilities that talk with the YubiHSM:
+ .
+   * yhsm-keystore-unlock - Keystore unlock
+   * yhsm-linux-add-entropy - Entropy seeder
+   * yhsm-decrypt-aead - Decrypt AEADs
+   * yhsm-generate-keys - Generate new AEADs
+Python-Version: 2.7

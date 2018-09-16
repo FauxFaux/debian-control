@@ -1,0 +1,22 @@
+Package: golang-github-nebulouslabs-errors-dev
+Source: golang-github-nebulouslabs-errors
+Version: 0.0~git20170430.98e1f05-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 22
+Section: devel
+Priority: optional
+Homepage: https://github.com/NebulousLabs/errors
+Description: errors with context, composition, and easy error checking
+ The errors package is an extension of and drop in replacement for the
+ standard library errors package. Multiple errors can be composed into a
+ single error with the Compose function, or a single error can be
+ extended by adding context using the Extend function. The result can be
+ checked for the presence of a specific error using Contains. If any of
+ the underlying composed or extended errors or extensions match,
+ Contains will return true.
+ .
+ This package is especially beneficial during testing, where you may wish
+ to check for presence of a specific error, but that specific error may
+ be extending another error or may have been extended by another function
+ somewhere else in the call stack.

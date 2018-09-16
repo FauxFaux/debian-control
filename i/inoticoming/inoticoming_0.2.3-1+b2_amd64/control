@@ -1,0 +1,17 @@
+Package: inoticoming
+Source: inoticoming (0.2.3-1)
+Version: 0.2.3-1+b2
+Architecture: amd64
+Maintainer: Bernhard R. Link <brlink@debian.org>
+Installed-Size: 47
+Depends: libc6 (>= 2.14)
+Suggests: reprepro (>= 2.2.2-1)
+Section: utils
+Priority: extra
+Description: trigger actions when files hit an incoming directory
+ inoticoming is a daemon to watch a directory with Linux's inotify
+ framework and trigger actions once files with specific names are placed
+ in there.
+ .
+ For example it can be used to wait for .changes files uploaded
+ into a directory and call reprepro to put them into your repository.

@@ -1,0 +1,15 @@
+Package: virtio-forwarder
+Version: 1.1.99.13-1~unstable
+Architecture: amd64
+Maintainer: Frik Botha <frik.botha@netronome.com>
+Installed-Size: 320
+Depends: libc6 (>= 2.27), libgcc1 (>= 1:3.0), libprotobuf-c1 (>= 1.0.1), librte-acl17.11 (>= 16.04), librte-bitratestats17.11 (>= 17.05), librte-bus-pci17.11 (>= 17.11), librte-bus-vdev17.11 (>= 17.11), librte-cfgfile17.11 (>= 16.04), librte-cmdline17.11 (>= 16.04), librte-cryptodev17.11 (>= 16.04), librte-distributor17.11 (>= 16.04), librte-eal17.11 (>= 16.04), librte-efd17.11 (>= 17.05), librte-ethdev17.11 (>= 16.07~rc1), librte-eventdev17.11 (>= 17.05), librte-flow-classify17.11 (>= 17.11), librte-gro17.11, librte-gso17.11 (>= 17.11), librte-hash17.11 (>= 16.04), librte-ip-frag17.11 (>= 16.04), librte-jobstats17.11 (>= 16.04), librte-kni17.11 (>= 16.04), librte-kvargs17.11 (>= 16.04), librte-latencystats17.11 (>= 17.05), librte-lpm17.11 (>= 16.04), librte-mbuf17.11 (>= 16.04), librte-member17.11 (>= 17.11), librte-mempool-ring17.11 (>= 17.05), librte-mempool17.11 (>= 16.07~rc1), librte-meter17.11 (>= 16.04), librte-metrics17.11 (>= 17.05), librte-net17.11 (>= 16.11), librte-pci17.11 (>= 17.11), librte-pdump17.11 (>= 16.07~rc1), librte-pipeline17.11 (>= 16.04), librte-pmd-bond17.11 (>= 16.04), librte-port17.11 (>= 16.07~rc1), librte-power17.11 (>= 16.04), librte-reorder17.11 (>= 16.04), librte-ring17.11 (>= 16.04), librte-sched17.11 (>= 16.04), librte-security17.11 (>= 17.11), librte-table17.11 (>= 17.11), librte-timer17.11 (>= 16.04), librte-vhost17.11 (>= 17.05), libzmq5 (>= 3.2.3+dfsg), python, python-zmq, python-protobuf
+Section: net
+Priority: optional
+Homepage: https://github.com/Netronome/virtio-forwarder
+Description: SR-IOV virtual function to virtio packet forwarder
+ virtio-forwarder is a userspace networking application that forwards
+ bi-directional traffic between SR-IOV virtual functions and virtio networking
+ devices in QEMU virtual machines. virtio-forwarder implements a virtio backend
+ driver using the DPDK’s vhost-user library and services designated VFs by
+ means of the DPDK poll mode driver (PMD) mechanism.

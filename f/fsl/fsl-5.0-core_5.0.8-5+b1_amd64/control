@@ -1,0 +1,36 @@
+Package: fsl-5.0-core
+Source: fsl (5.0.8-5)
+Version: 5.0.8-5+b1
+Architecture: amd64
+Maintainer: NeuroDebian Team <team@neuro.debian.net>
+Installed-Size: 39389
+Depends: mozilla-firefox | www-browser, tcsh | c-shell, tk, tcl, bc, dc, python, fslview, libjs-excanvas, libc6 (>= 2.14), libexpat1 (>= 2.0.1), libgcc1 (>= 1:4.0), libgd3 (>= 2.1.0~alpha~), libgdchart-gd2-noxpm | libgdchart-gd2-xpm, libgiftiio0, libgl1-mesa-glx | libgl1, libglu1-mesa | libglu1, libgomp1 (>= 4.9), libnewmat10ldbl, libnifti2, libpng16-16 (>= 1.6.2-1), libstdc++6 (>= 5.2), zlib1g (>= 1:1.1.4)
+Recommends: fsl-atlases
+Suggests: fsl-feeds, fsl-5.0-gpu, octave, mriconvert | dicomnifti, fsl-complete, condor | gridengine-client
+Conflicts: fsl-doc-4.1 (<< 4.1.9-5~), fsl-fslview
+Breaks: fsl-5.0 (<< 5.0.3)
+Replaces: fsl-5.0 (<< 5.0.3)
+Provides: fsl
+Section: non-free/science
+Priority: optional
+Homepage: http://www.fmrib.ox.ac.uk/fsl/
+Description: analysis tools for FMRI, MRI and DTI brain imaging
+ FSL is a comprehensive library of image analysis and statistical tools
+ for fMRI, MRI and DTI brain imaging data. The suite consists of various
+ command line tools, as well as simple GUIs for its core analysis pipelines.
+ Among others, FSL offers implementations of standard GLM analysis,
+ white matter tractography, tissue segmentation, affine and non-linear
+ co-registration, and independent component analysis.
+ .
+ Some FSL components require additional data packages (fsl-atlases,
+ fsl-first-data, fsl-possum-data) that are currently available from the
+ NeuroDebian repository only. For more information on how to obtain these
+ data packages visit http://neuro.debian.net.
+ .
+ Users aiming to perform a complete FSL 5.0 installation (including
+ all data components) are advised to install the 'fsl-5.0-complete'
+ package from NeuroDebian.
+ .
+ FSL interoperates well with other brain imaging related software. This includes
+ Caret, FreeSurfer (cortical flattening and modelling). All FSL tools support
+ the NIfTI format.

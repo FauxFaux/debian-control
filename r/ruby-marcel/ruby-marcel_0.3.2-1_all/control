@@ -1,0 +1,24 @@
+Package: ruby-marcel
+Version: 0.3.2-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 46
+Depends: ruby | ruby-interpreter, ruby-mimemagic (>= 0.3.2)
+Section: ruby
+Priority: optional
+Homepage: https://github.com/basecamp/marcel
+Description: Simple mime type detection
+ Marcel attempts to choose the most appropriate content type for a given file
+ by looking at the binary data, the filename, and any declared type (perhaps
+ passed as a request header).
+ .
+ By preference, the magic number data in any passed in file is used to determine
+ the type. If this doesn't work, it uses the type gleaned from the filename,
+ extension, and finally the declared type. If no valid type is found in any of
+ these, "application/octet-stream" is returned.
+ .
+ Some types aren't easily recognised solely by magic number data. For example
+ Adobe Illustrator files have the same magic number as PDFs (and can usually
+ even be viewed in PDF viewers!). For these types, Marcel uses both the magic
+ number data and the file name to work out the type.
+Ruby-Versions: all

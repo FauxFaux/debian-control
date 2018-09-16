@@ -1,0 +1,22 @@
+Package: libept-dev
+Source: libept (1.1+nmu3)
+Version: 1.1+nmu3+b1
+Architecture: amd64
+Maintainer: Enrico Zini <enrico@debian.org>
+Installed-Size: 3812
+Depends: libept1.5.0 (= 1.1+nmu3+b1), libapt-pkg-dev (>= 1.0.10), libxapian-dev (>= 1.2.21-1.2)
+Recommends: pkg-config
+Section: libdevel
+Priority: optional
+Description: High-level library for managing Debian package information
+ The library defines a very minimal framework in which many sources of data
+ about Debian packages can be implemented and queried together.
+ .
+ The library includes four data sources:
+ .
+  * APT: access the APT database
+  * Debtags: access the Debtags tag information
+  * Popcon: access Popcon package scores
+  * The Xapian index built by apt-xapian-index
+ .
+ This is the development library.

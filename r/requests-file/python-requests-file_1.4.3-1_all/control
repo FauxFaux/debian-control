@@ -1,0 +1,26 @@
+Package: python-requests-file
+Source: requests-file
+Version: 1.4.3-1
+Architecture: all
+Maintainer: Antoine Beaupré <anarcat@debian.org>
+Installed-Size: 26
+Depends: python-requests, python-six, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: http://github.com/dashea/requests-file
+Description: File transport adapter for Requests - Python 2.X
+ Requests-File is a transport adapter for use with the Requests Python
+ library to allow local filesystem access via file:// URLs.
+ .
+ Features:
+ .
+  * Will open and read local files
+  * Might set a Content-Length header
+  * That's about it
+ .
+ No encoding information is set in the response object, so be careful using
+ Response.text: the chardet library will be used to convert the file to a
+ unicode type and it may not detect what you actually want.
+ .
+ EACCES is converted to a 403 status code, and ENOENT is converted to a
+ 404. All other IOError types are converted to a 400.

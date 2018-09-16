@@ -1,0 +1,20 @@
+Package: python3-async-timeout
+Source: python-async-timeout
+Version: 3.0.0-1
+Architecture: all
+Maintainer: Piotr Ożarowski <piotr@debian.org>
+Installed-Size: 30
+Depends: python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/aio-libs/async_timeout/
+Description: timeout context manager for asyncio programs in Python
+ The context manager is useful in cases when you want to apply timeout
+ logic around block of code or in cases when asyncio.wait_for() is
+ not suitable. Also it's much faster than asyncio.wait_for()
+ because timeout doesn't create a new task.
+ .
+ Example:
+ .
+  with timeout(1.5):
+      yield from inner()

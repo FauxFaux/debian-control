@@ -1,0 +1,21 @@
+Package: postgresql-10-similarity
+Source: pg-similarity
+Version: 1.0-1
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <pkg-postgresql-public@lists.alioth.debian.org>
+Installed-Size: 115
+Depends: postgresql-10, libc6 (>= 2.14)
+Section: database
+Priority: optional
+Homepage: https://github.com/eulerto/pg_similarity
+Description: PostgreSQL similarity functions extension
+ pg_similarity is an extension to support similarity queries on PostgreSQL.
+ The extension consists of:
+ .
+  * Functions implementing similarity algorithms available in the literature.
+    These functions can be used as UDFs and are the base for implementing
+    the similarity operators;
+  * Operators defined on top of the similarity functions. They use similarity
+    functions to obtain the similarity threshold and compare its value to a
+    user-defined threshold to decide if it is a match or not;
+  * Session variables storing similarity function parameters.

@@ -1,0 +1,21 @@
+Package: slapi-nis
+Version: 0.56.2-1
+Architecture: amd64
+Maintainer: Debian FreeIPA Team <pkg-freeipa-devel@alioth-lists.debian.net>
+Installed-Size: 363
+Depends: libc6 (>= 2.14), libnspr4 (>= 2:4.10.9), libnss3 (>= 2:3.13.4-2~), libpam0g (>= 0.99.7.1), libsss-nss-idmap0, libwrap0 (>= 7.6-4~)
+Section: net
+Priority: optional
+Homepage: https://pagure.io/slapi-nis
+Description: NIS Server and Schema Compatibility plugins for 389 Directory Server
+ This package provides two plugins for Red Hat and 389 Directory Server.
+ .
+ The NIS Server plugin allows the directory server to act as a NIS server
+ for clients, dynamically generating and updating NIS maps according to
+ its configuration and the contents of the DIT, and serving the results to
+ clients using the NIS protocol as if it were an ordinary NIS server.
+ .
+ The Schema Compatibility plugin allows the directory server to provide an
+ alternate view of entries stored in part of the DIT, optionally adding,
+ dropping, or renaming attribute values, and optionally retrieving values
+ for attributes from multiple entries in the tree.

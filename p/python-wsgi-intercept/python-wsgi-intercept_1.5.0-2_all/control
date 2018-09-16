@@ -1,0 +1,21 @@
+Package: python-wsgi-intercept
+Version: 1.5.0-2
+Architecture: all
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 104
+Depends: python-six, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://github.com/cdent/wsgi-intercept
+Description: installs a WSGI application in place of a real URI for testing
+ Testing a WSGI application normally involves starting a server at a local host
+ and port, then pointing your test code to that address. Instead, this library
+ lets you intercept calls to any specific host/port combination and redirect
+ them into a WSGI application importable by your test program. Thus, you can
+ avoid spawning multiple processes or threads to test your Web app.
+ .
+ wsgi_intercept works by replacing httplib.HTTPConnection with a subclass,
+ wsgi_intercept.WSGI_HTTPConnection. This class then redirects specific
+ server/port combinations into a WSGI application by emulating a socket. If no
+ intercept is registered for the host and port requested, those requests are
+ passed on to the standard handler.

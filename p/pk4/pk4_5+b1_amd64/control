@@ -1,0 +1,32 @@
+Package: pk4
+Source: pk4 (5)
+Version: 5+b1
+Architecture: amd64
+Maintainer: Michael Stapelberg <stapelberg@debian.org>
+Installed-Size: 13915
+Depends: libc6 (>= 2.3.2), debian-keyring, devscripts, dpkg-dev, systemd-sysv
+Recommends: sbuild
+Built-Using: golang-1.10 (= 1.10-1), golang-go.crypto (= 1:0.0~git20170629.0.5ef0053-2), golang-golang-x-net-dev (= 1:0.0+git20170629.c81e7f2+dfsg-2), golang-golang-x-sync (= 0.0~git20171101.fd80eb9-1), golang-pault-go-debian (= 0.5-1), golang-pault-go-topsort (= 0.0~git20150602.0.a54e6e0-2)
+Section: utils
+Priority: extra
+Description: make available the Debian source package producing the specified package
+ pk4 resolves the specified argument(s) as either:
+ .
+ 1. the name of a Debian binary package, and selects its Debian source package.
+ 2. the name of a Debian source package, and selects it.
+ 3. or a file path, and selects the Debian source package of the owning package.
+ .
+ The source package version is either the installed version (if any) or the
+ installation candidate, as per “apt-cache policy”.
+ .
+ Then, pk4 downloads the entire selected source package (every file referenced
+ by — and including — its .dsc file) and prints the output directory path.
+ .
+ pk4…
+ • caps the disk usage of the checked out packages by deleting the oldest ones
+   after crossing a limit (default: 2GiB).
+ • allows users to enable supplied or shipped-with-pk4 hooks, e.g. git-init.
+ • optimizes for low latency of each operation.
+ • respects your APT configuration, i.e. should work in company intranets.
+ • comes with tab completion for bash and zsh.
+ • tries hard to download source packages, with fallback to snapshot.debian.org.

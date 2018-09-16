@@ -1,0 +1,17 @@
+Package: libfile-map-perl
+Version: 0.65-2
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 78
+Depends: perl (>= 5.26.2-6), perlapi-5.26.2, libc6 (>= 2.14), libperlio-layers-perl, libsub-exporter-progressive-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/File-Map
+Description: Perl module providing simple and safe memory mapping
+ File::Map maps files or anonymous memory into perl variables that can be read
+ just like any other variable. Files are unmapped when the scalar variable is
+ destroyed, even in multithreaded programs.
+ .
+ Mapped memory is shared between threads and forked processes, and can be
+ returned to the system when no longer needed. File::Map has built-in support
+ for thread synchronisation, and is safe yet fast.

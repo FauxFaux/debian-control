@@ -1,0 +1,30 @@
+Package: nvidia-legacy-340xx-vdpau-driver
+Source: nvidia-graphics-drivers-legacy-340xx
+Version: 340.107-2
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 2124
+Pre-Depends: nvidia-installer-cleanup
+Depends: libvdpau1, nvidia-legacy-340xx-alternative (= 340.107-2), libc6 (>= 2.2.5), libx11-6, libxext6
+Recommends: nvidia-legacy-340xx-kernel-dkms (= 340.107-2) | nvidia-legacy-340xx-kernel-340.107
+Suggests: nvidia-legacy-340xx-kernel-dkms (>= 340.107) | nvidia-legacy-340xx-kernel-source (>= 340.107)
+Enhances: libvdpau1
+Provides: vdpau-driver
+Section: non-free/video
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: Video Decode and Presentation API for Unix - NVIDIA driver (340xx legacy)
+ These libraries provide the Video Decode and Presentation API for Unix.
+ They provide accelerated video playback (incl. H.264) for the supported
+ graphics cards.
+ .
+ This package contains the NVIDIA VDPAU driver.
+ .
+ See /usr/share/doc/nvidia-legacy-340xx-vdpau-driver/README.txt.gz
+ for more information.
+ .
+ Please see the nvidia-legacy-340xx-kernel-dkms or
+ nvidia-legacy-340xx-kernel-source packages
+ for building the kernel module required by this package.
+ This will provide nvidia-legacy-340xx-kernel-340.107.

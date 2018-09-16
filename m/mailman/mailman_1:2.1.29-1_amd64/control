@@ -1,0 +1,27 @@
+Package: mailman
+Version: 1:2.1.29-1
+Architecture: amd64
+Maintainer: Mailman for Debian <pkg-mailman-hackers@lists.alioth.debian.org>
+Installed-Size: 38225
+Pre-Depends: debconf | debconf-2.0
+Depends: libc6 (>= 2.14), python:any, debconf (>= 0.5) | debconf-2.0, logrotate, ucf, lsb-base, apache2 | httpd, cron | cron-daemon, python-dnspython
+Recommends: default-mta | mail-transport-agent
+Suggests: mailman3-full, spamassassin, lynx, listadmin
+Section: mail
+Priority: optional
+Homepage: http://www.list.org/
+Description: Web-based mailing list manager (legacy branch)
+ The GNU Mailing List Manager, which manages email discussion lists.
+ Mailman gives each mailing list a web page, and allows users to
+ subscribe, unsubscribe, etc. over the web. The list manager can
+ administer his or her list entirely from the web.
+ .
+ Mailman also integrates most things people want to do with mailing
+ lists, including archiving, mail <-> news gateways, and so on. It
+ has all of the features you expect from such a product, plus
+ integrated support for the web (including web based archiving),
+ automated bounce handling and integrated spam prevention.
+ .
+ Note that this package contains the legacy (2.x) branch of Mailman.
+ All new development happens in the Mailman 3 suite, available in
+ Debian via the mailman3 metapackage.

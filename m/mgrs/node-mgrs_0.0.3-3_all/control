@@ -1,0 +1,24 @@
+Package: node-mgrs
+Source: mgrs
+Version: 0.0.3-3
+Architecture: all
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: nodejs
+Section: science
+Priority: optional
+Homepage: https://github.com/proj4js/mgrs
+Description: Utility for converting between WGS84 lat/lng and MGRS coordinates
+ mgrs is a utility for converting between WGS84 lat/lng and MGRS coordinates,
+ spunoff from proj4js.
+ .
+ It has 3 methods:
+ .
+  * forward, takes an array of [lon,lat] and optional accuracy and returns an
+    mgrs string
+  * inverse, takes an mgrs string and returns a bbox
+  * toPoint, takes an mgrs string, returns an array of '[lon,lat]'
+ .
+ This package contains the mgrs module for Node.js.
+ .
+ Node.js is an event-based server-side JavaScript engine.

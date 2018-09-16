@@ -1,0 +1,16 @@
+Package: libpoe-component-dbiagent-perl
+Version: 0.26-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 59
+Depends: perl, libclass-methodmaker-perl, libdbi-perl, libpoe-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/POE-Component-DBIAgent
+Description: POE Component for running asynchronous DBI calls
+ POE::Component::DBIAgent is your answer to non-blocking DBI in POE.
+ .
+ It fires off a configurable number child processes (defaults to 3) and
+ feeds database queries to it via two-way pipe (or sockets ... however
+ POE::Component::Wheel::Run is able to manage it).  The primary method
+ is query.

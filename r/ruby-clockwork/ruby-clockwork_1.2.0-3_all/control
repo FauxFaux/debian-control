@@ -1,0 +1,19 @@
+Package: ruby-clockwork
+Version: 1.2.0-3
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 52
+Depends: ruby | ruby-interpreter, ruby-activesupport, ruby-tzinfo
+Section: ruby
+Priority: optional
+Homepage: http://github.com/tomykaira/clockwork
+Description: scheduler process to replace cron
+ Clockwork is a cron replacement.  It runs as a lightweight,
+ long-running Ruby process which sits alongside your web processes
+ (Mongrel/Thin) and your worker processes (DJ/Resque/Minion/Stalker)
+ to schedule recurring work at particular times or dates.
+ .
+ For example, refreshing feeds on an hourly basis, or send reminder
+ emails on a nightly basis, or generating invoices once a month on the
+ 1st.
+Ruby-Versions: all

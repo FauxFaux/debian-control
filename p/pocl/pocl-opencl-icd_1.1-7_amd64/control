@@ -1,0 +1,21 @@
+Package: pocl-opencl-icd
+Source: pocl
+Version: 1.1-7
+Architecture: amd64
+Maintainer: Debian OpenCL Maintainers <pkg-opencl-devel@lists.alioth.debian.org>
+Installed-Size: 33
+Depends: libpocl2 (= 1.1-7)
+Provides: opencl-icd, opencl-icd-1.1-1, opencl-icd-1.2-1
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://portablecl.org
+Description: pocl ICD
+ Portable Computing Language is an open source implementation of the OpenCL
+ standard which can be easily adapted for new targets. One of the goals of the
+ project is improving performance portability of OpenCL programs, avoiding the
+ need for target-dependent manual optimizations. A "native" target is included,
+ which allows running OpenCL kernels on the host (CPU).
+ .
+ This package allows one to use pocl as an installable client driver (ICD) for
+ OpenCL.

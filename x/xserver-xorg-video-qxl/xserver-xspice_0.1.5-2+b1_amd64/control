@@ -1,0 +1,21 @@
+Package: xserver-xspice
+Source: xserver-xorg-video-qxl (0.1.5-2)
+Version: 0.1.5-2+b1
+Architecture: amd64
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Installed-Size: 310
+Depends: libc6 (>= 2.14), libspice-server1 (>= 0.13.2), libxfont2 (>= 1:2.0.1), python:any, xserver-xorg, xorg-video-abi-24, xserver-xorg-core (>= 2:1.18.99.901), python-argparse
+Breaks: xserver-xorg-video-qxl (<< 0.1.4-2~)
+Replaces: xserver-xorg-video-qxl (<< 0.1.4-2~)
+Section: x11
+Priority: optional
+Homepage: https://www.spice-space.org/
+Description: Xspice X server
+ Xspice is an X server and Spice server in one. It consists of a wrapper script
+ for executing Xorg with the right parameters and environment variables, a
+ module names spiceqxl_drv.so implementing three drivers: a video mostly
+ identical code to the guest qxl X driver, and keyboard and mouse reading from
+ the spice inputs channel.
+ .
+ Xspice allows regular X connections, while a spice client provides the keyboard
+ and mouse and video output.

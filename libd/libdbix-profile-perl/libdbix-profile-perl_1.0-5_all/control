@@ -1,0 +1,23 @@
+Package: libdbix-profile-perl
+Version: 1.0-5
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 30
+Depends: perl, libdbi-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/DBIx-Profile
+Description: DBI query profiler
+ DBIx::Profile is a quick and easy, and mostly transparent, profiler
+ for scripts using DBI.  It collects information on the query
+ level, and keeps track of first, failed, normal, and total amounts
+ (count, wall clock, CPU time) for each function on the query.
+ .
+ NOTE: DBIx::Profile use Time::HiRes to clock the wall time and
+       the old standby times() to clock the CPU time.  The CPU time is
+       pretty coarse.
+ .
+ DBIx::Profile can also trace the execution of queries.  It will print
+ a timestamp and the query that was called.  This is optional, and
+ occurs only when the environment variable DBIXPROFILETRACE is set
+ to 1. (ex: (bash) export DBIXPROFILETRACE=1).

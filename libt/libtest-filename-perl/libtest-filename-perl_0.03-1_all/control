@@ -1,0 +1,34 @@
+Package: libtest-filename-perl
+Version: 0.03-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 25
+Depends: libpath-tiny-perl, perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Filename
+Description: portable filename comparison
+ Many cross-platform test failures -- particularly on Win32 -- are due
+ to hard-coded file paths being used in comparison tests.
+ .
+  my $file = get_file();     # returns "foo\bar.t";
+  is( $file, "foo/bar.t" );  # fails on Win32
+ .
+ Test::Filename provides some handy functions to convert all those path
+ separators automatically so filename tests will just DWIM.
+ .
+ The alternative is to write your own utility subroutine and use it
+ everywhere or just keep on littering your test code with calls to
+ File::Spec -- yuck!
+ .
+  is( $file, File::Spec->canonpath("some/path"), "should pass" );
+ .
+ Since this module is so simple, you might not think it worth including
+ as a dependency.  After all, it's not that hard to always remember to
+ use File::Spec, Path::Tiny or some other file utility, right? But odds
+ are that, at some point, you'll be so busy writing tests that you'll
+ forget and hard-code a path in your haste to show what a clever
+ programmer you are.
+ .
+ So just use this module and stop worrying about it.  You'll be happier
+ and so will anyone trying to install your modules on Win32.

@@ -1,0 +1,18 @@
+Package: pypy-atomicwrites
+Source: python-atomicwrites
+Version: 1.1.5-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 33
+Depends: pypy
+Section: python
+Priority: optional
+Homepage: https://github.com/untitaker/python-atomicwrites
+Description: Atomic file writes - PyPy
+ It uses a temporary file in the same directory as the given path. This ensures
+ that the temporary file resides on the same filesystem.
+ The temporary file will then be atomically moved to the target location: On
+ POSIX, it will use rename if files should be overwritten, otherwise a
+ combination of link and unlink.
+ .
+ This package contains the PyPy.

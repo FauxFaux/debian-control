@@ -1,0 +1,16 @@
+Package: cyclades-serial-client
+Version: 0.93
+Architecture: amd64
+Maintainer: Russell Coker <russell@coker.com.au>
+Installed-Size: 97
+Depends: libc6 (>= 2.14)
+Suggests: sredird
+Conflicts: tsrdev
+Section: comm
+Priority: optional
+Description: Network Serial port client software for Cyclades terminal servers
+ This is the client for network serial port emulation via the RFC 2217
+ protocol as used by Cyclades terminal servers and other products.  It
+ consists of a daemon that manages a pseudo-tty and a shared object to take
+ over the tcsetattr() and tcsendbreak() library calls to redirect their
+ functionality over the network.

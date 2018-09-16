@@ -1,0 +1,20 @@
+Package: snoopy
+Version: 2.4.6-3
+Architecture: amd64
+Maintainer: Debian Security Tools Packaging Team <pkg-security-team@lists.alioth.debian.org>
+Installed-Size: 115
+Depends: libc6 (>= 2.7), debconf (>= 0.5) | debconf-2.0
+Section: admin
+Priority: optional
+Homepage: https://github.com/a2o/snoopy/
+Description: execve() wrapper and logger
+ snoopy is merely a shared library that is used as a wrapper
+ to the execve() function provided by libc as to log every call
+ to syslog (authpriv).  system administrators may find snoopy
+ useful in tasks such as light/heavy system monitoring, tracking other
+ administrator's actions as well as getting a good 'feel' of
+ what's going on in the system (for example Apache running cgi
+ scripts).
+ .
+ This type of monitoring can be bypassed by hostile users, and should
+ not be considered a secure replacement for tools like auditd.

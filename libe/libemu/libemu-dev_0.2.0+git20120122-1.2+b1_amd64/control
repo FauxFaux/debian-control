@@ -1,0 +1,33 @@
+Package: libemu-dev
+Source: libemu (0.2.0+git20120122-1.2)
+Version: 0.2.0+git20120122-1.2+b1
+Architecture: amd64
+Maintainer: David Martínez Moreno <ender@debian.org>
+Installed-Size: 1906
+Depends: libemu2 (= 0.2.0+git20120122-1.2+b1)
+Section: libdevel
+Priority: extra
+Homepage: http://libemu.carnivore.it/
+Description: x86 shellcode detection and emulation
+ libemu is a small library written in C offering basic x86 emulation and
+ shellcode detection using GetPC heuristics.  Intended use is within network
+ intrusion/prevention detections and honeypots.
+ .
+ libemu supports:
+   * executing x86 instructions
+     * reading x86 binary code
+     * register emulation
+     * basic FPU emulation
+   * shellcode execution
+     * shellcode detection
+       * using GetPC heuristics
+       * static analysis
+       * and binary backwards traversal
+      * Win32 API hooking
+ .
+ Using libemu one can:
+   * detect shellcodes
+   * execute the shellcodes
+   * profile shellcode behaviour
+ .
+ This package has the development files.

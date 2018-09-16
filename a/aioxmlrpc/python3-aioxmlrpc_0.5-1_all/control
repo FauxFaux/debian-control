@@ -1,0 +1,34 @@
+Package: python3-aioxmlrpc
+Source: aioxmlrpc
+Version: 0.5-1
+Architecture: all
+Maintainer: Piotr Ożarowski <piotr@debian.org>
+Installed-Size: 39
+Depends: python3-aiohttp, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/mardiros/aioxmlrpc
+Description: XML-RPC for asyncio
+ Asyncio version of the standard lib xmlrpc.
+ .
+ Currently only aioxmlrpc.client, which works like xmlrpc.client but
+ with coroutine is implemented.
+ .
+ aioxmlrpc is based on aiohttp for the transport, and just patch
+ the necessary from the Python standard library to get it working.
+ .
+ Example of usage:
+ .
+  import asyncio
+  from aioxmlrpc.client import ServerProxy
+ .
+  @asyncio.coroutine
+  def print_gandi_api_version():
+      api = ServerProxy('https://rpc.gandi.net/xmlrpc/')
+      result = yield from api.version.info()
+      print(result)
+ .
+  if __name__ == '__main__':
+      loop = asyncio.get_event_loop()
+      loop.run_until_complete(print_gandi_api_version())
+      loop.stop()

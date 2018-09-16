@@ -1,0 +1,19 @@
+Package: python-tornadorpc
+Version: 0.1.1-1
+Architecture: all
+Maintainer: Sandro Tosi <morph@debian.org>
+Installed-Size: 55
+Depends: python-jsonrpclib, python-tornado, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://github.com/joshmarshall/tornadorpc
+Description: library for XML/JSON RPC using the Tornado framework
+ This library is an implementation of both the JSON-RPC and the XML-RPC
+ specification (server-side) for the Tornado web framework. It supports the
+ basic features of both, as well as the MultiCall / Batch support for both
+ specifications. The JSON-RPC handler supports both the original 1.0
+ specification, as well as the new (proposed) 2.0 spec, which includes batch
+ submission, keyword arguments, etc.
+ .
+ There is also a base library that other RPC protocols could use to quickly get
+ tied into Tornado.

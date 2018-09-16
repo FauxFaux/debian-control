@@ -1,0 +1,14 @@
+Package: critcl
+Version: 3.1.17+dfsg-1
+Architecture: all
+Maintainer: Andrew Shadura <andrewsh@debian.org>
+Installed-Size: 1250
+Depends: tcl (>= 8.6.0-2), tcllib, gcc, build-essential, tcl-dev | tcl8.4-dev | tcl8.5-dev | tcl8.6-dev
+Recommends: tcl-trf
+Section: interpreters
+Priority: optional
+Homepage: http://andreas-kupries.github.com/critcl/
+Description: compiled runtime in Tcl
+ Critcl takes a snippet of C, generates Tcl interface, sends it to the
+ compiler, and then dynamically links the code. Checksums are used to only
+ recompile when needed, so the build overhead really applies only once.

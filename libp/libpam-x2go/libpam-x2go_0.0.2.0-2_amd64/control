@@ -1,0 +1,17 @@
+Package: libpam-x2go
+Version: 0.0.2.0-2
+Architecture: amd64
+Maintainer: Debian Remote Maintainers <debian-remote@lists.debian.org>
+Installed-Size: 50
+Depends: libc6 (>= 2.7), libpam0g (>= 0.99.7.1), libssh-4 (>= 0.3.91)
+Suggests: pyhoca-cli
+Breaks: lightdm-remote-session-x2go (<< 0.0.2.0)
+Section: admin
+Priority: optional
+Homepage: https://github.com/ArcticaProject/libpam-x2go
+Description: PAM Module to check credentials against X2Go servers
+ Auth and session PAM module that uses SSH to authenticate against
+ an X2Go server as the remote host and user. Local account required.
+ .
+ This PAM module is intended for facilitating Remote Logon into X2Go
+ servers using LightDM's Arctica Greeter.

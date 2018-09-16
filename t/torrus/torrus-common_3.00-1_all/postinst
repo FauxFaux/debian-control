@@ -1,0 +1,61 @@
+#!/bin/sh
+set -e
+
+configure_user_group() {
+#   Create the user/group. It only returns non-zero if there is some real
+#   error, so in that case it's better to bail out anyway.
+    adduser --quiet --system --no-create-home --home /nonexistent \
+            --force-badname --group Debian-torrus > /dev/null 2>&1
+}
+
+fix_owner_perm() {
+    chown Debian-torrus:Debian-torrus /var/lib/torrus /var/log/torrus
+    chmod g+w /var/log/torrus
+    chmod g+w /var/lib/torrus/session_data/lock /var/lib/torrus/session_data/store
+    if [ -d /var/cache/torrus ]; then
+	    chown Debian-torrus:Debian-torrus /var/cache/torrus
+	    chmod g+w /var/cache/torrus
+    fi
+    # zap /var/lib/torrus/db, we don't have berkeley-db any more
+    rm -rf /var/lib/torrus/db
+    addgroup www-data Debian-torrus > /dev/null 2>&1
+}
+
+dpkg-maintscript-helper rm_conffile /etc/logrotate.d/torrus-common 2.01-3 -- "$@"
+
+# Remove torrus-apache2.conf symlink that used to be installed in
+# the now dropped package torrus-apache2 ... it has mod_perl configuration
+# statements that break apache2 restarts until the configuration has been
+# purged (if libapache2-mod-perl has been autoremoved in the meantime)
+test -L /etc/apache2/conf.d/torrus-apache2.conf && rm /etc/apache2/conf.d/torrus-apache2.conf
+
+case "$1" in
+    configure)	
+	configure_user_group
+	fix_owner_perm
+	# torrus clearcache has vanished in torrus 3.0. It is currently unclear
+	# whether this was intended upstream, so we're keeping the call
+	# conditionally for the time being
+	if [ -x '/usr/share/torrus/bin/clearcache' ]; then
+		torrus clearcache
+	fi
+	;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+    *)
+	echo "${0} called with unknown argument ${1}"
+	exit 1
+	;;
+esac
+
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/torrus-common" ]; then
+		update-rc.d torrus-common defaults >/dev/null
+		invoke-rc.d torrus-common start || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

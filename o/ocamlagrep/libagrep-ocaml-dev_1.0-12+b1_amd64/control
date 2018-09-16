@@ -1,0 +1,33 @@
+Package: libagrep-ocaml-dev
+Source: ocamlagrep (1.0-12)
+Version: 1.0-12+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 148
+Depends: libagrep-ocaml (= 1.0-12+b1), libagrep-ocaml-y3dw2, ocaml-nox-4.05.0
+Provides: libagrep-ocaml-dev-y3dw2
+Section: ocaml
+Priority: optional
+Homepage: http://forge.ocamlcore.org/projects/ocamlagrep/
+Description: Wu-Manber algorithm for string searching with errors
+ This OCaml library implements the Wu-Manber algorithm for string searching
+ with errors, popularized by the "agrep" Unix command and the "glimpse" file
+ indexing tool. It was developed as part of a search engine for a largish MP3
+ collection; the "with error" searching comes handy for those who can't spell
+ Liszt or Shostakovitch.
+ .
+ Given a search pattern and a string, this algorithm determines whether the
+ string contains a substring that matches the pattern up to a parameterizable
+ number N of "errors". An "error" is either a substitution (replace a
+ character of the string with another character), a deletion (remove a
+ character) or an insertion (add a character to the string). In more
+ scientific terms, the number of errors is the Levenshtein edit distance
+ between the pattern and the matched substring.
+ .
+ The search patterns are roughly those of the Unix shell, including
+ one-character wildcard (?), character classes ([0-9]) and multi-character
+ wildcard (*). In addition, conjunction (&) and alternative (|) are supported.
+ General regular expressions are not supported, however.
+ .
+ This package contains all the development stuff you need to use
+ the agrep OCaml library in your programs.

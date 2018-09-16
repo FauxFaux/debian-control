@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    (configure)
+        :
+    ;;
+    (abort-upgrade|abort-remove|abort-deconfigure)
+	exit 0
+    ;;
+    (*)
+	echo "postinst called with unknown argument \`$1'" >&2
+	exit 0
+    ;;
+esac
+
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper symlink_to_dir /usr/share/doc/zsh-dev zsh-common 5.0.7-3 -- "$@"
+# End automatically added section
+
+
+exit 0

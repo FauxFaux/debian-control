@@ -1,0 +1,18 @@
+Package: v86d
+Source: v86d (0.1.10-1)
+Version: 0.1.10-1+b1
+Architecture: amd64
+Maintainer: Evgeni Golov <evgeni@debian.org>
+Installed-Size: 44
+Depends: libc6 (>= 2.14), libx86-1 (>= 0.99-1)
+Recommends: initramfs-tools
+Section: utils
+Priority: optional
+Homepage: http://dev.gentoo.org/~spock/projects/uvesafb/
+Description: daemon to run x86 code in an emulated environment
+ v86d provides a backend for kernel drivers that need to execute
+ x86 BIOS code. The code is executed in a controlled environment
+ and the results are passed back to the kernel via the netlink
+ interface.
+ .
+ v86d is needed by the uvesafb kernel module.

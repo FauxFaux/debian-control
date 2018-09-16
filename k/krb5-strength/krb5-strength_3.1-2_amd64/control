@@ -1,0 +1,28 @@
+Package: krb5-strength
+Version: 3.1-2
+Architecture: amd64
+Maintainer: Russ Allbery <rra@debian.org>
+Installed-Size: 195
+Depends: adduser, perl:any, libc6 (>= 2.26), libcdb1, libcrack2 (>= 2.8.12), libkrb5-3 (>= 1.10+dfsg~alpha1), libsqlite3-0 (>= 3.5.9)
+Recommends: cracklib-runtime, libcrypt-pbkdf2-perl, libdb-file-lock-perl, libdbd-sqlite3-perl, libdbi-perl, libgetopt-long-descriptive-perl, libipc-run-perl, libjson-perl, libreadonly-perl, tinycdb
+Enhances: heimdal-kdc, krb5-admin-server
+Section: net
+Priority: optional
+Homepage: https://www.eyrie.org/~eagle/software/krb5-strength/
+Description: Password strength checking for Kerberos KDCs
+ krb5-strength provides a password quality plugin for the MIT Kerberos KDC
+ (specifically the kadmind server), an external password quality program
+ for use with Heimdal, and a per-principal password history implementation
+ for Heimdal.  Passwords can be tested with CrackLib, checked against a
+ CDB or SQLite database of known weak passwords with some transformations,
+ checked for length, checked for non-printable or non-ASCII characters
+ that may be difficult to enter reproducibly, required to contain
+ particular character classes, or any combination of these tests.
+ .
+ No dictionary is shipped with this package.  A CrackLib dictionary can be
+ created with the tools in cracklib-runtime, a CDB or SQLite database can
+ be created from a password list (obtained separately) using the tools
+ included in this package, or both.
+ .
+ The recommended packages are needed to generate CDB or SQLite databases
+ and for the password history implementation for Heimdal.

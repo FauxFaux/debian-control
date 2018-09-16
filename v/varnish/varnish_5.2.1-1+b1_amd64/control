@@ -1,0 +1,29 @@
+Package: varnish
+Source: varnish (5.2.1-1)
+Version: 5.2.1-1+b1
+Architecture: amd64
+Maintainer: Varnish Package Maintainers <pkg-varnish-devel@lists.alioth.debian.org>
+Installed-Size: 2011
+Depends: libbsd0 (>= 0.0), libc6 (>= 2.25), libedit2 (>= 2.11-20080614), libjemalloc1 (>= 2.1.1), libncurses6 (>= 6), libncursesw6 (>= 6), libpcre3, libtinfo6 (>= 6), libvarnishapi1 (>= 5.2.0), adduser, gcc, libc6-dev | libc6.1-dev | libc-dev, lsb-base
+Suggests: varnish-doc
+Replaces: libvarnishapi1 (<< 3.0.0-5)
+Provides: varnishabi-6.1, varnishabi-strict-67e562482
+Section: web
+Priority: optional
+Homepage: https://www.varnish-cache.org/
+Description: state of the art, high-performance web accelerator
+ Varnish Cache is a state of the art web accelerator written with
+ performance and flexibility in mind.
+ .
+ Varnish Cache stores web pages in memory so web servers don't have to
+ create the same web page over and over again. Varnish serves pages
+ much faster than any application server; giving the website a
+ significant speed up.
+ .
+ Some of the features include:
+  * A modern design
+  * VCL - a very flexible configuration language
+  * Load balancing with health checking of backends
+  * Partial support for ESI - Edge Side Includes
+  * URL rewriting
+  * Graceful handling of "dead" backends

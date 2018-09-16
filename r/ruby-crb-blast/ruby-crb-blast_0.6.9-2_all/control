@@ -1,0 +1,27 @@
+Package: ruby-crb-blast
+Version: 0.6.9-2
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 51
+Depends: ncbi-blast+, ruby | ruby-interpreter, ruby-bio, ruby-fixwhich, ruby-threach, ruby-trollop (>= 2.0)
+Section: ruby
+Priority: optional
+Homepage: https://github.com/cboursnell/crb-blast
+Description: Run conditional reciprocal best blast
+ CRB-BLAST is a novel method for finding orthologs between one set of sequences
+ and another. This is particularly useful in genome and transcriptome
+ annotation.
+ .
+ CRB-BLAST initially performs a standard reciprocal best BLAST. It does this by
+ performing BLAST alignments of query->target and target->query. Reciprocal
+ best BLAST hits are those where the best match for any given query sequence in
+ the query->target alignment is also the best hit of the match in the reverse
+ (target->query) alignment.
+ .
+ Reciprocal best BLAST is a very conservative way to assign orthologs. The main
+ innovation in CRB-BLAST is to learn an appropriate e-value cutoff to apply to
+ each pairwise alignment by taking into account the overall relatedness of the
+ two datasets being compared. This is done by fitting a function to the
+ distribution of alignment e-values over sequence lengths. The function
+ provides the e-value cutoff for a sequence of given length.
+Ruby-Versions: all

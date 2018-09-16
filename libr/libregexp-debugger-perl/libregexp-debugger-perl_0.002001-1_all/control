@@ -1,0 +1,23 @@
+Package: libregexp-debugger-perl
+Version: 0.002001-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 174
+Depends: perl
+Recommends: libjson-xs-perl | libjson-perl | libyaml-syck-perl, libio-prompter-perl (>= 0.004000), libterm-readkey-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Regexp-Debugger
+Description: Perl module to visually debug regexes in-place
+ Regexp::Debugger is a module that helps tame unruly regexes by
+ providing live interactive run-time visualizations of any regex in a
+ Perl code. The debugger allows one to track capture variables, follow
+ recursive subpattern matches, set break-points within a regex match,
+ and even step backwards through the matching process to work out
+ exactly where things started going so horribly wrong.
+ .
+ When you load this module, any regex in the same lexical scope will be
+ visually (and interactively) debugged as it matches.
+ .
+ In addition to the Perl module, the package also contains the
+ module's commandline frontend rxrx.

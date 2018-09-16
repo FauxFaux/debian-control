@@ -1,0 +1,28 @@
+Package: openprinting-ppds
+Source: foomatic-db
+Version: 20180604-1
+Architecture: all
+Maintainer: Debian Printing Group <debian-printing@lists.debian.org>
+Installed-Size: 6189
+Depends: python3:any, xz-utils
+Recommends: cups-filters (>= 1.0.42) | foomatic-filters, cups, cups-client
+Suggests: hpijs-ppds
+Breaks: cups (<< 1.5.0-3~)
+Section: text
+Priority: optional
+Homepage: http://www.openprinting.org/
+Description: OpenPrinting printer support - PostScript PPD files
+ This package includes a collection of free PostScript Printer Description
+ files for PostScript (and clone) printers from various manufacturers, as
+ distributed by OpenPrinting.
+ .
+ If you have non-PostScript printers, the foomatic-db-compressed-ppds (or
+ foomatic-db and foomatic-db-engine), hplip and the
+ printer-driver-* packages are the ones you need; this package
+ won't be of much help to you.
+ .
+ Some manufacturers distribute PPD files for their printers under
+ non-free licenses; those are not included in this package, but may be
+ available from the manufacturer's website, included on a CD or
+ other media with the printer, or downloadable from the OpenPrinting
+ web site (even automatically if the printer setup tool supports it).

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+PGBINDIR=/usr/lib/postgresql/10/bin
+
+case "$1" in
+  remove|deconfigure)
+    update-alternatives --quiet --remove pg_filedump $PGBINDIR/pg_filedump
+    ;;
+esac
+
+
+

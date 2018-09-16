@@ -1,0 +1,31 @@
+#!/bin/sh -e
+
+is_diverted() {
+  if [ "$(dpkg-divert --list "$1")" ]; then
+    return 0
+  fi
+
+  # not installed
+  return 1
+}
+
+remove_diversion() {
+  local file="$1"
+
+  if ! is_diverted $file; then return; fi
+  dpkg-divert --package $DPKG_MAINTSCRIPT_PACKAGE --remove --rename $file
+}
+
+undivert_files() {
+  local files="/usr/include/crypt.h /usr/lib/x86_64-linux-gnu/libcrypt.a /usr/lib/x86_64-linux-gnu/libcrypt.so /usr/share/man/man3/crypt.3.gz /usr/share/man/man3/crypt_r.3.gz"
+  for file in $files; do remove_diversion $file; done
+}
+
+case "$1" in
+    remove|abort-install|disappear)
+      undivert_files
+    ;;
+esac
+
+
+

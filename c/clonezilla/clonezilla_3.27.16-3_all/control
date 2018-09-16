@@ -1,0 +1,25 @@
+Package: clonezilla
+Version: 3.27.16-3
+Architecture: all
+Maintainer: Georges Khaznadar <georgesk@debian.org>
+Installed-Size: 2982
+Depends: drbl (>> 2.20.11-5), file, pigz, gdisk, bc, dialog, fdisk | util-linux (<< 2.29.2-3~), e2fsprogs
+Recommends: partclone, partimage
+Suggests: openssh-client, cifs-utils, udpcast, sshfs
+Section: admin
+Priority: extra
+Homepage: http://clonezilla.org
+Description: bare metal backup and recovery of disk drives
+ Clonezilla is an OpenSource clone system (OCS) solution with
+ unicasting and multicasting.
+ .
+ Clonezilla, based on drbl, partclone and udpcast, allows you to do
+ bare metal backup and recovery. This package provides Clonezilla SE
+ (server edition) which is for massive deployment: it can clone many
+ (40 plus!) computers simultaneously.
+ .
+ Clonezilla saves and restores only used blocks in the harddisk. This
+ increases the clone efficiency. At the NCHC's Classroom C, Clonezilla
+ SE was used to clone 41 computers simultaneously. It took only about
+ 10 minutes to clone a 5.6 GBytes system image to all 41 computers via
+ multicasting.

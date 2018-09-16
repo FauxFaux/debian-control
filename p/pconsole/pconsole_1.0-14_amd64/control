@@ -1,0 +1,35 @@
+Package: pconsole
+Version: 1.0-14
+Architecture: amd64
+Maintainer: Axel Beckert <abe@debian.org>
+Installed-Size: 90
+Depends: debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.4)
+Suggests: sudo, xterm | x-terminal-emulator
+Section: utils
+Priority: optional
+Homepage: https://github.com/walterdejong/pconsole
+Description: parallel interactive shell console
+ pconsole allows you to connect to each node of your cluster (e.g. via
+ ssh or rsh) simultaneously by spawning one terminal per host or
+ job. Alternatively you can even connect to already existing terminal
+ sessions.
+ .
+ You can type your administrative commands either in a specialized
+ window that 'multiplies' the input to each of the connections you
+ have opened or use each of the connected terminals in case one host
+ or job needs some additional commands to be typed.
+ .
+ pconsole is best run from within X Window, although it is possible to
+ employ it without X (in console mode) as well.  You need to install
+ pconsole on only 1 machine in the cluster, this would usually be your
+ central administrative node.
+ .
+ pconsole's X automatisms work well with window-managers which offer a
+ smart placement mode without resizing new windows or with a tiling
+ mode which resizes all windows to the same size.
+ .
+ It is known to work very well with FVWM and has proven less usable
+ with Awesome or Ratpoison. For usage with window-managers focussed on
+ full-screen applications like ratpoison, for parallel interactive SSH
+ sessions MultiSSH (package "mssh") is probably be the better choice
+ due to managing all SSH sessions in one application window.

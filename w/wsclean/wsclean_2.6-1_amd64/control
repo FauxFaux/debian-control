@@ -1,0 +1,20 @@
+Package: wsclean
+Version: 2.6-1
+Architecture: amd64
+Maintainer: Debian Astro Team <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 51
+Depends: libboost-system1.62.0, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), libwsclean2
+Suggests: wsclean-dev
+Section: science
+Priority: optional
+Homepage: https://sourceforge.net/projects/wsclean/
+Description: Fast generic widefield interferometric imager
+ WSClean (w-stacking clean) is a fast generic widefield imager. It uses the
+ w-stacking algorithm and can make use of the w-snapshot algorithm. As of
+ Feb 2014, it is 2-12 times faster than CASA's w-projection, depending on the
+ array configuration. It supports full-sky imaging and proper beam correction
+ for homogeneous dipole arrays such as the MWA.
+ .
+ WSClean allows Hogbom and Cotton-Schwab cleaning, and can clean polarizations
+ joinedly. All operations are performed on the CPU (it is not specialized for
+ GPUs).

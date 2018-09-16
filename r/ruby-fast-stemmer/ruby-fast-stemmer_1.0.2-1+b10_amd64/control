@@ -1,0 +1,19 @@
+Package: ruby-fast-stemmer
+Source: ruby-fast-stemmer (1.0.2-1)
+Version: 1.0.2-1+b10
+Architecture: amd64
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 38
+Depends: libc6 (>= 2.4), libgmp10, libruby2.5 (>= 2.5.0~preview1), ruby (>= 1:2.5~0), ruby (<< 1:2.6~)
+Conflicts: ruby-stemmer
+Section: ruby
+Priority: optional
+Homepage: http://github.com/romanbsd/fast-stemmer
+Description: Fast Porter stemmer based on a C version of algorithm for Ruby
+ Fast-stemmer is simply a wrapping around multithreaded Porter stemming
+ algorithm.
+ .
+ This gem adds a String::stem method, and it's in order of magnitude
+ faster (and uses much less memory) than the pure Ruby implementation of
+ stemmer.
+Ruby-Versions: ruby2.5

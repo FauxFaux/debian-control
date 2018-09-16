@@ -1,0 +1,17 @@
+Package: ngetty
+Version: 1.1-3.1
+Architecture: amd64
+Maintainer: NIIBE Yutaka <gniibe@fsij.org>
+Installed-Size: 84
+Depends: lsb-base (>= 3.0-6)
+Built-Using: dietlibc (= 0.34~cvs20160606-8)
+Section: comm
+Priority: optional
+Homepage: http://riemann.fmi.uni-sofia.bg/ngetty/
+Description: getty replacement - one single daemon for all consoles
+ Ngetty is a daemon that starts login sessions on virtual console
+ terminals, on demand.  It is a good replacement for all those getty
+ processes started from init that, most of the time, are only taking
+ up memory.  Since it is compiled statically with dietlibc, the ngetty
+ binary size is only about 2k and uses considerably less memory than a
+ usual getty implementations.

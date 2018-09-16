@@ -1,0 +1,15 @@
+Package: patroni
+Version: 1.4.4-2
+Architecture: all
+Maintainer: Debian PostgreSQL Maintainers <team+postgresql@tracker.debian.org>
+Installed-Size: 932
+Depends: python3-cdiff, python3-click (>= 4.1), python3-dateutil, python3-prettytable (>= 0.7), python3-psutil, python3-psycopg2 (>= 2.6.1), python3-requests, python3-six (>= 1.7), python3-tzlocal, python3-urllib3, python3-yaml, python3:any (>= 3.5~), lsb-base (>= 3.0-6)
+Suggests: postgresql, etcd-server | consul | zookeeperd, haproxy
+Section: database
+Priority: optional
+Homepage: https://github.com/zalando/patroni
+Description: Template for PostgreSQL High Availability
+ Patroni is a template for a customized, high-availability PostgreSQL solution
+ using Python and a distributed configuration store (ZooKeeper, etcd or
+ Consul). It provides a REST API on each Postgres node of the cluster allowing
+ for remote management and monitoring.

@@ -1,0 +1,15 @@
+Package: libfile-find-wanted-perl
+Version: 1.00-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 59
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/File-Find-Wanted/
+Description: more obvious wrapper around File::Find
+ File::Find::Wanted provides a find_wanted() function, which does what
+ File::Find's find() does but in a more obvious way: To get a list of all
+ files ending in .jpg, simply call
+ .
+    @files = find_wanted( sub { -f && /\.jpg$/ }, $dir );

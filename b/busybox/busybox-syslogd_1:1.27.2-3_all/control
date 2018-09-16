@@ -1,0 +1,30 @@
+Package: busybox-syslogd
+Source: busybox
+Version: 1:1.27.2-3
+Architecture: all
+Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Installed-Size: 60
+Depends: busybox (>> 1:1.27.2) | busybox-static (>> 1:1.27.2), lsb-base
+Conflicts: linux-kernel-log-daemon, system-log-daemon
+Provides: linux-kernel-log-daemon, system-log-daemon
+Section: utils
+Priority: optional
+Homepage: http://www.busybox.net
+Description: Provides syslogd and klogd using busybox
+ The system log daemon is responsible for providing logging of
+ messages received from programs and facilities on the local host as
+ well as from remote hosts.
+ .
+ The kernel log daemon listens to kernel message sources and is
+ responsible for prioritizing and processing operating system
+ messages.
+ .
+ The busybox implementation of the syslogd is particular useful on
+ embedded, diskless (netboot) or flash disk based systems because it
+ can use a fixed size ring buffer for logging instead of saving logs
+ to the disk or sending it to remote logging servers. The ring buffer
+ can be read using the (also busybox based) command logread.
+ .
+ This package provides the glue to the busybox syslogd and klogd to be
+ used in the system by providing the appropriate symbolic links and
+ scripts.

@@ -1,0 +1,15 @@
+Package: fusesmb
+Version: 0.8.7-1.4
+Architecture: amd64
+Maintainer: Samuel Mimram <smimram@debian.org>
+Installed-Size: 88
+Depends: fuse, samba-common, samba-common-bin, libc6 (>= 2.14), libfuse2 (>= 2.5), libsmbclient (>= 2:4.0.3+dfsg1)
+Section: utils
+Priority: optional
+Description: filesystem client based on the SMB file transfer protocol
+ fusesmb is a filesystem client based on the SMB file transfer protocol. This
+ gives the ability to transparently exchange files with Microsoft Windows
+ servers and Unix servers running Samba.
+ .
+ It is based on FUSE (userspace filesystem framework for Linux), thus you will
+ have to prepare fuse kernel module to be able to use it.

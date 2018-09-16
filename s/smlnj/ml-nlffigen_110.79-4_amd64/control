@@ -1,0 +1,17 @@
+Package: ml-nlffigen
+Source: smlnj
+Version: 110.79-4
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 2077
+Depends: libckit-smlnj (= 110.79-4), libsmlnj-smlnj (= 110.79-4)
+Section: devel
+Priority: optional
+Homepage: http://www.smlnj.org/
+Description: ML generator for C glue code
+ This tool reads in C source code and outputs ML code and a CM
+ description file for use with the ML "No Longer Foreign Function
+ Interface" library. This tool works by separating each top-level C
+ declaration into a new ML source file. For large programs, this
+ puts some strain on the SML Compilation Manager, but this should only
+ marginally increase the program run-time.

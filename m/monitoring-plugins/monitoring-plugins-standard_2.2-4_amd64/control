@@ -1,0 +1,25 @@
+Package: monitoring-plugins-standard
+Source: monitoring-plugins
+Version: 2.2-4
+Architecture: amd64
+Maintainer: Debian Nagios Maintainer Group <pkg-nagios-devel@lists.alioth.debian.org>
+Installed-Size: 855
+Depends: monitoring-plugins-basic, ucf, libc6 (>= 2.15)
+Recommends: bind9-host | host, dnsutils, libnet-snmp-perl, rpcbind, smbclient, snmp, libdbi1 (>= 0.8.4), libldap-2.4-2 (>= 2.4.7), libmariadbclient18 (>= 10.1.28), libpq5, libradcli4, zlib1g (>= 1:1.1.4)
+Suggests: fping, icinga | icinga2, postfix | sendmail-bin | exim4-daemon-heavy | exim4-daemon-light, qstat
+Section: net
+Priority: optional
+Homepage: https://www.monitoring-plugins.org
+Description: Plugins for nagios compatible monitoring systems (standard)
+ Plugins for nagios compatible monitoring systems like Naemon and Icinga. It
+ contains the following plugins:
+ .
+  check_breeze, check_dbi, check_dig, check_disk_smb, check_dns,
+  check_flexlm, check_fping, check_game, check_hpjd, check_ifoperstatus,
+  check_ifstatus, check_ldap, check_ldaps, check_mailq, check_mysql,
+  check_mysql_query, check_oracle, check_pgsql, check_radius, check_rpc,
+  check_snmp, check_wave
+ .
+ This package provides the suite of plugins that are most likely to be
+ useful on a central monitoring host. Some scripts need more packages installed
+ to work, which is implemented as recommends.

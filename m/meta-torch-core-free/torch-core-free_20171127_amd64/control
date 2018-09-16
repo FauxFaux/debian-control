@@ -1,0 +1,48 @@
+Package: torch-core-free
+Source: meta-torch-core-free
+Version: 20171127
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 9
+Depends: luajit (>= 2.1.0~), luarocks, lua-cjson, lua-filesystem, lua-penlight, lua-torch-cwrap, lua-torch-paths, lua-torch-sys, lua-torch-xlua, lua-torch-torch7, lua-torch-nn, lua-torch-graph, lua-torch-nngraph, lua-torch-optim, lua-torch-sundown, lua-torch-dok, lua-torch-trepl, torch-trepl, lua-torch-image, libopenblas-base | libatlas-base | libblas.so.3
+Recommends: lua-torch-cutorch
+Suggests: lua-torch-paths-dev, lua-torch-torch7-dev, libtorch-th-dev, libtorch-luat-dev
+Section: metapackages
+Priority: optional
+Homepage: http://torch.ch
+Description: Scientific Computing Framework For Luajit (Core Components)
+ Torch is a scientific computing framework with wide support for machine
+ learning algorithms that puts GPUs first. It is easy to use and efficient,
+ thanks to an easy and fast scripting language, LuaJIT, and an underlying
+ C/CUDA implementation.
+ .
+ A summary of core features:
+  * a powerful N-dimensional array
+  * lots of routines for indexing, slicing, transposing, ...
+  * amazing interface to C, via LuaJIT
+  * linear algebra routines
+  * neural network, and energy-based models
+  * numeric optimization routines
+  * Fast and efficient GPU support
+  * Embeddable, with ports to iOS, Android and FPGA backends
+ .
+ The goal of Torch is to have maximum flexibility and speed in building
+ your scientific algorithms while making the process extremely simple.
+ Torch comes with a large ecosystem of community-driven packages in
+ machine learning, computer vision, signal processing, parallel
+ processing, image, video, audio and networking among others, and
+ builds on top of the Lua community.
+ .
+ At the heart of Torch are the popular neural network and optimization
+ libraries which are simple to use, while having maximum flexibility
+ in implementing complex neural network topologies. You can build
+ arbitrary graphs of neural networks, and parallelize them over CPUs
+ and GPUs in an efficient manner.
+ .
+ This package is a metapackage, which pulls the following core and *free*
+ modules for you: cwrap, paths, sys, xlua, torch7, nn, graph, nngraph,
+ optim, sundown, dok, trepl, image.
+ .
+ Note that cutorch (CUDA backend for torch) and cunn (CUDA backend for
+ neural network) are not present in this metapacakge - they will be
+ shipped in the torch-core-contrib metapackage in the future.

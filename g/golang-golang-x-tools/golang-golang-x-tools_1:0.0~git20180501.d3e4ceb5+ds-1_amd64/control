@@ -1,0 +1,24 @@
+Package: golang-golang-x-tools
+Version: 1:0.0~git20180501.d3e4ceb5+ds-1
+Architecture: amd64
+Maintainer: pkg-go <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 86392
+Depends: libjs-jquery, libjs-jquery-ui, libc6 (>= 2.3.2)
+Recommends: golang-doc
+Breaks: golang-go (<< 2:1.2), golang-go.tools (<< 1:0.0~git20150716.0.87156cb~)
+Replaces: golang-go (<< 2:1.2), golang-go.tools (<< 1:0.0~git20150716.0.87156cb~)
+Provides: golang-go.tools
+Built-Using: golang-1.10 (= 1.10.1-3), golang-golang-x-net-dev (= 1:0.0+git20180124.0ed95ab+dfsg-1)
+Section: devel
+Priority: optional
+Homepage: http://golang.org/x/tools
+Description: supplementary Go tools
+ This subrepository holds the source for various packages and tools that
+ support the Go programming language.
+ .
+ Some of the tools, godoc and vet for example, used to be included in the
+ golang-go package. Others, including the Go oracle and the test coverage tool,
+ can be fetched with "go get".
+ .
+ Packages include a type-checker for Go and an implementation of the Static
+ Single Assignment form (SSA) representation for Go programs.

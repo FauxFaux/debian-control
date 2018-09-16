@@ -1,0 +1,24 @@
+Package: ircd-hybrid
+Version: 1:8.2.24+dfsg.1-1
+Architecture: amd64
+Maintainer: Dominic Hargreaves <dom@earth.li>
+Installed-Size: 1638
+Pre-Depends: debconf (>= 0.5) | debconf-2.0
+Depends: libc6 (>= 2.14), libgnutls30 (>= 3.5.6), libltdl7 (>= 2.4.6), openssl, lsb-base (>= 3.0-6)
+Recommends: whois
+Suggests: anope
+Conflicts: dancer-ircd, ircd-irc2, ircd-ircu, oftc-hybrid
+Provides: ircd
+Section: net
+Priority: optional
+Homepage: http://ircd-hybrid.com/
+Description: high-performance secure IRC server
+ ircd-hybrid is a stable, high-performance IRC server that features:
+ .
+  * SSL client support and server-to-server RSA encryption;
+  * Compressed server links;
+  * Channel exceptions (+e) and invitation exceptions (+I);
+  * New configuration file format;
+  * Halfops (+h) and anti-spam user mode +g;
+  * Dynamically loadable modules;
+  * Channel and nickname RESV's (reservations).

@@ -1,0 +1,20 @@
+Package: python3-signedjson
+Source: python-signedjson
+Version: 1.0.0+git20151019-1
+Architecture: all
+Maintainer: Matrix Packaging Team <pkg-matrix-maintainers@lists.alioth.debian.org>
+Installed-Size: 32
+Depends: python3-canonicaljson (>= 1.0.0), python3-nacl (>= 0.3.0), python3-unpaddedbase64 (>= 1.0.1), python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/matrix-org/python-signedjson
+Description: sign JSON with Ed25519 signatures in Python 3
+ A module to sign JSON objects with ED25519 signatures.
+ .
+ * More than one entity can sign the same object.
+ * Each entity can sign the object with more than one key making it easier to
+   rotate keys
+ * ED25519 can be replaced with a different algorithm.
+ * Unprotected data can be added to the object under the "unsigned" key.
+ .
+ This package is for Python 3.

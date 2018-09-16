@@ -1,0 +1,19 @@
+Package: libtest-exit-perl
+Version: 0.11-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 48
+Depends: perl, libreturn-multilevel-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Exit/
+Description: Perl module for testing whether code exits without terminating
+ Test::Exit provides some simple tools for testing that code does or does not
+ call exit(), while stopping code that does exit at the point of the exit().
+ Currently it does so by means of exceptions, so it will not function properly
+ if the code under test calls exit() inside of an eval block or string.
+ .
+ The only criterion tested is that the supplied code does or does not call
+ exit(). If the code throws an exception, the exception will be propagated and
+ you will have to call it yourself. die()ing is not exiting for the purpose of
+ these tests.

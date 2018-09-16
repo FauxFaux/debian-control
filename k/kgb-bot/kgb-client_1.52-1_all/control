@@ -1,0 +1,28 @@
+Package: kgb-client
+Source: kgb-bot
+Version: 1.52-1
+Architecture: all
+Maintainer: Debian KGB Maintainers <kgb-bot@packages.debian.org>
+Installed-Size: 255
+Depends: perl, libclass-accessor-perl, libjson-xs-perl, libjson-rpc-perl, libsoap-lite-perl, libsvn-perl, libyaml-perl
+Recommends: libdpkg-perl, libfile-touch-perl, libwww-perl, libwww-shorten-perl
+Suggests: kgb-bot
+Breaks: kgb-client-git (<= 1.28-1~)
+Replaces: kgb-client-git (<= 1.28-1~)
+Section: devel
+Priority: optional
+Homepage: https://salsa.debian.org/kgb-team/kgb/wikis/home
+Description: client for KGB (IRC collaboration bot)
+ KGB is an IRC bot, helping people work together by notifying an IRC channel
+ when a commit occurs.
+ .
+ It supports multiple repositories/IRC channels and is fully configurable.
+ .
+ This package contains the client-side program, kgb-client, which is supposed
+ to be used as an hook in your version control system and sends the
+ notifications to the KGB daemon.
+ .
+ Currently supported version control systems are:
+  * Git
+  * Subversion
+  * CVS

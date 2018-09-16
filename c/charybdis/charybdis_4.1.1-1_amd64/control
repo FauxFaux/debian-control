@@ -1,0 +1,39 @@
+Package: charybdis
+Version: 4.1.1-1
+Architecture: amd64
+Maintainer: Antoine Beaupré <anarcat@debian.org>
+Installed-Size: 3613
+Depends: adduser, lsb-base (>= 3.0-6), libc6 (>= 2.15), libltdl7 (>= 2.4.6), libmbedcrypto1 (>= 2.7), libmbedtls10 (>= 2.0), libmbedx509-0 (>= 2.0), libsqlite3-0 (>= 3.5.9), zlib1g (>= 1:1.1.4)
+Provides: ircd
+Section: net
+Priority: optional
+Homepage: http://atheme.org/projects/charybdis.html
+Description: fast, scalable irc server
+ Charybdis is a highly scalable IRC server which presently implements
+ the IRCv3.1 client protocol with some additional components of
+ IRCv3.2. Development of charybdis began in 2005 as a proposed
+ replacement to freenode’s hyperion ircd, designed for use by any
+ network, with roots in ircd-ratbox and ircu. Over time, charybdis has
+ developed, tested and demonstrated many of the features commonly seen
+ in modern IRC networks.
+ .
+ Interesting features that Charybdis has include:
+ .
+  * SASL support — charybdis was the first IRC server to implement SASL
+    support, resulting in the IRCv3 SASL standards.
+  * DNS blocklist support
+  * Augmented banlist criteria through “extbans”
+  * Channel forwarding (channel mode +f)
+  * Optional hostname/IP cloaking (through modules, either usermode +h or
+    +x)
+  * Colorcode stripping (channel mode +c)
+  * CALLERID (user mode +g) with automatic accept when you send a PM
+  * TLS encrypted client and server connections
+  * Multi-process sandbox architecture for enhanced security, scalability
+    and robustness
+  * Easy to understand configuration
+  * A complete user and operator’s manual
+ .
+ Many of the largest networks in the world use charybdis-based IRC
+ servers, including freenode, EsperNet, DarkMyst and others, because
+ of it’s proven scalability, security and robustness track records

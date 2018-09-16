@@ -1,0 +1,20 @@
+Package: dhcpd-pools
+Version: 2.29-1
+Architecture: amd64
+Maintainer: Martijn van Brummelen <mvb@debian.org>
+Installed-Size: 112
+Depends: libc6 (>= 2.14)
+Enhances: isc-dhcp-server
+Section: net
+Priority: optional
+Homepage: http://dhcpd-pools.sf.net/
+Description: ISC dhcpd lease analysis and reporting tool
+ This is dhcpd-pools ISC dhcp shared network and pool range usage analysis.
+ Purpose of command is to count usage ratio of each IP range and shared network
+ pool which ISC dhcpd is in control of. Users of the command are most likely
+ ISPs and other organizations that have large IP space.
+ .
+ Program is written C. Design goal is to get analysis done quickly where there
+ is lots of data. On cheap laptop the speed of analysis is roughly 100k leases
+ per second. Number of ranges, or shared networks, does not make any significant
+ difference in getting analysis done.

@@ -1,0 +1,20 @@
+Package: libtest-needs-perl
+Version: 0.002005-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 25
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Needs
+Description: module to skip tests when modules are not available
+ Test::Needs allows one to skip test scripts if modules are not available. The
+ requested modules will be loaded, and optionally have their versions checked.
+ If the module is missing, the test script will be skipped. Modules that are
+ found but fail to compile will exit with an error rather than skip.
+ .
+ If used in a subtest, the rest of the subtest will be skipped.
+ .
+ If the "RELEASE_TESTING" environment variable is set, the tests will
+ fail rather than skip. Subtests will be aborted, but the test script
+ will continue running after that point.

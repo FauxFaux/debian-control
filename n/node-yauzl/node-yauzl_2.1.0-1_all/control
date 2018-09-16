@@ -1,0 +1,18 @@
+Package: node-yauzl
+Version: 2.1.0-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 57
+Depends: nodejs, node-pend (>= 1.1.3), node-fd-slicer
+Section: web
+Priority: extra
+Homepage: https://github.com/thejoshwolfe/yauzl
+Description: yet another unzip library - Node.js module
+ yauzl is a Node.js module which provides the ability to read from zip files.
+ It follows the spec by reading the central directory for file metadata instead
+ of scanning for local file headers which might be deleted. yauzl also keeps
+ memory usage low by not attempting to buffer entire files in RAM at once.
+ yauzl is designed to generate an error instead of crashing when encountering
+ corrupted or malicious zip files and has a robust test suite to ensure this.
+ .
+ Node.js is an event-based server-side JavaScript engine.

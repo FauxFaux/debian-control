@@ -1,0 +1,33 @@
+Package: python-django-anymail
+Source: django-anymail
+Version: 3.0-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 330
+Depends: python-django, python-requests, python-six, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Suggests: python-sparkpost, python-boto3
+Section: contrib/python
+Priority: optional
+Homepage: https://github.com/anymail/django-anymail
+Description: Django email backend for multiple ESPs (Python 2)
+ Anymail integrates several transactional email service providers (ESPs) into
+ Django, with a consistent API that lets you use ESP-added features without
+ locking your code to a particular ESP.
+ .
+ It currently fully supports Amazon SES (requires python-boto3), Mailgun,
+ Mailjet, Postmark, SendinBlue, SendGrid, and SparkPost, and has limited
+ support for Mandrill
+ .
+ Anymail normalizes ESP functionality so it "just works" with Django's
+ built-in `django.core.mail` package. It includes:
+ .
+   * Support for HTML, attachments, extra headers, and other features of
+     Django's built-in email
+   * Extensions that make it easy to use extra ESP functionality, like tags,
+     metadata, and tracking, with code that's portable between ESPs
+   * Simplified inline images for HTML email
+   * Normalized sent-message status and tracking notification, by connecting
+     your ESP's webhooks to Django signals
+   * "Batch transactional" sends using your ESP's merge and template features
+ .
+ This is the Python 2 version of the package.

@@ -1,0 +1,24 @@
+Package: libostree-dev
+Source: ostree
+Version: 2018.8-1
+Architecture: amd64
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 765
+Depends: gir1.2-ostree-1.0 (= 2018.8-1), libglib2.0-dev, libostree-1-1 (= 2018.8-1), pkg-config
+Suggests: libostree-doc
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/ostreedev/ostree/
+Description: Development files for the libostree library
+ libostree is a library for managing bootable, immutable, versioned
+ filesystem trees. It is like git in that it checksums individual files
+ and has a content-addressed object store; unlike git, it "checks out"
+ the files using hardlinks into an immutable directory tree. This
+ can be used to provide atomic upgrades with rollback, history and
+ parallel-installation, particularly useful on "fixed purpose" systems
+ such as embedded devices. It is also used by the Flatpak application
+ runtime system.
+ .
+ This package contains development headers and the pkg-config file for
+ libostree.

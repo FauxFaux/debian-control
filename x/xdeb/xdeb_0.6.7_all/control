@@ -1,0 +1,19 @@
+Package: xdeb
+Version: 0.6.7
+Architecture: all
+Maintainer: Wookey <wookey@debian.org>
+Installed-Size: 137
+Depends: python:any (>= 2.7.5-5~), python-debian (>= 0.1.15~), dpkg-dev (>= 1.15), lintian (>= 2.3.0), devscripts (>= 2.10.41), dpkg-cross (>= 2.6.3), apt-utils (>= 0.8.11), python-apt (>= 0.7.91), wget, build-essential, sudo
+Recommends: gcc, fakeroot
+Breaks: apt (<< 0.7.26~exp6)
+Section: devel
+Priority: optional
+Description: Cross-build tool for Debian packages
+ xdeb allows building a set of packages, using either native or cross
+ compilation.  It is based on dpkg-cross and includes heuristics to map
+ package names to the build or host architecture.
+ .
+ xdeb will build source packages from either APT or the current
+ directory and can optionally convert existing natively built packages
+ to satisfy build-dependencies.  It will also schedule builds in the
+ proper order as specified in build-dependencies.

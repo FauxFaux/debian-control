@@ -1,0 +1,19 @@
+Package: node-run-queue
+Version: 1.0.3-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 19
+Depends: nodejs, node-aproba (>= 1.1.1)
+Section: javascript
+Priority: optional
+Homepage: https://npmjs.com/package/run-queue
+Description: promise based dynamic priority queue runner
+ A promise based, dynamic priority queue runner, with concurrency limiting.
+ .
+ The concurrency means that processes don't finish in order, because some take
+ longer than others. Each priority level must finish entirely before the
+ next priority level is run. Priorities essentially represent distinct job
+ queues. All jobs in a queue must complete before the next highest priority job
+ queue is executed. Lowest is executed first.
+ .
+ Node.js is an event-based server-side JavaScript engine.

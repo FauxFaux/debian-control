@@ -1,0 +1,17 @@
+Package: nss-passwords
+Source: nss-passwords (0.2-2)
+Version: 0.2-2+b2
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 907
+Depends: pinentry-curses | pinentry, libc6 (>= 2.17), libncurses6 (>= 6), libnspr4 (>= 2:4.9-2~), libnss3 (>= 2:3.13.4-2~), libsqlite3-0 (>= 3.5.9), libtinfo6 (>= 6)
+Section: misc
+Priority: optional
+Homepage: https://github.com/glondu/nss-passwords
+Description: read passwords from a Mozilla keyring
+ This program reads passwords from keyrings used by Mozilla products,
+ such as Firefox and Thunderbird. It can run entirely in text mode.
+ .
+ This program works with SQLite-based keyrings (signons.sqlite), used
+ in recent versions of Firefox. Text-based keyrings can be read with
+ pwdecrypt, from libnss3-tools package.

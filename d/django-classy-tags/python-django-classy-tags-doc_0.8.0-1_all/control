@@ -1,0 +1,27 @@
+Package: python-django-classy-tags-doc
+Source: django-classy-tags
+Version: 0.8.0-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 318
+Depends: libjs-sphinxdoc (>= 1.0)
+Section: doc
+Priority: optional
+Homepage: https://github.com/ojii/django-classy-tags
+Description: Class based template tags for Django projects (Documentation)
+ django-classy-tags is an approach at making writing template tags in
+ Django easier, shorter and more fun. It provides an extensible
+ argument parser which reduces most of the boiler plate code you
+ usually have to write when coding custom template tags.
+ .
+ django-classy-tags does no magic by design. Thus you will not get
+ automatic registering/loading of your tags like other solutions
+ provide. You will not get automatic argument guessing from function
+ signatures but rather you have to declare what arguments your tag
+ accepts. There is no magic in your template tag class either,
+ it’s just a subclass of django.template.Node which invokes a parser
+ class to parse the arguments when it’s initialized and resolves those
+ arguments into keyword arguments in it’s render method and calls its
+ render_tag method with those keyword arguments.
+ .
+ This package contains the documentation.

@@ -1,0 +1,20 @@
+Package: dpm-srm-server-mysql
+Source: lcgdm
+Version: 1.10.0-2
+Architecture: amd64
+Maintainer: Mattias Ellert <mattias.ellert@physics.uu.se>
+Installed-Size: 1808
+Depends: libdpm1 (= 1.10.0-2), adduser, libc6 (>= 2.14), libcgsi-gsoap1, libgsoap-2.8.60, liblcgdm1, libmariadbclient18 (>= 10.1.28), libuuid1 (>= 2.16), finger
+Conflicts: dpm-mysql-srmv1 (<< 1.8.1.2-2~), dpm-mysql-srmv2 (<< 1.8.1.2-2~), dpm-mysql-srmv22 (<< 1.8.1.2-2~)
+Replaces: dpm-mysql-srmv1 (<< 1.8.1.2-2~), dpm-mysql-srmv2 (<< 1.8.1.2-2~), dpm-mysql-srmv22 (<< 1.8.1.2-2~)
+Provides: dpm-mysql-srmv1, dpm-mysql-srmv2, dpm-mysql-srmv22
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://glite.web.cern.ch/glite/
+Description: DPM SRM server with MySQL database backend
+ The LCG Disk Pool Manager (DPM) creates a storage element from a set
+ of disks. It provides several interfaces for storing and retrieving
+ data such as RFIO and SRM version 1, version 2 and version 2.2.
+ This package provides a DPM SRM server that uses MySQL as its
+ database backend.

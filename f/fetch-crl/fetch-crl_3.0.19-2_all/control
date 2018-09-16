@@ -1,0 +1,18 @@
+Package: fetch-crl
+Version: 3.0.19-2
+Architecture: all
+Maintainer: Mattias Ellert <mattias.ellert@physics.uu.se>
+Installed-Size: 138
+Depends: init-system-helpers (>= 1.51), perl:any, libwww-perl, openssl, lsb-base (>= 3.0-6)
+Section: net
+Priority: optional
+Homepage: https://wiki.nikhef.nl/grid/FetchCRL3
+Description: Downloads Certificate Revocation Lists
+ This tool and associated cron entry ensure that Certificate Revocation
+ Lists (CRLs) are periodically retrieved from the web sites of the
+ respective Certification Authorities.
+ .
+ The fetch-crl tool finds all *.crl_url files in the configured CRL
+ directory, downloads the CRLs listed in those files and saves them in
+ the same directory. The default configuration uses
+ /etc/grid-security/certificates as the CRL directory.

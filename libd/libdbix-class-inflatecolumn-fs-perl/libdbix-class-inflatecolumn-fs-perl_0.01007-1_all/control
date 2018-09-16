@@ -1,0 +1,20 @@
+Package: libdbix-class-inflatecolumn-fs-perl
+Version: 0.01007-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 72
+Depends: perl, libdbd-sqlite3-perl, libdbicx-testdatabase-perl, libdbix-class-perl, libdbix-class-uuidcolumns-perl (>= 0.02005), libpath-class-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/DBIx-Class-InflateColumn-FS/
+Description: Inflate/deflate columns to Path::Class::File objects
+ DBIx::Class::InflateColumn::FS provides DBIx::Class style column
+ inflation to a Path::Class::File object allowing file system storage
+ of BLOBS.
+ .
+ The storage path is specified with fs_column_path. Each file receives a
+ unique name, so the storage for all FS columns can share the same path.
+ .
+ Within the path specified by fs_column_path, files are stored in
+ sub-directories based on the first 2 characters of the unique file
+ names.

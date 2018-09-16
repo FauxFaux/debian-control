@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ]; then
+        CLOJUREVER=1.9
+        update-alternatives --remove clojure  /usr/bin/clojure${CLOJUREVER}
+        update-alternatives --remove clojurec /usr/bin/clojurec${CLOJUREVER}
+fi
+
+

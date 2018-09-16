@@ -1,0 +1,25 @@
+Package: golang-github-jacobsa-ogletest-dev
+Source: golang-github-jacobsa-ogletest
+Version: 0.0~git20150610-8
+Architecture: all
+Maintainer: pkg-go <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 126
+Depends: golang-github-jacobsa-oglematchers-dev, golang-github-jacobsa-oglemock-dev, golang-github-jacobsa-reqtrace-dev, golang-golang-x-net-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/jacobsa/ogletest
+Description: unit testing framework for Go
+ ogletest is a unit testing framework for Go with the following features:
+ .
+  * An extensive and extensible set of matchers for expressing expectations.
+  * Automatic failure messages; no need to say
+    t.Errorf("Expected %v, got %v"...).
+  * Clean, readable output that tells you exactly what you need to know.
+  * Built-in support for mocking through the oglemock package.
+  * Style and semantics similar to Google Test and Google JS Test.
+ .
+ It integrates with Go's built-in testing package, so it works with the go test
+ command, and even with other types of test within your package. Unlike the
+ testing package which offers only basic capabilities for signalling failures,
+ it offers ways to express expectations and get nice failure messages
+ automatically.

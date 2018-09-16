@@ -1,0 +1,20 @@
+Package: r-cran-bit64
+Version: 0.9-7-3
+Architecture: amd64
+Maintainer: Debian R Packages Maintainers <r-pkg-team@alioth-lists.debian.net>
+Installed-Size: 621
+Depends: r-base-core (>= 3.5.0-5), r-api-3.5, r-cran-bit (>= 1.1-12), libc6 (>= 2.4)
+Section: gnu-r
+Priority: optional
+Homepage: https://cran.r-project.org/package=bit64
+Description: GNU R S3 Class for Vectors of 64bit Integers
+ Package 'bit64' provides serializable S3 atomic 64bit (signed) integers.
+ These are useful for handling database keys and exact counting in +-2^63.
+ WARNING: do not use them as replacement for 32bit integers, integer64 are not
+ supported for subscripting by R-core and they have different semantics when
+ combined with double, e.g. integer64 + double => integer64.
+ Class integer64 can be used in vectors, matrices, arrays and data.frames.
+ Methods are available for coercion from and to logicals, integers, doubles,
+ characters and factors as well as many elementwise and summary functions.
+ Many fast algorithmic operations such as 'match' and 'order' support
+ interactive data exploration and manipulation and optionally leverage caching.

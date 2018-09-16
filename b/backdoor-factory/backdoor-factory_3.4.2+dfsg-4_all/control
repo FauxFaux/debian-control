@@ -1,0 +1,17 @@
+Package: backdoor-factory
+Version: 3.4.2+dfsg-4
+Architecture: all
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 735
+Depends: python3:any (>= 3.5~), curl, python3-capstone (>= 3.0), python3-pkg-resources (>= 39.2.0), python3-pefile, osslsigncode
+Section: utils
+Priority: optional
+Homepage: https://github.com/secretsquirrel/the-backdoor-factory
+Description: Patch 32/64 bits ELF & win32/64 binaries with shellcode
+ Injects shellcode into win32/64 PE files, 32/64bits ELF binaries, to continue
+ normal file execution (if the shellcode supports it), by patching the exe/dll
+ directly.
+ .
+ Some executables have built in protections, as such this will not work on all
+ ELF/PE files. It is advisable that you test target ELF/PE files before
+ deploying them to clients or using them in exercises

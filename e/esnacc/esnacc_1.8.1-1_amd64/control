@@ -1,0 +1,26 @@
+Package: esnacc
+Version: 1.8.1-1
+Architecture: amd64
+Maintainer: Balint Reczey <balint@balintreczey.hu>
+Installed-Size: 588
+Depends: libc6 (>= 2.14), libesnacc180
+Recommends: libesnacc-dev, esnacc-doc
+Suggests: automake
+Section: devel
+Priority: optional
+Homepage: https://esnacc.org
+Description: ASN.1 to C or C++ or IDL compiler
+ esnacc is short for "Enhanced Sample Neufeld ASN.1 to C Compiler" and ASN.1
+ stands for Abstract Syntax Notation One (ITU-T X.208/ISO 8824).
+ esnacc supports a subset of ASN.1 1988.
+ .
+ Given an ASN.1 source file(s) esnacc can produce:
+ .
+ 1. C routines for BER encoding, decoding, printing and freeing.
+ 2. C++ routines for BER encoding, decoding, and printing.
+ 3. A type table that can be used with C driver routines
+    for BER encoding, decoding, printing and freeing.
+ .
+ If you want to build esnacc based applications, you want to install
+ the libesnacc-dev package, too.  Your application will then depend on
+ the esnacc libraries, you find in the libesnacc180 package.

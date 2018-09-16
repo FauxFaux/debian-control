@@ -1,0 +1,21 @@
+Package: libclass-load-perl
+Version: 0.25-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 40
+Depends: perl, libdata-optlist-perl (>= 0.110), libmodule-implementation-perl, libmodule-runtime-perl, libpackage-stash-perl, libtry-tiny-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Class-Load
+Description: module for loading modules by name
+ "require EXPR" only accepts Class/Name.pm style module names, not
+ Class::Name. For that, Class::Load provides "load_class 'Class::Name'".
+ .
+ It's often useful to test whether a module can be loaded, instead of throwing
+ an error when it's not available. For that, Class::Load provides
+ "try_load_class 'Class::Name'".
+ .
+ Finally, sometimes it is important to know whether a particular class has
+ been loaded. Asking %INC is an option, but that will miss inner packages and
+ any class for which the filename does not correspond to the package name. For
+ that, this module provides "is_class_loaded 'Class::Name'".

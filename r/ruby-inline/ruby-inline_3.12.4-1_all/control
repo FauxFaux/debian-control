@@ -1,0 +1,20 @@
+Package: ruby-inline
+Version: 3.12.4-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 77
+Depends: rake, ruby | ruby-interpreter, ruby-all-dev
+Recommends: gcc | c-compiler
+Section: ruby
+Priority: optional
+Homepage: http://www.zenspider.com/ZSS/Products/RubyInline/
+Description: Ruby library for embedding C/++ external module code
+ Inline allows you to write foreign code within your ruby code. It
+ automatically determines if the code in question has changed and
+ builds it only when necessary. The extensions are then automatically
+ loaded into the class/module that defines it.
+ .
+ You can even write extra builders that will allow you to write inlined
+ code in any language. Use Inline::C as a template and look at
+ Module#inline for the required API.
+Ruby-Versions: all

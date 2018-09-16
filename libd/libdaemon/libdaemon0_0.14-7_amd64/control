@@ -1,0 +1,25 @@
+Package: libdaemon0
+Source: libdaemon
+Version: 0.14-7
+Architecture: amd64
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 46
+Depends: libc6 (>= 2.15)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://0pointer.de/lennart/projects/libdaemon/
+Description: lightweight C library for daemons - runtime library
+ libdaemon is a lightweight C library which eases the writing of UNIX daemons.
+ It consists of the following parts:
+ .
+  * Wrapper around fork() for correct daemonization of a process
+  * Wrapper around syslog() for simple log output to syslog or STDERR
+  * An API for writing PID files
+  * An API for serializing signals into a pipe for use with select() or poll()
+  * An API for running subprocesses with STDOUT and STDERR redirected to syslog
+ .
+ Routines like these are included in most of the daemon software available. It
+ is not simple to get these done right and code duplication is not acceptable.
+ .
+ This package includes the libdaemon run time shared library.

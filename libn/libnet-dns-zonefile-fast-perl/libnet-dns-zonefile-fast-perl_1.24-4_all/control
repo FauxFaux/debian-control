@@ -1,0 +1,22 @@
+Package: libnet-dns-zonefile-fast-perl
+Version: 1.24-4
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 72
+Depends: perl, libnet-dns-perl, libmime-base32-perl
+Breaks: dnssec-tools (<< 2.1.0-2~)
+Replaces: dnssec-tools (<< 2.1.0-2~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Net-DNS-ZoneFile-Fast
+Description: fast BIND-style zonefile parser on top of Net::DNS
+ The Net::DNS::ZoneFile::Fast module provides an ability to parse zone files
+ that BIND8 and BIND9 use, fast. Currently it provides a single function,
+ parse(), which returns a reference to an array of traditional Net::DNS::RR
+ objects, so that no new API has to be learned in order to manipulate zone
+ records.
+ .
+ Great care was taken to ensure that parse() does its job as fast as possible,
+ so it is interesting to use this module to parse huge zones. As an example
+ datapoint, it takes less than 5 seconds to parse a 2.2 MB zone with about
+ 72000 records on an Athlon XP 2600+ box.

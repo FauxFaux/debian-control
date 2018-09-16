@@ -1,0 +1,18 @@
+Package: krb5-sync-tools
+Source: krb5-sync
+Version: 3.1-2
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 134
+Depends: libipc-run-perl, libnet-remctl-perl, perl:any, libc6 (>= 2.26), libkadm5srv-mit11 (>= 1.15~beta1), libkrb5-3 (>= 1.10+dfsg~alpha1), libldap-2.4-2 (>= 2.4.7)
+Recommends: krb5-sync-plugin
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.eyrie.org/~eagle/software/krb5-sync/
+Description: Kerberos Active Directory synchronization tools
+ Provides tools to enable, disable, and set the password of an account in
+ a Windows Active Directory using the same configuration used by the
+ krb5-sync-plugin package.  These supporting tools are normally used to
+ handle queued changes created by the plugin that failed due to a
+ temporary error, but can be used on their own.

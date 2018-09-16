@@ -1,0 +1,22 @@
+Package: gtk3-nocsd
+Version: 3-1
+Architecture: all
+Maintainer: Christian Seiler <christian@iwakd.de>
+Installed-Size: 80
+Depends: libgtk3-nocsd0
+Section: x11
+Priority: extra
+Homepage: https://github.com/PCMan/gtk3-nocsd
+Description: Disable Gtk+ 3 client side decorations (CSD)
+ gtk3-nocsd LD_PRELOADs a small library to disable the client side
+ decorations (CSD) of Gtk+ 3.
+ .
+ Since Gtk+ 3.10, its developers added a so-called header bar or custom
+ title bar. With this and the client-side decoration, the original
+ title bar and window border provided by the window manager are
+ disabled by Gtk+. This makes all Gtk+ 3 programs look like alike, but
+ have different handling from other windows on non-GNOME desktops. Even
+ worse, this may break some window manager or compositors.
+ .
+ Unfortunately, there is no reliable way of turning off CSDs in Gtk+
+ directly. This library makes this possible.

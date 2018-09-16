@@ -1,0 +1,18 @@
+Package: tomb
+Version: 2.5+dfsg1-1
+Architecture: all
+Maintainer: Debian Security Tools Packaging Team <pkg-security-team@lists.alioth.debian.org>
+Installed-Size: 118
+Depends: cryptsetup-bin, e2fsprogs, gnupg, pinentry-curses | pinentry, sudo, zsh
+Section: utils
+Priority: optional
+Homepage: https://www.dyne.org/software/tomb/
+Description: crypto undertaker
+ Tomb is a free and easy to operate desktop application for fairly strong
+ encryption of personal files. A tomb is like a locked folder that can be
+ transported and hidden in filesystems; its keys are password protected and can
+ be kept separate, for instance keeping the tomb file in your computer's
+ harddisk and the key file on a USB stick.
+ .
+ Tomb relies on dm-crypt (and cryptsetup) as an encryption backend using the
+ aes-cbc-essiv:sha256 cypher.

@@ -1,0 +1,20 @@
+Package: vdmfec
+Source: vdmfec (1.0-2)
+Version: 1.0-2+b2
+Architecture: amd64
+Maintainer: Andreas Tille <tille@debian.org>
+Installed-Size: 97
+Depends: libc6 (>= 2.14)
+Section: misc
+Priority: extra
+Homepage: http://members.tripod.com/professor_tom/archives/
+Description: recover lost blocks using Forward Error Correction
+ VDMFEC implements Block ECC using a Forward Error Correction
+ (FEC) code based on Vandermonde (VDM) matrices in GF(2^8) due
+ to Luigi Rizzo. Given the FEC parameters K and N, with N
+ greater than K, N blocks are written for every K input blocks
+ in such a way that any K blocks are sufficient to reconstruct
+ the data. That is, up to N - K blocks out of every group of N
+ blocks may be lost without loss of data. Its primary
+ application is intended to be in recovering data from
+ unreliable media such as diskettes.

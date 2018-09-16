@@ -1,0 +1,27 @@
+Package: resolvconf-admin
+Version: 0.3-1
+Architecture: amd64
+Maintainer: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+Installed-Size: 31
+Depends: adduser, libc6 (>= 2.4)
+Recommends: resolvconf
+Enhances: resolvconf
+Section: net
+Priority: optional
+Homepage: https://github.com/dkg/resolvconf-admin
+Description: setuid helper program for setting up the local DNS
+ resolvconf-admin deals with setting the local DNS information, which
+ needs to be done by root on some systems. For example, it should
+ enable a non-privileged DHCP client to add information about DNS
+ resolvers it discovers.
+ .
+ If /sbin/resolvconf is present, it is invoked as root with the
+ recommended data. If it is not present, then /etc/resolv.conf is
+ overwritten with a simple file.
+ .
+ Note: setuid binaries like resolvconf-admin are additional attack
+ surface on your system.  If you can use a different approach, such as
+ enabling systemd-resolved, you should probably prefer it.
+ .
+ DO NOT INSTALL THIS PACKAGE (or any other with a setuid binary) IF
+ YOU DO NOT NEED IT!

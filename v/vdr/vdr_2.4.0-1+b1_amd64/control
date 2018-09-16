@@ -1,0 +1,26 @@
+Package: vdr
+Source: vdr (2.4.0-1)
+Version: 2.4.0-1+b1
+Architecture: amd64
+Maintainer: Debian VDR Team <pkg-vdr-dvb-devel@lists.alioth.debian.org>
+Installed-Size: 3241
+Depends: libc6 (>= 2.16), libcap2 (>= 1:2.10), libfontconfig1 (>= 2.12.6), libfreetype6 (>= 2.2.1), libgcc1 (>= 1:3.0), libjpeg62-turbo (>= 1.3.1), libstdc++6 (>= 5), libsystemd0, debconf (>= 0.5) | debconf-2.0, adduser, lsb-base (>= 3.0-6)
+Recommends: lirc, ttf-bitstream-vera | fonts-freefont-ttf
+Suggests: vdr-plugin-dvbsddevice
+Provides: vdr-abi-2.4.0-debian
+Section: video
+Priority: optional
+Homepage: http://www.tvdr.de/
+Description: Video Disk Recorder for DVB cards
+ Video Disk Recorder (VDR) is a digital sat-receiver program using
+ Linux and DVB technologies. It allows one to record MPEG2 streams,
+ as well as output the stream to TV. It is also possible to watch DVDs
+ (hardware accelerated) with some comfort and use an IR remote control.
+ .
+ This package contains the VDR main program which is controlled via the
+ PC keyboard or a IR remote control.
+ .
+ NOTE: You should install compatible DVB drivers before using these
+ programs. Also the standard VDR (without special plugins) requires
+ a DVB-Card with an integrated mpeg-decoder, a so called
+ Full-Featured Card.

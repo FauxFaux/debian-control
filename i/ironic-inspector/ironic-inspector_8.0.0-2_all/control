@@ -1,0 +1,21 @@
+Package: ironic-inspector
+Version: 8.0.0-2
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 195
+Depends: adduser, dbconfig-common, python3-ironic-inspector (= 8.0.0-2), python3-openstackclient, q-text-as-data, debconf (>= 0.5) | debconf-2.0, lsb-base
+Section: python
+Priority: optional
+Homepage: https://github.com/openstack/ironic-inspector
+Description: discovering hardware properties for OpenStack Ironic - Daemon
+ This is an auxiliary service for discovering hardware properties for a node
+ managed by OpenStack Ironic. Hardware introspection or hardware properties
+ discovery is a process of getting hardware parameters required for scheduling
+ from a bare metal node, given it's power management credentials (e.g. IPMI
+ address, user name and password).
+ .
+ A special discovery ramdisk is required to collect the information on a node.
+ The default one can be built using diskimage-builder and
+ ironic-inspector-ramdisk element.
+ .
+ This package contains the daemon.

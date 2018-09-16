@@ -1,0 +1,25 @@
+Package: snap-templates
+Source: haskell-snap-templates
+Version: 1.0.0.1-1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 1698
+Depends: libc6 (>= 2.27), libffi6 (>= 3.0.4), libgmp10
+Recommends: libghc-snap-dev
+Breaks: libghc-snap-dev (<< 1.0.0.1-1)
+Replaces: libghc-snap-dev (<< 1.0.0.1-1)
+Section: haskell
+Priority: optional
+Homepage: http://snapframework.com/
+Description: scaffolding CLI for the Snap Framework
+ This is the Scaffolding CLI for the official Snap Framework libraries.
+ It includes:
+ .
+  * The "snap-framework" executable program for generating starter projects
+ .
+ To get started, issue the following sequence of commands:
+ .
+  $ apt-get install snap-templates
+  $ mkdir myproject
+  $ cd myproject
+  $ snap-framework init

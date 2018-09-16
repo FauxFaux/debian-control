@@ -1,0 +1,21 @@
+Package: postgresql-10-pglogical
+Source: pglogical
+Version: 2.2.0-1
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <pkg-postgresql-public@lists.alioth.debian.org>
+Installed-Size: 354
+Depends: libc6 (>= 2.4), libpq5 (>= 9.1~), postgresql-10
+Section: database
+Priority: optional
+Homepage: https://www.2ndquadrant.com/en/resources/pglogical/
+Description: Logical Replication Extension for PostgreSQL
+ The pglogical extension provides logical streaming replication between
+ PostgreSQL instances, using a publish/subscribe model.  Contrary to the
+ built-in streaming replication, pglogical can replicate between major versions
+ or different architectures and is not restricted to replicate the entire
+ instance but can selectively replicate arbitrary sets of tables.
+ .
+ Use-Cases include migrations and major-version upgrades, aggregation of
+ several databases into a Data Warehouse, It utilises the Logical Decoding
+ features available since PostgreSQL 9.4 working with low overhead on both
+ provider and subscriber.

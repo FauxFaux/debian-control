@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "remove" ] || [ "horizon" = "disappear" ]; then
+	update-alternatives --remove puppet-module-horizon /usr/share/puppet/modules.available/horizon
+fi
+
+
+
+exit 0

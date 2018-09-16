@@ -1,0 +1,15 @@
+Package: ekeyd-egd-linux
+Source: ekeyd
+Version: 1.1.5-6.2
+Architecture: amd64
+Maintainer: Simtec Electronics <support@simtec.co.uk>
+Installed-Size: 50
+Depends: libc6 (>= 2.14), lsb-base
+Suggests: ekeyd
+Section: utils
+Priority: optional
+Description: Transfers entropy from an EGD to the Linux kernel pool
+ This utility reads from an EGD capable service over TCP and writes
+ the entropy retrieved to the Linux kernel random pool. Typically
+ this will be used on clusters or virtual hosts where direct access
+ to useful entropy is hard.

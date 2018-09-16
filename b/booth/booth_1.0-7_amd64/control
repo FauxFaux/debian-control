@@ -1,0 +1,23 @@
+Package: booth
+Version: 1.0-7
+Architecture: amd64
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Installed-Size: 203
+Depends: lsb-base, libc6 (>= 2.17), libgcrypt20 (>= 1.8.0), libglib2.0-0 (>= 2.12.0), libplumb2, libplumbgpl2, libxml2 (>= 2.7.4), zlib1g (>= 1:1.1.4)
+Section: admin
+Priority: optional
+Homepage: https://github.com/ClusterLabs/booth
+Description: Cluster Ticket Manager
+ Booth manages tickets which authorize cluster sites located in
+ geographically dispersed locations to run resources. It
+ facilitates support of geographically distributed clustering in
+ Pacemaker.
+ .
+ Booth is based on the Raft consensus algorithm. Though the
+ implementation is not complete (there is no log) and there are a
+ few additions and modifications, booth guarantees that a ticket
+ is always available at just one site as long as it has exclusive
+ control of the tickets.
+ .
+ This package contains the booth daemon, and a script to run booth
+ in standalone ("arbitrator") mode.

@@ -1,0 +1,30 @@
+Package: librandom123-dev
+Source: librandom123
+Version: 1.09+dfsg-1
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 217
+Section: libdevel
+Priority: optional
+Homepage: http://www.deshawresearch.com/resources_random123.html
+Description: parallel random numbers library
+ Random123 is a family of highly parallelizable counter-based random
+ number generators (CBRNGs) that are useful for a wide range of
+ applications.
+ .
+ Random123 is a library of "counter-based" random number generators
+ (CBRNGs), in which the Nth random number can be obtained by applying a
+ stateless mixing function to N instead of the conventional approach of
+ using N iterations of a stateful transformation. CBRNGs are ideal for a
+ wide range of applications on modern multi-core CPUs, GPUs, clusters,
+ and special-purpose hardware. Three families of non-cryptographic CBRNGs
+ are described in a paper presented at the SC11 conference: ARS (based on
+ the Advanced Encryption System (AES)), Threefry (based on the Threefish
+ encryption function), and Philox (based on integer multiplication). They
+ all satisfy rigorous statistical testing (passing BigCrush in TestU01),
+ vectorize and parallelize well (each generator can produce at least 2^64
+ independent streams), have long periods (the period of each stream is at
+ least 2^128), require little or no memory or state, and have excellent
+ performance (a few clock cycles per byte of random output). The
+ Random123 library can be used with CPU (C and C++) and GPU (CUDA and
+ OpenCL) applications.

@@ -1,0 +1,28 @@
+Package: icinga-common
+Source: icinga
+Version: 1.14.2+ds-3
+Architecture: all
+Maintainer: Debian Nagios Maintainer Group <pkg-nagios-devel@lists.alioth.debian.org>
+Installed-Size: 280
+Depends: adduser, bsd-mailx | mailx, dpkg (>= 1.16.1), lsb-base, monitoring-plugins-basic | nagios-plugins-basic, ucf, debconf (>= 0.5) | debconf-2.0
+Recommends: monitoring-plugins | nagios-plugins
+Section: net
+Priority: optional
+Homepage: https://www.icinga.com/
+Description: host and network monitoring system - support files
+ Icinga is a modular monitoring framework for hosts, services, and
+ networks, based on the Nagios project. It is designed to be easy to
+ understand and modify to fit any need.
+ .
+ Features include:
+  * monitoring of network services via ping, SMTP, POP3, HTTP, NNTP, or
+    TCP port
+  * plugin interface to allow for user-developed service checks
+  * contact notifications when problems occur and get resolved (via
+    email, pager, or user-defined method)
+  * support for proactive problem resolution (handlers can be defined to
+    be run during service or host events)
+  * web output: current status, notifications, problem history, log
+    file, etc.
+ .
+ This package contains the common files for all Icinga packages.

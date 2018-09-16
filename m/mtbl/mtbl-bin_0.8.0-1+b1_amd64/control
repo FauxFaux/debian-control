@@ -1,0 +1,25 @@
+Package: mtbl-bin
+Source: mtbl (0.8.0-1)
+Version: 0.8.0-1+b1
+Architecture: amd64
+Maintainer: Robert Edmonds <edmonds@debian.org>
+Installed-Size: 70
+Depends: libc6 (>= 2.14), libmtbl0 (>= 0.8.0), libsnappy1v5, zlib1g (>= 1:1.1.4)
+Section: utils
+Priority: optional
+Description: immutable sorted string table library (utilities)
+ mtbl is a C library implementation of the Sorted String Table (SSTable)
+ data structure, based on the SSTable implementation in the open source
+ Google LevelDB library. An SSTable is a file containing an immutable
+ mapping of keys to values. Keys are stored in sorted order, with an
+ index at the end of the file allowing keys to be located quickly.
+ .
+ mtbl is not a database library. It does not provide an updateable
+ key-value data store, but rather exposes primitives for creating,
+ searching and merging SSTable files. Unlike databases which use
+ the SSTable data structure internally as part of their data store,
+ management of SSTable files -- creation, merging, deletion, combining
+ of search results from multiple SSTables -- is left to the
+ discretion of the mtbl library user.
+ .
+ This package contains command line utilities for libmtbl.

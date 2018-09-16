@@ -1,0 +1,19 @@
+Package: golang-github-jsternberg-zap-logfmt-dev
+Source: golang-github-jsternberg-zap-logfmt
+Version: 1.0.0-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 34
+Depends: golang-github-stretchr-testify-dev, golang-go.uber-zap-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/jsternberg/zap-logfmt
+Description: logfmt for zap
+ This package implements logfmt for zap
+ .
+ Limitations: It is not possible to log an array, channel, function,
+ map, slice, or struct.
+ .
+ Namespaces are supported. If a namespace is opened, all of the keys
+ will be prepended with the namespace name. For example, with the
+ namespace foo and the key bar, you would get a key of foo.bar.

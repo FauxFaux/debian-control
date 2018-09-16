@@ -1,0 +1,35 @@
+Package: golang-gopkg-check.v1-dev
+Source: golang-check.v1
+Version: 0.0+git20161208.0.20d25e2-6
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 167
+Provides: golang-check.v1-dev, golang-github-go-check-check-dev
+Section: devel
+Priority: optional
+Homepage: http://labix.org/gocheck
+Description: Rich testing extension for Go's testing package
+ The Go language provides an internal testing library, named testing, which is
+ relatively slim due to the fact that the standard library correctness by
+ itself is verified using it. The check package, on the other hand, expects the
+ standard library from Go to be working correctly, and builds on it to offer a
+ richer testing framework for libraries and applications to use.
+ .
+ Package "gopkg.in/check.v1" includes features such as:
+ .
+    - Helpful error reporting to aid on figuring problems out
+    - Richer test helpers: assertions which interrupt the test immediately,
+      deep multi-type comparisons, string matching, etc
+    - Suite-based grouping of tests
+    - Fixtures: per suite and/or per test set up and tear down
+    - Benchmarks integrated in the suite logic (with fixtures, etc)
+    - Management of temporary directories
+    - Panic-catching logic, with proper error reporting
+    - Proper counting of successes, failures, panics, missed tests, skips, etc
+    - Explicit test skipping
+    - Support for expected failures
+    - Verbosity flag which disables output caching (helpful to debug hanging
+      tests, for instance)
+    - Multi-line string reporting for more comprehensible failures
+    - Inclusion of comments surrounding checks on failure reports
+    - Fully tested (it manages to test itself reliably)

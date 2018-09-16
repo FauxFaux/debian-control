@@ -1,0 +1,20 @@
+Package: fsarchiver
+Version: 0.8.5-2
+Architecture: amd64
+Maintainer: Michael Biebl <biebl@debian.org>
+Installed-Size: 279
+Depends: libblkid1 (>= 2.16), libbz2-1.0, libc6 (>= 2.14), libcom-err2 (>= 1.01), libext2fs2 (>= 1.37), libgcrypt20 (>= 1.8.0), libgpg-error0 (>= 1.14), liblz4-1 (>= 0.0~r130), liblzma5 (>= 5.1.1alpha+20120614), liblzo2-2, libuuid1 (>= 2.16), libzstd1 (>= 1.3.2), zlib1g (>= 1:1.1.4)
+Recommends: e2fsprogs
+Suggests: xfsprogs, reiserfsprogs, reiser4progs, jfsutils, ntfsprogs, ntfs-3g, btrfs-progs
+Section: admin
+Priority: optional
+Homepage: http://www.fsarchiver.org/
+Description: file system archiver
+ FSArchiver is a system tool that allows you to save the contents of a
+ file system to a compressed archive file. The file system can be restored
+ on a partition which has a different size and it can be restored on a
+ different file system.
+ Unlike tar/dar, FSArchiver also creates the file system when it extracts
+ the data to partitions.
+ Everything is checksummed in the archive in order to protect the data. If
+ the archive is corrupt, you just lose the current file, not the whole archive.

@@ -1,0 +1,28 @@
+#! /bin/sh -e
+#
+# prerm script for Debian python packages.
+# Written 1998 by Gregor Hoffleit <flight@debian.org>.
+
+if [ "$1" = "failed-upgrade" ] ; then
+  invoke-rc.d mailman stop || true
+  chmod -x /usr/lib/mailman/bin/mailmanctl
+fi
+
+# Automatically added by dh_installsystemd/11.3.5
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop 'mailman.service' >/dev/null || true
+fi
+# End automatically added section
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p mailman 
+else
+	dpkg -L mailman | grep '\.py$' | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+

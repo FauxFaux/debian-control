@@ -1,0 +1,25 @@
+Package: montage-gridtools
+Source: montage
+Version: 5.0+dfsg-1
+Architecture: amd64
+Maintainer: Debian Astro Team <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 489
+Depends: libc6 (>= 2.14), libcfitsio5 (>= 3.390~), libwcstools1 (>= 3.8.4)
+Recommends: pegasus-wms, htcondor, montage
+Section: science
+Priority: optional
+Homepage: http://montage.ipac.caltech.edu/
+Description: Create files to run montage on the grid
+ Montage is a toolkit for assembling astronomical images into custom mosaics.
+ .
+ This package contains modules that can generate a Directed Acyclic Graph
+ (DAG) representation of the mosaicking process for a set of on-line surveys
+ (e.g., 2MASS). This information is fed to the Pegasus software from ISI (the
+ Information Sciences Institute), which produces processing plans for Condor
+ (or Condor-G on the Teragrid).
+ .
+ These modules should be considered prototypes: they have been used
+ extensively but have not been subject to the same rigorous testing to which
+ the core modules have been subjected. Users should contact Montage
+ (montage@ipac.caltech.edu) before employing them to verify limitations in
+ their use and changes in the interfaces.

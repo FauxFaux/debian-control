@@ -1,0 +1,24 @@
+Package: ocsinventory-server
+Version: 2.4.1+dfsg-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 425
+Depends: perl, libapache-dbi-perl, libapache2-mod-perl2, libarchive-zip-perl, libdbd-mysql-perl, libdbi-perl, libnet-ip-perl, libsoap-lite-perl, libxml-simple-perl
+Recommends: apache2 (>= 2.4.6-4~) | httpd, ocsinventory-reports
+Suggests: default-mysql-server | virtual-mysql-server, nmap, ocsinventory-agent, samba-common
+Section: web
+Priority: optional
+Homepage: https://www.ocsinventory-ng.org/
+Description: Hardware and software inventory tool (Communication Server)
+ Open Computer and Software Inventory Next Generation is an application
+ designed to help a network or system administrator keep track of the
+ computers configuration and software that are installed on the network.
+ .
+ Information about Hardware and Operating System are collected.
+ OCS Inventory is also able to detect all active devices on your network,
+ such as switch, router, network printer and unattended devices.
+ It also allows deploying software, commands or files on client computers.
+ .
+ This package contains the 'Communication Server' part.
+ Note that this is the XML-RPC/SOAP server, not the web interface (which is
+ provided in the ocsinventory-reports package).

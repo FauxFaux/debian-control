@@ -1,0 +1,26 @@
+Package: libghc-auto-update-doc
+Source: haskell-auto-update
+Version: 0.1.4-4
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 210
+Depends: haddock-interface-31
+Recommends: ghc-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: https://github.com/yesodweb/wai
+Description: efficiently run periodic, on-demand actions; documentation
+ A common problem is the desire to have an action run at a scheduled interval,
+ but only if it is needed. For example, instead of having every web request
+ result in a new getCurrentTime call, we'd like to have a single worker
+ thread run every second, updating an IORef. However, if the request
+ frequency is less than once per second, this is a pessimization, and worse,
+ kills idle GC.
+ .
+ This library allows you to define actions which will either be performed by a
+ dedicated thread or, in times of low volume, will be executed by the calling
+ thread.
+ .
+ This package provides the documentation for a library for the Haskell
+ programming language.
+ See http://www.haskell.org/ for more information on Haskell.

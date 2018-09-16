@@ -1,0 +1,20 @@
+Package: starlet
+Version: 0.31-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 49
+Depends: perl, libparallel-prefork-perl, libplack-perl, libserver-starter-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Starlet
+Description: simple, high-performance PSGI/Plack HTTP server
+ Starlet is a standalone HTTP/1.0 server with keep-alive support, formerly
+ known as Plack::Server::Standalone::Prefork and
+ Plack::Server::Standalone::Prefork::Server::Starter.
+ .
+ The server supports following features, and is suitable for running HTTP
+ application servers behind a reverse proxy.
+ .
+  - prefork and graceful shutdown using Parallel::Prefork
+  - hot deploy using Server::Starter
+  - fast HTTP processing using HTTP::Parser::XS (optional)

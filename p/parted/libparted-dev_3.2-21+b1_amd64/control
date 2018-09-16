@@ -1,0 +1,22 @@
+Package: libparted-dev
+Source: parted (3.2-21)
+Version: 3.2-21+b1
+Architecture: amd64
+Maintainer: Parted Maintainer Team <parted-maintainers@lists.alioth.debian.org>
+Installed-Size: 1100
+Depends: libc6-dev, libparted2 (= 3.2-21+b1), libparted-fs-resize0 (= 3.2-21+b1), libdevmapper-dev (>= 1.02.33), uuid-dev, libblkid-dev
+Suggests: parted (= 3.2-21+b1), parted-doc
+Breaks: libparted0-dev (<< 3.1-1~), parted (<< 1.2.11)
+Replaces: libparted0-dev (<< 3.1-1~), libparted2-dev (<< 2.2), parted (<< 1.2.11)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.gnu.org/software/parted
+Description: disk partition manipulator - development files
+ GNU Parted is a program that allows you to create, destroy, resize,
+ move, and copy disk partitions. This is useful for creating space
+ for new operating systems, reorganizing disk usage, and copying data
+ to new hard disks.
+ .
+ This package contains the static library and header files for
+ libparted, which are really only of interest to parted developers.

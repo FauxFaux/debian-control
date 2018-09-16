@@ -1,0 +1,23 @@
+Package: progress
+Version: 0.14-2
+Architecture: amd64
+Maintainer: Mo Zhou <cdluminate@gmail.com>
+Installed-Size: 83
+Depends: libc6 (>= 2.14), libncurses6 (>= 6), libtinfo6 (>= 6)
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/Xfennec/progress
+Description: Coreutils Progress Viewer (formerly known as 'cv')
+ This tool can be described as a Tiny, Dirty, Linux-and-OSX-Only
+ C command that looks for coreutils basic commands (cp, mv, dd, tar,
+ gzip/gunzip, cat, etc.) currently running on your system and
+ displays the percentage of copied data. It can also show estimated
+ time and throughput, and provide a "top-like" mode (monitoring).
+ .
+ It simply scans `/proc` for interesting commands, and then looks at
+ directories `fd` and `fdinfo` to find opened files and seek positions,
+ and reports status for the largest file.
+ .
+ It's very light, and compatible with virtually any command.
+ This program was formerly known as 'cv' on github.

@@ -1,0 +1,24 @@
+Package: ruby-batch-loader
+Version: 1.2.1-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 38
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: https://github.com/exAspArk/batch-loader
+Description: Powerful tool to avoid N+1 DB or HTTP queries
+ This library provides a generic lazy batching mechanism to avoid N+1 DB
+ queries, HTTP queries, etc.
+ .
+ Highlights
+  * Generic utility to avoid N+1 DB queries, HTTP requests, etc.
+  * Adapted Ruby implementation of battle-tested tools like Haskell Haxl, JS
+    DataLoader, etc.
+  * Batching is isolated and lazy, load data in batch where and when it's
+    needed.
+  * Automatically caches previous queries (identity map).
+  * Thread-safe (`loader`).
+  * No need to share batching through variables or custom defined classes.
+  * No dependencies, no monkey-patches, no extra primitives such as Promises.
+Ruby-Versions: all

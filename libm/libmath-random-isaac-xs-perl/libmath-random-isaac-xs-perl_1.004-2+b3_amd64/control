@@ -1,0 +1,21 @@
+Package: libmath-random-isaac-xs-perl
+Source: libmath-random-isaac-xs-perl (1.004-2)
+Version: 1.004-2+b3
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 51
+Depends: perl (>= 5.26.0-4), perlapi-5.26.0, libc6 (>= 2.2.5)
+Suggests: libmath-random-isaac-perl
+Enhances: libmath-random-isaac-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Math-Random-ISAAC-XS
+Description: Perl implementation of the ISAAC PRNG (C/XS Accelerated)
+ Math::Random::ISAAC::XS implements the same interface as Math::Random::ISAAC
+ and can be used as a drop-in replacement. This is the recommended version of
+ the module, based on Bob Jenkins' reference implementation in C as described
+ in his paper at: <URL:http://burtleburtle.net/bob/rand/isaac.html>
+ .
+ If you install this package, then any code that uses Math::Random::ISAAC will
+ automagically benefit from this faster implementation. Performance increases
+ are somewhere on the order of 400-500%.

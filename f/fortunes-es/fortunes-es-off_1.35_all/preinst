@@ -1,0 +1,37 @@
+#!/bin/sh -e
+
+# TODO: Move to i18n messages
+#msg_found_obsolete_dir="Eliminando directorio obsoleto"
+#msg_found_link="OK, encontrado como un link el directorio"
+#msg_installing_link="Instalación correcta. No está el directorio obsoleto"
+#msg_unable_to_remove="No se pudo eliminar el directorio. Examine manualmente"
+
+msg_found_obsolete_dir="Removing obsolete directory"
+msg_found_link="OK, found as a link the directory"
+msg_installing_link="Installing O.K. Not found obsolete dir"
+msg_unable_to_remove="Unable to remove dir. Please check"
+
+check_fix_obsolete_dirs(){
+    BAD_DIR="$1"
+    if [ -d "$BAD_DIR" ]; then
+	if [ ! -L $BAD_DIR ]; then
+	    echo "*** $msg_found_obsolete_dir $BAD_DIR"
+	    rm -f $BAD_DIR/changelog.gz $BAD_DIR/copyright
+	    rmdir $BAD_DIR || echo "$BAD_DIR: $msg_unable_to_remove"
+	else
+	    echo "*** $msg_found_link $BAD_DIR"
+	fi
+    else
+	echo "--- $msg_installing_link $BAD_DIR"
+    fi
+}
+
+for i in /usr/doc/fortunes-es-off /usr/share/doc/fortunes-es-off; do
+    check_fix_obsolete_dirs $i
+done
+
+if [ -e /usr/share/doc/fortunes-es-off ] && [ -L /usr/share/doc/fortunes-es-off ] ; then
+    rm /usr/share/doc/fortunes-es-off
+fi
+
+

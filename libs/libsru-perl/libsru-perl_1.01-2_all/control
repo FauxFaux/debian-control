@@ -1,0 +1,28 @@
+Package: libsru-perl
+Version: 1.01-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 130
+Depends: perl, libcgi-application-perl, libclass-accessor-perl, libcql-parser-perl (>= 1.12), liburi-perl, libxml-libxml-perl, libxml-simple-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/SRU
+Description: framework for Search and Retrieval by URL
+ The SRU package provides a framework for working with the Search and
+ Retrieval by URL (SRU) protocol developed by the Library of Congress. SRU
+ defines a web service for searching databases containing metadata and
+ objects. SRU often goes under the name SRW which is a SOAP version of the
+ protocol. You can think of SRU as a RESTful version of SRW, since all the
+ requests are simple URLs instead of XML documents being sent via some sort of
+ transport layer.
+ .
+ You might be interested in SRU if you want to provide a generic API for
+ searching a data repository and a mechanism for returning metadata records.
+ SRU defines three verbs: explain, scan and searchRetrieve which define the
+ requests and responses in a SRU interaction.
+ .
+ This set of modules attempts to provide a framework for building an SRU
+ service. The distribution is made up of two sets of Perl modules: modules in
+ the SRU::Request::* namespace which represent the three types of requests;
+ and modules in the SRU::Response::* namespace which represent the various
+ responses.

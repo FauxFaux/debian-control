@@ -1,0 +1,28 @@
+Package: newrole
+Source: policycoreutils
+Version: 2.8-1
+Architecture: amd64
+Maintainer: Debian SELinux maintainers <selinux-devel@lists.alioth.debian.org>
+Installed-Size: 96
+Depends: libcap2-bin, policycoreutils (= 2.8-1), libaudit1 (>= 1:2.2.1), libc6 (>= 2.15), libcap-ng0 (>= 0.7.9), libpam0g (>= 0.99.7.1), libselinux1 (>= 2.8)
+Breaks: policycoreutils (<< 2.4)
+Replaces: policycoreutils (<< 2.4)
+Section: utils
+Priority: optional
+Homepage: http://userspace.selinuxproject.org/
+Description: SELinux core policy utilities (newrole application for RBAC/MLS)
+ Security-enhanced Linux is a patch of the Linux® kernel and a number
+ of utilities with enhanced security functionality designed to add
+ mandatory access controls to Linux.  The Security-enhanced Linux
+ kernel contains new architectural components originally developed to
+ improve the security of the Flask operating system. These
+ architectural components provide general support for the enforcement
+ of many kinds of mandatory access control policies, including those
+ based on the concepts of Type Enforcement®, Role-based Access Control,
+ and Multi-level Security.
+ .
+ RBAC/MLS policy machines require newrole as a way of changing the role or
+ level of a logged in user.
+ .
+ This package contains newrole to switch roles, run_init to run /etc/init.d
+ scripts in the proper context.

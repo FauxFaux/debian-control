@@ -1,0 +1,19 @@
+Package: openstack-cloud-services
+Source: openstack-meta-packages
+Version: 0.22
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 11
+Depends: dbconfig-common, default-mysql-server | mysql-server, ntp, rabbitmq-server
+Recommends: memcached
+Section: net
+Priority: optional
+Homepage: http://openstack.alioth.debian.org/
+Description: Metapackage to install all Openstack service dependencies
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ This metapackage will install memcached, rabbitmq and MySQL servers, which
+ are all needed in order to run an Openstack cloud service.

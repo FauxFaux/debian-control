@@ -1,0 +1,45 @@
+Package: proj-rdnap
+Version: 2008-8
+Architecture: all
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 4741
+Depends: proj-data
+Recommends: proj-bin
+Suggests: python-pdfminer
+Section: non-free/science
+Priority: optional
+Homepage: https://www.kadaster.nl/transformatie-van-coordinaten
+Description: RDNAP grid correction files for PROJ
+ Kadaster and Rijkswaterstaat CIV, working together under the name RDNAP,
+ developed RDNAPTRANS™2008, the precise and official transformation
+ between ETRS89 and the dutch national horizontal and vertical coordinate
+ reference systems the Stelsel van de Rijksdriehoeksmeting (RD) and the
+ Normaal Amsterdams Peil (NAP). A ‘simplified’ procedure has been
+ developed which uses a NTv2-grid for the transformation between ETRS89
+ and RD as well as a VDatum-grid for the transformation between ETRS89
+ and NAP. This ‘simplified’ procedure has the following limitations:
+ .
+  1) The rdtrans2008 NTv2-grid can only give identical results to
+     RDNAPTRANS™2008 within 1 millimeter at ground level onshore and at
+     mean sea level offshore. The horizontal deviation is approximately
+     1 millimeter per 50 meter height difference from ground level or mean
+     sea level.
+  2) An exception to 1) is the border of the RDNAPTRANS™2008 correction
+     grid. Transformation results within cells of the rdtrans2008 NTv2-grid
+     that are intersected by the border of the RDNAPTRANS™2008 correction
+     grid can result in deviations of up to 20 centimeter.
+  3) The naptrans2008 VDatum-grid cannot be used to determine deflections
+     of the vertical. For this the NLGEO2004 geoid model has to be used.
+  4) The naptrans2008 VDatum-grid is referenced to the Bessel-1841 ellipsoid
+     and cannot be used stand-alone, it has to be used in combination with
+     the rdtrans2008 NTv2-grid.
+ .
+ Taking into account the limitations listed above, the rdtrans2008 NTv2-grid
+ and naptrans2008 VDatum-grid can be used as an alternative to
+ RDNAPTRANS™2008 to transform geographic ETRS89-coordinates to
+ projected RD-coordinates with grid correction applied and NAP-heights.
+ .
+ Note that, although the resulting RD/NAP and ETRS89 coordinates from the
+ transformation will be correct, geographic Bessel-1841 coordinates will
+ differ in both procedures and should only be considered as an intermediate
+ result.

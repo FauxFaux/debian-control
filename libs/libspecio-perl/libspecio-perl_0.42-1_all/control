@@ -1,0 +1,24 @@
+Package: libspecio-perl
+Version: 0.42-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 412
+Depends: perl, libdevel-stacktrace-perl, libeval-closure-perl, libmodule-runtime-perl, libmro-compat-perl, librole-tiny-perl (>= 1.003003), libsub-quote-perl, perl (>= 5.19.5) | libscalar-list-utils-perl (>= 1:1.33)
+Recommends: libref-util-perl, perl (>= 5.21.4) | libscalar-list-utils-perl (>= 1:1.40)
+Suggests: libtest-fatal-perl, libtry-tiny-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Specio
+Description: Perl module providing type constraints and coercions
+ Specio provides classes for representing type constraints and coercion,
+ along with the syntactic sugar for declaring them.
+ .
+ This distribution ships with a set of builtin types representing the types
+ provided by the Perl interpreter itself.
+ .
+ Note that this is not a proper type system for Perl. Nothing in this
+ distribution will magically make the Perl interpreter start checking a value's
+ type on assignment to a variable.
+ .
+ Module Test::Specio requires the packages libtest-fatal-perl
+ libtry-tiny-perl.

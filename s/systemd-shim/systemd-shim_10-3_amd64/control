@@ -1,0 +1,13 @@
+Package: systemd-shim
+Version: 10-3
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 76
+Depends: libc6 (>= 2.4), libglib2.0-0 (>= 2.39.4), cgmanager (>= 0.32)
+Suggests: pm-utils
+Breaks: systemd (<< 209)
+Section: admin
+Priority: extra
+Description: shim for systemd
+ This package emulates the systemd function that are required to run
+ the systemd helpers without using the init service

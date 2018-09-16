@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+if [ "$1" = configure ]; then
+    update-alternatives --install /usr/bin/tf tf /usr/games/tf 50 --slave /usr/share/man/man1/tf.1.gz tf.1.gz /usr/share/man/man1/tf4.1.gz
+fi
+
+# Automatically added by dh_installmenu/11.2.1
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

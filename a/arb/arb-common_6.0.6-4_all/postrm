@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+# In case arb should be purged remove all stuff it might have dropped
+# in /var/lib
+
+if [ "$1" = "purge" ] && [ -d /var/lib/arb ]; then
+    rm -rf /var/lib/arb
+fi
+
+# Automatically added by dh_installdebconf/11.3.5
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

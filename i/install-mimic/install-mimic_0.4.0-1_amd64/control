@@ -1,0 +1,17 @@
+Package: install-mimic
+Version: 0.4.0-1
+Architecture: amd64
+Maintainer: Peter Pentchev <roam@debian.org>
+Installed-Size: 25
+Depends: libc6 (>= 2.10)
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://devel.ringlet.net/misc/install-mimic/
+Description: overwrite files and preserve their ownership
+ The install-mimic utility copies the specified files to the specified
+ destination (file or directory) similarly to install(1), but it preserves
+ the ownership and access mode of the destination files.  This is useful when
+ updating files that have already been installed with locally modified copies
+ that may be owned by the current user and not by the desired owner of the
+ destination file (e.g. root).

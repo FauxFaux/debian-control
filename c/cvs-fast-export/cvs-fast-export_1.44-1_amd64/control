@@ -1,0 +1,32 @@
+Package: cvs-fast-export
+Version: 1.44-1
+Architecture: amd64
+Maintainer: Anthony Fok <foka@debian.org>
+Installed-Size: 309
+Depends: libc6 (>= 2.17), python:any
+Recommends: reposurgeon, cvs, git, rsync
+Suggests: rcs, bzr-fastimport
+Section: vcs
+Priority: optional
+Homepage: http://www.catb.org/esr/cvs-fast-export/
+Description: Export an RCS or CVS history as a fast-import stream
+ cvs-fast-export, formerly "parsecvs", does what its new name implies:
+ exports CVS repositories in a format suitable for git fast-import.
+ .
+ This program analyzes a collection of RCS files in a CVS repository
+ (or outside of one) and, when possible, emits an equivalent history
+ in the form of a fast-import stream. Not all possible histories can
+ be rendered this way; the program tries to emit useful warnings when
+ it can't. The program can also produce a visualization of the
+ resulting commit DAG in the DOT format handled by the graphviz suite.
+ .
+ The distribution includes a tool, cvssync, for fetching masters from
+ CVS remote repositories so cvs-fast-export can see them.  You will
+ need rsync installed to use it.
+ .
+ A wrapper script called cvsconvert runs a conversion to git and
+ looks for content mismatches with the original CVS.  You will need
+ CVS and Git installed to use it.
+ .
+ Also included is a tool called cvsreduce that strips content out of
+ trees of RCS/CVS masters, leaving only metadata structure in place.

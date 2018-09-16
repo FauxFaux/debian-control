@@ -1,0 +1,25 @@
+Package: syncache
+Version: 1.4-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 57
+Depends: adduser, ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: http://samizdat.nongnu.org/
+Description: Thread-safe time-limited cache for Ruby
+ SynCache stores cached objects in a Hash that is protected by an advanced
+ two-level locking mechanism which ensures that:
+ .
+  * Multiple threads can add and fetch objects in parallel.
+  * While one thread is working on a cache entry, other threads can access
+    the rest of the cache with no waiting on the global lock, no race
+    conditions nor deadlock or livelock situations.
+  * While one thread is performing a long and resource-intensive
+    operation, other threads that request the same data will be put on hold,
+    and as soon as the first thread completes the operation, the result will be
+    returned to all threads.
+ .
+ This package provides SynCache module for Ruby and a DRb server that exports a
+ SynCache::Cache object for use in Ruby programs.
+Ruby-Versions: all

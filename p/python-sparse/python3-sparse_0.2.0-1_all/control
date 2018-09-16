@@ -1,0 +1,30 @@
+Package: python3-sparse
+Source: python-sparse
+Version: 0.2.0-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 144
+Depends: python3-numpy, python3-scipy (>= 0.19), python3-six, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/mrocklin/sparse
+Description: multidimensional sparse arrays for Python
+ This package implements sparse multidimensional arrays on top of NumPy
+ and scipy.sparse. It generalizes the scipy.sparse.coo_matrix layout but
+ extends beyond just rows and columns to an arbitrary number of
+ dimensions. The original motivation is for machine learning algorithms,
+ but it is intended for somewhat general use.
+ .
+ It supports:
+ .
+   - NumPy ufuncs (where zeros are preserved)
+   - Arithmetic with scalars (where zeros are preserved)
+   - Reductions (sum, max)
+   - Reshape
+   - Transpose
+   - Tensordot
+   - Slicing with integers, lists, and slices (with no step value)
+   - Concatenation and stacking
+   - Addition with other sparse arrays of the same shape
+ .
+ This package provides the modules for Python 3.

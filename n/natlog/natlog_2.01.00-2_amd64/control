@@ -1,0 +1,29 @@
+Package: natlog
+Version: 2.01.00-2
+Architecture: amd64
+Maintainer: Frank B. Brokken <f.b.brokken@rug.nl>
+Installed-Size: 277
+Depends: libbobcat4 (>= 4.08.03), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libpcap0.8 (>= 0.9.8), libstdc++6 (>= 6), lsb-base (>= 3.2-14)
+Suggests: conntrack (>= 1.0.0)
+Section: devel
+Priority: optional
+Homepage: https://fbb-git.gitlab.io/natlog/
+Description: Source-natting firewall logging utility
+ Firewalls like iptables usually offer POSTROUTING source network address
+ translation facilities changing the source address of a host behind the
+ firewall to the address of the host before the firewall.
+ .
+ The standard log facilities provided by iptables do not easily allow
+ associating addresses behind the firewall with their source-natted
+ equivalents before the firewall. Natlog was designed to fill in that
+ particular niche.
+ .
+ When running natlog, messages are sent to the syslog daemon and/or to the
+ standard output stream showing the essential characteristics of the
+ connection using source natting. Here is an example:
+ .
+ from Fri 8 22:30:10:55588 until Fri 8 22:40:43:807100: 192.168.19.72:4467
+ (via: 129.125.90.132:4467) to 200.49.219.180:443
+ .
+ Natlog depends on facilities provided by iptables; work is in progress to
+ generate logs using facilities offered by the pcap library.

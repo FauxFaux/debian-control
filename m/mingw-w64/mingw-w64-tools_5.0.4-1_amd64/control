@@ -1,0 +1,22 @@
+Package: mingw-w64-tools
+Source: mingw-w64
+Version: 5.0.4-1
+Architecture: amd64
+Maintainer: Stephen Kitt <skitt@debian.org>
+Installed-Size: 1095
+Depends: libc6 (>= 2.14), pkg-config
+Provides: pkg-config-mingw-w64-i686, pkg-config-mingw-w64-x86-64
+Section: devel
+Priority: optional
+Homepage: http://mingw-w64.sf.net
+Description: Development tools for 32- and 64-bit Windows
+ MinGW-w64 provides a development and runtime environment for 32- and
+ 64-bit (x86 and x64) Windows applications using the Windows API and
+ the GNU Compiler Collection (gcc).
+ .
+ This package contains:
+  * gendef, which extracts DLL exports from Windows executables;
+  * genidl, which extracts IDL information from Windows executables;
+  * genpeimg, which manipulates PE flags in Windows executables;
+  * widl, which generates build files from IDL descriptions;
+  * pkg-config symlinks to allow .pc-based libraries to be used.

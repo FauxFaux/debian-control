@@ -1,0 +1,23 @@
+Package: debomatic
+Version: 0.23+git20180514-1
+Architecture: all
+Maintainer: Luca Falavigna <dktrkranz@debian.org>
+Installed-Size: 437
+Depends: python3:any (>= 3.3.2-2~), debootstrap | cdebootstrap | qemu-user-static, sbuild (>= 0.67.0), schroot (>= 1.6.10-2), python3-toposort, lsb-base (>= 3.0-6)
+Recommends: python3-pyinotify (>= 0.8.6-1), gpgv, python3-systemd
+Suggests: autopkgtest (>= 4.0), blhc, devscripts, lintian, piuparts (>= 0.45), apt-utils, gnupg, debian-archive-keyring, ubuntu-archive-keyring | ubuntu-keyring
+Section: devel
+Priority: optional
+Homepage: https://debomatic.github.io
+Description: automatic build machine for Debian source packages
+ Deb-o-Matic is an easy to use build machine for Debian source packages
+ based on sbuild and schroot, written in Python.
+ .
+ It provides a simple tool to automate build of source packages with limited
+ user interaction and a simple configuration. It has some useful features such
+ as automatic update of chroots, automatic scan and selection of source
+ packages to build and modules support.
+ .
+ It is meant to help developers to build their packages without worrying too
+ much of compilation, since it will run in background and no user feedback
+ is required during the whole process.

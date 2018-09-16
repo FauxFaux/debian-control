@@ -1,0 +1,21 @@
+Package: libmail-rfc822-address-perl
+Version: 0.4-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: http://www.ex-parrot.com/~pdw/Mail-RFC822-Address.html
+Description: Perl extension for validating email addresses
+ Mail::RFC822::Address validates email addresses against the grammar described
+ in RFC 822 using regular expressions.  How to validate a user supplied email
+ address is a FAQ (see perlfaq9): the only sure way to see if a supplied email
+ address is genuine is to send an email to it and see if the user receives it.
+ The one useful check that can be performed on an address is to check that the
+ email address is syntactically valid.  That is what this module does.
+ .
+ This module is functionally equivalent to RFC::RFC822::Address, but uses
+ regular expressions rather than the Parse::RecDescent parser.  This means that
+ startup time is greatly reduced making it suitable for use in transient scripts
+ such as CGI scripts.

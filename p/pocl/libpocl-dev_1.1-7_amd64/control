@@ -1,0 +1,23 @@
+Package: libpocl-dev
+Source: pocl
+Version: 1.1-7
+Architecture: amd64
+Maintainer: Debian OpenCL Maintainers <pkg-opencl-devel@lists.alioth.debian.org>
+Installed-Size: 58
+Depends: libpocl2 (= 1.1-7), libc6 (>= 2.4), ocl-icd-libopencl1 | libopencl1, ocl-icd-libopencl1 (>= 1.0) | libopencl-1.1-1
+Section: libdevel
+Priority: optional
+Homepage: http://portablecl.org
+Description: development files for the pocl library
+ Portable Computing Language is an open source implementation of the OpenCL
+ standard which can be easily adapted for new targets. One of the goals of the
+ project is improving performance portability of OpenCL programs, avoiding the
+ need for target-dependent manual optimizations. A "native" target is included,
+ which allows running OpenCL kernels on the host (CPU).
+ .
+ This package provides the development files for the pocl library. Unless very
+ specific needs, this package is useless. This package is only required to link
+ directly and explicitly with pocl.
+ .
+ To develop OpenCL programs (that can be run with pocl), the opencl-dev virtual
+ package (provided by ocl-icd-opencl-dev for example) is required, not this one.

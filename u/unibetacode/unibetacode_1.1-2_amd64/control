@@ -1,0 +1,30 @@
+Package: unibetacode
+Version: 1.1-2
+Architecture: amd64
+Maintainer: Paul Hardy <unifoundry@unifoundry.com>
+Installed-Size: 202
+Depends: libc6 (>= 2.4)
+Section: text
+Priority: optional
+Homepage: http://unifoundry.com/unibetacode/
+Description: convert classical Greek and Coptic between Beta Code and Unicode
+ The unibetacode package contains two utilities primarily designed for ASCII
+ transliteration of classical Greek: beta2uni converts Beta Code text to UTF-8
+ Unicode, and uni2beta converts text from UTF-8 Unicode to Beta Code.  A third
+ utility, unibetaprep, converts special codes for other characters (such as
+ Byzantine musical symbols) into four- to six-digit Unicode code points.
+ .
+ Beta Code is an ASCII-only encoding scheme created in the 1970s as an
+ efficient, intuitive digital input method for classical Greek.  It provides
+ an easy way to enter classical Greek on a plain ASCII keyboard for conversion
+ to UTF-8 Unicode text.  This package implements a subset of Beta Code as
+ specified by the Thesaurus Linguae Graecae (TLG) Project at the University
+ of California, Irvine.  The unibetacode package also is compatible with
+ the Beta Code implementation of the Perseus Digital Library of Tufts
+ University and other online repositories of classical Greek.
+ .
+ TLG Coptic support only includes the basic alphabet plus the jinma (grave)
+ accent.  TLG Hebrew support only covers the basic alphabet, aleph (U+05D0)
+ through tav (U+05EA).  To this base, unibetacode adds full Unicode coverage.
+ The unibetacode(5) man page describes the Beta Code file format in detail.
+ Files in the examples directory provide sample encodings and test data.

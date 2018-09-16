@@ -1,0 +1,29 @@
+Package: libperlx-maybe-perl
+Version: 1.001-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 79
+Depends: libmodule-manifest-skip-perl, perl
+Recommends: libperlx-maybe-xs-perl
+Suggests: libsyntax-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/PerlX-Maybe
+Description: return a pair only if they are both defined
+ Moose classes (and some other classes) distinguish between an attribute
+ being unset and the attribute being set to undef. Supplying a
+ constructor arguments like this:
+ .
+     my $bob = Person->new(
+        name => $name,
+        age => $age,
+        );
+ .
+ Will result in the "name" and "age" attributes possibly being set to
+ undef (if the corresponding $name and $age variables are not defined),
+ which may violate the Person class' type constraints.
+ .
+ PerlX::Maybe checks that $x and $y are both defined. If they are, it
+ returns them both as a list; otherwise it returns the empty list.
+ .
+ This package also includes Syntax::Feature::Maybe.

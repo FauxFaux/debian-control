@@ -1,0 +1,27 @@
+Package: python3-djangorestframework-gis
+Source: djangorestframework-gis
+Version: 0.13-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 59
+Depends: python3-django-filters, python3-djangorestframework (>= 3.0.4), python3-six, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/djangonauts/django-rest-framework-gis
+Description: Geographic add-ons for Django REST Framework (Python3 version)
+ djangorestframework-gis extends the Django REST Framework to also handle
+ geographic data as used by GeoDjango during serialization and deserialization.
+ It provides the following features:
+ .
+  * GeometryField: This field handles GeoDjango geometry fields, providing
+      custom to_native and from_native methods for GeoJSON input/output.
+  * GeoModelSerializer: This serializer updates the field_mapping dictionary to
+      include field mapping of GeoDjango geometry fields to the above
+      GeometryField.
+  * GeoFeatureModelSerializer: GeoFeatureModelSerializer is a subclass of
+      GeoModelSerializer which will output data in a format that is GeoJSON
+      compatible.
+  * InBBOXFilter: Filters a queryset to only those instances within a certain
+      bounding box.
+ .
+ This package contains the Python 3 version of the library.

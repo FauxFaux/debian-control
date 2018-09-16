@@ -1,0 +1,29 @@
+Package: libnauty2
+Source: nauty
+Version: 2.6r10+ds-1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 3389
+Depends: libc6 (>= 2.14)
+Suggests: nauty (= 2.6r10+ds-1), nauty-doc
+Conflicts: libnauty
+Provides: libnauty
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://pallini.di.uniroma1.it
+Description: library for graph automorphisms -- library package
+ nauty (No AUTomorphisms, Yes?) is a set of procedures for computing
+ automorphism groups of graphs and digraphs. This mathematical software
+ suite is developed by Brendan McKay and Adolfo Piperno:
+ http://pallini.di.uniroma1.it
+ .
+ nauty computes graph information in the form of a set of generators,
+ the size of the group, and the orbits of the group; it can also
+ produce a canonical label. The nauty suite is written in C and comes
+ with a command-line interface, a collection of command-line tools,
+ and an Application Programming Interface (API).
+ .
+ This package provides the shared libraries required to run programs
+ compiled against the nauty library. To compile your own programs you
+ also need to install the libnauty2-dev package.

@@ -1,0 +1,21 @@
+Package: libjson-validator-perl
+Version: 2.08+dfsg-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 123
+Depends: perl, libmojolicious-perl (>= 7.28)
+Recommends: libcpanel-json-xs-perl (>= 3.0200), libdata-validate-domain-perl, libdata-validate-ip-perl, libhash-multivalue-perl, libyaml-libyaml-perl (>= 0.67)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/JSON-Validator
+Description: module to validate data against a JSON schema
+ JSON::Validator is a class for validating data against JSON schemas. You
+ might want to use this instead of JSON::Schema if you need to validate data
+ against draft 4 of the JSON schema specification.
+ .
+ JSON::Validator can load JSON schemas in multiple formats: Plain perl data
+ structured or files on disk/web in the JSON/YAML format. The JSON parsing is
+ done using Mojo::JSON, while the YAML parsing is done with an optional
+ modules which need to be installed manually. JSON::Validator will look for
+ the YAML modules in this order: YAML::XS, YAML::Syck. The order is set by
+ which module that performs the best, so it might change in the future.

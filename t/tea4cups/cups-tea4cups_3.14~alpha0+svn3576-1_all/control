@@ -1,0 +1,38 @@
+Package: cups-tea4cups
+Source: tea4cups
+Version: 3.14~alpha0+svn3576-1
+Architecture: all
+Maintainer: Debian Printing Team <debian-printing@lists.debian.org>
+Installed-Size: 96
+Depends: cups, python
+Section: text
+Priority: optional
+Homepage: http://www.pykota.com/software/tea4cups
+Description: Swiss Army's knife of advanced CUPS administrators
+ Tea4CUPS is a CUPS backend wrapper which can capture print datas before they
+ are sent to a printer and process, duplicate or dispatch them in a number of
+ ways.
+ .
+ Tea4CUPS is the Swiss Army's knife of the advanced CUPS administrator, and
+ can easily replace or extend most of the existing specialized CUPS backends
+ (pdf, email, ftp, etc...).
+ .
+ You are greatly encouraged to use this software instead of writing your own
+ CUPS backends: Tea4CUPS will let you plug your own scripts, filters, tools,
+ or commands wherever you want, while giving them access to all the print
+ job's characteristics in a consistent way.
+ .
+ Tea4CUPS makes all information about the current print job, in particular the
+ job's datas and attributes, available to your own commands through environment
+ variables.
+ .
+ The possibilities are endless:
+ .
+   - Your own commands can optionally decide to discard the current print job
+     instead of printing it.
+   - Send the same job to several printers at the same time, which is not
+     possible with CUPS.
+   - Automate the PDF archiving of all print jobs.
+   - Forbid duplicate print jobs (a simple example is shown in the sample
+     configuration file).
+   - Easily create a print accounting solution.

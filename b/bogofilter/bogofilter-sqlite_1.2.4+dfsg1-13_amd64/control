@@ -1,0 +1,22 @@
+Package: bogofilter-sqlite
+Source: bogofilter
+Version: 1.2.4+dfsg1-13
+Architecture: amd64
+Maintainer: Adrian Bunk <bunk@debian.org>
+Installed-Size: 615
+Depends: bogofilter-common (= 1.2.4+dfsg1-13), libc6 (>= 2.14), libgsl23, libgslcblas0, libsqlite3-0 (>= 3.5.9)
+Provides: bogofilter-db
+Section: mail
+Priority: optional
+Homepage: http://bogofilter.sourceforge.net/
+Description: fast Bayesian spam filter (sqlite)
+ This package implements a fast Bayesian spam filter along the lines suggested
+ by Paul Graham in his article "A Plan For Spam".
+ .
+ This version substantially improves on Paul's proposal by doing smarter
+ lexical analysis.  In particular, hostnames and IP addresses are retained
+ as recognition features rather than broken up. Various kinds of MTA
+ cruft such as dates and message-IDs are discarded so as not to bloat
+ the word lists.
+ .
+ This package provides the sqlite database backend.

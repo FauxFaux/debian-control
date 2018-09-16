@@ -1,0 +1,28 @@
+Package: icinga-cgi
+Source: icinga
+Version: 1.14.2+ds-3
+Architecture: amd64
+Maintainer: Debian Nagios Maintainer Group <pkg-nagios-devel@lists.alioth.debian.org>
+Installed-Size: 136
+Depends: adduser, apache2-utils, icinga-cgi-bin (= 1.14.2+ds-3), icinga-common (= 1.14.2+ds-3), ucf, debconf (>= 0.5) | debconf-2.0
+Recommends: apache2 | httpd, nagios-images
+Section: net
+Priority: optional
+Homepage: https://www.icinga.com/
+Description: host and network monitoring system - CGI configuration
+ Icinga is a modular monitoring framework for hosts, services, and
+ networks, based on the Nagios project. It is designed to be easy to
+ understand and modify to fit any need.
+ .
+ Features include:
+  * monitoring of network services via ping, SMTP, POP3, HTTP, NNTP, or
+    TCP port
+  * plugin interface to allow for user-developed service checks
+  * contact notifications when problems occur and get resolved (via
+    email, pager, or user-defined method)
+  * support for proactive problem resolution (handlers can be defined to
+    be run during service or host events)
+  * web output: current status, notifications, problem history, log
+    file, etc.
+ .
+ This package provides CGI configuration files and the required dependencies.

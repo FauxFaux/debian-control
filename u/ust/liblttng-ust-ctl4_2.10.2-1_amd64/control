@@ -1,0 +1,21 @@
+Package: liblttng-ust-ctl4
+Source: ust
+Version: 2.10.2-1
+Architecture: amd64
+Maintainer: Jon Bernard <jbernard@debian.org>
+Installed-Size: 349
+Depends: libc6 (>= 2.15), liburcu6 (>= 0.10.0)
+Conflicts: liblttng-ust2
+Replaces: liblttng-ust2
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://lttng.org/
+Description: LTTng 2.0 Userspace Tracer (trace control library)
+ The userspace tracer is designed to provide detailed information about
+ userspace activity. Like the kernel tracer, performance is the main goal.
+ Tracing does not require system calls or traps. UST instrumentation points may
+ be added in any userspace code including signal handlers and libraries.
+ .
+ This package contains a library to control tracing in other processes. Used by
+ lttng-tools.

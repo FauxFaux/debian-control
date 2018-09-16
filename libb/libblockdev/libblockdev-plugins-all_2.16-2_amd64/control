@@ -1,0 +1,20 @@
+Package: libblockdev-plugins-all
+Source: libblockdev
+Version: 2.16-2
+Architecture: amd64
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 10
+Depends: libblockdev2 (= 2.16-2), libblockdev-btrfs2 (= 2.16-2), libblockdev-crypto2 (= 2.16-2), libblockdev-dm2 (= 2.16-2), libblockdev-fs2 (= 2.16-2), libblockdev-kbd2 (= 2.16-2), libblockdev-loop2 (= 2.16-2), libblockdev-lvm2 (= 2.16-2), libblockdev-lvm-dbus2 (= 2.16-2), libblockdev-mdraid2 (= 2.16-2), libblockdev-mpath2 (= 2.16-2), libblockdev-part2 (= 2.16-2), libblockdev-part-err2 (= 2.16-2), libblockdev-swap2 (= 2.16-2), libblockdev-utils2 (= 2.16-2)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/storaged-project/libblockdev
+Description: All plugins for libblockdev
+ libblockdev is a C library with GObject introspection support that can be used
+ for doing low-level operations with block devices like setting up LVM, BTRFS,
+ LUKS or MD RAID.
+ .
+ The library uses plugins (LVM, BTRFS,...) and serves as a thin wrapper around
+ its plugins' functionality.
+ .
+ This is a metapackage that depends on all libblockdev plugins.

@@ -1,0 +1,31 @@
+Package: libghc-double-conversion-doc
+Source: haskell-double-conversion
+Version: 2.0.2.0+ds1-2
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 123
+Depends: haddock-interface-31
+Recommends: ghc-doc, libghc-text-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: https://github.com/bos/double-conversion
+Description: fast conversion between double precision floating point and text; documentation
+ A library that performs fast, accurate conversion between double
+ precision floating point and text.
+ .
+ This library is implemented as bindings to the C++
+ double-conversion library written by Florian Loitsch at Google.
+ .
+ The 'Text' versions of these functions are about 30 times faster
+ than the default 'show' implementation for the 'Double' type.
+ .
+ The 'ByteString' versions are /slower/ than the 'Text' versions;
+ roughly half the speed.  (This seems to be due to the cost of
+ allocating 'ByteString' values via malloc.)
+ .
+ As a final note, be aware that the bytestring-show package is
+ about 50% slower than simply using 'show'.
+ .
+ This package provides the documentation for a library for the Haskell
+ programming language.
+ See http://www.haskell.org/ for more information on Haskell.

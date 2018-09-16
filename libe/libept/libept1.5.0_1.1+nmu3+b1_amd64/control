@@ -1,0 +1,24 @@
+Package: libept1.5.0
+Source: libept (1.1+nmu3)
+Version: 1.1+nmu3+b1
+Architecture: amd64
+Maintainer: Enrico Zini <enrico@debian.org>
+Installed-Size: 270
+Depends: libapt-pkg5.0 (>= 1.1~exp9), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), libxapian30
+Breaks: libept1.4.16 (= 1.0.14+b2)
+Replaces: libept1.4.16 (= 1.0.14+b2)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Description: High-level library for managing Debian package information
+ The library defines a very minimal framework in which many sources of data
+ about Debian packages can be implemented and queried together.
+ .
+ The library includes four data sources:
+ .
+  * APT: access the APT database
+  * Debtags: access the Debtags tag information
+  * Popcon: access Popcon package scores
+  * The Xapian index built by apt-xapian-index
+ .
+ This is the shared library.

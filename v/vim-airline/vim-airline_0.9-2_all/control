@@ -1,0 +1,29 @@
+Package: vim-airline
+Version: 0.9-2
+Architecture: all
+Maintainer: Jonathan Carter <jcc@debian.org>
+Installed-Size: 323
+Depends: vim, vim-addon-manager
+Recommends: vim-airline-themes
+Suggests: fonts-powerline
+Section: editors
+Priority: optional
+Homepage: https://github.com/vim-airline/vim-airline
+Description: Lean & mean status/tabline for vim that's light as air
+ vim-airline provides a themable vim status bar that makes use of the
+ powerline font. It's similar to vim-powerline, but is much simpler
+ since it uses pure vim configuration instead of scripting languages.
+ .
+ Some of its features:
+ .
+  * Tiny core written with extensibility in mind
+  * Integrates with a variety of vim plugins
+  * Looks good with regular fonts and provides configuration points
+    so you can use unicode or powerline symbols
+  * Optimized for speed; it typically loads in under a millisecond
+ .
+ To use the powerline fonts, add the following lines to your .vimrc:
+    let g:airline_powerline_fonts = 1
+ .
+ To enable the top bar, you can add the following to your .vimrc:
+    let g:airline#extensions#tabline#enabled = 1

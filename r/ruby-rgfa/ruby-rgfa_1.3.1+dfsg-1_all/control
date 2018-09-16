@@ -1,0 +1,23 @@
+Package: ruby-rgfa
+Version: 1.3.1+dfsg-1
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 270
+Depends: ruby | ruby-interpreter
+Section: science
+Priority: optional
+Homepage: http://github.com/ggonnella/rgfa
+Description: parse, edit and write GFA format graphs in Ruby
+ The Graphical Fragment Assembly (GFA) format is a proposed file format
+ to describe the product of a genome sequence assembly process.
+ rgfa implements the proposed specifications for the GFA format
+ described under https://github.com/pmelsted/GFA-spec/blob/master/GFA-spec.md
+ as closely as possible.
+ The library allows one to create an RGFA object from a file in the GFA format
+ or from scratch, to enumerate the graph elements (segments, links,
+ containments, paths and header lines), to traverse the graph (by
+ traversing all links outgoing from or incoming to a segment), to search for
+ elements (e.g. which links connect two segments) and to manipulate the
+ graph (e.g. to eliminate a link or a segment or to duplicate a segment
+ distributing the read counts evenly on the copies).
+Ruby-Versions: all

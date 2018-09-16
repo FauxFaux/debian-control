@@ -1,0 +1,21 @@
+Package: libmail-message-perl
+Version: 3.006-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 1284
+Depends: perl, libio-stringy-perl, libmailtools-perl (>= 2.17), libmime-types-perl, libtimedate-perl, liburi-perl, libuser-identity-perl (>= 0.94)
+Suggests: libemail-simple-perl, libhtml-tree-perl, libmime-tools-perl, libtext-autoformat-perl
+Breaks: libmail-box-perl (<< 3.0)
+Replaces: libmail-box-perl (<< 3.0)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Mail-Message
+Description: generic class representing mail messages (perl library)
+ A Mail::Message object is a container for MIME-encoded message information,
+ as defined by RFC2822.  Everything what is not specificaly related to storing
+ the messages in mailboxes (folders) is implemented in this class.  Methods
+ which are related to folders is implemented in the Mail::Box::Message
+ extension (included in the libmail-box-perl package).
+ .
+ The suggested packages are used by the various Mail::Message::Convert::*
+ modules.

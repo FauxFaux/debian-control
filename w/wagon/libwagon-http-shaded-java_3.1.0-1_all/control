@@ -1,0 +1,27 @@
+Package: libwagon-http-shaded-java
+Source: wagon
+Version: 3.1.0-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 2119
+Breaks: libwagon-java (<< 3.0.0-2~)
+Replaces: libwagon-java (<< 3.0.0-2~)
+Built-Using: commons-io (= 2.6-2), httpcomponents-client (= 4.5.5-1), httpcomponents-core (= 4.4.9-1), jsoup (= 1.10.2-2), libcommons-codec-java (= 1.11-1)
+Section: java
+Priority: optional
+Homepage: http://maven.apache.org/wagon/
+Description: Artifact transport abstraction used in Maven (HTTP providers with dependencies)
+ The Wagon project defines a simple API for transferring resources
+ (artifacts) to and from repositories. The word repository is used in this
+ context as it is commonly used in Maven and means a storage of artifacts.
+ It is also used to deploy the Maven generated site to a server.
+ .
+ Wagon defines a unified API, and it currently has the following providers:
+  * File
+  * HTTP
+  * HTTP lightweight
+  * FTP
+  * SSH/SCP
+  * WebDAV
+ .
+ This package contains the wagon-http-shaded artifact.

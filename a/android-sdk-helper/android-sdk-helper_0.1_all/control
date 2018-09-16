@@ -1,0 +1,19 @@
+Package: android-sdk-helper
+Version: 0.1
+Architecture: all
+Maintainer: Android Tools Maintainers <android-tools-devel@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: gradle (>= 3.2.1), libgradle-android-plugin-java (>= 2.2.2)
+Suggests: android-sdk
+Section: java
+Priority: optional
+Description: Helper tools for building Android apps using Debian's Android SDK
+ The Android SDK packaged in Debian is a restricted distribution with only one
+ version of Build-Tools and limited selections of the Android target frameworks
+ (android.jar). This package provides helper tools to build Android apps using
+ Debian's Android SDK without modifying the build scripts.
+ .
+ This package consists of:
+ .
+   * A Gradle init script that forces a build script to use the Gradle Android
+     Plugin in Debian which is patched to work with the SDK.

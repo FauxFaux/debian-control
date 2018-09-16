@@ -1,0 +1,24 @@
+Package: h5utils
+Version: 1.13.1-3
+Architecture: amd64
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 351
+Depends: libc6 (>= 2.14), libhdf4-0 (>= 4.0.2), libhdf5-100, libjpeg62-turbo (>= 1.3.1), libmatheval1 (>= 1.1.3), libpng16-16 (>= 1.6.2-1), zlib1g (>= 1:1.1.4)
+Recommends: hdf5-tools
+Suggests: octave
+Section: science
+Priority: optional
+Homepage: https://github.com/stevengj/h5utils
+Description: HDF5 files visualization tools
+ HDF5 (Hierarchical Data Format 5) is a file format for storing
+ scientific data. These tools allow converting other formats to
+ HDF5 and to visualize HDF5 files. They include:
+  - h5topng, which extracts a 2d slice of an HDF5 file and
+    outputs a corresponding image in PNG format;
+  - h5totxt, which extracts 2d slices and outputs comma-delimited
+    text (suitable for import into a spreadsheet);
+  - h5fromtxt, which converts simple text input into
+    multi-dimensional numeric HDF5 datasets;
+  - h5fromh4, which converts HDF4 data to HDF5;
+  - h5tovtk, which converts HDF5 files to VTK files for
+    visualization with VTK-aware programs;

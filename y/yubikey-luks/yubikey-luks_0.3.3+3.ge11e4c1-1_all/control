@@ -1,0 +1,19 @@
+Package: yubikey-luks
+Version: 0.3.3+3.ge11e4c1-1
+Architecture: all
+Maintainer: Markus Frosch <lazyfrosch@debian.org>
+Installed-Size: 31
+Depends: cryptsetup, initramfs-tools, yubikey-personalization (>= 1.5)
+Section: admin
+Priority: extra
+Homepage: https://github.com/cornelinux/yubikey-luks
+Description: YubiKey two factor authentication for LUKS disks
+ With this extension to the initramfs-tools, you can unlock a LUKS encrypted
+ disk using your YubiKey as a second factor.
+ .
+ The challenge-response mechanism of the YubiKey is used to generate a response
+ based on a PIN/password you have to enter.
+ .
+ Only the combination of the correct password and the matching YubiKey will
+ generate a response, that is a valid key of the LUKS disk. Alternatively
+ you can use any other LUKS passphrase when the YubiKey is not present.

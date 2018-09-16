@@ -1,0 +1,22 @@
+Package: libt-digest-java
+Source: t-digest
+Version: 1:3.0-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 107
+Suggests: libt-digest-java-doc
+Section: java
+Priority: optional
+Homepage: https://github.com/tdunning/t-digest
+Description: Data structure for quantiles and related rank statistics
+ The t-digest construction algorithm uses a variant of 1-dimensional
+ k-means clustering to product a data structure that is related to the
+ Q-digest. This t-digest data structure can be used to estimate
+ quantiles or compute other rank statistics. The advantage of the
+ t-digest over the Q-digest is that the t-digest can handle floating
+ point values while the Q-digest is limited to integers. With small
+ changes, the t-digest can handle any values from any ordered set that
+ has something akin to a mean. The accuracy of quantile estimates
+ produced by t-digests can be orders of magnitude more accurate than
+ those produced by Q-digests in spite of the fact that t-digests are
+ more compact when stored on disk.

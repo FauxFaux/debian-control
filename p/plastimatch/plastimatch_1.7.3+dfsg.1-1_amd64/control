@@ -1,0 +1,38 @@
+Package: plastimatch
+Version: 1.7.3+dfsg.1-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 15238
+Depends: libblas3 | libblas.so.3, libc6 (>= 2.27), libdcmtk12, libdlib19, libfftw3-double3 (>= 3.3.5), libgcc1 (>= 1:4.0), libgdcm2.8, libgomp1 (>= 4.9), libinsighttoolkit4.12 (>= 4.12.0-dfsg1-2~), liblapack3 | liblapack.so.3, libstdc++6 (>= 5.2)
+Section: science
+Priority: optional
+Homepage: http://plastimatch.org
+Description: medical image reconstruction and registration
+ Plastimatch is an open source software for deformable image
+ registration. It is designed for high-performance volumetric
+ registration of medical images, such as X-ray computed tomography (CT),
+ magnetic resonance imaging (MRI), and positron emission tomography(PET).
+ Software features include:
+  * B-spline method for deformable image registration (GPU and multicore
+    accelerated), including support for image masking, landmark penalties,
+    and regularization
+  * Demons method for deformable image registration (GPU accelerated)
+  * Multi-atlas segmentation
+  * ITK-based algorithms for translation, rigid, affine, multiple demons
+    methods, and B-spline registration
+  * Pipelined, multi-stage registration framework with seamless conversion
+    between most algorithms and transform types
+  * Landmark-based deformable registration using thinplate splines for
+    global registration
+  * Landmark-based deformable registration using radial basis functions
+    for local corrections
+  * Broad support for 3D image file formats (using ITK), including DICOM,
+    Nifti, NRRD, MetaImage, and Analyze
+  * Extensive toolchain for radiotherapy research, including support for
+    DICOM, DICOM-RT, DICOM SRO, XiO file format, gamma analysis, contour
+    manipulation, contour overlap analysis, and vector field analysis
+ Plastimatch also features two handy utilities which are not directly
+ related to image registration:
+  * FDK cone-beam CT reconstruction (GPU and multicore accelerated)
+  * Digitally reconstructed radiograph (DRR) generation (GPU and multicore
+    accelerated)

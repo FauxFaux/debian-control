@@ -1,0 +1,22 @@
+Package: tftpd-hpa
+Source: tftp-hpa (5.2+20150808-1)
+Version: 5.2+20150808-1+b1
+Architecture: amd64
+Maintainer: Ron Lee <ron@debian.org>
+Installed-Size: 118
+Depends: libc6 (>= 2.14), libwrap0 (>= 7.6-4~), adduser, debconf (>= 0.5) | debconf-2.0
+Suggests: pxelinux
+Conflicts: atftpd, tftp-server, tftpd
+Replaces: atftpd, tftp-server, tftpd
+Provides: tftp-server
+Section: net
+Priority: extra
+Homepage: http://git.kernel.org/cgit/network/tftp/tftp-hpa.git
+Description: HPA's tftp server
+ Trivial File Transfer Protocol (TFTP) is a file transfer protocol, mainly to
+ serve boot images over the network to other machines (PXE).
+ .
+ tftp-hpa is an enhanced version of the BSD TFTP client and server. It
+ possesses a number of bugfixes and enhancements over the original.
+ .
+ This package contains the server.

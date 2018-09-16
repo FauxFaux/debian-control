@@ -1,0 +1,27 @@
+Package: python-inotifyx
+Source: inotifyx
+Version: 0.2.0-1
+Architecture: amd64
+Maintainer: Ritesh Raj Sarraf <rrs@debian.org>
+Installed-Size: 148
+Depends: python2.6 | python2.7, python (>= 2.6.6-7~), python (<< 2.8), libc6 (>= 2.4)
+Provides: python2.6-inotifyx, python2.7-inotifyx
+Section: python
+Priority: optional
+Homepage: http://www.alittletooquiet.net/software/inotifyx/
+Description: simple Python binding to the Linux inotify
+ inotifyx is a Python extension providing access to the Linux
+ inotify file system event notification API. It is primarily
+ written in C but has some Python window dressing
+ .
+ inotifyx exists as an alternative to the much known pyinotify bindings
+ .
+ Reasons you might choose inotifyx over pyinotify
+  * inotifyx is a C extension and does not use ctypes, making it
+    faster and less prone to subtle breakage due to changes in the inotify API
+  * inotifyx is a much thinner wrapper around inotify. pyinotify is more
+    complicated. It does provide features that inotifyx does not, but many of
+    them are not needed by most applications
+  * The API provided by pyinotify seems to change in incompatible ways on a
+    fairly regular basis and with little justification. inotifyx has a simple
+    API that will change rarely, if ever.

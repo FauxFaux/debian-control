@@ -1,0 +1,23 @@
+Package: aptly-publisher
+Source: python-aptly
+Version: 0.12.10-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 105
+Depends: python3-aptly (= 0.12.10-1), python3:any
+Section: utils
+Priority: optional
+Homepage: https://github.com/tcpcloud/python-aptly
+Description: Tool for management of Aptly publishes
+ This tool allows one to create aptly multi-component
+ publishes from YAML definition of repositories and mirrors
+ .
+ Features:
+  - create or update publish from latest snapshots
+    - it takes configuration in yaml format which defines what to publish and
+      how
+    - expected snapshot format is ``<name>-<timestamp>``
+  - promote publish
+    - use source publish snapshots to create or update another publish (eg.
+      testing -> stable)
+  - cleanup unused snapshots

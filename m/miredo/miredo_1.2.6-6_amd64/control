@@ -1,0 +1,18 @@
+Package: miredo
+Version: 1.2.6-6
+Architecture: amd64
+Maintainer: Tomasz Buchert <tomasz@debian.org>
+Installed-Size: 388
+Pre-Depends: adduser, udev | makedev
+Depends: iproute2, lsb-base, libc6 (>= 2.15), libcap2 (>= 1:2.10), libjudydebian1
+Section: net
+Priority: optional
+Homepage: http://www.remlab.net/miredo/
+Description: Teredo IPv6 tunneling through NATs
+ The Teredo IPv6 tunneling protocol encapsulates IPv6 packets into UDP/IPv4
+ datagrams, to allow hosts behind NAT devices to access the IPv6 Internet.
+ .
+ Miredo is a Teredo client (as per RFC 4380): it can provide IPv6
+ connectivity to a dual-stack IPv6/IPv4 host even if it is located behind a
+ NAT. It can also operate as a Teredo relay which forwards IPv6 packets
+ between the IPv6 Internet and remote Teredo clients.

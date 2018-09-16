@@ -1,0 +1,15 @@
+Package: rdup
+Version: 1.1.15-1
+Architecture: amd64
+Maintainer: Jose Carlos Garcia Sogo <jsogo@debian.org>
+Installed-Size: 140
+Depends: libarchive13 (>= 3.0.4), libc6 (>= 2.7), libglib2.0-0 (>= 2.12.0), libnettle6, libpcre3, bash (>= 3.0.0)
+Section: utils
+Priority: optional
+Homepage: https://github.com/miekg/rdup
+Description: utility to create a file list suitable for making backups
+ rdup is a utility inspired by rsync and the plan9 way of doing
+ things. rdup itself does not backup anything. It only prints a list
+ of files that are changed, or all files in case of a null dump. It
+ also handles files that are removed, allowing for correct incremental
+ backups.

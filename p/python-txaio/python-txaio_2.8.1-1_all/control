@@ -1,0 +1,20 @@
+Package: python-txaio
+Version: 2.8.1-1
+Architecture: all
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 87
+Depends: python-six, python-trollius, python-twisted, python-zope.interface, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Suggests: python-txaio-doc
+Section: python
+Priority: optional
+Homepage: https://github.com/tavendo/txaio
+Description: compatibility API between asyncio/Twisted/Trollius - Python 2.x
+ Txaio is a helper library for writing code that runs unmodified on both
+ Twisted and asyncio.
+ .
+ This is like six , but for wrapping over differences between Twisted and
+ asyncio so one can write code that runs unmodified on both (aka "source code
+ compatibility"). In other words: users can choose if they want asyncio or
+ Twisted as a dependency.
+ .
+ This package contains the Python 2.x module.

@@ -1,0 +1,16 @@
+Package: ibod
+Source: ibod (1.5.0-6)
+Version: 1.5.0-6+b1
+Architecture: amd64
+Maintainer: Paul Martin <pm@debian.org>
+Installed-Size: 51
+Depends: libc6 (>= 2.15), libwrap0 (>= 7.6-4~), ipppd | isdnutils
+Section: net
+Priority: extra
+Description: ISDN MPPP bandwidth on demand daemon
+ ibod is an ISDN MPPP bandwidth on demand daemon designed to operate in
+ conjunction with isdn4linux. The program monitors inbound and outbound
+ traffic on the ISDN interface. When the required bandwidth exceeds the
+ capacity for the current number of ISDN B-channels, more (slave)
+ channels are connected according to the MPPP protocol. When the traffic
+ decreases, the slave channel(s) are disconnected.

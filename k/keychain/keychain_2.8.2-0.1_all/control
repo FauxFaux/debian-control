@@ -1,0 +1,19 @@
+Package: keychain
+Version: 2.8.2-0.1
+Architecture: all
+Maintainer: Cesar Mendoza <mendoza@debian.org>
+Installed-Size: 83
+Depends: openssh-client | ssh-client
+Suggests: gnupg-agent, ssh-askpass
+Section: net
+Priority: extra
+Homepage: http://www.funtoo.org/Keychain
+Description: key manager for OpenSSH
+ Keychain is an OpenSSH key manager, typically run from ~/.bash_profile. When
+ keychain is run, it checks for a running ssh-agent, otherwise it starts one.
+ It saves the ssh-agent environment variables to ~/.keychain/\$\{HOSTNAME\}-sh,
+ so that subsequent logins and non-interactive shells such as cron jobs can
+ source the file and make passwordless ssh connections.  In addition, when
+ keychain runs, it verifies that the key files specified on the command-line
+ are known to ssh-agent, otherwise it loads them, prompting you for a password
+ if necessary.

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+# This conffile moval fixes #714922
+dpkg-maintscript-helper mv_conffile /etc/gosa/etc/sieve-discard.txt /etc/gosa/sieve-discard.txt 2.7.4-4.4  -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/gosa/etc/sieve-header.txt /etc/gosa/sieve-header.txt 2.7.4-4.4  -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/gosa/etc/sieve-vacation.txt /etc/gosa/sieve-vacation.txt 2.7.4-4.4  -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/gosa/etc/vacation/vacation_example.txt /etc/gosa/vacation/vacation_example.txt 2.7.4-4.4  -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/gosa/etc/sieve-mailsize.txt /etc/gosa/sieve-mailsize.txt  2.7.4-4.4  -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/gosa/etc/sieve-spam.txt /etc/gosa/sieve-spam.txt 2.7.4-4.4  -- "$@"
+
+

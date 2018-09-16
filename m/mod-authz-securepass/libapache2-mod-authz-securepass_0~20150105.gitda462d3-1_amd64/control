@@ -1,0 +1,19 @@
+Package: libapache2-mod-authz-securepass
+Source: mod-authz-securepass
+Version: 0~20150105.gitda462d3-1
+Architecture: amd64
+Maintainer: Debian SecurePass <pkg-securepass-devel@lists.alioth.debian.org>
+Installed-Size: 59
+Depends: apache2-api-20120211, libc6 (>= 2.14), libcurl3-gnutls (>= 7.16.2)
+Section: httpd
+Priority: optional
+Homepage: https://github.com/gplll/mod_authz_securepass
+Description: Apache2 module for authorizing SecurePass users
+ SecurePass provides web single sign-on through the CAS protocol.
+ .
+ This module enhances the Apache authorization features by introducing two
+ rules to restrict access to the Apache resources:
+  * the first rule allows only users belonging to specific SecurePass
+    realm(s) to access the Apache resource
+  * the second rule allows only users belonging to specific SecurePass
+    group(s) to access the Apache resource

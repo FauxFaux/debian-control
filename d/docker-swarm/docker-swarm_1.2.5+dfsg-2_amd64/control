@@ -1,0 +1,26 @@
+Package: docker-swarm
+Version: 1.2.5+dfsg-2
+Architecture: amd64
+Maintainer: pkg-go <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 16070
+Depends: libc6 (>= 2.3.2), init-system-helpers (>= 1.18~), lsb-base (>= 3.0-6), pipexec
+Suggests: etcd, consul, zookeeper
+Built-Using: consul (= 0.6.4~dfsg-3), docker-libkv (= 0.2.0-1), docker-registry (= 2.4.1~ds1-2), docker.io (= 1.11.2~ds1-6), etcd (= 2.3.7+dfsg-5), golang-1.7 (= 1.7.3-1), golang-codegangsta-cli (= 1.18.0-1), golang-context (= 1.1-1), golang-github-davecgh-go-spew (= 0.0~git20151106.5215b55-1), golang-github-docker-engine-api (= 0.4.0-1), golang-github-docker-go-connections (= 0.2.1-1), golang-github-docker-go-units (= 0.3.1-1), golang-github-docker-leadership (= 0.1.0-1), golang-github-gorilla-mux (= 1.1-2), golang-github-hashicorp-go-cleanhttp (= 0.0~git20160217.0.875fb67-1), golang-github-hashicorp-serf (= 0.7.0~ds1-1), golang-github-mesos-mesos-go (= 0.0.2+dfsg-2), golang-github-pborman-uuid (= 0.0+git20150824.0.cccd189-1), golang-github-pmezard-go-difflib (= 0.0~git20160110.0.792786c-2), golang-github-samalba-dockerclient (= 0.0~git20160531.0.a303626-1), golang-github-samuel-go-zookeeper (= 0.0~git20150817.0.177002e-1), golang-github-skarademir-naturalsort (= 0.0~git20150715.0.69a5d87-1), golang-github-ugorji-go-codec (= 0.0~git20151130.0.357a44b-1), golang-glog (= 0+git20150801.fca8c88-1), golang-gogoprotobuf (= 0.3-1), golang-golang-x-net-dev (= 1:0.0+git20161013.8b4af36+dfsg-3), golang-logrus (= 0.10.0-2), golang-objx (= 0.0~git20150928.0.1a9d0bb-1), golang-testify (= 1.1.3+git20160418.12.c5d7a69+ds-1), runc (= 0.1.1+dfsg1-1)
+Section: devel
+Priority: extra
+Homepage: https://github.com/docker/swarm
+Description: Docker's native clustering system
+ Docker Swarm is native clustering for Docker. It turns a pool of Docker
+ hosts into a single, virtual host.
+ .
+ Swarm serves the standard Docker API, so any tool which already
+ communicates with a Docker daemon can use Swarm to transparently scale to
+ multiple hosts: Dokku, Compose, Krane, Flynn, Deis, DockerUI, Shipyard,
+ Drone, Jenkins... and, of course, the Docker client itself.
+ .
+ Like other Docker projects, Swarm follows the "batteries included but
+ removable" principle. It ships with a set of simple scheduling backends
+ out of the box, and as initial development settles, an API will be
+ developed to enable pluggable backends.  The goal is to provide a smooth
+ out-of-the-box experience for simple use cases, and allow swapping in more
+ powerful backends, like Mesos, for large scale production deployments.

@@ -1,0 +1,15 @@
+Package: libpod-eventual-perl
+Version: 0.094001-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 68
+Depends: perl, libmixin-linewise-perl (>= 0.102)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Pod-Eventual/
+Description: module to read a POD as a series of trivial events
+ Pod::Eventual is a collection of Perl modules designed to read line-based
+ input and produce events describing each POD paragraph or directive it finds.
+ Once complete, events are immediately passed to the handle_event method. This
+ method should be implemented by subclasses of Pod::Eventual; otherwise the
+ default handle_event method will raise an exception.

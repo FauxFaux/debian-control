@@ -1,0 +1,15 @@
+Package: golang-github-fortytw2-leaktest-dev
+Source: golang-github-fortytw2-leaktest
+Version: 1.2.0-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 23
+Section: devel
+Priority: optional
+Homepage: https://github.com/fortytw2/leaktest
+Description: Goroutine Leak Detector
+ Refactored, tested variant of the goroutine leak detector found in both
+ net/http tests and the cockroachdb source tree.
+ .
+ Takes a snapshot of running goroutines at the start of a test, and at the
+ end -- compares the two and voila. Ignores runtime/sys goroutines.

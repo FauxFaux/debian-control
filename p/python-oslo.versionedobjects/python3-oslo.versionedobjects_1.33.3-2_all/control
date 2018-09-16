@@ -1,0 +1,20 @@
+Package: python3-oslo.versionedobjects
+Source: python-oslo.versionedobjects
+Version: 1.33.3-2
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 349
+Depends: python3-fixtures, python3-iso8601, python3-netaddr, python3-oslo.concurrency (>= 3.26.0), python3-oslo.config (>= 1:5.2.0), python3-oslo.context (>= 2.19.2), python3-oslo.i18n (>= 3.15.3), python3-oslo.log (>= 3.36.0), python3-oslo.messaging (>= 5.29.0), python3-oslo.serialization (>= 2.18.0), python3-oslo.utils (>= 3.33.0), python3-six (>= 1.10.0), python3-webob (>= 1.7.1), python3:any
+Suggests: python-oslo.versionedobjects-doc
+Section: python
+Priority: optional
+Homepage: https://github.com/openstack/oslo.versionedobjects
+Description: deals with DB schema versions and code expectations - Python 3.x
+ oslo.versionedobjects library deals with DB schema being at different versions
+ than the code expects, allowing services to be operated safely during
+ upgrades. It enables DB independent schema by providing an abstraction layer,
+ which allows one to support SQL and NoSQL Databases. oslo.versionedobjects is
+ also used in RPC APIs, to ensure upgrades happen without spreading version
+ dependent code across different services and projects.
+ .
+ This package contains the Python 3.x module.

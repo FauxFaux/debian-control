@@ -1,0 +1,22 @@
+Package: smemcap
+Source: smem (1.4-2)
+Version: 1.4-2+b1
+Architecture: amd64
+Maintainer: Michal Čihař <nijel@debian.org>
+Installed-Size: 25
+Depends: libc6 (>= 2.4)
+Breaks: smem (<< 1.3-2)
+Replaces: smem (<< 1.3-2)
+Section: utils
+Priority: extra
+Homepage: http://www.selenic.com/smem/
+Description: data collection tool for memory reporting
+ Tool that can give numerous reports on memory usage on Linux systems.
+ Unlike existing tools, smem can report proportional set size (PSS),
+ which is a more meaningful representation of the amount of memory used
+ by libraries and applications in a virtual memory system.
+ .
+ This package contains smemcap utility, which can be used to collect
+ data on resource constrained systems without depending on Python.
+ .
+ The captured data can be processed by smem program.

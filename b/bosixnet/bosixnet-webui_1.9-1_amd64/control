@@ -1,0 +1,24 @@
+Package: bosixnet-webui
+Source: bosixnet
+Version: 1.9-1
+Architecture: amd64
+Maintainer: Boris Pek <tehnick@debian.org>
+Installed-Size: 80
+Depends: adduser, curl, lsb-base (>= 3.0-6), sed (>= 4.2), spawn-fcgi, init-system-helpers (>= 1.18~), libc6 (>= 2.14), libfcgi0ldbl, libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Recommends: bosixnet-daemon
+Suggests: miredo | gogoc
+Section: net
+Priority: optional
+Homepage: https://github.com/tehnick/bosixnet
+Description: Build Own IPv6 Network (server utilities)
+ Project should be useful when you have to administer many computers
+ distributed through different networks and connected via NAT. In most of
+ cases you may just install miredo, gogoc or any other tunnel broker's
+ software and these computers will be available via IPv6 addresses. BOSixNet
+ includes the collection of tools for automatic updating the list of such
+ hosts.
+ .
+ This package provides the FastCGI program which passively listens for
+ incoming connections and generates list of hosts in your IPv6 network which
+ may be put directly into /etc/hosts. Program has very few dependencies and
+ it may be easily launched on embedded devices.

@@ -1,0 +1,15 @@
+Package: numad
+Version: 0.5+20150602-5
+Architecture: amd64
+Maintainer: Jeremías Casteglione <debian@jrms.com.ar>
+Installed-Size: 87
+Depends: libc6 (>= 2.14), init-system-helpers (>= 1.18~), systemd-sysv | cgmanager, lsb-base (>= 3.2-14)
+Section: admin
+Priority: optional
+Homepage: https://git.fedorahosted.org/cgit/numad.git
+Description: User-level daemon that monitors NUMA topology and usage
+ Numad is a system daemon that monitors NUMA topology and usage. It will attempt
+ to locate processes for optimum NUMA locality and affinity, dynamically
+ adjusting to changing system conditions. Numad also provides guidance to assist
+ management applications with initial manual binding of CPU and memory resources
+ for their processes.

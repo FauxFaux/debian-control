@@ -1,0 +1,23 @@
+Package: libplack-middleware-csrfblock-perl
+Version: 0.10-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 40
+Depends: perl, libhtml-parser-perl, libplack-middleware-session-perl, libplack-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Plack-Middleware-CSRFBlock
+Description: Plack middleware to block CSRF (cross-site request forgery)
+ Plack::Middleware::CSRFBlock helps blocking Cross-Site Request Forgeries,
+ and can be used without any modifications to your application, in
+ most cases.
+ .
+ When the application response Content-type header is "text/html" or
+ "application/xhtml+xml", this middleware inserts a hidden input tag
+ that contains a token string into all POST-forms found in the
+ response body.
+ .
+ For every POST requests, this middleware ensures that the input
+ parameters contain the correct token parameter. If not found, the
+ middleware throws an HTTP error 403 (Forbidden) and the forged
+ request does not even reach your application.

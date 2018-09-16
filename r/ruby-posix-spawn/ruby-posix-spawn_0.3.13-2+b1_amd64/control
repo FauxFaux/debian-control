@@ -1,0 +1,23 @@
+Package: ruby-posix-spawn
+Source: ruby-posix-spawn (0.3.13-2)
+Version: 0.3.13-2+b1
+Architecture: amd64
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 79
+Depends: ruby (>= 1:2.5~0), libc6 (>= 2.15), libgmp10, libruby2.5 (>= 2.5.0~preview1), ruby (<< 1:2.6~)
+Section: ruby
+Priority: optional
+Homepage: http://github.com/rtomayko/posix-spawn
+Description: Ruby Implementation of posix_spawn(2) for faster process spawning
+ The posix-spawn library aims to implement a subset of the Ruby 1.9
+ `Process::spawn` interface in a way that takes advantage of fast
+ process spawning interfaces when available and provides sane fallbacks
+ on systems that do not.
+ .
+ `fork(2)` calls slow down as the parent process uses more memory due to
+ the need to copy page tables. In many common uses of fork(), where it
+ is followed by one of the exec family of functions to spawn child
+ processes (`Kernel#system`,`IO::popen`, `Process::spawn`, etc.), it's
+ possible to remove this overhead by using the use of special process
+ spawning interfaces (`posix_spawn()`, `vfork()`, etc.)
+Ruby-Versions: ruby2.5

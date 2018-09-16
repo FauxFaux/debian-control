@@ -1,0 +1,32 @@
+Package: slick-greeter
+Version: 1.2.2-2
+Architecture: amd64
+Maintainer: David Mohammed <fossfreedom@ubuntu.com>
+Installed-Size: 1321
+Depends: dconf-gsettings-backend | gsettings-backend, libatk1.0-0 (>= 1.12.4), libc6 (>= 2.27), libcairo2 (>= 1.14.0), libcanberra0 (>= 0.2), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.37.3), libgtk-3-0 (>= 3.21.4), liblightdm-gobject-1-0 (>= 1.16.0), libpango-1.0-0 (>= 1.14.0), libpangocairo-1.0-0 (>= 1.14.0), libx11-6, libxext6, lightdm, python3
+Provides: lightdm-greeter
+Section: x11
+Priority: optional
+Homepage: https://github.com/linuxmint/slick-greeter
+Description: Slick-looking LightDM greeter
+ Slick-Greeter is cross-distribution and should work pretty much
+ anywhere.
+ .
+ All panel applets are embedded. No external indicators are launched or
+ loaded by the greeter.
+ .
+ No settings daemon are launched or loaded by the greeter.
+ .
+ This greeter supports HiDPI.
+ .
+ Sessions are validated. If a default/chosen session isn't present on
+ the system, the greeter scans for known sessions in
+ /usr/share/xsessions and replaces the invalid session choice with a
+ valid session.
+ .
+ You can take a screenshot by pressing PrintScrn. The screenshot is
+ saved in /var/lib/lightdm/Screenshot.png.
+ .
+ Slick Greeter started as a fork of Unity Greeter 16.04.2, a greeter
+ developed for Ubuntu by Canonical, which used indicators and
+ unity-settings-daemon.

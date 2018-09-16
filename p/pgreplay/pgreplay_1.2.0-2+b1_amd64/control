@@ -1,0 +1,28 @@
+Package: pgreplay
+Source: pgreplay (1.2.0-2)
+Version: 1.2.0-2+b1
+Architecture: amd64
+Maintainer: Cyril Bouthors <cyb@debian.org>
+Installed-Size: 81
+Depends: libc6 (>= 2.14), libpq5
+Section: admin
+Priority: optional
+Description: replay PostgreSQL log files
+ Reads a PostgreSQL log file (*not* a WAL file), extracts the SQL statements and
+ executes them in the same order and with the original timing against a
+ PostgreSQL database.
+ .
+ If the execution of statements gets behind schedule, warning messages are
+ issued that indicate that the server cannot handle the load in a timely
+ fashion.
+ .
+ A final report gives you a useful statistical analysis of your workload and its
+ execution.
+ .
+ The idea is to replay a real-world database workload as exactly as possible.
+ .
+ This is useful for performance tests, particularly in the following situations:
+ - You want to compare the performance of your PostgreSQL application on
+   different hardware or different operating systems.
+ - You want to upgrade your database and want to make sure that the new database
+   version does not suffer from performance regressions that affect you.

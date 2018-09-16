@@ -1,0 +1,16 @@
+Package: pd-plugin
+Version: 0.2.1-4
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 45
+Depends: libc6 (>= 2.4), puredata-core | pd
+Recommends: ladspa-sdk, cmt
+Suggests: amb-plugins, caps, fil-plugins, invada-studio-plugins-ladspa, mcp-plugins, omins, rubberband-ladspa, tap-plugins
+Section: sound
+Priority: optional
+Homepage: https://puredata.info
+Description: LADSPA and VST plug-in hosting for Pd
+ This is a Pd tilde object for hosting LADSPA audio plug-ins. The
+ LADSPA plug-in interface is supported completely. The object will
+ search your LADSPA path for plugins, which are loadable by name as an
+ argument to the plugin~ object.

@@ -1,0 +1,72 @@
+#!/bin/sh
+
+set -e
+
+USER=inetsim
+
+# shortcut to run command as user and group $USER
+as_user () {
+    runuser -u "${USER}" -- "$@"
+}
+
+if [ "$1" = configure ] ; then
+    # create user/group if it does not yet exist
+    if ! getent passwd "$USER" >/dev/null ; then
+        adduser --quiet --system --group \
+            --home /var/lib/inetsim "${USER}"
+    fi
+
+    # create the variable state information directory
+    mkdir -p /var/lib/inetsim/
+    chown "${USER}:${USER}" /var/lib/inetsim
+    # copy examples from /usr/share
+    as_user cp -r -u /usr/share/inetsim/data/* /var/lib/inetsim/
+    # add missing directories
+    as_user mkdir -p /var/lib/inetsim/tftp/upload /var/lib/inetsim/ftp/upload \
+        /var/lib/inetsim/smtp /var/lib/inetsim/http/postdata
+    as_user chmod g+w /var/lib/inetsim/tftp/upload \
+         /var/lib/inetsim/ftp/upload /var/lib/inetsim/http/postdata
+    # create certificates directory
+    as_user mkdir -p /var/lib/inetsim/certs
+    if [ ! -f "/var/lib/inetsim/certs/default_key.pem" ] || \
+            [ ! -f "/var/lib/inetsim/certs/default_cert.pem" ]; then
+        if openssl version >/dev/null 2>&1; then
+            echo -n "Creating default SSL key and certificate... "
+            as_user openssl req -new -x509 -days 3650 -nodes -sha1 \
+                -keyout "/var/lib/inetsim/certs/default_key.pem" \
+                -out "/var/lib/inetsim/certs/default_cert.pem" \
+                -subj "/O=INetSim/OU=Development/CN=inetsim.org" 2>/dev/null \
+                && echo "done" || echo "failed, using snakeoil as fallback"
+        else
+            echo "OpenSSL not found."
+        fi
+    fi
+    # use snakeoil certificate as fallback
+    if [ ! -f "/var/lib/inetsim/certs/default_key.pem" ] || \
+            [ ! -f "/var/lib/inetsim/certs/default_cert.pem" ]; then
+        if [ -f "/etc/ssl/private/ssl-cert-snakeoil.key" ] && \
+                [ -f "/etc/ssl/certs/ssl-cert-snakeoil.pem" ]; then
+            cp -a "/etc/ssl/private/ssl-cert-snakeoil.key" \
+                "/var/lib/inetsim/certs/default_key.pem"
+            cp -a "/etc/ssl/certs/ssl-cert-snakeoil.pem" \
+                "/var/lib/inetsim/certs/default_cert.pem"
+            chown "${USER}:${USER}" "/var/lib/inetsim/certs/default_key.pem" \
+                "/var/lib/inetsim/certs/default_cert.pem"
+        fi
+    fi
+
+    # create the log dir and report subdir
+    mkdir -p /var/log/inetsim
+    chown "${USER}:${USER}" /var/log/inetsim
+    chmod 0700 /var/log/inetsim
+    as_user mkdir -p /var/log/inetsim/report
+fi
+
+# Automatically added by dh_installinit/11.1.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/inetsim" ]; then
+		update-rc.d inetsim defaults-disabled >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+

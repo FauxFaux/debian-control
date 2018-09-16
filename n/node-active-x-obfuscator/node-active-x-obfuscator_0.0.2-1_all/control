@@ -1,0 +1,17 @@
+Package: node-active-x-obfuscator
+Version: 0.0.2-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 39
+Depends: nodejs (>= 0.6.19~dfsg1-3~), node-zeparser (>= 0.0.7)
+Section: web
+Priority: extra
+Homepage: https://github.com/felixge/node-active-x-obfuscator
+Description: Safely obfuscate the string 'ActiveX' inside of JavaScript code
+ This Node.js module (safely) obfuscates all occurrences of the string
+ 'ActiveX' inside any JavaScript code.
+ .
+ Some corporate firewalls/proxies such as Blue Coat block JavaScript files
+ to be downloaded if they contain the word 'ActiveX'. That of course is very
+ annoying for libraries such as socket.io that need to use ActiveXObject for
+ supporting IE8 and older.

@@ -1,0 +1,31 @@
+Package: aoetools
+Version: 36-2
+Architecture: amd64
+Maintainer: Christoph Biedl <debian.axhn@manchmal.in-ulm.de>
+Installed-Size: 135
+Depends: libc6 (>= 2.15), lsb-base
+Section: admin
+Priority: optional
+Homepage: http://aoetools.sf.net
+Description: tools to assist in using ATA over Ethernet
+ The aoetools are programs that assist in using ATA over Ethernet.  These
+ tools are designed to work with the "aoe" driver for Linux 2.6+ kernels;
+ in fact, this version recommends kernel 2.6.14 or later, as both support
+ up to 16 slots per shelf address.
+ .
+ Systems running Linux 2.4 kernels do not need and should not install
+ the aoetools.  The aoe driver for 2.4 kernels is self-sufficient.
+ .
+ There are several tools included in this package:
+  * aoecfg         - manipulate AoE configuration strings
+  * aoe-discover   - trigger discovery of ATA over Ethernet devices
+  * aoe-flush      - flush the down devices out of the aoe driver
+  * aoe-interfaces - restrict network interfaces used for AoE
+  * aoe-mkdevs     - create character and block device files
+  * aoe-mkshelf    - create block device files for one shelf address
+  * aoeping        - simple userland communication with AoE devices
+  * aoe-revalidate - revalidate the disk size of an AoE device
+  * aoe-sancheck   - diagnoses MTU and other network issues
+  * aoe-stat       - print status information for AoE devices
+  * aoe-version    - print AoE-related software version information
+  * coraid-update  - upload an update file to a Coraid appliance

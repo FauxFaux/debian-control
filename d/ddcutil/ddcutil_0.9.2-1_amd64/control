@@ -1,0 +1,22 @@
+Package: ddcutil
+Version: 0.9.2-1
+Architecture: amd64
+Maintainer: Sanford Rockowitz <rockowitz@minsoft.com>
+Installed-Size: 570
+Depends: libc6 (>= 2.17), libdrm2 (>= 2.4.66), libglib2.0-0 (>= 2.32), libudev1 (>= 183), libusb-1.0-0 (>= 2:1.0.22), libx11-6, libxrandr2 (>= 2:1.2.99.2), i2c-tools
+Section: utils
+Priority: optional
+Homepage: http://www.ddcutil.com
+Description: Control monitor settings
+ ddcutil is used to query and change monitor settings.
+ .
+ ddcutil communicates with monitors implementing MCCS (Monitor Control Command
+ Set). Normally, communication is performed using the DDC/CI protocol on the
+ I2C bus.  Alternatively, communication can be performed over USB as per the
+ USB Monitor Control Class Specification.
+ .
+ A particular use case for ddcutil is as part of color profile management.
+ Monitor calibration is relative to the monitor color settings currently in
+ effect,  e.g. red  gain.  ddcutil allows color related settings to be saved
+ at the time a monitor is calibrated, and then restored when the calibration
+ is applied.

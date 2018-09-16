@@ -1,0 +1,28 @@
+Package: postgresql-common
+Version: 193
+Architecture: all
+Maintainer: Debian PostgreSQL Maintainers <team+postgresql@tracker.debian.org>
+Installed-Size: 624
+Depends: adduser, debconf (>= 0.5.00) | debconf-2.0, lsb-base (>= 3.0-3), postgresql-client-common (= 193), procps, ssl-cert (>= 1.0.11), ucf
+Recommends: e2fsprogs, logrotate
+Suggests: libjson-perl
+Conflicts: postgresql-7.4, postgresql-8.0
+Breaks: postgresql-9.1 (<< 9.1.1-3~), systemd (<< 204)
+Section: database
+Priority: optional
+Multi-Arch: foreign
+Description: PostgreSQL database-cluster manager
+ The postgresql-common package provides a structure under which
+ multiple versions of PostgreSQL may be installed and/or multiple
+ clusters maintained at one time.
+ .
+ The commands provided are pg_conftool, pg_createcluster, pg_ctlcluster,
+ pg_dropcluster, pg_lsclusters, pg_renamecluster, pg_upgradecluster,
+ pg_virtualenv.
+ .
+ PostgreSQL is a fully featured object-relational database management
+ system. It supports a large part of the SQL standard and is designed
+ to be extensible by users in many aspects. Its features include ACID
+ transactions, foreign keys, views, sequences, subqueries, triggers,
+ outer joins, multiversion concurrency control, and user-defined types
+ and functions.

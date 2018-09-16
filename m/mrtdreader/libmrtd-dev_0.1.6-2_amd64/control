@@ -1,0 +1,26 @@
+Package: libmrtd-dev
+Source: mrtdreader
+Version: 0.1.6-2
+Architecture: amd64
+Maintainer: Ruben Undheim <ruben.undheim@gmail.com>
+Installed-Size: 27
+Depends: libmrtd0 (= 0.1.6-2), libgcrypt20-dev, libnfc-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/rubund/mrtdreader
+Description: Development files for libmrtd0
+ Machine-readable travel documents such as passports nowadays usually contain
+ an RFID chip for storing various data. This library provides useful functions
+ for reading out the data from these documents. This version of the library
+ supports the Basic Access Control (BAC). It uses several cryptographic
+ functions from either libgcrypt or libtomcrypt (depending on compile-time
+ options) in order to do the necessary decryption of the content of the MRTDs.
+ The key for the BAC-scheme is derived from the Machine-readable zone (MRZ)
+ which is printed on the MRTD.
+ .
+ The library depends on libnfc for the hardware interaction and only devices
+ supported by libnfc will therefore work.
+ .
+ This package contains header files for building programs linked with
+ libmrtd0.

@@ -1,0 +1,65 @@
+#!/bin/sh
+# preinst script for fusiondirectory.
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <new-preinst> `install'
+#        * <new-preinst> `install' <old-version>
+#        * <new-preinst> `upgrade' <old-version>
+#        * <old-preinst> `abort-upgrade' <new-version>
+#
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+#####################################################################################
+### ADAPT to new upstream release, whenever a new upstream release is packaged!!! ###
+#####################################################################################
+
+CURRENTMAJOR=1.2
+
+#####################################################################################
+
+# $2 is the package version of the still installed package
+LASTMAJOR=$(echo $2 | cut -d"." -f1-2)
+
+
+case "${1}" in
+
+	'install')
+		;;
+
+	'upgrade')
+		if test -n "$LASTMAJOR" && dpkg --compare-versions "$LASTMAJOR" lt "$CURRENTMAJOR"; then
+
+			db_fset fusiondirectory/upgrade-confirm seen false
+			db_input critical fusiondirectory/upgrade-confirm
+			db_go
+			db_get fusiondirectory/upgrade-confirm
+			if test "x$RET" = "xfalse"; then
+				db_fset fusiondirectory/upgrade-canceled seen false
+				db_input critical fusiondirectory/upgrade-canceled
+				db_go
+				exit 1
+			fi
+		fi
+		;;
+
+	'abort-upgrade')
+		;;
+
+	*)
+		echo "preinst called with unknown argument '${1}'" >&2
+		exit '1'
+		;;
+
+esac
+
+
+
+exit 0

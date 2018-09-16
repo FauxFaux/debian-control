@@ -1,0 +1,23 @@
+Package: libkiokudb-perl
+Version: 0.57-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 970
+Depends: perl, libcache-ref-perl, libclass-load-perl, libdata-stream-bulk-perl (>= 0.08), libdata-swap-perl, libdata-uuid-libuuid-perl, libdata-uuid-perl, libdata-visitor-perl, libhash-util-fieldhash-compat-perl, libjson-perl, libjson-xs-perl, libmodule-pluggable-perl | perl (<< 5.17.0), libmoose-perl (>= 2), libmoosex-clone-perl, libmoosex-role-parameterized-perl, libmoosex-yaml-perl, libnamespace-clean-perl, libpadwalker-perl, libpath-class-perl, libscope-guard-perl, libsearch-gin-perl, libset-object-perl, libsub-exporter-perl, libtest-exception-perl, libthrowable-perl, libtie-toobject-perl, libtry-tiny-perl, libyaml-libyaml-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/KiokuDB
+Description: Perl module for object persistence
+ KiokuDB is a Moose based frontend to various data stores, somewhere in
+ between Tangram and Pixie.
+ .
+ Its purpose is to provide persistence for "regular" objects with as little
+ effort as possible, without sacrificing control over how persistence is
+ actually done, especially for harder to serialize objects.
+ .
+ KiokuDB is also non-invasive: it does not use ties, AUTOLOAD, proxy objects,
+ sv_magic or any other type of trickery.
+ .
+ Many features important for proper Perl space semantics are supported,
+ including shared data, circular structures, weak references, tied structures,
+ etc.

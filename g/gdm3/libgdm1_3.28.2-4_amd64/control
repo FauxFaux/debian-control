@@ -1,0 +1,21 @@
+Package: libgdm1
+Source: gdm3
+Version: 3.28.2-4
+Architecture: amd64
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Installed-Size: 263
+Depends: libc6 (>= 2.4), libglib2.0-0 (>= 2.37.3), libsystemd0, dconf-gsettings-backend | gsettings-backend
+Breaks: gdm3 (<< 3.18.0-3~)
+Replaces: gdm3 (<< 3.18.0-3~)
+Section: libs
+Priority: optional
+Description: GNOME Display Manager (shared library)
+ GDM provides the equivalent of a "login:" prompt for X displays: it
+ asks for a login and starts graphical sessions.
+ .
+ It supports multiple seats and switching between multiple users.
+ .
+ The greeter is based on the GNOME libraries and applications, and its
+ look and design are the same as those of a GNOME session.
+ .
+ This package contains the shared library required by gnome-shell.

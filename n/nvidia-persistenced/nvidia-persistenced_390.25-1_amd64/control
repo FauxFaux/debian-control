@@ -1,0 +1,16 @@
+Package: nvidia-persistenced
+Version: 390.25-1
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 80
+Depends: libnvidia-cfg1 | libnvidia-cfg1-any, libc6 (>= 2.14)
+Breaks: nvidia-driver (<< 340.46-4~)
+Replaces: nvidia-driver (<< 340.46-4~)
+Section: contrib/utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/NVIDIA/nvidia-persistenced
+Description: daemon to maintain persistent software state in the NVIDIA driver
+ When persistence mode is enabled, the daemon prevents the driver from
+ releasing device state when the device is not in use.
+ This can improve the startup time of new clients in this scenario.

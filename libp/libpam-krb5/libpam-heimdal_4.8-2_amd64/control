@@ -1,0 +1,17 @@
+Package: libpam-heimdal
+Source: libpam-krb5
+Version: 4.8-2
+Architecture: amd64
+Maintainer: Russ Allbery <rra@debian.org>
+Installed-Size: 156
+Depends: krb5-config, libpam-runtime, libpam0g (>= 0.99.7.1), libc6 (>= 2.26), libkrb5-26-heimdal (>= 1.7~git20161112)
+Conflicts: libpam-krb5
+Section: admin
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.eyrie.org/~eagle/software/pam-krb5/
+Description: PAM module for Heimdal Kerberos
+ A Kerberos PAM module build against the Heimdal libraries.  It supports
+ authenticating against a Kerberos KDC, obtaining tickets and populating
+ an initial ticket cache, authorizing users via a ~/.k5login file, and
+ changing Kerberos passwords.

@@ -1,0 +1,23 @@
+Package: php-text-wiki
+Version: 1.2.1-3
+Architecture: all
+Maintainer: Debian PHP PEAR Maintainers <pkg-php-pear@lists.alioth.debian.org>
+Installed-Size: 530
+Depends: php-pear, php-common
+Section: php
+Priority: optional
+Homepage: http://pear.php.net/package/Text_Wiki
+Description: transform Wiki and BBCode markup into XHTML, LaTeX or plain text markup
+ The text transformation is done in 2 steps.
+ The chosen parser uses markup rules to tokenize the tags and content.
+ Renderers output the tokens and text into the requested format.
+ The tokenized form replaces the tags by a protected byte value associated to
+ an index in an options table. This form shares up to 50 rules by all parsers
+ and renderers.
+ The package is intented for versatile transformers as well as converters.
+ Text_Wiki is delivered with its own parser, which is used by Yawiki or Horde's
+ Wicked and three basic renderers: XHTML , LaTeX and plain text.
+ Strong sanitizing of XHTML is default.
+ Parsers (* and Renderers) exist for BBCode, Cowiki (*), Dokuwiki (*),
+ Mediawiki and Tikiwiki (*).
+ It is highly configurable and can be easily extended.

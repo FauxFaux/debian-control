@@ -1,0 +1,16 @@
+Package: postgresql-10-hypopg
+Source: hypopg
+Version: 1.1.1-1
+Architecture: amd64
+Maintainer: Julien Rouhaud <rjuju123@gmail.com>
+Installed-Size: 59
+Depends: libc6 (>= 2.4), postgresql-10
+Section: database
+Priority: optional
+Homepage: https://hypopg.readthedocs.io/
+Description: PostgreSQL extension adding support for hypothetical indexes.
+ An hypothetical, or virtual, index is an index that doesn't really exists, and
+ thus doesn't cost CPU, disk or any resource to create.  They're useful to know
+ if specific indexes can increase performance for problematic queries, since
+ you can know if PostgreSQL will use these indexes or not without having to
+ spend resources to create them.

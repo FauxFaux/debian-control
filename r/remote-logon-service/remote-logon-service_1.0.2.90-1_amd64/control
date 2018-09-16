@@ -1,0 +1,17 @@
+Package: remote-logon-service
+Version: 1.0.2.90-1
+Architecture: amd64
+Maintainer: Debian Remote Maintainers <pkg-remote-team@lists.alioth.debian.org>
+Installed-Size: 447
+Depends: libc6 (>= 2.14), libgcrypt20 (>= 1.8.0), libglib2.0-0 (>= 2.37.3), libjson-glib-1.0-0 (>= 0.12.0), libnm0 (>= 1.0.0), libsoup2.4-1 (>= 2.41.90), remote-logon-config-agent (>= 0.10)
+Section: misc
+Priority: optional
+Homepage: https://github.com/ArcticaProject/remote-logon-service
+Description: DBus service for tracking available remote logon servers
+ The 'remote-logon-service' DBus service obtains its data from the Python
+ script 'remote-logon-config-agent'. The retrieved information is then
+ handed over to Arctica Greeter.
+ .
+ In Arctica Greeter, the logon information is presented to the user for
+ starting up remote desktop sessions on Arctica, X2Go or RDP / Citrix
+ servers.

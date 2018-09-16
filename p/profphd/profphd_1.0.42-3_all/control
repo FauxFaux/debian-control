@@ -1,0 +1,30 @@
+Package: profphd
+Version: 1.0.42-3
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 26199
+Depends: perl:any, librg-utils-perl, profnet-prof, profphd-utils, profphd-net
+Recommends: pp-popularity-contest
+Conflicts: profphd-data, profphd-perl
+Replaces: profphd-data, profphd-perl
+Section: science
+Priority: optional
+Homepage: http://predictprotein.org/
+Description: secondary structure and solvent accessibility predictor
+ This package provides prof(1), the protein secondary structure, accessibility
+ and transmembrane helix predictor from Burkhard Rost.  Prediction is either
+ done from protein sequence alone or from an alignment - the latter should be
+ used for optimal performance.
+ .
+ How well does prof(1) perform?
+ .
+  * Secondary structure is predicted at an expected average accuracy > 72% for
+    the three states helix, strand and loop.
+ .
+  * Solvent accessibility is predicted at a correlation coefficient
+    (correlation between experimentally observed and predicted relative
+    solvent accessibility) of 0.54
+ .
+  * Transmembrane helix prediction has an expected per-residue accuracy of
+    about 95%.  The number of false positives, i.e., transmembrane helices
+    predicted in globular proteins, is about 2%.

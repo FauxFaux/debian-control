@@ -1,0 +1,31 @@
+Package: liboscpack-dev
+Source: oscpack
+Version: 1.1.0-2
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 91
+Depends: liboscpack1 (= 1.1.0-2), libasound2-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.rossbencina.com/code/oscpack
+Description: C++ library for packing and unpacking OSC packets - dev files
+ Oscpack is simply a set of C++ classes for packing and unpacking OSC
+ packets. Oscpack includes a minimal set of UDP networking classes for
+ Windows and POSIX which are sufficient for writing many OSC applications
+ and servers, but you are encouraged to use another networking framework
+ if it better suits your needs. Oscpack is not an OSC application
+ framework, it doesn't include infrastructure for constructing or routing
+ OSC namespaces, just classes for easily constructing, sending, receiving
+ and parsing OSC packets. The library should also be easy to use for
+ other transport methods (eg serial).
+ .
+ The key goals of the oscpack library are:
+ .
+  - to be a simple and complete implementation of OSC
+  - to be portable to a wide variety of platforms
+  - to allow easy development of robust OSC applications (for example it
+    should be impossible to crash a server by sending it malformed packets,
+    and difficult to create malformed packets.)
+ .
+ This package contains files needed for development.

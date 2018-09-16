@@ -1,0 +1,21 @@
+Package: ruby-sidekiq-cron
+Version: 0.6.3-5
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 69
+Depends: ruby | ruby-interpreter, ruby-redis-namespace (>= 1.5.2), ruby-rufus-scheduler (>= 3.3~), ruby-sidekiq (>= 4.2.1~)
+Section: ruby
+Priority: optional
+Homepage: http://github.com/ondrejbartas/sidekiq-cron
+Description: scheduling add-on for Sidekiq
+ Sidekiq Cron helps to add repeated scheduled jobs. It enables to set jobs to
+ be run in specified time (using CRON notation)
+ .
+ It runs a thread alongside Sidekiq workers to schedule jobs at specified times
+ (using cron notation `* * * * *` parsed by Rufus-Scheduler
+ .
+ It checks for new jobs to schedule every 10 seconds and doesn't schedule the
+ same job multiple times when more than one Sidekiq worker is running.
+ .
+ Scheduling jobs are added only when at least one Sidekiq process is running.
+Ruby-Versions: all

@@ -1,0 +1,28 @@
+Package: koji-common
+Source: koji
+Version: 1.16.0-2
+Architecture: all
+Maintainer: Reproducible Builds Maintainers <reproducible-builds@lists.alioth.debian.org>
+Installed-Size: 294
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~), python-krbv, python-openssl, python-rpm
+Section: python
+Priority: optional
+Homepage: https://pagure.io/koji
+Description: RPM-based build system - common library
+ The Fedora Project uses Koji for their build system, as do several other
+ projects.
+ .
+ Koji's goal is to provide a flexible, secure, and reproducible way to build
+ software.
+ .
+ Key features:
+ .
+  -  New buildroot for each build
+  -  Robust XML-RPC APIs for easy integration with other tools
+  -  Web interface with SSL and Kerberos authentication
+  -  Thin, portable command line client
+  -  Users can create local buildroots
+  -  Buildroot contents are tracked in the database
+  -  Versioned data
+ .
+ This package contains the common Python library used by other components.

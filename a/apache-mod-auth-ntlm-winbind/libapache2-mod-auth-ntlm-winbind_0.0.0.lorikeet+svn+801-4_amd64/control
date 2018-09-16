@@ -1,0 +1,21 @@
+Package: libapache2-mod-auth-ntlm-winbind
+Source: apache-mod-auth-ntlm-winbind
+Version: 0.0.0.lorikeet+svn+801-4
+Architecture: amd64
+Maintainer: Olly Betts <olly@survex.com>
+Installed-Size: 32
+Depends: libc6 (>= 2.4), apache2-api-20120211, winbind
+Section: httpd
+Priority: optional
+Homepage: http://adldap.sourceforge.net/wiki/doku.php?id=mod_auth_ntlm_winbind
+Description: apache2 module for NTLM authentication against Winbind
+ The mod_auth_ntlm_winbind module provides authentication and
+ authorisation over the web against a Microsoft Windows NT/2000/XP/etc or
+ Samba Domain Controller using Samba's winbind daemon running on the
+ same machine Apache is running on.
+ .
+ If you're considering using this module, you should be aware that NTLM
+ isn't regarded as very secure by modern standards - even Microsoft no longer
+ recommends its use - and where possible, you probably want to use Kerberos with
+ negotiate auth over https instead (see Debian package
+ libapache2-mod-auth-kerb).

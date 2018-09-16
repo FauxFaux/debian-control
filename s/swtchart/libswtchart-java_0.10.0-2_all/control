@@ -1,0 +1,38 @@
+Package: libswtchart-java
+Source: swtchart
+Version: 0.10.0-2
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 195
+Depends: libswt-gtk-4-java
+Suggests: libswtchart-java-doc
+Section: java
+Priority: optional
+Homepage: http://www.swtchart.org
+Description: Chart drawing SWT component
+ SWTChart is a chart component which has following basic functionalities:
+  * line chart
+  * scatter chart
+  * stack chart
+  * log scale
+  * category axis
+  * multiple axes
+  * bar chart
+  * area chart
+  * step chart
+  * axis orientation
+  * series label
+ .
+ All of widgets in SWTChart are composed of SWT, so that you can easily hock
+ listeners to widgets, and also you can easily extend the functionality without
+ expertise of AWT.
+ .
+ SWTChart provides an ability to handle large data size of series. Even if
+ showing 1,000,000 data points, repainting or resizing chart panel doesn't take
+ long time. The internal algorithm is not to simply sample the data with a
+ certain interval but to thin out only the data which doesn't make sense to show
+ in current screen resolution. Therefore, even if there are prominent peaks in
+ large data points, the peaks won't be lost in the screen.
+ .
+ SWTChart has minimum basic functionalities. SWTChart doesn't have any
+ dependencies other than SWT, and even JFace is not required.

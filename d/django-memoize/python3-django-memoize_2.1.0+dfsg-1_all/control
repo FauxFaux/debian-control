@@ -1,0 +1,22 @@
+Package: python3-django-memoize
+Source: django-memoize
+Version: 2.1.0+dfsg-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 40
+Depends: python3-django, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://pythonhosted.org/django-memoize/
+Description: implementation of memoization technique for Django (Python 3)
+ django-memoize is an implementation of the memoization technique for Django.
+ You can think of it as a cache for function or method results.
+ .
+ In memoization, the functions arguments are also included into the cache_key.
+ Memoize is also designed for methods, since it will take into account the repr
+ of the ‘self’ or ‘cls’ argument as part of the cache key. The theory behind
+ memoization is that if you have a function you need to call several times in
+ one request, it would only be calculated the first time that function is
+ called with those arguments.
+ .
+ This is the Python 3 version of the package.

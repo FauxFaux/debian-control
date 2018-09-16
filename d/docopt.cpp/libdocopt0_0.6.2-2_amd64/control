@@ -1,0 +1,34 @@
+Package: libdocopt0
+Source: docopt.cpp
+Version: 0.6.2-2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 319
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/docopt/docopt.cpp
+Description: C++11 port of docopt
+ With docopt, the option parser is generated based on the program's docstring.
+ docopt parses the usage pattern ("Usage: ...") and option descriptions (lines
+ starting with dash "-") and ensures that the program invocation matches the
+ usage pattern. It parses options, arguments and commands based on that. The
+ basic idea is that a good help message has all necessary information in it to
+ make a parser.
+ .
+ This is a port of the docopt Python module to C++ with a focus on maintaining
+ full feature parity (and code structure) as the original. The differences from
+ the Python port are:
+ .
+   - The addition of a docopt_parse function, which does not terminate the
+     program on error a docopt::value type to hold the various value types that
+     can be parsed.
+ .
+   - Because C++ is statically-typed and Python is not, some changes were made
+     to the interfaces of the internal parse tree types.
+ .
+   - Because std::regex does not have an equivalent to Python's regex.split,
+     some of the regex's had to be restructured and additional loops used.
+ .
+ This package provides the shared libraries.

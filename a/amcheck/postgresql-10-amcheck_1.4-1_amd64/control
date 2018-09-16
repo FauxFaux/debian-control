@@ -1,0 +1,15 @@
+Package: postgresql-10-amcheck
+Source: amcheck
+Version: 1.4-1
+Architecture: amd64
+Maintainer: Peter Geoghegan <pg@bowt.ie>
+Installed-Size: 50
+Depends: libc6 (>= 2.4), postgresql-10
+Section: libs
+Priority: extra
+Homepage: https://github.com/petergeoghegan/amcheck
+Description: PostgreSQL extension that verifies indexes
+ This extension verifies the logical consistency of PostgreSQL B-Tree indexes.
+ The extension consists of SQL-callable functions.  When no error is raised
+ during a call to these verification functions, no logical inconsistency was
+ detected.  This is useful as a general smoke test to detect corruption.

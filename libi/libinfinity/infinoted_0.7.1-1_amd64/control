@@ -1,0 +1,20 @@
+Package: infinoted
+Source: libinfinity
+Version: 0.7.1-1
+Architecture: amd64
+Maintainer: Philipp Kern <pkern@debian.org>
+Installed-Size: 407
+Pre-Depends: dpkg (>= 1.15.6)
+Depends: libc6 (>= 2.14), libdaemon0 (>= 0.10), libglib2.0-0 (>= 2.35.9), libgnutls30 (>= 3.5.5), libgsasl7 (>= 1.1), libinfinity-0.7-0 (>= 0.7.1), libpam0g (>= 0.99.7.1), libxml2 (>= 2.7.4)
+Conflicts: infinoted-0.3, infinoted-0.4
+Breaks: infinoted-0.5 (<< 0.5.2-3~)
+Replaces: infinoted-0.5 (<< 0.5.2-3~)
+Section: net
+Priority: optional
+Homepage: https://gobby.github.io
+Description: dedicated server for infinote-based collaborative editing
+ infinoted is a dedicated server which allows clients to edit plain text
+ documents and source files collaboratively over a network. Changes
+ to the documents are synchronised instantly to the other clients.
+ .
+ It serves the documents using the same protocol as gobby-0.5.

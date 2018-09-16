@@ -1,0 +1,18 @@
+Package: libmyodbc
+Source: myodbc
+Version: 5.1.10-3
+Architecture: amd64
+Maintainer: Steve Langasek <vorlon@debian.org>
+Installed-Size: 369
+Depends: libc6 (>= 2.14), libmysqlclient18 (>= 5.5.24+dfsg-1), odbcinst1debian2 (>= 2.2.14p2), zlib1g (>= 1:1.1.4), debconf (>= 0.5) | debconf-2.0
+Recommends: libodbc1 | libiodbc2
+Breaks: libiodbc2 (<< 3.52.7-3~), odbcinst1debian2 (<< 2.2.14p2-3), unixodbc (<< 2.2.14p2-3)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://dev.mysql.com/downloads/connector/odbc/
+Description: the MySQL ODBC driver
+ This package allows you to connect to MySQL database servers using
+ ODBC, the Open Database Connectivity abstraction layer which is
+ understood by a variety of database tools that cannot talk to MySQL
+ databases directly.

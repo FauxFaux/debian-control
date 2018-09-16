@@ -1,0 +1,20 @@
+Package: libtest-www-declare-perl
+Version: 0.02-4
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 41
+Depends: perl, libtest-www-mechanize-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-WWW-Declare
+Description: declarative testing module for web apps
+ Often in web apps, tests are very dependent on the state set up by previous
+ tests. If one test fails (e.g. "follow the link to the admin page") then it's
+ likely there will be many more failures. Test::WWW::Declare aims to alleviate
+ this problem, as well as provide a nicer interface to Test::WWW::Mechanize.
+ .
+ The central idea is that of "flow". Each flow is a sequence of commands ("fill
+ in this form") and assertions ("content should contain 'testuser'"). If any of
+ these commands or assertions fail then the flow is aborted. Only that one
+ failure is reported to the test harness and user. Flows may also contain other
+ flows. If an inner flow fails, then the outer flow fails as well.

@@ -1,0 +1,17 @@
+Package: libcgi-application-plugin-session-perl
+Version: 1.05-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 44
+Depends: perl, libcgi-application-perl, libcgi-session-perl (>= 4.48)
+Breaks: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Replaces: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Application-Plugin-Session
+Description: plugin that adds session support to CGI::Application
+ CGI::Application::Plugin::Session seamlessly adds session support to your
+ CGI::Application modules, by providing a CGI::Session object that is
+ accessible from anywhere in the application. Lazy loading is used to prevent
+ expensive file system or database calls from being made if the session is
+ not needed during this request.

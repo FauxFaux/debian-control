@@ -1,0 +1,29 @@
+Package: ruby-httpclient
+Version: 2.8.3-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 792
+Depends: ruby | ruby-interpreter, ruby-http-cookie (>= 1.0)
+Section: ruby
+Priority: optional
+Homepage: https://github.com/nahi/httpclient
+Description: HTTP client library for ruby
+ httpclient gives something like the functionality of
+ libwww-perl (LWP) in Ruby.
+ .
+ Features:
+    * methods like GET/HEAD/POST/* via HTTP/1.1.
+    * HTTPS(SSL), Cookies, proxy, authentication(Digest, NTLM, Basic), etc.
+    * asynchronous HTTP request, streaming HTTP request.
+    * by contrast with net/http in standard distribution;
+          o Cookies support
+          o MT-safe
+          o streaming POST (POST with File/IO)
+          o Digest auth
+          o Negotiate/NTLM auth for WWW-Authenticate (requires net/htlm module)
+          o NTLM auth for WWW-Authenticate/Proxy-Authenticate (requires
+            win32/sspi module)
+          o extensible with filter interface
+          o you don't have to care HTTP/1.1 persistent connection (httpclient
+            cares instead of you).
+Ruby-Versions: all

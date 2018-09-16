@@ -1,0 +1,20 @@
+Package: libmatch-simple-xs-perl
+Source: libmatch-simple-xs-perl (0.001-2)
+Version: 0.001-2+b4
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 48
+Depends: libexporter-tiny-perl, liblist-moreutils-perl, libsub-infix-perl, perl (>= 5.26.0-4), perlapi-5.26.0, libc6 (>= 2.4)
+Recommends: libmatch-simple-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/match-simple-XS
+Description: XS backend for match::simple
+ match::simple::XS is a faster XS-based implementation of match::simple.
+ .
+ Depending on what sort of matches done, it is likely to be several
+ times faster. In extreme cases, such as matching a string in an
+ arrayref, it can be twenty-five times faster, or more. However, where
+ $that is a single regexp, it's around 30% slower.
+ .
+ Overall though, the performance improvement should be worthwhile.

@@ -1,0 +1,68 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    purge)
+        # remove the user database
+        rm -f /var/lib/jabberd2/db/*
+        rm -f /var/lib/jabberd2/*.db
+        for SUB in c2s s2s sm router; do
+           # the application should remove these on exit
+           rm -f /var/run/jabberd2/${SUB}.pid
+           # need better way of detecting whether these exist or not
+           rm -f /var/log/jabberd2/${SUB}.log*
+        done
+        # remove any empty directories
+        for DIR in /etc/jabberd2/component.d /var/lib/jabberd2/db \
+           /var/lib/jabberd2 /etc/jabberd2 \
+           /var/run/jabberd2 /var/log/jabberd2; do
+              if [ -d ${DIR} ]; then
+                 #rmdir -p --ignore-fail-on-non-empty ${DIR} > /dev/null 2>&1
+                 rmdir --ignore-fail-on-non-empty ${DIR} > /dev/null 2>&1
+              fi
+        done
+    ;;
+    remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installsystemd/11.2.1
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.2.1
+if [ "$1" = "purge" ] ; then
+	update-rc.d jabberd2 remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.2.1
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'jabberd-c2s.service' 'jabberd-router.service' 'jabberd-s2s.service' 'jabberd-sm.service' 'jabberd.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'jabberd-c2s.service' 'jabberd-router.service' 'jabberd-s2s.service' 'jabberd-sm.service' 'jabberd.service' >/dev/null || true
+		deb-systemd-helper unmask 'jabberd-c2s.service' 'jabberd-router.service' 'jabberd-s2s.service' 'jabberd-sm.service' 'jabberd.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

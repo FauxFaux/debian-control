@@ -1,0 +1,24 @@
+Package: python3-llfuse-dbg
+Source: python-llfuse
+Version: 1.3.5+dfsg-1
+Architecture: amd64
+Maintainer: Nikolaus Rath <Nikolaus@rath.org>
+Installed-Size: 12408
+Depends: python3-llfuse (= 1.3.5+dfsg-1), libc6 (>= 2.14), libfuse2 (>= 2.9.0)
+Recommends: python3-dbg
+Breaks: python3-llfuse (<< 0.40+dfsg-1)
+Replaces: python3-llfuse (<< 0.40+dfsg-1)
+Section: debug
+Priority: optional
+Homepage: https://bitbucket.org/nikratio/python-llfuse/
+Description: Python 3 bindings for the low-level FUSE API (debugging symbols)
+ Python-llfuse is a set of Python bindings for the low level FUSE API.
+ .
+ FUSE (Filesystem in USErspace) is a simple interface for userspace
+ programs to export a virtual filesystem to the Linux kernel. FUSE
+ also aims to provide a secure method for non privileged users to
+ create and mount their own filesystem implementations.
+ .
+ This package contains the debugging symbols as well as the extension
+ built for the Python 3 debug interpreter.
+Build-Ids: 3ce4ebd4c27b00a64d06da8bb08e6e01ecb0f3df a79817b7b31ecb3e5ad4e608d935b1b327911939

@@ -1,0 +1,25 @@
+Package: libfindlib-ocaml
+Source: findlib (1.7.3-2)
+Version: 1.7.3-2+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 602
+Depends: ocaml-base-nox-4.05.0, libc6 (>= 2.2.5)
+Breaks: ocaml-findlib (<< 1.2.4-3)
+Replaces: ocaml-findlib (<< 1.2.4-3)
+Provides: libfindlib-ocaml-ima03
+Section: ocaml
+Priority: optional
+Homepage: http://projects.camlcity.org/projects/findlib.html
+Description: library for managing OCaml libraries (runtime)
+ The "findlib" OCaml library provides a scheme to manage reusable
+ software components (packages), and includes tools that support this
+ scheme. Packages are collections of OCaml modules for which
+ metainformation can be stored. The packages are kept in the
+ filesystem hierarchy, but with strict directory structure. The
+ library contains functions to look the directory up that stores a
+ package, to query metainformation about a package, and to retrieve
+ dependency information about multiple packages.
+ .
+ This package contains files that are or may be needed at runtime by
+ programs using findlib (META files and dynamically-loadable files).

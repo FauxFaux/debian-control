@@ -1,0 +1,21 @@
+Package: reprotest
+Version: 0.7.8
+Architecture: all
+Maintainer: Reproducible builds folks <reproducible-builds@lists.alioth.debian.org>
+Installed-Size: 327
+Depends: diffoscope, python3-distro, python3-rstr, python3:any (>= 3.5~), python3-debian, apt-utils, libdpkg-perl, procps, python3-pkg-resources
+Recommends: diffoscope (>= 84), disorderfs (>= 0.5.2), faketime, locales-all, sudo
+Suggests: autodep8, schroot, qemu-system, qemu-utils
+Section: devel
+Priority: optional
+Description: Build software and check it for reproducibility
+ reprotest builds the same source code twice in different environments, and
+ then checks the binaries produced by each build for differences. If any are
+ found, then diffoscope (or if unavailable then diff) is used to display them
+ in detail for later analysis.
+ .
+ It supports different types of environment such as a "null" environment (i.e.
+ doing the builds directly in /tmp) or various other virtual servers, for
+ example schroot, ssh, qemu, and several others.
+ .
+ reprotest is developed as part of the “reproducible builds” Debian project.

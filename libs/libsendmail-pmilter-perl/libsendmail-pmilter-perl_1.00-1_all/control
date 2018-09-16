@@ -1,0 +1,21 @@
+Package: libsendmail-pmilter-perl
+Version: 1.00-1
+Architecture: all
+Maintainer: Hilko Bengen <bengen@debian.org>
+Installed-Size: 152
+Depends: perl
+Recommends: libmail-milter-perl
+Conflicts: libsendmail-milter-perl
+Replaces: libsendmail-milter-perl
+Section: perl
+Priority: optional
+Description: Perl implementation of the Sendmail Milter protocol
+ PMilter is an attempt to reimplement Sendmail's milter (mail filter)
+ protocol in pure Perl. There are many reasons for this, including
+ independence from Sendmail's libmilter, as well as freedom from POSIX
+ threads (helps stability for Perl filters), etc.
+ .
+ Most of PMilter's Sendmail::Milter interface is a clone of the
+ frontend functions in PMilter::Server. However, this compatibility
+ package also includes some methods specific to the Sendmail MTA,
+ which are deliberately not included in PMilter::Server.

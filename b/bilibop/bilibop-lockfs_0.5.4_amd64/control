@@ -1,0 +1,48 @@
+Package: bilibop-lockfs
+Source: bilibop
+Version: 0.5.4
+Architecture: amd64
+Maintainer: Yann Amar <quidame@poivron.org>
+Installed-Size: 137
+Depends: bilibop-common (= 0.5.4), initramfs-tools
+Recommends: cryptsetup
+Suggests: aufs-dkms, bilibop-device-policy, gnome-icon-theme, libnotify-bin, plymouth
+Section: admin
+Priority: optional
+Homepage: https://un.poivron.org/~quidame/wiki/bilibop
+Description: lock filesystems and write changes into RAM
+ Bilibop helps to maintain a Debian GNU/Linux operating system installed
+ on an external media (USB, FireWire, Flash memory, eSATA). It hardens
+ standard rules and policies to make the system more robust in this
+ particular situation.
+ .
+ If the lockfs feature is enabled (in a configuration file, in the boot
+ commandline or by a heuristic), nothing will be written on the filesystems
+ listed in /etc/fstab, except for those that have been whitelisted, or for
+ the encrypted swap devices. More, bilibop-lockfs now is able to detect if
+ the drive has been locked by a physical switch, and then overrides its own
+ settings to unconditionally apply a 'hard' policy.
+ .
+ The root filesystem is locked (set readonly, using either aufs or overlay)
+ by an initramfs script which also modifies the temporary fstab to prepare
+ other filesystems to be locked later by a mount helper script.
+ .
+ bilibop-lockfs provides the following features:
+  * whitelist based policy: filesystems on which you want to allow persistent
+    changes must be explicitly listed in a configuration file.
+  * swap devices policy: they can be used 'as is', noauto, only if encrypted,
+    only if encrypted with a random key, or not used at all.
+  * not only filesystems are set read-only, but also block devices: this
+    forbids changes of the partition table, boot sectors, LUKS headers and
+    LVM metadata.
+  * plymouth messages to know at boot time if bilibop-lockfs is enabled or
+    not, or if an error occurred.
+  * desktop notifications at startup about filesystems status, to inform the
+    user that volatile or persistent changes are allowed or not, and where.
+ .
+ This package can be used as an alternative to fsprotect or overlayroot,
+ especially for writable operating systems embedded on a USB stick; but it
+ may also be installed on public or personal computers, for daily use,
+ kiosks, testing purposes, or as a tool in anti-forensics strategies.
+ .
+ Some features may require Linux kernel 2.6.37 or higher to work properly.

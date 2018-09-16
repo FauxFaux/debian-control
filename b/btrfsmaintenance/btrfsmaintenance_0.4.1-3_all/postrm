@@ -1,0 +1,148 @@
+#!/bin/sh
+
+set -e
+
+period="daily hourly monthly weekly"
+operation="balance defrag scrub trim"
+
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+    for i in $period; do
+        for op in $operation; do
+            if [ -L "/etc/cron.$i/btrfs-$op" ] \
+                   && [ ! -e "/etc/cron.$i/btrfs-$op" ]; then
+                rm "/etc/cron.$i/btrfs-$op"
+            fi
+            if [ -L "/etc/systemd/system/timers.target.wants/btrfs-$op.timer" ]; then
+                rm "/etc/systemd/system/timers.target.wants/btrfs-$op.timer"
+            fi
+            if [ -L "/etc/systemd/system/btrfs-$op.timer.d/schedule.conf" ]; then
+                rm "/etc/systemd/system/btrfs-$op.timer.d/schedule.conf"
+                rmdir "/etc/systemd/system/btrfs-$op.timer.d"
+            fi
+        done
+    done
+fi
+if [ -L "/etc/systemd/system/multi-user.target.wants/btrfsmaintenance-refresh.service" ]; then
+    rm "/etc/systemd/system/multi-user.target.wants/btrfsmaintenance-refresh.service"
+fi
+if [ -L "/etc/systemd/system/multi-user.target.wants/btrfsmaintenance-refresh.path" ]; then
+    rm "/etc/systemd/system/multi-user.target.wants/btrfsmaintenance-refresh.path"
+fi
+
+# Automatically added by dh_installsystemd/11.3.5
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'btrfsmaintenance-refresh.path' 'btrfsmaintenance-refresh.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'btrfsmaintenance-refresh.path' 'btrfsmaintenance-refresh.service' >/dev/null || true
+		deb-systemd-helper unmask 'btrfsmaintenance-refresh.path' 'btrfsmaintenance-refresh.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'btrfsmaintenance-refresh.path' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'btrfsmaintenance-refresh.path' >/dev/null || true
+		deb-systemd-helper unmask 'btrfsmaintenance-refresh.path' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'btrfs-trim.timer' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'btrfs-trim.timer' >/dev/null || true
+		deb-systemd-helper unmask 'btrfs-trim.timer' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'btrfs-scrub.timer' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'btrfs-scrub.timer' >/dev/null || true
+		deb-systemd-helper unmask 'btrfs-scrub.timer' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'btrfs-defrag.timer' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'btrfs-defrag.timer' >/dev/null || true
+		deb-systemd-helper unmask 'btrfs-defrag.timer' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'btrfs-balance.timer' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'btrfs-balance.timer' >/dev/null || true
+		deb-systemd-helper unmask 'btrfs-balance.timer' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

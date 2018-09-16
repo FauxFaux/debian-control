@@ -1,0 +1,20 @@
+Package: dl10n
+Version: 3.00
+Architecture: all
+Maintainer: Debian l10n development team <debian-l10n-devel@lists.alioth.debian.org>
+Installed-Size: 256
+Depends: perl | perl5, gettext (>= 0.11), liblocale-gettext-perl, perl-modules, libwww-perl, libmailtools-perl, libtimedate-perl
+Section: text
+Priority: optional
+Description: Debian infrastructure and tools for localization
+ dl10n is the debian localization project. This package contains all the
+ relevant infrastructure and tools. Of course, most people won't really need
+ the server side part on their machine, but given the size of the package,
+ there is no need for a split.
+ .
+ This package contains the main libraries of po4a, and the following tools:
+ .
+   - dl10n-check: dig into the source packages looking for stuff to translate
+   - dl10n-bot: reads the translator mailing lists seeking for status update
+   - dl10n-txt: generate textual statistic views
+   - dl10n-html: generates the debian web pages

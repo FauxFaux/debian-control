@@ -1,0 +1,120 @@
+#!/bin/sh
+# postinst script for gitolite
+# Copyright 2010-2011 by Gerfried Fuchs <rhonda@debian.org>
+# Licenced under WTFPLv2
+
+set -e
+
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <postinst> `abort-remove'
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+pkg=gitolite3
+etcdir=/etc/$pkg
+
+relink_rc () {
+    cd $1
+
+    mv .gitolite.rc $etcdir/gitolite.rc
+    chown root:root $etcdir/gitolite.rc
+    chmod 0644 $etcdir/gitolite.rc
+    ln -s $etcdir/gitolite.rc .gitolite.rc
+}
+
+# Source debconf library.
+if [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+fi
+
+action=$1
+version=$2
+if [ "${DEBCONF_RECONFIGURE}" = "1" ]; then
+	# workaround until reconfigure is really available
+	action=reconfigure
+fi
+
+if [ "$action" = "configure" ]; then
+    db_get $pkg/gitdir
+    GITDIR="${RET:-/var/lib/$pkg}"
+
+    db_get $pkg/gitdir
+    GITDIR="${RET:-/var/lib/$pkg}"
+
+    oldrc="$GITDIR/.gitolite.rc"
+    # migrate existing config file to /etc
+    if [ -f "${oldrc}" -a ! -L "${oldrc}" ]; then
+	relink_rc "$GITDIR"
+    fi
+
+fi
+
+# only on new install or reconfigure
+if [ "x$version" = "x" ] || [ "$action" = "reconfigure" ]; then
+
+    # we only attempt to configure once, even if using reconfigure
+    if [ -f $etcdir/gitolite.rc ]; then
+	echo "gitolite configuration already exists in $etcdir, doing nothing." 1>&2
+	exit 0
+    fi
+
+	db_get $pkg/gituser
+	GITUSER="${RET:-$pkg}"
+
+	db_get $pkg/gitdir
+	GITDIR="${RET:-/var/lib/$pkg}"
+
+	db_get $pkg/adminkey
+	ADMINKEY="$RET"
+	# set it back to empty after use
+	db_set $pkg/adminkey ""
+
+
+	# all this makes only sense when we have been given an admin key
+	# to initialize with
+	if [ -n "$ADMINKEY" ]; then
+
+		if ! getent passwd "$GITUSER" >/dev/null; then
+			adduser --quiet --system --home "$GITDIR" --shell /bin/bash \
+				--no-create-home --gecos 'git repository hosting' \
+				--group "$GITUSER"
+		fi
+
+		if [ ! -r "$GITDIR/.gitolite.rc" ]; then
+			if [ ! -d "$GITDIR" ]; then
+				mkdir -p "$GITDIR"
+				chown "$GITUSER":"$GITUSER" "$GITDIR"
+			fi
+
+			# create admin repository
+			tmpdir="$(mktemp -d)"
+			if [ -r "$ADMINKEY" ]; then
+				# key file
+				cat "$ADMINKEY" > "$tmpdir/admin.pub"
+			else
+				# possibly pasted key
+				echo "$ADMINKEY" > "$tmpdir/admin.pub"
+			fi
+			chown -R "$GITUSER" "$tmpdir"
+			su - $GITUSER -c "gitolite setup -pk '$tmpdir/admin.pub'"
+			rm -r "$tmpdir"
+			relink_rc "$GITDIR"
+		else
+			echo "gitolite seems to be already set up in $GITDIR, doing nothing." 1>&2
+		fi
+
+	else
+		echo "No adminkey given - not setting up gitolite. Do a dpkg-reconfigure to setup." 1>&2
+	fi
+
+fi
+
+exit 0

@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+PACKAGE=rail
+
+if [ ! -e /var/lib/emacsen-common/state/package/installed/emacsen-common ]
+then
+    # Fallback to emacsen-common 1.x
+    if [ -x /usr/lib/emacsen-common/emacs-package-remove ]
+    then
+        /usr/lib/emacsen-common/emacs-package-remove $PACKAGE
+    fi
+else
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper rm_conffile /usr/share/emacs/site-start.d/50rail.el -- "$@"
+# End automatically added section
+# Automatically added by dh_elpa/UNDECLARED
+if [ -e /var/lib/emacsen-common/state/package/installed/emacsen-common -a -x /usr/lib/emacsen-common/emacs-package-remove ] ; then
+	/usr/lib/emacsen-common/emacs-package-remove --prerm rail
+fi
+# End automatically added section
+
+    rm -f /var/lib/emacsen-common/state/package/installed/$PACKAGE
+fi

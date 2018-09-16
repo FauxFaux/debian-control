@@ -1,0 +1,25 @@
+Package: python-xopen
+Version: 0.3.3-1
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: python-bz2file, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Provides: python2.7-xopen
+Section: python
+Priority: optional
+Homepage: https://github.com/marcelm/xopen
+Description: Python module to open compressed files transparently
+ This small Python module provides a xopen function that works like the
+ built-in open function, but can also deal with compressed files.
+ Supported compression formats are gzip, bzip2 and xz. They are
+ automatically recognized by their file extensions .gz, .bz2 or .xz.
+ .
+ The focus is on being as efficient as possible on all supported Python
+ versions. For example, simply using gzip.open is slow in older Pythons,
+ and it is a lot faster to use a gzip subprocess.
+ .
+ This module has originally been developed as part of the cutadapt tool
+ that is used in bioinformatics to manipulate sequencing data. It has
+ been in successful use within that software for a few years.
+ .
+ This is the Python 2 version.

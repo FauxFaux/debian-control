@@ -1,0 +1,22 @@
+Package: librecommended-perl
+Version: 0.003-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 30
+Depends: libmodule-runtime-perl (>= 0.014), perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/recommended
+Description: Load recommended Perl modules on demand when available
+ recommended gathers a list of recommended modules and versions and provides
+ means to check if they are available. It is a thin veneer around
+ Module::Runtime.
+ .
+ There are two major benefits over using Module::Runtime directly:
+ .
+   * Self-documents recommended modules together with versions at the top
+     of your code, while still loading them on demand elsewhere.
+   * Dies if a recommended module exists but fails to compile, but
+     doesn't die if the module is missing or the version is insufficient.
+     This is not something that Module::Runtime offers in a single
+     subroutine.

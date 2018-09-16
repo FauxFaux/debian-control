@@ -1,0 +1,16 @@
+Package: postgresql-10-pg-qualstats
+Source: pg-qualstats
+Version: 1.0.5-1
+Architecture: amd64
+Maintainer: Julien Rouhaud <rjuju123@gmail.com>
+Installed-Size: 75
+Depends: libc6 (>= 2.4), postgresql-10
+Section: database
+Priority: optional
+Homepage: https://powa.readthedocs.io/
+Description: PostgreSQL extension to gather statistics about predicates.
+ This extensions tracks WHERE clauses predicates and JOIN predicates.
+ Statistics will report whether the predicate was evaluated as an index scan or
+ not, how many time the expression appeared, how many times the operator was
+ executed and how filtering the expression is.  If pg_stat_statements is
+ enabled, it can also track to which statements the predicate belongs.

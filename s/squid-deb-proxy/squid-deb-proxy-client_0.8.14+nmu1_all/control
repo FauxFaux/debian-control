@@ -1,0 +1,17 @@
+Package: squid-deb-proxy-client
+Source: squid-deb-proxy
+Version: 0.8.14+nmu1
+Architecture: all
+Maintainer: Michael Vogt <mvo@debian.org>
+Installed-Size: 22
+Depends: avahi-utils, apt (>= 0.7.25.3ubuntu1), python
+Section: net
+Priority: extra
+Homepage: https://launchpad.net/squid-deb-proxy
+Description: automatic proxy discovery for APT based on Avahi
+ This package contains a helper for the APT http method to discover
+ proxies that publish their service as _apt_proxy._tcp.
+ .
+ It was written to be installed on clients that should use
+ squid-deb-proxy automatically, but it will work with any proxy
+ that publishes the service as _apt_proxy._tcp.

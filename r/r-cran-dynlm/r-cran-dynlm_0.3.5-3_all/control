@@ -1,0 +1,19 @@
+Package: r-cran-dynlm
+Version: 0.3.5-3
+Architecture: all
+Maintainer: Debian R Packages Maintainers <r-pkg-team@alioth-lists.debian.net>
+Installed-Size: 91
+Depends: r-base-core (>= 3.5.0-5), r-api-3.5, r-cran-zoo, r-cran-car (>= 2.0-0), r-cran-lmtest
+Suggests: r-cran-sandwich, r-cran-strucchange, libgdal-dev
+Section: gnu-r
+Priority: optional
+Homepage: https://cran.r-project.org/package=dynlm
+Description: GNU R package for dynamic linear models and time series regression
+ This R package provides a user-friendly interface for fitting dynamic linear
+ models and time series regression relationships
+ .
+ The interface and internals of dynlm are very similar to lm, but currently
+ dynlm offers three advantages over the direct use of lm:
+  - extended formula processing;
+  - preservation of time series attributes;
+  - instrumental variables regression (via two-stage least squares).

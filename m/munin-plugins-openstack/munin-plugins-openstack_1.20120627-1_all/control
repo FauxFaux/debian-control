@@ -1,0 +1,24 @@
+Package: munin-plugins-openstack
+Version: 1.20120627-1
+Architecture: all
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 113
+Depends: python2.7 | python2.6, python (>= 2.6), munin-node
+Section: net
+Priority: optional
+Homepage: https://labs.enovance.com/projects/munin-plugins-openstack
+Description: Plugins for Munin compatible monitoring OpenStack based systems
+ This package provides various plugins for Munin.
+ It contains the following plugins:
+ .
+   * glance_size_ : Plugin to monitor used size of a tenant in glance
+   * glance_status : Plugin to monitor status og glance images
+   * keystone_stats : Plugin to monitor status of Keystone
+   * nova_floating_ips : Plugin to monitor status of Floating IPs in Nova
+   * nova_instance_ : Plugin to monitor instances by vm_state, vcpus,
+     task_state, root_gb, ephemeral_gb, power_state, memory_mb, instance_type_id
+   * nova_instance_launched : Plugin to monitor instances launched from
+     beginning of time
+   * nova_instance_timing : Plugin to monitor trending of launch/schedule
+     times for last 5 successful instances
+   * nova_services : Plugin to report service status

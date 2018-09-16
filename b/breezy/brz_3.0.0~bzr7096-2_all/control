@@ -1,0 +1,30 @@
+Package: brz
+Source: breezy
+Version: 3.0.0~bzr7096-2
+Architecture: all
+Maintainer: Debian Breezy Maintainers <pkg-bazaar-maint@lists.alioth.debian.org>
+Installed-Size: 73
+Depends: python-breezy (<= 3.0.0~bzr7096-2.1~), python-breezy (>= 3.0.0~bzr7096-2), python:any
+Recommends: python-gpg, python-dulwich (>= 0.19.6)
+Suggests: brz-doc, python-breezy.tests, python-fastimport (>= 0.9.8)
+Conflicts: bzr (<< 2.7.0+bzr6622-1)
+Section: vcs
+Priority: optional
+Homepage: https://www.breezy-vcs.org/
+Description: easy to use distributed version control system
+ Breezy is a distributed version control system designed to be easy to
+ use and intuitive, able to adapt to many workflows, reliable, and
+ easily extendable.
+ .
+ Publishing of branches can be done over plain HTTP, that is, no special
+ software is needed on the server to host Breezy branches. Branches can
+ be pushed to the server via sftp (which most SSH installations come
+ with), FTP, or over a custom and faster protocol if brz is installed in
+ the remote end.
+ .
+ Merging in Breezy is easy, as the implementation is able to avoid many
+ spurious conflicts, deals well with repeated merges between branches,
+ and is able to handle modifications to renamed files correctly.
+ .
+ Install python-paramiko if you are going to push branches to remote
+ hosts with sftp.

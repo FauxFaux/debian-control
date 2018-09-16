@@ -1,0 +1,30 @@
+Package: dphys-config
+Version: 20130301~current-5
+Architecture: all
+Maintainer: Axel Beckert <abe@debian.org>
+Installed-Size: 141
+Depends: dash, lsb-base (>= 3.0-6), wget
+Suggests: colordiff, dwdiff, pciutils, wdiff
+Enhances: hobbit-client, xymon-client
+Section: admin
+Priority: optional
+Homepage: http://neil.franklin.ch/Projects/dphys-config/
+Description: Tool to distribute config files by fetching them
+ This project is aimed at automatically installing (and keeping
+ update) site specific config files on many hosts, after preprocessing
+ them (conditional content and include files and include sections).
+ .
+ It's installed on the client receiving the configuration files and
+ fetches them regularly via cron-jobs or on demand from the
+ commandline.
+ .
+ It also triggers postinstall scripts whenever their associated config
+ file has been changed. It can also remove config files, including
+ running an preremove script before doing so. All this is driven by an
+ simple config file list.
+ .
+ dphys-config is capable of reporting update failure or success to a
+ Xymon (formerly Hobbit) monitoring server.
+ .
+ dphys-config features an interactive mode and a non-interactive diff
+ mode to check what would be updated.

@@ -1,0 +1,55 @@
+Package: apg
+Version: 2.2.3.dfsg.1-5
+Architecture: amd64
+Maintainer: Marc Haber <mh+debian-packages@zugschlus.de>
+Installed-Size: 133
+Depends: libc6 (>= 2.14)
+Section: admin
+Priority: optional
+Homepage: http://www.adel.nursat.kz/apg/
+Description: Automated Password Generator - Standalone version
+ APG (Automated Password Generator) is the tool set for random
+ password generation. It generates some random words of required type
+ and prints them to standard output. This binary package contains only
+ the standalone version of apg.
+ Advantages:
+  * Built-in ANSI X9.17 RNG (Random Number Generator)(CAST/SHA1)
+  * Built-in password quality checking system (now it has support for Bloom
+    filter for faster access)
+  * Two Password Generation Algorithms:
+     1. Pronounceable Password Generation Algorithm (according to NIST
+        FIPS 181)
+     2. Random Character Password Generation Algorithm with 35
+        configurable modes of operation
+  * Configurable password length parameters
+  * Configurable amount of generated passwords
+  * Ability to initialize RNG with user string
+  * Support for /dev/random
+  * Ability to crypt() generated passwords and print them as additional output.
+  * Special parameters to use APG in script
+  * Ability to log password generation requests for network version
+  * Ability to control APG service access using tcpd
+  * Ability to use password generation service from any type of box (Mac,
+    WinXX, etc.) that connected to network
+  * Ability to enforce remote users to use only allowed type of password
+    generation
+ The client/server version of apg has been deliberately omitted.
+ .
+ Please note that there are security flaws in pronounceable
+ password generation schemes (see Ganesan / Davis "A New Attack on
+ Random Pronounceable Password Generators", in "Proceedings of the 17th
+ National Computer Security Conference (NCSC), Oct. 11-14, 1994
+ (Volume 1)", http://csrc.nist.gov/publications/history/nissc/
+ 1994-17th-NCSC-proceedings-vol-1.pdf, pages 203-216)
+ .
+ Also note that the FIPS 181 standard from 1993 has been withdrawn by NIST in
+ 2015 with no superseding publication. This means that the document is
+ considered by its publicher as obsolete and not been updated to reference
+ current or revised voluntary industry standards, federal specifications, or
+ federal data standards.
+ .
+ apg has not seen upstream attention since 2003, upstream is not
+ answering e-mail, and the upstream web page does not look like it is
+ in good working order. The Debian maintainer plans to discontinue apg
+ maintenance as soon as an actually maintained software with a
+ compariable feature set becomes available.

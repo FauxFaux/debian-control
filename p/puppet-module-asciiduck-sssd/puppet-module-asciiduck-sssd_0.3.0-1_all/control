@@ -1,0 +1,15 @@
+Package: puppet-module-asciiduck-sssd
+Version: 0.3.0-1
+Architecture: all
+Maintainer: Puppet Package Maintainers <pkg-puppet-devel@lists.alioth.debian.org>
+Installed-Size: 59
+Depends: puppet (>= 4) | puppet-common (>= 3), puppet-module-puppetlabs-stdlib, lsb-release
+Section: admin
+Priority: optional
+Homepage: https://forge.puppet.com/asciiduck/sssd
+Description: Manage the SSSD service
+ This module will install, configure and manage the SSSD service, but it will
+ not touch your nsswitch or your pam configs, that's the job for another module.
+ .
+ Currently this module only supports Debian 8; however, if you specify the
+ needed parameters yourself you can override the "unsupported os" failure.

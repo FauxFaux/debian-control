@@ -1,0 +1,19 @@
+Package: openafs-fileserver
+Source: openafs
+Version: 1.8.2-1
+Architecture: amd64
+Maintainer: Benjamin Kaduk <kaduk@mit.edu>
+Installed-Size: 7677
+Depends: libc6 (>= 2.14), libhcrypto4-heimdal (>= 1.4.0+git20110226), libroken18-heimdal (>= 1.7~git20150920), debconf (>= 0.5) | debconf-2.0, lsb-base (>= 3.0-6), openafs-client
+Recommends: ntp | time-daemon
+Suggests: openafs-doc
+Section: net
+Priority: optional
+Homepage: http://www.openafs.org/
+Description: AFS distributed filesystem file server
+ AFS is a distributed filesystem allowing cross-platform sharing of
+ files among multiple computers.  Facilities are provided for access
+ control, authentication, backup and administrative management.
+ .
+ This package provides the AFS fileserver binaries.  It should be
+ installed on any machine that will export files into AFS.

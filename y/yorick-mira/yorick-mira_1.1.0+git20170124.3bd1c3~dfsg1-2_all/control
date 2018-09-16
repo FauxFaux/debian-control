@@ -1,0 +1,31 @@
+Package: yorick-mira
+Version: 1.1.0+git20170124.3bd1c3~dfsg1-2
+Architecture: all
+Maintainer: Debian Astronomy Maintainers <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 655
+Depends: yorick-yeti (>= 6.3.1), yorick-yeti-fftw (>= 6.3.1), yorick-yutils, yorick-optimpacklegacy, yorick (>= 2.2.03), yorick-ynfft
+Section: science
+Priority: extra
+Homepage: https://cral.univ-lyon1.fr/labo/perso/eric.thiebaut/?Software/MiRA
+Description: optical interferometry image reconstruction within Yorick
+ MiRA is an algorithm for image reconstruction from data provided by
+ optical interferometers. It is written in the Yorick language and
+ operated through the Yorick interpreter.
+ .
+ MiRA won the 2008' Interferometric Imaging Beauty Contest organized
+ by International Astronomical Union (IAU) to compare the image
+ synthesis algorithms designed for optical interferometry.  In a
+ nutshell, MiRA proceeds by direct minimization of a penalized
+ likelihood. This penalty is the sum of two terms: a likelihood term
+ (typically a χ2) which enforces agreement of the model with the data,
+ plus a regularization term to account for priors. The priors are
+ required to lever the many degeneracies due to the sparseness of the
+ spatial frequency sampling. MiRA implements many different
+ regularizations (quadratic or edge-preserving smoothness, total
+ variation, maximum entropy, etc.) and let the user defines his own
+ priors. The likelihood penalty is modular and designed to account for
+ available data of any kind (complex visibilities, powerspectra and/or
+ closure phase). One of the strength of MiRA is that it is purely
+ based on an inverse problem approach and can therefore cope with
+ incomplete data set; for instance, MiRA can build an image without
+ any Fourier phase information. Input data must be in OI-FITS format.

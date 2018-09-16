@@ -1,0 +1,22 @@
+Package: python3-biomaj3-user
+Source: biomaj3-user
+Version: 3.0.6-1
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 81
+Depends: python3-biomaj3-core, python3-consul, python3-flask, python3-ldap3, python3-pymongo, python3-tabulate, python3-yaml, python3:any (>= 3.3.2-2~)
+Suggests: python3-gunicorn, mongodb
+Section: python
+Priority: optional
+Homepage: https://github.com/genouest/biomaj-user
+Description: BioMAJ user management library
+ BioMAJ downloads remote data banks, checks their status and applies
+ transformation workflows, with consistent state, to provide ready-to-use
+ data for biologists and bioinformaticians. For example, it can transform
+ original FASTA files into BLAST indexes. It is very flexible and its
+ post-processing facilities can be extended very easily.
+ .
+ BioMAJ3 is a rewrite of BioMAJ v1.x, see online documentation for migration.
+ .
+ This package contains the library and microservice to manage users in BioMAJ3
+Python-Egg-Name: biomaj-user

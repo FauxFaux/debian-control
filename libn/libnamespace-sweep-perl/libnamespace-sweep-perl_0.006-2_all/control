@@ -1,0 +1,18 @@
+Package: libnamespace-sweep-perl
+Version: 0.006-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 55
+Depends: libsub-identify-perl, libb-hooks-endofscope-perl (>= 0.09), libpackage-stash-perl (>= 0.33), perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/namespace-sweep/
+Description: sweeps up imported subs in your classes
+ Because Perl methods are just regular subroutines, it's difficult to
+ tell what's a method and what's just an imported function. As a result,
+ imported functions can be called as methods on your objects.
+ .
+ The namespace::sweep pragma will delete imported functions from your
+ class's symbol table, thereby ensuring that your interface is as you
+ specified it. However, code inside your module will still be able to
+ use the imported functions without any problems.

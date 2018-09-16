@@ -1,0 +1,22 @@
+Package: xmount
+Version: 0.7.6-2
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 281
+Depends: libafflib0v5 (>= 3.7.6), libc6 (>= 2.14), libewf2 (>= 20121209), libfuse2 (>= 2.7.1-2~bpo40+1), zlib1g (>= 1:1.1.4)
+Section: admin
+Priority: optional
+Homepage: https://www.pinguin.lu/
+Description: tool to crossmount between multiple input and output harddisk images
+ xmount allows you to convert on-the-fly between multiple input
+ and output harddisk image types. xmount creates a virtual file
+ system using FUSE (Filesystem in Userspace) that contains a
+ virtual representation of the input harddisk image. The virtual
+ representation can be in raw DD, VirtualBox's virtual disk file
+ (VDI) format, Microsoft's Virtual Hard Disk Image format (VHD)
+ or in VMware's VMDK format. Input harddisk images can be raw DD
+ or EWF (Expert Witness Compression Format) or AFF (Advanced
+ Forensic Format) files. In addition, xmount also supports
+ virtual write access to the output files that is redirected to a
+ cache file. This makes it for example possible to boot acquired
+ harddisk images using QEMU, KVM, VirtualBox, VMware or alike.

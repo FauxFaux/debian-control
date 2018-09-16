@@ -1,0 +1,18 @@
+Package: ruby-parser
+Version: 3.11.0-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 2780
+Depends: ruby | ruby-interpreter, ruby-sexp-processor (>= 4.9)
+Section: ruby
+Priority: optional
+Homepage: https://github.com/seattlerb/ruby_parser
+Description: Ruby parser written in pure Ruby
+ ruby_parser (RP) can be used to parse and check syntax of Ruby code.
+ "Pure Ruby" in this context means the parser's code
+ * consists solely of Ruby source files
+ * does not add any native extensions or other C code (eg. with RubyInline)
+   which requires a C compiler to be present on the user's system
+ .
+ It utilizes racc and its output is same as that of ParseTree's.
+Ruby-Versions: all

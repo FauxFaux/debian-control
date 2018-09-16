@@ -1,0 +1,18 @@
+Package: libalt-alien-ffi-system-perl
+Version: 0.21-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: perl, libffi-dev, pkg-config | libpkgconfig-perl
+Conflicts: libalien-ffi-perl
+Provides: libalien-ffi-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Alt-Alien-FFI-System
+Description: simplified alternative to Alien::FFI that uses system libffi
+ Alien::FFI makes libffi available to other Perl distributions.
+ .
+ Alt::Alien::FFI::System provides an alternative implementation of Alien::FFI
+ that is geared toward system integrators when libffi is provided by the
+ operating system. It will NOT attempt to download or install libffi, contrary
+ to the original Alien::FFI.

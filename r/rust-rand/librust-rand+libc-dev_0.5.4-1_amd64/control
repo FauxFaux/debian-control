@@ -1,0 +1,15 @@
+Package: librust-rand+libc-dev
+Source: rust-rand
+Version: 0.5.4-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-rand-dev (= 0.5.4-1), librust-libc-0.2+default-dev
+Provides: librust-rand-0+libc-dev (= 0.5.4-1), librust-rand-0.5+libc-dev (= 0.5.4-1), librust-rand-0.5.4+libc-dev (= 0.5.4-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://crates.io/crates/rand
+Description: Random number generators and other randomness functionality - feature "libc"
+ This metapackage enables feature libc for the Rust rand crate, by pulling in
+ any additional dependencies needed by that feature.

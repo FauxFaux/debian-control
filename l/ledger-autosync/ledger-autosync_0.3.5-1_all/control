@@ -1,0 +1,15 @@
+Package: ledger-autosync
+Version: 0.3.5-1
+Architecture: all
+Maintainer: Clint Adams <clint@debian.org>
+Installed-Size: 86
+Depends: hledger | ledger, python-bs4, python-fuzzywuzzy, python-ofxclient, python-ofxparse, python-pkg-resources, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: utils
+Priority: optional
+Homepage: https://bitbucket.org/egh/ledger-autosync
+Description: automated synchronization between OFX providers and ledger files
+ ledger-autosync is a program to pull down transactions from your bank
+ and create ledger transactions for them. It is designed to only
+ create transactions that are not already present in your ledger files.
+ This should make it comparable to some of the automated synchronization
+ features available in products like GnuCash, Mint, etc.

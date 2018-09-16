@@ -1,0 +1,38 @@
+Package: gr-osmosdr
+Source: gr-osmosdr (0.1.4-14)
+Version: 0.1.4-14+b7
+Architecture: amd64
+Maintainer: A. Maitland Bottoms <bottoms@debian.org>
+Installed-Size: 1425
+Depends: python (<< 2.8), python (>= 2.7~), python:any (<< 2.8), python:any (>= 2.7~), libairspy0 (>= 1.0.9~), libairspyhf1, libbladerf1, libboost-atomic1.62.0, libboost-chrono1.62.0, libboost-date-time1.62.0, libboost-system1.62.0, libboost-thread1.62.0, libc6 (>= 2.14), libfreesrp0, libgcc1 (>= 1:3.0), libgnuradio-blocks3.7.13, libgnuradio-fcd3.7.13, libgnuradio-fcdproplus3.7.11, libgnuradio-iqbalance3.7.11, libgnuradio-osmosdr0.1.4 (>= 0.1.4-13), libgnuradio-pmt3.7.13, libgnuradio-runtime3.7.13, libgnuradio-uhd3.7.13, libhackrf0, liblog4cpp5v5, libmirisdr0, libosmosdr0, libpython2.7 (>= 2.7), librtlsdr0, libsoapysdr0.6, libstdc++6 (>= 5.2), libuhd3.12.0, libvolk1.4
+Recommends: gnuradio, gr-fosphor
+Section: libdevel
+Priority: optional
+Homepage: http://sdr.osmocom.org/trac/wiki/GrOsmoSDR
+Description: Gnuradio blocks from the OsmoSDR project
+ The Osmocom project is a family of projects regarding Open source
+ mobile communications.
+ .
+ While primarily being developed for the OsmoSDR hardware, this block
+ as well supports:
+  - FUNcube Dongle through libgnuradio-fcd
+  - FUNcube Dongle Pro+ through gr-fcdproplus
+  - sysmocom OsmoSDR Devices through libosmosdr
+  - RTL2832U based DVB-T dongles through librtlsdr
+  - RTL-TCP spectrum server (see librtlsdr project)
+  - MSi2500 based DVB-T dongles through libmirisdr
+  - gnuradio .cfile input through libgnuradio-blocks
+  - RFSPACE SDR-IQ, SDR-IP, NetSDR (incl. X2 option)
+  - Great Scott Gadgets HackRF through libhackrf
+  - Nuand LLC bladeRF through libbladeRF library
+  - Ettus USRP Devices through Ettus UHD library
+  - Fairwaves UmTRX through Fairwaves' fork of UHD
+  - AIRSPY Receiver
+  - AIRSPY HF+ Receiver
+  - SoapySDR support
+  - Red Pitaya SDR transceiver (http://bazaar.redpitaya.com)
+  - FreeSRP through libfreesrp
+ .
+ By using the OsmoSDR block you can take advantage of a common
+ software API in your application(s) independent of the underlying
+ radio hardware.

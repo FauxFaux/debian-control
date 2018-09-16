@@ -1,0 +1,16 @@
+Package: libtest-failwarnings-perl
+Version: 0.8-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-FailWarnings
+Description: module for adding test failures if warnings are caught
+ Test::FailWarnings hooks $SIG{__WARN__} and converts warnings to Test::More's
+ fail() calls. It is designed to be used with done_testing, when you don't
+ need to know the test count in advance.
+ .
+ Just as with Test::NoWarnings, this does not catch warnings if other things
+ localize $SIG{__WARN__}, as this is designed to catch unhandled warnings.

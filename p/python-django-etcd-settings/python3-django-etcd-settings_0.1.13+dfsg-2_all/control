@@ -1,0 +1,24 @@
+Package: python3-django-etcd-settings
+Source: python-django-etcd-settings
+Version: 0.1.13+dfsg-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 46
+Depends: python3-dateutil, python3-django, python3-six (>= 1.10.0), python3:any (>= 3.3.2-2~), python3-etcd
+Suggests: python-django-etcd-settings-doc (= 0.1.13+dfsg-2)
+Section: python
+Priority: optional
+Homepage: https://github.com/kpn-digital/django-etcd-settings
+Description: config manager for Django apps based on ETCD (Python3 version)
+ This application allows you to extend the Django settings as configured in the
+ settings.py file with:
+ .
+  * Environment dependent values
+  * Values in different config sets, identified by name, which can be selected
+    on a 'per request' basis using the X-DYNAMIC-SETTINGS HTTP header
+ .
+ Both the added configuration values and config sets would live at ETCD,
+ which will be continuously monitored by this library in order to
+ transparently update your app settings upon changes.
+ .
+ This package contains the Python 3 version of the library.

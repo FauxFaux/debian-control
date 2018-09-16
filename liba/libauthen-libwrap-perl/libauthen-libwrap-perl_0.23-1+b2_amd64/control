@@ -1,0 +1,18 @@
+Package: libauthen-libwrap-perl
+Source: libauthen-libwrap-perl (0.23-1)
+Version: 0.23-1+b2
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 48
+Depends: perl (>= 5.26.0-4), perlapi-5.26.0, libc6 (>= 2.2.5), libwrap0 (>= 7.6-4~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Authen-Libwrap
+Description: module providing access to the TCP Wrappers library
+ The Authen::Libwrap module allows you to access the hosts_ctl() function from
+ Wietse Venema's popular TCP Wrappers security package. This allows validation
+ of network access from Perl programs against the system-wide hosts.allow file.
+ .
+ If any of the parameters to hosts_ctl() are not known (i.e. username due to
+ lack of an identd server), the constant STRING_UNKNOWN may be passed to the
+ function.

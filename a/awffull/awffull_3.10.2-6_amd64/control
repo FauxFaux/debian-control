@@ -1,0 +1,38 @@
+Package: awffull
+Version: 3.10.2-6
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 907
+Pre-Depends: debconf (>= 1.4.58) | debconf-2.0
+Depends: libc6 (>= 2.27), libgd3 (>= 2.1.0~alpha~), libgeoip1, libpcre3, zlib1g (>= 1:1.2.3.3)
+Suggests: dnshistory, httpd, fonts-dejavu
+Section: web
+Priority: optional
+Homepage: http://www.stedee.id.au/awffull/
+Description: web server log analysis program
+ AWFFull is a Web server log analysis program, forked from Webalizer. It adds a
+ number of new features and improvements, such as extended frontpage history,
+ resizable graphs, and a few more pie charts.
+ .
+ Webalizer is a great weblog analysis program but hasn't been going anywhere in
+ recent years. AWFFull takes that base and starts to fix the niggles and
+ annoyances and hopefully become a useful enhancement.
+ .
+ As a base, weblizer has a stated goal of producing web server analysis.
+ AWFFull on the other hand, will gradually focus more on the business
+ intelligence contained within those logs - and not specifically limited just to
+ web server logs.
+ .
+ Major Enhancements vs. Webalizer
+ .
+ The frontpage history can now cover more than 12 months.
+ StyleSheets (CSS) are supported. Customise to your hearts content!
+ The log type can be auto-detected
+ Can process: CLF, Combined, Squid, FTP XFER and Domino v6 Logs
+ All graphs are now resizable, rather than being a fixed size
+ Config File simplification to reduce duplication of common config pairings
+ Bookmarking numbers are tracked. Be aware that these are estimates!
+ Backend changes: Use of PCRE lib and standard library calls to ease coding pain
+ Pattern Matching improvements can increase the speed of a run by 50%. YMMV!
+ 404 Errors are tracked and displayed with both the target and referrering URL
+ Can specify what is a page or what is not.

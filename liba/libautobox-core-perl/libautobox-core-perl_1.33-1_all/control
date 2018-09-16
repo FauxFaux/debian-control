@@ -1,0 +1,20 @@
+Package: libautobox-core-perl
+Version: 1.33-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 83
+Depends: perl, libautobox-perl, libwant-perl (>= 0.26)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/autobox-Core
+Description: module providing automatic methods for core functions
+ This module provides automatic methods which wrap perl's built-in
+ functions for minipulating numbers, strings, arrays, hashes, and code
+ references. It can be handy to use built-in functions as methods to avoid
+ messy dereferencing syntaxes and parentheses pile ups.
+ .
+ autobox::Core is what you'd call a stub module. It is merely glue, presenting
+ existing functions with a new interface. Most of the methods read like sub
+ hex ($) { hex($_[0]) }. Besides built-ins that operate on hashes, arrays,
+ scalars, and code references, some Perl 6-ish things were thrown in, and some
+ keywords like foreach have been turned into methods.

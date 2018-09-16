@@ -1,0 +1,25 @@
+Package: libparse-keyword-perl
+Source: libparse-keyword-perl (0.08-2)
+Version: 0.08-2+b3
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 61
+Depends: libdevel-callparser-perl, perl (>= 5.26.0-4), perlapi-5.26.0, libc6 (>= 2.2.5)
+Section: oldlibs
+Priority: optional
+Homepage: https://metacpan.org/release/Parse-Keyword
+Description: write syntax extensions in perl (with only limited use)
+ Parse::Keyword allows you to write keyword-based syntax extensions
+ without requiring you to write any C code yourself. It is similar to
+ Devel::Declare, except that it uses the Perl parser API introduced in
+ Perl 5.14 in order to  allow you to parse parts of things using perl's
+ own parser, rather than having to fake it with balanced brace matching
+ or other fragile things.
+ .
+ NB! This module has fundamental errors in the way it handles closures,
+ which are not fixable. Runtime keywords will never be able to work
+ properly with the current design of this module. There are certain
+ cases where this module is still safe to use (keywords that only have
+ effect at compile time, or keywords that never call any of the parse_*
+ functions), but that is limiting enough to make this module mostly
+ worthless, and its author may not continue maintain it. Be warned!

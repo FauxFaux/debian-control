@@ -1,0 +1,23 @@
+Package: proot
+Version: 5.1.0-1.2
+Architecture: amd64
+Maintainer: Rémi Duraffort <ivoire@videolan.org>
+Installed-Size: 2239
+Depends: libc6 (>= 2.15), libtalloc2 (>= 2.0.4~git20101213)
+Section: utils
+Priority: optional
+Homepage: http://proot.me
+Description: emulate chroot, bind mount and binfmt_misc for non-root users
+ PRoot is a user-space implementation of chroot, mount --bind,
+ and binfmt_misc.
+ .
+ This means that users don't need any privileges or setup to do things like
+ using an arbitrary directory as the new root filesystem, making files
+ accessible somewhere else in the filesystem hierarchy, or executing programs
+ built for another CPU architecture transparently through QEMU user-mode.
+ .
+ Also, developers can add their own features or use PRoot as a Linux process
+ instrumentation engine thanks to its extension mechanism.
+ .
+ Technically PRoot relies on ptrace, an unprivileged system-call available in
+ every Linux kernel.

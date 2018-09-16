@@ -1,0 +1,30 @@
+Package: libcatalyst-model-dbic-schema-perl
+Version: 0.65-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 166
+Depends: perl, libcarp-clan-perl, libcatalyst-devel-perl, libcatalyst-component-instancepercontext-perl, libcatalyst-perl, libcatalystx-component-traits-perl, libdbix-class-cursor-cached-perl, libdbix-class-perl, libdbix-class-schema-loader-perl, libhash-merge-perl, liblist-moreutils-perl, libmodule-runtime-perl (>= 0.012), libmoose-perl (>= 1.12), libmoosex-markasmethods-perl, libmoosex-nonmoose-perl, libmoosex-types-loadableclass-perl (>= 0.009), libmoosex-types-perl, libnamespace-autoclean-perl, libnamespace-clean-perl, libtie-ixhash-perl, libtry-tiny-perl
+Breaks: libcatalyst-modules-perl (<< 48~)
+Replaces: libcatalyst-modules-perl (<< 48~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-Model-DBIC-Schema
+Description: DBIx::Class::Schema-based database model for Catalyst
+ Catalyst::Model::DBIC::Schema is a Catalyst database model class for
+ DBIx::Class::Schema-based Models. See the documentation for
+ Catalyst::Helper::Model::DBIC::Schema for information on generating these
+ Models via Helper scripts.
+ .
+ When a Catalyst app starts up, a thin Model layer is created as an interface
+ to the DBIC Schema. It should be clearly noted that the model object returned
+ by $c->model('FilmDB') is NOT itself a DBIC schema or resultset object, but
+ merely a wrapper proving methods to access the underlying schema.
+ .
+ In addition to this model class, a shortcut class is generated for each
+ source in the schema, allowing easy and direct access to a resultset of the
+ corresponding type. These generated classes are even thinner than the model
+ class, providing no public methods but simply hooking into Catalyst's model()
+ accessor via the ACCEPT_CONTEXT mechanism.
+ .
+ Catalyst is an elegant Model-View-Controller web application framework
+ written in Perl.

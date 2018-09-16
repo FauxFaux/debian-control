@@ -1,0 +1,18 @@
+Package: docker-runc
+Version: 1.0.0~rc2+git+docker1.13.1~ds1-5
+Architecture: amd64
+Maintainer: Tim Potter <tpot@debian.org>
+Installed-Size: 5898
+Depends: libapparmor1 (>= 2.6~devel), libc6 (>= 2.14), libseccomp2 (>= 2.1.0)
+Breaks: docker.io (<< 1.12)
+Built-Using: golang-1.10 (= 1.10.2-1), golang-dbus (= 4.1.0-1), golang-github-coreos-go-systemd (= 16-1), golang-github-coreos-pkg (= 3-1), golang-github-docker-go-units (= 0.3.1+git20170127.11.9e638d3-1), golang-github-mrunalp-fileutils (= 0.0~git20160930.0.4ee1cc9-1), golang-github-urfave-cli (= 1.20.0-1), golang-github-vishvananda-netlink (= 0.0~git20170407.0.1e86b2b-1), golang-github-vishvananda-netns (= 0.0~git20170707.0.86bef33-1), golang-go.crypto (= 1:0.0~git20180513.94e3fad-2), golang-gocapability-dev (= 0.0~git20160928.0.e7cb7fa-2), golang-golang-x-sys (= 0.0~git20180510.7dfd129-1), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-2), golang-logrus (= 1.0.5-2)
+Section: devel
+Priority: optional
+Homepage: https://github.com/opencontainers/runc
+Description: Open Container Project - runtime (Docker's version)
+ "runc" is a command line client for running applications packaged according
+ to the Open Container Format (OCF) and is a compliant implementation of
+ the Open Container Project specification.
+ .
+ This package contains the version to be used with docker.io packages and
+ provides "runc" as the "docker-runc" executable binary.

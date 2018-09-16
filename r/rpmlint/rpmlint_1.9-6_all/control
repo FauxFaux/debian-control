@@ -1,0 +1,25 @@
+Package: rpmlint
+Version: 1.9-6
+Architecture: all
+Maintainer: RPM packaging team <pkg-rpm-devel@lists.alioth.debian.org>
+Installed-Size: 440
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: binutils, bzip2, cpio, desktop-file-utils, python-rpm, rpm2cpio, python:any (>= 2.7.5-5~)
+Recommends: groff-base, python-enchant, python-magic, rpm
+Section: admin
+Priority: extra
+Homepage: https://github.com/rpm-software-management/rpmlint
+Description: RPM package checker
+ rpmlint is a tool for checking common errors in rpm packages.  rpmlint
+ can be used to test individual packages before uploading or to check
+ an entire distribution.  By default all applicable checks are
+ performed but specific checks can be performed by using command line
+ parameters.
+ .
+ rpmlint can check binary rpms (files and installed ones), source rpms,
+ and plain specfiles, but all checks do not apply to all argument
+ types.  For best check coverage, run rpmlint on source rpms instead of
+ plain specfiles, and installed binary rpms instead of uninstalled
+ binary rpm files.
+ .
+ The idea for rpmlint is from the lintian tool of the Debian project.

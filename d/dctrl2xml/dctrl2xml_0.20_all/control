@@ -1,0 +1,19 @@
+Package: dctrl2xml
+Version: 0.20
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 40
+Depends: python:any (<< 2.8), python:any (>= 2.7~), python-debian
+Section: utils
+Priority: optional
+Description: Debian control data to XML converter
+ This package contains the dctrl2xml tool that converts Debian control
+ data into an XML representation. It can be used to convert data which
+ is normally found in debian/control, .changes, .dsc, Packages,
+ Sources, and similar files to XML.
+ .
+ For most fields dctrl2xml just uses the field name as element name and
+ the field data as element content. For other fields, such as package
+ interrelationship fields (Depends, Build-Depends, etc.) or the Files
+ field in .changes or Sources files, dctrl2xml additionally parses their
+ field data to represent it in a more fine-structured form.

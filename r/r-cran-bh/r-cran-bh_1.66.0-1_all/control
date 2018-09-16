@@ -1,0 +1,16 @@
+Package: r-cran-bh
+Version: 1.66.0-1
+Architecture: all
+Maintainer: Dirk Eddelbuettel <edd@debian.org>
+Installed-Size: 29
+Depends: libboost-dev
+Section: gnu-r
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://cran.r-project.org/package=BH
+Description: (Virtual) GNU R package to provide BH
+ The CRAN package BH provides a (large) subset of Boost.  This package tricks
+ R into believing BH is installed when we just depend on the distribution's
+ Boost packages.  The actual set of Boost libraries could get fine-tuned. In
+ short, we avoid doubling up the 140+ mb of the 'BH' package which are alredy
+ in libboost-dev.

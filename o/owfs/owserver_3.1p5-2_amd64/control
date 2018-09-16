@@ -1,0 +1,20 @@
+Package: owserver
+Source: owfs
+Version: 3.1p5-2
+Architecture: amd64
+Maintainer: Vincent Danjean <vdanjean@debian.org>
+Installed-Size: 131
+Depends: libc6 (>= 2.15), libow-3.1-5, owfs-common, lsb-base
+Suggests: avahi-daemon
+Section: electronics
+Priority: extra
+Homepage: http://owfs.org/
+Description: Backend server for 1-Wire control
+ The 1-Wire bus is a cheap low-speed bus for devices like weather
+ sensors, access control, etc. It can be attached to your system via
+ serial, USB, I2C, and other interfaces.
+ .
+ OWserver arbitrates access to the 1-Wire bus from multiple client processes.
+ The physical bus is usually connected to a serial or USB port,
+ and other processes connect to owserver over network sockets (tcp port).
+ Communication can be local or over a network.

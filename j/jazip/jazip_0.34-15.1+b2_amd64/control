@@ -1,0 +1,22 @@
+Package: jazip
+Source: jazip (0.34-15.1)
+Version: 0.34-15.1+b2
+Architecture: amd64
+Maintainer: Peter S Galbraith <psg@debian.org>
+Installed-Size: 320
+Depends: libc6 (>= 2.2.5), libforms2, libx11-6, debconf (>= 0.5) | debconf-2.0
+Section: utils
+Priority: extra
+Description: Mount and unmount Iomega Zip and/or Jaz drives
+ It combines Grant Guenther's original command line utility, ziptool, with
+ Jaz drive support, a nice X interface and additional utilities to allow
+ users to easily mount and unmount disks formatted in either ext2 or fat.
+ .
+ It supports the Iomega Zip drive with USB, parallel, SCSI or ATAPI
+ interfaces, but ATAPI Zip drives are supported only when using kernel SCSI
+ emulation.  I don't know about the Zip-plus version (someone please tell
+ me).  The SCSI Jaz drive is supported in both the 1G and 2G capacities. It
+ does not support the much older IDE (non-ATAPI) interface drives, nor
+ Syquest drives.
+ .
+ The package also includes jazipconfig, a configuration tool.

@@ -1,0 +1,25 @@
+Package: libtime-duration-perl
+Version: 1.20-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 36
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Time-Duration
+Description: module for rounded or exact English expression of durations
+ Time::Duration provides functions for expressing time spans in rounded
+ or exact terms. So while
+ .
+    say duration_exact(86399);
+ .
+ will correctly give "23 hours, 59 minutes, and 59 seconds",
+ .
+    say ago(86399);
+ .
+ will output the rounded time span as "1 day ago".
+ .
+ The provided functions are duration(), ago(), from_now(), later() and
+ earlier(), along with their *_exact counterparts.  The precision used
+ for rounding can be specified, and version 1.10 added a millisecond
+ mode.

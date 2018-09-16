@@ -1,0 +1,493 @@
+#!/bin/sh
+
+#
+# postinst script for sympa
+#
+
+set -e
+
+if [ -f /usr/share/debconf/confmodule ]; then
+    . /usr/share/debconf/confmodule
+fi
+
+if [ -f /usr/share/dbconfig-common/dpkg/postinst ]; then
+    . /usr/share/dbconfig-common/dpkg/postinst
+fi
+
+if [ -f "/etc/sympa/sympa/sympa.conf" ] || [ ! -f "/etc/sympa/sympa.conf" ]; then
+    conf=/etc/sympa/sympa/sympa.conf
+else
+    conf=/etc/sympa/sympa.conf
+fi
+
+sympa_version() {
+    perl -e "use lib '/usr/share/sympa/lib'; use Sympa::Constants; print Sympa::Constants::VERSION;"
+}
+
+sympa_config_update() {
+    key="${1}"
+    value="${2}"
+    if [ -n "${value}" ]; then
+        if grep -qE "^\s*${key}\s+" "${conf}" ; then
+            sed -r -i "s~^\s*${key}\s+.*\$~${key}\t${value}~" "${conf}"
+        elif grep -qE "^\s*#\s*${key}\s+" "${conf}" ; then
+            sed -r -i "s~^\s*#\s*${key}\s+.*\$~${key}\t${value}~" "${conf}"
+        else
+            printf "${key}\t${value}\n" >> "${conf}"
+        fi
+    else
+        sed -r -i "s~^\s*(${key}\s+.*)\$~#\1~" "${conf}"
+    fi
+}
+
+# creating sympa user if he isn't already there
+if ! getent passwd sympa >/dev/null ; then
+    echo "Adding system user: sympa."
+    # We use --force-badname in case of a not compatible NAME_REGEX in /etc/adduser.conf (see #328053)
+    adduser --force-badname --system --group --gecos "Sympa mailing list manager" --no-create-home --home /var/lib/sympa sympa >/dev/null
+fi
+
+# /etc/sympa/data_structure.version should not be handled as a conffile as it
+# is modified by sympa upgrade tool and it breaks the sympa upgrade process
+# itsself (#655967)
+if [ -f /etc/sympa/data_structure.version ] && [ ! -f /etc/sympa/data_structure.version.debian-old ]; then
+    cp /etc/sympa/data_structure.version /etc/sympa/data_structure.version.debian-old
+fi
+if which dpkg-maintscript-helper >/dev/null && dpkg-maintscript-helper supports rm_conffile ; then
+    dpkg-maintscript-helper rm_conffile /etc/sympa/data_structure.version \
+        "6.1.11~dfsg-1~" -- "$@"
+fi
+
+# Ensure that data structure version file exists and is writable for Sympa
+if [ -f /etc/sympa/data_structure.version.debian-old ]; then
+    cp /etc/sympa/data_structure.version.debian-old /etc/sympa/data_structure.version
+    rm -f /etc/sympa/data_structure.version.debian-old
+fi
+if [ ! -f /etc/sympa/data_structure.version ]; then
+    sympa_version > /etc/sympa/data_structure.version
+fi
+
+# Remove conffiles used by apache2 < 2.4
+if which dpkg-maintscript-helper >/dev/null && dpkg-maintscript-helper supports rm_conffile ; then
+    for i in apache apache-soap httpd.conf-cgi httpd.conf-fcgi ; do
+        dpkg-maintscript-helper rm_conffile "/etc/sympa/${i}" \
+            "6.1.17~dfsg-1~" -- "$@"
+    done
+fi
+
+# Stop the daemon if it has already been started This is necessary when you run
+# dpkg-reconfigure
+if [ "$1" = "configure" ]; then
+    if [ -f /etc/init.d/sympa ]; then
+        if which invoke-rc.d >/dev/null 2>&1; then
+            invoke-rc.d sympa stop || true
+        else
+            /etc/init.d/sympa stop || true
+        fi
+    fi
+fi
+
+# Install sympa.conf
+if [ ! -f "$conf" ]; then
+    # Create congfiguration file
+    /usr/lib/sympa/bin/sympa_wizard.pl --create sympa.conf --target "$conf"
+fi
+
+# Configure the language
+db_get sympa/language
+sympa_config_update "lang" "${RET}"
+
+# Get the hostname
+db_get sympa/hostname
+hostname="${RET}"
+sympa_config_update "domain" "${hostname}"
+
+db_get sympa/listmaster
+listmaster="${RET}"
+if ! echo "${listmaster}" | grep -qE '^.+@.+$' ; then
+    listmaster="listmaster@${hostname}"
+fi
+sympa_config_update "listmaster" "${listmaster}"
+
+# Create file for mailing list aliases
+if [ ! -f /etc/mail/sympa/aliases ]; then
+    echo "## List aliases used for the sympa mailing-list manager" > /etc/mail/sympa/aliases
+fi
+
+# Moving alias files to a destination where SYMPA can write
+# and create the db alias file with the right permissions
+# from /etc/mail/sympa.aliases to /etc/mail/sympa/aliases
+if [ -d /etc/mail/sympa ]; then
+    chown sympa:sympa /etc/mail/sympa
+    for ext in '' '.db' ; do
+        if [ ! -f /etc/mail/sympa/aliases${ext} ] && [ -f /etc/mail/sympa.aliases${ext} ] && [ ! -h /etc/mail/sympa/aliases${ext} ]; then
+            mv /etc/mail/sympa.aliases${ext} /etc/mail/sympa/aliases${ext}
+            ln -s /etc/mail/sympa/aliases${ext} /etc/mail/sympa.aliases${ext}
+            chown -h sympa:sympa /etc/mail/sympa.aliases${ext}
+        fi
+    done
+fi
+
+# Ensure permissions are correct
+for ext in '' '.db' ; do
+    if [ -f /etc/mail/sympa/aliases${ext} ]; then
+        chown sympa:sympa /etc/mail/sympa/aliases${ext}
+    fi
+done
+
+# Remove old sympa aliases
+if [ -f /etc/aliases ]; then
+    sed -i -e '/#-- SYMPA begin/,/#-- SYMPA end/d' /etc/aliases
+    newaliases || true
+fi
+
+## Create a unique cookie for this host
+if [ ! -e /etc/sympa/cookie ]; then
+    touch /etc/sympa/cookie
+    chmod 0660 /etc/sympa/cookie
+    if [ -r /dev/urandom ]; then
+        dd if=/dev/urandom bs=1k count=1 2>/dev/null \
+        | md5sum | cut -d " " -f 1 >>/etc/sympa/cookie
+    else
+        (free; uptime; ps aux) | md5sum | cut -d " " -f 1 >>/etc/sympa/cookie
+    fi
+fi
+
+if [ ! -e /etc/sympa/cookies.history ]; then
+    cp /etc/sympa/cookie /etc/sympa/cookies.history
+    chmod 0660 /etc/sympa/cookies.history
+fi
+
+sympa_config_update "cookie" "\`/usr/bin/head -n1 /etc/sympa/cookie\`"
+
+## Look for bad path in aliases file (why the hell did they move the files ?)
+if grep -q "/usr/lib/sympa/queue" /etc/aliases ; then
+    echo "WARNING : The path of the queue program is bad in the aliases file"
+    echo "Change /usr/lib/sympa/queue by /usr/lib/sympa/bin/queue !"
+    echo "I'll create a symlink to prevent problems from happening..."
+    echo ""
+    ln -sf bin/queue /usr/lib/sympa/queue
+fi
+
+db_get sympa/dbconfig-install
+if [ "${RET}" != 'false' ]; then
+    dbc_first_version="5.3.4-6~"
+    dbc_dbfile_owner="sympa:sympa"
+    dbc_go sympa $@
+
+    # Translate database parameters from dbconfig-common to Sympa's db_xxx
+    # configuration values
+    case "$dbc_dbtype" in
+        mysql)
+            type=mysql
+            ;;
+        pgsql)
+            type=Pg
+            ;;
+        sqlite3)
+            type=SQLite
+            dbc_dbname="${dbc_basepath}/${dbc_dbname}"
+            ;;
+        *)
+            echo "Unsupported database type $dbc_dbtype."
+            exit 1
+            ;;
+    esac
+    # Install the database configuration
+    sympa_config_update "db_type" "${type}"
+    sympa_config_update "db_name" "${dbc_dbname}"
+    sympa_config_update "db_host" "${dbc_dbserver}"
+    sympa_config_update "db_user" "${dbc_dbuser}"
+    sympa_config_update "db_passwd" "${dbc_dbpass}"
+    sympa_config_update "db_port" "${dbc_dbport}"
+fi
+
+echo "Ensuring that permissions and ownerships are right (this can take a while)..."
+# Ensure permissions and ownerships are right
+chown -R sympa:sympa /etc/sympa
+
+if [ -e /var/log/sympa.log ] && [ ! -f /var/log/sympa.log ]; then
+    echo "Problem: /var/log/sympa.log already exists and it isn't a file !"
+fi
+touch /var/log/sympa.log || true
+chown sympa:sympa /var/log/sympa.log
+chmod 0640 /var/log/sympa.log
+
+# set default permissions for sympa's data directory except static_content
+# which has to be readable by the webserver
+find /var/lib/sympa /var/spool/sympa \
+    -maxdepth 1 -type d -not -name 'static_content' \
+    -exec chmod 0771 {} \;
+
+# It's better to search files and directories with wrong owner/group and fix
+# them instead of recursively doing it, even if it's not needed (see #630384)
+find /var/spool/sympa /var/lib/sympa \
+    \( -not -user sympa -or -not -group sympa \) \
+    -exec chown sympa:sympa {} \;
+
+# Fix permissions on CGI wrappers
+chown sympa:sympa /usr/lib/cgi-bin/sympa/wwsympa-wrapper.fcgi \
+    /usr/lib/cgi-bin/sympa/sympa_soap_server-wrapper.fcgi
+chmod 6755 /usr/lib/cgi-bin/sympa/wwsympa-wrapper.fcgi \
+    /usr/lib/cgi-bin/sympa/sympa_soap_server-wrapper.fcgi
+
+# Fix permissions on newaliases wrapper
+chmod u+s /usr/lib/sympa/bin/sympa_newaliases-wrapper
+
+# Starting from version 6.2.26, automatically generated CSS directory and
+# subscribers pictures directory can be separated from static_content to be
+# more FHS compliant.
+# Trying to safely move css and pictures in the new location
+for i in css pictures; do
+    if [ -d "/var/lib/sympa/static_content/${i}" ] ; then
+        find "/var/lib/sympa/static_content/${i}" \
+            -mindepth 1 -maxdepth 1 -printf '%f\n' | \
+            while read e ; do
+                if [ ! -d "/var/lib/sympa/${i}/${e}" ]; then
+                    mv "/var/lib/sympa/static_content/${i}/${e}" \
+                        "/var/lib/sympa/${i}/${e}"
+                fi
+            done
+        rmdir --ignore-fail-on-non-empty "/var/lib/sympa/static_content/${i}"
+    fi
+done
+if [ -d "/var/lib/sympa/static_content" ]; then
+    rmdir --ignore-fail-on-non-empty "/var/lib/sympa/static_content"
+fi
+sympa_config_update "static_content_path" "/usr/share/sympa/static_content"
+sympa_config_update "css_path" "/var/lib/sympa/css"
+sympa_config_update "css_url" "/css-sympa"
+sympa_config_update "pictures_path" "/var/lib/sympa/pictures"
+sympa_config_update "pictures_url" "/pictures-sympa"
+
+# WebServer configuration
+db_get wwsympa/webserver_type
+case "${RET}" in
+    "Apache 2")
+        webserver="apache2"
+        ;;
+    *)
+        webserver="none"
+        ;;
+esac
+
+# Read FastCGI setting
+db_get wwsympa/fastcgi
+fastcgi="${RET}"
+if [ "$fastcgi" = "true" ] && [ $webserver = "apache2" ]; then
+    if [ ! -f /etc/apache2/mods-enabled/fcgid.load ] && [ ! -f /etc/apache2/mods-enabled/fastcgi.load ]; then
+        echo "FastCGI module not installed or enabled, skipping."
+        fastcgi="false"
+    fi
+fi
+if [ "$fastcgi" = "true" ]; then
+    sympa_config_update "use_fast_cgi" "1"
+else
+    sympa_config_update "use_fast_cgi" "0"
+fi
+
+db_get wwsympa/wwsympa_url
+sympa_config_update "wwsympa_url" "${RET}"
+
+db_get sympa/use_soap
+use_soap="${RET}"
+if [ "$use_soap" = "true" ]; then
+    sympa_config_update "soap_url" "http://${hostname}/sympasoap"
+else
+    sympa_config_update "soap_url" ""
+fi
+
+# Cleanup sympa configuration files used by Apache2 << 2.4
+for suffix in '' '-soap' ; do
+    if [ -h "/etc/apache2/conf.d/sympa${suffix}" ] && \
+        [ "$(readlink -f "/etc/apache2/conf.d/sympa${suffix}")" = "/etc/sympa/apache${suffix}" ]; then
+        rm -f "/etc/apache2/conf.d/sympa${suffix}"
+    fi
+done
+
+# WebServer configuration
+db_get wwsympa/webserver_type
+webserver="${RET}"
+if [ "$webserver" = "Apache 2" ]; then
+    if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+        # Apache2 >= 2.4
+        . /usr/share/apache2/apache2-maintscript-helper
+        apache2_invoke enconf sympa.conf
+        if [ "$use_soap" = "true" ]; then
+            apache2_invoke enconf sympa-soap.conf
+        else
+            apache2_invoke disconf sympa-soap.conf
+        fi
+    fi
+else
+    if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+        # Apache2 >= 2.4
+        . /usr/share/apache2/apache2-maintscript-helper
+        apache2_invoke disconf sympa.conf
+        apache2_invoke disconf sympa-soap.conf
+    fi
+fi
+
+echo "Moving configuration files for Sympa >= 6.2 (if required)"
+su -l sympa -s /bin/sh -c "/usr/lib/sympa/bin/sympa.pl --upgrade_config_location"
+
+echo "Upgrading Sympa internals (health check)"
+su -l sympa -s /bin/sh -c "/usr/lib/sympa/bin/sympa.pl --health_check"
+
+echo "Upgrading Sympa internals (upgrade)"
+su -l sympa -s /bin/sh -c "/usr/lib/sympa/bin/sympa.pl --upgrade"
+
+echo "Move messages stored in database to filesystem (if required)"
+su -l sympa -s /bin/sh -c "/usr/share/sympa/bin/upgrade_bulk_spool.pl" || true
+
+echo "Move messages sent through the web interface to the new formalism (if required)"
+su -l sympa -s /bin/sh -c "/usr/share/sympa/bin/upgrade_send_spool.pl"
+
+## End up with debconf
+db_stop
+
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper rm_conffile /etc/sympa/sympa/sympa.conf 6.2.16\~dfsg-2\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/sympa/sympa.conf-smime.in 6.2.16\~dfsg-4\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/sympa" ]; then
+		update-rc.d sympa defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d sympa $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'sympa.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'sympa.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'sympa.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'sympa.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'sympa-bounced.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'sympa-bounced.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'sympa-bounced.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'sympa-bounced.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			deb-systemd-invoke try-restart 'sympa-bounced.service' >/dev/null || true
+		fi
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'sympa-archived.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'sympa-archived.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'sympa-archived.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'sympa-archived.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			deb-systemd-invoke try-restart 'sympa-archived.service' >/dev/null || true
+		fi
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'sympa-bulk.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'sympa-bulk.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'sympa-bulk.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'sympa-bulk.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			deb-systemd-invoke try-restart 'sympa-bulk.service' >/dev/null || true
+		fi
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'sympa-task_manager.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'sympa-task_manager.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'sympa-task_manager.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'sympa-task_manager.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			deb-systemd-invoke try-restart 'sympa-task_manager.service' >/dev/null || true
+		fi
+	fi
+fi
+# End automatically added section
+
+
+exit 0

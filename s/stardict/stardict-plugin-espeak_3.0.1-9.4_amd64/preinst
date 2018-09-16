@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+ 
+case "$1" in
+	upgrade)
+		DOCDIR=/usr/share/doc/stardict-plugin-espeak
+		if [ -L $DOCDIR ]; then
+			rm $DOCDIR
+		fi
+		;;
+esac
+ 
+

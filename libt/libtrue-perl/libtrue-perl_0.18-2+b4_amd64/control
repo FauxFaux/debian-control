@@ -1,0 +1,21 @@
+Package: libtrue-perl
+Source: libtrue-perl (0.18-2)
+Version: 0.18-2+b4
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 42
+Depends: perl (>= 5.26.0-4), perlapi-5.26.0, libc6 (>= 2.2.5), libb-hooks-op-annotation-perl, libb-hooks-op-check-perl (>= 0.18), libdevel-stacktrace-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/true
+Description: automatically return a true value when a file is required
+ Perl's require builtin (and its use wrapper) requires the files it loads to
+ return a true value. This is usually accomplished by placing a single
+ .
+ 1;
+ .
+ statement at the end of included scripts or modules. It's not onerous to add
+ but it's a speed bump on the Perl novice's road to enlightenment.
+ .
+ This module packages this "return true" behaviour so that it need not be
+ written explicitly.

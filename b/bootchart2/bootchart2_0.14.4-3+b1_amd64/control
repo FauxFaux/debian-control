@@ -1,0 +1,23 @@
+Package: bootchart2
+Source: bootchart2 (0.14.4-3)
+Version: 0.14.4-3+b1
+Architecture: amd64
+Maintainer: David Paleino <dapal@debian.org>
+Installed-Size: 94
+Depends: libc6 (>= 2.14), lsb-base (>= 3.0-6~)
+Recommends: pybootchartgui
+Conflicts: bootchart
+Section: utils
+Priority: optional
+Homepage: http://github.com/mmeeks/bootchart
+Description: boot process performance analyser
+ bootchart2 is a boot process performance analyser: a tool that lets you
+ collect and analyse data from your boot process.
+ bootchart2 origins from bootchart, and has some advantages over it:
+ .
+  - more detailed kernel charting: uses the taskstats interface, instead
+    of /proc/*/stat
+  - the data collector has been rewritten to make it faster
+ .
+ After the boot, you can view the logged data with a separately-provided
+ GUI.

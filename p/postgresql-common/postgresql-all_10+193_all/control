@@ -1,0 +1,22 @@
+Package: postgresql-all
+Source: postgresql-common (193)
+Version: 10+193
+Architecture: all
+Maintainer: Debian PostgreSQL Maintainers <team+postgresql@tracker.debian.org>
+Installed-Size: 62
+Depends: libecpg-dev, libpq-dev, postgresql-server-dev-all, postgresql-contrib-10, postgresql-plperl-10, postgresql-plpython-10, postgresql-plpython3-10, postgresql-pltcl-10
+Section: database
+Priority: optional
+Description: metapackage depending on all PostgreSQL server packages
+ This metapackage depends on all PostgreSQL server packages, in all
+ supported versions (excluding documentation and debug symbols). It
+ exists to facilitate depending on the server packages in test
+ environments.
+ .
+ PostgreSQL is a fully featured object-relational database management
+ system.  It supports a large part of the SQL standard and is designed
+ to be extensible by users in many aspects.  Some of the features are:
+ ACID transactions, foreign keys, views, sequences, subqueries,
+ triggers, user-defined types and functions, outer joins, multiversion
+ concurrency control.  Graphical user interfaces and bindings for many
+ programming languages are available as well.

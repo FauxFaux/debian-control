@@ -1,0 +1,32 @@
+Package: wah-plugins
+Version: 0.1.0-4
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 24
+Depends: libc6 (>= 2.15), libstdc++6 (>= 5)
+Suggests: ams
+Provides: ladspa-plugin
+Section: sound
+Priority: optional
+Homepage: http://kokkinizita.linuxaudio.org/linuxaudio/index.html
+Description: auto-wah LADSPA plugin
+ This LADSPA plugin is the combination of a 'wah' pedal and
+ a simple envelope follower.
+ .
+ Controls are:
+  - Freq: the resonance frequency of wah filter.
+    This would normally be controlled using a
+    midi pedal.
+  - Mix: crossfades between dry and wet signal, the
+    first is the original input signal and the latter
+    is the pure output of the resonant filter amplified
+    by 18 dB.
+ .
+ The three remaining parameters control the envelope
+ follower. This produces a control signal that is
+ added to the 'Freq' setting.
+  - Drive: input gain to the envelope follower (so
+    this gain is not in the signal path).
+  - Decay: controls the decay time of the envelope.
+  - Range: controls how much the envelope is allowed
+    to modify the basic frequency.

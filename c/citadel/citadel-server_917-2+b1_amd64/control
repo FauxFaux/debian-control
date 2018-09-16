@@ -1,0 +1,29 @@
+Package: citadel-server
+Source: citadel (917-2)
+Version: 917-2+b1
+Architecture: amd64
+Maintainer: Debian Citadel Team <pkg-citadel-devel@lists.alioth.debian.org>
+Installed-Size: 1365
+Depends: libc6 (>= 2.15), libcitadel4 (>= 917), libcurl4 (>= 7.16.2), libdb5.3, libexpat1 (>= 2.0.1), libical3 (>= 3.0.0), libldap-2.4-2 (>= 2.4.7), libpam0g (>= 0.99.7.1), libsieve2-1, libssl1.1 (>= 1.1.0), zlib1g (>= 1:1.1.4), debconf (>= 0.5) | debconf-2.0, adduser, openssl, patch, lsb-base (>= 3.0-6)
+Recommends: db4.6-util, shared-mime-info
+Conflicts: citadel-common, citadel-mta, imap-server, mail-transport-agent, pop3-server
+Replaces: citadel-common, citadel-mta, mail-transport-agent
+Provides: citadel-mta, imap-server, mail-transport-agent, pop3-server
+Section: mail
+Priority: optional
+Homepage: http://www.citadel.org/
+Description: complete and feature-rich groupware server
+ Citadel is a complete and feature-rich open source groupware platform.
+  * Email, calendaring/scheduling, address books
+  * Bulletin boards, mailing list server, instant messaging
+  * Multiple domain support
+  * An intuitive, attractive AJAX-style web interface
+ .
+ The Citadel system is extremely versatile. It provides numerous front ends to
+ present to users, such as a text-based interface, an AJAX-style web interface,
+ and many popular PIM clients using SMTP/POP/IMAP. All of these can be used
+ simultaneously.
+ .
+ It's also extremely scalable. Not only can a well-equipped Citadel server
+ support a large number of concurrent users, but you can also build
+ a distributed network of Citadel nodes that share rooms and their content.

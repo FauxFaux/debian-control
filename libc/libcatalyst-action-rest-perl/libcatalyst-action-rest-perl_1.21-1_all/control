@@ -1,0 +1,17 @@
+Package: libcatalyst-action-rest-perl
+Version: 1.21-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 161
+Depends: perl, libcatalyst-perl (>= 5.80030), libclass-inspector-perl, libjson-maybexs-perl, libmodule-pluggable-perl | perl (<< 5.17.0), libmoose-perl, libmro-compat-perl, libnamespace-autoclean-perl, libparams-validate-perl, liburi-find-perl
+Recommends: libhtml-parser-perl, libyaml-syck-perl
+Suggests: libcatalyst-action-serialize-data-serializer-perl, libconfig-general-perl, libfreezethaw-perl, libcpanel-json-xs-perl, libphp-serialization-perl, libxml-simple-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-Action-REST
+Description: module for automatic REST method dispatching
+ Catalyst::Action::REST is a Catalyst Action that handles doing automatic
+ method dispatching for REST requests. It takes a normal Catalyst action, and
+ changes the dispatch to append an underscore and method name. It will
+ dispatch either to the action with the generating name or to a regular
+ method.

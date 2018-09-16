@@ -1,0 +1,31 @@
+Package: libghc-cmdargs-prof
+Source: haskell-cmdargs
+Version: 0.10.20-1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 4986
+Depends: libghc-cmdargs-dev (= 0.10.20-1), libghc-base-prof-4.10.1.0-35a7f, libghc-filepath-prof-1.4.1.2-f4919, libghc-process-prof-1.6.1.0-df30c, libghc-template-haskell-prof-2.12.0.0-22576, libghc-transformers-prof-0.5.2.0-e0457
+Provides: libghc-cmdargs-prof-0.10.20-321f1
+Section: haskell
+Priority: optional
+Homepage: https://github.com/ndmitchell/cmdargs#readme
+Description: command-line argument processing; profiling libraries
+ It provides an easy way to define command-line parsers. Most users
+ will want to use the System.Console.CmdArgs.Implicit module, whose
+ documentation contains an example.
+ .
+ System.Console.CmdArgs.Explicit provides a way to write command-line
+ parsers for both single mode programs (most programs) and multiple
+ mode programs (e.g. darcs or cabal). Parsers are defined by
+ constructing a data structure.
+ .
+ System.Console.CmdArgs.Implicit provides a way to concisely define
+ command-line parsers, up to three times shorter than getopt. These
+ parsers are translated into the Explicit data type.
+ .
+ System.Console.CmdArgs.GetOpt provides a wrapper allowing
+ compatiblity with existing getopt parsers, mapping to the Explicit
+ data type.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

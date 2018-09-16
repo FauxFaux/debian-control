@@ -1,0 +1,23 @@
+Package: mono-reference-assemblies-3.5
+Source: mono-reference-assemblies
+Version: 3.12.1+dfsg-2
+Architecture: all
+Maintainer: Debian Mono Group <pkg-mono-group@lists.alioth.debian.org>
+Installed-Size: 381
+Depends: mono-runtime-common (>= 4.4), mono-reference-assemblies-2.0 (= 3.12.1+dfsg-2)
+Breaks: libmono-microsoft-build2.0-cil (<< 4.0), libmono-xbuild-tasks2.0-cil (<< 4.0)
+Replaces: libmono-microsoft-build2.0-cil (<< 4.0), libmono-xbuild-tasks2.0-cil (<< 4.0)
+Section: cli-mono
+Priority: optional
+Homepage: http://www.mono-project.com
+Description: Mono runtime - compiler compatibility for .NET 3.5
+ Mono is a platform for running and developing applications based on the
+ ECMA/ISO Standards. Mono is an open source effort led by Xamarin.
+ Mono provides a complete CLR (Common Language Runtime) including compiler and
+ runtime, which can produce and execute CIL (Common Intermediate Language)
+ bytecode (aka assemblies), and a class library.
+ .
+ This package contains files required to compile applications against an older
+ version of .NET, using Mono 4.0 or above, which only include the latest
+ version of the class library as-is. This is important for producing apps for
+ wider distribution

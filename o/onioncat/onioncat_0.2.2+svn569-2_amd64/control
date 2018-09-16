@@ -1,0 +1,23 @@
+Package: onioncat
+Version: 0.2.2+svn569-2
+Architecture: amd64
+Maintainer: Debian Privacy Tools Maintainers <pkg-privacy-maintainers@lists.alioth.debian.org>
+Installed-Size: 125
+Depends: libc6 (>= 2.15), adduser, lsb-base (>= 3.0-6), net-tools
+Recommends: tor
+Section: comm
+Priority: optional
+Homepage: https://www.onioncat.org/
+Description: IP-Transparent Tor hidden service connector
+ OnionCat creates a transparent IP layer on top of Tor hidden
+ services. It transparently transmits any kind of IP-based data
+ through the Tor network on a location hidden basis. You can think of
+ it as a point-to-multipoint VPN between hidden services.
+ .
+ OnionCat is a stand-alone application which runs in userland and is a
+ connector between Tor and the local OS. Any protocol based on IP,
+ such as UDP or TCP, can be transmitted.
+ .
+ OnionCat supports IPv6; native IPv4 forwarding, though still
+ available, is deprecated: the recommended solution for IPv4
+ forwarding is to build a IPv4-through-IPv6 tunnel through OnionCat.

@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	if ! getent group zvmsdk > /dev/null 2>&1; then
+		addgroup --system zvmsdk >/dev/null
+	fi
+
+	if ! getent passwd zvmsdk > /dev/null 2>&1; then
+		adduser --system --home /var/lib/zvmsdk --ingroup zvmsdk --no-create-home --shell /bin/false zvmsdk
+	fi
+
+	chown -R root:zvmsdk /etc/zvmsdk
+	chown -R zvmsdk:zvmsdk /var/lib/zvmsdk
+	chown -R zvmsdk:adm /var/log/zvmsdk
+	chmod 0750 /var/lib/zvmsdk /var/log/zvmsdk /etc/zvmsdk
+fi
+
+
+
+exit 0

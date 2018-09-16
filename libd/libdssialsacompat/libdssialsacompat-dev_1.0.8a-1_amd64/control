@@ -1,0 +1,29 @@
+Package: libdssialsacompat-dev
+Source: libdssialsacompat
+Version: 1.0.8a-1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 112
+Depends: libdssialsacompat0 (= 1.0.8a-1)
+Section: libdevel
+Priority: optional
+Homepage: http://smbolton.com/linux.html
+Description: DSSI ALSA compatibility library (development files)
+ libdssialsacompat is simply an extraction from and repackaging of
+ the code from alsa-lib, necessary to support DSSI on non-ALSA
+ systems.
+ .
+ libdssialsacompat is intended to provide the snd_seq_event_t
+ declarations and handling code necessary to compile and use DSSI on
+ non-ALSA systems. It aims to allows compiling DSSI code with as
+ little change as possible, while not presenting itself in such a way
+ as to fool other autoconf-enabled code into thinking a system has
+ ALSA.
+ .
+ This library does NOT provide any sort of emulation of the ALSA
+ audio, MIDI, or sequencer devices. The only part of ALSA that is
+ required by the DSSI specification is the snd_seq_event_t definition
+ and handling, and that is all libdssialsacompat is intended to
+ replace. Other ALSA code should be ported to native facilities.
+ .
+ This package provides the development files.

@@ -1,0 +1,27 @@
+Package: python-graypy
+Source: graypy
+Version: 0.2.14-1
+Architecture: all
+Maintainer: Benjamin Drung <benjamin.drung@profitbricks.com>
+Installed-Size: 43
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Suggests: python-amqplib
+Provides: python2.7-graypy
+Section: python
+Priority: optional
+Homepage: https://github.com/severb/graypy
+Description: Python logging handler that sends messages in GELF (Python 2)
+ This package can be used to sent messages to Graylog2 using a custom handler
+ for the builtin logging library in the Graylog Extended Log Format (GELF).
+ .
+ Alternately, GELFRabbitHandler can be used to send messages to RabbitMQ. Your
+ Graylog2 server needs to be configured to consume messages via AMQP then. This
+ prevents log messages from being lost due to dropped UDP packets (GELFHandler
+ sends messages to Graylog2 using UDP). You will need to configure RabbitMQ
+ with a 'gelf_log' queue and bind it to the 'logging.gelf' exchange so messages
+ are properly routed to a queue that can be consumed by Graylog2 (the queue and
+ exchange names may be customized to your liking).
+ .
+ graypy can be easily integrated into Django's logging settings.
+ .
+ This is the Python 2 version of the package.

@@ -1,0 +1,24 @@
+Package: libbz2-ocaml
+Source: camlbz2 (0.6.0-7)
+Version: 0.6.0-7+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 26
+Depends: ocaml-base-nox-4.05.0, libbz2-1.0, libc6 (>= 2.14)
+Provides: libbz2-ocaml-jbcg2
+Section: ocaml
+Priority: optional
+Homepage: http://camlbz2.forge.ocamlcore.org
+Description: OCaml bindings for the bzip2 compression library
+ CamlBZ2 provides OCaml bindings for libbz2 (AKA bzip2), a popular
+ compression library which typically compresses better (i.e., smaller
+ resulting files) than gzip.
+ .
+ Using CamlBZ2 you can read and write compressed "files", where files
+ can be anything offering an in_channel/out_channel abstraction
+ (files, sockets, ...).
+ .
+ Also, with CamlBZ2 you can compress and decompress strings in memory
+ using the bzip2 compression algorithm.
+ .
+ This package contains only the shared runtime stub libraries.

@@ -1,0 +1,19 @@
+Package: snd-nox
+Source: snd
+Version: 18.7-1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 3723
+Depends: snd (>= 18.7-1), libasound2 (>= 1.0.16), libc6 (>= 2.14), libfftw3-double3 (>= 3.3.5), libgmp10, libgsl23 (>= 2.5), libgslcblas0 (>= 2.4), libjack-jackd2-0 (>= 1.9.10+20150825) | libjack-0.125, libmpc3, libmpfr6 (>= 3.1.3), libsamplerate0 (>= 0.1.7)
+Breaks: snd-gtk (<< 16.1-2)
+Replaces: snd-gtk (<< 16.1-2)
+Provides: snd-nox-alsa
+Section: sound
+Priority: optional
+Homepage: https://ccrma.stanford.edu/software/snd/
+Description: Sound file editor (cmdline)
+ Snd is a powerful sound file editor that can be customized and extended using
+ the Scheme programming language.
+ .
+ This package contains a version of snd compiled with both JACK and ALSA
+ support, but without support for X.

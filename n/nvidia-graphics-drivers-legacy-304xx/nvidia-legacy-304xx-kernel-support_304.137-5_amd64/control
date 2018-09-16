@@ -1,0 +1,20 @@
+Package: nvidia-legacy-304xx-kernel-support
+Source: nvidia-graphics-drivers-legacy-304xx
+Version: 304.137-5
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 91
+Depends: nvidia-legacy-304xx-alternative (= 304.137-5), nvidia-legacy-304xx-alternative--kmod-alias, nvidia-kernel-common (>= 20151021), nvidia-modprobe
+Breaks: glx-alternative-nvidia (<< 0.6.91)
+Replaces: glx-alternative-nvidia (<< 0.6.91)
+Provides: nvidia-kernel-support-any, nvidia-legacy-304xx-kernel-support--v1
+Section: non-free/kernel
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.nvidia.com
+Description: NVIDIA binary kernel module support files (304xx legacy version)
+ The NVIDIA binary driver provides optimized hardware acceleration of
+ OpenGL/GLX applications via a direct-rendering X Server for graphics cards
+ using NVIDIA chip sets.
+ .
+ This package provides supporting configuration for the kernel module.

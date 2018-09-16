@@ -1,0 +1,25 @@
+Package: dput
+Version: 1.0.2
+Architecture: all
+Maintainer: Ben Finney <bignose@debian.org>
+Installed-Size: 197
+Depends: python3-pkg-resources, python3-debian, python3-gpg, python3:any (>= 3.4~)
+Suggests: openssh-client, lintian, mini-dinstall, rsync
+Breaks: devscripts (<< 2.17.0)
+Replaces: devscripts (<< 2.17.0)
+Section: devel
+Priority: optional
+Homepage: https://packages.debian.org/source/sid/dput
+Description: Debian package upload tool
+ dput allows you to put one or more Debian packages into the archive.  This
+ package also includes a dcut utility which can be used to generate and / or
+ upload a commands file for the Debian FTP archive upload queue.
+ .
+ dput includes some tests to verify that the package is policy-compliant.
+ It offers the possibility to run lintian before the upload. It can also
+ run dinstall in dry-run-mode, when having used an appropriate upload method.
+ This is very useful to see if the upload will pass dinstall sanity checks
+ in the next run.
+ .
+ It is intended mainly for Debian maintainers only, although it can
+ also be useful for people maintaining local APT repositories.

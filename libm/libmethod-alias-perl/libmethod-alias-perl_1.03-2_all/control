@@ -1,0 +1,17 @@
+Package: libmethod-alias-perl
+Version: 1.03-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 21
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Method-Alias
+Description: module to create method aliases
+ The traditional way to create a method alias (provide an alternate
+ name for a method) is simply a GLOB alias.  While this works fine for
+ functions, it does not work for methods overloaded by a subclass.
+ .
+ Instead, Method::Alias creates a number of methods in the caller's
+ package to call the real method. It is designed to be used as a pragma,
+ to which you provide a set of pairs of method names.

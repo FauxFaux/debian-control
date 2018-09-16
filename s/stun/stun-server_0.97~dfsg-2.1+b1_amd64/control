@@ -1,0 +1,22 @@
+Package: stun-server
+Source: stun (0.97~dfsg-2.1)
+Version: 0.97~dfsg-2.1+b1
+Architecture: amd64
+Maintainer: Debian VoIP Team <pkg-voip-maintainers@lists.alioth.debian.org>
+Installed-Size: 86
+Depends: libc6 (>= 2.15), libgcc1 (>= 1:3.0), libstdc++6 (>= 4.4.0)
+Recommends: stun-client
+Breaks: stun (<< 0.97~dfsg-1)
+Replaces: stun (<< 0.97~dfsg-1)
+Provides: stun
+Section: net
+Priority: optional
+Homepage: http://sourceforge.net/projects/stun/
+Description: Server daemon for STUN
+ The STUN protocol (Simple Traversal of UDP through NATs) is described in the
+ IETF RFC 3489, available at http://www.ietf.org/rfc/rfc3489.txt.  It's used to
+ help clients behind NAT to tunnel incoming calls through. This server is the
+ counterpart to help the client identify the NAT and have it open the proper
+ ports for it.
+ .
+ This package installs only the server part

@@ -1,0 +1,19 @@
+Package: libfunction-fallback-coreorpp-perl
+Version: 0.08-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: perl, libclone-pp-perl
+Recommends: libacme-damn-perl, libdata-clone-perl, liblist-moreutils-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Function-Fallback-CoreOrPP
+Description: set of functions using non-core XS modules with pure-Perl/core fallback
+ Function::Fallback::CoreOrPP provides functions that use non-core XS modules
+ (for best speed, reliability, feature, etc) but falls back to those that use
+ core XS or pure-Perl modules when the non-core XS module is not available.
+ .
+ This module helps when you want to bootstrap your Perl application with a
+ portable, dependency-free Perl script. In a vanilla Perl installation (having
+ only core modules), you can use App::FatPacker to include non-core pure-Perl
+ dependencies to your script.

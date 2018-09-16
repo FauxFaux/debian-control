@@ -1,0 +1,23 @@
+Package: colorized-logs
+Version: 2.4-1
+Architecture: amd64
+Maintainer: Adam Borowski <kilobyte@angband.pl>
+Installed-Size: 61
+Depends: libc6 (>= 2.7), less
+Suggests: colordiff, colormake, ccze, colortail
+Replaces: kbtin (<< 1.0.18)
+Section: text
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://github.com/kilobyte/colorized-logs
+Description: tools for consuming logs with ANSI color
+ Some tools like gcc, dmesg, grep --color, colordiff, ccze, etc can enhance
+ their output with color, making reading a lot more pleasant.  You can
+ usually view that only on your terminal or with "less -R"; this package
+ gives you:
+  * ansi2html: convert logs to HTML
+  * ansi2txt: drop ANSI control codes
+  * ttyrec2ansi: drop timing data from ttyrec files
+  * pipetty: makes a program think its stdout and stderr are connected to a
+    terminal; use as a prefix: "pipetty dmesg|tee"
+  * lesstty: pipe a program (as above) to "less -R"

@@ -1,0 +1,38 @@
+Package: snooze
+Version: 0.3-1
+Architecture: amd64
+Maintainer: Nicolas Braud-Santoni <nicolas@braud-santoni.eu>
+Installed-Size: 29
+Depends: libc6 (>= 2.16)
+Section: utils
+Priority: optional
+Homepage: https://github.com/chneukirchen/snooze
+Description: run a command at a particular time
+ `snooze` is a tool for waiting until a particular time and then
+ running a command.  Together with a service supervision system such as
+ runit, this can be used to replace cron(8).
+ .
+ Benefits over cron:
+  - mnemonic syntax
+  - no overlapping job runs possible
+  - filtering by ISO week and day of year
+  - due to supervision, no centralized daemon required
+  - due to supervision, can easily disable jobs or force their
+    execution instantly
+  - due to supervision, have custom logs
+  - due to no centralized daemon, no fuzzing with multiple users/permissions
+  - very robust with respect to external time changes
+  - can use a file timestamp to ensure minimum waiting time between two
+    runs, even across reboots
+  - randomized delays (some cron have that)
+  - variable slack (no need for anacron)
+  - ad-hoc usage possible, just run the program from command line
+ .
+ Benefits over runwhen:
+  - less confusing usage (arguably)
+  - filtering by ISO week and day of year
+  - zero dependencies
+ .
+ Benefits over uschedule:
+  - no centralized daemon required
+  - filtering by ISO week and day of year

@@ -1,0 +1,25 @@
+Package: libgnuplot-iostream-dev
+Source: gnuplot-iostream
+Version: 0~20140302.gitc8919a0+dfsg-3
+Architecture: all
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 85
+Depends: gnuplot, libboost-filesystem-dev, libboost-iostreams-dev, libboost-system-dev
+Suggests: gnuplot-iostream-doc
+Section: libdevel
+Priority: optional
+Homepage: http://www.stahlke.org/dan/gnuplot-iostream/
+Description: C++ programming interface for gnuplot. Headers
+ This interface allows gnuplot to be controlled from C++ and is designed to be
+ the lowest hanging fruit. In other words, if you know how gnuplot works it
+ should only take 30 seconds to learn this library. Basically it is just an
+ iostream pipe to gnuplot with some extra functions for pushing data arrays and
+ getting mouse clicks. Data sources include STL containers (eg. vector or map)
+ and one or two dimensional Blitz++ arrays (of scalars or TinyVectors). Support
+ for other data sources should be easy to add.
+ .
+ Basically there are two functions defined: send() sends arrays of data values
+ (it is overloaded to do the right thing based upon what type of variable you
+ pass) and getMouse() gets the position of a mouse click. Everything else is
+ accomplished by sending commands manually to gnuplot via the iostream
+ interface.

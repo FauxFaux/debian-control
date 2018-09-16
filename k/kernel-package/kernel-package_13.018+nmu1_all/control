@@ -1,0 +1,22 @@
+Package: kernel-package
+Version: 13.018+nmu1
+Architecture: all
+Maintainer: Manoj Srivastava <srivasta@debian.org>
+Installed-Size: 1710
+Depends: build-essential, po-debconf, gettext, file, bc, binutils, kmod, xz-utils, xmlto, lzma, bzip2, dpkg-dev
+Recommends: docbook-utils, cpio, uboot-mkimage, kernel-common
+Suggests: linux-source, libncurses-dev
+Section: kernel
+Priority: optional
+Description: utility for building Linux kernel related Debian packages
+ This package provides the capability to create a Debian kernel image
+ package by just running make-kpkg kernel_image in a kernel source
+ directory tree.  It can also package the relevant kernel headers into
+ a kernel-headers package. In general, this package is very useful if
+ you need to create a custom kernel, if, for example, the default
+ kernel does not support some of your hardware, or you wish a leaner,
+ meaner kernel.  It also scripts the steps that need be taken to
+ compile the kernel, which is quite convenient (forgetting a crucial
+ step once was the initial motivation for this package). Please look at
+ /usr/share/doc/kernel-package/Rationale for a full list of advantages
+ of this package.

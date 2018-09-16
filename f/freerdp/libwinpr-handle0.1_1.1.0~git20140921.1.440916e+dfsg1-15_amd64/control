@@ -1,0 +1,25 @@
+Package: libwinpr-handle0.1
+Source: freerdp
+Version: 1.1.0~git20140921.1.440916e+dfsg1-15
+Architecture: amd64
+Maintainer: Debian Remote Maintainers <pkg-remote-team@lists.alioth.debian.org>
+Installed-Size: 218
+Depends: libc6 (>= 2.2.5)
+Suggests: freerdp-x11
+Breaks: libfreerdp1 (<< 1.1.0~git20140921.1.440916e+dfsg-1)
+Replaces: libfreerdp1 (<< 1.1.0~git20140921.1.440916e+dfsg-1)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.freerdp.com/
+Description: Windows Portable Runtime library (handle library)
+ WinPR is a spin-off project of FreeRDP which aims at providing a portable
+ implementation of important portions of the Windows API. Just like FreeRDP,
+ WinPR is released under the Apache license. Unlike Wine, WinPR does not provide
+ binary compatibility, and does not require applications to be built for
+ Windows. Instead, WinPR provides API compatibility for applications targeting
+ non-Windows environments. When on Windows, the original native API is being
+ used instead of the equivalent WinPR implementation, without having to modify
+ the code using it.
+ .
+ This package contains the winpr-handle shared library.

@@ -1,0 +1,21 @@
+Package: liblwt-glib-ocaml
+Source: lwt (2.7.1-4)
+Version: 2.7.1-4+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 91
+Depends: liblwt-ocaml-wwm00, libresult-ocaml-ciso5, ocaml-base-nox-4.05.0, libc6 (>= 2.2.5), libglib2.0-0 (>= 2.12.0)
+Breaks: liblwt-ocaml-dev (<= 2.3.0)
+Replaces: liblwt-ocaml-dev (<= 2.3.0)
+Provides: liblwt-glib-ocaml-hngl0
+Section: ocaml
+Priority: optional
+Homepage: http://ocsigen.org/lwt
+Description: cooperative GLib bindings for OCaml (runtime)
+ Lwt is a library for cooperative threads implemented in a monadic style.
+ Unlike preemptive threads, cooperative threads do not use a scheduler to
+ distribute processor time between threads. Instead, each thread must
+ announce that it wants to let the others run.
+ .
+ This package contains runtime libraries for programs using Lwt with
+ cooperative GLib.

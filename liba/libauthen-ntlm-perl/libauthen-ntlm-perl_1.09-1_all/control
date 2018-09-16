@@ -1,0 +1,21 @@
+Package: libauthen-ntlm-perl
+Version: 1.09-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 88
+Depends: perl, libdigest-hmac-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Authen-NTLM/
+Description: authentication module for NTLM
+ Authen::NTLM provides methods to use NTLM authentication. It can
+ be used as an authenticate method with the Mail::IMAPClient module
+ to perform the challenge/response mechanism for NTLM connections
+ or it can be used on its own for NTLM authentication with other
+ protocols (eg. HTTP).
+ .
+ The implementation is a direct port of the code from fetchmail
+ which, itself, has based its NTLM implementation on samba. As
+ such, this code is not especially efficient, however it will still
+ take a fraction of a second to negotiate a login on a PII which is
+ likely to be good enough for most situations.

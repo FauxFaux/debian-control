@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        # Create user account for dropping privileges to run openconnect.
+        adduser --system --quiet \
+            --home /var/lib/NetworkManager --no-create-home \
+            --gecos "NetworkManager OpenConnect plugin" \
+            --group nm-openconnect
+
+        # Ask dbus to reload the VPN service config file.
+        if [ -x "/etc/init.d/dbus" ]; then
+            invoke-rc.d dbus force-reload || true
+        fi
+        ;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+    *)
+        echo "postinst called with unknown arguments \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper rm_conffile /etc/NetworkManager/VPN/nm-openconnect-service.name 1.2.4-1.1\~ -- "$@"
+# End automatically added section
+
+
+exit 0

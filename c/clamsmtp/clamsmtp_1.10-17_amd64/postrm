@@ -1,0 +1,73 @@
+#!/bin/sh
+#
+# postrm -- clamsmtp post-remove maintainer script
+#
+set -e
+
+if [ "$1" = "purge" ]; then
+	if [ -f /usr/share/debconf/confmodule ]; then
+		. /usr/share/debconf/confmodule
+		# Purge the clamsmtp spool directory?
+		db_get clamsmtp/purge || true
+		if [ "${RET:-false}" = "true" -a -d /var/spool/clamsmtp ] ; then
+			rm -rf /var/spool/clamsmtp || true
+		elif [ -d /var/spool/clamsmtp ] ; then
+			rmdir /var/spool/clamsmtp 2>/dev/null || true
+		fi
+	fi
+
+	if [ -d /var/run/clamsmtp ] ; then
+		rm -rf /var/run/clamsmtp
+	fi
+
+	# Remove clamav from clamsmtp group
+	if (getent group clamsmtp|grep clamav>/dev/null) ; then
+		if which deluser >/dev/null; then
+			deluser clamav clamsmtp || true
+		fi
+		if [ -x /etc/init.d/clamsmtp ]; then
+			# Attempt to stop and start clamav-daemon, getting
+			# cleaned group permissions.
+			(invoke-rc.d clamav-daemon stop && \
+			invoke-rc.d clamav-daemon start) || true
+		fi
+	fi
+fi
+
+# Automatically added by dh_installinit/11.1.6
+if [ "$1" = "purge" ] ; then
+	update-rc.d clamsmtp remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.1.6
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'clamsmtp.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'clamsmtp.service' >/dev/null || true
+		deb-systemd-helper unmask 'clamsmtp.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.1.6
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+if [ "$1" = "purge" ]; then
+	db_stop || true
+fi

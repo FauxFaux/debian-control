@@ -1,0 +1,19 @@
+Package: libfile-modified-perl
+Version: 0.10-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 32
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/File-Modified
+Description: module to check if files have changed
+ File::Modified module is intended as a simple method for programs to detect
+ whether configuration files (or modules they rely on) have changed. There are
+ currently two methods of change detection implemented, mtime and MD5.
+ The MD5 method will fall back to use timestamps if the Digest::MD5 module
+ cannot be loaded.
+ .
+ There is another module, File::Signature, which has many similar features,
+ so if this module doesn't do what you need, maybe File::Signature does. There
+ also is quite some overlap between the two modules, code wise.

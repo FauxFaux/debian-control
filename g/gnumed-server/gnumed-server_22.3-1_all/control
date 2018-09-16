@@ -1,0 +1,31 @@
+Package: gnumed-server
+Version: 22.3-1
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 40749
+Depends: postgresql (>= 9.2), postgresql-client, python, debconf, bsd-mailx | mail-reader, openssl, bzip2, cron | anacron, sudo, gnupg | gnupg2, rsync, python-psycopg2, python-egenix-mxdatetime
+Recommends: barman
+Suggests: postgresql-contrib, postgresql-plr, bacula-console, postgresql-filedump, orthanc-postgresql | orthanc, orthanc-webviewer
+Section: misc
+Priority: optional
+Homepage: http://www.gnumed.de
+Description: medical practice management - server
+ This is the GNUmed Electronic Medical Record. Its purpose is
+ to enable doctors to keep a medically sound record on their
+ patients' health. It does not currently provide functionality
+ for billing and stock keeping. Clinical features are well-tested
+ by real doctors in the field.
+ .
+ While the GNUmed team has taken the utmost care to make sure
+ the medical records are safe at all times you still need to
+ make sure you are taking appropriate steps to backup the
+ medical data to a safe place at appropriate intervals. Do
+ not forget to test your recovery procedures, too !
+ .
+ Protect your data! GNUmed itself comes without
+ any warranty whatsoever. You have been warned.
+ .
+ This package contains the PostgreSQL server part.
+ .
+ Note: The package does currently _NOT_ build the GNUmed database
+ but just installs the needed SQL files.  Please see README.Debian.

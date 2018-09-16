@@ -1,0 +1,23 @@
+Package: cups-daemon
+Source: cups
+Version: 2.2.8-5
+Architecture: amd64
+Maintainer: Debian Printing Team <debian-printing@lists.debian.org>
+Installed-Size: 892
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: libavahi-client3 (>= 0.6.16), libavahi-common3 (>= 0.6.16), libc6 (>= 2.15), libcups2 (= 2.2.8-5), libcupsmime1 (>= 1.5.0), libdbus-1-3 (>= 1.9.14), libgssapi-krb5-2 (>= 1.14+dfsg), libpam0g (>= 0.99.7.1), libpaper1, libsystemd0, procps, lsb-base (>= 3.2-14~), ssl-cert (>= 1.0.11), adduser, bc
+Recommends: colord, cups-browsed, avahi-daemon (>= 0.6.31-3~)
+Suggests: cups, cups-bsd, cups-common (>= 2.2.8-5), cups-server-common (>= 2.2.8-5), cups-client (>= 2.2.8-5), cups-ppdc, cups-filters, poppler-utils (>= 0.12), ghostscript (>= 9.02~), cups-filters (>= 1.0.42) | foomatic-filters (>= 4.0), foomatic-db-compressed-ppds | foomatic-db, printer-driver-gutenprint, printer-driver-hpcups, hplip, cups-pdf, udev, smbclient
+Breaks: cups (<< 2.1.0-6~)
+Replaces: cups (<< 2.1.0-6~)
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.cups.org/
+Description: Common UNIX Printing System(tm) - daemon
+ The Common UNIX Printing System (or CUPS(tm)) is a printing system and
+ general replacement for lpd and the like.  It supports the Internet
+ Printing Protocol (IPP), and has its own filtering driver model for
+ handling various document types.
+ .
+ This package provides the CUPS scheduler/daemon.

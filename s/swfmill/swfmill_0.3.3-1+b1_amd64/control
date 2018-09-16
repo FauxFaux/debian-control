@@ -1,0 +1,24 @@
+Package: swfmill
+Source: swfmill (0.3.3-1)
+Version: 0.3.3-1+b1
+Architecture: amd64
+Maintainer: Debian Flash Team <pkg-flash-devel@lists.alioth.debian.org>
+Installed-Size: 1735
+Depends: libc6 (>= 2.14), libfreetype6 (>= 2.2.1), libgcc1 (>= 1:3.0), libpng16-16 (>= 1.6.2-1), libstdc++6 (>= 5.2), libxml2 (>= 2.7.4), libxslt1.1 (>= 1.1.25), zlib1g (>= 1:1.1.4)
+Suggests: mtasc
+Section: utils
+Priority: optional
+Homepage: http://www.swfmill.org/
+Description: xml2swf and swf2xml processor
+ swfmill is a tool to process Shockwave Flash(TM) (SWF) files. It can
+ convert SWF from and to an XML-dialect called swfml, which is closely
+ modeled after the SWF file format.
+ .
+ Apart from this xml2swf and swf2xml functionality, it also provides a
+ libxslt-based XSL transformator that supports an extension ("swft")
+ which helps with generating IDs for SWF objects and can import an SWF as
+ XML using an XPath command (swft:document()).
+ .
+ As a simple application of such functionality, swfmill can pack together
+ a bunch of media files (currently JPGs, PNGs, TTFs and other SWFs) into
+ an SWF as "library objects" for your attachMovie() pleasure.

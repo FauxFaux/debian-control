@@ -1,0 +1,19 @@
+Package: yhsm-yubikey-ksm
+Source: python-pyhsm
+Version: 1.2.0-1.1
+Architecture: all
+Maintainer: Debian Authentication Maintainers <pkg-auth-maintainers@lists.alioth.debian.org>
+Installed-Size: 96
+Depends: python (<< 2.8), python (>= 2.7), python:any (>= 2.6.6-7~), adduser, lsb-base, python-pyhsm (= 1.2.0-1.1), python-argparse, yhsm-tools, python-setuptools, python-daemon, python-sqlalchemy
+Section: net
+Priority: optional
+Homepage: https://developers.yubico.com/python-pyhsm/
+Description: Yubikey Key Storage Module using YubiHSM
+ Decryption backend for a Yubico validation service. Uses the
+ YubiHSM to decrypt YubiKey OTPs and answer 'OK' or 'ERR'.
+ .
+ This package provides the decryption backend for a Yubico validation
+ service. It uses the YubiHSM to decrypt YubiKey OTPs and answer 'OK'
+ or 'ERR'.  The package also contains the yhsm-db-import and
+ yhsm-db-export tools for database management.
+Python-Version: 2.7

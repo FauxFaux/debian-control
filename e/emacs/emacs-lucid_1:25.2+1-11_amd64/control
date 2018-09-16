@@ -1,0 +1,24 @@
+Package: emacs-lucid
+Source: emacs
+Version: 1:25.2+1-11
+Architecture: amd64
+Maintainer: Rob Browning <rlb@defaultvalue.org>
+Installed-Size: 19241
+Depends: emacs-bin-common (= 1:25.2+1-11), emacs-common (= 1:25.2+1-11), libacl1 (>= 2.2.51-8), libasound2 (>= 1.0.16), libc6 (>= 2.15), libcairo2 (>= 1.2.4), libdbus-1-3 (>= 1.9.14), libfontconfig1 (>= 2.12.6), libfreetype6 (>= 2.2.1), libgdk-pixbuf2.0-0 (>= 2.22.0), libgif7 (>= 5.1), libglib2.0-0 (>= 2.16.0), libgnutls30 (>= 3.5.6), libgomp1 (>= 4.2.1), libgpm2 (>= 1.20.7), libice6 (>= 1:1.0.0), libjpeg62-turbo (>= 1.3.1), libm17n-0 (>= 1.6.1), libmagickcore-6.q16-6 (>= 8:6.9.10.2), libmagickwand-6.q16-6 (>= 8:6.9.10.2), libotf0 (>= 0.9.11), libpng16-16 (>= 1.6.2-1), librsvg2-2 (>= 2.14.4), libselinux1 (>= 1.32), libsm6, libtiff5 (>= 4.0.3), libtinfo6 (>= 6), libx11-6, libx11-xcb1, libxcb1, libxext6, libxfixes3 (>= 1:4.0.1), libxft2 (>> 2.1.1), libxinerama1, libxml2 (>= 2.7.4), libxmu6, libxpm4, libxrandr2 (>= 2:1.2.99.3), libxrender1, libxt6, xaw3dg (>= 1.5+E-1), zlib1g (>= 1:1.1.4)
+Suggests: emacs-common-non-dfsg
+Conflicts: emacs-gtk, emacs-nox
+Replaces: emacs-gtk, emacs-lucid (<< 1:25), emacs-nox
+Provides: editor, emacs, emacsen, info-browser, mail-reader, news-reader
+Section: editors
+Priority: optional
+Homepage: http://www.gnu.org/software/emacs/
+Description: GNU Emacs editor (with Lucid GUI support)
+ GNU Emacs is the extensible self-documenting text editor.  This
+ package contains a version of Emacs with support for a graphical user
+ interface based on the Lucid toolkit (instead of the GTK+ interface
+ provided by the emacs-gtk package).  Until some known GTK+
+ problems are fixed, this version may help avoid crashing Emacs during
+ an emacsclient disconnect.  See
+ https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=567934 and
+ https://bugzilla.gnome.org/show_bug.cgi?id=85715 for more
+ information.

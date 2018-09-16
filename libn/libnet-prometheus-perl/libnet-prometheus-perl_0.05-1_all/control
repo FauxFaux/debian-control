@@ -1,0 +1,18 @@
+Package: libnet-prometheus-perl
+Version: 0.05-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 90
+Depends: perl, libstruct-dumb-perl, libscalar-list-utils-perl (>= 1:1.29) | perl (>= 5.19.5)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Net-Prometheus
+Description: module to export monitoring metrics for Prometheus
+ Net::Prometheus provides the ability for a program to collect monitoring
+ metrics and export them to the Prometheus.io monitoring server.
+ .
+ As Prometheus will expect to collect the metrics by making an HTTP request,
+ facilities are provided to yield a PSGI application that the containing
+ program can embed in its own structure to provide the results, or the
+ application can generate a plain-text result directly and serve them by its
+ own means.

@@ -1,0 +1,26 @@
+Package: libmath-random-tt800-perl
+Source: libmath-random-tt800-perl (1.01-3)
+Version: 1.01-3+b5
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 39
+Depends: perl (>= 5.26.0-4), perlapi-5.26.0, libc6 (>= 2.2.5)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Math-Random-TT800/
+Description: Perl module implementing the TT800 algorithm
+ Math::Random::TT800 provides an implementation of Makoto Matsumoto and Takuji
+ Nishimura's pseudorandom number generator (PRNG) algorithm called TT800. It is
+ similar to some other fantastic PRNG algorithms such as the Mersenne Twister
+ (see libmath-random-mt-perl) and ISAAC (see libmath-random-isaac-perl). This
+ particular implementation is particularly notable because it has no external
+ dependencies aside from Perl itself.
+ .
+ The algorithm itself is described in Matsumoto's article published in ACM
+ Transactions on Modelling and Computer Simulation, Volume 4, Issue 3, 1994,
+ pages 254-266.
+ .
+ This algorithm is similar to the Mersenne Twister algorithm but uses a smaller
+ array to hold state information (25 elements compared to MT's 624).
+ Consequently, the period is much smaller - 2^800-1 versus MT's 2^19937-1.
+ The period of ISAAC is 2^8295 values on average.

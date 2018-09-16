@@ -1,0 +1,24 @@
+Package: collectd-utils
+Source: collectd
+Version: 5.8.0-5.2
+Architecture: amd64
+Maintainer: Sebastian Harl <tokkee@debian.org>
+Installed-Size: 214
+Depends: libc6 (>= 2.17), libcollectdclient1 (>= 5.2.0)
+Recommends: collectd
+Suggests: icinga
+Replaces: collectd (<< 4.6.1-1~)
+Section: utils
+Priority: optional
+Homepage: https://collectd.org/
+Description: statistics collection and monitoring daemon (utilities)
+ collectd is a small daemon which collects system information periodically and
+ provides mechanisms to monitor and store the values in a variety of ways.
+ Since the daemon doesn't need to startup every time it wants to update the
+ values it's very fast and easy on the system. Also, the statistics are very
+ fine grained since the files are updated every 10 seconds by default.
+ .
+ This package contains the following utility:
+ .
+   * collectdctl: Control interface for collectd
+   * collectd-nagios: Nagios plugin for querying collectd

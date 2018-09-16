@@ -1,0 +1,36 @@
+Package: libghc-thyme-doc
+Source: haskell-thyme
+Version: 0.3.5.5-2
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 1461
+Depends: haddock-interface-31
+Recommends: ghc-doc, libghc-aeson-doc, libghc-attoparsec-doc, libghc-old-locale-doc, libghc-quickcheck2-doc, libghc-random-doc, libghc-vector-doc, libghc-vector-space-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: https://github.com/liyang/thyme
+Description: faster time library; documentation
+ Thyme is a rewrite of the fine time library, with a particular focus
+ on performance for applications that make heavy use of timestamps. For
+ example, UTCTime is represented with μs precision as an Int64, which
+ gives a usable range from -290419-11-07 19:59:05.224192 UTC to
+ 294135-11-26 04:00:54.775807 UTC in the future.
+ .
+ Conversions are provided as Iso's from the lens package, while
+ AdditiveGroup, VectorSpace and AffineSpace from vector-space allow for
+ more principled operations instead of Num, Fractional & al.
+ .
+ Thyme uses strict and unpacked tuples throughout, e.g. YearMonthDay or
+ WeekDate. Descriptive Int synonyms such as Year and DayOfMonth are
+ also provided.
+ .
+ On platforms where Int is 64-bits wide, types with an Enum instance
+ can be used as Keys for IntMap, preferably via the EnumMap wrapper
+ provided by enummapset-th. In any case the Ord instances are much
+ faster, if you must use Map.
+ .
+ Data.Thyme.Time is a drop-in compatibility module for existing code.
+ .
+ This package provides the documentation for a library for the Haskell
+ programming language.
+ See http://www.haskell.org/ for more information on Haskell.

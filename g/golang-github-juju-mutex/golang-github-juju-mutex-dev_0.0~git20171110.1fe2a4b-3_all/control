@@ -1,0 +1,17 @@
+Package: golang-github-juju-mutex-dev
+Source: golang-github-juju-mutex
+Version: 0.0~git20171110.1fe2a4b-3
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 53
+Depends: golang-github-juju-errors-dev, golang-gopkg-check.v1-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/juju/mutex
+Description: named machine level mutex shareable between processes
+ package mutex provides a named machine level mutex shareable between
+ processes.
+ .
+ Mutexes have names. Each each name, only one mutex for that name can be
+ acquired at the same time, within and across process boundaries. If a
+ process dies while the mutex is held, the mutex is automatically released.

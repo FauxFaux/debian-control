@@ -1,0 +1,31 @@
+Package: s3ql
+Version: 2.30+dfsg-1
+Architecture: amd64
+Maintainer: Nikolaus Rath <Nikolaus@rath.org>
+Installed-Size: 1650
+Depends: python3 (<< 3.7), python3 (>= 3.6~), python3-apsw (>= 3.7.0), python3-crypto, python3-defusedxml, python3-dugong (<< 4.0), python3-dugong (>= 3.4), python3-llfuse (<< 2.0), python3-llfuse (>= 1.0), python3-requests, python3:any, libc6 (>= 2.14), libsqlite3-0 (>= 3.6.23), libjs-sphinxdoc (>= 1.0), fuse, psmisc, procps, python3-pkg-resources
+Recommends: python3-systemd
+Section: misc
+Priority: optional
+Homepage: https://bitbucket.org/nikratio/s3ql/
+Description: Full-featured file system for online data storage
+ S3QL is a file system that stores all its data online using storage
+ services like Google Storage, Amazon S3 or OpenStack. S3QL
+ effectively provides a hard disk of dynamic, infinite capacity that
+ can be accessed from any computer with internet access.
+ .
+ S3QL is a standard conforming, full featured UNIX file system that is
+ conceptually indistinguishable from any local file
+ system. Furthermore, S3QL has additional features like compression,
+ encryption, data de-duplication, immutable trees and snapshotting
+ which make it especially suitable for online backup and archival.
+ .
+ In addition to accessing online storage services directoly, S3QL can
+ also store its data underneath a regular mount point. This enables
+ the use of S3QL with e.g. NFS, CIFS or sftp servers.
+ .
+ S3QL is designed to favor simplicity and elegance over performance
+ and feature-creep. Care has been taken to make the source code as
+ readable and serviceable as possible. Solid error detection and error
+ handling have been included from the very first line, and S3QL comes
+ with extensive automated test cases.

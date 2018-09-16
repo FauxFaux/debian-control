@@ -1,0 +1,20 @@
+Package: netselect-apt
+Source: netselect
+Version: 0.3.ds1-28
+Architecture: all
+Maintainer: Javier Fernández-Sanguino Peña <jfs@debian.org>
+Installed-Size: 41
+Depends: wget, netselect (>= 0.3.ds1-17)
+Recommends: curl
+Suggests: dpkg-dev
+Enhances: apt
+Section: net
+Priority: optional
+Homepage: http://github.com/apenwarr/netselect
+Description: speed tester for choosing a fast Debian mirror
+ This package provides a utility that can choose the best Debian mirror
+ by downloading the full mirror list and using netselect to find the
+ fastest/closest one.
+ .
+ It can output a sources.list(5) file that can be used with package
+ management tools such as apt or aptitude.

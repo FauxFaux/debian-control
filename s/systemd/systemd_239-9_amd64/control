@@ -1,0 +1,27 @@
+Package: systemd
+Version: 239-9
+Architecture: amd64
+Maintainer: Debian systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>
+Installed-Size: 12156
+Pre-Depends: libacl1 (>= 2.2.51-8), libblkid1 (>= 2.19.1), libc6 (>= 2.27), libcap2 (>= 1:2.10), libcryptsetup12 (>= 2:1.4), libgcrypt20 (>= 1.8.0), libidn11 (>= 1.13), libip4tc0 (>= 1.6.0+snapshot20161117), liblz4-1 (>= 0.0~r130), liblzma5 (>= 5.1.1alpha+20120614), libmount1 (>= 2.19.1), libseccomp2 (>= 2.3.1), libselinux1 (>= 2.1.9)
+Depends: libapparmor1 (>= 2.9.0-3+exp2), libaudit1 (>= 1:2.2.1), libcryptsetup12 (>= 2:1.4.3), libgnutls30 (>= 3.5.6), libgpg-error0 (>= 1.14), libkmod2 (>= 5~), libmount1 (>= 2.26.2), libpam0g (>= 0.99.7.1), libsystemd0 (= 239-9), util-linux (>= 2.27.1), mount (>= 2.26), adduser, procps
+Recommends: libpam-systemd, dbus
+Suggests: systemd-container, policykit-1
+Breaks: apparmor (<< 2.9.2-1), ifupdown (<< 0.8.5~), laptop-mode-tools (<< 1.68~), python-dbusmock (<< 0.18), python3-dbusmock (<< 0.18), systemd-shim (<< 10-4~), udev (<< 228-5)
+Replaces: udev (<< 228-5)
+Section: admin
+Priority: important
+Multi-Arch: foreign
+Homepage: https://www.freedesktop.org/wiki/Software/systemd
+Description: system and service manager
+ systemd is a system and service manager for Linux. It provides aggressive
+ parallelization capabilities, uses socket and D-Bus activation for starting
+ services, offers on-demand starting of daemons, keeps track of processes using
+ Linux control groups, maintains mount and automount points and implements an
+ elaborate transactional dependency-based service control logic.
+ .
+ systemd is compatible with SysV and LSB init scripts and can work as a
+ drop-in replacement for sysvinit.
+ .
+ Installing the systemd package will not switch your init system unless you
+ boot with init=/bin/systemd or install systemd-sysv in addition.

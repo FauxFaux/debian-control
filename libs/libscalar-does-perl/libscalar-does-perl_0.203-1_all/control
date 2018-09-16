@@ -1,0 +1,17 @@
+Package: libscalar-does-perl
+Version: 0.203-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 68
+Depends: libtype-tiny-perl, liburi-perl, liblexical-underscore-perl, libexporter-tiny-perl, perl (>= 5.16.1) | libscalar-list-utils-perl (>= 1:1.24), libnamespace-clean-perl (>= 0.19), perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Scalar-Does
+Description: like ref() but useful
+ Scalar::Does provides a "does()" built-in.
+ .
+ A check that "ref($thing) eq 'ARRAY'" doesn't allow you to accept an
+ object that uses overloading to provide an array-like interface.
+ .
+ This package also includes IO::Detect, for detecting if a scalar is a
+ filehandle (or something filehandle-like).

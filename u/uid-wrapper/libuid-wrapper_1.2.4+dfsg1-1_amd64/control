@@ -1,0 +1,18 @@
+Package: libuid-wrapper
+Source: uid-wrapper
+Version: 1.2.4+dfsg1-1
+Architecture: amd64
+Maintainer: Debian SSSD Team <pkg-sssd-devel@lists.alioth.debian.org>
+Installed-Size: 58
+Depends: libc6 (>= 2.14)
+Section: devel
+Priority: optional
+Homepage: http://cwrap.org/uid_wrapper.html
+Description: UID wrapper library
+ This is a wrapper for the user, group and hosts NSS API that can
+ simulate uid switching as a regular user. This is useful for
+ testsuites that run as a regular user but need to test
+ privileged functions.
+ .
+ It works as a preload library, which overrides various
+ system functions.

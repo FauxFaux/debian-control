@@ -1,0 +1,20 @@
+Package: openssh-known-hosts
+Version: 0.6.2-1
+Architecture: all
+Maintainer: Timo Weingärtner <timo@tiwe.de>
+Installed-Size: 113
+Depends: lockfile-progs
+Recommends: openssh-client, cron
+Suggests: postgresql-client, rsync, curl, gpgv
+Section: net
+Priority: extra
+Homepage: https://github.com/tiwe-de/openssh-known-hosts
+Description: download, filter and merge known_hosts for OpenSSH
+ This package allows you to download public hostkeys from multiple sources,
+ filter the hostnames coming with them and merge them together into one
+ file for use by OpenSSH. Plugins included:
+  * curl (optional GnuPG verification)
+  * rsync (optional GnuPG verification)
+  * psql
+  * symlink
+ New plugins can easily be written.

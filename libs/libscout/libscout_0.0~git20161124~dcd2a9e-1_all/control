@@ -1,0 +1,26 @@
+Package: libscout
+Version: 0.0~git20161124~dcd2a9e-1
+Architecture: all
+Maintainer: Android Tools Maintainers <android-tools-devel@lists.alioth.debian.org>
+Installed-Size: 48794
+Depends: default-jre-headless (>= 2:1.7) | java7-runtime-headless, libandroid-23-java, libcommons-cli-java, libcommons-io-java, libwala-java
+Section: devel
+Priority: optional
+Homepage: https://projects.cispa.uni-saarland.de/derr/libscout
+Description: Third-party libraries detector for Android apps
+ LibScout is a light-weight and effective static analysis tool to detect
+ third-party libraries in Android apps. The detection is resilient against
+ common bytecode obfuscation techniques such as identifier renaming or
+ code-based obfuscations such as reflection-based API hiding or control-flow
+ randomization.
+ .
+ LibScout requires the original library SDKs (compiled .jar/.aar files) to
+ extract library profiles that can be used for detection on Android apps.
+ .
+ Unique features:
+ .
+   * Library detection resilient against many kinds of bytecode obfuscation.
+   * Capability of pinpointing the exact library version (in some cases to a set
+     of 2-3 candidate versions).
+   * Capability of handling dead-code elimination, by computing a similarity
+     score against baseline SDKs.

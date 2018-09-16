@@ -1,0 +1,21 @@
+Package: libapache2-authcookie-perl
+Version: 3.27-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 236
+Depends: perl, libapache2-mod-perl2 (>= 2.0.9~rc1), libclass-load-perl, libhash-multivalue-perl, libhttp-body-perl, libwww-form-urlencoded-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Apache-AuthCookie
+Description: Perl Authentication and Authorization via cookies
+ This module is for mod_perl version 2. If you are running mod_perl version 1,
+ you should be using Apache::AuthCookie instead.
+ .
+ Apache2::AuthCookie allows you to intercept a user's first unauthenticated
+ access to a protected document. The user will be presented with a custom form
+ where they can enter authentication credentials. The credentials are posted
+ to the server where AuthCookie verifies them and returns a session key.
+ .
+ The session key is returned to the user's browser as a cookie. As a cookie,
+ the browser will pass the session key on every subsequent accesses. AuthCookie
+ will verify the session key and re-authenticate the user.

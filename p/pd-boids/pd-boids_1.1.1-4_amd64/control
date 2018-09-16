@@ -1,0 +1,23 @@
+Package: pd-boids
+Version: 1.1.1-4
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 133
+Depends: libc6 (>= 2.4), puredata | pd
+Recommends: pd-libdir, pd-import, gem
+Section: sound
+Priority: optional
+Homepage: https://puredata.info
+Description: Pd library for the "boids" flocking simulator algorithm
+ Boids is a bird flight and animal flock simulator. It is based on the
+ same algorithm which was used in Jurassic Park for the herding
+ dinosaurs.  Boids takes an integer argument which is the number of
+ boids. Each time Boids receives a bang, it calculates and outputs the
+ new positions of the boids. The output consists of thew coordiantes
+ for each boid, the number and type depending on the mode.
+ .
+ The flight parameters can be changed with messages. Use the 'dump'
+ message to output a list of the current parameter settings.
+ .
+ For more information about the Boids algorithm, see Craig Reynolds'
+ Web site at http://www.red3d.com/cwr/

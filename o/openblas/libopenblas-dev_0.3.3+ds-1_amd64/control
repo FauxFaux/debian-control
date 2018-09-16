@@ -1,0 +1,23 @@
+Package: libopenblas-dev
+Source: openblas
+Version: 0.3.3+ds-1
+Architecture: amd64
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 53153
+Depends: libopenblas-base (= 0.3.3+ds-1)
+Breaks: libatlas-base-dev (<< 3.10.3-4~), libblas-dev (<< 3.7.1-2~), liblapack-dev (<< 3.7.1-2~)
+Provides: libblas.so, liblapack.so
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/xianyi/OpenBLAS
+Description: Optimized BLAS (linear algebra) library (development files)
+ OpenBLAS is an optimized BLAS library based on GotoBLAS2 1.13 BSD version.
+ .
+ Unlike Atlas, OpenBLAS provides a multiple architecture library.
+ .
+ All kernel will be included in the library and dynamically switched to
+ the best architecture at run time (only on x86 arches).
+ .
+ This package includes the static libraries and symbolic links
+ needed for program development.

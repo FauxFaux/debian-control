@@ -1,0 +1,30 @@
+Package: iraf-fitsutil
+Version: 2018.07.06-3
+Architecture: amd64
+Maintainer: Debian Astro Team <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 1357
+Depends: iraf, libcfitsio-bin, libc6 (>= 2.15), libcfitsio5 (>= 3.390~), libcurl3-gnutls (>= 7.16.2), libexpat1 (>= 2.0.1)
+Enhances: iraf
+Section: science
+Priority: optional
+Multi-Arch: foreign
+Description: FITS utilities for IRAF
+ Several tasks to operate of FITS files and extensions from within IRAF,
+ like copying, extension extraction, conversion etc.
+ .
+ The following tasks are available:
+ .
+  * fgread: Read a FITS file with FOREIGN extensions
+  * fgwrite: Create a FITS file with FOREIGN extensions
+  * funpack: Uncompress a FITS file
+  * fxconvert: Convert between IRAF image types.
+  * fxcopy: Copy FITS files or FITS extension to an output FITS file
+  * fxdelete: Delete FITS extensions in place
+  * fxdummyh: Create a dataless single FITS file
+  * fxextract: Extract a FITS extension
+  * fxheader: List one line of header description per FITS unit
+  * fxinsert: Insert FITS files or extensions into another FITS file
+  * fxplf: Converts a pixel list file into a BINTABLE extension
+  * fxsplit: Split a multiple extension FITS file into single FITS files
+  * ricepack: Rice compress a FITS file
+  * sum32: Compute the 32-bit FITS 1's complement checksum

@@ -1,0 +1,22 @@
+Package: libowfat-dev
+Source: libowfat
+Version: 0.30-2
+Architecture: amd64
+Maintainer: Roland Stigge <stigge@antcom.de>
+Installed-Size: 1249
+Depends: libc6-dev, libowfat0 (= 0.30-2)
+Conflicts: libcdb-dev, libdjbdns1-dev, libudt-dev
+Section: libdevel
+Priority: optional
+Homepage: http://www.fefe.de/libowfat/
+Description: Reimplementation of libdjb, development files
+ This library is a reimplementation of libdjb, which means that it provides
+ Daniel Bernstein's interfaces (with some extensions).
+ .
+ It contains wrappers around memory allocation, buffered I/O, routines for
+ formatting and scanning, a full DNS resolver, several socket routines,
+ wrappers for socket functions, mkfifo, opendir, wait, and an abstraction
+ around errno.  It also includes wrappers for Unix signal functions and a
+ layer of mmap and sendfile.
+ .
+ This package contains libowfat linked with glibc, and man pages.

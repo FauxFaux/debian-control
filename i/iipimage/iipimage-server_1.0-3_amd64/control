@@ -1,0 +1,31 @@
+Package: iipimage-server
+Source: iipimage
+Version: 1.0-3
+Architecture: amd64
+Maintainer: Mathieu Malaterre <malat@debian.org>
+Installed-Size: 350
+Depends: libapache2-mod-fcgid | lighttpd, libc6 (>= 2.14), libfcgi0ldbl, libgcc1 (>= 1:3.0), libgomp1 (>= 4.9), libjpeg62-turbo (>= 1.3.1), libmemcached11, libstdc++6 (>= 5.2), libtiff5 (>= 4.0.3)
+Recommends: imagemagick (>= 6.4.7~), libvips-tools
+Suggests: iipimage-doc, memcached
+Section: web
+Priority: optional
+Homepage: http://iipimage.sourceforge.net/
+Description: Web-based streamed viewing and zooming of ultra high-resolution images
+ IIPImage is an advanced high-performance feature-rich imaging server
+ system for web-based streamed viewing and zooming of ultra
+ high-resolution images. It is designed to be fast and
+ bandwidth-efficient with low processor and memory requirements. The
+ system can comfortably handle gigapixel size images as well as advanced
+ image features such as both 8 and 16 bit depths, CIELAB colorimetric
+ images and scientific imagery such as multispectral images.
+ .
+ Streaming is tile-based, making it possible to view, navigate and zoom
+ in real-time around gigapixel size images that would be impossible to
+ download and manipulate on the local machine. It also makes the system
+ very scalable as the number of image tile downloads will remain the same
+ regardless of the size of the source image.
+ .
+ Source images can be in either TIFF or JPEG2000 format. Whole images or
+ regions within images can also be rapidly and dynamically resized and
+ exported by the server from a single source image without the need to
+ store multiple files in various sizes.

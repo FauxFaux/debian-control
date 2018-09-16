@@ -1,0 +1,16 @@
+Package: heat-cfntools
+Version: 1.4.2-2
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 107
+Depends: python3-boto (>= 2.12.0), python3-pbr (>= 0.6), python3-psutil (>= 1.1.1), python3:any
+Section: python
+Priority: optional
+Homepage: https://wiki.openstack.org/Heat
+Description: Tools required to be installed on Heat provisioned cloud
+ This package contains tools for use with CloudFormation
+ cfn-init   - Reads the AWS::CloudFormation::Init for the instance resource,
+              installs packages, and starts services
+ cfn-signal - Waits for an application to be ready before continuing, ie:
+              supporting the WaitCondition feature
+ cfn-hup    - Handle updates from the UpdateStack CloudFormation API call

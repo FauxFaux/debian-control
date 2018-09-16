@@ -1,0 +1,19 @@
+Package: golang-github-ssor-bom-dev
+Source: golang-github-ssor-bom
+Version: 0.0~git20170718.0.6386211-4
+Architecture: all
+Maintainer: QA Group <packages@qa.debian.org>
+Installed-Size: 17
+Section: devel
+Priority: extra
+Homepage: https://github.com/ssor/bom
+Description: small Go library to clean bom from byte array or reader
+ This golang library implements a utility to clean bom from a byte array
+ or byte reader.
+ .
+ Example(s):
+ .
+   bs := []byte{bom0, bom1, bom2, 0x11} result := CleanBom(bs)
+ .
+   bs := []byte{bom0, bom1, bom2, 0x11} result :=
+   NewReaderWithoutBom(bytes.NewReader(bs))

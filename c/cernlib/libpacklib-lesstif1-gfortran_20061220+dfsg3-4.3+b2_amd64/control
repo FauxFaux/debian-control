@@ -1,0 +1,34 @@
+Package: libpacklib-lesstif1-gfortran
+Source: cernlib (20061220+dfsg3-4.3)
+Version: 20061220+dfsg3-4.3+b2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 383
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgfortran5 (>= 8), libgrafx11-1-gfortran, libkernlib1-gfortran, libpacklib1-gfortran, libquadmath0 (>= 4.6), libx11-6, libxm4 (>= 2.3.4), libxt6
+Recommends: kxterm
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://cernlib.web.cern.ch/cernlib/
+Description: CERNLIB data analysis suite - core GUI library
+ CERNLIB is a suite of data analysis tools and libraries created for
+ use in physics experiments, but also with applications to other
+ fields such as the biological sciences.
+ .
+ The packlib library includes a great deal of CERNLIB core functionality.
+ Best-known are probably the MINUIT function minimization routines, the
+ HBOOK histogramming routines, and KUIP (Kit for a User Interface Package).
+ Other subsystems include CSPACK, a set of client-server routines; FFREAD,
+ a format-free input processing system for FORTRAN; and ZEBRA, a data
+ structure management package.
+ .
+ This package includes the graphical functionality of KUIP, the CERNLIB
+ Kit for a User Interface Package. This library has been split off
+ from packlib so that the packlib packages need not depend upon
+ the X and Lesstif libraries.
+ .
+ This package was formerly named libkuipx11-1. The text-based functionality
+ of KUIP can be found in the libpacklib1-gfortran package.
+ .
+ Note that in order to compile and link programs against this library, you
+ must also install the libpacklib-lesstif1-dev package.

@@ -1,0 +1,23 @@
+Package: krb5-user
+Source: krb5
+Version: 1.16-2
+Architecture: amd64
+Maintainer: Sam Hartman <hartmans@debian.org>
+Installed-Size: 399
+Depends: libc6 (>= 2.14), libcomerr2 (>= 1.01), libgssapi-krb5-2 (>= 1.6.dfsg.2), libgssrpc4 (>= 1.6.dfsg.2), libk5crypto3 (>= 1.9+dfsg~beta1), libkadm5clnt-mit11 (>= 1.15~beta1), libkadm5srv-mit11 (>= 1.15~beta1), libkdb5-9, libkeyutils1 (>= 1.4), libkrb5-3 (= 1.16-2), libkrb5support0 (>= 1.13~alpha1+dfsg), libss2 (>= 1.01), krb5-config
+Conflicts: heimdal-clients
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://web.mit.edu/kerberos/
+Description: basic programs to authenticate using MIT Kerberos
+ Kerberos is a system for authenticating users and services on a network.
+ Kerberos is a trusted third-party service.  That means that there is a
+ third party (the Kerberos server) that is trusted by all the entities on
+ the network (users and services, usually called "principals").
+ .
+ This is the MIT reference implementation of Kerberos V5.
+ .
+ This package contains the basic programs to authenticate to MIT Kerberos,
+ change passwords, and talk to the admin server (to create and delete
+ principals, list principals, etc.).

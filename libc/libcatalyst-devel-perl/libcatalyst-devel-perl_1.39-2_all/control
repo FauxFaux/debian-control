@@ -1,0 +1,26 @@
+Package: libcatalyst-devel-perl
+Version: 1.39-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 152
+Depends: perl, libcatalyst-perl (>= 5.90001), libconfig-general-perl, libfile-changenotify-perl, libfile-copy-recursive-perl, libfile-sharedir-perl, libmoose-perl, libmoosex-emulate-class-accessor-fast-perl, libnamespace-autoclean-perl, libnamespace-clean-perl, libpath-class-perl, libtemplate-perl, libyaml-tiny-perl
+Suggests: libmodule-install-perl (>= 1.02), libmoosex-daemonize-perl, starman
+Breaks: libcatalyst-modules-perl (<< 39)
+Replaces: libcatalyst-modules-perl (<< 39)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-Devel
+Description: collection of development tools for Catalyst
+ Catalyst::Devel is a collection of modules needed for Catalyst application
+ development and testing, but is not required to run them. This package is not
+ needed for Catalyst application deployment on production servers. Among other
+ things, it includes the following tools:
+ .
+ Module::Install::Catalyst
+ Provides various utilities for creating Catalyst module distributions.
+ .
+ Catalyst::Helper
+ Helper module for bootstrapping a Catalyst application via catalyst.pl.
+ .
+ Catalyst::Restarter
+ Utility to restart the server when files have changed

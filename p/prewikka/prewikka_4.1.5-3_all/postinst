@@ -1,0 +1,85 @@
+#!/bin/sh
+# postinst script for prewikka
+#
+# see: dh_installdeb(1)
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+
+# helper functions
+
+replace_file () {
+    file=$1
+    file_new=$2
+    if [ ! -f ${file} ] ; then
+      mv ${file_new} ${file}
+    else
+      ucf --three-way --debconf-ok ${file_new} $file
+    fi
+}
+
+do_update () {
+    file=$1
+    file_new=$2
+    if diff -q ${file} ${file_new} >/dev/null 2>&1; then
+        # Old file and new file are identical
+        rm -f ${file_new}
+    else
+        replace_file $file $file_new
+        rm -f ${file_new}
+    fi
+}
+
+
+CONF=/etc/prewikka/prewikka.conf
+CONF_NEW="${CONF}-new"
+
+
+if [ "$1" = "configure" ]; then
+  . /usr/share/dbconfig-common/dpkg/postinst
+  dbc_go prewikka $@
+
+  if [ -z "$dbc_dbserver" ]; then
+    dbc_dbserver=localhost
+  fi
+
+  install -m 0640 /usr/share/prewikka/prewikka.conf $CONF_NEW
+
+  # do the following only if user has choosen dbconfig to manage database
+  if [ -n "$dbc_dbtype" ]; then
+    # the following code is an ugly way to replace the SQL parameters in the prewikka config
+    # by searching the [database] entry, and replacing the values in the following lines
+    sed -i "/\[database\]/{n;s/type: .*$/type: $dbc_dbtype/;n;n;s/user: .*$/user: $dbc_dbuser/;n;s/pass: .*$/pass: $dbc_dbpass/;n;s/name: .*$/name: $dbc_dbname/;}" $CONF_NEW
+    sed -i "/\[idmef_database\]/{n;n;n;n;n;s/type: .*$/type: $dbc_dbtype/;}" $CONF_NEW
+    if [ "x$dbc_dbtype" = "xmysql" ]; then
+      echo "ALTER DATABASE $dbc_dbname CHARACTER SET utf8 COLLATE utf8_unicode_ci;" | mysql -u $dbc_dbuser -p$dbc_dbpass $dbc_dbname 
+    fi
+  fi
+
+  if diff -q /usr/share/prewikka/prewikka.conf ${CONF} >/dev/null 2>&1; then
+    # prewikka configure file has not been changed .. overwrite it
+    install -m 0640 $CONF_NEW $CONF
+  else
+    do_update $CONF $CONF_NEW
+  fi
+
+  db_stop
+
+  # make sure conf file has the correct permissions and owner/group
+  chmod 640 /etc/prewikka/prewikka.conf
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p prewikka 
+fi
+
+# End automatically added section
+
+
+exit 0
+
+

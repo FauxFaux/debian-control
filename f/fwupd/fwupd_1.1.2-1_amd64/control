@@ -1,0 +1,20 @@
+Package: fwupd
+Version: 1.1.2-1
+Architecture: amd64
+Maintainer: Debian EFI <debian-efi@lists.debian.org>
+Installed-Size: 3880
+Depends: libappstream-glib8 (>= 0.7.10), libarchive13 (>= 3.0.4), libc6 (>= 2.17), libefiboot1 (>= 34), libefivar1 (>= 34), libelf1 (>= 0.142), libfwupd2 (>= 1.1.2), libgcab-1.0-0 (>= 1.0), libglib2.0-0 (>= 2.53.2), libgnutls30 (>= 3.5.7), libgpg-error0 (>= 1.14), libgpgme11 (>= 1.2.0), libgudev-1.0-0 (>= 146), libgusb2 (>= 0.2.10), libjson-glib-1.0-0 (>= 0.12.0), libpolkit-gobject-1-0 (>= 0.99), libsmbios-c2, libsoup2.4-1 (>= 2.41.90), libsqlite3-0 (>= 3.5.9), libuuid1 (>= 2.16)
+Recommends: python3, bolt, fwupd-signed
+Breaks: gir1.2-dfu-1.0 (<< 0.9.7-1), libdfu-dev (<< 0.9.7-1), libdfu1 (<< 0.9.7-1)
+Replaces: gir1.2-dfu-1.0 (<< 0.9.7-1), libdfu-dev (<< 0.9.7-1), libdfu1 (<< 0.9.7-1)
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/hughsie/fwupd
+Description: Firmware update daemon
+ fwupd is a daemon to allow session software to update device firmware.
+ You can either use a GUI software manager like GNOME Software to view and
+ apply updates, the command-line tool or the system D-Bus interface directly.
+ Currently, firmware updates using the UEFI capsule format and for the
+ ColorHug are supported. More formats may be supported in the future.
+ See <https://github.com/hughsie/fwupd> for details

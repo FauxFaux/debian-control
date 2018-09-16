@@ -1,0 +1,22 @@
+Package: ulogd2
+Version: 2.0.7-1
+Architecture: amd64
+Maintainer: Debian Netfilter Packaging Team <pkg-netfilter-team@lists.alioth.debian.org>
+Installed-Size: 567
+Depends: adduser, lsb-base, libc6 (>= 2.15), libmnl0 (>= 1.0.3-4~), libnetfilter-acct1, libnetfilter-conntrack3, libnetfilter-log1, libnfnetlink0
+Suggests: ulogd2-dbi, ulogd2-json, ulogd2-mysql, ulogd2-pcap, ulogd2-pgsql, ulogd2-sqlite3
+Section: net
+Priority: optional
+Homepage: https://www.netfilter.org/projects/ulogd/
+Description: Netfilter Userspace Logging Daemon
+ ulogd is an advanced netfilter logging daemon. It can act as a replacement for
+ syslog for logging netfilter ruleset violations (via the NFLOG or ULOG iptables
+ targets), can gather per-connection accounting using NFCT, or gather per-rule
+ accounting using NFACCT. Output can be sent to plain text log files, a variety
+ of SQL database formats, XML files, pcap files, syslog, and many other formats.
+ .
+ Support for the DBI database abstraction layer, MySQL, PostgreSQL and SQLite 3
+ databases is in separate packages called ulogd2-dbi, ulogd2-mysql, ulogd2-pgsql
+ and ulogd2-sqlite3 respectively. Support for writing to JSON files is the
+ ulogd2-json package. Support for writing to pcap files is in the ulogd2-pcap
+ package.

@@ -1,0 +1,24 @@
+Package: libdigest-md5-file-perl
+Version: 0.08-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 69
+Depends: perl, libwww-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Digest-MD5-File/
+Description: Perl extension for getting MD5 sums for files and urls
+ Digest::MD5::File adds functionality for easy calculation of MD5 checksums of
+ entire files, directories or URLs to the standard Digest::MD5 module.
+ .
+ Example usage:
+ .
+   use Digest::MD5::File;
+   my $md5 = Digest::MD5->new;
+   $md5->addpath('/path/to/file.txt');
+   $md5->addpath(\@files);
+   $md5->adddir('/home/tmbg/');
+   $md5->addurl('http://www.tmbg.com/tour.html');
+   my $digest = file_md5_hex($file);
+   my $dir_hashref = dir_md5_hex($dir);
+   my $digest = url_md5_hex($url);

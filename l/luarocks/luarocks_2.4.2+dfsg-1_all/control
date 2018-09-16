@@ -1,0 +1,23 @@
+Package: luarocks
+Version: 2.4.2+dfsg-1
+Architecture: all
+Maintainer: Enrico Tassi <gareuselesinge@debian.org>
+Installed-Size: 688
+Depends: lua-any, lua5.1 | lua5.2 | lua5.3, liblua5.1-dev | liblua5.2-dev | liblua5.3-dev, wget, zip, unzip
+Recommends: lua-sec
+Section: interpreters
+Priority: optional
+Homepage: http://luarocks.org/
+Description: deployment and management system for Lua modules
+ This package contains LuaRocks, a tool for managing rocks.  A Lua rock is a
+ bundle containing a module and some metadata like compilation instructions and
+ copyright. The command line utility luarocks can download, build, install and
+ remove rocks, properly handling dependencies among them and allowing multiple
+ versions of the same rock to coexist.
+ .
+ The tool installs system-wide rocks in /usr/local when run by the superuser,
+ but a regular user can easily tune it to install rocks in his home directory.
+ .
+ This package also provides the luarocks-admin tool, needed to create a rocks
+ repository, and the documentation for luarocks, describing the command line
+ tools as well as the library to manipulate rocks.

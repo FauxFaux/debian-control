@@ -1,0 +1,21 @@
+Package: ondir
+Version: 0.2.3+git0.55279f03-1
+Architecture: amd64
+Maintainer: Christian Seiler <christian@iwakd.de>
+Installed-Size: 44
+Depends: libc6 (>= 2.14)
+Section: utils
+Priority: optional
+Homepage: http://swapoff.org/ondir.html
+Description: Automate tasks specific to certain directories in the shell
+ ondir is a small program to automate tasks specific to certain
+ directories. It works by executing scripts in directories when you
+ enter and leave them. It may be used to set environment variables or
+ change the umask depending on the current working directory.
+ .
+ This program is similar to the direnv package. In contrast to direnv,
+ which expects the per-directory settings to be stored in the directory
+ itself, ondir uses a central configuration file in the user's home
+ directory, and can match directories based on patterns.
+ .
+ ondir supports bash, zsh and fish out of the box.

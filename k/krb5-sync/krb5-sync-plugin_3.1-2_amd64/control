@@ -1,0 +1,21 @@
+Package: krb5-sync-plugin
+Source: krb5-sync
+Version: 3.1-2
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 90
+Depends: libc6 (>= 2.14), libkadm5srv-mit11 (>= 1.15~beta1), libkrb5-3 (>= 1.10+dfsg~alpha1), libldap-2.4-2 (>= 2.4.7)
+Recommends: krb5-admin-server, krb5-sync-tools
+Section: net
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.eyrie.org/~eagle/software/krb5-sync/
+Description: MIT Kerberos Active Directory synchronization plugin
+ This plugin synchronizes passwords changed via kadmin or kpasswd to a
+ foreign realm via the Kerberos password change protocol (normally, but
+ not necessarily, an Active Directory realm).  It can also propagate
+ changes to the DISALLOW_ALL_TIX flag to Windows Active Directory using
+ LDAP.
+ .
+ This package provides a plugin for the MIT Kerberos KDC and will not work
+ with Heimdal.

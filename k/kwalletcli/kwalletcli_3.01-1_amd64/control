@@ -1,0 +1,22 @@
+Package: kwalletcli
+Version: 3.01-1
+Architecture: amd64
+Maintainer: Thorsten Glaser <tg@mirbsd.de>
+Installed-Size: 170
+Depends: libc6 (>= 2.8), libgcc1 (>= 1:3.0), libkf5coreaddons5 (>= 4.99.0), libkf5i18n5 (>= 4.97.0), libkf5wallet-bin, libkf5wallet5 (>= 4.96.0), libqt5core5a (>= 5.9.0~beta), libqt5widgets5 (>= 5.0.2), libstdc++6 (>= 4.1.1), mksh (>= 38~)
+Recommends: gnupg-agent, kwalletmanager, pinentry-curses | pinentry-fltk | pinentry-gnome3 | pinentry-gtk | pinentry-gtk2 | pinentry-qt | pinentry-qt4 | pinentry-tty | pinentry-x2go | pinentry | pinentry-x11, openssh-client
+Enhances: gajim (>= 0.13~)
+Provides: ssh-askpass
+Section: kde
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.mirbsd.org/kwalletcli.htm
+Description: command line interface to the KDE Wallet
+ kwalletcli implements a command line interface tool to get and set
+ password entries in the default KDE Wallet. Also included are a shell
+ wrapper around pinentry, a pinentry-kwallet application checking the
+ KDE Wallet for the passphrase requested before asking the user for
+ use with the GnuPG Agent, which is also capable of running without
+ a pinentry as backend, and kwalletaskpass, which can store SSH key
+ passphrases in the KDE Wallet for use with the OpenSSH Agent, and
+ is registered as ssh-askpass alternative.

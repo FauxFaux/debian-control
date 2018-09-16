@@ -1,0 +1,28 @@
+Package: libcatalyst-plugin-authorization-roles-perl
+Version: 0.09-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: perl, libcatalyst-plugin-authentication-perl (>= 0.10003), libcatalyst-perl (>= 5.7), libset-object-perl (>= 1.14), libuniversal-isa-perl (>= 0.05)
+Breaks: libcatalyst-modules-perl (<< 48~)
+Replaces: libcatalyst-modules-perl (<< 48~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-Plugin-Authorization-Roles
+Description: Role based authorization plugin for Catalyst
+ Catalyst::Plugin::Authorization::Roles provides role-based authorization
+ (access control) for Catalyst applications.
+ .
+ Role based access control is very simple: every user has a list of roles,
+ which that user is allowed to assume, and every restricted part of the app
+ makes an assertion about the necessary roles.
+ .
+ With assert_user_roles, if the user is a member in all of the required roles
+ access is granted. Otherwise, access is denied. With assert_any_user_role it
+ is enough that the user is a member of one role.
+ .
+ There are alternative approaches to do this on a per action basis, see
+ Catalyst::ActionRole::ACL.
+ .
+ Catalyst is an elegant Model-View-Controller web application framework
+ written in Perl.

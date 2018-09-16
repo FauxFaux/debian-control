@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+# Automatically added by dh_elpa/UNDECLARED
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -e /var/lib/emacsen-common/state/package/installed/emacsen-common -a -x /usr/lib/emacsen-common/emacs-package-install ] ; then
+		/usr/lib/emacsen-common/emacs-package-install --postinst elpa-org
+	fi
+fi
+# End automatically added section
+
+
+# fix 908508
+dir_9_1_11="/usr/share/emacs/site-lisp/elpa/org-9.1.11"
+if [ -d "$dir_9_1_11" ] ; then
+  rm -fr "$dir_9_1_11"
+fi

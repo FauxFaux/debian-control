@@ -1,0 +1,18 @@
+Package: apt-src
+Version: 0.25.2
+Architecture: all
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 76
+Depends: libapt-pkg-perl (>= 0.1.6), dpkg-dev, apt, perl
+Recommends: sudo, fakeroot, build-essential
+Section: admin
+Priority: optional
+Description: manage Debian source packages
+ apt-src is a command line interface for downloading, installing, upgrading,
+ and tracking Debian source packages. It makes source package management
+ feel a lot like using apt to manage binary packages, and is being used as
+ a testbed to work on adding source dependencies to Debian.
+ .
+ It can be run as a normal user, or as root. If you want a convenient way to
+ track updates to packages while preserving your local modifications, this is
+ a way to do that.

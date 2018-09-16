@@ -1,0 +1,19 @@
+Package: ruby-dirty-memoize
+Version: 0.0.4-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: http://github.com/clbustos/dirty-memoize
+Description: Similar to ruby-memoize, but for mutable and parameterizable objects
+ The dirty-memoize library can help making your program faster in the
+ following cases:
+ .
+  - You have one expensive method which sets many internal variables,
+    thus lazy evaluation of these dependent variables is preferred.
+  - The expensive operation depends on one or more parameters
+  - Changes to one or more parameters affect all dependent variables
+  - You may want to hide the call to the 'compute' operation
+Ruby-Versions: all

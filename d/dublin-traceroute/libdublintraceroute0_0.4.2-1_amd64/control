@@ -1,0 +1,17 @@
+Package: libdublintraceroute0
+Source: dublin-traceroute
+Version: 0.4.2-1
+Architecture: amd64
+Maintainer: Federico Ceratto <federico@debian.org>
+Installed-Size: 139
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libjsoncpp1 (>= 1.7.4), libstdc++6 (>= 6), libtins3.4
+Section: net
+Priority: optional
+Homepage: https://dublin-traceroute.net
+Description: NAT-aware multipath tracerouting tool (library)
+ Dublin Traceroute uses the techniques invented by the authors of
+ Paris-traceroute to enumerate the paths of ECMP flow-based load balancing,
+ but also introduces a new technique for NAT detection. It forges the IP ID
+ in the probe packet and analyzes the responses in order to detect all the
+ encountered NATs.
+ This package contains a dynamic library.

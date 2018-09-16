@@ -1,0 +1,19 @@
+Package: libconfig-jfdi-perl
+Version: 0.065-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 42
+Depends: perl, libany-moose-perl, libcarp-clan-share-perl, libclone-perl, libconfig-any-perl, libconfig-general-perl, libdata-visitor-perl, libgetopt-usaginator-perl, libhash-merge-simple-perl, liblist-moreutils-perl, libpath-class-perl, libsub-install-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Config-JFDI
+Description: Perl module to load any configuration files
+ Config::JFDI scans a directory for files matching a certain name. If such a
+ file is found, and it matches an extension that Config::Any can read, then
+ the configuration from that file will be loaded. It also looks for special
+ files that end with a "_local" suffix, which take precedence over any other
+ configuration files. The precedence takes place by merging the local config
+ with the standard file using Hash::Merge::Simple (libhash-merge-simple-perl).
+ .
+ Essentially, this is an implementation of Catalyst::Plugin::ConfigLoader that
+ exists outside of Catalyst.

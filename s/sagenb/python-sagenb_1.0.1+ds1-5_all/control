@@ -1,0 +1,31 @@
+Package: python-sagenb
+Source: sagenb
+Version: 1.0.1+ds1-5
+Architecture: all
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 3044
+Depends: python-flask (>= 0.10.1), python-flask-autoindex, python-flask-babel, python-flask-oldsessions, python-flask-openid, python-twisted-core, python:any (<< 2.8), python:any (>= 2.7.5-5~), libjs-codemirror, libjs-jquery, libjs-jquery-colorpicker, libjs-jquery-form, libjs-jquery-ui, libjs-json, libjs-mathjax, libjs-prettify, libjs-three, tinymce
+Recommends: sagemath
+Section: python
+Priority: optional
+Homepage: https://github.com/sagemath/sagenb
+Description: Standalone Sage Notebook
+ The Sage Notebook is a web-based graphical user interface for
+ mathematical software.
+ .
+ Sage is a different approach to mathematics software. It makes it easy for you
+ to use most mathematics software together. Sage includes GAP, GP/PARI, Maxima,
+ and Singular, and dozens of other open source math packages. It aims to be a
+ viable open source alternative to Magma, Maple, Mathematica, and MATLAB.
+ .
+ With the Sage Notebook anyone can create, collaborate on, and publish
+ interactive worksheets. In a worksheet, one can write code using Sage, Python,
+ and other software included in Sage. You can write programs that combine
+ serious mathematics with anything else.
+ .
+ Most of the notebook does not depend on having Sage installed. Only
+ a few miscellaneous functions are imported from Sage.
+ .
+ Unfortunately these few imports are still a circular dependency that upstream
+ never got around to fixing, mean that one cannot "import sagenb" unless sage
+ is also installed.

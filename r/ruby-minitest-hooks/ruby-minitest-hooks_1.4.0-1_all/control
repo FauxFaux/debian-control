@@ -1,0 +1,16 @@
+Package: ruby-minitest-hooks
+Version: 1.4.0-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 29
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: http://github.com/jeremyevans/minitest-hooks
+Description: Around and before_all/after_all/around_all hooks for Minitest
+ minitest-hooks adds around and before_all/after_all/around_all hooks for
+ Minitest. This allows you do things like run each suite of specs inside a
+ database transaction, running each spec inside its own savepoint inside that
+ transaction, which can significantly speed up testing for specs that share
+ expensive database setup code.
+Ruby-Versions: all

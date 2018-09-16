@@ -1,0 +1,17 @@
+Package: mariadb-plugin-gssapi-server
+Source: mariadb-10.1
+Version: 1:10.1.35-1
+Architecture: amd64
+Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Installed-Size: 92
+Depends: libgssapi-krb5-2 (>= 1.14+dfsg), mariadb-server-10.1, libc6 (>= 2.14), libcom-err2 (>= 1.01), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.13~alpha1+dfsg), libstdc++6 (>= 4.1.1)
+Breaks: mariadb-gssapi-server-10.1, mariadb-gssapi-server-10.2
+Replaces: mariadb-gssapi-server-10.1, mariadb-gssapi-server-10.2
+Section: database
+Priority: optional
+Homepage: https://mariadb.org/
+Description: GSSAPI authentication plugin for MariaDB server
+ This plugin includes support for Kerberos on Unix, but can also be used for
+ Windows authentication with or without domain environment.
+ .
+ This package contains the server parts.

@@ -1,0 +1,21 @@
+Package: burrow
+Version: 1.1.0-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 9326
+Depends: adduser, libc6 (>= 2.3.2)
+Built-Using: golang-1.10 (= 1.10.2-1), golang-fsnotify (= 1.4.7-1), golang-github-davecgh-go-spew (= 1.1.0-4), golang-github-eapache-go-xerial-snappy (= 0.0~git20160609.bb955e0-1), golang-github-golang-snappy (= 0.0+git20160529.d9eb7a3-2), golang-github-hashicorp-hcl (= 0.0~git20170509.0.392dba7-1), golang-github-julienschmidt-httprouter (= 1.1-5), golang-github-karrick-goswarm (= 1.4.7-1), golang-github-magiconair-properties (= 1.7.6-1), golang-github-mitchellh-mapstructure (= 0.0~git20170523.0.d0303fe-1), golang-github-oneofone-xxhash (= 1.2.1-3), golang-github-pborman-uuid (= 0.0+git20150824.0.cccd189-2), golang-github-pelletier-go-toml (= 1.1.0-1), golang-github-pierrec-lz4 (= 0.0~git20170519.0.5a3d224-2), golang-github-pierrec-xxhash (= 0.1.1-4), golang-github-pmezard-go-difflib (= 1.0.0-1), golang-github-rcrowley-go-metrics (= 0.0~git20180125.8732c61-2), golang-github-samuel-go-zookeeper (= 0.0~git20180130.c4fab1a-1), golang-github-shopify-sarama (= 1.16.0-1), golang-github-spf13-afero (= 1.1.0-1), golang-github-spf13-cast (= 1.2.0-2), golang-github-spf13-jwalterweatherman (= 0.0~git20180109.7c0cea3-1), golang-github-spf13-pflag (= 1.0.1-1), golang-github-spf13-viper (= 1.0.2-1), golang-go.uber-atomic (= 1.2.0+git20170719.9.70bd126-1), golang-go.uber-multierr (= 1.1.0-1), golang-go.uber-zap (= 1.7.1+git20171031.f85c78b-5), golang-golang-x-sys (= 0.0~git20180510.7dfd129-1), golang-gopkg-eapache-go-resiliency.v1 (= 1.0.0-4), golang-gopkg-eapache-queue.v1 (= 1.0.2-4), golang-gopkg-natefinch-lumberjack.v2 (= 2.1-1), golang-objx (= 0.0~git20150928.0.1a9d0bb-3), golang-testify (= 1.2.1+git20180303.b89eecf-1), golang-x-text (= 0.3.0-1), golang-yaml.v2 (= 2.2.1-1)
+Section: devel
+Priority: optional
+Homepage: https://github.com/linkedin/Burrow
+Description: Apache Kafka consumer lag checking
+ Burrow is a monitoring companion for Apache Kafka that provides
+ consumer lag checking as a service without the need for specifying
+ thresholds. It monitors committed offsets for all consumers and
+ calculates the status of those consumers on demand.
+ .
+ An HTTP endpoint is provided to request status on demand,
+ as well as provide other Kafka cluster information.
+ .
+ There are also configurable notifiers that can send status out
+ via email or HTTP calls to another service.

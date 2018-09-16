@@ -1,0 +1,25 @@
+Package: libcatalyst-model-adaptor-perl
+Version: 0.10-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 33
+Depends: perl, libcatalyst-perl, libmro-compat-perl
+Breaks: libcatalyst-modules-extra-perl (<< 9~)
+Replaces: libcatalyst-modules-extra-perl (<< 9~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-Model-Adaptor
+Description: glue for Catalyst model modules
+ The idea is that there's no need for a Catalyst model to be anything other
+ than a line or two of glue.  Using this module ensures that Model classes are
+ separate from the rest of the application and therefore are well-abstracted,
+ reusable, and easily testable.
+ .
+ Right now there are too many modules on CPAN that are Catalyst-specific. Most
+ of the models would be better written as a class that handles most of the
+ functionality with just a bit of glue to make it work nicely with Catalyst.
+ Catalyst::Model::Adaptor aims to make integrating that class with Catalyst
+ trivial, so there's no extra work involved in makint the model generic.
+ .
+ Catalyst is an elegant Model-View-Controller web application framework
+ written in Perl.

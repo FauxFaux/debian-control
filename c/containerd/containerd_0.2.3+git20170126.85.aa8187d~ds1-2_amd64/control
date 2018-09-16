@@ -1,0 +1,18 @@
+Package: containerd
+Version: 0.2.3+git20170126.85.aa8187d~ds1-2
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 16529
+Depends: runc (>= 0.1.0~), libc6 (>= 2.3.2)
+Breaks: docker.io (<< 1.12)
+Built-Using: docker.io (= 1.13.1~ds1-2), golang-1.8 (= 1.8.3-2), golang-codegangsta-cli (= 1.18.0-2), golang-github-cloudfoundry-gosigar (= 0.0~git20150402.27.3ed7c74-2), golang-github-coreos-go-systemd (= 14-1), golang-github-cyberdelia-go-metrics-graphite (= 0.0~git20151204.0.7e54b5c-1), golang-github-docker-go-connections (= 0.2.1+git20170204.13.ecb4cb2-1), golang-github-opencontainers-specs (= 1.0.0~rc2+git20160926.38.1c7c27d-1), golang-github-pkg-errors (= 0.8.0+git20170505.5.c605e28-1), golang-github-tonistiigi-fifo (= 0.0~git20161203.0.fe870cc-1), golang-golang-x-net-dev (= 1:0.0+git20170629.c81e7f2+dfsg-1), golang-golang-x-sys (= 0.0~git20170727.0.35ef448-1), golang-google-grpc (= 1.0.4-1), golang-goprotobuf (= 0.0~git20161116.0.224aaba-3), golang-logrus (= 1.0.2-1), golang-metrics (= 0.0~git20150823-1), golang-x-text (= 0.0~git20170627.0.6353ef0-1), runc (= 1.0.0~rc2+git20170201.133.9df8b30-2)
+Section: admin
+Priority: optional
+Homepage: https://containerd.tools
+Description: daemon to control runC
+ Containerd is a daemon to control runC, built for performance and density.
+ Containerd leverages runC's advanced features such as seccomp and user
+ namespace support as well as checkpoint and restore for cloning and live
+ migration of containers.
+ .
+ This package contains the binaries.

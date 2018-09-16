@@ -1,0 +1,33 @@
+Package: libtest-roo-perl
+Version: 1.004-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 134
+Depends: perl, libmoo-perl (>= 1.000008), libmoox-types-mooselike-perl, libstrictures-perl, libsub-install-perl, perl (>= 5.13.4) | libtest-simple-perl (>= 0.96)
+Recommends: libbareword-filehandles-perl, libindirect-perl, libmultidimensional-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Roo
+Description: module for composable, reusable tests with roles and Moo
+ Test::Roo allows you to compose Test::More tests from roles. It is inspired
+ by the excellent Test::Routine module, but uses Moo instead of Moose. This
+ gives most of the benefits without the need for Moose as a test dependency.
+ .
+ Test files are Moo classes. You can define any needed test fixtures as Moo
+ attributes. You define tests as method modifiers -- similar in concept to
+ "subtest" in Test::More, but your test method will be passed the test object
+ for access to fixture attributes. You may compose any Moo::Role into your
+ test to define attributes, require particular methods, or define tests.
+ .
+ This means that you can isolate test *behaviors* into roles which require
+ certain test *fixtures* in order to run. Your main test file will provide the
+ fixtures and compose the roles to run. This makes it easy to reuse test
+ behaviors.
+ .
+ For example, if you are creating tests for Awesome::Module, you could create
+ the test behaviors as Awesome::Module::Test::Role and distribute it with your
+ module. If another distribution subclasses Awesome::Module, it can compose
+ the Awesome::Module::Test::Role behavior for its own tests.
+ .
+ No more copying and pasting tests from a super class! Superclasses define and
+ share their tests. Subclasses provide their own fixtures and run the tests.

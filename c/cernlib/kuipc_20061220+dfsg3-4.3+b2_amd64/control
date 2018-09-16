@@ -1,0 +1,28 @@
+Package: kuipc
+Source: cernlib (20061220+dfsg3-4.3)
+Version: 20061220+dfsg3-4.3+b2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 134
+Depends: libc6 (>= 2.14), cernlib-base
+Recommends: cernlib-base-dev, libpacklib1-dev
+Suggests: libpacklib-lesstif1-dev
+Section: devel
+Priority: optional
+Homepage: http://cernlib.web.cern.ch/cernlib/
+Description: CERNLIB data analysis suite - KUIP compiler
+ CERNLIB is a suite of data analysis tools and libraries created for
+ use in physics experiments, but also with applications to other
+ fields such as the biological sciences.
+ .
+ KUIPC, the Kit for a User Interface Package Compiler, is a tool to simplify
+ the writing of a program's user interface code. It takes
+ a Command Definition File (CDF) as input, which describes the
+ commands to be understood by the program, and outputs C or FORTRAN code that
+ makes the appropriate function calls to set up the user interface. This
+ code can then be compiled and linked with the rest of the program. Since
+ the generated code uses KUIP routines, the program must also be linked
+ against the Packlib library that contains them.
+ .
+ KUIPC is no longer actively developed, so aside from its use in the build
+ process of CERNLIB, it is of mainly historical interest.

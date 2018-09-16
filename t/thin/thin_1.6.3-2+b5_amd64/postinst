@@ -1,0 +1,33 @@
+#!/bin/sh
+# -*- mode: Shell-Script -*-
+# complete dpkg-maintscript-helper operations
+
+set -e
+
+if [ "$1" = "configure" ]; then
+
+    if [ -h /etc/init.d/thin.dpkg-backup ]; then
+	mv -f "/etc/init.d/thin.dpkg-backup" "/etc/init.d/thin.dpkg-bak"
+    fi
+    if [ -h /etc/init.d/thin.dpkg-remove ]; then
+	rm -f /etc/init.d/thin.dpkg-remove
+    fi
+
+    if [ -e /etc/init.d/thin1.8.dpkg-remove ]; then
+	rm -f /etc/init.d/thin1.8.dpkg-remove
+    fi
+    if [ -e /etc/init.d/thin1.8.dpkg-backup ]; then
+	mv -f /etc/init.d/thin1.8.dpkg-backup /etc/init.d/thin1.8.dpkg-bak
+    fi
+
+fi
+
+# Automatically added by dh_installinit/11.1.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/thin" ]; then
+		update-rc.d thin defaults >/dev/null
+		invoke-rc.d thin start || exit 1
+	fi
+fi
+# End automatically added section
+

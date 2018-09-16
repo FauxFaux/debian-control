@@ -1,0 +1,25 @@
+Package: hello-traditional
+Source: hello-traditional (2.10-3)
+Version: 2.10-3+b1
+Architecture: amd64
+Maintainer: Santiago Vila <sanvila@debian.org>
+Installed-Size: 274
+Depends: libc6 (>= 2.14), dpkg (>= 1.15.4) | install-info
+Conflicts: hello
+Breaks: hello-debhelper (<< 2.9)
+Replaces: hello, hello-debhelper (<< 2.9)
+Provides: hello
+Section: devel
+Priority: extra
+Homepage: http://www.gnu.org/software/hello/
+Description: example package not using any helper package
+ The GNU hello program produces a familiar, friendly greeting.  It
+ allows non-programmers to use a classic computer science tool which
+ would otherwise be unavailable to them.
+ .
+ Seriously, though: this is an example of how to do a Debian package.
+ It is the Debian version of the GNU Project's `hello world' program
+ (which is itself an example for the GNU Project).
+ .
+ This is the same as the hello package, except it does not use
+ debhelper (hence the "traditional" suffix).

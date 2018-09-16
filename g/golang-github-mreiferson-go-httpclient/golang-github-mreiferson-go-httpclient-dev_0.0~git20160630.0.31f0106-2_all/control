@@ -1,0 +1,22 @@
+Package: golang-github-mreiferson-go-httpclient-dev
+Source: golang-github-mreiferson-go-httpclient
+Version: 0.0~git20160630.0.31f0106-2
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 27
+Breaks: golang-mreiferson-httpclient-dev (<< 0.0~git20140425-2~)
+Replaces: golang-mreiferson-httpclient-dev (<< 0.0~git20140425-2~)
+Provides: golang-mreiferson-httpclient-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/mreiferson/go-httpclient
+Description: Go HTTP client with timeouts
+ This Go package provides an HTTP Transport that implements the RoundTripper
+ interface and can be used as a built in replacement for the standard
+ library's, providing:
+ .
+  * connection timeouts
+  * request timeouts
+ .
+ This is a thin wrapper around http.Transport that sets dial timeouts and uses
+ Go's internal timer scheduler to call the Go 1.1+ CancelRequest() API.

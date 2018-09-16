@@ -1,0 +1,18 @@
+Package: sn
+Source: sn (0.3.8-10.1)
+Version: 0.3.8-10.1+b1
+Architecture: amd64
+Maintainer: Hilko Bengen <bengen@debian.org>
+Installed-Size: 573
+Depends: netbase, tcpd, heirloom-mailx | mailx, exim4 | mail-transport-agent, psmisc, ed, openbsd-inetd | inet-superserver, libc6 (>= 2.14), zlib1g (>= 1:1.1.4), debconf (>= 0.5) | debconf-2.0
+Conflicts: news-transport-system
+Provides: news-transport-system
+Section: news
+Priority: optional
+Description: Small NNTP server for leaf sites
+ sn is a small news system for small sites serving perhaps a few
+ dozen newsgroups, and with a slow connection to the internet.
+ It is similar to leafnode (ftp.troll.no, by Arnt Gulbrandsen).
+ The target user is a home or SOHO with a single modem connection
+ to the Internet, maybe running IP masq or similar, and serving a
+ few workstations.

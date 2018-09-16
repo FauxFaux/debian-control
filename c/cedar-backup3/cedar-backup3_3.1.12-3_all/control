@@ -1,0 +1,37 @@
+Package: cedar-backup3
+Version: 3.1.12-3
+Architecture: all
+Maintainer: Kenneth J. Pronovici <pronovic@debian.org>
+Installed-Size: 1199
+Depends: python3:any, python3-chardet
+Recommends: dvd+rw-tools, wodim, genisoimage, eject, ssh, cedar-backup3-doc, awscli (>= 1.11.13-1), fdisk | util-linux (<< 2.29.2-3~)
+Suggests: subversion, default-mysql-client | virtual-mysql-client, postgresql-client, grepmail, gnupg
+Section: admin
+Priority: optional
+Homepage: https://bitbucket.org/cedarsolutions/cedar-backup3
+Description: local and remote backups to CD/DVD media or Amazon S3 storage
+ Cedar Backup 3 is a software package designed to manage system backups for a
+ pool of local and remote machines.  Cedar Backup understands how to back up
+ filesystem data as well as MySQL and PostgreSQL databases and Subversion
+ repositories.  It can also be easily extended to support other kinds of data
+ sources.
+ .
+ Cedar Backup is focused around weekly backups to a single CD or DVD disc, with
+ the expectation that the disc will be changed or overwritten at the beginning
+ of each week.  If your hardware is new enough, Cedar Backup can write
+ multisession discs, allowing you to add incremental data to a disc on a daily
+ basis.
+ .
+ Alternately, Cedar Backup can write your backups to the Amazon S3 cloud
+ rather than relying on physical media.
+ .
+ Besides offering command-line utilities to manage the backup process, Cedar
+ Backup provides a well-organized library of backup-related functionality,
+ written in the Python 3 programming language.
+ .
+ This package provides Cedar Backup command-line utilities as well as the
+ CedarBackup3 Python library.  The accompanying documentation package
+ (cedar-backup3-doc) contains all of the end-user and library public
+ interface documentation.  You really should install cedar-backup3-doc and
+ read through the end-user documentation before using Cedar Backup for the
+ first time.

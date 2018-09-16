@@ -1,0 +1,19 @@
+Package: dictzip
+Source: dictd
+Version: 1.12.1+dfsg-8
+Architecture: amd64
+Maintainer: Robert Luberda <robert@debian.org>
+Installed-Size: 103
+Depends: libc6 (>= 2.14), libmaa4 (>= 1.2.0), zlib1g (>= 1:1.1.4)
+Replaces: dictd (<< 1.7.1-1)
+Section: text
+Priority: optional
+Homepage: https://sourceforge.net/projects/dict/
+Description: compression utility for dictionary databases
+ This package provides a utility to compress dictionary databases with the
+ LZ77 algorithm in a manner which is completely compatible with gzip(1),
+ but using an extension that allows for random access to chunks
+ of about 57kB without the overhead of decompressing the entire file.
+ .
+ This package also includes dictunzip, to decompress dictzipped files,
+ and dictzcat, for viewing dictzipped files.

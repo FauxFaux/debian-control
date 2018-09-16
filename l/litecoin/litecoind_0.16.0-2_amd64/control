@@ -1,0 +1,25 @@
+Package: litecoind
+Source: litecoin
+Version: 0.16.0-2
+Architecture: amd64
+Maintainer: Dmitry Smirnov <onlyjob@debian.org>
+Installed-Size: 6229
+Depends: libboost-chrono1.62.0, libboost-filesystem1.62.0, libboost-program-options1.62.0, libboost-system1.62.0, libboost-thread1.62.0, libc6 (>= 2.27), libdb5.3++, libevent-2.1-6 (>= 2.1.8-stable), libevent-pthreads-2.1-6 (>= 2.1.8-stable), libgcc1 (>= 1:3.0), libleveldb1v5, libminiupnpc17 (>= 1.9.20140610), libssl1.1 (>= 1.1.0), libstdc++6 (>= 7)
+Suggests: db-util
+Section: utils
+Priority: optional
+Homepage: http://litecoin.org/
+Description: peer-to-peer network based digital currency - daemon
+ Litecoin is a free open source peer-to-peer electronic cash system that
+ is completely decentralized, without the need for a central server or
+ trusted parties.  Users hold the crypto keys to their own money and
+ transact directly with each other, with the help of a P2P network to
+ check for double-spending. Litecoin is a fork of Bitcoin.
+ .
+ By default connects to an IRC network to discover other peers.
+ .
+ Full transaction history is stored locally at each client.
+ This requires 5+ GB of space, slowly growing.
+ .
+ This package provides the daemon (litecoind), and the CLI tool to
+ interact with the daemon.

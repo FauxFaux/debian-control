@@ -1,0 +1,26 @@
+Package: ocl-icd-opencl-dev
+Source: ocl-icd
+Version: 2.2.12-1
+Architecture: amd64
+Maintainer: Vincent Danjean <vdanjean@debian.org>
+Installed-Size: 22
+Depends: opencl-c-headers | opencl-headers, ocl-icd-libopencl1 (= 2.2.12-1)
+Recommends: libgl1-mesa-dev | libgl-dev, libpoclu-dev
+Conflicts: opencl-dev
+Breaks: amd-libopencl1 (<< 1:13.4-4~), nvidia-libopencl1 (<< 305~), ocl-icd-libopencl1 (<< 2.1.3-5~)
+Replaces: amd-libopencl1 (<< 1:13.4-4~), nvidia-libopencl1 (<< 305~), ocl-icd-libopencl1 (<< 2.1.3-5~), opencl-dev
+Provides: opencl-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://forge.imag.fr/projects/ocl-icd/
+Description: OpenCL development files
+ OpenCL (Open Computing Language) is a multivendor open standard for
+ general-purpose parallel programming of heterogeneous systems that include
+ CPUs, GPUs and other processors.
+ .
+ This package provides the development files: headers and libraries.
+ .
+ It also ensures that the ocl-icd ICD loader is installed so its additional
+ features (compared to the OpenCL norm) can be used: .pc file, avaibility to
+ select an ICD without root privilege, etc.

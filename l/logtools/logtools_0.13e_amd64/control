@@ -1,0 +1,20 @@
+Package: logtools
+Version: 0.13e
+Architecture: amd64
+Maintainer: Russell Coker <russell@coker.com.au>
+Installed-Size: 108
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Section: admin
+Priority: optional
+Description: Russell's misc tools for managing log files.
+ clfmerge - merge common-log-format web logs in order without sorting (good for
+ when you have a gig of logs).
+ .
+ logprn - like "tail -f" but after a specified time period of inactivity will
+ run a program (such as lpr) and pipe the new data to it)
+ .
+ funnel - pipe one stream of data to several files or processes.
+ .
+ clfsplit - split CLF format web logs by client IP address.
+ .
+ clfdomainsplit - split CLF logs by server domain.

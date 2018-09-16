@@ -1,0 +1,27 @@
+Package: golang-github-xtaci-smux-dev
+Source: golang-github-xtaci-smux
+Version: 1.0.7+ds-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 52
+Depends: golang-github-pkg-errors-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/xtaci/smux
+Description: Simple Multiplexing for golang
+ Smux (Simple MUltipleXing) is a multiplexing library for Golang.
+ It relies on an underlying connection to provide reliability and ordering,
+ such as TCP or KCP (golang-github-xtaci-kcp-dev), and provides
+ stream-oriented multiplexing.
+ .
+ The original intention of this library is to power the connection
+ management for KCP (golang-github-xtaci-kcp-dev).
+ .
+ Features:
+   * Tiny, less than 600 LOC.
+   * Token bucket controlled receiving, which provides smoother bandwidth
+     graph.
+   * Session-wide receive buffer, shared among streams, tightly controlled
+     overall memory usage.
+   * Minimized header(8Bytes), maximized payload.
+   * Well-tested on millions of devices in kcptun.

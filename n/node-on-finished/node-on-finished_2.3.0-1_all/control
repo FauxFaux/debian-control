@@ -1,0 +1,21 @@
+Package: node-on-finished
+Version: 2.3.0-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 31
+Depends: nodejs (>= 6)
+Breaks: node-finished (<< 2.1.0~)
+Replaces: node-finished (<< 2.1.0~)
+Provides: node-ee-first (= 1.1.1), node-finished
+Section: javascript
+Priority: optional
+Homepage: https://github.com/jshttp/on-finished
+Description: calls back on request close, finish or error - Node.js module
+ This module is useful for cleaning up streams.
+ It is used to safely destroy any object and stream used while serving
+ a request, and is required to fix what many perceive as an issue with
+ Node.js streams.
+ .
+ This package include small package ee-first.
+ .
+ Node.js is an event-based server-side JavaScript engine.

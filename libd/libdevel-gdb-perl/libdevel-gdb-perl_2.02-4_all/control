@@ -1,0 +1,28 @@
+Package: libdevel-gdb-perl
+Version: 2.02-4
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 60
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Devel-GDB
+Description: module to open and communicate with a gdb session
+ The Devel::GDB package provides an interface for communicating
+ with GDB. Internally, it uses the GDB/MI interpreter
+ (see http://sourceware.org/gdb/current/onlinedocs/gdb_25.html),
+ which accurately informs the caller of the program state and,
+ through the use of tokens, guarantees that the results returned
+ actually correspond to the request sent.
+ By contrast, GDB's console interpreter returns all responses on
+ STDOUT, and thus there is no way to ensure that a particular response
+ corresponds to a particular request.
+ .
+ Therefore, it is obviously preferable to use GDB/MI when programmatically
+ interacting with GDB.  This can be done via the send_cmd family of functions
+ (send_cmd, send_cmd_excl, and send_cmd_async).  There are, however,
+ some cases when there is no GDB/MI command corresponding to a particular
+ console command, or it has not yet been implemented (for example, -symbol-type,
+ corresponding to the console command ptype, is not yet implemented as of GDB
+ 6.6).  In this case, the get function provides a workaround by capturing all
+ output sent to the console stream.

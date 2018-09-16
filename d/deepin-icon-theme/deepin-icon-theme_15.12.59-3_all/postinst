@@ -1,0 +1,16 @@
+#! /bin/sh
+set -e
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+  update-alternatives --install /usr/share/icons/default/index.theme \
+      x-cursor-theme /usr/share/icons/deepin/cursor.theme 50
+fi
+
+# Automatically added by dh_icons/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if which update-icon-caches >/dev/null 2>&1 ; then
+		update-icon-caches /usr/share/icons/Sea /usr/share/icons/deepin
+	fi
+fi
+# End automatically added section
+

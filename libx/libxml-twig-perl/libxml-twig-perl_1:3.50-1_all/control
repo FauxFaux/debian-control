@@ -1,0 +1,27 @@
+Package: libxml-twig-perl
+Version: 1:3.50-1
+Architecture: all
+Maintainer: Bart Martens <bartm@debian.org>
+Installed-Size: 565
+Depends: perl, libxml-parser-perl
+Recommends: libtext-iconv-perl, libtie-ixhash-perl, libxml-xpathengine-perl | libxml-xpath-perl, libwww-perl, libhtml-parser-perl
+Suggests: libunicode-map8-perl, libunicode-string-perl, xml-twig-tools
+Section: perl
+Priority: optional
+Homepage: http://www.xmltwig.org/
+Description: Perl module for processing huge XML documents in tree mode
+ This module provides a way to process XML documents.  It is built on
+ top of XML::Parser.
+ .
+ The module offers a tree interface to the document, while allowing to
+ output the parts of it that have been completely processed.
+ .
+ It allows minimal resource (CPU and memory) usage by building the
+ tree only for the parts of the documents that need actual processing,
+ through the use of the twig_roots and twig_print_outside_roots
+ options.  The finish and finish_print methods also help to increase
+ performance.
+ .
+ XML::Twig tries to make simple things easy so it tries its best to
+ takes care of a lot of the (usually) annoying (but sometimes
+ necessary) features that come with XML and XML::Parser.

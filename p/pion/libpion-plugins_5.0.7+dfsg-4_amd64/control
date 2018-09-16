@@ -1,0 +1,28 @@
+Package: libpion-plugins
+Source: pion
+Version: 5.0.7+dfsg-4
+Architecture: amd64
+Maintainer: Athena Capital Research <acr-debian@athenacr.com>
+Installed-Size: 1253
+Depends: libpion-5.0 (= 5.0.7+dfsg-4), libboost-date-time1.62.0, libboost-filesystem1.62.0, libboost-regex1.62.0, libboost-system1.62.0, libboost-thread1.62.0, libbz2-1.0, libc6 (>= 2.14), libgcc1 (>= 1:3.0), liblog4cpp5v5, libssl1.1 (>= 1.1.0), libstdc++6 (>= 5.2), zlib1g (>= 1:1.1.4)
+Conflicts: libpion-net-plugins
+Section: libs
+Priority: extra
+Homepage: https://github.com/splunk/pion
+Description: lightweight HTTP interface library - plugins
+ pion is not intended to implement yet another web server, but to
+ provide HTTP(S) functionality to new or existing C++ applications. If
+ you're looking for a full-featured server application, check out Apache
+ or lighttpd. If you're working on a Boost C++ application and would just
+ like to use HTTP to provide a simple user interface or interact with
+ run-time data, then pion is a clean and simple solution.
+ .
+ Pion Network Library uses the Boost and asio libraries for multi-threading
+ and asynchronous I/O. This allows servers implemented using pion to
+ handle many thousands of connections simultaneously with a single physical
+ server.
+ .
+ pion also supports server-side SSL & TLS encryption when built with
+ the OpenSSL library (which the Debian package is).
+ .
+ This package includes the pion plugins.

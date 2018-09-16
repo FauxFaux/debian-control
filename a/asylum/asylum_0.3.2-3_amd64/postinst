@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+
+SCOREFILES="
+    /var/games/asylum/EgoHighScores
+    /var/games/asylum/ExtendedHighScores
+    /var/games/asylum/IdHighScores
+    /var/games/asylum/PsycheHighScores
+    "
+
+case "$1" in
+    configure)
+        touch $SCOREFILES
+        chown root:games $SCOREFILES
+        chmod 0664 $SCOREFILES
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0
+
+

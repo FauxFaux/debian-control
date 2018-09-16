@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+umask 002
+
+distdir=/usr/share/matlab/site/m/gdf
+
+case "$1" in
+    configure)
+        debian-matlab-mexhelper gdf install \
+            --build-cmd 'for f in *.cpp; do	mex $f -lGDF; done' \
+            --install-cmd "mv -t $distdir *.mex?*" \
+            --clean-cmd 'rm -f *.o *.a *.mex*'
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+

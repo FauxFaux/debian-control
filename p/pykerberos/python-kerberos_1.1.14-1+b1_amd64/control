@@ -1,0 +1,21 @@
+Package: python-kerberos
+Source: pykerberos (1.1.14-1)
+Version: 1.1.14-1+b1
+Architecture: amd64
+Maintainer: Calendarserver Maintainers <calendarserver-maintainers@lists.alioth.debian.org>
+Installed-Size: 65
+Depends: python (<< 2.8), python (>= 2.7), libc6 (>= 2.14), libcom-err2 (>= 1.01), libgssapi-krb5-2 (>= 1.14+dfsg), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.6.dfsg.2)
+Provides: python2.7-kerberos
+Section: python
+Priority: optional
+Homepage: https://pypi.python.org/pypi/pykerberos
+Description: GSSAPI interface module - Python 2.x
+ This Python package is a high-level wrapper for Kerberos (GSSAPI) operations.
+ The goal is to avoid having to build a module that wraps the entire
+ Kerberos.framework, and instead offer a limited set of functions that do what
+ is needed for client/server Kerberos authentication based on
+ <http://www.ietf.org/rfc/rfc4559.txt>.
+ .
+ Much of the C-code here is adapted from Apache's mod_auth_kerb-5.0rc7.
+ .
+ This package contains the Python 2.x module.

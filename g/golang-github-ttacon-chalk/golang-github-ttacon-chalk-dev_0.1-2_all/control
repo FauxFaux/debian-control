@@ -1,0 +1,23 @@
+Package: golang-github-ttacon-chalk-dev
+Source: golang-github-ttacon-chalk
+Version: 0.1-2
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 103
+Section: devel
+Priority: extra
+Homepage: https://github.com/ttacon/chalk
+Description: Go library for prettifying terminal/console output
+ Chalk is a go package for styling console/terminal output.
+ .
+ Check out godoc for some example usage:
+ http://godoc.org/github.com/ttacon/chalk
+ .
+ The api is pretty clean, there are default Colors and TextStyles which can be
+ mixed to create more intense Styles. Styles and Colors can be printed in normal
+ strings (i.e. fmt.Sprintf(chalk.Red)), but Styles, Colors and TextStyles are
+ more meant to be used to style specific text segments (i.e.
+ fmt.Println(chalk.Red.Color("this is red")) or fmt.Println(myStyle.Style("this
+ is blue text that is underlined"))).
+ .
+ This package contains the source.

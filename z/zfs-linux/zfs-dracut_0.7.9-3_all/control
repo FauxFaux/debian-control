@@ -1,0 +1,17 @@
+Package: zfs-dracut
+Source: zfs-linux
+Version: 0.7.9-3
+Architecture: all
+Maintainer: Debian ZFS on Linux maintainers <pkg-zfsonlinux-devel@alioth-lists.debian.net>
+Installed-Size: 87
+Depends: dracut, zfs-modules | zfs-dkms, zfsutils-linux (>= 0.7.9-3)
+Section: contrib/kernel
+Priority: optional
+Homepage: http://www.zfsonlinux.org/
+Description: OpenZFS root filesystem capabilities for Linux - dracut
+ The Z file system is a pooled filesystem designed for maximum data
+ integrity, supporting data snapshots, multiple copies, and data
+ checksums.
+ .
+ This package adds OpenZFS to the system initramfs with a hook
+ for the dracut infrastructure.

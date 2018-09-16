@@ -1,0 +1,14 @@
+Package: simple-tpm-pk11
+Version: 0.06-1
+Architecture: amd64
+Maintainer: Michael Stapelberg <stapelberg@debian.org>
+Installed-Size: 549
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libssl1.1 (>= 1.1.0), libstdc++6 (>= 5.2), libtspi1 (>= 0.3.1), trousers
+Recommends: openssh-client
+Section: net
+Priority: extra
+Homepage: https://github.com/ThomasHabets/simple-tpm-pk11
+Description: simple library for using the TPM chip to secure SSH keys
+ simple-tpm-pk11 provides tools to create a key in your TPM (Trusted Platform
+ Module) chip which can then be used with SSH. The package comes with a library
+ that you can use as “PKCS11Provider” in your SSH configuration file.

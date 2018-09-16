@@ -1,0 +1,21 @@
+Package: libcache-mmap-perl
+Source: libcache-mmap-perl (0.11-3)
+Version: 0.11-3+b5
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 68
+Depends: perl (>= 5.26.0-4), perlapi-5.26.0, libc6 (>= 2.4)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Cache-Mmap
+Description: module to provide a shared data cache using memory mapped files
+ Cache::Mmap implements a shared data cache, using memory mapped files.
+ If routines are provided which interact with the underlying data, access to
+ the cache is completely transparent, and the module handles all the details of
+ refreshing cache contents, and updating underlying data, if necessary.
+ .
+ Cache entries are assigned to "buckets" within the cache file, depending on
+ the key. Within each bucket, entries are stored approximately in order of last
+ access, so that frequently accessed entries will move to the head of the
+ bucket, thus decreasing access time. Concurrent accesses to the same bucket are
+ prevented by file locking of the relevant section of the cache file.

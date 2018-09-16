@@ -1,0 +1,19 @@
+Package: lfc-server-postgres
+Source: lcgdm
+Version: 1.10.0-2
+Architecture: amd64
+Maintainer: Mattias Ellert <mattias.ellert@physics.uu.se>
+Installed-Size: 334
+Depends: liblfc1 (= 1.10.0-2), adduser, libc6 (>= 2.15), liblcgdm1, libpq5, libstdc++6 (>= 4.1.1), libuuid1 (>= 2.16), finger, postgresql-client
+Conflicts: lfc-postgres (<< 1.8.1.2-2~)
+Replaces: lfc-postgres (<< 1.8.1.2-2~)
+Provides: lfc-postgres
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://glite.web.cern.ch/glite/
+Description: LCG File Catalog (LFC) server with postgres database backend
+ The LCG File Catalog (LFC) keeps track of the locations of the physical
+ replicas of the logical files in a distributed storage system.
+ This package provides an LFC server that uses postgres as its database
+ backend.

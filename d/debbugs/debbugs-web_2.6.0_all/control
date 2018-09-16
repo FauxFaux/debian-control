@@ -1,0 +1,21 @@
+Package: debbugs-web
+Source: debbugs
+Version: 2.6.0
+Architecture: all
+Maintainer: Debbugs developers <debian-debbugs@lists.debian.org>
+Installed-Size: 229
+Depends: perl:any, libdebbugs-perl, apache2 | httpd
+Suggests: libcgi-alert-perl, libapache2-mod-perl2
+Breaks: debbugs (<< 2.4.2)
+Replaces: debbugs (<< 2.4.2)
+Section: misc
+Priority: optional
+Homepage: https://salsa.debian.org/debbugs-team
+Description: web scripts for the active Debian BTS
+ Debian has a bug tracking system which files details of bugs reported by
+ users and developers. Each bug is given a number, and is kept on file until
+ it is marked as having been dealt with. The system is mainly controlled by
+ e-mail, but the bug reports can be viewed using the WWW.
+ .
+ This package contains the cgi scripts necessary to view bugreports
+ using the web.

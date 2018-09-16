@@ -1,0 +1,21 @@
+Package: etherpuppet
+Version: 0.3-3
+Architecture: amd64
+Maintainer: Vincent Bernat <bernat@debian.org>
+Installed-Size: 32
+Depends: libc6 (>= 2.2.5)
+Section: net
+Priority: optional
+Homepage: http://www.secdev.org/projects/etherpuppet/
+Description: create a virtual interface from a remote Ethernet interface
+ Etherpuppet is a small program that will create a virtual interface
+ (TUN/TAP) on one machine from the ethernet interface of another
+ machine through a TCP connection. Everything seen by the real
+ interface will be seen by the virtual one. Everything sent to the
+ virtual interface will be emitted by the real one.
+ .
+ It has been designed because one often has a small machine as their
+ Internet gateway, and sometimes want to run some big applications
+ that need raw access to this interface, for sniffing (Wireshark,
+ etc.)  or for crafting packets that do not survive being reassembled,
+ translated, routed, etc.

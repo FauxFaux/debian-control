@@ -1,0 +1,25 @@
+Package: python-stdeb
+Source: stdeb
+Version: 0.8.5-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 183
+Depends: python, python:any (<< 2.8), python:any (>= 2.7.5-5~), debhelper (>= 9), python-setuptools, python-requests
+Recommends: apt-file, dpkg-dev, python-all
+Suggests: python-all-dev
+Section: python
+Priority: optional
+Homepage: http://github.com/astraw/stdeb
+Description: Python to Debian source package conversion utility
+ This package provides some tools to produce Debian packages from Python
+ packages via a new distutils command, sdist_dsc. Automatic defaults are
+ provided for the Debian package, but many aspects of the resulting package can
+ be customized via a configuration file.
+ .
+  * pypi-install will query the Python Package Index (PyPI) for a
+    package, download it, create a .deb from it, and then install
+    the .deb.
+  * py2dsc will convert a distutils-built source tarball into a Debian
+    source package.
+  * py2dsc-deb is like py2dsc, but will additionally build binary package
+  * pypi-download will download upstream tarball from PyPI

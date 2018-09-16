@@ -1,0 +1,18 @@
+Package: libpod-constants-perl
+Version: 0.19-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 42
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Pod-Constants
+Description: module for including constants from POD
+ This module allows you to specify those constants that should be
+ documented in your POD, and pull them out a run time in a fairly
+ arbitrary fashion.
+ .
+ Pod::Constants uses Pod::Parser to do the parsing of the source file.
+ It has to open the source file it is called from, and does so directly
+ either by lookup in %INC or by assuming it is $0 if the caller is
+ "main" (or it can't find %INC{caller()})

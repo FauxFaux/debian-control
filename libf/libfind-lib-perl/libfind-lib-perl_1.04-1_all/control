@@ -1,0 +1,19 @@
+Package: libfind-lib-perl
+Version: 1.04-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 36
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Find-Lib/
+Description: Perl module to intelligently find libraries
+ Find::Lib is a module aimed at finding and loading libraries in paths relative
+ to the currently running script. It is particularly useful for test scripts,
+ when there are test helper modules included in the distribution that are needed
+ for testing but should not be installed on the system.
+ .
+ It simplifies the finding and loading these special libraries, which can be a
+ tedious and error-prone process, especially when new modules are updated. This
+ module is generally used to locate and load a bundled "bootstrapping" module
+ which then loads the required dependencies.

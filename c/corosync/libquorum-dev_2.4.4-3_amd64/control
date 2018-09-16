@@ -1,0 +1,29 @@
+Package: libquorum-dev
+Source: corosync
+Version: 2.4.4-3
+Architecture: amd64
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Installed-Size: 260
+Depends: libcorosync-common-dev (= 2.4.4-3), libquorum5 (= 2.4.4-3)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://corosync.github.io/corosync/
+Description: cluster engine Quorum library development
+ The Corosync Cluster Engine is a Group Communication
+ System with additional features for implementing high availability within
+ applications. The project provides four C Application Programming Interface
+ features:
+ .
+  * A closed process group communication model with virtual synchrony
+    guarantees for creating replicated state machines.
+  * A simple availability manager that restarts the application process
+    when it has failed.
+  * A configuration and statistics in-memory database that provide the
+    ability to set, retrieve, and receive change notifications of
+    information.
+  * A quorum system that notifies applications when quorum is achieved
+    or lost.
+ .
+ This package contains the headers and other necessary files to build
+ applications or libraries that use the Quorum library.

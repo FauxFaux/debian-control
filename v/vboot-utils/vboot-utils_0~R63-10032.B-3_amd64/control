@@ -1,0 +1,25 @@
+Package: vboot-utils
+Version: 0~R63-10032.B-3
+Architecture: amd64
+Maintainer: Sophie Brun <sophie@freexian.com>
+Installed-Size: 495
+Depends: vboot-kernel-utils, libc6 (>= 2.4), libgcc1 (>= 1:3.0), liblzma5 (>= 5.1.1alpha+20120614), libssl1.1 (>= 1.1.0), libstdc++6 (>= 5.2), libyaml-0-2
+Recommends: cgpt
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://chromium.googlesource.com/chromiumos/platform/vboot_reference
+Description: Chrome OS verified u-boot utilities
+ This package contains a set of tools to deal with Chromebook internals,
+ and the verified version of u-boot. Namely:
+ bmpblk_font bmpblk_utility chromeos-tpm-recovery crossystem dev_debug_vboot
+ dev_make_keypair dumpRSAPublicKey eficompress efidecompress enable_dev_usb_boot
+ load_kernel_test pad_digest_utility signature_digest_utility tpm-nvsize
+ tpm_init_temp_fix tpmc vbutil_what_key verify_data.
+ .
+ The programs previously included in this package: dump_fmap dump_kernel_config
+ futility gbb_utility  vbutil_firmware vbutil_key vbutil_keyblock, are now
+ grouped in the futility program in the package vboot-kernel-utils.
+ .
+ Most users don't need this package, and should look for the cgpt and
+ vboot-kernel-utils packages instead.

@@ -1,0 +1,18 @@
+Package: ip2host
+Version: 1.13-2
+Architecture: all
+Maintainer: Gunnar Wolf <gwolf@debian.org>
+Installed-Size: 51
+Depends: perl
+Section: utils
+Priority: optional
+Description: Resolve IPs to hostnames in web server logs
+ This script is a drop-in replacement for the logresolve.pl
+ script distributed with the Apache web server.
+ .
+ ip2host has the same basic design of forking children to handle
+ the DNS resolution in parallel, but multiplexes the communication
+ to minimize the impact of slow responses.  This results in a
+ significant speed improvement (approximately 10x faster), and
+ the performance degrades more gracefully as the DNS timeout value
+ is increased.

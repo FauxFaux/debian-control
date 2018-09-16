@@ -1,0 +1,19 @@
+Package: libperl-prereqscanner-perl
+Version: 1.023-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 89
+Depends: perl, perl (>= 5.19.5) | libcpan-meta-requirements-perl (>= 2.124), libgetopt-long-descriptive-perl, liblist-moreutils-perl, libmodule-path-perl, libmoose-perl, libnamespace-autoclean-perl, libparams-util-perl, libppi-perl, libstring-rewriteprefix-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Perl-PrereqScanner
+Description: module for extracting prerequisites from Perl code
+ Perl::PrereqScanner is a Perl module that extracts distribution prerequisites
+ from files through various means. The extraction is not perfect but provides
+ a best-guess approximation.
+ .
+ It currently detects the following:
+  * plain lines beginning with use or require in perl modules and scripts
+  * regular inheritance declared with the base and parent pragmata
+  * Moose inheritance declared with the extends keyword
+  * Moose roles included with the with keyword

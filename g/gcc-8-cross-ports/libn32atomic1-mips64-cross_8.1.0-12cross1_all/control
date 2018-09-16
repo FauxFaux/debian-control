@@ -1,0 +1,14 @@
+Package: libn32atomic1-mips64-cross
+Source: gcc-8-cross-ports (12)
+Version: 8.1.0-12cross1
+Architecture: all
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 35
+Depends: gcc-8-cross-base-ports (= 8.1.0-12cross1), libc6-mipsn32-mips64-cross (>= 2.27)
+Built-Using: gcc-8 (= 8.1.0-12)
+Section: devel
+Priority: optional
+Homepage: http://gcc.gnu.org/
+Description: support library providing __atomic built-in functions (n32)
+ library providing __atomic built-in functions. When an atomic call cannot
+ be turned into lock-free instructions, GCC will make calls into this library.

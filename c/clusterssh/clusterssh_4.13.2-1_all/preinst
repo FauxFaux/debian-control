@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+# starting with clusterssh-2.0, setuid root is no longer needed
+# remove this override so that the new file is installed 755
+if [ "$1" = upgrade -o "$1" = install -a -n "$2" ] &&
+	dpkg --compare-versions "$2" le 1.56-1 &&         
+	[ "`dpkg-statoverride --list /usr/bin/cssh`" = "root bin 4755 /usr/bin/cssh" ]
+then
+	dpkg-statoverride --remove /usr/bin/cssh
+fi
+
+
+
+exit 0

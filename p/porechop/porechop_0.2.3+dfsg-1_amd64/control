@@ -1,0 +1,19 @@
+Package: porechop
+Version: 0.2.3+dfsg-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 203
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), python3 (<< 3.7), python3 (>= 3.6~), python3:any
+Section: science
+Priority: optional
+Homepage: https://rrwick.github.io/Porechop
+Description: adapter trimmer for Oxford Nanopore reads
+ Porechop is a tool for finding and removing adapters from Oxford
+ Nanopore reads. Adapters on the ends of reads are trimmed off, and
+ when a read has an adapter in its middle, it is treated as chimeric
+ and chopped into separate reads. Porechop performs thorough
+ alignments to effectively find adapters, even at low sequence
+ identity.
+ Porechop also supports demultiplexing of Nanopore reads that were
+ barcoded with the Native Barcoding Kit, PCR Barcoding Kit or Rapid
+ Barcoding Kit.

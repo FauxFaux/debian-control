@@ -1,0 +1,25 @@
+Package: python-webflash
+Version: 0.1a9-5
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 66
+Depends: python (>= 2.7), python (<< 2.8)
+Conflicts: python-json
+Section: python
+Priority: optional
+Homepage: http://python-rum.org/wiki/WebFlash
+Description: Portable flash messages for Python WSGI applications
+ WebFlash is a library to display "flash" messages in Python web
+ applications.
+ .
+ These messages are usually used to provide feedback to the user (e.g:
+ you changes have been saved, your credit card number has been stolen,
+ etc). One important characteristic they must provide is the ability
+ to survive a redirect (i.e., display the message in a page after
+ being redirected from a form submission).
+ .
+  * WebFlash is implemented using cookies, no state must be kept
+  * The messages can be rendered by the browser using Javascript
+  * Alternatively messages can be rendered by the server
+  * The JS code is small (~1Kb) and has no dependency
+  * WebFlash is designed to be used in WSGI frameworks

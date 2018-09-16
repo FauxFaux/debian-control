@@ -1,0 +1,31 @@
+Package: syslog-ng-mod-basicfuncs-plus
+Source: syslog-ng-incubator
+Version: 0.6.2-0.1
+Architecture: amd64
+Maintainer: syslog-ng maintainers <syslog-ng-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: libc6 (>= 2.4), libglib2.0-0 (>= 2.31.8), libivykis0 (>= 0.29), syslog-ng-abi-3.13-0
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/balabit/syslog-ng-incubator
+Description: Enhanced system logging daemon (extra template functions)
+ syslog-ng is an enhanced log daemon, supporting a wide range of input
+ and output methods: syslog, unstructured text, message queues,
+ databases (SQL and NoSQL alike) and more.
+ .
+ Key features:
+ .
+  * receive and send RFC3164 and RFC5424 style syslog messages
+  * work with any kind of unstructured data
+  * receive and send JSON formatted messages
+  * classify and structure logs with builtin parsers (csv-parser(),
+    db-parser(), etc.)
+  * normalize, crunch and process logs as they flow through the system
+  * hand on messages for further processing using message queues (like
+    AMQP), files or databases (like PostgreSQL or MongoDB).
+ .
+ This package provides additional template functions such as $(//),
+ which is a floating point division function, $(or) which does what
+ the name implies and a $(state) function. It also provides $(getent)
+ to query the passwd, group or services databases.

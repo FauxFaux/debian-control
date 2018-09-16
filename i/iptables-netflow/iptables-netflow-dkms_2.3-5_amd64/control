@@ -1,0 +1,20 @@
+Package: iptables-netflow-dkms
+Source: iptables-netflow
+Version: 2.3-5
+Architecture: amd64
+Maintainer: Axel Beckert <abe@debian.org>
+Installed-Size: 279
+Depends: dkms (>= 2.1.0.0), libc6-dev, libxtables-dev, pkg-config, libc6 (>= 2.3.4)
+Recommends: iptables
+Suggests: irqtop, nfdump
+Section: kernel
+Priority: optional
+Homepage: https://github.com/aabc/ipt-netflow
+Description: iptables target which generates netflows
+ ipt-netflow is an iptables/netfilter target which generates traffic
+ statistics in NetFlow v5 and v9 format as well as in IPFIX format.
+ .
+ It provides high performance and scalability. For highest performance
+ module could be run without conntrack being enabled in
+ kernel. Reported to be able to handle 10Gbit traffic with more than
+ 1500000 pps with negligible server load (on S5500BC).

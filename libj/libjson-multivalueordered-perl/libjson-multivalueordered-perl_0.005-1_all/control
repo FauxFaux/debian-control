@@ -1,0 +1,18 @@
+Package: libjson-multivalueordered-perl
+Version: 0.005-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 92
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/JSON-MultiValueOrdered
+Description: module to handle JSON like {"a":1, "a":2}
+ A hash tied to the JSON::MultiValueOrdered class acts more or less like
+ a standard hash, except that when you assign a new value to an existing
+ key, the old value is retained underneath. An explicit delete deletes
+ all values associated with a key.
+ .
+ By default, the old values are inaccessible through the hash interface,
+ but can be retrieved via the tied object, however, the fetch_* methods
+ provide a means to alter the behaviour of the hash.

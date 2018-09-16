@@ -1,0 +1,19 @@
+Package: ceph-mds
+Source: ceph
+Version: 10.2.5-7.2
+Architecture: amd64
+Maintainer: Ceph Maintainers <ceph-maintainers@lists.ceph.com>
+Installed-Size: 39205
+Depends: ceph, libboost-iostreams1.62.0, libboost-system1.62.0, libboost-thread1.62.0, libc6 (>= 2.16), libgcc1 (>= 1:3.0), libgoogle-perftools4, libnspr4 (>= 2:4.9-2~), libnss3 (>= 2:3.13.4-2~), librados2 (>= 0.87), libstdc++6 (>= 6)
+Recommends: ceph-fs-common, ceph-fuse, libcephfs1
+Breaks: ceph (<< 0.67.3-1)
+Replaces: ceph (<< 0.67.3-1)
+Section: admin
+Priority: optional
+Homepage: http://ceph.com/
+Description: metadata server for the ceph distributed file system
+ Ceph is a distributed storage and network file system designed to
+ provide excellent performance, reliability, and scalability.
+ .
+ This package contains the metadata server daemon, which is used to
+ create a distributed file system on top of the ceph storage cluster.

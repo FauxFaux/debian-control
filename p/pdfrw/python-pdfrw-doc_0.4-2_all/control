@@ -1,0 +1,27 @@
+Package: python-pdfrw-doc
+Source: pdfrw
+Version: 0.4-2
+Architecture: all
+Maintainer: Rodrigo Siqueira <siqueira@ime.usp.br>
+Installed-Size: 52
+Section: doc
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/pmaupin/pdfrw
+Description: PDF file manipulation library (documentation)
+ pdfrw can read and write PDF files, and can also be used to read in PDFs which
+ can then be used inside reportlab.
+ .
+ pdfrw tries to be agnostic about the contents of PDF files, and support them
+ as containers, but to do useful work, something a little higher-level is
+ required. It supports the following:
+ .
+  * PDF pages. pdfrw knows enough to find the pages in PDF files you read in,
+    and to write a set of pages back out to a new PDF file.
+  * Form XObjects. pdfrw can take any page or rectangle on a page, and convert
+    it to a Form XObject, suitable for use inside another PDF file
+  * reportlab objects. pdfrw can recursively create a set of reportlab objects
+    from its internal object format. This allows, for example, Form XObjects to
+    be used inside reportlab.
+ .
+ This is the common documentation package.

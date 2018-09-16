@@ -1,0 +1,41 @@
+Package: libocamlnet-ocaml-dev
+Source: ocamlnet (4.1.2-3)
+Version: 4.1.2-3+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 67286
+Depends: ocaml-findlib, libfindlib-ocaml-dev-ima03, libocamlnet-ocaml-65rj4, libpcre-ocaml-dev-2h5n2, libzip-ocaml-dev-5t4j6, ocaml-nox-4.05.0
+Recommends: libocamlnet-ocaml-doc, libnethttpd-ocaml-dev
+Provides: libequeue-ocaml-dev, libnetclient-ocaml-dev, libocamlnet-ocaml-dev-65rj4, librpc-ocaml-dev
+Section: ocaml
+Priority: optional
+Homepage: http://projects.camlcity.org/projects/ocamlnet.html
+Description: OCaml application-level Internet libraries - core development libraries
+ Ocamlnet is a collection of OCaml libraries focusing focus on
+ application-level Internet protocols and conventions.
+ .
+ Ocamlnet consists of the following libraries:
+  * netstring: processing of strings that occur in network context
+  * netcgi2: portable web applications
+  * nethttpd: is a web server component (HTTP server implementation)
+  * netplex: generic server framework
+  * rpc: OncRPC implementation
+  * netclient: clients for HTTP, FTP, and Telnet
+  * equeue: event queue used for many protocol implementations
+  * shell: external commands invocation
+  * netshm: shared memory for IPC purposes
+  * netsys: bindings for system functions
+  * smtp and pop: two further client implementations
+ .
+ A number of ideas and concepts are used throughout the libraries:
+  * netchannels are a way to abstract sequential I/O channels
+  * event queues provided by equeue and unixqueue make asynchronous
+    protocol interpreters possible
+ .
+ This package contains the development stuff you need to use the core
+ Ocamlnet libraries in your programs. The following libraries are
+ packaged separately: SSL-related libraries (libocamlnet-ssl-ocaml-dev),
+ GTK-related libraries (libocamlnet-gtk2-ocaml-dev), nethttpd
+ (libnethttpd-ocaml-dev). The netcgi2 Apache connector is also part of
+ this package; to run applications built for that connector you will
+ need the mod_netcgi_apache Apache module (libapache2-mod-ocamlnet).

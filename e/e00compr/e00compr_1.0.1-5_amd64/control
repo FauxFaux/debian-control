@@ -1,0 +1,24 @@
+Package: e00compr
+Version: 1.0.1-5
+Architecture: amd64
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 83
+Depends: libc6 (>= 2.4)
+Suggests: avce00
+Enhances: grass
+Section: science
+Priority: optional
+Homepage: http://avce00.maptools.org/e00compr/
+Description: Program to read/write Arcinfo compressed E00 files
+ E00compr is an ANSI C library that reads and writes Arcinfo compressed E00
+ files. Both "PARTIAL" and "FULL" compression levels are supported. E00 files
+ are the vector import/export format for Arcinfo. It is plain ASCII and is
+ meant as an interchange format. ESRI considers the format to be proprietary,
+ so this package may not read all E00 files as ESRI may change the format.
+ .
+ This package is useful for importing E00 files into the grass GIS system.
+ .
+ It contains the e00conv command-line program, which takes a E00 file as
+ input (compressed or not) and copies it to a new file with the requested
+ compression level (NONE, PARTIAL or FULL). The library is not included
+ at this stage.

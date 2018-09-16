@@ -1,0 +1,20 @@
+Package: ifupdown-multi
+Version: 0.1.1
+Architecture: all
+Maintainer: Robert S. Edmonds <edmonds@debian.org>
+Installed-Size: 14
+Depends: python
+Enhances: ifupdown
+Section: admin
+Priority: optional
+Description: multiple default gateway support for ifupdown
+ This package integrates support for multiple default gateways on
+ independent network connections into the Debian ifupdown network
+ interface configuration system. It adds new "multi_*" options to the
+ /etc/network/interface file format in order to more easily configure
+ Linux's policy based routing.
+ .
+ The policy information used to configure each network interface using
+ ifupdown-multi is saved when ifup is run. This allows network
+ interfaces using ifupdown-multi to be brought up or down cleanly as
+ needed.

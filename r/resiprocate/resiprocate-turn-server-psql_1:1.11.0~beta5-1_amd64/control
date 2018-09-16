@@ -1,0 +1,27 @@
+Package: resiprocate-turn-server-psql
+Source: resiprocate
+Version: 1:1.11.0~beta5-1
+Architecture: amd64
+Maintainer: Debian VoIP Team <pkg-voip-maintainers@lists.alioth.debian.org>
+Installed-Size: 32
+Depends: resiprocate-turn-server, python, python-psycopg2
+Section: net
+Priority: extra
+Homepage: http://www.resiprocate.org/
+Description: reSIProcate SIP stack - ICE/TURN server
+ reTurn is the TURN server developed as part of the reSIProcate project.
+ TURN (RFC 5766) provides a standardised solution for VoIP applications
+ to find the most efficient way to route media streams when NAT and
+ firewall devices may be present.
+ .
+ reTurn provides a high-quality, low maintenance solution for serving
+ small and large IP telephony installations.  It has been used successfully
+ with a variety of SIP and Jabber applications, including Lumicall,
+ Jitsi, Empathy and Psi.
+ .
+ reSIProcate is a framework that aims to fully implement the SIP protocol
+ in first class C++.  It is intended for use in other applications,
+ such as the repro SIP proxy.
+ .
+ This package provides a Python script to synchronize the reTurn
+ users.txt file from a PostgreSQL table.

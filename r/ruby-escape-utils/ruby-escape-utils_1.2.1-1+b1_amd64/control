@@ -1,0 +1,18 @@
+Package: ruby-escape-utils
+Source: ruby-escape-utils (1.2.1-1)
+Version: 1.2.1-1+b1
+Architecture: amd64
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 89
+Depends: ruby (>= 1:2.5~0), libc6 (>= 2.4), libgmp10, libruby2.5 (>= 2.5.0~preview1), ruby (<< 1:2.6~)
+Suggests: ruby-actionpack, ruby-haml, ruby-rack
+Enhances: ruby-actionpack, ruby-haml, ruby-rack
+Section: ruby
+Priority: optional
+Homepage: http://github.com/brianmario/escape_utils
+Description: Faster string escaping routines for your web apps
+ escape_utils provides fast HTML escaping of string.  It has
+ monkey-patches for Rack::Utils, CGI, URI, ERB::Util and Haml and
+ ActionView which speed up their escaping.
+ .
+ It's assumed that all input is UTF-8 encoded.

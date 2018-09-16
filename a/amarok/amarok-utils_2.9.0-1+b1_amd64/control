@@ -1,0 +1,24 @@
+Package: amarok-utils
+Source: amarok (2.9.0-1)
+Version: 2.9.0-1+b1
+Architecture: amd64
+Maintainer: Debian KDE Extras Team <pkg-kde-extras@lists.alioth.debian.org>
+Installed-Size: 616
+Depends: libc6 (>= 2.14), libkdecore5 (>= 4:4.8.4), libqtcore4 (>= 4:4.8.0), libqtgui4 (>= 4:4.5.3), libstdc++6 (>= 5.2), libtag-extras1 (>= 1.0.1), libtag1v5 (>= 1.9.1-2.2~)
+Breaks: amarok (<< 2.8.0)
+Replaces: amarok (<< 2.8.0)
+Section: utils
+Priority: optional
+Homepage: https://amarok.kde.org
+Description: utilities for Amarok media player
+ This package contains command line utilities that are typically used by Amarok
+ media player but might also be useful on systems without Amarok installed.
+ They are designed to be lightweight as they do not depend on KDE libraries.
+ .
+ Currently the package contains the following utilities:
+   - amarokcollectionscanner - scans audio files, collects information from
+     file tags and prints it in the structured XML format.
+   - amarok_afttagger - a helper program which writes/removes custom tags
+     to/from media files required for embedded "Amarok File Tracking".
+   - amzdownloader - easily download your files from Amazon if you have their
+     references in an encrypted .amz file.

@@ -1,0 +1,28 @@
+Package: xdemorse
+Version: 3.6.1-1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 153
+Depends: libasound2 (>= 1.0.16), libc6 (>= 2.4), libcairo2 (>= 1.2.4), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.12.0), libgtk-3-0 (>= 3.0.0)
+Section: hamradio
+Priority: optional
+Homepage: http://www.qsl.net/5b4az/pkg/morse/xdemorse/xdemorse.html
+Description: decode Morse signals to text
+ X/GTK+ application for decoding Morse code signals into text. xdemorse
+ detects the "dihs" and "dahs" that make a Morse code character via the
+ computer's sound card, which can be connected to a radio receiver tuned
+ to a CW Morse code transmission or to a tone generator.
+ .
+ The input signal is processed by a Goertzel tone detector algorithm which
+ produces "mark" or "space" (signal/no signal) outputs and the resulting
+ stream of Morse code "elements" is decoded into an ASCII character for
+ printing to the Text viewer.
+ .
+ xdemorse has a certain level of tolerance towards operator errors (bad
+ "fist") regarding deviation from the standard duration of the various
+ elements that make up the Morse code.There is a "Waterfall" (audio
+ spectrum) display derived from an integer-arithmetic FFT of the receiver's
+ audio output.
+ .
+ This program has built-in CAT capability but only for the Yaesu FT847 or
+ FT857 and Elecraft K2 or K3.

@@ -1,0 +1,17 @@
+Package: sensible-mda
+Source: sendmail
+Version: 8.15.2-12
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 249
+Depends: sendmail-bin | mail-transport-agent, procmail | maildrop | deliver, libc6 (>= 2.4)
+Section: mail
+Priority: optional
+Homepage: http://www.sendmail.org
+Description: Mail Delivery Agent wrapper
+ Sensible-mda is a Debian addition in the sendmail package and has been
+ split out in hopes that it might be useful for other MTA packages.
+ .
+ Sensible-mda is called by the MTA, and will in turn call whichever of
+ the following MDAs that it finds (in this order):
+ procmail, maildrop, deliver, mail.local

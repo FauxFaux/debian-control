@@ -1,0 +1,33 @@
+Package: html2ps
+Version: 1.0b7-3
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 249
+Depends: perl:any, perlmagick, libwww-perl, libhtml-parser-perl, libpaper-utils
+Suggests: ghostscript, weblint-perl, texlive-base, postscript-viewer, xhtml2ps
+Section: text
+Priority: optional
+Homepage: http://user.it.uu.se/~jan/html2ps.html
+Description: HTML to PostScript converter
+ This program converts HTML directly to PostScript. The HTML code can be
+ retrieved from one or more URLs or local files, specified as parameters
+ on the command line. A comprehensive level of HTML is supported,
+ including inline images, CSS 1.0, and some features of HTML 4.0.
+ .
+ This is our justification for the suggests list:
+ .
+ We suggest ghostscript since it is required in order to output DSC
+ compliant PS (--dsc option) and make cross references at links within
+ the set of converted documents (--xref option).
+ .
+ We suggest weblint-perl because it's the default method for checking
+ HTML syntax (use the -c option).
+ .
+ We suggest texlive-base because we need TeX hyphenation pattern in
+ order to hyphenate text (use -H option).
+ .
+ We suggest postscript-viewer because this package generates postscripts
+ that can be viewed on a postscript-viewer.
+ .
+ We suggest xhtml2ps because it's a interesting graphical interface for
+ this package.

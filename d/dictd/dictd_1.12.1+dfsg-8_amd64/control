@@ -1,0 +1,28 @@
+Package: dictd
+Version: 1.12.1+dfsg-8
+Architecture: amd64
+Maintainer: Robert Luberda <robert@debian.org>
+Installed-Size: 304
+Depends: adduser, dictzip (>= 1.12.1+dfsg), lsb-base (>= 3.2-13), netbase, ucf (>= 3), update-inetd, debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.14), libmaa4 (>= 1.2.0), zlib1g (>= 1:1.1.4)
+Recommends: dict | dict-client
+Suggests: dict-foldoc, dict-gcide | dictd-dictionary, dict-jargon, dict-wn
+Conflicts: dict-server
+Provides: dict-server
+Section: text
+Priority: optional
+Homepage: https://sourceforge.net/projects/dict/
+Description: dictionary server
+ This package provides a TCP-based server that allows a client to access
+ dictionary definitions from a set of natural language dictionary databases.
+ .
+ Many dictionary databases have been packaged for use with dictd. They are
+ described in the /usr/share/doc/dictd/README.Debian.gz file.
+ .
+ Either dict-gcide or dict-wn is essential for a useful English
+ language dictionary server.  It is strongly recommended that both be
+ installed.  If you are interested in computer terminology, it is
+ recommended to install at least dict-jargon, dict-foldoc, or
+ dict-vera.
+ .
+ The client program, dict, is packaged separately and is needed on all
+ machines that will use the server.

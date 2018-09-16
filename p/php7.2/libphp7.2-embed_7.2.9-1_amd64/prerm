@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" -o "$1" = "deconfigure" ]; then
+    update-alternatives --remove libphp7 /usr/lib/libphp7.2.so
+fi
+
+php_enable() { return 0; }
+
+
+
+exit 0

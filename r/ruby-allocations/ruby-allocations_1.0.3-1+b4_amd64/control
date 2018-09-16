@@ -1,0 +1,16 @@
+Package: ruby-allocations
+Source: ruby-allocations (1.0.3-1)
+Version: 1.0.3-1+b4
+Architecture: amd64
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 38
+Depends: ruby (>= 1:2.5~0), libc6 (>= 2.4), libgmp10, libruby2.5 (>= 2.5.0~preview1), ruby (<< 1:2.6~)
+Section: ruby
+Priority: optional
+Homepage: https://gitlab.com/gitlab-org/allocations
+Description: tracking of retained objects in CRuby
+ Library for counting the amount of objects that have been allocated but not
+ released yet. Tracking this makes it easier to see if objects are being leaked
+ over time and if so what kind of objects. This library does _not_ provide any
+ insight into where objects are being leaked or why.
+Ruby-Versions: ruby2.5

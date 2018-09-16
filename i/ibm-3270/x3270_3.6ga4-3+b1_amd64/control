@@ -1,0 +1,27 @@
+Package: x3270
+Source: ibm-3270 (3.6ga4-3)
+Version: 3.6ga4-3+b1
+Architecture: amd64
+Maintainer: Philipp Kern <pkern@debian.org>
+Installed-Size: 1596
+Depends: libc6 (>= 2.15), libssl1.1 (>= 1.1.0), libx11-6, libxaw7, libxmu6, libxt6, 3270-common (= 3.6ga4-3+b1)
+Recommends: xfonts-x3270-misc
+Suggests: x3270-doc
+Section: net
+Priority: optional
+Homepage: http://x3270.bgp.nu/
+Description: X11 program for telnet sessions to IBM mainframes
+ x3270 opens a telnet connection to an IBM mainframe host in an X11
+ window.  It can also connect to an IBM AS/400 as a 5250 terminal
+ using the AS/400's 3270 emulation.  The window created by x3270 can
+ use its own font for displaying characters, so it is a fairly
+ accurate representation of an IBM 3278 or 3279.
+ .
+ x3270 is similar to tn3270(1) and c3270(1) except that it is X-based,
+ not curses-based.
+ .
+ x3270 implements RFCs 2355 (TN3270E), 1576 (TN3270),
+ and 1646 (LU name selection), and supports IND$FILE file transfer.
+ .
+ You will need to install x3270's fonts locally, or on your font-server -
+ they are required.

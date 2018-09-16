@@ -1,0 +1,17 @@
+Package: minicoredumper
+Version: 2.0.1-1
+Architecture: amd64
+Maintainer: John Ogness <john.ogness@linutronix.de>
+Installed-Size: 122
+Depends: libc6 (>= 2.12), libelf1 (>= 0.144), libjson-c3 (>= 0.11), lsb-base (>= 3.2-14), adduser
+Conflicts: core-dump-handler
+Replaces: core-dump-handler
+Provides: core-dump-handler
+Section: devel
+Priority: optional
+Homepage: https://www.linutronix.de/minicoredumper
+Description: generate minimal and customized core dump files on Linux
+ minicoredumper is a program that handles the creation of core dump files on
+ Linux. It can produce much smaller core dump files by making use of sparse
+ files, compression, and allowing the user to configure what parts of the
+ process memory image should be dumped.

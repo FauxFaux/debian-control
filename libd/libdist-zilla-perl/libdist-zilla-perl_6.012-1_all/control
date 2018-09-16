@@ -1,0 +1,24 @@
+Package: libdist-zilla-perl
+Version: 6.012-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 959
+Depends: perl (>= 5.21.4), libapp-cmd-perl (>= 0.330), libautobox-perl, libconfig-ini-perl, libconfig-mvp-perl (>= 2.200011), libconfig-mvp-reader-ini-perl, libcpan-uploader-perl (>= 0.103004), libdata-section-perl (>= 0.200002), libdatetime-perl, libfile-copy-recursive-perl, libfile-find-rule-perl, libfile-homedir-perl, libfile-pushd-perl, libfile-sharedir-install-perl (>= 0.06), libfile-sharedir-perl, libhash-merge-simple-perl, libio-tiecombine-perl, libjson-perl, liblog-dispatchouli-perl, libmixin-linewise-perl (>= 0.100), libmodule-runtime-perl, libmoose-autobox-perl, libmoose-perl, libmoosex-lazyrequire-perl, libmoosex-role-parameterized-perl, libmoosex-setonce-perl, libmoosex-types-perl, libmoosex-types-perl-perl, libnamespace-autoclean-perl, libpath-tiny-perl, libperl-prereqscanner-perl (>= 1.016), libperl-version-perl, libpod-eventual-perl, libscalar-list-utils-perl (>= 1:1.45), libsoftware-license-perl, libstring-formatter-perl, libstring-rewriteprefix-perl, libsub-exporter-formethods-perl, libterm-encoding-perl, libterm-readkey-perl, libtest-deep-perl, libtext-glob-perl, libtext-template-perl, libtry-tiny-perl, libyaml-tiny-perl
+Recommends: bash-completion, libarchive-tar-wrapper-perl, libdata-optlist-perl (>= 0.110), libterm-readline-gnu-perl
+Breaks: libdist-zilla-plugin-run-perl (<< 0.036)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Dist-Zilla
+Description: Perl distribution builder
+ Dist::Zilla builds distributions of code to be uploaded to the CPAN. In this
+ respect, it is like ExtUtils::MakeMaker, Module::Build, or Module::Install.
+ Unlike those tools, however, it is not also a system for installing code that
+ has been downloaded from the CPAN. Since it's only run by authors, and is
+ meant to be run on a repository checkout rather than on published, released
+ code, it can do much more than those tools, and is free to make much more
+ ludicrous demands in terms of prerequisites.
+ .
+ It's aim is to generate every file which is needed by a CPAN
+ distribution, but usually generated and hence commonly not checked in
+ into a VCS repository. For that it reads a file called dist.ini and
+ gathers data from other files as instructured in that file.

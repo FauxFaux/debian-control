@@ -1,0 +1,22 @@
+Package: libtest-rdf-doap-version-perl
+Version: 0.010-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 27
+Depends: librdf-trine-perl, liburi-perl, librdf-trin3-perl (>= 0.202), perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-RDF-DOAP-Version
+Description: tests 'meta/changes.ttl' is up to date
+ Resource Description Framework (RDF) is a standard model for data
+ interchange on the Web.
+ .
+ Test::RDF::DOAP::Version reads all RDF in a distribution's "meta"
+ directory and checks the distribution metadata matches the pattern:
+ .
+  ?uri doap:release ?rel .
+  ?rel doap:revision ?ver .
+ .
+ Where ?uri is the URI
+ "http://purl.org/NET/cpan-uri/dist/$dist/project" and ?ver is
+ "$module->VERSION", as an xsd:string or plain literal.

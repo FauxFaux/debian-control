@@ -1,0 +1,97 @@
+Package: nwchem
+Source: nwchem (6.8+47+gitdf6c956-3)
+Version: 6.8+47+gitdf6c956-3+b1
+Architecture: amd64
+Maintainer: Debichem Team <debichem-devel@lists.alioth.debian.org>
+Installed-Size: 67446
+Depends: mpi-default-bin, nwchem-data (= 6.8+47+gitdf6c956-3), libblas3 | libblas.so.3, libc6 (>= 2.27), libgcc1 (>= 1:4.0), libgfortran5 (>= 8), liblapack3 | liblapack.so.3, libopenmpi3, libpython2.7 (>= 2.7), libquadmath0 (>= 4.6), libscalapack-openmpi2.0, zlib1g (>= 1:1.2.0)
+Section: science
+Priority: optional
+Homepage: http://www.nwchem-sw.org
+Description: High-performance computational chemistry software
+ NWChem is a computational chemistry program package.  It provides methods
+ which are scalable both in their ability to treat large scientific
+ computational chemistry problems efficiently, and in their use of available
+ parallel computing resources from high-performance parallel supercomputers to
+ conventional workstation clusters.
+ .
+ NWChem can handle:
+ .
+  * Molecular electronic structure methods using gaussian
+    basis functions for high-accuracy calculations of molecules
+  * Pseudopotentials plane-wave electronic structure methods for calculating
+    molecules, liquids, crystals, surfaces, semi-conductors or metals
+  * Ab-initio and classical molecular dynamics simulations
+  * Mixed quantum-classical simulations
+  * Parallel scaling to thousands of processors
+ .
+ Features include:
+  * Molecular electronic structure methods, analytic second derivatives:
+   - Restricted/unrestricted Hartree-Fock (RHF, UHF)
+   - Restricted Density Functional Theory (DFT) using many local,
+     non-local (gradient-corrected) or hybrid (local, non-local, and HF)
+     exchange-correlation potentials
+  * Molecular electronic structure methods, analytic gradients:
+   - Restricted open-shell Hartree-Fock (ROHF)
+   - Unrestricted Density Functional Theory (DFT)
+   - Second-order Moeller-Plesset perturbation theory (MP2), using RHF and UHF
+     reference
+   - MP2 with resolution of the identity approximation (RI-MP2)
+   - Complete active space SCF (CASSCF)
+   - Time-Dependent Density Functional Theory (TDDFT)
+  * Molecular electronic structure methods, single-point energies:
+   - MP2 spin-component scaled approach (SCS-MP2)
+   - Coupled cluster singles and doubles, triples or pertubative triples
+     (CCSD, CCSDT, CCSD(T)), with RHF and UHF reference
+   - Configuration interaction (CISD, CISDT, and CISDTQ)
+   - Second-order approximate coupled-cluster singles doubles (CC2)
+   - State-specific multireference coupled cluster methods (MRCC)
+     (Brillouin-Wigner (BW-MRCC) and Mukherjee (Mk-MRCC) approaches)
+  * Further molecular electronic structure features:
+   - Geometry optimization including transition state searches, constraints
+     and minimum energy paths (via the Nudged Elastic Band (NEB) and Zero
+     Temperature String methods)
+   - Vibrational frequencies
+   - Equation-of-motion (EOM)-CCSD, EOM-CCSDT, EOM-CCSD(T), CC2,
+     Configuration-Interaction singles (CIS), time-dependent HF (TDHF) and
+     TDDFT, for excited states with RHF, UHF, RDFT, or UDFT reference
+   - Solvatisation using the Conductor-like screening model (COSMO) for RHF,
+     ROHF and DFT, including analytical gradients
+   - Hybrid calculations using the two- and three-layer ONIOM method
+   - Relativistic effects via spin-free and spin-orbit one-electron
+     Douglas-Kroll and zeroth-order regular approximations (ZORA) and
+     one-electron spin-orbit effects for DFT via spin-orbit potentials
+  * Pseudopotential plane-wave electronic structure:
+   - Pseudopotential Plane-Wave (PSPW), Projector Augmented Wave (PAW) or band
+     structure methods for calculating molecules, liquids, crystals, surfaces,
+     semi-conductors or metals
+   - Geometry/unit cell optimization including transition state searches
+   - Vibrational frequencies
+   - LDA, PBE96, and PBE0 exchange-correlation potentials (restricted and
+     unrestricted)
+   - SIC, pert-OEP, Hartree-Fock, and hybrid functionals (restricted and
+     unrestricted)
+   - Hamann, Troullier-Martins and Hartwigsen-Goedecker-Hutter norm-conserving
+     pseudopotentials with semicore corrections
+   - Wavefunction, density, electrostatic and Wannier plotting
+   - Band structure and density of states generation
+  * Car-Parrinello ab-initio molecular dynamics (CPMD):
+   - Constant energy and constant temperature dynamics
+   - Verlet algorithm for integration
+   - Geometry constraints in cartesian coordinates
+  * Classical molecular dynamics (MD):
+   - Single configuration energy evaluation
+   - Energy minimization
+   - Molecular dynamics simulation
+   - Free energy simulation (multistep thermodynamic perturbation (MSTP) or
+     multiconfiguration thermodynamic integration (MCTI) methods with options
+     of single and/or dual topologies, double wide sampling, and separation-
+     shifted scaling)
+   - Force fields providing effective pair potentials, first order
+     polarization, self consistent polarization, smooth particle mesh Ewald
+     (SPME), periodic boundary conditions and SHAKE constraints
+  * Mixed quantum-classical:
+   - Mixed quantum-mechanics and molecular-mechanics (QM/MM) minimizations and
+     molecular dynamics simulations
+   - Quantum molecular dynamics simulation by using any of the quantum
+     mechanical methods capable of returning gradients.

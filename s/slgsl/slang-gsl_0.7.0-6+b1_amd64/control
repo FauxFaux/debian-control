@@ -1,0 +1,36 @@
+Package: slang-gsl
+Source: slgsl (0.7.0-6)
+Version: 0.7.0-6+b1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 308
+Depends: libc6 (>= 2.14), libgsl23, libgslcblas0, libslang2 (>= 2.2.4)
+Suggests: slsh (>= 2.0) | jed (>= 0.99.17) | slrn (>= 0.9.8.1pl1-4)
+Section: interpreters
+Priority: optional
+Homepage: http://space.mit.edu/cxc/software/slang/modules/gsl/
+Description: GNU Scientific Library binding for S-Lang
+ The GNU Scientific Library (GSL) is a vast collection of robust and
+ well documented numerical functions. It includes support for many
+ special functions, random numbers, interpolation and integration
+ routines, and much more.
+ .
+ Many of the routines in the GSL may be made available to the S-Lang
+ interpreter via the GSL modules included in this package.
+ .
+ The following GSL modules are available:
+ .
+  * gslsf: The GSL special function module. Currently, this module
+    provides an interface to nearly 200 GSL special functions.
+  * gslconst: The GSL constants module. This module defines many
+    constants such as CONST_MKSA_SPEED_OF_LIGHT, CONST_CGSM_BOLTZMANN,
+    etc.
+  * gslinterp: The GSL interpolation module, which includes routines
+    for linear interpolation, cubic splines, etc.
+  * gslrand: The GSL random number module.  This module supports most
+    of GSL's random number generators and distributions.
+  * gslcdf: The GSL cumulative distribution function module.
+  * gslfft: The GSL fast-fourier transform module.
+  * gslcore: This is a module that must be loaded before any of the
+    above modules can be loaded.  Its main purpose is to provide support
+    functions for the other GSL modules.

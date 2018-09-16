@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] ; then
+	update-alternatives --remove dib-block-device /usr/bin/python2-dib-block-device
+	update-alternatives --remove dib-lint /usr/bin/python2-dib-lint
+	update-alternatives --remove disk-image-create /usr/bin/python2-disk-image-create
+	update-alternatives --remove element-info /usr/bin/python2-element-info
+	update-alternatives --remove ramdisk-image-create /usr/bin/python2-ramdisk-image-create
+fi
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p python-diskimage-builder 
+else
+	dpkg -L python-diskimage-builder | grep '\.py$' | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+
+exit 0

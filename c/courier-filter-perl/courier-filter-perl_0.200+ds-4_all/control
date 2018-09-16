@@ -1,0 +1,35 @@
+Package: courier-filter-perl
+Version: 0.200+ds-4
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 313
+Depends: perl, courier-mta, liberror-perl
+Recommends: libarchive-zip-perl, libclamav-client-perl, libio-stringy-perl, libmail-spamassassin-perl, libmail-spf-perl, libmime-tools-perl, libnet-rblclient-perl
+Suggests: libnet-address-ip-local-perl
+Section: mail
+Priority: optional
+Homepage: https://metacpan.org/release/Courier-Filter
+Description: purely Perl-based mail filter framework for the Courier MTA
+ Courier::Filter implements the Courier MTA's courierfilter interface as a
+ framework for mail filter modules.  Authors of filter modules can concentrate
+ on writing the actual filter logic without having to care about the usual
+ low-level details of the courierfilter interface.  Logging to various
+ facilities is also supported.
+ .
+ Courier::Filter allows multiple filter modules to be installed in stacked and
+ hierarchically grouped configurations.  Also, modules' polarity can be
+ reversed, so some modules can be used for explicitly accepting messages while
+ others are used in the traditional way for rejecting messages.
+ .
+ The following filter modules are included:
+   * BlankBody: matching of blank bodies (a stupid spammer symptom)
+   * DNSBL:     matching of calling MTA's IP address against DNS black-lists
+   * SPF:       authentication of sender addresses in inbound messages
+   * SPFout:    authentication of sender addresses in outbound messages
+   * Envelope:  matching of RFC 2821 message envelope fields
+   * Header:    matching of RFC 2822 message header fields
+   * FakeDate:  detection of implausible and malformed date header fields
+   * ClamAVd:   malware detection using the ClamAV scanner
+   * SpamAssassin:  spam detection using SpamAssassin
+   * Parts:     matching of MIME parts and ZIP archive contents
+   * SendCopy:  sending message copies to additional recipients

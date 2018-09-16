@@ -1,0 +1,30 @@
+Package: libssreflect-coq
+Source: ssreflect
+Version: 1.6.1-3
+Architecture: all
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 138794
+Depends: libssreflect-ocaml (>= 1.6.1-3), coq-8.6+4.05.0
+Provides: libmathcomp-coq, ssreflect
+Section: math
+Priority: optional
+Homepage: https://math-comp.github.io/math-comp/
+Description: small scale reflection library for Coq (theories)
+ The name Ssreflect stands for "small scale reflection", a style of
+ proof that evolved from the computer-checked proof of the Four Colour
+ Theorem and which leverages the higher-order nature of Coq's
+ underlying logic to provide effective automation for many small,
+ clerical proof steps. This is often accomplished by restating
+ ("reflecting") problems in a more concrete form, hence the name. For
+ example, in the Ssreflect library, arithmetic comparison is not an
+ abstract predicate, but a function computing a boolean.
+ .
+ The Ssreflect distribution comprises two parts:
+ * A new tactic language, which promotes more structured, concise and
+   robust proof scripts, and is in fact independent from the "reflection"
+   proof style. It is implemented as a linkable extension to the Coq
+   system.
+ * A comprehensive set of Coq libraries covering topics as combinatorics
+   and algebra.
+ .
+ This package installs the full Ssreflect distribution.

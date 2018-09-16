@@ -1,0 +1,29 @@
+Package: libspectrum8
+Source: libspectrum
+Version: 1.4.4-1
+Architecture: amd64
+Maintainer: Alberto Garcia <berto@igalia.com>
+Installed-Size: 296
+Depends: libaudiofile1 (>= 0.3.6), libbz2-1.0, libc6 (>= 2.14), libgcrypt20 (>= 1.8.0), libglib2.0-0 (>= 2.12.0), zlib1g (>= 1:1.1.4)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://fuse-emulator.sourceforge.net/libspectrum.php
+Description: ZX Spectrum emulator library - Shared libraries
+ libspectrum is a fairly simple library designed to make the handling
+ of various ZX Spectrum emulator-related file formats easy.
+ .
+ So far it handles:
+   * Snapshots: .z80, .szx, .sna (all read/write), .zxs, .sp., .snp
+     and +D snapshots (read only).
+   * Tape images: .tzx, .tap, .spc, .sta and .ltp (read/write) and
+     .pzx, Warajevo .tap, Z80Em and CSW version 1 (read only).
+   * Input recordings: .rzx (read/write).
+   * Disk images: .dsk (both plain and extended), .d40, .d80, .fdi,
+     .img, .mgt, .opd, .sad, .scl, .td0, .trd and .udi (identification
+     only).
+   * Timex cartridges: .dck (read only).
+   * IDE hard disk images: .hdf (read/write).
+   * Microdrive cartridge images: .mdr (read/write).
+ .
+ This package contains the shared libraries.

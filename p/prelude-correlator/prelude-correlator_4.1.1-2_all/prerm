@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installsystemd/11.1.5
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop 'prelude-correlator.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.1.5
+dpkg-maintscript-helper rm_conffile /etc/init.d/prelude-correlator 3.1.0-1\~ prelude-correlator -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/default/prelude-correlator 3.1.0-1\~ prelude-correlator -- "$@"
+# End automatically added section
+
+# Automatically added by dh_python3:
+if which py3clean >/dev/null 2>&1; then
+	py3clean -p prelude-correlator 
+else
+	dpkg -L prelude-correlator | perl -ne 's,/([^/]*)\.py$,/__pycache__/\1.*, or next; unlink $_ or die $! foreach glob($_)'
+	find /usr/lib/python3/dist-packages/ -type d -name __pycache__ -empty -print0 | xargs --null --no-run-if-empty rmdir
+fi
+
+# End automatically added section

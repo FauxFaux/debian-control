@@ -1,0 +1,18 @@
+Package: pmount
+Source: pmount (0.9.23-3)
+Version: 0.9.23-3+b2
+Architecture: amd64
+Maintainer: Vincent Fourmond <fourmond@debian.org>
+Installed-Size: 500
+Depends: libblkid1 (>= 2.16), libc6 (>= 2.14)
+Suggests: cryptsetup (>= 1.0)
+Section: utils
+Priority: optional
+Description: mount removable devices as normal user
+ pmount is a wrapper around the standard mount program which permits normal
+ users to mount removable devices without a matching /etc/fstab entry. This
+ provides a robust basis for automounting frameworks like GNOME's Utopia
+ project and confines the amount of code that runs as root to a minimum.
+ .
+ If a LUKS capable cryptsetup package is installed, pmount is able to
+ transparently mount encrypted volumes.

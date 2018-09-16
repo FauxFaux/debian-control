@@ -1,0 +1,48 @@
+#!/bin/sh -e
+
+# some shorthands for sanity
+en="/etc/nagios4"
+enc="/etc/nagios4/conf.d"
+usn="/usr/share/nagios4"
+
+setperm() {
+    local user="${1}"
+    local group="${2}"
+    local mode="${3}"
+    local file="${4}"
+    shift 4
+    # only do something when no setting exists
+    if ! dpkg-statoverride --list "${file}" >/dev/null 2>&1
+    then
+	if [ -e "${file}" ]
+	then
+	    chown "${user}":"${group}" "${file}"
+	    chmod "${mode}" "${file}"
+	fi
+    fi
+}
+
+case "${1}" in
+    remove)
+	if [ -e /var/lib/nagios4/rw ]
+	then
+	  setperm nagios nagios 0755 /var/lib/nagios4
+	  setperm nagios nagios 0700 /var/lib/nagios4/rw
+	fi
+	;;
+    purge)
+	rm -f /etc/nagios4/htpasswd.users
+	rm -f /etc/nagios4/apache2.conf
+	if which ucf >/dev/null 2>&1
+	then
+	    ucf --purge /etc/nagios4/apache2.conf
+	fi
+	if [ -e /var/lib/nagios4/rw ]
+	then
+	  setperm nagios nagios 0750 /var/lib/nagios4
+	  setperm nagios nagios 0700 /var/lib/nagios4/rw
+	fi
+	;;
+esac
+
+

@@ -1,0 +1,26 @@
+Package: hgsvn
+Version: 0.1.8-1.1
+Architecture: all
+Maintainer: Vincent Danjean <vdanjean@debian.org>
+Installed-Size: 21
+Depends: python-pkg-resources, mercurial, subversion, python-elementtree | python (>= 2.5)
+Section: vcs
+Priority: extra
+Homepage: http://cheeseshop.python.org/pypi/hgsvn
+Description: Scripts to work locally on Subversion checkouts using Mercurial
+ This set of scripts allows to work locally on Subversion-managed projects
+ using the Mercurial distributed version control system.
+ .
+ Why use Mercurial ? You can do local (disconnected) work, pull the latest
+ changes from the SVN server, manage private branches, submit patches to
+ project maintainers, etc. And of course you have fast local operations like
+ "hg log", "hg annotate"...
+ .
+ Currenly three scripts are provided: hgimportsvn, hgpullsvn, and hgpushsvn.
+ .
+ hgimportsvn initializes an SVN checkout which is also a Mercurial repository.
+ .
+ hgpullsvn pulls the latest changes from the SVN repository, and updates the
+ Mercurial repository accordingly. It can be run multiple times.
+ .
+ hgpushsvn pushes your local Mercurial commits back to the SVN repository.

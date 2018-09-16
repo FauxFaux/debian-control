@@ -1,0 +1,25 @@
+Package: libaqbanking35-plugins
+Source: libaqbanking
+Version: 5.7.8-2
+Architecture: amd64
+Maintainer: Micha Lenk <micha@debian.org>
+Installed-Size: 810
+Depends: libaqbanking35 (>= 5.1.0beta), libaqebics0 (>= 5.3.2beta), libaqhbci24 (>= 4.1.8), libaqofxconnect7 (>= 4.0.0), libc6 (>= 2.14), libgmp10, libgnutls30 (>= 3.5.0), libgwenhywfar60 (>= 4.17.0), libktoblzcheck1v5, libxml2 (>= 2.6.27), libxmlsec1 (>= 1.2.26), libxmlsec1-gcrypt (>= 1.2.26), libxmlsec1-gnutls (>= 1.2.26), libxslt1.1 (>= 1.1.25), zlib1g (>= 1:1.1.4)
+Conflicts: libaqbanking-plugins-libgwenhywfar60 (<< 5.3.5beta)
+Replaces: libaqbanking-plugins-libgwenhywfar60 (<< 5.3.5beta)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.aquamaniac.de/aqbanking/
+Description: plugins needed by libaqbanking35
+ AqBanking provides a middle layer between the applications
+ and online banking libraries implementing various file formats and protocols.
+ Plugins supporting OFX, DTAUS, HBCI, and EBICS are available.
+ .
+ This package provides several plugins to AqBanking needed for features like:
+  * HBCI support
+  * OFX support
+  * EBICS support
+  * import/export of data in various formats (CSV, DTAUS, OFX, OpenHBCI1, SWIFT
+    and others)
+  * integrated debugging and setup wizard GUIs

@@ -1,0 +1,18 @@
+Package: sshfs
+Source: sshfs-fuse
+Version: 2.10+repack-2
+Architecture: amd64
+Maintainer: Bartosz Fenski <fenio@debian.org>
+Installed-Size: 122
+Depends: libc6 (>= 2.14), libfuse2 (>= 2.7), libglib2.0-0 (>= 2.12.0), fuse, openssh-client
+Section: utils
+Priority: optional
+Homepage: https://github.com/libfuse/sshfs
+Description: filesystem client based on SSH File Transfer Protocol
+ sshfs is a filesystem client based on the SSH File Transfer Protocol.
+ Since most SSH servers already support this protocol it is very easy
+ to set up: i.e. on the server side there's nothing to do.  On the
+ client side mounting the filesystem is as easy as logging into the
+ server with ssh.
+ .
+ sshfs is FUSE (Filesystem in USErspace).

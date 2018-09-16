@@ -1,0 +1,21 @@
+Package: git-notifier
+Version: 1:0.6-25-1
+Architecture: all
+Maintainer: Robert Edmonds <edmonds@debian.org>
+Installed-Size: 62
+Depends: default-mta | mail-transport-agent, git, python
+Recommends: moreutils
+Enhances: git, gitolite
+Section: vcs
+Priority: optional
+Homepage: http://www.icir.org/robin/git-notifier/
+Description: git commit email notification script
+ git-notifier is a script to be used with git as a post-receive hook.
+ Once installed, it emails out a summary of all changes each time a user
+ pushes an update to the repository. Different from other similar
+ scripts, git-notifier sends exactly one email per change, each of which
+ includes a complete diff of all modifications as well as the set of
+ branches from which the new revision can be reached. The script ensures
+ that each change is mailed out only exactly once by keeping a state
+ file of already reported revisions. The script integrates nicely with
+ gitolite.

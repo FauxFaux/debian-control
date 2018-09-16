@@ -1,0 +1,20 @@
+Package: drac
+Source: drac (1.12-8)
+Version: 1.12-8+b2
+Architecture: amd64
+Maintainer: Noël Köthe <noel@debian.org>
+Installed-Size: 67
+Depends: libc6 (>= 2.15), libdb5.3, portmap, postfix | mail-transport-agent
+Section: net
+Priority: optional
+Homepage: http://mail.cc.umanitoba.ca/drac/
+Description: Dynamic Relay Authorization Control (pop-before-smtp)
+ A daemon that dynamically updates a relay authorization map for some
+ MTA (postfix, sendmail). It provides a way to allow legitimate users
+ to relay mail through an SMTP server, while still preventing others
+ from using it as a spam relay. User's IP addresses are added to the
+ map immediately after they have authenticated to the POP or IMAP
+ server. By default, map entries expire after 30 minutes, but can be
+ renewed by additional authentication. Periodically checking mail on
+ a POP server is sufficient to do this. The POP and SMTP servers can
+ be on different hosts.

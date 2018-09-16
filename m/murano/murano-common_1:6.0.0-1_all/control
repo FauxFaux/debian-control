@@ -1,0 +1,22 @@
+Package: murano-common
+Source: murano
+Version: 1:6.0.0-1
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 309
+Depends: adduser, dbconfig-common, debconf, python3-murano (= 1:6.0.0-1), sqlite3, debconf (>= 0.5) | debconf-2.0, python3:any
+Recommends: python3-ldap
+Breaks: murano-api (<< 1:6.0.0~), murano-engine (<< 1:6.0.0~)
+Replaces: murano-api (<< 1:6.0.0~), murano-engine (<< 1:6.0.0~)
+Section: python
+Priority: optional
+Homepage: https://github.com/openstack/murano
+Description: cloud-ready application catalog - common files
+ Murano Project introduces an application catalog, which allows application
+ developers and cloud administrators to publish various cloud-ready
+ applications in a browsable categorised catalog, which may be used by the
+ cloud users (including the inexperienced ones) to pick-up the needed
+ applications and services and composes the reliable environments out of them
+ in a "push-the-button" manner.
+ .
+ This package contains common files to all Murano servers.

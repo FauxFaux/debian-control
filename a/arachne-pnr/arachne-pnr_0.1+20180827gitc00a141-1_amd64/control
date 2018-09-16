@@ -1,0 +1,20 @@
+Package: arachne-pnr
+Version: 0.1+20180827gitc00a141-1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 592
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), arachne-pnr-chipdb, yosys, fpga-icestorm
+Section: electronics
+Priority: optional
+Homepage: https://github.com/cseed/arachne-pnr
+Description: Place and route tool for iCE40 family FPGAs
+ Arachne-pnr implements the place and route step of the hardware compilation
+ process for FPGAs. It accepts as input a technology-mapped netlist in BLIF
+ format, as output by the Yosys synthesis suite for example. It currently
+ targets the Lattice Semiconductor iCE40 family of FPGAs. Its output is a
+ textual bitstream representation for assembly by the IceStorm icepack command.
+ The output of icepack is a binary bitstream which can be uploaded to a hardware
+ device.
+ .
+ Together, Yosys, arachne-pnr and IceStorm provide an fully open-source
+ Verilog-to-bistream tool chain for iCE40 1K and 8K FPGA development.

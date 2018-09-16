@@ -1,0 +1,22 @@
+Package: oss-compat
+Version: 7
+Architecture: amd64
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Installed-Size: 20
+Depends: kmod
+Suggests: osspd
+Section: sound
+Priority: optional
+Multi-Arch: foreign
+Description: Open Sound System (OSS) compatibility package
+ This package ensures that Open Sound System support is provided in
+ some way. On Linux, it enables the ALSA compatibility modules. On
+ other kernels where OSS is the default interface, no action is
+ taken.
+ .
+ The purpose of this package is for applications that only support OSS
+ to depend on it, hence preventing common "/dev/dsp not found" errors
+ that would confuse unexperienced users.
+ .
+ On Linux platforms a better approach nowadays is to use osspd, which
+ emulates OSS devices using ALSA or PulseAudio.

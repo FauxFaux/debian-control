@@ -1,0 +1,23 @@
+Package: libcgi-application-plugin-protectcsrf-perl
+Version: 1.01-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 35
+Depends: perl, libcgi-application-plugin-session-perl, libhtml-parser-perl
+Enhances: libcgi-application-perl
+Breaks: libcgi-application-extra-plugin-bundle-perl (<< 0.5)
+Replaces: libcgi-application-extra-plugin-bundle-perl (<< 0.5)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Application-Plugin-ProtectCSRF
+Description: plugin to generate and verify anti-CSRF challenges
+ CGI::Application::Plugin::ProtectCSRF is a CGI::Application plugin that
+ helps protect against CSRF attacks. It works by tying back the processing
+ of a form to the display of a form.
+ .
+ A cross-site request forgery is a form of online attack in which Mr Attacker
+ posts what appears to be an image in, say, a forum. However the image src
+ attribute is carefully crafted to undertake some action desired by Mr Attacker
+ on the target website. The trap is sprung when Mr Victim, logs on to the
+ target website and then views the image set up by Mr Attacker in the same
+ browser.

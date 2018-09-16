@@ -1,0 +1,24 @@
+Package: openntpd
+Version: 1:6.2p3-4
+Architecture: amd64
+Maintainer: Ulises Vitulli <dererk@debian.org>
+Installed-Size: 243
+Depends: libc6 (>= 2.26), adduser, lsb-base (>= 3.0-6), netbase
+Suggests: apparmor
+Conflicts: ntp, time-daemon
+Breaks: apparmor-profiles-extra (<< 1.8)
+Replaces: ntp, time-daemon
+Provides: time-daemon
+Section: net
+Priority: optional
+Homepage: http://www.openntpd.org
+Description: OpenBSD NTP daemon
+ NTP, the Network Time Protocol, is used to keep the computer clocks
+ synchronized. It provides the ability to sync the local clock to remote NTP
+ servers and can act as NTP server itself, redistributing the local clock.
+ .
+ This is an alternative implementation of the NTP software, made by the OpenBSD
+ Project. It makes use of privilege separation, only implements a subset of the
+ NTP protocol, adjusting the rate of the clock to synchronize the local clock.
+ .
+ Alternative packages which provide similar functionality are ntp and chrony.

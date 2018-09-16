@@ -1,0 +1,18 @@
+Package: sga
+Source: sga (0.10.15-3)
+Version: 0.10.15-3+b1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 2883
+Depends: libbamtools2.5.1, libc6 (>= 2.23), libgcc1 (>= 1:3.0), libgomp1 (>= 4.9), libstdc++6 (>= 5.2), zlib1g (>= 1:1.1.4), samtools, python, python-ruffus, python-pysam
+Recommends: abyss (>= 2.0.2-1)
+Section: science
+Priority: optional
+Homepage: https://github.com/jts/sga
+Description: de novo genome assembler that uses string graphs
+ The major goal of SGA is to be very memory efficient, which is achieved by
+ using a compressed representation of DNA sequence reads.
+ .
+ SGA is a de novo assembler for DNA sequence reads. It is based on Gene Myers'
+ string graph formulation of assembly and uses the FM-index/Burrows-Wheeler
+ transform to efficiently find overlaps between sequence reads.

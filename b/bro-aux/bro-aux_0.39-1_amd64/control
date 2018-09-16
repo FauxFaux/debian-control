@@ -1,0 +1,21 @@
+Package: bro-aux
+Version: 0.39-1
+Architecture: amd64
+Maintainer: Raúl Benencia <rul@kalgan.cc>
+Installed-Size: 70
+Depends: libc6 (>= 2.4), libpcap0.8 (>= 0.9.8)
+Suggests: gawk
+Enhances: bro
+Section: net
+Priority: optional
+Homepage: https://www.bro.org/sphinx/components/bro-aux/README.html
+Description: small auxiliary tools for Bro
+ This package provides handy auxiliary programs related to the use of the
+ Bro Network Security Monitor.
+ .
+ The “adtrace” utility is used to compute the network address that compose
+ the internal and extern nets that bro is monitoring. The “bro-cut” utility
+ reads ASCII Bro logs on standard input and outputs them with only the
+ specified columns (if no column names are specified, then all columns are
+ output). The "nfcollector" and "ftwire2bro" utilities are for dealing with
+ Bro’s custom file format for storing NetFlow records.

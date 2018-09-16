@@ -1,0 +1,21 @@
+Package: rtirq-init
+Source: rtirq
+Version: 20150216-2
+Architecture: all
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 27
+Section: misc
+Priority: optional
+Homepage: http://www.rncbc.org/jack/
+Description: startup script for realtime-preempt enabled kernels
+ This package contains a script to prioritize IRQ thread handlers
+ on a kernel patched with realtime-preempt patch from Ingo Molnar.
+ The script takes advantage of the fact that realtime kernels use
+ threads for IRQs management, and as such these threads (like any
+ other thread running on your system) can be given maximum
+ priority in an effort to minimize the latency of audio
+ peripherals.
+ .
+ The script identifies the audio devices present on the machine
+ and raises the priority of the threads that handle the IRQs of
+ such devices.

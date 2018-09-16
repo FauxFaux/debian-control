@@ -1,0 +1,22 @@
+Package: drbd-utils
+Version: 9.5.0-1
+Architecture: amd64
+Maintainer: Debian DRBD Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Installed-Size: 1947
+Depends: lsb-base (>= 3.0-6), libc6 (>= 2.27), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), init-system-helpers (>= 1.51), perl:any
+Recommends: heirloom-mailx | mailx
+Suggests: heartbeat
+Breaks: drbd8-utils (<< 2:8.9.0)
+Replaces: drbd8-utils (<< 2:8.9.0)
+Section: admin
+Priority: optional
+Homepage: https://www.drbd.org/
+Description: RAID 1 over TCP/IP for Linux (user utilities)
+ Drbd is a block device which is designed to build high availability
+ clusters by providing a virtual shared device which keeps disks in
+ nodes synchronised using TCP/IP. This simulates RAID 1 but avoiding
+ the use of uncommon hardware (shared SCSI buses or Fibre Channel).
+ It is currently limited to fail-over HA clusters.
+ .
+ This package contains the programs that will control the drbd kernel
+ module provided in the Linux kernel.

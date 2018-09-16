@@ -1,0 +1,32 @@
+Package: python-bioblend
+Version: 0.7.0-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 392
+Depends: python-boto, python-requests, python-requests-toolbelt, python-six, python-yaml, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Suggests: python-bioblend-doc
+Conflicts: python3-bioblend
+Section: python
+Priority: optional
+Homepage: https://github.com/galaxyproject/bioblend
+Description: CloudMan and Galaxy API library (Python 2)
+ BioBlend is a Python library for interacting with CloudMan and Galaxy's API.
+ BioBlend is supported and tested on:
+  · Python 2.6, 2.7, 3.3 and 3.4
+  · Galaxy release_14.02 and later.
+ Conceptually, it makes it possible to script and automate  the  process
+ of cloud infrastructure provisioning and scaling via CloudMan, and run‐
+ ning of analyses via Galaxy. In reality, it makes  it  possible  to  do
+ things like this:
+  · Create  a CloudMan compute cluster, via an API and directly from your
+    local machine:
+  · Reconnect to an existing CloudMan instance and manipulate it
+  · Interact with Galaxy via a straightforward API
+ .
+ Although this library allows you to blend these two services into  a
+ cohesive  unit,  the  library itself can be used with either service
+ irrespective of the other. For example,  you  can  use  it  to  just
+ manipulate  CloudMan  clusters or to script the interactions with an
+ instance of Galaxy running on your laptop.
+ .
+ This package installs the library for Python 2.

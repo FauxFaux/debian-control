@@ -1,0 +1,15 @@
+Package: pv-grub-menu
+Version: 1.3
+Architecture: all
+Maintainer: Charles Plessy <plessy@debian.org>
+Installed-Size: 86
+Depends: grub-common
+Conflicts: grub-legacy, grub-legacy-ec2
+Provides: grub-legacy-ec2
+Section: admin
+Priority: optional
+Description: Creates a menu.lst file for PV-GRUB
+ PV-GRUB is a utility of the vitualisation platform Xen, to boot virtual
+ machines with their own kernel.  This package maintains a configuration file in
+ /boot/grub/menu.lst, that is read by PV-GRUB.  It does nothing else, which
+ means that it is not suitable for booting non-virtual systems.

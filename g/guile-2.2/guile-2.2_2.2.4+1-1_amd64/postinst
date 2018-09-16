@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+update-alternatives \
+    --install \
+    /usr/bin/guile \
+    guile \
+    /usr/lib/x86_64-linux-gnu/guile-2.2/bin/guile \
+    2202 \
+    --slave /usr/share/man/man1/guile.1.gz guile.1.gz \
+    /usr/share/man/man1/guile-2.2.1.gz
+
+# Automatically added by dh_installmenu/11.3.5
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

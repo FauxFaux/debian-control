@@ -1,0 +1,16 @@
+Package: debsig-verify
+Version: 0.19
+Architecture: amd64
+Maintainer: Dpkg Developers <debian-dpkg@lists.debian.org>
+Installed-Size: 98
+Depends: libc6 (>= 2.14), libexpat1 (>= 2.0.1), gpg | gnupg
+Suggests: debian-keyring, debsigs
+Enhances: dpkg
+Built-Using: dpkg (= 1.19.0.5)
+Section: admin
+Priority: optional
+Description: Debian package signature verification tool
+ This tool inspects and verifies binary package digital signatures based
+ on predetermined policies, complementing repository signatures or allowing
+ to verify the authenticity of a package even after download when detached
+ from a repository.

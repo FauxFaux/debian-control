@@ -1,0 +1,19 @@
+Package: sagan
+Version: 1.2.0-1
+Architecture: amd64
+Maintainer: Pierre Chifflier <pollux@debian.org>
+Installed-Size: 591
+Depends: libc6 (>= 2.14), libee0 (>= 0.3.0), libestr0 (>= 0.1.0), libfastjson4 (>= 0.99.3), liblognorm5 (>= 0.3.0), libpcre3, libyaml-0-2, adduser, sagan-rules, lsb-base (>= 3.0-6)
+Section: admin
+Priority: optional
+Homepage: http://sagan.softwink.com/
+Description: Real-time System & Event Log Monitoring System
+ Sagan is a multi-threaded, real time system- and event-log monitoring
+ system, but with a twist. Sagan uses a “Snort” like rule set for
+ detecting malicious events happening on your network and/or computer
+ systems.
+ If Sagan detects a potentially bad event, that event can be stored to a
+ Snort database (MySQL/PostgreSQL), send it to a SIEM tool like Prelude,
+ or send an email.
+ Sagan is meant to be used in a ‘centralized’ logging environment, but
+ will work fine as part of a standalone Host IDS system for workstations.

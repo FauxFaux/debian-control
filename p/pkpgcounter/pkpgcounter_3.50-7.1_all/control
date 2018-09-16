@@ -1,0 +1,46 @@
+Package: pkpgcounter
+Version: 3.50-7.1
+Architecture: all
+Maintainer: Python Applications Packaging Team <python-apps-team@lists.alioth.debian.org>
+Installed-Size: 367
+Depends: python, python:any (<< 2.8), python:any (>= 2.7.5-5~), python-imaging (>= 1.1.2-3.2), ghostscript
+Recommends: python-psyco, imagemagick, xvfb, xauth, texlive-latex-base
+Suggests: abiword
+Section: utils
+Priority: optional
+Homepage: http://www.pykota.com/software/pkpgcounter
+Description: computes number of pages or quantity of ink needed to print documents
+ pkpgcounter is a generic Page Description Language parser which can
+ either count the number of pages or compute the percent of ink
+ coverage needed to print various types of documents. It is written in
+ Python.
+ .
+ It currently recognizes the following file formats :
+ .
+  * PostScript (both DSC compliant and binary)
+  * PDF
+  * PCL3/4/5
+  * PCLXL (aka PCL6)
+  * DVI
+  * OpenDocument (ISO/IEC DIS 26300)
+  * Microsoft Word (c) (tm) (r) (etc...)
+  * Plain text
+  * TIFF
+  * Several other image formats
+  * ESC/P2
+  * Zenographics ZjStream
+  * Samsung QPDL (aka SPL2)
+  * Samsung SPL1
+  * ESC/PageS03
+  * Brother HBP
+  * Hewlett-Packard Lightweight Imaging Device Interface Language
+  * Structured Fax
+  * Canon BJ/BJC
+  * ASCII PNM (Netpbm)
+ .
+ The ten latter ones, as well as some TIFF documents, are currently
+ only supported in page counting mode.
+ .
+ pkpgcounter is often used in combination with print
+ accounting solutions like PyKota or JasMine.
+Python-Version: 2.7

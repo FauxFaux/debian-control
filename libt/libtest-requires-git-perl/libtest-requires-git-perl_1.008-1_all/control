@@ -1,0 +1,17 @@
+Package: libtest-requires-git-perl
+Version: 1.008-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 27
+Depends: perl, git, libgit-version-compare-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Test-Requires-Git
+Description: module to check the available version of Git
+ Test::Requires::Git checks if the version of Git available for testing
+ meets the given requirements.
+ .
+ The "current git" is obtained by running "git --version" (so the first
+ "git" binary found in the "PATH" will be tested).
+ .
+ If the checks fail, then all tests will be skipped.

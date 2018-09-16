@@ -1,0 +1,18 @@
+Package: node-imports-loader
+Version: 0.7.1-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 17
+Depends: nodejs, node-source-map (>= 0.5.6), node-loader-utils (>= 1.0.2)
+Section: web
+Priority: optional
+Homepage: https://github.com/webpack/imports-loader#readme
+Description: imports loader module for webpack
+ The imports loader allows you to use modules that depend on specific global
+ variables.
+ .
+ This is useful for third-party modules that rely on global variables like '$'
+ or 'this' being the 'window' object. The imports loader can add the necessary
+ require('whatever') calls, so those modules work with webpack.
+ .
+ Node.js is an event-based server-side JavaScript engine.

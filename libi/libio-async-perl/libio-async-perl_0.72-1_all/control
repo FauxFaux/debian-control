@@ -1,0 +1,19 @@
+Package: libio-async-perl
+Version: 0.72-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 657
+Depends: perl, libfuture-perl (>= 0.33), libstruct-dumb-perl, perl (>= 5.17.8) | libsocket-perl (>= 2.007)
+Recommends: libasync-mergepoint-perl, libsereal-perl, libtest-fatal-perl, libtest-refcount-perl, perl (>= 5.19.8) | libio-socket-ip-perl (>= 0.26)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/IO-Async
+Description: modules for asynchronous event-driven programming
+ The IO::Async collection of modules allows programs to be written that
+ perform asynchronous filehandle IO operations.
+ .
+ A typical program using them would consist of a single subclass of
+ IO::Async::Loop to act as a container of other objects, which perform the
+ actual IO work required by the program. As well as IO handles, the loop also
+ supports timers and signal handlers, and includes more higher-level
+ functionality built on top of these basic parts.

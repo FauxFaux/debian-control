@@ -1,0 +1,31 @@
+Package: pbdagcon
+Source: pbdagcon (0.3+20161121+ds-1)
+Version: 0.3+20161121+ds-1+b1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 1146
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.4), libhdf5-100, libhdf5-cpp-100 (>= 1.8.13), libhts2, libstdc++6 (>= 6), zlib1g (>= 1:1.1.4), libpbseq, libpbbam
+Suggests: blasr
+Section: science
+Priority: optional
+Homepage: https://github.com/PacificBiosciences/pbdagcon
+Description: sequence consensus using directed acyclic graphs
+ pbdagcon is a tool that implements DAGCon (Directed Acyclic Graph Consensus)
+ which is a sequence consensus algorithm based on using directed acyclic
+ graphs to encode multiple sequence alignment.
+ .
+ It uses the alignment information from blasr to align sequence reads to a
+ "backbone" sequence. Based on the underlying alignment directed acyclic graph
+ (DAG), it will be able to use the new information from the reads to find the
+ discrepancies between the reads and the "backbone" sequences. A dynamic
+ programming process is then applied to the DAG to find the optimum sequence
+ of bases as the consensus. The new consensus can be used as a new backbone
+ sequence to iteratively improve the consensus quality.
+ .
+ While the code is developed for processing PacBio(TM) raw sequence data,
+ the algorithm can be used for general consensus purpose. Currently, it only
+ takes FASTA input. For shorter read sequences, one might need to adjust the
+ blasr alignment parameters to get the alignment string properly.
+ .
+ The code and the underlying graphical data structure have been used for some
+ algorithm development prototyping including phasing reads and pre-assembly.

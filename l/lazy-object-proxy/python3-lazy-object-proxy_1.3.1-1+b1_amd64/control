@@ -1,0 +1,27 @@
+Package: python3-lazy-object-proxy
+Source: lazy-object-proxy (1.3.1-1)
+Version: 1.3.1-1+b1
+Architecture: amd64
+Maintainer: Sandro Tosi <morph@debian.org>
+Installed-Size: 153
+Depends: libc6 (>= 2.4), python3 (<< 3.8), python3 (>= 3.6~), python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/ionelmc/python-lazy-object-proxy
+Description: Python 3 fast and thorough lazy object proxy
+ A lazy object proxy is an object that wraps a callable but defers the call
+ until the object is actually required, and caches the result of said call.
+ .
+ These kinds of objects are useful in resolving various dependency issues, few
+ examples:
+ .
+  * Objects that need to held circular references at each other, but at
+    different stages. To instantiate object Foo you need an instance of Bar.
+    Instance of Bar needs an instance of Foo in some of it methods (but not at
+    construction).  Circular imports sound familiar?
+ .
+  * Performance sensitive code. You don't know ahead of time what you're going
+    to use but you don't want to pay for allocating all the resources at the
+    start as you usually need just few of them.
+ .
+ This package contains the Python 3 version of lazy-object-proxy .

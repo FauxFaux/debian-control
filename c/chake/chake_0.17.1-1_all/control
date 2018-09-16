@@ -1,0 +1,16 @@
+Package: chake
+Version: 0.17.1-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 73
+Depends: rake, ruby | ruby-interpreter
+Section: admin
+Priority: optional
+Homepage: https://gitlab.com/terceiro/chake
+Description: serverless configuration management tool for chef
+ chake allows one to manage a number of hosts via SSH by combining chef (solo)
+ and rake. It doesn't require a chef server; all you need is a workstation from
+ where you can SSH into all your hosts. chake automates copying the
+ configuration management repository to the target host (including managing
+ encrypted files), running chef on them, and arbitraty commands on the hosts.
+Ruby-Versions: all

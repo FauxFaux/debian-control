@@ -1,0 +1,19 @@
+Package: ruby-docker-api
+Version: 1.22.2-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 94
+Depends: ruby | ruby-interpreter, ruby-archive-tar-minitar, ruby-excon (>= 0.28)
+Suggests: docker.io
+Section: ruby
+Priority: optional
+Homepage: https://github.com/swipely/docker-api
+Description: Ruby gem to interact with docker.io remote API
+ ruby-docker-api gem provides an object-oriented interface to the Docker
+ Remote API and a complete client implementation.
+ .
+ ruby-docker-api is designed to be very lightweight. Almost no state
+ is cached (aside from id's which are immutable) to ensure that each
+ method call's information is up to date. As such, just about every
+ external method represents an API call.
+Ruby-Versions: all

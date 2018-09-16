@@ -1,0 +1,18 @@
+Package: node-safe-buffer
+Version: 5.1.2-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 31
+Depends: nodejs (>= 4.7)
+Section: javascript
+Priority: optional
+Homepage: https://github.com/feross/safe-buffer
+Description: Safer Node.js Buffer API
+ The goal of this package is to provide a safe replacement for the node.js
+ `Buffer`. It's a drop-in replacement for `Buffer`. You can use it by adding
+ one `require` line to the top of your node.js modules; for example
+ var Buffer = require('safe-buffer').Buffer
+ Existing buffer code will continue to work without issues.
+ This package is a dependency for ava.
+ .
+ Node.js is an event-based server-side JavaScript engine.

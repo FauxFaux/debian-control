@@ -1,0 +1,26 @@
+Package: libmodule-install-perl
+Version: 1.19-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 356
+Depends: perl, libfile-remove-perl, libmodule-scandeps-perl (>= 1.09), perl (>= 5.19.9) | libparse-cpan-meta-perl (>= 1.4413), libyaml-tiny-perl
+Recommends: libarchive-zip-perl (>= 1.37), libfile-homedir-perl (>= 1.00), libwww-perl (>= 6.05), libjson-perl, libpar-dist-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Module-Install
+Description: framework for installing Perl modules
+ NOTE: while Module::Install pioneered many great ideas in its time, its
+ primary benefits have been better achieved by other tools, like Dist::Zilla,
+ and its spinoffs. Use of Module::Install for new distributions is therefore
+ discouraged by the maintainers.
+ .
+ Module::Install is a package for writing installers for CPAN (or CPAN-like)
+ distributions that are clean, simple, minimalist, act in a strictly correct
+ manner with ExtUtils::MakeMaker. It will run on any Perl installation version
+ 5.005 or newer.
+ .
+ It is designed to automatically include a copy of itself with modules that
+ use it, thus ensuring that bleeding-edge features will be available for use
+ in Makefile.PL in a simple and portable way. It is simple to learn, and has
+ the same features as ExtUtils::MakeMaker and Module::Build. However, it has
+ the advantage that it requires no installation for end-users.

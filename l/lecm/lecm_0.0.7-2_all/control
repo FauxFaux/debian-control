@@ -1,0 +1,19 @@
+Package: lecm
+Version: 0.0.7-2
+Architecture: all
+Maintainer: Debian Let's Encrypt Team <team+letsencrypt@tracker.debian.org>
+Installed-Size: 85
+Depends: acme-tiny, python3-openssl, python3-prettytable, python3-requests, python3-yaml, python3:any (>= 3.3.2-2~)
+Section: utils
+Priority: optional
+Homepage: https://github.com/Spredzy/lecm
+Description: Let's Encrypt Certificate Manager
+ Let's Encrypt Certificates Manager (lecm) is an utility that allows one to
+ manage (generate and renew) Let's Encrypt SSL certificates.
+ .
+ lecm can be placed in a cron to automatically renew lecm's managed
+ certificates according to a threshold; during the renewal operations
+ lecm is also able to restart the web server.
+ .
+ lecm take a yaml style configuration (default to /etc/lecm.conf),parameter can
+ be declared for all managed certificates or individually.

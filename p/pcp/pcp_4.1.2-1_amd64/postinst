@@ -1,0 +1,196 @@
+#!/bin/sh -e
+
+#
+# The goal here is to live-migrate PCP temporary files from places
+# they may have been stashed away in previous versions.  This is
+# important as they may be in-use by instrumented applications and
+# we want to avoid loss of service as a result of the switch.
+#
+
+# The new place ... this should match the setting in /etc/pcp.conf
+# _after_ the installation
+#
+PCP_TMP_DIR=/var/lib/pcp/tmp
+
+_version_configs()
+{
+    # Use the supported conffile move method (no prompts)
+    local FILE
+
+    local NPMCD=/etc/pcp/pmcd
+    local PMCD1=/etc/pmcd
+    local PMCD2=/var/lib/pcp/config/pmcd
+    for FILE in pmcd.conf pmcd.options rc.local; do
+        dpkg-maintscript-helper mv_conffile $PMCD2/$FILE $NPMCD/$FILE 3.7.0~ pcp -- "$@"
+        dpkg-maintscript-helper mv_conffile $PMCD1/$FILE $NPMCD/$FILE 3.6.1~ pcp -- "$@"
+    done
+
+    local NPMIE=/etc/pcp/pmie
+    local PMIE1=/etc/pmie
+    local PMIE2=/var/lib/pcp/config/pmie
+    for FILE in control; do
+        dpkg-maintscript-helper mv_conffile $PMIE2/$FILE $NPMIE/$FILE 3.7.0~ pcp -- "$@"
+        dpkg-maintscript-helper mv_conffile $PMIE1/$FILE $NPMIE/$FILE 3.6.1~ pcp -- "$@"
+    done
+
+    local NPMPROXY=/etc/pcp/pmproxy
+    local PMPROXY1=/etc/pmproxy
+    local PMPROXY2=/var/lib/pcp/config/pmproxy
+    for FILE in pmproxy.options; do
+        dpkg-maintscript-helper mv_conffile $PMPROXY2/$FILE $NPMPROXY/$FILE 3.7.0~ pcp -- "$@"
+        dpkg-maintscript-helper mv_conffile $PMPROXY1/$FILE $NPMPROXY/$FILE 3.6.1~ pcp -- "$@"
+    done
+
+    local NPMLOGGER=/etc/pcp/pmlogger
+    local PMLOGGER1=/etc/pmlogger
+    local PMLOGGER2=/var/lib/pcp/config/pmlogger
+    for FILE in control; do
+        dpkg-maintscript-helper mv_conffile $PMLOGGER2/control $NPMLOGGER/control 3.7.0~ pcp -- "$@"
+        dpkg-maintscript-helper mv_conffile $PMLOGGER1/control $NPMLOGGER/control 3.6.1~ pcp -- "$@"
+    done
+}
+
+if dpkg-maintscript-helper supports mv_conffile
+then
+    _version_configs "$@"
+fi
+
+touch /var/lib/pcp/pmns/.NeedRebuild
+chmod 644 /var/lib/pcp/pmns/.NeedRebuild
+
+getent group pcp >/dev/null || groupadd -r pcp
+getent passwd pcp >/dev/null || \
+useradd -c "Performance Co-Pilot" -g pcp -d /var/lib/pcp -M -r -s /usr/sbin/nologin pcp
+
+# must match GNUmakefile
+chown pcp:pcp /var/lib/pcp/config/pmda
+chmod 775 /var/lib/pcp/config/pmda
+chown pcp:pcp /var/lib/pcp/tmp
+chmod 775 /var/lib/pcp/tmp
+chown pcp:pcp /var/log/pcp
+chmod 775 /var/log/pcp
+chown pcp:pcp /etc/pcp/nssdb
+chmod 775 /etc/pcp/nssdb
+
+# must match src/pmcd/GNUmakefile
+chown pcp:pcp /var/log/pcp/pmcd
+chmod 775 /var/log/pcp/pmcd
+
+# must match src/pmdas/{json,bash,mmv}/GNUmakefile
+for PMDA in bash json mmv; do
+    # directory may be in optionally build component, so test first
+    #
+    if [ -d /var/lib/pcp/tmp/$PMDA ]
+    then
+	chown pcp:pcp /var/lib/pcp/tmp/$PMDA
+	chmod 775 /var/lib/pcp/tmp/$PMDA
+    fi
+done
+
+# must match src/pmie/GNUmakefile
+chown pcp:pcp /var/lib/pcp/config/pmie
+chmod 775 /var/lib/pcp/config/pmie
+chown pcp:pcp /var/lib/pcp/tmp/pmie
+chmod 775 /var/lib/pcp/tmp/pmie
+chown pcp:pcp /var/log/pcp/pmie
+chmod 775 /var/log/pcp/pmie
+
+# must match src/pmlogger/GNUmakefile
+chown pcp:pcp /var/lib/pcp/config/pmlogger
+chmod 775 /var/lib/pcp/config/pmlogger
+chown pcp:pcp /var/lib/pcp/tmp/pmlogger
+chmod 775 /var/lib/pcp/tmp/pmlogger
+chown pcp:pcp /var/log/pcp/pmlogger
+chmod 775 /var/log/pcp/pmlogger
+chown pcp:pcp /var/log/pcp/sa
+chmod 775 /var/log/pcp/sa
+
+# must match src/pmproxy/GNUmakefile
+chown pcp:pcp /var/log/pcp/pmproxy
+chmod 775 /var/log/pcp/pmproxy
+
+# and fixup the change in deployment plan for these ones in the case
+# of an upgrade, rather than an install ... they used to be pcp:pcp
+chown root:root /etc/pcp/pmie
+chmod 755 /etc/pcp/pmie
+chown root:root /etc/pcp/pmie/control
+chmod 644 /etc/pcp/pmie/control
+chown root:root /etc/pcp/pmlogger
+chmod 755 /etc/pcp/pmlogger
+chown root:root /etc/pcp/pmlogger/control
+chmod 644 /etc/pcp/pmlogger/control
+
+# migrate generated config files from /etc/pcp/* to /var/lib/pcp/config/*
+#
+if [ -f /etc/pcp/pmie/config.default ]
+then
+    cp /etc/pcp/pmie/config.default /var/lib/pcp/config/pmie/config.default
+    rm -f /etc/pcp/pmie/config.default
+    chown pcp:pcp /var/lib/pcp/config/pmie/config.default
+    chmod 644 /var/lib/pcp/config/pmie/config.default
+fi
+if [ -f /etc/pcp/pmlogger/config.default ]
+then
+    cp /etc/pcp/pmlogger/config.default /var/lib/pcp/config/pmlogger/config.default
+    rm -f /etc/pcp/pmlogger/config.default
+    chown pcp:pcp /var/lib/pcp/config/pmlogger/config.default
+    chmod 644 /var/lib/pcp/config/pmlogger/config.default
+fi
+
+do_systemd=true
+which deb-systemd-helper >/dev/null 2>&1 || do_systemd=false
+# only need to check pmcd.service, if it is here they will all
+# be here
+[ -f /lib/systemd/system/pmcd.service ] || do_systemd=false
+
+if $do_systemd
+then
+    deb-systemd-helper enable pmcd.service >/dev/null
+    deb-systemd-helper enable pmlogger.service >/dev/null
+    deb-systemd-helper enable pmie.service >/dev/null
+    deb-systemd-helper enable pmproxy.service >/dev/null
+elif which update-rc.d >/dev/null 2>&1
+then
+    update-rc.d -f pmcd remove >/dev/null
+    update-rc.d pmcd defaults >/dev/null
+    update-rc.d -f pmlogger remove >/dev/null
+    update-rc.d pmlogger defaults >/dev/null
+    update-rc.d -f pmie remove >/dev/null
+    update-rc.d pmie defaults >/dev/null
+    update-rc.d -f pmproxy remove >/dev/null
+    update-rc.d pmproxy defaults >/dev/null
+fi
+
+# transition pmdadmcache over to pmdadm (device mapper)
+#
+PCP_PMCDCONF_PATH=/etc/pcp/pmcd/pmcd.conf
+PCP_PMDAS_DIR=/var/lib/pcp/pmdas/
+if grep -q ^dmcache $PCP_PMCDCONF_PATH 2>/dev/null
+then
+    mkdir -p -m 755 "$PCP_PMDAS_DIR/dm"
+    touch "$PCP_PMDAS_DIR/dm/.NeedInstall"
+    touch "$PCP_PMDAS_DIR/dmcache/.NeedRemove"
+fi
+
+# set the notready flag for pmdaprometheus (only if already ./Install'd)
+#
+if grep -q ^prometheus $PCP_PMCDCONF_PATH 2>/dev/null
+then
+    touch "$PCP_PMDAS_DIR/prometheus/.NeedInstall"
+fi
+
+# set the notready flag for pmdabcc (only if already ./Install'd)
+#
+if grep -q ^bcc $PCP_PMCDCONF_PATH 2>/dev/null
+then
+    touch "$PCP_PMDAS_DIR/bcc/.NeedInstall"
+fi
+
+if which invoke-rc.d >/dev/null 2>&1
+then
+    invoke-rc.d pmcd start
+    invoke-rc.d pmlogger start
+else
+    /etc/init.d/pmcd start
+    /etc/init.d/pmlogger start
+fi

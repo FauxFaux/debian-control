@@ -1,0 +1,18 @@
+Package: barrnap
+Version: 0.9+dfsg-1
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 1440
+Depends: perl:any, hmmer (>= 3.1), bedtools
+Section: science
+Priority: optional
+Homepage: http://www.vicbioinformatics.com/software.barrnap.shtml
+Description: rapid ribosomal RNA prediction
+ Barrnap (BAsic Rapid Ribosomal RNA Predictor) predicts the location of
+ ribosomal RNA genes in genomes. It supports bacteria (5S,23S,16S), archaea
+ (5S,5.8S,23S,16S), mitochondria (12S,16S) and eukaryotes (5S,5.8S,28S,18S).
+ .
+ It takes FASTA DNA sequence as input, and writes GFF3 as output. It uses the
+ NHMMER tool that comes with HMMER 3.1 for HMM searching in RNA:DNA style.
+ Multithreading is supported and one can expect roughly linear speed-ups
+ with more CPUs.

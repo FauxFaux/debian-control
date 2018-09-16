@@ -1,0 +1,25 @@
+Package: mergerfs
+Version: 2.24.2-2
+Architecture: amd64
+Maintainer: Ritesh Raj Sarraf <rrs@debian.org>
+Installed-Size: 436
+Depends: libc6 (>= 2.27), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), libfuse2
+Section: utils
+Priority: optional
+Homepage: http://github.com/trapexit/mergerfs
+Description: another FUSE union filesystem
+ mergerfs is a union filesystem geared towards simplifying storage and
+ management of files across numerous commodity storage devices. It is
+ similar to mhddfs, unionfs, and aufs.
+ .
+ Some salient features include
+  * Runs in userspace (FUSE)
+  * Configurable behaviors
+  * Support for extended attributes (xattrs)
+  * Support for file attributes (chattr)
+  * Runtime configurable (via xattrs)
+  * Safe to run as root
+  * Opportunistic credential caching
+  * Works with heterogeneous filesystem types
+  * Handling of writes to full drives
+  * Handles pool of readonly and read/write drives

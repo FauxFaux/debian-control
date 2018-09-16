@@ -1,0 +1,20 @@
+Package: adns-tools
+Source: adns
+Version: 1.5.0~rc1-1.1
+Architecture: amd64
+Maintainer: Ian Jackson <ijackson@chiark.greenend.org.uk>
+Installed-Size: 117
+Depends: libadns1 (>= 1.5.0~), libc6 (>= 2.14)
+Conflicts: libadns0, libadns1-bin
+Replaces: libadns1-bin
+Provides: libadns1-bin
+Section: net
+Priority: optional
+Homepage: http://www.chiark.greenend.org.uk/~ian/adns/
+Description: Asynchronous-capable DNS client utilities
+ adns is a DNS resolver.  In contrast with many existing interfaces,
+ gethostbyname et al and libresolv, it can be used in an asynchronous,
+ non-blocking manner.  Many queries can be handled simultaneously.
+ .
+ This package contains useful utilities for IP address resolving,
+ fast bulk logfile processing, and testing.

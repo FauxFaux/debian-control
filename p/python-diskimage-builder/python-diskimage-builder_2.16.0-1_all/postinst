@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/dib-block-device dib-block-device /usr/bin/python2-dib-block-device 300
+	update-alternatives --install /usr/bin/dib-lint dib-lint /usr/bin/python2-dib-lint 300
+	update-alternatives --install /usr/bin/disk-image-create disk-image-create /usr/bin/python2-disk-image-create 300
+	update-alternatives --install /usr/bin/element-info element-info /usr/bin/python2-element-info 300
+	update-alternatives --install /usr/bin/ramdisk-image-create ramdisk-image-create /usr/bin/python2-ramdisk-image-create 300
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-diskimage-builder 
+fi
+
+# End automatically added section
+
+
+exit 0

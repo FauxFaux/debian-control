@@ -1,0 +1,26 @@
+Package: libcgi-application-plugin-authorization-perl
+Version: 0.07-5
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 113
+Depends: perl, libcgi-application-basic-plugin-bundle-perl, libcgi-application-perl, libuniversal-require-perl
+Recommends: libapache-htgroup-perl, libcgi-application-plugin-authentication-perl, libnet-ldap-perl
+Enhances: libcgi-application-perl
+Breaks: libcgi-application-extra-plugin-bundle-perl (<< 0.3)
+Replaces: libcgi-application-extra-plugin-bundle-perl (<< 0.3)
+Provides: libcgi-application-plugin-authorization-driver-activedirectory-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Application-Plugin-Authorization
+Description: authorization framework for CGI::Application
+ CGI::Application::Plugin::Authorization adds the ability to authorize users
+ for specific tasks. Once a user has been authenticated and you know who you
+ are dealing with, you can then use this plugin to control what that user has
+ access to. It imports two methods (authz and authorization) into your
+ CGI::Application module.  Both of these methods are interchangeable, so you
+ should choose one and use it consistently throughout your code.  Through the
+ authz method you can call all the methods of the
+ CGI::Application::Plugin::Authorization plugin.
+ .
+ This package also bundles an active directory driver:
+ CGI::Application::Plugin::Authorization::Driver::ActiveDirectory

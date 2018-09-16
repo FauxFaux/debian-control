@@ -1,0 +1,30 @@
+Package: ifupdown-extra
+Version: 0.28
+Architecture: all
+Maintainer: Javier Fernandez-Sanguino Peña <jfs@debian.org>
+Installed-Size: 100
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: lsb-base, iproute2, iputils-ping | ping, netcat, iputils-arping | arping, net-tools, host, curl
+Recommends: ethtool, ndisc6
+Conflicts: debian-goodies (<< 0.39)
+Section: admin
+Priority: optional
+Description: Network scripts for ifupdown
+ This package provides a set of network testing scripts to be used together
+ with the ifupdown package. These scripts can:
+   - check the network cable before an interface is configured.
+   - test if an assigned IPv4 or IPv6 address is already in use in the network.
+   - test if default network gateways are reachable.
+   - setup default static routes for interfaces.
+ .
+ Additionally network static routes can also be defined globally for the
+ system when this is needed (e.g. for 'reject' rules) and will be
+ added after network initialisation.
+ .
+ This package also provides 'network-test', a script to test the network
+ configuration status by checking:
+   - Status of available interface.
+   - Availability of configured gateway routes.
+   - If host resolution is working properly (DNS checks).
+   - If network connectivity is working, including ICMP and web connections to
+     remote web servers.

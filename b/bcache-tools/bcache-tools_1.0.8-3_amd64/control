@@ -1,0 +1,18 @@
+Package: bcache-tools
+Version: 1.0.8-3
+Architecture: amd64
+Maintainer: David Mohr <david@mcbf.net>
+Installed-Size: 88
+Depends: libblkid1 (>= 2.17.2), libc6 (>= 2.8), libuuid1 (>= 2.16)
+Recommends: initramfs-tools | linux-initramfs-tool
+Section: utils
+Priority: optional
+Homepage: https://bcache.evilpiepirate.org/
+Description: bcache userspace tools
+ Bcache allows the use of SSDs to cache other block devices.
+ .
+ Documentation for the run-time interface is included in the kernel tree; in
+ Documentation/bcache.txt.
+ .
+ This package includes udev rules, initramfs support, and the utilities to
+ create a new bcache as well as inspect existing bcache partitions.

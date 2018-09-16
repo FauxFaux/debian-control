@@ -1,0 +1,26 @@
+Package: qemubuilder
+Source: cowdancer (0.87)
+Version: 0.87+b1
+Architecture: amd64
+Maintainer: Debian pbuilder maintenance team <team+pbuilder@tracker.debian.org>
+Installed-Size: 107
+Depends: debootstrap, e2fsprogs, pbuilder, qemu-system | kvm, libc6 (>= 2.15), libncurses6 (>= 6), libtinfo6 (>= 6)
+Section: utils
+Priority: optional
+Homepage: https://wiki.debian.org/qemubuilder
+Description: pbuilder using QEMU as backend
+ pbuilder implementation for QEMU.
+ .
+ qemubuilder create -- builds QEMU cow base image.
+ .
+ qemubuilder update -- updates QEMU cow base image.
+ .
+ qemubuilder build -- builds package inside QEMU cow base image.
+ .
+ Gives a pbuilder interface for emulated cross-building environments
+ using qemu.
+ .
+ pbuilder is a tool for building and testing Debian package inside a
+ clean chroot, and qemubuilder implements similar experience over
+ emulated CPUs. This tool allows building package inside emulated
+ Debian environment for different CPU architectures supported by qemu.

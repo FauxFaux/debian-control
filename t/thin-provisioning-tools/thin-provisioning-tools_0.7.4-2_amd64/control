@@ -1,0 +1,14 @@
+Package: thin-provisioning-tools
+Version: 0.7.4-2
+Architecture: amd64
+Maintainer: Debian LVM Team <pkg-lvm-maintainers@lists.alioth.debian.org>
+Installed-Size: 1319
+Depends: libaio1 (>= 0.3.93), libc6 (>= 2.14), libexpat1 (>= 2.0.1), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Section: admin
+Priority: optional
+Description: Tools for handling thinly provisioned device-mapper meta-data
+ This package contains tools to handle meta-data from the device-mapper
+ thin target.  This target allows the use of a single backing store for multple
+ thinly provisioned volumes.  Numerous snapshots can be taken from such
+ volumes.  The tools can check the meta-data for consistency, repair damaged
+ information and dump or restore the meta-data in textual form.

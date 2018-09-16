@@ -1,0 +1,23 @@
+Package: superiotool
+Source: superiotool (0.0+r6637-1)
+Version: 0.0+r6637-1+b2
+Architecture: amd64
+Maintainer: Uwe Hermann <uwe@debian.org>
+Installed-Size: 2550
+Depends: libc6 (>= 2.4), libpci3 (>= 1:3.5.2-1)
+Section: utils
+Priority: extra
+Homepage: http://coreboot.org/Superiotool
+Description: Super I/O detection tool
+ Superiotool is a user-space utility which can
+ .
+   - detect which Super I/O chip is soldered onto your mainboard,
+ .
+   - at which configuration port it's located (usually 0x2e or 0x4e), and
+ .
+   - dump all register contents of the Super I/O chip, together with the
+     default values as per datasheet (to make comparing the values easy).
+ .
+ It is mainly used for coreboot (previously known as LinuxBIOS) development
+ purposes (see coreboot.org for details on coreboot), but it may also be
+ useful for other things.

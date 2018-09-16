@@ -1,0 +1,35 @@
+Package: mptp
+Version: 0.2.4-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 160
+Depends: libc6 (>= 2.14), libgsl23, libgslcblas0
+Recommends: bash-completion
+Section: science
+Priority: optional
+Homepage: https://github.com/Pas-Kapli/mptp
+Description: single-locus species delimitation
+ Implementation of a fast species delimitation method, based on PTP
+ (Zhang et al. 2013) with a 64-bit multi-threaded design that handles
+ very large datasets.
+ .
+ The tool mPTP can handle very large biodiversity datasets. It implements
+ a fast method to compute the ML delimitation from an inferred
+ phylogenetic tree of the samples. Using MCMC, it also computes the
+ support values for each clade, which can be used to assess the
+ confidence of the ML delimitation.
+ .
+ ML delimitation mPTP implements two flavours of the point-estimate
+ solution. First, it implements the original method from (Zhang et al.
+ 2013) where all within-species processes are modelled with a single
+ exponential distribution. mPTP uses a dynamic programming implementation
+ which estimates the ML delimitation faster and more accurately than the
+ original PTP. The dynamic programming implementation has similar
+ properties as (Gulek et al. 2010). See the wiki for more information.
+ The second method assumes a distinct exponential distribution for the
+ branching events of each of the delimited species allowing it to fit to
+ a wider range of empirical datasets.
+ .
+ MCMC method mPTP generates support values for each clades. They
+ represent the ratio of the number of samples for which a particular node
+ was in the between-species process, to the total number of samples.

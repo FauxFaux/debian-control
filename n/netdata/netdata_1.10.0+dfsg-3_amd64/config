@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+CONFFILE="/etc/netdata/health_alarm_notify.conf"
+
+. /usr/share/debconf/confmodule
+
+if [ -e "${CONFFILE}" ]; then
+	# contains bashisms
+	. ${CONFFILE} || true
+
+	db_set netdata/send_email "${SEND_EMAIL}"
+fi
+
+db_settitle netdata/title
+db_input low netdata/send_email || true
+db_go
+
+db_stop

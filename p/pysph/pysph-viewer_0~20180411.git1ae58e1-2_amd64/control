@@ -1,0 +1,20 @@
+Package: pysph-viewer
+Source: pysph
+Version: 0~20180411.git1ae58e1-2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 19
+Depends: python-pysph, python-numpy (>= 1:1.14.3), python-numpy-abi9, python:any
+Recommends: mayavi2
+Section: python
+Priority: optional
+Homepage: http://pysph.googlecode.com
+Description: viewer for PySPH - framework for Smoothed Particle Hydrodynamics
+ It is implemented in Python and the performance critical parts are
+ implemented in Cython.
+ .
+ PySPH is implemented in a way that allows a user to specify the entire
+ SPH simulation in pure Python. High-performance code is generated from
+ this high-level Python code, compiled on the fly and executed. PySPH also
+ features optional automatic parallelization using mpi4py and Zoltan.
+ The package contains viewer for PySPH.

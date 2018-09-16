@@ -1,0 +1,26 @@
+Package: libdist-checkconflicts-perl
+Version: 0.11-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 56
+Depends: perl, libmodule-runtime-perl (>= 0.009)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Dist-CheckConflicts
+Description: module for declaring version conflicts for a distribution
+ One shortcoming of the CPAN clients that currently exist is that they have no
+ way of specifying conflicting downstream dependencies of modules.
+ Dist::CheckConflicts attempts to work around this issue by allowing you to
+ specify conflicting versions of modules separately, and deal with them after
+ the module is done installing.
+ .
+ For instance, say you have a module Foo, and some other module Bar uses Foo.
+ If Foo were to change its API in a non-backwards-compatible way, this would
+ cause Bar to break until it is updated to use the new API. Foo can't just
+ depend on the fixed version of Bar, because this will cause a circular
+ dependency (because Bar is already depending on Foo), and this doesn't
+ express intent properly anyway - Foo doesn't use Bar at all. The ideal
+ solution would be for there to be a way to specify conflicting versions of
+ modules in a way that would let CPAN clients update conflicting modules
+ automatically after an existing module is upgraded, but until that happens,
+ this module will allow users to do this manually.

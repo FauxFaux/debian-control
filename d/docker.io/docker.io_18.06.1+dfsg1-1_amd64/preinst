@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper mv_conffile /etc/bash_completion.d/docker.io /etc/bash_completion.d/docker 1.2.0\~ -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/default/docker.io /etc/default/docker 1.2.0\~ -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/init.d/docker.io /etc/init.d/docker 1.2.0\~ -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/init/docker.io.conf /etc/init/docker.conf 1.2.0\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/bash_completion.d/docker 1.11.2\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/docker.conf 18.06.0\~ -- "$@"
+# End automatically added section

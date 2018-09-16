@@ -1,0 +1,20 @@
+Package: liblist-maker-perl
+Version: 0.005-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 44
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/List-Maker
+Description: Perl module to generate more sophisticated lists than just $a..$b
+ The List::Maker module hijacks Perl's built-in file globbing syntax (< *.pl >
+ and glob '*.pl') and retargets it at list creation.
+ .
+ The rationale is simple: most people rarely if ever glob a set of files, but
+ they have to create lists in almost every program they write. So the list
+ construction syntax should be easier than the filename expansion syntax.
+ .
+ Alternatively, you can load the module with an explicit name, and it creates
+ a subroutine of that name that builds the same kinds of lists for you
+ (leaving the globbing mechanism unaltered).

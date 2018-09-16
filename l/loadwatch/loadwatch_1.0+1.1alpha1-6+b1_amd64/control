@@ -1,0 +1,16 @@
+Package: loadwatch
+Source: loadwatch (1.0+1.1alpha1-6)
+Version: 1.0+1.1alpha1-6+b1
+Architecture: amd64
+Maintainer: Nicolas Boullis <nboullis@debian.org>
+Installed-Size: 48
+Depends: libc6 (>= 2.4)
+Section: utils
+Priority: optional
+Description: Run a program using only idle cycles
+ loadwatch forks a child process and only allows it to run when the
+ system load meets user-defined parameters. It allows you to specify
+ that a program should run only if the load is below a specified
+ point, and will stop it when that point is reached. When the load
+ falls below a second specified point, the program will be
+ continued. The user can also specify the system load sampling period.

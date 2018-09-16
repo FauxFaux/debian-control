@@ -1,0 +1,17 @@
+Package: fcgiwrap
+Version: 1.1.0-10
+Architecture: amd64
+Maintainer: Peter Colberg <peter@colberg.org>
+Installed-Size: 60
+Depends: lsb-base (>= 3.0-6), spawn-fcgi (>= 1.6.1) | systemd, init-system-helpers (>= 1.18~), libc6 (>= 2.15), libfcgi0ldbl, libsystemd0
+Enhances: nginx
+Section: web
+Priority: extra
+Homepage: https://github.com/gnosek/fcgiwrap
+Description: simple server to run CGI applications over FastCGI
+ fcgiwrap is a simple server for running CGI applications over FastCGI.
+ Its goal is to provide clean CGI support to the nginx webserver, although
+ can be used with others.
+ .
+ fcgiwrap is lightweight and has no configuration, making it possible to
+ use the same pool to run different sites.

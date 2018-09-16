@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+	"remove")
+		if [ -x /usr/sbin/update-gsfontmap ]
+		then
+			update-gsfontmap
+		fi
+	;;
+esac
+
+

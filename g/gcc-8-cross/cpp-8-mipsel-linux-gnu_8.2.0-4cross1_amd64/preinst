@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove mipsel-linux-gnu-cpp /usr/bin/mipsel-linux-gnu-cpp-8
+fi
+
+
+
+exit 0

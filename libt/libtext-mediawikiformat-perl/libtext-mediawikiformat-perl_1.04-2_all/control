@@ -1,0 +1,29 @@
+Package: libtext-mediawikiformat-perl
+Version: 1.04-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 78
+Depends: libcgi-pm-perl, libhtml-parser-perl, libhtml-tagset-perl, liburi-perl, perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Text-MediawikiFormat
+Description: module that converts Mediawiki markup into other text formats
+ Wikipedia and its sister projects use the PHP Mediawiki to format
+ their pages. Text::MediawikiFormat attempts to duplicate the Mediawiki
+ formatting rules. Those formatting rules can be simple and easy to use, while
+ providing more advanced options for the power user. They are also easy to
+ translate into other, more complicated markup languages with this module. It
+ creates HTML by default, but could produce valid POD, DocBook, XML, or any
+ other format imaginable.
+ .
+ The most important function is Text::MediawikiFormat::format(). It is not
+ exported by default, but will be exported as wikiformat() if any options at
+ all are passed to the exporter, unless the name is overridden explicitly. See
+ "EXPORT" for more information.
+ .
+ It should be noted that this module is written as a drop in replacement for
+ Text::WikiMarkup that expands on that modules functionality and provides a
+ default rule set that may be used to format text like the PHP Mediawiki. It
+ is also well to note early that if you just want a Mediawiki clone (you don't
+ need to customize it heavily and you want integration with a back end
+ database), you should look at Wiki::Toolkit::Formatter::Mediawiki.

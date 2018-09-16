@@ -1,0 +1,19 @@
+Package: ivy-debian-helper
+Version: 1.0
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 37
+Depends: default-jre-headless | java7-runtime-headless, maven-repo-helper, ant, ivy
+Recommends: debhelper
+Section: java
+Priority: optional
+Description: Helper tools for building Debian packages with Ivy
+ ivy-debian-helper contains helper tools to ease the packaging of Ivy
+ based projects in Debian. It consists in:
+ .
+  * an Ivy plugin resolving the dependencies against the system Maven
+    repository (/usr/share/maven-repo). The resolver uses the same Maven
+    rule files that maven-debian-helper and maven-repo-helper employ
+    (debian/maven.rules, debian/maven.ignoreRules).
+  * a debhelper class initializing the plugin and running Ant+Ivy in offline
+    mode.

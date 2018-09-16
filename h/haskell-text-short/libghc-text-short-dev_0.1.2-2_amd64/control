@@ -1,0 +1,27 @@
+Package: libghc-text-short-dev
+Source: haskell-text-short
+Version: 0.1.2-2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 711
+Depends: libghc-base-dev-4.10.1.0-35a7f, libghc-binary-dev-0.8.5.1-efb65, libghc-bytestring-dev-0.10.8.2-4a9e2, libghc-deepseq-dev-1.4.3.0-38379, libghc-ghc-prim-dev-0.5.1.1-c8f3d, libghc-hashable-dev-1.2.7.0-6cb51, libghc-text-dev-1.2.3.0-81981, libc6 (>= 2.14), libgmp10
+Suggests: libghc-text-short-doc, libghc-text-short-prof
+Provides: libghc-text-short-dev-0.1.2-58ca6
+Section: haskell
+Priority: optional
+Homepage: https://github.com/hvr/text-short
+Description: memory-efficient representation of Unicode text strings
+ This Haskell library provides the 'ShortText' type which is suitable
+ for keeping many short strings in memory. This is similiar to the
+ relationship between 'ShortByteString' and 'ByteString'.
+ .
+ The main differences between 'Text' and 'ShortText' is that
+ 'ShortText' uses UTF-8 instead of UTF-16 internally and 'ShortText'
+ doesn't support zero-copy slicing (thereby saving 2 words).
+ Consequently, the memory footprint of a (boxed) 'ShortText' value is 4
+ words (2 words when unboxed) plus the length of the UTF-8 encoded
+ payload.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: text-short-0.1.2-3Uygp64k5ip25KhQORvvTe

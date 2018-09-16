@@ -1,0 +1,18 @@
+Package: cowbuilder
+Source: cowdancer (0.87)
+Version: 0.87+b1
+Architecture: amd64
+Maintainer: Debian pbuilder maintenance team <team+pbuilder@tracker.debian.org>
+Installed-Size: 80
+Depends: cowdancer, pbuilder, libc6 (>= 2.14), libncurses6 (>= 6), libtinfo6 (>= 6)
+Replaces: cowdancer (<= 0.49)
+Section: utils
+Priority: optional
+Description: pbuilder running on cowdancer
+ 'cowbuilder' command is a wrapper for pbuilder which allows using
+ pbuilder-like interface over cowdancer environment.
+ .
+ pbuilder is a tool for building and testing Debian package inside a clean
+ chroot, and cowbuilder allows chroot to be recreated using
+ hard-linked copies with copy-on-write, which makes creation and
+ destruction of chroots fast.

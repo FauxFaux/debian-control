@@ -1,0 +1,72 @@
+#!/bin/sh
+
+set -e
+
+if [  "$1" = "triggered" ]; then
+	invoke-rc.d mcollective stop || :
+	invoke-rc.d mcollective start
+	exit
+fi
+
+MCOLLECTIVE_SERVER_CFG="/etc/mcollective/server.cfg"
+
+case "$1" in
+	configure)
+		if [ ! -e "$MCOLLECTIVE_SERVER_CFG" ]; then
+			cp /usr/share/mcollective/server.cfg $MCOLLECTIVE_SERVER_CFG
+                else
+                        # try to update config file values
+                        # remove deprecated voncif goption
+                        sed -i 's/^topicprefix.*$//g' $MCOLLECTIVE_SERVER_CFG
+                        # change default connector. previous one "stomp" has been deprecated since 2.2.0
+                        sed -i 's/^connector = stomp/connector = activemq\nplugin.activemq.pool.size = 1/g' $MCOLLECTIVE_SERVER_CFG
+                        # change stomp options to activemq ones, keeping user values
+                        sed -i 's/^plugin.stomp.host=\(.*\)$/plugin.activemq.pool.1.host = \1/g' $MCOLLECTIVE_SERVER_CFG
+                        sed -i 's/^plugin.stomp.port=.*$/plugin.activemq.pool.1.port = 61613/g' $MCOLLECTIVE_SERVER_CFG
+                        sed -i 's/^plugin.stomp.user=\(.*\)$/plugin.activemq.pool.1.user = \1/g' $MCOLLECTIVE_SERVER_CFG
+                        sed -i 's/^plugin.stomp.password=\(.*\)/plugin.activemq.pool.1.password = \1/g' $MCOLLECTIVE_SERVER_CFG
+		fi
+
+		chmod 600 $MCOLLECTIVE_SERVER_CFG
+	;;
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+	*)
+		echo "postinst called with unknown argument \`${1}'" >&2
+		exit 1
+	;;
+esac
+
+# Automatically added by dh_installsystemd/11.2.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'mcollective.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'mcollective.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'mcollective.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'mcollective.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.2.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		deb-systemd-invoke $_dh_action 'mcollective.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

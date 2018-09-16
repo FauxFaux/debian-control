@@ -1,0 +1,24 @@
+Package: python3-reprozip-dbg
+Source: reprozip
+Version: 1.0.14-2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 561
+Depends: python3-dbg (<< 3.8), python3-dbg (>= 3.6~), python3-dbg:any (>= 3.3~), libc6 (>= 2.14), libsqlite3-0 (>= 3.5.9), python3-reprozip (= 1.0.14-2)
+Section: debug
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.reprozip.org
+Description: debug extensions for the ReproZip packer
+ ReproZip is a tool aimed at simplifying the process of creating
+ reproducible experiments from command-line executions, a frequently-used
+ common denominator in computational science.
+ .
+ It tracks operating system calls and creates a package that contains
+ all the binaries, files and dependencies required to run a given
+ command on the author’s computational environment (packing step). A
+ reviewer can then extract the experiment in his environment to
+ reproduce the results (unpacking step).
+ .
+ This package provides the debug extensions for Python 3.
+Build-Ids: bc6dd1b44a5e8af5b0852e2dd421160be6de559b bc71c3a1a47afd5be7352d2cd33d5cabae219aa4

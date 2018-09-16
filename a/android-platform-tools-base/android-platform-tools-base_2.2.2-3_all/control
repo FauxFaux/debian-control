@@ -1,0 +1,22 @@
+Package: android-platform-tools-base
+Version: 2.2.2-3
+Architecture: all
+Maintainer: Android Tools Maintainers <android-tools-devel@lists.alioth.debian.org>
+Installed-Size: 180
+Depends: default-jre-headless (>= 2:1.8) | java8-runtime-headless, libandroid-ddms-java (>= 2.2.2-3)
+Suggests: default-jre
+Section: java
+Priority: optional
+Homepage: https://android.googlesource.com/platform/tools/base/
+Description: base tools for developing applications for the Android system
+ This package includes various tools for developing and building Android
+ applications, e.g.
+ .
+  * Draw 9-patch: Allows you to easily create a NinePatch graphic using a
+    WYSIWYG editor. It also previews stretched versions of the image, and
+    highlights the area in which content is allowed.
+ .
+  * screenshot2: Takes a screenshot from a remote Android device.
+ .
+ default-jre or other non-headless JRE needs to be installed in order to run
+ "draw9patch". However draw9patch fails to run due to bug #798794.

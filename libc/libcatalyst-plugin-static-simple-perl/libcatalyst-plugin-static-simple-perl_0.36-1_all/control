@@ -1,0 +1,24 @@
+Package: libcatalyst-plugin-static-simple-perl
+Version: 0.36-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 46
+Depends: perl, libcatalyst-perl, libmime-types-perl (>= 2.03), libmoose-perl, libmoosex-types-perl, libnamespace-autoclean-perl
+Breaks: libcatalyst-modules-perl (<< 48~)
+Replaces: libcatalyst-modules-perl (<< 48~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-Plugin-Static-Simple
+Description: Catalyst plugin for easy serving of static pages
+ Catalyst::Plugin::Static::Simple is designed to make serving static content
+ in your application during development quick and easy, without requiring a
+ single line of code from you.
+ .
+ This plugin detects static files by looking at the file extension in the URL
+ (such as .css or .png or .js). The plugin uses the lightweight MIME::Types
+ module to map file extensions to IANA-registered MIME types, and will serve
+ your static files with the correct MIME type directly to the browser, without
+ being processed through Catalyst.
+ .
+ Catalyst is an elegant Model-View-Controller web application framework
+ written in Perl.

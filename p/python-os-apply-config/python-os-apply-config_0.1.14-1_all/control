@@ -1,0 +1,26 @@
+Package: python-os-apply-config
+Version: 0.1.14-1
+Architecture: all
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 119
+Pre-Depends: dpkg (>= 1.15.6~)
+Depends: python-anyjson (>= 0.3.3), python-pbr (>= 0.6), python-pystache, python (>= 2.7), python (<< 2.8)
+Section: python
+Priority: optional
+Homepage: https://github.com/openstack/os-apply-config
+Description: Creates config files out of cloud metadata
+ os-apply-config apply configuration out of the cloud metadata (JSON) that it
+ recieves from a metadata server.
+ .
+ It turns metadata from one or more JSON files like this:
+ .
+  {"keystone":
+   {"database":
+    {"host": "127.0.0.1", "user": "keystone", "password": "foobar"}
+   }
+  }
+ .
+ into service config files like this:
+ .
+  [sql]
+  connection = mysql://keystone:foobar@127.0.0.1/keystone

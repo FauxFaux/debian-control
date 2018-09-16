@@ -1,0 +1,18 @@
+Package: prism2-usb-firmware-installer
+Source: linux-wlan-ng
+Version: 0.2.9+dfsg-6
+Architecture: amd64
+Maintainer: Tormod Volden <debian.tormod@gmail.com>
+Installed-Size: 130
+Depends: wget, libc6 (>= 2.2.5)
+Section: contrib/kernel
+Priority: extra
+Description: firmware files for the prism2_usb kernel driver
+ prism2-usb-firmware-installer will at the time of its own installation
+ download the firmware files for the prism2_usb devices from the
+ upstream code repository and convert them to the format used by the
+ kernel modules since 2.6.32.
+ .
+ Note that only some adapters really need a firmware file and that
+ firmware files are not completely free (in the sense of freely
+ redistributable), which is why this package exists.

@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+TEMPDIR=$(mktemp -d) || exit 1
+
+echo Fetching file...
+wget -P $TEMPDIR http://pubs.opengroup.org/onlinepubs/9699919799/download/susv4-2018.tar.bz2
+
+echo Verifying SHA512 checksum...
+SHA512SUM="c356d8b9b311201bef8900add7aab18b822af0e6e1a0c63b141c7c5f5e401bf25f39dcf9976577e934b7bfc939574c965ebefd63fef7a57ad6feb875e237fd7d"
+[ x"$(sha512sum $TEMPDIR/susv4-2018.tar.bz2 | cut -f1 -d\ )" = x"$SHA512SUM" ] || (rm -rf $TEMPDIR; exit 1)
+
+echo Untarring...
+bunzip2 -cd $TEMPDIR/susv4-2018.tar.bz2 | tar xf - -C /usr/share/doc/susv4 --no-same-permissions --no-same-owner
+
+rm -rf $TEMPDIR
+
+## Note: Keep debhelper token after so that files exist when they're being
+## registered.
+
+

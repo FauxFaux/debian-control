@@ -1,0 +1,22 @@
+Package: libjboss-xnio-java
+Source: jboss-xnio
+Version: 3.6.2-2
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 737
+Depends: libjboss-threads-java, libwildfly-client-config-java, libwildfly-common-java
+Suggests: libjboss-xnio-java-doc, libosgi-core-java
+Section: java
+Priority: optional
+Homepage: http://xnio.jboss.org/
+Description: simplified low-level I/O layer for NIO
+ XNIO is a simplified low-level I/O layer which can be used anywhere you are
+ using non-blocking I/O today. It frees you from the hassle of dealing with
+ Selectors and the lack of NIO support for multicast sockets and non-socket
+ I/O, while still maintaining all the capabilities present in NIO, and it opens
+ the door to non-obvious optimizations.
+ .
+ XNIO provides a unique API for combining blocking and non-blocking operations,
+ even on the same channel, allowing you to take advantage of the simplicity and
+ low latency of blocking I/O while still gaining the thread-conservative and
+ throughput benefits of non-blocking I/O.

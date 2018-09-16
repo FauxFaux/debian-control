@@ -1,0 +1,18 @@
+Package: ippusbxd
+Version: 1.33-1
+Architecture: amd64
+Maintainer: Debian Printing Team <debian-printing@lists.debian.org>
+Installed-Size: 87
+Depends: libavahi-client3 (>= 0.6.16), libavahi-common3 (>= 0.6.16), libc6 (>= 2.15), libusb-1.0-0 (>= 2:1.0.16)
+Recommends: system-config-printer-udev
+Enhances: cups
+Conflicts: cups-filters-ippusbxd
+Replaces: cups-filters-ippusbxd
+Provides: cups-filters-ippusbxd
+Section: comm
+Priority: optional
+Homepage: https://github.com/OpenPrinting/ippusbxd
+Description: Daemon for IPP USB printer support
+ ippusbxd is a userland driver for USB devices supporting the IPP USB
+ specification. It enables these USB printers to be seen as regular
+ network IPP printers.

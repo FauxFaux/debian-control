@@ -1,0 +1,30 @@
+Package: libgeo-google-mapobject-perl
+Version: 0.06-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 61
+Depends: perl, libhtml-parser-perl, libjson-perl
+Recommends: libhtml-template-pluggable-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Geo-Google-MapObject
+Description: module managing the server side of the Google Maps API
+ Geo::Google::MapObject is intended to provide a server side solution to
+ working with the Google Maps API. In particular an object of this class
+ encapsulates a "map" object that provides support for the static maps API,
+ the javascript maps API, AJAX calls and non-javascript fallback data; but
+ without making many assumptions about the surrounding framework. It is assumed
+ that a template framework with support for a "dot" notation is being used,
+ for example HTML::Template::Pluggable. An important commitment of the module
+ is support for graceful and consistent fallback to a functional
+ non-javascript web page.
+ .
+ The javascript and static Google map APIs do not behave in quite the same way
+ when zoom and center are not specified. Specifically it works quite well with
+ the static maps
+ (http://developers.google.com/maps/documentation/staticmaps/?csw=1)
+ but not so well with the javascript API. To compensate for this the
+ module gives a choice between: specifying the center and zoom levels;
+ allowing the APIs and client side code to do whatever they think best; using
+ a built in algorithm to calculate a sensible zoom and center; and finally
+ supplying ones own algorithm to calculate a sensible zoom and center.

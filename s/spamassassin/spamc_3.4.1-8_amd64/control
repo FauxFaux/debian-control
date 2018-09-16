@@ -1,0 +1,22 @@
+Package: spamc
+Source: spamassassin
+Version: 3.4.1-8
+Architecture: amd64
+Maintainer: Noah Meyerhans <noahm@debian.org>
+Installed-Size: 130
+Depends: libc6 (>= 2.14), libssl1.1 (>= 1.1.0)
+Suggests: spamassassin
+Section: mail
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.spamassassin.org/
+Description: Client for SpamAssassin spam filtering daemon
+ spamc is the client to communicate with spamd, the daemonized form of
+ SpamAssassin (see the spamassassin package). It is written in C for
+ maximum speed and minimum loading overhead.
+ .
+ spamc is quite useful for integrating spamassassin into an MTA or
+ into a .procmailrc file because of its speed.
+ .
+ This package is useless unless you have spamassassin installed,
+ either on this machine or another local machine (i.e. a mail server).

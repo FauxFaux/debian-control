@@ -1,0 +1,18 @@
+Package: policyd-weight
+Version: 0.1.15.2-12
+Architecture: all
+Maintainer: Werner Detter <werner@aloah-from-hell.de>
+Installed-Size: 170
+Depends: perl:any, adduser, lsb-base, libnet-dns-perl, libnet-ip-perl, libio-socket-inet6-perl
+Recommends: libsys-syslog-perl
+Section: mail
+Priority: optional
+Homepage: http://www.policyd-weight.org/
+Description: Perl policy daemon for the Postfix MTA
+ policyd-weight is intended to eliminate forged envelope senders and HELOs
+ (i.e. in bogus mails). It allows you to score DNSBLs (RBL/RHSBL), HELO,
+ MAIL FROM and client IP addresses before any queuing is done. It allows
+ you to REJECT messages which have a score higher than allowed, providing
+ improved blocking of spam and virus mails. policyd-weight caches the most
+ frequent client/sender combinations (SPAM as well as HAM) to reduce the
+ number of DNS queries.

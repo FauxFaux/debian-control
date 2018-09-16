@@ -1,0 +1,37 @@
+Package: libopenturns0.11
+Source: openturns
+Version: 1.10-5
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 18391
+Depends: libblas3 | libblas.so.3, libc6 (>= 2.23), libgcc1 (>= 1:4.0), libhmat-oss1, liblapack3 | liblapack.so.3, libmuparser2v5 (>= 2.2.3), libnlopt0 (>= 2.2.4), libstdc++6 (>= 5.2), libtbb2, libxml2 (>= 2.7.4)
+Suggests: python-openturns, r-base-core, ghostscript, r-other-rot (= 1.10-5)
+Breaks: openturns-wrapper
+Replaces: openturns-wrapper
+Section: libs
+Priority: optional
+Homepage: http://www.openturns.org/
+Description: dynamic libraries for OpenTURNS
+ OpenTURNS is a powerful and generic tool to treat and quantify
+ uncertainties in numerical simulations in design, optimization and
+ control. It allows both sensitivity and reliability analysis studies:
+  * define the outputs of interest and decision criteria;
+  * quantify and model the source of uncertainties;
+  * propagate uncertainties and/or analyse sensitivity
+  * rank the sources of uncertainty
+ .
+ OpenTURNS is a large project with more than 300 C++ classes which
+ uses well known and supported software such as R for the statistical
+ methods and BLAS/LAPACK for the linear algebra.
+ .
+ This package provides the dynamic libraries.
+ .
+ The library implements almost all the treatments of uncertainty that
+ OpenTURNS can provide. It is designed to be linked against any user
+ specific application, or with either the textual front-end (see
+ python-openturns or python3-openturns packages).
+ .
+ The main function of that library is giving to specific applications
+ all the functionalities needed to treat uncertainties in
+ studies. Targeted users are all engineers who want to introduce the
+ probabilistic dimension in their so far deterministic studies.

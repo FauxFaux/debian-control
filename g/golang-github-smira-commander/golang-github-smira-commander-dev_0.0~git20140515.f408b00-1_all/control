@@ -1,0 +1,21 @@
+Package: golang-github-smira-commander-dev
+Source: golang-github-smira-commander
+Version: 0.0~git20140515.f408b00-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 35
+Depends: golang-github-smira-flag-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/smira/commander
+Description: library to provide command-line commands and sub-commands
+ Package commander is a fork of a spin off of golang  go tool
+ infrastructure to provide commands and sub-commands.
+ .
+ This package is a fork of t he original commander package, with the
+ following modifications:
+   - flags could be placed anywhere on the command line
+   - flags in whole subcommand tree should be non-conflicting
+     (i.e. one name - one value type)
+   - interface has changed: first flags should be parsed, then command
+     dispatched

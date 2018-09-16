@@ -1,0 +1,37 @@
+Package: koji-servers
+Source: koji
+Version: 1.16.0-2
+Architecture: all
+Maintainer: Reproducible Builds Maintainers <reproducible-builds@lists.alioth.debian.org>
+Installed-Size: 1540
+Depends: python, python:any (>= 2.7.5-5~), koji-common (= 1.16.0-2), createrepo, python-cheetah, python-krbv, python-libvirt, python-libxml2, python-qpid, python-rpm, python-simplejson, yum
+Recommends: httpd
+Suggests: systemd
+Section: devel
+Priority: optional
+Homepage: https://pagure.io/koji
+Description: RPM-based build system - server components
+ The Fedora Project uses Koji for their build system, as do several other
+ projects.
+ .
+ Koji's goal is to provide a flexible, secure, and reproducible way to build
+ software.
+ .
+ Key features:
+ .
+  -  New buildroot for each build
+  -  Robust XML-RPC APIs for easy integration with other tools
+  -  Web interface with SSL and Kerberos authentication
+  -  Thin, portable command line client
+  -  Users can create local buildroots
+  -  Buildroot contents are tracked in the database
+  -  Versioned data
+ .
+ This package contains the server components of the koji build system.
+ .
+  - koji-hub, the center of all Koji operations. It is an XML-RPC server
+    running under mod_wsgi in Apache.
+  - kojid is the build daemon that runs on each of the build machines.
+  - koji-web is a set of scripts that run in mod_wsgi and use the Cheetah
+    templating engine to provide a web interface to Koji.
+  - kojira is a daemon that keeps the build root repodata updated.

@@ -1,0 +1,48 @@
+#!/bin/sh -e
+
+. /usr/share/nagios4/debian/httpd.webapps-common
+
+apacheconf="/etc/nagios4/apache2.conf"
+
+setperm() {
+    local user="${1}"
+    local group="${2}"
+    local mode="${3}"
+    local file="${4}"
+    shift 4
+    # only do something when no setting exists
+    if ! dpkg-statoverride --list "${file}" >/dev/null 2>&1
+    then
+	if [ -e "${file}" ]
+	then
+	    chown "${user}":"${group}" "${file}"
+	    chmod "${mode}" "${file}"
+	fi
+    fi
+}
+
+if [ -f "${apacheconf}" ]
+then
+    case "${1}" in
+	remove)
+	    # find the configured servers
+	    configured_servers=`wc_httpd_apache_configured "${apacheconf}" nagios4`
+	    if [ "${configured_servers}" ]
+	    then
+		# deconfigure them
+		wc_httpd_apache_uninclude "${apacheconf}" nagios4 "${configured_servers}"
+		# reload the configured servers if they are running 
+		running_servers="$(wc_httpd_running "${configured_servers}")"
+		if [ "${running_servers}" ]
+		then
+		      wc_httpd_invoke "reload" ${running_servers}
+		fi
+	    fi
+	    if [ -e /var/lib/nagios4/rw ]
+	    then setperm nagios www-data 0700 /var/lib/nagios4/rw
+	    fi
+	    ;;
+    esac
+fi
+
+

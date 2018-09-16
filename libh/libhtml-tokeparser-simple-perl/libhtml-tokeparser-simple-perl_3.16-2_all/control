@@ -1,0 +1,19 @@
+Package: libhtml-tokeparser-simple-perl
+Version: 3.16-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 90
+Depends: perl, libhtml-parser-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/HTML-TokeParser-Simple
+Description: Perl module used to tokenize HTML documents
+ HTML::TokeParser::Simple is a subclass of HTML::TokeParser that uses
+ easy-to-remember method calls to work with tokens.  For instance,
+ rather than writing code like this:
+ .
+    $token->[0] eq 'S' and $token->[1] eq 'form' .
+ .
+ you can instead write something simpler like this:
+ .
+    $token->is_start_tag( 'form' )

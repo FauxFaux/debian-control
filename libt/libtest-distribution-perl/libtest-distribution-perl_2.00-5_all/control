@@ -1,0 +1,23 @@
+Package: libtest-distribution-perl
+Version: 2.00-5
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 40
+Depends: perl, libfile-find-rule-perl, libtest-pod-perl, libtest-pod-coverage-perl, libpod-coverage-perl
+Section: perl
+Priority: extra
+Homepage: https://metacpan.org/release/Test-Distribution
+Description: perform tests on all modules of a distribution
+ When using Test::Distribution in a test script, it goes through all the
+ modules in your distribution, checks their POD, checks that they compile ok
+ and checks that they all define a $VERSION.
+ .
+ This module also performs a number of tests on the distribution itself. It
+ checks that your files match your SIGNATURE file if you have one. It checks
+ that your distribution isn't missing certain 'core' description files. It
+ checks to see you haven't missed out listing any pre-requisites in Makefile.PL
+ .
+ It defines its own testing plan, so you usually don't use it in conjunction
+ with other Test::* modules in the same file. It's recommended that you just
+ create a one-line test script as shown in the SYNOPSIS above. However, there
+ are options.

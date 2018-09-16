@@ -1,0 +1,15 @@
+Package: librust-crossbeam-epoch+lazy-static-dev
+Source: rust-crossbeam-epoch
+Version: 0.5.2-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-crossbeam-epoch-dev (= 0.5.2-1), librust-lazy-static-1+default-dev
+Provides: librust-crossbeam-epoch-0+lazy-static-dev (= 0.5.2-1), librust-crossbeam-epoch-0.5+lazy-static-dev (= 0.5.2-1), librust-crossbeam-epoch-0.5.2+lazy-static-dev (= 0.5.2-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/crossbeam-rs/crossbeam-epoch
+Description: Epoch-based garbage collection - feature "lazy_static"
+ This metapackage enables feature lazy_static for the Rust crossbeam-epoch
+ crate, by pulling in any additional dependencies needed by that feature.

@@ -1,0 +1,40 @@
+Package: php-analog
+Version: 1.0.7-2
+Architecture: all
+Maintainer: Debian PHP PEAR Maintainers <pkg-php-pear@lists.alioth.debian.org>
+Installed-Size: 95
+Depends: php-psr-log (>= 1.0.0-2~), php-common, php-psr-log (<< 2~~)
+Section: php
+Priority: optional
+Homepage: https://github.com/jbroadway/analog
+Description: PHP micro logging package
+ PHP 5.3+ micro logging class that can be extended via closures. Includes
+ several pre-built handlers including file, mail, syslog, HTTP post, and
+ MongoDB.
+ .
+ Analog also comes with over a dozen pre-written handlers in the
+ Analog/Handlers folder, with examples for each in the examples folder.
+ These include:
+ .
+  - Amon - Send logs to the Amon server monitoring tool
+  - Buffer - Buffer messages to send all at once (works with File, Mail,
+    Stderr,
+    and Variable handlers)
+  - ChromeLogger - Sends messages to Chrome Logger browser plugin
+  - File - Append messages to a file
+  - FirePHP - Send messages to FirePHP browser plugin
+  - GELF - Send message to the Graylog2 log management server
+  - LevelBuffer - Buffer messages and send only if sufficient error level
+    reached
+  - Mail - Send email notices
+  - Mongo - Save to MongoDB collection
+  - Multi - Send different log levels to different handlers
+  - Null - Do nothing
+  - Post - Send messages over HTTP POST to another machine
+  - Stderr - Send messages to STDERR
+  - Syslog - Send messages to syslog
+  - Threshold - Only writes log messages above a certain threshold
+  - Variable - Buffer messages to a variable reference.
+ .
+ So while it's a micro class, it's highly extensible and very capable out of the
+ box too.

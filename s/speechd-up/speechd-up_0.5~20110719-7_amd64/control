@@ -1,0 +1,21 @@
+Package: speechd-up
+Version: 0.5~20110719-7
+Architecture: amd64
+Maintainer: Debian Accessibility Team <pkg-a11y-devel@lists.alioth.debian.org>
+Installed-Size: 87
+Depends: libc6 (>= 2.15), libdotconf0 (>= 1.0.13), libspeechd2 (>= 0.7.1), speech-dispatcher, lsb-base
+Section: admin
+Priority: optional
+Homepage: https://github.com/williamh/speechd-up.git
+Description: Interface between Speech Dispatcher and SpeakUp
+ SpeechD-Up provides an interface daemon between Speakup (kernel based
+ screen reader) and Speech Dispatcher (common interface to speech
+ synthesis). Using SpeechD-Up, you can make Speakup work with software
+ synthesizers like Flite or Festival. This interface is in no way optimal
+ and it suffers of many problems. Some users still find it useful.
+ If you want to have sound on the console with a commercial speech synthetiser,
+ such as ibmtts, you need a connector between the speech synthetiser and the
+ speakup_soft module. As there has not been any usable connector since Squeeze,
+ this package has this function. It is useless if you use a free speech
+ synthetiser as Espeak, since a connector exists and is packaged: see the
+ espeakup package. It is also useless if you use speechd-el with Emacs.

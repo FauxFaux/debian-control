@@ -1,0 +1,19 @@
+Package: magic-wormhole-transit-relay
+Version: 0.1.2-1
+Architecture: all
+Maintainer: Antoine Beaupré <anarcat@debian.org>
+Installed-Size: 94
+Depends: python3-twisted (>= 17.5.0~), python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/warner/magic-wormhole-transit-relay
+Description: Transit Relay server for Magic-Wormhole
+ This repository implements the Magic-Wormhole "Transit Relay", a
+ server that helps clients establish bulk-data transit connections
+ even when both are behind NAT boxes. Each side makes a TCP connection
+ to this server and presents a handshake. Two connections with
+ identical handshakes are glued together, allowing them to pretend
+ they have a direct connection.
+ .
+ This server used to be included in the magic-wormhole repository, but
+ was split out into a separate repo to aid deployment and development.

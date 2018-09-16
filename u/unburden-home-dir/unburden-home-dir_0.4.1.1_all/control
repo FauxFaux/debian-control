@@ -1,0 +1,55 @@
+Package: unburden-home-dir
+Version: 0.4.1.1
+Architecture: all
+Maintainer: Axel Beckert <abe@debian.org>
+Installed-Size: 67
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: libconfig-file-perl, libfile-basedir-perl, libfile-rsync-perl, libfile-touch-perl, libfile-which-perl, libipc-run-perl, libstring-expand-perl, libtry-tiny-perl, perl:any
+Recommends: lsof, x11-common
+Suggests: agedu, autotrash, bleachbit, corekeeper, eatmydata, fslint, ncdu | baobab | filelight | xdiskusage | xdu, unburden-home-dir-doc, tmpreaper
+Enhances: x11-common
+Section: utils
+Priority: optional
+Homepage: https://github.com/xtaran/unburden-home-dir
+Description: Remove or move cache files automatically from user's home
+ unburden-home-dir allows users to move cache files from browsers,
+ etc. off their home directory, i.e. on a local harddisk or tmpfs and
+ replace them with a symbolic link to the new location (e.g. on /tmp/
+ or /scratch/) upon login. Optionally the contents of the directories
+ and files can be removed instead of moved.
+ .
+ This is helpful at least in the following cases:
+ .
+ The idea-giving case are big workstation setups where $HOME is on NFS
+ and all those caches put an unnecessary burden (hence the name) on
+ the file server since caching over NFS doesn't have the best
+ performance and may clog the NFS server, too.
+ .
+ A similar case, but with different purpose is reducing I/O on mobile
+ devices like laptops or netbooks to extend the battery life or reduce
+ the wearing down of CF or SD cards, e.g. in single board computers
+ like the Raspberry Pi or Alix or APU boards: Moving browser caches
+ etc. off the real disk into a tmpfs filesystem reduces the amount of
+ disk I/O which reduces the power consumption of the disk.
+ .
+ Another possible solution for saving non-crucial I/O is using the
+ package eatmydata to ignore a software's fsync calls.
+ .
+ The other type of use cases for unburden-home-dir is to reduce disk
+ space usage, e.g. on devices with small disk space but a lot of RAM
+ as seen often on boxes with flash disks or early netbooks, e.g.  the
+ first EeePC with 4GB disk space and 2GB RAM. In this case you want to
+ move off as many cache files, etc. as possible to some tmpfs
+ filesystem, e.g. /tmp/.
+ .
+ It may also help to reduce the amount of needed backup disk space by
+ keeping those files in places where they don't get backed up. In that
+ case it's an alternative to keeping the blacklist in your backup
+ software up-to-date.
+ .
+ For some users it may also be helpful to stay under their quota.
+ .
+ The package also contains an Xsession hook which calls this script on
+ X login for every user. But by default no files or directories are
+ configured to be moved elsewhere, so nothing will happen
+ automatically without configuration.

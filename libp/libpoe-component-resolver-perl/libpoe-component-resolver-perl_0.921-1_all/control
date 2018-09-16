@@ -1,0 +1,17 @@
+Package: libpoe-component-resolver-perl
+Version: 0.921-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 52
+Depends: perl, libpoe-perl, libsocket-getaddrinfo-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/POE-Component-Resolver
+Description: POE Component for domain name resolution
+ POE::Component::Resolver is a Perl module that provides nonblocking domain
+ name resolution by using Socket::GetAddrInfo's getaddrinfo() function in
+ subprocesses where they are permitted to block indefinitely.
+ .
+ By default, it will use a maximum of eight subprocesses and prefer address
+ families in whatever order Socket::GetAddrInfo returns them. These defaults
+ can be overridden with constructor parameters.

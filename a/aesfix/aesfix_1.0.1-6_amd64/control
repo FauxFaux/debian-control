@@ -1,0 +1,19 @@
+Package: aesfix
+Version: 1.0.1-6
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 41
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 4.9)
+Recommends: aeskeyfind
+Section: utils
+Priority: optional
+Homepage: https://citp.princeton.edu/research/memory/code
+Description: tool for correcting bit errors in an AES key schedule
+ This program illustrates a technique for correcting bit errors in an AES
+ key schedule. It should be used with the output of the aeskeyfind program.
+ .
+ It is limited to AES-128 key schedules, and it can only correct unidirectional
+ 1->0 bit errors.  For the most part it has been optimized for readability
+ rather than performance.
+ .
+ This package is useful to several activities, as forensics investigations.

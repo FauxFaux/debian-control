@@ -1,0 +1,16 @@
+Package: rt-app
+Version: 0.3-2
+Architecture: amd64
+Maintainer: Linaro Packagers <linaro-pkg@lists.launchpad.net>
+Installed-Size: 120
+Depends: libc6 (>= 2.12), libjson-c3 (>= 0.10), python
+Section: misc
+Priority: optional
+Homepage: https://github.com/gbagnoli/rt-app
+Description: Test application which simulates a real-time periodic load
+ rt-app is a test application that starts multiple periodic threads in
+ order to simulate a real-time periodic load. It supports the
+ SCHED_OTHER/SCHED_FIFO/SCHED_RR kernel mechanisms as well as the
+ AQuoSA framework and SCHED_DEADLINE. It can be run with a simple
+ command-line config, or a more complex set of tasks/threads
+ configured in a (json) config file.

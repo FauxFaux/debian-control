@@ -1,0 +1,28 @@
+Package: libjavacc-maven-plugin-java
+Source: javacc-maven-plugin
+Version: 2.6-4
+Architecture: all
+Maintainer: Ludovico Cavedon <cavedon@debian.org>
+Installed-Size: 97
+Depends: javacc, jtb, libdoxia-core-java (>= 1.7), libdoxia-sitetools-java (>= 1.7.4), libmaven-reporting-api-java (>= 3.0), libmaven-reporting-impl-java, libmaven3-core-java (>= 3.5.0), libplexus-utils-java
+Section: java
+Priority: optional
+Homepage: https://github.com/mojohaus/javacc-maven-plugin
+Description: maven plugin which uses JavaCC to process JavaCC grammar files
+ This plugin uses the JavaCC parser generator to process JavaCC grammar
+ files and generate the appropriate Java source files. For general
+ information about JavaCC, see the  JavaCC web site.
+ .
+ JavaCC grammar files use the extension .jj. This plugin can be used to
+ locate and process all grammar files within a specified directory. Java
+ source files will be written to a common generated-sources output
+ directory, typically located in the build output directory. By default,
+ the plugin will run during the generate-sources phase, but it can be
+ configured to run in other phases as well.
+ .
+ The plugin can also be used to call the JJTree and JTB tools.
+ .
+ Finally, this plugin contains a goal for running JJDoc. JJDoc is a
+ simple tool that generates BNF documentation for the JavaCC grammar
+ files. This can be used to generate a report for your project site using
+ the Maven reporting tools.

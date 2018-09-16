@@ -1,0 +1,29 @@
+Package: pinentry-gnome3
+Source: pinentry (1.1.0-1)
+Version: 1.1.0-1+b1
+Architecture: amd64
+Maintainer: Debian GnuPG Maintainers <pkg-gnupg-maint@lists.alioth.debian.org>
+Installed-Size: 127
+Depends: gcr, libassuan0 (>= 2.0.1), libc6 (>= 2.14), libgcr-base-3-1 (>= 3.8.0), libglib2.0-0 (>= 2.26.0), libgpg-error0 (>= 1.14), libncursesw6 (>= 6), libsecret-1-0 (>= 0.7), libtinfo6 (>= 6)
+Recommends: dbus-user-session
+Suggests: pinentry-doc
+Enhances: gnupg-agent
+Provides: pinentry, pinentry-x11
+Section: utils
+Priority: optional
+Homepage: https://www.gnupg.org/related_software/pinentry/
+Description: GNOME 3 PIN or pass-phrase entry dialog for GnuPG
+ This package contains a program that allows for secure entry of PINs or
+ pass phrases.  That means it tries to take care that the entered
+ information is not swapped to disk or temporarily stored anywhere.
+ This functionality is particularly useful for entering pass phrases
+ when using encryption software such as GnuPG or e-mail clients using
+ the same.  It uses an open protocol and is therefore not tied to
+ particular software.
+ .
+ The program contained in this package implements a PIN entry dialog
+ designed for use with GNOME 3.  It tries to follow the GNOME Human
+ Interface Guidelines as much as possible.  If the X Window System is
+ not active then an alternative text-mode dialog will be used.  There
+ are sibling packages that implement PIN entry dialogs using other
+ tool kits.

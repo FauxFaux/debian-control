@@ -1,0 +1,25 @@
+Package: sendfile
+Source: sendfile (2.1b.20080616-5.3)
+Version: 2.1b.20080616-5.3+b3
+Architecture: amd64
+Maintainer: Martin Schulze <joey@debian.org>
+Installed-Size: 552
+Depends: libc6 (>= 2.14), libreadline7 (>= 6.0), openbsd-inetd | inet-superserver, perl | perl5, update-inetd, libdpkg-perl
+Suggests: pgp-i
+Section: net
+Priority: optional
+Homepage: http://fex.rus.uni-stuttgart.de/saft/
+Description: Simple Asynchronous File Transfer
+ Sendfile is an asynchronous file transfer service for the Internet,
+ like the sendfile facility in Bitnet: Any user A can send files to
+ another user B without B being active in any way.
+ .
+ The existing standard file transfer (ftp) is a synchronous service:
+ The user must have access to an account on the sending and on the
+ receiving site, too.
+ .
+ Sendfile for Unix, which is an implementation of the SAFT protocol
+ (Simple Asynchronous File Transfer) now offers you a true
+ asynchronous file transfer service for the Internet.  Virtually any
+ form of file can be sent, including encrypted ones.  The SAFT
+ protocol will be submitted as an RFC in the near future.

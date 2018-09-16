@@ -1,0 +1,23 @@
+Package: bumblebee
+Version: 3.2.1-17
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 190
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: bbswitch-dkms | bbswitch-source, lsb-base (>= 3.0-6), xserver-xorg-core (>= 2:1.18), libbsd0 (>= 0.2.0), libc6 (>= 2.15), libglib2.0-0 (>= 2.12.0), libkmod2 (>= 5~), libx11-6
+Recommends: virtualgl | primus
+Suggests: bumblebee-nvidia (= 3.2.1-17)
+Section: utils
+Priority: optional
+Homepage: https://launchpad.net/~bumblebee
+Description: NVIDIA Optimus support for Linux
+ Bumblebee is an effort to make NVIDIA Optimus enabled laptops work in
+ GNU/Linux systems. These laptops are built in such a way that the NVIDIA
+ graphics card can be used on demand so that battery life is improved and
+ temperature is kept low.
+ .
+ It disables the discrete graphics card if no client is detected, and starts
+ an X server making use of NVIDIA card if requested then let software GL
+ implementations (such as VirtualGL) copy frames to the visible display that
+ runs on the integrated graphics. The ability to use discrete graphics
+ depends on the driver: open source nouveau and proprietary nvidia.

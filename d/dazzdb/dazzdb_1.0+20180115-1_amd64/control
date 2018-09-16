@@ -1,0 +1,39 @@
+Package: dazzdb
+Version: 1.0+20180115-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 1349
+Depends: libc6 (>= 2.7), zlib1g (>= 1:1.1.4)
+Section: science
+Priority: optional
+Homepage: https://github.com/thegenemyers/DAZZ_DB
+Description: manage nucleotide sequencing read data
+ To facilitate the multiple phases of the dazzler assembler, all the read data
+ is organized into what is effectively a database of the
+ reads and their meta-information. The design goals for this data base
+ are as follows:
+  * The database stores the source Pacbio read information in such a
+    way that it can re-create the original input data, thus permitting
+    a user to remove the (effectively redundant) source files. This
+    avoids duplicating the same data, once in the source file and once
+    in the database.
+  * The data base can be built up incrementally, that is new sequence
+    data can be added to the data base over time.
+  * The data base flexibly allows one to store any meta-data desired for
+    reads. This is accomplished with the concept of *tracks* that
+    implementors can add as they need them.
+  * The data is held in a compressed form equivalent to the .dexta and
+    .dexqv files of the data extraction module. Both the .fasta and
+    .quiva information for each read is held in the data base and can be
+    recreated from it. The .quiva information can be added separately and
+    later on if desired.
+  * To facilitate job parallel, cluster operation of the phases of the
+    assembler, the database has a concept of a *current partitioning* in
+    which all the reads that are over a given length and optionally
+    unique to a well, are divided up into *blocks* containing roughly a
+    given number of bases, except possibly the last block which may have
+    a short count. Often programs can be run on blocks or pairs of blocks
+    and each such job is reasonably well balanced as the blocks are all
+    the same size. One must be careful about changing the partition
+    during an assembly as doing so can void the structural validity of
+    any interim block-based results.

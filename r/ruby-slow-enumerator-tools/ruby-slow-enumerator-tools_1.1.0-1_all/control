@@ -1,0 +1,24 @@
+Package: ruby-slow-enumerator-tools
+Version: 1.1.0-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 28
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: https://github.com/ddfreyne/slow_enumerator_tools
+Description: transformation of Ruby enumerators to produce data slowly and unpredictably
+ This Ruby library provides tools for transforming Ruby enumerators that
+ produce data slowly and unpredictably.
+ .
+   * SlowEnumeratorTools.merge: given a collection of enumerables, creates a
+     new enumerator that yields elements from any of these enumerables as soon
+     as they become available.
+ .
+   * SlowEnumeratorTools.batch: given an enumerable, creates a new enumerable
+     that yields batches containing all elements currently available.
+ .
+   * SlowEnumeratorTools.buffer: given an enumerable and a number, will create
+     a buffer of that number of elements and try to fill it up with as many
+     elements from that enumerable, so that they can be yielded immediately.
+Ruby-Versions: all

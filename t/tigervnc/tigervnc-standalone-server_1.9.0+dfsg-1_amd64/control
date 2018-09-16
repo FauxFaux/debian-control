@@ -1,0 +1,27 @@
+Package: tigervnc-standalone-server
+Source: tigervnc
+Version: 1.9.0+dfsg-1
+Architecture: amd64
+Maintainer: TigerVNC Packaging Team <pkg-tigervnc-devel@lists.alioth.debian.org>
+Installed-Size: 2706
+Depends: xkb-data, x11-xkb-utils, xauth, libfile-readbackwards-perl (>= 1.05), libaudit1 (>= 1:2.2.1), libbsd0 (>= 0.7.0), libc6 (>= 2.17), libgcc1 (>= 1:3.0), libgcrypt20 (>= 1.8.0), libgl1, libgnutls30 (>= 3.5.6), libjpeg62-turbo (>= 1.3.1), libpam0g (>= 0.99.7.1), libpixman-1-0 (>= 0.30.0), libselinux1 (>= 2.0.82), libstdc++6 (>= 5.2), libsystemd0, libx11-6, libxau6, libxdmcp6, libxfont2 (>= 1:2.0.1), libxshmfence1, zlib1g (>= 1:1.1.4), perl:any
+Recommends: tigervnc-common, libgl1-mesa-dri (>= 7.1~rc1), xfonts-base, x11-xserver-utils
+Suggests: xfonts-100dpi | xfonts-75dpi, xfonts-scalable
+Breaks: tigervnc-server (<< 1.1.90)
+Replaces: tigervnc-server (<< 1.1.90)
+Provides: vnc-server, xserver
+Section: x11
+Priority: optional
+Homepage: http://www.tigervnc.org
+Description: Standalone virtual network computing server
+ VNC stands for Virtual Network Computing. It is, in essence, a remote
+ display system which allows you to view a computing `desktop' environment
+ not only on the machine where it is running, but from anywhere on the
+ Internet and from a wide variety of machine architectures.
+ .
+ This package provides a standalone VNC server to which clients can connect.
+ The server generates a display that can be viewed with a vncviewer.
+ .
+ Note: This server does not need a display. You need a VNC viewer to see
+ something. This viewer may also be on a computer running other operating
+ systems.

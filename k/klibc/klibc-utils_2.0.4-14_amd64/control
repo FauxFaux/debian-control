@@ -1,0 +1,17 @@
+Package: klibc-utils
+Source: klibc
+Version: 2.0.4-14
+Architecture: amd64
+Maintainer: maximilian attems <maks@debian.org>
+Installed-Size: 624
+Depends: libklibc (= 2.0.4-14)
+Breaks: initramfs-tools (<< 0.123~)
+Section: libs
+Priority: optional
+Homepage: https://git.kernel.org/cgit/libs/klibc/klibc.git
+Description: small utilities built with klibc for early boot
+ This package contains a collection of programs that are linked
+ against klibc. These duplicate some of the functionality of a
+ regular Linux toolset, but are typically much smaller than their
+ full-function counterparts.  They are intended for inclusion in
+ initramfs images and embedded systems.

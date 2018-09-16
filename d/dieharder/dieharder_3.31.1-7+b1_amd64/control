@@ -1,0 +1,20 @@
+Package: dieharder
+Source: dieharder (3.31.1-7)
+Version: 3.31.1-7+b1
+Architecture: amd64
+Maintainer: Dirk Eddelbuettel <edd@debian.org>
+Installed-Size: 980
+Depends: libc6 (>= 2.4), libdieharder3, libgsl23, libgslcblas0
+Section: devel
+Priority: optional
+Description: Random-number generator test front-end
+ dieharder is a fairly involved random number/uniform deviate generator
+ tester.  It can either test any of its many prebuilt and linked
+ generators (basically all of those in the GNU Scientific Library plus
+ any others I've been able to find) or a potentially random dataset in a
+ file.  With file input, it can test either N-bit bitstrings (with N user
+ specifiable) or (double precision) floating point numbers in the range
+ [0.0,1.0) (uniform deviates).  It is thus suitable for use in testing
+ both software RNG's and hardware RNG's.
+ .
+ This package provides the command-line frontend.

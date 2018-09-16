@@ -1,0 +1,23 @@
+Package: backintime-qt4
+Source: backintime
+Version: 1.1.24-0.1
+Architecture: all
+Maintainer: Jonathan Wiltshire <jmw@debian.org>
+Installed-Size: 386
+Depends: x11-utils, libnotify-bin, python3-pyqt4, python3-dbus.mainloop.qt, policykit-1, backintime-common (= 1.1.24-0.1), python3:any (>= 3.3.2-2~)
+Recommends: python3-secretstorage
+Suggests: meld | kompare
+Conflicts: backintime-kde4
+Breaks: backintime-gnome (<< 1.1.6-1~), backintime-kde (<< 1.1.6-1~)
+Replaces: backintime-gnome (<< 1.1.6-1~), backintime-kde (<< 1.1.6-1~), backintime-kde4
+Section: utils
+Priority: optional
+Homepage: https://github.com/bit-team/backintime
+Description: simple backup/snapshot system (graphical interface)
+ Back In Time is a framework for rsync and cron for the purpose of
+ taking snapshots and backups of specified folders. It minimizes disk space use
+ by taking a snapshot only if the directory has been changed, and hard links
+ for unmodified files if it has. The user can schedule regular backups using
+ cron.
+ .
+ This is the graphical interface for Back In Time.

@@ -1,0 +1,377 @@
+#! /bin/bash
+# postinst script for boxbackup-client
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+#loading debconf module
+. /usr/share/debconf/confmodule
+
+CONFDIR=/etc/boxbackup
+DEBCONFBB=$CONFDIR/bbackupd.debconf
+BBCONF=$CONFDIR/bbackupd.conf
+BBKEY=$CONFDIR/bbackupd/boxbackup-client-encrypt-key.raw
+BBPRIVKEY=$CONFDIR/bbackupd/boxbackup-client-priv-key.pem
+BBCERTREQ=$CONFDIR/bbackupd/boxbackup-client-cert-req.pem
+BBCERT=$CONFDIR/bbackupd/boxbackup-client-cert.pem
+BBCACERT=$CONFDIR/bbackupd/boxbackup-server-ca-cert.pem
+DEBCONFNOTIFY=$CONFDIR/bbackupd/notifyadmin.debconf
+NOTIFYSCRIPT=$CONFDIR/bbackupd/notifyadmin
+
+case "$1" in
+    configure)
+	db_get boxbackup-client/debconf
+	if [ "$RET" = "true" ]; then
+	    # Generate configuration files
+	    # backupd.conf
+	    echo "#To reconfigure boxbackup-client run #dpkg-reconfigure boxbackup-client" >> $DEBCONFBB
+
+	    db_get boxbackup-client/backupServer
+	    echo "StoreHostname = $RET" >> $DEBCONFBB
+
+	    db_get boxbackup-client/accountNumber
+	    ACCOUNT=$RET
+	    echo "AccountNumber = 0x$ACCOUNT" >> $DEBCONFBB
+	    echo "KeysFile = $BBKEY" >> $DEBCONFBB
+	    echo "" >> $DEBCONFBB
+	    echo "CertificateFile = $BBCERT" >> $DEBCONFBB
+	    echo "PrivateKeyFile = $BBPRIVKEY" >> $DEBCONFBB
+	    echo "TrustedCAsFile = $BBCACERT" >> $DEBCONFBB
+	    echo "" >> $DEBCONFBB
+	    echo "DataDirectory = /var/lib/bbackupd" >> $DEBCONFBB
+
+	    cat >>$DEBCONFBB <<__EOF
+
+# This script is run whenever bbackupd encounters a problem which requires
+# the system administrator to assist:
+# 1) The store is full, and no more data can be uploaded.
+# 2) Some files or directories were not readable.
+# The default script emails the system administrator.
+NotifyScript = $NOTIFYSCRIPT
+
+__EOF
+
+	    db_get boxbackup-client/backupMode
+	    if [ "$RET" = "lazy" ]; then
+		db_get boxbackup-client/UpdateStoreInterval
+		UPDATE=$RET
+		[ -z "$UPDATE" ] && UPDATE="3600"
+
+		db_get boxbackup-client/MinimumFileAge
+		FILEAGE=$RET
+		[ -z "$FILEAGE" ] && FILEAGE="21600"
+
+		db_get boxbackup-client/MaxUploadWait
+		UPWAIT=$RET
+		[ -z "$UPWAIT" ] && UPWAIT="86400"
+
+		AUTO=yes
+	    else
+		AUTO=no
+		UPDATE=0
+		FILEAGE=0
+		UPWAIT=0
+	    fi
+
+	    cat >>$DEBCONFBB <<__EOF
+# Backup mode specification
+# With snapshot mode, you will need to run bbackupctl to instruct the daemon to upload files.
+# Set to no for snapshot mode and yes for lazy mode
+AutomaticBackup = $AUTO
+
+# A scan of the local discs will be made once an hour (approximately).
+# To avoid cycles of load on the server, this time is randomly adjusted by a small
+# percentage as the daemon runs.
+# Defaults: 3600 for lazy mode - 0 for snapshot mode
+UpdateStoreInterval = $UPDATE
+
+# A file must have been modified at least 6 hours ago before it will be uploaded.
+# Defaults: 21600 for lazy mode - 0 for snapshot mode
+MinimumFileAge = $FILEAGE
+
+# If a file is modified repeated, it won't be uploaded immediately in case it's modified again.
+# However, it should be uploaded eventually. This is how long we should wait after first noticing
+# a change. (1 day)
+# Defaults: 86400 for lazy mode - 0 for snapshot mode
+MaxUploadWait = $UPWAIT
+
+# Files above this size (in bytes) are tracked, and if they are renamed they will simply be
+# renamed on the server, rather than being uploaded again. (64k - 1)
+FileTrackingSizeThreshold = 65535
+
+# The daemon does "changes only" uploads for files above this size (in bytes).
+# Files less than it are uploaded whole without this extra processing.
+DiffingUploadSizeThreshold = 8192
+
+# The limit on how much time is spent diffing files. Most files shouldn't take very long,
+# but if you have really big files you can use this to limit the time spent diffing them.
+# * Reduce if you are having problems with processor usage.
+# * Increase if you have large files, and think the upload of changes is too large and want
+#   to spend more time searching for unchanged blocks.
+MaximumDiffingTime = 20
+
+# Uncomment this line to see exactly what the daemon is going when it's connected to the server.
+# ExtendedLogging = yes
+
+# Use this to temporarily stop bbackupd from syncronising or connecting to the store.
+# This specifies a program or script script which is run just before each sync, and ideally
+# the full path to the interpreter. It will be run as the same user bbackupd is running as,
+# usually root.
+# The script prints either "now" or a number to STDOUT (and a terminating newline, no quotes).
+# If the result was "now", then the sync will happen. If it's a number, then the script will
+# be asked again in that number of seconds.
+# For example, you could use this on a laptop to only backup when on a specific network.
+
+# SyncAllowScript = /path/to/intepreter/or/exe script-name parameters etc
+
+# Where the command socket is created in the filesystem.
+CommandSocket = /var/run/bbackupd.sock
+
+Server
+{
+    PidFile = /var/run/bbackupd.pid
+}
+
+#
+# BackupLocations specifies which locations on disc should be backed up. Each
+# directory is in the format
+#
+#	name
+#	{
+#		Path = /path/of/directory
+#		(optional exclude directives)
+#	}
+#
+# 'name' is derived from the Path by the config script, but should merely be
+# unique.
+#
+# The exclude directives are of the form
+#
+#	[Exclude|AlwaysInclude][File|Dir][|sRegex] = regex or full pathname
+#
+# (The regex suffix is shown as 'sRegex' to make File or Dir plural)
+#
+# For example:
+#
+#	ExcludeDir = /home/guest-user
+#	ExcludeFilesRegex = \.(mp3|MP3)$
+#	AlwaysIncludeFile = /home/username/veryimportant.mp3
+#
+# This excludes the directory /home/guest-user from the backup along with all mp3
+# files, except one MP3 file in particular.
+#
+# In general, Exclude excludes a file or directory, unless the directory is
+# explicitly mentioned in a AlwaysInclude directive.
+#
+# If a directive ends in Regex, then it is a regular expression rather than a
+# explicit full pathname. See
+#
+#	man 7 re_format
+#
+# for the regex syntax on your platform.
+#
+
+BackupLocations
+{
+__EOF
+
+	    db_get boxbackup-client/backupDirs
+
+	    for dir in $RET; do
+		NAME=`echo $dir | sed 's/\//-/g' | sed 's/^-//'`
+
+		# TODO : exclude encrypt key file from the backup
+
+		echo "	$NAME" >> $DEBCONFBB
+		echo "		{" >> $DEBCONFBB
+		echo "			Path = $dir" >> $DEBCONFBB
+		echo "		}" >> $DEBCONFBB
+	    done
+
+	    echo "}" >> $DEBCONFBB
+
+	    # Encryption key
+	    if [ ! -e $BBKEY ]; then
+		if ! openssl rand -out $BBKEY 1024 >&2; then
+		    echo "Can't generate encryption key. Check why." >&2
+		fi
+	    fi
+
+	    chmod 600 $BBKEY || true
+
+	    # SSL stuff
+	    if [ ! -z "$ACCOUNT" ]; then
+		if [ ! -e $BBPRIVKEY -a ! -e $BBCERT ]; then
+		    db_get boxbackup-client/generateCertificate
+
+		    if [ "$RET" = "true" ]; then
+			if ! openssl genrsa -out $BBPRIVKEY 2048 >&2; then
+			    echo "Private key generation failed! Check why." >&2
+			else
+			    chmod 600 $BBPRIVKEY || true
+			fi
+
+
+			if ! openssl req -new -key $BBPRIVKEY -sha1 -out $BBCERTREQ >&2 <<__EOF
+.
+.
+.
+.
+.
+BACKUP-$ACCOUNT
+.
+.
+.
+__EOF
+			then
+			    echo "Certificate request generation failed ! Check why." >&2
+			fi
+		    fi
+		fi
+	    fi
+
+	    # Generate notify script
+	    CLIENTNAME=`hostname --fqdn`
+
+	    db_get boxbackup-client/notifyMail
+	    MAILTO=$RET
+
+	    cat >>$DEBCONFNOTIFY <<__EOF
+#!/bin/sh
+#To reconfigure boxbackup-client run #dpkg-reconfigure boxbackup-client
+
+# This script is run whenever bbackupd changes state or encounters a
+# problem which requires the system administrator to assist:
+#
+# 1) The store is full, and no more data can be uploaded.
+# 2) Some files or directories were not readable.
+# 3) A backup run starts or finishes.
+#
+# The default script emails the system administrator, except for backups
+# starting and stopping, where it does nothing.
+
+SUBJECT="BACKUP PROBLEM on host $CLIENTNAME"
+SENDTO="$MAILTO"
+
+if [ "\$1" = "" ]; then
+	echo "Usage: \$0 <store-full|read-error|backup-ok|backup-error|backup-start|backup-finish>" >&2
+	exit 2
+elif [ "\$1" = store-full ]; then
+	$sendmail \$SENDTO <<EOM
+Subject: \$SUBJECT (store full)
+To: \$SENDTO
+
+
+The store account for $CLIENTNAME is full.
+
+=============================
+FILES ARE NOT BEING BACKED UP
+=============================
+
+Please adjust the limits on account $account_num on server $server.
+
+EOM
+elif [ "\$1" = read-error ]; then
+$sendmail \$SENDTO <<EOM
+Subject: \$SUBJECT (read errors)
+To: \$SENDTO
+
+
+Errors occured reading some files or directories for backup on $CLIENTNAME.
+
+===================================
+THESE FILES ARE NOT BEING BACKED UP
+===================================
+
+Check the logs on $CLIENTNAME for the files and directories which caused
+these errors, and take appropriate action.
+
+Other files are being backed up.
+
+EOM
+elif [ "\$1" = backup-start -o "\$1" = backup-finish -o "\$1" = backup-ok ]; then
+	# do nothing by default
+	true
+else
+$sendmail \$SENDTO <<EOM
+Subject: \$SUBJECT (unknown)
+To: \$SENDTO
+
+
+The backup daemon on $CLIENTNAME reported an unknown error (\$1).
+
+==========================
+FILES MAY NOT BE BACKED UP
+==========================
+
+Please check the logs on $CLIENTNAME.
+
+EOM
+fi
+__EOF
+
+	    if [ -x "`which ucf`" ]; then
+		ucf --three-way --debconf-ok $DEBCONFBB $BBCONF
+	    fi
+	    rm -f $DEBCONFBB
+	    chmod 644 $BBCONF || true
+	    chown root:root $BBCONF || true
+
+	    if [ -x "`which ucf`" ]; then
+		ucf --three-way --debconf-ok $DEBCONFNOTIFY $NOTIFYSCRIPT
+	    fi
+	    rm -f $DEBCONFNOTIFY
+	    chmod 755 $NOTIFYSCRIPT || true
+	    chown root:root $NOTIFYSCRIPT || true
+	fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+	echo "postinst called with unknown argument \`$1'" >&2
+	exit 1
+    ;;
+esac
+
+db_stop
+
+# dh_installdeb will replace this with shell code automatically
+# generated by other debhelper scripts.
+
+# Automatically added by dh_installinit/11.1.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/boxbackup-client" ]; then
+		update-rc.d boxbackup-client defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d boxbackup-client $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

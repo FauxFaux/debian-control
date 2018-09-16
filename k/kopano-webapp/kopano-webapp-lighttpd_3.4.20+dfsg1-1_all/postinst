@@ -1,0 +1,55 @@
+#!/bin/sh
+
+# postinst script for kopano-webapp-lighttpd
+# see: dh_installdeb(1)
+
+# summary of how this script can be called:
+#                           --- $1 ---          --- $2 ---     --- $3 ---               --- $4 ---
+#            <new-postinst> 'configure'         <most-recently-configured-version>
+#            <old-postinst> 'abort-upgrade'     <new version>
+#   <conflictor's-postinst> 'abort-remove'      'in-favour'     <package>                <new-version>
+#                <postinst> 'abort-remove'
+# <deconfigured's-postinst> 'abort-deconfigure' 'in-favour'     <failed-install-package> <version>     'removing' <conflicting-package> <version>
+#
+# for details, see http://www.debian.org/doc/debian-policy/ or the
+# debian-policy package
+
+set -e
+#set -x # uncomment for verbose output
+
+PHPVERSION="7.0"
+PACKAGE_ETC_FOLDER="/etc/kopano/webapp"
+
+case "$1" in
+    configure)
+        if [ -e /usr/lib/php/php-maintscript-helper ]; then
+            . /usr/lib/php/php-maintscript-helper
+
+            # Calling php_invoke to enable 'mapi' for the PHP module cgi
+            php_invoke enmod ${PHPVERSION} cgi mapi
+        fi
+        # Handle the lighttpd modules
+        if [ -x "`which lighty-enable-mod`" ]; then
+            echo "Add symlink for Lighttpd config file"
+            if [ ! -L /etc/lighttpd/conf-available/50-kopano-webapp.conf ]; then
+                ln -s ${PACKAGE_ETC_FOLDER}/lighttpd.conf /etc/lighttpd/conf-available/50-kopano-webapp.conf
+            fi
+            # We need some modules enabled, but let this all the user,
+            # note /usr/share/kopano-webapp-lighttpd/kopano-webapp-lighttpd.README.Debian
+            #lighty-enable-mod accesslog kopano-webapp fastcgi-php mod_alias || true
+            echo "kopano-webapp-lighttpd: not enable Lighttpd configuration by default!"
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

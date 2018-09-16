@@ -1,0 +1,36 @@
+Package: libghc-cabal-helper-prof
+Source: haskell-cabal-helper (0.8.0.2-1)
+Version: 0.8.0.2-1+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 2070
+Depends: libghc-cabal-helper-dev (= 0.8.0.2-1+b1), libghc-cabal-prof-2.0.1.0-0f36b, libghc-base-prof-4.10.1.0-35a7f, libghc-directory-prof-1.3.0.2-60cb0, libghc-filepath-prof-1.4.1.2-f4919, libghc-ghc-prim-prof-0.5.1.1-c8f3d, libghc-mtl-prof-2.2.2-ada79, libghc-process-prof-1.6.1.0-df30c, libghc-semigroupoids-prof-5.2.2-088ba, libghc-transformers-prof-0.5.2.0-e0457, libghc-unix-prof-2.7.2.2-1e3ca, libghc-unix-compat-prof-0.5.0.1-10859
+Provides: libghc-cabal-helper-prof-0.8.0.2-ee594
+Section: haskell
+Priority: optional
+Homepage: http://hackage.haskell.org/package/cabal-helper
+Description: simple interface to some of Cabal's configuration state; profiling libraries
+ cabal-helper provides a library which wraps the internal use of
+ an executable to lift the restrictions imposed by linking against versions of
+ GHC before 7.10. This has the pleasant side effect of isolating the user
+ from having to deal with Cabal version changes manually as cabal-helper
+ can simply recompile it's helper program automatically as needed.
+ .
+ cabal-helper uses a wrapper executable to compile the actual cabal-helper
+ executable at runtime while linking against an arbitrary version of
+ Cabal. This runtime-compiled helper executable is then used to extract
+ various bits and peices from Cabal's on disk state (dist/setup-config)
+ written by it's configure command.
+ .
+ In addition to this the wrapper executable also supports installing any
+ version of Cabal from hackage in case it cannot be found in any available
+ package database. The wrapper installs these instances of the Cabal library
+ into a private package database so as to not interfere with the user's
+ packages.
+ .
+ Furthermore the wrapper supports one special case namely reading a state
+ file for Cabal itself. This is needed as Cabal compiles it's Setup.hs using
+ itself and not using any version of Cabal installed in any package database.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

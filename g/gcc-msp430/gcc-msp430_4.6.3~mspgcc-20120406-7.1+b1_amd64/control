@@ -1,0 +1,19 @@
+Package: gcc-msp430
+Source: gcc-msp430 (4.6.3~mspgcc-20120406-7.1)
+Version: 4.6.3~mspgcc-20120406-7.1+b1
+Architecture: amd64
+Maintainer: Luca Bruno <lucab@debian.org>
+Installed-Size: 36777
+Depends: libc6 (>= 2.14), libgmp10 (>= 2:5.0.1+dfsg-7), libmpc3, libmpfr6 (>= 3.1.3), zlib1g (>= 1:1.1.4), msp430mcu, binutils-msp430 (>= 2.21~)
+Recommends: msp430-libc
+Section: devel
+Priority: extra
+Description: GNU C compiler (cross compiler for MSP430)
+ This is the GNU C compiler, a fairly portable optimizing compiler for C
+ for TI's MSP430 architecture.  This package is primarily for MSP430
+ developers and cross-compilers and is not needed by normal users.
+ .
+ BEWARE: due to a bug in the memory layout reference of FRAM-based chips,
+ this package DOES NOT WORK with MSP430FR5xxx chips (eg. FraunchPad devkit).
+ DO NOT use gcc-msp430 on that chip series, as you will lose access to
+ JTAG and BSL, and permanently BRICK your chip!

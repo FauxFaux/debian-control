@@ -1,0 +1,17 @@
+Package: dnssec-trigger
+Version: 0.15+repack-1
+Architecture: amd64
+Maintainer: dnssec-trigger packagers <dnssec-trigger@packages.debian.org>
+Installed-Size: 368
+Depends: libc6 (>= 2.15), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.31.8), libgtk2.0-0 (>= 2.18.0), libldns2 (>= 1.6.5), libssl1.1 (>= 1.1.0), python3, python3-gi, python3-lockfile, gir1.2-nm-1.0 (>= 1.2), unbound
+Breaks: resolvconf
+Section: net
+Priority: optional
+Homepage: https://www.nlnetlabs.nl/projects/dnssec-trigger/
+Description: reconfiguration tool to make DNSSEC work
+ Dnssec-trigger reconfigures the local unbound DNS server. This unbound
+ DNS server performs DNSSEC validation, but dnssec-trigger will signal
+ it to use the DHCP obtained forwarders if possible, and fallback to
+ doing its own AUTH queries if that fails, and if that fails prompt the
+ user via dnssec-trigger-applet the option to go with insecure DNS
+ only.

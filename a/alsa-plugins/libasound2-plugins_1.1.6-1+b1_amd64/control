@@ -1,0 +1,24 @@
+Package: libasound2-plugins
+Source: alsa-plugins (1.1.6-1)
+Version: 1.1.6-1+b1
+Architecture: amd64
+Maintainer: Debian ALSA Maintainers <pkg-alsa-devel@lists.alioth.debian.org>
+Installed-Size: 352
+Depends: libasound2 (>= 1.1.6), libavcodec58 (>= 7:4.0) | libavcodec-extra58 (>= 7:4.0), libavresample4 (>= 7:4.0), libavutil56 (>= 7:4.0), libc6 (>= 2.15), libjack-jackd2-0 (>= 1.9.10+20150825) | libjack-0.125, libpulse0 (>= 0.99.1), libsamplerate0 (>= 0.1.7)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.alsa-project.org/
+Description: ALSA library additional plugins
+ This package contains plugins for the ALSA library that are
+ not included in the main libasound2 package.
+ .
+ The following plugins are included, among other:
+   - a52: S16 to A52 stream converter
+   - jack: play or capture via JACK
+   - oss: run native ALSA apps on OSS drivers
+   - pulse: play or capture via Pulse Audio
+   - lavcrate, samplerate and speexrate: rate converters
+   - upmix and vdownmix: convert from/to 2 and 4/6 channel streams
+ .
+ ALSA is the Advanced Linux Sound Architecture.

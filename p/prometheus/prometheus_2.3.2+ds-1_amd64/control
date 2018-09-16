@@ -1,0 +1,29 @@
+Package: prometheus
+Version: 2.3.2+ds-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 34664
+Depends: adduser, daemon | systemd-sysv, libjs-bootstrap, libjs-eonasdan-bootstrap-datetimepicker, libjs-jquery (>= 1.11.3~), libjs-jquery-hotkeys, libjs-moment, libjs-mustache (>= 2.3.0-1~), libjs-rickshaw, debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.3.2)
+Recommends: prometheus-node-exporter
+Built-Using: golang-1.10 (= 1.10.3-1), golang-github-alecthomas-units (= 0.0~git20151022.0.2efee85-3), golang-github-armon-go-metrics (= 0.0~git20171117.6c3acc97-1), golang-github-aws-aws-sdk-go (= 1.12.79+dfsg-1), golang-github-azure-azure-sdk-for-go (= 10.3.0~beta-1), golang-github-azure-go-autorest (= 8.3.1-1), golang-github-beorn7-perks (= 0.0~git20160804.0.4c0e845-1), golang-github-cespare-xxhash (= 1.0.0-3), golang-github-cockroachdb-cmux (= 0.0~git20170110.0.30d10be-1), golang-github-dgrijalva-jwt-go-v3 (= 3.1.0-2), golang-github-go-ini-ini (= 1.32.0-2), golang-github-go-kit-kit (= 0.6.0-2), golang-github-go-logfmt-logfmt (= 0.3.0-1), golang-github-go-stack-stack (= 1.5.2-2), golang-github-golang-snappy (= 0.0+git20160529.d9eb7a3-2), golang-github-gophercloud-gophercloud (= 0.0~git20170728.0.0118feec-2), golang-github-grpc-ecosystem-grpc-gateway (= 1.3.0-1), golang-github-hashicorp-go-cleanhttp (= 0.0~git20171219.d5fe4b57-1), golang-github-hashicorp-go-immutable-radix (= 0.0~git20170725.0.8aac270-1), golang-github-hashicorp-golang-lru (= 0.0~git20160813.0.0a025b7-2), golang-github-hashicorp-serf (= 0.8.1+git20180508.80ab4877~ds-1), golang-github-jmespath-go-jmespath (= 0.2.2-2), golang-github-json-iterator-go (= 1.0.6-1), golang-github-julienschmidt-httprouter (= 1.1-5), golang-github-miekg-dns (= 1.0.4+ds-1), golang-github-mwitkow-go-conntrack (= 0.0~git20161129.cc309e4-2), golang-github-oklog-ulid (= 0.3.0+git20170117.66bb656-1), golang-github-opentracing-contrib-go-stdlib (= 0.0~git20170528.48e4d76-1), golang-github-opentracing-opentracing-go (= 1.0.2-1), golang-github-pkg-errors (= 0.8.0+git20180311.816c908-1), golang-github-prometheus-client-golang (= 0.9.0~pre1+git20180417.82f5ff1-2), golang-github-prometheus-client-model (= 0.0.2+git20171117.99fa1f4-1), golang-github-prometheus-common (= 0+git20180518.7600349-1), golang-github-prometheus-tsdb (= 0.0~git20180711.99a2c43-1), golang-gogoprotobuf (= 1.0.0+git20180330.1ef32a8b-1), golang-google-cloud (= 0.9.0-5), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-2), golang-procfs (= 0+git20180613.7d6f385-1), golang-protobuf-extensions (= 1.0.0-2)
+Section: net
+Priority: optional
+Homepage: https://prometheus.io/
+Description: Monitoring system and time series database
+ Prometheus is a systems and services monitoring system. It collects metrics
+ from configured targets at given intervals, evaluates rule expressions,
+ displays the results, and can trigger alerts if some condition is observed to
+ be true.
+ .
+ Prometheus' main distinguishing features as compared to other monitoring
+ systems are:
+ .
+  * A multi-dimensional data model (timeseries defined by metric name and set
+    of key/value dimensions).
+  * A flexible query language to leverage this dimensionality.
+  * No dependency on distributed storage; single server nodes are autonomous.
+  * Timeseries collection happens via a pull model over HTTP.
+  * Pushing timeseries is supported via an intermediary gateway.
+  * Targets are discovered via service discovery or static configuration.
+  * Multiple modes of graphing and dashboarding support.
+  * Federation support coming soon.

@@ -1,0 +1,25 @@
+Package: gpgv-static
+Source: gnupg2
+Version: 2.2.10-1
+Architecture: amd64
+Maintainer: Debian GnuPG Maintainers <pkg-gnupg-maint@lists.alioth.debian.org>
+Installed-Size: 2874
+Recommends: debian-archive-keyring, debootstrap
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.gnupg.org/
+Description: minimal signature verification tool (static build)
+ GnuPG is GNU's tool for secure communication and data storage.
+ It can be used to encrypt data and to create digital signatures.
+ It includes an advanced key management facility and is compliant
+ with the proposed OpenPGP Internet standard as described in RFC 4880.
+ .
+ This is GnuPG's signature verification tool, gpgv, built statically
+ so that it can be directly used on any platform that is running on
+ the Linux kernel.  Android and ChromeOS are two well known examples,
+ but there are many other platforms that this will work for, like
+ embedded Linux OSes.  This gpgv in combination with debootstrap and
+ the Debian archive keyring allows the secure creation of chroot
+ installs on these platforms by using the full Debian signature
+ verification that is present in all official Debian mirrors.

@@ -1,0 +1,20 @@
+Package: isrcsubmit
+Version: 2.0.1-3
+Architecture: all
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 59
+Depends: python3:any (>= 3.1~), python3-libdiscid, python3-musicbrainzngs (>= 0.4)
+Recommends: cdrdao, python3-keyring, www-browser, xdg-utils
+Section: sound
+Priority: optional
+Homepage: http://jonnyjd.github.io/musicbrainz-isrcsubmit/
+Description: extract ISRCs from audio CDs and submit them to MusicBrainz
+ isrcsubmit is a command line utility to extract International Standard
+ Recording Codes (ISRC) from audio CDs. It allows one to submit the extracted
+ data to MusicBrainz. ISRCs are used to uniquely identify sound and music video
+ recordings.
+ .
+ isrcsubmit supports multiple backends to extract ISRCs: libdiscid (the default)
+ and cdrdao for discs that do not store ISRCs in the subchannel information.
+ .
+ A valid MusicBrainz account is required to submit ISRCs.

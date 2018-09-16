@@ -1,0 +1,26 @@
+Package: libqt4-dbus
+Source: qt4-x11
+Version: 4:4.8.7+dfsg-17
+Architecture: amd64
+Maintainer: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Installed-Size: 102
+Depends: libqtdbus4 (= 4:4.8.7+dfsg-17), qdbus (= 4:4.8.7+dfsg-17)
+Breaks: libqt4-dev (<< 4:4.7.1)
+Replaces: libqt4-dev (<< 4:4.7.1)
+Section: oldlibs
+Priority: optional
+Multi-Arch: same
+Homepage: http://qt-project.org/
+Description: Qt 4 D-Bus module
+ Qt is a cross-platform C++ application framework. Qt's primary feature
+ is its rich set of widgets that provide standard GUI functionality.
+ .
+ The QtDBus module is a Unix-only library that you can use to make Inter-Process
+ Communication using the D-Bus protocol.
+ .
+ Applications using the QtDBus module can provide services to other, remote
+ applications by exporting objects, as well as use services exported by those
+ applications by placing calls and accessing properties.
+ .
+ This package depends on qdbus and libqtdbus4 to break their circular dependency
+ and allow easy updates from Squeeze to Wheezy.

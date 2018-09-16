@@ -1,0 +1,27 @@
+Package: openstack-cluster-installer-poc
+Source: openstack-cluster-installer
+Version: 4
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 46
+Depends: bridge-utils, curl, ipcalc, jq, lsb-base, net-tools, openipmi (>= 2.0.25), openstack-debian-images, openstack-pkg-tools, qemu-kvm, qemu-utils
+Section: net
+Priority: optional
+Homepage: https://salsa.debian.org/openstack-team/debian/openstack-cluster-installer
+Description: automatic PXE and puppet-master installer for OpenStack - PoC
+ OCI (OpenStack Cluster Installer) is a software to provision an OpenStack
+ cluster automatically. This package install a provisioning machine, which
+ consists of a DHCP server, a PXE boot server, and a puppet-master.
+ .
+ Once computers in the cluster boot for the first time, a Debian live system
+ is served by OCI, to act as a discovery image. This live system then reports
+ the hardware features back to OCI. The computers can then be installed with
+ Debian from that live system, configured with a puppet-agent that will connect
+ to the puppet-master of OCI. OpenStack is then provisionned in these machines.
+ .
+ All of this is managed through a web interface.
+ .
+ This package installs a PoC (Proof of Concept) server running VMs to test,
+ contribute and debug OCI. Note that you need at least 80 GB of RAM to run it,
+ as it will provision 8 nodes, with 2 nodes for each role: controller, computes,
+ volume and network, plus the OCI node.

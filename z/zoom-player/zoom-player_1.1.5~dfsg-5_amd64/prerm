@@ -1,0 +1,24 @@
+#! /bin/sh
+# prerm script for zoom-player
+#
+# see: dh_installdeb(1)
+
+set -e
+
+case "$1" in
+    remove|deconfigure|failed-upgrade)
+	update-alternatives --remove zcode-interpreter /usr/games/zoom
+        ;;
+    upgrade)
+	;;
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+
+
+exit 0
+
+

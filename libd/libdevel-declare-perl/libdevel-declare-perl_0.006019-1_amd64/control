@@ -1,0 +1,18 @@
+Package: libdevel-declare-perl
+Version: 0.006019-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 102
+Depends: perl (>= 5.26.0-7), perlapi-5.26.0, libc6 (>= 2.14), libb-hooks-endofscope-perl, libb-hooks-op-check-perl (>= 0.19), libsub-name-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Devel-Declare
+Description: module to add new syntax to Perl
+ Devel::Declare can install subroutines called declarators which locally take
+ over control of Perl's parser, allowing the creation of new syntax, including
+ keywords and other constructs that might not be, in themselves, valid Perl 5
+ code.
+ .
+ This module can be used for adding new keywords, completely in Perl code. It
+ allows a subroutine to be executed during the Perl code compilation, meaning
+ that syntax can be transformed into equivalent code for Perl on-the-fly.

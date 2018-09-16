@@ -1,0 +1,22 @@
+Package: dh-python
+Version: 3.20180723
+Architecture: all
+Maintainer: Piotr Ożarowski <piotr@debian.org>
+Installed-Size: 431
+Depends: python3:any, python3-distutils | python3 (<< 3.6.5~rc1-1)
+Suggests: libdpkg-perl, dpkg-dev
+Breaks: python3 (<< 3.3.2-4~)
+Replaces: python3 (<< 3.3.2-4~)
+Section: python
+Priority: optional
+Multi-Arch: foreign
+Description: Debian helper tools for packaging Python libraries and applications
+ This package contains:
+  * pybuild - invokes various build systems for requested Python versions in
+    order to build modules and extensions
+  * dh_python2 - calculates Python 2.X dependencies for Debian packages,
+    adds maintainer scripts to byte compile files, etc.
+  * dh_python3 - calculates Python 3.X dependencies for Debian packages,
+    adds maintainer scripts to byte compile files, etc.
+  * dh_pypy - calculates PyPy dependencies for Debian packages,
+    adds maintainer scripts to byte compile files, etc.

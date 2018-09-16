@@ -1,0 +1,24 @@
+Package: libboinc7
+Source: boinc
+Version: 7.12.0+dfsg-1
+Architecture: amd64
+Maintainer: Debian BOINC Maintainers <pkg-boinc-devel@lists.alioth.debian.org>
+Installed-Size: 1587
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.3.1), libssl1.1 (>= 1.1.0), libstdc++6 (>= 5.2)
+Breaks: boinc-dev (<< 7.0.28+dfsg-3), libboinc (<= 7.0.34+dfsg-1)
+Replaces: boinc-dev (<< 7.0.28+dfsg-3), libboinc (<= 7.0.34+dfsg-1)
+Provides: libboinc
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://boinc.berkeley.edu/
+Description: libraries of BOINC the client depends on
+ The Berkeley Open Infrastructure for Network Computing (BOINC) is a
+ software platform for distributed computing using volunteered computer
+ resources.
+ .
+ The environment offers a series of libraries that both the user-run
+ client and the client-invoked scientific applications depend on. With
+ the number of cores per machine growing, and with scientific apps
+ commonly started for every core, it is essential to have memory
+ shared as much as possible between binaries of all projects.

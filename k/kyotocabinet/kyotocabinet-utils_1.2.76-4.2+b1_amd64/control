@@ -1,0 +1,26 @@
+Package: kyotocabinet-utils
+Source: kyotocabinet (1.2.76-4.2)
+Version: 1.2.76-4.2+b1
+Architecture: amd64
+Maintainer: Shawn Landden <shawnlandden@gmail.com>
+Installed-Size: 5279
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libkyotocabinet16v5 (= 1.2.76-4.2+b1), libstdc++6 (>= 5.2)
+Recommends: kyotocabinet-doc
+Breaks: kyotocabinet-doc (<< 1.2.76-2)
+Replaces: kyotocabinet-doc (<< 1.2.76-2)
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://fallabs.com/kyotocabinet/
+Description: Straightforward implementation of DBM - utilities
+ Kyoto Cabinet is a library of routines for managing a database. The
+ database is a simple data file containing records, each is a pair of
+ a key and a value. Every key and value is serial bytes with variable
+ length. Both binary data and character string can be used as a key and
+ a value. Each key must be unique within a database. There is neither
+ concept of data tables nor data types. Records are organized in
+ hash table or B+ tree.
+ .
+ This package contains the kcutilmgr tool, used to compile kyotocabinet
+ language bindings without Debian patches applied, and well as testing
+ and debugging utilities.

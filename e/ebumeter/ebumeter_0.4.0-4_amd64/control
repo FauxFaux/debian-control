@@ -1,0 +1,21 @@
+Package: ebumeter
+Version: 0.4.0-4
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 149
+Depends: libc6 (>= 2.14), libclthreads2, libclxclient3, libgcc1 (>= 1:3.0), libjack-jackd2-0 (>= 1.9.10+20150825) | libjack-0.125, libpng16-16 (>= 1.6.2-1), libsndfile1 (>= 1.0.20), libstdc++6 (>= 5), libx11-6, libzita-resampler1
+Section: sound
+Priority: optional
+Homepage: http://kokkinizita.linuxaudio.org/linuxaudio/ebumeter-doc/quickguide.html
+Description: loudness measurement according to EBU-R128
+ These tools help controlling loudness of audio material aimed
+ primarily for broadcasting, but they can be useful in other
+ situation.
+ .
+ ebumeter and ebur128 allow users to measure Momentary (400 ms),
+ Short term (3s) and Integrated Loudness (from start to stop).
+ They can be used on audio files and signals through JACK.
+ .
+ This package contains two programs:
+   * ebumeter - interactive meter working via jackd
+   * ebur128 - the command line app to measure sound files

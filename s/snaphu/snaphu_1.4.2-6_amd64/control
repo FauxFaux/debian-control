@@ -1,0 +1,38 @@
+Package: snaphu
+Version: 1.4.2-6
+Architecture: amd64
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 345
+Depends: libc6 (>= 2.14)
+Section: non-free/science
+Priority: optional
+Homepage: https://web.stanford.edu/group/radar/softwareandlinks/sw/snaphu/
+Description: Statistical-Cost, Network-Flow Algorithm for 2D Phase Unwrapping
+ Two-dimensional phase unwrapping is the process of recovering
+ unambiguous phase data from a 2-D array of phase values known only
+ modulo 2pi rad.
+ .
+ There are many applications, like Magnetic Resonance Imaging (MRI),
+ Synthetic Aperture Radar (SAR), fringe pattern analysis, tomography
+ and spectroscopy, which as part of their fundamental operation depend
+ upon the extraction of a phase signal from their input image. Usually
+ the phase is available in a form that suffers from 2-pi phase jumps
+ due to the use of the mathematical arctangent function, which produces
+ an inherently wrapped output. This wrapped phase is unusable until the
+ phase discontinuities are removed.
+ .
+ SNAPHU is an implementation of the Statistical-cost, Network-flow
+ Algorithm for Phase Unwrapping particularly suitable for SAR
+ interferometry applications. This algorithm poses phase unwrapping as
+ a maximum a posteriori probability (MAP) estimation problem, the
+ objective of which is to compute the most likely unwrapped solution
+ given the observable input data. Because the statistics relating the
+ input data to the solution depend on the measured quantity, SNAPHU
+ incorporates three built-in statistical models, for topography data,
+ deformation data, and smooth generic data. The posed optimization
+ problem is solved approximately with use of network-flow techniques.
+ .
+ As SNAPHU uses an iterative optimization procedure, its execution time
+ depends on the difficulty of the interferogram. In single-tile mode
+ the required memory is on the order of 100 MB per 1,000,000 pixels in
+ the input interferogram.

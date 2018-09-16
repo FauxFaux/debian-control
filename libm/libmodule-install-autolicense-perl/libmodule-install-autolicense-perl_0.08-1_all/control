@@ -1,0 +1,22 @@
+Package: libmodule-install-autolicense-perl
+Version: 0.08-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 58
+Depends: libmodule-install-perl (>= 0.85), libsoftware-license-perl, perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Module-Install-AutoLicense/
+Description: automagically generate LICENSE files
+ Module::Install::AutoLicense is a Module::Install extension that
+ generates a "LICENSE" file automatically whenever the author runs
+ "Makefile.PL". On the user side it does nothing.
+ .
+ When "make distclean" is invoked by the author, the "LICENSE" is
+ removed.
+ .
+ The appropriate license is determined from the meta provided with the
+ "license" command and the holder of the license from the "author"
+ command.
+ .
+ Software::License is used to generate the "LICENSE" file.

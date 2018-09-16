@@ -1,0 +1,20 @@
+Package: puppet-master-passenger
+Source: puppet
+Version: 5.5.6-1
+Architecture: all
+Maintainer: Puppet Package Maintainers <pkg-puppet-devel@lists.alioth.debian.org>
+Installed-Size: 59
+Depends: apache2, libapache2-mod-passenger, lsb-base, puppet (= 5.5.6-1), ruby | ruby-interpreter
+Breaks: puppetmaster-passenger (<< 4.4.0-1)
+Replaces: puppetmaster-passenger (<< 4.4.0-1)
+Section: admin
+Priority: optional
+Homepage: https://github.com/puppetlabs/puppet
+Description: configuration management system, scalable master service
+ Puppet is a configuration management system that allows you to define
+ the state of your IT infrastructure, then automatically enforces the
+ correct state.
+ .
+ This package provides configuration for apache2 with mod_passenger,
+ suitable for large deployments. This offers better scalability than
+ the "puppet-master" package.

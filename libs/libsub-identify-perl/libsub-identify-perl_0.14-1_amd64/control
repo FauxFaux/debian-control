@@ -1,0 +1,24 @@
+Package: libsub-identify-perl
+Version: 0.14-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 40
+Depends: perl (>= 5.26.1-2), perlapi-5.26.1, libc6 (>= 2.2.5)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Sub-Identify
+Description: module to retrieve names of code references
+ Sub::Identify allows you to retrieve the real name of code references. For
+ this, it uses perl's introspection mechanism, provided by the B module.
+ .
+ It provides four functions : sub_name returns the name of the
+ subroutine (or __ANON__ if it's an anonymous code reference),
+ stash_name returns its package, and sub_fullname returns the
+ concatenation of the two.
+ .
+ The fourth function, get_code_info, returns a list of two elements,
+ the package and the subroutine name (in case of you want both and are worried
+ by the speed.)
+ .
+ In case of subroutine aliasing, those functions always return the
+ original name.

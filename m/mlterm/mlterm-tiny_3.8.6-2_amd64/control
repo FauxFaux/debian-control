@@ -1,0 +1,37 @@
+Package: mlterm-tiny
+Source: mlterm
+Version: 3.8.6-2
+Architecture: amd64
+Maintainer: Kenshi Muto <kmuto@debian.org>
+Installed-Size: 506
+Depends: mlterm-common (= 3.8.6-2), libc6 (>= 2.15), libx11-6
+Suggests: mlterm-tools, unifont, xfonts-efont-unicode, fonts-vlgothic | fonts-japanese-gothic, fonts-nanum | fonts-baekmuk, fonts-arphic-bsmi00lp, fonts-arphic-gbsn00lp, fonts-freefont-ttf, t1-cyrillic, mlterm-im-uim
+Conflicts: mlterm
+Provides: x-terminal-emulator
+Section: x11
+Priority: optional
+Homepage: http://mlterm.sourceforge.net
+Description: MultiLingual TERMinal, tiny version
+ This is a terminal emulator for X Window System, which supports
+ various encodings including ISO-8859-[1-11,13-16], TCVN5712, VISCII,
+ TIS-620 (same as ISO-8859-11), KOI8-{R,U,T}, CP{1251,1255}, GEORGEAN-PS,
+ EUC-JP, EUC-JISX0213, ISO-2022-JP{,1,2,3}, Shift_JIS, Shift_JISX0213,
+ ISO-2022-KR, EUC-KR, UHC, JOHAB, EUC-CN (aka GB2312), GBK, ISO-2022-CN,
+ Big5, EUC-TW, HZ, UTF-8, and GB18030.
+ .
+ Doublewidth characters for east Asian, combining characters for
+ Thai, Vietnamese, and other diacritics, BiDi (bi-directionality)
+ for Arabic and Hebrew as well as Arabic shaping are all supported.
+ Though mlterm supports Indic complex languages such as Hindi, this
+ Debian package is not compiled with Indic support.
+ .
+ Since mlterm checks the current locale and selects appropriate encoding,
+ you don't need to configure mlterm to display your language and
+ encoding.
+ .
+ mlterm also supports unique features such as scrollbar API,
+ multiple windows, multiple XIM, anti-alias using FreeType and Xft,
+ and so on.
+ .
+ This tiny version does not support fancy features such as background
+ image and so on, except for i18n-related features.

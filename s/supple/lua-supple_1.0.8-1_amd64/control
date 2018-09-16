@@ -1,0 +1,20 @@
+Package: lua-supple
+Source: supple
+Version: 1.0.8-1
+Architecture: amd64
+Maintainer: Daniel Silverstone <dsilvers@digital-scurf.org>
+Installed-Size: 122
+Depends: libc6 (>= 2.4), liblua5.1-0, liblua5.2-0, lua-luxio0
+Provides: lua5.1-supple, lua5.2-supple
+Section: interpreters
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.gitano.org.uk/supple/
+Description: Lua strict sandbox
+ Supple is a very strict sandbox which runs Lua code on behalf of applications
+ which cannot trust the code very much.
+ .
+ Supple relies on a number of techniques to sandbox the user code away from the
+ host application, such as chroots, seccomp mode, interpreter sandboxing, and
+ rlimits.
+Lua-Versions: 5.1 5.2

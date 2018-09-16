@@ -1,0 +1,26 @@
+Package: vrfy
+Version: 990522-10
+Architecture: amd64
+Maintainer: Jari Aalto <jari.aalto@cante.net>
+Installed-Size: 59
+Depends: libc6 (>= 2.11)
+Replaces: netstd (<< 3.07-3)
+Section: mail
+Priority: optional
+Description: verify electronic mail addresses
+ 'vrfy' is a tool to verify e-mail addresses and mailing lists.  In its
+ simplest form it takes an address "user@domain", figures out the MX hosts
+ for "domain", and issues the SMTP command VRFY at the primary MX host
+ (optionally all), or at "domain" itself if no MX hosts exist.  Without
+ "domain" it goes to "localhost".
+ .
+ More complex capabilities are:
+  * recursively expanding forward files or mailing lists,
+  * detecting mail forwarding loops,
+  * understanding full-blown RFC822 address specifications,
+  * syntax checking that can be carried out either locally or remotely,
+  * various options provided to exploit alternative protocol suites
+    if necessary, and to print many forms of verbose output.
+ .
+ Obvious limitations exist (mostly due to a lousy VRFY command
+ implementation on some hosts), but otherwise, it works pretty well.

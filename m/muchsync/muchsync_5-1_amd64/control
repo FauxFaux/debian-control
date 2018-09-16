@@ -1,0 +1,20 @@
+Package: muchsync
+Version: 5-1
+Architecture: amd64
+Maintainer: Rémi Vanicat <vanicat@debian.org>
+Installed-Size: 262
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libnotmuch5 (>= 0.13~rc1), libsqlite3-0 (>= 3.7.15), libssl1.1 (>= 1.1.0), libstdc++6 (>= 6), libxapian30
+Section: mail
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.muchsync.org/
+Description: synchronize maildirs and notmuch databases
+ Muchsync brings notmuch to all of your computers by synchronizing your
+ mail messages and notmuch tags across machines. The protocol is heavily
+ pipelined to work efficiently over high-latency networks such as mobile
+ broadband.
+ .
+ Muchsync supports arbitrary pairwise synchronization among replicas. A
+ version-vector-based algorithm allows it to exchange only the minimum
+ information necessary to bring replicas up to date regardless of which
+ pairs have previously synchronized.

@@ -1,0 +1,21 @@
+Package: efax
+Version: 1:0.9a-19.1
+Architecture: amd64
+Maintainer: MJ Ray (Debian) <mjr@debian.org>
+Installed-Size: 253
+Depends: libc6 (>= 2.14), libpaper-utils, debconf (>= 0.5) | debconf-2.0, make
+Suggests: gs, xloadimage | imagemagick | mgetty-viewfax
+Section: comm
+Priority: optional
+Description: programs to send and receive fax messages
+ efax is a small ANSI C/POSIX program that provides the data transport
+ function for fax applications using any Class 1 or Class 2 fax modem.
+ Another program, efix, converts between fax, text, bitmap and grayscale
+ formats. fax, a shell script, provides a simple user interface to the efax
+ and efix programs. It allows you to send text or Postscript files as faxes
+ and receive, print or preview received faxes.
+ .
+ The ghostscript package is needed to fax Postscript files, and an image
+ viewing program like xloadimage is needed to view incoming faxes.
+ .
+ Note that you probably have to adapt /etc/efax.rc to your needs.

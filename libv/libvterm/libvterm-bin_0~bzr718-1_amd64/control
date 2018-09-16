@@ -1,0 +1,19 @@
+Package: libvterm-bin
+Source: libvterm
+Version: 0~bzr718-1
+Architecture: amd64
+Maintainer: James McCoy <jamessan@debian.org>
+Installed-Size: 55
+Depends: libc6 (>= 2.10), libvterm0 (>= 0~bzr626)
+Section: misc
+Priority: optional
+Homepage: http://www.leonerd.org.uk/code/libvterm/
+Description: abstract terminal library (utility programs)
+ An abstract C99 library which implements a VT220 or xterm-like terminal
+ emulator. It doesn't use any particular graphics toolkit or output
+ system, instead it invokes callback function pointers that its embedding
+ program should provide it to draw on its behalf. It avoids calling
+ malloc() during normal running state, allowing it to be used in embedded
+ kernel situations.
+ .
+ This package contains utility programs that demonstrate libvterm.

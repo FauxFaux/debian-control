@@ -1,0 +1,25 @@
+Package: echoping
+Version: 6.0.2-10
+Architecture: amd64
+Maintainer: Dario Minnucci <midget@debian.org>
+Installed-Size: 219
+Depends: libc6 (>= 2.14), libgnutls30 (>= 3.5.6), libidn11 (>= 1.13), libpopt0 (>= 1.14)
+Section: net
+Priority: optional
+Homepage: https://github.com/bortzmeyer/echoping/
+Description: Small test tool for TCP servers
+ echoping is a small program to test (approximatively) performances of a
+ remote host by sending it requests such as HTTP requests.
+ .
+ In any case, be polite: don't bother the remote host with many repeated
+ requests, especially with large size. Ask for permission if you often
+ test hosts which aren't yours.
+ .
+ Current features:
+    * plugins, so you can extend echoping with any protocol you like and/or use,
+    * Supports IPv6 as well as IPv4,
+    * Supports IDN (Unicode domain names),
+    * uses the protocols echo, discard, chargen or HTTP,
+    * can use cryptographic connections with HTTP,
+    * uses UDP instead of TCP for the protocols which accept it (like echo),
+    * can repeat the test and display various measures about it,

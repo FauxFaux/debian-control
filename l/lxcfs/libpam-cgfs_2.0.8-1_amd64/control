@@ -1,0 +1,19 @@
+Package: libpam-cgfs
+Source: lxcfs
+Version: 2.0.8-1
+Architecture: amd64
+Maintainer: pkg-lxc <pkg-lxc-devel@lists.alioth.debian.org>
+Installed-Size: 47
+Depends: libc6 (>= 2.14), libfuse2 (>= 2.2), libpam0g (>= 0.99.7.1), libpam-runtime (>= 1.0.1-6), systemd | cgroupfs-mount
+Conflicts: libpam-cgm
+Section: admin
+Priority: optional
+Homepage: https://linuxcontainers.org
+Description: PAM module for managing cgroups for LXC
+ LXCFS provides a FUSE based filesystem to improve the LXC experience
+ within the containers.
+ .
+ This provides a Pluggable Authentication Module (PAM) to provide
+ logged-in users with a set of cgroups which they can administer.
+ This allows for instance unprivileged containers, and session
+ management using cgroup process tracking.

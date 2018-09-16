@@ -1,0 +1,16 @@
+Package: prometheus-pgbouncer-exporter
+Version: 1.7-1
+Architecture: all
+Maintainer: Christopher Baines <mail@cbaines.net>
+Installed-Size: 90
+Depends: init-system-helpers (>= 1.18~), python3:any (>= 3.3.2-2~), postgresql-common, daemon, python3-configargparse, python3-prometheus-client, python3-psycopg2, python3-pkg-resources
+Section: net
+Priority: optional
+Homepage: http://git.cbaines.net/prometheus-pgbouncer-exporter/
+Description: Export metrics from pgbouncer to Prometheus
+ This is a simple exporter for PgBouncer that makes several metrics available
+ to Prometheus.
+ .
+ Metrics are exported from the SHOW LISTS, STATS, POOLS and DATABASES command
+ output. For the full list, see the prometheus_pgbouncer_exporter/collectors.py
+ file.

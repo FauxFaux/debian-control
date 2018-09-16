@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+. /usr/share/dbconfig-common/dpkg/prerm
+
+if which pyclean >/dev/null 2>&1; then
+    pyclean -p mailman3-web
+else
+    dpkg -L mailman3-web | grep \.py$ | while read file
+    do
+        rm -f "${file}"[co] >/dev/null
+    done
+fi
+
+case "$1" in
+    remove|upgrade|deconfigure)
+    ;;
+
+    failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit/11.3.5
+if [ -x "/etc/init.d/mailman3-web" ] && [ "$1" = remove ]; then
+	invoke-rc.d mailman3-web stop || exit 1
+fi
+# End automatically added section
+
+
+# database removal has to happen after service is stopped
+dbc_go mailman3-web "$@"
+
+exit 0

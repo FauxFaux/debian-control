@@ -1,0 +1,16 @@
+Package: ejabberd-mod-logsession
+Source: ejabberd-contrib
+Version: 0.2018.07.13~dfsg0-1
+Architecture: amd64
+Maintainer: Ejabberd Packaging Team <ejabberd@packages.debian.org>
+Installed-Size: 26
+Depends: erlang-base (>= 1:17) | erlang-abi-17.0, erlang-base (>= 1:20.3.8.1+dfsg) | erlang-base-hipe (>= 1:20.3.8.1+dfsg), ejabberd (= 18.06-1)
+Section: net
+Priority: optional
+Homepage: https://github.com/processone/ejabberd-contrib
+Description: logs session connections to a text file
+ This module is intended to log the session connections in a text file.
+ Right now it only logs the forbidden connection attempts and the
+ failed authentication attempts.
+ .
+ Each vhost is logged in a different file.

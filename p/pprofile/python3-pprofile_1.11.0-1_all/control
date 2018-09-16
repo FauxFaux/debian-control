@@ -1,0 +1,28 @@
+Package: python3-pprofile
+Source: pprofile
+Version: 1.11.0-1
+Architecture: all
+Maintainer: Josue Ortega <josue@debian.org>
+Installed-Size: 99
+Depends: python3:any (>= 3.5~), python3-pkg-resources
+Suggests: python3-ipython
+Section: python
+Priority: optional
+Homepage: https://github.com/vpelletier/pprofile
+Description: Line-granularity, deterministic and statistic Python 3 profiler
+ Line granularity allows locating precisely where time is spent in code.
+ Thread awareness automatically propagates profiling to all threads (all
+ threads in statistic mode, or threads spawned by profiled code in
+ deterministic mode).
+ .
+ Deterministic profiling gives precise measures, but at a large speed
+ cost (best used on minimal test scenario).
+ .
+ Statistic profiling gives rough measure, but has an extremely low
+ overhead (suitable for live code profiling).
+ .
+ Does not require marking methods to profile, allowing non-method
+ profiling (module imports, class & function declarations and other
+ module-level code).
+ .
+ This package installs the library for Python 3.

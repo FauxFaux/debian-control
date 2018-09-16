@@ -1,0 +1,25 @@
+Package: pd-osc
+Source: pd-mrpeach (0.1~svn17647-2)
+Version: 1:0.1~svn17647-2
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 115
+Depends: libc6 (>= 2.14), puredata | pd
+Recommends: pd-iemnet | pd-net
+Suggests: pd-comport, pd-slip
+Section: sound
+Priority: optional
+Homepage: https://download.puredata.info/mrpeach
+Description: Open Sound Control for Pd
+ This library allows one to construct and parse OSC messages within Pd.  It
+ includes support for ordinary OSC-messages, typetags, timetags and bundles.
+ .
+ These objects are transport-agnostic, so you can use them to transmit OSC over
+ UDP, TCP/IP, serial port, or in fact whatever you want.  However, you will have
+ to install additional libraries that will handle the transport layer (like
+ pd-net or pd-comport).
+ .
+ Note however, that OSC is a packet-based protocol, so if you intend to use it
+ with a stream-based transport (like TCP/IP or the serial line), you must use
+ a packetizer (the OSC-specifications suggest to use SLIP, as provided by
+ pd-slip).

@@ -1,0 +1,19 @@
+Package: nocache
+Version: 1.0-1
+Architecture: amd64
+Maintainer: Dmitry Smirnov <onlyjob@debian.org>
+Installed-Size: 67
+Depends: libc6 (>= 2.4)
+Section: utils
+Priority: optional
+Homepage: https://github.com/Feh/nocache
+Description: bypass/minimize file system caching for a program
+ `nocache` tries to minimize the effect an application has on the Linux
+ file system cache.
+ .
+ Use case: backup processes that should not interfere with the present
+ state of the cache.
+ .
+ Also this package provides the following utilities:
+ * `cachedel`   : clear page cache for a file.
+ * `cachestats` : print number of cached vs. not-cached pages for a file

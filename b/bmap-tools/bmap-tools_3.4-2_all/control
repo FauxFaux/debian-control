@@ -1,0 +1,17 @@
+Package: bmap-tools
+Version: 3.4-2
+Architecture: all
+Maintainer: Simon McVittie <smcv@debian.org>
+Installed-Size: 153
+Depends: python3 (>= 3.3), python3:any (>= 3.3.2-2~)
+Recommends: bzip2, lzop, xz-utils
+Suggests: lz4, pbzip2, pigz, python3-gpgme, unzip
+Section: utils
+Priority: optional
+Homepage: https://github.com/intel/bmap-tools
+Description: tool to flash image files to block devices using the block map
+ bmaptool is a generic tool for creating the block map (bmap) for a
+ file, and copying files using the block map. The idea is that large
+ file containing unused blocks, like raw system image files, can be
+ copied or flashed a lot faster with bmaptool than with traditional
+ tools like "dd" or "cp".

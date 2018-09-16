@@ -1,0 +1,25 @@
+Package: libghc-retry-doc
+Source: haskell-retry
+Version: 0.7.6.2-3
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 289
+Depends: haddock-interface-31
+Recommends: ghc-doc, libghc-data-default-class-doc, libghc-exceptions-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: https://github.com/Soostone/retry
+Description: Retry combinators for monadic actions that may fail; documentation
+ This package exposes combinators that can wrap arbitrary monadic actions. They
+ run the action and potentially retry running it with some configurable delay
+ for a configurable number of times.
+ .
+ The purpose is to make it easier to work with IO and especially network IO
+ actions that often experience temporary failure and warrant retrying of the
+ original action. For example, a database query may time out for a while, in
+ which case we should hang back for a bit and retry the query instead of simply
+ raising an exception.
+ .
+ This package provides the documentation for a library for the Haskell
+ programming language.
+ See http://www.haskell.org/ for more information on Haskell.

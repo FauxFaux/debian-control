@@ -1,0 +1,21 @@
+Package: publicfile-installer
+Version: 0.14
+Architecture: all
+Maintainer: Joost van Baal-Ilić <joostvb@debian.org>
+Installed-Size: 40
+Depends: wget, debhelper, fakeroot, sudo, debconf (>= 0.5) | debconf-2.0
+Section: contrib/net
+Priority: optional
+Description: installer package for the publicfile HTTP and FTP server
+ Publicfile is an HTTP and FTP server, written by Daniel J. Bernstein in
+ 1999; it didn't change a lot after that. Modern features are not
+ supported. However, if you're looking for a small, simple and secure
+ webserver, which integrates with the runit and daemontools UNIX service
+ managers, publicfile will suit your needs.
+ .
+ This installer package downloads the publicfile .tar.gz file from
+ the upstream website, combines it with Debian packaging information
+ from the package maintainer's website; then builds a publicfile Debian
+ package, and installs that. When installing this installer package,
+ one is given the option to postpone downloading and installing
+ publicfile.

@@ -1,0 +1,28 @@
+Package: r-bioc-multtest
+Version: 2.36.0-3
+Architecture: amd64
+Maintainer: Debian R Packages Maintainers <r-pkg-team@alioth-lists.debian.net>
+Installed-Size: 1061
+Depends: r-base-core (>= 3.5.1-1), r-api-3.5, r-bioc-biocgenerics, r-bioc-biobase, r-cran-survival, r-cran-mass, libc6 (>= 2.14)
+Suggests: r-cran-snow
+Section: gnu-r
+Priority: optional
+Homepage: https://bioconductor.org/packages//multtest/
+Description: Bioconductor resampling-based multiple hypothesis testing
+ Non-parametric bootstrap and permutation resampling-based multiple
+ testing procedures (including empirical Bayes methods) for controlling
+ the family-wise error rate (FWER), generalized family-wise error rate
+ (gFWER), tail probability of the proportion of false positives (TPPFP),
+ and false discovery rate (FDR). Several choices of bootstrap-based null
+ distribution are implemented (centered, centered and scaled,
+ quantile-transformed). Single-step and step-wise methods are available.
+ Tests based on a variety of t- and F-statistics (including t-statistics
+ based on regression parameters from linear and survival models as well
+ as those based on correlation parameters) are included. When probing
+ hypotheses with t-statistics, users may also select a potentially faster
+ null distribution which is multivariate normal with mean zero and
+ variance covariance matrix derived from the vector influence function.
+ Results are reported in terms of adjusted p-values, confidence regions
+ and test statistic cutoffs. The procedures are directly applicable to
+ identifying differentially expressed genes in DNA microarray
+ experiments.

@@ -1,0 +1,24 @@
+Package: mingw-w64-x86-64-dev
+Source: mingw-w64
+Version: 5.0.4-1
+Architecture: all
+Maintainer: Stephen Kitt <skitt@debian.org>
+Installed-Size: 79592
+Depends: mingw-w64-common
+Suggests: wine64
+Breaks: gcc-mingw-w64 (<< 4.6.0), libpthreads-mingw-w64, mingw-w64-dev (= 3.0~svn4933-1), mingw-w64-dev (<< 2.0.3-1)
+Replaces: libpthreads-mingw-w64, mingw-w64-dev (= 3.0~svn4933-1), mingw-w64-dev (<< 2.0.3-1)
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://mingw-w64.sf.net
+Description: Development files for MinGW-w64 targeting Win64
+ MinGW-w64 provides a development and runtime environment for 32- and
+ 64-bit (x86 and x64) Windows applications using the Windows API and
+ the GNU Compiler Collection (gcc).
+ .
+ This package contains the headers and libraries required to build
+ 64-bit software using MinGW-w64.
+ .
+ The wine64 package can be used to test software built using MinGW-w64
+ without using Windows.

@@ -1,0 +1,22 @@
+Package: coz-profiler
+Version: 0.1.0-2
+Architecture: amd64
+Maintainer: Lluís Vilanova <vilanova@ac.upc.edu>
+Installed-Size: 9179
+Depends: libc6 (>= 2.14), libdwarf++0 (>= 0.2), libelf++0 (>= 0.2), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), python, fonts-font-awesome, libjs-jquery, libjs-d3, libjs-d3-tip
+Section: devel
+Priority: optional
+Homepage: http://coz-profiler.org/
+Description: Finding Code that Counts with Causal Profiling
+ Coz is a code profiler that find optimization opportunities
+ missed by traditional profilers. Coz employs a technique called
+ causal profiling that measures optimization potential. This measurement
+ matches developers' assumptions about profilers: that optimizing
+ highly-ranked code will have the greatest impact on performance. Causal
+ profiling measures optimization potential for serial, parallel, and
+ asynchronous programs without instrumentation of special handling for
+ library calls and concurrency primitives. Instead, a causal profiler
+ uses performance experiments to predict the effect of
+ optimizations. This allows the profiler to establish causality:
+ "optimizing function X will have effect Y," exactly the measurement
+ developers had assumed they were getting all along.

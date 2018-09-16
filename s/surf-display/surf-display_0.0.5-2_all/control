@@ -1,0 +1,25 @@
+Package: surf-display
+Version: 0.0.5-2
+Architecture: all
+Maintainer: Debian Edu Packaging Team <debian-edu-pkg-team@lists.alioth.debian.org>
+Installed-Size: 341
+Depends: surf (>= 0.7), psmisc, x11-xkb-utils, xdotool, xinit, xprintidle
+Recommends: matchbox-window-manager, pulseaudio, unclutter, x11-xserver-utils, wmctrl
+Suggests: nodm
+Section: admin
+Priority: optional
+Homepage: https://code.it-zukunft-schule.de/cgit/surf-display/
+Description: Kiosk browser session manager based on the surf browser
+ Provide an X11 session manager script that launches a minimal window
+ manager and then opens an entry web page via the surf web browser in
+ kiosk mode. The web page can be consumed "read-only" or in interactive
+ mode.
+ .
+ In combination with the nodm display manager you can provide an
+ easy-to-setup html'ish display screen or a web terminal.
+ .
+ If URL/domain filtering is needed, combine surf-display with a local
+ instance of tinyproxy.
+ .
+ After a configurable idle time, the browser session is fully
+ reset and started anew.

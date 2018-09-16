@@ -1,0 +1,20 @@
+Package: dmucs
+Version: 0.6.1-3
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 291
+Depends: libc6 (>= 2.15), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), lsb-base
+Recommends: distcc
+Section: devel
+Priority: optional
+Homepage: http://dmucs.sourceforge.net/
+Description: distributed compilation system for use with distcc
+ DMUCS is a system that allows a group of users to share a compilation farm.
+ Each compilation request from each user will be sent to the fastest available
+ machine, every time.  The system has these fine qualities:
+  * Works with distcc, which need not be altered in any way.
+  * Supports multiple operating systems in the compilation farm.
+  * Uses all processors of a multi-processor compilation host.
+  * Makes best use of compilation hosts with widely differing CPU speeds.
+  * Takes into account the load on a host caused by non-compilation tasks.
+  * Supports the dynamic addition and removal of hosts to the compilation farm.

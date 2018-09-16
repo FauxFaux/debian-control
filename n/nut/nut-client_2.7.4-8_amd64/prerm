@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+handle_start_failure () {
+# The MODE defined in /etc/nut/nut.conf shouldn't affect the exit code when the
+# daemon is stopped. If it fails to stop, the maintainer script should fail
+# too.
+  return 1
+}
+
+# Automatically added by dh_installinit/11.3.2
+if [ -x "/etc/init.d/nut-client" ] && [ "$1" = remove ]; then
+	invoke-rc.d nut-client stop || handle_start_failure
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.3.2
+dpkg-maintscript-helper rm_conffile /etc/bash_completion.d/nut 2.7.1-1~ -- "$@"
+# End automatically added section
+
+
+exit 0

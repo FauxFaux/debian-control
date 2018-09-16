@@ -1,0 +1,26 @@
+Package: libmath-prime-util-gmp-perl
+Version: 0.51-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 594
+Depends: perl (>= 5.26.2-7), perlapi-5.26.2, libc6 (>= 2.27), libgmp10 (>= 2:5.1.1)
+Recommends: libmath-prime-util-perl (>= 0.68)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Math-Prime-Util-GMP
+Description: utilities related to prime numbers, using GMP
+ Math::Prime::Util::GMP contains a set of utilities related to prime numbers,
+ using GMP. This includes primality tests, getting primes in a range, and
+ factoring.
+ .
+ While it certainly can be used directly, the main purpose of this module is
+ for Math::Prime::Util. That module will automatically load this if it is
+ installed, greatly speeding up many of its operations on big numbers.
+ .
+ Inputs and outputs for big numbers are via strings, so you do not need to use
+ a bigint package in your program. However if you do use bigints, inputs will
+ be converted internally so there is no need to convert before a call. Output
+ results are returned as either Perl scalars (for native-size) or strings (for
+ bigints). Math::Prime::Util tries to reconvert all strings back into the
+ callers bigint type if possible, which makes it more convenient for
+ calculations.

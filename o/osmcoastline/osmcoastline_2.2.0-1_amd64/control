@@ -1,0 +1,25 @@
+Package: osmcoastline
+Version: 2.2.0-1
+Architecture: amd64
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 1260
+Depends: gdal-abi-2-3-0, libbz2-1.0, libc6 (>= 2.14), libexpat1 (>= 2.0.1), libgcc1 (>= 1:3.0), libgdal20 (>= 2.2.0), libgeos-c1v5 (>= 3.4.2), libstdc++6 (>= 7), zlib1g (>= 1:1.2.6)
+Section: utils
+Priority: optional
+Homepage: https://osmcode.org/osmcoastline/
+Description: Extract coastline data from OpenStreetMap planet file
+ OSMCoastline extracts the coastline from an OSM planet file and assembles all
+ the pieces into polygons for use in map renderers etc.
+ .
+ OSMCoastline relies on the Osmium library for its OpenStreetMap data handling.
+ .
+ The Osmium library has extensive support for all types of OSM entities: nodes,
+ ways, relations, and changesets. It allows reading from and writing to OSM
+ files in XML and PBF formats, including change files and full history files.
+ Osmium can store OSM data in memory and on disk in various formats and using
+ various indexes. Its easy to use handler interface allows you to quickly write
+ data filtering and conversion functions. Osmium can create WKT, WKB, OGR, GEOS
+ and GeoJSON geometries for easy conversion into many GIS formats and it can
+ assemble multipolygons from ways and relations.
+ .
+ This package contains the OSMCoastline utilities.

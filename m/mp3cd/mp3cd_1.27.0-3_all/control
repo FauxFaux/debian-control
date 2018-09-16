@@ -1,0 +1,28 @@
+Package: mp3cd
+Version: 1.27.0-3
+Architecture: all
+Maintainer: Kees Cook <kees@debian.org>
+Installed-Size: 50
+Depends: perl, libconfig-simple-perl, cdrdao, sox (>= 14.1.0-1), libsox-fmt-mp3, normalize-audio, gstreamer1.0-tools
+Recommends: flac, vorbis-tools, gstreamer1.0-plugins-good, mplayer
+Section: sound
+Priority: extra
+Homepage: http://outflux.net/software/pkgs/mp3cd/
+Description: Burns normalized audio CDs from lists of MP3s/WAVs/Oggs/FLACs
+ This script burns a playlist (.m3u, XMLPlaylist or command line list) of
+ MP3s, Oggs, and/or WAVs to an audio CD. The ".m3u" format is really
+ nothing more than a list of fully qualified filenames. The script
+ handles making the WAVs sane by resampling if needed, and normalizing the
+ volume across all tracks. Reading tags and writing CD-TEXT is supported.
+ .
+ If a failure happens, earlier stages can be skipped with the '-s' flag.
+ The file "tool-output.txt" in the temp directory can be examined to see
+ what went wrong during the stage. Some things are time-consuming (like
+ writing the WAVs from MP3s) and if the CD burn failed, it's much nicer
+ not to have to start over from scratch. When doing this, you will not
+ need the m3u file any more, since the files have already been built.
+ See the list of stages using '-h'.
+ .
+ This script implements the suggested methods outlined in the Linux MP3
+ CD Burning mini-HOWTO:
+  http://tldp.org/HOWTO/MP3-CD-Burning/

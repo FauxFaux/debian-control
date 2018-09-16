@@ -1,0 +1,32 @@
+Package: erlang-tools
+Source: erlang
+Version: 1:20.3.8.8+dfsg-1
+Architecture: amd64
+Maintainer: Debian Erlang Packagers <pkg-erlang-devel@lists.alioth.debian.org>
+Installed-Size: 1132
+Depends: erlang-base (= 1:20.3.8.8+dfsg-1) | erlang-base-hipe (= 1:20.3.8.8+dfsg-1), erlang-runtime-tools (= 1:20.3.8.8+dfsg-1), libc6 (>= 2.14)
+Suggests: erlang, erlang-manpages, erlang-doc
+Replaces: erlang (<< 1:20.3.8.8+dfsg-1), erlang-base (<< 1:20.3.8.8+dfsg-1), erlang-base-hipe (<< 1:20.3.8.8+dfsg-1), erlang-dev (<< 1:20.3.8.8+dfsg-1), erlang-doc (>> 1:20.3.8.8+dfsg-999), erlang-doc (<< 1:20.3.8.8+dfsg), erlang-examples (<< 1:20.3.8.8+dfsg-1), erlang-manpages (<= 1:11.b.1-2), erlang-mode (<< 1:12.b.1-dfsg-2), erlang-nox (<< 1:20.3.8.8+dfsg-1), erlang-src (<< 1:20.3.8.8+dfsg-1), erlang-x11 (<< 1:20.3.8.8+dfsg-1)
+Section: interpreters
+Priority: optional
+Homepage: http://www.erlang.org/
+Description: Erlang/OTP various tools
+ The Tools application contains a number of stand-alone tools, which are
+ useful when developing Erlang programs.
+ .
+  cover - A coverage analysis tool for Erlang.
+  cprof - A profiling tool that shows how many times each function
+    is called. Uses a kind of local call trace breakpoints containing
+    counters to achieve very low runtime performance degradation.
+  eprof - A time profiling tool; measures how time is used in Erlang
+    programs. Predecessor of fprof (see below).
+  fprof - Another Erlang profiler; measures how time is used in Erlang
+    programs. Uses trace to file to minimize runtime performance
+    impact, and displays time for calling and called functions.
+  instrument - Utility functions for obtaining and analyzing resource
+    usage in an instrumented Erlang runtime system.
+  make - A make utility for Erlang similar to UNIX make.
+  tags - A tool for generating Emacs TAGS files from Erlang source
+    files.
+  xref - A cross reference tool. Can be used to check dependencies
+    between functions, modules, applications and releases.

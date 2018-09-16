@@ -1,0 +1,22 @@
+Package: mouseemu
+Source: mouseemu (0.15-10)
+Version: 0.15-10+b1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 54
+Depends: libc6 (>= 2.4), procps, dmidecode
+Section: utils
+Priority: optional
+Description: Emulate mouse buttons and mouse wheel
+ Mouseemu is a daemon to emulate mouse buttons on trackpads
+ with only one button. It lets you:
+  - emulate middle and right click
+  - emulate mouse wheel
+  - block trackpad while typing
+ .
+ It was initially developed for Apple PowerBooks
+ and iBooks, but it may be useful on other architectures
+ as well.
+ .
+ This program only works when booting a 2.6 kernel because
+ it uses the new uinput interface to emulate the mouse.

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ]; then
+        # remove .pycs
+        find /usr/lib/libreoffice/share/extensions/lightproof_en/pythonpath -name "*.pyc" -exec rm {} \;
+fi
+
+
+
+

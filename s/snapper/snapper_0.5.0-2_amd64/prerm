@@ -1,7 +1,0 @@
-#!/bin/sh
-set -e
-# Automatically added by dh_systemd_start/10.6.4
-if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
-	deb-systemd-invoke stop snapper-boot.service snapper-boot.timer snapper-cleanup.service snapper-cleanup.timer snapper-timeline.service snapper-timeline.timer >/dev/null
-fi
-# End automatically added section

@@ -1,0 +1,20 @@
+Package: leafnode
+Version: 1.11.11-1
+Architecture: amd64
+Maintainer: Moritz Muehlenhoff <jmm@debian.org>
+Installed-Size: 751
+Depends: netbase, openbsd-inetd | inet-superserver, tcpd, logrotate, libc6 (>= 2.14), libpcre3, debconf (>= 0.5) | debconf-2.0
+Suggests: slrn | news-reader, perl:any
+Conflicts: news-transport-system, newsx
+Provides: news-transport-system
+Section: news
+Priority: optional
+Homepage: http://leafnode.org/
+Description: NNTP server for small sites
+ Leafnode is a news server suitable for small, limited-bandwidth sites
+ with only a few users ('leaf' sites). It keeps track of which groups
+ are being read, and downloads only articles in those groups. Leafnode
+ has been designed to require no maintenance and to be easy to set up.
+ .
+ Perl is required to use some optional features of the package for
+ handling very low volume newsgroups.

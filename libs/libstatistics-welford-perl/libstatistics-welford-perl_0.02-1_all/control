@@ -1,0 +1,22 @@
+Package: libstatistics-welford-perl
+Version: 0.02-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 20
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Statistics-Welford
+Description: Standard statistics using Welford's algorithm
+ Statistics::Welford provides standard statistics (mean value,
+ variance, standard deviation, minimum and maximum value as well as
+ the number of elements) using Welford's algorithm.
+ .
+ Welford's algorithm is much more resource efficient compared to the
+ naïve algorithm implemented in e.g. Statistics::Basic::StdDev or
+ Catmandu::Fix::stat_stddev. It especially does not need to load all
+ values into RAM at the same time, i.e. does not require an array
+ containing all values.
+ .
+ See also
+ https://en.wikipedia.org/wiki/Variance/Algorithm#Online_algorithm

@@ -1,0 +1,30 @@
+Package: libreins-ocaml-dev
+Source: ocaml-reins (0.1a-7)
+Version: 0.1a-7+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 3731
+Depends: ocaml-nox-4.05.0
+Suggests: ocaml-findlib
+Provides: libreins-ocaml-dev-e8o44
+Section: ocaml
+Priority: optional
+Homepage: http://ocaml-reins.sourceforge.net/
+Description: data structure library for OCaml
+ The OCaml Reins data structure library consists of the following
+ persistent implementations:
+  * Lists (singly, O(1) catenable, Acyclic doubly linked,
+           random access)
+  * Sets/Maps (AVL, Red/Black, Patricia, Splay)
+  * Heaps (Binomial, Skew-Binomial)
+ .
+ All of the implementations conform to a unified signature for each
+ data type.  Also, each data types include zipper style cursor
+ interfaces and persistent, bi-directional cursor based iterators.
+ The library also includes a set of standard modules to hoist the base
+ typs into the module level (Int, Bool, etc...) as well as a
+ collection of functor combinators to minimize boilerplate (e.g., for
+ constructing compare or to_string functions).  Finally, a
+ quickcheck-like random testing framework is included and each data
+ type supports the necessary "gen" function to generate a random
+ instance of the type.

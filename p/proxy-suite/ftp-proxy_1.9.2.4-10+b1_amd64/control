@@ -1,0 +1,34 @@
+Package: ftp-proxy
+Source: proxy-suite (1.9.2.4-10)
+Version: 1.9.2.4-10+b1
+Architecture: amd64
+Maintainer: Roberto Lumbreras <rover@debian.org>
+Installed-Size: 149
+Depends: libc6 (>= 2.15), libldap-2.4-2 (>= 2.4.7), libwrap0 (>= 7.6-4~)
+Recommends: ftp-proxy-doc
+Section: net
+Priority: optional
+Description: application level proxy for the FTP protocol
+ FTP-Proxy is a transparent, application-level proxy server for FTP
+ connections, designed to protect FTP servers against attacks based on the FTP
+ protocol. It is the first (and currently only) component of the SuSE Proxy
+ Suite, a set of programs to enhance firewall security.
+ .
+ FTP-Proxy is much less complex than any current FTP server, has been designed
+ with great care and performs chroot(), setuid(), setgid() to avoid possible
+ vulnerabilities, and is believed to be immune against current known attacks.
+ .
+ FTP-Proxy features include:
+  o Securely relays FTP connections between clients and servers
+  o Can switch connections from active to passive and vice versa
+  o Utilizes port ranges for both control and data connections
+  o Provides extensive auditing (via syslog or rotating log files)
+  o Can separate user related from system triggered audit events
+  o Provides command restriction based on logged in user name
+  o Allows command argument checking with regular expressions
+  o Is able to retrieve configuration data from an LDAP directory
+  o Has been thoroughly tested against buffer overflow attacks
+  o Fully conforms to RFC 959 and 1123 (the basic FTP RFCs)
+  o Planned to support RFC 1579 ("Firewall Friendly FTP")
+  o Planned to support RFC 2428 (IPv6 Extensions for FTP)
+  o Based on GNU AutoConf, supposed to run on many UNIX systems

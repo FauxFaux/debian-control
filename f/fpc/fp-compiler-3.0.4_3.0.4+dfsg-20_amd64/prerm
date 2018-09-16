@@ -1,0 +1,11 @@
+#! /bin/sh
+
+set -e
+
+# remove alternative
+update-alternatives --remove fpc /usr/bin/x86_64-linux-gnu-fpc-3.0.4
+update-alternatives --remove fpc.cfg /etc/fpc-3.0.4.cfg
+update-alternatives --remove pc /usr/bin/fpc-3.0.4
+
+# Debhelper code
+

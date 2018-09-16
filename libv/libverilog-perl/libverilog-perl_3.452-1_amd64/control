@@ -1,0 +1,29 @@
+Package: libverilog-perl
+Version: 3.452-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 1665
+Depends: perl (>= 5.26.2-2), perlapi-5.26.2, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Verilog-Perl
+Description: framework providing Verilog support
+ Verilog is a Perl framework providing Verilog support in the Perl language.
+ It includes:
+ .
+  * Verilog::Getopt, which parses command line options similar to C++ and VCS
+  * Verilog::Language, which knows the language keywords and parses numbers.
+  * Verilog::Netlist, which builds netlists out of Verilog files. This allows
+    easy scripts to determine things such as the hierarchy of modules.
+  * Verilog::Parser, which invokes callbacks for language tokens
+  * Verilog::Preproc, preprocesses the language, and allows reading
+    post-processed files right from Perl without temporary files.
+ .
+ It also includes a variety of useful utilities:
+ .
+  * vpassert inserts PLIish warnings and assertions for any simulator
+  * vppreproc preprocesses the complete Verilog 2001 and SystemVerilog
+    language
+  * vrename renames and cross-references Verilog symbols. It creates Verilog
+    cross references and makes it easy to rename signal and module names over
+    multiple files.

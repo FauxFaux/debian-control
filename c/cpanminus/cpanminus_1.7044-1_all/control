@@ -1,0 +1,25 @@
+Package: cpanminus
+Version: 1.7044-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 201
+Depends: perl (>= 5.19.4), libcpan-distnameinfo-perl, libcpan-meta-check-perl (>= 0.012), libfile-pushd-perl (>= 1.009), liblocal-lib-perl (>= 2.000015), libmodule-cpanfile-perl (>= 1.1000), libparse-pmfile-perl (>= 0.36), libstring-shellquote-perl, perl (>= 5.19.10) | libparse-cpan-meta-perl (>= 1.4414), perl (>= 5.21.5) | libjson-pp-perl (>= 2.27300), perl (>= 5.23.0) | libcpan-meta-perl (>= 2.150005), perl (>= 5.23.0) | libcpan-meta-requirements-perl (>= 2.133), perl (>= 5.23.0) | libcpan-meta-yaml-perl (>= 0.016), perl (>= 5.23.0) | libhttp-tiny-perl (>= 0.056) | curl | wget, perl (>= 5.23.0) | libmodule-metadata-perl (>= 1.000027), perl (>= 5.23.9) | libversion-perl (>= 1:0.9912)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/App-cpanminus
+Description: script to get, unpack, build and install modules from CPAN
+ cpanminus provides a command-line (non interactive) interface to
+ automatically download, build and install Perl modules from CPAN.
+ .
+ It requires zero configuration, and stands alone. It also has a very low memory
+ footprint compared to similar software: when running, it requires only 10MB of
+ RAM.
+ .
+ It installs to wherever ExtUtils::MakeMaker and Module::Build are
+ configured to. So if you're using local::lib, then it installs to your
+ local perl5 directory. Otherwise it installs to the siteperl directory.
+ .
+ cpanminus at a boot time checks whether you have configured local::lib,
+ or have the permission to install modules to the sitelib directory. If
+ neither, it automatically sets up local::lib compatible installation
+ path in a perl5 directory under your home directory.

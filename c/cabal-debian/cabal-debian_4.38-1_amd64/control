@@ -1,0 +1,14 @@
+Package: cabal-debian
+Version: 4.38-1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 20167
+Depends: libbz2-1.0, libc6 (>= 2.27), libffi6 (>= 3.0.4), libgmp10, zlib1g (>= 1:1.1.4)
+Recommends: apt-file
+Section: utils
+Priority: optional
+Homepage: https://github.com/ddssff/cabal-debian
+Description: Create a debianization for a cabal package
+ Tool for creating debianizations of Haskell packages based on the .cabal
+ file.  If apt-file is installed it will use it to discover what is the
+ Debian package name of a C library.

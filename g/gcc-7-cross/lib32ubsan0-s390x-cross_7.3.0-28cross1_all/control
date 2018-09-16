@@ -1,0 +1,16 @@
+Package: lib32ubsan0-s390x-cross
+Source: gcc-7-cross (26)
+Version: 7.3.0-28cross1
+Architecture: all
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 327
+Depends: gcc-7-cross-base (>= 7.3.0-28), lib32gcc1-s390x-cross, lib32stdc++6-s390x-cross, libc6-s390-s390x-cross (>= 2.27)
+Conflicts: libc6-i386 (<< 2.9-22)
+Built-Using: gcc-7 (= 7.3.0-28)
+Section: devel
+Priority: optional
+Homepage: http://gcc.gnu.org/
+Description: UBSan -- undefined behaviour sanitizer (32bit)
+ UndefinedBehaviorSanitizer can be enabled via -fsanitize=undefined.
+ Various computations will be instrumented to detect undefined behavior
+ at runtime. Available for C and C++.

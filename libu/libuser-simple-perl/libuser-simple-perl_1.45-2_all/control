@@ -1,0 +1,21 @@
+Package: libuser-simple-perl
+Version: 1.45-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 69
+Depends: perl, libdate-calc-perl, libdbi-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/User-Simple
+Description: module for simple user sessions management
+ User::Simple provides a very simple framework for validating users,
+ managing their sessions and storing a minimal set of information (this
+ is, a meaningful user login/password pair and the user's name) via a
+ database. The sessions can be used as identifiers for i.e. cookies on
+ a Web system. The passwords are stored as MD5 hashes (this means, the
+ password is not stored in clear text).
+ .
+ User::Simple was originally developed with a PostgreSQL database in
+ mind, but should work with any DBI handle, be it from a real database
+ (i.e. PostgreSQL, Firebird, MySQL) or from a file-based one
+ (DBD::CSV, DBD::XBase, DBD::DBM, etc.)

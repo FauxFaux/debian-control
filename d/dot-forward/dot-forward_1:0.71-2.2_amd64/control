@@ -1,0 +1,18 @@
+Package: dot-forward
+Version: 1:0.71-2.2
+Architecture: amd64
+Maintainer: Gerrit Pape <pape@smarden.org>
+Installed-Size: 66
+Depends: libc6 (>= 2.2.5)
+Recommends: qmail (>> 1.06)
+Section: mail
+Priority: extra
+Description: reads sendmail's .forward files under qmail
+ It runs in the qmail startup script to support all your existing .forward
+ files automatically.  Individual users can switch to the .qmail mechanism
+ at their leisure.
+ .
+ dot-forward supports forwarding, program deliveries, and comments.  It
+ does not support file deliveries or :include: (However, it recognizes
+ file delivery attempts, and defers delivery to give you a chance to set up
+ a .qmail file).

@@ -1,0 +1,22 @@
+Package: bzr-upload
+Version: 1.1.0-8
+Architecture: all
+Maintainer: Debian Bazaar Maintainers <pkg-bazaar-maint@lists.alioth.debian.org>
+Installed-Size: 85
+Depends: bzr (<< 2.8.0), bzr (>= 2.2~), python (<< 2.8), python (>= 2.7), python:any (>= 2.6.6-7~)
+Enhances: bzr
+Conflicts: python-paramiko (<< 1.14.1)
+Section: vcs
+Priority: optional
+Homepage: https://launchpad.net/bzr-upload
+Description: Bazaar plugin for uploading to web servers
+ This is a plugin for Bazaar that incrementally uploads changes in a Bazaar
+ branch to a dumb server.
+ .
+ Web sites are often hosted on servers where Bazaar can not be installed.
+ In other cases, the web site must not give access to its corresponding
+ branch (for security reasons for example). Finally, web hosting providers
+ often provide only ftp access to upload sites.  This plugin uploads only
+ the relevant changes since the last upload using the ftp or sftp protocols.
+ .
+ It adds a "upload" subcommand to bzr.

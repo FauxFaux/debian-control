@@ -1,0 +1,18 @@
+Package: libunwind-setjmp0
+Source: libunwind
+Version: 1.2.1-8
+Architecture: amd64
+Maintainer: Adrian Bunk <bunk@debian.org>
+Installed-Size: 34
+Depends: libc6 (>= 2.2.5), liblzma5 (>= 5.1.1alpha+20110809), libunwind8
+Section: libs
+Priority: optional
+Homepage: http://www.nongnu.org/libunwind
+Description: libunwind-based non local goto - runtime
+ The unwind-setjmp library offers a libunwind-based implementation of
+ non-local gotos. This implementation is intended to be a drop-in
+ replacement for the normal, system-provided routines of the same name.
+ The main advantage of using the unwind-setjmp library is  that  setting
+ up a non-local goto via one of the setjmp() routines is very fast.
+ .
+ This package includes the shared library

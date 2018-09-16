@@ -1,0 +1,26 @@
+Package: geany-plugin-ctags
+Source: geany-plugins (1.33+dfsg-1)
+Version: 1.33+dfsg-1+b1
+Architecture: amd64
+Maintainer: Geany Packaging Team <pkg-geany-team@lists.alioth.debian.org>
+Installed-Size: 64
+Depends: geany-abi-18176, geany-plugins-common (= 1.33+dfsg-1+b1), exuberant-ctags, geany, libc6 (>= 2.4), libglib2.0-0 (>= 2.18.0), libgtk-3-0 (>= 3.0.0)
+Enhances: geany
+Section: devel
+Priority: optional
+Homepage: http://plugins.geany.org
+Description: ctags plugin for Geany
+ GeanyCtags adds a simple support for generating and querying ctags files
+ for a Geany project.
+ .
+ Even though Geany supports symbol definition searching by itself within the
+ open files (and with a plugin support within the whole project), tag
+ regeneration can become too slow for really big projects. This is why this
+ plugin was created. It makes it possible to generate the tag file only once
+ and just query it when searching for a particular symbol
+ definition/declaration. This approach is fine for big projects where most
+ of the codebase remains unchanged and the tag positions remain more or
+ less static.
+ .
+ Geany is a small and lightweight integrated development environment using the
+ Gtk+ toolkit.

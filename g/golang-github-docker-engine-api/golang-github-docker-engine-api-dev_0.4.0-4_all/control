@@ -1,0 +1,22 @@
+Package: golang-github-docker-engine-api-dev
+Source: golang-github-docker-engine-api
+Version: 0.4.0-4
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 528
+Depends: golang-github-docker-distribution-dev, golang-github-docker-go-connections-dev, golang-github-docker-go-units-dev (>= 0.3.0)
+Section: oldlibs
+Priority: extra
+Homepage: https://github.com/docker/engine-api
+Description: client and server components compatible with the Docker engine
+ Engine-api is a set of Go libraries to implement client and server
+ components compatible with the Docker engine.
+ The client package implements a fully featured http client to interact
+ with the Docker engine. It's modeled after the requirements of the Docker
+ engine CLI, but it can also serve other purposes.
+ .
+ Please do not use this library anymore. The Docker API client and types
+ have been moved to the main docker repo under the following import paths:
+ .
+  https://github.com/docker/docker/client
+  https://github.com/docker/docker/api/types

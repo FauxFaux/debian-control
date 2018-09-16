@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+# Version 5.4.2-2 starts using defaults-disabled
+# Remove rc.d links if upgrading from an older version and the service is
+# disabled in /etc/default
+
+if [ -n "$2" ] ; then
+	if dpkg --compare-versions "$2" "<<" "5.4.2-2" ; then
+		[ -r /etc/default/arc-datadelivery-service ] && . /etc/default/arc-datadelivery-service
+		if [ -n "${RUN}" ] && [ "${RUN}" != "yes" ] ; then
+			update-rc.d -f arc-datadelivery-service remove >/dev/null
+		fi
+	fi
+fi
+
+
+
+dpkg-maintscript-helper rm_conffile /etc/default/arc-datadelivery-service 5.4.2-2 -- "$@"

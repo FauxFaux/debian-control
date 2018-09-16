@@ -1,0 +1,69 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  purge)
+	if [ -e /var/spool/news ]; then
+		# we need the debconf library
+		. /usr/share/debconf/confmodule
+
+		# Prompt here rather than in configure since there may
+		# be a considerable gap between configuration and
+		# removal.
+		db_input high leafnode/purge || true
+		db_go
+
+		db_get leafnode/purge || true
+		answer=$RET
+
+		if [ "$answer" = "true" ]; then
+			rm -rf /var/spool/news
+			echo ""
+		fi
+	fi
+	rm -rf /var/lib/leafnode
+	rm -rf /etc/news/leafnode
+
+	if grep -q "#-- leafnode begin" /etc/hosts.allow 2>/dev/null; then
+		cp /etc/hosts.allow /etc/hosts.allow.new
+		sed -e '/#-- leafnode begin/,/#-- leafnode end/d' \
+			</etc/hosts.allow.new >/etc/hosts.allow
+		rm -f /etc/hosts.allow.new
+
+	fi
+
+	if grep -q "#-- leafnode begin" /etc/hosts.deny 2>/dev/null; then
+		cp /etc/hosts.deny /etc/hosts.deny.new
+		sed -e '/#-- leafnode begin/,/#-- leafnode end/d' \
+			</etc/hosts.deny.new >/etc/hosts.deny
+		rm -f /etc/hosts.deny.new
+	fi
+  ;;
+  remove)
+        update-inetd --remove ".*leafnode.*"
+        update-inetd --comment-chars "#disabled#" --enable nntp
+  ;;
+
+  upgrade|deconfigure)
+  ;;
+         
+  failed-upgrade)
+  ;;
+
+  abort-upgrade)
+  ;;
+                
+  *)
+	echo "unknown argument --> $1" >&2
+	exit 0
+  ;;
+esac
+
+# Automatically added by dh_installdebconf/11
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

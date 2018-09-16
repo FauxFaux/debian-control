@@ -1,0 +1,21 @@
+Package: winpdb
+Version: 1.4.8-3
+Architecture: all
+Maintainer: Bernd Zeimetz <bzed@debian.org>
+Installed-Size: 640
+Depends: python (>= 2.7), python (<< 2.8), python:any (>= 2.6.6-7~)
+Recommends: x-terminal-emulator | screen, python-wxversion, python-wxgtk3.0, python-crypto
+Section: python
+Priority: optional
+Homepage: http://www.winpdb.org/
+Description: Platform independent Python debugger
+ Winpdb supports debugging of threads- and curses based applications,
+ namespace modification and embedded debugging. As a remote debugger,
+ it uses (encrypted) network connections to connect to the debuggee
+ (which is running on the same machine, usually).
+ .
+ Winpdb is the graphical, wx-based frontend to rpdb2, which is also
+ included in this package. rpdb2 is text based and able to use screen
+ sessions if there is no x-terminal-emulator available.
+ .
+ Winpdb is up to 20 times faster than pdb.

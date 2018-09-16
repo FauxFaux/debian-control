@@ -1,0 +1,25 @@
+Package: janus
+Source: janus (0.4.2-1)
+Version: 0.4.2-1+b1
+Architecture: amd64
+Maintainer: Debian VoIP Team <pkg-voip-maintainers@lists.alioth.debian.org>
+Installed-Size: 2353
+Depends: libc6 (>= 2.17), libcurl4 (>= 7.16.2), libglib2.0-0 (>= 2.45.4), libjansson4 (>= 2.0.1), liblua5.3-0, libmicrohttpd12 (>= 0.9.50), libnice10 (>= 0.1.4), libogg0 (>= 1.0rc3), libopus0 (>= 1.1), librabbitmq4 (>= 0.8.0), libre0 (>= 0.4.14), libsofia-sip-ua0 (>= 1.12.10), libsrtp2-1 (>= 2.0.0), libssl1.1 (>= 1.1.0), libwebsockets8 (>= 2.0.2)
+Recommends: ssl-cert
+Suggests: janus-tools, janus-doc
+Section: comm
+Priority: optional
+Homepage: https://janus.conf.meetecho.com
+Description: general purpose WebRTC gateway
+ Janus is a general purpose WebRTC Gateway with a minimal footprint.
+ .
+ As such, it provides no functionality per se other than implementing
+ the means to set up a WebRTC media communication with a browser,
+ exchanging JSON messages with it, and relaying RTP/RTCP and messages
+ between browsers and the server-side application logic they are
+ attached to. Any specific feature/application are implemented in server
+ side plugins, that browsers contact via the gateway to take advantage
+ of the functionality they provide.
+ .
+ Example uses for Janus are applications involving echo tests,
+ conference bridges, media recorders, and SIP gateways.

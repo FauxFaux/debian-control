@@ -1,0 +1,30 @@
+Package: abcmidi
+Version: 20180222-1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 797
+Depends: libc6 (>= 2.14)
+Suggests: abcm2ps, timidity | pmidi | playmidi, postscript-viewer
+Conflicts: abcmidi-yaps
+Replaces: abcmidi-yaps
+Section: sound
+Priority: optional
+Homepage: https://ifdo.ca/~seymour/runabc/top.html
+Description: converter from ABC to MIDI format and back
+ This package contains the programs `abc2midi' and `midi2abc',  which
+ convert from the abc musical notation format to standard MIDI format
+ and vice-versa. They can generate accompaniment from guitar chords
+ in the abc file, as well as insert various MIDI events; the
+ MIDI-to-abc translation tries to figure out bars, triplets and
+ accidentals on its own.
+ .
+ The package also contains `abc2abc' (an abc prettyprinter/transposer),
+ `mftext' (a program that dumps a MIDI file as text), and `midicopy'
+ (a program that extracts specific tracks, channels or time intervals
+ from a MIDI file).
+ .
+ The package also contains Yet another ABC to PostScript converter (yaps)
+ which translates tunes written in the ABC format to PostScript,
+ which can then be viewed on screen or printed. It is essentially a
+ (non-exclusive) alternative to abc2ps, being based on the abc2ps
+ PostScript code together with the ABC parser from the abcmidi package.

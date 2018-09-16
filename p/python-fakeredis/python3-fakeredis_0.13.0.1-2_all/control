@@ -1,0 +1,19 @@
+Package: python3-fakeredis
+Source: python-fakeredis
+Version: 0.13.0.1-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 158
+Depends: python3-redis, python3:any
+Section: python
+Priority: optional
+Homepage: https://github.com/jamesls/fakeredis
+Description: Fake version of a redis-py - Python 3.x
+ fakeredis is a pure Python implementation of the redis-py Python client that
+ simulates talking to a redis server. This was created for a single purpose:
+ to write unittests. Setting up redis is not hard, but many times you want to
+ write unittests that do not talk to an external server (such as redis).
+ This module now allows tests to simply use this module as a reasonable
+ substitute for redis.
+ .
+ This package contains the Python 3.x module.

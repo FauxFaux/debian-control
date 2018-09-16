@@ -1,0 +1,26 @@
+Package: python-multi-key-dict
+Version: 2.0.3-1
+Architecture: all
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 44
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://github.com/formiaczek/multi_key_dict
+Description: multi key dictionary implementation - Python 2.7
+ Implementation of a multi-key dictionary, i.e.:
+  (key1[,key2, ..]) => value
+ .
+ This dictionary has a similar interface to the standard dictionary, but is
+ extended to support multiple keys referring to the same element.
+ .
+ Multi-key dict provides also extended interface for iterating over items and
+ keys (e.g. by the key type), which might be useful when creating, e.g.
+ dictionaries with index-name key pair allowing to iterate over items using
+ either: names or indexes. It can be useful for many other similar use-cases,
+ and there is no limit to the number of keys used to map to the value.
+ .
+ There are few other useful methods, e.g. to iterate over dictionary (by/using)
+ selected key type, finding other keys mapping to the same value etc.
+ .
+ This package contains the Python 2.7 module.

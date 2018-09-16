@@ -1,0 +1,40 @@
+Package: fsa
+Version: 1.15.9+dfsg-4
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 3693
+Depends: libc6 (>= 2.15), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), mummer, exonerate
+Recommends: med-config (>= 2.1)
+Section: science
+Priority: optional
+Homepage: http://fsa.sourceforge.net/
+Description: Fast Statistical Alignment of protein, RNA or DNA sequences
+ FSA is a probabilistic multiple sequence alignment algorithm which uses
+ a "distance-based" approach to aligning homologous protein, RNA or DNA
+ sequences. Much as distance-based phylogenetic reconstruction methods
+ like Neighbor-Joining build a phylogeny using only pairwise divergence
+ estimates, FSA builds a multiple alignment using only pairwise
+ estimations of homology. This is made possible by the sequence annealing
+ technique for constructing a multiple alignment from pairwise
+ comparisons, developed by Ariel Schwartz.
+ .
+ FSA brings the high accuracies previously available only for
+ small-scale analyses of proteins or RNAs to large-scale problems such as
+ aligning thousands of sequences or megabase-long sequences. FSA
+ introduces several novel methods for constructing better alignments:
+  * FSA uses machine-learning techniques to estimate gap and
+    substitution parameters on the fly for each set of input sequences.
+    This "query-specific learning" alignment method makes FSA very robust:
+    it can produce superior alignments of sets of homologous sequences
+    which are subject to very different evolutionary constraints.
+  * FSA is capable of aligning hundreds or even thousands of sequences
+    using a randomized inference algorithm to reduce the computational
+    cost of multiple alignment. This randomized inference can be over ten
+    times faster than a direct approach with little loss of accuracy.
+  * FSA can quickly align very long sequences using the "anchor
+    annealing" technique for resolving anchors and projecting them with
+    transitive anchoring. It then stitches together the alignment between
+    the anchors using the methods described above.
+  * The included GUI, MAD (Multiple Alignment Display), can display the
+    intermediate alignments produced by FSA, where each character is
+    colored according to the probability that it is correctly aligned

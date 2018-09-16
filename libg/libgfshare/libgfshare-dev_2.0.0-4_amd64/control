@@ -1,0 +1,20 @@
+Package: libgfshare-dev
+Source: libgfshare
+Version: 2.0.0-4
+Architecture: amd64
+Maintainer: Simon McVittie <smcv@debian.org>
+Installed-Size: 316
+Depends: libgfshare2 (= 2.0.0-4)
+Suggests: libgfshare-bin
+Replaces: libgfshare1 (<< 1.0.2-1)
+Section: libdevel
+Priority: optional
+Homepage: https://git.gitano.org.uk/libgfshare.git/
+Description: library for multi-way secret-sharing (headers)
+ This library implements Shamir's method for secret sharing, which can be
+ used to split a secret (like a GPG secret key) into multiple parts, so that
+ at least some number of those parts are needed to recover the original file,
+ but any smaller combination of parts is useless to an attacker.
+ .
+ This package contains header files and static libraries, needed to compile
+ programs that use libgfshare.

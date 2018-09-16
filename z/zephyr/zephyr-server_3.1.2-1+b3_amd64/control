@@ -1,0 +1,20 @@
+Package: zephyr-server
+Source: zephyr (3.1.2-1)
+Version: 3.1.2-1+b3
+Architecture: amd64
+Maintainer: Karl Ramm <kcr@debian.org>
+Installed-Size: 800
+Depends: libc-ares2 (>= 1.7.0), libc6 (>= 2.14), libcom-err2 (>= 1.01), libhesiod0, libzephyr4, debconf (>= 0.5) | debconf-2.0
+Conflicts: zephyr-server-krb, zephyr-server-krb45, zephyr-server-krb5
+Section: net
+Priority: optional
+Description: Project Athena's notification service - non-Kerberos server
+ Zephyr is derived from the original Project Athena 'Instant Message' system
+ and allows users to send messages to other users or to groups of users.
+ Users can view incoming Zephyr messages as windowgrams (transient X
+ windows) or as text on a terminal.
+ .
+ This package provides the server for the messaging service, which
+ maintains a location and subscription database for all the receiving
+ clients. All zephyrgrams are sent to the server to be routed to the
+ intended recipient. Only one server is required for a group of clients.

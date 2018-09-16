@@ -1,0 +1,28 @@
+Package: libghc-enummapset-th-doc
+Source: haskell-enummapset-th
+Version: 0.6.1.1-2
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 483
+Depends: haddock-interface-31
+Recommends: ghc-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: https://github.com/tsurucapital/enummapset-th
+Description: TH-generated EnumSet/EnumMap wrappers around IntSet/IntMap; documentation
+ This package wraps IntSet and IntMap from containers, and provides
+ fast sets and maps keyed on any data type with a well-behaved Enum
+ instance. Useful for derived Enums, newtype'd Ints, or any data type
+ that can be packed into an Int: just implement fromEnum and toEnum.
+ .
+ The boilerplate is generated using Template Haskell, so unlike
+ enummapset it's easier to maintain and keep up-to-date with
+ containers. On the downside, it's less portable.
+ .
+ Note that "Data.EnumMap.Lazy" and "Data.EnumMap.Strict" provide distinct
+ newtype wrappers, and their respective 'Functor' instances behave as
+ expected, unlike that of IntMap which is alway lazy.
+ .
+ This package provides the documentation for a library for the Haskell
+ programming language.
+ See http://www.haskell.org/ for more information on Haskell.

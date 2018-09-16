@@ -1,0 +1,23 @@
+Package: openvas-nasl
+Source: openvas-libraries
+Version: 9.0.3-1
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 196
+Depends: libc6 (>= 2.4), libgcrypt20 (>= 1.8.0), libglib2.0-0 (>= 2.16.0), libgnutls30 (>= 3.5.0), libgpgme11 (>= 1.2.0), libopenvas9 (>= 9.0.2), libssh-4 (>= 0.8.0)
+Breaks: libopenvas-dev (<< 9.0.1-4), libopenvas9 (<< 9.0.1-4)
+Replaces: libopenvas-dev (<< 9.0.1-4), libopenvas9 (<< 9.0.1-4)
+Section: net
+Priority: optional
+Homepage: http://www.openvas.org/
+Description: remote network security auditor - nasl tool
+ The Open Vulnerability Assessment System is a modular security auditing
+ tool, used for testing remote systems for vulnerabilities that should be
+ fixed.
+ .
+ It is made up of two parts: a server, and a client. The server/daemon,
+ openvasd, is in charge of the attacks, whereas the client,
+ OpenVAS-Client, provides an X11/GTK+ user interface.
+ .
+ This package contains the openvas-nasl tool used to execute NASL scripts
+ against hosts.

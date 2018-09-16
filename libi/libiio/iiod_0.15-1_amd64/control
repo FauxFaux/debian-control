@@ -1,0 +1,15 @@
+Package: iiod
+Source: libiio
+Version: 0.15-1
+Architecture: amd64
+Maintainer: A. Maitland Bottoms <bottoms@debian.org>
+Installed-Size: 81
+Depends: libiio0 (>= 0.15-1), lsb-base (>= 3.0-6), libc6 (>= 2.14)
+Suggests: avahi-daemon
+Section: net
+Priority: optional
+Homepage: https://github.com/analogdevicesinc/libiio
+Description: Daemon to share IIO devices on the network
+ IIOD is a network daemon that communicates with the network backend of libiio.
+ It can be used, for instance, to stream the flow of data samples from one weak
+ system to a more powerful one, where the samples will be processed.

@@ -1,0 +1,17 @@
+Package: libhash-util-fieldhash-compat-perl
+Version: 0.11-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 34
+Depends: perl, libtie-refhash-weak-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Hash-Util-FieldHash-Compat
+Description: Perl module providing a Hash::Util::FieldHash compatible API
+ Hash::Util::FieldHash::Compat under older perls provides a drop in
+ compatible API to Hash::Util::FieldHash using perltie. When
+ Hash::Util::FieldHash is available it will use that instead.
+ .
+ This way code requiring field hashes can benefit from fast, robust field
+ hashes on Perl 5.10 and newer, but still run on older perls that don't
+ ship with that module.

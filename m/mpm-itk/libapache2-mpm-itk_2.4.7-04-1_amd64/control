@@ -1,0 +1,21 @@
+Package: libapache2-mpm-itk
+Source: mpm-itk
+Version: 2.4.7-04-1
+Architecture: amd64
+Maintainer: Steinar H. Gunderson <sesse@debian.org>
+Installed-Size: 48
+Depends: libc6 (>= 2.4), libcap2 (>= 1:2.10), apache2-api-20120211, apache2-bin (>= 2.4.16)
+Breaks: apache2 (<< 2.4.9-2~)
+Replaces: apache2 (<< 2.4.6-4~)
+Section: libs
+Priority: optional
+Homepage: http://mpm-itk.sesse.net/
+Description: multiuser module for Apache
+ The mpm-itk module, although not technically a Multi-Processing Module (MPM)
+ (although it used to be) enhances the classical "prefork" module (that is,
+ without threads), in such a way that it allows you to constrain each
+ individual vhost to a particular system user and group. This allows you to run
+ several different web sites on a single server without worrying that they will
+ be able to read each others' files. mpm-itk is largely independent of e.g.
+ what scripting technology is in use on your server; in particular, it does not
+ require you to run your scripts as CGI to get the extra security benefit.

@@ -1,0 +1,26 @@
+Package: libpawlib2-dev
+Source: paw (1:2.14.04.dfsg.2-9.1)
+Version: 1:2.14.04.dfsg.2-9.1+b2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 6182
+Depends: cernlib-base-dev (>= 2006.dfsg.2-7), libgraflib1-dev (>= 2006.dfsg.2-7), libmathlib2-dev (>= 2006.dfsg.2-7), libpawlib2-gfortran (= 1:2.14.04.dfsg.2-9.1+b2)
+Suggests: libpawlib-lesstif3-dev
+Breaks: libpaw1-dev (<= 2004.11.04.dfsg-0sarge1)
+Replaces: libpaw1-dev
+Section: libdevel
+Priority: optional
+Homepage: http://paw.web.cern.ch/paw/
+Description: CERNLIB PAW library - portion without Lesstif (development files)
+ CERNLIB is a suite of data analysis tools and libraries created for
+ use in physics experiments, but also with applications to other
+ fields such as the biological sciences.
+ .
+ This package includes a static version of (most of) the library pawlib,
+ required by the CERNLIB application PAW.  In addition to the internal workings
+ of PAW, pawlib also provides the COMIS FORTRAN interpreter and the SIGMA array
+ manipulation language.  The Lesstif-dependent parts of the library are
+ provided in the libpawlib-lesstif3-dev package.
+ .
+ The COMIS portion of this library is functional on 64-bit machines only
+ when statically linked.

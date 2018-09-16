@@ -1,0 +1,18 @@
+Package: python-ruamel.ordereddict
+Version: 0.4.13-1
+Architecture: amd64
+Maintainer: Gianfranco Costamagna <locutusofborg@debian.org>
+Installed-Size: 126
+Depends: libc6 (>= 2.14), python (<< 2.8), python (>= 2.7~), python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://bitbucket.org/ruamel/ordereddict
+Description: dictionary that keeps keys in insertion resp. sorted order
+ This package is an implementation of an ordered dictionary with Key Insertion
+ Order (KIO: updates of values do not affect the position of the key),
+ Key Value Insertion Order (KVIO, an existing key's position is removed
+ and put at the back).
+ .
+ Sorted dictionaries are also provided. Currently only with Key Sorted
+ Order (KSO, no sorting function can be specified, but you can specify a
+ transform to apply on the key before comparison (e.g. string.lower)).

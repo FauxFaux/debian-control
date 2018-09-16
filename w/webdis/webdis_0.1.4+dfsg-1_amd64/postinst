@@ -1,0 +1,63 @@
+#! /bin/sh
+
+set -e
+WEBDIS_LOG=/var/log/webdis
+
+case "$1" in
+    configure)
+	    adduser --system --group \
+            --home /var/lib/webdis \
+            --no-create-home \
+            --gecos "webdis system user" \
+            --disabled-login \
+            --disabled-password webdis
+        if ! dpkg-statoverride --list $WEBDIS_LOG >/dev/null 2>&1 ; then
+            dpkg-statoverride --update --add webdis webdis 0750 $WEBDIS_LOG
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/webdis" ]; then
+		update-rc.d webdis defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d webdis $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'webdis.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'webdis.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'webdis.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'webdis.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0
+
+

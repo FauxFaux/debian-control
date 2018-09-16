@@ -1,0 +1,25 @@
+Package: python-django-babel
+Version: 0.6.2-1
+Architecture: all
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 57
+Depends: python-babel, python-django, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Suggests: python-django-babel-doc
+Section: python
+Priority: optional
+Homepage: https://github.com/graingert/django-babel/
+Description: Utilities for using Babel in Django - Python 2.7
+ This package contains various utilities for integration of Babel into the
+ Django web framework:
+  * A message extraction plugin for Django templates.
+  * A middleware class that adds the Babel Locale object to requests.
+  * A set of template tags for date and number formatting.
+ .
+ Babel provides a message extraction framework similar to GNU xgettext, but
+ more extensible and geared towards Python applications. While Django does
+ provide wrapper scripts for making the use of xgettext more convenient, the
+ extraction functionality is rather limited. For example, you can't use
+ template files with an extension other than .html, and everything needs to be
+ in your project package directory.
+ .
+ This package contains the Python 2.7 module.

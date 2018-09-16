@@ -1,0 +1,16 @@
+Package: reboot-notifier
+Version: 0.7
+Architecture: all
+Maintainer: Francois Marier <francois@debian.org>
+Installed-Size: 23
+Depends: bsd-mailx | mailx, default-mta | mail-transport-agent
+Conflicts: update-notifier-common
+Section: admin
+Priority: optional
+Description: daily reboot notification mailer
+ This package sends a daily email to the administrator when a system
+ reboot is required due to a kernel update.
+ .
+ The format used for the temporary files in /var/run/ is designed
+ to be compatible with any scripts that were written to work with
+ the late update-notifier-common package.

@@ -1,0 +1,28 @@
+Package: libjs-d3-format
+Source: d3-format
+Version: 1:1.0.2-1
+Architecture: all
+Maintainer: Ximin Luo <infinity0@debian.org>
+Installed-Size: 57
+Recommends: javascript-common
+Section: web
+Priority: extra
+Homepage: https://github.com/d3/d3-format
+Description: Formatting numbers for human consumption - browser library
+ Sometimes JavaScript doesn’t display numbers the way you expect. For example,
+ printing tenths with a naive simple loop might give you 0, 0.1, 0.2,
+ 0.30000000000000004, 0.4, 0.5, 0.6000000000000001, 0.7000000000000001, 0.8,
+ 0.9 - welcome to binary floating point!
+ .
+ Yet rounding error is not the only reason to customize number formatting. A
+ table of numbers should be formatted consistently for comparison; above, 0.0
+ would be better than 0. Large numbers should have grouped digits (e.g.,
+ 42,000) or be in scientific or metric notation (4.2e+4, 42k). Currencies
+ should have fixed precision ($3.50). Reported numerical results should be
+ rounded to significant digits (4021 becomes 4000). Number formats should
+ appropriate to the reader’s locale (42.000,00 or 42,000.00). The list goes on.
+ .
+ Formatting numbers for human consumption is the purpose of d3-format, which is
+ modeled after Python 3’s format specification mini-language (PEP 3101).
+ .
+ This package contains the plain JS library as well as a minified version.

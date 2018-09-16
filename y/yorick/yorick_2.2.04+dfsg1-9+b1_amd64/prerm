@@ -1,0 +1,26 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dh_usrlocal/11.2.1
+(
+	while read dir; do
+		rmdir "$dir" 2>/dev/null || true
+	done
+) << DATA
+/usr/local/lib/yorick/contrib
+/usr/local/lib/yorick/data
+/usr/local/lib/yorick/glade
+/usr/local/lib/yorick/i
+/usr/local/lib/yorick/i-start
+/usr/local/lib/yorick/i0
+/usr/local/lib/yorick/lib
+/usr/local/lib/yorick/packages
+/usr/local/lib/yorick/python
+/usr/local/lib/yorick
+DATA
+# End automatically added section
+
+
+# dh_usrlocal tries to remove this directory when it is not empty yet
+# and as a result leaves it in place. See #787837, #788098.
+rmdir /usr/local/lib/yorick 2>/dev/null || true

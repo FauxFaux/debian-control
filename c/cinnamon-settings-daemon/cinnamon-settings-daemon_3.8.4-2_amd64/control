@@ -1,0 +1,27 @@
+Package: cinnamon-settings-daemon
+Version: 3.8.4-2
+Architecture: amd64
+Maintainer: Debian Cinnamon Team <debian-cinnamon@lists.debian.org>
+Installed-Size: 2230
+Depends: cinnamon-desktop-data (>= 3.8), dconf-gsettings-backend | gsettings-backend, gir1.2-cvc-1.0, libc6 (>= 2.14), libcairo2 (>= 1.10.0), libcanberra-gtk3-0 (>= 0.25), libcanberra0 (>= 0.2), libcinnamon-desktop4 (>= 3.8.0), libcolord2 (>= 0.1.31), libcups2 (>= 1.6.0), libcvc0 (>= 3.0.1), libdbus-glib-1-2 (>= 0.88), libfontconfig1 (>= 2.12.6), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.43.92), libgnomekbd8 (>= 3.6.0), libgtk-3-0 (>= 3.16.2), libgudev-1.0-0 (>= 146), liblcms2-2 (>= 2.2+git20110628), libnotify4 (>= 0.7.3), libnspr4 (>= 2:4.9-2~), libnss3 (>= 2:3.13.4-2~), libpolkit-gobject-1-0 (>= 0.99), libpulse0 (>= 0.99.1), libsystemd0, libupower-glib3 (>= 0.99.0), libx11-6, libxext6, libxfixes3 (>= 1:4.0.1), libxi6 (>= 2:1.2.99.4), libxklavier16 (>= 5.0)
+Recommends: cinnamon-l10n (>= 3.8), pulseaudio
+Suggests: cinnamon-screensaver (>= 3.8), gnome-calculator | galculator | mate-calc, gnome-power-manager, gnome-screenshot, muffin (>= 3.8) | x-window-manager, tracker-gui | gnome-search-tool, x11-xserver-utils
+Breaks: cinnamon (<< 3.8), cinnamon-control-center (<< 3.8), cinnamon-core (<< 3.8~)
+Section: x11
+Priority: optional
+Homepage: http://cinnamon.linuxmint.com
+Description: daemon handling the Cinnamon session settings
+ This package contains the daemon which is responsible for setting the
+ various parameters of a Cinnamon session and the applications that run
+ under it. It handles the following kinds of settings:
+ .
+  * Keyboard: layout, accessibility options, shortcuts, media keys
+  * Clipboard management
+  * Theming: background, icons, GTK+ applications
+  * Cleanup of unused files
+  * Mouse: cursors, speed, accessibility options
+  * Startup of other daemons: screensaver, sound daemon
+  * Typing break
+ .
+ It also sets various application settings through X resources and
+ freedesktop.org XSETTINGS.

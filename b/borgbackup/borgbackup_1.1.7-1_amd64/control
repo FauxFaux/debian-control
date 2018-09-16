@@ -1,0 +1,33 @@
+Package: borgbackup
+Version: 1.1.7-1
+Architecture: amd64
+Maintainer: Danny Edel <debian@danny-edel.de>
+Installed-Size: 2515
+Depends: fuse, python3-llfuse (<< 2.0), python3-pkg-resources, python3 (<< 3.7), python3 (>= 3.6~), python3-msgpack (>= 0.5.1), python3:any, libacl1 (>= 2.2.51-8), libb2-1, libc6 (>= 2.14), liblz4-1 (>= 0.0~r130), libssl1.1 (>= 1.1.0), libzstd1 (>= 1.3.2)
+Suggests: borgbackup-doc
+Section: admin
+Priority: optional
+Homepage: https://borgbackup.github.io/borgbackup/
+Description: deduplicating and compressing backup program
+ Borg is a deduplicating and compressing backup program. Optionally, it
+ also supports authenticated encryption. It was forked from the attic
+ backup program.
+ .
+ The main goal of Borg is to provide an efficient and secure way to
+ backup data. The data deduplication technique used makes Borg suitable
+ for daily backups since only the changes are stored. The authenticated
+ encryption makes it suitable for backups to not fully trusted targets.
+ .
+ It can push backups to remote repositories accessed via ssh. A client
+ pushing a backup invokes "borg serve" on the repository host. It is
+ possible to restrict the ssh key to "borg serve" using the
+ authorized_keys command= clause.
+ .
+ Please note that the server and the client should be on the same
+ version of borgbackup. Using different versions of borgbackup on
+ client and server might result in 'incompatible API version' error
+ messages and a non-working backup.
+ .
+ While there is no direct operations mode for pull-type backups, you
+ can configure the backup target in append-only mode, preventing the
+ backup source from deleting or altering previous backups.

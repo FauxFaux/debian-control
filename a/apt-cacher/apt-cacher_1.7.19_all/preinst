@@ -1,0 +1,63 @@
+#! /bin/sh
+# preinst script for apt-cacher
+#
+# see: dh_installdeb(1)
+
+set -e
+
+case "$1" in
+    install|upgrade)
+        if dpkg --compare-versions "$2" ge "1.7.6" && \
+		dpkg --compare-versions "$2" le "1.7.16" ; then
+            # We reverted to dpkg handling of conffile /etc/default/apt-cacher
+	    # in 1.7.17 and don't need ucf anymore (introduced in version
+	    # 1.7.6). Remove it from the ucf database unconditionally.
+
+	    defaultfile='/etc/default/apt-cacher'
+	    if which ucf >/dev/null; then
+		echo "Purging obsolete ucf control of conffile $defaultfile."
+		ucf --purge $defaultfile
+	    fi    
+	    if which ucfr >/dev/null; then
+		ucfr --purge apt-cacher $defaultfile 
+            fi
+
+	    # Also remove the file itself if it is unmodified to prevent dpkg
+	    # from prompting.
+
+	    # Test MD5SUMS are:
+	    #  1.7.6: AUTOSTART=0
+	    #  1.7.6: AUTOSTART=1
+	    #  1.7.14: AUTOSTART=0
+	    #  1.7.14: AUTOSTART=1
+	    for test_md5sum in afc7a4b065275465c1eeb5a09c985bde \
+				   f269a1c735ae47d7068db3ba5641a08b \
+				   58440d3f69d8775a54c9c9e482eb90fb \
+				   f7ad90e6cfe327cfab7b16b9206cc56c
+	    do
+		if echo "$test_md5sum $defaultfile" | md5sum -c >/dev/null 2>&1; then
+		    echo "Removing unmodified version of $defaultfile"
+		    rm $defaultfile
+		    break
+		fi
+	    done
+
+	fi ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper rm_conffile /etc/cron.daily/apt-cacher 1.7.1 -- "$@"
+# End automatically added section
+
+
+exit 0
+
+

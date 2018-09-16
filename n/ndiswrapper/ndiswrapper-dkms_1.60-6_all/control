@@ -1,0 +1,20 @@
+Package: ndiswrapper-dkms
+Source: ndiswrapper
+Version: 1.60-6
+Architecture: all
+Maintainer: Julian Andres Klode <jak@debian.org>
+Installed-Size: 760
+Depends: dkms (>= 2.1.0.0)
+Section: kernel
+Priority: optional
+Homepage: http://ndiswrapper.sourceforge.net/
+Description: Source for the ndiswrapper Linux kernel module (DKMS)
+ Some vendors do not release specifications of the hardware or provide a
+ Linux driver for their wireless network cards. This project implements
+ Windows kernel API and NDIS (Network Driver Interface Specification) API
+ within Linux kernel. A Windows driver for wireless network card is then
+ linked to this implementation so that the driver runs natively, as though
+ it is in Windows, without binary emulation.
+ .
+ This package provides the source code for ndiswrapper kernel module to be
+ build with dkms.

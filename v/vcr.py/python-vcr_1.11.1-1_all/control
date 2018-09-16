@@ -1,0 +1,26 @@
+Package: python-vcr
+Source: vcr.py
+Version: 1.11.1-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 135
+Depends: python-contextlib2, python-mock, python-six (>= 1.5), python-wrapt, python-yaml, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://github.com/kevin1024/vcrpy/
+Description: record and replay HTML interactions (Python library)
+ vcr.py records all interactions that take place through the HTML libraries
+ it supports and writes them to flat files, called cassettes (YAML format by
+ default). These cassettes could be replayed then for fast, deterministic
+ and accurate HTML testing.
+ .
+ vcr.py supports the following Python HTTP libraries:
+  - urllib2 (stdlib)
+  - urllib3
+  - http.client (Python3 stdlib)
+  - Requests
+  - httplib2
+  - Boto (interface to Amazon Web Services)
+  - Tornado's HTTP client
+ .
+ This package contains the modules for Python 2.

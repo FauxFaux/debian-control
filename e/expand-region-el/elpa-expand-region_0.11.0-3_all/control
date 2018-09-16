@@ -1,0 +1,27 @@
+Package: elpa-expand-region
+Source: expand-region-el
+Version: 0.11.0-3
+Architecture: all
+Maintainer: Debian Emacs addons team <pkg-emacsen-addons@lists.alioth.debian.org>
+Installed-Size: 161
+Depends: emacsen-common
+Enhances: emacs, emacs24, emacs25
+Breaks: expand-region-el (<< 0.10.0-6), sml-mode (<< 6)
+Replaces: expand-region-el (<< 0.10.0-6)
+Provides: expand-region-el
+Section: editors
+Priority: optional
+Homepage: https://github.com/magnars/expand-region.el
+Description: Increase selected region in Emacs by semantic units
+ Expand region increases the selected region by semantic units.  Just
+ keep pressing the 'C-=' key until it selects what you want.
+ The notion of "semantic" is language-sensitive.
+ .
+ Example: editing
+ .
+ (setq alphabet-start "abc def")
+ .
+ With the cursor at the `c`, it starts by marking the entire word
+ `abc`, then expand to the contents of the quotes `abc def`, then to
+ the entire quote `"abc def"`, then to the contents of the sexp `setq
+ alphabet-start "abc def"` and finally to the entire sexp.

@@ -1,0 +1,26 @@
+Package: pt-websocket
+Version: 0.2-8
+Architecture: amd64
+Maintainer: Debian Privacy Tools Maintainers <pkg-privacy-maintainers@lists.alioth.debian.org>
+Installed-Size: 4329
+Depends: libc6 (>= 2.3.2)
+Built-Using: golang-1.10 (= 1.10-1), golang-golang-x-net-dev (= 1:0.0+git20170629.c81e7f2+dfsg-2), golang-goptlib (= 0.6-3)
+Section: net
+Priority: optional
+Homepage: https://gitweb.torproject.org/pluggable-transports/websocket.git
+Description: WebSocket pluggable transport - server
+ Pluggable transports are tools that transform a stream of application traffic
+ into a different format on the network. This helps to bypass network-level
+ censorship.
+ .
+ This package contains a server transport plugin that accepts connections
+ transformed to look like the websocket protocol. This is typically used to
+ enhance systems like Tor, to provide service even to censored users.
+ .
+ See flashproxy-client for a corresponding client transport plugin, meant for
+ users to bypass censorship, that is compatible with the websocket protocol that
+ this package expects.
+ .
+ (The source package also contains a websocket-client transport plugin, but
+ this is just a demo that is less effective than flashproxy-client, and not
+ meant to be used in real situations.)

@@ -1,0 +1,49 @@
+Package: libthread-tie-perl
+Version: 0.13-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 108
+Depends: perl, libload-perl, libthread-serialize-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Thread-Tie
+Description: alternative separate thread implementation of shared variables
+ The standard shared variable scheme used by Perl, is based on tie-ing the
+ variable to some very special dark magic. This dark magic ensures that shared
+ variables, which are copied just as any other variable when a thread is
+ started, update values in all of the threads where they exist as soon as the
+ value of a shared variable is changed.
+ .
+ The Thread::Tie module is a proof-of-concept implementation of another approach
+ to shared variables. Instead of having shared variables exist in all the
+ threads from which they are accessible, shared variable exist as "normal",
+ unshared variables in a separate thread. Only a tied object exists in each
+ thread from which the shared variable is accessible.
+ .
+ Through the use of a client-server model, any thread can fetch and/or update
+ variables living in that thread. This client-server functionality is hidden
+ under the hood of tie(). So you could say that one dark magic (the current
+ shared variables implementation) is replaced by another dark magic.
+ .
+ The Thread::Tie approach has the following advantages:
+ .
+  * Memory usage - This implementation circumvents the memory leak that
+    currently (threads::shared version 0.90) plagues any shared array or shared
+    hash access.
+  * Tieing shared variables - Because the current implementation uses tie-ing,
+    you can not tie a shared variable. The same applies for this implementation
+    you might say. However, it is possible to specify a non-standard tie
+    implementation for use within the thread. So with this implementation you
+    can tie() a shared variable. So you could tie a shared hash to a DBM file à
+    la dbmopen() with this module.
+ .
+ Of course there are disadvantages to this approach:
+ .
+  * Pure Perl implementation - This module is currently a pure Perl
+    implementation. This is ok for a proof of concept, but may need re-
+    implementation in pure XS or in Inline::C for production use.
+ .
+  * Tradeoff between cpu and memory - This implementation currently uses (much)
+    more cpu than the standard shared variables implementation. Whether this
+    would still be true when re-implemented in XS or Inline::C, remains to be
+    seen.

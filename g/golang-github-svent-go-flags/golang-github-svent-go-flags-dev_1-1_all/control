@@ -1,0 +1,35 @@
+Package: golang-github-svent-go-flags-dev
+Source: golang-github-svent-go-flags
+Version: 1-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 98
+Built-Using: golang-1.6 (= 1.6.2-2)
+Section: devel
+Priority: extra
+Multi-Arch: foreign
+Homepage: https://github.com/svent/go-flags
+Description: go library for parsing command line arguments
+ This library provides similar functionality to the builtin flag library
+ of go, but provides much more functionality and nicer formatting.
+ Supported features are:
+ .
+  * Options with short names (-v)
+  * Options with long names (--verbose)
+  * Options with and without arguments (bool v.s. other type)
+  * Options with optional arguments and default values
+  * Multiple option groups each containing a set of options
+  * Generate and print well-formatted help message
+  * Passing remaining command line arguments after -- (optional)
+  * Ignoring unknown command line options (optional)
+  * Supports -I/usr/include -I=/usr/include -I /usr/include option
+    argument specification
+  * Supports multiple short options -aux
+  * Supports all primitive go types (string, int{8..64}, uint{8..64},
+    float)
+  * Supports same option multiple times (can store in slice or last option
+    counts)
+  * Supports maps
+  * Supports function callbacks
+  * Supports namespaces for (nested) option groups
+Go-Import-Path: github.com/svent/go-flags

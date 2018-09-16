@@ -1,0 +1,31 @@
+Package: alsa-oss
+Version: 1.1.6-1
+Architecture: amd64
+Maintainer: Debian ALSA Maintainers <pkg-alsa-devel@lists.alioth.debian.org>
+Installed-Size: 99
+Depends: libasound2 (>= 1.0.16), libc6 (>= 2.15)
+Section: sound
+Priority: optional
+Homepage: https://www.alsa-project.org/
+Description: ALSA wrapper for OSS applications
+ This package contains a program loader, aoss, which wraps
+ applications written for OSS in a compatibility library,
+ thus allowing them to work with ALSA.
+ .
+ There are two ways of getting an application to work with
+ ALSA if the application was written for OSS. The first way
+ is to load the special ALSA drivers that emulate the OSS
+ kernel interface; these allow the application to open
+ /dev/dsp0 and other OSS device files. The second way is
+ to wrap the application in the libaoss library provided
+ in this package; the wrapper causes the application to
+ access native ALSA device files such as /dev/snd/pcmC0D0c
+ instead of OSS device files.
+ .
+ Use of the alsa-oss library is recommended over the use of
+ OSS-emulation drivers if you want to use ALSA's PCM plugin
+ layer.
+ .
+ ALSA is the Advanced Linux Sound Architecture.
+ .
+ OSS is the free version of the Open Sound System.

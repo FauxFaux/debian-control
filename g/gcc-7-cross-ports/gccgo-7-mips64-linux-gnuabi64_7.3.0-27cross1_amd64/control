@@ -1,0 +1,20 @@
+Package: gccgo-7-mips64-linux-gnuabi64
+Source: gcc-7-cross-ports (21)
+Version: 7.3.0-27cross1
+Architecture: amd64
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 93516
+Depends: gcc-7-mips64-linux-gnuabi64-base (= 7.3.0-27cross1), gcc-7-mips64-linux-gnuabi64 (= 7.3.0-27cross1), libgo11-mips64-cross (>= 7), libc6-dev-mips64-cross (>= 2.13-5), libc6 (>= 2.14), libgmp10 (>= 2:5.0.1~), libisl19 (>= 0.15), libmpc3, libmpfr6 (>= 3.1.3), zlib1g (>= 1:1.1.4)
+Suggests: gccgo-7-doc, libgo11-dbg-mips64-cross (>= 7.3.0-27cross1)
+Conflicts: golang-go (<< 2:1.3.3-1ubuntu2)
+Breaks: libgo11-mips64-cross (<< 7.2.0-18)
+Replaces: libgo11-mips64-cross (<< 7.2.0-18)
+Provides: go-compiler
+Built-Using: gcc-7 (= 7.3.0-27)
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://gcc.gnu.org/
+Description: GNU Go compiler
+ This is the GNU Go compiler, which compiles Go on platforms supported
+ by the gcc compiler. It uses the gcc backend to generate optimized code.

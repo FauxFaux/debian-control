@@ -1,0 +1,18 @@
+Package: libpdf-writer-perl
+Version: 0.06-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 37
+Depends: perl, libpdf-api2-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/PDF-Writer
+Description: PDF writer abstraction layer
+ PDF::Writer is a generalised API that allows a module that generates PDFs to
+ transparently target multiple backends without changing its code. The
+ currently supported backends are:
+  * PDF::API2
+  * PDFlib (versions 3+)
+  * Mock
+ If both PDF::API2 and pdflib_pl are available, PDF::API2 is preferred.
+ If neither is available, a run-time exception will be thrown.

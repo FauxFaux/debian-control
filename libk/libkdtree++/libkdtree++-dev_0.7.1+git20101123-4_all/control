@@ -1,0 +1,30 @@
+Package: libkdtree++-dev
+Source: libkdtree++
+Version: 0.7.1+git20101123-4
+Architecture: all
+Maintainer: Sebastian Ramacher <sramacher@debian.org>
+Installed-Size: 96
+Section: libdevel
+Priority: optional
+Homepage: https://alioth.debian.org/projects/libkdtree/
+Description: C++ template container implementation of kd-tree sorting
+ libkdtree++ is a C++ template container implementation of k-dimensional space
+ sorting, using a kd-tree. It:
+ .
+   - supports an unlimited number of dimensions (in theory)
+   - can store any data structure, provided the data structure provides
+     operator[0 - k-1] to access the individual dimensional
+     components (arrays, std::vector already do) and a std::less
+     implementation for the type of dimensional components
+   - has support for custom allocators
+   - implements iterators
+   - provides standard find as well as range queries
+   - has amortised O(lg n) time (O(n lg n) worst case) on most
+     operations (insert/erase/find optimised) and worst-case O(n) space
+   - provides a means to rebalance and thus optimise the tree
+   - exists in its own namespace
+   - uses STL coding style, basing a lot of the code on stl_tree.h
+ .
+ libkdtree++ only exists as a -dev package as it's only a bunch of C++ header
+ files. Therefore, no static or shared library is necessary, allowing for
+ ultimate flexibility.

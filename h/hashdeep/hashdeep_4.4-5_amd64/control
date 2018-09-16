@@ -1,0 +1,26 @@
+Package: hashdeep
+Version: 4.4-5
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 294
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Breaks: md5deep (<< 4.4-1~)
+Replaces: md5deep (<< 4.4-1~)
+Provides: md5deep
+Section: utils
+Priority: optional
+Homepage: http://md5deep.sf.net
+Description: recursively compute hashsums or piecewise hashings
+ hashdeep is a set of tools to compute MD5, SHA1, SHA256, tiger
+ and whirlpool hashsums of arbitrary number of files recursively.
+ .
+ The main hashdeep features are:
+ .
+   * It can compare those hashsums with a list of known hashes;
+   * The tools can display those that match the list or those that
+     does not match;
+   * It can  display a time estimation when processing large files.
+   * It can do piecewise hashing (hash input files in arbitrary
+     sized blocks).
+ .
+ This package is useful in forensics investigations.

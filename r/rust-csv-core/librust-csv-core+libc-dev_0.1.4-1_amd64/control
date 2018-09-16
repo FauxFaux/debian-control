@@ -1,0 +1,15 @@
+Package: librust-csv-core+libc-dev
+Source: rust-csv-core
+Version: 0.1.4-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-csv-core-dev (= 0.1.4-1), librust-memchr-2+libc-dev
+Provides: librust-csv-core+default-dev (= 0.1.4-1), librust-csv-core-0+default-dev (= 0.1.4-1), librust-csv-core-0+libc-dev (= 0.1.4-1), librust-csv-core-0.1+default-dev (= 0.1.4-1), librust-csv-core-0.1+libc-dev (= 0.1.4-1), librust-csv-core-0.1.4+default-dev (= 0.1.4-1), librust-csv-core-0.1.4+libc-dev (= 0.1.4-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/BurntSushi/rust-csv
+Description: Bare bones CSV parsing with no_std support - feature "libc"
+ This metapackage enables feature libc for the Rust csv-core crate, by pulling
+ in any additional dependencies needed by that feature.

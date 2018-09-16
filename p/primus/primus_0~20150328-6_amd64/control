@@ -1,0 +1,22 @@
+Package: primus
+Version: 0~20150328-6
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 32
+Depends: bumblebee, socat, primus-libs (= 0~20150328-6), xserver-xorg-core (>= 2:1.18.3-2) | xserver-xorg-video-intel (>= 2:2.99.917)
+Recommends: primus-libs-ia32
+Suggests: nvidia-driver-libs-nonglvnd
+Breaks: libgl1-nvidia-glvnd-glx, nvidia-driver-libs
+Section: utils
+Priority: optional
+Homepage: https://github.com/amonakov/primus
+Description: client-side GPU offloading for NVIDIA Optimus
+ Primus is a shared library that provides OpenGL and GLX APIs and implements
+ low-overhead local-only client-side OpenGL offloading via GLX forking,
+ similar to VirtualGL. It intercepts GLX calls and redirects GL rendering
+ to a secondary X display, presumably driven by a faster GPU. On swapping
+ buffers, rendered contents are read back using a PBO and copied onto
+ the drawable it was supposed to be rendered on in the first place.
+ .
+ Primus is currently intended to be used alongside Bumblebee and provides a
+ drop-in replacement for optirun (i.e. "primusrun").

@@ -1,0 +1,23 @@
+Package: liblog-dispatchouli-perl
+Version: 2.016-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 78
+Depends: perl, liblog-dispatch-array-perl, liblog-dispatch-perl, libparams-util-perl, libstring-flogger-perl, libsub-exporter-globexporter-perl, libsub-exporter-perl, libtry-tiny-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Log-Dispatchouli
+Description: simple wrapper around Log::Dispatch
+ Log::Dispatchouli is a simple wrapper around Log::Dispatch intended to make
+ it simpler to add logging to a program. It removes the need to think much
+ about categories, facilities, levels, or things like that. It makes logging
+ just configurable enough so you can find the logs you want, and easy enough
+ that you will actually log things.
+ .
+ Log::Dispatchouli can log to syslog (if you specify a facility), standard
+ error or standard output, to a file, or to an array in memory. Logging to
+ memory is primarily intended for testing.
+ .
+ Additionally, Log::Dispatchouli uses String::Flogger to process the things to
+ be logged, meaning you can easily log data structures. For more information,
+ see String::Flogger (libstring-flogger-perl).

@@ -1,0 +1,30 @@
+Package: python3-pynzb
+Source: python-pynzb
+Version: 0.1.0-3
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 36
+Depends: python3-pkg-resources, python3:any (>= 3.3.2-2~)
+Suggests: python3-lxml
+Section: python
+Priority: optional
+Homepage: https://github.com/ericflo/pynzb
+Description: unified API for parsing NZB files from NNTP (Usenet) servers
+ pynzb is a unified API for parsing NZB files, with several concrete
+ implementations included.
+ .
+ NZB is an XML-based file format for retrieving posts from NNTP (Usenet)
+ servers.  Since NZB is XML-based, it's relatively easy to build one-off
+ parsers to parse NZB files.  This project is an attempt to consolidate those
+ many one-off NZB parsers into one simple interface.
+ .
+ This package includes three implementations (listed in order of
+ compatibility): one based on expat, another based on ElementTree, and a final
+ implementation based on lxml.  The expat version should work on all versions
+ of Python > 2.0.  The ElementTree implementation will work on Python > 2.5.
+ The lxml version will work as long as lxml is installed.
+ .
+ Simply import nzb_parser from the pynzb package.  It's an instantiated
+ version of the fastest available parser that your system can support.
+ .
+ This package provides the Python 3 module.

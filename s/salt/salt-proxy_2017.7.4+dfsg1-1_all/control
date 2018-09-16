@@ -1,0 +1,32 @@
+Package: salt-proxy
+Source: salt
+Version: 2017.7.4+dfsg1-1
+Architecture: all
+Maintainer: Debian Salt Team <pkg-salt-team@lists.alioth.debian.org>
+Installed-Size: 57
+Depends: salt-minion (= 2017.7.4+dfsg1-1), python3:any (>= 3.4~)
+Section: admin
+Priority: optional
+Homepage: http://saltstack.org/
+Description: Proxy client package for salt stack
+ Proxy minion allows a remote manager to administer devices that are unable to
+ run a minion. salt is a powerful remote execution manager that can be used to
+ administer servers in a fast and efficient way.
+ .
+ It allows commands to be executed across large groups of
+ devices. This means systems can be easily managed, but data can
+ also be easily gathered.  Quick introspection into running
+ systems becomes a reality.
+ .
+ Remote execution is usually used to set up a certain state on a
+ remote system. Salt addresses this problem as well, the salt
+ state system uses salt state files to define the state a server
+ needs to be in.
+ .
+ Between the remote execution system, and state management Salt
+ addresses the backbone of cloud and data center management.
+ .
+ This particular package provides the salt proxy minion. It
+ is able to run salt modules and states on remote hosts via a proxy
+ which transmits appropriate commands to devices and replies with the
+ results of said commands.

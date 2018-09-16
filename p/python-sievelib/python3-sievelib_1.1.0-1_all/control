@@ -1,0 +1,28 @@
+Package: python3-sievelib
+Source: python-sievelib
+Version: 1.1.0-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 140
+Depends: python3-future, python3-six, python3:any (>= 3.4~)
+Section: python
+Priority: optional
+Homepage: https://github.com/tonioo/sievelib
+Description: Client-side Sieve and Managesieve library (Python3 version)
+ Client-side Sieve and Managesieve library written in Python.
+ .
+ Sieve:
+ Currently, the provided parser supports most of the functionalities described
+ in RFC 5228. The only exception concerns section 2.4.2.4. Encoding Characters
+ using "encoded-character" which is not supported.
+ The following Sieve extensions are also supported:
+  * Date and Index (RFC 5260)
+  * Vacation (RFC 5230)
+ .
+ ManageSieve:
+ All mandatory commands are supported. The RENAME extension is supported, with a
+ simulated behaviour for server that do not support it.
+ For the AUTHENTICATE command, supported mechanisms are DIGEST-MD5, PLAIN and
+ LOGIN.
+ .
+ This package contains the Python 3 version of the library.

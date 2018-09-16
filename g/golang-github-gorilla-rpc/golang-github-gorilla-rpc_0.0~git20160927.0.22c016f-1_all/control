@@ -1,0 +1,18 @@
+Package: golang-github-gorilla-rpc
+Version: 0.0~git20160927.0.22c016f-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 129
+Built-Using: golang-1.7 (= 1.7.6-1)
+Section: devel
+Priority: extra
+Homepage: https://github.com/gorilla/rpc
+Description: golang foundation for RPC over HTTP services
+ gorilla/rpc is a foundation for RPC over HTTP services, providing access to
+ the exported methods of an object through HTTP requests.  It derives from the
+ standard net/rpc package but uses a single HTTP request per call instead of
+ persistent connections. Other differences compared to net/rpc:
+  - Multiple codecs can be registered in the same server.
+  - A codec is chosen based on the "Content-Type" header from the request.
+  - Service methods also receive http.Request as parameter.
+  - This package can be used on Google App Engine.

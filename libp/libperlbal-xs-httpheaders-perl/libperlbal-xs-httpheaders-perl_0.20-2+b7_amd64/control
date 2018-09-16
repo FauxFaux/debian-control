@@ -1,0 +1,21 @@
+Package: libperlbal-xs-httpheaders-perl
+Source: libperlbal-xs-httpheaders-perl (0.20-2)
+Version: 0.20-2+b7
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 72
+Depends: perl (>= 5.26.0-4), perlapi-5.26.0, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5), libperlbal-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Perlbal-XS-HTTPHeaders/
+Description: Perlbal extension for processing HTTP headers faster
+ Perlbal::XS::HTTPHeaders is used to read HTTP headers from a string and to
+ parse them into an internal storage format for easy access and modification.
+ You can also ask the module to reconstitute the headers into one big string,
+ useful if you're writing a proxy and need to read and write headers while
+ maintaining the ability to modify individual parts of the whole.
+ .
+ The goal is to be fast. This is a lot faster than doing all of the text
+ processing in Perl directly, and a lot of the flexibility of Perl is
+ maintained by implementing the library in Perl and descending from
+ Perlbal::HTTPHeaders.

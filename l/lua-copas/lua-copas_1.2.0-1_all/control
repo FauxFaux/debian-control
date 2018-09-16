@@ -1,0 +1,18 @@
+Package: lua-copas
+Version: 1.2.0-1
+Architecture: all
+Maintainer: Enrico Tassi <gareuselesinge@debian.org>
+Installed-Size: 99
+Depends: lua-coxpcall, lua-socket
+Provides: lua5.1-copas, lua5.2-copas
+Section: interpreters
+Priority: optional
+Homepage: https://github.com/keplerproject/copas
+Description: Copas is a dispatcher of concurrent TCP/IP requests
+ Copas is a dispatcher of concurrent TCP/IP requests based on corutines.
+ A server registered with Copas should provide a handler for requests and use
+ Copas socket functions to send the response. Copas loops through requests and
+ invokes the corresponding handlers.
+ .
+ This package also contains the documentation of copas.
+Lua-Versions: 5.1 5.2

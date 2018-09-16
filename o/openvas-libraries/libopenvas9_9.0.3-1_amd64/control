@@ -1,0 +1,24 @@
+Package: libopenvas9
+Source: openvas-libraries
+Version: 9.0.3-1
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 955
+Depends: libc6 (>= 2.15), libgcrypt20 (>= 1.8.0), libglib2.0-0 (>= 2.31.8), libgnutls30 (>= 3.5.6), libgpg-error0 (>= 1.14), libgpgme11 (>= 1.2.0), libhiredis0.13 (>= 0.13.1), libksba8 (>= 1.2.0), libldap-2.4-2 (>= 2.4.7), libpcap0.8 (>= 0.9.8), libradcli4, libsnmp30 (>= 5.7.3+dfsg-3~dfsg), libssh-4 (>= 0.8.0), libuuid1 (>= 2.16), zlib1g (>= 1:1.1.4)
+Conflicts: libopenvas8
+Breaks: openvas-scanner (<< 5.1.2~)
+Replaces: libopenvas8
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.openvas.org/
+Description: remote network security auditor - shared libraries
+ The Open Vulnerability Assessment System is a modular security auditing
+ tool, used for testing remote systems for vulnerabilities that should be
+ fixed.
+ .
+ It is made up of two parts: a server, and a client. The server/daemon,
+ openvasd, is in charge of the attacks, whereas the client,
+ OpenVAS-Client, provides an X11/GTK+ user interface.
+ .
+ This package contains the required shared libraries.

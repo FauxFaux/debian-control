@@ -1,0 +1,26 @@
+Package: libbot-basicbot-pluggable-perl
+Version: 1.20-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 264
+Depends: perl, libbot-basicbot-perl (>= 0.91), libconfig-find-perl, libcrypt-saltedhash-perl, libdbi-perl, libdbm-deep-perl, liblist-moreutils-perl, liblog-log4perl-perl, libmoose-perl, libmoosex-getopt-perl, libmoosex-simpleconfig-perl, libpoe-perl, libtext-unidecode-perl, libtry-tiny-perl, liburi-find-simple-perl, liburi-perl, liburi-title-perl, libwww-perl, libxml-feed-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Bot-BasicBot-Pluggable
+Description: extended simple IRC bot for pluggable modules
+ Bot::BasicBot::Pluggable started as Yet Another Infobot replacement,
+ but now is a generalized framework for writing infobot-type bots that
+ lets you keep each specific function separate. You can have separate modules
+ for factoid tracking, 'seen' status, karma, googling, etc.
+ Included default modules are:
+ .
+  Auth    - user authentication and main access.
+  DNS     - host lookup (e.g. nslookup and dns).
+  Google  - search Google for things.
+  Infobot - handles infobot-style factoids.
+  Join    - joins and leaves channels.
+  Karma   - tracks the popularity of things.
+  Loader  - loads and unloads modules as bot commands.
+  Seen    - tells you when people were last seen.
+  Title   - gets the title of URLs mentioned in channel.
+  Vars    - changes module variables.

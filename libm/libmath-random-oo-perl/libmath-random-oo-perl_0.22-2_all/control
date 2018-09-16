@@ -1,0 +1,24 @@
+Package: libmath-random-oo-perl
+Version: 0.22-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 58
+Depends: perl, libclass-accessor-perl, libparams-validate-perl, libtest-mockrandom-perl, libtest-number-delta-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Math-Random-OO
+Description: consistent object-oriented interface for generating random numbers
+ CPAN contains many modules for generating random numbers in various ways and
+ from various probability distributions using pseudo-random number generation
+ algorithms or other entropy sources. (The /"SEE ALSO" section has some
+ examples.) Unfortunately, no standard interface exists across these modules.
+ Math::Random::OO defines an abstract interface for random number generation.
+ Subclasses of this model will implement specific types of random number
+ generators or will wrap existing random number generators.
+ .
+ This consistency will come at the cost of some efficiency, but will enable
+ generic routines to be written that can manipulate any provided random number
+ generator that adheres to the interface. E.g., a stochastic simulation could
+ take a number of user-supplied parameters, each of which is a
+ Math::Random::OO subclass object and which represent a stochastic variable
+ with a particular probability distribution.

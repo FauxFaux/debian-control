@@ -1,0 +1,25 @@
+Package: ftp-ssl
+Source: netkit-ftp-ssl
+Version: 0.17.34+0.2-4
+Architecture: amd64
+Maintainer: Mats Erik Andersson <mats.andersson@gisladisker.se>
+Installed-Size: 148
+Depends: libc6 (>= 2.15), libeditline0, libssl1.0.2 (>= 1.0.2d), netbase
+Breaks: ftp (<= 0.17-31)
+Replaces: ftp (<= 0.17-31)
+Provides: ftp
+Section: net
+Priority: extra
+Description: FTP client with SSL or TLS encryption support
+ ftp is the user interface to the ARPANET standard File Transfer Protocol.
+ The program allows a user to transfer files to and from a remote network
+ site.
+ .
+ ftp-ssl replaces normal ftp using SSL or TLS authentication and encryption.
+ It interoperates with normal ftpd.
+ It checks if the other side is also talking SSL or TLS, if not it falls back
+ to normal ftp protocol.
+ .
+ Advantages over normal ftp(d): Your passwords and the data you send
+ will not go in cleartext over the line. Nobody can get it with
+ tcpdump or similar tools.

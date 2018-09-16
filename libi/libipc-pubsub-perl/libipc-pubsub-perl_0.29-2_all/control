@@ -1,0 +1,19 @@
+Package: libipc-pubsub-perl
+Version: 0.29-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 51
+Depends: perl, libossp-uuid-perl, libclass-accessor-perl, libdbm-deep-perl
+Suggests: libcache-memcached-perl, libjifty-dbi-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/IPC-PubSub
+Description: Interprocess Publish/Subscribe channels
+ IPC::PubSub provides a simple API for publishing messages to channels
+ and for subscribing to them.
+ .
+ When a message is published on a channel, all subscribers currently in
+ that channel will get it on their next get or get_all call.
+ .
+ The package includes backends based on DBM::Deep, Cache::Memcached,
+ Jifty::DBI and plain hashes.

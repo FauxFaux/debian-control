@@ -1,0 +1,29 @@
+Package: automake-1.15
+Version: 1:1.15.1-5
+Architecture: all
+Maintainer: Eric Dorland <eric@debian.org>
+Installed-Size: 1768
+Depends: autoconf (>= 2.65), autotools-dev (>= 20020320.1)
+Suggests: autoconf-doc, gnu-standards
+Breaks: automake (<= 1:1.16-1~)
+Replaces: automake (<= 1:1.16-1~)
+Provides: automaken
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.gnu.org/software/automake/
+Description: Tool for generating GNU Standards-compliant Makefiles
+ Automake is a tool for automatically generating `Makefile.in's from
+ files called `Makefile.am'.
+ .
+ The goal of Automake is to remove the burden of Makefile maintenance
+ from the back of the individual GNU maintainer (and put it on the back
+ of the Automake maintainer).
+ .
+ The `Makefile.am' is basically a series of `make' macro definitions
+ (with rules being thrown in occasionally).  The generated
+ `Makefile.in's are compliant with the GNU Makefile standards.
+ .
+ Automake 1.15 fails to work in a number of situations that Automake
+ 1.4, 1.6, 1.7, 1.8, 1.9, 1.10, 1.11 and 1.14 did, so previous versions are
+ available as separate packages.

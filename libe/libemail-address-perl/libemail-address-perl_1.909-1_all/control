@@ -1,0 +1,19 @@
+Package: libemail-address-perl
+Version: 1.909-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 67
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Email-Address
+Description: Perl module for RFC 2822 address parsing and creation
+ Email::Address implements a complete RFC 2822 parser that locates email
+ addresses in strings and returns a list of Email::Address objects
+ found. Alternatively you may construct objects manually. The goal
+ of this software is to be correct, and very very fast.
+ .
+ This module is deprecated. Its parse() method can cause a denial of service
+ attack by taking way too long. It is recommended to instead use (the parse()
+ method from) Email::Address::XS, packaged as libemail-address-xs-perl. Cf.
+ Email::Address(1) for details.

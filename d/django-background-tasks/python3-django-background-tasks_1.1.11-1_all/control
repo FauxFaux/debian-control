@@ -1,0 +1,27 @@
+Package: python3-django-background-tasks
+Source: django-background-tasks
+Version: 1.1.11-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 102
+Depends: python3-django-compat, python3-six, python3:any (>= 3.3.2-2~), python3-django (>= 1.4)
+Section: python
+Priority: optional
+Homepage: https://github.com/ierror/django-background-tasks
+Description: databased-backed work queue for Django
+ Django Background Task is a databased-backed work queue for Django,
+ loosely based around Ruby's DelayedJob library. This project was
+ adopted and adapted from lilspikey django-background-task.
+ .
+ To avoid conflicts on PyPI this packaged was renamed it to
+ django-background-tasks (plural). For an easy upgrade from
+ django-background-task to django-background-tasks, the internal
+ module structure were left untouched.
+ .
+ In Django Background Task, all tasks are implemented as functions (or
+ any other callable).
+ .
+ There are two parts to using background tasks:
+  * creating the task functions and registering them with the
+  * scheduler setup a cron task (or long running process) to execute the
+    tasks

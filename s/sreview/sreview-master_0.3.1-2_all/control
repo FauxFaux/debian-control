@@ -1,0 +1,19 @@
+Package: sreview-master
+Source: sreview
+Version: 0.3.1-2
+Architecture: all
+Maintainer: Wouter Verhelst <wouter@debian.org>
+Installed-Size: 88
+Depends: sreview-common, debconf (>= 0.5) | debconf-2.0
+Recommends: libxml-rss-perl, postgresql, postgresql-contrib, libemail-simple-perl, libemail-sender-perl, gridengine-master, sreview-detect, libnet-ssh-authorizedkeysfile-perl, rsync
+Section: video
+Priority: optional
+Description: SReview components for master host
+ SReview is a video review and transcoding system. It allows users to
+ review videos, and will then (after the review has finished) transcode
+ them into archive-quality video files.
+ .
+ This package contains the components that should run on just one
+ server. It is not useful without one or more machines also running the
+ webinterface (in the sreview-web package) or the encoder (in the
+ sreview-encoder package).

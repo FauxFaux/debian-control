@@ -1,0 +1,37 @@
+Package: libdistorm64-1
+Source: distorm64
+Version: 1.7.30-1
+Architecture: amd64
+Maintainer: David Martínez Moreno <ender@debian.org>
+Installed-Size: 212
+Depends: libc6 (>= 2.2.5)
+Section: libs
+Priority: extra
+Homepage: http://ragestorm.net/distorm/
+Description: ultimate disassembler library for x86 code
+ Distorm64 is a fast disassembler library for the x86-64 instruction set.  Main
+ features are:
+  - It's really fast.
+  - It supports multi-threading.
+  - It supports AMD64, and all other 80x86 instruction sets.
+  - It supports up to date instruction sets, such as VMX and SSE4.
+  - It handles instruction prefixes in a serious manner.
+  - Unused/extra prefixes are dropped (output as DB'ed).
+  - Lock prefix works only on lockable instructions if the first operand is in
+ the form of memory indirection.
+  - REPn/z prefix works only on repeatable string instructions as well as I/O
+ instructions.
+  - Segment Override prefixes are possible where memory indirection address is
+ being used (and specially treated with string and I/O instructions).
+  - Some SSE2 instructions support pseudo opcodes (CMP family).
+  - "Native" instructions, those which have the same mnemonic in different
+ decoding modes, unless there's an operand size prefix, which then a suffix
+ letter is concatenated to the mnemonic in order to indicate the operation size
+ (instructions like: PUSHA, IRET, etc.).
+  - XLAT instruction is treated specially when prefixed.
+  - Drops invalid instructions when their operands are invalid.
+  - Won't decode instructions which are longer than 15 bytes.
+  - CR8 register is now accessible using the Lock prefix in 32 bits decoding
+ mode.
+  - In 64-bit decoding mode the Segment Override prefixes CS, DS, ES and SS are
+ ignored.

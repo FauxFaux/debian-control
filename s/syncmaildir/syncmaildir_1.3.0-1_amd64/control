@@ -1,0 +1,26 @@
+Package: syncmaildir
+Version: 1.3.0-1
+Architecture: amd64
+Maintainer: Enrico Tassi <gareuselesinge@debian.org>
+Installed-Size: 178
+Depends: lua5.1, openssh-client, xdelta, libc6 (>= 2.4), libglib2.0-0 (>= 2.19.1)
+Section: mail
+Priority: optional
+Homepage: http://syncmaildir.sourceforge.net
+Description: mailbox synchronization tools
+ Sync Mail Dir is a set of utilities to synchronize a pair of mailboxes
+ in Maildir format, using SSH to transfer data. It provides the smd-pull
+ utility to pull changes made on the remote mailbox, smd-push to propagate
+ local changes to the remote mailbox, and smd-loop to iterate push and pull
+ in a timely way.
+ .
+ The software is young and should thus be used with care in production
+ environments.
+ .
+ Unlike OfflineIMAP, it does not require an IMAP server to be installed on the
+ remote host. Moreover, it never attempts to automatically resolve conflicts
+ between incompatible mailbox statuses - it just notifies the user explaining
+ how to fix the problem.
+ .
+ Sync Mail Dir's design is similar to that of Maildirsync, but is more
+ efficient in terms of CPU cycles and disk I/O.

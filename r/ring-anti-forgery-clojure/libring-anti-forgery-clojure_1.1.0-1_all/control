@@ -1,0 +1,16 @@
+Package: libring-anti-forgery-clojure
+Source: ring-anti-forgery-clojure
+Version: 1.1.0-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 30
+Depends: libclojure-java, libcrypto-equality-clojure, libcrypto-random-clojure, libhiccup-clojure
+Section: java
+Priority: optional
+Homepage: https://github.com/ring-clojure/ring-anti-forgery
+Description: Ring middleware to prevent CSRF attacks
+ ring-anti-forgery is a Ring middleware that prevents CSRF attacks via
+ a randomly-generated anti-forgery token. By default, any request that isn't a
+ HEAD or GET request will require an anti-forgery token, or an "access denied"
+ response will be returned. The token is bound to the session, and accessible
+ via the "anti-forgery-token" variable.

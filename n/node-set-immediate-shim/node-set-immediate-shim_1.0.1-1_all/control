@@ -1,0 +1,19 @@
+Package: node-set-immediate-shim
+Version: 1.0.1-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 15
+Depends: nodejs
+Section: web
+Priority: optional
+Homepage: https://github.com/sindresorhus/set-immediate-shim
+Description: Simple setImmediate shim
+ setImmediate allows scripts to yield to the browser, executing a  given
+ operation asynchronously, in a manner that is typically  more efficient and
+ consumes less power than the usual  setTimeout(..., 0) pattern. This library
+ provides a simple setImmediate shim.
+ .
+ This library is a dependency of readdirp. Even though we have setimmediate
+ packaged, patching readdirp to use it is more work.
+ .
+ Node.js is an event-based server-side JavaScript engine.

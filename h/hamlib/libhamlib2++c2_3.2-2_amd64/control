@@ -1,0 +1,25 @@
+Package: libhamlib2++c2
+Source: hamlib
+Version: 3.2-2
+Architecture: amd64
+Maintainer: Debian Hamradio Maintainers <debian-hams@lists.debian.org>
+Installed-Size: 84
+Depends: libc6 (>= 2.4), libgcc1 (>= 1:3.0), libhamlib2, libstdc++6 (>= 5)
+Conflicts: hamlib3++, hamlib3++c2, hamlib4++c2
+Provides: hamlib4++c2
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://sourceforge.net/projects/hamlib/
+Description: Run-time C++ library to control radio transceivers and receivers
+ Most recent amateur radio transceivers allow external control of their
+ functions through a computer interface. Unfortunately, control commands are
+ not always consistent across a manufacturer's product line and each
+ manufacturer's product line differs greatly from its competitors.
+ .
+ This library addresses that issue by providing a standardised programming
+ interface that applications can talk to and translating that into the
+ appropriate commands required by the radio in use.
+ .
+ This package provides the C++ run-time form of the library. If you wish to
+ develop software using this library you need the 'libhamlib++-dev' package.

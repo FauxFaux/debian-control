@@ -1,0 +1,16 @@
+Package: djvuserve
+Source: djvulibre
+Version: 3.5.27.1-9
+Architecture: amd64
+Maintainer: Barak A. Pearlmutter <bap@debian.org>
+Installed-Size: 79
+Depends: libc6 (>= 2.4), libdjvulibre21 (>= 3.5.27.1), libgcc1 (>= 1:3.0), libstdc++6 (>= 5)
+Recommends: apache2 | apache | httpd-cgi | httpd
+Conflicts: djvulibre-bin (<< 3.5.9-3)
+Section: web
+Priority: optional
+Homepage: http://djvu.sourceforge.net/
+Description: CGI program for unbundling DjVu files on the fly
+ CGI program to convert a bundled multi-page DjVu document into an
+ indirect DjVu document on the fly.  This provides for efficiently
+ browsing large DjVu documents without transferring unnecessary pages.

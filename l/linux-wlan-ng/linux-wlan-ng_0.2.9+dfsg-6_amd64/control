@@ -1,0 +1,26 @@
+Package: linux-wlan-ng
+Version: 0.2.9+dfsg-6
+Architecture: amd64
+Maintainer: Tormod Volden <debian.tormod@gmail.com>
+Installed-Size: 405
+Depends: libc6 (>= 2.14), wireless-tools, udev (>= 0.140-1)
+Recommends: linux-wlan-ng-doc
+Conflicts: linux-wlan-ng-0.1.15-modules, linux-wlan-ng-modules
+Section: kernel
+Priority: extra
+Description: utilities for wireless prism2 cards
+ linux-wlan-ng is a set of drivers and utilities that is intended to
+ provide the full range of IEEE 802.11 MAC management capabilities for use
+ in user-mode utilities and scripts. The package currently supports the
+ Intersil 802.11b Prism2, Prism2.5, and Prism3 reference designs for
+ PCMCIA, PCI, and USB. Additionally, the package includes support for the
+ PLX9052 based PCI to PCMCIA adapter with a few different PCMCIA cards.
+ .
+ Please note that you probably do not need this package: The prism2_usb
+ driver is included in the default kernel packages since 2.6.31.
+ If you need firmware loading for your prism2_usb device, please just
+ install the prism2-usb-firmware-installer package.
+ .
+ This package ships legacy utilities and scripts for advanced
+ configuration and user-space firmware downloading (support for
+ non-USB devices).

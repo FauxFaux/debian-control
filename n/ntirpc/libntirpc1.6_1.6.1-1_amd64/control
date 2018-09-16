@@ -1,0 +1,24 @@
+Package: libntirpc1.6
+Source: ntirpc
+Version: 1.6.1-1
+Architecture: amd64
+Maintainer: Dmitry Smirnov <onlyjob@debian.org>
+Installed-Size: 282
+Depends: libc6 (>= 2.16), libcom-err2 (>= 1.01), libgssapi-krb5-2 (>= 1.14+dfsg), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.6.dfsg.2)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/nfs-ganesha/ntirpc
+Description: new transport-independent RPC library
+ Port of Sun's transport-independent RPC library to Linux. The library
+ is intended as a replacement for the RPC code in the GNU C library,
+ providing among others support for RPC (and in turn, NFS) over IPv6.
+ .
+ Changes introduced in the ntirpc library include:
+  * Bi-directional operation.
+  * Full-duplex operation on the TCP (vc) transport.
+  * Thread-safe operating modes:
+    * new locking primitives and lock callouts (interface change).
+    * stateless send/recv on the TCP transport (interface change).
+  * Flexible server integration support.
+  * Event channels.

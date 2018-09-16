@@ -1,0 +1,27 @@
+Package: nmzmail
+Source: nmzmail (1.1-2)
+Version: 1.1-2+b1
+Architecture: amd64
+Maintainer: Kevin Coyner <kcoyner@debian.org>
+Installed-Size: 30
+Depends: libc6 (>= 2.4), libreadline7 (>= 6.0), namazu2, namazu2-index-tools
+Suggests: mutt
+Enhances: mutt
+Section: mail
+Priority: optional
+Homepage: http://www.ecademix.com/JohannesHofmann/nmzmail.html
+Description: indexes and searches email in maildir folders
+ nmzmail is a tool, primarily to be used with mutt, for indexing and searching
+ maildir folders.  Based on the result of a search query using the search
+ engine namazu2, nmzmail generates a maildir folder containing symbolic links
+ to the mail(s) matching the query.  A simple mutt macro makes it easy to use
+ nmzmail from within mutt.  nmzmail is similar to mairix (another email
+ index/search program), but perhaps easier to use since it uses the query
+ syntax of namazu2.
+ .
+ Features:
+   - fast mail searching even with large quantities of mail
+   - incremental index building
+   - integrates very nicely into mutt
+   - rich, but simple, query language including regex
+   - query history

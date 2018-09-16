@@ -1,0 +1,23 @@
+Package: lua-wsapi
+Version: 1.6.1-1
+Architecture: all
+Maintainer: Enrico Tassi <gareuselesinge@debian.org>
+Installed-Size: 96
+Depends: lua-coxpcall, lua-rings, lua-filesystem, lua-cgi, lua5.1
+Provides: lua5.1-wsapi, lua5.2-wsapi
+Section: interpreters
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://keplerproject.github.com/wsapi/index.html
+Description: Web server API abstraction layer for the Lua language
+ WSAPI is an API that abstracts the web server for Lua web applications,
+ allowing the same application to be used in different web servers.
+ .
+ This package contains the WSAPI utility libraries (for common tasks like url
+ encoding/decoding) as well as the following backends (server implementations):
+ .
+  - CGI (the regular environment-variables based protocol)
+  - xavante (for the Xavante web server)
+ .
+ The fastcgi backends is available in the separate package lua-wsapi-fcgi.
+Lua-Versions: 5.1 5.2

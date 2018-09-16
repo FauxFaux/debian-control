@@ -1,0 +1,31 @@
+Package: python3-networking-bgpvpn
+Source: networking-bgpvpn
+Version: 9.0.0-1
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 769
+Depends: python3-django-horizon (>= 3:14.0.0~rc2), python3-babel, python3-debtcollector (>= 1.2.0), python3-networking-bagpipe, python3-neutron (>= 2:13.0.0~rc1), python3-neutron-lib (>= 1.18.0), python3-oslo.config (>= 1:5.2.0), python3-oslo.db (>= 4.27.0), python3-oslo.i18n (>= 3.15.3), python3-oslo.log (>= 3.36.0), python3-oslo.utils (>= 3.33.0), python3-pbr (>= 2.0.0), python3-sphinx (>= 1.6.2), python3-sphinxcontrib.blockdiag, python3-sphinxcontrib.seqdiag, python3:any
+Suggests: networking-bgpvpn-doc
+Section: python
+Priority: optional
+Homepage: http://github.com/openstack/networking-bgpvpn
+Description: OpenStack virtual network service - BGP-MPLS VPN Extension - Python 3.x
+ Neutron provides an API to dynamically request and configure virtual networks.
+ These networks connect "interfaces" from other OpenStack services (such as
+ vNICs from Nova VMs). The Neutron API supports extensions to provide advanced
+ network capabilities, including QoS, ACLs, and network monitoring.
+ .
+ This package provides an API and Framework to interconnect BGP/MPLS VPNs to
+ Openstack Neutron networks, routers and ports.
+ .
+ The Border Gateway Protocol and Multi-Protocol Label Switching are widely used
+ Wide Area Networking technologies. The primary purpose of this project is to
+ allow attachment of Neutron networks and/or routers to VPNs built in carrier
+ provided WANs using these standard protocols. An additional purpose of this
+ project is to enable the use of these technologies within the Neutron
+ networking environment.
+ .
+ A vendor-neutral API and data model are provided such that multiple SDN
+ controllers may be used as backends, while offering the same tenant facing
+ API. A reference implementation working along with Neutron reference drivers
+ is also provided.

@@ -1,0 +1,29 @@
+Package: maptransfer-server
+Source: maptransfer
+Version: 0.3-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 36
+Depends: python:any (>= 2.7.5-5~), python-openssl (>= 0.10)
+Section: python
+Priority: optional
+Homepage: http://bitbucket.org/Svedrin/maptransfer/wiki/
+Description: upload/download maps to/from a VALVe game server (Server)
+ Uploading Maps to a Game server can be a tedious process if you want to get
+ the post-upload processing right. MapTransfer tries to automate this process
+ as much as possible. It handles everything a map upload takes:
+ .
+  * Automatically BZip compresses uploaded maps if the client didn't.
+  * Hardlinks files if more than one gameserver path is specified in the config.
+    That way a single map is uploaded to multiple servers at once (and only
+    takes up the space once, too).
+  * Saves you and your users a lot of tedious cdery and copypasta.
+ .
+  Aside from the core functionality, it offers a few niceties as well:
+ .
+  * Uses HTTPS as protocol - that way, you can download maps (or test
+    connectivity) with your favorite web browser, or write your own scripts
+    that interact with the server.
+  * IPv6 ready
+  * Extensible: Any game should work, as long as it uses bsp maps - map
+    directories aren't hard coded but read from the config file.

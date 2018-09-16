@@ -1,0 +1,21 @@
+Package: ruby-multipart-parser
+Version: 0.1.1-2
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 16
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: https://github.com/danabr/multipart-parser
+Description: simple parser for multipart MIME messages
+ multipart-parser is a simple parser for multipart MIME messages, written in
+ Ruby, based on felixge/node-formidable's parser.
+ .
+ Some things to note:
+  - pure Ruby
+  - event-driven API
+  - only supports one level of multipart parsing: another parser needs
+    to be invoked to handle nested messages
+  - does not perform I/O
+  - does not depend on any other library
+Ruby-Versions: all

@@ -1,0 +1,19 @@
+Package: golang-blitiri-go-systemd-dev
+Source: golang-blitiri-go-systemd
+Version: 0.0+git20170821.0.aec3508-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 27
+Section: devel
+Priority: extra
+Homepage: https://blitiri.com.ar/git/r/systemd/
+Description: Utilities to interact with systemd sockets in Go
+ blitiri.com.ar/go/systemd is a Go package implementing a way to get network
+ listeners from systemd, similar to C's sd_listen_fds() and
+ sd_listen_fds_with_names().
+ .
+ Supports named file descriptors, which is useful if your daemon needs to be
+ able to tell the different ports apart (e.g. http vs https).
+ .
+ It can be used by daemons to listen on privileged ports without needing to run
+ as root.

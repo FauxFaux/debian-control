@@ -1,0 +1,30 @@
+Package: flatpak
+Version: 1.0.2-1
+Architecture: amd64
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 3343
+Depends: bubblewrap (>= 0.2.1), xdg-desktop-portal (>= 0.10), libappstream-glib8 (>= 0.6.1), libarchive13 (>= 3.0.4), libc6 (>= 2.27), libglib2.0-0 (>= 2.49.3), libgpgme11 (>= 1.1.6), libjson-glib-1.0-0 (>= 0.16.0), libostree-1-1 (>= 2018.7), libpolkit-gobject-1-0 (>= 0.99), libseccomp2 (>= 1.0.1), libsoup2.4-1 (>= 2.41.90), libxau6, libxml2 (>= 2.7.4)
+Recommends: desktop-file-utils, hicolor-icon-theme, gtk-update-icon-cache, libpam-systemd, p11-kit, policykit-1, shared-mime-info, xdg-desktop-portal-gtk | xdg-desktop-portal-backend
+Suggests: avahi-daemon
+Conflicts: xdg-app
+Replaces: xdg-app
+Section: admin
+Priority: optional
+Homepage: http://flatpak.org/
+Description: Application deployment framework for desktop apps
+ Flatpak installs, manages and runs sandboxed desktop application bundles.
+ Application bundles run partially isolated from the wider system, using
+ containerization techniques such as namespaces to prevent direct access
+ to system resources. Resources from outside the sandbox can be accessed
+ via "portal" services, which are responsible for access control; for
+ example, the Documents portal displays an "Open" dialog outside the
+ sandbox, then allows the application to access only the selected file.
+ .
+ Each application uses a specified "runtime", or set of libraries, which is
+ available as /usr inside its sandbox. This can be used to run application
+ bundles with multiple, potentially incompatible sets of dependencies within
+ the same desktop environment.
+ .
+ This package contains the services and executables needed to install and
+ launch sandboxed applications, and the portal services needed to provide
+ limited access to resources outside the sandbox.

@@ -1,0 +1,16 @@
+Package: jarwrapper
+Source: javatools
+Version: 0.64
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 44
+Depends: binfmt-support, fastjar
+Section: java
+Priority: optional
+Description: Run executable Java .jar files
+ Jarwrapper sets up binfmt-misc to run executable jar files
+ using the installed java runtime.
+ .
+ It also includes a /usr/share/jarwrapper/java-arch.sh script
+ to convert Debian architecture names into java names to locate
+ libjvm.so

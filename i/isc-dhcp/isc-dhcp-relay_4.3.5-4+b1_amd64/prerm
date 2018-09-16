@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+invoke-rc.d isc-dhcp-relay stop
+
+# Automatically added by dh_installinit/11.3.5
+if [ -x "/etc/init.d/isc-dhcp-relay" ]; then
+	invoke-rc.d isc-dhcp-relay stop || exit 1
+fi
+# End automatically added section
+
+
+exit 0

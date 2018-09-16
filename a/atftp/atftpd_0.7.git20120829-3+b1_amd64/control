@@ -1,0 +1,18 @@
+Package: atftpd
+Source: atftp (0.7.git20120829-3)
+Version: 0.7.git20120829-3+b1
+Architecture: amd64
+Maintainer: Ludovic Drolez <ldrolez@debian.org>
+Installed-Size: 174
+Depends: libc6 (>= 2.15), libpcre3, libwrap0 (>= 7.6-4~), debconf (>= 0.5) | debconf-2.0, update-inetd, lsb-base
+Recommends: inet-superserver
+Suggests: logrotate
+Conflicts: tftpd
+Section: net
+Priority: extra
+Description: advanced TFTP server
+ Multi-threaded TFTP server implementing all options (option extension and
+ multicast) as specified in RFC1350, RFC2090, RFC2347, RFC2348 and RFC2349.
+ Atftpd also supports multicast protocol known as mtftp, defined in the PXE
+ specification. The server supports being started from inetd(8) as well as
+ in daemon mode using init scripts.

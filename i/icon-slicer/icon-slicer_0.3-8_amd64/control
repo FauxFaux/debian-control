@@ -1,0 +1,36 @@
+Package: icon-slicer
+Version: 0.3-8
+Architecture: amd64
+Maintainer: Debian Sugar Team <pkg-sugar-devel@lists.alioth.debian.org>
+Installed-Size: 155
+Depends: libc6 (>= 2.4), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.24.0), libpopt0 (>= 1.14), x11-apps
+Section: graphics
+Priority: optional
+Homepage: http://freedesktop.org/wiki/Software/icon-slicer
+Description: utility for generating icon themes and libXcursor cursor themes
+ The inputs to icon-slicer are conceptually:
+ .
+  - A set of multi-layer images, one for each size
+  - Am XML theme description file
+ .
+ Each image contains all the cursors arranged in a grid; For cursors the
+ layers are:
+ .
+  - A layer with a dot for the hotspot of each cursor
+  - The main image or first animation frame for multi-frame animated
+    cursors
+  - The second animation frame for multi-frame animated cursors
+  - ...
+ .
+ For icons, the layers are:
+ .
+  - A layer with the images
+  - An optional layer with attachment points for emblems
+  - An optional layer with boxes for embedding text into icons
+ .
+ In practice, since loading of multilayer images is not supported by
+ standard image libraries, each layer is input as a separate image file.
+ .
+ The theme description file contains, among other things, information
+ about the source images to read, the location of each named cursor or
+ icon within the grid, and a set of aliases from names to other names.

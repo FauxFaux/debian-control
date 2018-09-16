@@ -1,0 +1,20 @@
+Package: libmime-lite-html-perl
+Version: 1.24-3
+Architecture: all
+Maintainer: Debian Sympa Team <libmime-lite-html-perl@packages.debian.org>
+Installed-Size: 71
+Depends: perl, libwww-perl, libhtml-parser-perl, liburi-perl, libmime-lite-perl (>= 1)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MIME-Lite-HTML
+Description: Transform HTML page into MIME email
+ Mime::Lite::Html provides an interface for sending message that supports HTML
+ format and builds it for you. This is useful to transform HTML pages into MIME
+ email like that:
+ .
+  * Get the page with LWP if needed
+  * Parse page to find included images and objects (gif, jpg, flash)
+  * Attach them to mail with proper header
+  * Include external CSS and Javascript files
+  * Replace relative urls with absolute ones
+  * Build the MIME email with any parts found

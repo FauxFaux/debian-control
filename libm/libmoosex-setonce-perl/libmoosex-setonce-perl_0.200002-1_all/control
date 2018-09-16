@@ -1,0 +1,20 @@
+Package: libmoosex-setonce-perl
+Version: 0.200002-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 48
+Depends: perl, libmoose-perl, libtry-tiny-perl
+Enhances: libmoose-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MooseX-SetOnce/
+Description: module providing write-once, read-many attributes for Moose
+ MooseX::SetOnce provides the SetOnce attribute which lets your class have
+ attributes that are not lazy and not set, but that cannot be altered once
+ set.
+ .
+ The logic is very simple: if you try to alter the value of an attribute with
+ the SetOnce trait, either by accessor or writer, and the attribute has a
+ value, it will throw an exception.
+ .
+ If the attribute has a clearer, you may clear the attribute and set it again.

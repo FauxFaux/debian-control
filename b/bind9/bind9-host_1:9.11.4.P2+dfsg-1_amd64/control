@@ -1,0 +1,17 @@
+Package: bind9-host
+Source: bind9
+Version: 1:9.11.4.P2+dfsg-1
+Architecture: amd64
+Maintainer: BIND 9 Package <bind9@package.debian.org>
+Installed-Size: 357
+Depends: libbind9-160 (= 1:9.11.4.P2+dfsg-1), libdns1102 (= 1:9.11.4.P2+dfsg-1), libisc169 (= 1:9.11.4.P2+dfsg-1), libisccfg160 (= 1:9.11.4.P2+dfsg-1), liblwres160 (= 1:9.11.4.P2+dfsg-1), libc6 (>= 2.14), libcap2 (>= 1:2.10), libcom-err2 (>= 1.43.9), libfstrm0 (>= 0.2.0), libgeoip1, libgssapi-krb5-2 (>= 1.6.dfsg.2), libidn2-0 (>= 2.0.0), libjson-c3 (>= 0.10), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.6.dfsg.2), liblmdb0 (>= 0.9.6), libprotobuf-c1 (>= 1.0.0), libssl1.1 (>= 1.1.0), libxml2 (>= 2.6.27), zlib1g (>= 1:1.1.4)
+Provides: host
+Section: net
+Priority: standard
+Homepage: https://www.isc.org/downloads/bind/
+Description: DNS lookup utility (deprecated)
+ This package provides /usr/bin/host, a simple utility (bundled with the
+ BIND 9.X sources) which can be used for converting domain names to IP
+ addresses and the reverse.
+ .
+ This utility is deprecated, use dig or delv from the dnsutils package.

@@ -1,0 +1,20 @@
+Package: abci
+Source: abci (0.0~git20170124.0.f94ae5e-2)
+Version: 0.0~git20170124.0.f94ae5e-2+b2
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 7536
+Depends: golang-github-tendermint-go-common-dev, golang-github-tendermint-go-crypto-dev, golang-github-tendermint-go-db-dev, golang-github-tendermint-go-logger-dev, golang-github-tendermint-go-merkle-dev, golang-github-tendermint-go-process-dev (>= 0.1~20170125~0gitb27edfd), golang-github-tendermint-go-wire-dev, golang-github-urfave-cli-dev, golang-golang-x-net-dev, golang-google-grpc-dev, golang-goprotobuf-dev, libc6 (>= 2.3.2)
+Built-Using: go-wire (= 1.0~rc+git20161223.40.2f3b7aa-1), golang-1.10 (= 1.10-1), golang-github-btcsuite-btcd-btcec (= 0.0~git20161101.0.g8343278-1), golang-github-btcsuite-fastsha256 (= 0.0~git20160815.0.637e656-1), golang-github-go-stack-stack (= 1.5.2-2), golang-github-golang-snappy (= 0.0+git20160529.d9eb7a3-2), golang-github-mattn-go-colorable (= 0.0.9-3), golang-github-mattn-go-isatty (= 0.0.3-4), golang-github-urfave-cli (= 1.20.0-1), golang-go.crypto (= 1:0.0~git20170629.0.5ef0053-2), golang-golang-x-net-dev (= 1:0.0+git20170629.c81e7f2+dfsg-2), golang-goleveldb (= 0.0~git20170725.0.b89cc31-2), golang-google-genproto (= 0.0~git20171123.7f0da29-1), golang-google-grpc (= 1.6.0-3), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-1), golang-x-text (= 0.0~git20170627.0.6353ef0-1), tendermint-ed25519 (= 0.0~git20160723.0.1f52c6f-2), tendermint-go-common (= 0~20170309~0gitdcb015d-1), tendermint-go-crypto (= 0.0~git20160724.0.4b11d62-1), tendermint-go-db (= 0.1~20170131~0git72f6dac-2), tendermint-go-logger (= 0~20161018~0gitcefb3a4-2), tendermint-go-merkle (= 0.1~20170131~0git7a86b44-1), tendermint-go-process (= 0.1~20170125~0gitb27edfd-1), tendermint-log15 (= 2.3-67-g9545b24-2)
+Section: devel
+Priority: extra
+Homepage: https://github.com/tendermint/abci
+Description: Tendermint's Serverside Blockchain API
+ Blockchains are a system for multi-master state machine replication.
+ ABCI (Application BlockChain Interface) is an interface that defines
+ the boundary between the replication engine (the blockchain), and the
+ state machine (the application). By using a socket protocol, Tendermint
+ enable a consensus engine running in one process to manage an
+ application state running in another.
+ .
+ Previously, the ABCI was just referred to as TMSP.

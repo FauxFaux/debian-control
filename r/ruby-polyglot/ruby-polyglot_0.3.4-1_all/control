@@ -1,0 +1,20 @@
+Package: ruby-polyglot
+Version: 0.3.4-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 61
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: http://polyglot.rubyforge.org
+Description: Custom language loaders for specified file extensions
+ Allows one to write custom language loaders for specified file extensions
+ to be hooked into require.
+ .
+ This supports the creation of DSLs having a syntax that is most
+ appropriate to their purpose, instead of abusing the Ruby syntax.
+ .
+ Required files are attempted first using the normal Ruby loader,
+ and if that fails, Polyglot conducts a search for a file having
+ a supported extension.
+Ruby-Versions: all

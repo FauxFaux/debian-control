@@ -1,0 +1,21 @@
+Package: popa3d
+Source: popa3d (1.0.3-1)
+Version: 1.0.3-1+b1
+Architecture: amd64
+Maintainer: Krzysztof Krzyżaniak (eloy) <eloy@debian.org>
+Installed-Size: 86
+Pre-Depends: debconf (>= 1.2.9) | debconf-2.0, adduser, update-inetd
+Depends: libc6 (>= 2.14), libpam0g (>= 0.99.7.1)
+Recommends: exim4 | mail-transport-agent
+Conflicts: pop3-server
+Provides: pop3-server
+Section: mail
+Priority: extra
+Homepage: http://www.openwall.com/popa3d/
+Description: Tiny POP3 daemon, designed with security as the primary goal
+ popa3d is fast, small and secure pop3 daemon. It's written from scratch by
+ Solar Designer for Owl (Openwall GNU/*/Linux).
+ .
+ Popa3d can work both in standalone or inetd mode.
+ .
+ For more information see DESIGN file.

@@ -1,0 +1,21 @@
+Package: dms-core
+Source: dms
+Version: 1.0.8.1-1
+Architecture: amd64
+Maintainer: DMS Maintainers <dms-maintainers@lists.alioth.debian.org>
+Installed-Size: 1163
+Depends: init-system-helpers (>= 1.18~), python3:any (>= 3.3.2~), python3-magcode-core, postgresql (>= 9.3) | postgresql-9.3 | postgresql-9.4 | postgresql-9.5 | postgresql-9.6, python3-sqlalchemy (>= 0.7), python3-psycopg2 (>= 2.4.5), python3-psutil (>= 0.4.1), python3-pyparsing (>= 2.0.2), python3-dnspython (>= 1.10), rsync, bind9, adduser, diffutils | diff, oping, lsb-base (>= 3.2-14)
+Recommends: less, colordiff, haveged, netscript-ipfilter | netscript-2.4 | iptables-persistent, ntp, strongswan | racoon | ike-server, bind9-host, dnsutils
+Suggests: vim-nox | vim, nano, locales-all
+Section: admin
+Priority: extra
+Homepage: https://github.com/grantma/dms
+Description: bind9 DNS Management System, core system
+ This is the bind9 DNS Management System, core backend.
+ .
+ Install this by itself if you are just after a single Master server, no DR.
+ .
+ This package include the dms python3 modules, zone_tool and dmsdmd.
+ It creates the dms system users.
+ .
+ For setup, see README.Debian in /usr/share/doc/dms-core

@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+# handle symlink to directory conversion (#700778)
+DOCDIR=/usr/share/doc/python-crypto-dbg
+if [ -L $DOCDIR ] ; then
+  rm $DOCDIR
+fi
+
+

@@ -1,0 +1,24 @@
+Package: kannel-sqlbox
+Source: kannel-sqlbox (0.7.2-4)
+Version: 0.7.2-4+b1
+Architecture: amd64
+Maintainer: Jonas Smedegaard <dr@jones.dk>
+Installed-Size: 628
+Depends: libc6 (>= 2.14), libct4 (>= 0.64), libhiredis0.13 (>= 0.13.1), libmariadbclient18 (>= 5.5.36), libpam0g (>= 0.99.7.1), libpcre3, libpq5, libsqlite0 (>= 2.8.17), libsqlite3-0 (>= 3.5.9), libssl1.0.2 (>= 1.0.2d), libxml2 (>= 2.7.4), zlib1g (>= 1:1.1.4)
+Section: net
+Priority: optional
+Homepage: http://www.kannel.org/~aguerrieri/SqlBox/
+Description: SQL helper application for Kannel WAP and SMS gateway
+ Kannel is a gateway for connecting WAP (Wireless Application Protocol)
+ phones to the Internet. It also works as an SMS/SMPP gateway, for
+ providing SMS based services for GSM phones.
+ .
+ Sqlbox is a special Kannel box that sits between bearerbox and smsbox
+ and uses a database queue to store and forward messages.
+ .
+ Messages are queued on a configurable table (defaults to send_sms) and
+ moved to another table (defaults to sent_sms) afterwards.
+ .
+ You can also manually insert messages into the send_sms table and they
+ will be sent and moved to the sent_sms table as well. This allows for
+ fast and easy injection of large amounts of messages into Kannel.

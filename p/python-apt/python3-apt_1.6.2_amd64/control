@@ -1,0 +1,27 @@
+Package: python3-apt
+Source: python-apt
+Version: 1.6.2
+Architecture: amd64
+Maintainer: APT Development Team <deity@lists.debian.org>
+Installed-Size: 1053
+Depends: python3 (<< 3.8), python3 (>= 3.6~), python3:any (>= 3.3.2-2~), libapt-inst2.0 (>= 1.4~beta3), libapt-pkg5.0 (>= 1.4~beta3), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), python-apt-common
+Recommends: lsb-release, iso-codes
+Suggests: python3-apt-dbg, python-apt-doc, apt
+Breaks: python-apt (<< 0.7.98+nmu1)
+Replaces: python-apt (<< 0.7.98+nmu1)
+Provides: python3.6-apt, python3.7-apt
+Section: python
+Priority: optional
+Multi-Arch: allowed
+Description: Python 3 interface to libapt-pkg
+ The apt_pkg Python 3 interface will provide full access to the internal
+ libapt-pkg structures allowing Python 3 programs to easily perform a
+ variety of functions, such as:
+ .
+  - Access to the APT configuration system
+  - Access to the APT package information database
+  - Parsing of Debian package control files, and other files with a
+    similar structure
+ .
+ The included 'aptsources' Python interface provides an abstraction of
+ the sources.list configuration on the repository and the distro level.

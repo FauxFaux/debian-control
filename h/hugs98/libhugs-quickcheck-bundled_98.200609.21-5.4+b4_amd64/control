@@ -1,0 +1,23 @@
+Package: libhugs-quickcheck-bundled
+Source: hugs98 (98.200609.21-5.4)
+Version: 98.200609.21-5.4+b4
+Architecture: amd64
+Maintainer: Isaac Jones <ijones@debian.org>
+Installed-Size: 53
+Depends: hugs (= 98.200609.21-5.4+b4), libhugs-base
+Conflicts: libhugs-quickcheck
+Provides: libhugs-quickcheck
+Section: devel
+Priority: optional
+Description: Automatic testing of Haskell programs
+ A library for testing Haskell programs automatically.
+ The programmer provides a specification of the program, in
+ the form of properties which functions should satisfy, and
+ QuickCheck then tests that the properties hold in a large number
+ of randomly generated cases.  Specifications are expressed in
+ Haskell, using combinators defined in the QuickCheck library.
+ QuickCheck provides combinators to define properties, observe
+ the distribution of test data, and define test
+ data generators.
+ .
+ This is the version bundled with the interpreter.

@@ -1,0 +1,51 @@
+#!/bin/sh
+# postinst script for grml-rescueboot
+
+set -e
+
+update_grub_wrapper() {
+  # default, unless configured otherwise:
+  ISO_LOCATION=/boot/grml
+
+  if [ -r /etc/default/grml-rescueboot ] ; then
+    . /etc/default/grml-rescueboot
+  fi
+
+  if ! ls "${ISO_LOCATION}"/*iso >/dev/null 2>&1 ; then
+    echo "INFO: No *.iso files found inside ${ISO_LOCATION}."
+    echo "INFO: Execute 'update-grml-rescueboot' to download and integrate a Grml ISO."
+    return 0
+  fi
+
+  if ! which update-grub >/dev/null 2>&1; then
+    echo "WARN: ISOs found inside ${ISO_LOCATION} but update-grub not present (huh?)"
+    return 0
+  fi
+
+  if ! [ -e /boot/grub/grub.cfg ] ; then
+    echo "WARN: ISOs found inside ${ISO_LOCATION} but /boot/grub/grub.cfg does not exist."
+    echo "WARN: Ignoring request to run update-grub to avoid possible boot loader problems."
+    return 0
+  fi
+
+  echo "INFO: ISOs found inside ${ISO_LOCATION}, invoking update-grub:"
+  update-grub
+}
+
+case "$1" in
+    configure)
+      update_grub_wrapper
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

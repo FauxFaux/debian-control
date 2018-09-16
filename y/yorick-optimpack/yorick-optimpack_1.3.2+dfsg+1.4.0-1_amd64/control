@@ -1,0 +1,24 @@
+Package: yorick-optimpack
+Version: 1.3.2+dfsg+1.4.0-1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 141
+Depends: libc6 (>= 2.14), yorick (>= 1.6.02)
+Provides: yorick-optimpacklegacy
+Section: science
+Priority: extra
+Homepage: https://cral.univ-lyon1.fr/labo/perso/eric.thiebaut/?Software/OptimPack
+Description: optimization of large scale problems for the Yorick language
+ OptimPack is a portable C library which implements algorithms for
+ optimization of large scale problems with bound constraints. Large
+ scale means some million variables (e.g. pixel values) or more.
+ .
+ The most important algorithm is VMLM-B: a variable metric method with
+ limited memory requirements and, possibly, bound constraints on the
+ parameters. The algorithm is based on limited memory BFGS updates
+ with Moré & Thuente inexact line search and gradient projection to
+ account for bounds.
+ .
+ This package contains two Yorick plug-ins: one based on the newer
+ OptimPackLegacy version and, for backward compatibility, one based on the
+ previous OptimPack1 implementation.

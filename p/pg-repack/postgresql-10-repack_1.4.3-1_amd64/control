@@ -1,0 +1,19 @@
+Package: postgresql-10-repack
+Source: pg-repack
+Version: 1.4.3-1
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <pkg-postgresql-public@lists.alioth.debian.org>
+Installed-Size: 167
+Depends: postgresql-10, libc6 (>= 2.15), libpq5 (>= 8.3~rc1-1~)
+Section: database
+Priority: optional
+Homepage: https://github.com/reorg/pg_repack
+Description: reorganize tables in PostgreSQL databases with minimal locks
+ pg_repack is a PostgreSQL extension which lets you remove bloat from tables
+ and indexes, and optionally restore the physical order of clustered indexes.
+ Unlike CLUSTER and VACUUM FULL it works online, without holding an exclusive
+ lock on the processed tables during processing. pg_repack is efficient to
+ boot, with performance comparable to using CLUSTER directly.
+ .
+ This package contains the pg_repack program and the server extension for
+ PostgreSQL 10.

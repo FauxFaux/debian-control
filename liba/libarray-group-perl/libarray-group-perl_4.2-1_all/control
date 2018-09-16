@@ -1,0 +1,25 @@
+Package: libarray-group-perl
+Version: 4.2-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 22
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Array-Group
+Description: module that converts an array into array of arrayrefs of uniform size N
+ Array::Group is a module for converting a list into a list of arrayrefs
+ of the same size. It exports two methods:
+ .
+  The ngroup method reformats a list into a list of arrayrefs. It is often
+  used for formatting data into HTML tables, amongst other things.
+ .
+  dissect() returns a list of lists where the first element of each sublist
+  will be one of the first elements of the source list, and the last element
+  will be one of the last. This behaviour is much more useful when the input
+  list is sorted.
+ .
+ The key difference between the two methods is that dissect() takes elements
+ from the start of the list provided and pushes them onto each of the
+ subarrays sequentially, rather than simply dividing the list into discrete
+ chunks.

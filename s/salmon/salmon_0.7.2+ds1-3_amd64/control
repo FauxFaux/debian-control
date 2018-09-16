@@ -1,0 +1,21 @@
+Package: salmon
+Version: 0.7.2+ds1-3
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 5635
+Depends: libboost-atomic1.62.0, libboost-chrono1.62.0, libboost-date-time1.62.0, libboost-filesystem1.62.0, libboost-iostreams1.62.0, libboost-program-options1.62.0, libboost-regex1.62.0, libboost-system1.62.0, libboost-thread1.62.0, libboost-timer1.62.0, libc6 (>= 2.22), libdivsufsort3 (>= 2.0.1), libgcc1 (>= 1:4.2), libgomp1 (>= 4.2.1), libjellyfish-2.0-2, libjemalloc1 (>= 2.1.1), libstaden-read11, libtbb2, zlib1g (>= 1:1.1.4), libjs-sphinxdoc (>= 1.0), sphinx-rtd-theme-common
+Section: science
+Priority: optional
+Homepage: https://github.com/COMBINE-lab/salmon
+Description: wicked-fast transcript quantification from RNA-seq data
+ Salmon is a wicked-fast program to produce a highly-accurate, transcript-level
+ quantification estimates from RNA-seq data. Salmon achieves is accuracy and
+ speed via a number of different innovations, including the use of lightweight
+ alignments (accurate but fast-to-compute proxies for traditional read
+ alignments) and massively-parallel stochastic collapsed variational inference.
+ The result is a versatile tool that fits nicely into many different pipelines.
+ For example, you can choose to make use of the lightweight alignments by
+ providing Salmon with raw sequencing reads, or, if it is more convenient, you
+ can provide Salmon with regular alignments (e.g. computed with your favorite
+ aligner), and it will use the same wicked-fast, state-of-the-art inference
+ algorithm to estimate transcript-level abundances for your experiment.

@@ -1,0 +1,25 @@
+Package: lv2vocoder
+Version: 1-5
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 31
+Depends: libc6 (>= 2.2.5), libgcc1 (>= 1:3.0), libstdc++6 (>= 4.1.1)
+Provides: lv2-plugin
+Section: sound
+Priority: optional
+Homepage: https://gna.org/projects/lv2vocoder
+Description: LV2 vocoder plugin
+ Perhaps you don't know what a vocoder is, but I'm sure you have heard
+ one before. Vocoders are often used to add a robotic effect to vocals
+ in music. Happy robots use Linux and LV2!
+ .
+ This vocoder plugin has 2 AUDIO inputs and 1 OUTPUT. The first INPUT is
+ the "Formant" signal which is usually someone's voice. The second INPUT
+ is the "Carrier" signal which is some sort of continuous synth sound.
+ The "Carrier" signal is modulated to the "Formant".
+ .
+ There are a number of controls ports. The first one is the "Number of
+ bands" which is how many frequency bands to use (current maximum is 16).
+ The rest of the controls set the level of each individual band and
+ should have a value between 0.0 and 1.0. The lower numbered bands are
+ lower in frequency the higher numbered bands are higher in frequency.

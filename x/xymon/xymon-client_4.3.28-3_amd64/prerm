@@ -1,0 +1,24 @@
+#! /bin/sh
+# prerm script for xymon
+
+set -e
+
+# Workaround for http://bugs.debian.org/560317 in case debconf is too old like on Squeeze
+export DPKG_MAINTSCRIPT_PACKAGE=${DPKG_MAINTSCRIPT_PACKAGE:-xymon-client}
+export DPKG_MAINTSCRIPT_NAME=${DPKG_MAINTSCRIPT_NAME:-prerm}
+
+# Automatically added by dh_installinit/11.1.2
+if [ -x "/etc/init.d/xymon-client" ] && [ "$1" = remove ]; then
+	invoke-rc.d xymon-client stop || exit 1
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.1.2
+dpkg-maintscript-helper mv_conffile /etc/init.d/hobbit-client /etc/init.d/xymon-client 4.3.7-1\~\~ xymon-client -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/logrotate.d/hobbit-client /etc/logrotate.d/xymon-client 4.3.7-1\~\~ xymon-client -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/hobbit/localclient.cfg /etc/xymon/localclient.cfg 4.3.7-1\~\~ xymon-client -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/hobbit/hobbitclient.cfg /etc/xymon/xymonclient.cfg 4.3.7-1\~\~ xymon-client -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/hobbit/clientlaunch.cfg /etc/xymon/clientlaunch.cfg 4.3.7-1\~\~ xymon-client -- "$@"
+# End automatically added section
+
+
+exit 0

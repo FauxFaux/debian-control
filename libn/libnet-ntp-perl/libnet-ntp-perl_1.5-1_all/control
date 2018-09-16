@@ -1,0 +1,18 @@
+Package: libnet-ntp-perl
+Version: 1.5-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 34
+Depends: perl, netbase
+Recommends: libio-socket-inet6-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Net-NTP
+Description: Perl module to query NTP servers
+ Net::NTP is a small perl module to query an NTP (Network Time Protocol)
+ time server for the current time. It exports a single method
+ (get_ntp_response) and returns an associative array based upon RFC1305 and
+ RFC2030.  The response from the server is "humanized" to a point that further
+ processing of the information received from the server can be manipulated.
+ For example: timestamps are in epoch, so one could use the localtime function
+ to produce an even more "human" representation of the timestamp.

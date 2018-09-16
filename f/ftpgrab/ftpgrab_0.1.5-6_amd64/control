@@ -1,0 +1,20 @@
+Package: ftpgrab
+Version: 0.1.5-6
+Architecture: amd64
+Maintainer: Christian T. Steigies <cts@debian.org>
+Installed-Size: 109
+Depends: libc6 (>= 2.15), libgcc1 (>= 1:3.0), libstdc++6 (>= 5)
+Section: net
+Priority: optional
+Description: file mirroring utility
+ ftpgrab is a utility for maintaining FTP mirrors. In fact not unlike the
+ "Mirror" perl program. However ftpgrab is oriented towards the smaller
+ site which doesn't have the resources to mirror entire version trees of
+ software.
+ .
+ The primary "plus point" of ftpgrab is that it can base download decisions
+ by parsing version numbers out of filenames. For example, ftpgrab will
+ recognize that the file "linux-2.2.2.tar.gz" is newer than
+ "linux-2.2.1.tar.gz" based on the version string. It will then download
+ the new version and delete the old one when it is done, thus saving you
+ mirroring 10 kernel versions all at >10Mb each.

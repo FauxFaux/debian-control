@@ -1,0 +1,24 @@
+Package: restricted-ssh-commands
+Version: 0.4-1
+Architecture: all
+Maintainer: Benjamin Drung <bdrung@debian.org>
+Installed-Size: 20
+Section: net
+Priority: optional
+Homepage: https://github.com/bdrung/restricted-ssh-commands
+Description: Restrict SSH users to a predefined set of commands
+ restricted-ssh-commands is intended to be called by SSH to restrict a
+ user to only run specific commands. A list of allowed regular
+ expressions can be configured in /etc/restricted-ssh-commands/. The
+ requested command has to match at least one regular expression.
+ Otherwise it will be rejected.
+ .
+ restricted-ssh-commands is useful to grant restricted access via SSH to
+ do certain task. For example, it could allow a user to upload a Debian
+ packages via scp and run reprepro processincoming.
+ .
+ Create a configuration file in /etc/restricted-ssh-commands/ and add
+ following line to ~/.ssh/authorized_keys to use it
+ .
+    command="/usr/lib/restricted-ssh-commands",no-port-forwarding,
+    no-X11-forwarding,no-agent-forwarding,no-pty ssh-rsa [...]

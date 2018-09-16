@@ -1,0 +1,17 @@
+Package: libcgi-application-plugin-dbh-perl
+Version: 4.04-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 30
+Depends: perl, libcgi-application-perl, libdbi-perl
+Breaks: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Replaces: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Application-Plugin-DBH
+Description: plugin adding database support to CGI::Application
+ CGI::Application::Plugin::DBH adds access to a DBI database handle to
+ your CGI::Application modules. Lazy loading is used to prevent a database
+ connection from being made if the dbh method is not called during the
+ request.  In other words, the database connection is not created until it is
+ actually needed.

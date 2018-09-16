@@ -1,0 +1,27 @@
+Package: litmus
+Version: 0.13-1
+Architecture: amd64
+Maintainer: Jelmer Vernooĳ <jelmer@debian.org>
+Installed-Size: 230
+Depends: libc6 (>= 2.4), libneon27-gnutls
+Section: web
+Priority: optional
+Homepage: http://www.webdav.org/neon/litmus/
+Description: WebDAV server test suite
+ A WebDAV server protocol compliance test suite. Tests include:
+ .
+  * OPTIONS for DAV: header
+  * PUT, GET with byte comparison
+  * MKCOL
+  * DELETE (collections, non-collections)
+  * COPY, MOVE using combinations of:
+   - overwrite t/f
+   - destination exists/doesn't exist
+   - collection/non-collection
+  * Property manipulation and querying:
+   - set, delete, replace properties
+   - persist dead props across COPY
+   - namespace handling
+  * Locking
+   - attempts to modify locked resource (as lock owner, not owner)
+   - shared/exclusive locks, lock discovery

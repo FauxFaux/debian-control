@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+if [ -x "/etc/init.d/dpm" ]; then
+	invoke-rc.d dpm stop || exit 1
+fi
+
+if [ "$1" = "remove" ] ; then
+	update-alternatives --remove dpm /usr/lib/dpm-postgres/dpm
+fi
+
+

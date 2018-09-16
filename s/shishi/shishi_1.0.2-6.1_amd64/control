@@ -1,0 +1,41 @@
+Package: shishi
+Version: 1.0.2-6.1
+Architecture: amd64
+Maintainer: Debian Shishi Team <help-shishi@gnu.org>
+Installed-Size: 219
+Depends: libc6 (>= 2.14), libgcrypt20 (>= 1.7.0), libgpg-error0 (>= 1.14), libshishi0 (>= 0.0.42)
+Suggests: shishi-doc
+Section: net
+Priority: extra
+Homepage: http://www.gnu.org/software/shishi/
+Description: Command line client for the Shishi Kerberos v5 implementation
+ Shishi is an implementation of the kerberos v5 network authentication
+ system.
+ .
+ Shishi can be used to authenticate users in distributed systems.
+ .
+ Shishi contains a library ('libshishi') that can be used by
+ application developers to add support for kerberos v5.  Shishi
+ contains a command line utility ('shishi') that is used by users to
+ acquire and manage tickets (and more).  The server side, a Key
+ Distribution Center, is implemented by 'shishid'.  Of course, a
+ manual documenting usage aspects as well as the programming API is
+ included.
+ .
+ Shishi currently supports AS/TGS exchanges for acquiring tickets, the
+ AP exchange for performing client and server authentication, and
+ SAFE/PRIV for integrity/privacy protected application data exchanges.
+ .
+ Shishi is internationalized; error and status messages can be
+ translated into the users' language; user name and passwords can be
+ converted into any available character set (normally including
+ ISO-8859-1 and UTF-8) and also be processed using an experimental
+ Stringprep profile.
+ .
+ Most, if not all, of the widely used encryption and checksum types
+ are supported, such as ARCFOUR, 3DES, AES and HMAC-SHA1.
+ .
+ This package includes a few command line tools:
+  shishi -- Acquire and manage Kerberos tickets.
+  keytab2shishi -- Convert MIT/Heimdal /etc/krb5.keytab's to Shishi format.
+  ccache2shishi -- Convert MIT/Heimdal user ticket files to Shishi format.

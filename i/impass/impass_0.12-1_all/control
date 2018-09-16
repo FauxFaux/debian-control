@@ -1,0 +1,25 @@
+Package: impass
+Version: 0.12-1
+Architecture: all
+Maintainer: Jameson Graef Rollins <jrollins@finestructure.net>
+Installed-Size: 87
+Depends: python3-gpg, python3-gi, python3:any (>= 3.3.2-2~)
+Recommends: gir1.2-gtk-3.0, python3-xdo, xclip
+Provides: python3-impass
+Section: utils
+Priority: optional
+Homepage: https://salsa.debian.org/debian/impass
+Description: Simple and secure password management and retrieval system
+ Impass is a secure password manager that relies on your OpenPGP key
+ for security and is designed to integrate in a minimal fashion into
+ any X11 window manager.
+ .
+ Passwords and context strings are stored in a single
+ OpenPGP-encrypted and signed file (meaning entry contexts are not
+ exposed to the filesystem).  Along with a simple command-line
+ interface, there is a streamlined GUI meant for X11 window manager
+ integration.  When invoked, the GUI produces a prompt to search
+ stored contexts.  New entries can also easily be created.  Passwords
+ are securely retrieved without displaying on the screen.  Multiple
+ retrieval methods are available, including auto-typing them directly
+ into an X11 window (default), or inserting them into the X11 clipboard.

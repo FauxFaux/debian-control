@@ -1,0 +1,52 @@
+Package: vamp-examples
+Source: vamp-plugin-sdk
+Version: 2.7.1~repack0-1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 618
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libsndfile1 (>= 1.0.20), libstdc++6 (>= 5.2)
+Breaks: vamp-plugin-sdk (<< 2.4-1~)
+Replaces: vamp-plugin-sdk (<< 2.4-1~)
+Section: sound
+Priority: optional
+Homepage: http://www.vamp-plugins.org/
+Description: example Vamp plugins, host and RDF generator
+ Vamp is an audio processing plugin system for plugins that extract
+ descriptive information from audio data - typically referred to as
+ audio analysis plugins or audio feature extraction plugins.
+ .
+ This package contains the following example plugins:
+ .
+  * Zero Crossings calculates the positions and density of
+    zero-crossing points in an audio waveform.
+ .
+  * Spectral Centroid calculates the centre of gravity of the
+    frequency domain representation of each block of audio.
+ .
+  * Simple Power Spectrum calculates a power spectrum from the input
+    audio.  Actually, it doesn't do any work except calculating power
+    from a cartesian complex FFT output.  The work of calculating this
+    frequency domain output is done for it by the host or host SDK; the
+    plugin just needs to declare that it wants frequency domain
+    input. This is the simplest of the example plugins.
+ .
+  * Amplitude Follower is an implementation of SuperCollider's
+    amplitude-follower algorithm as a simple Vamp plugin.
+ .
+  * Simple Percussion Onset Detector: estimates the locations of
+    percussive onsets using a simple method described in "Drum Source
+    Separation using Percussive Feature Detection and Spectral
+    Modulation" by Dan Barry, Derry Fitzgerald, Eugene Coyle and Bob
+    Lawlor, ISSC 2005.
+ .
+  * Simple Fixed Tempo Estimator: calculates a single beats-per-minute
+    value which is an estimate of the tempo of a piece of music that is
+    assumed to be of fixed tempo, using autocorrelation of a frequency
+    domain energy rise metric.  It has several outputs that return
+    intermediate results used in the calculation, and may be a useful
+    example of a plugin having several outputs with varying feature
+    structures.
+ .
+ Also included is a simple host that can enumerate plugins, list their
+ features, and process an audio file as well as a utility to generate
+ Vamp plugin RDF templates.

@@ -1,0 +1,24 @@
+Package: opendnssec-enforcer
+Source: opendnssec
+Version: 1:2.1.3-0.2
+Architecture: all
+Maintainer: Debian DNS Packaging <pkg-dns-devel@lists.alioth.debian.org>
+Installed-Size: 56
+Depends: opendnssec-enforcer-sqlite3 | opendnssec-enforcer-backend, procps, init-system-helpers (>= 1.18~)
+Recommends: opendnssec, opendnssec-signer, softhsm2
+Section: admin
+Priority: extra
+Homepage: http://www.opendnssec.org/
+Description: tool to prepare DNSSEC keys (common package)
+ OpenDNSSEC is a complete DNSSEC zone signing system which is very
+ easy to use with stability and security in mind.  There are a lot of
+ details in signing zone files with DNSSEC and OpenDNSSEC covers most
+ of it.
+ .
+ OpenDNSSEC Enforcer, which is a tool to make sure that there are
+ enough keys for all of the zones, and take the policy and key
+ information from the KASP database and turn it into an xml file that
+ the signer can use.
+ .
+ The package contains OpenDNSSEC Enforcer documentation, manpages and
+ it depends on either sqlite3 or mysql backend package with binaries.

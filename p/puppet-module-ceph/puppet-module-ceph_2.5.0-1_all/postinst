@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/ceph puppet-module-ceph /usr/share/puppet/modules.available/ceph 500
+fi
+
+
+
+exit 0

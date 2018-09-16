@@ -1,0 +1,33 @@
+Package: pd-cxc
+Version: 0.5.2-2
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 361
+Depends: libc6 (>= 2.7), puredata-core | pd, pd-libdir
+Section: sound
+Priority: optional
+Homepage: https://puredata.info
+Description: Pd library for working with patterns and numbers
+ cxc is a library of Pd objects for random numbers, number patterns and a
+ couple errant system tools.
+ .
+  * ixprint: print data on console without prefix (needed for ascwave)
+  * binshift: binary shift objects (<<,>>)
+  * ascseq: ascii-sequencer: input anything, which is output again
+            sequentially character by character with a given delay
+  * ascwave: print funny ascii constructions on console
+  * bfilt: re-output every argumen-th event, useful for modulo-sequencers
+  * bfilt2: features internal counter, output just bangs
+  * cxc_counter: a clone of the counting object from pd-markex
+  * reson: an interpolating reson filter
+  * cxc_prepend: prepend stuff with another symbol
+  * cxc_split: split incoming string at specified delimiter
+  * utime: output seconds since epoch and microsecond fraction
+  * random1, random_fl, random_icg, random_tw, dist_normal: PRNG algorithms
+  * random1~, random_fl~, random_icg~: signal version of above algorithms
+  * ENV: get and set environment variables and certain defines like RAND_MAX
+  * proc: get stuff out of the Linux proc directory (so far:
+          cpuinfo, loadavg, version, uptime)
+  * delta~: emit distance to last sample as signal
+  * cx.mean, cx.avgdev, cx.stddev: calculate mean, standard and average
+                                   deviation of a signal in an array

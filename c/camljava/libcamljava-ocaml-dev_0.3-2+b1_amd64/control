@@ -1,0 +1,29 @@
+Package: libcamljava-ocaml-dev
+Source: camljava (0.3-2)
+Version: 0.3-2+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 303
+Depends: ocaml-nox-4.05.0, default-jdk
+Provides: libcamljava-ocaml-dev-o0rt3
+Section: ocaml
+Priority: optional
+Homepage: http://pauillac.inria.fr/~xleroy/software.html#camljava
+Description: interface between OCaml and Java via Caml/C interface and JNI
+ CamlJava is an interface between OCaml and Java allowing programs written in
+ one of the two languages to call code written in the other.
+ .
+ Interaction among the two languages happen via the respective C interfaces:
+ Caml/C interface for OCaml and JNI (Java Native Interface) for Java.
+ .
+ Currently, CamlJava provides a low-level, weakly-typed OCaml interface very
+ similar to the JNI. Java object references are mapped to an abstract type, and
+ various JNI-like operations are provided to allow Java method invocation,
+ field access, and more.
+ .
+ A basic callback facility (allowing Java code to invoke methods on OCaml
+ objects) is also provided, although some stub Java code must be written by
+ hand.
+ .
+ This package contain all the development stuff needed to use CamlJava from
+ OCaml programs.

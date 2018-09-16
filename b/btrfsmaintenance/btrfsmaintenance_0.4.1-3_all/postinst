@@ -1,0 +1,181 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if deb-systemd-helper debian-installed 'btrfs-balance.timer'; then
+		# This will only remove masks created by d-s-h on package removal.
+		deb-systemd-helper unmask 'btrfs-balance.timer' >/dev/null || true
+
+		if deb-systemd-helper --quiet was-enabled 'btrfs-balance.timer'; then
+			# Create new symlinks, if any.
+			deb-systemd-helper enable 'btrfs-balance.timer' >/dev/null || true
+		fi
+	fi
+
+	# Update the statefile to add new symlinks (if any), which need to be cleaned
+	# up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'btrfs-balance.timer' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			deb-systemd-invoke try-restart 'btrfs-balance.timer' >/dev/null || true
+		fi
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if deb-systemd-helper debian-installed 'btrfs-defrag.timer'; then
+		# This will only remove masks created by d-s-h on package removal.
+		deb-systemd-helper unmask 'btrfs-defrag.timer' >/dev/null || true
+
+		if deb-systemd-helper --quiet was-enabled 'btrfs-defrag.timer'; then
+			# Create new symlinks, if any.
+			deb-systemd-helper enable 'btrfs-defrag.timer' >/dev/null || true
+		fi
+	fi
+
+	# Update the statefile to add new symlinks (if any), which need to be cleaned
+	# up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'btrfs-defrag.timer' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			deb-systemd-invoke try-restart 'btrfs-defrag.timer' >/dev/null || true
+		fi
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if deb-systemd-helper debian-installed 'btrfs-scrub.timer'; then
+		# This will only remove masks created by d-s-h on package removal.
+		deb-systemd-helper unmask 'btrfs-scrub.timer' >/dev/null || true
+
+		if deb-systemd-helper --quiet was-enabled 'btrfs-scrub.timer'; then
+			# Create new symlinks, if any.
+			deb-systemd-helper enable 'btrfs-scrub.timer' >/dev/null || true
+		fi
+	fi
+
+	# Update the statefile to add new symlinks (if any), which need to be cleaned
+	# up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'btrfs-scrub.timer' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			deb-systemd-invoke try-restart 'btrfs-scrub.timer' >/dev/null || true
+		fi
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if deb-systemd-helper debian-installed 'btrfs-trim.timer'; then
+		# This will only remove masks created by d-s-h on package removal.
+		deb-systemd-helper unmask 'btrfs-trim.timer' >/dev/null || true
+
+		if deb-systemd-helper --quiet was-enabled 'btrfs-trim.timer'; then
+			# Create new symlinks, if any.
+			deb-systemd-helper enable 'btrfs-trim.timer' >/dev/null || true
+		fi
+	fi
+
+	# Update the statefile to add new symlinks (if any), which need to be cleaned
+	# up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'btrfs-trim.timer' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			deb-systemd-invoke try-restart 'btrfs-trim.timer' >/dev/null || true
+		fi
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if deb-systemd-helper debian-installed 'btrfsmaintenance-refresh.path'; then
+		# This will only remove masks created by d-s-h on package removal.
+		deb-systemd-helper unmask 'btrfsmaintenance-refresh.path' >/dev/null || true
+
+		if deb-systemd-helper --quiet was-enabled 'btrfsmaintenance-refresh.path'; then
+			# Create new symlinks, if any.
+			deb-systemd-helper enable 'btrfsmaintenance-refresh.path' >/dev/null || true
+		fi
+	fi
+
+	# Update the statefile to add new symlinks (if any), which need to be cleaned
+	# up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'btrfsmaintenance-refresh.path' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			deb-systemd-invoke try-restart 'btrfsmaintenance-refresh.path' >/dev/null || true
+		fi
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if deb-systemd-helper debian-installed 'btrfsmaintenance-refresh.path'; then
+		# This will only remove masks created by d-s-h on package removal.
+		deb-systemd-helper unmask 'btrfsmaintenance-refresh.path' >/dev/null || true
+
+		if deb-systemd-helper --quiet was-enabled 'btrfsmaintenance-refresh.path'; then
+			# Create new symlinks, if any.
+			deb-systemd-helper enable 'btrfsmaintenance-refresh.path' >/dev/null || true
+		fi
+	fi
+
+	# Update the statefile to add new symlinks (if any), which need to be cleaned
+	# up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'btrfsmaintenance-refresh.path' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if deb-systemd-helper debian-installed 'btrfsmaintenance-refresh.service'; then
+		# This will only remove masks created by d-s-h on package removal.
+		deb-systemd-helper unmask 'btrfsmaintenance-refresh.service' >/dev/null || true
+
+		if deb-systemd-helper --quiet was-enabled 'btrfsmaintenance-refresh.service'; then
+			# Create new symlinks, if any.
+			deb-systemd-helper enable 'btrfsmaintenance-refresh.service' >/dev/null || true
+		fi
+	fi
+
+	# Update the statefile to add new symlinks (if any), which need to be cleaned
+	# up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state 'btrfsmaintenance-refresh.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			deb-systemd-invoke try-restart 'btrfsmaintenance-refresh.path' 'btrfsmaintenance-refresh.service' >/dev/null || true
+		fi
+	fi
+fi
+# End automatically added section

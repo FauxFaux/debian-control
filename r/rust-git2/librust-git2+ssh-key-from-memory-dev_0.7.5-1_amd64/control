@@ -1,0 +1,18 @@
+Package: librust-git2+ssh-key-from-memory-dev
+Source: rust-git2
+Version: 0.7.5-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-git2-dev (= 0.7.5-1), librust-libgit2-sys-0.7+ssh-key-from-memory-dev (>= 0.7.7~~)
+Provides: librust-git2-0+ssh-key-from-memory-dev (= 0.7.5-1), librust-git2-0.7+ssh-key-from-memory-dev (= 0.7.5-1), librust-git2-0.7.5+ssh-key-from-memory-dev (= 0.7.5-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/alexcrichton/git2-rs
+Description: Bindings to libgit2 for interoperating with git repositories - feature "ssh_key_from_memory"
+ This library is both threadsafe and memory safe and allows both reading and
+ writing git repositories.
+ .
+ This metapackage enables feature ssh_key_from_memory for the Rust git2 crate,
+ by pulling in any additional dependencies needed by that feature.

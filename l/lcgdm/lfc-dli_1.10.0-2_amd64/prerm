@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+if [ -x "/etc/init.d/lfc-dli" ]; then
+	invoke-rc.d lfc-dli stop || exit 1
+fi
+
+

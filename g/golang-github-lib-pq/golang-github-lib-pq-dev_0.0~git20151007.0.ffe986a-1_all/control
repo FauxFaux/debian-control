@@ -1,0 +1,19 @@
+Package: golang-github-lib-pq-dev
+Source: golang-github-lib-pq
+Version: 0.0~git20151007.0.ffe986a-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 243
+Breaks: golang-pq-dev (<< 0.0~git20151007.0.ffe986a-1~)
+Replaces: golang-pq-dev (<< 0.0~git20151007.0.ffe986a-1~)
+Provides: golang-pq-dev
+Built-Using: golang (= 2:1.4.3-3)
+Section: devel
+Priority: extra
+Homepage: https://github.com/lib/pq
+Description: pure Go postgres driver for Go’s database/sql package
+ After importing this package, you can connect to a postgres database from your
+ Go programs. This package does not depend on libpq-dev and does not need cgo,
+ making it suitable for use when cross-compiling.
+ .
+ This package contains the source.

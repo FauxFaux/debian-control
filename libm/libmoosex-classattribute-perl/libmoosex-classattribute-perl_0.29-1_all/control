@@ -1,0 +1,21 @@
+Package: libmoosex-classattribute-perl
+Version: 0.29-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 98
+Depends: perl, libmoose-perl, libnamespace-autoclean-perl, libnamespace-clean-perl, libscalar-list-utils-perl (>= 1:1.45) | perl (>= 5.25.1)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MooseX-ClassAttribute
+Description: module to declare class attributes Moose-style
+ MooseX::ClassAttribute allows you to declare class attributes in exactly the
+ same way as object attributes, using class_has() instead of has().
+ .
+ You can use any feature of Moose's attribute declarations, including
+ overriding a parent's attributes, delegation (handles), attribute traits,
+ etc. All features should just work. The one exception is the "required" flag,
+ which is not allowed for class attributes.
+ .
+ The accessor methods for class attribute may be called on the class directly,
+ or on objects of that class. Passing a class attribute to the constructor
+ will not set that attribute.

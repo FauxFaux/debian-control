@@ -1,0 +1,22 @@
+Package: proxsmtp
+Source: proxsmtp (1.10-2.1)
+Version: 1.10-2.1+b2
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 104
+Depends: dpkg (>= 1.10.11), lsb-base, libc6 (>= 2.15), libcap2 (>= 1:2.10)
+Recommends: postfix | mail-transport-agent
+Section: mail
+Priority: optional
+Description: multi purpose SMTP Proxy
+ ProxSMTP is a flexible tool that allows you to reject, change or log email
+ based on arbitrary critera.  It accepts SMTP connections and forwards the SMTP
+ commands and responses to another SMTP server.  The 'DATA' email body is
+ intercepted and filtered before forwarding.
+ .
+ You need to be able to write the filtering scripts that integrate it with your
+ particular needs.  If you're looking for something that does virus filtering,
+ take a look at ClamSMTP which behaves similarly and uses a similar code base.
+ .
+ You do not need a local mail-transport-agent installed, since this server can
+ forward to a remote one.

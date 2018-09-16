@@ -1,0 +1,19 @@
+Package: libapache2-mod-ruid2
+Version: 0.9.8-3
+Architecture: amd64
+Maintainer: Alessandro De Zorzi <lota@nonlontano.it>
+Installed-Size: 72
+Depends: libc6 (>= 2.2.5), libcap2 (>= 2.10), apache2-api-20120211
+Conflicts: libapache2-mod-suphp
+Section: web
+Priority: extra
+Homepage: http://sourceforge.net/projects/mod-ruid/
+Description: suexec module for Apache 2
+ ruid2 is based on mod_ruid and mod_suid2 but it has better performance than
+ mod_suid2 because it doesn't need to kill httpd children after one request.
+ .
+ It makes use of kernel capabilities and after receiving a new request suids
+ again. There are some security issues, for instance if attacker successfully
+ exploits the httpd process, he can set effective capabilities and setuid to
+ root. For this reason, it is recommended to be used in conjunction with a
+ kernel security patch (eg. grsec).

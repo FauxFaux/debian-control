@@ -1,0 +1,18 @@
+Package: multiwatch
+Source: multiwatch (1.0.0-rc1+really1.0.0-1)
+Version: 1.0.0-rc1+really1.0.0-1+b1
+Architecture: amd64
+Maintainer: Jérémy Lal <kapouer@melix.org>
+Installed-Size: 29
+Depends: libc6 (>= 2.4), libev4 (>= 1:4.04), libglib2.0-0 (>= 2.16.0)
+Section: web
+Priority: extra
+Homepage: http://redmine.lighttpd.net/projects/multiwatch
+Description: Forks and watches multiple instances of a program
+ multiwatch forks multiple instance of one application and
+ keeps them running.
+ .
+ It is made to be used with spawn-fcgi so all forks share the same
+ fastcgi socket (no webserver restart needed if you increase/decrease
+ the number of forks), and it is easier to setup than multiple
+ daemontool or runit supervised instances.

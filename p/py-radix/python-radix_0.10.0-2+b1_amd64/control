@@ -1,0 +1,24 @@
+Package: python-radix
+Source: py-radix (0.10.0-2)
+Version: 0.10.0-2+b1
+Architecture: amd64
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 83
+Depends: libc6 (>= 2.4), python (<< 2.8), python (>= 2.7~), python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Provides: python2.7-radix
+Section: python
+Priority: optional
+Homepage: https://github.com/mjschultz/py-radix
+Description: radix tree implementation for storage of IPv4 and IPv6 networks (Python 2)
+ py-radix is an implementation of a radix tree for Python, which supports
+ storage and lookups of IPv4 and IPv6 networks. This is a Python equivalent to
+ Dave Plonka's Perl Net::Patricia (it even steals the same radix tree code from
+ MRTd).
+ .
+ The radix tree (a.k.a Patricia tree) is the data structure most commonly used
+ for routing table lookups. It efficiently stores network prefixes of varying
+ lengths and allows fast lookups of containing networks. py-radix's
+ implementation is built solely for networks (the data structure itself is more
+ general).
+ .
+ This package contains the Python 2 version of the library.

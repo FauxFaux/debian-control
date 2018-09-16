@@ -1,0 +1,33 @@
+Package: cyrus-imapd
+Source: cyrus-imapd (2.5.10-3)
+Version: 2.5.10-3+b1
+Architecture: amd64
+Maintainer: Debian Cyrus Team <pkg-cyrus-imapd-debian-devel@lists.alioth.debian.org>
+Installed-Size: 332
+Pre-Depends: dpkg (>= 1.17.14~)
+Depends: cyrus-common (= 2.5.10-3+b1), libc6 (>= 2.15), libicu57 (>= 57.1-1~), libsasl2-2, libssl1.1 (>= 1.1.0), libwrap0 (>= 7.6-4~), zlib1g (>= 1:1.1.4)
+Conflicts: imap-server
+Breaks: cyrus-imapd-2.4
+Replaces: cyrus-imapd-2.4
+Provides: imap-server
+Section: mail
+Priority: extra
+Homepage: http://www.cyrusimap.org/
+Description: Cyrus mail system - IMAP support
+ Cyrus is an IMAP server designed to handle massive quantities of mail,
+ with a number of features not found in other IMAP implementations,
+ including support for:
+  - running the daemon without root privileges;
+  - POP3 and NNTP in addition to plain IMAP;
+  - CalDAV and CardDAV;
+  - secure IMAP using SSL;
+  - server-side filtering with Sieve;
+  - mail users without login accounts;
+  - simple mail quotas;
+  - virtual domains;
+  - IPv6.
+ .
+ This package contains the IMAP (Internet Mail Access Protocol) portion
+ of the Cyrus IMAPd suite.
+ .
+ For more information, please see the cyrus-common package.

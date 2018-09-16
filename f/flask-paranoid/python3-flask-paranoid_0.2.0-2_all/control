@@ -1,0 +1,18 @@
+Package: python3-flask-paranoid
+Source: flask-paranoid
+Version: 0.2.0-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: python3-flask (>= 0.10), python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://github.com/miguelgrinberg/flask-paranoid/
+Description: Simple user session protection
+ Flask-Paranoid protects user sessions. When a client connects to this
+ application, a "paranoid" token will be generated according to the IP address
+ and user agent. In all subsequent requests, the token will be recalculated and
+ checked against the one computed for the first request. If the session cookie
+ is stolen and the attacker tries to use it from another location, the
+ generated token will be different, and in that case the extension will clear
+ the session and block the request.

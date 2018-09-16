@@ -1,0 +1,21 @@
+Package: libjctools-java
+Source: jctools
+Version: 2.0.2-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 234
+Section: java
+Priority: optional
+Homepage: http://jctools.github.io/JCTools/
+Description: Java Concurrency Tools for the JVM
+ JCTools offers some concurrent data structures currently missing from the JDK:
+  * SPSC/MPSC/SPMC/MPMC variations for concurrent queues:
+    * SPSC - Single Producer Single Consumer (Wait Free, bounded and unbounded)
+    * MPSC - Multi Producer Single Consumer (Lock less, bounded and unbounded)
+    * SPMC - Single Producer Multi Consumer (Lock less, bounded)
+    * MPMC - Multi Producer Multi Consumer (Lock less, bounded)
+  * An expanded queue interface (MessagePassingQueue):
+    * relaxedOffer/Peek/Poll: trade off conflated guarantee on full/empty queue
+      state with improved performance.
+    * drain/fill: batch read and write methods for increased throughput
+      and reduced contention

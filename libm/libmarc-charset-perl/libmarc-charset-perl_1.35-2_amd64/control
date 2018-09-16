@@ -1,0 +1,24 @@
+Package: libmarc-charset-perl
+Version: 1.35-2
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 5259
+Depends: perl, libxml-sax-perl, libclass-accessor-perl
+Suggests: libmarc-record-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MARC-Charset
+Description: Perl module for bidirectional MARC-8 <-> Unicode conversion
+ MARC::Charset allows you to turn MARC-8 encoded strings into UTF-8
+ strings.
+ .
+ MARC-8 is a single byte character encoding that predates unicode, and
+ allows you to put non-Roman scripts in MARC bibliographic records.
+ .
+ The MARC21 standard now supports encoding character data in Unicode,
+ specifically the UCS Transformation Formats-8 (UTF-8).  Unicode
+ notwithstanding, libraries still have a wealth of data encoded using
+ MARC-8. Yet, some new data formats such as XML require that characters are
+ encoded using Unicode. In order to facilitate conversion the Library of
+ Congress graciously published character mappings to enable the conversion
+ of MARC-8 data to Unicode.

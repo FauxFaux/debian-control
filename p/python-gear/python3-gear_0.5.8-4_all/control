@@ -1,0 +1,27 @@
+Package: python3-gear
+Source: python-gear
+Version: 0.5.8-4
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 177
+Depends: python3-daemon, python3-extras, python3-pbr, python3 (>= 3.2), python3:any (>= 3.3.2-2~)
+Suggests: python3-statsd
+Section: python
+Priority: optional
+Homepage: https://pypi.python.org/pypi/gear
+Description: Pure Python Async Gear Protocol Library - Python 3.x
+ python-gear is a pure-Python asynchronous library to interface with Gearman.
+ .
+ It provides interfaces to build a client or worker, and access to the
+ administrative protocol. The design approach is to keep it simple, with a
+ relatively thin abstration of the Gearman protocol itself. It should be easy
+ to use to build a client or worker that operates either synchronously or
+ asynchronously.
+ .
+ The module also provides a simple Gearman server for use as a convenience in
+ unit tests. The server is not designed for production use under load.
+ .
+ Installing the suggested python-statsd package would add support for reporting
+ to statsd a frontend to Graphite a stats collection and graphing server.
+ .
+ This package contains the Python 3.x module.

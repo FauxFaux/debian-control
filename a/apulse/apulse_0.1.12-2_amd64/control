@@ -1,0 +1,21 @@
+Package: apulse
+Version: 0.1.12-2
+Architecture: amd64
+Maintainer: Mirek Kratochvil <exa.exa@gmail.com>
+Installed-Size: 159
+Depends: libasound2 (>= 1.0.18), libc6 (>= 2.17), libglib2.0-0 (>= 2.14.0)
+Section: sound
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/i-rinat/apulse
+Description: PulseAudio emulation for ALSA
+ The program provides an alternative partial implementation of the PulseAudio
+ API. It consists of a loader script and a number of shared libraries with the
+ same names as from original PulseAudio, so applications could dynamically load
+ them and think they are talking to PulseAudio. Internally, no separate sound
+ mixing daemon is used. Instead, apulse relies on ALSA's dmix, dsnoop, and plug
+ plugins to handle multiple sound sources and capture streams running at the
+ same time. dmix plugin muxes multiple playback streams; dsnoop plugin allow
+ multiple applications to capture from a single microphone; and plug plugin
+ transparently converts audio between various sample formats, sample rates and
+ channel numbers.

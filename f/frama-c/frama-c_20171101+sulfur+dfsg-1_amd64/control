@@ -1,0 +1,29 @@
+Package: frama-c
+Version: 20171101+sulfur+dfsg-1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 55524
+Depends: libart-2.0-2 (>= 2.3.17), libatk1.0-0 (>= 1.12.4), libc6 (>= 2.27), libcairo2 (>= 1.2.4), libfontconfig1 (>= 2.12.6), libfreetype6 (>= 2.2.1), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.35.9), libgmp10, libgnomecanvas2-0 (>= 2.11.1), libgtk2.0-0 (>= 2.24.32), libgtksourceview2.0-0 (>= 2.10.0), libpango-1.0-0 (>= 1.14.0), libpangocairo-1.0-0 (>= 1.14.0), libpangoft2-1.0-0 (>= 1.14.0), liblablgtk2-gnome-ocaml-dlf93, liblablgtk2-ocaml-il3k6, liblablgtksourceview2-ocaml-rynx6, libzarith-ocaml-gqf85, ocaml-base-nox-4.05.0, frama-c-base (= 20171101+sulfur+dfsg-1), graphviz, emacs | emacsen
+Breaks: frama-c-base (<= 20140301+neon+dfsg-3)
+Replaces: frama-c-base (<= 20140301+neon+dfsg-3)
+Section: devel
+Priority: optional
+Homepage: http://frama-c.com/
+Description: Platform dedicated to the analysis of source code written in C
+ Frama-C gathers several analysis techniques in a single collaborative
+ framework, based on analyzers (called "plug-ins") that can build upon the
+ results computed by other analyzers in the framework.
+ .
+ Thanks to this approach, Frama-C provides sophisticated tools, including:
+   * an analyzer based on abstract interpretation (Value plug-in);
+   * a program proof framework based on weakest precondition calculus (WP plug-in);
+   * a program slicer (Slicing plug-in);
+   * a tool for verification of temporal (LTL) properties (Aoraï plug-in);
+   * several tools for code base exploration and dependency analysis
+     (plug-ins From, Impact, Metrics, Occurrence, Scope, etc.).
+  .
+ These plug-ins communicate between each other via the Frama-C API
+ and via ACSL (ANSI/ISO C Specification Language) properties.
+ .
+ This package provides the graphical user interface of Frama-c and depends
+ on frama-c-base.

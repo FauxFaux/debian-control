@@ -1,0 +1,21 @@
+Package: graphite-web
+Version: 1.0.2+debian-2
+Architecture: all
+Maintainer: Debian Graphite Group <pkg-graphite-maint@lists.alioth.debian.org>
+Installed-Size: 4298
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~), adduser, python-cairo, python-django (>> 1.6-1~), python-simplejson, python-django-tagging (>> 1:0.4-1~), python-tz, python-pyparsing, python-whisper (>> 1.0.2-1~), python-urllib3, python-scandir
+Suggests: python-memcache, libapache2-mod-wsgi, python-ldap, python-mysqldb, graphite-carbon
+Section: web
+Priority: extra
+Homepage: https://github.com/graphite-project/graphite-web/
+Description: Enterprise Scalable Realtime Graphing
+ Graphite consists of a storage backend and a web-based visualization
+ frontend. Client applications send streams of numeric time-series
+ data to the Graphite backend (called carbon), where it gets stored in
+ fixed-size database files similar in design to RRD. The web frontend
+ provides 2 distinct user interfaces for visualizing this data in
+ graphs as well as a simple URL-based API for direct graph generation.
+ .
+ Graphite's design is focused on providing simple interfaces (both to
+ users and applications), real-time visualization, high-availability,
+ and enterprise scalability.

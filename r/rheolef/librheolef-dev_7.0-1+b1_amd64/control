@@ -1,0 +1,34 @@
+Package: librheolef-dev
+Source: rheolef (7.0-1)
+Version: 7.0-1+b1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 2008
+Depends: librheolef1 (= 7.0-1+b1), g++, make, libarmadillo-dev, libboost-dev, libboost-iostreams-dev, libboost-mpi-dev, libcgal-dev, liblapack-dev, libscotch-dev, libptscotch-dev, libsuitesparse-dev, libmumps-scotch-dev, libmumps-ptscotch-dev
+Recommends: rheolef-doc (= 7.0-1)
+Breaks: rheolef (<< 6.4)
+Replaces: rheolef (<< 6.4)
+Section: libdevel
+Priority: optional
+Homepage: http://ljk.imag.fr/membres/Pierre.Saramito/rheolef
+Description: efficient Finite Element environment - development files
+ Rheolef is a computer environment that serves as a convenient laboratory for
+ computations in applied mathematics involving finite element-like methods.
+ It provides a set of commands and C++ algorithms and containers.
+ .
+ Most basically, containers cover the classic graph data structure for sparse
+ matrix formats and finite element meshes. At a higher level of abstraction,
+ they can handle approximate finite element spaces, discrete fields.
+ Flexible and powerful expressions are used to specify bilinear forms.
+ .
+ Current applications include:
+  * massively distributed memory finite element environment, based on MPI;
+  * elasticity, Stokes and Navier-Stokes problems in 2D and 3D;
+  * complex fluids applications: viscoplasticity, viscoelasticity, wall slip;
+  * nonlinear problems with fixed-point, Newton and continuation methods;
+  * high order polynomials, mixed elements and discontinuous Galerkin methods;
+  * auto-adaptive mesh approaches;
+  * axisymmetric problems;
+  * multi-regions and variable coefficient problems.
+ .
+ This package provides the headers required for development.

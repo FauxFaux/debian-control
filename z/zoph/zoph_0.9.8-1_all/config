@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+
+
+  dbc_dbuser=zoph_rw
+  dbc_dbname=zoph
+
+
+if [ -f /usr/share/dbconfig-common/dpkg/config.mysql ]; then
+	. /usr/share/dbconfig-common/dpkg/config.mysql 
+	dbc_go zoph "$@"
+fi
+
+db_input medium zoph/rm_images  || true
+db_go
+
+

@@ -1,0 +1,34 @@
+Package: libmodule-install-authorrequires-perl
+Version: 0.02-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 61
+Depends: libmodule-install-perl, perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/Module-Install-AuthorRequires/
+Description: declare author-only dependencies
+ Modules often have optional requirements, for example dependencies that
+ are useful for (optional) tests, but not required for the module to
+ work properly.
+ .
+ Usually you want all developers of a project to have these optional
+ modules installed. However, simply telling everyone or printing
+ diagnostic messages if optional dependencies are missing often isn't
+ enough to make sure all authors have all optional modules installed.
+ .
+ Module::Install already has a way of detecting an author environment,
+ so an easy way to achieve the above would be something like:
+ .
+  if ($Module::Install::AUTHOR) {
+    requires 'Some::Module';
+    requires 'Another::Module' => '0.42';
+  }
+ .
+ Unfortunately, that'll also make the optional dependencies show up in
+ the distributions "META.yml" file, which is obviously wrong, as they
+ aren't actually hard requirements.
+ .
+ Working that around requires a considerable amount of non-trivial
+ Makefile.PL hackery, or simply using Module::Install::AuthorRequires's
+ "author_requires" command.

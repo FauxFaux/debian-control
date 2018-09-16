@@ -1,0 +1,121 @@
+#!/bin/bash
+#dash is fine, too, but not general /bin/sh (ulimit)
+set -e
+
+if [ "$1" = install -o "$1" = upgrade ]; then
+    # Writing to /usr/lib is nasty but some folks mount everything noexec.
+    FILE=`mktemp /usr/lib/sse4.2-support.XXXXXXXXXX`
+    trap "rm -f '$FILE'" EXIT
+    perl <<'END' |gzip -cdf >"$FILE"
+binmode STDOUT;
+print unpack "u*", <<'end';
+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
+@_;7&YS$A+LFR?Z5KTPS/E0;"OSO+_O=?@0+0;_@G````
+`
+end
+
+END
+    chmod u+x "$FILE"
+    # "exec >;command" instead of "command >" looks strange but regular
+    # redirections don't fully work within qemu-user.
+    ret=0;(ulimit -c 0; exec >/dev/null 2>&1; "$FILE") || ret=$?
+    rm -f "$FILE"
+    trap - EXIT
+
+    if [ $ret -ne 0 -a -n "$IGNORE_ISA" ]; then
+        cat >&2 <<END
+This machine doesn't support sse4.2, but override (IGNORE_ISA) is enabled.
+Continuing...
+END
+	ret=0
+    fi
+
+    if [ $ret -eq 126 ]; then
+        cat >&2 <<END
+Couldn't execute test binary for sse4.2, you either do foreign multi-arch
+without qemu or do something strange.  Assuming you know what you're doing.
+Continuing...
+END
+	ret=0
+    fi
+
+    if [ $ret -ne 0 ]; then
+        # Fail noisily, first via debconf (if installed).
+        if [ -e /usr/share/debconf/confmodule ]; then
+
+            . /usr/share/debconf/confmodule
+            db_version 2.0
+
+            db_fset sse4.2-support/fail seen false ||:
+            db_reset sse4.2-support/fail ||:
+            db_input critical sse4.2-support/fail ||:
+            db_go ||:
+            db_stop ||:
+        fi
+
+        cat >&2 <<END
+This machine doesn't support sse4.2, sorry.
+Aborting.
+END
+        exit 2
+    fi
+fi
+
+
+
+exit 0

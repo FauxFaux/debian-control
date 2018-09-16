@@ -1,0 +1,24 @@
+Package: libcatalyst-plugin-subrequest-perl
+Version: 0.21-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: perl, libcatalyst-perl (>= 5.90000)
+Breaks: libcatalyst-modules-perl (<< 48~)
+Replaces: libcatalyst-modules-perl (<< 48~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-Plugin-SubRequest
+Description: deprecated Catalist plugin for making subrequests to actions
+ Catalyst::Plugin::SubRequest is a Catalyst plugin for making subrequests to
+ actions. It uses the catalyst dispatcher, so it will work like an external
+ URL call. Methods are provided both to get the body of the response and the
+ full response (Catalyst::Response) object.
+ .
+ From: https://rt.cpan.org/Public/Bug/Display.html?id=57544:
+  $c->visit() is a perfect substitute for Catalyst::Plugin::SubRequest and
+  works fine with content types, response headers, request headers, request
+  method, missing localization etc.
+ .
+ Catalyst is an elegant Model-View-Controller web application framework
+ written in Perl.

@@ -1,0 +1,27 @@
+Package: python-migrate
+Source: migrate
+Version: 0.11.0-3
+Architecture: all
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 431
+Depends: python-decorator, python-pbr, python-six (>= 1.7.0), python-sqlalchemy, python-sqlparse, python-tempita, python2.7:any, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Suggests: python-migrate-doc
+Section: python
+Priority: optional
+Homepage: https://github.com/openstack/sqlalchemy-migrate
+Description: Database schema migration for SQLAlchemy - Python 2.7
+ Inspired by Ruby on Rails' migrations, migrate provides a way to deal
+ with database schema changes in SQLAlchemy projects.
+ .
+ SQLAlchemy-migrate is build on top of SQLAlchemy and provides a changeset
+ and a versioning API for database schemas as well as a script utilizing
+ these APIs. The database change sets are managed in a file based
+ repository allowing upgrades and downgrades of database schema versions.
+ The change sets may consist of Python code facilitating the changeset API
+ or SQL scripts.
+ .
+ SQLAlchemy-migrate has support for MySQL, PostgreSQL, SQLite and Oracle
+ databases. The support for Oracle is not as well tested as the support for
+ the other database systems.
+ .
+ This package provides the Python 2.7 module.

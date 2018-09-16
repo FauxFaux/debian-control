@@ -1,0 +1,19 @@
+Package: mrtgutils-sensors
+Source: mrtgutils (0.8.3)
+Version: 0.8.3+b1
+Architecture: amd64
+Maintainer: Luciano Bello <luciano@debian.org>
+Installed-Size: 32
+Depends: libc6 (>= 2.7), libsensors4 (>= 1:3.0.0)
+Suggests: mrtgutils
+Conflicts: mrtgutils (<= 0.7)
+Section: net
+Priority: optional
+Description: Utilities to generate statistics for mrtg (from lm-sensors)
+ MRTGutils is a collection of simple utilities to generate output useful for
+ mrtg. Many of the existing mrtg setups use shell or perl scripts to gather
+ output. On busy systems, these scripts can generate a lot of extra load. These
+ (small) C programs can return the given statistics more efficiently.
+ .
+ This package provides the binary mrtg-sensors that returns data sensors
+ information from lm-sensors.

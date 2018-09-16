@@ -1,0 +1,28 @@
+Package: libsocket-getaddrinfo-perl
+Version: 0.22-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 88
+Depends: perl (>= 5.13.9)
+Suggests: dnsutils
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Socket-GetAddrInfo
+Description: module implementing getaddrinfo and getnameinfo
+ Socket::GetAddrInfo provides a Perl implementation of the getaddrinfo and
+ getnameinfo functions as described in RFC 2553. These functions are useful for
+ converting between a pair of host name/service name and socket addresses, or
+ vice versa.
+ .
+ This module uses underlying C code to do most of the work if possible, but can
+ also fall back on some mostly-compatible emulation code written in Perl. This
+ means that this module is a fairly portable implementation of these functions.
+ .
+ As of Perl version 5.14.0, Perl already supports `getaddrinfo' in core. On
+ such a system, this module simply uses the functions provided by `Socket',
+ and does not need to use its own compiled XS, or pure-perl legacy emulation.
+ .
+ As `Socket' in core now provides all the functions also provided by this
+ module, it is likely this may be the last released version of this module.
+ And code currently using this module would be advised to switch to using core
+ `Socket' instead.

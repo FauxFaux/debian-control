@@ -1,0 +1,28 @@
+Package: policyrcd-script-zg2
+Version: 0.1-3
+Architecture: all
+Maintainer: Marc Haber <mh+debian-packages@zugschlus.de>
+Installed-Size: 18
+Section: admin
+Priority: extra
+Homepage: https://tracker.debian.org/pkg/policyrcd-script-zg2
+Description: policy-compliant interface from invoke-rc.d to local config files
+ This package contains a script which is linked via the alternatives
+ subsystem to /usr/sbin/policy-rc.d. This script looks for a local
+ policy-rc.d script in /usr/local and /etc, providing a policy- and
+ FHS-compliant way to interface invoke-rc.d with a local script.
+ .
+ Without this package, a local admin wanting to cleanly interface with
+ invoke-rc.d is forced to drop a local binary to /usr/sbin and/or
+ manually interface with the alternatives system. Both ways of doing
+ this are clumsy and error-prone, so this package offers a clean way of
+ interfacing with sysvrc and file-rc.
+ .
+ Since there are at least two packages containing their own version of
+ invoke-rc.d, having a search path policy for policy-rc.d can be
+ messy and is prone to be unstructured and uncoordinated.
+ .
+ Hence, having a dedicated package is the clean way of doing things.
+ .
+ This package has its upstream sources maintained in the Debian
+ project, so there is no upstream URL.

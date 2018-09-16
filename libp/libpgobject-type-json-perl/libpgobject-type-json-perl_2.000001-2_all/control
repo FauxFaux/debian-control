@@ -1,0 +1,17 @@
+Package: libpgobject-type-json-perl
+Version: 2.000001-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 24
+Depends: libjson-perl, libpgobject-perl, perl
+Recommends: libjson-xs-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/PGObject-Type-JSON
+Description: JSON wrappers for PGObject
+ PGObject::Type::JSON is a type handler for JSON entities. This is a best
+ effort mapping of types to references. Literal values are handled as literal
+ references. It allows json types or other (specified by custom register) types
+ to be converted from JSON into objects according to their values. This module
+ assumes that encoding will be in UTF8 across the board and is not safe to use
+ with other database encodings.

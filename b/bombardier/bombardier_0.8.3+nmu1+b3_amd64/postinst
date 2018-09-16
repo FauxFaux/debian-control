@@ -1,0 +1,46 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+	if ! [ -d /var/games/bombardier ]
+	then
+	    mkdir /var/games/bombardier
+	fi
+	chmod 0755 /var/games/bombardier
+	chown root /var/games/bombardier
+	chgrp root /var/games/bombardier
+	if ! [ -f /var/games/bombardier/bdscore ]
+	then
+	    cat >/var/games/bombardier/bdscore <<EOF
+Teller Ede          |1908-01-15|  16384
+Szilárd Leó         |1898-02-11|   8192
+Neumann János       |1903-12-28|   4096
+Gábor Dénes         |1900-06-05|   2048
+Bolyai János        |1802-12-15|   1024
+Eötvös Loránd       |1848-07-27|    512
+Horthy Miklós       |1868-06-18|    256
+Kádár János         |1912-05-26|    128
+Rákosi Mátyás       |1892-03-09|     64
+EOF
+	fi
+	chown root /var/games/bombardier/bdscore
+	chgrp games /var/games/bombardier/bdscore
+	chmod 0664 /var/games/bombardier/bdscore
+	;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 0
+	;;
+esac
+
+# Automatically added by dh_installmenu/11.2.1
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+
+
+exit 0

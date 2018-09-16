@@ -1,0 +1,25 @@
+Package: python3-senlin
+Source: senlin
+Version: 6.0.0-1
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 3540
+Depends: python3-babel, python3-docker (>= 2.4.2), python3-eventlet, python3-jsonpath-rw, python3-jsonschema (>= 2.6.0), python3-keystoneauth1 (>= 3.4.0), python3-keystonemiddleware (>= 4.17.0), python3-microversion-parse (>= 0.2.1), python3-migrate (>= 0.11.0), python3-openstacksdk (>= 0.17.2), python3-oslo.config (>= 1:5.2.0), python3-oslo.context (>= 2.19.2), python3-oslo.db (>= 4.27.0), python3-oslo.i18n (>= 3.15.3), python3-oslo.log (>= 3.36.0), python3-oslo.messaging (>= 5.29.0), python3-oslo.middleware (>= 3.31.0), python3-oslo.policy (>= 1.30.0), python3-oslo.serialization (>= 2.18.0), python3-oslo.service (>= 1.24.0), python3-oslo.utils (>= 3.33.0), python3-oslo.versionedobjects (>= 1.31.2), python3-osprofiler (>= 1.4.0), python3-pastedeploy, python3-pbr (>= 2.0.0), python3-requests (>= 2.14.2), python3-routes, python3-six (>= 1.10.0), python3-sqlalchemy, python3-stevedore (>= 1.20.0), python3-tenacity (>= 4.9.0), python3-tz, python3-webob (>= 1.7.1), python3-yaml, python3:any
+Conflicts: python-senlin
+Section: python
+Priority: optional
+Homepage: https://github.com/stackforge/senlin
+Description: clustering service for OpenStack clouds - Python 2.7
+ Senlin is a clustering service for OpenStack clouds. It creates and operates
+ clusters of homogeneous objects exposed by other OpenStack services. The goal
+ is to make the orchestration of collections of similar objects easier.
+ .
+ Senlin provides RESTful APIs to users so that they can associate various
+ policies to a cluster. Sample policies include placement policy, load
+ balancing policy, health policy, scaling policy, update policy and so on.
+ .
+ Senlin is designed to be capable of managing different types of objects. An
+ object's lifecycle is managed using profile type implementations, which are
+ themselves plugins.
+ .
+ This package provides the Python 2.7 library.

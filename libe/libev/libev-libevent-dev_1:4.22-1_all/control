@@ -1,0 +1,25 @@
+Package: libev-libevent-dev
+Source: libev
+Version: 1:4.22-1
+Architecture: all
+Maintainer: Jérémy Lal <kapouer@melix.org>
+Installed-Size: 30
+Depends: libev4 (>= 1:4.22), libev4 (<< 1:4.22+1~), libev-dev
+Conflicts: libevent-dev
+Section: libdevel
+Priority: extra
+Homepage: http://libev.schmorp.de/
+Description: libevent event loop compatibility wrapper for libev
+ Compatibility wrapper "event.h" to enable programs which use the
+ libevent event loop to link against libev.
+ .
+ libev provides a full-featured and high-performance event loop that is
+ loosely modelled after libevent. It includes relative timers, absolute
+ timers with customized rescheduling, synchronous signals, process status
+ change events, event watchers dealing with the event loop itself, file
+ watchers, and even limited support for fork events. It uses a priority
+ queue to manage timers and uses arrays as fundamental data structure. It
+ has no artificial limitations on the number of watchers waiting for the
+ same event.
+ .
+ libev supports select, poll, epoll, kqueue, and inotify.

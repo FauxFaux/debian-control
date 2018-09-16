@@ -1,0 +1,20 @@
+Package: envstore
+Version: 2.1-4
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 28
+Depends: libc6 (>= 2.7)
+Section: utils
+Priority: optional
+Homepage: http://derf.homelinux.org/projects/envstore/
+Description: store for environment variables across shell processes
+ envstore allows you to save environment variables into a separate store, list
+ them, and reload them into the (other) shell again. It therefore provides a
+ way to share them in cases where exporting to child processes is not feasible.
+ .
+ Included is envify, a shell script which loads the environment saved with
+ envstore and then executes the command given to it.
+ .
+ A classic use case is MPD_HOST for clients of the Music Player Daemon.
+ Commands to control the MPD would be wrapped with envify. If the MPD_HOST were
+ then changed in envstore, it would automatically be used.

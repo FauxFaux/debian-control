@@ -1,0 +1,21 @@
+Package: libexception-class-trycatch-perl
+Version: 1.13-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 68
+Depends: perl, libexception-class-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Exception-Class-TryCatch
+Description: syntactic try/catch sugar for use with Exception::Class
+ Exception::Class::TryCatch provides syntactic sugar for use with
+ Exception::Class using the familiar keywords try and catch.  Its
+ primary objective is to allow users to avoid dealing directly with $@ by
+ ensuring that any exceptions caught in an eval are captured as
+ Exception::Class objects, whether they were thrown objects to begin with or
+ whether the error resulted from die.  This means that users may immediately
+ use isa and various Exception::Class methods to process the exception.
+ .
+ In addition, this module provides for a method to push errors onto a hidden
+ error stack immediately after an eval so that cleanup code or other error
+ handling may also call eval without the original error in $@ being lost.

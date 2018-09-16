@@ -1,0 +1,21 @@
+Package: odbcinst1debian2
+Source: unixodbc
+Version: 2.3.6-0.1
+Architecture: amd64
+Maintainer: Steve Langasek <vorlon@debian.org>
+Installed-Size: 231
+Depends: libc6 (>= 2.14), libltdl7 (>= 2.4.6), odbcinst
+Conflicts: odbcinst1, odbcinst1debian1
+Breaks: libmyodbc (<< 5.1.6-2), odbc-postgresql (<< 1:09.00.0310-1.1), tdsodbc (<< 0.82-8)
+Replaces: unixodbc (<< 2.1.1-2)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.unixodbc.org/
+Description: Support library for accessing odbc ini files
+ This package contains the libodbcinst library from unixODBC, a library
+ used by ODBC drivers for reading their configuration settings from
+ /etc/odbc.ini and ~/.odbc.ini.
+ .
+ Also contained in this package are the driver setup plugins, which
+ describe the features supported by individual ODBC drivers.

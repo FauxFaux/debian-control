@@ -1,0 +1,20 @@
+Package: node-tty-browserify
+Version: 0.0.0-2
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 15
+Depends: nodejs
+Section: web
+Priority: optional
+Homepage: https://github.com/substack/tty-browserify
+Description: tty library from node core for browsers
+ Provides a tiny stub implementation of the tty module that always returns
+ false to isatty and throws out not implemented errors if ReadStream
+ or WriteStream are called.
+ .
+ This library is a dependency for browserify. Browserify takes code targeted at
+ node.js and makes it run in the browser. Node.js comes with API of its own
+ that is not available in the browsers. Browserify exposes this code
+ to programs that are unaware they are running in a browser
+ .
+ Node.js is an event-based server-side JavaScript engine.

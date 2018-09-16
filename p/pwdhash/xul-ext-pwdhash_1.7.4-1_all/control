@@ -1,0 +1,28 @@
+Package: xul-ext-pwdhash
+Source: pwdhash
+Version: 1.7.4-1
+Architecture: all
+Maintainer: Benjamin Drung <bdrung@debian.org>
+Installed-Size: 76
+Depends: iceweasel | firefox | firefox-esr
+Enhances: firefox, firefox-esr, iceweasel
+Breaks: mozilla-pwdhash (<< 1.7-4~), pwdhash (<< 1.7-5ubuntu2)
+Replaces: mozilla-pwdhash (<< 1.7-4~), pwdhash (<< 1.7-5ubuntu2)
+Provides: firefox-esr-pwdhash, firefox-pwdhash, iceweasel-pwdhash, pwdhash
+Section: web
+Priority: optional
+Homepage: https://www.pwdhash.com/
+Description: per-site password generator for Mozilla browsers
+ PwdHash is a browser extension (compatible with Iceweasel, Firefox,
+ and Seamonkey) to transparently convert a user's password into a
+ site-specific password which is not tied to the machine on which it
+ was generated.
+ .
+ Hashing is triggered by prefixing the password with '@@' or by using
+ the shortcut key 'F2'. The password field in focus is replaced by the
+ hash value. Should the site be compromised, the attacker can now only
+ see the hash of the password, not the password itself.
+ .
+ PwdHash does not encrypt passwords, but it makes brute-force attacks much
+ less effective. It also means phishing sites can only steal a hash that's
+ specific to the spoof page and useless on the site being imitated.

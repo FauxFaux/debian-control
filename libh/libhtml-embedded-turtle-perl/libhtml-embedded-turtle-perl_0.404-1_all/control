@@ -1,0 +1,35 @@
+Package: libhtml-embedded-turtle-perl
+Version: 0.404-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 72
+Depends: perl, libnamespace-clean-perl, librdf-rdfa-parser-perl, librdf-trine-perl, librdf-trin3-perl, libossp-uuid-perl | libdata-uuid-perl, librole-commons-perl | libobject-authority-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/HTML-Embedded-Turtle
+Description: embedding RDF in HTML the crazy way
+ Resource Description Framework (RDF) is a standard model for data
+ interchange on the Web.
+ .
+ RDF can be embedded in (X)HTML using simple <script> tags. This is
+ described at http://esw.w3.org/N3inHTML . This gives you a file format
+ that can contain multiple (optionally named) graphs.
+ .
+ HTML::Embedded::Turtle parses HTML files containing such graphs, and
+ allows you to access them each individually; as a union of all graphs
+ on the page; or as a union of just the endorsed graphs.
+ .
+ Despite the module name, this module supports a variety of script
+ types:
+  * text/turtle
+  * application/turtle
+  * application/x-turtle
+  * text/plain (N-Triples)
+  * application/x-rdf+json (RDF/JSON)
+  * application/json (RDF/JSON)
+  * application/rdf+xml (RDF/XML)
+ .
+ Although it doesn't support full N3, it recognises the following as
+ well, but treats them as Turtle:
+  * text/n3
+  * text/rdf+n3

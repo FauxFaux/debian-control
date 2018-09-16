@@ -1,0 +1,18 @@
+Package: sshuttle
+Version: 0.78.4-1
+Architecture: all
+Maintainer: Brian May <bam@debian.org>
+Installed-Size: 428
+Depends: iptables, openssh-client | lsh-client | dropbear | ssh-client, python3-pkg-resources, python3:any (>= 3.5~)
+Recommends: sudo
+Suggests: autossh
+Section: net
+Priority: optional
+Homepage: https://github.com/sshuttle/sshuttle
+Description: Transparent proxy server for VPN over SSH
+ Sshuttle makes it possible to access remote networks using SSH. It creates a
+ transparent proxy server, using iptables, that will forward all the traffic
+ through an SSH tunnel to a remote copy of sshuttle.
+ .
+ It does not require installation on the remote server, which just needs to
+ have Python installed.

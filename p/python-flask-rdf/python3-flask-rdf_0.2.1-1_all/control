@@ -1,0 +1,22 @@
+Package: python3-flask-rdf
+Source: python-flask-rdf
+Version: 0.2.1-1
+Architecture: all
+Maintainer: Iain R. Learmonth <irl@debian.org>
+Installed-Size: 42
+Depends: python3-mimeparse, python3-six, python3:any (>= 3.3.2-2~)
+Section: python
+Priority: optional
+Homepage: https://pypi.python.org/pypi/flask_rdf
+Description: Flask decorator to output RDF using content negotiation (Python 3)
+ Apply the @flask_rdf decorator to a view function and return an rdflib
+ Graph object. Flask_rdf will automatically format it into an RDF output
+ format, depending on what the request’s Accept header says. If the view
+ function returns something besides an rdflib graph, it will be passed
+ through without modification.
+ .
+ Custom formats can be registered easily. After registering the new
+ serializer with rdflib’s plugin support, use the decide_format method to
+ register a new mimetype request to use the new formatter.
+ .
+ This package works with Python versions 3.x.

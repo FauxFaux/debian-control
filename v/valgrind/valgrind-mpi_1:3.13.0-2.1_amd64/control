@@ -1,0 +1,20 @@
+Package: valgrind-mpi
+Source: valgrind
+Version: 1:3.13.0-2.1
+Architecture: amd64
+Maintainer: Alessandro Ghedini <ghedo@debian.org>
+Installed-Size: 375
+Depends: libc6 (>= 2.2.5), libopenmpi3, valgrind (= 1:3.13.0-2.1)
+Recommends: gdb
+Section: devel
+Priority: optional
+Homepage: http://www.valgrind.org/
+Description: instrumentation framework for building dynamic analysis tools (MPI module)
+ Valgrind is a system for debugging and profiling Linux programs. With its tool
+ suite you can automatically detect many memory management and threading bugs,
+ avoiding hours of frustrating bug-hunting and making your programs more stable.
+ You can also perform detailed profiling to help speed up your programs and use
+ Valgrind to build new tools.
+ .
+ This package provides the "mpiwrap" library for debugging distributed-memory
+ applications which use the MPI message passing standard.

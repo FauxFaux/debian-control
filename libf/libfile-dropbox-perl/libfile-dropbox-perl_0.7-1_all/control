@@ -1,0 +1,21 @@
+Package: libfile-dropbox-perl
+Version: 0.7-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 37
+Depends: perl, libfurl-perl, libio-socket-ssl-perl, libjson-perl, libnet-dns-lite-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/File-Dropbox
+Description: convenient and fast Dropbox API abstraction
+ File::Dropbox provides high-level Dropbox API abstraction based on
+ Tie::Handle. Code required to get access_token and access_secret for
+ signed OAuth 1.0 requests or access_token for OAuth 2.0 requests is
+ not included in this module. To get app_key and app_secret you need
+ to register your application with Dropbox.
+ .
+ At this moment Dropbox API is not fully supported, File::Dropbox
+ covers file read/write and directory listing methods. If you need full
+ API support take look at WebService::Dropbox. File::Dropbox main
+ purpose is not 100% API coverage, but simple and high-performance
+ file operations.

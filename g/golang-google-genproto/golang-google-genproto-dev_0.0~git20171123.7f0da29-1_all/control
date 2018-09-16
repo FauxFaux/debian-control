@@ -1,0 +1,27 @@
+Package: golang-google-genproto-dev
+Source: golang-google-genproto
+Version: 0.0~git20171123.7f0da29-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 6989
+Depends: golang-golang-x-net-dev, golang-google-grpc-dev, golang-goprotobuf-dev
+Section: devel
+Priority: optional
+Homepage: https://godoc.org/google.golang.org/genproto
+Description: Generated Go packages for common protocol buffer types
+ This repository contains the generated Go packages for common protocol buffer
+ types, and the generated gRPC code necessary for interacting with Google's
+ gRPC APIs.
+ .
+ It provides similar functionality to the now abandoned
+ golang-github-googleapis-proto-client-go.
+ .
+ There are two sources for the proto files used in this repository:
+ .
+ * google/protobuf: the code in the protobuf and ptypes subdirectories is
+   derived from this repo. The messages in protobuf are used to describe
+   protocol buffer messages themselves. The messages under ptypes define the
+   common well-known types.
+ * googleapis/googleapis: the code in the googleapis is derived from this repo.
+   The packages here contain types specifically for interacting with Google
+   APIs.

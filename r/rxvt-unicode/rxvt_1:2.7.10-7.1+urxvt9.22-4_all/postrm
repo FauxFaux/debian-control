@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+set -e
+
+# Remove /etc/menu-methods/rxvt unless it was modified. See
+# dpkg-maintscript-helper(1) for details
+dpkg-maintscript-helper rm_conffile \
+  /etc/menu-methods/rxvt 1:2.7.10-7.1+urxvt9.22-3 rxvt -- "$@"
+
+
+
+exit 0

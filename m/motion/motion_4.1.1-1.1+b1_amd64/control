@@ -1,0 +1,28 @@
+Package: motion
+Source: motion (4.1.1-1.1)
+Version: 4.1.1-1.1+b1
+Architecture: amd64
+Maintainer: Ximin Luo <infinity0@debian.org>
+Installed-Size: 811
+Depends: libavcodec58 (>= 7:4.0) | libavcodec-extra58 (>= 7:4.0), libavdevice58 (>= 7:4.0), libavformat58 (>= 7:4.0), libavutil56 (>= 7:4.0), libc6 (>= 2.14), libjpeg62-turbo (>= 1.3.1), libmariadbclient18 (>= 10.1.28), libpq5, libsqlite3-0 (>= 3.6.0), libswscale5 (>= 7:4.0), zlib1g (>= 1:1.1.4), debconf (>= 0.5) | debconf-2.0, lsb-base (>= 3.0-6), adduser
+Recommends: ffmpeg
+Suggests: default-mysql-client, postgresql-client
+Section: video
+Priority: optional
+Homepage: https://github.com/Motion-Project/motion
+Description: V4L capture program supporting motion detection
+ Motion is a program that monitors the video signal from
+ one or more cameras and is able to detect if a significant
+ part of the picture has changed. Or in other words, it can
+ detect motion.
+ .
+ Motion is a command line based tool. It has no graphical
+ user interface. Everything is setup either via the
+ command line or via configuration files.
+ .
+ The output from motion can be:
+    - jpg/ppm image files
+    - mpeg/mp4/swf/flv/mov/ogg video sequences
+ .
+ Also, motion has its own minimalistic web server. Thus,
+ you can access the webcam output from motion via a browser.

@@ -1,0 +1,28 @@
+Package: libdbix-class-perl
+Version: 0.082841-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 2033
+Depends: perl, libclass-accessor-grouped-perl (>= 0.10012), libclass-c3-componentised-perl, libclass-inspector-perl, libconfig-any-perl, libcontext-preserve-perl, libdata-dumper-concise-perl, libdata-page-perl, libdbi-perl, libdevel-globaldestruction-perl (>= 0.09), libhash-merge-perl, libmodule-find-perl, libmoo-perl (>= 2.000000), libnamespace-clean-perl (>= 0.24), libpath-class-perl, libscope-guard-perl, libsql-abstract-perl (>= 1.81), libsub-name-perl, libtry-tiny-perl
+Recommends: libsql-translator-perl (>= 0.11018)
+Suggests: libgetopt-long-descriptive-perl, libjson-any-perl, libmath-base36-perl, libmoose-perl, libmoosex-types-json-perl, libmoosex-types-path-class-perl, libmoosex-types-perl, libtext-csv-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/DBIx-Class
+Description: extensible and flexible object <-> relational mapper
+ DBIx::Class is an SQL to OO mapper with an object API inspired by Class::DBI
+ (and a compatibility layer as a springboard for porting) and a resultset API
+ that allows abstract encapsulation of database operations. It aims to make
+ representing queries in your code as perl-ish as possible while still
+ providing access to as many of the capabilities of the database as possible,
+ including retrieving related records from multiple tables in a single query,
+ JOIN, LEFT JOIN, COUNT, DISTINCT, GROUP BY and HAVING support.
+ .
+ DBIx::Class can handle multi-column primary and foreign keys, complex queries
+ and database-level paging, and does its best to only query the database in
+ order to return something you've directly asked for. If a resultset is used
+ as an iterator it only fetches rows off the statement handle as requested
+ in order to minimise memory usage. It has auto-increment support for SQLite,
+ MySQL, PostgreSQL, Oracle, SQL Server and DB2 and is known to be used in
+ production on at least the first four, and is fork- and thread-safe out of
+ the box (although your DBD may not be).

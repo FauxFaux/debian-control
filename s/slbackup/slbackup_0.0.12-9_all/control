@@ -1,0 +1,19 @@
+Package: slbackup
+Version: 0.0.12-9
+Architecture: all
+Maintainer: Debian Edu Packaging Team <debian-edu-pkg-team@lists.alioth.debian.org>
+Installed-Size: 153
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: perl, debconf (>= 0.5) | debconf-2.0, rdiff-backup, logrotate, libconfig-general-perl, libnet-dns-perl
+Recommends: ssh
+Section: utils
+Priority: optional
+Homepage: http://slbackup.alioth.debian.org/
+Description: Skolelinux Backup system
+ A backup system designed to back up multiple clients to a server.
+ slbackup uses rdiff-backup as the underlying backup software.
+ .
+ Clients can be the host installing this package, or other hosts
+ reachable via a SSH connection (using SSH keys). The host storing the
+ backup data can be the host installing this package or another host
+ reachable via a SSH connection (also using SSH keys).

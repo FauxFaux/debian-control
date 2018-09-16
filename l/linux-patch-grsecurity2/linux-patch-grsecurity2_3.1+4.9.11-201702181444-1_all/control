@@ -1,0 +1,26 @@
+Package: linux-patch-grsecurity2
+Version: 3.1+4.9.11-201702181444-1
+Architecture: all
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 2280
+Depends: bash (>= 2.0), patch, grep-dctrl
+Recommends: linux-source-3.2, linux-patch-debian-3.2, kernel-package, gradm2 (>= 2.1.10)
+Conflicts: kernel-patch-grsecurity2 (<< 2.1.12+2.6.26.3-200809012141-1)
+Replaces: kernel-patch-grsecurity2 (<< 2.1.12+2.6.26.3-200809012141-1)
+Section: kernel
+Priority: extra
+Homepage: http://www.grsecurity.net/
+Description: grsecurity kernel patch
+ This patch provides enhanced security to the Linux kernel. It includes a
+ robust ACL system, extensive auditing capabilities and measures to stop
+ the most common methods of exploiting a system. These include limited
+ chroot(), fork() rate limiting, various network limiting and randomizing
+ options, memory page protection on i386, sparc, sparc64, alpha, parisc,
+ amd64, ia64, and ppc, restricting mprotect(), random PIDs, and much more.
+ .
+ This patch conflicts with the LSM patch, they both change the same things
+ so the patches can't both apply.
+ .
+ Furthermore, this patch will NOT apply to Debian kernels. You will have to
+ use vanilla kernel sources to apply this patch. Reasons are documented in
+ README contained within the package.

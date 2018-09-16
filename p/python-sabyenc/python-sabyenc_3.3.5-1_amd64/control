@@ -1,0 +1,20 @@
+Package: python-sabyenc
+Version: 3.3.5-1
+Architecture: amd64
+Maintainer: JCF Ploemen (jcfp) <linux@jcf.pm>
+Installed-Size: 36
+Depends: libc6 (>= 2.14), python (<< 2.8), python (>= 2.7~), python:any (<< 2.8), python:any (>= 2.7~)
+Provides: python2.7-sabyenc
+Section: python
+Priority: optional
+Homepage: https://github.com/sabnzbd/sabyenc
+Description: yEnc extension for Python, optimized for Usenet
+ Modified version of the original python-yenc module by Alessandro Duca,
+ optimized for use within SABnzbd. The module was extended to do header
+ parsing and full yEnc decoding from a Python list of chunks, the way in
+ which data is retrieved from usenet.
+ .
+ This is particularly beneficial when SSL is enabled, which limits the
+ size of each chunk to 16K. Parsing these chunks in Python is much more
+ costly. Additionally, this module releases Python's GIL during decoding,
+ greatly increasing performance of the overall download process.

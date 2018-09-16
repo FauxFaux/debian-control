@@ -1,0 +1,16 @@
+Package: local-apt-repository
+Version: 0.6
+Architecture: all
+Maintainer: Joachim Breitner <nomeata@debian.org>
+Installed-Size: 33
+Depends: systemd, apt-utils
+Section: admin
+Priority: optional
+Description: Ready to use local apt repository
+ With this package installed, every Debian package (i.e. a *.deb file) dropped
+ into /srv/local-apt-repository (which you need to create first) will be
+ available to apt.
+ .
+ This package does not provide an apt repository to be used by other hosts. For
+ that, look at more serious repository solutions like reprepro and
+ apt-ftparchive.

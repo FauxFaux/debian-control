@@ -1,0 +1,18 @@
+Package: libpam-krb5-migrate-heimdal
+Source: pam-krb5-migrate
+Version: 0.0.11-5
+Architecture: amd64
+Maintainer: Dominik George <nik@naturalnet.de>
+Installed-Size: 45
+Depends: libpam-runtime (>= 1.0.1-6), libc6 (>= 2.4), libcomerr2 (>= 1.01), libkadm5clnt7-heimdal (>= 1.6~rc2), libkrb5-26-heimdal (>= 1.4.0+git20110226), libpam0g (>= 0.99.7.1)
+Section: admin
+Priority: optional
+Homepage: https://jelmer.uk/code/pam-krb5-migrate/
+Description: PAM module for migrating to Heimdal Kerberos
+ A stackable authentication module that takes a username and password from an
+ earlier module in the stack and attempts to transparently add the user to a
+ Kerberos realm using the Kerberos 5 kadmin service. The module can be used to
+ ease the administrative burdens of migrating a large installed userbase from
+ pre-existing authentication methods to a Kerberos-based setup.
+ .
+ This package allows updating the database of a remote Heimdal server.

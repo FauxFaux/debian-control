@@ -1,0 +1,25 @@
+Package: dvbackup
+Version: 1:0.0.4-9
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 412
+Depends: libdv-bin (>= 0.99), libc6 (>= 2.14), libpopt0 (>= 1.14), zlib1g (>= 1:1.1.4)
+Recommends: rsbep (>= 0.0.5)
+Suggests: afio, cpio, star
+Section: admin
+Priority: extra
+Homepage: http://dvbackup.sourceforge.net/
+Description: backup tool using MiniDV camcorders
+ Dvbackup hides the data it receives on standard input in a perfectly
+ legal DV (digital video) stream. This allows you to use your DV camcorder
+ and your DV cartridges as a potent mass storage system. Obviously, your
+ system and your camcorder have to be connected via IEEE1394 (aka Firewire,
+ iLink).
+ .
+ Current digital camcorders can save approximately 13 GB of data on those
+ tiny DV cartridges at a speed of 3.6 MB/sec. That's faster than most
+ DAT streamers which only work at 1 MB/sec or less. dvbackup can not use all of
+ the data, but 10 GB should be good enough for everyone.
+ .
+ To bring the data on tape, you have to use an additional utility, called
+ dvconnect, which is included in libdv-bin.

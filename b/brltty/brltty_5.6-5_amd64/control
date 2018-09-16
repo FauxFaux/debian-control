@@ -1,0 +1,51 @@
+Package: brltty
+Version: 5.6-5
+Architecture: amd64
+Maintainer: Debian Accessibility Team <pkg-a11y-devel@lists.alioth.debian.org>
+Installed-Size: 6365
+Depends: libasound2 (>= 1.0.16), libbluetooth3 (>= 4.91), libbrlapi0.6, libc6 (>= 2.27), libdbus-1-3 (>= 1.9.14), libglib2.0-0 (>= 2.16.0), libgpm2 (>= 1.20.7), libicu60 (>= 60.1-1~), liblouis16, libncursesw6 (>= 6), libpolkit-gobject-1-0 (>= 0.101), libsystemd0, libtinfo6 (>= 6), lsb-base (>= 3.2-14), policykit-1
+Recommends: python
+Suggests: brltty-speechd, brltty-x11, console-braille
+Replaces: libbrlapi1 (<< 3.7.2-7.1)
+Section: admin
+Priority: optional
+Homepage: https://brltty.com
+Description: Access software for a blind person using a braille display
+ BRLTTY is a daemon which provides access to the console (text mode)
+ for a blind person using a braille display.  It drives the braille
+ display and provides complete screen review functionality.
+ The following display models are supported:
+  * Alva/Optelec (ABT3xx, Delphi, Satellite, Braille System 40, BC 640/680)
+  * Baum
+  * BrailComm
+  * BrailleLite
+  * BrailleNote
+  * Cebra
+  * EcoBraille
+  * EuroBraille (AzerBraille, Clio, Esys, Iris, NoteBraille, Scriba)
+  * Freedom Scientific (Focus and PacMate)
+  * Handy Tech
+  * HIMS (Braille Sense, SyncBraille)
+  * HumanWare (Brailliant)
+  * Iris
+  * LogText 32
+  * MDV
+  * Metec (BD-40)
+  * NinePoint
+  * Papenmeier
+  * Pegasus
+  * Seika
+  * Tieman (Voyager, CombiBraille, MiniBraille, MultiBraille,
+            BraillePen/EasyLink)
+  * Tivomatic (Albatross)
+  * TSI (Navigator, PowerBraille)
+  * VideoBraille
+  * VisioBraille
+ .
+ BRLTTY also provides a client/server based infrastructure for applications
+ wishing to utilize a Braille display.  The daemon process listens for incoming
+ TCP/IP connections on a certain port.  A shared object library for clients is
+ provided in the package libbrlapi0.6.  A static library, header files and
+ documentation is provided in package libbrlapi-dev.  Bindings to other
+ programming languages can be found in cl-brlapi (Lisp), libbrlapi-java (Java)
+ and python-brlapi (Python).

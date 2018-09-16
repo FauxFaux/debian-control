@@ -1,0 +1,25 @@
+Package: dnscrypt-proxy
+Version: 2.0.16-2
+Architecture: amd64
+Maintainer: Eric Dorland <eric@debian.org>
+Installed-Size: 7806
+Depends: adduser, lsb-base (>= 3.0-6), libc6 (>= 2.3.2)
+Suggests: resolvconf
+Breaks: dnscrypt-proxy-plugins
+Built-Using: golang-1.10 (= 1.10.3-1)
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/jedisct1/dnscrypt-proxy
+Description: Tool for securing communications between a client and a DNS resolver
+ dnscrypt-proxy provides local service which can be used directly as your local
+ resolver or as a DNS forwarder, encrypting and authenticating requests using
+ the DNSCrypt protocol and passing them to an upstream server.
+ .
+ The DNSCrypt protocol uses high-speed high-security elliptic-curve
+ cryptography and is very similar to DNSCurve, but focuses on securing
+ communications between a client and its first-level resolver.
+ .
+ While not providing end-to-end security, it protects the local network, which
+ is often the weakest point of the chain, against man-in-the-middle attacks. It
+ also provides some confidentiality to DNS queries.

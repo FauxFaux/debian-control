@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+DATA_DIR=/usr/share/games/astromenace
+
+if [ ! -e ${DATA_DIR}/RAW_VFS_DATA.tar.xz ]; then
+    echo "File ${DATA_DIR}/RAW_VFS_DATA.tar.xz is not exist!"
+    echo "Please install package astromenace-data-src first."
+    exit 1
+fi
+
+# Directory for temporary files
+cd ${DATA_DIR}
+
+rm -rf RAW_VFS_DATA
+rm -f  ${DATA_DIR}/gamedata.vfs
+
+tar xJf ${DATA_DIR}/RAW_VFS_DATA.tar.xz
+
+/usr/games/AstroMenace --pack --rawdata=./RAW_VFS_DATA --dir=${DATA_DIR}
+
+# Delete temporary files
+rm -rf RAW_VFS_DATA
+
+
+

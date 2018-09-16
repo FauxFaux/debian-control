@@ -1,0 +1,22 @@
+Package: libdb1-compat
+Source: db1-compat
+Version: 2.1.3-20
+Architecture: amd64
+Maintainer: Colin Watson <cjwatson@debian.org>
+Installed-Size: 104
+Depends: libc6 (>= 2.14)
+Replaces: libc0.3 (<< 2.2.5-13), libc6 (<< 2.2.5-13), libc6.1 (<< 2.2.5-13), libdb2-util
+Section: oldlibs
+Priority: optional
+Description: Berkeley database routines [glibc 2.0/2.1 compatibility]
+ libdb is a library for manipulating database files, developed at Berkeley.
+ .
+ It supports three kinds of file formats:
+  * btree. A representation of a sorted, balanced tree structure.
+  * hashed. An extensible, dynamic hashing scheme.
+  * UNIX file oriented. A byte stream file with fixed or variable length
+    records.
+ .
+ This library exists for compatibility with applications built against
+ glibc 2.0 or 2.1. There is intentionally no corresponding development
+ package. Do not link new applications against this library!

@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+dpkg-statoverride --update --add root games 2775 /var/games/glhack
+dpkg-statoverride --update --add root games 2775 /var/games/glhack/save
+dpkg-statoverride --update --add root games 2664 /var/games/glhack/logfile
+dpkg-statoverride --update --add root games 2664 /var/games/glhack/perm
+dpkg-statoverride --update --add root games 2664 /var/games/glhack/record
+
+# Automatically added by dh_installmenu/11.1.4
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

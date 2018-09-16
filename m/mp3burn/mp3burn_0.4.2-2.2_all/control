@@ -1,0 +1,15 @@
+Package: mp3burn
+Version: 0.4.2-2.2
+Architecture: all
+Maintainer: Alexander Wirt <formorer@debian.org>
+Installed-Size: 72
+Depends: perl, mpg321 (>= 0.1.5.2) | mpg123, wodim, libmp3-info-perl, vorbis-tools (>= 1.0), file, libstring-shellquote-perl, libogg-vorbis-header-pureperl-perl
+Suggests: flac, libaudio-flac-perl
+Section: sound
+Priority: extra
+Description: burn audio CDs directly from MP3, Ogg Vorbis, or FLAC files
+ mp3burn is a Perl script that allows you to burn audio CDs composed
+ of MP3, Ogg Vorbis, or FLAC tracks without an intermediate file conversion
+ to .cdr or .wav.
+ The .mp3/.ogg/.flac files *are* converted using a decoder, but are
+ written to FIFOs so they don't consume filesystem space during the burn.

@@ -1,0 +1,25 @@
+Package: collectl
+Version: 4.3.0-1
+Architecture: all
+Maintainer: Troy Heber <troyh@debian.org>
+Installed-Size: 2182
+Depends: lsb-base, pciutils, libtime-hires-perl, libio-compress-perl
+Recommends: colplot
+Breaks: collectl-utils
+Replaces: collectl-utils
+Section: admin
+Priority: optional
+Homepage: http://collectl.sourceforge.net
+Description: Utility to collect Linux performance data
+ Collectl is a performance monitoring and benchmark tool that tries to do it
+ all.  You can choose to monitor any of a broad set of subsystems which
+ currently include buddyinfo, cpu, disk, inodes, infiniband, lustre, memory,
+ network, nfs, processes, quadrics, slabs, sockets and tcp.
+ .
+ Output can also be saved in a rolling set of logs for later playback or
+ displayed interactively in a variety of formats. If all that isn't enough
+ there are additional mechanisms for supplying data to external tools by
+ generating output as s-expressions, a format of choice for some tools such as
+ supermon or in another format called list-expressions. This output can be
+ written to a file or sent over a socket. You can even create files in
+ space-separated format for plotting with external packages like gnuplot.

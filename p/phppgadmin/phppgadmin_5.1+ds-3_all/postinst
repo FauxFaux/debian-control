@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_apache2/UNDECLARED
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in phppgadmin  ; do
+			apache2_invoke enconf $conf  || exit 1
+		done
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.1.4
+dpkg-maintscript-helper dir_to_symlink /usr/share/phppgadmin/libraries/adodb ../../php/adodb 5.1\+ds-1\~ -- "$@"
+# End automatically added section

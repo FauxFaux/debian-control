@@ -1,0 +1,24 @@
+Package: autofs-ldap
+Source: autofs
+Version: 5.1.2-4
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 310
+Depends: libc6 (>= 2.17), libcom-err2 (>= 1.01), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.13~alpha1+dfsg), libldap-2.4-2 (>= 2.4.7), libsasl2-2, libxml2 (>= 2.7.4), autofs (= 5.1.2-4)
+Breaks: autofs5-ldap (<< 5.0.6-1~)
+Replaces: autofs5-ldap (<< 5.0.6-1~)
+Provides: autofs5-ldap
+Section: utils
+Priority: optional
+Homepage: http://www.kernel.org/pub/linux/daemons/autofs/v5/
+Description: LDAP map support for autofs
+ Autofs controls the operation of the automount daemons. The
+ automount daemons automatically mount filesystems when they
+ are used and unmount them after a period of inactivity. This
+ is done based on a set of pre-configured maps.
+ .
+ The kernel automounter implements an almost complete SunOS
+ style automounter under Linux. A recent version of the kernel
+ autofs4 module (builtin or separate) is required.
+ .
+ This is the LDAP module of the autofs.

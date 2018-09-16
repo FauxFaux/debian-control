@@ -1,0 +1,18 @@
+Package: gccgo-6
+Source: gcc-6
+Version: 6.4.0-20
+Architecture: amd64
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 84560
+Depends: gcc-6-base (= 6.4.0-20), gcc-6 (= 6.4.0-20), libgo9 (>= 6.4.0-20), libc6-dev (>= 2.13-5), libc6 (>= 2.14), libgmp10 (>= 2:5.0.1~), libisl19 (>= 0.15), libmpc3, libmpfr6 (>= 3.1.3), zlib1g (>= 1:1.1.4)
+Suggests: gccgo-6-doc, libgo9-dbg (>= 6.4.0-20)
+Conflicts: golang-go (<< 2:1.3.3-1ubuntu2)
+Breaks: libgo9 (<< 6.4.0-12)
+Replaces: libgo9 (<< 6.4.0-12)
+Provides: go-compiler
+Section: devel
+Priority: optional
+Homepage: http://gcc.gnu.org/
+Description: GNU Go compiler
+ This is the GNU Go compiler, which compiles Go on platforms supported
+ by the gcc compiler. It uses the gcc backend to generate optimized code.

@@ -1,0 +1,18 @@
+Package: libcgi-formbuilder-source-yaml-perl
+Version: 1.0.8-4
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 29
+Depends: perl, libcgi-formbuilder-perl, libcgi-pm-perl | perl (<< 5.19), libyaml-syck-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-FormBuilder-Source-YAML
+Description: module to initialize FormBuilder applications from YAML files
+ CGI::FormBuilder::Source::YAML reads a YAML file containing CGI::FormBuilder
+ configuration options and returns a hash that can be directly fed into the
+ application initialization method CGI::FormBuilder->new().
+ .
+ It uses YAML::Syck as YAML backend, allowing full data structure
+ specification as well as code fragment specification. This is particularly
+ useful if you need to define validation callbacks, as if often desired
+ in CGI::FormBuilder applications.

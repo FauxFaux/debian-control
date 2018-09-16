@@ -1,0 +1,50 @@
+Package: netexpect
+Version: 0.22-2
+Architecture: amd64
+Maintainer: Eloy Paris <peloy@debian.org>
+Installed-Size: 462
+Depends: libc6 (>= 2.14), libdumbnet1 (>= 1.8), libglib2.0-0 (>= 2.24.0), libpcap0.8 (>= 0.9.8), libtcl8.6 (>= 8.6.0), libwireshark5 (>= 1.12.0~rc1), libwiretap4 (>= 1.9.1), libwsutil4 (>= 1.12.0~rc1)
+Section: net
+Priority: optional
+Homepage: http://www.netexpect.org
+Description: Network Expect, a framework for manipulating network packets
+ Network Expect is a framework that allows to easily build tools
+ that can interact with network traffic. Following a script, traffic
+ can be injected into the network, and decisions can be taken, and
+ acted upon, based on received network traffic. An interpreted language
+ (Tcl) provides branching and high-level control structures to direct the
+ interaction with the network.
+ .
+ Network Expect was heavily influenced and inspired on the Expect program
+ written by Don Libes, which allows to "talk" to interactive programs in
+ a scripted fashion.
+ .
+ The type of things that Network Expect can do are usually very low level
+ network operations, which usually require writing a custom application
+ in a language like C.
+ .
+ Some of the things that Network Expect can do include:
+ .
+   * Generate arbitrary network traffic and inject it into a network at layer
+     2 or layer 3.
+ .
+   * A wide range of protocols is supported, including 802.1q, ARP,
+     Cisco VTP and DTP, GRE, IPv4, IPv6, ICMP, UDP, TCP (including
+     options), etc.
+ .
+     This Network Expect functionality is very similar to the
+     functionality provided by several packet crafting and forging open
+     source tools like Nemesis, Packit, hping, Scapy, and others.
+ .
+   * Listen for network traffic and take decisions based on the type of
+     traffic received.
+ .
+   * Open a sniffer trace in PCAP format and replay it after changing some
+     values in the original packet capture.
+ .
+   * Emulate network protocols to see how they interact with other
+     speakers of that protocol. For example, emulating a TCP server to
+     investigate approaches to randomization of TCP Initial Sequence Numbers
+     (ISN) can be easily done in Network Expect.
+ .
+ Visit http://www.netexpect.org for more information.

@@ -1,0 +1,30 @@
+Package: cryptmount
+Version: 5.3-1
+Architecture: amd64
+Maintainer: RW Penney <rwpenney@users.sourceforge.net>
+Installed-Size: 224
+Depends: libc6 (>= 2.14), libcryptsetup12 (>= 2:1.4), libdevmapper1.02.1 (>= 2:1.02.97), libgcrypt20 (>= 1.8.0)
+Recommends: e2fsprogs (>= 1.42.12), udev
+Suggests: openssl, dmsetup
+Section: admin
+Priority: optional
+Homepage: http://cryptmount.sourceforge.net
+Description: Management of encrypted file systems
+ cryptmount is a utility for creating encrypted filesystems & swap partitions
+ and which allows an ordinary user to mount/unmount filesystems
+ without requiring superuser privileges.
+ .
+ It offers the following features:
+    * easy and safe on-demand access to filesystems without su/sudo;
+    * access passwords can be changed easily without involving the sys-admin;
+    * filesystems can reside on raw disk partitions or ordinary files;
+    * supports LUKS encrypted filesystems created by cryptsetup;
+    * encrypted access keys can be stored on removable media
+      (e.g. USB flash disks);
+    * includes support for encrypted swap partitions;
+    * multiple filesystems can be stored in a single disk partition;
+    * encrypted filesystems can be initialized at boot-up or on demand;
+    * temporary filesystems can be setup via command-line,
+      for use in shell-scripts;
+    * transparent configuration of dm-crypt & loopback devices during mounting;
+    * access keys can optionally be made compatible with OpenSSL.

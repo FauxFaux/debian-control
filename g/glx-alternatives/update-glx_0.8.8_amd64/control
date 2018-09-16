@@ -1,0 +1,19 @@
+Package: update-glx
+Source: glx-alternatives
+Version: 0.8.8
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 30
+Pre-Depends: dpkg (>= 1.17.21)
+Section: contrib/x11
+Priority: optional
+Multi-Arch: foreign
+Description: utility for switching the GLX implementation
+ In setups with several GLX providers (e.g. the free MESA implementation and
+ proprietary graphics hardware vendor implementations) this utility
+ allows one to switch between the different implementations.
+ .
+ Use 'update-glx --config glx' to select an implementation.
+ .
+ In addition to updating the alternatives, this will trigger further actions
+ needed to complete the switch.

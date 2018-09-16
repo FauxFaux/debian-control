@@ -1,0 +1,19 @@
+Package: ceph-fs-common
+Source: ceph
+Version: 10.2.5-7.2
+Architecture: amd64
+Maintainer: Ceph Maintainers <ceph-maintainers@lists.ceph.com>
+Installed-Size: 1106
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libkeyutils1 (>= 1.4), libstdc++6 (>= 5.2)
+Suggests: ceph-mds
+Conflicts: ceph-client-tools
+Breaks: ceph-common (<< 0.67.3-1)
+Replaces: ceph-client-tools, ceph-common (<< 0.67.3-1)
+Section: admin
+Priority: optional
+Homepage: http://ceph.com/
+Description: common utilities to mount and interact with a ceph file system
+ Ceph is a distributed network file system designed to provide
+ excellent performance, reliability, and scalability.  This is a collection
+ of common tools, including the mount utility, that allows one to mount the
+ Ceph file system with the kernel client.

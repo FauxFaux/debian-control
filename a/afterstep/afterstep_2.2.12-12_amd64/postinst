@@ -1,0 +1,44 @@
+#!/bin/sh
+set -e
+# Automatically added by debian/scripts/fix_conffiles
+
+cfgdir="/etc/menu-methods"
+ucfdir="/usr/share/afterstep/ucf"
+cfgfiles="afterstep.menu-method"
+package="afterstep"
+
+if [ "$1" = "configure" ] ; then
+   ucfforce=""
+   if dpkg --compare-versions "$2" le 2.2.11-2~; then
+      ucfforce="--force"
+   fi
+
+   for f in $cfgfiles; do
+      uf="$ucfdir/$f"
+      cf="$cfgdir/${f%.menu-method}"
+      ucf --three-way "$uf" "$cf"
+      ucfr $ucfforce "$package" "$cf"
+   done
+fi
+
+# End automatically added section
+# Automatically added by dh_installmenu/11.3.5
+inst=/etc/menu-methods/afterstep
+if [ -f $inst ]; then
+	chmod a+x $inst
+	if [ -x "`which update-menus 2>/dev/null`" ]; then
+		update-menus
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installwm/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ]; then
+	update-alternatives --install /usr/bin/x-window-manager \
+		x-window-manager /usr/bin/afterstep 50 \
+		--slave /usr/share/man/man1/x-window-manager.1.gz \
+		x-window-manager.1.gz /usr/share/man/man1/afterstep.1x.gz
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.3.5
+dpkg-maintscript-helper symlink_to_dir /usr/share/doc/afterstep /usr/share/doc/afterstep-data 2.2.12-4\~ -- "$@"
+# End automatically added section

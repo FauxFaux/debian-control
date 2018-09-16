@@ -1,0 +1,22 @@
+Package: xserver-xorg-input-mouse
+Version: 1:1.9.3-1
+Architecture: amd64
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Installed-Size: 124
+Depends: libc6 (>= 2.2.5), xorg-input-abi-24, xserver-xorg-core (>= 2:1.18.99.901)
+Provides: xorg-driver-input
+Section: x11
+Priority: optional
+Description: X.Org X server -- mouse input driver
+ This package provides the driver for mouse input devices.  It is mainly used
+ on non-Linux operating systems such as BSD and Solaris. Most
+ configurations on Linux will use evdev, the kernel's event delivery
+ mechanism, and do not need this package.
+ .
+ See the inputattach package if your mouse is not automatically
+ detected by the Linux kernel, for example because it is a serial mouse.
+ .
+ More information about X.Org can be found at:
+ <URL:http://www.X.org>
+ .
+ This package is built from the X.org xf86-input-mouse driver module.

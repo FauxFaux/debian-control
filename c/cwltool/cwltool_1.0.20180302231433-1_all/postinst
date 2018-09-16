@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+update-alternatives --quiet --install /usr/bin/cwl-runner cwl-runner \
+	/usr/bin/cwltool 50
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p cwltool 
+fi
+
+# End automatically added section
+

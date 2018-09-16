@@ -1,0 +1,64 @@
+#! /bin/sh
+# postrm script for tiger
+#
+# see: dh_installdeb(1)
+
+set -e
+
+CONFIG=/etc/tiger/tigerrc
+
+case "$1" in
+	purge)
+		for dir in /var/log/tiger/ /var/lib/tiger/work /var/lib/tiger/ /var/run/tiger/ 
+		do
+			[ -d "$dir" ] &&  {
+			 	find "$dir" -type d -o -exec rm -f {} \;
+				find "$dir" -type d -exec rmdir {} \;
+			}
+		done
+# Do we have any tigerXX files under /var/log/? if so we should remove
+# them. This were created due to bug #164682 ...
+		find /var/log/ -type f -name "tiger*" | xargs rm -f
+
+                # Clear some other cruft
+                rm -f /usr/lib/tiger/bin/.bintype || true 
+
+                # we mimic dpkg as closely as possible, so we remove configuration
+                # files with dpkg backup extensions too:
+                for ext in '~' '%' .bak .ucf-new .ucf-old .ucf-dist;  do
+                        rm -f ${CONFIG}${ext}
+                 done
+
+# Remove configuration files, if they still exist
+                for conf in /etc/cron.d/tiger /etc/default/tiger \
+                    /etc/tiger/cronrc /etc/tiger/tiger.ignore \
+                    /etc/tiger/tigerrc /etc/default/tiger.default ; do
+                    [ -f "$conf" ] && rm -f "$conf"
+                done
+
+                # Clear config file from the ucf database
+                if which ucf >/dev/null; then
+                    ucf --purge $CONFIG
+                fi    
+                if which ucfr >/dev/null; then
+                    ucfr --purge tiger $CONFIG
+                fi    
+
+                
+	;;
+	remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+# Do nothing 
+	;;
+
+	*)
+	echo "postrm called with unknown argument \`$1'" >&2
+	exit 0
+esac
+
+# Automatically added by dh_installdebconf/11.1.4
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

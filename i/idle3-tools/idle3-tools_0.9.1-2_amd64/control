@@ -1,0 +1,37 @@
+Package: idle3-tools
+Version: 0.9.1-2
+Architecture: amd64
+Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
+Installed-Size: 32
+Depends: libc6 (>= 2.2.5)
+Section: admin
+Priority: optional
+Homepage: http://idle3-tools.sourceforge.net/
+Description: change the idle3 timer of recent Western Digital Hard Disk Drives
+ Idle3-tools provides a linux/unix utility that can disable, get and
+ set the value of the infamous idle3 timer found on recent Western
+ Digital Hard Disk Drives.
+ .
+ It can be used as an alternative to the official wdidle3.exe
+ proprietary utility, without the need to reboot in a DOS environment.
+ .
+ A power off/on cycle of the drive will still be mandatory for new
+ settings to be taken into account.
+ .
+ Modern Western Digital "Green" Drives include the Intellipark feature
+ that stops the disk when not in use.
+ .
+ Unfortunately, the default timer setting is not perfect on linux/unix
+ systems, including many NAS, and leads to a dramatic increase of the
+ Load Cycle Count value (SMART attribute #193). With the default timer
+ setting, the drive will spin down *every eight seconds* if idle and
+ this may get the spindle motor to burn out in a few months or so.
+ .
+ If you have a Western Digital EADS or EARS drive, please check you
+ SMART information before it's too late by running the following
+ command:
+ .
+  sudo smartctl -A /dev/sda | grep "^193"
+ .
+ If the Load cycle count (which is in the last column) exceeds 1000,
+ you're probably affected by the idle3 timer problem.

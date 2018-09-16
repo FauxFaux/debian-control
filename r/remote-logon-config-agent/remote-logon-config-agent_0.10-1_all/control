@@ -1,0 +1,27 @@
+Package: remote-logon-config-agent
+Version: 0.10-1
+Architecture: all
+Maintainer: Debian Remote Maintainers <pkg-remote-team@lists.alioth.debian.org>
+Installed-Size: 34
+Depends: python3:any (>= 3.3.2-2~), python3-pycurl
+Section: utils
+Priority: optional
+Homepage: https://github.com/ArcticaProject/remote-logon-config-agent
+Description: Retrieve host and session information from remote broker servers
+ This tiny Python tool is part of the Arctica Greeter display manager.
+ .
+ The remote-logon-config-agent fetches JSON based remote server
+ information from a brokerage host (formerly known as UCCS, a service run
+ by Canonical Ltd. around 2012-2014).
+ .
+ This tool gets used by the DBus service 'remote-logon-service'. The
+ retrieved information is then handed over by the DBus service to Arctica
+ Greeter.
+ .
+ The retrieved information can be obtained from a remote desktop
+ brokerage service like Arctica Server (with brokerage support) or from
+ the X2Go Session Broker.
+ .
+ In Arctica Greeter, the logon information is presented to the user for
+ starting up remote desktop sessions on Arctica, X2Go or RDP / Citrix
+ servers.

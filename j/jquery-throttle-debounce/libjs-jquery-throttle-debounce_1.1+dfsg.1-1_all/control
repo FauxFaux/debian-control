@@ -1,0 +1,27 @@
+Package: libjs-jquery-throttle-debounce
+Source: jquery-throttle-debounce
+Version: 1.1+dfsg.1-1
+Architecture: all
+Maintainer: Ben Finney <ben+debian@benfinney.id.au>
+Installed-Size: 24
+Recommends: javascript-common
+Section: web
+Priority: optional
+Homepage: http://benalman.com/projects/jquery-throttle-debounce-plugin/
+Description: library of rate-limit wrappers for functions
+ jQuery throttle / debounce allows you to rate-limit your functions in
+ multiple useful ways:
+ .
+  * Passing a ‘delay’ and ‘callback’ to ‘$.throttle’ returns a new
+    function that will execute no more than once every ‘delay’
+    milliseconds.
+  * Passing a ‘delay’ and ‘callback’ to ‘$.debounce’ returns a new
+    function that will execute only once, coalescing multiple
+    sequential calls into a single execution at either the very
+    beginning or end.
+ .
+ jQuery isn’t actually required for this library, because nothing
+ internal uses any jQuery methods or properties. jQuery is just used
+ as a namespace under which these methods can exist.
+ .
+ This package installs the runtime library.

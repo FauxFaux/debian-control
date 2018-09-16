@@ -1,0 +1,20 @@
+Package: carbon-c-relay
+Version: 3.2-1
+Architecture: amd64
+Maintainer: Filippo Giunchedi <filippo@debian.org>
+Installed-Size: 373
+Depends: libc6 (>= 2.16), libssl1.1 (>= 1.1.0), adduser
+Section: net
+Priority: optional
+Homepage: https://github.com/grobian/carbon-c-relay
+Description: Carbon-compatible graphite line mode relay
+ This project provides a multithreaded relay which can address multiple targets
+ and clusters for each and every metric based on pattern matches.
+ .
+ Consistent-hash routing compatible with the original carbon's implementation
+ is also provided. This relay also supports aggregation, failover of backend
+ servers and more.
+ .
+ Carbon is graphite's default storage backend and supports different protocols
+ for receiving metrics, this project aims to be a replacement of graphite's
+ original carbon-relay component and supports "plaintext" protocol metrics.

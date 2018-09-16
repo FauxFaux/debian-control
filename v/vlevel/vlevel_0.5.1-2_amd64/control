@@ -1,0 +1,27 @@
+Package: vlevel
+Version: 0.5.1-2
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 115
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libjack-jackd2-0 (>= 1.9.10+20150825) | libjack-0.125, libstdc++6 (>= 5.2)
+Suggests: jackd
+Section: sound
+Priority: optional
+Homepage: https://github.com/radiocicletta/vlevel
+Description: Levelling audio filter as command-line tool and LADSPA/JACK plugin
+ VLevel keeps your music from making you jump out of your seat, and it
+ keeps you from having to fiddle with the volume constantly. It's
+ different from other dynamic compressors because it looks ahead. You
+ can think of VLevel as someone who knows your music by heart, and
+ turns the volume up during quiet passages, but smoothly turns it back
+ down when he knows a loud part is coming. It's great for making CDs
+ to listen to in your car, or to play background music on your
+ computer.
+ .
+ VLevel is currently a LADSPA plugin, a JACK plugin and a command-line
+ filter. You can use it with many Linux audio programs including XMMS,
+ GStreamer, GLAME, GDAM, and others, and you can use it in shell
+ scripts to level your music before burning a CD.
+ .
+ The commandline filter is also useful for levelling podcasts before
+ (encoding and) publishing.

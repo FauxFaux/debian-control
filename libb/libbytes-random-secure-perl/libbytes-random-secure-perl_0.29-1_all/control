@@ -1,0 +1,28 @@
+Package: libbytes-random-secure-perl
+Version: 0.29-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 69
+Depends: perl, libcrypt-random-seed-perl, libmath-random-isaac-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Bytes-Random-Secure
+Description: Perl extension to generate cryptographically-secure random bytes
+ Bytes::Random::Secure provides two interfaces for obtaining crypt-quality
+ random bytes. The simple interface is built around plain functions. For
+ greater control over the Random Number Generator's seeding, there is an
+ Object Oriented interface that provides much more flexibility.
+ .
+ The "functions" interface provides five functions that can be used any time
+ you need a string (or MIME Base64 representation, or hex-digits
+ representation, or Quoted Printable representation) of a specific number of
+ random bytes. There are equivalent methods available via the OO interface.
+ .
+ Bytes::Random::Secure can be a drop-in replacement for Bytes::Random, with
+ the primary enhancement of using a much higher quality random number
+ generator to create the random data. The random_bytes function emulates the
+ user interface of Bytes::Random's function by the same name. But with
+ Bytes::Random::Secure the random number generator comes from
+ Math::Random::ISAAC, and is suitable for cryptographic purposes. The harder
+ problem to solve is how to seed the generator. This module uses
+ Crypt::Random::Seed to generate the initial seeds for Math::Random::ISAAC.

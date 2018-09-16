@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "disappear" ] ; then
+	update-alternatives --remove os-inject-fault /usr/bin/python2-os-inject-fault
+	update-alternatives --remove os-faults /usr/bin/python2-os-faults
+fi
+
+
+
+exit 0

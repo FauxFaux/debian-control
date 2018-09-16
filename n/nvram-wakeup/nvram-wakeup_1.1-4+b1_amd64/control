@@ -1,0 +1,16 @@
+Package: nvram-wakeup
+Source: nvram-wakeup (1.1-4)
+Version: 1.1-4+b1
+Architecture: amd64
+Maintainer: Debian VDR Team <pkg-vdr-dvb-devel@lists.alioth.debian.org>
+Installed-Size: 417
+Depends: libc6 (>= 2.14)
+Section: misc
+Priority: optional
+Homepage: http://sourceforge.net/projects/nvram-wakeup
+Description: Read/write the WakeUp time from/to the BIOS
+ nvram-wakeup can read and write the wake up time in the BIOS
+ (via /dev/nvram on recent 2.4.x kernels or direct I/O port access).
+ On this wake up time the computer will be powered on automatically from
+ the soft-off state. For the video disc recorder VDR, nvram-wakeup installs
+ a hook script, that allows VDR to set a wake up time, when it powers down.

@@ -1,0 +1,56 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+    configure|reconfigure) ;;
+    *) exit 0 ;;
+esac
+
+# add the approx user
+adduser --quiet --system --group --no-create-home --home /var/cache/approx approx
+
+# create the approx cache directory if necessary
+if [ ! -d /var/cache/approx ]; then
+    mkdir /var/cache/approx
+    chown approx:approx /var/cache/approx
+fi
+
+if dpkg --compare-versions "$2" lt "4.0"; then
+    if [ -f /etc/default/approx ]; then
+        rm -f /etc/default/approx
+    fi
+    if [ -f /etc/init.d/approx ]; then
+        rm -f /etc/init.d/approx
+        update-rc.d approx remove >/dev/null
+    fi
+fi
+
+# Automatically added by dh_systemd_enable/10.6.4
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask approx.socket >/dev/null || true
+
+# was-enabled defaults to true, so new installations run enable.
+if deb-systemd-helper --quiet was-enabled approx.socket; then
+	# Enables the unit on first installation, creates new
+	# symlinks on upgrades if the unit file has changed.
+	deb-systemd-helper enable approx.socket >/dev/null || true
+else
+	# Update the statefile to add new symlinks (if any), which need to be
+	# cleaned up on purge. Also remove old symlinks.
+	deb-systemd-helper update-state approx.socket >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start/10.6.4
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	if [ -n "$2" ]; then
+		_dh_action=try-restart
+	else
+		_dh_action=start
+	fi
+	deb-systemd-invoke $_dh_action approx.socket >/dev/null || true
+fi
+# End automatically added section
+

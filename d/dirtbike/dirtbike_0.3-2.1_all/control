@@ -1,0 +1,17 @@
+Package: dirtbike
+Version: 0.3-2.1
+Architecture: all
+Maintainer: Barry Warsaw <barry@debian.org>
+Installed-Size: 44
+Depends: python3-distutils, python3-pkg-resources, python3-wheel, python3:any (>= 3.4~)
+Section: python
+Priority: optional
+Homepage: https://github.com/paulproteus/dirtbike
+Description: turn system-installed Python packages into wheels
+ The purpose of this package is to make it easier to devendorize other
+ packages which bundle various upstream packages.  An example of this
+ is pip, which bundles a half-dozen or so other upstream packages.  In
+ Debian and other distros, such vendoring is frowned upon.  To make it
+ easier to devendorize, dirtbike turns installed system packages into
+ wheels, and these wheels can then be used instead of the vendored
+ packages.

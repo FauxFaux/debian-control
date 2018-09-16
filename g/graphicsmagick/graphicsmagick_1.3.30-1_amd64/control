@@ -1,0 +1,29 @@
+Package: graphicsmagick
+Version: 1.3.30-1
+Architecture: amd64
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 5158
+Depends: libc6 (>= 2.2.5), libgomp1 (>= 4.2.1), libgraphicsmagick-q16-3 (>= 1.3.5)
+Suggests: graphicsmagick-dbg
+Replaces: graphicsmagick-doc, imagemagick (<< 6:6.2.4.4)
+Section: graphics
+Priority: optional
+Homepage: http://www.graphicsmagick.org/
+Description: collection of image processing tools
+ GraphicsMagick provides a set of command-line applications to manipulate
+ image files. It is a fork of the ImageMagick project and therefore offers
+ a similar set of features, but puts a larger emphasis on stability.
+ .
+ The tools support a large variety of image formats from the widely used
+ jpeg, tiff, bmp or xpm to special-purpose formats such as fits or image
+ formats found on some photo CDs. They can convert between formats,
+ concatenate several images into one, annotate and distort them, create
+ thumbnails or manipulate the colormap. While all features are available
+ from the command-line, the package also includes an image viewer that
+ allows interactive manipulation.
+ .
+ Note that unlike ImageMagick, the GraphicsMagick tools are accessed
+ through a single executable called 'gm'. Therefore, GraphicsMagick and
+ ImageMagick can be used in parallel. Install package
+ graphicsmagick-imagemagick-compat to obtain a set of several executables
+ that is compatible to ImageMagick's interface.

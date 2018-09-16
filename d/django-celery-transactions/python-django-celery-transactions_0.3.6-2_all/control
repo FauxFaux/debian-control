@@ -1,0 +1,22 @@
+Package: python-django-celery-transactions
+Source: django-celery-transactions
+Version: 0.3.6-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 38
+Depends: python-django, python-celery, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://github.com/fellowshipofone/django-celery-transactions
+Description: Django transaction support for Celery tasks
+ django-celery-transactions holds on to Celery tasks until the current database
+ transaction is committed, avoiding potential race conditions as described in
+ Celery's user guide.
+ .
+ Features:
+  * If the transaction is rolled back, the tasks are discarded. Django's
+    transaction middleware does this if an exception is raised.
+  * If transactions aren't being managed, tasks are sent as normal. This means
+    that sending tasks from within Django's shell will work as expected, as
+    will the various transaction decorators commit_manually, commit_on_success,
+    etc.

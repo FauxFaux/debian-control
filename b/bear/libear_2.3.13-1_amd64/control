@@ -1,0 +1,23 @@
+Package: libear
+Source: bear
+Version: 2.3.13-1
+Architecture: amd64
+Maintainer: Sebastian Ramacher <sramacher@debian.org>
+Installed-Size: 36
+Depends: libc6 (>= 2.8)
+Breaks: bear (<< 2.3.1-1)
+Replaces: bear (<< 2.3.1-1)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/rizsotto/Bear
+Description: generate compilation database for Clang tooling (wrapper library)
+ Bear records the flags passed to the compiler for each translation unit and
+ stores them in a JSON file. This file can be used by Clang's tooling interface
+ and programs like clang-check to process a translation unit.
+ .
+ cmake supports the generation of JSON compilation databases out of the box.
+ For any other build system that does not support this, Bear can be used
+ instead to intercept the invocation of the compiler.
+ .
+ This is the required library for wrapping system calls.

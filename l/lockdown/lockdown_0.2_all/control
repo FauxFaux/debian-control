@@ -1,0 +1,15 @@
+Package: lockdown
+Version: 0.2
+Architecture: all
+Maintainer: Matt Taggart <taggart@debian.org>
+Installed-Size: 29
+Depends: lsb-base, init-system-helpers (>= 1.18~)
+Section: admin
+Priority: optional
+Homepage: https://gitlab.com/taggart/lockdown
+Description: make it harder for attackers to compromise your system
+ Does some basic things to reduce system attack surface. Primarily it
+ will disable kernel module loading after boot to prevent security
+ bugs in unused modules from being used to compromise a system.
+ WARNING: This may prevent hardware and other subsystems from working,
+ be sure to read the documentation before rebooting.

@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+update-alternatives --install /usr/bin/subvertpy-fast-export subvertpy-fast-export  /usr/bin/subvertpy3-fast-export 10
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-subvertpy 
+fi
+
+# End automatically added section
+

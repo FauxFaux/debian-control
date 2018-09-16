@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        debian-matlab-mexhelper dynare-matlab install \
+            --build-cmd 'cd mex/build/matlab && ./configure --with-matlab=$(dirname $(dirname $(readlink -f `which matlab`))) MATLAB_VERSION=$(echo version | matlab -nodesktop -nodisplay -nosplash 2>/dev/null | grep -A2 "ans ="|tail -1| cut -d "." -f 1,2) && make' \
+            --install-cmd 'mkdir -p /usr/lib/dynare/mex/matlab && install -m644 /usr/src/matlab/dynare-matlab/mex/matlab/* /usr/lib/dynare/mex/matlab' \
+            --clean-cmd 'cd mex/build/matlab && make distclean && rmdir /usr/src/matlab/dynare-matlab/mex/matlab'
+        ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+

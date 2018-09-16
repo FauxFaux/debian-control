@@ -1,0 +1,25 @@
+Package: pari-gp2c
+Source: gp2c
+Version: 0.0.11-1
+Architecture: amd64
+Maintainer: Bill Allombert <ballombe@debian.org>
+Installed-Size: 841
+Depends: libpari-dev (>= 2.11.0), gcc, pari-gp (>= 2.11.0), libc6 (>= 2.14)
+Suggests: pari-gp-dbgsym, gdb
+Section: math
+Priority: optional
+Description: PARI/GP GP to C compiler
+ PARI/GP is a widely used computer algebra system designed for fast
+ computations in number theory (factorizations, algebraic number theory,
+ elliptic curves...), but also contains a large number of other useful
+ functions to compute with mathematical entities such as matrices,
+ polynomials, power series, algebraic numbers, etc., and a lot of
+ transcendental functions. PARI is also available as a C library to allow
+ for faster computations.
+ .
+ Originally developed by Henri Cohen and his co-workers (University Bordeaux I,
+ France), PARI is now under the GPL and maintained by Karim Belabas
+ with the help of many volunteer contributors.
+ .
+ This package contains the G2PC compiler that converts GP scripts to C
+ libpari modules and the helper scripts gp2c-run and gp2c-dbg.

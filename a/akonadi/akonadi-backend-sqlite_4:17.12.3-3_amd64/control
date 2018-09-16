@@ -1,0 +1,24 @@
+Package: akonadi-backend-sqlite
+Source: akonadi
+Version: 4:17.12.3-3
+Architecture: amd64
+Maintainer: Debian/Kubuntu Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Installed-Size: 128
+Depends: libqt5sql5-sqlite, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libqt5core5a (>= 5.11.0~rc1), libqt5sql5 (>= 5.8.0~), libsqlite3-0 (>= 3.6.12), libstdc++6 (>= 4.1.1), qtbase-abi-5-11-0
+Recommends: akonadi-server
+Section: misc
+Priority: optional
+Multi-Arch: same
+Homepage: http://pim.kde.org/akonadi
+Description: SQLite storage backend for Akonadi
+ Akonadi is an extensible cross-desktop Personal Information Management (PIM)
+ storage service. It provides a common framework for applications to store and
+ access mail, calendars, addressbooks, and other PIM data.
+ .
+ This package installs everything what's needed for Akonadi to work with SQLite
+ as underlying data storage engine. Since SQLite is an embedded database
+ engine, a separate SQL server daemon is not necessary.
+ .
+ In addition, the package contains an improved QSql driver for SQLite named
+ "QSQLite3". It can be used by any application that needs to access SQLite
+ databases via standard Qt QSql framework.

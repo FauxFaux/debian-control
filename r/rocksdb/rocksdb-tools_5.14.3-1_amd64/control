@@ -1,0 +1,32 @@
+Package: rocksdb-tools
+Source: rocksdb
+Version: 5.14.3-1
+Architecture: amd64
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 29497
+Depends: libbz2-1.0, libc6 (>= 2.16), libgcc1 (>= 1:3.0), libgflags2.2, liblz4-1 (>= 0.0~r130), libsnappy1v5, libstdc++6 (>= 7), libzstd1 (>= 1.3.2), zlib1g (>= 1:1.1.4)
+Section: database
+Priority: optional
+Homepage: http://rocksdb.org/
+Description: persistent Key-Value Store for Flash and RAM Storage (tools)
+ C++ library providing an embedded key-value store, where keys and values are
+ arbitrary byte streams. It was developed at Facebook based on LevelDB and
+ provides backwards-compatible support for LevelDB APIs.
+ .
+ RocksDB is optimized for Flash with extremely low latencies. RocksDB uses a
+ Log Structured Database Engine for storage, written entirely in C++.
+ .
+ RocksDB features highly flexible configuration settings that may be tuned to
+ run on a variety of production environments, including pure memory, Flash,
+ hard disks or HDFS. It supports various compression algorithms and good tools
+ for production support and debugging.
+ .
+ Features:
+   - Designed for application servers wanting to store up to a few terabytes
+     of data on locally attached Flash drives or in RAM
+   - Optimized for storing small to medium size key-values on fast storage --
+     flash devices or in-memory
+   - Scales linearly with number of CPUs so that it works well on ARM
+     processors
+ .
+ This package contains administration and data access tools.

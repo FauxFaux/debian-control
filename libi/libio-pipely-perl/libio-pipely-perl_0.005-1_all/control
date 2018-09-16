@@ -1,0 +1,23 @@
+Package: libio-pipely-perl
+Version: 0.005-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 66
+Depends: perl (>= 5.17.11)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/IO-Pipely
+Description: portable way to create pipe() or pipe-like handles
+ IO::Pipely provides a couple functions to portably create one- and
+ two-way pipes and pipe-like socket pairs. It acknowledges and works
+ around known platform issues so you don't have to.
+ .
+ IO::Pipely currently understands pipe(), UNIX-domain socketpair() and
+ regular IPv4 localhost sockets. It will use different kinds of pipes or
+ sockets depending on the operating system's capabilities and the number
+ of directions requested. The autodetection may be overridden by
+ specifying a particular pipe type.
+ .
+ IO::Pipely is a spin-off of the POE project's portable pipes. Earlier
+ versions of the code have been tested and used in production systems for
+ over a decade.

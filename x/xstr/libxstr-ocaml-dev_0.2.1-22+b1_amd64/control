@@ -1,0 +1,21 @@
+Package: libxstr-ocaml-dev
+Source: xstr (0.2.1-22)
+Version: 0.2.1-22+b1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 299
+Depends: ocaml-nox-4.05.0, ocaml-findlib
+Provides: libxstr-ocaml-dev-wlb57
+Section: ocaml
+Priority: optional
+Homepage: http://projects.camlcity.org/projects/xstr.html
+Description: OCaml library for frequent string operations
+ xstr is an OCaml library for string operations.
+ .
+ This package implements frequent string operations: searching,
+ replacing, splitting, matching. It is independent from the Str library,
+ and can replace Str in many cases. Unlike Str, xstr is thread-safe.
+ xstr does not implement regular expressions in general, but an
+ important subset.  Some operations of xstr are performed as quickly as
+ by Str; if the string to be processed is small, xstr is often faster
+ than Str; if the string is big, xstr is up to half as fast than Str.

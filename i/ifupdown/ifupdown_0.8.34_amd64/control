@@ -1,0 +1,17 @@
+Package: ifupdown
+Version: 0.8.34
+Architecture: amd64
+Maintainer: Guus Sliepen <guus@debian.org>
+Installed-Size: 206
+Depends: libc6 (>= 2.14), lsb-base, adduser, iproute2
+Recommends: isc-dhcp-client | dhcp-client
+Suggests: ppp, rdnssd
+Breaks: systemd (<< 228-3~)
+Replaces: systemd (<< 228-3~)
+Section: admin
+Priority: important
+Multi-Arch: foreign
+Description: high level tools to configure network interfaces
+ This package provides the tools ifup and ifdown which may be used to
+ configure (or, respectively, deconfigure) network interfaces based on
+ interface definitions in the file /etc/network/interfaces.

@@ -1,0 +1,25 @@
+Package: gamemode
+Version: 1.2-6
+Architecture: amd64
+Maintainer: Jonathan Carter <jcc@debian.org>
+Installed-Size: 72
+Depends: libc6 (>= 2.27), libsystemd0 (>= 221), libgamemode0, libgamemodeauto0
+Section: libs
+Priority: optional
+Homepage: https://github.com/FeralInteractive/gamemode
+Description: Optimise Linux system performance on demand
+ GameMode is a daemon/lib combo for Linux that allows games to request a set
+ of optimisations be temporarily applied to the host OS.
+ .
+ The design has a clear-cut abstraction between the host daemon and library
+ (gamemoded and libgamemode), and the client loaders (libgamemodeauto and
+ gamemode_client.h) that allows for safe use without worrying about whether
+ the daemon is installed or running. This design also means that while the
+ host library currently relies on systemd for exchanging messages with the
+ daemon, it's entirely possible to implement other internals that still work
+ with the same clients.
+ .
+ GameMode was designed primarily as a stop-gap solution to problems with
+ the Intel and AMD CPU powersave or ondemand governors, but is intended to
+ be expanded beyond just CPU governor states, as there are a wealth of
+ automation tasks one might want to apply.

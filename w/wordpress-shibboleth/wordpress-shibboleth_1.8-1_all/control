@@ -1,0 +1,29 @@
+Package: wordpress-shibboleth
+Version: 1.8-1
+Architecture: all
+Maintainer: Dominic Hargreaves <dom@earth.li>
+Installed-Size: 72
+Depends: wordpress, libapache2-mod-shib2
+Section: php
+Priority: optional
+Homepage: https://wordpress.org/extend/plugins/shibboleth/
+Description: Shibboleth plugin for WordPress
+ This plugin is designed to support integrating your WordPress blog into
+ your existing identity management infrastructure using a Shibboleth
+ Service Provider.
+ .
+ WordPress can be configured so that all standard login requests will be
+ sent to your configured Shibboleth Identity Provider or Discovery Service.
+ Upon successful authentication, a new WordPress account will be
+ automatically provisioned for the user if one does not already exist.
+ User attributes (username, first name, last name, display name, nickname,
+ and email address) can be synchronized with your enterprise's system of
+ record each time the user logs into WordPress.
+ .
+ Finally, the user's role within WordPress can be automatically set (and
+ continually updated) based on any attribute Shibboleth provides. For
+ example, you may decide to give users with an eduPersonAffiliation value
+ of faculty the WordPress role of editor, while the eduPersonAffiliation
+ value of student maps to the WordPress role contributor. Or you may choose
+ to limit access to WordPress altogether using a special
+ eduPersonEntitlement value.

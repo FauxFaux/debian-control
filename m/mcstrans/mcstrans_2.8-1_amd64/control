@@ -1,0 +1,31 @@
+Package: mcstrans
+Version: 2.8-1
+Architecture: amd64
+Maintainer: Debian SELinux maintainers <selinux-devel@lists.alioth.debian.org>
+Installed-Size: 313
+Depends: lsb-base (>= 3.0-6), selinux-utils, libc6 (>= 2.27), libcap2 (>= 1:2.10), libpcre3, libselinux1 (>= 2.8)
+Breaks: policycoreutils (<< 2.4)
+Replaces: policycoreutils (<< 2.4)
+Built-Using: libsepol (= 2.8-1)
+Section: utils
+Priority: optional
+Homepage: http://userspace.selinuxproject.org/
+Description: SELinux core policy utilities (mcstrans utilities)
+ Security-enhanced Linux is a patch of the Linux® kernel and a number
+ of utilities with enhanced security functionality designed to add
+ mandatory access controls to Linux.  The Security-enhanced Linux
+ kernel contains new architectural components originally developed to
+ improve the security of the Flask operating system. These
+ architectural components provide general support for the enforcement
+ of many kinds of mandatory access control policies, including those
+ based on the concepts of Type Enforcement®, Role-based Access Control,
+ and Multi-level Security.
+ .
+ This package contains mcstransd to map a machine readable sensitivity label to
+ a human readable form.  The sensitivity label is comprised of a sensitivity
+ level (always s0 for MCS and anything from s0 to s15 for MLS) and a set of
+ categories.  A ranged sensitivity label will have a low level and a high level
+ where the high level will dominate the low level.  Categories are numbered from
+ c0 to c1023.  Names such as s0 and c1023 and not easily readable by humans, so
+ mcstransd translated them to human readable labels such as SystemLow and
+ SystemHigh.

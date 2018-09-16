@@ -1,0 +1,16 @@
+Package: librust-scopeguard-dev
+Source: rust-scopeguard
+Version: 0.3.3-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 47
+Provides: librust-scopeguard+default-dev (= 0.3.3-1), librust-scopeguard+use-std-dev (= 0.3.3-1), librust-scopeguard-0+default-dev (= 0.3.3-1), librust-scopeguard-0+use-std-dev (= 0.3.3-1), librust-scopeguard-0-dev (= 0.3.3-1), librust-scopeguard-0.3+default-dev (= 0.3.3-1), librust-scopeguard-0.3+use-std-dev (= 0.3.3-1), librust-scopeguard-0.3-dev (= 0.3.3-1), librust-scopeguard-0.3.3+default-dev (= 0.3.3-1), librust-scopeguard-0.3.3+use-std-dev (= 0.3.3-1), librust-scopeguard-0.3.3-dev (= 0.3.3-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: RAII scope guard that will run a given closure when it goes out of scope, even if the code between panics (assuming unwinding panic) - Rust source code
+ Defines the macros `defer!` and `defer_on_unwind!`; the latter only runs if the
+ scope is extited through unwinding on panic.
+ .
+ This package contains the source for the Rust scopeguard crate, packaged by
+ debcargo for use with cargo and dh-cargo.

@@ -1,0 +1,19 @@
+Package: libcpan-meta-requirements-perl
+Version: 2.140-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 56
+Depends: perl, perl (>= 5.13.9) | libversion-perl (>= 1:0.8800)
+Breaks: libcpan-meta-perl (<< 2.120921-1)
+Replaces: libcpan-meta-perl (<< 2.120921-1)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CPAN-Meta-Requirements
+Description: set of version requirements for a CPAN dist
+ A CPAN::Meta::Requirements object models a set of version constraints like
+ those specified in the META.yml or META.json files in CPAN distributions. It
+ can be built up by adding more and more constraints, and it will reduce them
+ to the simplest representation.
+ .
+ Logically impossible constraints will be identified immediately by thrown
+ exceptions.

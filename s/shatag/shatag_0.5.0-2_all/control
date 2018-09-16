@@ -1,0 +1,14 @@
+Package: shatag
+Version: 0.5.0-2
+Architecture: all
+Maintainer: Didier Raboud <odyx@debian.org>
+Installed-Size: 58
+Depends: python3-pyxattr, python3-yaml, python3:any (>= 3.3.2-2~), python3-pyinotify
+Section: misc
+Priority: optional
+Homepage: https://bitbucket.org/maugier/shatag
+Description: tool to store file checksums in extended attributes, and work with them
+ Shatag is a tool for computing and caching file checksums, and do
+ remote duplicate detection. Files are compared on their SHA-256 hash to
+ find duplicates, and will use filesystem extended attributes to cache
+ the checksum values.

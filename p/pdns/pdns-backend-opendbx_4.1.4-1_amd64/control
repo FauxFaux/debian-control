@@ -1,0 +1,20 @@
+Package: pdns-backend-opendbx
+Source: pdns
+Version: 4.1.4-1
+Architecture: amd64
+Maintainer: pdns packagers <pdns@packages.debian.org>
+Installed-Size: 171
+Depends: pdns-server (= 4.1.4-1), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libopendbx1 (>= 1.4.6), libstdc++6 (>= 5.2)
+Provides: pdns-backend
+Section: net
+Priority: optional
+Homepage: https://www.powerdns.com/
+Description: OpenDBX backend for PowerDNS
+ PowerDNS is a versatile nameserver which supports a large number
+ of different backends ranging from simple zonefiles to relational
+ databases and load balancing/failover algorithms.
+ PowerDNS tries to emphasize speed and security.
+ .
+ This package contains the OpenDBX backend for PowerDNS. Please install
+ the libopendbx1-DATABASE package to allow OpenDBX to connect to
+ the chosen database.

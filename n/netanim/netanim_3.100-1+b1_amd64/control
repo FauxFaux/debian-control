@@ -1,0 +1,19 @@
+Package: netanim
+Source: netanim (3.100-1)
+Version: 3.100-1+b1
+Architecture: amd64
+Maintainer: YunQiang Su <wzssyqa@gmail.com>
+Installed-Size: 352
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libqt4-svg (>= 4:4.5.3), libqtcore4 (>= 4:4.7.0~beta1), libqtgui4 (>= 4:4.8.0), libstdc++6 (>= 5.2)
+Section: net
+Priority: optional
+Homepage: http://www.nsnam.org/wiki/index.php/NetAnim
+Description: network animator based on Qt4 working with ns-3
+ NetAnim currently animates the simulation using an XML trace
+ file collected during simulation.
+ .
+ Using NetAnim is a two-step process:
+   - Generate the animation XML trace file during simulation
+     using "ns3::AnimationInterface" in the ns-3 code base
+   - Load the XML trace file generated in Step 1 with the
+     offline animator (NetAnim).

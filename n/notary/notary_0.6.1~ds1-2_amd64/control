@@ -1,0 +1,32 @@
+Package: notary
+Version: 0.6.1~ds1-2
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 42010
+Depends: libc6 (>= 2.3.2), libltdl7 (>= 2.4.6), libnspr4 (>= 2:4.9-2~), libnss3 (>= 2:3.13.4-2~)
+Built-Using: docker-registry (= 2.6.2~ds1-2), golang-1.10 (= 1.10.3-1), golang-bugsnag-panicwrap (= 1.2.0-1), golang-context (= 1.1-3), golang-fsnotify (= 1.4.7-2), golang-github-beorn7-perks (= 0.0~git20160804.0.4c0e845-1), golang-github-bugsnag-bugsnag-go (= 1.0.5+dfsg-3), golang-github-cenkalti-backoff (= 2.0.0-1), golang-github-davecgh-go-spew (= 1.1.0-4), golang-github-docker-go (= 0.0~git20160303.0.d30aec9-3), golang-github-docker-go-connections (= 0.3.0-3), golang-github-docker-libtrust (= 0.0~git20150526.0.9cbd2a1-3), golang-github-dvsekhvalnov-jose2go (= 1.3-1), golang-github-go-sql-driver-mysql (= 1.3-1), golang-github-gorilla-mux (= 1.1-4), golang-github-hailocab-go-hostpool (= 0.0~git20160125.0.e80d13c-1), golang-github-hashicorp-hcl (= 0.0~git20170509.0.392dba7-1), golang-github-jinzhu-gorm (= 1.0+git20180218.58e3472-2), golang-github-jinzhu-inflection (= 0.0~git20170102.0.1c35d90-2), golang-github-lib-pq (= 0.0~git20151007.0.ffe986a-1), golang-github-magiconair-properties (= 1.8.0-1), golang-github-mitchellh-mapstructure (= 0.0~git20170523.0.d0303fe-1), golang-github-pelletier-go-toml (= 1.1.0-1), golang-github-pkg-errors (= 0.8.0+git20180311.816c908-1), golang-github-pmezard-go-difflib (= 1.0.0-1), golang-github-prometheus-client-golang (= 0.9.0~pre1+git20180417.82f5ff1-2), golang-github-prometheus-client-model (= 0.0.2+git20171117.99fa1f4-1), golang-github-prometheus-common (= 0+git20180518.7600349-1), golang-github-shopify-logrus-bugsnag (= 0.0~git20171204.577dee2-1), golang-github-spf13-afero (= 1.1.1-1), golang-github-spf13-cast (= 1.2.0-2), golang-github-spf13-cobra (= 0.0.3-1), golang-github-spf13-jwalterweatherman (= 0.0~git20180109.7c0cea3-1), golang-github-spf13-pflag (= 1.0.1-1), golang-github-spf13-viper (= 1.0.2-1), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-net-dev (= 1:0.0+git20180124.0ed95ab+dfsg-2), golang-golang-x-sys (= 0.0~git20180510.7dfd129-1), golang-google-genproto (= 0.0~git20171123.7f0da29-1), golang-google-grpc (= 1.6.0-3), golang-gopkg-fatih-pool.v2 (= 0.0~git20171010.010e0b7-3), golang-gopkg-gorethink-gorethink.v3 (= 3.0.5-1), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-2), golang-logrus (= 1.0.5-2), golang-procfs (= 0+git20180613.7d6f385-1), golang-protobuf-extensions (= 1.0.0-2), golang-testify (= 1.2.2+ds-1), golang-x-text (= 0.3.0-1), golang-yaml.v2 (= 2.2.1-1)
+Section: devel
+Priority: optional
+Homepage: https://github.com/theupdateframework/notary
+Description: tool for running and interacting with trusted collections
+ Notary is a project that allows anyone to have trust over arbitrary
+ collections of data.
+ .
+ The Notary project comprises a server (cmd/notary-server) and a client
+ (cmd/notary) for running and interacting with trusted collections.
+ .
+ Notary aims to make the internet more secure by making it easy for people to
+ publish and verify content. We often rely on TLS to secure our communications
+ with a web server which is inherently flawed, as any compromise of the server
+ enables malicious content to be substituted for the legitimate content.
+ .
+ With Notary, publishers can sign their content offline using keys kept highly
+ secure. Once the publisher is ready to make the content available, they can
+ push their signed trusted collection to a Notary Server.
+ .
+ Consumers, having acquired the publisher's public key through a secure
+ channel, can then communicate with any notary server or (insecure) mirror,
+ relying only on the publisher's key to determine the validity and integrity
+ of the received content.
+ .
+ This package contains the binaries/tools.

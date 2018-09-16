@@ -1,0 +1,24 @@
+Package: libtask-weaken-perl
+Version: 1.06-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 25
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Task-Weaken
+Description: module for ensuring that a platform has weaken support
+ One recurring problem in modules that use Scalar::Util's weaken function is
+ that it is not present in the pure-perl variant.
+ .
+ While this isn't necessarily always a problem in a straight CPAN-based Perl
+ environment, some operating system distributions only include the pure-Perl
+ versions, don't include the XS version, and so weaken is then "missing" from
+ the platform, despite passing a dependency on Scalar::Util successfully.
+ .
+ The normal solution is to manually write tests in each distribution to ensure
+ that weaken is available.
+ .
+ Task::Weaken restores the functionality testing to a dependency you do once
+ in your Makefile.PL, rather than something you have to write extra tests for
+ each time you write a module.

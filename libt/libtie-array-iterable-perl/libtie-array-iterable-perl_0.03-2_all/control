@@ -1,0 +1,26 @@
+Package: libtie-array-iterable-perl
+Version: 0.03-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 51
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Tie-Array-Iterable
+Description: module allowing creation of iterators for lists and arrays
+ Tie::Hash::Iterable allows one to create iterators for lists and arrays. The
+ concept of iterators is borrowed from the C++ STL [1], in which most of the
+ collections have iterators, though this class does not attempt to fully mimic
+ it.
+ .
+ Typically, in C/C++ or Perl, the 'easy' way to visit each item on a list is
+ to use a counter, and then a for( ;; ) loop. However, this requires knowledge
+ on how long the array is to know when to end. In addition, if items are
+ removed or inserted into the array during the loop, then the counter will be
+ incorrect on the next run through the loop, and will cause problems.
+ .
+ While some aspects of this are fixed in Perl by the use of for or foreach,
+ these commands still suffer when items are removed or added to the array
+ while in these loops. Also, if one wished to use break to step out of a
+ foreach loop, then restart where they left at some later point, there is no
+ way to do this without maintaining some additional state information.

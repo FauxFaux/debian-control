@@ -1,0 +1,23 @@
+Package: xenstore-utils
+Source: xen
+Version: 4.8.3+xsa267+shim4.10.1+xsa267-1+deb9u9
+Architecture: amd64
+Maintainer: Debian Xen Team <pkg-xen-devel@lists.alioth.debian.org>
+Installed-Size: 193
+Depends: libc6 (>= 2.14), libxenstore3.0 (>= 4.1.0~rc6)
+Conflicts: xen-utils-common (<= 3.1.0-1)
+Replaces: xen-utils-common (<= 3.1.0-1)
+Section: admin
+Priority: optional
+Description: Xenstore command line utilities for Xen
+ This package contains command line utilities for interacting with
+ XenStore.
+ .
+ XenStore is a shared database used for interdomain communication of
+ configuration and status information.  It is accessible to all domains
+ running on the same Xen host.  See http://wiki.xen.org/wiki/XenStore for
+ more information.
+ .
+ In the common case these tools are used by the Xen toolstack running in
+ domain0 (or a driver domain) however they may also be used in a guest
+ domain to support local scripting which wants to communicate via XenStore.

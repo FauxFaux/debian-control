@@ -1,0 +1,24 @@
+Package: libxml-dtdparser-perl
+Version: 2.01-5
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 29
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/XML-DTDParser
+Description: perl module providing a quick and dirty DTD parser
+ XML::DTDParser parses a DTD file and creates a data structure containing info
+ about all tags, their allowed parameters, children, parents, optionality etc.
+ .
+ The module should be able to parse just about anything, but it
+ intentionaly looses some information. Eg. if the DTD specifies that a tag
+ should contain either CHILD1 or CHILD2 you only get that CHILD1 and CHILD2
+ are optional. That is the DTD contains
+ .
+ <!ELEMENT FOO (BAR|BAZ)> the result will be the same is if it contained
+ .
+ <!ELEMENT FOO (BAR?,BAZ?)>
+ .
+ You get the original unparsed parameter list as well so if you need this
+ information you may parse it yourself.

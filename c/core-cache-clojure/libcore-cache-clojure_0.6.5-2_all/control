@@ -1,0 +1,26 @@
+Package: libcore-cache-clojure
+Source: core-cache-clojure
+Version: 0.6.5-2
+Architecture: all
+Maintainer: Debian Clojure Maintainers <pkg-clojure-maintainers@lists.alioth.debian.org>
+Installed-Size: 57
+Depends: libclojure-java, libdata-priority-map-clojure
+Section: java
+Priority: optional
+Homepage: http://github.com/clojure/core.cache
+Description: cache abstraction library for Clojure
+ core.cache is a Clojure library that provides implementations of basic
+ caching strategies such as:
+ .
+  * First-in-first-out (FIFOCache)
+  * Least-recently-used (LRUCache)
+  * Least-used (LUCache -- sometimes called Least Frequently Used)
+  * Time-to-live (TTLCache)
+  * Naïve cache (BasicCache)
+  * Naïve cache backed with soft references (SoftCache)
+  * Low inter-reference recency set algorithm (LIRSCache)
+ .
+ All implementation use a common base abstraction (CacheProtocol) which, in
+ combination with suitable macros, allows for the easy integration of user
+ defined caching strategies that hook into the Clojure associative data
+ capabilities.

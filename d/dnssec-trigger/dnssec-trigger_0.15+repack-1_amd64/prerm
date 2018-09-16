@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper mv_conffile /etc/init.d/dnssec-trigger /etc/init.d/dnssec-triggerd 0.12-1~ dnssec-trigger -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/dnssec.conf /etc/dnssec-trigger/dnssec.conf 0.12-3~ dnssec-trigger -- "$@"
+
+# Automatically added by dh_installsystemd/11.2.1
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop 'dnssec-triggerd-keygen.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.2.1
+if [ -x "/etc/init.d/dnssec-triggerd" ] && [ "$1" = remove ]; then
+	invoke-rc.d dnssec-triggerd stop || exit 1
+fi
+# End automatically added section
+
+
+exit 0

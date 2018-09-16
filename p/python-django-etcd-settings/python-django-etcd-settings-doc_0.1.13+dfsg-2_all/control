@@ -1,0 +1,23 @@
+Package: python-django-etcd-settings-doc
+Source: python-django-etcd-settings
+Version: 0.1.13+dfsg-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 84
+Depends: libjs-sphinxdoc (>= 1.0)
+Section: doc
+Priority: optional
+Homepage: https://github.com/kpn-digital/django-etcd-settings
+Description: config manager for Django apps based on ETCD (Documentation)
+ This application allows you to extend the Django settings as configured in the
+ settings.py file with:
+ .
+  * Environment dependent values
+  * Values in different config sets, identified by name, which can be selected
+    on a 'per request' basis using the X-DYNAMIC-SETTINGS HTTP header
+ .
+ Both the added configuration values and config sets would live at ETCD,
+ which will be continuously monitored by this library in order to
+ transparently update your app settings upon changes.
+ .
+ This package contains the documentation.

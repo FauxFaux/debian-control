@@ -1,0 +1,18 @@
+Package: ruby-threach
+Version: 0.2.0-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 22
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: http://github.com/billdueber/threach
+Description: Threaded each
+ An addition to the Enumerable Ruby module that allows easy use of threaded
+ each and each-like iterators. It's a very simple producer-consumer model.
+ .
+ If you're using stock (MRI) ruby -- you probably shouldn't bother with threach
+ unless you're doing IO-intensive stuff. It'll just slow things down. But if
+ you're using a ruby implementation that has real threads, like JRuby, this
+ will give you relatively painless multi-threading.
+Ruby-Versions: all

@@ -1,0 +1,28 @@
+Package: libcasa-casa2
+Source: casacore
+Version: 2.4.1-3
+Architecture: amd64
+Maintainer: Debian Astro Team <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 3881
+Depends: libc6 (>= 2.27), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://casacore.github.io/casacore
+Description: CASA core modules
+ The casacore package contains the core libraries of the old
+ AIPS++/CASA (Common Astronomy Software Applications) package. This
+ split was made to get a better separation of core libraries and
+ applications.
+ .
+ This package contains the Core modules: Multi-dimensional arrays, Quantities
+ (values with physical units), OS and IO interface classes, Containers (from
+ pre-STL era), Miscellaneous modules for exceptions, tasking interface,
+ command line input, logging, STL wrappers, and basic math classes and
+ functors.
+ .
+ Most of the code has been developed before STL came into existence, so
+ several classes in modules Containers and Utilities are superseded by their
+ STL counterparts. However, they are still used in some casacore
+ code. Furthermore, some classes offer some extra functionality compared to
+ STL.

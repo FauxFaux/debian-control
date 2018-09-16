@@ -1,0 +1,25 @@
+Package: buffycli
+Version: 0.7-1
+Architecture: all
+Maintainer: Penny Leach <penny@mjollnir.org>
+Installed-Size: 70
+Depends: perl, libtext-formattable-perl, libtie-ixhash-perl, libbuffy-perl (>= 0.10), procps, libfile-which-perl, libproc-simple-perl
+Suggests: mutt, offlineimap
+Section: mail
+Priority: optional
+Description: Text mode alternative to Buffy
+ buffycli displays a compact summary of your mail folders in text-mode, and
+ allows you to invoke a command (usually a mail reader) on them. It is written
+ with the intent of being a handy everyday tool for people handling large
+ volumes of mail. For mutt users, this can be a nice front-end to supplement
+ the simple built-in folder browser when one has many folders to keep track of.
+ It tries hard to work out of the box: it looks for mail folders in sensible
+ places and comes with reasonable defaults.
+ .
+ buffycli uses the same backend as Buffy, but it outputs text to the terminal,
+ rather than a GUI window. It is thus suitable to be used over SSH links, and
+ fits nicely with window managers that are primarily used to organise
+ terminals.
+ .
+ Buffycli is functional but still very young, and only Maildir and Mailbox
+ format are supported at the moment.

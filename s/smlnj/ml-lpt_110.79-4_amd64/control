@@ -1,0 +1,25 @@
+Package: ml-lpt
+Source: smlnj
+Version: 110.79-4
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 2484
+Depends: smlnj (= 110.79-4)
+Provides: ml-antlr, ml-ulex
+Section: devel
+Priority: optional
+Homepage: http://www.smlnj.org/
+Description: SML/NJ language processing tools
+ Tradition has it that when a new programming language is introduced,
+ new scanner and parser generators are written in that language, and
+ generate code for that language.  Traditional also has it that the
+ new tools are modeled after the old lex and yacc tools, both in terms
+ of the algorithms used, and often the syntax as well.  The language
+ Standard ML is no exception: ml-lex and ml-yacc are the SML
+ incarnations of the old Unix tools.
+ .
+ This package has two new tools, ml-ulex and ml-antlr, that follow
+ tradition in separating scanning from parsing, but break from
+ tradition in their implementation: ml-ulex is based on regular
+ expression derivatives rather than subset-construction, and ml-antlr
+ is based on LL(k) parsing rather than LALR(1) parsing.

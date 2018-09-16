@@ -1,0 +1,31 @@
+Package: baitfisher
+Version: 1.0+dfsg-2
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 487
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Section: science
+Priority: optional
+Homepage: https://github.com/cmayer/BaitFisher-package
+Description: software package for designing hybrid enrichment probes
+ The BaitFisher package consists of two programs: BaitFisher and BaitFilter.
+ .
+ BaitFisher was been designed to construct hybrid enrichment baits from
+ multiple sequence alignments (MSAs) or annotated features in MSAs. The main
+ goal of BaitFisher is to avoid redundancy in the construction of baits by
+ designing fewer baits in conserved regions of the MSAs and designing more baits
+ in variable regions. This makes use of the fact that hybrid enrichment baits
+ can differ to some extends from the target region, which they should capture
+ in the enrichment procedure.
+ By specifying the allowed distance between baits and the sequences in the MSAs
+ the user can control the allowed bait-to-target distance and the degree of
+ reduction in the number of baits that are designed.
+ See the BaitFisher paper for details.
+ .
+ BaitFilter was designed (i) to determine whether baits bind unspecifically to
+ a reference genome, (ii) to filter baits that only have partial length matches
+ to a reference genome, (iii) to determine the optimal bait region in a MSA and
+ to convert baits to a format that can be uploaded at a bait constructing
+ company. The optimal bait region can be the most conserved region in the MSA
+ or the region with the highest number of sequences without gaps or ambiguous
+ nucleotides.

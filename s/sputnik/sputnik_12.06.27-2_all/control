@@ -1,0 +1,33 @@
+Package: sputnik
+Version: 12.06.27-2
+Architecture: all
+Maintainer: Enrico Tassi <gareuselesinge@debian.org>
+Installed-Size: 1044
+Depends: lua5.1-coxpcall, lua5.1-wsapi, lua5.1-markdown, lua5.1-cosmo, lua5.1-filesystem, lua5.1-md5, lua5.1-socket, lua5.1
+Recommends: lua5.1-posix, lua5.1-iconv
+Suggests: git, lua5.1-sql-sqlite3, lua5.1-sql-mysql, lua5.1-logging, lua5.1-zlib, xavante
+Section: web
+Priority: optional
+Homepage: http://spu.tnik.org/
+Description: Extensible wiki
+ Sputnik is a wiki written in Lua. It is also a platform for building a range
+ of wiki-like applications, drawing on Lua's strengths as an extension
+ language.
+ .
+ Out of the box Sputnik behaves like a wiki with all the standard wiki
+ features: editable pages, protection against spam bots, history view of pages,
+ diff, preview, per-page-RSS feed for site changes.
+ .
+ At the same time, Sputnik is designed to be used as a platform for a wide
+ range of "social software" applications. Sputnik stores its data as versioned
+ "pages" that can be editable through the web, and it allows those pages to
+ store any data that can be saved as text (prose, comma-separated values, lists
+ of named parameters, Lua tables, mbox-formatted messages, XML, etc.) While by
+ default the page is displayed as if it carried Markdown-formatted text, the
+ way the page is viewed (or edited, or saved, etc.) can be overridden on a
+ per-page basis by over-riding or adding "actions".
+ .
+ The packages provide a wide range of storage modules that may require
+ one of the suggested packages: git, lua5.1-sql-sqlite3, lua5.1-sql-mysql.
+ .
+ The easiest form of deployment is by using the Xavante web server.

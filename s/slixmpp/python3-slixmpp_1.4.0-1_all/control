@@ -1,0 +1,27 @@
+Package: python3-slixmpp
+Source: slixmpp
+Version: 1.4.0-1
+Architecture: all
+Maintainer: Debian XMPP Maintainers <pkg-xmpp-devel@lists.alioth.debian.org>
+Installed-Size: 1553
+Depends: python3-aiodns, python3-pyasn1, python3-pyasn1-modules, python3:any
+Recommends: gnupg, python3-slixmpp-lib
+Section: python
+Priority: optional
+Homepage: https://dev.louiz.org/projects/slixmpp
+Description: Threadless, event-based XMPP Python 3 library
+ Slixmpp is a (friendly) fork of SleekXMPP, which goal is to “improve” the
+ core of the library by entirely removing all threads from the library and
+ using an event-based approach instead.
+ .
+ Features of this library:
+  * No threads. See http://blog.louiz.org/slixmpp. All parts of the API relying
+    on threads are removed.
+  * No support for Python < 3.4. This allows one to remove a lot of workaround
+    and other hacks.
+  * No backward compatibility with old SleekXMPP version. For example things
+    like “addHandler = add_handler” are removed.
+ .
+ You should use this library only if you would prefer not to use threads in
+ your application. If threads don’t really bother you, or if you need Python
+ 2 support, then you should use SleekXMPP instead.

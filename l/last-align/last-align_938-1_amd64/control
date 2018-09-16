@@ -1,0 +1,24 @@
+Package: last-align
+Version: 938-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 3314
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 6), zlib1g (>= 1:1.1.4), parallel
+Recommends: python, python-pil
+Section: science
+Priority: optional
+Homepage: http://last.cbrc.jp/
+Description: genome-scale comparison of biological sequences
+ LAST is software for comparing and aligning sequences, typically DNA or
+ protein sequences. LAST is similar to BLAST, but it copes better with very
+ large amounts of sequence data. Here are two things LAST is good at:
+ .
+  * Comparing large (e.g. mammalian) genomes.
+  * Mapping lots of sequence tags onto a genome.
+ .
+ The main technical innovation is that LAST finds initial matches based on
+ their multiplicity, instead of using a fixed size (e.g. BLAST uses 10-mers).
+ This allows one to map tags to genomes without repeat-masking, without becoming
+ overwhelmed by repetitive hits. To find these variable-sized matches, it uses
+ a suffix array (inspired by Vmatch). To achieve high sensitivity, it uses a
+ discontiguous suffix array, analogous to spaced seeds.

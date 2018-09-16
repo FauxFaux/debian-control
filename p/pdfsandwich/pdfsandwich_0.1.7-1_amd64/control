@@ -1,0 +1,21 @@
+Package: pdfsandwich
+Version: 0.1.7-1
+Architecture: amd64
+Maintainer: Tobias Frost <tobi@debian.org>
+Installed-Size: 1035
+Depends: exactimage, ghostscript, imagemagick, tesseract-ocr (>= 3.00), poppler-utils, unpaper, libc6 (>= 2.17)
+Section: text
+Priority: optional
+Homepage: http://www.tobias-elze.de/pdfsandwich/index.html
+Description: Tool to generate "sandwich" OCR pdf files
+ pdfsandwich generates "sandwich" OCR pdf files, i.e. pdf files which contain
+ only images (no text) will be processed by optical character recognition (OCR)
+ and the text will be added to each page invisibly "behind" the images.
+ pdfsandwich is a command line tool which is supposed to be useful to OCR
+ scanned books or journals.
+ .
+ It is able to recognize the page layout even for multicolumn text.
+ .
+ Essentially, pdfsandwich is a wrapper script which calls the following
+ binaries: convert, unpaper, gs (only for psd resizing), hocr2pdf (for
+ tesseract < 3.03), and tesseract.

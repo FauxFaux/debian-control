@@ -1,0 +1,39 @@
+Package: iwatch
+Version: 0.2.2-5
+Architecture: all
+Maintainer: Joao Eriberto Mota Filho <eriberto@debian.org>
+Installed-Size: 58
+Depends: libevent-perl, liblinux-inotify2-perl, libmail-sendmail-perl, libxml-simpleobject-libxml-perl, lsb-base (>= 3.0-6), perl, postfix | mail-transport-agent
+Suggests: sendxmpp, yowsup-cli
+Section: admin
+Priority: optional
+Homepage: http://iwatch.sf.net
+Description: realtime filesystem monitoring program using inotify
+ inotify (inode notify) is a Linux kernel subsystem that monitors
+ events in filesystems and reports those events to applications in
+ real time.
+ .
+ inotify can be used to monitor individual files or directories.
+ When a directory is monitored, inotify will return events for the
+ directory itself and for files inside the directory.
+ .
+ iWatch is a Perl wrap to inotify to monitor changes in specific
+ directories or files, sending alarm to the system administrator
+ (or other destination) in real time. It can:
+ .
+   - Send notifications via email about changes.
+   - Take programmable actions immediately, as emit alerts via
+     XMPP (jabber) messengers, WhatsApp or execute a local program
+     or script.
+   - Act as HIDS (Host-based Intrusion Detection System) or an
+     integrity checker, complementing the firewall system in
+     networks and improving the security.
+ .
+ iWatch can run as a simple command, as well a daemon.
+ .
+ A good example of iWatch usage is to monitor the pages directory
+ in webservers to notify, in real time, about defacements or file
+ insertions. Other example is to synchronize configuration files
+ between machines, when they are changed, as in DHCP servers acting
+ in failover mode. You also use to synchronize files, via rsync
+ when these files are changed.

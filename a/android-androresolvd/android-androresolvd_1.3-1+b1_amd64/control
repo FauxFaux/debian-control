@@ -1,0 +1,20 @@
+Package: android-androresolvd
+Source: android-androresolvd (1.3-1)
+Version: 1.3-1+b1
+Architecture: amd64
+Maintainer: Sven-Ola Tuecke <sven-ola@gmx.de>
+Installed-Size: 37
+Depends: libc6 (>= 2.14), resolvconf
+Section: otherosfs
+Priority: extra
+Homepage: http://sven-ola.dyndns.org
+Description: Daemon to transfer Android DNS property to resolv.conf
+ Small user space daemon to get the Android DNS server setting and
+ maintain the resolver config on a regulary basis. Note, that this
+ daemon has to be started by some running android programs, in order
+ to have the ANDROID_PROPERTY_WORKSPACE environment variable and
+ the /dev/ashmem file descriptor (usually #9) that is inherited from
+ the calling process. Another note: cannot be started from a login
+ shell, because `bash --login` closes all inherited file descriptors.
+ .
+ This only makes sense to install on a Debian chroot running on Android.

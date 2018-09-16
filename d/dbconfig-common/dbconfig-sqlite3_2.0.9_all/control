@@ -1,0 +1,17 @@
+Package: dbconfig-sqlite3
+Source: dbconfig-common
+Version: 2.0.9
+Architecture: all
+Maintainer: Paul Gevers <elbrus@debian.org>
+Installed-Size: 9
+Depends: dbconfig-common (= 2.0.9), sqlite3
+Conflicts: dbconfig-no-thanks
+Section: admin
+Priority: optional
+Description: dbconfig-common SQLite3 support
+ This package ensures SQLite3 support in the dbconfig-common framework, and
+ should be in the depends list of packages that require SQLite3 support from
+ dbconfig-common.
+ .
+ System administrators that don't want dbconfig-common to handle the database
+ management should install dbconfig-no-thanks instead.

@@ -1,0 +1,23 @@
+Package: virtualbox-source
+Source: virtualbox
+Version: 5.2.18-dfsg-2
+Architecture: all
+Maintainer: Debian Virtualbox Team  <team+debian-virtualbox@tracker.debian.org>
+Installed-Size: 852
+Depends: build-essential, bzip2, debhelper (>= 10), kbuild, module-assistant
+Recommends: virtualbox (>= 5.2.18-dfsg-2)
+Section: contrib/kernel
+Priority: optional
+Homepage: https://www.virtualbox.org
+Description: x86 virtualization solution - kernel module source
+ VirtualBox is a free x86 virtualization solution allowing a wide range
+ of x86 operating systems such as Windows, DOS, BSD or Linux to run on a
+ Linux system.
+ .
+ This package provides the source code for the virtualbox kernel module.
+ The virtualbox package is also required in order to make use of these
+ modules. Kernel sources or headers are required to compile this module.
+ .
+ The source is placed under /usr/src, and after decompression it can
+ be built to produce a virtualbox-modules-_KVERS_ providing
+ "virtualbox-modules" package.

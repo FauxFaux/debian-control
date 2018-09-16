@@ -1,0 +1,28 @@
+Package: icinga2-bin
+Source: icinga2
+Version: 2.9.1-1
+Architecture: amd64
+Maintainer: Debian Nagios Maintainer Group <pkg-nagios-devel@lists.alioth.debian.org>
+Installed-Size: 17211
+Depends: icinga2-common (= 2.9.1-1), libboost-atomic1.62.0, libboost-chrono1.62.0, libboost-date-time1.62.0, libboost-program-options1.62.0, libboost-regex1.62.0 (>= 1.62.0+dfsg-5.1), libboost-system1.62.0, libboost-thread1.62.0, libc6 (>= 2.27), libedit2 (>= 2.11-20080614), libgcc1 (>= 1:3.0), libssl1.1 (>= 1.1.0), libstdc++6 (>= 7), libtinfo6 (>= 6), libyajl2 (>= 2.0.4)
+Section: admin
+Priority: optional
+Homepage: https://www.icinga.com
+Description: host and network monitoring system - daemon
+ Icinga 2 is a general-purpose monitoring application to fit the needs of
+ any size of network. Icinga 1.x was a Nagios fork; this new generation
+ has been rewritten from scratch in C++, with multi-threading and cluster
+ support.
+ .
+ Features:
+  * all standard features of Icinga and Nagios;
+  * much faster and more scalable than Icinga 1 and Nagios;
+  * new, more intuitive, template-based configuration format;
+  * monitoring services on ICMP (ping) or TCP ports (HTTP, NNTP, POP3,
+    SMTP, etc.) by executing checks (see monitoring-plugins*);
+  * any small script following the Nagios plugin API can be used as a
+    check plugin;
+  * notifications about alerts for any custom script (with examples);
+  * native support for Livestatus and Graphite.
+ .
+ This package provides the Icinga 2 daemon.

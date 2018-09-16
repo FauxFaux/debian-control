@@ -1,0 +1,18 @@
+Package: node-defaults
+Version: 1.0.3-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 15
+Depends: nodejs, node-clone (>= 1.0.2)
+Section: web
+Priority: optional
+Homepage: https://github.com/tmpvar/defaults#readme
+Description: merge single level defaults over a config object
+ A simple one level options merge utility. This module exports
+ a function that takes 2 arguments: options and defaults.
+ When called, it overrides all of undefined properties in
+ options with the clones of properties defined in defaults.
+ Sidecases: if called with a falsy options value, options will
+ be initialized to a new object before being merged onto.
+ .
+ Node.js is an event-based server-side JavaScript engine.

@@ -1,0 +1,21 @@
+Package: ack
+Version: 2.24-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 210
+Depends: libfile-next-perl (>= 1.10), perl
+Breaks: ack-grep (<= 2.14-5~)
+Replaces: ack-grep (<= 2.14-5~)
+Provides: ack-grep
+Section: utils
+Priority: optional
+Homepage: https://beyondgrep.com/
+Description: grep-like program specifically for large source trees
+ Ack is designed as an alternative for 99% of the uses of grep. ack is
+ intelligent about the files it searches. It knows about certain file
+ types, based on both the extension on the file and, in some cases, the
+ contents of the file.
+ .
+ Ack ignores backup files and files under CVS and .svn directories. It
+ also highlights matches to help you see where the match was. Ack uses
+ perl regular expressions.

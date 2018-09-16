@@ -1,0 +1,23 @@
+Package: imapproxy
+Source: up-imapproxy (1.2.8~svn20171105-1)
+Version: 1.2.8~svn20171105-1+b1
+Architecture: amd64
+Maintainer: Richard Laager <rlaager@wiktel.com>
+Installed-Size: 190
+Depends: lsb-base (>= 3.2-13), ucf (>= 0.28), debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.14), libncurses6 (>= 6), libssl1.1 (>= 1.1.0), libtinfo6 (>= 6), libwrap0 (>= 7.6-4~)
+Section: mail
+Priority: optional
+Homepage: http://www.imapproxy.org
+Description: IMAP protocol proxy
+ IMAP Proxy proxies IMAP transactions between an IMAP client and an IMAP
+ server. The general idea is that the client should never know that it is
+ not talking to the real IMAP server while IMAP Proxy caches server connections.
+ .
+ IMAP Proxy was written to compensate for webmail clients that are unable to
+ maintain persistent connections to an IMAP server. Most webmail clients
+ need to log in to an IMAP server for nearly every single transaction. This
+ behaviour can cause tragic performance problems on the IMAP server.
+ IMAP Proxy tries to deal with this problem by leaving server connections
+ open for a short time after a webmail client logs out. When the webmail client
+ connects again, IMAP Proxy will determine if there is a cached connection
+ available and reuse it if possible.

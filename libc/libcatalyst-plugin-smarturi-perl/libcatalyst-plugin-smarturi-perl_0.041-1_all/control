@@ -1,0 +1,24 @@
+Package: libcatalyst-plugin-smarturi-perl
+Version: 0.041-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 29
+Depends: perl, libcatalyst-perl, libclass-c3-componentised-perl, libclass-load-perl, libmoose-perl, libnamespace-clean-perl, libtask-weaken-perl, liburi-smarturi-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Catalyst-Plugin-SmartURI
+Description: module providing configurable URIs for Catalyst
+ Configure whether $c->uri_for and $c->req->uri_with return absolute, hostless
+ or relative URIs, or URIs based on the 'Host' header. Also allows configuring
+ which URI class to use. Works on application-wide or per-request basis.
+ .
+ Catalyst::Plugin::SmartURI is useful in situations where you're for example,
+ redirecting to a lighttpd from a firewall rule, instead of a real proxy, and
+ you want your links and redirects to still work correctly.
+ .
+ To use your own URI class, just subclass URI::SmartURI and set uri_class, or
+ write a class that follows the same interface.
+ .
+ This plugin installs a custom $c->request_class, however it does so in a way
+ that won't break if you've already set $c->request_class yourself, ie. by
+ using Catalyst::Action::REST (thanks mst!).

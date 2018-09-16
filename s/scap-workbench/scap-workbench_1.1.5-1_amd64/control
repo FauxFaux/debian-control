@@ -1,0 +1,31 @@
+Package: scap-workbench
+Version: 1.1.5-1
+Architecture: amd64
+Maintainer: Frank Lin PIAT <fpiat@klabs.be>
+Installed-Size: 2716
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libopenscap8 (>= 1.2.0), libqt4-xmlpatterns (>= 4:4.5.3), libqtcore4 (>= 4:4.8.0), libqtgui4 (>= 4:4.7.0~beta1), libstdc++6 (>= 5.2)
+Recommends: openssh-client, ssh-askpass
+Section: admin
+Priority: optional
+Homepage: https://www.open-scap.org/tools/scap-workbench/
+Description: Scanning and tailoring tool for SCAP content
+ SCAP is a line of standards managed by NIST with the goal of
+ providing a standard language for the expression of Computer Network
+ Defense related information.
+ .
+ The main goal of this application is to lower the initial barrier of using
+ SCAP. Therefore, the scope of very narrow - scap-workbench only scans a
+ single machine and only with XCCDF/SDS (no direct OVAL evaluation).
+ The assumption is that this is enough for users who want to scan a few
+ machines and users with huge amount of machines to scan will just use
+ scap-workbench to test or hand-tune their content before deploying it with
+ more advanced (and harder to use) tools like spacewalk.
+ .
+ Feature highlights:
+  * XCCDF 1.1 and 1.2 support
+  * Source Data Stream 1.2 support
+  * XCCDF 1.2 Tailoring file support
+  * Evaluation of local machine
+  * Evaluation of remote machine (using ssh)
+  * Limited tailoring support - selection and unselection
+  * Saving results as XCCDF 1.1 or 1.2 (depending on input) or ARF 1.1

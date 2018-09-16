@@ -1,0 +1,21 @@
+Package: das-watchdog
+Source: das-watchdog (0.9.0-3.2)
+Version: 0.9.0-3.2+b3
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 49
+Depends: x11-utils, libc6 (>= 2.4), libglib2.0-0 (>= 2.12.0), libgtop-2.0-11 (>= 2.22.3)
+Section: admin
+Priority: extra
+Description: solves system lock-ups by making all processes non-realtime
+ Das_Watchdog is a general watchdog for the Linux operating system that
+ should be run in the background at all times to ensure a realtime process
+ won't hang the machine.
+ .
+ Das_Watchdog is inspired by the rt_watchdog program from Florian Schmidt,
+ but has some improvements over it:
+  * It works with 2.4 kernels as well as 2.6.
+  * Instead of permanently setting all realtime processes to run
+    non-realtime, das_watchdog only sets them temporary.
+  * When the watchdog kicks in, an X window should pop up that tells you
+    whats happening (just close it after reading the message).

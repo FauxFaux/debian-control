@@ -1,0 +1,24 @@
+Package: joystick
+Version: 1:1.6.0-2
+Architecture: amd64
+Maintainer: Stephen Kitt <skitt@debian.org>
+Installed-Size: 175
+Depends: libc6 (>= 2.15), libsdl1.2debian (>= 1.2.11)
+Recommends: evtest, inputattach
+Breaks: stella (<< 4.7.2)
+Replaces: stella (<< 4.7.2)
+Section: utils
+Priority: extra
+Homepage: https://sourceforge.net/projects/linuxconsole/
+Description: set of testing and calibration tools for joysticks
+ Some useful tools for using joysticks:
+  evdev-joystick(1) - joystick calibration tool
+  ffcfstress(1)     - force-feedback stress test
+  ffmvforce(1)      - force-feedback orientation test
+  ffset(1)          - force-feedback configuration tool
+  fftest(1)         - general force-feedback test
+  jstest(1)         - joystick test
+  jscal(1)          - joystick calibration tool
+ .
+ evtest and inputattach, which used to be part of this package, are now
+ available separately.

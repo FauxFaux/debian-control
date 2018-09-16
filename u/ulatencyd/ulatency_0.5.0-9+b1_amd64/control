@@ -1,0 +1,18 @@
+Package: ulatency
+Source: ulatencyd (0.5.0-9)
+Version: 0.5.0-9+b1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 64
+Depends: ulatencyd (= 0.5.0-9+b1), python, python-dbus
+Suggests: python-qt4
+Section: utils
+Priority: optional
+Homepage: https://github.com/poelzi/ulatencyd
+Description: scriptable latency regulator using cgroups (client)
+ The userspace latency daemon controls how the Linux kernel spends its
+ resources on the running processes. It uses dynamic cgroups to give the
+ kernel hints on how to optimize process scheduling.
+ .
+ This package provides a command-line/Qt4 client which can be used to tune
+ and monitor ulatencyd.

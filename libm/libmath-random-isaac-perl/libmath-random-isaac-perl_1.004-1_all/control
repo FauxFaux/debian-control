@@ -1,0 +1,27 @@
+Package: libmath-random-isaac-perl
+Version: 1.004-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 50
+Depends: perl
+Recommends: libmath-random-isaac-xs-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Math-Random-ISAAC
+Description: Perl interface to the ISAAC PRNG Algorithm
+ Math::Random::ISAAC implements the ISAAC (Indirection, Shift, Accumulate, Add
+ and Count) pseudorandom number generator (PRNG) algorithm described on the
+ project page at: <URL:http://burtleburtle.net/bob/rand/isaac.html>
+ .
+ As with other algorithms like the Mersenne Twister (see Math::Random::MT),
+ this algorithm is designed to take some seed information and produce seemingly
+ random results as output.
+ .
+ The results are uniformly distributed, unbiased, and unpredictable unless you
+ know the seed. The algorithm was published by Bob Jenkins in the late 1990s
+ and despite the best efforts of many security researchers, no feasible attacks
+ have been found to date.
+ .
+ For comparison with other algorithms intended to generate random data, the
+ Mersenne Twister has a period of 2^19937-1, the related TT800 has a period
+ of 2^800-1 values. ISAAC has a period of 2^8295 values on average.

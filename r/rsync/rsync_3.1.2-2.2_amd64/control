@@ -1,0 +1,23 @@
+Package: rsync
+Version: 3.1.2-2.2
+Architecture: amd64
+Maintainer: Paul Slootman <paul@debian.org>
+Installed-Size: 695
+Depends: libacl1 (>= 2.2.51-8), libattr1 (>= 1:2.4.46-8), libc6 (>= 2.15), libpopt0 (>= 1.14), lsb-base (>= 3.2-14), base-files (>= 4.0.1), init-system-helpers (>= 1.18~)
+Suggests: openssh-client, openssh-server
+Breaks: duplicity (<< 0.6.11)
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://rsync.samba.org/
+Description: fast, versatile, remote (and local) file-copying tool
+ rsync is a fast and versatile file-copying tool which can copy locally
+ and to/from a remote host. It offers many options to control its behavior,
+ and its remote-update protocol can minimize network traffic to make
+ transferring updates between machines fast and efficient.
+ .
+ It is widely used for backups and mirroring and as an improved copy
+ command for everyday use.
+ .
+ This package provides both the rsync command line tool and optional
+ daemon functionality.

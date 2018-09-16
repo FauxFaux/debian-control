@@ -1,0 +1,20 @@
+Package: openafs-fuse
+Source: openafs
+Version: 1.8.2-1
+Architecture: amd64
+Maintainer: Benjamin Kaduk <kaduk@mit.edu>
+Installed-Size: 699
+Depends: libc6 (>= 2.14), libfuse2 (>= 2.6), libhcrypto4-heimdal (>= 1.4.0+git20110226), libroken18-heimdal (>= 1.4.0+git20110226), openafs-client (= 1.8.2-1)
+Section: net
+Priority: optional
+Homepage: http://www.openafs.org/
+Description: AFS distributed file system experimental FUSE client
+ AFS is a distributed filesystem allowing cross-platform sharing of
+ files among multiple computers.  Facilities are provided for access
+ control, authentication, backup and administrative management.
+ .
+ This package provides an experimental FUSE implementation of the AFS
+ client as afsd.fuse.  This currently only provides read-only access to
+ AFS, doesn't work with all of the normal AFS client programs, and must be
+ started manually, but may be of interest in situations where read-only
+ access is sufficient and the kernel module cannot be built.

@@ -1,0 +1,26 @@
+Package: asterisk-opus
+Version: 13.7+20161113-4
+Architecture: amd64
+Maintainer: Debian VoIP Team <pkg-voip-maintainers@lists.alioth.debian.org>
+Installed-Size: 61
+Depends: asterisk, asterisk-1fb7f5c06d7a2052e38d021b3d8ca151, libc6 (>= 2.14), libopus0 (>= 1.1), libopusfile0 (>= 0.5)
+Section: comm
+Priority: extra
+Homepage: http://github.com/traud/asterisk-opus/
+Description: opus module for Asterisk
+ Module for the Asterisk open source PBX which allows you to use the
+ Opus audio codec.
+ .
+ Opus is the default audio codec in WebRTC. WebRTC is available in
+ Asterisk via SIP over WebSockets (WSS). Nevertheless, Opus can be used
+ for other transports (UDP, TCP, TLS) as well. Opus supersedes previous
+ codecs like CELT and SiLK. Furthermore in favor of Opus, other
+ open-source audio codecs are no longer developed, like Speex, iSAC,
+ iLBC, and Siren. If you use your Asterisk as a back-to-back user agent
+ (B2BUA) and you transcode between various audio codecs, one should
+ enable Opus for future compatibility.
+ .
+ Opus is not only supported for pass-through but can be transcoded as
+ well. This allows you to translate to/from other audio codecs like
+ those for landline telephones (ISDN: G.711; DECT: G.726-32; and HD:
+ G.722) or mobile phones (GSM, AMR, AMR-WB, 3GPP EVS).

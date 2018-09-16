@@ -1,0 +1,19 @@
+Package: libdata-phrasebook-perl
+Version: 0.35-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 140
+Depends: perl, libmodule-pluggable-perl | perl (<< 5.17.0)
+Suggests: libdata-phrasebook-loader-yaml-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Data-Phrasebook
+Description: perl implementation of the phrasebook paradigm
+ The phrasebook pattern is a technique to separate expressions in one language
+ (e.g. SQL) from the main code that is written in another (e.g. Perl). The
+ translations are kept in a separate file - the phrasebook.
+ .
+ Data::Phrasebook enables the framework for abstracting common or locale data
+ out of your code into a datastore. The default is within a plain text file,
+ but more complex datastores can be intrigrated via the use of other
+ Data::Pharsebook::Loader distributions (eg YAML, XML, INI, DBI).

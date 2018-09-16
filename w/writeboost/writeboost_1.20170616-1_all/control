@@ -1,0 +1,18 @@
+Package: writeboost
+Version: 1.20170616-1
+Architecture: all
+Maintainer: Dmitry Smirnov <onlyjob@debian.org>
+Installed-Size: 39
+Depends: dmsetup, dm-writeboost-dkms
+Recommends: kmod
+Enhances: dm-writeboost-dkms
+Section: utils
+Priority: optional
+Homepage: https://gitlab.com/onlyjob/writeboost
+Description: utility to manage mappings of dm-writeboost devices
+ Writeboost is a utility to activate dm-writeboost device mappings.
+ .
+ dm-writeboost is an OS-level IO controller that builds logs from in-coming
+ writes (data and metadata) and then writes the logs sequentially similar
+ to log-structured filesystem. As a further extension, dm-writeboost
+ supports read-caching which also writes data sequentially.

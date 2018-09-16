@@ -1,0 +1,19 @@
+Package: golang-github-facebookgo-grace-dev
+Source: golang-github-facebookgo-grace
+Version: 0.0~git20170218.0.4afe952-6
+Architecture: all
+Maintainer: QA Group <packages@qa.debian.org>
+Installed-Size: 63
+Depends: golang-github-facebookgo-ensure-dev, golang-github-facebookgo-freeport-dev, golang-github-facebookgo-httpdown-dev
+Section: devel
+Priority: extra
+Homepage: https://github.com/facebookgo/grace
+Description: Graceful restart & zero downtime deploy for Go servers
+ This Go library provides a mechanism that makes it easy to build socket
+ based servers that can be gracefully terminated and restarted--without
+ dropping any connections.
+ .
+ It provides a convenient API for HTTP servers including support for
+ TLS, and listening on multiple ports. It is implemented using the
+ same API as systemd providing socket activation compatibility to also
+ provide lazy activation of the server.

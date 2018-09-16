@@ -1,0 +1,24 @@
+Package: libfuture-asyncawait-perl
+Version: 0.15-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 66
+Depends: perl (>= 5.26.1-5), perlapi-5.26.1, libc6 (>= 2.4), libfuture-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Future-AsyncAwait
+Description: deferred subroutine syntax for futures
+ Future::AsyncAwait provides syntax for deferring and resuming subroutines
+ while waiting for Futures to complete. This syntax aims to make code that
+ performs asynchronous operations using futures look neater and more
+ expressive than simply using then chaining and other techniques on the
+ futures themselves. It is also a similar syntax used by a number of other
+ languages; notably C# 5, EcmaScript 6, Python 3, and lately even Rust is
+ considering adding it.
+ .
+ The new syntax takes the form of two new keywords, async and await.
+ .
+ WARNING: The actual semantics in this module are in an early state of
+ implementation. Some things will randomly break. While it seems stable enough
+ for small-scale development and experimental testing, don't expect to be able
+ to use this module reliably in production yet.

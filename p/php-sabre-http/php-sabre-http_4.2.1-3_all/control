@@ -1,0 +1,28 @@
+Package: php-sabre-http
+Version: 4.2.1-3
+Architecture: all
+Maintainer: Debian PHP PEAR Maintainers <pkg-php-pear@lists.alioth.debian.org>
+Installed-Size: 145
+Depends: php-common, php-mbstring, php-sabre-event (>= 1.0.0), php-sabre-event (<< 4.0.0~~), php-sabre-uri (>= 1.0), php-sabre-uri (<< 2~~)
+Suggests: php-curl
+Breaks: php-sabre-dav (<< 1.9)
+Replaces: php-sabre-dav (<< 1.9)
+Section: php
+Priority: optional
+Homepage: https://github.com/fruux/sabre-http
+Description: library to ease the work with HTTP protocol
+ sabre/http provides a toolkit to ease the work with HTTP protocol.
+ .
+ This library is a wrapper around the following PHP constructs:
+ .
+ For Input:
+  * $_GET
+  * $_POST
+  * $_SERVER
+  * php://input or $HTTP_RAW_POST_DATA.
+ For output:
+  * php://output or echo.
+  * header()
+ .
+ It provides a Request object, and a Response object. The objects are
+ extensible and easily mockable.

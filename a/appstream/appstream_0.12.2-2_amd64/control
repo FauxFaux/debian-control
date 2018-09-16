@@ -1,0 +1,26 @@
+Package: appstream
+Version: 0.12.2-2
+Architecture: amd64
+Maintainer: Matthias Klumpp <mak@debian.org>
+Installed-Size: 656
+Depends: libappstream4 (>= 0.12.0), libc6 (>= 2.4), libglib2.0-0 (>= 2.46)
+Suggests: apt-config-icons, curl
+Breaks: appstream-index (<< 0.12.2-2), gnome-software (<< 3.22.5-1), plasma-discover (<< 5.8.5-3)
+Provides: appstream-index
+Section: admin
+Priority: optional
+Homepage: https://www.freedesktop.org/wiki/Distributions/AppStream/
+Description: Software component metadata management
+ AppStream is a metadata specification, allowing to write metadata for
+ software projects in a standardized format.
+ It provides facilities to easily access and transform the data, as well
+ as a few additional services to allow building feature-rich software center
+ applications.
+ .
+ This package provides tools to generate, maintain and query the AppStream
+ data pool of installed and available software, and enables integration
+ with the APT package manager.
+ .
+ The 'appstreamcli' tool can be used for accessing the software component
+ pool as well as for working with AppStream metadata directly, including
+ validating it for compliance with the specification.

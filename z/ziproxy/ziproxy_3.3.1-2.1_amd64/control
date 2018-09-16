@@ -1,0 +1,32 @@
+Package: ziproxy
+Version: 3.3.1-2.1
+Architecture: amd64
+Maintainer: Marcos Talau <talau@users.sourceforge.net>
+Installed-Size: 285
+Depends: libc6 (>= 2.15), libgif7 (>= 5.1), libjpeg62-turbo (>= 1.3.1), libpng16-16 (>= 1.6.2-1), libsasl2-2, zlib1g (>= 1:1.1.4), adduser, lsb-base (>= 3.0-10), passwd
+Section: net
+Priority: extra
+Homepage: http://ziproxy.sf.net
+Description: compressing HTTP proxy server
+ Ziproxy is a forwarding, non-caching and compressing HTTP proxy server.
+ Basically it squeezes images by converting them to lower quality JPEGs
+ and compresses (gzip) HTML and other text-like data. It also provides
+ other features such as: HTML/JS/CSS optimization, preemptive hostname
+ resolution, transparent proxying, IP ToS marking (QoS), Ad-Blocker,
+ detailed logging and more.
+ .
+ Ziproxy may be installed in a number of different ways. Most common
+ setup modes:
+  1) As a remote proxy (by far, the most commonly used setup)
+     Ziproxy accesses the remote www servers through a fast link,
+     compresses the data, then send it to the client through a slow link.
+     In such setups there's no additional software required by the client,
+     Ziproxy acts much as a common network proxy.
+  2) As a local and remote proxy
+     Similar to setup #1, except that the client also runs its instance of
+     Ziproxy. Although Ziproxy does not require a Ziproxy-specific client,
+     there are circumstances where is desired to run Ziproxy-as-a-client:
+       * Client does not support JPEG 2000.
+       * Client supports JPEG 2000 but it is buggy and/or slow.
+       * Client does not support gzip.
+       * Need to support both JPEG 2000 and standard JPEG at the same proxy.

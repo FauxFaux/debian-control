@@ -1,0 +1,22 @@
+Package: node-thenify-all
+Version: 1.6.0-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 20
+Depends: nodejs, node-thenify
+Section: javascript
+Priority: optional
+Homepage: https://github.com/thenables/thenify-all
+Description: Promisifies all the selected functions in an object
+ Some features of this module:
+  - Preserves function names
+  - Uses a native promise implementation if available and tries to fall back to
+    a promise implementation such as bluebird
+  - Converts multiple arguments from the callback into an Array, also support
+    change the behavior by options.multiArgs
+  - Resulting function never deoptimizes
+  - Supports both callback and promise style
+ An added benefit is that thrown errors in that async function will be caught
+ by the promise!
+ .
+ Node.js is an event-based server-side JavaScript engine.

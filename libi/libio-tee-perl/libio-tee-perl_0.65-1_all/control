@@ -1,0 +1,30 @@
+Package: libio-tee-perl
+Version: 0.65-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/IO-Tee
+Description: module for multiplexing output to multiple output handles
+ IO::Tee objects can be used to multiplex input and output in two
+ different ways.  The first way is to multiplex output to zero or more
+ output handles.  The IO::Tee constructor, given a list of output
+ handles, returns a tied handle that can be written to.  When written
+ to (using print or printf), the IO::Tee object multiplexes the
+ output to the list of handles originally passed to the constructor.
+ As a shortcut, you can also directly pass a string or an array
+ reference to the constructor, in which case IO::File::new is called
+ for you with the specified argument or arguments.
+ .
+ The second way is to multiplex input from one input handle to zero or
+ more output handles as it is being read.  The IO::Tee constructor,
+ given an input handle followed by a list of output handles, returns a
+ tied handle that can be read from as well as written to.  When written
+ to, the IO::Tee object multiplexes the output to all handles passed
+ to the constructor, as described in the previous paragraph.  When read
+ from, the IO::Tee object reads from the input handle given as the
+ first argument to the IO::Tee constructor, then writes any data
+ read to the output handles given as the remaining arguments to the
+ constructor.

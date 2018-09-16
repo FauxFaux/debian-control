@@ -1,0 +1,31 @@
+Package: libfile-policy-perl
+Version: 1.005-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 39
+Depends: perl, libtest-assertions-perl, liblog-trace-perl, libfile-slurp-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/File-Policy
+Description: simple policy for file I/O functions
+ File::Policy defines the policy for file I/O with modules such as
+ File::Slurp::WithinPolicy. The purpose is to allow systems administrators to
+ define locations and restrictions for applications' file I/O and give app
+ developers a policy to follow. Note that the module doesn't ENFORCE the policy
+ - application developers can choose to ignore it (and systems administrators
+ can choose not to install their applications if they do!).
+ .
+ You may control which policy gets applied by creating a File::Policy::Config
+ module with an IMPLEMENTATION constant. You may write your own policy as a
+ module within the File::Policy:: namespace.
+ .
+ By default (if no File::Policy::Config is present), the File::Policy::Default
+ policy gets applied which doesn't impose any restrictions and provides
+ reasonable default locations for temporary and log files.
+ .
+ The motivation behind this module was a standard, flexible approach to allow
+ a site wide file policy to be defined. This will be most useful in large
+ environments where a few sysadmins are responsible for code written by many
+ other people. Simply ensuring that submitted code calls check_safe() ensures
+ file access is sane, reducing the amount of effort required to do a security
+ audit.

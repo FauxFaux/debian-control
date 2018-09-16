@@ -1,0 +1,18 @@
+Package: pluginhook
+Source: pluginhook (0~20150216.0~a320158-2)
+Version: 0~20150216.0~a320158-2+b3
+Architecture: amd64
+Maintainer: Alessio Treglia <alessio@debian.org>
+Installed-Size: 1505
+Built-Using: golang-1.10 (= 1.10-1), golang-go.crypto (= 1:0.0~git20170629.0.5ef0053-2)
+Section: utils
+Priority: extra
+Homepage: http://github.com/progrium/pluginhook
+Description: simple plugin system for Bash programs
+ The pluginhook command loops through all plugin directories found in the
+ path defined by the environment variable PLUGIN_PATH and passes the same
+ arguments to any hook scripts by that name. This means installing a
+ plugin is as simple as putting it in your PLUGIN_PATH.
+ .
+ pluginhook does not only provide a mechanism for arguments broadcasting,
+ it also accepts streams and pass them through each plugin.

@@ -1,0 +1,22 @@
+Package: python-adns
+Source: python-adns (1.2.1-5)
+Version: 1.2.1-5+b1
+Architecture: amd64
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 156
+Depends: python2.6 | python2.7, python (>= 2.6.6-7~), python (<< 2.8), libadns1 (>= 1.4), libc6 (>= 2.2.5)
+Conflicts: python2.3-adns (<< 1.0.0-6.2), python2.4-adns (<< 1.0.0-6.2)
+Replaces: python2.3-adns (<< 1.0.0-6.2), python2.4-adns (<< 1.0.0-6.2)
+Provides: python2.6-adns, python2.7-adns
+Section: python
+Priority: optional
+Homepage: http://code.google.com/p/adns-python/
+Description: Python bindings to the asynchronous DNS resolver library
+ This module provides a Python binding to the adns asynchronous DNS
+ resolver library.
+ .
+ The module provides a small wrapper adns that simply returns status
+ codes as does the C library. It also provides a more Python like
+ interface ADNS that wraps status codes in proper exceptions.
+ .
+ The package contains working examples in ADNS.py and DNSBL.py.

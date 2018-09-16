@@ -1,0 +1,20 @@
+Package: onesixtyone
+Source: onesixtyone (0.3.2-1)
+Version: 0.3.2-1+b2
+Architecture: amd64
+Maintainer: Jose Parrella <bureado@debian.org>
+Installed-Size: 46
+Depends: libc6 (>= 2.4)
+Section: net
+Priority: extra
+Homepage: http://www.phreedom.org/solar/onesixtyone/
+Description: fast and simple SNMP scanner
+ onesixtyone is a simple SNMP scanner which sends SNMP requests for the
+ sysDescr value asynchronously with user-adjustable sending times and
+ then logs the responses which gives the description of the software
+ running on the device.
+ .
+ Running onesixtyone on a class B network (switched 100Mbs with 1Gbs
+ backbone) with -w 10 gives a performance of 3 seconds per class C, with
+ no dropped packets, and all 65536 IP addresses were scanned in less than
+ 13 minutes.

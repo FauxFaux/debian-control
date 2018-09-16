@@ -1,0 +1,19 @@
+Package: libio-stream-perl
+Version: 2.0.3-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 57
+Depends: perl, libanyevent-perl, libev-perl
+Recommends: libdata-alias-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/IO-Stream
+Description: module that provides non-blocking I/O streams based on EV
+ Non-blocking event-based low-level I/O is hard to get right. Things become
+ much worse when you need to alter I/O stream in some way - use proxies,
+ encryption, SSL, etc.
+ .
+ IO::Stream is designed to give user ability to work with I/O streams on
+ higher level, using input/output buffers (just scalars) and high-level
+ events like CONNECTED, SENT or EOF. As same time it doesn't hide low-level
+ things, and user still able to work on low-level without any limitations.

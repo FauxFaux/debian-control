@@ -1,0 +1,26 @@
+Package: python3-sepolgen
+Source: selinux-python
+Version: 2.8-1
+Architecture: all
+Maintainer: Debian SELinux maintainers <selinux-devel@lists.alioth.debian.org>
+Installed-Size: 357
+Depends: checkpolicy (>= 2.8), make, python3-selinux (>= 2.8), python3-setools (>= 4.1.1), semodule-utils (>= 2.8), python3:any (>= 3.3.2-2~)
+Recommends: selinux-policy-dev
+Breaks: python-sepolgen (<< 2.6)
+Replaces: python-sepolgen (<< 2.6)
+Section: python
+Priority: optional
+Homepage: http://userspace.selinuxproject.org/
+Description: Python3 module used in SELinux policy generation
+ This package contains a Python3 module that forms the core of the modern
+ audit2allow (which is a part of the package policycoreutils).
+ .
+ The sepolgen library is structured to give flexibility to the application
+ using it. The library contains: Reference Policy Representation,
+ which are Objects for representing policies and the reference policy
+ interfaces. Secondly, it has objects and algorithms for representing
+ access and sets of access in an abstract way and searching that
+ access. It also has a parser for reference policy "headers". It
+ contains infrastructure for parsing SELinux related messages as
+ produced by the audit system. It has facilities for generating policy
+ based on required access.

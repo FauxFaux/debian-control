@@ -1,0 +1,28 @@
+Package: antlr3.2-gunit-maven-plugin
+Source: antlr3.2
+Version: 3.2-16
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 37
+Depends: libantlr3.2-gunit-java (>= 3.2-16), libmaven3-core-java, libplexus-compiler-java
+Breaks: antlr3-gunit-maven-plugin (<< 3.3~)
+Replaces: antlr3-gunit-maven-plugin (<< 3.3~)
+Section: java
+Priority: optional
+Homepage: http://www.antlr3.org
+Description: Maven plugin for gUnit, a unit test framework for ANTLR grammars
+ gUnit is a "Unit Test" framework for ANTLR grammars. It provides a simple
+ way to write and run automated tests for ANTLR grammars in a manner similar
+ to Java unit testing framework jUnit. The basic idea is to create a bunch of
+ input/output pairs for rules in a grammar and gUnit will verify the expected
+ output/result. The input can be a single line or multiple lines of strings or
+ even an external file. The output can be simply success or failure, an
+ abstract syntax tree (AST), a rule return value, or some text output which
+ could be a rule's template return value. The current version of gUnit has 2
+ main functions, interpreter and jUnit generator. The interpreter interprets
+ your gUnit script and runs unit tests using Java reflection to invoke methods
+ in your parser objects. The generator, on the other hand, translates your
+ gUnit script to jUnit Java code that you can compile and execute by hand.
+ .
+ This package provides the Maven plugin that allows one to run gUnit tests
+ during a Maven build.

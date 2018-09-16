@@ -1,0 +1,19 @@
+Package: elpa-with-simulated-input
+Source: with-simulated-input-el
+Version: 2.2-1
+Architecture: all
+Maintainer: Debian Emacs addons team <pkg-emacsen-addons@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: elpa-seq (>= 2.0), elpa-s (>= 0), emacsen-common
+Recommends: emacs (>= 46.0)
+Enhances: emacs, emacs25
+Section: lisp
+Priority: optional
+Homepage: https://github.com/DarwinAwardWinner/with-simulated-input
+Description: macro to simulate user input non-interactively
+ This package provides an Emacs Lisp macro, `with-simulated-input',
+ which evaluates one or more forms while simulating a sequence of
+ input events for those forms to read. The result is the same as if
+ you had evaluated the forms and then manually typed in the same
+ input. This macro is useful for non-interactive testing of normally
+ interactive commands and functions, such as `completing-read'.

@@ -1,0 +1,18 @@
+Package: python-dib-utils
+Version: 0.0.6-2
+Architecture: all
+Maintainer: Debian OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: python:any (<< 2.8), python:any (>= 2.7~)
+Section: python
+Priority: optional
+Homepage: https://github.com/openstack/dib-utils
+Description: Standalone tools related to diskimage-builder - Python 2.x
+ These tools were originally part of the diskimage-builder project, but they
+ have uses outside of that project as well. Because disk space is at a premium
+ in base cloud images, pulling in all of diskimage-builder and its dependencies
+ just to use something like dib-run-parts is not desirable. This project allows
+ consumers to use the tools while pulling in only one small package with few/no
+ additional dependencies.
+ .
+ This package contains the Python 2.x module.

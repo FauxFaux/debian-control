@@ -1,0 +1,21 @@
+Package: python3-iowait
+Source: python-iowait
+Version: 0.1-1.1
+Architecture: all
+Maintainer: Andrea Corbellini <andrea.corbellini@ubuntu.com>
+Installed-Size: 68
+Depends: python3 (>= 3.1.3-13~)
+Section: python
+Priority: optional
+Homepage: https://launchpad.net/python-iowait
+Description: Platform-independent module for I/O completion events
+ Different operating systems provide different ways to wait for I/O completion
+ events: there's select(), poll(), epoll() and kqueue(). For cross-platform
+ applications it can be a pain to support all this system functions, especially
+ because each one provides a different interface.
+ .
+ IOWait solves this problem by providing a unified interface and using always
+ the best and faster function available in the platform. Its only limitation is
+ that, on Windows, it only works for sockets.
+ .
+ This package provides the module for Python 3.

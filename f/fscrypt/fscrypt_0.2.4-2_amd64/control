@@ -1,0 +1,23 @@
+Package: fscrypt
+Version: 0.2.4-2
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Installed-Size: 4666
+Depends: libc6 (>= 2.14), libpam0g (>= 0.99.7.1)
+Suggests: libpam-fscrypt
+Built-Using: golang-1.10 (= 1.10.3-1), golang-github-pkg-errors (= 0.8.0+git20180311.816c908-1), golang-github-urfave-cli (= 1.20.0-1), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-sys (= 0.0~git20180510.7dfd129-1), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-2)
+Section: admin
+Priority: optional
+Homepage: https://github.com/google/fscrypt
+Description: Tool for managing Linux filesystem encryption
+ fscrypt is a high-level tool for the management of Linux filesystem
+ encryption. This tool manages metadata, key generation, key wrapping,
+ PAM integration, and provides a uniform interface for creating and
+ modifying encrypted directories.
+ .
+ To use fscrypt, you must have a filesystem with encryption enabled and
+ a kernel that supports reading/writing from that filesystem. Currently,
+ ext4, F2FS, and UBIFS support Linux filesystem encryption. Ext4 has
+ supported Linux filesystem encryption since v4.1, F2FS added support
+ in v4.2, and UBIFS added support in v4.10. Other filesystems may add
+ support for native encryption in the future.

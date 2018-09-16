@@ -1,0 +1,21 @@
+Package: python3-ironic-ui
+Source: ironic-ui
+Version: 3.3.0-2
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 523
+Depends: openstack-dashboard (>= 3:14.0.0~rc2), python3-django (<< 2:2), python3-ironicclient (>= 2.3.0), python3-pbr (>= 2.0.0), python3-six, python3:any
+Breaks: python-ironic-ui
+Replaces: python-ironic-ui
+Section: python
+Priority: optional
+Homepage: https://github.com/openstack/ironic-ui
+Description: bare metal hypervisor API for OpenStack - Dashboard plugin
+ Ironic provision bare metal machines instead of virtual machines. It is a fork
+ of the Nova Baremetal driver. It is best thought of as a bare metal hypervisor
+ API and a set of plugins which interact with the bare metal hypervisors. By
+ default, it will use PXE and IPMI in concert to provision and turn on/off
+ machines, but Ironic also supports vendor-specific plugins which may implement
+ additional functionality.
+ .
+ This package contains the Ironic OpenStack dashboard plugin.

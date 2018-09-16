@@ -1,0 +1,37 @@
+Package: python-dialog
+Source: python2-pythondialog
+Version: 3.3.0-3
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 372
+Depends: dialog, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: http://pythondialog.sourceforge.net/
+Description: Python 2 module for making simple terminal-based user interfaces
+ pythondialog is a Python wrapper for the dialog utility originally
+ written by Savio Lam, and later rewritten by Thomas E. Dickey. Its
+ purpose is to provide an easy to use, pythonic and comprehensive Python
+ interface to dialog. This allows one to make simple text-mode user
+ interfaces on Unix-like systems.
+ .
+ pythondialog provides dialog boxes (widgets) of many different types.
+ Among these, one can find infobox, msgbox, yesno, menu, checklist,
+ radiolist, fselect (for selecting a file), rangebox, buildlist,
+ treeview, calendar. These widgets, and those not listed here, allow one
+ to build nice interfaces quickly and easily. However, it is not possible
+ to create new widgets without modifying dialog itself.
+ .
+ For most widgets, the following settings can be chosen:
+  * width, height and other parameters where applicable;
+  * two user-defined buttons, referred to as "Help" and "Extra", may be
+    added and their labels freely chosen.
+ Additionally, a color theme may be defined for all widgets via a
+ configuration file.
+ .
+ pythondialog has good Unicode support. Precisely, this support should be
+ as good as allowed by the combination of the Python interpreter, dialog,
+ the terminal and the locale settings in use.
+ .
+ This version is a backport of pythondialog to Python 2. Unless you really
+ have to use Python 2, you should use the python3-dialog package.

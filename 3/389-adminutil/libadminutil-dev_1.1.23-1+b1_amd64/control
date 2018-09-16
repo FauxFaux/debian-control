@@ -1,0 +1,25 @@
+Package: libadminutil-dev
+Source: 389-adminutil (1.1.23-1)
+Version: 1.1.23-1+b1
+Architecture: amd64
+Maintainer: Debian 389ds Team <pkg-fedora-ds-maintainers@lists.alioth.debian.org>
+Installed-Size: 332
+Depends: libadminutil0 (= 1.1.23-1+b1), libnspr4-dev, libnss3-dev, libicu-dev, libldap2-dev (>= 2.4.28)
+Section: libdevel
+Priority: extra
+Homepage: http://directory.fedoraproject.org
+Description: Utility library for 389ds administration - development files
+ Libraries of functions used to administer 389 directory servers,
+ usually in conjunction with the admin server.
+ .
+ Adminutil is broken into two libraries - libadminutil contains the basic
+ functionality, and libadmsslutil contains SSL versions and wrappers
+ around the basic functions. The PSET functions allow applications to
+ store their preferences and configuration parameters in LDAP, without
+ having to know anything about LDAP. The configuration is cached in a
+ local file, allowing applications to function even if the LDAP server
+ is down. The other code is typically used by CGI programs used for
+ directory server management, containing GET/POST processing code as
+ well as resource handling (ICU ures API).
+ .
+ This package includes the development headers.

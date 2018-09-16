@@ -1,0 +1,21 @@
+Package: acpid
+Source: acpid (1:2.0.28-1)
+Version: 1:2.0.28-1+b1
+Architecture: amd64
+Maintainer: Debian Acpi Team <pkg-acpi-devel@lists.alioth.debian.org>
+Installed-Size: 143
+Depends: libc6 (>= 2.15), init-system-helpers (>= 1.18~), lsb-base (>= 3.2-14), kmod
+Recommends: acpi-support-base (>= 0.114-1)
+Section: admin
+Priority: optional
+Homepage: http://sourceforge.net/projects/acpid2/
+Description: Advanced Configuration and Power Interface event daemon
+ Modern computers support the Advanced Configuration and Power Interface (ACPI)
+ to allow intelligent power management on your system and to query battery and
+ configuration status.
+ .
+ ACPID is a completely flexible, totally extensible daemon for delivering
+ ACPI events. It listens on netlink interface (or on the deprecated file
+ /proc/acpi/event), and when an event occurs, executes programs to handle the
+ event. The programs it executes are configured through a set of configuration
+ files, which can be dropped into place by packages or by the admin.

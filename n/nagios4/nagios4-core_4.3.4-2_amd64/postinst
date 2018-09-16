@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+# debconf-devel(7) asks we do this
+.  /usr/share/debconf/confmodule
+
+
+if [ -x "/etc/init.d/nagios4" ]
+then
+    if ! /etc/init.d/nagios4 status >/dev/null
+    then
+	if [ -x "`which invoke-rc.d 2>/dev/null`" ]
+	then invoke-rc.d nagios4 start || true
+	else /etc/init.d/nagios4 start || true
+	fi
+    fi
+fi
+
+

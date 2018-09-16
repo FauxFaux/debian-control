@@ -1,0 +1,20 @@
+Package: postgrey
+Version: 1.36-5
+Architecture: all
+Maintainer: Antonio Radici <antonio@debian.org>
+Installed-Size: 156
+Depends: adduser, debconf, libberkeleydb-perl, libnetaddr-ip-perl, libnet-dns-perl, libnet-server-perl (>= 0.87), perl, ucf (>= 0.28), debconf (>= 0.5) | debconf-2.0
+Recommends: libnet-rblclient-perl, libparse-syslog-perl, postfix | exim4
+Breaks: libsys-syslog-perl (<< 0.21)
+Section: mail
+Priority: optional
+Homepage: http://postgrey.schweikert.ch/
+Description: greylisting implementation for Postfix
+ This package provides a policy server for Postfix to implement "greylisting".
+ .
+ Greylisting is a spam filtering method that rejects email from external
+ servers on the first try. Spammers don't usually retry sending their
+ messages, whereas legitimate mail servers do.
+ .
+ While Postgrey is designed for use with Postfix, it can also be used
+ with Exim.

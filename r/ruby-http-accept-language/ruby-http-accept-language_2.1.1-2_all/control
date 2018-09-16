@@ -1,0 +1,24 @@
+Package: ruby-http-accept-language
+Version: 2.1.1-2
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 32
+Depends: ruby | ruby-interpreter, ruby-activesupport
+Suggests: ruby-railties
+Section: ruby
+Priority: optional
+Homepage: https://github.com/iain/http_accept_language
+Description: Ruby library that finds out which locale the user prefers
+ This ruby library reads the language user specified in their browser
+ and returns the language in an array. This package will be useful
+ in cases where the locale should be selected depending on the
+ user's locale settings automatically.
+ .
+ Features
+  * Splits the http-header into languages specified by the user
+  * Returns empty array if header is malformed.
+  * Corrects case to xx-XX
+  * Sorted by priority given, as much as possible.
+  * Gives you the most important language
+  * Gives compatible languages
+Ruby-Versions: all

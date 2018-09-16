@@ -1,0 +1,24 @@
+Package: tgn
+Source: netexpect
+Version: 0.22-2
+Architecture: amd64
+Maintainer: Eloy Paris <peloy@debian.org>
+Installed-Size: 220
+Depends: libc6 (>= 2.14), libdumbnet1 (>= 1.8), libglib2.0-0 (>= 2.12.0), libpcap0.8 (>= 0.9.8)
+Section: net
+Priority: optional
+Homepage: http://www.netexpect.org
+Description: A command-line based network traffic generator
+ TGN (Traffic GeNerator) is a command-line based network traffic
+ generator that allows to easily craft and inject network traffic.
+ It has the same packet crafting and injection capabilities provided
+ by the Network Expect framework but does not have the bigger
+ dependencies that Network Expect has. The Protocol Data Unit (PDU)
+ to send is defined in a simple way, without the use of complicated
+ command-line switches that are hard to remember.
+ .
+ A TGN invokation may look like:
+ .
+ shell# tgn "ip(proto = 0..255, src = 'random', dst = 192.168.1.1)/icmp-echo()"
+ .
+ Visit http://www.netexpect.org for more information.

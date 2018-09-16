@@ -1,0 +1,17 @@
+Package: libtie-hash-expire-perl
+Version: 0.03-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 25
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Tie-Hash-Expire
+Description: Perl module providing hashes with keys that expire after a user-set period
+ Hashes tied to Tie::Hash::Expire behave like normal hashes in all respects
+ except that when a key is added or the value associated with a key is
+ changed, the current time is stored, and after 'expire_seconds' the key and
+ value are removed from the hash.
+ .
+ Resolutions finer than seconds are available if the module finds access to
+ Time::HiRes.

@@ -1,0 +1,36 @@
+Package: qmidiarp
+Version: 0.6.5-1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Installed-Size: 1653
+Depends: libasound2 (>= 1.0.16), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libjack-jackd2-0 (>= 1.9.10+20150825) | libjack-0.125, liblo7 (>= 0.26~repack), libqt5core5a (>= 5.9.0~beta), libqt5gui5 (>= 5.0.2), libqt5widgets5 (>= 5.2.0~alpha1), libstdc++6 (>= 5.2)
+Recommends: jackd
+Section: sound
+Priority: optional
+Homepage: https://qmidiarp.sourceforge.io
+Description: MIDI arpeggiator for ALSA
+ QMidiArp is an advanced MIDI arpeggiator, programmable step sequencer
+ and LFO for the ALSA sequencer. It can hold any number of arpeggiator,
+ sequencer, or LFO modules running in parallel.
+ .
+ Arpeggiator modules produce sequences depending on the notes sent
+ to their input port, which is typically connected to a keyboard or
+ another sequencer.
+ .
+ Step sequencer modules allow one to create simple linear, monophonic
+ and globally transposable sequences similar to the first analog
+ sequencers.
+ .
+ MIDI LFO modules independently produce MIDI controller data of
+ adjustable waveform, time resolution, amplitude and duration.
+ .
+ For each module, an input note filter is available, and the output
+ port and channel can be set independently. Since the modules use a
+ common sequencer queue, they are automatically in sync with each other.
+ QMidiArp works with an internal tick resolution of 192 ticks per beat.
+ The queue can be synchronized to an incoming MIDI realtime clock or as
+ a JACK transport client. Most of the relevant control elements are
+ accessible via MIDI controller through a MIDI-learn infrastructure.
+ QMidiArp also has a log tool displaying the history of incoming MIDI
+ events in colors depending on their type. QMidiArp is based on the Qt4
+ toolkit

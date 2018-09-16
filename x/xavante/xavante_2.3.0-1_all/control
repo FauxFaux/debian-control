@@ -1,0 +1,18 @@
+Package: xavante
+Version: 2.3.0-1
+Architecture: all
+Maintainer: Enrico Tassi <gareuselesinge@debian.org>
+Installed-Size: 142
+Depends: lua5.1-coxpcall, lua5.1-copas, lua-copas (>= 1.1.6), lua5.1-filesystem, lua-filesystem (>= 1.5.0), lua5.1
+Recommends: lua5.1-wsapi, lua5.1-cgi
+Section: net
+Priority: optional
+Homepage: http://keplerproject.github.com/xavante/
+Description: Lua HTTP 1.1 Web server
+ This package contains xavante, a Lua HTTP 1.1 Web server that uses a modular
+ architecture based on URI mapped handlers. Xavante currently offers a file
+ handler, a redirect handler and a CGILua handler. Those are used for general
+ files, URI remapping and CGILua scripts respectively.
+ .
+ The CGILua handler is considered optional thus xavante just recommends the
+ packages needed for that handler.

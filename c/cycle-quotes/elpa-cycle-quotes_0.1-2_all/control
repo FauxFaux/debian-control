@@ -1,0 +1,25 @@
+Package: elpa-cycle-quotes
+Source: cycle-quotes
+Version: 0.1-2
+Architecture: all
+Maintainer: Debian Emacs addons team <pkg-emacsen-addons@lists.alioth.debian.org>
+Installed-Size: 34
+Depends: emacsen-common (>= 2.0.8)
+Recommends: emacs (>= 46.0)
+Enhances: emacs, emacs24, emacs25
+Section: lisp
+Priority: optional
+Homepage: https://elpa.gnu.org/packages/cycle-quotes.html
+Description: Emacs command to cycle between quotation marks
+ This package provides the `cycle-quotes' command to cycle between
+ different string quote styles.
+ .
+ For example, in JavaScript, there are three string quote characters:
+ ", ` and '.  In a JavaScript buffer, with point located someplace
+ within the string, `cycle-quotes' will cycle between the following
+ quote styles each time it's called:
+ .
+ --> "Hi, it's me!" --> `Hi, it's me!` --> 'Hi, it\'s me!'
+ .
+ As seen in the above example, `cycle-quotes' tries to escape and
+ unescape quote characters intelligently.

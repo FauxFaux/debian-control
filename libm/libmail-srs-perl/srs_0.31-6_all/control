@@ -1,0 +1,23 @@
+Package: srs
+Source: libmail-srs-perl
+Version: 0.31-6
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 43
+Depends: libmail-srs-perl
+Section: mail
+Priority: optional
+Homepage: https://metacpan.org/release/Mail-SRS
+Description: command-line Sender Rewriting Scheme client
+ The Sender Rewriting Scheme preserves .forward functionality in an
+ SPF-compliant world.
+ .
+ SPF requires the SMTP client IP to match the envelope sender
+ (return-path). When a message is forwarded through an intermediate
+ server, that intermediate server may need to rewrite the return-path
+ to remain SPF compliant. If the message bounces, that intermediate
+ server needs to validate the bounce and forward the bounce to the
+ original sender.
+ .
+ This package contains the srs client that can be used in
+ your .forward files.

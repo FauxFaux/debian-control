@@ -1,0 +1,56 @@
+#! /bin/sh
+
+set -e
+
+fixperms() {
+    for target in /etc/groonga/httpd /etc/groonga/httpd/logs /var/log/groonga/httpd /etc/groonga/httpd/scgi_temp /etc/groonga/httpd/proxy_temp /etc/groonga/httpd/uwsgi_temp /etc/groonga/httpd/fastcgi_temp /etc/groonga/httpd/client_body_temp /etc/groonga/httpd/html
+    do
+        dpkg-statoverride --list $target >/dev/null || \
+            dpkg-statoverride --update --add groonga groonga 0755 $target
+    done
+}
+
+case "$1" in
+    configure)
+        fixperms
+        ;;
+    abort-upgrade|abort-deconfigure|abort-remove)
+        :
+        ;;
+    *)
+        echo "Called with unknown argument $1, bailing out."
+        exit 1
+        ;;
+esac
+
+# Automatically added by dh_installinit/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/groonga-httpd" ]; then
+		update-rc.d groonga-httpd defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d groonga-httpd $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.3.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'groonga-httpd.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'groonga-httpd.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'groonga-httpd.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'groonga-httpd.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

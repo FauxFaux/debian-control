@@ -1,0 +1,27 @@
+Package: libnet-smtp-server-perl
+Version: 1.1-6
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 56
+Depends: libnet-dns-perl, perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/SMTP-Server
+Description: native Perl SMTP Server implementation for Perl
+ The Net::SMTP::Server module implements an RFC 821 compliant SMTP
+ server, completely in Perl.  It's extremely extensible, so adding in
+ things like spam filtering, or more advanced routing and handling
+ features can be easily handled.  An additional module,
+ Net::SMTP::Server::Relay has also been implemented as an example of
+ just one application of this extensibility.  See the pod for more
+ details on that module.  This extension has been tested on both Unix
+ and Win32 platforms.
+ .
+ Creating a new server is as trivial as:
+ .
+ $server = new Net::SMTP::Server($host, $port);
+ .
+ This creates a new SMTP::Server.  Both $host and $port are optional,
+ and default to the current hostname and the standard SMTP port (25).
+ However, if you run on a multi-homed machine, you may want to
+ explicitly specify which interface to bind to.

@@ -1,0 +1,17 @@
+Package: multipath-tools
+Version: 0.7.7-1
+Architecture: amd64
+Maintainer: Debian DM Multipath Team <team+linux-blocks@tracker.debian.org>
+Installed-Size: 977
+Depends: libaio1 (>= 0.3.106-8), libc6 (>= 2.17), libdevmapper1.02.1 (>= 2:1.02.97), libjson-c3 (>= 0.10), librados2 (>= 0.72.2), libreadline7 (>= 6.0), libsystemd0, libudev1 (>= 183), liburcu6 (>= 0.10.0), udev (>> 136-1), kpartx (>= 0.7.7-1), lsb-base (>= 3.0-6), sg3-utils-udev
+Suggests: multipath-tools-boot
+Breaks: multipath-tools-boot (<= 0.4.8+git0.761c66f-2~), multipath-tools-initramfs (<= 1.0.1)
+Section: admin
+Priority: extra
+Homepage: http://christophe.varoqui.free.fr/
+Description: maintain multipath block device access
+ These tools are in charge of maintaining the disk multipath device maps and
+ react to path and map events.
+ .
+ If you install this package you may have to change the way you address block
+ devices. See README.Debian for details.

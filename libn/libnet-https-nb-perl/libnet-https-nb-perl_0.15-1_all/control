@@ -1,0 +1,16 @@
+Package: libnet-https-nb-perl
+Version: 0.15-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 30
+Depends: perl, libio-socket-ssl-perl, libnet-http-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Net-HTTPS-NB
+Description: low-level non-blocking HTTPS client
+ Net::HTTPS::NB provides a non-blocking HTTPS client. It has the same
+ interface as Net::HTTPS and Net::HTTP, but it will never try multiple
+ reads when the read_response_headers() or read_entity_body() methods are
+ invoked. If read_response_headers() did not see enough data to complete
+ the headers an empty list is returned. If read_entity_body() did not see
+ new entity data in its read the value -1 is returned.

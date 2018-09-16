@@ -1,0 +1,16 @@
+Package: pcs-snmp
+Source: pcs
+Version: 0.9.165-3
+Architecture: all
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Installed-Size: 73
+Depends: pcs, python3:any, python3-pyagentx, snmpd
+Breaks: pcs (<< 0.9.165-3)
+Replaces: pcs (<< 0.9.165-3)
+Section: admin
+Priority: optional
+Homepage: https://github.com/ClusterLabs/pcs
+Description: Pacemaker Configuration System SNMP agent
+ SNMP agent which connects to the master agent (snmpd)
+ via AgentX protocol and provides information about
+ the status of a corosync/pacemaker cluster.

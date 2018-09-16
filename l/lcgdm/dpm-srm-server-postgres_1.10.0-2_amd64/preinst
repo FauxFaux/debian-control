@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+# Version 1.10.0 starts using defaults-disabled
+# Remove rc.d links if upgrading from an older version and the service is
+# disabled in /etc/default
+
+if [ -n "$2" ] ; then
+	if dpkg --compare-versions "$2" "<<" "1.10.0" ; then
+		[ -r /etc/default/dpm-srmv1 ] && . /etc/default/dpm-srmv1
+		if [ "${RUN_SRMV1DAEMON}" != "yes" ] ; then
+			update-rc.d -f dpm-srmv1 remove >/dev/null
+		fi
+		[ -r /etc/default/dpm-srmv2 ] && . /etc/default/dpm-srmv2
+		if [ "${RUN_SRMV2DAEMON}" != "yes" ] ; then
+			update-rc.d -f dpm-srmv2 remove >/dev/null
+		fi
+		[ -r /etc/default/dpm-srmv2.2 ] && . /etc/default/dpm-srmv2.2
+		if [ "${RUN_SRMV2DAEMON}" != "yes" ] ; then
+			update-rc.d -f dpm-srmv2.2 remove >/dev/null
+		fi
+	fi
+fi
+
+

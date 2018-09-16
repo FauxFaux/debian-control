@@ -1,0 +1,24 @@
+Package: libjavaewah-java
+Version: 0.6.12-2
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 84
+Suggests: libjavaewah-java-doc
+Section: java
+Priority: optional
+Homepage: https://github.com/lemire/javaewah
+Description: Compressed variant of the Java bitset class
+ The bit array data structure is implemented in Java as the BitSet class.
+ Unfortunately, this fails to scale without compression.
+ .
+ JavaEWAH is a word-aligned compressed variant of the Java bitset class. It uses
+ a 64-bit run-length encoding (RLE) compression scheme. It trades-off some
+ compression for better processing speed. It also has a 32-bit version which
+ compresses better, but is not as fast.
+ .
+ In general, the goal of word-aligned compression is not to achieve the best
+ compression, but rather to improve query processing time. Hence, the class
+ tries to save CPU cycles, maybe at the expense of storage. However, the EWAH
+ scheme implemented is always more efficient storage-wise than an uncompressed
+ bitmap as implemented in the BitSet class). Unlike some alternatives, javaewah
+ does not rely on a patented scheme.

@@ -1,0 +1,27 @@
+Package: yubikey-ksm
+Version: 1.15-6
+Architecture: all
+Maintainer: Debian Authentication Maintainers <pkg-auth-maintainers@lists.alioth.debian.org>
+Installed-Size: 97
+Depends: debconf (>= 0.5) | debconf-2.0, apache2, php | php5, php-mcrypt | php5-mcrypt, mysql-server | postgresql, php-mysql | php-pgsql | php5-mysql | php5-pgsql, dbconfig-common, libdbi-perl
+Recommends: mysql-client | postgresql-client
+Suggests: yubikey-val
+Section: net
+Priority: extra
+Homepage: https://developers.yubico.com/yubikey-ksm/
+Description: Key Storage Module for YubiKey One-Time Password (OTP) tokens
+ YubiKeys are USB tokens that act like keyboards and generate one-time
+ passwords.  This package contains a server written in PHP for use
+ with Apache that decrypt YubiKey One-Time Passwords (OTPs), normally
+ only used by YubiKey OTP validation servers.  The architecture is
+ that a set of validation servers manage the token counters and
+ respond to OTP requests from clients, and utilize a set of back-end
+ YubiKey Key Storage Module (KSM) servers to perform the actual AES
+ key decryption.  The protocols are openly published.  This implementation
+ store the AES keys in a database unencrypted, which can be protected
+ using file-system encryption mechanisms   Another KSM implementation
+ is available in the yhsm-yubikey-ksm package that use the YubiHSM hardware
+ to protect the decryption process.  Sometimes the KSM runs on another
+ server than the validation server, but it is possible to run both on
+ the same machine.  After installing and configuring this package you
+ will have a YubiKey KSM server up and running via Apache.

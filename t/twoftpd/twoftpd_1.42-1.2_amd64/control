@@ -1,0 +1,21 @@
+Package: twoftpd
+Version: 1.42-1.2
+Architecture: amd64
+Maintainer: Gerrit Pape <pape@smarden.org>
+Installed-Size: 268
+Depends: libbg2 (>= 2.03), libc6 (>= 2.14), libcvm1
+Recommends: twoftpd-run, runit, ipsvd, cvm
+Section: net
+Priority: optional
+Description: a simple secure efficient FTP server (programs)
+ This is twoftpd, an FTP server that strives to be secure, simple, and
+ efficient.  None of the commands can cause execution of other programs,
+ and the normal model of execution does a chroot to the logged in user's
+ directory immediately after authentication.
+ .
+ The name "twoftpd" comes from the fact that there were two parts to the
+ server -- an authenticating front end, which contains no file or data
+ transfer code, and a back end, which contains all the data transfer
+ code.
+ .
+ This package contains the twoftpd programs.

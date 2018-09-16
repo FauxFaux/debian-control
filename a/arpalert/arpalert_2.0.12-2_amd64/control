@@ -1,0 +1,20 @@
+Package: arpalert
+Version: 2.0.12-2
+Architecture: amd64
+Maintainer: Thorsten Alteholz <debian@alteholz.de>
+Installed-Size: 137
+Depends: libc6 (>= 2.15), libpcap0.8 (>= 0.9.8), adduser, ieee-data, lsb-base
+Section: net
+Priority: optional
+Homepage: http://www.arpalert.org/
+Description: monitor ARP changes in ethernet networks
+ The arpalert daemon is a security tool that listens on a network interface
+ (without using 'promiscuous' mode) and catches all conversations
+ of MAC address to IP request to alert of possibility of ARP spoofing attack.
+ .
+ It compares the mac addresses it detected with a pre-configured list of
+ authorized MAC addresses. If the MAC is not in list, arpalert launches a
+ pre-defined user script with the MAC address and IP address as parameters.
+ .
+ If you need to use a list of authorized MAC addresses, this package should
+ suit your needs, otherwise arpwatch may be also fine.

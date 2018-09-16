@@ -1,0 +1,21 @@
+Package: roarplaylistd
+Version: 0.1.9-6
+Architecture: amd64
+Maintainer: Patrick Matthäi <pmatthaei@debian.org>
+Installed-Size: 173
+Depends: libc6 (>= 2.14), libroar2, libxml2 (>= 2.7.4), lsb-base, roaraudio | roaraudio-server
+Recommends: roarplaylistd-tools, roarplaylistd-client
+Suggests: vclt-tools, roarplaylistd-codechelper-gst, libroar-plugins-universal
+Section: sound
+Priority: optional
+Homepage: http://roaraudio.keep-cool.org/
+Description: RoarAudio PlayList Daemon (RPLD)
+ RoarAudio PlayList Daemon is a audio player backend daemon
+ handling playlists. It stores playlists and plays files
+ using RoarAudio as audio backend.
+ .
+ The daemon can be controlled using a simple protocol.
+ It can listen on UNIX and TCP sockets.
+ .
+ File formats and codecs not supported by RoarAudio
+ can be handled by using a helper program.

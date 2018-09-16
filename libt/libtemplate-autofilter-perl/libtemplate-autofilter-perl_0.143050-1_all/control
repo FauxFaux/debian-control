@@ -1,0 +1,25 @@
+Package: libtemplate-autofilter-perl
+Version: 0.143050-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 38
+Depends: perl, liblist-moreutils-perl, libtemplate-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Template-AutoFilter
+Description: Template::Toolkit subclass with automatic filtering
+ Template::AutoFilter is a subclass of Template::Toolkit which loads a
+ specific Parser that is subclassed from Template::Parser. It adds a filter
+ instruction to each interpolation token found in templates loaded by the TT
+ engine. Tokens that already have a filter instruction are left unchanged.
+ .
+ By default this automatic filter is set to be 'html', but can be modified
+ during object creation by passing the AUTO_FILTER option with the name of the
+ wanted filter.
+ .
+ Additionally a pass-through filter called 'none' is added to the object to
+ allow exclusion of tokens from being filtered.
+ .
+ Lastly, if you have problems with the directives which get auto filters
+ applied, you can see the Template::AutoFilter::Parser docs for how you can
+ customize that.

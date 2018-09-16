@@ -1,0 +1,22 @@
+Package: libdbix-xmlmessage-perl
+Version: 0.05-10
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 85
+Depends: libdbi-perl, libhtml-parser-perl, libxml-parser-perl, perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/DBIx-XMLMessage
+Description: perl module for exchanging XML messages between DBI data sources
+ This module maintains simple XML templates that describe object
+ structure.  The module is capable of generating SQL statements based
+ on these templates and executing them against DBI data sources. After
+ executing the SQL, the package formats the data results into XML
+ strings.
+ .
+ Inbound messages can be processed according to the same kind of
+ templates and the database is updated accordingly. Templates are
+ capable of defining the SQL operators, plus new SAVE operation which
+ is basically a combination of SELECT and either INSERT or UPDATE
+ depending on whether the record was found by the compound key value
+ or not.

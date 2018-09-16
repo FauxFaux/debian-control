@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+# Version 5.4.2-2 starts using defaults-disabled
+# Remove rc.d links if upgrading from an older version and the service is
+# disabled in /etc/default
+
+if [ -n "$2" ] ; then
+	if dpkg --compare-versions "$2" "<<" "5.4.2-2" ; then
+		[ -r /etc/default/nordugrid-arc-inforeg ] && . /etc/default/nordugrid-arc-inforeg
+		if [ -n "${RUN}" ] && [ "${RUN}" != "yes" ] ; then
+			update-rc.d -f nordugrid-arc-inforeg remove >/dev/null
+		fi
+		RUN=
+		[ -r /etc/default/nordugrid-arc-slapd ] && . /etc/default/nordugrid-arc-slapd
+		if [ -n "${RUN}" ] && [ "${RUN}" != "yes" ] ; then
+			update-rc.d -f nordugrid-arc-slapd remove >/dev/null
+		fi
+	fi
+fi
+
+
+
+dpkg-maintscript-helper rm_conffile /etc/default/nordugrid-arc-inforeg 5.4.2-2 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/default/nordugrid-arc-slapd 5.4.2-2 -- "$@"

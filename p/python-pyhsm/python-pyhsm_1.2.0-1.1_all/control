@@ -1,0 +1,26 @@
+Package: python-pyhsm
+Version: 1.2.0-1.1
+Architecture: all
+Maintainer: Debian Authentication Maintainers <pkg-auth-maintainers@lists.alioth.debian.org>
+Installed-Size: 178
+Depends: python (<< 2.8), python (>= 2.7), python-crypto, python-serial, python:any (>= 2.6.6-7~)
+Recommends: yhsm-tools
+Suggests: python-argparse, yhsm-daemon
+Provides: python2.7-pyhsm
+Section: python
+Priority: optional
+Homepage: https://developers.yubico.com/python-pyhsm/
+Description: Python code for talking to a Yubico YubiHSM hardware
+ YubiHSM is an easy to use and affordable crypto appliance
+ that you connect to the USB port of a server. You can then
+ store cryptographic keys on the YubiHSM and use them from the
+ server without any possibility for an attacker to extract
+ the crypto keys from the YubiHSM.
+ .
+ Supported operations include YubiKey OTP validation, AES ECB
+ encrypt/decrypt/decrypt-compare, HMAC-SHA1 hashing (enabling OATH code
+ validation), and Random number entropy generation.
+ .
+ This package contains the core Python code for interacting with the
+ YubiHSM.
+Python-Version: 2.7

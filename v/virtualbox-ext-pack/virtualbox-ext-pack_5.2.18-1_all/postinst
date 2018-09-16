@@ -1,0 +1,30 @@
+#!/bin/sh
+set -e
+
+version=5.2.18
+hash=3ecb43c71502741f4eb790576c608eb65cd424bcf3dfdb56471e4a2cac806f68
+file=Oracle_VM_VirtualBox_Extension_Pack-$version.vbox-extpack
+accept_license=56be48f923303c8cababb0bb4c478284b688ed23f16d775d729b89a2e8e5f9eb
+
+error ()
+{
+	echo "Hash mismatch $file: expected $hash, or wrong accept-license key, removing the file."
+	rm -rf /usr/share/virtualbox-ext-pack/$file
+	exit 1
+}
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "configure" ] ; then
+	echo "removing old virtualbox extension packs"
+	rm -f /usr/share/virtualbox-ext-pack/Oracle_VM_VirtualBox_Extension_Pack-*.vbox-extpack
+	cd /usr/share/virtualbox-ext-pack
+	echo "virtualbox-ext-pack: downloading: http://download.virtualbox.org/virtualbox/$version/$file"
+	echo "The file will be downloaded into /usr/share/virtualbox-ext-pack"
+	/usr/bin/wget -q -N http://download.virtualbox.org/virtualbox/$version/$file
+	echo "$hash  $file" | sha256sum -c > /dev/null 2>&1 || error
+	vboxmanage extpack install --replace --accept-license=$accept_license $file || error
+fi
+
+

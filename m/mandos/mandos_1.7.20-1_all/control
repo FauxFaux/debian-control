@@ -1,0 +1,24 @@
+Package: mandos
+Version: 1.7.20-1
+Architecture: all
+Maintainer: Mandos Maintainers <mandos@recompile.se>
+Installed-Size: 292
+Depends: python (>= 2.7), python (<< 3), libgnutls28-dev (>= 3.3.0) | libgnutls30 (>= 3.3.0), libgnutls28-dev (<< 3.6.0) | libgnutls30 (<< 3.6.0), python-dbus, python-gi, avahi-daemon, adduser, python-urwid, gnupg2 | gnupg, systemd-sysv | lsb-base (>= 3.0-6)
+Recommends: ssh-client | fping
+Section: admin
+Priority: optional
+Homepage: https://www.recompile.se/mandos
+Description: server giving encrypted passwords to Mandos clients
+ This is the server part of the Mandos system, which allows
+ computers to have encrypted root file systems and at the
+ same time be capable of remote and/or unattended reboots.
+ .
+ The computers run a small client program in the initial RAM
+ disk environment which will communicate with a server over a
+ network.  All network communication is encrypted using TLS.
+ The clients are identified by the server using an OpenPGP
+ key; each client has one unique to it.  The server sends the
+ clients an encrypted password.  The encrypted password is
+ decrypted by the clients using the same OpenPGP key, and the
+ password is then used to unlock the root file system,
+ whereupon the computers can continue booting normally.

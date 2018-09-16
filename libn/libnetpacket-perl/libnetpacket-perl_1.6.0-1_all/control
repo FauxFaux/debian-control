@@ -1,0 +1,22 @@
+Package: libnetpacket-perl
+Version: 1.6.0-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 147
+Depends: perl
+Suggests: libnet-pcap-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/NetPacket
+Description: modules to manipulate network packets at the protocol level
+ NetPacket provides a base class for a cluster of modules related to
+ decoding and encoding of network protocols.  Each NetPacket
+ descendent module knows how to encode and decode packets for the
+ network protocol it implements.  Consult the documentation for the
+ module in question for protocol-specific implementation.
+ .
+ Note that there is no inheritance in the NetPacket:: cluster of
+ modules other than each protocol module being a NetPacket.  This
+ was seen to be too restrictive as imposing inheritance relationships
+ (for example between the IP, UDP and TCP protocols) would make things
+ like tunneling or other unusual situations difficult.

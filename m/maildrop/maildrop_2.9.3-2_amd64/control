@@ -1,0 +1,44 @@
+Package: maildrop
+Version: 2.9.3-2
+Architecture: amd64
+Maintainer: Josip Rodin <joy-packages@debian.org>
+Installed-Size: 1140
+Depends: courier-authlib (>= 0.66.4-5~), libc6 (>= 2.15), libcourier-unicode4 (>= 1.4), libgcc1 (>= 1:3.0), libgdbm5 (>= 1.12), libpcre3, libstdc++6 (>= 5.2)
+Recommends: exim4 | mail-transport-agent
+Breaks: courier-maildrop (<< 2.8.3+0.75.0-15~)
+Replaces: courier-base (<= 0.58.0-1), courier-maildrop (<< 2.8.3+0.75.0-15~)
+Section: mail
+Priority: optional
+Homepage: http://www.courier-mta.org/maildrop/
+Description: mail delivery agent with filtering abilities (set-GID=mail)
+ maildrop is a mail delivery agent (MDA), a program which reads a mail
+ message from standard input and then delivers the message to your mailbox.
+ .
+ maildrop can deliver mail both in mbox and maildir storing formats.
+ It can read instructions from a file, directing it how to log deliveries,
+ and how to filter incoming mail, for example to deliver mail to alternate
+ mailboxes, or forward it somewhere else, or pipe it through external
+ programs.
+ .
+ It performs all the same functions as procmail, but unlike procmail,
+ maildrop uses a structured filtering language which is a bit easier
+ on the eyes. Other differences from procmail include not skipping syntax
+ errors in filter files (instead deferring the mails for later processing)
+ and being more resource-efficient when processing mails (not loading
+ large messages right into memory).
+ .
+ maildrop in this package sets its permission to "rwxr-sr-x" (set-GID)
+ and is owned by "root:mail".
+ .
+ maildrop also comes with the following additional programs:
+ .
+  * reformail, an e-mail reformatting tool, which can detect duplicate
+               messages, manipulate message headers, split mailboxes into
+               individual messages, and generate autoreply messages
+  * maildirmake, which creates maildirs, and maildir folders
+  * deliverquota, which delivers mail to maildirs while taking account
+                   software-imposed quotas
+  * reformime, a utility for reformatting MIME messages
+  * makemime, which creates MIME-formatted messages of arbitrary complexity
+  * lockmail, which creates dot-locks, file locks, and C-Client folder locks
+  * mailbot, a MIME-aware autoresponder utility

@@ -1,0 +1,20 @@
+Package: moonshot-trust-router
+Source: moonshot-trust-router (1.4.1-1)
+Version: 1.4.1-1+b1
+Architecture: amd64
+Maintainer: Sam Hartman <hartmans@debian.org>
+Installed-Size: 115
+Depends: libc6 (>= 2.4), libcomerr2 (>= 1.01), libgssapi-krb5-2 (>= 1.6.dfsg.2), libjansson4 (>= 2.0.1), libsqlite3-0 (>= 3.5.9), libssl1.0.2 (>= 1.0.2d), libtalloc2 (>= 2.0.4~git20101213), libtr-tid2 (>= 1.3), moonshot-gss-eap, adduser, sqlite3
+Section: net
+Priority: extra
+Homepage: http://www.project-moonshot.org/
+Description: Moonshot Trust Router
+ Moonshot allows services using GSS-API applications to gain federated
+ access to identities provided by other organizations.  Moonshot uses
+ EAP and RADIUS over TLS for authentication and federation and SAML
+ for enhanced attribute exchange.
+ .
+ This package provides the trust router and associated commands.  The
+ trust router provides authenticated key exchange so that RADIUS
+ proxies in one organization can connect to RADIUS servers (providing
+ identities) in another organization.

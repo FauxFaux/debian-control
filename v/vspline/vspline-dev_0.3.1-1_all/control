@@ -1,0 +1,35 @@
+Package: vspline-dev
+Source: vspline
+Version: 0.3.1-1
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 531
+Depends: libvigraimpex-dev
+Suggests: clang, vc-dev
+Section: math
+Priority: optional
+Homepage: https://bitbucket.org/kfj/vspline
+Description: header-only C++ template library for uniform b-spline processing
+ vspline aims to be as fast as possible, it's main focus is processing
+ of bulk data, especially images. vspline can create b-splines of:
+ .
+  -  real data types and their aggregates
+  -  coming in strided n-dimensional memory
+  -  spline order up to 24
+  -  arbitrary dimensions of the spline
+  -  with a reasonable selection of boundary conditions
+  -  with implicit or explicit scheme of extrapolation
+ .
+ on the evaluation side it provides:
+ .
+  -  evaluation of the spline at point locations
+  -  evaluation of the spline's derivatives
+  -  fast specializations for nearest neighbour and linear interpolation
+  -  mapping of arbitrary coordinates into the defined range
+  -  evaluation of n-dimensional arrays of coordinates ('remap' function)
+  -  functor-based transform and apply functions
+  -  set of functional constructs to facilitate evaluation
+ .
+ data handling is done with vigra data types.
+ vspline optionally uses horizontal vectorization with Vc.
+ coefficient generation and remap routines are multithreaded.

@@ -1,0 +1,19 @@
+Package: libdatetime-format-xsd-perl
+Version: 0.2-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 54
+Depends: perl, libdatetime-format-iso8601-perl
+Section: perl
+Priority: optional
+Homepage: http://search.cpan.org/dist/DateTime-Format-XSD/
+Description: format DateTime according to xsd:dateTime
+ XML Schema defines a usage profile which is a subset of the ISO8601
+ profile. This profile defines that the following is the only possible
+ representation for a dateTime, despite all other options ISO provides.
+ .
+  YYYY-MM-DD"T"HH:MI:SS(Z|[+-]zh:zm)
+ .
+ DateTime::Format::XSD is a subclass of DateTime::Format::ISO8601,
+ therefore it will be able to parse all other ISO options, but will only
+ format it in this exact spec.

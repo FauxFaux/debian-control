@@ -1,0 +1,21 @@
+Package: knot-resolver-module-http
+Source: knot-resolver
+Version: 3.0.0-9
+Architecture: all
+Maintainer: knot-resolver packagers <knot-resolver@packages.debian.org>
+Installed-Size: 511
+Depends: libjs-bootstrap, libjs-d3, libjs-jquery, lua-http, lua-mmdb
+Breaks: knot-resolver-module-tinyweb (<< 1.1.0~git20160713-1~)
+Section: net
+Priority: optional
+Homepage: https://www.knot-resolver.cz/
+Description: HTTP/2 module for Knot Resolver
+ The Knot DNS Resolver is a caching full resolver implementation
+ written in C and LuaJIT, including both a resolver library and a
+ daemon. Modular architecture of the library keeps the core tiny and
+ efficient, and provides a state-machine like API for
+ extensions. There are three built-in modules - iterator, cache,
+ validator, and many external.
+ .
+ This package contains HTTP/2 module for local visualization of the
+ resolver cache and queries.

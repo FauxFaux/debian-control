@@ -1,0 +1,21 @@
+Package: switcheroo-control
+Version: 1.2-1
+Architecture: amd64
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Installed-Size: 40
+Depends: libc6 (>= 2.4), libglib2.0-0 (>= 2.31.18)
+Section: gnome
+Priority: optional
+Homepage: https://github.com/hadess/switcheroo-control
+Description: D-Bus service to check the availability of dual-GPU
+ For systems that have both an integrated GPU and a dedicated GPU, this
+ package by default will force the integrated GPU to be used to save power.
+ .
+ You can launch individual apps using the dedicated GPU by running them
+ with the environment variable DRI_PRIME=1. Or you can right-click on the
+ app (while it's not running) in GNOME Shell's Activities Overview
+ and choose the "Launch using Dedicated Graphics Card" option.
+ .
+ If this default behavior is not appropriate, uninstall this package or
+ set xdg.force_integrated=0 as a kernel command-line option in your
+ bootloader.

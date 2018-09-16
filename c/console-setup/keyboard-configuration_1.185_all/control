@@ -1,0 +1,18 @@
+Package: keyboard-configuration
+Source: console-setup
+Version: 1.185
+Architecture: all
+Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Installed-Size: 2515
+Pre-Depends: debconf (>= 1.5.34)
+Depends: liblocale-gettext-perl
+Breaks: console-setup (<< 1.71), console-setup-mini (<< 1.47)
+Replaces: console-setup (<< 1.47), console-setup-mini (<< 1.47)
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Description: system-wide keyboard preferences
+ This package maintains the keyboard preferences in
+ /etc/default/keyboard.  Other packages can use the information
+ provided by this package in order to configure the keyboard on the
+ console or in X Window.

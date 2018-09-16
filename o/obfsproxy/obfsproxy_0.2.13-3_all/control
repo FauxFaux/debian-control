@@ -1,0 +1,21 @@
+Package: obfsproxy
+Version: 0.2.13-3
+Architecture: all
+Maintainer: Debian Privacy Tools Maintainers <pkg-privacy-maintainers@lists.alioth.debian.org>
+Installed-Size: 347
+Depends: python (>= 2.7) | python-argparse, python-crypto, python-pkg-resources, python-pyptlib (>= 0.0.6), python-twisted-core, python-yaml, python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Recommends: python-gmpy
+Suggests: apparmor
+Enhances: tor
+Section: net
+Priority: optional
+Homepage: https://www.torproject.org/projects/obfsproxy.html
+Description: pluggable transport proxy for Tor
+ obfsproxy is a tool that attempts to circumvent censorship by
+ transforming the Tor traffic between the client and the bridge. This way
+ censors, who usually monitor traffic between the client and the bridge, will
+ see innocent-looking transformed traffic instead of the actual Tor traffic.
+ .
+ It is written in Python and is compliant with the Tor pluggable transports
+ specification, and its modular architecture allows it to support multiple
+ pluggable transports.

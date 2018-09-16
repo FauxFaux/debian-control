@@ -1,0 +1,18 @@
+Package: sudo
+Version: 1.8.23-2
+Architecture: amd64
+Maintainer: Bdale Garbee <bdale@gag.com>
+Installed-Size: 3634
+Depends: libaudit1 (>= 1:2.2.1), libc6 (>= 2.27), libpam0g (>= 0.99.7.1), libselinux1 (>= 1.32), libpam-modules, lsb-base
+Conflicts: sudo-ldap
+Replaces: sudo-ldap
+Section: admin
+Priority: optional
+Homepage: http://www.sudo.ws/
+Description: Provide limited super user privileges to specific users
+ Sudo is a program designed to allow a sysadmin to give limited root
+ privileges to users and log root activity.  The basic philosophy is to give
+ as few privileges as possible but still allow people to get their work done.
+ .
+ This version is built with minimal shared library dependencies, use the
+ sudo-ldap package instead if you need LDAP support for sudoers.

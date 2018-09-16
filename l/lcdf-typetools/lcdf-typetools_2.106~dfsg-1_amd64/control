@@ -1,0 +1,59 @@
+Package: lcdf-typetools
+Version: 2.106~dfsg-1
+Architecture: amd64
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Installed-Size: 3931
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libkpathsea6, libstdc++6 (>= 5), aglfn
+Recommends: texlive-font-utils | ptex-bin
+Conflicts: mminstance
+Section: text
+Priority: optional
+Homepage: http://www.lcdf.org/type/
+Description: tools for OpenType, multiple-master, and Type 1 fonts
+ LCDF Typetools comprises several programs for manipulating PostScript
+ Type 1, Type 1 multiple master, and OpenType fonts.
+ .
+ Programs to manipulate OpenType, multiple-master, and Type 1 fonts:
+ .
+  cfftot1     allows you to translate Compact Font Format (CFF) or
+              PostScript-flavored OpenType fonts into PostScript
+              Type 1 font format
+ .
+  otfinfo     reports information about OpenType fonts, such as the
+              features they support and the contents of their ``size''
+              optical size option
+ .
+  otftotfm    allows you to create TeX font metrics and encodings for
+              using PostScript-flavored OpenType fonts
+ .
+  t1dotlessj  creates a Type 1 font with a single character --
+              the dotless j corresponding to the specified design
+ .
+  t1lint      checks a Type 1 font for correctness (preliminary)
+ .
+  t1rawafm    generates a "raw" (kernless and ligatureless) AFM file
+              given a font file (PFB/PFA)
+ .
+  t1reencode  changes a PostScript Type 1 fon't embedded encoding
+ .
+  t1testpage  creates a PostScript test page for a specified
+              font file (preliminary)
+ .
+  ttftotype42 converts TrueType or TrueType-flavored OpenType font
+              programs into PostScript Type 42 format
+ .
+ LCDF-TypeTools also includes the multiple-master font tools formerly
+ distributed as mminstance.  These tools allow you to use
+ multiple-master fonts with programs that require single-master fonts
+ (afm2tfm, ps2pk, fontinst, etc.).  Both programs work fine with fonts
+ that contain intermediate masters (e.g., Adobe Jenson MM and Adobe
+ Kepler MM).
+ .
+ mmafm        creates an AFM (Adobe font metric) file corresponding to
+              a single instance of a multiple-master font.  It reads
+              (and therefore requires) the AMFM and AFM files
+              distributed with the font.
+ .
+ mmpfb        creates a normal, single-master font program that looks
+              like an instance of a multiple-master font.  It reads
+              the multiple-master font program in PFA or PFB format.

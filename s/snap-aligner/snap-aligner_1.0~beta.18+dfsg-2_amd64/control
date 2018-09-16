@@ -1,0 +1,18 @@
+Package: snap-aligner
+Version: 1.0~beta.18+dfsg-2
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 13673
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:4.0), libstdc++6 (>= 5.2), zlib1g (>= 1:1.2.2)
+Section: science
+Priority: optional
+Homepage: http://snap.cs.berkeley.edu/
+Description: Scalable Nucleotide Alignment Program
+ SNAP is a new sequence aligner that is 3-20x faster and just as accurate as
+ existing tools like BWA-mem, Bowtie2 and Novoalign. It runs on commodity x86
+ processors, and supports a rich error model that lets it cheaply match reads
+ with more differences from the reference than other tools. This gives SNAP up
+ to 2x lower error rates than existing tools (in some cases) and lets it match
+ larger mutations that they may miss. SNAP also natively reads BAM, FASTQ, or
+ gzipped FASTQ, and natively writes SAM or BAM, with built-in sorting,
+ duplicate marking, and BAM indexing.

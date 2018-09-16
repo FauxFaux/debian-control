@@ -1,0 +1,18 @@
+Package: greylistd
+Version: 0.8.8.7
+Architecture: all
+Maintainer: Thorsten Alteholz <debian@alteholz.de>
+Installed-Size: 159
+Depends: python:any (>= 2.3~), debconf (>= 0.5) | debconf-2.0, adduser
+Recommends: exim4
+Section: mail
+Priority: optional
+Description: Greylisting daemon for use with Exim 4
+ This daemon provides a simple greylisting implementation for use with
+ the Exim Mail Transport Agent (MTA), version 4.
+ .
+ Once installed, you will need to configure your MTA to query the
+ greylistd server.  This package contains a script to automatically
+ configure Exim 4. It may be possible to use greylistd with other MTAs
+ as well. Postfix users may want to check out the "postgrey" package
+ instead of this one.

@@ -1,0 +1,23 @@
+Package: libghc-stmonadtrans-prof
+Source: haskell-stmonadtrans
+Version: 0.4.3-2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 953
+Depends: libghc-stmonadtrans-dev (= 0.4.3-2), libghc-array-prof-0.5.2.0-26dc0, libghc-base-prof-4.10.1.0-35a7f, libghc-mtl-prof-2.2.2-ada79
+Provides: libghc-stmonadtrans-prof-0.4.3-00653
+Section: haskell
+Priority: optional
+Homepage: http://hackage.haskell.org/package/STMonadTrans
+Description: monad transformer version of the ST monad; profiling libraries
+ This package provides a monad transformer version of the ST monad.
+ .
+ Warning! This monad transformer should not be used with monads that can
+ contain multiple answers, like the list monad. The reason is that the will be
+ duplicated across the different answers and this cause Bad Things to happen
+ (such as loss of referential transparency). Safe monads include the monads
+ State, Reader, Writer, Maybe and combinations of their corresponding monad
+ transformers.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

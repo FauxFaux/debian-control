@@ -1,0 +1,27 @@
+Package: python-frozendict
+Version: 0.5-1
+Architecture: all
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Installed-Size: 18
+Depends: python:any (<< 2.8), python:any (>= 2.7.5-5~)
+Section: python
+Priority: optional
+Homepage: https://github.com/slezica/python-frozendict
+Description: immutable dictionary - Python 2.7
+ Frozendict is an immutable wrapper around dictionaries that implements the
+ complete mapping interface. It can be used as a drop-in replacement for
+ dictionaries where immutability is desired.
+ .
+ Of course, this is Python, and you can still poke around the object's
+ internals if you want.
+ .
+ The frozendict constructor mimics dict, and all of the expected interfaces
+ (iter, len, repr, hash, getitem) are provided. Note that a frozendict does not
+ guarantee the immutability of its values, so the utility of hash method is
+ restricted by usage.
+ .
+ The only difference is that the copy() method of frozendict takes variable
+ keyword arguments, which will be present as key/value pairs in the new,
+ immutable copy.
+ .
+ This package contains the Python 2.7 module.

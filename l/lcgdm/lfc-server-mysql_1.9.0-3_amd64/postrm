@@ -1,9 +1,0 @@
-#!/bin/sh
-set -e
-
-if [ "$1" = "purge" ] ; then
-	update-alternatives --display lfcdaemon > /dev/null || \
-		update-rc.d lfcdaemon remove >/dev/null || exit $?
-fi
-
-

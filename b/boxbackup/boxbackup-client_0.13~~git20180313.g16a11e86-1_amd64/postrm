@@ -1,0 +1,33 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "purge" ]; then
+	    for i in /etc/boxbackup/bbackupd.conf /etc/boxbackup/bbackupd/notifyadmin; do
+		if [ -e $i ]; then
+		    rm -f $i
+		fi
+		if which ucf >/dev/null; then
+		    ucf -p $i
+		fi
+	    done
+fi
+
+# Automatically added by dh_installinit/11.1.5
+if [ "$1" = "purge" ] ; then
+	update-rc.d boxbackup-client remove >/dev/null
+fi
+
+
+# In case this system is running systemd, we make systemd reload the unit files
+# to pick up changes.
+if [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.1.5
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

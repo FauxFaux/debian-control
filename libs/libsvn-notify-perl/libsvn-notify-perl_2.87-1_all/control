@@ -1,0 +1,23 @@
+Package: libsvn-notify-perl
+Version: 2.87-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 226
+Depends: perl, libemail-address-xs-perl, subversion
+Recommends: libhtml-parser-perl, libnet-smtp-tls-perl, libtext-trac-perl
+Suggests: default-mta | mail-transport-agent
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/SVN-Notify
+Description: Subversion activity notification
+ SVN::Notify provides a class and an interface to notify by email Subversion
+ repository changes.
+ .
+ It is able to inform about the files changed in a commit and send the
+ appropriate diff files.
+ .
+ An additional class (SVN::Notify::HTML) is provided to manage HTML formatted
+ emails.
+ .
+ Please, consider installing a MTA if you are planning to use sendmail instead
+ of --smtp-* options.

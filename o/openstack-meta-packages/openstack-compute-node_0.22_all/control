@@ -1,0 +1,19 @@
+Package: openstack-compute-node
+Source: openstack-meta-packages
+Version: 0.22
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 11
+Pre-Depends: default-mysql-client | mysql-client
+Depends: ceilometer-agent-compute, neutron-plugin-openvswitch-agent, nova-compute, nova-compute-kvm | nova-compute-qemu, novnc, ntp, openstack-pkg-tools
+Section: net
+Priority: optional
+Homepage: http://openstack.alioth.debian.org/
+Description: Metapackage to install an Openstack compute node
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ This metapackage will install a KVM based compute node which will also run
+ Neutron OVS Agent.

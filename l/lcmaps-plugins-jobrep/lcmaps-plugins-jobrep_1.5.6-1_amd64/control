@@ -1,0 +1,28 @@
+Package: lcmaps-plugins-jobrep
+Version: 1.5.6-1
+Architecture: amd64
+Maintainer: Dennis van Dok <dennisvd@nikhef.nl>
+Installed-Size: 131
+Depends: libc6 (>= 2.7), libodbc1 (>= 2.3.1), libssl1.1 (>= 1.1.0), liblcmaps0
+Section: libs
+Priority: extra
+Homepage: https://wiki.nikhef.nl/grid/LCMAPS
+Description: Jobrepository plugin for the LCMAPS authorization framework
+ The Local Centre MAPping Service (LCMAPS) is a security middleware
+ component that processes the users Grid credentials (typically X.509
+ proxy certificates and VOMS attributes) and maps the user to a local
+ account based on the site local policy.
+ .
+ This package contains the LCMAPS jobrepository plug-in, which stores
+ credentials and the resulting account mappings into a relational
+ database. This plugin will link up all the known in-process information
+ from LCMAPS core memory and store it in a database. This plug-in uses
+ ODBC (http://en.wikipedia.org/wiki/ODBC) to connect to the database.
+ .
+ The current state of the mappings between various credentials and
+ Unix accounts is stored in an open database on disk, but this
+ information can change over time through (regular) system
+ administrative interventions. This state is now preserved in a
+ relational database with the added benefit of being accessible by
+ other systems, e.g. GridSAFE and build-up an easy to backup historic
+ view on the mapping state.

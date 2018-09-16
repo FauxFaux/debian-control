@@ -1,0 +1,22 @@
+Package: ruby-librarian
+Version: 0.6.4-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 189
+Depends: ruby | ruby-interpreter, ruby-thor (>= 0.15)
+Section: ruby
+Priority: optional
+Homepage: https://github.com/voxpupuli/librarian
+Description: framework for writing bundlers
+ Librarian is a framework for writing bundlers, which are tools that resolve,
+ fetch, install, and isolate a project's dependencies, in Ruby.
+ .
+ A bundler written with Librarian will expect you to provide a specfile listing
+ your project's declared dependencies, including any version constraints and
+ including the upstream sources for finding them. Librarian can resolve the
+ spec, write a lockfile listing the full resolution, fetch the resolved
+ dependencies, install them, and isolate them in your project.
+ .
+ A bundler written with Librarian will be similar in kind to Bundler, the
+ bundler for Ruby gems that many modern Rails applications use.
+Ruby-Versions: all

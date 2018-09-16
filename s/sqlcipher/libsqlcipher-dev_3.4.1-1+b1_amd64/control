@@ -1,0 +1,34 @@
+Package: libsqlcipher-dev
+Source: sqlcipher (3.4.1-1)
+Version: 3.4.1-1+b1
+Architecture: amd64
+Maintainer: Hans-Christoph Steiner <hans@eds.org>
+Installed-Size: 1681
+Depends: libsqlcipher0 (= 3.4.1-1+b1), libc6-dev
+Suggests: sqlite3-doc
+Section: libdevel
+Priority: optional
+Homepage: http://sqlcipher.net/
+Description: SQLCipher development files
+ SQLCipher is a C library that implements an encryption in the SQLite 3
+ database engine.  Programs that link with the SQLCipher library can have SQL
+ database access without running a separate RDBMS process.  It allows one to
+ have per-database or page-by-page encryption using AES-256 from OpenSSL.
+ .
+ SQLCipher has a small footprint and great performance so it’s ideal for
+ protecting embedded application databases and is well suited for mobile
+ development.
+ .
+  * as little as 5-15% overhead for encryption
+  * 100% of data in the database file is encrypted
+  * Uses good security practices (CBC mode, key derivation)
+  * Zero-configuration and application level cryptography
+  * Algorithms provided by the peer reviewed OpenSSL crypto library.
+ .
+ SQLCipher has broad platform support for with C/C++, Obj-C, QT,
+ Win32/.NET/Mono, Java, Python, Ruby, Linux, Mac OS X, iPhone/iOS, Android,
+ Xamarin.iOS, and Xamarin.Android.
+ .
+ This package contains the development files (headers, static libraries)
+ .
+ SQLCipher v3.4.1 is based on SQLite3 v3.15.2.

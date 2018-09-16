@@ -1,0 +1,30 @@
+Package: python3-gfapy
+Source: gfapy
+Version: 1.0.0+dfsg-2
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 481
+Depends: python3:any (>= 3.3.2-2~)
+Section: science
+Priority: optional
+Homepage: https://github.com/ggonnella/gfapy
+Description: flexible and extensible software library for handling sequence graphs
+ The Graphical Fragment Assembly (GFA) are formats for the representation of
+ sequence graphs, including assembly, variation and splicing graphs. Two
+ versions of GFA have been defined (GFA1 and GFA2) and several sequence
+ analysis programs have been adopting the formats as an interchange format,
+ which allow the user to easily combine different sequence analysis tools.
+ .
+ This library implements the GFA1 and GFA2 specification. It is possible to
+ create a Gfa object from a file in the GFA format or from scratch, to
+ enumerate the graph elements (segments, links, containments, paths and header
+ lines), to traverse the graph (by traversing all links outgoing from or
+ incoming to a segment), to search for elements (e.g. which links connect two
+ segments) and to manipulate the graph (e.g. to eliminate a link or a segment
+ or to duplicate a segment distributing the read counts evenly on the copies).
+ .
+ The GFA format can be easily extended by users by defining own custom tags
+ and record types. In Gfapy, it is easy to write extensions modules, which
+ allow one to define custom record types and datatypes for the parsing and
+ validation of custom fields. The custom lines can be connected, using
+ references, to each other and to lines of the standard record types.

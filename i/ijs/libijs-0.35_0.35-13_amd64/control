@@ -1,0 +1,26 @@
+Package: libijs-0.35
+Source: ijs
+Version: 0.35-13
+Architecture: amd64
+Maintainer: Debian Printing Team <debian-printing@lists.debian.org>
+Installed-Size: 49
+Depends: libc6 (>= 2.14)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.linuxprinting.org/ijs/
+Description: IJS raster image transport protocol: shared library
+ IJS is, first and foremost, a protocol for transmission of raster page
+ images. This snapshot provides a reference implementation of the protocol,
+ the design of which is still in flux. When the protocol specification is
+ published, it will be authoritative. Applications should feel free to link
+ against the library provided in this package, adapt that code for their own
+ needs, or roll a completely new implementation.
+ .
+ IJS is a client-server protocol, used to write ghostscript drivers. The
+ drivers are separate programs. The client and server communicate via pipes,
+ though shared memory may be used additionally in the future. Currently IJS
+ is used by the hpijs and ijsgimpprint drivers.
+ .
+ Code for both the client- and server-side is included in the library. This
+ package provides the shared library.

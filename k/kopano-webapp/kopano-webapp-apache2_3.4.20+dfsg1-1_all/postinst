@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# postinst script for kopano-webapp-apache2
+# see: dh_installdeb(1)
+
+# summary of how this script can be called:
+#                           --- $1 ---          --- $2 ---     --- $3 ---               --- $4 ---
+#            <new-postinst> 'configure'         <most-recently-configured-version>
+#            <old-postinst> 'abort-upgrade'     <new version>
+#   <conflictor's-postinst> 'abort-remove'      'in-favour'     <package>                <new-version>
+#                <postinst> 'abort-remove'
+# <deconfigured's-postinst> 'abort-deconfigure' 'in-favour'     <failed-install-package> <version>     'removing' <conflicting-package> <version>
+#
+# for details, see http://www.debian.org/doc/debian-policy/ or the
+# debian-policy package
+
+set -e
+#set -x # uncomment for verbose output
+
+case "$1" in
+    configure)
+        ### Apache2.4
+        # processing kopano-webapp for apache2
+        if [ -e /usr/share/apache2/apache2-maintscript-helper ]; then
+            . /usr/share/apache2/apache2-maintscript-helper
+
+            if [ ! -e "/etc/apache2/mods-enabled/ssl.load" ]; then
+                apache2_invoke enmod ssl || exit $?
+            fi
+            if [ ! -e "/etc/apache2/mods-enabled/rewrite.load" ]; then
+                apache2_invoke enmod rewrite || exit $?
+            fi
+
+            # preparations made, try to activate or reload apache2 config
+            if test -n "$2"; then
+                # we are updating to the new version
+                if apache2ctl -S | grep "kopano-webapp" > /dev/null ;then
+                    # vhost config from previous version is active, reload server config
+                    apache2_reload || exit $?
+                else
+                    echo "kopano-webapp config for Apache2 wasn't active, doing nothing further"
+                fi
+            else
+                # we are on a first time installation
+                apache2_invoke enconf kopano-webapp-apache2 || exit $?
+            fi
+        fi
+
+        APP_PROFILE="/etc/apparmor.d/usr.sbin.apache2"
+        if [ -f "$APP_PROFILE" ] && aa-status --enabled 2>/dev/null; then
+            apparmor_parser -rTW "$APP_PROFILE" || true
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0
+
+# vim: autoindent ts=4 sw=4 expandtab softtabstop=4 ft=conf

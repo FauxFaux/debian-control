@@ -1,0 +1,18 @@
+Package: libplack-middleware-session-perl
+Version: 0.30-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 101
+Depends: perl, libcookie-baker-perl, libdigest-hmac-perl (>= 1.03), libplack-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Plack-Middleware-Session
+Description: Perl module for Plack middleware session management
+ Plack::Middleware::Session provides Plack Middleware
+ component for session management. By default it will
+ use cookies to keep session state and store data in
+ memory. This library also comes with other state and
+ store solutions. It should be noted that it stores
+ the current session as a hash reference in the
+ psgix.session key inside the $env where it can
+ accessed as needed.

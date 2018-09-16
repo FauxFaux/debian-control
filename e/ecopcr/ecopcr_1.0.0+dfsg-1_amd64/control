@@ -1,0 +1,27 @@
+Package: ecopcr
+Version: 1.0.0+dfsg-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 230
+Depends: libc6 (>= 2.7), zlib1g (>= 1:1.1.4), python3:any, python3-reportlab
+Section: science
+Priority: optional
+Homepage: https://git.metabarcoding.org/obitools/ecopcr/wikis/home
+Description: estimate PCR barcode primers quality
+ DNA barcoding is a tool for characterizing the species origin using a
+ short sequence from a standard position and agreed upon position in the
+ genome. To be used as a DNA barcode, a genome locus should vary among
+ individuals of the same species only to a minor degree and it should
+ vary among species very quickly. From a practical point of view, a
+ barcode locus should be ﬂanked by two conserved regions to design PCR
+ primers. Several manually discovered barcode loci like COI, rbcL, 18S,
+ 16S and 23S rDNA, or trnH-ps are routinely used today, but no objective
+ function has been described to measure their quality in terms of
+ universality (barcode coverage, Bc ) or in terms of taxonomical
+ discrimination capacity (barcode speciﬁcity, Bs ).
+ .
+ ecoPCR is an electronic PCR software developed by LECA and
+ Helix-Project. It helps to estimate Barcode primers quality. In
+ conjunction with OBITools you can postprocess ecoPCR output to compute
+ barcode coverage and barcode speciﬁcity. New barcode primers can be
+ developed using the ecoPrimers software

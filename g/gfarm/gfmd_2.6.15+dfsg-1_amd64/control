@@ -1,0 +1,23 @@
+Package: gfmd
+Source: gfarm
+Version: 2.6.15+dfsg-1
+Architecture: amd64
+Maintainer: Dmitry Smirnov <onlyjob@debian.org>
+Installed-Size: 972
+Depends: libc6 (>= 2.14), libgfarm1 (>= 2.6.15), libldap-2.4-2 (>= 2.4.7), libpq5, init-system-helpers (>= 1.18~), adduser
+Recommends: gfarm-client, postgresql | slapd
+Suggests: gfarm-doc
+Section: net
+Priority: extra
+Homepage: https://sourceforge.net/p/gfarm/wiki/Home/
+Description: Gfarm file system metadata server
+ The Gfarm file system is designed to turn commodity PCs into nodes of
+ a distributed storage network, implementing the Grid Datafarm
+ architecture for global petascale data-intensive computing. It solves
+ performance and reliability problems in NFS and AFS by means of
+ multiple file replicas, and not only prevents performance degradation
+ due to access concentration, but also supports fault tolerance and
+ disaster recovery.
+ .
+ This package provides the Gfarm metadata server, which equips a
+ host to function as a server node managing file system metadata.

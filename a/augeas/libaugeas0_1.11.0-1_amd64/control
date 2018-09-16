@@ -1,0 +1,20 @@
+Package: libaugeas0
+Source: augeas
+Version: 1.11.0-1
+Architecture: amd64
+Maintainer: Hilko Bengen <bengen@debian.org>
+Installed-Size: 566
+Depends: libc6 (>= 2.27), libselinux1 (>= 1.32), libxml2 (>= 2.7.4), augeas-lenses
+Suggests: augeas-tools
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://augeas.net/
+Description: Augeas configuration editing library and API
+ Augeas is a configuration editing tool. It parses configuration files in their
+ native formats and transforms them into a tree. Configuration changes are made
+ by manipulating this tree and saving it back into native config files.
+ .
+ The transformation works very hard to preserve comments and formatting
+ details. It is controlled by ``lens'' definitions that describe the file
+ format and the transformation into a tree.

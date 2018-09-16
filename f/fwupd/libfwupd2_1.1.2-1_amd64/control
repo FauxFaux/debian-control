@@ -1,0 +1,20 @@
+Package: libfwupd2
+Source: fwupd
+Version: 1.1.2-1
+Architecture: amd64
+Maintainer: Debian EFI <debian-efi@lists.debian.org>
+Installed-Size: 160
+Depends: libc6 (>= 2.4), libglib2.0-0 (>= 2.45.8), libjson-glib-1.0-0 (>= 0.13.2), libsoup2.4-1 (>= 2.32.2)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/hughsie/fwupd
+Description: Firmware update daemon library
+ fwupd is a daemon to allow session software to update device firmware.
+ You can either use a GUI software manager like GNOME Software to view and
+ apply updates, the command-line tool or the system D-Bus interface directly.
+ Currently, firmware updates using the UEFI capsule format and for the
+ ColorHug are supported. More formats may be supported in the future.
+ See <https://github.com/hughsie/fwupd> for details
+ .
+ This package provides the library used by the daemon.

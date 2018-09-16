@@ -1,0 +1,18 @@
+Package: libcgi-application-dispatch-perl
+Version: 3.12-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 122
+Depends: perl, libcgi-application-perl (>= 4.50), libexception-class-perl, libhttp-exception-perl, libtry-tiny-perl
+Suggests: libapache2-mod-perl2, libplack-perl
+Breaks: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Replaces: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Application-Dispatch
+Description: request dispatcher for CGI::Application
+ CGI::Application::Dispatch provides glue between web server environments
+ such as mod_perl, Plack and straight CGI and the CGI::Application web
+ framework. It does this by parsing the PATH_INFO environment variable
+ and mapping it onto a CGI::Application subclass module invocation with the
+ appropriate run mode and CGI::Application parameters.

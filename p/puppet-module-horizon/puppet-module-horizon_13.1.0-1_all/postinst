@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/horizon puppet-module-horizon /usr/share/puppet/modules.available/horizon 500
+fi
+
+
+
+exit 0

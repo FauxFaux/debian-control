@@ -1,0 +1,39 @@
+#! /bin/sh
+# postrm script for spip
+#
+# see: dh_installdeb(1)
+
+set -e
+
+if [ -f /usr/share/debconf/confmodule ]; then
+. /usr/share/debconf/confmodule
+fi
+
+case "$1" in
+    purge)
+	CONF="spip"
+	COMMON_STATE=$(dpkg-query -f '${Status}' -W 'apache2.2-common' 2>/dev/null | awk '{print $3}' || true)
+
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		apache2_invoke disconf spip.conf
+	elif [ "$COMMON_STATE" = "installed" ] || [ "$COMMON_STATE" = "unpacked" ] ; then
+		[ -L /etc/apache2/conf.d/$CONF.conf ] && rm /etc/apache2/conf.d/$CONF.conf
+	fi
+        rm -rf /etc/spip /var/lib/spip /etc/apache2/conf-available/spip.conf /etc/cherokee/sites-available/spip
+    ;;
+    *)
+    ;;
+esac
+
+
+# Automatically added by dh_installdebconf/11.3.2
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0
+

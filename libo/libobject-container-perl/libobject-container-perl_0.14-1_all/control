@@ -1,0 +1,26 @@
+Package: libobject-container-perl
+Version: 0.14-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 93
+Depends: perl, libclass-accessor-perl
+Recommends: libexporter-autoclean-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Object-Container
+Description: module that provides a simple object container
+ Object::Container is an object container with an OO interface. It is
+ used to make singletons out of ordinary classes.
+ .
+ For example, if you want to have a single instance of WWW::Mechanize
+ throughout a program, you can do
+ Object::Container->register('WWW::Mechanize') somewhere and then you
+ can retrieve that instance of WWW::Mechanize from anywhere else with
+ Object::Container->get('WWW::Mechanize');
+ .
+ Class::Singleton is a similar module, which makes subclasses
+ singletons. Unlike Class::Singleton, Object::Container can make any
+ class a singleton.
+ .
+ Object::Registrar is another similar module, but it does not support
+ lazy loading.

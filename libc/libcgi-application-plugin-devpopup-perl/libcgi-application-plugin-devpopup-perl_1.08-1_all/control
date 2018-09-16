@@ -1,0 +1,32 @@
+Package: libcgi-application-plugin-devpopup-perl
+Version: 1.08-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 69
+Depends: perl, libcgi-application-perl, libio-stringy-perl, libhtml-template-perl
+Suggests: liblog-dispatch-perl
+Breaks: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Replaces: libcgi-application-basic-plugin-bundle-perl (<< 0.6), libcgi-application-plugins-perl (<< 0.11)
+Provides: libcgi-application-plugin-devpopup-params-perl, libcgi-application-plugin-devpopup-query-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CGI-Application-Plugin-DevPopup
+Description: debugging framework for CGI::Application
+ CGI::Application::Plugin::DevPopup module provides a plugin framework for
+ displaying runtime information about your CGI::Application application in a
+ popup window. Specific plugins include:
+ .
+ CGI::Application::Plugin::DevPopup::Query - Shows the state of the query
+ object (usually a CGI)
+ .
+ CGI::Application::Plugin::DevPopup::Params - Shows the internal
+ CGI::Application state
+ .
+ CGI::Application::Plugin::DevPopup::HTTPHeaders - Shows incoming and
+ outgoing headers
+ .
+ CGI::Application::Plugin::DevPopup::Log - Shows information collected from
+ a log file handle
+ .
+ CGI::Application::Plugin::DevPopup::Timing - Shows timing information about
+ application states.
