@@ -19,7 +19,7 @@ curl -s "$url" \
             --exclude=md5sums \
             --exclude=symbols \
             --exclude=templates \
-            --exclude=control \
+#            --exclude=control \
             -C "$D"
 
 mv --no-target-directory "$D" "$out"
