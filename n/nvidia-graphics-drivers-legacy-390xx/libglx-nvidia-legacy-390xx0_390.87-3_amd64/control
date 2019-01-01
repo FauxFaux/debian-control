@@ -1,0 +1,22 @@
+Package: libglx-nvidia-legacy-390xx0
+Source: nvidia-graphics-drivers-legacy-390xx
+Version: 390.87-3
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 1443
+Depends: nvidia-legacy-390xx-alternative (= 390.87-3), libglx0 | libglx0-glvnd-nvidia, libnvidia-legacy-390xx-glcore (= 390.87-3), libc6 (>= 2.2.5), libx11-6, libxext6
+Provides: libglx-vendor
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: NVIDIA binary GLX library (390xx legacy version)
+ GLX ("OpenGL Extension to the X Window System") provides an interface between
+ OpenGL and the X Window System as well as extensions to OpenGL itself.
+ .
+ See the description of the nvidia-legacy-390xx-driver package
+ or /usr/share/doc/libgl1-nvidia-legacy-390xx-glx/README.txt.gz
+ for a complete list of supported GPUs and PCI IDs.
+ .
+ This package contains the driver specific binary GLX implementation by NVIDIA
+ that is accessed via GLVND.

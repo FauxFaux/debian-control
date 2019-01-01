@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+# source debconf library
+. /usr/share/debconf/confmodule
+
+if [ "$1" != "upgrade" ]; then
+
+    update-alternatives --remove libblas64.so-x86_64-linux-gnu \
+                        /usr/lib/x86_64-linux-gnu/libblis64.so
+
+fi
+
+
+exit 0

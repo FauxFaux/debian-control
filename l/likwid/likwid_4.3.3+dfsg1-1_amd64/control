@@ -1,0 +1,35 @@
+Package: likwid
+Version: 4.3.3+dfsg1-1
+Architecture: amd64
+Maintainer: Christoph Martin <martin@uni-mainz.de>
+Installed-Size: 14016
+Depends: libc6 (>= 2.14), liblua5.2-0, perl:any, lua5.2
+Suggests: feedgnuplot
+Section: misc
+Priority: optional
+Homepage: https://github.com/rrze-likwid/likwid
+Description: toolsuite for performance oriented programmers
+ Likwid is a simple to install and use toolsuite of command line applications
+ for performance oriented programmers. It works for Intel and AMD processors
+ on the Linux operating system.
+ .
+ It consists of:
+ .
+ likwid-topology       - print thread and cache topology
+ likwid-features       - view and toggle feature reagister on Intel processors
+ likwid-perfctr        - configure and read out hardware performance counters
+                         on Intel and AMD processors
+ likwid-powermeter     - read out RAPL Energy information and get info about
+                         Turbo Mode steps
+ likwid-setFrequencies - read out RAPL Energy information and get info about
+                         Turbo Mode steps
+ likwid-memsweeper     - cleans up filled NUMA memory domains and evicts dirty
+                         cacheline from cache hierarchy
+ likwid-pin            - pin your threaded application (pthread, Intel and gcc
+                         OpenMP to dedicated processors
+ likwid-bench          - Micro benchmarking platform
+ likwid-gencfg         - Dumps topology information to a file
+ likwid-mpirun         - Wrapper to start MPI and Hybrid MPI/OpenMP
+                         applications (Supports Intel MPI and OpenMPI)
+ likwid-scope          - Frontend to the timeline mode of likwid-perfctr, plots
+                         live graphs of performance metrics

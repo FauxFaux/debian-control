@@ -1,0 +1,21 @@
+Package: lksctp-tools
+Version: 1.0.18+dfsg-1
+Architecture: amd64
+Maintainer: Michael Biebl <biebl@debian.org>
+Installed-Size: 190
+Depends: libc6 (>= 2.16), libsctp1 (>= 1.0.12+dfsg)
+Section: net
+Priority: optional
+Homepage: http://lksctp.sf.net/
+Description: user-space access to Linux kernel SCTP - commandline tools
+ SCTP (Stream Control Transmission Protocol) is a message oriented,
+ reliable transport protocol, with congestion control, support for
+ transparent multi-homing, and multiple ordered streams of messages.
+ RFC 2960 defines the core protocol.
+ .
+ This package is part of the LKSCTP project, and contains libraries and
+ commandline tools to test SCTP functionality:
+  * checksctp: determine if kernel supports SCTP
+  * withsctp: run existing TCP binaries over SCTP
+  * sctp_darn: send and receive messages via SCTP
+  * sctp_test: check SCTP functionality from user-space

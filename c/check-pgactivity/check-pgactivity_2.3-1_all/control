@@ -1,0 +1,27 @@
+Package: check-pgactivity
+Version: 2.3-1
+Architecture: all
+Maintainer: Debian PostgreSQL Maintainers <team+postgresql@tracker.debian.org>
+Installed-Size: 285
+Depends: perl:any, postgresql-client
+Suggests: wget | curl | lynx | links | links2
+Section: database
+Priority: optional
+Homepage: https://github.com/OPMDG/check_pgactivity
+Description: PostgreSQL plugin for Nagios
+ check_pgactivity is a Nagios probe dedicated to PostgreSQL. It offers many
+ options to measure and monitor useful performance metrics.
+ .
+ Services include (among others) monitoring of autovacuum, bgwriter, locks,
+ long queries, idle in transaction queries, number of temporary files and WAL
+ files, bloat of tables and btree indexes, commit and hit ratios,
+ WAL archives exhaustivity, age of logical backups, backends number and states,
+ backup label file age, connectivity, replication delay between primary and
+ secondary instances, database sizes, vacuum and analyze times,
+ sequence exhaustion, snapshots age, presence of unlogged tables or invalid
+ indexes, incoming freeze, settings changes, PostgreSQL minor version,
+ PGDATA rights, custom queries.
+ .
+ Most services only need normal user rights.
+ .
+ All versions of PostgreSQL are supported from 7.4 to 10.

@@ -1,0 +1,161 @@
+#!/bin/sh
+
+set -e
+
+if [ -f /usr/share/debconf/confmodule ]; then
+    . /usr/share/debconf/confmodule
+fi
+if [ -f /usr/share/dbconfig-common/dpkg/postrm ]; then
+    . /usr/share/dbconfig-common/dpkg/postrm
+    dbc_go mailman3-web "$@"
+fi
+
+if [ -e /usr/share/apache2/apache2-maintscript-helper ]; then
+    . /usr/share/apache2/apache2-maintscript-helper
+fi
+
+pathfind() {
+    OLDIFS="$IFS"
+    IFS=:
+    for p in $PATH; do
+        if [ -x "$p/$*" ]; then
+            IFS="$OLDIFS"
+            return 0
+        fi
+    done
+    IFS="$OLDIFS"
+    return 1
+}
+
+apache_remove() {
+    if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+        apache2_invoke disconf mailman3.conf
+    fi
+    if [ -d /etc/apache2/conf-available ] && [ -e /etc/apache2/conf-available/mailman3.conf ]; then
+        rm /etc/apache2/conf-available/mailman3.conf
+    fi
+}
+
+ngnx_remove() {
+    if [ -d /etc/nginx/sites-enabled ] && [ -e /etc/nginx/sites-enabled/mailman3 ]; then
+        rm -f /etc/nginx/sites-enabled/mailman3
+        rm -rf /var/log/nginx/mailman3
+    fi
+}
+
+case "$1" in
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    remove)
+
+        # Handling web server configuration
+        db_get mailman3-web/configure-webserver
+        webservers="$RET"
+        restart=""
+
+        for webserver in $webservers; do
+            webserver=${webserver%,}
+
+            case "$webserver" in
+                apache2)
+                    apache_remove
+                    ;;
+                nginx)
+                    nginx_remove
+                    ;;
+            esac
+
+            pathfind $webserver || continue
+            restart="$restart $webserver"
+        done
+
+        db_get mailman3-web/restart-webserver
+        res="$RET"
+        db_stop || true
+        if [ "$res" = "true" ]; then
+            for webserver in $restart; do
+                webserver=${webserver%,}
+                # Redirection of 3 is needed because Debconf uses it and it might
+                # be inherited by webserver. See bug #446324.
+                if pathfind invoke-rc.d; then
+                    invoke-rc.d $webserver reload 3>/dev/null || true
+                else
+                    /etc/init.d/$webserver reload 3>/dev/null || true
+                fi
+            done
+        fi
+    ;;
+
+    purge)
+        if [ -f /usr/share/debconf/confmodule ]; then
+            db_purge
+        fi
+
+        rm -rf /var/lib/mailman3/web
+        rm -f /var/log/mailman3/web/mailman-web.log*
+
+        for ext in .ucf-new .ucf-old .ucf-dist ""; do
+            rm -f "/etc/mailman3/mailman-web.py$ext"
+        done
+        if which ucf >/dev/null 2>&1; then
+            ucf --purge /etc/mailman3/mailman-web.py
+        fi
+        if which ucfr >/dev/null 2>&1; then
+            ucfr --purge mailman3-web /etc/mailman3/mailman-web.py
+        fi
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit/11.4.1
+if [ "$1" = "purge" ] ; then
+	update-rc.d mailman3-web remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.4.1
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.4.1
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'mailman3-web-qcluster.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'mailman3-web-qcluster.service' >/dev/null || true
+		deb-systemd-helper unmask 'mailman3-web-qcluster.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.4.1
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'mailman3-web.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'mailman3-web.service' >/dev/null || true
+		deb-systemd-helper unmask 'mailman3-web.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.4.1
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

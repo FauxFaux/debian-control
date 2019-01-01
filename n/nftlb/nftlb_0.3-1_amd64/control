@@ -1,0 +1,20 @@
+Package: nftlb
+Version: 0.3-1
+Architecture: amd64
+Maintainer: Arturo Borrero Gonzalez <arturo@debian.org>
+Installed-Size: 134
+Depends: libc6 (>= 2.14), libev4 (>= 1:4.04), libjansson4 (>= 2.3), libmnl0 (>= 1.0.3-4~), libnftables0
+Section: net
+Priority: optional
+Homepage: https://github.com/zevenet/nftlb
+Description: nftables load balancer
+ nftlb stands for nftables load balancer, the next generation linux firewall
+ that replaces iptables, is adapted to behave as a complete load balancer and
+ traffic distributor.
+ .
+ nftlb is provided with a JSON API, so you can use your preferred health
+ checker to enable/disable backends or virtual services and automate processed
+ with it.
+ .
+ The nftables framework used for load balancing can outperform typical LVS
+ deployments by 10x.

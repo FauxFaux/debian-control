@@ -1,0 +1,30 @@
+Package: python3-engineio
+Source: python-engineio
+Version: 3.0.0+dfsg-1
+Architecture: all
+Maintainer: Paulo Henrique de Lima Santana (phls) <paulo@phls.com.br>
+Installed-Size: 143
+Depends: python3-six (>= 1.9.0), python3:any (>= 3.5~)
+Section: python
+Priority: optional
+Homepage: https://pypi.python.org/pypi/python-engineio
+Description: python3 implementation of the Engine.IO realtime server
+ This project implements an Engine.IO server that can run standalone or
+ integrated with a python3 WSGI application. The following are some of its
+ features:
+ .
+ Fully compatible with the Javascript engine.io-client library.
+ Compatible with python3.
+ Supports large number of clients even on modest hardware when used with an
+ asynchronous server based on asyncio (sanic, aiohttp or tornado), eventlet or
+ gevent. For development and testing, any WSGI compliant multi-threaded
+ server can also be used.
+ Includes a WSGI middleware that integrates Engine.IO traffic with standard
+ WSGI applications.
+ Uses an event-based architecture implemented with decorators that hides the
+ details of the protocol.
+ Implements HTTP long-polling and WebSocket transports.
+ Supports XHR2 and XHR browsers as clients.
+ Supports text and binary messages.
+ Supports gzip and deflate HTTP compression.
+ Configurable CORS responses to avoid cross-origin problems with browsers.

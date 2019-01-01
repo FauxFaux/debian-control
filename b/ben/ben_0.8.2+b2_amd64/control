@@ -1,0 +1,24 @@
+Package: ben
+Source: ben (0.8.2)
+Version: 0.8.2+b2
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 6736
+Depends: libben-ocaml-iuqw5, libtyxml-ocaml-bkgg0, ocaml-base-nox-4.05.0, libc6 (>= 2.17), libpcre3, libpq5, bzip2, curl, libjs-jquery
+Recommends: dose-distcheck
+Enhances: devscripts
+Section: devel
+Priority: optional
+Homepage: https://ben.debian.net
+Description: toolbox for Debian maintainers
+ This is a collection of useful tools that Debian maintainers can use
+ to make their packaging work easier. They all work with regular
+ Debian package list files, and should be useful for Debian
+ derivatives as well. This package ships a single executable, "ben",
+ with the following subcommands:
+  * download: download a set of package list files from a mirror
+  * monitor: monitor the status of a set of packages across several
+    architectures (useful for transitions)
+  * query: query packages using their metadata (similar to grep-dctrl,
+    but uses a dedicated query language)
+  * tracker: frontend to multiple monitors

@@ -1,0 +1,21 @@
+Package: jenkins-debian-glue
+Version: 0.19.0
+Architecture: all
+Maintainer: Michael Prokop <mika@debian.org>
+Installed-Size: 169
+Depends: sudo | sudo-ldap
+Recommends: jenkins-debian-glue-buildenv
+Conflicts: jenkins-debian-glue-buildenv-git, jenkins-debian-glue-buildenv-lintian, jenkins-debian-glue-buildenv-piuparts, jenkins-debian-glue-buildenv-slave, jenkins-debian-glue-buildenv-svn, jenkins-debian-glue-buildenv-taptools
+Section: admin
+Priority: optional
+Homepage: https://github.com/mika/jenkins-debian-glue
+Description: Jenkins Debian glue scripts
+ This package provides scripts which make building Debian
+ packages inside Jenkins (a Continuous Integration suite) easier.
+ .
+ It's meant to make Q/A builds of Debian packages inside Jenkins
+ as manageable and homogeneous as possible.
+ .
+ You need to install the according packaging tools, depending on
+ your VCS type and the features you want to use. To get all tools
+ you can just install the jenkins-debian-glue-buildenv package.

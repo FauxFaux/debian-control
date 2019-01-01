@@ -1,0 +1,28 @@
+Package: suricata
+Version: 1:4.0.6-1
+Architecture: amd64
+Maintainer: Pierre Chifflier <pollux@debian.org>
+Installed-Size: 2877
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: python (>= 2.7) | python-argparse, python-simplejson, python:any (<< 2.8), python:any (>= 2.7~), libc6 (>= 2.27), libcap-ng0 (>= 0.7.9), libevent-2.1-6 (>= 2.1.8-stable), libevent-pthreads-2.1-6 (>= 2.1.8-stable), libgeoip1, libgnutls30 (>= 3.5.0), libhiredis0.14 (>= 0.14.0), libhtp2 (>= 0.5.24+1git0439eed), libhyperscan5, libjansson4 (>= 2.2), libltdl7 (>= 2.4.6), libluajit-5.1-2 (>= 2.0.4+dfsg), libmagic1 (>= 5.12), libnet1 (>= 1.1.5), libnetfilter-log1, libnetfilter-queue1, libnfnetlink0, libnspr4 (>= 2:4.9-2~), libnss3 (>= 2:3.13.4-2~), libpcap0.8 (>= 1.0.0), libpcre3, libprelude23 (>= 4.1), libyaml-0-2, lsb-base (>= 3.0-6)
+Recommends: suricata-oinkmaster (= 1:4.0.6-1), python, snort-rules-default
+Suggests: libtcmalloc-minimal4
+Conflicts: libhtp1 (<< 0.5.16), suricata-hyperscan (<< 3.2)
+Replaces: libhtp1 (<< 0.5.16), suricata-hyperscan (<< 3.2)
+Section: net
+Priority: optional
+Homepage: https://www.suricata-ids.org/
+Description: Next Generation Intrusion Detection and Prevention Tool
+ Suricata is a network Intrusion Detection System (IDS). It is based on
+ rules (and is fully compatible with snort rules) to detect a variety of
+ attacks / probes by searching packet content.
+ .
+ It can also be used as Intrusion Prevention System (IPS), and as higher layer
+ firewall.
+ .
+ This new Engine supports Multi-Threading, Automatic Protocol Detection
+ (IP, TCP, UDP, ICMP, HTTP, TLS, FTP and SMB), Gzip Decompression, Fast
+ IP Matching and coming soon hardware acceleration on CUDA and OpenCL GPU
+ cards.
+ .
+ This version has inline (NFQUEUE) support enabled.

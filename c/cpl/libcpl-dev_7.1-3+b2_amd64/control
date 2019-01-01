@@ -1,0 +1,44 @@
+Package: libcpl-dev
+Source: cpl (7.1-3)
+Version: 7.1-3+b2
+Architecture: amd64
+Maintainer: Debian Astronomy Maintainers <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 449
+Depends: libcext-dev, libcfitsio-dev | libcfitsio3-dev (>= 3.310), libcplcore26 (= 7.1-3+b2), libcpldfs26 (= 7.1-3+b2), libcpldrs26 (= 7.1-3+b2), libcplui26 (= 7.1-3+b2), wcslib-dev
+Suggests: libcpl-doc
+Section: libdevel
+Priority: optional
+Homepage: https://www.eso.org/sci/software/cpl/
+Description: ESO library for automated astronomical data-reduction
+ The Common Pipeline Library (CPL) comprises a set of ISO-C libraries that
+ provide a comprehensive, efficient and robust software toolkit. It forms a
+ basis for the creation of automated astronomical data-reduction tasks (known
+ as "pipelines").
+ .
+ The CPL was developed to standardise the way instrument pipelines
+ are built, to shorten their development cycle and to ease their
+ maintenance. However, it may be more generally applied to any similar
+ application, and the details of the CPL code have been engineered in
+ a way to make the library portable and flexible, as well as
+ minimising external dependencies.
+ .
+ The CPL provides a host of functionality, presented in a clear,
+ generic and uniform manner. Among its many features, the CPL offers:
+ .
+  * many useful low-level data types (images, tables, matrices, strings,
+    property lists, ...),
+  * many fundamental statistic, arithmetic and conversion operations for
+    these data types.
+  * medium-level data access methods (e.g. a data abstraction layer for
+    FITS files),
+  * data table organisation and manipulation,
+  * keyword/value handling and management,
+  * a standardised application interface for pipeline recipes, and,
+  * support for dynamic loading of recipe modules.
+ .
+ Despite the current bias towards instrument pipeline development, the
+ library also provides a variety of general-purpose image- and
+ signal-processing functions, making it an excellent framework for the
+ creation of more generic data-handling packages.
+ .
+ This package contains the static library and the C header files.

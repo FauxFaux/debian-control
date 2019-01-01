@@ -1,0 +1,33 @@
+Package: rapmap
+Version: 0.12.0+dfsg-2
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 2819
+Depends: libc6 (>= 2.14), libdivsufsort3 (>= 2.0.1), libgcc1 (>= 1:4.2), libgomp1 (>= 4.2.1), libjemalloc1 (>= 2.1.1), zlib1g (>= 1:1.1.4)
+Section: science
+Priority: optional
+Homepage: https://github.com/COMBINE-lab/RapMap
+Description: rapid sensitive and accurate DNA read mapping via quasi-mapping
+ RapMap is a testing ground for ideas in quasi-mapping / (lightweight /
+ pseudo) transcriptome alignment. That means that, at this point, it is
+ somewhat experimental. The develop branch will have the latest
+ improvements and additions, but is not guaranteed to be stable between
+ commits. Breaking changes to the master branch will be accompanied by a
+ tag to the version before the breaking change. Currently, RapMap is a
+ stand-alone quasi-mapper that can be used with other tools. It is also
+ being used as part of Sailfish and Salmon. Eventually, the hope is to
+ create and stabilize an API so that it can be used as a library from
+ other tools.
+ .
+ Quasi-mapping / (lightweight / pseudo)-alignment is the term that is
+ used here for the type of information required for certain tasks (e.g.
+ transcript quantification) that is less "heavyweight" than what is
+ provided by traditional alignment. For example, one may only need to
+ know the transcripts / contigs to which a read aligns and, perhaps, the
+ position within those transcripts rather than the optimal alignment and
+ base-for-base CIGAR string that aligns the read and substring of the
+ transcript. For details on RapMap (quasi-mapping in particular), please
+ check out the associated paper. Note: RapMap implements both quasi-
+ mapping and pseudo-alignment (originally introduced in Bray et al.
+ 2016), these two are not the same thing. They are distinct concepts, and
+ RapMap simply happens to implement algorithms for computing both.

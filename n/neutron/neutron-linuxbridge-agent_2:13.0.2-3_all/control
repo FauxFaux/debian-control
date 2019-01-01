@@ -1,0 +1,19 @@
+Package: neutron-linuxbridge-agent
+Source: neutron
+Version: 2:13.0.2-3
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 52
+Depends: bridge-utils, ebtables, neutron-common (= 2:13.0.2-3), sudo, lsb-base (>= 3.0.6)
+Provides: neutron-plugin-linuxbridge-agent
+Section: net
+Priority: optional
+Homepage: http://neutron.openstack.org/
+Description: OpenStack virtual network service - Linux bridge agent
+ Neutron provides an API to dynamically request and configure virtual networks.
+ These networks connect "interfaces" from other OpenStack services (such as
+ vNICs from Nova VMs). The Neutron API supports extensions to provide advanced
+ network capabilities, including QoS, ACLs, and network monitoring.
+ .
+ This package provides the Linux bridge agent. If you choose to use the Linux
+ bridge plugin on neutron-server, this agent should run on each compute node.

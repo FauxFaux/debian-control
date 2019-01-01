@@ -1,0 +1,19 @@
+Package: strongswan-starter
+Source: strongswan
+Version: 5.7.1-1
+Architecture: amd64
+Maintainer: strongSwan Maintainers <pkg-swan-devel@lists.alioth.debian.org>
+Installed-Size: 626
+Depends: adduser, libstrongswan (= 5.7.1-1), lsb-base (>= 3.0-6), debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.27)
+Recommends: strongswan-charon
+Conflicts: openswan
+Section: net
+Priority: optional
+Homepage: http://www.strongswan.org
+Description: strongSwan daemon starter and configuration file parser
+ The strongSwan VPN suite uses the native IPsec stack in the standard
+ Linux kernel. It supports both the IKEv1 and IKEv2 protocols.
+ .
+ The starter and the associated "ipsec" script control the charon daemon from
+ the command line. It parses ipsec.conf and loads the configurations to the
+ daemon.

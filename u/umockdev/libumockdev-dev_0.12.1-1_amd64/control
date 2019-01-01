@@ -1,0 +1,30 @@
+Package: libumockdev-dev
+Source: umockdev
+Version: 0.12.1-1
+Architecture: amd64
+Maintainer: Martin Pitt <mpitt@debian.org>
+Installed-Size: 185
+Depends: libumockdev0 (= 0.12.1-1), libglib2.0-dev, gir1.2-umockdev-1.0 (= 0.12.1-1)
+Section: libdevel
+Priority: optional
+Homepage: https://github.com/martinpitt/umockdev/
+Description: development files and documentation for libumockdev
+ umockdev mocks hardware devices for creating unit tests for libraries and
+ programs that handle Linux hardware devices.
+ .
+ This library provides an UMockdevTestbed class for running a program or test
+ suite under a test bed with the previously recorded devices loaded.
+ .
+ Right now this covers sysfs, uevents, basic support for /dev devices, and
+ recording/mocking usbdevfs ioctls (for PtP/MTP devices).
+ .
+ With this you can simulate particular hardware in virtual environments up to
+ some degree, without needing any particular privileges or disturbing the whole
+ system.
+ .
+ The library supports gobject-introspection and builds a VAPI, so that you can
+ also use it with Python, JavaScript, and other languages which support GI, and
+ Vala.
+ .
+ This package contains the header, development, and documentation files which
+ are needed for building umockdev applications.

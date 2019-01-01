@@ -1,0 +1,50 @@
+Package: vspline-dev
+Source: vspline
+Version: 0.4.1-1
+Architecture: all
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 849
+Depends: libvigraimpex-dev
+Suggests: clang, vc-dev
+Section: math
+Priority: optional
+Homepage: https://bitbucket.org/kfj/vspline
+Description: header-only C++ template library for uniform b-spline processing
+ vspline aims to be as fast as possible, it's main focus is processing
+ of bulk raster data, especially images. vspline can handle
+ .
+  -  splines over real and integer data types and their aggregates
+  -  a reasonable selection of boundary conditions
+  -  spline degree up to 45
+  -  arbitrary dimensionality of the spline
+  -  using multithreaded code
+  -  using the CPU's vector units if possible
+ .
+ On the evaluation side it provides
+ .
+  -  evaluation of the spline at point locations in the defined range
+  -  evaluation of the spline's derivatives
+  -  specialized code for degrees 0 and 1 (nearest neighbour and n-linear)
+  -  mapping of arbitrary coordinates into the defined range
+  -  evaluation of nD arrays of coordinates ('remap' function)
+  -  coordinate-fed remap function ('index_remap')
+  -  functor-based remap, aka 'transform' functions
+  -  functor-based 'apply' function
+  -  restoration of the original data from the coefficients
+ .
+ To produce maximum performance, vspline has a fair amount of collateral code,
+ and some of this code may be helpful beyond vspline:
+ .
+  -  range-based multithreading with a thread pool
+  -  functional constructs using vspline::unary_functor
+  -  forward-backward n-pole recursive filtering
+  -  separable convolution
+  -  efficient access to the b-spline basis functions
+  -  extremely precise precalculated constants
+ .
+ data handling is done with vigra data types, using vigra::MultiArrayView
+ for handling strided nD arrays, and vigra::TinyVector for small aggregates.
+ vspline optionally uses horizontal vectorization with Vc, but without Vc
+ present, it attempts to trigger the compiler's autovectorization by producing
+ deliberately vector-friendly inner loops.
+ bulk data processing is automatically multithreaded.

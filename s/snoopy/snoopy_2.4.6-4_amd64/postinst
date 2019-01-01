@@ -1,0 +1,35 @@
+#!/bin/sh
+
+set -e
+
+PRELOAD="/etc/ld.so.preload"
+LIBNAME="libsnoopy.so"
+LIBPATH="/lib/x86_64-linux-gnu"
+
+. /usr/share/debconf/confmodule
+
+[ -n "$SNOOPYDEBUG" ] && set -x
+
+if [ "$1" = "configure" ] ; then
+    # check if snoopy should be added or removed from $PRELOAD
+    db_get snoopy/install-ld-preload
+    if [ x"$RET" = x"true" ] ; then
+        # add $LIBNAME to $PRELOAD if not already present
+        if [ ! -f $PRELOAD ] || ! grep -q "/${LIBNAME}$" $PRELOAD ; then
+            # libsnoopy.so is currently not in $PRELOAD, add it
+            echo "$LIBPATH/$LIBNAME" >> $PRELOAD
+        fi
+    else
+        # remove $LIBNAME from $PRELOAD (if present)
+        if grep -vqs "/${LIBNAME}$" $PRELOAD ; then
+            # the file remains non-empty if $LIBNAME is removed
+            TEMPFILE=`mktemp`
+            grep -v "/${LIBNAME}$" $PRELOAD > "$TEMPFILE"
+            mv -f "$TEMPFILE" $PRELOAD
+        else
+            rm -f $PRELOAD
+        fi
+    fi
+fi
+
+

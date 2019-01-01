@@ -1,0 +1,24 @@
+Package: libgdbm-dev
+Source: gdbm
+Version: 1.18.1-2
+Architecture: amd64
+Maintainer: Dmitry Bogatov <KAction@debian.org>
+Installed-Size: 335
+Depends: libc6-dev | libc-dev, libgdbm6 (= 1.18.1-2)
+Replaces: libgdbm4 (= 1.12-1)
+Provides: libgdbm-dietlibc-dev
+Built-Using: dietlibc (= 0.34~cvs20160606-10)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://gnu.org/software/gdbm
+Description: GNU dbm database routines (development files) 
+ GNU dbm ('gdbm') is a library of database functions that use extendible
+ hashing and works similarly to the standard UNIX 'dbm' functions.
+ .
+ The basic use of 'gdbm' is to store key/data pairs in a data file, thus
+ providing a persistent version of the 'dictionary' Abstract Data Type
+ ('hash' to perl programmers).
+ .
+ Note, that to build old programs, that use legacy 'dbm' interface,
+ you have to install libgdbm-compat-dev binary package.

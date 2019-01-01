@@ -1,0 +1,23 @@
+Package: psensor
+Source: psensor (1.1.5-1)
+Version: 1.1.5-1+b4
+Architecture: amd64
+Maintainer: Jean-Philippe Orsini <jeanfi@gmail.com>
+Installed-Size: 363
+Depends: psensor-common (= 1.1.5-1), dconf-gsettings-backend | gsettings-backend, libappindicator3-1 (>= 0.2.92), libatasmart4 (>= 0.13), libc6 (>= 2.14), libcairo2 (>= 1.2.4), libcurl3-gnutls (>= 7.16.2), libglib2.0-0 (>= 2.30.0), libgtk-3-0 (>= 3.3.16), libgtop-2.0-11 (>= 2.22.3), libjson-c3 (>= 0.10), libnotify4 (>= 0.7.0), libsensors5 (>= 1:3.5.0), libudisks2-0 (>= 2.0.0), libx11-6, libxnvctrl0
+Section: utils
+Priority: optional
+Homepage: http://wpitchoune.net/psensor
+Description: display graphs for monitoring hardware temperature
+ Psensor is a GTK+ application for monitoring hardware sensors,
+ including temperatures and fan speeds.
+ .
+ It displays a curve for each sensor, alerts user using Desktop Notification
+ and Application Indicator when a temperature is too high.
+ .
+ It can monitor:
+  * the temperature of the motherboard and CPU sensors (using lm-sensors).
+  * the temperature of the NVidia GPUs (using XNVCtrl).
+  * the temperature of the Hard Disk Drives (using hddtemp or atasmart lib).
+  * the rotation speed of the fans (using lm-sensors).
+  * the sensors of a remote computer (using psensor-server).

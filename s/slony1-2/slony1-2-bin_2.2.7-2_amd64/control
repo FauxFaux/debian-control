@@ -1,0 +1,22 @@
+Package: slony1-2-bin
+Source: slony1-2
+Version: 2.2.7-2
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <team+postgresql@tracker.debian.org>
+Installed-Size: 842
+Depends: lsb-base (>= 3.0-6), logrotate, postgresql-common, perl:any, libc6 (>= 2.15), libpq5
+Recommends: libdbd-pg-perl, ntp | time-daemon, postgresql-11-slony1-2
+Suggests: libpg-perl, slony1-2-doc
+Conflicts: slony1-bin
+Provides: slony1-bin
+Section: database
+Priority: optional
+Homepage: http://slony.info/
+Description: replication system for PostgreSQL: daemon and administration tools
+ Slony-I is an asynchronous master-to-multiple-slaves replication system
+ for PostgreSQL with cascading and slave promotion.
+ .
+ This package contains the slon daemon and the slonik administration tool.
+ It should be installed on those hosts where Slony-I daemons are to be run
+ or administered, which usually, but not necessarily, are the hosts where
+ the database server nodes are running.

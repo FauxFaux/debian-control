@@ -1,0 +1,114 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    remove)
+        # Calling the init script during removal
+	if [ -x "/etc/init.d/enable-nat" ] ; then
+	    if [ -x "`which invoke-rc.d 2>/dev/null`" ] ; then
+		invoke-rc.d enable-nat stop || exit $?
+	    else
+		/etc/init.d/enable-nat stop || exit $?
+	    fi
+	fi
+	# cleanup from debian-edu-ltsp-audiodivert
+	if dpkg --compare-versions "$2" le "1.931~" && [ -f /usr/bin/gtick.ltsp ] ; then
+	    rm /usr/bin/gtick
+	    dpkg-divert --package debian-edu-config --rename --remove /usr/bin/gtick
+	    rm /usr/bin/gtick.ltsp
+	fi
+	if [ -e /var/lib/cfengine3/inputs/debian-edu ] ; then
+	    rm -rf /var/lib/cfengine3/inputs/debian-edu
+	    rm -rf /var/lib/cfengine3/inputs/
+	    mkdir /var/lib/cfengine3/inputs/
+	fi
+	;;
+    purge)
+	# Generated in the postinst
+	rm -f /etc/default/enable-nat
+	if [ ! -s /var/lib/dovecot/auth_success ] ; then
+	    rm -f /var/lib/dovecot/auth_success
+	fi
+
+        # Don't leave Cfengine3 log files behind
+	if [ -e /var/log/cfengine3/promise_summary.log ] ; then
+	    rm /var/log/cfengine3/*.log
+	fi
+
+        # Cfengine3 setup files copied / generated at installation time
+        # via '/usr/share/debian-edu-config/tools/setup-cfengine3'
+	if [ -e /var/lib/cfengine3/inputs/debian-edu ] ; then
+	    rm -rf /var/lib/cfengine3/inputs/debian-edu
+	    rm -rf /var/lib/cfengine3/inputs/
+	    mkdir /var/lib/cfengine3/inputs/
+	fi
+	if [ -e /var/lib/cfengine3/policy_server.dat ] ; then
+	    rm /var/lib/cfengine3/policy_server.dat
+	fi
+
+        # Don't leave copied ldapscripts files behind
+	if [ -e /etc/ldapscripts/debian-edu.addmachine.template ] ; then
+	    rm /etc/ldapscripts/debian-edu.*
+	fi
+
+        # Don't leave copied gosa file behind
+	if [ -e /etc/gosa/gosa.conf ] && grep -q Managed-by /etc/gosa/gosa.conf ; then
+	    rm /etc/gosa/gosa.conf
+	fi
+
+	# remove /var/lib/dovecot directory (this does not
+	# interfere with dovecot-core, if installed)
+	if [ -e /var/lib/dovecot ] ; then
+	    rmdir --ignore-fail-on-non-empty /var/lib/dovecot
+	fi
+esac
+
+# Automatically added by dh_installinit/12
+if [ "$1" = "purge" ] ; then
+	update-rc.d enable-nat remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installinit/12
+if [ "$1" = "purge" ] ; then
+	update-rc.d chromium-ldapconf remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installinit/12
+if [ "$1" = "purge" ] ; then
+	update-rc.d firefox-ldapconf remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installinit/12
+if [ "$1" = "purge" ] ; then
+	update-rc.d fetch-ldap-cert remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/12
+dpkg-maintscript-helper mv_conffile /etc/apache2/sites-available/debian-edu-default /etc/apache2/sites-available/debian-edu-default.conf 1.719 -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/apache2/sites-available/debian-edu-ssl-default /etc/apache2/sites-available/debian-edu-ssl-default.conf 1.719 -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/apache2/conf.d/debian-edu-config-doc /etc/apache2/conf-available/debian-edu-config-doc.conf 1.719 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/cfengine/debian-edu/cf.pdns 1.811 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/insserv.conf.d/debian-edu-config 1.811 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/powerdns/pdns.d/pdns-debian-edu.conf 1.811 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/X11/Xsession.d/06debian-edu-iceweasel-ltsp 1.818\+deb8u1 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/apt/apt.conf.d/99-edu-prefer-iceweasel 1.818\+deb8u1 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init.d/iceweasel-ldapconf 1.818\+deb8u1 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/cfengine/debian-edu/cf.iceweasel 1.818\+deb8u1 -- "$@"
+dpkg-maintscript-helper rm_conffile /usr/share/debian-edu-config/iceweacel-networked-prefs.js 1.818\+deb8u1 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/cfengine/debian-edu/cf.kdm 1.906 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/insserv/overrides/kdm 1.906 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/ldap/slapd-debian-edu.conf 1.911 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/ldap/slapd-lenny_debian-edu.conf 1.911 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/cfengine3/debian-edu/cf.pki 2.10.19 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/cfengine3/debian-edu/cf.thunderbird 2.10.19 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/desktop-profiles/debian-edu-config.listing 2.10.22 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/apt/apt.conf.d/90squid 2.10.36 -- "$@"
+# End automatically added section
+# Automatically added by dh_installdebconf/12
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

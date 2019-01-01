@@ -1,0 +1,17 @@
+Package: libobject-signature-perl
+Version: 1.08-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 31
+Depends: perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Object-Signature
+Description: module perl for generate cryptographic signatures for objects
+ Object::Signature is an abstract base class that you can inherit from in
+ order to allow your objects to generate unique cryptographic signatures.
+ .
+ The method used to generate the signature is based on Storable and
+ Digest::MD5. The object is fed to "Storable::nfreeze" to get a string,
+ which is then passed to Digest::MD5::md5_hex to get a unique 32
+ character hexadecimal signature.

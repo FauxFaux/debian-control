@@ -1,0 +1,21 @@
+Package: ncbi-tools-bin
+Source: ncbi-tools6
+Version: 6.1.20170106-6
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 3724
+Depends: libncbi6 (<< 6.1.20170106.1), libncbi6 (>= 6.1.20170106), libc6 (>= 2.14)
+Suggests: libvibrant6b, ncbi-blast+, ncbi-tools-x11
+Breaks: blast2 (<< 1:2.2.26.20160908)
+Replaces: blast2 (<< 1:2.2.26.20160908)
+Section: science
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.ncbi.nlm.nih.gov/IEB/ToolBox/
+Description: NCBI libraries for biology applications (text-based utilities)
+ This package includes various utilities distributed with the NCBI C SDK,
+ including the development tools asntool and errhdr (formerly of
+ libncbi6-dev).  None of the programs in this package require X; you can
+ find the X-based utilities in the ncbi-tools-x11 package.  BLAST and
+ related tools now come from a separate source base, corresponding to the
+ ncbi-blast+ and ncbi-blast+-legacy packages.

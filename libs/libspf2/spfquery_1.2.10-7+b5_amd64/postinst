@@ -1,0 +1,25 @@
+#!/bin/sh -e
+
+mode=$1
+
+source_package=libspf2
+
+case "$mode" in
+  configure )
+    prev_version=$2
+    
+    update-alternatives --install /usr/bin/spfquery spfquery      /usr/bin/spfquery.$source_package 25 \
+        --slave /usr/share/man/man1/spfquery.1.gz spfquery.1.gz   /usr/share/man/man1/spfquery.$source_package.1.gz
+    update-alternatives --install /usr/sbin/spfd    spfd          /usr/sbin/spfd.$source_package    25
+    ;;
+esac
+
+# Replace documentation directory with symlink
+docdir="/usr/share/doc/spfquery"
+if [ -d $docdir ] && [ ! -L $docdir ]; then
+    if rmdir $docdir 2>/dev/null; then
+        ln -sf libspf2-2 $docdir
+    fi
+fi
+
+

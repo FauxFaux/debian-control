@@ -1,0 +1,18 @@
+Package: php-luasandbox
+Source: php-luasandbox (3.0.3-1)
+Version: 3.0.3-1+b1
+Architecture: amd64
+Maintainer: MediaWiki packaging team <mediawiki-debian@lists.wikimedia.org>
+Installed-Size: 111
+Depends: php | php-cli, libc6 (>= 2.14), liblua5.1-0, php-common (>= 1:7.0+33~), phpapi-20180731
+Section: php
+Priority: optional
+Homepage: https://www.mediawiki.org/wiki/LuaSandbox
+Description: PHP extension that provides a sandboxed Lua environment
+ LuaSandbox is a PHP extension that provides a Lua environment which can be used
+ to run untrusted code. It provides a performance benefit compared to using a
+ standalone Lua binary.
+ .
+ LuaSandbox was designed for the MediaWiki Scribunto extension, which allows
+ users to write Lua code on the wiki, and then have it executed. But it has
+ no dependency upon MediaWiki and can be used standalone.

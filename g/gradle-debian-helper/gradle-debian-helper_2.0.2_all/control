@@ -1,0 +1,18 @@
+Package: gradle-debian-helper
+Version: 2.0.2
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 93
+Depends: default-jre-headless | java7-runtime-headless, gradle (>= 3.4.1-8~), maven-repo-helper
+Section: java
+Priority: optional
+Description: Helper tools for building Debian packages with Gradle
+ gradle-debian-helper contains helper tools to ease the packaging of Gradle
+ based projects in Debian. It consists in:
+ .
+  * a Gradle plugin resolving the dependencies against the system Maven
+    repository (/usr/share/maven-repo). The resolver uses the same Maven
+    rule files that maven-debian-helper and maven-repo-helper employ
+    (debian/maven.rules, debian/maven.ignoreRules).
+  * a debhelper class detecting Gradle build files, initializing the plugin
+    and running Gradle in offline mode.

@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p linux-perf-4.19 /usr/lib/perf_4.19-core/scripts/python/Perf-Trace-Util/lib
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p linux-perf-4.19 /usr/lib/perf_4.19-core/scripts/python/Perf-Trace-Util/lib || true
+fi
+
+# End automatically added section

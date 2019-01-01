@@ -1,0 +1,23 @@
+#! /bin/sh
+# postrm script for changetrack
+
+set -e
+
+case "$1" in
+    purge)      
+        ## Remove the repository
+        rm -rf /var/lib/changetrack
+        ;;
+    remove)
+        ;;
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+        ;;
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 0
+
+esac
+
+
+
+exit 0

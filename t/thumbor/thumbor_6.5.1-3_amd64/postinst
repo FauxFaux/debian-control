@@ -1,0 +1,55 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	if ! getent passwd thumbor | grep -q thumbor; then
+		useradd --system --user-group --home /var/lib/thumbor thumbor
+	fi
+
+	install -d -o thumbor -g thumbor -m 750 /var/cache/thumbor
+
+	if [ ! -e /etc/thumbor.key ] ; then
+		umask 077
+		od --read-bytes 16 --output-duplicates \
+			--address-radix n --format x2 /dev/urandom | tr -d ' ' > /etc/thumbor.key
+		umask 002
+		chown thumbor:thumbor /etc/thumbor.key
+	fi
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p thumbor 
+fi
+
+# End automatically added section
+# Automatically added by dh_systemd_enable/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'thumbor.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'thumbor.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'thumbor.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'thumbor.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_systemd_start/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		deb-systemd-invoke start 'thumbor.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+TARGETDIR=/usr/share/synphot
+
+if [ "$1" = "configure" ] ; then
+  mkdir -p ${TARGETDIR}
+  cd ${TARGETDIR}
+  if ! md5sum -c --quiet md5sums.txt ; then
+    for i in `seq 1 6` ; do
+      curl ftp://ftp.stsci.edu/cdbs/tarfiles/synphot${i}.tar.gz | tar xz
+    done
+    if [ -d grid/extinction ] ; then
+      rm -rf extinction
+      mv -f grid/extinction .
+    fi
+    find calspec comp extinction grid mtab -type f | xargs md5sum > md5sums.txt
+  fi
+fi
+
+

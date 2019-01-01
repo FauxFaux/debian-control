@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  remove|purge)
+    if [ -L /etc/courier/filters/active/couriergrey ];
+    then
+      filterctl stop couriergrey
+    fi
+  ;;
+esac
+
+##

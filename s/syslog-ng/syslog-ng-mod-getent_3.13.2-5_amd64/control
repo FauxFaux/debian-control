@@ -1,0 +1,31 @@
+Package: syslog-ng-mod-getent
+Source: syslog-ng
+Version: 3.13.2-5
+Architecture: amd64
+Maintainer: syslog-ng maintainers <syslog-ng-maintainers@alioth-lists.debian.net>
+Installed-Size: 64
+Depends: libc6 (>= 2.4), syslog-ng-abi-3.13-0
+Conflicts: syslog-ng-mod-basicfuncs-plus (<< 0.6.0)
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.syslog-ng.org/
+Description: Enhanced system logging daemon (getent plugin)
+ syslog-ng is an enhanced log daemon, supporting a wide range of input
+ and output methods: syslog, unstructured text, message queues,
+ databases (SQL and NoSQL alike) and more.
+ .
+ Key features:
+ .
+  * receive and send RFC3164 and RFC5424 style syslog messages
+  * work with any kind of unstructured data
+  * receive and send JSON formatted messages
+  * classify and structure logs with builtin parsers (csv-parser(),
+    db-parser(), etc.)
+  * normalize, crunch and process logs as they flow through the system
+  * hand on messages for further processing using message queues (like
+    AMQP), files or databases (like PostgreSQL or MongoDB).
+ .
+ This package provides getent module which allows querying the Name Service
+ Switch library to convert UIDs to names, protocol names to port number and
+ much more.

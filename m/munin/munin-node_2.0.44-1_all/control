@@ -1,0 +1,27 @@
+Package: munin-node
+Source: munin
+Version: 2.0.44-1
+Architecture: all
+Maintainer: Munin Debian Maintainers <team+munin@tracker.debian.org>
+Installed-Size: 324
+Depends: perl, libnet-server-perl, lsb-base (>= 4.1), munin-common (>= 2.0.44-1), munin-plugins-core
+Recommends: gawk, munin-plugins-extra, procps
+Suggests: munin, munin-plugins-java
+Breaks: munin-doc (<< 2.0.37-3)
+Replaces: munin-doc (<< 2.0.37-3)
+Section: net
+Priority: optional
+Homepage: http://munin-monitoring.org
+Description: network-wide graphing framework (node)
+ Munin is a highly flexible and powerful solution used to create graphs of
+ virtually everything imaginable throughout your network, while still
+ maintaining a rattling ease of installation and configuration.
+ .
+ This package contains the daemon for the nodes being monitored. You should
+ install it on all the nodes in your network. It will know how to extract all
+ sorts of data from the node it runs on, and will wait for the gatherer to
+ request this data for further processing.
+ .
+ Munin is written in Perl, and relies heavily on Tobi Oetiker's excellent
+ RRDtool. To see a real example of Munin in action, you can follow a link
+ from <http://munin-monitoring.org/> to a live installation.

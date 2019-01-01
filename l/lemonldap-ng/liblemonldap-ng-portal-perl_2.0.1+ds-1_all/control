@@ -1,0 +1,25 @@
+Package: liblemonldap-ng-portal-perl
+Source: lemonldap-ng
+Version: 2.0.1+ds-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 4461
+Pre-Depends: debconf
+Depends: perl, fonts-font-awesome, lemonldap-ng-fastcgi-server (= 2.0.1+ds-1) | lemonldap-ng-uwsgi-app (= 2.0.1+ds-1) | apache2 | httpd-cgi, libclone-perl, liblemonldap-ng-handler-perl (= 2.0.1+ds-1), libjs-bootstrap4, libjs-cryptojs, libjs-jquery, libjs-jquery-ui, libjs-jquery-cookie, libregexp-assemble-perl
+Recommends: libcrypt-openssl-bignum-perl, libconvert-base32-perl, libemail-sender-perl (>= 1.300027) | libemail-sender-transport-smtps-perl, libgd-securityimage-perl, libmime-tools-perl, libnet-ldap-perl, libstring-random-perl, libunicode-string-perl
+Suggests: libcrypt-u2f-server-perl, libdbi-perl, libglib-perl, libgssapi-perl, libimage-magick-perl, liblasso-perl, libnet-facebook-oauth2-perl (>= 0.10), libnet-openid-consumer-perl, libnet-openid-server-perl, libnet-oauth-perl, libsoap-lite-perl, libweb-id-perl, slapd
+Section: perl
+Priority: optional
+Homepage: https://lemonldap-ng.org/
+Description: Lemonldap::NG authentication portal part
+ Lemonldap::NG is a complete Web-SSO system that can run with reverse-proxies
+ or directly on application webservers. It can be used in conjunction with
+ OpenID-Connect, CAS and SAML systems as identity or service provider. It can
+ also be used as proxy between those federation systems.
+ .
+ It manages both authentication and authorization and provides headers for
+ accounting. So you can have a full AAA protection. Authorizations are built by
+ associating a regular expression and a rule. Regular expression is applied on
+ the requested URL and the rule calculates if the user is authorized.
+ .
+ Lemonldap::NG::Portal provides the authentication portal.

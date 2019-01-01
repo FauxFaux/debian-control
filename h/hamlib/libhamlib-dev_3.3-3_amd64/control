@@ -1,0 +1,24 @@
+Package: libhamlib-dev
+Source: hamlib
+Version: 3.3-3
+Architecture: amd64
+Maintainer: Debian Hamradio Maintainers <debian-hams@lists.debian.org>
+Installed-Size: 5163
+Depends: libc6-dev, libhamlib2 (= 3.3-3), libusb-1.0-0-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://sourceforge.net/projects/hamlib/
+Description: Development library to control radio transceivers and receivers
+ Most recent amateur radio transceivers allow external control of their
+ functions through a computer interface. Unfortunately, control commands are
+ not always consistent across a manufacturer's product line and each
+ manufacturer's product line differs greatly from its competitors.
+ .
+ This library addresses that issue by providing a standardised programming
+ interface that applications can talk to and translating that into the
+ appropriate commands required by the radio in use.
+ .
+ This package provides the development library with both C bindings.
+ If you wish to run applications developed using this library you'll need the
+ 'libhamlib2' package.

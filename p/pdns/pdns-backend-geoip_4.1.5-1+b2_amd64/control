@@ -1,0 +1,21 @@
+Package: pdns-backend-geoip
+Source: pdns (4.1.5-1)
+Version: 4.1.5-1+b2
+Architecture: amd64
+Maintainer: pdns packagers <pdns@packages.debian.org>
+Installed-Size: 296
+Depends: pdns-server (= 4.1.5-1+b2), libc6 (>= 2.27), libgcc1 (>= 1:3.0), libgeoip1, libstdc++6 (>= 5.2), libyaml-cpp0.5d1
+Provides: pdns-backend
+Section: net
+Priority: optional
+Homepage: https://www.powerdns.com/
+Description: geoip backend for PowerDNS
+ PowerDNS is a versatile nameserver which supports a large number
+ of different backends ranging from simple zonefiles to relational
+ databases and load balancing/failover algorithms.
+ PowerDNS tries to emphasize speed and security.
+ .
+ This package contains a geoip-backend for the PowerDNS nameserver. This
+ backend balances the load throughout the world so that people access the
+ geographically nearest available server based on a zonefile written in
+ YAML.

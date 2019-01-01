@@ -1,0 +1,16 @@
+Package: librust-simd+with-serde-dev
+Source: rust-simd
+Version: 0.2.3-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-simd-dev (= 0.2.3-1), librust-serde-1+default-dev, librust-serde-derive-1+default-dev
+Provides: librust-simd-0+with-serde-dev (= 0.2.3-1), librust-simd-0.2+with-serde-dev (= 0.2.3-1), librust-simd-0.2.3+with-serde-dev (= 0.2.3-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Cross-platform access to SIMD instructions - feature "with-serde"
+ (To be obsoleted by the `std::simd` implementation RFC 2366.)
+ .
+ This metapackage enables feature with-serde for the Rust simd crate, by pulling
+ in any additional dependencies needed by that feature.

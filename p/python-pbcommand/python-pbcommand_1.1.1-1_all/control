@@ -1,0 +1,19 @@
+Package: python-pbcommand
+Version: 1.1.1-1
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 450
+Depends: python-avro, python-iso8601, python-requests, python-tz, python:any (<< 2.8), python:any (>= 2.7~), python-numpy
+Recommends: python-pbcore
+Section: python
+Priority: optional
+Homepage: https://pbcommand.readthedocs.org/en/latest/
+Description: common command-line interface for Pacific Biosciences analysis modules
+ To integrate with the pbsmrtpipe workflow engine, one must to be able to
+ generate a Tool Contract and to be able to run from a Resolved Tool Contract.
+ A Tool Contract contains the metadata of the exe, such as the file types of
+ inputs, outputs and options.
+ There are two principal use cases, first wrapping/calling Python functions that
+ have been defined in external Python packages, or scripts. Second, creating a
+ CLI tool that supports emitting tool contracts, running resolved tool contracts
+ and complete argparse-style CLI.

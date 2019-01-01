@@ -1,0 +1,19 @@
+Package: piuparts-slave
+Source: piuparts
+Version: 0.95
+Architecture: all
+Maintainer: piuparts developers team <piuparts-devel@alioth-lists.debian.net>
+Installed-Size: 140
+Depends: piuparts (= 0.95), piuparts-common (= 0.95), adduser, openssh-client, screen, sudo, python (>= 2.7)
+Suggests: schroot
+Section: devel
+Priority: optional
+Homepage: https://piuparts.debian.org
+Description: piuparts slave components
+ piuparts is meant as a quality assurance tool for people who create .deb
+ packages to test them before they upload them to the Debian package archive.
+ A master/slave piuparts installation is used for testing complete archives
+ as it is done on https://piuparts.debian.org/.
+ .
+ This package provides the piuparts slave components, which need a piuparts
+ master to operate. See the documentation in the piuparts-master package.

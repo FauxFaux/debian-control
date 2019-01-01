@@ -1,0 +1,33 @@
+Package: leela-zero
+Version: 0.16-1
+Architecture: amd64
+Maintainer: Ximin Luo <infinity0@debian.org>
+Installed-Size: 1282
+Depends: libboost-filesystem1.67.0, libboost-program-options1.67.0, libboost-system1.67.0, libc6 (>= 2.27), libgcc1 (>= 1:3.0), libqt5core5a (>= 5.11.0~rc1), libstdc++6 (>= 7), ocl-icd-libopencl1 | libopencl1, ocl-icd-libopencl1 (>= 1.0) | libopencl-1.1-1, ocl-icd-libopencl1 (>= 1.0) | libopencl-1.2-1, zlib1g (>= 1:1.1.4)
+Recommends: opencl-icd, clinfo
+Section: games
+Priority: optional
+Homepage: https://github.com/gcp/leela-zero
+Description: Go engine with no human-provided knowledge, modeled after the AlphaGo Zero paper
+ A Go program with no human provided knowledge. Using MCTS (but without Monte
+ Carlo playouts) and a deep residual convolutional neural network stack.
+ .
+ This is a fairly faithful reimplementation of the system described in the
+ Alpha Go Zero paper "Mastering the Game of Go without Human Knowledge". For
+ all intents and purposes, it is an open source AlphaGo Zero.
+ .
+ https://deepmind.com/documents/119/agz_unformatted_nature.pdf
+ .
+ No network weights are in this repository. If you manage to obtain the AlphaGo
+ Zero weights, this program will be about as strong, provided you also obtain a
+ few Tensor Processing Units. Lacking those TPUs, the author recommends a top
+ of the line GPU - it's not exactly the same, but the result would still be an
+ engine that is far stronger than the top humans.
+ .
+ Recomputing the AlphaGo Zero weights will take about 1700 years on commodity
+ hardware. Upstream is running a public, distributed effort to repeat this
+ work. Working together, and especially when starting on a smaller scale, it
+ will take less than 1700 years to get a good network (which you can feed into
+ this program, suddenly making it strong). To help with this effort, run the
+ leelaz-autogtp binary provided in this package. The best-known network weights
+ file is at http://zero.sjeng.org/best-network

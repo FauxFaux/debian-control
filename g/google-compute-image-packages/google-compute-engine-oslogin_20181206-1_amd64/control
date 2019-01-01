@@ -1,0 +1,24 @@
+Package: google-compute-engine-oslogin
+Source: google-compute-image-packages
+Version: 20181206-1
+Architecture: amd64
+Maintainer: Lucas Kanashiro <lucas.kanashiro@collabora.com>
+Installed-Size: 893
+Depends: libc6 (>= 2.14), libcurl4 (>= 7.16.2), libgcc1 (>= 1:3.0), libjson-c3 (>= 0.10), libpam0g (>= 0.99.7.1), libstdc++6 (>= 5.2)
+Section: admin
+Priority: optional
+Homepage: https://github.com/GoogleCloudPlatform/compute-image-packages
+Description: OS Login guest environment for Google Compute Engine
+ Contains applications and configurations for using OS Login on Google Compute
+ Engine Virtual Machine Instances.
+ .
+ It is composed by:
+  * Authorized Keys Command to fetch SSH keys from the user's OS Login profile
+    and make them available to sshd.
+  * NSS Module to provide support for making OS Login user and group
+    information available to the system, using NSS (Name Service Switch)
+    functionality.
+  * PAM Module to provide authorization and authentication support allowing
+    the system to use data stored in Google Cloud IAM permissions to control
+    both, the ability to log into an instance, and to perform operations as
+    root (sudo).

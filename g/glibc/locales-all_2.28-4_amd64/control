@@ -1,0 +1,17 @@
+Package: locales-all
+Source: glibc
+Version: 2.28-4
+Architecture: amd64
+Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
+Installed-Size: 221262
+Depends: libc-l10n (>> 2.28)
+Breaks: locales (<< 2.13-17)
+Section: localization
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.gnu.org/software/libc/libc.html
+Description: GNU C Library: Precompiled locale data
+ This package contains the precompiled locale data for all supported locales.
+ A better alternative is to install the locales package and only select
+ desired locales, but it can be useful on a low-memory machine because some
+ locale files take a lot of memory to be compiled.

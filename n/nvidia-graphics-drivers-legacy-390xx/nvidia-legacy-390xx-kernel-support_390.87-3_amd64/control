@@ -1,0 +1,20 @@
+Package: nvidia-legacy-390xx-kernel-support
+Source: nvidia-graphics-drivers-legacy-390xx
+Version: 390.87-3
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 114
+Depends: nvidia-legacy-390xx-alternative (= 390.87-3), nvidia-legacy-390xx-alternative--kmod-alias, nvidia-kernel-common (>= 20151021), nvidia-modprobe (>= 352)
+Breaks: glx-alternative-nvidia (<< 0.6.91)
+Replaces: glx-alternative-nvidia (<< 0.6.91)
+Provides: nvidia-kernel-support-any, nvidia-legacy-390xx-kernel-support--v1
+Section: non-free/kernel
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.nvidia.com
+Description: NVIDIA binary kernel module support files (390xx legacy version)
+ The NVIDIA binary driver provides optimized hardware acceleration of
+ OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
+ for graphics cards using NVIDIA chip sets.
+ .
+ This package provides supporting configuration for the kernel module.

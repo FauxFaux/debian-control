@@ -1,0 +1,27 @@
+Package: makefs
+Version: 20100306-7
+Architecture: amd64
+Maintainer: GNU/kFreeBSD Maintainers <debian-bsd@lists.debian.org>
+Installed-Size: 152
+Depends: libbsd0 (>= 0.0), libc6 (>= 2.14)
+Section: otherosfs
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://cvs.mirbsd.de/src/usr.sbin/makefs/
+Description: create a cd9660 or ffs file system image from a directory tree
+ NetBSD® makefs(8) creates a file system image from a directory tree
+ without the need for superuser privileges. The MirBSD version fixes
+ ECMA 119, SUSP and RRIP (Rock Ridge) compliance and adds features.
+ .
+ Supported target filesystem types are:
+ .
+    cd9660   ISO 9660 (ECMA 119) compatible filesystem images, with
+             Rock Ridge, El Torito, and other features
+    ffs      4.2FFS, the BSD Fast Filesystem, also known as UFS1;
+             UFS2 (with "-o version=2")
+ .
+ The images created can be of a fixed (predefined) size, given on the
+ command line, or sized automatically. Permission bits are taken from
+ the source directory tree but may be overridden using an mtree file.
+ .
+ This utility does not currently support Large Files (2 GiB or more).

@@ -1,0 +1,24 @@
+Package: pkg-perl-tools
+Version: 0.49
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 393
+Depends: perl, curl, debhelper, devscripts, dh-make-perl, dpkg-dev (>= 1.17.0), git, git-buildpackage, libdatetime-perl, libdpkg-perl, libgit-repository-perl, libgitlab-api-v4-perl, libipc-run-perl, libjson-xs-perl, libparse-debianchangelog-perl, libproc-invokeeditor-perl, librt-client-rest-perl, libtry-tiny-perl, libutf8-all-perl, lintian (>= 2.5.28~), openssh-client | ssh-client, pristine-tar, quilt
+Recommends: autodep8, autopkgtest, libconfig-model-dpkg-perl, libconfig-model-perl, libdebian-copyright-perl, libfile-slurp-perl, libmime-lite-perl, libmodule-inspector-perl, libnet-github-perl, libparallel-forkmanager-perl (>= 0.7.6), libsoap-lite-perl, libterm-readline-gnu-perl, libwww-mechanize-perl, libyaml-libyaml-perl, lintian (>= 2.5.36~), myrepos | mr, sensible-utils
+Suggests: bc, cdbs, duck, moreutils, perl-depends, python3, python3-launchpadlib
+Enhances: lintian
+Section: devel
+Priority: optional
+Homepage: https://wiki.debian.org/Teams/DebianPerlGroup
+Description: collection of tools to aid packaging Perl modules in Debian
+ The Debian Perl Group works on packaging Perl modules for Debian. This
+ collection contains the tools which help the group with day-to-day work, like
+ filing ITPs, forwarding bugs and patches upstream, taking over a package for
+ the group, maintaining proper git repository structure and so on.
+ .
+ Additionally it depends on, recommends or suggests separately
+ packaged tools the Debian Perl Group uses.
+ .
+ It also includes some Debian Perl Group specific lintian checks. Add
+ "LINTIAN_PROFILE=pkg-perl" to your ~/.lintianrc to use them after
+ installing this package.

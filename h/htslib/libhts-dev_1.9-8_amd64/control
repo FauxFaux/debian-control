@@ -1,0 +1,24 @@
+Package: libhts-dev
+Source: htslib
+Version: 1.9-8
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 5527
+Depends: libhts2 (= 1.9-8), liblzma-dev, zlib1g-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/samtools/htslib
+Description: development files for the HTSlib
+ HTSlib is an implementation of a unified C library for accessing common file
+ formats, such as SAM (Sequence Alignment/Map), CRAM and VCF (Variant Call
+ Format), used for high-throughput sequencing data, and is the core library
+ used by samtools and bcftools. HTSlib only depends on zlib. It is known to be
+ compatible with gcc, g++ and clang.
+ .
+ HTSlib implements a generalized BAM (binary SAM) index, with file extension
+ ‘csi’ (coordinate-sorted index). The HTSlib file reader first looks for the
+ new index and then for the old if the new index is absent.
+ .
+ This package contains development files for the HTSlib: headers, static
+ library, manual pages, etc.

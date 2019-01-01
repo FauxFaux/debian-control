@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -e
+
+if [ !  -z "$(update-alternatives --get-selections 2> /dev/null | grep  mpi-x86_64-linux-gnu)" ]; then
+MPI=`update-alternatives --get-selections | grep mpi-x86_64-linux-gnu | awk '{print $3}' | cut -f5 -d/ `
+else
+MPI=openmpi
+fi
+
+echo "DEBUG: ACTION: postinst $1" 
+
+# Generate the update-alternatives line ...
+PYVERS=`py3versions --supported`
+# abitag=.$$($$v -c "import sysconfig; print(sysconfig.get_config_var('SOABI'))"
+
+# Hard-code for the moment
+update-alternatives \
+    --install /usr/lib/python3/dist-packages/adios_mpi/adios_mpi.cpython-36m-x86_64-linux-gnu.so python-py36-adios-x86_64-linux-gnu \
+    /usr/lib/python3/dist-packages/adios_${MPI}/adios_mpi.cpython-36m-x86_64-linux-gnu.so 50 \
+    --slave /usr/lib/python3/dist-packages/adios_mpi/adios_mpi.cpython-367-x86_64-linux-gnu.so python-py37-adios-x86_64-linux-gnu \
+    /usr/lib/python3/dist-packages/adios_${MPI}/adios_mpi.cpython-37m-x86_64-linux-gnu.so
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-adios 
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p python3-adios  || true
+fi
+
+# End automatically added section
+
+
+exit 0

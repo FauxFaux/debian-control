@@ -1,0 +1,23 @@
+Package: libunicode-map-perl
+Source: libunicode-map-perl (0.112-12)
+Version: 0.112-12+b1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 784
+Depends: libc6 (>= 2.4), perl (>= 5.28.0-3), perlapi-5.28.0
+Suggests: libwww-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Unicode-Map
+Description: Perl module for mapping charsets from and to UTF16 Unicode
+ This module converts strings from and to 2-byte Unicode UCS2 format.
+ All mappings happen via 2 byte UTF16 encodings, not via 1 byte UTF8
+ encoding.  To convert between UTF8 and UTF16 use Unicode::String.
+ .
+ For historical reasons this module coexists with Unicode::Map8.
+ Please use Unicode::Map8 unless you need to care for >1 byte
+ character sets, e.g. chinese GB2312.  Anyway, if you stick to the
+ basic functionality (see documentation) you can use both modules
+ equivalently.
+ .
+ The 'libwww-perl' package is needed to run the example mirrorMappings.

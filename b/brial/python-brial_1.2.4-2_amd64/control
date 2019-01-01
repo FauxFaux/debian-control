@@ -1,0 +1,25 @@
+Package: python-brial
+Source: brial
+Version: 1.2.4-2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 220
+Depends: libbrial3 (= 1.2.4-2), libbrial-groebner3 (= 1.2.4-2), python:any (<< 2.8), python:any (>= 2.7~)
+Breaks: python-polybori (<< 0.8.5), sagemath (<< 8.1~)
+Replaces: python-polybori (<< 0.8.5)
+Section: python
+Priority: optional
+Homepage: https://github.com/BRiAl
+Description: polynomials over Boolean Rings, Python 2 module
+ The core of BRiAl is a C++ library, which provides high-level data
+ types for Boolean polynomials and monomials, exponent vectors, as
+ well as for the underlying polynomial rings and subsets of the
+ powerset of the Boolean variables. As a unique approach, binary
+ decision diagrams are used as internal storage type for polynomial
+ structures. On top of this C++-library a Python interface
+ is provided. This allows parsing of complex polynomial systems, as well
+ as sophisticated and extendable strategies for Groebner base
+ computation. BRiAl features a powerful reference implementation
+ for Groebner basis computation.
+ .
+ This package contains the BRiAl Python 2 module.

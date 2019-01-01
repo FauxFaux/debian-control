@@ -1,0 +1,21 @@
+Package: img2pdf
+Version: 0.3.2-1
+Architecture: all
+Maintainer: Johannes 'josch' Schauer <josch@debian.org>
+Installed-Size: 21
+Depends: python3:any, python3-img2pdf (= 0.3.2-1), python3-pkg-resources
+Section: utils
+Priority: optional
+Homepage: https://gitlab.mister-muffin.de/josch/img2pdf
+Description: Lossless conversion of raster images to PDF
+ This program will take a list of raster images and produce a PDF file with the
+ images embedded in it. JPEG and JPEG2000 images will be included without
+ recompression. Raster images in other formats will be included with zip/flate
+ encoding which usually leads to an increase in the resulting size because
+ formats like png compress better than PDF which just zip/flate compresses the
+ RGB data. As a result, this tool is able to losslessly wrap images into a PDF
+ container with a quality to filesize ratio that is typically better (in case
+ of JPEG and JPEG2000 images) or equal (in case of other formats) than that of
+ existing tools.
+ .
+ This package contains the executable.

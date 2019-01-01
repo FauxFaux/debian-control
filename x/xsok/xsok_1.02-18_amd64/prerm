@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    remove)
+        rm -f /var/games/xsok/*
+    ;;
+
+    upgrade|deconfigure|failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+    ;;
+esac
+
+

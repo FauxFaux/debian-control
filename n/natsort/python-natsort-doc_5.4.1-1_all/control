@@ -1,0 +1,32 @@
+Package: python-natsort-doc
+Source: natsort
+Version: 5.4.1-1
+Architecture: all
+Maintainer: Agustin Henze <tin@debian.org>
+Installed-Size: 667
+Depends: libjs-sphinxdoc (>= 1.0)
+Recommends: python3-natsort
+Section: doc
+Priority: optional
+Homepage: https://github.com/SethMMorton/natsort
+Description: Natural sorting for Python (doc)
+ natsort lets you apply natural sorting to your sequences easily, for example:
+ .
+  >>> from natsort import natsorted
+  >>> a = ['a2', 'a9', 'a1', 'a4', 'a10']
+  >>> data = [['a1', 'a5'], ['a1', 'a40'], ['a10', 'a1'], ['a2', 'a5']]
+  >>> natsorted(a)
+  ['a1', 'a2', 'a4', 'a9', 'a10'
+  >>> natsorted(data)
+  [['a1', 'a5'], ['a1', 'a40'], ['a2', 'a5'], ['a10', 'a1']]
+ .
+ natsort identifies the numbers and sorts them separately from strings.
+ .
+ natsort comes with a shell script to use natural sorting in shell scripts. You
+ can also execute natsort from the command line with Python -m natsort.
+ .
+ There exists another natural sorting package for Python called
+ python-naturalsort. You may prefer that package if you wish to only sort
+ version numbers.
+ .
+ This package contains API documentation and examples.

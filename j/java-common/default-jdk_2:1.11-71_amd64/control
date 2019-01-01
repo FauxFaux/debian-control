@@ -1,0 +1,16 @@
+Package: default-jdk
+Source: java-common (0.71)
+Version: 2:1.11-71
+Architecture: amd64
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 6
+Depends: default-jre (= 2:1.11-71), default-jdk-headless (= 2:1.11-71), openjdk-11-jdk
+Provides: java-sdk, java10-sdk, java11-sdk, java2-sdk, java5-sdk, java6-sdk, java7-sdk, java8-sdk, java9-sdk
+Section: java
+Priority: optional
+Homepage: https://wiki.debian.org/Java/
+Description: Standard Java or Java compatible Development Kit
+ This dependency package points to the Java runtime, or Java compatible
+ development kit recommended for this architecture, which is
+ openjdk-11-jdk for amd64.
+Cnf-Extra-Commands: javac,javadoc,jar

@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" -o "$1" = "deconfigure" ]; then
+    update-alternatives --remove libphp7 /usr/lib/libphp7.3.so
+fi
+
+php_enable() { return 0; }
+
+if [ "$1" = "remove" ]; then
+    if [ -e /usr/lib/php/php-maintscript-helper ]; then
+	. /usr/lib/php/php-maintscript-helper
+
+	mods=$(phpquery -M -v 7.3)
+	for mod in $mods; do
+	    php_invoke dismod 7.3 embed $mod
+	done
+    else
+	for mod in /etc/php/7.3/embed/conf.d/*.ini; do 
+	    rm -f $mod
+	    for ext in '~' '%' .bak .ucf-new .ucf-old .ucf-dist;  do
+		rm -f $mod$ext
+	    done
+	done
+    fi
+fi
+
+
+
+exit 0

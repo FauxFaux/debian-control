@@ -1,0 +1,31 @@
+Package: ddskk
+Version: 16.2-5
+Architecture: all
+Maintainer: Tatsuya Kinoshita <tats@debian.org>
+Installed-Size: 2336
+Depends: emacsen-common (>= 2.0.8), emacs-nox | emacs | emacs25 | emacs24 | emacs23 | emacs-snapshot | xemacs21-mule | xemacs21-mule-canna-wnn | xemacs21-gnome-mule | xemacs21-gnome-mule-canna-wnn, emacs-nox | emacs | emacs25 | emacs24 | emacs23 | emacs-snapshot | apel (>= 10.7), dpkg (>= 1.15.4) | install-info
+Recommends: skkdic-cdb | dbskkd-cdb | skkserv | skkdic
+Suggests: skkdic, skkdic-extra, skktools, lookup-el, kakasi, w3m-el, eieio, ruby, dictionaries-common
+Conflicts: skk
+Replaces: skk
+Provides: skk
+Section: lisp
+Priority: optional
+Homepage: http://openlab.jp/skk/
+Description: efficient Japanese input system for emacsen
+ Daredevil SKK (DDSKK) is a fast and efficient Japanese input system
+ written in Emacs Lisp.
+ .
+ DDSKK is an expand version of SKK (Simple Kana to Kanji conversion
+ program, originated by Masahiko Sato).  The way of Kana to Kanji
+ conversion is characteristic of SKK.  To learn the usage of DDSKK,
+ the tutorial program `skk-tutorial' is available.
+ .
+ By default, DDSKK tries to connect an skkserv compatible dictionary
+ server such as dbskkd-cdb, skksearch or yaskkserv on localhost.
+ Directly use of a dictionary file without skkserv is also supported.
+ .
+ To make a local dictionary from the skkdic package and the skkdic-extra
+ package, use the update-skkdic command of the skktools package.  To use
+ optional features, install required packages such as lookup-el, kakasi,
+ and so on.

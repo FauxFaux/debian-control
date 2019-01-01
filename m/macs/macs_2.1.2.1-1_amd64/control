@@ -1,0 +1,18 @@
+Package: macs
+Version: 2.1.2.1-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 5551
+Depends: cython, python (<< 2.8), python (>= 2.7~), python-numpy, python:any (<< 2.8), python:any (>= 2.7~), libc6 (>= 2.22)
+Section: science
+Priority: optional
+Homepage: https://github.com/taoliu/MACS/
+Description: Model-based Analysis of ChIP-Seq on short reads sequencers
+ MACS empirically models the length of the sequenced ChIP fragments, which
+ tends to be shorter than sonication or library construction size estimates,
+ and uses it to improve the spatial resolution of predicted binding sites.
+ MACS also uses a dynamic Poisson distribution to effectively capture local
+ biases in the genome sequence, allowing for more sensitive and robust
+ prediction. MACS compares favorably to existing ChIP-Seq peak-finding
+ algorithms, is publicly available open source, and can be used for ChIP-Seq
+ with or without control samples.

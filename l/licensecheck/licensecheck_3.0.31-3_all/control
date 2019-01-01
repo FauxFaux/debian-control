@@ -1,0 +1,19 @@
+Package: licensecheck
+Version: 3.0.31-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 75
+Depends: libgetopt-long-descriptive-perl, libmoo-perl, libnamespace-clean-perl, libpath-iterator-rule-perl, libpath-tiny-perl (>= 0.062), libpod-constants-perl, libregexp-pattern-license-perl, libscalar-list-utils-perl (>= 1:1.45) | perl (>= 5.25.1), libsort-key-perl, libstrictures-perl (>= 2), libstring-copyright-perl, libstring-escape-perl, libtry-tiny-perl, perl:any
+Suggests: bash-completion
+Breaks: devscripts (<< 2.16.6~)
+Replaces: devscripts (<< 2.16.6~)
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://metacpan.org/pod/App::Licensecheck
+Description: simple license checker for source files
+ Licensecheck attempts to determine the license that applies to each
+ file passed to it, by searching the start of the file for text
+ belonging to various licenses.
+ .
+ Support for bash tab-completion requires the package bash-completion.

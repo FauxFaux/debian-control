@@ -1,0 +1,27 @@
+Package: libghc-safe-exceptions-prof
+Source: haskell-safe-exceptions (0.1.7.0-4)
+Version: 0.1.7.0-4+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 289
+Depends: libghc-safe-exceptions-dev (= 0.1.7.0-4+b1), libghc-base-prof-4.11.1.0-5dd74, libghc-deepseq-prof-1.4.3.0-17e4f, libghc-exceptions-prof-0.10.0-c507a, libghc-transformers-prof-0.5.5.0-b5d2f
+Provides: libghc-safe-exceptions-prof-0.1.7.0-c5219
+Section: haskell
+Priority: optional
+Homepage: https://github.com/fpco/safe-exceptions
+Description: safe, consistent, and easy exception handling; profiling libraries
+ This package provides additional safety and simplicity versus
+ Control.Exception by having its functions recognize the difference
+ between synchronous and asynchronous exceptions. As described below,
+ synchronous exceptions are treated as recoverable, allowing you to
+ catch and handle them as well as clean up after them, whereas
+ asynchronous exceptions can only be cleaned up after. In particular,
+ this library prevents you from making the following mistakes:
+ .
+  * Catching and swallowing an asynchronous exception
+  * Throwing an asynchronous exception synchronously
+  * Throwing a synchronous exception asynchronously
+  * Swallowing asynchronous exceptions via failing cleanup handlers
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

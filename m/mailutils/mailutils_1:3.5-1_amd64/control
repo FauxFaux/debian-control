@@ -1,0 +1,30 @@
+Package: mailutils
+Version: 1:3.5-1
+Architecture: amd64
+Maintainer: Jordi Mallach <jordi@debian.org>
+Installed-Size: 995
+Depends: mailutils-common (= 1:3.5-1), default-mta | mail-transport-agent, guile-2.2-libs, libc6 (>= 2.14), libfribidi0 (>= 0.19.2), libgc1c2 (>= 1:7.2d), libgnutls30 (>= 3.5.0), libgsasl7 (>= 1.1), libkyotocabinet16v5 (>= 1.2.76), libldap-2.4-2 (>= 2.4.7), libmailutils5, libncurses6 (>= 6), libpam0g (>= 0.99.7.1), libpython2.7 (>= 2.7), libreadline7 (>= 6.0), libtinfo6 (>= 6), libwrap0 (>= 7.6-4~)
+Suggests: mailutils-mh, mailutils-doc
+Breaks: bsd-mailx (<< 8.1.2-0.20071201cvs-1), bsdmainutils (<< 8.0.6), elm-me+ (<< 2.4pl25ME+99c-3), heirloom-mailx (<< 12.3-3)
+Provides: mail-reader, mailx
+Section: mail
+Priority: optional
+Homepage: https://www.gnu.org/software/mailutils/
+Description: GNU mailutils utilities for handling mail
+ GNU Mailutils is a rich and powerful protocol-independent mail framework.
+ It contains a series of useful mail libraries, clients, and servers.
+ .
+ This package contains the GNU mailutils versions of dotlock, frm, from,
+ maidag, mail, messages, mimeview, movemail, readmsg and sieve. They are
+ capable of speaking POP3, IMAP, mbox, MH and Maildir.
+ .
+  dotlock -- lock mail spool files.
+  frm -- display From: lines.
+  from -- display from and subject.
+  maidag -- the mail delivery agent.
+  mail -- the standard /bin/mail interface, mail sender and reader.
+  messages -- count the number of messages in a mailbox.
+  mimeview -- display files, using mailcap mechanism.
+  movemail -- move messages across mailboxes.
+  readmsg -- extract selected messages from a mailbox.
+  sieve -- a mail filtering tool.

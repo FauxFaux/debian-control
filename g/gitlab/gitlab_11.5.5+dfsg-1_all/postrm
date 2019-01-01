@@ -1,0 +1,284 @@
+#! /bin/sh
+# postrm.skeleton
+# Skeleton maintainer script showing all the possible cases.
+# Written by Charles Briscoe-Smith, March-June 1998.  Public Domain.
+
+# Abort if any command returns an error value
+set -e
+
+# Set variables
+gitlab_common_defaults=/var/lib/gitlab-common/gitlab-common.defaults
+
+# This script is called twice during the removal of the package; once
+# after the removal of the package's files from the system, and as
+# the final step in the removal of this package, after the package's
+# conffiles have been removed.
+
+# Ensure the menu system is updated
+
+# Read debian specific configuration
+if [ -f ${gitlab_common_defaults} ]
+then
+  . ${gitlab_common_defaults}
+else
+  echo "${gitlab_common_defaults} not found. Not removing anything."
+  exit 0
+fi
+
+if [ -f ${gitlab_debian_conf} ]
+then
+  . ${gitlab_debian_conf}
+else
+  echo "${gitlab_debian_conf} not found. Not removing anything."
+  exit 0
+fi
+
+if [ -f ${gitlab_common_conf} ]
+then
+  . ${gitlab_common_conf}
+else
+  echo "${gitlab_common_conf} not found. Not removing anything."
+  exit 0
+fi
+
+safely_remove() {
+  CANDIDATE_DIR=$1
+  if [ -n "${CANDIDATE_DIR}" ];then
+    if [ -e ${CANDIDATE_DIR} ]; then
+      echo "Removing: $i"
+      rm -rf ${CANDIDATE_DIR}
+    fi
+  fi
+}
+
+case "$1" in
+  remove)
+    # This package is being removed, but its configuration has not yet
+    # been purged.
+    :
+
+    # Remove diversion
+    # ldconfig is NOT needed during removal of a library, only during
+    # installation
+
+    ;;
+  purge)
+    # This package has previously been removed and is now having
+    # its configuration purged from the system.
+    :
+    # purge debconf questions
+    if [ -e /usr/share/debconf/confmodule ]; then
+      # Source debconf library.
+      . /usr/share/debconf/confmodule
+
+      # Do you want to remove all data?
+      db_input high gitlab/purge_data || true
+      db_go
+      
+      # Check if we should remove data?
+      db_get gitlab/purge_data
+      if [ "${RET}" = "true" ]; then
+        if [ -n "${gitlab_data_dir}" ] && [ -d ${gitlab_data_dir} ]; then
+          for i in shared public db repositories secrets.yml Gemfile.lock; do
+            if [ -e ${gitlab_data_dir}/$i ]; then
+              echo "Removing: ${gitlab_data_dir}/$i"
+              rm -rf ${gitlab_data_dir}/$i; fi
+          done
+        fi
+	for i in ${gitlab_log_dir} ${gitlab_cache_path} ${gitlab_pid_path}; do
+		safely_remove $i
+	done
+
+	# Remove locale directory
+	echo "Removing: ${gitlab_app_root}/app/assets/javascripts/locale"
+	safely_remove ${gitlab_app_root}/app/assets/javascripts/locale
+
+        if [ ! -z "${gitlab_user}" ]; then
+            # Do only if gitlab_user is set
+            if command -v dropdb >/dev/null; then
+                echo "Removing Database: gitlab_production"
+                if runuser -u ${gitlab_user} -- sh -c 'psql gitlab_production -c ""' ; then su postgres -c "dropdb gitlab_production"; fi
+            else
+                echo "dropdb command not found. Hence not removing database."
+           fi
+        else
+            echo "gitlab_user not set. Hence not removing user."
+        fi
+        safely_remove ${gitlab_ssl_path}
+      fi
+
+      # Remove my changes to the db.
+      db_purge
+    fi
+
+    nginx_site="/etc/nginx/sites-available/${GITLAB_HOST}"
+    dbconfig_config="/etc/dbconfig-common/gitlab.conf"
+
+    if [ -f ${nginx_site} ]; then echo "Found nginx site configuration at ${nginx_site}..."; fi
+
+
+    # we mimic dpkg as closely as possible, so we remove configuration
+    # files with dpkg backup extensions too:
+    ### Some of the following is from Tore Anderson:
+    for ext in '~' '%' .bak .ucf-new .ucf-old .ucf-dist;  do
+	rm -f ${nginx_site}$ext
+	rm -f ${gitlab_debian_conf}$ext
+	rm -f ${gitlab_yml}$ext
+	rm -f ${gitlab_tmpfiles}$ext
+	rm -f ${gitlab_shell_config}$ext
+        rm -f ${dbconfig_config}$ext
+    done
+ 
+    for i in ${nginx_site} ${gitlab_debian_conf} ${gitlab_yml} \
+${gitlab_tmpfiles} ${gitlab_shell_config} ${dbconfig_config}; do
+      # remove the configuration file itself
+      if [ -f $i ] ; then rm -f $i; fi
+      # and finally clear it out from the ucf database
+      if which ucf >/dev/null; then
+        if [ -n "$i" ]; then ucf --purge $i; fi
+      fi
+      if which ucfr >/dev/null; then
+        if [ -n "$i" ]; then ucfr --purge gitlab $i; fi
+      fi
+    done
+
+    # remove generated assets
+    if [ -n "${gitlab_data_dir}" ]; then safely_remove ${gitlab_data_dir}/public/assets; fi
+      
+    # Remove private copies of configuration files
+    rm -f ${nginx_site_private}
+    rm -f ${gitlab_debian_conf_private}
+    rm -f ${gitlab_yml_private}
+    rm -f ${gitlab_tmpfiles_private}
+    rm -f ${gitlab_shell_config_private}
+
+    # Remove systemd service overrides
+    for service in mailroom unicorn sidekiq workhorse; do
+      path=/etc/systemd/system/gitlab-${service}.service.d
+      rm -rf $path
+    done
+
+       # cleanup complete
+    exit 0
+
+    ;;
+  disappear)
+    if test "$2" != overwriter; then
+      echo "$0: undocumented call to \`postrm $*'" 1>&2
+      exit 0
+    fi
+    # This package has been completely overwritten by package $3
+    # (version $4).  All our files are already gone from the system.
+    # This is a special case: neither "prerm remove" nor "postrm remove"
+    # have been called, because dpkg didn't know that this package would
+    # disappear until this stage.
+    :
+
+    ;;
+  upgrade)
+    # About to upgrade FROM THIS VERSION to version $2 of this package.
+    # "prerm upgrade" has been called for this version, and "preinst
+    # upgrade" has been called for the new version.  Last chance to
+    # clean up.
+    :
+
+    ;;
+  failed-upgrade)
+    # About to upgrade from version $2 of this package TO THIS VERSION.
+    # "prerm upgrade" has been called for the old version, and "preinst
+    # upgrade" has been called for this version.  This is only used if
+    # the previous version's "postrm upgrade" couldn't handle it and
+    # returned non-zero. (Fix old postrm bugs here.)
+    :
+
+    ;;
+  abort-install)
+    # Back out of an attempt to install this package.  Undo the effects of
+    # "preinst install...".  There are two sub-cases.
+    :
+
+    if test "${2+set}" = set; then
+      # When the install was attempted, version $2's configuration
+      # files were still on the system.  Undo the effects of "preinst
+      # install $2".
+      :
+
+    else
+      # We were being installed from scratch.  Undo the effects of
+      # "preinst install".
+      :
+
+    fi ;;
+  abort-upgrade)
+    # Back out of an attempt to upgrade this package from version $2
+    # TO THIS VERSION.  Undo the effects of "preinst upgrade $2".
+    :
+
+    ;;
+  *) echo "$0: didn't understand being called with \`$1'" 1>&2
+     exit 0;;
+esac
+
+# Automatically added by dh_installinit/11.5.4
+if [ "$1" = "purge" ] ; then
+	update-rc.d gitlab remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.4
+if [ "$1" = "purge" ] ; then
+	update-rc.d gitlab-workhorse remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.4
+if [ "$1" = "purge" ] ; then
+	update-rc.d gitlab-mailroom remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.4
+if [ "$1" = "purge" ] ; then
+	update-rc.d gitlab-unicorn remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.4
+if [ "$1" = "purge" ] ; then
+	update-rc.d gitlab-sidekiq remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.4
+dpkg-maintscript-helper rm_conffile /etc/gitlab/initializers/devise_async.rb 8.8.2\+dfsg-5 gitlab -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/gitlab/gitlab.teatro.yml 8.11.3\+dfsg1-1 gitlab -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/gitlab/initializers/haml.rb 8.11.3\+dfsg1-1 gitlab -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/gitlab/initializers/math_lexer.rb 9.5.4\+dfsg-7 gitlab -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/gitlab/initializers/plantuml_lexer.rb 9.5.4\+dfsg-7 gitlab -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/gitlab/initializers/additional_headers_interceptor.rb 11.2.8\+dfsg-1 gitlab -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/gitlab/initializers/asset_sync.rb 11.5.3\+dfsg-1 gitlab -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/gitlab/initializers/email_template_interceptor.rb 11.2.8\+dfsg-1 gitlab -- "$@"
+dpkg-maintscript-helper dir_to_symlink /usr/share/gitlab/app/assets/javascripts/locale /var/lib/gitlab/locale 9.5.4\+dfsg-5 gitlab -- "$@"
+# End automatically added section
+# Automatically added by dh_systemd_start/11.5.4
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/11.5.4
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'gitlab.service' 'gitlab.target' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'gitlab.service' 'gitlab.target' >/dev/null || true
+		deb-systemd-helper unmask 'gitlab.service' 'gitlab.target' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.5.4
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+exit 0

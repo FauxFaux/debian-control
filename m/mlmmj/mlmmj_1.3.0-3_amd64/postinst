@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+if [ -f /usr/share/debconf/confmodule ]
+then
+. /usr/share/debconf/confmodule
+else
+        echo "No debconf installed"
+fi
+
+mkdir -p /var/spool/mlmmj
+
+
+

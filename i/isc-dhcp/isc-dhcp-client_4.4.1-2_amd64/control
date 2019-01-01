@@ -1,0 +1,25 @@
+Package: isc-dhcp-client
+Source: isc-dhcp
+Version: 4.4.1-2
+Architecture: amd64
+Maintainer: Debian ISC DHCP Maintainers <isc-dhcp@packages.debian.org>
+Installed-Size: 673
+Depends: libc6 (>= 2.15), libdns-export1104, libisc-export1100, debianutils (>= 2.8.2), iproute2
+Recommends: isc-dhcp-common
+Suggests: resolvconf, avahi-autoipd, isc-dhcp-client-ddns
+Provides: dhcp-client
+Section: net
+Priority: important
+Homepage: http://www.isc.org
+Description: DHCP client for automatically obtaining an IP address
+ This is the Internet Software Consortium's DHCP client.
+ .
+ Dynamic Host Configuration Protocol (DHCP) is a protocol like BOOTP
+ (actually dhcpd includes much of the functionality of bootpd). It
+ gives client machines "leases" for IP addresses and can
+ automatically set their network configuration. If your machine
+ depends on DHCP (especially likely if it's a workstation on a large
+ network, or a laptop, or attached to a cable modem), keep this or
+ another DHCP client installed.
+ .
+ Extra documentation can be found in the package isc-dhcp-common.

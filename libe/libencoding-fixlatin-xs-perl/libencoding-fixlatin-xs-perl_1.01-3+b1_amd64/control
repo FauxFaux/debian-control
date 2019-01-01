@@ -1,0 +1,22 @@
+Package: libencoding-fixlatin-xs-perl
+Source: libencoding-fixlatin-xs-perl (1.01-3)
+Version: 1.01-3+b1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 47
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.4)
+Enhances: libencoding-fixlatin-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Encoding-FixLatin-XS
+Description: XS implementation layer for Encoding::FixLatin
+ Most encoding conversion tools take input in one encoding and produce
+ output in another encoding.  Encoding::FixLatin takes input which may
+ contain characters in more than one encoding and makes a best effort to
+ convert them all to UTF-8 output.
+ .
+ Encoding::FixLatin::XS provides a C implementation of the 'fix_latin'
+ algorithm.  It is not meant to be called directly.  Instead, simply
+ install this module and use Encoding::FixLatin as normal.
+ Encoding::FixLatin will use this module if it's found and will fall
+ back to the pure-Perl implementation otherwise.

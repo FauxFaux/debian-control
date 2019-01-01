@@ -1,0 +1,26 @@
+Package: libpengine-dev
+Source: pacemaker
+Version: 1.1.19-2
+Architecture: amd64
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Installed-Size: 153
+Depends: libpe-rules2 (= 1.1.19-2), libpe-status10 (= 1.1.19-2), libpengine10 (= 1.1.19-2), libcrmcommon-dev (= 1.1.19-2), libcrmservice-dev (= 1.1.19-2), liblrmd-dev (= 1.1.19-2)
+Breaks: libpengine3-dev, libpengine4-dev
+Replaces: libpengine3-dev, libpengine4-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.clusterlabs.org/
+Description: cluster resource manager Policy Engine library development
+ At its core, Pacemaker is a distributed finite state
+ machine capable of co-ordinating the startup and recovery of inter-related
+ services across a set of machines.
+ .
+ Pacemaker understands many different resource types (OCF, SYSV, systemd) and
+ can accurately model the relationships between them (colocation, ordering).
+ .
+ It can even use technology such as Docker to automatically isolate the
+ resources managed by the cluster.
+ .
+ This package contains the headers and other necessary files to build
+ applications or libraries that use the Policy Engine library.

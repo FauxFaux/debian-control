@@ -1,0 +1,22 @@
+Package: libhypre-dev
+Source: hypre
+Version: 2.15.1-4
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 1387
+Depends: libhypre-2.15.1 (= 2.15.1-4), libopenblas-dev | libatlas-base-dev | libblas-dev | libblas.so, libopenblas-dev | libatlas-base-dev | liblapack-dev | liblapack.so, libsuperlu-dev, mpi-default-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.llnl.gov/casc/hypre/
+Description: High Performance Matrix Preconditioners - Development Files
+ Hypre is a set of matrix preconditioning libraries to aid in the solution of
+ large systems of linear equations.
+ .
+ This package contains the headers and symlinks necessary to develop programs
+ which use hypre.
+ .
+ To reduce the size of the library, HYPRE is split into sublibraries:
+ libHYPRE.so is a dummy library linked to:
+ - libHYPRE_core.so
+ - libHYPRE_FEI.so

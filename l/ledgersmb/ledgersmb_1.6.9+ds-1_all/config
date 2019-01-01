@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+
+. /usr/share/debconf/confmodule
+
+# Get web proxy selection
+db_input high ledgersmb/lsmb_proxy || true
+db_go || true
+
+# If this is a new install, then get DB Admin user and password.
+# Or also if called with 'reconfigure' instead of 'configure'?
+if [ -z "$2" ]; then
+    db_input high ledgersmb/admin_login || true
+    db_input high ledgersmb/admin_password || true
+    db_go || true
+fi
+
+# Explicitly do defconf stop
+db_stop
+
+exit 0

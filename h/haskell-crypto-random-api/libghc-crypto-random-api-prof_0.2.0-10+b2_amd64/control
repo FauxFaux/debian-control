@@ -1,0 +1,27 @@
+Package: libghc-crypto-random-api-prof
+Source: haskell-crypto-random-api (0.2.0-10)
+Version: 0.2.0-10+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 125
+Depends: libghc-crypto-random-api-dev (= 0.2.0-10+b2), libghc-base-prof-4.11.1.0-5dd74, libghc-bytestring-prof-0.10.8.2-76891, libghc-entropy-prof-0.4.1.1-1de25
+Provides: libghc-crypto-random-api-prof-0.2.0-d3632
+Section: haskell
+Priority: optional
+Homepage: http://github.com/vincenthz/hs-crypto-random-api
+Description: simple random generators API for crypto-related code; profiling libraries
+ This provides a class of Cryptographic Secure Random generator.
+ .
+ The main difference with the generic Haskell RNG is that it return bytes
+ instead of an integer.
+ .
+ It is quite similar to the CryptoRandomGen class in crypto-api except
+ that error are not returned to the user. Instead the user is suppose to
+ handle reseeding by using the NeedReseed and SupplyEntropy methods. For
+ other type of errors, the user is expected to generate bytes with the
+ parameters bounds explicity defined here.
+ .
+ The CPRG need to be able to generate up to 2^20 bytes in one call.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

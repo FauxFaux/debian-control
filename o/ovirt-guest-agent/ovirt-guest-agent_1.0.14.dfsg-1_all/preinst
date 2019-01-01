@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+getent group ovirtagent >/dev/null || \
+  if [ -z "`getent group 175`" ]; then
+    groupadd -r -g 175 ovirtagent
+  else
+    groupadd -r ovirtagent
+  fi
+
+getent passwd ovirtagent > /dev/null || \
+  useradd -u 175 -g ovirtagent -o -r ovirtagent -c "oVirt Guest Agent" \
+    -d /usr/share/ovirt-guest-agent -s /sbin/nologin
+
+

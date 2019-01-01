@@ -1,0 +1,65 @@
+#! /bin/sh
+
+set -e
+
+if [ "configure" = "$1" ] || [ "reconfigure" = "$1" ] ; then
+    . /usr/share/debconf/confmodule
+    db_version 2.0
+
+    db_get krb5-kdc/debconf
+    DEBCONF="$RET"
+
+    if [ $DEBCONF = "true" ] ; then
+        if [ -f "/etc/default/krb5-admin-server" ] ; then
+            . /etc/default/krb5-admin-server
+        fi
+        cat <<'EOF' > /etc/default/krb5-admin-server
+# Automatically generated.  If you change anything in this file other than the
+# values of  DAEMON_ARGS, first run dpkg-reconfigure
+# krb5-admin-server and disable managing the kadmin configuration with
+# debconf.  Otherwise, changes will be overwritten.
+
+EOF
+        db_get krb5-admin-server/kadmind ||true
+        RUN_KADMIND="$RET"
+	if dpkg --compare-versions "$2" le-nl 1.12.1+dfsg-11; then
+	    if [ "x$RUN_KADMIND" = "xfalse" ]; then
+		update-rc.d krb5-admin-server disable
+		fi
+	    fi
+        if [ -n "$DAEMON_ARGS" ] ; then
+            echo "DAEMON_ARGS=\"$DAEMON_ARGS\"" \
+                >> /etc/default/krb5-admin-server
+        fi
+    fi
+    db_stop
+fi
+
+# Automatically added by dh_systemd_enable/12
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'krb5-admin-server.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'krb5-admin-server.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'krb5-admin-server.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'krb5-admin-server.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/12
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/krb5-admin-server" ]; then
+		update-rc.d krb5-admin-server defaults 18 18 >/dev/null
+		invoke-rc.d krb5-admin-server start || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

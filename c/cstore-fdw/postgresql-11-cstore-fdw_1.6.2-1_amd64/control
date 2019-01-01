@@ -1,0 +1,18 @@
+Package: postgresql-11-cstore-fdw
+Source: cstore-fdw
+Version: 1.6.2-1
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <team+postgresql@tracker.debian.org>
+Installed-Size: 268
+Depends: libprotobuf-c-dev, postgresql-11, libc6 (>= 2.14), libprotobuf-c1 (>= 1.0.1)
+Section: database
+Priority: optional
+Homepage: https://github.com/citusdata/cstore_fdw
+Description: PostgreSQL foreign data wrapper for columnar storage
+ Cstore_fdw is a columnar store extension for PostgreSQL, implemented as a
+ foreign data wrapper (FDW). Columnar stores provide notable benefits for
+ analytics use cases where data is loaded in batches. Cstore_fdw's columnar
+ nature delivers performance by only reading relevant data from disk, and it
+ may compress data 6x-10x to reduce space requirements for data archival.
+ .
+ This package is for PostgreSQL 11.

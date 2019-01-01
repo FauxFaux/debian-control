@@ -1,0 +1,21 @@
+Package: icecc
+Version: 1.2-1
+Architecture: amd64
+Maintainer: Debian KDE Extras Team <pkg-kde-extras@lists.alioth.debian.org>
+Installed-Size: 878
+Depends: libc6 (>= 2.15), libcap-ng0 (>= 0.7.9), libgcc1 (>= 1:3.0), liblzo2-2, libstdc++6 (>= 5.2), adduser, lsb-base, file, g++ | c++-compiler | c-compiler
+Recommends: logrotate
+Suggests: icecc-monitor, clang
+Section: devel
+Priority: optional
+Homepage: https://github.com/icecc/icecream
+Description: distributed compiler (client and server)
+ icecc (also known as Icecream) is a distributed compile system. It allows
+ parallel compiling by distributing the compile jobs to several nodes of
+ a compile network running the icecc daemon. The icecc scheduler routes
+ the jobs and provides status and statistics information to the icecc monitor.
+ .
+ Each compile node can accept one or more compile jobs depending on the number
+ of processors and the settings of the daemon. Link jobs and other jobs which
+ cannot be distributed are executed locally on the node where the compilation
+ is started.

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+
+# Automatically added by dh_installdeb/12
+dpkg-maintscript-helper rm_conffile /etc/opt/chrome/policies/managed/chrome-gnome-shell.json 10-2\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/chromium/policies/managed/chrome-gnome-shell.json 10-2\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/opt/chrome/native-messaging-hosts/org.gnome.chrome_gnome_shell.json 10.1-4\~ -- "$@"
+# End automatically added section
+
+
+case "$1" in
+    purge|remove)
+
+    # Avoid a piuparts error. See https://bugs.debian.org/888549
+    rm -f /etc/opt/chrome/native-messaging-hosts/org.gnome.chrome_gnome_shell.json
+    # These 2 lines are unnecessary as long as debian/maintscript
+    # includes an /etc/opt/chrome/ file
+    # rmdir /etc/opt/chrome/native-messaging-hosts || true
+    # rmdir /etc/opt/chrome/ || true
+    mkdir -p /etc/opt/
+esac
+
+exit 0

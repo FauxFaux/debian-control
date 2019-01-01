@@ -1,0 +1,23 @@
+Package: libindirect-perl
+Source: libindirect-perl (0.38-1)
+Version: 0.38-1+b1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 69
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.14)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/indirect
+Description: module warning about using the indirect object syntax
+ When enabled (or disabled as some may prefer to say, since you actually turn
+ it on by calling no indirect), the indirect pragma lexically warns about
+ indirect object syntax constructs that may have slipped into your code. This
+ syntax is now considered harmful, since its parsing has many quirks and its
+ use is error prone (when swoosh isn't defined, swoosh $x actually compiles to
+ $x->swoosh).
+ .
+ It currently does not warn for core functions (print, say, exec or system).
+ This may change in the future, or may be added as optional features that
+ would be enabled by passing options to unimport.
+ .
+ indirect is not a source filter.

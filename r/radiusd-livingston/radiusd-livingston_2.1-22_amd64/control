@@ -1,0 +1,27 @@
+Package: radiusd-livingston
+Version: 2.1-22
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 217
+Depends: lsb-base, libc6 (>= 2.14), libdb5.3, debconf (>= 0.5) | debconf-2.0
+Conflicts: radius-server
+Replaces: radius-server
+Provides: radius-server
+Section: net
+Priority: optional
+Description: Remote Authentication Dial-In User Service (RADIUS) server
+ RADIUS is an AAA (authentication, authorization and accounting) protocol for
+ managing client access to network services, and is described by RFCs 2865 to
+ 2869. This version of the RADIUS server is from Lucent Technologies Inc.,
+ formerly known as Livingston Enterprises Inc.
+ .
+ Some Internet Service Providers (ISPs) require a username and password to be
+ given on connection. Before access to the network is granted, this
+ information is passed to a Network Access Server (NAS) device over the
+ link-layer protocol and then to a RADIUS server over the RADIUS protocol. The
+ RADIUS server checks that the information is correct using authentication
+ schemes like PAP, CHAP or EAP. If accepted, the server will then authorize
+ access to the ISP's system and select an IP address, L2TP parameters, etc.
+ .
+ RADIUS is also commonly used for accounting purposes so that the users can be
+ billed accordingly.

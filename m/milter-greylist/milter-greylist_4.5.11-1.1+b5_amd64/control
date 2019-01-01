@@ -1,0 +1,25 @@
+Package: milter-greylist
+Source: milter-greylist (4.5.11-1.1)
+Version: 4.5.11-1.1+b5
+Architecture: amd64
+Maintainer: Paul Martin <pm@debian.org>
+Installed-Size: 359
+Depends: libbind9-161 (>= 1:9.10.6+dfsg), libc6 (>= 2.15), libcurl4 (>= 7.16.2), libgeoip1, libmilter1.0.1, libopendkim11 (>= 2.11.0~alpha), libspf2-2, libssl1.1 (>= 1.1.0), adduser (>= 3.11)
+Recommends: sendmail | postfix
+Section: mail
+Priority: extra
+Homepage: http://hcpnet.free.fr/milter-greylist/
+Description: Greylist milter for sendmail
+ milter-greylist is a stand-alone milter written in C that implements the
+ greylist filtering method, as proposed by Evan Harris.
+ .
+ Greylisting works by assuming that unlike legitimate MTA, spam engines will
+ not retry sending their junk mail on a temporary error. The filter will
+ always temporarily reject mail on a first attempt, and to accept it after
+ some time has elapsed.
+ .
+ If spammers ever try to resend rejected messages, we can assume they will not
+ stay idle between the two sends (if they do, the spam problem would just be
+ solved). Odds are good that the spammer will send a mail to an honey pot
+ address and get blacklisted in several real-time distributed black list
+ before the second attempt.

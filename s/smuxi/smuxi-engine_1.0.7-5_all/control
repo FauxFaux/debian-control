@@ -1,0 +1,41 @@
+Package: smuxi-engine
+Source: smuxi
+Version: 1.0.7-5
+Architecture: all
+Maintainer: Mirco Bauer <meebey@debian.org>
+Installed-Size: 5796
+Depends: mono-runtime (>= 3.0~), liblog4net1.2-cil (>= 1.2.10), libmono-corlib4.5-cil (>= 4.6.1.3), libmono-posix4.0-cil (>= 4.6.1.3), libmono-sqlite4.0-cil (>= 3.0.6), libmono-system-core4.0-cil (>= 4.6.1.3), libmono-system-data-linq4.0-cil (>= 1.0), libmono-system-data4.0-cil (>= 4.6.1.3), libmono-system-drawing4.0-cil (>= 4.6.1.3), libmono-system-runtime-serialization4.0-cil (>= 4.6.1.3), libmono-system-runtime4.0-cil (>= 2.10.1), libmono-system-web4.0-cil (>= 2.10.3), libmono-system-xml-linq4.0-cil (>= 4.2.0), libmono-system-xml4.0-cil (>= 4.6.1.3), libmono-system4.0-cil (>= 4.6.1.3), libnini1.1-cil (>= 1.1)
+Suggests: oidentd | ident-server
+Breaks: smuxi-engine-irc (<< 0.8.10.2), smuxi-engine-twitter (<< 0.8.10.2), smuxi-engine-xmpp (<< 0.8.10.2), smuxi-frontend (<< 0.8.10.2), smuxi-server (<< 0.8.10.2)
+Replaces: smuxi (<< 0.5.25), smuxi-engine-irc (<< 0.8.10.2), smuxi-engine-twitter (<< 0.8.10.2), smuxi-engine-xmpp (<< 0.8.10.2), smuxi-frontend (<< 0.8.10.2), smuxi-server (<< 0.8.10.2)
+Section: gnome
+Priority: optional
+Homepage: https://smuxi.im/
+Description: Engine libraries for Smuxi (IRC, Twitter, XMPP, Campfire, JabbR)
+ Smuxi is an irssi-inspired, flexible, user-friendly and cross-platform IRC
+ client for sophisticated users, targeting the GNOME desktop.
+ .
+ Smuxi is based on the client-server model: The core application (engine) can
+ be placed onto a server which is connected to the Internet around-the-clock;
+ one or more frontends then connect to the core. This way, the connection to
+ IRC can be kept up even when all frontends have been closed. The combination
+ of screen and irssi served as example for this architecture.
+ .
+ Smuxi also supports the regular single application mode. This behaves like a
+ typical IRC client; it doesn't need separate core management and utilizes a
+ local engine that is used by the local frontend client.
+ .
+ This package contains all Smuxi engines and the standalone server.
+ .
+ The standalone server of Smuxi named smuxi-server doesn't need any GUI. The
+ Smuxi frontends can connect to a running server via the network.
+ .
+ The following Smuxi engines are included in this package:
+  * IRC engine
+  * Twitter engine
+    - receive and post tweets to the Twitter microblogging service.
+    - friends timeline, replies view, and direct messages.
+  * XMPP engine
+    - receive and send messages on XMPP, Jabber, GTalk and the Facebook chat.
+  * Campfire engine
+  * JabbR engine

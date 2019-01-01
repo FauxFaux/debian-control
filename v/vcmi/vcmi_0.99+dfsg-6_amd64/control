@@ -1,0 +1,37 @@
+Package: vcmi
+Version: 0.99+dfsg-6
+Architecture: amd64
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Installed-Size: 16385
+Depends: libavcodec58 (>= 7:4.0), libavformat58 (>= 7:4.0), libavutil56 (>= 7:4.0), libboost-atomic1.67.0, libboost-chrono1.67.0, libboost-date-time1.67.0, libboost-filesystem1.67.0, libboost-locale1.67.0, libboost-program-options1.67.0, libboost-system1.67.0, libboost-test1.67.0, libboost-thread1.67.0, libc6 (>= 2.23), libfuzzylite5.1v5 (>= 5.1), libgcc1 (>= 1:3.0), libminizip1 (>= 1.1), libqt5core5a (>= 5.11.0~rc1), libqt5gui5 (>= 5.0.2), libqt5network5 (>= 5.0.2), libqt5widgets5 (>= 5.0.2), libsdl2-2.0-0 (>= 2.0.8), libsdl2-image-2.0-0 (>= 2.0.2), libsdl2-mixer-2.0-0 (>= 2.0.2), libsdl2-ttf-2.0-0 (>= 2.0.14), libstdc++6 (>= 5.2), libswscale5 (>= 7:4.0), zlib1g (>= 1:1.1.4)
+Recommends: unshield, innoextract, unzip, ffmpeg
+Suggests: homm3-demo-data | homm3-data
+Section: contrib/games
+Priority: optional
+Homepage: http://vcmi.eu
+Description: Rewrite of the Heroes of Might and Magic 3 game engine
+ The purpose of VCMI project is to create a free implementation of the "Heroes
+ of Might and Magic 3: In the Wake of Gods" engine to overcome limitations
+ of the original engine for better modding support, higher resolutions,
+ bigger map sizes and extended engine limits.
+ .
+ VCMI is a turn-based strategy game where the player controls a number of
+ heroes commanding an army of creatures. The player explores the game map
+ with their heroes, conquers enemy towns and improves their own.
+ .
+ VCMI stands for Vinyar Callor Meletya Ingole which means "New Heroes of Might
+ and Magic" in Quenya.
+ .
+ This game requires the graphics, sound and videos of the "Heroes of Might and
+ Magic 3: In the Wake of Gods" game. After installing this package, run either
+ one of the following commands depending on whether you have access to the
+ Good Old Games installer (1), the original CDs (2) or just the installed
+ game directory (3):
+ .
+  (1): vcmibuilder --gog /path/to/gog.com/installer
+  (2): vcmibuilder --cd1 /path/to/iso/or/cd --cd2 /path/to/second/cd
+  (3): vcmibuilder --data /path/to/h3/data
+ .
+ Alternatively, use `game-data-packager heroes3`.
+ .
+ This package contains the game engine.

@@ -1,0 +1,20 @@
+Package: nvidia-legacy-390xx-vulkan-icd
+Source: nvidia-graphics-drivers-legacy-390xx
+Version: 390.87-3
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 106
+Depends: nvidia-vulkan-common, libvulkan1 (>= 1.0.42), libglx-nvidia-legacy-390xx0 (= 390.87-3)
+Suggests: vulkan-utils
+Enhances: libvulkan1
+Conflicts: nvidia-legacy-390xx-nonglvnd-vulkan-icd
+Provides: vulkan-icd
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: NVIDIA Vulkan installable client driver (ICD) (390xx legacy version)
+ Vulkan is a multivendor open standard by the Khronos Group for 3D graphics.
+ .
+ This metapackage provides the NVIDIA installable client driver (ICD) for
+ Vulkan (GLVND variant) which supports NVIDIA GPUs.

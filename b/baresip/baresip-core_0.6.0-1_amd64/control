@@ -1,0 +1,30 @@
+Package: baresip-core
+Source: baresip
+Version: 0.6.0-1
+Architecture: amd64
+Maintainer: Debian VoIP Team <pkg-voip-maintainers@lists.alioth.debian.org>
+Installed-Size: 1548
+Depends: libasound2 (>= 1.0.16), libavahi-client3 (>= 0.6.16), libavahi-common3 (>= 0.6.16), libc6 (>= 2.14), libcodec2-0.8.1, libdirectfb-1.7-7 (>= 1.7.7), libgsm1 (>= 1.0.13), libjack-jackd2-0 (>= 1.9.10+20150825) | libjack-0.125, libmosquitto1 (>= 1.0), libmpg123-0 (>= 1.6.2), libopencore-amrnb0, libopencore-amrwb0, libopus0 (>= 1.1), libpng16-16 (>= 1.6.2-1), libportaudio2 (>= 19+svn20101113), libre0 (>= 0.5.5), librem0 (>= 0.4.7), libsndfile1 (>= 1.0.20), libsndio7.0 (>= 1.1.0), libspandsp2 (>= 0.0.6~pre18), libspeexdsp1 (>= 1.2~beta3.2-1), libssl1.1 (>= 1.1.0), libtwolame0 (>= 0.3.6), libvo-amrwbenc0, libvpx5 (>= 1.6.0), zlib1g (>= 1:1.1.4)
+Recommends: avahi-daemon
+Suggests: baresip-ffmpeg, baresip-gstreamer, baresip-gtk, baresip-x11
+Section: comm
+Priority: optional
+Homepage: http://www.creytiv.com/baresip.html
+Description: portable and modular SIP user-agent - core parts
+ A modular SIP user-agent with support for audio and video, and many
+ IETF standards such as SIP, SDP, RTP/RTCP, STUN, TURN, and ICE.
+ .
+ Supports both IPv4 and IPv6, and the following features.
+  * Audio codecs: AMR, G.711, G.722, G.726, GSM, L16, MPA, OPUS.
+  * Video codecs: H.263, H.264, H.265, MPEG4, VP8, VP9.
+  * Audio drivers: Alsa, GStreamer, JACK, OSS, Portaudio, sndio.
+  * Video sources: FFmpeg avformat, Video4Linux2, X11 Grabber.
+  * Video outputs: SDL2, X11, DirectFB.
+  * NAT Traversal: STUN, TURN, ICE, NATBD, NAT-PMP, PCP.
+  * Media encryption: SRTP, DTLS-SRTP.
+  * DNS Service Discovery: Avahi.
+  * Telemetry messaging: MQTT.
+  * Control interfaces: JSON-over-TCP.
+ .
+ Some of above features are provided in separate packages baresip-gtk,
+ baresip-ffmpeg, baresip-gstreamer and baresip-x11.

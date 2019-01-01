@@ -1,0 +1,23 @@
+Package: afl
+Version: 2.52b-4
+Architecture: amd64
+Maintainer: Daniel Stender <stender@debian.org>
+Installed-Size: 434
+Depends: build-essential, libc6 (>= 2.14)
+Recommends: afl-clang, afl-doc
+Suggests: gnuplot
+Section: devel
+Priority: optional
+Homepage: http://lcamtuf.coredump.cx/afl/
+Description: instrumentation-driven fuzzer for binary formats
+ American fuzzy lop is a fuzzer that employs compile-time instrumentation and
+ genetic algorithms to automatically discover clean, interesting test cases
+ that trigger new internal states in the targeted binary. This substantially
+ improves the functional coverage for the fuzzed code. The compact synthesized
+ corpora produced by the tool are also useful for seeding other, more labor- or
+ resource-intensive testing regimes down the road.
+ .
+ afl-fuzz is designed to be practical: it has modest performance overhead, uses
+ a variety of highly effective fuzzing strategies, requires essentially no
+ configuration, and seamlessly handles complex, real-world use cases - say,
+ common image parsing or file compression libraries.

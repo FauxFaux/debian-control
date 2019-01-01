@@ -1,0 +1,33 @@
+Package: libghc-language-haskell-extract-doc
+Source: haskell-language-haskell-extract
+Version: 0.2.4-9
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 119
+Depends: haddock-interface-33
+Recommends: ghc-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: http://github.com/finnsson/template-helper
+Description: automatically extract functions from the local code.; documentation
+ language-haskell-extract contains some useful helper functions on top of
+ Template Haskell.
+ functionExtractor extracts all functions after a regexp-pattern.
+ .
+ > foo = "test"
+ > boo = "testing"
+ > bar = $(functionExtractor "oo$")
+ .
+ will automagically extract the functions ending with "oo" such as
+ .
+ > bar = [("foo",foo), ("boo",boo)]
+ .
+ This can be useful if you wish to extract all functions beginning with test
+ (for a test-framework) or all functions beginning with wc (for a web service).
+ .
+ functionExtractorMap works like functionsExtractor but applies a function
+ over all function-pairs.
+ This functions is useful if the common return type of the functions is
+ a type class.
+ .
+ This package contains the documentation files.

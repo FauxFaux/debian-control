@@ -1,0 +1,29 @@
+Package: pki-tks
+Source: dogtag-pki
+Version: 10.6.8-2
+Architecture: all
+Maintainer: Debian FreeIPA Team <pkg-freeipa-devel@alioth-lists.debian.net>
+Installed-Size: 316
+Depends: libsymkey-java (>= 10.6.8-2), pki-server (>= 10.6.8-2)
+Suggests: pki-ca
+Section: java
+Priority: optional
+Homepage: http://pki.fedoraproject.org
+Description: Certificate System - Token Key Service
+ Certificate System (CS) is an enterprise software system designed
+ to manage enterprise Public Key Infrastructure (PKI) deployments.
+ .
+ The Token Key Service (TKS) is an optional PKI subsystem that manages the
+ master key(s) and the transport key(s) required to generate and distribute
+ keys for hardware tokens.  TKS provides the security between tokens and an
+ instance of Token Processing System (TPS), where the security relies upon the
+ relationship between the master key and the token keys.  A TPS communicates
+ with a TKS over SSL using client authentication.
+ .
+ TKS helps establish a secure channel (signed and encrypted) between the token
+ and the TPS, provides proof of presence of the security token during
+ enrollment, and supports key changeover when the master key changes on the
+ TKS.  Tokens with older keys will get new token keys.
+ .
+ Because of the sensitivity of the data that TKS manages, TKS should be set up
+ behind the firewall with restricted access.

@@ -1,0 +1,18 @@
+Package: dbconfig-pgsql
+Source: dbconfig-common
+Version: 2.0.11
+Architecture: all
+Maintainer: Paul Gevers <elbrus@debian.org>
+Installed-Size: 9
+Depends: dbconfig-common (= 2.0.11), postgresql-client
+Suggests: postgresql
+Conflicts: dbconfig-no-thanks
+Section: admin
+Priority: optional
+Description: dbconfig-common PostgreSQL support
+ This package ensures PostgreSQL support in the dbconfig-common framework, and
+ should be in the depends list of packages that require PostgreSQL support from
+ dbconfig-common.
+ .
+ System administrators that don't want dbconfig-common to handle the database
+ management should install dbconfig-no-thanks instead.

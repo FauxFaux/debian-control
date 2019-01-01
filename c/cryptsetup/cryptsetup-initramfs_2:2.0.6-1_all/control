@@ -1,0 +1,20 @@
+Package: cryptsetup-initramfs
+Source: cryptsetup
+Version: 2:2.0.6-1
+Architecture: all
+Maintainer: Debian Cryptsetup Team <pkg-cryptsetup-devel@alioth-lists.debian.net>
+Installed-Size: 133
+Depends: busybox | busybox-static, cryptsetup-run (>= 2:2.0.6-1), initramfs-tools (>= 0.129) | linux-initramfs-tool
+Recommends: console-setup, kbd
+Breaks: cryptsetup (<< 2:2.0.3-1)
+Replaces: cryptsetup (<< 2:2.0.3-1)
+Section: admin
+Priority: optional
+Homepage: https://gitlab.com/cryptsetup/cryptsetup
+Description: disk encryption support - initramfs integration
+ Cryptsetup provides an interface for configuring encryption on block
+ devices (such as /home or swap partitions), using the Linux kernel
+ device mapper target dm-crypt. It features integrated Linux Unified Key
+ Setup (LUKS) support.
+ .
+ This package provides initramfs integration for cryptsetup.

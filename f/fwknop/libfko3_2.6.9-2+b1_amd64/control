@@ -1,0 +1,26 @@
+Package: libfko3
+Source: fwknop (2.6.9-2)
+Version: 2.6.9-2+b1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 142
+Depends: libassuan0 (>= 2.0.1), libc6 (>= 2.14), libgpg-error0 (>= 1.14), libgpgme11 (>= 1.2.0)
+Breaks: libfko2
+Replaces: libfko2
+Section: libs
+Priority: extra
+Homepage: http://www.cipherdyne.com/fwknop/
+Description: FireWall KNock OPerator - shared library
+ The FireWall KNock OPerator implements an authorization scheme called
+ Single Packet Authorization (SPA), based on Netfilter and libpcap.
+ .
+ Its main application is to protect services such as OpenSSH with
+ an additional layer of security in order to make the exploitation of
+ vulnerabilities (both 0-day and unpatched code) much more difficult.
+ .
+ The authorization server passively listens for authorization packets via
+ libpcap, so there is no service listening for network connections on the
+ traditional port. Access to a protected service is only granted after a
+ valid encrypted and non-replayed packet is detected.
+ .
+ This package provides the runtime library for fwknop (written inC).

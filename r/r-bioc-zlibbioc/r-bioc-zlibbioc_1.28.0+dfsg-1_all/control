@@ -1,0 +1,14 @@
+Package: r-bioc-zlibbioc
+Version: 1.28.0+dfsg-1
+Architecture: all
+Maintainer: Debian R Packages Maintainers <r-pkg-team@alioth-lists.debian.net>
+Installed-Size: 38
+Depends: r-base-core (>= 3.5.1-2), r-api-3.5, r-api-bioc-3.8, zlib1g-dev
+Section: gnu-r
+Priority: optional
+Homepage: https://bioconductor.org/packages/zlibbioc/
+Description: (Virtual) zlibbioc Bioconductor package
+ zlibbioc provides the zlib library to the Bioconductor environment.
+ This is useless on Debian because zlib is packaged. So, to avoid to patch all
+ Bioconductor packages which required zlibbioc, zlibbioc is packaged as an
+ empty shell depending on zlib1g-dev.

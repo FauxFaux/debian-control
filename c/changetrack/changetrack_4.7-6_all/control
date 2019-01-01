@@ -1,0 +1,21 @@
+Package: changetrack
+Version: 4.7-6
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 63
+Depends: perl:any
+Recommends: cron, ed | rcs
+Section: utils
+Priority: optional
+Homepage: http://changetrack.sf.net
+Description: monitor changes to (configuration) files
+ changetrack automatically monitors changes to a set of files. If the files
+ are modified one day and the machine stops working correctly some days later,
+ changetrack will provide information on which files were modified and thus
+ help locate the problem.
+ .
+ If you tell changetrack to use either the line editor ed (the default) or The
+ GNU Revision Control System (RCS), you can recover files to any previous stage.
+ If you do not want to install Perl, try out the filetraq or diffmon package.
+ .
+ changetrack is a filesystem watch, similar to etckeeper.

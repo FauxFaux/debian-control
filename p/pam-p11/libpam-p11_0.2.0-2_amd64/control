@@ -1,0 +1,17 @@
+Package: libpam-p11
+Source: pam-p11
+Version: 0.2.0-2
+Architecture: amd64
+Maintainer: Debian OpenSC Maintainers <pkg-opensc-maint@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: libc6 (>= 2.4), libp11-3 (>= 0.4.4), libpam0g (>= 0.99.7.1), libssl1.1 (>= 1.1.0)
+Conflicts: libpam-opensc
+Replaces: libpam-opensc
+Provides: libpam-opensc
+Section: admin
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/OpenSC/pam_p11
+Description: PAM module for using PKCS#11 smart cards
+ A Pluggable Authentication Module for PKCS#11 based smart
+ cards. Useful for enabling smart card based user login to a system.

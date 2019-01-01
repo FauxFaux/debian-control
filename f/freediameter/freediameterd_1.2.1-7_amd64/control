@@ -1,0 +1,23 @@
+Package: freediameterd
+Source: freediameter
+Version: 1.2.1-7
+Architecture: amd64
+Maintainer: Debian Mobcom Maintainers <Debian-mobcom-maintainers@lists.alioth.debian.org>
+Installed-Size: 51
+Depends: libfdcore6 (= 1.2.1-7), libfdproto6 (= 1.2.1-7), libc6 (>= 2.4), libgnutls30 (>= 3.5.0)
+Breaks: libfdcore6 (<< 1.2.1-3)
+Replaces: libfdcore6 (<< 1.2.1-3)
+Section: utils
+Priority: optional
+Homepage: http://www.freediameter.net/trac/
+Description: Daemon for the Diameter protocol
+ Diameter is a protocol designed to carry Authentication, Authorization and
+ Accounting (AAA) payload. It is an evolution of the RADIUS protocol (as the
+ name suggests).
+ .
+ freeDiameter is an implementation of the Diameter protocol.
+ .
+ This simple daemon parses the command line and initializes the freeDiameter
+ framework. Use it for your Diameter server & agent components.  In case of
+ Diameter clients, you probably will prefer linking the libfdcore directly with
+ your client application that must be made Diameter-aware.

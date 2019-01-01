@@ -1,0 +1,72 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+#
+# Skip, if we are not in "configure" or "reconfigure" state
+#
+if [ "$1" != "configure" ] && [ "$1" != "reconfigure" ]; then
+	exit 0
+fi
+
+#
+# retrieve various configuration options from debconf
+#
+db_get colplot/webserver
+WWWTYPE="$RET"
+
+# done with debconf...
+db_stop
+
+# Only create link and grant permissions on first install
+if [ ! -n "$2" ] ; then
+    chown -R www-data:www-data /usr/share/colplot/site
+    ln -sf /usr/bin/colplot /usr/share/colplot/site/index.cgi
+fi
+
+# Update the webserver, if needed
+case $WWWTYPE in
+    apache2)
+	if [ -e /etc/apache2/conf-available/colplot.conf ] ; then
+		ucf --debconf-ok /usr/share/colplot/conf_templates/colplot.apache.conf /etc/apache2/conf-available/colplot.conf
+		ucfr colplot /etc/apache2/conf-available/colplot.conf
+		if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+	    		. /usr/share/apache2/apache2-maintscript-helper
+	    		apache2_invoke enconf colplot
+		else
+	    		echo "Apache2 not installed, skipping"
+		fi
+	else
+	    echo "Apache2 not installed, skipping"
+	fi
+	;;
+    lighttpd)
+	ucf --debconf-ok /usr/share/colplot/conf_templates/colplot.lighttpd.conf /etc/lighttpd/conf-available/20-colplot.conf
+	ucfr colplot /etc/lighttpd/conf-available/20-colplot.conf
+	if [ -e /etc/lighttpd/conf-available/20-colplot.conf ] ; then
+	    if which lighty-enable-mod >/dev/null 2>&1 ; then
+		lighty-enable-mod colplot || \
+                    if [ "$?" != "2" ] ; then exit 1 ; else true ; fi
+	    else
+		echo "Lighttpd not installed, skipping"
+	    fi
+	fi
+	;;
+    *)
+	;;
+esac
+
+# Always trigger reload of webservers if the configuration is enabled
+if [ -e /etc/apache2/conf.d/colplot.conf -o -e /etc/apache2/conf-enabled/colplot.conf ] ; then
+    invoke-rc.d apache2 reload || true
+fi
+if [ -e /etc/lighttpd/conf-enabled/20-colplot.conf ] ; then
+    invoke-rc.d lighttpd reload 3>/dev/null || true
+fi
+
+
+exit 0

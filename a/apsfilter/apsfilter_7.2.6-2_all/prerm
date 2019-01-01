@@ -1,0 +1,12 @@
+#! /bin/sh -e
+
+if [ "$1" = remove ]
+then
+  if [ -f /etc/printcap.orig ]
+  then
+    mv /etc/printcap.orig /etc/printcap
+  fi
+  rm -f /etc/printcap.old
+fi
+
+

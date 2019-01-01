@@ -1,0 +1,24 @@
+Package: libghc-retry-prof
+Source: haskell-retry (0.7.7.0-1)
+Version: 0.7.7.0-1+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 347
+Depends: libghc-retry-dev (= 0.7.7.0-1+b1), libghc-base-prof-4.11.1.0-5dd74, libghc-data-default-class-prof-0.1.2.0-66927, libghc-exceptions-prof-0.10.0-c507a, libghc-ghc-prim-prof-0.5.2.0-0a259, libghc-random-prof-1.1-1827c, libghc-transformers-prof-0.5.5.0-b5d2f
+Provides: libghc-retry-prof-0.7.7.0-f218a
+Section: haskell
+Priority: optional
+Homepage: https://github.com/Soostone/retry
+Description: Retry combinators for monadic actions that may fail; profiling libraries
+ This package exposes combinators that can wrap arbitrary monadic actions. They
+ run the action and potentially retry running it with some configurable delay
+ for a configurable number of times.
+ .
+ The purpose is to make it easier to work with IO and especially network IO
+ actions that often experience temporary failure and warrant retrying of the
+ original action. For example, a database query may time out for a while, in
+ which case we should hang back for a bit and retry the query instead of simply
+ raising an exception.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

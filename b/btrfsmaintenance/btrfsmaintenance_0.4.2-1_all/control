@@ -1,0 +1,23 @@
+Package: btrfsmaintenance
+Version: 0.4.2-1
+Architecture: all
+Maintainer: Nicholas D Steeves <nsteeves@gmail.com>
+Installed-Size: 75
+Depends: btrfs-progs, systemd | cron
+Enhances: btrfs-progs
+Section: admin
+Priority: optional
+Homepage: https://github.com/kdave/btrfsmaintenance
+Description: automate btrfs maintenance tasks on mountpoints or directories
+ This is a set of scripts for the btrfs filesystem that automates the
+ following maintenance tasks: scrub, balance, trim, and defragment.
+ .
+ Tasks are enabled, disabled, scheduled, and customised from a single
+ text file.  The default configuration assumes an installation profile
+ where / is a btrfs filesystem.
+ .
+ The default values have been chosen as an even compromise between
+ time to complete maintenance, improvement in filesystem performance,
+ and minimum impact on other processes.  Please note that I/O priority
+ scheduling requires the use of CFQ, and not noop, deadline,
+ anticipatory, or blk-mq.  CFQ is Debian's default block scheduler.

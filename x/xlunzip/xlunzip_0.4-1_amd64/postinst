@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+	configure)
+		# lzip-alternative
+		update-alternatives --quiet \
+			--install /usr/bin/lzip lzip /usr/bin/lzip.xlunzip -3000 \
+			--slave /usr/share/info/lzip.info.gz lzip.info.gz /usr/share/info/lzip.xlunzip.info.gz \
+			--slave /usr/share/man/man1/lzip.1.gz lzip.1.gz /usr/share/man/man1/lzip.xlunzip.1.gz
+
+		# lzip-decompressor
+		update-alternatives --quiet \
+			--install /usr/bin/lzip-decompressor lzip-decompressor /usr/bin/lzip.xlunzip -3000 \
+			--slave /usr/share/info/lzip-decompressor.info.gz lzip-decompressor.info.gz /usr/share/info/lzip.xlunzip.info.gz \
+			--slave /usr/share/man/man1/lzip-decompressor.1.gz lzip-decompressor.1.gz /usr/share/man/man1/lzip.xlunzip.1.gz
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+
+
+exit 0

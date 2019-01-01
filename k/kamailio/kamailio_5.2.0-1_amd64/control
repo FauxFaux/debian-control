@@ -1,0 +1,37 @@
+Package: kamailio
+Version: 5.2.0-1
+Architecture: amd64
+Maintainer: Debian VoIP Team <pkg-voip-maintainers@lists.alioth.debian.org>
+Installed-Size: 28243
+Depends: adduser, lsb-base, python, libc6 (>= 2.14), libncurses6 (>= 6), libpcre3, libreadline7 (>= 6.0), libstdc++6 (>= 5), libtinfo6 (>= 6)
+Suggests: kamailio-berkeley-modules, kamailio-cpl-modules, kamailio-ldap-modules, kamailio-lua-modules, kamailio-mono-modules, kamailio-mysql-modules, kamailio-perl-modules, kamailio-postgres-modules, kamailio-presence-modules, kamailio-python-modules, kamailio-radius-modules, kamailio-redis-modules, kamailio-snmpstats-modules, kamailio-tls-modules, kamailio-unixodbc-modules, kamailio-xml-modules, kamailio-xmpp-modules, stun-server | turn-server
+Replaces: kamailio-carrierroute-modules
+Provides: sip-router
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.kamailio.org/
+Description: very fast, dynamic and configurable SIP server
+ Kamailio is a very fast and flexible SIP (RFC3261)
+ server. Written entirely in C, kamailio can handle thousands requests
+ per second even on low-budget hardware. It can be configured to act
+ as a SIP proxy, application server, session border controller,
+ or call load balancer to handle a set of media servers.
+ .
+ A C Shell like scripting language provides full control over the server's
+ behaviour. It's easy to integrate Kamailio with 3rd party API's and
+ applications using HTTP, AMQP, database drivers, LDAP, Radius and many other
+ solutions. In addition there is support for scripting using Lua, Python, Perl,
+ Java and a set of other languages using Mono.
+ .
+ Kamailio's modular architecture allows only required functionality to be
+ loaded. There are over 100 modules available: WebSockets for WebRTC,
+ authentication, multiple databases - both traditional SQL databases as well as
+ no-SQL, message bus systems like Rabbit MQ, instant messaging, a presence
+ agent, integration with REST-ful APIs using HTTP and JSON or XML, radius
+ authentication, record routing, an SMS gateway, a XMPP/jabber gateway, a
+ transaction and dialog module, OSP module, statistics support,
+ registrar and user location services, SNMP, SIMPLE Presence and much more.
+ .
+ This package contains the main Kamailio binary along with the principal
+ modules and support binaries.

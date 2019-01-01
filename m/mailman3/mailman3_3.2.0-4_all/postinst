@@ -1,0 +1,175 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+. /usr/share/dbconfig-common/dpkg/postinst
+
+# Set permissions for sqlite3 file
+dbc_dbfile_owner="list:list"
+dbc_dbfile_perms="0660"
+
+dbc_go mailman3 "$@"
+
+cleanup () {
+    [ "$mailmancfg_new" ] && rm -f "$mailmancfg_new"
+}
+
+upgrade_fixes () {
+    version="$(dpkg -s $DPKG_MAINTSCRIPT_PACKAGE | sed -n 's/^Version: //p')"
+    if dpkg --compare-versions "$version" le "3.1.1-7"; then
+        ucfr --force mailman3 /etc/mailman3/mailman.cfg
+    fi
+}
+
+init_service_failed () {
+    db_input high mailman3/init_service_failed || true
+    db_go
+}
+
+# All seds are using a vertical pipe "|" as a delimiter because of
+# the potential presence of a slash "/" into some variables, as those
+# filled with a base64 -w0. We thought about using a number sign "#",
+# but sometimes the delimiter follows a variable sign "$", and "$#"
+# might be interpreted by the shell.
+create_config () {
+    trap cleanup EXIT
+    mailmancfg_new=`tempfile -m 0640`
+    cp -a /usr/share/mailman3/mailman.cfg.sample $mailmancfg_new
+
+    # get database settings from dbconfig-common
+    if [ -f /etc/dbconfig-common/mailman3.conf ]; then
+        . /etc/dbconfig-common/mailman3.conf
+
+        # Comment out default database settings if dbconfig is used
+        sed -i -e 's|^\s*class: mailman\.database\..*$|#&|' \
+            $mailmancfg_new
+        sed -i -e 's|^\s*url: [a-z+]\+://.*$|#&|' \
+            $mailmancfg_new
+    fi
+
+    case "$dbc_dbtype" in
+        pgsql)
+            sed -i -e 's|^#\?\s*\(class: mailman\.database\.postgresql\.PostgreSQLDatabase\)$|\1|' \
+                $mailmancfg_new
+            sed -i -e "s|^#\?\s*url: postgres://.*$|url: postgres://$dbc_dbuser:$dbc_dbpass@$dbc_dbserver/$dbc_dbname|" \
+                $mailmancfg_new
+            ;;
+        mysql)
+            sed -i -e 's|^#\?\s*\(class: mailman\.database\.mysql\.MySQLDatabase\)|\1|' \
+                $mailmancfg_new
+            sed -i -e "s|^#\?\s*url: mysql+pymysql://.*$|url: mysql+pymysql://$dbc_dbuser:$dbc_dbpass@$dbc_dbserver/$dbc_dbname?charset=utf8\&use_unicode=1|" \
+                $mailmancfg_new
+            ;;
+        sqlite3)
+            sed -i -e 's|^#\?\s*\(class: mailman\.database\.sqlite\.SQLiteDatabase\)$|\1|' \
+                $mailmancfg_new
+            sed -i -e 's|^#\?\s*url: sqlite:///.*$|url: sqlite:///$DATA_DIR/mailman.db|' \
+                $mailmancfg_new
+            ;;
+        "")
+            ;;
+        *)
+            echo "Unsupported database type $dbc_type."
+            exit 1
+            ;;
+    esac
+
+    # Get admin_pass from mailman.cfg if existent
+    [ -f /etc/mailman3/mailman.cfg ] && {
+        admin_pass="$(sed -ne 's|^\s*admin_pass:\s*||p' /etc/mailman3/mailman.cfg)"
+    }
+    # If this is the default password, forget it!
+    [ "$admin_pass" = "restpass" ] && unset admin_pass
+    # Generate a new one
+    while [ -z "$admin_pass" ]; do
+        admin_pass="$(dd if=/dev/urandom bs=1 count=200 2>/dev/null \
+            | base64 -w0 | sed -ne 's|\(.\{48\}\).*|\1|p')"
+    done
+
+    # Set new admin_pass in mailman.cfg
+    sed -i -e "s|^\(\s*admin_pass:\s*\)\S\+$|\1$admin_pass|" $mailmancfg_new
+
+    db_get mailman3/config_hyperkitty
+    res="$RET"
+    if [ "$res" = "true" ]; then
+        cat /usr/share/mailman3/mailman_cfg_hyperkitty_snippet.cfg \
+            >>$mailmancfg_new
+    fi
+
+    # Register new config file
+    ucf --three-way --debconf-ok "$mailmancfg_new" /etc/mailman3/mailman.cfg
+    ucfr mailman3 /etc/mailman3/mailman.cfg
+    chmod 0640 /etc/mailman3/mailman.cfg
+    chown root:list /etc/mailman3/mailman.cfg
+    rm -f $mailmancfg_new
+}
+
+case "$1" in
+    configure)
+        upgrade_fixes
+        create_config
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p mailman3 -V 3.5-
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p mailman3 -V 3.5- || true
+fi
+
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create mailman3.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/mailman3" ]; then
+		update-rc.d mailman3 defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d mailman3 $_dh_action || init_service_failed
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'mailman3.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'mailman3.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'mailman3.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'mailman3.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+db_stop
+exit 0

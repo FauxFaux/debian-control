@@ -1,0 +1,54 @@
+#!/bin/sh
+# postinst script for twms
+set -e
+
+if [ "$1" = "configure" ]; then
+	if ! getent passwd twms > /dev/null ; then
+		echo 'Adding system-user for twms' 1>&2
+		adduser --system --group --quiet --home /var/cache/twms \
+			--no-create-home --disabled-login twms
+	fi
+	install -d -otwms -gtwms -m2750 /var/log/twms
+	install -d -otwms -gtwms -m750 /var/cache/twms /var/cache/twms/tiles /var/cache/twms/traces
+
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p twms 
+fi
+
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p twms /usr/share/twms
+fi
+
+# End automatically added section
+# Automatically added by dh_systemd_enable/11.3.2
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'twms.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'twms.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'twms.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'twms.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.3.2
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/twms" ]; then
+		update-rc.d twms defaults >/dev/null
+		invoke-rc.d twms start || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

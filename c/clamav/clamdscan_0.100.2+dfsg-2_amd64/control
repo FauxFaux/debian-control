@@ -1,0 +1,24 @@
+Package: clamdscan
+Source: clamav
+Version: 0.100.2+dfsg-2
+Architecture: amd64
+Maintainer: ClamAV Team <pkg-clamav-devel@lists.alioth.debian.org>
+Installed-Size: 305
+Depends: clamav-base (= 0.100.2+dfsg-2), libc6 (>= 2.28), libssl1.1 (>= 1.1.0)
+Suggests: clamav-daemon, clamav-docs
+Breaks: clamd (<< 0.98.5~beta1+dfsg-3)
+Replaces: clamd (<< 0.98.5~beta1+dfsg-3)
+Section: utils
+Priority: optional
+Homepage: https://www.clamav.net/
+Description: anti-virus utility for Unix - scanner client
+ Clam AntiVirus is an anti-virus toolkit for Unix. The main purpose of
+ this software is the integration with mail servers (attachment
+ scanning). The package provides a flexible and scalable
+ multi-threaded daemon in the clamav-daemon package, a command-line
+ scanner in the clamav package, and a tool for automatic updating via
+ the Internet in the clamav-freshclam package. The programs are based
+ on libclamav, which can be used by other software.
+ .
+ This package contains clamdscan, the command line interface of the clamav
+ daemon.

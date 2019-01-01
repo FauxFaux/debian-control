@@ -1,0 +1,159 @@
+Package: collectd-core
+Source: collectd
+Version: 5.8.1-1.2
+Architecture: amd64
+Maintainer: Sebastian Harl <tokkee@debian.org>
+Installed-Size: 5024
+Depends: libc6 (>= 2.17), libcap2 (>= 1:2.10), debconf (>= 0.5) | debconf-2.0, lsb-base
+Recommends: perl, rrdtool
+Suggests: collectd-dev, librrds-perl, liburi-perl, libhtml-parser-perl, libregexp-common-perl, libconfig-general-perl, httpd-cgi, apache2, apcupsd, bind9, ceph, chrony, default-mysql-server, gpsd, hddtemp, iptables, ipvsadm, lm-sensors, mbmon, memcached, nginx, notification-daemon, nut, openvpn, olsrd, pdns-server, postgresql, redis-server, slapd, time-daemon, varnish, zookeeper, intel-cmt-cat, libatasmart4 (>= 0.13), libcurl3-gnutls (>= 7.16.2), libdbi1 (>= 0.9.0), libesmtp6, libganglia1, libgcc1 (>= 1:3.0), libgcrypt20 (>= 1.8.0), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.16.0), libgps23 (>= 3.3), libgrpc++1, libhiredis0.14 (>= 0.14.0), libi2c0, libip4tc0 (>= 1.6.0+snapshot20161117), libip6tc0 (>= 1.6.0+snapshot20161117), libldap-2.4-2 (>= 2.4.7), liblua5.3-0, libmariadb3 (>= 3.0.0), libmemcached11, libmicrohttpd12 (>= 0.9.50), libmnl0 (>= 1.0.3-4~), libmodbus5 (>= 3.0.2), libnotify4 (>= 0.7.0), libnspr4 (>= 2:4.9-2~), libnss3 (>= 2:3.13.4-2~), libopenipmi0, liboping0 (>= 0.3.3), libowcapi-3.2-3, libpcap0.8 (>= 1.0.0), libperl5.28 (>= 5.28.0), libpq5, libprotobuf-c1 (>= 1.0.1), libprotobuf17, libpython2.7 (>= 2.7), librabbitmq4 (>= 0.6.0), librdkafka1 (>= 0.9.1), libriemann-client0 (>= 1.10.0), librrd8 (>= 1.4~rc2), librte-acl18.11 (>= 16.04), librte-bbdev18.11 (>= 18.02), librte-bitratestats18.11 (>= 17.05), librte-bpf18.11 (>= 18.05), librte-cfgfile18.11 (>= 16.04), librte-cmdline18.11 (>= 16.04), librte-compressdev18.11 (>= 18.05), librte-cryptodev18.11 (>= 16.04), librte-distributor18.11 (>= 16.04), librte-eal18.11 (>= 16.04), librte-efd18.11 (>= 17.05), librte-ethdev18.11 (>= 16.07~rc1), librte-eventdev18.11 (>= 17.05), librte-flow-classify18.11 (>= 17.11), librte-gro18.11, librte-gso18.11 (>= 17.11), librte-hash18.11 (>= 16.04), librte-ip-frag18.11 (>= 16.04), librte-jobstats18.11 (>= 16.04), librte-kni18.11 (>= 16.04), librte-kvargs18.11 (>= 16.04), librte-latencystats18.11 (>= 17.05), librte-lpm18.11 (>= 16.04), librte-mbuf18.11 (>= 16.04), librte-member18.11 (>= 17.11), librte-mempool18.11 (>= 16.07~rc1), librte-meter18.11 (>= 16.04), librte-metrics18.11 (>= 17.05), librte-net18.11 (>= 16.11), librte-pci18.11 (>= 17.11), librte-pdump18.11 (>= 16.07~rc1), librte-pipeline18.11 (>= 16.04), librte-port18.11 (>= 16.07~rc1), librte-power18.11 (>= 16.04), librte-rawdev18.11 (>= 18.08), librte-reorder18.11 (>= 16.04), librte-ring18.11 (>= 16.04), librte-sched18.11 (>= 16.04), librte-security18.11 (>= 18.11), librte-table18.11 (>= 17.11), librte-telemetry18.11 (>= 18.11), librte-timer18.11 (>= 16.04), librte-vhost18.11 (>= 16.07~rc1), libsensors5 (>= 1:3.5.0), libsnmp30 (>= 5.7.3+dfsg-4+b2~dfsg), libssl1.1 (>= 1.1.0), libstdc++6 (>= 5.2), libtokyotyrant3, libudev1 (>= 183), libupsclient4 (>= 2.7.2), libvirt0 (>= 1.2.11~rc1), libxenmisc4.11, libxml2 (>= 2.7.4), libyajl2 (>= 2.0.4), zlib1g (>= 1:1.1.4), default-jre-headless
+Replaces: collectd (<< 4.8.2-1~)
+Section: utils
+Priority: optional
+Homepage: https://collectd.org/
+Description: statistics collection and monitoring daemon (core system)
+ collectd is a small daemon which collects system information periodically and
+ provides mechanisms to monitor and store the values in a variety of ways.
+ Since the daemon doesn't need to startup every time it wants to update the
+ values it's very fast and easy on the system. Also, the statistics are very
+ fine grained since the files are updated every 10 seconds by default.
+ .
+ The collected information can be used to find current performance bottlenecks
+ (performance analysis) and predict future system load (capacity planning).
+ .
+ This package contains the main program file and the plugins listed below (some
+ of those plugins require additional libraries - for more details see
+ /usr/share/doc/collectd-core/README.Debian.plugins) but no configuration. For
+ a full installation (including configuration), see the "collectd" package.
+ This package allows sites to, e.g., provide customizations (like a custom
+ default configuration) on top of it without having to modify the "collectd"
+ package.
+ .
+   * AMQP output plugin: amqp
+   * Apache and lighttpd statistics provided by mod_status: apache
+   * APC UPS's charge, load, input/output/battery voltage, etc.: apcups
+   * Ascent server statistics: ascent
+   * Bosch and Freescale barometers: barometer
+   * battery status: battery
+   * bind9 name-server and zone statistics: bind
+   * Ceph distributed storage system statitics: ceph
+   * CGroups resource usage: cgroups
+   * Chrony daemon statistics: Local clock drift, offset to peers: chrony
+   * connection tracking table size: conntrack
+   * number of context switches done by the operating system: contextswitch
+   * CPU utilization: cpu
+   * CPU frequency: cpufreq
+   * CPU sleep: Time spent in suspend : cpusleep
+   * output to comma separated values (CSV) files: csv
+   * parse statistics from websites: curl
+   * parse JSON files: curl_json
+   * parse XML data: curl_xml
+   * query data from a relational database: dbi
+   * disk space usage: df
+   * disk and partition throughput: disk
+   * DNS traffic information: dns
+   * DPDK link status and keep alive events: dpdkevents
+   * DPDK interface statistics: dpdkstat
+   * Distributed Replicated Block Device status: drbd
+   * E-Mail statistics (count, traffic, spam scores and checks): email
+   * amount of available entropy: entropy
+   * execution of external programs: exec
+   * count the number of open file handles: fhcount
+   * count the number of files in directories: filecount
+   * Linux file-system based caching framework statistics: fscache
+   * Monitor gps related data through gpsd: gps
+   * Send or receive values over the network using the gRPC framework: grpc
+   * query data from Java processes using JMX: GenericJMX (Java based plugin)
+   * receive and interpret Ganglia multicast traffic: gmond
+   * harddisk temperature: hddtemp
+   * Report the number of used and free hugepages: hugepages
+   * Intel Resource Director Technology statistics: intel_rdt
+   * network traffic: interface
+   * IPC statistics: ipc
+   * IPMI sensors information: ipmi
+   * iptables statistics: iptables
+   * IPVS connection statistics: ipvs
+   * IRQ counters: irq
+   * embedded Java Virtual Machine: java
+   * system load averages: load
+   * logging to files, STDOUT and STDERR: logfile
+   * logging in logstash's JSON event format: log_logstash
+   * embedded Lua interpreter: lua
+   * Machine Check Exceptions notifications: mcelog
+   * Atheros wireless LAN chipset statistics: madwifi
+   * motherboard monitor: mbmon
+   * query and parse data from a memcache daemon: memcachec
+   * statistics of the memcached distributed caching system: memcached
+   * memory usage: memory
+   * read values from Modbus/TCP enabled devices: modbus
+   * statistics from mon.itor.us: Monitorus (Perl based plugin)
+   * Publishes and subscribes to MQTT topics: mqtt
+   * multimeter statistics: multimeter
+   * MySQL statistics provided by MySQL's "show status" command: mysql
+   * detailed Linux network interface and routing statistics: netlink
+   * IO via the network: network
+   * NFS utilization: nfs
+   * Nginx (a HTTP and E-Mail server/proxy) statistics: nginx
+   * send desktop notifications to a notification daemon: notify_desktop
+   * send notification E-mails: notify_email
+   * send notifications to nagios: notify_nagios
+   * NTP daemon's local clock drift, offset to peers, etc.: ntpd
+   * UPS information: nut
+   * Optimized Link State Routing daemon statistics: olsrd
+   * OpenLDAP's cn=Monitor statistics: openldap
+   * OpenVPN traffic and compression statistics: openvpn
+   * OpenVZ statistics: OpenVZ (Perl based plugin)
+   * Open vSwitch link state events: ovs_events
+   * Open vSwitch bridge / interface statistics: ovs_stats
+   * embedded Perl interpreter: perl
+   * timing values from Pinba: pinba
+   * network latency statistics: ping
+   * PostgreSQL database statistics: postgresql
+   * PowerDNS name server statistics: powerdns
+   * number of processes: processes
+   * information about network protocols: protocols
+   * embedded Python interpreter: python
+   * Redis server statistics: redis
+   * write data via the RRD accelerator daemon: rrdcached
+   * output to RRD files: rrdtool
+   * lm_sensors information (e.g. CPU temperature, fan speeds): sensors
+   * serial port traffic: serial
+   * values from SNMP enabled network devices: snmp
+   * receive and handle queries from SNMP master agent: snmp_agent
+   * aggregate values received with the StatsD protocol: statsd
+   * SMART statistics: smart
+   * swap usage: swap
+   * Linux synproxy statistics: synproxy
+   * logging to syslog: syslog
+   * parse table-like structured files: table
+   * incremental parsing of logfiles: tail
+   * incremental parsing of CSV files: tail_csv
+   * number of TCP connections to specific ports: tcpconns
+   * TeamSpeak2 server statistics: teamspeak2
+   * power consumption measurements from "The Energy Detective" (TED): ted
+   * Linux ACPI thermal zone information: thermal
+   * check thresholds and for missing values: threshold
+   * statistics from Intel turbo-capable processors: turbostat
+   * Tokyo Tyrant server statistics: tokyotyrant
+   * external runtime interface: unixsock
+   * system uptime: uptime
+   * number of users logged into the system: users
+   * set the hostname to an unique identifier: uuid
+   * Varnish HTTP accelerator daemon statistics: varnish
+   * CPU, disk, network statistics of guest systems: virt
+   * detailed virtual memory statistics: vmem
+   * system resources used by Linux-VServers: vserver
+   * wireless network stats: wireless
+   * send collected values to a graphite server: write_graphite
+   * send collected values to a web-server: write_http
+   * send collected values to an Apache Kafka message broker: write_kafka
+   * send collected values to the logging subsystem: write_log
+   * send collected values to MongoDB, a NoSQL database: write_mongodb
+   * publish collected values as a Prometheus exporter: write_prometheus
+   * send collected values to a Redis server: write_redis
+   * send collected values to a Riemann server: write_riemann
+   * send collected values to a Sensu client: write_sensu
+   * send collected values to an OpenTSDB server: write_tsdb
+   * XEN Hypervisor CPU stats: xencpu
+   * ZFS's Adaptive Replacement Cache statistics: zfs_arc
+   * data from Zookeeper's MNTR command: zookeeper

@@ -1,0 +1,21 @@
+Package: ruby-data-migrate
+Version: 3.2.2-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 48
+Depends: ruby | ruby-interpreter, ruby-rails (>= 4.0)
+Section: ruby
+Priority: optional
+Homepage: https://github.com/ilyakatz/data-migrate
+Description: migrate data alongside schema changes for rake tasks
+ This data_migrate gem provides data migrations alongside schema
+ migrations for rake tasks.
+ .
+ Data migrations are stored in db/data. They act like schema migrations,
+ except they should be reserved for data migrations.
+ .
+ For instance, if you realize you need to titleize all yours titles,
+ this is the place to do it. Running any of the provided rake tasks
+ also creates a data schema table to mirror the usual schema migrations
+ table to track all the goodness.
+Ruby-Versions: all

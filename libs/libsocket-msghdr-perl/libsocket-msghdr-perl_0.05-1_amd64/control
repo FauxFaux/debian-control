@@ -1,0 +1,18 @@
+Package: libsocket-msghdr-perl
+Version: 0.05-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 51
+Depends: perl (>= 5.28.1-3), perlapi-5.28.1, libc6 (>= 2.14)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Socket-MsgHdr
+Description: sendmsg, recvmsg and ancillary data operations
+ Socket::MsgHdr provides advanced socket messaging operations via sendmsg and
+ recvmsg. Like their C counterparts, these functions accept few parameters,
+ instead stuffing a lot of information into a complex structure.
+ .
+ This structure describes the message sent or received (buf), the peer on the
+ other end of the socket (name), and ancillary or so-called control
+ information (cmsghdr). This ancillary data may be used for file descriptor
+ passing, IPv6 operations, and a host of implemenation-specific extensions.

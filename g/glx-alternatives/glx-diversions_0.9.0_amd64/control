@@ -1,0 +1,17 @@
+Package: glx-diversions
+Source: glx-alternatives
+Version: 0.9.0
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 37
+Pre-Depends: nvidia-installer-cleanup
+Depends: dpkg (>= 1.15), glx-alternative-mesa (= 0.9.0)
+Conflicts: libgl1-mesa-swx11
+Section: contrib/libs
+Priority: optional
+Multi-Arch: foreign
+Description: prepare for using accelerated GLX implementations from GPU vendors
+ Diverts the free libGL.so implementation (MESA) and the xserver module
+ libglx.so (Xorg), preparing the system for plugging in accelerated
+ implementations from GPU vendors via alternatives, see the
+ glx-alternative-* packages.

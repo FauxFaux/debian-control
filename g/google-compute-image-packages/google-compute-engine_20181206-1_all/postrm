@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installsystemd/12
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/12
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'google-accounts-daemon.service' 'google-clock-skew-daemon.service' 'google-instance-setup.service' 'google-network-daemon.service' 'google-shutdown-scripts.service' 'google-startup-scripts.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'google-accounts-daemon.service' 'google-clock-skew-daemon.service' 'google-instance-setup.service' 'google-network-daemon.service' 'google-shutdown-scripts.service' 'google-startup-scripts.service' >/dev/null || true
+		deb-systemd-helper unmask 'google-accounts-daemon.service' 'google-clock-skew-daemon.service' 'google-instance-setup.service' 'google-network-daemon.service' 'google-shutdown-scripts.service' 'google-startup-scripts.service' >/dev/null || true
+	fi
+fi
+# End automatically added section

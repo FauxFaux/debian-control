@@ -1,0 +1,21 @@
+Package: gnome-session-bin
+Source: gnome-session
+Version: 3.30.1-2
+Architecture: amd64
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Installed-Size: 463
+Depends: libc6 (>= 2.28), libegl1, libepoxy0 (>= 1.0), libgl1, libgles2, libglib2.0-0 (>= 2.46.0), libgnome-desktop-3-17 (>= 3.18.0), libgtk-3-0 (>= 3.18.0), libice6 (>= 1:1.0.0), libjson-glib-1.0-0 (>= 0.12.0), libsm6, libsystemd0 (>= 209), libx11-6, libxcomposite1 (>= 1:0.3-1), dconf-gsettings-backend | gsettings-backend, dbus-x11, gsettings-desktop-schemas, upower (>= 0.9.0), xwayland
+Recommends: libpam-systemd
+Breaks: gdm3 (<< 3.8)
+Section: gnome
+Priority: optional
+Description: GNOME Session Manager - Minimal runtime
+ The GNOME Session Manager is in charge of starting the core components
+ of the GNOME desktop, and applications that should be launched at
+ login time. It also features a way to save and restore currently
+ running applications.
+ .
+ This package contains the binaries for the GNOME Session Manager, but
+ no startup scripts. It is meant for those willing to start
+ gnome-session by hand with the components of their choice, and for
+ applications such as GDM that use gnome-session internally.

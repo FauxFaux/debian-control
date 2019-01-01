@@ -1,0 +1,20 @@
+Package: telnetd
+Source: netkit-telnet
+Version: 0.17-41.1
+Architecture: amd64
+Maintainer: Mats Erik Andersson <mats.andersson@gisladisker.se>
+Installed-Size: 116
+Depends: adduser, openbsd-inetd | inet-superserver, passwd, libc6 (>= 2.15)
+Replaces: netstd
+Provides: telnet-server
+Section: net
+Priority: optional
+Description: basic telnet server
+ The in.telnetd program is a server which supports the DARPA telnet interactive
+ communication protocol.
+ .
+ This legacy server should in general be abandoned in favour of a contemporary
+ ssh-server, as this implementation only is able to process password and user
+ name in clear text.  Other variants, like telnetd-ssl and a selection of
+ Kerberized TELNET servers, are able to improve on this by providing secure
+ forms of authentication and encryption.

@@ -1,0 +1,17 @@
+Package: sshfp
+Version: 1.2.2-6
+Architecture: all
+Maintainer: Janos Lenart <ocsi@debian.org>
+Installed-Size: 81
+Depends: openssh-client, python (>= 2.7) | python-argparse, python-dnspython, python-ipcalc, python-ldns, python:any (>= 2.6.6-7~)
+Section: net
+Priority: extra
+Homepage: https://github.com/xelerance/sshfp/
+Description: DNS SSHFP records generator
+ sshfp generates RFC4255 SSHFP DNS records based on the public keys stored in
+ a known_hosts file, or public keys can be obtained by using ssh-keyscan.
+ Serve these entries from the DNS server for your domain to provide
+ authentication via the ssh VerifyHostKeyDNS option.
+ .
+ This package also includes the dane command to generate IETF DANE WG
+ DNS records.

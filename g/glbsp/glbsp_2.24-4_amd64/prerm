@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ]
+then
+  update-alternatives --remove bsp /usr/bin/glbsp
+fi
+
+
+
+exit 0

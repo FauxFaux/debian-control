@@ -1,0 +1,331 @@
+#!/bin/sh
+
+set -e
+
+running_from_di() {
+    # Look for file created by base-installer and removed at the end
+    # of the d-i run.
+    [ -e /etc/apt/apt.conf.d/00IgnoreTimeConflict ]
+}
+
+# This block must be done on upgrades before debconf is enabled, and
+# not when the upgrade is done from within d-i.
+if [ ! "$DEBIAN_HAS_FRONTEND" ] && [ "$1" = configure ] && [ -n "$2" ] && \
+    ! running_from_di ; then
+    # Purge clear text passwords left over from the installation from
+    # debconf templates.dat and templates.dat-old (BTS #711251).
+    # Calling debconf-set-selections twice to also purge it from
+    # templates.dat-old.
+    clearpwd=false
+    for template in \
+	debian-edu-config/kdc-password \
+	debian-edu-config/kdc-password-again \
+	debian-edu-config/ldap-password-again \
+	debian-edu-config/ldap-password \
+	debian-edu-config/first-user-password ; do
+	if [ -n "$(perl -MDebconf::Db -MDebconf::Template -e "Debconf::Db->load; my \$template = Debconf::Template->get('$template'); print \$template->default || \$template->value;")" ]; then
+	    clearpwd=true
+	fi
+    done
+    wipepwdsfromdebconf() {
+	cat <<EOF | debconf-set-selections
+debian-edu-config debian-edu-config/kdc-password password
+debian-edu-config debian-edu-config/kdc-password-again password
+debian-edu-config debian-edu-config/ldap-password password
+debian-edu-config debian-edu-config/ldap-password-again password
+debian-edu-config debian-edu-config/first-user-password password
+EOF
+    }
+    if $clearpwd ; then
+	echo "info: Found clear text passwords in debconf database.  Wiping them."
+	wipepwdsfromdebconf
+	wipepwdsfromdebconf
+    fi
+fi
+
+# Enable debconf
+. /usr/share/debconf/confmodule
+
+# Execute early, to get the state before changes activated by this
+# package is done.
+if which etckeeper > /dev/null ; then
+    etckeeper commit "start of debian-edu-config postinst" || true
+fi
+
+update-mime
+
+# Update config for init.d/update-hostname based on debconf preseeding
+ENABLED_DEFAULT=false
+ENABLED=$ENABLED_DEFAULT
+DEFAULTFILE=/etc/default/update-hostname
+# Load current value if set in /etc/
+if [ -f $DEFAULTFILE ] ; then
+    . $DEFAULTFILE
+    if [ "$ENABLED" ] ; then
+	db_set debian-edu-config/update-hostname "$ENABLED"
+    fi
+fi
+db_get debian-edu-config/update-hostname
+# Only replace if the value changed
+if [ -f $DEFAULTFILE ] ; then
+    if [ "$RET" != "$ENABLED" ] ; then
+	sed "s/ENABLED=.+/ENABLED=\"$RET\"" < $DEFAULTFILE > $DEFAULTFILE.new &&
+	    mv $DEFAULTFILE.new $DEFAULTFILE	    
+    fi
+else
+    # Only create or update the file if the value isn't the default value
+    if [ "$ENABLED_DEFAULT" != "$RET" ] ; then
+	echo "ENABLED=\"$RET\"" >> $DEFAULTFILE
+    fi
+fi
+
+db_get debian-edu-config/enable-nat
+FILE="/etc/default/enable-nat"
+# Check the value for enable-nat and set it according to the boolean
+if [ "$RET" = "false" ] ; then
+	if [ ! -e "$FILE" ] ; then
+		echo "NETWORK_TO_NAT=" > $FILE
+	fi
+fi
+
+pam-auth-update --package
+
+# Some init-scripts fail if to many fd is open ??
+# close debconf db_handle before they start
+db_stop
+
+
+# start the enable-nat init script if we have a ltspserver
+if [ -f /etc/debian-edu/config ] && egrep -q "(LTSP-Server|Thin-Client-Server)" /etc/debian-edu/config ; then
+	if ! grep -q Main-Server /etc/debian-edu/config ; then
+		if [ -x "`which invoke-rc.d 2>/dev/null`" ] ; then
+			invoke-rc.d enable-nat start || exit $?
+		else
+			/etc/init.d/enable-nat start || exit $?
+		fi
+	fi
+fi
+
+case "$1" in
+configure)
+    if dpkg --compare-versions "$2" le "2.10.49" ; then
+        if [ -f /etc/ldap/ldap.conf ] ; then
+            sed -i 's#/etc/ldap/ssl/ldap-server-pubkey.pem#/etc/ssl/certs/debian-edu-server.crt#' /etc/ldap/ldap.conf
+        fi
+        if [ -f /etc/nslcd.conf ] ; then
+            sed -i 's#/etc/ldap/ssl/ldap-server-pubkey.pem#/etc/ssl/certs/debian-edu-server.crt#' /etc/nslcd.conf
+        fi
+        if egrep -q "(Main-Server)" /etc/debian-edu/config ; then
+            rm -f /etc/ldap/ssl/slapd.pem
+            rm -f /etc/ldap/slapd.conf
+            if [ -f /etc/ldap/slapd-debian-edu.conf ] ; then
+                ln -s /etc/ldap/slapd-debian-edu.conf /etc/ldap/slapd.conf
+            fi
+            if [ -f /usr/share/debian-edu-config/tools/create-debian-edu-certs ] && \
+                ! running_from_di ; then
+                /usr/share/debian-edu-config/tools/create-debian-edu-certs --force-overwrite
+            fi
+        else
+            if ! egrep -q "(Standalone)" /etc/debian-edu/config ; then
+                invoke-rc.d fetch-ldap-cert restart
+                invoke-rc.d nslcd restart
+            fi
+        fi
+        rm -f /etc/ldap/ssl/ldap-server-pubkey.pem
+        rm -f /etc/ldap/ssl/slapd-cert.cnf
+        rm -f /etc/ldap/slapd-squeeze_debian-edu.conf
+    fi
+
+    if dpkg --compare-versions "$2" le "1.929" && dpkg --compare-versions "$2" ge "1.926" && \
+        egrep -q "(Main-Server)" /etc/debian-edu/config ; then
+	rm /etc/apache2/mods-available/userdir.load
+	cp /etc/apache2/mods-available/status.load /etc/apache2/mods-available/userdir.load
+	sed -i 's/status/userdir/g' /etc/apache2/mods-available/userdir.load
+	if ! [ -L /etc/apache2/mods-available/debian-edu-userdir.load ] ; then
+	    ln -s /etc/apache2/mods-available/userdir.load /etc/apache2/mods-available/debian-edu-userdir.load
+	fi
+        if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+             . /usr/share/apache2/apache2-maintscript-helper
+             apache2_invoke enmod debian-edu-userdir
+        fi
+    fi
+
+    if dpkg --compare-versions "$2" le "1.933" && [ -f /etc/asound.conf ] ; then
+	rm /etc/asound.conf
+    fi
+
+    if dpkg --compare-versions "$2" le "1.937" && \
+        [ -f /usr/share/debian-edu-config/tools/debian-edu-dovecot-create-cert ] ; then
+	rm /usr/share/debian-edu-config/tools/debian-edu-dovecot-create-cert
+    fi
+
+    if dpkg --compare-versions "$2" le "1.939" ; then
+        if [ -f /usr/share/debian-edu-config/tools/exim4-create-cert ] ; then
+	    rm /usr/share/debian-edu-config/tools/exim4-create-cert
+        fi
+        if [ -f /usr/sbin/snakeoil-on-ice ] ; then
+	    rm /usr/sbin/snakeoil-on-ice
+        fi
+        if [ -f /etc/skel/.mozilla/firefox/debian-edu.default/cert_override.txt ] ; then
+	    rm /etc/skel/.mozilla/firefox/debian-edu.default/cert_override.txt
+        fi
+    fi
+
+    if dpkg --compare-versions "$2" le "1.941" ; then
+        if [ -f /etc/debian-edu/www/index.html.es ] ; then
+	    rm /etc/debian-edu/www/index.html.es
+        fi
+        if [ -f /etc/debian-edu/www/index.html.nb ] ; then
+	    rm /etc/debian-edu/www/index.html.nb
+        fi
+    fi
+
+    if dpkg --compare-versions "$2" le "1.942" && \
+        [ -f /usr/share/ltsp/init-ltsp.d/70-edu-client-core ] ; then
+	rm /usr/share/ltsp/init-ltsp.d/70-edu-client-core
+    fi
+
+    # cleanup from cfengine2
+    if dpkg --compare-versions "$2" le "1.944" ; then
+        if [ -d /etc/cfengine/debian-edu ] ; then
+	    rm /etc/cfengine/debian-edu -rf
+        fi
+        if [ -d /etc/cfengine/inputs ] ; then
+	    rm /etc/cfengine/inputs -rf
+        fi
+        if [ -f /etc/cfengine/cfservd.conf ] ; then
+	    rm /etc/cfengine/cfservd.conf
+        fi
+        if [ -f /etc/cfengine/update.conf ] ; then
+	    rm /etc/cfengine/update.conf
+        fi
+    fi
+
+    if dpkg --compare-versions "$2" le "2.10.19" && \
+        [ -f /usr/share/man/man1/.1.gz ] ; then
+	rm /usr/share/man/man1/.1.gz
+    fi
+
+    if dpkg --compare-versions "$2" le "2.10.21" && \
+        [ -f /etc/samba/smbldap-machineadd-gosa ] ; then
+	rm /etc/samba/smbldap-machineadd-gosa
+    fi
+
+    if dpkg --compare-versions "$2" le "2.10.22" ; then
+        if [ -f /etc/kderc ] ; then
+	    rm  /etc/kderc
+        fi
+        if [ -f /etc/kde-user-profile ] ; then
+	    rm  /etc/kde-user-profile
+        fi
+    fi
+
+    # sssd refuses to read the file if it has any other mode
+    chmod 600 /etc/sssd/sssd-debian-edu.conf
+    chown root:root /etc/sssd/sssd-debian-edu.conf
+
+    # The scripts in /etc/network/if-up.d need to be executable.
+    chmod +x /etc/network/if-up.d/hostname
+    # Drop wpad-proxy-update for the main server, it makes no sense to run the
+    # script at this time.
+    if egrep -q "(Main-Server)" /etc/debian-edu/config ; then
+        rm -f /etc/network/if-up.d/wpad-proxy-update
+    else
+	chmod +x /etc/network/if-up.d/wpad-proxy-update
+    fi
+
+    # silence dovecot's message: if you have trouble with authentication failures,
+    # enable auth_debug setting. See http://wiki.dovecot.org/WhyDoesItNotWork
+    # This message goes away after the first successful login.
+    mkdir -p /var/lib/dovecot
+    chmod 750 /var/lib/dovecot
+    chown root:root /var/lib/dovecot
+    touch /var/lib/dovecot/auth_success
+    if [ ! -d /var/lib/cfengine3/inputs/debian-edu ] ; then
+        . /usr/share/debian-edu-config/tools/setup-cfengine3
+    else
+        cp /etc/cfengine3/debian-edu/cf.* /var/lib/cfengine3/inputs/debian-edu
+        cp /etc/cfengine3/debian-edu/edu.cf /var/lib/cfengine3/inputs/debian-edu
+        cp /etc/cfengine3/debian-edu/promises.cf /var/lib/cfengine3/inputs
+    fi
+    ;;
+esac
+
+# Automatically added by dh_installdeb/12
+dpkg-maintscript-helper mv_conffile /etc/apache2/sites-available/debian-edu-default /etc/apache2/sites-available/debian-edu-default.conf 1.719 -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/apache2/sites-available/debian-edu-ssl-default /etc/apache2/sites-available/debian-edu-ssl-default.conf 1.719 -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/apache2/conf.d/debian-edu-config-doc /etc/apache2/conf-available/debian-edu-config-doc.conf 1.719 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/cfengine/debian-edu/cf.pdns 1.811 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/insserv.conf.d/debian-edu-config 1.811 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/powerdns/pdns.d/pdns-debian-edu.conf 1.811 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/X11/Xsession.d/06debian-edu-iceweasel-ltsp 1.818\+deb8u1 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/apt/apt.conf.d/99-edu-prefer-iceweasel 1.818\+deb8u1 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init.d/iceweasel-ldapconf 1.818\+deb8u1 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/cfengine/debian-edu/cf.iceweasel 1.818\+deb8u1 -- "$@"
+dpkg-maintscript-helper rm_conffile /usr/share/debian-edu-config/iceweacel-networked-prefs.js 1.818\+deb8u1 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/cfengine/debian-edu/cf.kdm 1.906 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/insserv/overrides/kdm 1.906 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/ldap/slapd-debian-edu.conf 1.911 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/ldap/slapd-lenny_debian-edu.conf 1.911 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/cfengine3/debian-edu/cf.pki 2.10.19 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/cfengine3/debian-edu/cf.thunderbird 2.10.19 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/desktop-profiles/debian-edu-config.listing 2.10.22 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/apt/apt.conf.d/90squid 2.10.36 -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit/12
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/fetch-ldap-cert" ]; then
+		update-rc.d fetch-ldap-cert defaults >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/12
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/firefox-ldapconf" ]; then
+		update-rc.d firefox-ldapconf defaults >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/12
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/chromium-ldapconf" ]; then
+		update-rc.d chromium-ldapconf defaults >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/12
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/enable-nat" ]; then
+		update-rc.d enable-nat defaults >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+
+
+#fix symlink for exim4.conf, related to #1264
+if [ -h /etc/exim4/exim4.conf ] && [ -x /etc/init.d/exim4 ] ; then
+	if [ $(readlink /etc/exim4/exim4.conf) = "/etc/exim/exim-ldap-client-v4.conf" ] ; then
+		ln -sf /etc/exim4/exim-ldap-client-v4.conf /etc/exim4/exim4.conf
+		invoke-rc.d exim4 reload
+	fi
+fi
+
+# cleanup from debian-edu-ltsp-audiodivert
+if dpkg --compare-versions "$2" le "1.931~" && [ -f /usr/bin/gtick.ltsp ] ; then
+    rm /usr/bin/gtick
+    dpkg-divert --package debian-edu-config --rename --remove /usr/bin/gtick
+    rm /usr/bin/gtick.ltsp
+fi
+
+# Register all changes done by this postinst script
+if which etckeeper > /dev/null ; then
+    etckeeper commit "end of debian-edu-config postinst" || true
+fi
+
+# Regenerate desktop-profiles cache, as we've installed new .listing files 
+if(  ( test "$1" = "configure" ) &&
+     ( test -x "$(which update-profile-cache 2>/dev/null)" ) ); then
+    update-profile-cache;
+fi;
+
+exit 0

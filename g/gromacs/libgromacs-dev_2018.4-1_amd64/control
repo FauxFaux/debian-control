@@ -1,0 +1,28 @@
+Package: libgromacs-dev
+Source: gromacs
+Version: 2018.4-1
+Architecture: amd64
+Maintainer: Debichem Team <debichem-devel@lists.alioth.debian.org>
+Installed-Size: 1358
+Depends: fftw3-dev, libgromacs3 (= 2018.4-1)
+Recommends: gromacs-data
+Suggests: gromacs-mpich (= 2018.4-1) | gromacs-openmpi (= 2018.4-1), libmpich-dev, libx11-dev, zlib1g-dev
+Breaks: gromacs-dev (<< 5.1-1~)
+Replaces: gromacs-dev (<< 5.1-1~)
+Section: libdevel
+Priority: optional
+Homepage: http://www.gromacs.org/
+Description: GROMACS molecular dynamics sim, development kit
+ GROMACS is a versatile package to perform molecular dynamics, i.e. simulate
+ the Newtonian equations of motion for systems with hundreds to millions of
+ particles.
+ .
+ It is primarily designed for biochemical molecules like proteins and lipids
+ that have a lot of complicated bonded interactions, but since GROMACS is
+ extremely fast at calculating the nonbonded interactions (that usually
+ dominate simulations) many groups are also using it for research on non-
+ biological systems, e.g. polymers.
+ .
+ This package contains header files and static libraries for development
+ purposes, plus sample Makefiles.  Development components for MPI-enabled
+ GROMACS builds also require their respective packages.

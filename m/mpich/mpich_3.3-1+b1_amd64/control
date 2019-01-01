@@ -1,0 +1,26 @@
+Package: mpich
+Source: mpich (3.3-1)
+Version: 3.3-1+b1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 1977
+Depends: hwloc-nox | hwloc, libmpich12 (= 3.3-1+b1), libc6 (>= 2.17)
+Recommends: libmpich-dev (= 3.3-1+b1)
+Suggests: mpich-doc (= 3.3-1)
+Breaks: libmpich-dev (<< 3.3~b2-3~), mpich-bin, mpich2
+Replaces: libmpich-dev (<< 3.3~b2-3~), mpich-bin, mpich2
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.mpich.org/
+Description: Implementation of the MPI Message Passing Interface standard
+ MPICH is a high-performance and widely portable implementation of the
+ MPI-3.1 standard from the Argonne National Laboratory.
+ It efficiently supports different computation and communication platforms
+ including commodity clusters, SMPs, massively parallel systems, and
+ high-speed networks.
+ This release has all MPI 3.1 functions and features required by the standard
+ with the exception of support for the "external32" portable I/O format and
+ user-defined data representations for I/O.
+ .
+ This package includes the program binaries necessary to run MPICH programs.

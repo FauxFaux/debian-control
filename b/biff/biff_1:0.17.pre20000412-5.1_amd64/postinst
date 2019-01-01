@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ]; then
+	if [ -x /usr/sbin/update-inetd ]; then
+		if grep -q '^biff' /etc/inetd.conf ; then
+			ENABLED=yes
+		else
+			ENABLED=no
+		fi
+		if grep -q 'biff	dgram	udp	wait	nobody.mail	/usr/sbin/in.comsat	comsat' /etc/inetd.conf ; then
+			update-inetd --remove biff
+		fi
+		if [ "$ENABLED" = "yes" ]; then
+			update-inetd --add 'biff	dgram	udp	wait	root.tty	/usr/sbin/in.comsat	comsat'
+		else
+			update-inetd --add '#<off># biff	dgram	udp	wait	root.tty	/usr/sbin/in.comsat	comsat'
+		fi
+
+	fi
+fi
+
+

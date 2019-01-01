@@ -1,0 +1,37 @@
+#! /bin/sh
+
+set -e
+
+priority=1101
+basedir=/usr/share/icedtea-web
+tools='javaws itweb-settings policyeditor'
+
+case "$1" in
+configure)
+   if [ -z "$2" ]; then
+        update_alternatives=y
+    fi
+    if [ -n "$2" ]; then
+        for tool in $tools; do
+            if [ -z "$(update-alternatives --list $tool 2>/dev/null | grep ^$basedir/)" ]; then
+                update_alternatives=y
+                break
+            fi
+        done
+    fi
+
+    if [ "$update_alternatives" = y ]; then
+	if [ -f $basedir/bin/javaws ]; then
+	    for tool in $tools; do
+		unset slave1 || true
+		if [ -e $basedir/man/man1/$tool.1.gz ]; then
+		    slave1="--slave /usr/share/man/man1/$tool.1.gz $tool.1.gz $basedir/man/man1/$tool.1.gz"
+		fi
+		update-alternatives --install /usr/bin/$tool $tool $basedir/bin/$tool $priority $slave1
+		update-alternatives --set $tool $basedir/bin/$tool
+	    done
+	fi
+    fi # update_alternatives
+esac
+
+

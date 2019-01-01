@@ -1,0 +1,30 @@
+Package: nvidia-legacy-390xx-vdpau-driver
+Source: nvidia-graphics-drivers-legacy-390xx
+Version: 390.87-3
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 1141
+Pre-Depends: nvidia-installer-cleanup
+Depends: libvdpau1 (>= 0.9), nvidia-legacy-390xx-alternative (= 390.87-3), libc6 (>= 2.2.5), libx11-6, libxext6
+Recommends: nvidia-legacy-390xx-kernel-dkms (= 390.87-3) | nvidia-legacy-390xx-kernel-390.87
+Suggests: nvidia-legacy-390xx-kernel-dkms (>= 390.87) | nvidia-legacy-390xx-kernel-source (>= 390.87)
+Enhances: libvdpau1
+Provides: vdpau-driver
+Section: non-free/video
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: Video Decode and Presentation API for Unix - NVIDIA driver (390xx legacy)
+ These libraries provide the Video Decode and Presentation API for Unix.
+ They provide accelerated video playback (incl. H.264) for the supported
+ graphics cards.
+ .
+ This package contains the NVIDIA VDPAU driver.
+ .
+ See /usr/share/doc/nvidia-legacy-390xx-vdpau-driver/README.txt.gz
+ for more information.
+ .
+ Please see the nvidia-legacy-390xx-kernel-dkms or
+ nvidia-legacy-390xx-kernel-source packages
+ for building the kernel module required by this package.
+ This will provide nvidia-legacy-390xx-kernel-390.87.

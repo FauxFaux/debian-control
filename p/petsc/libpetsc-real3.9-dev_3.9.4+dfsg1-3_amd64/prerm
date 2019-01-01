@@ -1,0 +1,37 @@
+#!/bin/sh -e
+
+DEB_HOST_MULTIARCH=x86_64-linux-gnu
+
+SONAME=3.9
+
+PETSC_VERSION=3.9.4
+PETSC_ARCH=${DEB_HOST_MULTIARCH}
+PETSC_REAL_ARCH=${PETSC_ARCH}-real
+PETSC_SONAME_VERSION=3.9
+PETSC_NAME=petsc${PETSC_SONAME_VERSION}
+
+PETSC_DIR_REAL=/usr/lib/petscdir/${PETSC_NAME}/${PETSC_REAL_ARCH}
+
+# Remove alternatives links
+if [ "$1" = "remove" ]; then
+  update-alternatives --remove petsc ${PETSC_DIR_REAL}
+  update-alternatives --remove libpetsc_real.so /usr/lib/${DEB_HOST_MULTIARCH}/libpetsc_real.so.${PETSC_VERSION}
+
+  # remove general X.Y soname alternatives
+  update-alternatives --remove petsc${SONAME} ${PETSC_DIR_REAL}
+
+fi
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p libpetsc-real3.9-dev 
+else
+	dpkg -L libpetsc-real3.9-dev | grep '\.py$' | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+

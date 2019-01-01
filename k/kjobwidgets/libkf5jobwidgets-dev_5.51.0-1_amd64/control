@@ -1,0 +1,24 @@
+Package: libkf5jobwidgets-dev
+Source: kjobwidgets
+Version: 5.51.0-1
+Architecture: amd64
+Maintainer: Debian/Kubuntu Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Installed-Size: 79
+Depends: libkf5coreaddons-dev (>= 5.51.0~), libkf5jobwidgets5 (= 5.51.0-1), libkf5widgetsaddons-dev (>= 5.51.0~), qtbase5-dev (>= 5.8.0~)
+Recommends: libkf5jobwidgets-doc (= 5.51.0-1)
+Breaks: kio-dev (<< 5.28), libkf5kio-dev (<< 5.51)
+Section: libdevel
+Priority: optional
+Homepage: https://projects.kde.org/projects/frameworks/kjobwidgets
+Description: Widgets for tracking KJob instances
+ Window class that associates this job with a window given by
+ window. This is used by KDialogJobUiDelegate as parent widget
+ for error messages, KWidgetJobTracker as parent widget for
+ progress dialogs, KIO::AbstractJobInteractionInterface as
+ parent widget for rename/skip dialogs and possibly more.
+ Overload that takes a QWindow.
+ .
+ Timestamp handling to update the last user action timestamp
+ to the given time. Returns the last user action timestamp.
+ .
+ Contains development files for kjobwidgets.

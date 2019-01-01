@@ -1,0 +1,88 @@
+Package: volatility
+Version: 2.6.1-1
+Architecture: all
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 27745
+Depends: python-crypto, python-distorm3, python-openpyxl, python-pil, python-tz, python-yara, volatility-tools (>= 2.4.1-1), python:any (<< 2.8), python:any (>= 2.7~)
+Suggests: libraw1394-11, lime-forensics-dkms
+Section: utils
+Priority: optional
+Homepage: https://github.com/volatilityfoundation/volatility
+Description: advanced memory forensics framework
+ The Volatility Framework is a completely open collection of tools for
+ the extraction of digital artifacts from volatile memory (RAM) samples.
+ It is useful in forensics analysis. The extraction techniques are
+ performed completely independent of the system being investigated but
+ offer unprecedented visibility into the runtime state of the system.
+ .
+ Volatility supports memory dumps from all major 32- and 64-bit Windows
+ versions and service packs. Whether your memory dump is in raw format,
+ a Microsoft crash dump, hibernation file, or virtual machine snapshot,
+ Volatility is able to work with it.
+ .
+ Linux memory dumps in raw or LiME format are supported too. There are
+ several plugins for analyzing memory dumps from 32- and 64-bit Linux
+ kernels and relevant distributions such as Debian, Ubuntu, openSUSE,
+ RedHat, Fedora, CentOS, Mandriva, etc.
+ .
+ Volatility also support several versions of Mac OSX memory dumps, both
+ 32- and 64-bit. Android phones with ARM processors are also supported.
+ .
+ These are some of the data that can be extracted from a memory image:
+    - Image information (date, time, CPU count);
+    - Running processes;
+    - Open network sockets and connections;
+    - OS kernel modules loaded;
+    - Memory maps for each process;
+    - Executables samples;
+    - Command history;
+    - Suspicious process mappings (i.e. injected code);
+    - Passwords, as LM/NTLM hashes and LSA secrets;
+    - Cached Truecrypt passphrases;
+    - Others.
+ .
+ Current version (2.6) supports investigations of the memory images from
+ the following operational systems:
+    - 32-bit Windows XP Service Pack 2 and 3
+    - 32-bit Windows 2003 Server Service Pack 0, 1, 2
+    - 32-bit Windows Vista Service Pack 0, 1, 2
+    - 32-bit Windows 2008 Server Service Pack 1, 2 (there is no SP0)
+    - 32-bit Windows 7 Service Pack 0, 1
+    - 32-bit Windows 8, 8.1, and 8.1 Update 1
+    - 32-bit Windows 10 (initial support)
+    - 64-bit Windows XP Service Pack 1 and 2 (there is no SP0)
+    - 64-bit Windows 2003 Server Service Pack 1 and 2 (there is no SP0)
+    - 64-bit Windows Vista Service Pack 0, 1, 2
+    - 64-bit Windows 2008 Server Service Pack 1 and 2 (there is no SP0)
+    - 64-bit Windows 2008 R2 Server Service Pack 0 and 1
+    - 64-bit Windows 7 Service Pack 0 and 1
+    - 64-bit Windows 8, 8.1, and 8.1 Update 1
+    - 64-bit Windows Server 2012 and 2012 R2
+    - 64-bit Windows 10 (including at least 10.0.14393)
+    - 64-bit Windows Server 2016 (including at least 10.0.14393.0)
+    - 32-bit Linux kernels 2.6.11 to 4.2.3
+    - 64-bit Linux kernels 2.6.11 to 4.2.3
+    - 32-bit 10.5.x Leopard (the only 64-bit 10.5 is Server, which isn't
+      supported)
+    - 32-bit 10.6.x Snow Leopard
+    - 64-bit 10.6.x Snow Leopard
+    - 32-bit 10.7.x Lion
+    - 64-bit 10.7.x Lion
+    - 64-bit 10.8.x Mountain Lion (there is no 32-bit version)
+    - 64-bit 10.9.x Mavericks (there is no 32-bit version)
+    - 64-bit 10.10.x Yosemite (there is no 32-bit version)
+    - 64-bit 10.11.x El Capitan (there is no 32-bit version)
+    - 64-bit 10.12.x Sierra (there is no 32-bit version)
+ .
+ Volatility supports a variety of sample file formats:
+    - Raw linear sample (dd)
+    - Hibernation file (from Windows 7 and earlier)
+    - Crash dump file
+    - VirtualBox ELF64 core dump
+    - VMware saved state and snapshot files
+    - EWF format (E01)
+    - LiME format
+    - Mach-O file format
+    - QEMU virtual machine dumps
+    - Firewire
+    - HPAK (FDPro)

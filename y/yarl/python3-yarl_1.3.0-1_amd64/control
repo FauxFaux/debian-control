@@ -1,0 +1,59 @@
+Package: python3-yarl
+Source: yarl
+Version: 1.3.0-1
+Architecture: amd64
+Maintainer: Piotr Ożarowski <piotr@debian.org>
+Installed-Size: 161
+Depends: python3 (<< 3.8), python3 (>= 3.7~), python3-idna, python3-multidict (>= 4.0.0), python3:any, libc6 (>= 2.14)
+Section: python
+Priority: optional
+Homepage: https://github.com/aio-libs/yarl/
+Description: yet another URL library for Python
+ URL is constructed from `str`:
+ .
+  >>> from yarl import URL
+  >>> url = URL('https://www.python.org/~guido?arg=1#frag')
+  >>> url
+  URL('https://www.python.org/~guido?arg=1#frag')
+ .
+ All URL parts: scheme, user, passsword, host, port, path, query and fragment
+ are accessible by properties:
+ .
+  >>> url.scheme
+  'https'
+  >>> url.host
+  'www.python.org'
+  >>> url.path
+  '/~guido'
+  >>> url.query_string
+  'arg=1'
+  >>> url.query
+  <MultiDictProxy('arg': '1')>
+  >>> url.fragment
+  'frag'
+ .
+ All URL manipulations produces a new URL object:
+ .
+  >>> url.parent / 'downloads/source'
+  URL('https://www.python.org/downloads/source')
+ .
+ Strings passed to constructor and modification methods are automatically
+ encoded giving canonical representation as result::
+ .
+  >>> url = URL('https://www.python.org/Ð¿ÑƒÑ‚ÑŒ')
+  >>> url
+  URL('https://www.python.org/%D0%BF%D1%83%D1%82%D1%8C')
+ .
+ Regular properties are percent-decoded, use `raw_` versions for getting
+ encoded strings:
+ .
+  >>> url.path
+  '/Ð¿ÑƒÑ‚ÑŒ'
+ .
+  >>> url.raw_path
+  '/%D0%BF%D1%83%D1%82%D1%8C'
+ .
+ Human readable representation of URL is available as `.human_repr()`:
+ .
+  >>> url.human_repr()
+  'https://www.python.org/Ð¿ÑƒÑ‚ÑŒ'

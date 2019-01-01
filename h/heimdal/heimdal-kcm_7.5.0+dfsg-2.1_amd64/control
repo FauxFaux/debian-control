@@ -1,0 +1,19 @@
+Package: heimdal-kcm
+Source: heimdal
+Version: 7.5.0+dfsg-2.1
+Architecture: amd64
+Maintainer: Brian May <bam@debian.org>
+Installed-Size: 118
+Depends: libasn1-8-heimdal (>= 1.4.0+git20110226), libc6 (>= 2.14), libhcrypto4-heimdal (>= 1.4.0+git20110226), libhdb9-heimdal (>= 1.4.0+git20110226), libheimbase1-heimdal (>= 1.4.0+git20110226), libheimntlm0-heimdal (>= 1.4.0+git20110226), libkrb5-26-heimdal (>= 1.4.0+git20110226), libroken18-heimdal (>= 1.7~git20150920), lsb-base
+Section: net
+Priority: optional
+Homepage: http://www.h5l.org/
+Description: Heimdal Kerberos - KCM daemon
+ Heimdal is a free implementation of Kerberos 5 that aims to be
+ compatible with MIT Kerberos.
+ .
+ This package includes the KCM daemon which can hold the credentials
+ for all users in the system. Access control is done with Unix-like
+ permissions. The daemon checks the access on all operations based on
+ the UID and GID of the user. The tickets are renewed as long as is
+ permitted by the KDC's policy.

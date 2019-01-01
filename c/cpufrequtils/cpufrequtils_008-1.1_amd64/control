@@ -1,0 +1,17 @@
+Package: cpufrequtils
+Version: 008-1.1
+Architecture: amd64
+Maintainer: Mattia Dongili <malattia@debian.org>
+Installed-Size: 178
+Pre-Depends: init-system-helpers (>= 1.54~)
+Depends: libc6 (>= 2.3), libcpufreq0 (>= 006), debconf (>= 0.5) | debconf-2.0, lsb-base (>= 3.0)
+Section: admin
+Priority: optional
+Homepage: http://kernel.org/pub/linux/utils/kernel/cpufreq/cpufrequtils.html
+Description: utilities to deal with the cpufreq Linux kernel feature
+ This package contains two utilities for inspecting and setting the
+ CPU frequency through both the sysfs and procfs CPUFreq kernel
+ interfaces.
+ .
+ By default, it also enables CPUFreq at boot time if the correct CPU
+ driver is found.

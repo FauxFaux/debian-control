@@ -1,0 +1,29 @@
+Package: liblinux-inotify2-perl
+Version: 1:2.1-1
+Architecture: amd64
+Maintainer: Joao Eriberto Mota Filho <eriberto@debian.org>
+Installed-Size: 59
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.4), libcommon-sense-perl
+Suggests: iwatch
+Section: perl
+Priority: optional
+Multi-Arch: same
+Homepage: http://software.schmorp.de/pkg/Linux-Inotify2.html
+Description: scalable directory and file change notification
+ inotify (inode notify) is a Linux kernel subsystem that monitors events in
+ filesystems and reports those events to applications in real time.
+ .
+ inotify can be used to monitor individual files or directories. When a
+ directory is monitored, inotify will return events for the directory itself
+ and for files inside the directory.
+ .
+ This module implements an interface to the Linux 2.6.13 and later inotify
+ directory and file change notification system.
+ .
+ It has a number of advantages over the Linux::Inotify module:
+   - It is portable (Linux::Inotify only works on x86).
+   - The equivalent of fullname works correctly.
+   - It is better documented.
+   - It has callback-style interface, which is better suited for integration.
+ .
+ This package provides the Perl module Linux::Inotify2.

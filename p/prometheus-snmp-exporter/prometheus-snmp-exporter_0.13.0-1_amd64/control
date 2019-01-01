@@ -1,0 +1,17 @@
+Package: prometheus-snmp-exporter
+Version: 0.13.0-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 12298
+Depends: libc6 (>= 2.3.2), libsnmp30 (>= 5.7.3+dfsg-3~dfsg)
+Built-Using: golang-1.10 (= 1.10.3-1), golang-github-alecthomas-units (= 0.0~git20151022.0.2efee85-3), golang-github-beorn7-perks (= 0.0~git20160804.0.4c0e845-1), golang-github-prometheus-client-golang (= 0.9.0~pre1+git20180417.82f5ff1-2), golang-github-prometheus-client-model (= 0.0.2+git20171117.99fa1f4-1), golang-github-prometheus-common (= 0+git20180518.7600349-1), golang-github-soniah-gosnmp (= 1.10-1), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-sys (= 0.0~git20180510.7dfd129-1), golang-gopkg-alecthomas-kingpin.v2 (= 2.2.6-1), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-2), golang-logrus (= 1.0.6-1), golang-procfs (= 0+git20180613.7d6f385-1), golang-protobuf-extensions (= 1.0.0-2), golang-yaml.v2 (= 2.2.1-1)
+Section: net
+Priority: optional
+Homepage: https://github.com/prometheus/snmp_exporter
+Description: Prometheus exporter for SNMP-enabled devices
+ An exporter for Prometheus which exposes information gathered from Simple
+ Network Management Protocol (SNMP) for use by the Prometheus monitoring
+ system.
+ .
+ There are two components - an exporter which does the actual scraping, and a
+ generator which creates the configuration for use by the exporter.

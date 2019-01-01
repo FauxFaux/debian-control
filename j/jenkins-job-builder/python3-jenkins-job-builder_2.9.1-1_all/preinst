@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] ; then
+	update-alternatives --remove jenkins-jobs /usr/bin/python3-jenkins-jobs
+fi
+
+
+
+exit 0

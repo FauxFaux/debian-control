@@ -1,0 +1,26 @@
+Package: vbackup
+Version: 1.0.1-1.1
+Architecture: all
+Maintainer: Stefanos Harhalakis <v13@v13.gr>
+Installed-Size: 187
+Depends: fdisk | util-linux (<< 2.29.2-3~)
+Section: admin
+Priority: optional
+Homepage: http://www.v13.gr/
+Description: modular backup utility
+ vbackup constists of a set of scripts that handle the various aspects of
+ a backup. It can be easily extended to support other backup methods too.
+ It can be used for full or incremental backups. It also includes a wizard
+ for basic (quick) configuration.
+ .
+ Currently it supports/backups:
+  * XFS using xfsdump
+  * Generic filesystem backups using tar
+  * PostgreSQL
+  * MySQL
+  * dpkg and RPM database
+  * Partition tables, disk MBRs, MD and LVM information
+  * OpenLDAP database
+ .
+ It can work with local files, handle NFS mounts or scp backups to a remote
+ location. It also supports encryption using x509 certificates.

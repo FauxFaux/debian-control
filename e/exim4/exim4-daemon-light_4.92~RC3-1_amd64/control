@@ -1,0 +1,35 @@
+Package: exim4-daemon-light
+Source: exim4
+Version: 4.92~RC3-1
+Architecture: amd64
+Maintainer: Exim4 Maintainers <pkg-exim4-maintainers@lists.alioth.debian.org>
+Installed-Size: 1327
+Depends: exim4-base (>= 4.92~RC3), debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.16), libdb5.3, libgnutls-dane0 (>= 3.5.7), libgnutls30 (>= 3.6.5), libpcre3
+Conflicts: mail-transport-agent
+Replaces: exim4-base (<= 4.61-1), mail-transport-agent
+Provides: default-mta, exim4-localscanapi-2.0, mail-transport-agent
+Section: mail
+Priority: optional
+Homepage: https://www.exim.org/
+Description: lightweight Exim MTA (v4) daemon
+ Exim (v4) is a mail transport agent. This package contains the exim4
+ daemon with only basic features enabled. It works well with the
+ standard setups that are provided by Debian and includes support for
+ TLS encryption and the dlopen patch to allow dynamic loading of a
+ local_scan function.
+ .
+ The Debian exim4 packages have their own web page,
+ http://wiki.debian.org/PkgExim4. There is also a Debian-specific
+ FAQ list. Information about the way the Debian packages are
+ configured can be found in
+ /usr/share/doc/exim4-base/README.Debian.gz, which additionally contains
+ information about the way the Debian binary packages are built. The
+ very extensive upstream documentation is shipped in
+ /usr/share/doc/exim4-base/spec.txt.gz. To repeat the debconf-driven
+ configuration process in a standard setup, invoke dpkg-reconfigure
+ exim4-config. There is a Debian-centered mailing list,
+ pkg-exim4-users@lists.alioth.debian.org. Please ask Debian-specific
+ questions there, and only write to the upstream exim-users mailing
+ list if you are sure that your question is not Debian-specific. You
+ can find the subscription web page on
+ http://lists.alioth.debian.org/mailman/listinfo/pkg-exim4-users

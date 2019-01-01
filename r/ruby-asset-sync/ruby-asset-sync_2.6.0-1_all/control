@@ -1,0 +1,18 @@
+Package: ruby-asset-sync
+Version: 2.6.0-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 85
+Depends: ruby | ruby-interpreter, ruby-fog-core, ruby-unf, ruby-activemodel (>= 2:4.1~), ruby-mime-types (>= 2.99~)
+Section: ruby
+Priority: optional
+Homepage: https://github.com/rumblelabs/asset_sync
+Description: synchronises assets in a Rails app and Amazon/Rackspace cloud
+ After you run assets:precompile your compiled assets will be synchronised
+ with your Amazon S3/Cloudfront or Rackspace Cloudfiles.
+ .
+ Asset Sync is built to run with the new Rails Asset Pipeline feature introduced
+ in Rails 3.1.  After you run __bundle exec rake assets:precompile__ your assets
+ will be synchronised to your cloud account, optionally deleting unused files
+ and only uploading the files it needs to.
+Ruby-Versions: all

@@ -1,0 +1,65 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+  upgrade|remove|purge)
+    if [ -x "$(which docker)" ]; then
+        if service docker status >>/dev/null; then
+            ## Clearing docker cache...
+#            CONTAINERS=$(docker ps -a | grep runner | grep project | grep concurrent | grep cache ||:)
+            CONTAINERS=$(docker ps -a | grep gitlab | grep runner ||:)
+            if [ -n "${CONTAINERS}" ]; then
+                for container in $(printf "$CONTAINERS\n" | awk '{print $1}'); do
+                    docker rm -v $container || :
+                done
+            fi
+
+            ## Removing old pre-built image...
+            DIMs=$(docker images -q gitlab-runner-prebuilt)
+            if [ -n "${DIMs}" ]; then
+                docker rmi ${DIMs} || :
+            fi
+
+            ## Removing pre-built image...
+            DIMs=$(docker images -q gitlab-runner-helper)
+            if [ -n "${DIMs}" ]; then
+                docker rmi ${DIMs} || :
+            fi
+        else
+            printf "W: Docker is not running; unable to clean.\n"
+        fi
+    fi
+
+    rm -rf /var/lib/gitlab-runner/builds
+    rm -f  /var/lib/gitlab-runner/*-prebuilt*
+    rm -f  /var/lib/gitlab-runner/*-helper*
+  ;;
+  purge)
+    if [ -x deluser ]; then
+        deluser --quiet gitlab-runner >>/dev/null || true
+    fi
+    delgroup --quiet --system --only-if-empty gitlab-runner || true
+    rm -rf /var/lib/gitlab-runner
+  ;;
+esac
+
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "purge" ] ; then
+	update-rc.d gitlab-runner remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.3
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'gitlab-runner.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'gitlab-runner.service' >/dev/null || true
+		deb-systemd-helper unmask 'gitlab-runner.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

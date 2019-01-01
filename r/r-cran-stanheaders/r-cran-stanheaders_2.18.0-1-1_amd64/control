@@ -1,0 +1,27 @@
+Package: r-cran-stanheaders
+Version: 2.18.0-1-1
+Architecture: amd64
+Maintainer: Debian R Packages Maintainers <r-pkg-team@alioth-lists.debian.net>
+Installed-Size: 6653
+Depends: r-base-core (>= 3.5.1.20181215-1), r-api-3.5
+Suggests: r-cran-rcpp, r-cran-rcppeigen, r-cran-bh, r-cran-knitr (>= 1.15.1), r-cran-rmarkdown
+Section: gnu-r
+Priority: optional
+Homepage: https://cran.r-project.org/package=StanHeaders
+Description: C++ Header Files for Stan for GNU R
+ The C++ header files of the Stan project are provided by this package,
+ but it contains no R code, vignettes, or function documentation. There
+ is a shared object containing part of the 'CVODES' library, but it is
+ not accessible from R. 'StanHeaders' is only useful for developers who
+ want to utilize the 'LinkingTo' directive of their package's DESCRIPTION
+ file to build on the Stan library without incurring unnecessary
+ dependencies. The Stan project develops a probabilistic programming
+ language that implements full or approximate Bayesian statistical
+ inference via Markov Chain Monte Carlo or 'variational' methods and
+ implements (optionally penalized) maximum likelihood estimation via
+ optimization. The Stan library includes an advanced automatic
+ differentiation scheme, 'templated' statistical and linear algebra
+ functions that can handle the automatically 'differentiable' scalar
+ types (and doubles, 'ints', etc.), and a parser for the Stan language.
+ The 'rstan' package provides user-facing R functions to parse, compile,
+ test, estimate, and analyze Stan models.

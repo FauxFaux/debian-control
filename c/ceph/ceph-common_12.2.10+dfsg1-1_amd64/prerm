@@ -1,0 +1,33 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb/12
+dpkg-maintscript-helper rm_conffile /etc/bash_completion.d/rados 10.2.5-1\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/bash_completion.d/rbd 10.2.5-1\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_systemd_start/12
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop 'ceph.target' >/dev/null || true
+fi
+# End automatically added section
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p ceph-common 
+else
+	dpkg -L ceph-common | grep '\.py$' | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+# Automatically added by dh_python3:
+if which py3clean >/dev/null 2>&1; then
+	py3clean -p ceph-common 
+else
+	dpkg -L ceph-common | perl -ne 's,/([^/]*)\.py$,/__pycache__/\1.*, or next; unlink $_ or die $! foreach glob($_)'
+	find /usr/lib/python3/dist-packages/ -type d -name __pycache__ -empty -print0 | xargs --null --no-run-if-empty rmdir
+fi
+
+# End automatically added section

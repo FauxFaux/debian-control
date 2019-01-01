@@ -1,0 +1,22 @@
+Package: libghc-blaze-builder-prof
+Source: haskell-blaze-builder (0.4.1.0-3)
+Version: 0.4.1.0-3+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 555
+Depends: libghc-blaze-builder-dev (= 0.4.1.0-3+b2), libghc-base-prof-4.11.1.0-5dd74, libghc-bytestring-prof-0.10.8.2-76891, libghc-deepseq-prof-1.4.3.0-17e4f, libghc-text-prof-1.2.3.1-30bbe
+Provides: libghc-blaze-builder-prof-0.4.1.0-75fbe
+Section: haskell
+Priority: optional
+Homepage: http://github.com/lpsmith/blaze-builder
+Description: abstraction of buffered output of byte streams; profiling libraries
+ This library provides an abstraction of buffered output of byte streams and
+ several convenience functions to exploit it. For example, it allows one to
+ efficiently serialize Haskell values to lazy bytestrings with a large average
+ chunk size. The large average chunk size allows one to make good use of cache
+ prefetching in later processing steps (e.g. compression) and reduces the
+ system call overhead when writing the resulting lazy bytestring to a file or
+ sending it over the network.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

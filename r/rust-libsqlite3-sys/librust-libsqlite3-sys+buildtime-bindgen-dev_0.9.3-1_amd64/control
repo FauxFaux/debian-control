@@ -1,0 +1,14 @@
+Package: librust-libsqlite3-sys+buildtime-bindgen-dev
+Source: rust-libsqlite3-sys
+Version: 0.9.3-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-libsqlite3-sys-dev (= 0.9.3-1), librust-bindgen-0.38+default-dev, librust-pkg-config-0.3+default-dev, librust-vcpkg-0.2+default-dev
+Provides: librust-libsqlite3-sys-0+buildtime-bindgen-dev (= 0.9.3-1), librust-libsqlite3-sys-0.9+buildtime-bindgen-dev (= 0.9.3-1), librust-libsqlite3-sys-0.9.3+buildtime-bindgen-dev (= 0.9.3-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Native bindings to the libsqlite3 library - feature "buildtime_bindgen"
+ This metapackage enables feature buildtime_bindgen for the Rust libsqlite3-sys
+ crate, by pulling in any additional dependencies needed by that feature.

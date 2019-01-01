@@ -1,0 +1,163 @@
+#!/bin/sh
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# Code copied from dh_systemd_enable ----------------------
+# This will only remove masks created by d-s-h on package removal.
+deb-systemd-helper unmask glewlwyd.service >/dev/null || true
+
+if deb-systemd-helper --quiet was-enabled glewlwyd.service; then
+  # Enables the unit on first installation, creates new
+  # symlinks on upgrades if the unit file has changed.
+  deb-systemd-helper enable glewlwyd.service >/dev/null || true
+else
+  # Update the statefile to add new symlinks (if any), which need to be
+  # cleaned up on purge. Also remove old symlinks.
+  deb-systemd-helper update-state glewlwyd.service >/dev/null || true
+fi
+
+# Create the glewlwyd user in glewlwyd, so that Dbus doesn't complain.
+      
+# create a user to run as (code stolen from dnsmasq)
+if [ "$1" = "configure" ]; then
+  CONFIG="/etc/glewlwyd/glewlwyd.conf"
+  CONFIG_DB="/etc/glewlwyd/glewlwyd-db.conf"
+  
+  db_get glewlwyd/config_type || true
+  
+  if [ "$RET" = "Personalized" ]; then
+    cp /usr/share/glewlwyd/templates/glewlwyd.conf.properties $CONFIG
+    
+    if [ -z "`id -u glewlwyd 2> /dev/null`" ]; then
+      echo "Add user glewlwyd"
+      adduser --system  --home /var/cache/glewlwyd --gecos "glewlwyd" \
+              --no-create-home --disabled-password \
+              --quiet glewlwyd || true
+    fi
+    
+    if [ ! -f /var/log/glewlwyd.log ]; then
+      touch /var/log/glewlwyd.log
+      chown glewlwyd /var/log/glewlwyd.log
+    fi
+    
+    dbc_generate_include="template:$CONFIG_DB"
+    dbc_generate_include_perms="660"
+    dbc_generate_include_owner="glewlwyd:root"
+    dbc_generate_include_args="-o template_infile=/usr/share/glewlwyd/templates/glewlwyd-db.conf.properties"
+    dbc_mysql_createdb_encoding="UTF8"
+    dbc_basepath="/var/cache/glewlwyd"
+    dbc_dbfile_owner="glewlwyd:root"
+    dbc_dbfile_perms="0660"
+
+    . /usr/share/dbconfig-common/dpkg/postinst
+    dbc_go glewlwyd "$@" || true
+    
+    db_get glewlwyd/config_external_url || true
+    sed -i -e "s,_G_EXTRNAL_URL_/,$RET,g" $CONFIG
+    
+    if [ "$dbc_dbtype" = "mysql" ]; then
+      sed -i -e "s,_G_DB_TYPE_,mariadb," $CONFIG_DB
+      gunzip --stdout /usr/share/doc/glewlwyd/init-mariadb.sql.gz | mysql -u$dbc_dbuser -p$dbc_dbpass -h$dbc_dbserver $dbc_dbname
+    else
+      echo "Initializing SQLite3 database"
+      sed -i -e "s,_G_DB_TYPE_,sqlite3," $CONFIG_DB
+      su - glewlwyd -s /bin/sh -c "gunzip --stdout /usr/share/doc/glewlwyd/init-sqlite3-sha256.sql.gz | sqlite3 $dbc_basepath/$dbc_dbname"
+    fi
+    
+    db_get glewlwyd/config_reset_pwd || true
+    sed -i -e "s,_G_RESET_PWD_FLAG_,$RET,g" $CONFIG
+    
+    db_get glewlwyd/config_reset_pwd_host
+    sed -i -e "s,_G_RESET_PWD_HOST_,$RET,g" $CONFIG
+    
+    db_get glewlwyd/config_reset_pwd_from
+    sed -i -e "s,_G_RESET_PWD_FROM_,$RET,g" $CONFIG
+    
+    db_get glewlwyd/config_reset_pwd_subject
+    sed -i -e "s,_G_RESET_PWD_SUBJECT_,$RET,g" $CONFIG
+    
+    db_get glewlwyd/config_jwt_alg
+    JWT_ALG="$RET"
+    
+    db_get glewlwyd/config_jwt_key_size
+    sed -i -e "s,_G_JWT_KEY_SIZE_,$RET,g" $CONFIG
+    if [ "$JWT_ALG" = "RSA" ]; then
+      sed -i -e 's,_G_JWT_RSA_FLAG_,true,g' $CONFIG
+      sed -i -e 's,_G_JWT_ECDSA_FLAG_,false,g' $CONFIG
+      sed -i -e 's,_G_JWT_SHA_FLAG_,false,g' $CONFIG
+      sed -i -e "s,_G_JWT_SHA_SECRET_,secret,g" $CONFIG
+      
+      db_get glewlwyd/config_jwt_generate_key
+      if [ "$RET" = "true" ]; then
+        openssl genrsa -out /etc/glewlwyd/private-rsa.key 4096
+        openssl rsa -in /etc/glewlwyd/private-rsa.key -outform PEM -pubout -out /etc/glewlwyd/public-rsa.pem
+        chown glewlwyd /etc/glewlwyd/private-rsa.key
+        chown glewlwyd /etc/glewlwyd/public-rsa.pem
+        chmod 600 /etc/glewlwyd/private-rsa.key
+        chmod 600 /etc/glewlwyd/public-rsa.pem
+      fi
+    elif [ "$JWT_ALG" = "ECDSA" ]; then
+      sed -i -e 's,_G_JWT_RSA_FLAG_,false,g' $CONFIG
+      sed -i -e 's,_G_JWT_ECDSA_FLAG_,true,g' $CONFIG
+      sed -i -e 's,_G_JWT_SHA_FLAG_,false,g' $CONFIG
+      sed -i -e "s,_G_JWT_SHA_SECRET_,secret,g" $CONFIG
+      
+      db_get glewlwyd/config_jwt_generate_key
+      if [ "$RET" = "true" ]; then
+        openssl ecparam -genkey -name secp521r1 -noout -out /etc/glewlwyd/private-ecdsa.key
+        openssl ec -in /etc/glewlwyd/private-ecdsa.key -pubout -out /etc/glewlwyd/public-ecdsa.pem
+        chown glewlwyd /etc/glewlwyd/private-ecdsa.key
+        chown glewlwyd /etc/glewlwyd/public-ecdsa.pem
+        chmod 600 /etc/glewlwyd/private-rsa.key
+        chmod 600 /etc/glewlwyd/public-rsa.pem
+      fi
+    else
+      sed -i -e 's,_G_JWT_RSA_FLAG_,false,g' $CONFIG
+      sed -i -e 's,_G_JWT_ECDSA_FLAG_,false,g' $CONFIG
+      sed -i -e 's,_G_JWT_SHA_FLAG_,true,g' $CONFIG
+      
+      db_get glewlwyd/config_jwt_secret
+      sed -i -e "s,_G_JWT_SHA_SECRET_,$RET,g" $CONFIG
+    fi
+  else
+    if [ ! -f $CONFIG ]; then
+      gunzip --stdout /usr/share/doc/glewlwyd/glewlwyd.conf.sample.gz > $CONFIG
+    fi
+  fi
+  
+  echo "Start Glewlwyd service"
+  invoke-rc.d glewlwyd start || true
+fi
+# Automatically added by dh_installsystemd/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'glewlwyd.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'glewlwyd.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'glewlwyd.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'glewlwyd.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		deb-systemd-invoke $_dh_action 'glewlwyd.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

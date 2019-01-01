@@ -1,0 +1,24 @@
+Package: bacula-sd
+Source: bacula
+Version: 9.4.1-1
+Architecture: amd64
+Maintainer: Debian Bacula Team <pkg-bacula-devel@lists.alioth.debian.org>
+Installed-Size: 519
+Depends: bacula-common (= 9.4.1-1), lsb-base (>= 3.0-6), mtx, ucf, libc6 (>= 2.14), liblzo2-2, libstdc++6 (>= 5), zlib1g (>= 1:1.1.4)
+Recommends: bacula-bscan, mt-st
+Suggests: dds2tar, scsitools, sg3-utils
+Breaks: bacula-sd-mysql (<< 7.4.3+dfsg-3), bacula-sd-pgsql (<< 7.4.3+dfsg-3), bacula-sd-sqlite3 (<< 7.4.3+dfsg-3)
+Replaces: bacula-sd-mysql (<< 7.4.3+dfsg-3), bacula-sd-pgsql (<< 7.4.3+dfsg-3), bacula-sd-sqlite3 (<< 7.4.3+dfsg-3)
+Section: admin
+Priority: optional
+Homepage: http://www.bacula.org/
+Description: network backup service - storage daemon
+ Bacula is a set of programs to manage backup, recovery and verification of
+ data across a network of computers of different kinds.
+ .
+ The storage daemon performs the storage and recovery of the file
+ attributes and data to the physical media; in other words, it is
+ responsible for reading and writing the backups.
+ .
+ It runs on the machine which has access to the backup device(s) - usually
+ a tape drive, but alternatively other storage media, such as files.

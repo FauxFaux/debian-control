@@ -1,0 +1,17 @@
+Package: gitaly
+Version: 0.129.0+debian-3
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 22635
+Depends: libc6 (>= 2.3.2), gitlab-common, ruby | ruby-interpreter, ruby-rugged (>= 0.27.2~), ruby-github-linguist (>= 6.1~), ruby-github-markup (>= 1.6.4~), ruby-gitaly-proto (>= 0.123~), ruby-activesupport (>= 2:4.2.10~), ruby-gollum-lib (>= 4.2.7.5~), ruby-gollum-rugged-adapter (>= 0.4.4.1~), ruby-grpc (>= 1.15~), ruby-sentry-raven (>= 2.7.2~), ruby-faraday (>= 0.12~), ruby-licensee (>= 8.9~), ruby-google-protobuf (>= 3.6~), pipexec, procps
+Built-Using: golang-1.10 (= 1.10.6-1), golang-github-beorn7-perks (= 0.0~git20160804.0.4c0e845-1), golang-github-davecgh-go-spew (= 1.1.1-1), golang-github-kelseyhightower-envconfig-dev (= 1.3.0-1), golang-github-pmezard-go-difflib (= 1.0.0-1), golang-github-prometheus-client-model (= 0.0.2+git20171117.99fa1f4-1), golang-github-prometheus-common (= 0+git20180518.7600349-1), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-net-dev (= 1:0.0+git20181201.351d144+dfsg-1), golang-golang-x-sync (= 0.0~git20171101.fd80eb9-1), golang-golang-x-sys (= 0.0~git20181026.95b1ffb-1), golang-google-genproto (= 0.0~git20171123.7f0da29-1), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-2), golang-logrus (= 1.0.6-1), golang-procfs (= 0+git20181204.1dc9a6c-1), golang-protobuf-extensions (= 1.0.0-3), golang-testify (= 1.2.2+ds-1), golang-toml (= 0.3.0+git20170626.7.a368813-1), golang-x-text (= 0.3.0-2)
+Section: net
+Priority: optional
+Homepage: https://gitlab.com/gitlab-org/gitaly
+Description: Git RPC service for handling all the git calls made by GitLab
+ Gitaly makes the git data storage tier of large GitLab instances fast.
+ .
+ This is achieved by moving git operations as close to the data as possible and
+ Optimizing git services using caching.
+ .
+ Gitaly is a core service of gitlab.

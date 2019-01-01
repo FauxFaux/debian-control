@@ -1,0 +1,18 @@
+Package: prometheus-blackbox-exporter
+Version: 0.13.0+ds-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 9416
+Depends: libc6 (>= 2.3.2)
+Built-Using: golang-1.10 (= 1.10.7-1), golang-github-alecthomas-units (= 0.0~git20151022.0.2efee85-4), golang-github-beorn7-perks (= 0.0~git20160804.0.4c0e845-1), golang-github-go-kit-kit (= 0.6.0-2), golang-github-go-logfmt-logfmt (= 0.3.0-1), golang-github-go-stack-stack (= 1.5.2-2), golang-github-miekg-dns (= 1.0.4+ds-1), golang-github-mwitkow-go-conntrack (= 0.0~git20161129.cc309e4-3), golang-github-pkg-errors (= 0.8.0+git20180311.816c908-1), golang-github-prometheus-client-golang (= 0.9.0-1), golang-github-prometheus-client-model (= 0.0.2+git20171117.99fa1f4-1), golang-github-prometheus-common (= 0+git20181119.b36ad28-1), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-net-dev (= 1:0.0+git20181201.351d144+dfsg-2), golang-gopkg-alecthomas-kingpin.v2 (= 2.2.6-1), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-2), golang-procfs (= 0+git20181204.1dc9a6c-1), golang-protobuf-extensions (= 1.0.0-3), golang-yaml.v2 (= 2.2.2-1)
+Section: devel
+Priority: optional
+Homepage: https://github.com/prometheus/blackbox_exporter
+Description: Blackbox prober for Prometheus
+ The blackbox exporter allows blackbox probing of network endpoints over HTTP,
+ HTTPS, DNS, TCP and ICMP. Additional modules can be defined to suit other
+ needs.
+ .
+ Querying of endpoints happens via HTTP GET queries, by specifying the target
+ name and what kind of probing to execute. Results from the probe are returned
+ as a set of Prometheus metrics.

@@ -1,0 +1,29 @@
+Package: libscscp1
+Source: scscp-imcce
+Version: 1.0.3+ds-2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 210
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5), libxml2 (>= 2.7.4)
+Suggests: libscscp-doc
+Conflicts: libscscp
+Provides: libscscp
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.imcce.fr/trip/scscp
+Description: IMCCE SCSCP C Library -- library package
+ SCSCP stands for Symbolic Computation Software Composibility Protocol.
+ This protocol is developed by the European project SCIEnce - Symbolic
+ Computation Infrastructure for Europe: http://www.symbolic-computing.org
+ .
+ This C/C++ library, which is developed by the French Institute of
+ Celestial Mechanics and Ephemeridesis Calculus (IMCCE) consists
+ of an implementation of the SCSCP protocol. It provides an Application
+ Programming Interface (API) to develop client and server applications
+ to communicate with systems that support the SCSCP protocol, mainly
+ Computer Algebra Systems (CAS).
+ .
+ This package provides the shared libraries required to run programs
+ compiled against the SCSCP library developed at IMCCE. To compile your
+ own programs you also need to install the libscscp1-dev package.

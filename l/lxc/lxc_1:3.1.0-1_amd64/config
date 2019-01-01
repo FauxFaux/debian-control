@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+do_configure(){
+    if dpkg --compare-versions "$2" le "1:3.0.2-1~exp+4"; then
+        db_input high lxc/auto_update_config || true
+        db_go
+    fi
+}
+
+case "$1" in
+    configure|reconfigure)
+        do_configure "$@"
+    ;;
+
+    *)
+        echo "config called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac

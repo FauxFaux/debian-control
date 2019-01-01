@@ -1,0 +1,111 @@
+#!/bin/sh
+#
+# Post removal script for Tomcat
+#
+
+set -e
+
+# Automatically added by dh_installsystemd/11.5.3
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.3
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'tomcat9.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'tomcat9.service' >/dev/null || true
+		deb-systemd-helper unmask 'tomcat9.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+CONFFILES="tomcat-users.xml web.xml server.xml logging.properties context.xml catalina.properties jaspic-providers.xml"
+
+case "$1" in
+    remove)
+        # Remove the ROOT webapp if not modified
+        RWLOC="/var/lib/tomcat9/webapps/ROOT"
+        RWFILES="$RWLOC/index.html $RWLOC/META-INF/context.xml"
+        if [ "`(cat $RWFILES | md5sum -) 2>/dev/null | cut -d ' ' -f 1`" \
+                            = "91096d9351ec2604e58d434762b8b9b6" ] ; then
+            rm $RWFILES
+            rmdir --ignore-fail-on-non-empty \
+                /var/lib/tomcat9/webapps/ROOT/META-INF \
+                /var/lib/tomcat9/webapps/ROOT \
+                /var/lib/tomcat9/webapps \
+                /var/lib/tomcat9 || true
+        fi
+
+        # Remove CATALINA_BASE/lib if not empty
+        if [ -d /var/lib/tomcat9/lib ] && [ -z "`(find var/lib/tomcat9/lib/classes -type f)`" ] ; then
+            rmdir --ignore-fail-on-non-empty \
+                /var/lib/tomcat9/lib/classes \
+                /var/lib/tomcat9/lib || true
+        fi
+
+        # Remove the cache files (compiled JSP files)
+        if [ -d "/var/cache/tomcat9" ] ; then
+            rm -rf /var/cache/tomcat9
+        fi
+
+        # Remove the auto-generated catalina.policy file
+        if [ -d "/var/lib/tomcat9/policy" ] ; then
+            rm -rf /var/lib/tomcat9/policy
+        fi
+    ;;
+
+    purge)
+        # Ignore errors during purge
+        set +e
+
+        # Remove the configuration files
+        rm -rf /etc/logrotate.d/tomcat9
+        rm -rf /etc/default/tomcat9
+        for conffile in $CONFFILES;
+        do
+            rm -f /etc/tomcat9/$conffile
+        done
+
+        # Unregister the configuration files from ucf
+        if which ucf >/dev/null; then
+            ucf --purge /etc/logrotate.d/tomcat9
+            ucf --purge /etc/default/tomcat9
+            for conffile in $CONFFILES;
+            do
+                ucf --purge /etc/tomcat9/$conffile
+            done
+        fi
+
+        # Remove the log files
+        rm -rf /var/log/tomcat9
+
+        # Remove the temp directory
+        rm -rf /var/lib/tomcat9/temp
+
+        # Remove the CATALINA_BASE directory if empty
+        if [ -d "/var/lib/tomcat9" ] ; then
+            rmdir --ignore-fail-on-non-empty /var/lib/tomcat9
+        fi
+
+        # Remove the configuration directories
+        rmdir --ignore-fail-on-non-empty /etc/tomcat9/policy.d /etc/tomcat9/Catalina/* /etc/tomcat9/Catalina /etc/tomcat9
+
+        set -e
+    ;;
+
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+        # Nothing to do here
+    ;;
+
+    *)
+        echo "$0 called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac

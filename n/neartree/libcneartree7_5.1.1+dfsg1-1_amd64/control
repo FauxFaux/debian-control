@@ -1,0 +1,21 @@
+Package: libcneartree7
+Source: neartree
+Version: 5.1.1+dfsg1-1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 89
+Depends: libc6 (>= 2.4), libcvector2 (>= 1.0.3)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://neartree.sourceforge.net/
+Description: Library for solving the Nearest Neighbor Problem
+ Neartree is an API and a library for finding nearest neighbors among
+ points in spaces of arbitrary dimensions.
+ .
+ The library uses the Nearest Neighbor algorithm after Kalantari and
+ McDonald, (IEEE Transactions on Software Engineering, v. SE-9, pp.
+ 631-634,1983) modified to use recursion instead of a double-linked tree
+ and simplified so that it does less checking for things like is the
+ distance to the right less than the distance to the left; it was found
+ that these checks make little to no difference.

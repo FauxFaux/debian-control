@@ -1,0 +1,42 @@
+Package: elpa-projectile
+Source: projectile
+Version: 1.0.0-2
+Architecture: all
+Maintainer: Debian Emacsen team <debian-emacsen@lists.debian.org>
+Installed-Size: 220
+Depends: emacs, elpa-pkg-info (>= 0.4), emacsen-common
+Recommends: elpa-flx-ido, emacs (>= 46.0), exuberant-ctags
+Suggests: projectile-doc
+Enhances: emacs, emacs25
+Section: lisp
+Priority: optional
+Homepage: http://batsov.com/projectile/
+Description: project interaction library for Emacs
+ This library enhances Emacs with easy project management and
+ navigation. The concept of a project is simple: just a folder
+ containing a special file.  Currently git, mercurial, darcs and
+ bazaar repos are considered projects by default.  So are lein, maven,
+ sbt, scons, rebar and bundler projects.  If you want to mark a folder
+ manually as a project just create an empty .projectile file in it.
+ .
+ Some of Projectile's features:
+ .
+   * jump to a file in project
+   * jump to files at point in project
+   * jump to a directory in project
+   * jump to a file in a directory
+   * jump to a project buffer
+   * jump to a test in project
+   * toggle between files with same names but different extensions
+     (e.g. `.h` <-> `.c/.cpp`, `Gemfile` <-> `Gemfile.lock`)
+   * toggle between code and its test (e.g. `main.service.js` <->
+     `main.service.spec.js`)
+   * jump to recently visited files in the project
+   * switch between projects you have worked on
+   * kill all project buffers
+   * replace in project
+   * multi-occur in project buffers
+   * grep in project
+   * regenerate project etags or gtags
+   * visit project in dired
+   * run make in a project with a single key chord

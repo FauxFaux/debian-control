@@ -1,0 +1,66 @@
+#!/bin/sh
+# postinst script for open-isns-server
+
+# as per debconf-devel(7), let debconf load the templates here
+# to make them available for postrm later
+. /usr/share/debconf/confmodule
+
+set -e
+
+case "$1" in
+    configure)
+        if [ -z "$2" ] ; then
+            # Initial configuration, let's generate a key pair
+            if ! [ -f /etc/isns/auth_key ] ; then
+                isnsd --init
+            fi
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Prevent leak of FD 3 (from debconf), otherwise sysvinit-based
+# systems will hang at postinst (isnsd doesn't close fds when it
+# daemonizes.)
+{
+# Automatically added by dh_systemd_enable/11.4.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'isnsd.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'isnsd.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'isnsd.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'isnsd.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.4.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/isnsd" ]; then
+		update-rc.d isnsd defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d isnsd $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+
+} 3>&-
+
+exit 0

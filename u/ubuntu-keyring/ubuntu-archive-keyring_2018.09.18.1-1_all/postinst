@@ -1,0 +1,35 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    install|configure)
+
+      . /usr/share/debconf/confmodule
+      db_version 2.0
+      db_get ubuntu-archive-keyring/keyring
+
+      if [ -n "$RET" ]; then
+        for keyring in "$RET"
+        do
+          rm -f /etc/apt/trusted.gpg.d/"$keyring".gpg
+          ln -sf /usr/share/keyrings/"$keyring".gpg /etc/apt/trusted.gpg.d/
+        done
+      fi
+
+      db_stop
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

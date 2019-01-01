@@ -1,0 +1,89 @@
+#! /bin/sh -e
+# postinst script for lyskom-server
+#
+# see: dh_installdeb(1)
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+if test "$1" = "configure"; then
+  # Add the user 'lyskom' to run the server
+  adduser --quiet --system --no-create-home --home /var/lib/lyskom --shell /bin/sh lyskom
+
+  # Set database to be owned by the 'lyskom' user
+  for f in /var/lib/lyskom-server /var/log/lyskom-server; do
+    if ! dpkg-statoverride --list $f >/dev/null 2>&1; then
+      dpkg-statoverride --update --add lyskom root 0750 $f
+    fi
+  done
+
+  # Install default database if none exists
+  if [ ! -e /var/lib/lyskom-server/lyskomd-data ]; then
+    # Get selected database language
+    db_get lyskom-server/language
+    language=$RET
+
+    if [ "$language" = "Swedish" ]; then
+      file="/usr/share/lyskom-server/default/lyskomd-data"
+    else
+      file="/usr/share/lyskom-server/default/lyskomd-data-en"
+    fi
+    db_get lyskom-server/admin-password
+    password="$RET"
+
+    install -m 0640 -o lyskom /usr/share/lyskom-server/default/lyskomd-texts /usr/share/lyskom-server/default/number.txt /var/lib/lyskom-server/
+
+    if [ -n "$password" ]; then
+	perl -p - "$password" "$file" > /var/lib/lyskom-server/lyskomd-data.tmp <<'EOF'
+BEGIN {
+  $password = shift 
+}
+if (/^P 5 /) { 
+  my @tokens = split; 
+  $tokens[2] = '64H' . pack 'Z[64]', crypt($password, join '', ('.', '/', 0..9, 'A'..'Z', 'a'..'z')[rand 64, rand 64]); 
+  $_ = join ' ', @tokens; }
+EOF
+	mv /var/lib/lyskom-server/lyskomd-data.tmp /var/lib/lyskom-server/lyskomd-data
+	chmod 0640 /var/lib/lyskom-server/lyskomd-data
+	chown lyskom /var/lib/lyskom-server/lyskomd-data
+    else
+	install -m 0640 -o lyskom "$file" /var/lib/lyskom-server/lyskomd-data
+    fi
+
+    db_set lyskom-server/admin-password ""
+    db_set lyskom-server/admin-password-repeat ""
+  fi
+fi
+
+# Do anything debhelper wants to do
+# Automatically added by dh_systemd_enable/11.5.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'lyskom-server.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'lyskom-server.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'lyskom-server.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'lyskom-server.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/lyskom-server" ]; then
+		update-rc.d lyskom-server defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d lyskom-server $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+

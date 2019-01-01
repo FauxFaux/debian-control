@@ -1,0 +1,28 @@
+Package: libc++1-7
+Source: llvm-toolchain-7
+Version: 1:7.0.1-3
+Architecture: amd64
+Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
+Installed-Size: 839
+Depends: libc++abi1-7, libc6 (>= 2.17), libgcc1 (>= 1:3.0)
+Suggests: clang
+Conflicts: libc++-x.y
+Breaks: libc++1 (<< 44)
+Replaces: libc++-x.y
+Provides: libc++-x.y
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.llvm.org/
+Description: LLVM C++ Standard library
+ libc++ is another implementation of the C++ standard library.
+ .
+ Features and Goals
+ .
+   * Correctness as defined by the C++ standards.
+   * Fast execution.
+   * Minimal memory use.
+   * Fast compile times.
+   * ABI compatibility with gcc's libstdc++ for some low-level features such
+     as exception objects, rtti and memory allocation.
+   * Extensive unit tests.

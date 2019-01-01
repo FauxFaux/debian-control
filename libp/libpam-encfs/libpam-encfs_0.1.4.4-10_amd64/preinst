@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+LASTVERSION="0.1.2-4"
+
+# Prepare to move a conffile without triggering a dpkg question
+prep_mv_conffile() {
+    CONFFILE="$1"
+
+    if [ -e "$CONFFILE" ]; then
+        md5sum="`md5sum \"$CONFFILE\" | sed -e \"s/ .*//\"`"
+        old_md5sum="`dpkg-query -W -f='${Conffiles}' libpam-encfs | grep "$CONFFILE" | awk '{print $2}'`"
+        if [ "$md5sum" = "$old_md5sum" ]; then
+            rm -f "$CONFFILE"
+        fi
+    fi
+}
+
+case "$1" in
+install|upgrade)
+    if dpkg --compare-versions "$2" le "$LASTVERSION"; then
+        prep_mv_conffile "/etc/pam_encfs.conf"
+    fi
+esac
+
+

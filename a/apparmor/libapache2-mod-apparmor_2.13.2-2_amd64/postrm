@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" ]; then
+    APP_PROFILE="usr.sbin.apache2"
+    rm -f /etc/apparmor.d/disable/$APP_PROFILE >/dev/null 2>&1 || true
+    rmdir /etc/apparmor.d/disable 2>/dev/null || true
+    rmdir /etc/apparmor.d         2>/dev/null || true
+fi
+
+# Automatically added by dh_installdeb/12
+dpkg-maintscript-helper rm_conffile /etc/apparmor.d/local/usr.lib.apache2.mpm-prefork.apache2 2.8.0-0ubuntu21\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/apparmor.d/usr.lib.apache2.mpm-prefork.apache2 2.8.0-0ubuntu21\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_apache2/UNDECLARED
+if [ "$1" = "purge" ] ; then
+	if true; then
+		if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+			. /usr/share/apache2/apache2-maintscript-helper
+
+			for conf in apparmor  ; do
+				apache2_invoke dismod $conf  || exit 1
+			done
+		fi
+	fi
+fi
+# End automatically added section
+

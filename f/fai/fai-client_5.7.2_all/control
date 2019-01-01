@@ -1,0 +1,23 @@
+Package: fai-client
+Source: fai
+Version: 5.7.2
+Architecture: all
+Maintainer: Thomas Lange <lange@debian.org>
+Installed-Size: 325
+Depends: perl, file, libapt-pkg-perl, libfile-lchown-perl, iproute2 | iproute, debconf-utils
+Recommends: libgraph-perl, fdisk | util-linux (<< 2.29.2-3~)
+Suggests: logtail
+Breaks: fai-nfsroot (<< 5.2)
+Replaces: fai-nfsroot (<< 5.2)
+Section: admin
+Priority: optional
+Homepage: https://fai-project.org
+Description: Fully Automatic Installation client package
+ FAI is a non-interactive system to install, customize and manage
+ Linux systems and software configurations on computers as well as
+ virtual machines and chroot environments, from small networks to
+ large infrastructures and clusters.
+ .
+ This is the client package for FAI. It contains the parts necessary
+ to run the softupdate functionality on already installed systems, and
+ is needed for the dirinstall functionality and others on a FAI server.

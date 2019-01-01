@@ -1,0 +1,21 @@
+Package: libdeps-perl
+Source: deps
+Version: 0.13-4
+Architecture: all
+Maintainer: Yann Dirson <dirson@debian.org>
+Installed-Size: 78
+Depends: libset-object-perl, perl
+Recommends: libdeps-renderer-dot-perl | libdeps-renderer
+Conflicts: graph-includes (<< 0.12)
+Replaces: graph-includes (<< 0.12)
+Section: devel
+Priority: optional
+Description: Dependency Extraction and Processing System
+ Toolkit to extract internal dependencies from a project, manipulate
+ the dependency graph in arbitrary ways, and produce graphs to help in
+ managing your project, including locating abusive #includes.
+ .
+ It aims to be fully generic and pluggable, but is still under
+ development.  However, several aspects are already possible to
+ customize.  Eg, you can provide your own graph transformations,
+ styling rules, and graph renderers.

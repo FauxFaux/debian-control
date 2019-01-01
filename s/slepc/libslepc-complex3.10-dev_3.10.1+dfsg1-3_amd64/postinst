@@ -1,0 +1,43 @@
+#!/bin/sh -e
+
+DEB_HOST_MULTIARCH=x86_64-linux-gnu
+
+SONAME=3.10
+
+SLEPC_VERSION=3.10.1
+SLEPC_ARCH=${DEB_HOST_MULTIARCH}
+SLEPC_COMPLEX_ARCH=${SLEPC_ARCH}-complex
+SLEPC_VERSION_NUMBER=$( echo ${SLEPC_VERSION} | sed "s/\.//g" )
+SLEPC_SONAME_VERSION=3.10
+SLEPC_NAME=slepc${SLEPC_SONAME_VERSION}
+
+SLEPC_DIR_COMPLEX=/usr/lib/slepcdir/${SLEPC_NAME}/${SLEPC_COMPLEX_ARCH}
+
+# Make alternatives links
+if [ "$1" = "configure" ]; then
+
+# alternative libslepc.so.multiarch is deprecated
+# test if libslepc.so.multiarch is still in use, so remove old slepc alternatives
+# This should be safe since Conflicts are set up with the dev package versions using deprecated libslepc.so.multiarch.
+if update-alternatives --query slepc | grep libslepc.so.multiarch > /dev/null ; then
+  echo Removing deprecated slepc alternatives using libslepc.so.multiarch.
+  for alt in `update-alternatives --list slepc`; do
+    update-alternatives --remove slepc ${alt}
+  done
+fi
+
+# alternative default slepc (e.g. real or complex)
+update-alternatives --install /usr/lib/slepc slepc ${SLEPC_DIR_COMPLEX} ${SLEPC_VERSION_NUMBER}73 \
+  --slave /usr/lib/${DEB_HOST_MULTIARCH}/libslepc.so libslepc.so /usr/lib/${DEB_HOST_MULTIARCH}/libslepc_complex.so.${SLEPC_VERSION} \
+  --slave /usr/include/slepc slepcinclude ${SLEPC_DIR_COMPLEX}/include \
+  --slave /usr/lib/${DEB_HOST_MULTIARCH}/pkgconfig/SLEPc.pc SLEPc.pc ${SLEPC_DIR_COMPLEX}/lib/pkgconfig/SLEPc.pc
+
+# alternative base version of slepc complex
+update-alternatives --install /usr/lib/${DEB_HOST_MULTIARCH}/libslepc_complex.so libslepc_complex.so /usr/lib/${DEB_HOST_MULTIARCH}/libslepc_complex.so.${SLEPC_VERSION} ${SLEPC_VERSION_NUMBER}77
+
+# alternative slepc for this X.Y soname (e.g. real or complex)
+update-alternatives --install /usr/lib/slepcdir/${SONAME} slepc${SONAME} ${SLEPC_DIR_COMPLEX} ${SLEPC_VERSION_NUMBER}73
+
+fi
+
+

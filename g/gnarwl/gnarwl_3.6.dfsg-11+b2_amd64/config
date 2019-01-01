@@ -1,0 +1,41 @@
+#!/bin/sh -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+
+
+# Get LDAP-Server
+db_metaget gnarwl/server || true
+if [ -z "$RET" ]; then
+  if [ -f /etc/ldap/ldap.conf ]; then
+    URI=`cat /etc/ldap/ldap.conf | awk '/^URI/ {print $2}' | sed "s/ldap:\/\///gi"`
+    if [ -z "$URI" ]; then
+      HOST=`cat /etc/ldap/ldap.conf | awk '/^HOST/ {print $2}' | head -1`
+      PORT=`cat /etc/ldap/ldap.conf | awk '/^PORT/ {print $2}' | head -1`
+      URI="$HOST"
+      [ "$PORT" ] && URI="$URI:$PORT"
+    fi
+    db_set gnarwl/server $URI
+  fi
+fi
+
+# Get LDAP-Base
+db_metaget gnarwl/base || true
+if [ -z "$RET" ]; then
+  if [ -f /etc/ldap/ldap.conf ]; then
+    BASE=`cat /etc/ldap/ldap.conf | sed "s/^BASE[ 	]*//g" | grep "^BASE" | head -1`
+  fi
+  echo $BASE
+  [ "$BASE" ] && db_set gnarwl/server $BASE
+fi
+
+
+db_input medium gnarwl/server || true
+db_go
+
+# Get LDAP-Base
+db_input medium gnarwl/base || true
+db_go
+
+exit 0

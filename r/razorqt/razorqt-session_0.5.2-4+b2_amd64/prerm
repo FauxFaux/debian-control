@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    "remove"|"upgrade"|"deconfigure"|"failed-upgrade")
+	update-alternatives \
+	    --remove x-session-manager /usr/bin/razor-session
+	;;
+esac
+
+

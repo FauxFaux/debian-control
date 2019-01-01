@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit/11.5.4
+if [ -x "/etc/init.d/samba-ad-dc" ] && [ "$1" = remove ]; then
+	invoke-rc.d samba-ad-dc stop || exit 1
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.4
+if [ -x "/etc/init.d/nmbd" ] && [ "$1" = remove ]; then
+	invoke-rc.d nmbd stop || nmbd_error_handler
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.4
+if [ -x "/etc/init.d/smbd" ] && [ "$1" = remove ]; then
+	invoke-rc.d smbd stop || exit 1
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.4
+dpkg-maintscript-helper rm_conffile /etc/init.d/samba 2:4.6.5\+dfsg-5\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/nmbd.conf 2:4.6.5\+dfsg-5\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/reload-smbd.conf 2:4.6.5\+dfsg-5\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/samba-ad-dc.conf 2:4.6.5\+dfsg-5\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/smbd.conf 2:4.6.5\+dfsg-5\~ -- "$@"
+# End automatically added section

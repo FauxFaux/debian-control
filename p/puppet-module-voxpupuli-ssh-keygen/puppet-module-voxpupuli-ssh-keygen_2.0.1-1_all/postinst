@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/ssh_keygen puppet-module-ssh-keygen /usr/share/puppet/modules.available/voxpupuli-ssh-keygen 500
+fi
+
+
+
+exit 0

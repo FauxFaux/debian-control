@@ -1,0 +1,19 @@
+Package: license-reconcile
+Version: 0.16
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 149
+Depends: perl, libclass-xsaccessor-perl, libconfig-any-perl, libdebian-copyright-perl (>= 0.2), libdpkg-perl, libemail-address-xs-perl, libfile-fnmatch-perl, libfile-mmagic-perl, libfile-slurp-perl, liblist-moreutils-perl, libparse-debianchangelog-perl, libreadonly-perl (>= 1.500) | libreadonly-xs-perl, libreadonly-perl (>= 1.600) | libreadonly-perl (<< 1.500), libset-intspan-perl, libsmart-comments-perl, libtext-levenshteinxs-perl, libuniversal-require-perl, licensecheck
+Recommends: libyaml-libyaml-perl
+Section: devel
+Priority: optional
+Description: tool to reconcile copyright file and source
+ Out of the box the license-reconcile tool compares licensecheck output
+ and the debian/changelog file against the debian/copyright file. However
+ the power of the tool is that the behaviour can be overridden and complemented
+ by rules. Rules include the ability to file match, to match against
+ licensecheck output and to extract copyright years. The rules can be defined
+ in a file and should need to be changed less often than the debian/copyright
+ file itself. If necessary copyright and license data can be extracted
+ from the source code in more specialized ways by adding Perl modules
+ below Debian::LicenseReconcile::Filter.

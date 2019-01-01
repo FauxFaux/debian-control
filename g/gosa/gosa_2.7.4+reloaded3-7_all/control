@@ -1,0 +1,20 @@
+Package: gosa
+Version: 2.7.4+reloaded3-7
+Architecture: all
+Maintainer: Debian Edu Packaging Team <debian-edu-pkg-team@lists.alioth.debian.org>
+Installed-Size: 6509
+Depends: apache2 | lighttpd | httpd, default-mta | mail-transport-agent, fonts-liberation, gettext, libcrypt-smbhash-perl, libjs-scriptaculous, php, php-xml, php-cgi, php-cli, php-curl, php-gd, php-imagick | imagemagick | graphicsmagick-im-compat, php-imap, php-ldap, php-mbstring, php-mysql, php-recode, smarty-gettext, smarty3
+Suggests: cyrus21-imapd (>= 2.1.11), gosa-schema, php-apc, php-fpdf, php-suhosin, postfix-ldap, slapd
+Conflicts: smarty-acl-render, smarty3-gosa
+Breaks: gosa-plugin-fai (<< 2.7.4+reloaded3-1~), gosa-plugin-fai-schema (<< 2.7.4+reloaded3-1~), gosa-plugin-heimdal (<< 2.7.4+reloaded3-1~), gosa-plugin-opsi (<< 2.7.4+reloaded3-1~)
+Replaces: gosa-plugin-fai (<< 2.7.4+reloaded3-1~), gosa-plugin-fai-schema (<< 2.7.4+reloaded3-1~), gosa-plugin-heimdal (<< 2.7.4+reloaded3-1~), gosa-plugin-opsi (<< 2.7.4+reloaded3-1~)
+Section: web
+Priority: optional
+Homepage: https://oss.gonicus.de/labs/gosa/
+Description: Web Based LDAP Administration Program
+ Provided is access to posix, shadow, samba, proxy, fax, pureftp and
+ kerberos accounts. It is able to manage the postfix/cyrus server
+ combination and can write user adapted sieve scripts.
+ .
+ GOsa² is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.

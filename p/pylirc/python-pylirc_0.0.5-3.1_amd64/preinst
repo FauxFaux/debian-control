@@ -1,0 +1,11 @@
+#! /bin/sh
+
+set -e
+
+if [ "$1" = upgrade ] && dpkg --compare-versions "$2" lt 0.0.5-2; then
+	pycentral pkgremove python-pylirc
+fi
+
+
+
+exit 0

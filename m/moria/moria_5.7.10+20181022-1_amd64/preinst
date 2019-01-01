@@ -1,0 +1,35 @@
+#!/bin/sh -e
+
+# Shamelessly stolen from Joey Hess' bsdgames-2.12-9
+
+SCORESFILE="/var/games/moria/scores.dat"
+SCORESDIR="/var/games/moria"
+
+OLDSCORESFILE="/var/lib/games/moria/scores.dat"
+OLDSCORESDIR="/var/lib/games/moria"
+
+# Is the scores directory present?
+if [ ! -d /var/games/moria ]; then
+    mkdir -p $SCORESDIR
+    chown root:games $SCORESDIR
+    chmod g+rws $SCORESDIR
+fi
+
+
+# Is there an old scores file in the old scores directory?
+if [ -d $OLDSCORESDIR ]; then
+
+    if [ -e $OLDSCORESFILE ]; then
+	if [ ! -e $SCORESDIR ]; then
+	    mv -f $OLDSCORESFILE $SCORESDIR
+	else
+	    # Ah, somehow there's a current scores file.  Delete the old one.
+	    rm -f $OLDSCORESFILE
+	fi
+    fi
+    
+    # And now delete the old directory hierarchy.
+    rm -rf $OLDSCORESDIR
+fi
+
+

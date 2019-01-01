@@ -1,0 +1,23 @@
+Package: libxs-object-magic-perl
+Source: libxs-object-magic-perl (0.4-1)
+Version: 0.4-1+b7
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 57
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.2.5)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/XS-Object-Magic/
+Description: module for opaque, extensible XS pointer backed objects using sv_magic
+ XS::Object::Magic provides a way of associating structs with Perl space
+ objects designed to supercede Perl's builtin "T_PTROBJ" with something that
+ is designed to be:
+ .
+   * extensible: The association of the pointer using "sv_magicext" can be
+     done on any data type, so you can associate C structs with any
+     representation type. This means that you can add pointers to any object
+     (hand coded, Moose or otherwise), while still having instance data in
+     regular hashes.
+   * opaque: The C pointer is neither visible nor modifiable from Perl space.
+     This prevents accidental corruption which could lead to segfaults using
+     "T_PTROBJ" (e.g. "$$ptr_obj = 0").

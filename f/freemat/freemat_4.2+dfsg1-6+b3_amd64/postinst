@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+# Move a conffile without triggering a dpkg question
+mv_conffile() {
+    local OLDCONFFILE="$1"
+    local NEWCONFFILE="$2"
+
+    [ -e "$OLDCONFFILE" ] || return 0
+
+    echo "Preserving user changes to $NEWCONFFILE ..."
+    mv -f "$NEWCONFFILE" "$NEWCONFFILE".dpkg-new
+    mv -f "$OLDCONFFILE" "$NEWCONFFILE"
+}
+
+case "$1" in
+configure)
+    if dpkg --compare-versions "$2" le "4.2+dfsg1-3"; then
+        mv_conffile "/etc/xdg/FreeMat/FreeMat v4.0.conf" "/etc/xdg/FreeMat/FreeMat v4.2.conf"
+    fi
+esac
+
+

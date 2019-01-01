@@ -1,0 +1,17 @@
+Package: google-compute-engine
+Source: google-compute-image-packages
+Version: 20181206-1
+Architecture: all
+Maintainer: Lucas Kanashiro <lucas.kanashiro@collabora.com>
+Installed-Size: 50
+Depends: google-compute-engine-oslogin, python3-google-compute-engine (= 20181206-1)
+Section: admin
+Priority: optional
+Homepage: https://github.com/GoogleCloudPlatform/compute-image-packages
+Description: Google Compute Engine guest environment for cloud images
+ This package contains a set of scripts, configuration, and systemd init files
+ for features specific to the Google Compute Engine cloud environment. These
+ features are Google Compute Engine specific and need to be configured by
+ special daemons provided by this package. Some examples of these services are:
+ configure specific network settings, run startup/shutdown scripts and store
+ user provided ssh keys for machine access.

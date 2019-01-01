@@ -1,0 +1,24 @@
+Package: libunsafe-mock-java
+Source: unsafe-mock
+Version: 8.0-3
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 27
+Section: java
+Priority: optional
+Homepage: https://github.com/headius/unsafe-mock
+Description: Java library providing backported sun.misc.Unsafe class from JDK 8
+ sun.misc.Unsafe is Java class in Oracle JDKs that provides a collection of
+ methods for performing low-level, unsafe operations.
+ .
+ Although the class and all methods are public, use of this class is limited
+ because only trusted code can obtain instances of it.
+ .
+ unsafe-mock provides a current version of sun.misc.Unsafe that
+ supports all APIs up through the new "fences" API in Java 8 EA builds
+ b71 and later. This Unsafe is a copy of the one from Java 8 EA build
+ b71, and it is expected that if you want to build against it you put
+ it in javac's bootclasspath. You are responsible for determining in
+ your own code whether you can access Unsafe and which methods are
+ available; this library is only to provide an all-inclusive Unsafe
+ against which you can compile using JDKs <= 8.0.

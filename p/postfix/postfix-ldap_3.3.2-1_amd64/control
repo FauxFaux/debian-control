@@ -1,0 +1,21 @@
+Package: postfix-ldap
+Source: postfix
+Version: 3.3.2-1
+Architecture: amd64
+Maintainer: LaMont Jones <lamont@debian.org>
+Installed-Size: 403
+Depends: libc6 (>= 2.3), libldap-2.4-2 (>= 2.4.7), postfix (= 3.3.2-1)
+Breaks: postfix (<< 3.1.3-7~)
+Replaces: postfix (<< 3.1.3-7~)
+Section: mail
+Priority: optional
+Homepage: http://www.postfix.org
+Description: LDAP map support for Postfix
+ Postfix is Wietse Venema's mail transport agent that started life as an
+ alternative to the widely-used Sendmail program.  Postfix attempts to
+ be fast, easy to administer, and secure, while at the same time being
+ sendmail compatible enough to not upset existing users. Thus, the outside
+ has a sendmail-ish flavor, but the inside is completely different.
+ .
+ This provides support for LDAP maps in Postfix. If you plan to use LDAP maps
+ with Postfix, you need this.

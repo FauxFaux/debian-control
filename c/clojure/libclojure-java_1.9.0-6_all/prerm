@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ]; then
+        CLOJUREVER=1.9
+        update-alternatives --remove libclojure /usr/share/java/clojure-${CLOJUREVER}.jar
+fi
+
+

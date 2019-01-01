@@ -1,0 +1,30 @@
+Package: sqlobject-admin
+Source: sqlobject
+Version: 3.7.0+dfsg-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 29
+Depends: python3-sqlobject (= 3.7.0+dfsg-1), python3:any
+Breaks: python-sqlobject (<< 3.0.0+dfsg-1)
+Replaces: python-sqlobject (<< 3.0.0+dfsg-1)
+Section: python
+Priority: optional
+Homepage: http://www.sqlobject.org
+Description: Helper applications for SQLObject, a Python ORM for databases
+ SQLObject is an object-relational mapper. It allows you to translate RDBMS
+ table rows into Python objects, and manipulate those objects to transparently
+ manipulate the database.
+ .
+ In using SQLObject, you will create a class definition that will describe how
+ the object connects to the database (in addition to any other methods you may
+ wish to add to the class). SQLObject will produce the code to access the
+ database, and update the database with your changes. The interface to the
+ database is meant to be indistinguishable from other interfaces you may add
+ to the object.
+ .
+ SQLObject also includes a novel feature to generate WHERE clauses using
+ Python syntax and objects (instead of generating SQL using string
+ substitution, as is traditional).
+ .
+ This package includes the sqlobject-admin and sqlobject-convertOldURI helper
+ applications for use with SQLObject.

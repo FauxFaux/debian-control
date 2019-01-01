@@ -1,0 +1,21 @@
+Package: plymouth-x11
+Source: plymouth
+Version: 0.9.4-1
+Architecture: amd64
+Maintainer: Laurent Bigonville <bigon@debian.org>
+Installed-Size: 49
+Depends: plymouth (= 0.9.4-1), libc6 (>= 2.4), libcairo2 (>= 1.2.4), libglib2.0-0 (>= 2.12.0), libgtk-3-0 (>= 3.14.0), libplymouth4 (>= 0.9.3)
+Recommends: plymouth-themes
+Suggests: gdm
+Section: misc
+Priority: optional
+Homepage: http://www.freedesktop.org/wiki/Software/Plymouth
+Description: boot animation, logger and I/O multiplexer - X11 renderer
+ Plymouth provides a boot-time I/O multiplexing framework - the most obvious
+ use for which is to provide an attractive graphical animation in place of
+ the text messages that normally get shown during boot. (The messages are
+ instead redirected to a logfile for later viewing.) However, in event-driven
+ boot systems Plymouth can also usefully handle user interaction such as
+ password prompts for encrypted file systems.
+ .
+ This package contains the X11 renderer for a graphical boot splash.

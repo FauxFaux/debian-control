@@ -1,0 +1,52 @@
+#!/bin/sh
+
+set -e
+
+add_override() {
+    if ! dpkg-statoverride --list $4 >/dev/null; then
+	dpkg-statoverride --update --add $1 $2 $3 $4
+    fi
+}
+
+if [ "$1" = "configure" ]; then
+    add_override root courier 0640 /etc/courier/authldaprc
+    add_override root courier 0640 /etc/courier/ldapaliasrc
+fi
+
+# Automatically added by dh_systemd_enable/11.5.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'courier-ldap.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'courier-ldap.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'courier-ldap.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'courier-ldap.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create courier-ldap.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/courier-ldap" ]; then
+		update-rc.d courier-ldap defaults >/dev/null
+		invoke-rc.d courier-ldap start || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

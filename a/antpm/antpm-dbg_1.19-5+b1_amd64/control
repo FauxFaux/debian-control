@@ -1,0 +1,28 @@
+Package: antpm-dbg
+Source: antpm (1.19-5)
+Version: 1.19-5+b1
+Architecture: amd64
+Maintainer: Debian running development group <pkg-running-devel@lists.alioth.debian.org>
+Installed-Size: 8599
+Depends: antpm (= 1.19-5+b1)
+Section: debug
+Priority: extra
+Description: ANT+ information retrieval client for Garmin GPS products
+ This software uses the Garmin ANT+ proprietary USB keys and
+ communication protocol to retrieve information (such as GPS traces)
+ from some Garmin Forerunner watches such as Forerunner 405 and 310XT.
+ .
+ The underlying ANT+minus implements the ANT/ANT+/ANT-FS protocols to
+ provide these tools: garmin-ant-downloader, antpm-downloader,
+ antpm-fit2gpx, and antpm-usbmon2ant.
+ .
+ ANT+minus is a userspace implementation of a wire protocol similar
+ to the ANT/ANT+/ANT-FS protocols. The goal is to be able to communicate
+ with any ANT capable device in order to e.g. retrieve sports tracks. The
+ c++ implementation is currently available under both linux and win.
+ Communication with watches other than the 310XT might work, but are
+ untested. Please report your experience to help improving the software.
+ .
+ The software was originally named "gant" but renamed when packaged
+ to avoid confusion with existing Java software.
+Build-Ids: 186e44fdfbc410f9d5a73f87db1c227c7795b619 588c704d36e8c83da84fec48f2392c492d6dcf08 bb79ce8b75de48e6356f84adacf1e875ee68fa92 dc16917d0c0325d687ef8c107fcc982d880da17d

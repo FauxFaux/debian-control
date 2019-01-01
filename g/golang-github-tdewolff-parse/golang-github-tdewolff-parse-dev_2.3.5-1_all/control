@@ -1,0 +1,20 @@
+Package: golang-github-tdewolff-parse-dev
+Source: golang-github-tdewolff-parse
+Version: 2.3.5-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Installed-Size: 309
+Depends: golang-github-tdewolff-test-dev (>= 1.0.0-2~)
+Section: devel
+Priority: optional
+Homepage: https://github.com/tdewolff/parse
+Description: Go parsers for web formats
+ This package contains several lexers and parsers written in Go.
+ All subpackages are built to be streaming, high performance
+ and to be in accordance with the official (latest) specifications.
+ .
+ The lexers are implemented using buffer.Lexer in
+ https://github.com/tdewolff/parse/buffer and the parsers work on top of
+ the lexers. Some subpackages have hashes defined (using Hasher
+ https://github.com/tdewolff/hasher) that speed up common
+ byte-slice comparisons.

@@ -1,0 +1,48 @@
+Package: libarchive13
+Source: libarchive
+Version: 3.3.3-2
+Architecture: amd64
+Maintainer: Peter Pentchev <roam@debian.org>
+Installed-Size: 801
+Depends: libacl1 (>= 2.2.51-8), libbz2-1.0, libc6 (>= 2.16), liblz4-1 (>= 0.0~r130), liblzma5 (>= 5.2.2), libnettle6, libxml2 (>= 2.7.4), libzstd1 (>= 1.3.2), zlib1g (>= 1:1.1.4)
+Suggests: lrzip
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.libarchive.org/
+Description: Multi-format archive and compression library (shared library)
+ The libarchive library provides a flexible interface for reading and writing
+ archives in various formats such as tar and cpio. libarchive also supports
+ reading and writing archives compressed using various compression filters such
+ as gzip and bzip2. The library is inherently stream-oriented; readers serially
+ iterate through the archive, writers serially add things to the archive.
+ .
+ Archive formats supported are:
+ .
+    * tar (read and write, including GNU extensions)
+    * pax (read and write, including GNU and star extensions)
+    * cpio (read and write, including odc and newc variants)
+    * iso9660 (read and write, including Joliet and Rockridge extensions, with
+      some limitations)
+    * zip (read only, with some limitations, uses zlib)
+    * mtree (read and write)
+    * shar (write only)
+    * ar (read and write, including BSD and GNU/SysV variants)
+    * empty (read only; in particular, note that no other format will accept an
+      empty file)
+    * raw (read only)
+    * xar (read only)
+    * rar (read only, with some limitations)
+    * 7zip (read and write, with some limitations)
+ .
+ Filters supported are:
+ .
+    * gzip (read and write, uses zlib)
+    * bzip2 (read and write, uses bzlib)
+    * compress (read and write, uses an internal implementation)
+    * uudecode (read only)
+    * separate command-line compressors with fixed-signature auto-detection
+    * xz and lzma (read and write using liblzma)
+    * zstandard (read and write using libzstd)
+ .
+ This package provides the libarchive shared library.

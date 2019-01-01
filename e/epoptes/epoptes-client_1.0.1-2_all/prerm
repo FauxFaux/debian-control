@@ -1,0 +1,22 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installsystemd/11.4.1
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop 'epoptes-client.service' >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.4.1
+dpkg-maintscript-helper rm_conffile /etc/init.d/epoptes-client 1.0.1-2\~ epoptes-client -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/epoptes-client.conf 1.0.1-2\~ epoptes-client -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/network/if-up.d/epoptes-client 1.0.1-2\~ epoptes-client -- "$@"
+# End automatically added section
+
+# Automatically added by dh_python3:
+if which py3clean >/dev/null 2>&1; then
+	py3clean -p epoptes-client 
+else
+	dpkg -L epoptes-client | perl -ne 's,/([^/]*)\.py$,/__pycache__/\1.*, or next; unlink $_ or die $! foreach glob($_)'
+	find /usr/lib/python3/dist-packages/ -type d -name __pycache__ -empty -print0 | xargs --null --no-run-if-empty rmdir
+fi
+
+# End automatically added section

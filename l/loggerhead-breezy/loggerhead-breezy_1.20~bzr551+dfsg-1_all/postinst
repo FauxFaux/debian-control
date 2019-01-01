@@ -1,0 +1,29 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p loggerhead-breezy 
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p loggerhead-breezy  || true
+fi
+
+# End automatically added section
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/loggerhead-breezy" ]; then
+		update-rc.d loggerhead-breezy defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d loggerhead-breezy $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+
+
+adduser --system --group --home / loggerhead > /dev/null 2>&1
+chown loggerhead /var/log/loggerhead

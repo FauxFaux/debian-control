@@ -1,0 +1,17 @@
+Package: mariadb-plugin-rocksdb
+Source: mariadb-10.3
+Version: 1:10.3.11-3
+Architecture: amd64
+Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Installed-Size: 10796
+Depends: mariadb-server-10.3 (= 1:10.3.11-3), rocksdb-tools, libc6 (>= 2.28), libssl1.1 (>= 1.1.0), libstdc++6 (>= 7), zlib1g (>= 1:1.1.4)
+Recommends: python-mysqldb
+Breaks: mariadb-rocksdb-engine-10.2, mariadb-rocksdb-engine-10.3
+Replaces: mariadb-rocksdb-engine-10.2, mariadb-rocksdb-engine-10.3
+Section: database
+Priority: optional
+Homepage: https://mariadb.org/
+Description: RocksDB storage engine for MariaDB
+ The RocksDB storage engine is a high performance storage engine, aimed
+ at maximising storage efficiency while maintaining InnoDB-like performance.
+ This package contains the RocksDB plugin for MariaDB.

@@ -1,0 +1,26 @@
+Package: courier-base
+Source: courier (0.78.0-2)
+Version: 0.78.0-2+b3
+Architecture: amd64
+Maintainer: Markus Wanner <markus@bluegap.ch>
+Installed-Size: 656
+Depends: adduser, courier-authdaemon, courier-authlib (>= 0.66.1), courier-authlib-userdb, debconf (>= 0.5) | debconf-2.0, gnutls-bin, lsb-base, sysvinit-utils (>= 2.88dsf-50), perl:any, libc6 (>= 2.15), libcourier-unicode4 (>= 1.4), libfam0, libgdbm6 (>= 1.16), libgnutls30 (>= 3.5.6)
+Breaks: courier-authdaemon (<< 0.66.4-4~), courier-ssl (<< 0.75.0-1)
+Replaces: courier-ssl (<< 0.75.0-1)
+Section: mail
+Priority: optional
+Homepage: http://www.courier-mta.org/
+Description: Courier mail server - base system
+ The Courier mail transfer agent (MTA) is an integrated mail/groupware
+ server based on open commodity protocols, such as ESMTP, IMAP, POP3,
+ LDAP, TLS, and HTTP. Courier provides ESMTP, IMAP, POP3, webmail, and
+ mailing list services within a single, consistent, framework.
+ .
+ This package provides the functionality needed by all courier
+ packages such as some configuration files, helper programs and the
+ Courier TCP server daemon.
+ .
+ Courier uses the a TLS wrapper application named couriertls
+ instead of embedding TLS support in the different applications.
+ Additionally, this package contains a default set of trusted X.509
+ root CA certs.

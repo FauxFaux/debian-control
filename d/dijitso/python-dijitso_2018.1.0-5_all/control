@@ -1,0 +1,35 @@
+Package: python-dijitso
+Source: dijitso
+Version: 2018.1.0-5
+Architecture: all
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 14
+Depends: python3-dijitso (>= 2018.1)
+Section: python
+Priority: optional
+Homepage: https://fenicsproject.org
+Description: distributed just-in-time building of shared libraries
+ Dijitso was written to improve a core component of the FEniCS
+ framework, namely the just in time compilation of C++ code that is
+ generated from Python modules, but is only called from within a C++
+ library, and thus do not need wrapping in a nice Python interface.
+ .
+ The main approach of dijitso is to use ctypes to import the dynamic
+ shared library directly with no attempt at wrapping it in a Python
+ interface.
+ .
+ As long as the compiled code can provide a simple factory function to
+ a class implementing a predefined C++ interface, there is no limit to
+ the complexity of that interface as long as it is only called from
+ C++ code, If you want a Python interface to your generated code,
+ dijitso is probably not the answer.
+ .
+ Although dijitso serves a very specific role within the FEniCS
+ project, it does not depend on other FEniCS components.
+ .
+ The parallel support depends on the mpi4py interface, although mpi4py
+ is not actually imported within the dijitso module so it would be
+ possible to mock the communicator object with a similar interface.
+ .
+ This is a dummy package that depends on python3-dijitso.
+ (Dijitso is no longer available for Python 2).

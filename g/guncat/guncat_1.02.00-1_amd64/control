@@ -1,0 +1,27 @@
+Package: guncat
+Version: 1.02.00-1
+Architecture: amd64
+Maintainer: Frank B. Brokken <f.b.brokken@rug.nl>
+Installed-Size: 90
+Depends: libbobcat4, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Section: devel
+Priority: optional
+Homepage: https://fbb-git.gitlab.io/guncat
+Description: Catenates files while decrypting PGP-encrypted sections
+ Guncat acts like unix's cat command, but handles
+ (partially) encrypted sections of processed files.
+ Sections of guncat's input files which are surrounded by
+ -----BEGIN PGP MESSAGE-----
+ and
+ -----END PGP MESSAGE-----
+ markers are decrypted before being concatenated to the
+ standard output stream.
+ .
+ Guncat's output (i.e., the standard output stream) may
+ subsequently be processed by other programs, like grep
+ or less.  Guncat supports reading a decryption passphrase
+ either from stdin or from gpg-agent.
+ .
+ Guncat stands for (Gpg UNencrypting CAT) and was designed to
+ facilitate searching through (partially) PGP encrypted files,
+ as encountered in mailboxes, for example.

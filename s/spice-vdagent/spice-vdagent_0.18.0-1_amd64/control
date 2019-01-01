@@ -1,0 +1,19 @@
+Package: spice-vdagent
+Version: 0.18.0-1
+Architecture: amd64
+Maintainer: Liang Guo <guoliang@debian.org>
+Installed-Size: 170
+Depends: libasound2 (>= 1.0.16), libc6 (>= 2.15), libdbus-1-3 (>= 1.9.14), libglib2.0-0 (>= 2.34), libgtk-3-0 (>= 3.10), libpciaccess0, libsystemd0, libx11-6, libxinerama1, libxrandr2 (>= 2:1.2.99.2)
+Section: x11
+Priority: optional
+Homepage: http://www.spice-space.org/
+Description: Spice agent for Linux
+ spice-vdagent is the spice agent for Linux, it is used in conjunction with
+ spice-compatible hypervisor, its feature includes:
+  - Client mouse mode (no need to grab mouse by client, no mouse lag)
+    this is handled by the daemon by feeding mouse events into the kernel
+    via uinput. This will only work if the active X-session is running a
+    spice-vdagent process so that its resolution can be determined.
+  - Automatic adjustment of the X-session resolution to the client resolution
+  - Support of copy and paste (text and images) between the active X-session
+    and the client

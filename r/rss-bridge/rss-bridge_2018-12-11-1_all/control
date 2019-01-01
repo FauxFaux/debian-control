@@ -1,0 +1,17 @@
+Package: rss-bridge
+Version: 2018-12-11-1
+Architecture: all
+Maintainer: Johannes 'josch' Schauer <josch@debian.org>
+Installed-Size: 987
+Depends: php-curl, php-json, php-mbstring, php-xml
+Recommends: apache2 | nginx | httpd, libapache2-mod-php | php-fpm | php-cgi
+Section: web
+Priority: optional
+Homepage: https://github.com/RSS-Bridge/rss-bridge
+Description: web service generating ATOM feeds for websites that don't have them
+ Provides a PHP web service which generates ATOM feeds for facebook, twitter,
+ youtube, flickr, google, instagram, pinterest and more than 130 other web
+ services which do not provide ATOM or RSS feeds themselves. The software acts
+ as a proxy between the web service and an RSS reader software. It scrapes
+ their publicly available HTML pages to extract the necessary information.
+ To prevent banning, the results are cached.

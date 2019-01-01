@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+# TODO:
+# Priority 50 is based on the priority for openmpi by default
+
+update-alternatives \
+    --install /usr/lib/x86_64-linux-gnu/pkgconfig/adios-mpi.pc adios-mpi.pc \
+              /usr/lib/x86_64-linux-gnu/pkgconfig/adios-openmpi.pc 50
+
+
+
+
+exit 0

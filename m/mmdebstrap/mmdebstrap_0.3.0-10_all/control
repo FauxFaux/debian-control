@@ -1,0 +1,20 @@
+Package: mmdebstrap
+Version: 0.3.0-10
+Architecture: all
+Maintainer: Johannes 'josch' Schauer <josch@debian.org>
+Installed-Size: 95
+Depends: perl-doc, apt, perl:any
+Recommends: arch-test, fakechroot, fakeroot, mount, uidmap
+Suggests: proot, qemu-user, qemu-user-static, binfmt-support, dpkg-dev
+Section: admin
+Priority: optional
+Homepage: https://gitlab.mister-muffin.de/josch/mmdebstrap/
+Description: create a Debian chroot
+ Downloads, unpacks and installs Debian packages to either directly create a
+ directory which can be chrooted into, or a tarball of it. In contrast to
+ debootstrap it uses apt, supports more than one mirror, automatically uses
+ security and updates mirrors for Debian stable chroots, is 3-6 times faster,
+ produces smaller output by removing unnecessary cruft, is bit-by-bit
+ reproducible if $SOURCE_DATE_EPOCH is set, allows unprivileged operation using
+ Linux user namespaces, fakechroot or proot and can setup foreign architecture
+ chroots using qemu-user.

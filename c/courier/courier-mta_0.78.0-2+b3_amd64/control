@@ -1,0 +1,30 @@
+Package: courier-mta
+Source: courier (0.78.0-2)
+Version: 0.78.0-2+b3
+Architecture: amd64
+Maintainer: Markus Wanner <markus@bluegap.ch>
+Installed-Size: 2230
+Depends: courier-base (= 0.78.0-2+b3), debconf (>= 0.5) | debconf-2.0, libnet-cidr-perl, sysvinit-utils (>= 2.88dsf-50) | init-d-script, courier-authlib (>= 0.66.4-5~), libc6 (>= 2.15), libcourier-unicode4 (>= 1.4), libgcc1 (>= 1:3.0), libgdbm6 (>= 1.16), libidn11 (>= 1.13), libperl5.28 (>= 5.28.0), libstdc++6 (>= 5.2)
+Suggests: courier-doc, courier-filter-perl, couriergrey, mail-reader
+Conflicts: mail-transport-agent
+Breaks: courier-mta-ssl (<< 0.75.0-1~)
+Replaces: courier-mta-ssl (<< 0.75.0-1~), mail-transport-agent
+Provides: mail-transport-agent
+Section: mail
+Priority: optional
+Homepage: http://www.courier-mta.org/
+Description: Courier mail server - ESMTP daemon
+ The Courier mail transfer agent (MTA) is an integrated mail/groupware
+ server based on open commodity protocols, such as ESMTP, IMAP, POP3,
+ LDAP, TLS, and HTTP. Courier provides ESMTP, IMAP, POP3, webmail, and
+ mailing list services within a single, consistent, framework.
+ .
+ This package provides an ESMTP daemon which uses the Maildir format
+ as native storage format, supports IPv6, implements SMTP extensions
+ for mailing list management and features integrated mail filtering.
+ It can function as an intermediate mail relay, relaying mail between
+ an internal LAN and the Internet, or perform final delivery to
+ mailboxes.
+ .
+ ESMTP over TLS is handled by the regular ESMTP daemon in conjunction
+ with the TLS wrapper.

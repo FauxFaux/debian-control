@@ -1,0 +1,25 @@
+Package: getmail
+Version: 5.8-1
+Architecture: all
+Maintainer: Osamu Aoki <osamu@debian.org>
+Installed-Size: 658
+Depends: python:any (<< 2.8), python:any (>= 2.7~)
+Suggests: python-gnomekeyring, python-gobject
+Breaks: getmail4 (<< 5.5-2)
+Replaces: getmail4
+Provides: getmail4
+Section: mail
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://pyropus.ca/software/getmail/
+Description: mail retriever with support for POP3, IMAP4 and SDPS
+ getmail is intended as a simple replacement for fetchmail.
+ It retrieves mail (either all messages, or only unread messages)
+ from one or more POP3/IMAP4/SDPS servers for one or more email
+ accounts, and reliably delivers into a qmail-style Maildir, mbox
+ file or to a command (pipe delivery) like maildrop or procmail,
+ specified on a per-account basis. getmail also has support for
+ domain (multidrop) mailboxes.
+ .
+ Supported protocols:
+ POP3, POP3-over-SSL, IMAP4, IMAP4-over-SSL, and SDPS mail.

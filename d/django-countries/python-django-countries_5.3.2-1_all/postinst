@@ -1,0 +1,35 @@
+#!/bin/sh
+
+set -eu
+
+build_locale_symlinks ()
+{
+    local path dest file
+    # Remove existing symlink farm. We will recreate it immediately.
+    rm -rf /usr/share/python-django-countries/locale/*
+    for file in /usr/share/locale/*/LC_MESSAGES/iso_3166.mo; do
+        # Create the necessary directory structure for each language.
+        path=$(dirname /usr/share/python-django-countries/locale/${file#/usr/share/locale/})
+        mkdir -p ${path}
+        # Create the symlink with an absolute target path (iso_3166.mo -> django.mo).
+        dest=${path}/django.mo
+        ln -s ../../../../${file#/usr/share/} ${dest}
+    done
+}
+
+if [ "$1" = "configure" ]; then
+    build_locale_symlinks
+elif [ "$1" = "triggered" ]; then
+    # iso-codes has been updated
+    build_locale_symlinks
+    exit 0
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-django-countries 
+fi
+
+# End automatically added section
+

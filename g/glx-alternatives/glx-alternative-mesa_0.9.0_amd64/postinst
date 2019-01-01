@@ -1,0 +1,100 @@
+#!/bin/sh
+set -e
+
+
+TRIPLETS="/ /i386-linux-gnu/ /x86_64-linux-gnu/ /arm-linux-gnueabihf/"
+
+add_slave()
+{
+	local target_link name source_path prefix
+	target_link="$1"
+	name="$2"
+	source_path="$3"
+	prefix="glx--"
+
+	if [ -f "${source_path}" ] && [ -d "$(dirname "${target_link}")" ]; then
+		echo --slave "${target_link}" "${prefix}${name}" "${source_path}"
+	fi
+}
+
+add_multiarch_slave()
+{
+	local target_dir target_sub_dir file source_dir source_sub_dir prefix suffix triplet
+	target_dir="$1"
+	target_sub_dir="$2"
+	file="$3"
+	source_dir="$4"
+	source_sub_dir="$5"
+	prefix="$6"
+	srcfile="${7:-$file}"
+
+	for triplet in $TRIPLETS ; do
+		# s|/$||; s|^/|-|;
+		suffix="${triplet%/}"
+		suffix="${suffix:+-${suffix#/}}"
+		add_slave \
+			"${target_dir}${triplet}${target_sub_dir}${file}" \
+			"${prefix}${file}${suffix}" \
+			"${source_dir}${triplet}${source_sub_dir}${srcfile}"
+	done
+}
+
+# Handles the alternatives for
+# * /usr/lib[/<triplet>]/libGL.so
+# * /usr/lib[/<triplet>]/libGL.so.1
+setup_alternatives()
+{
+	# these were never used
+	update-alternatives --remove libGL.so-master /usr/lib/mesa
+	update-alternatives --remove glx /usr/lib/mesa
+
+	# libGL.so.1 (from /usr/lib/mesa-diverted/)
+	slaves="$(add_multiarch_slave /usr/lib "" libGL.so.1 /usr/lib/mesa-diverted)
+		$(add_multiarch_slave /usr/lib "" libEGL.so.1 /usr/lib/mesa-diverted)
+		$(add_multiarch_slave /usr/lib "" libGLESv1_CM.so.1 /usr/lib/mesa-diverted)
+		$(add_multiarch_slave /usr/lib "" libGLESv2.so.2 /usr/lib/mesa-diverted)
+"
+	slave_indirect=
+	if ! update-alternatives --query nvidia 2>/dev/null | grep -q nvidia--libGLX_indirect.so.0- ; then
+		slave_indirect="$(add_multiarch_slave /usr/lib "" libGLX_indirect.so.0 /usr/lib "" "" libGLX_mesa.so.0)"
+	fi
+
+	if echo "$slaves" | grep -q "slave" ; then
+		update-alternatives --install /usr/lib/glx glx /usr/lib/mesa-diverted 5 $slaves $slave_indirect
+	else
+		update-alternatives --remove glx /usr/lib/mesa-diverted
+	fi
+
+	# libGL.so (from /usr/lib/mesa-diverted/)
+	slaves="$(add_multiarch_slave /usr/lib "" libGL.so /usr/lib/mesa-diverted)
+		$(add_multiarch_slave /usr/lib "" libEGL.so /usr/lib/mesa-diverted)
+		$(add_multiarch_slave /usr/lib "" libGLESv1_CM.so /usr/lib/mesa-diverted)
+		$(add_multiarch_slave /usr/lib "" libGLESv2.so /usr/lib/mesa-diverted)
+"
+
+	if echo "$slaves" | grep -q "slave" ; then
+		update-alternatives --install /usr/lib/mesa-diverted/libGL.so-master libGL.so-master /usr/lib/mesa-diverted 9995 $slaves
+	else
+		update-alternatives --remove libGL.so-master /usr/lib/mesa-diverted
+	fi
+
+	dpkg-trigger --no-await ldconfig
+}
+
+if [ "$1" = "triggered" ]; then
+
+	setup_alternatives
+
+fi
+
+if [ "$1" = "configure" ]; then
+
+	dpkg-trigger --no-await register-glx-alternative-mesa
+
+fi
+
+
+# Automatically added by dh_installdeb/11.5.4
+dpkg-maintscript-helper symlink_to_dir /usr/share/doc/glx-alternative-mesa glx-diversions 0.7.4\~ -- "$@"
+# End automatically added section
+

@@ -1,0 +1,51 @@
+#!/bin/sh
+set -e
+
+if test "$1" = "configure"; then
+    if ! id salt > /dev/null 2>&1; then
+        adduser --quiet --system --group --home /var/lib/salt --shell /bin/sh salt
+    fi
+    chown --from=root:adm salt:adm $(find /var/log/salt/ -maxdepth 1 -type f -name "master*") /var/log/salt
+
+    if dpkg --compare-versions "$2" lt-nl "2017.7.3~"; then
+        # Move salt-master pki directory (unless configured by the user)
+        if test -d /etc/salt/pki/master && ! grep -rq "^\s*pki_dir:" /etc/salt/master /etc/salt/master.d/; then
+            mkdir -p /var/lib/salt/pki
+            mv /etc/salt/pki/master /var/lib/salt/pki
+        fi
+    fi
+fi
+
+# Automatically added by dh_installinit/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/salt-master" ]; then
+		update-rc.d salt-master defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d salt-master $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'salt-master.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'salt-master.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'salt-master.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'salt-master.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,24 @@
+Package: libforks-perl
+Source: libforks-perl (0.36-2)
+Version: 0.36-2+b4
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 331
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.4), libacme-damn-perl, liblist-moreutils-perl, libsys-sigaction-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/forks
+Description: Perl module to emulate threads with fork
+ The forks.pm module is a drop-in replacement for threads.pm.  It has the
+ same syntax as the threads.pm module (it even takes over its namespace) but
+ has some significant differences:
+ .
+  - you do _not_ need a special (threaded) version of Perl
+  - it is _much_ more economic with memory usage on OS's that support COW
+  - it is more efficient in the startup of threads
+  - it is slightly less efficient in the stopping of threads
+  - it is less efficient in inter-thread communication
+ .
+ If nothing else, it allows you to use the Perl threading model in
+ non-threaded Perl builds and in older versions of Perl (5.6.0 and
+ higher are supported).

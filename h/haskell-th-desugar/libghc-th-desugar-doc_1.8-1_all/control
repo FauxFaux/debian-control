@@ -1,0 +1,25 @@
+Package: libghc-th-desugar-doc
+Source: haskell-th-desugar
+Version: 1.8-1
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 3106
+Depends: haddock-interface-33
+Recommends: ghc-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: https://github.com/goldfirere/th-desugar
+Description: functions to desugar Template Haskell; documentation
+ This package provides the Language.Haskell.TH.Desugar module, which desugars
+ Template Haskell's rich encoding of Haskell syntax into a simpler encoding.
+ This desugaring discards surface syntax information (such as the use of infix
+ operators) but retains the original meaning of the TH code. The intended use
+ of this package is as a preprocessor for more advanced code manipulation
+ tools. Note that the input to any of the ds... functions should be produced
+ from a TH quote, using the syntax [| ... |]. If the input to these functions
+ is a hand-coded TH syntax tree, the results may be unpredictable. In
+ particular, it is likely that promoted datatypes will not work as expected.
+ .
+ This package provides the documentation for a library for the Haskell
+ programming language.
+ See http://www.haskell.org/ for more information on Haskell.

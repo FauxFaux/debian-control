@@ -1,0 +1,30 @@
+Package: profbval
+Version: 1.0.22-6
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 259
+Depends: perl:any, profnet-bval
+Recommends: blast2, librg-utils-perl, profphd
+Suggests: pp-popularity-contest
+Section: science
+Priority: optional
+Homepage: https://www.rostlab.org/owiki/index.php/PROFbval
+Description: predictor of flexible/rigid protein residues from sequence
+ PROFbval can be useful for both protein structure and
+ function predictions. For instance, a biologist can locate potentially
+ antigenic determinants by identifying the most flexible residues on the
+ protein surface. Additionally, a crystallographer can locate residues that
+ potentially have high experimental B-values.
+ .
+ PROFbval takes the following input, further described on profbval(1):
+  * a protein sequence in a FASTA file
+  * secondary structure and solvent accessibility prediction by prof(1)
+  * an HSSP file
+ .
+ Background: the mobility of a given residue on the protein surface is related
+ to its functional role.
+ Therefore, identification of extremely rigid or flexible
+ residues on the protein surface is helpful for identifying functionally
+ important residues in proteins. A common measure of atom mobility in proteins
+ is B-value data from x-ray crystallography structures. PROFbval is the first
+ tool to predict normalized backbone B-values from amino-acid sequence.

@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# uruk prerm
+
+set -e
+
+case "$1" in
+  remove)
+    if test -x /usr/sbin/invoke-rc.d
+    then
+        # if we've still got the default rc, "stop" will fail. ignore that.
+        invoke-rc.d uruk stop || true
+    else
+        /etc/init.d/uruk stop || true
+    fi
+    ;;
+  deconfigure|upgrade|failed-upgrade)
+    ;;
+  *)
+    echo "prerm called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+exit 0
+

@@ -1,0 +1,25 @@
+Package: shutdown-at-night
+Version: 0.20
+Architecture: all
+Maintainer: Debian Edu Packaging Team <debian-edu-pkg-team@lists.alioth.debian.org>
+Installed-Size: 34
+Depends: cron | cron-daemon, ethtool, fping, ng-utils, wakeonlan, x11-utils, perl:any
+Recommends: nvram-wakeup
+Suggests: sitesummary
+Section: misc
+Priority: optional
+Description: System to shut down clients at night, and wake them in the morning
+ With this tool you can schedule regular shutdowns of workstations in the
+ evening, and also wake them up every morning, using either nvram-wakeup, ACPI
+ wakeup or wake-on-lan.
+ .
+ For the wake-on-lan wake-up sequence you need one awake machine on your local
+ network / subnet. This can be a server machine or a client machine that got
+ just previously woken up by nvram-wakeup.
+ .
+ The shutdown sequence will be initiated hourly after 4pm via a CRON job.
+ However, only machines that appear inactive / unused will be shut down.
+ Machines that are currently in use will remain up and running.
+ .
+ The Shutdown-at-Night tool can be activated via a config file or via
+ membership in a NIS netgroup called shutdown-at-night-hosts.

@@ -1,0 +1,18 @@
+Package: ruby-nakayoshi-fork
+Version: 0.0.4-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: https://github.com/ko1/nakayoshi_fork
+Description: solves CoW friendly problem on MRI 2.2 and later
+ MRI 2.1 employs generational GC algorithms that separate YOUNG objects and OLD
+ objects. Young objects will be promoted to old objects when they survive 1 GC.
+ .
+ However, Ruby 2.2 employs an algorithm to promote young objects after 3 GCs.
+ .
+ nakayoshi_fork promotes most of young objects before fork by invoking GC some
+ times.
+Ruby-Versions: all

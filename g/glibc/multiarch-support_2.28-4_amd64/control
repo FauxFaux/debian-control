@@ -1,0 +1,15 @@
+Package: multiarch-support
+Source: glibc
+Version: 2.28-4
+Architecture: amd64
+Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
+Installed-Size: 234
+Depends: libc6 (>= 2.3.6-2)
+Section: oldlibs
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.gnu.org/software/libc/libc.html
+Description: Transitional package to ensure multiarch compatibility
+ This is a transitional package used to ensure multiarch support is present
+ in ld.so before unpacking libraries to the multiarch directories.  It can
+ be removed once nothing on the system depends on it.

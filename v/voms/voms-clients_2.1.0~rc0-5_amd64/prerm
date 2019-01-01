@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+
+
+if [ "$1" = "remove" ] ; then
+  update-alternatives --remove voms-proxy-init /usr/bin/voms-proxy-init2
+  update-alternatives --remove voms-proxy-info /usr/bin/voms-proxy-info2
+  update-alternatives --remove voms-proxy-destroy /usr/bin/voms-proxy-destroy2
+fi

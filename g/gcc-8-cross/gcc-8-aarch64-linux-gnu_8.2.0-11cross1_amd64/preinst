@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove aarch64-linux-gnu-gcc /usr/bin/aarch64-linux-gnu-gcc-8
+    update-alternatives --quiet --remove aarch64-linux-gnu-gcov /usr/bin/aarch64-linux-gnu-gcov-8
+fi
+
+
+
+exit 0

@@ -1,0 +1,18 @@
+Package: freeradius-config
+Source: freeradius
+Version: 3.0.16+dfsg-5
+Architecture: amd64
+Maintainer: Debian FreeRADIUS Packaging Team <pkg-freeradius-maintainers@lists.alioth.debian.org>
+Installed-Size: 877
+Depends: freeradius-common (>= 3), openssl, make, ca-certificates, ssl-cert, adduser
+Breaks: freeradius (<< 3.0.11+dfsg-1), freeradius-config
+Replaces: freeradius (<< 3.0.11+dfsg-1)
+Section: net
+Priority: optional
+Homepage: http://www.freeradius.org/
+Description: FreeRADIUS default config files
+ freeradius-config contains the default configuration for FreeRADIUS.
+ .
+ You can install a custom package which sets "Provides: freeradius-config" in
+ order to use the FreeRADIUS packages without any default configuration getting
+ into your way.

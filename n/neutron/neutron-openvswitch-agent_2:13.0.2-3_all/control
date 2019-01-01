@@ -1,0 +1,21 @@
+Package: neutron-openvswitch-agent
+Source: neutron
+Version: 2:13.0.2-3
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 133
+Pre-Depends: openvswitch-switch (>= 2.8.0)
+Depends: neutron-common (= 2:13.0.2-3), sudo, debconf (>= 0.5) | debconf-2.0, lsb-base (>= 3.0.6)
+Recommends: openvswitch-datapath-dkms
+Provides: neutron-plugin-openvswitch-agent
+Section: net
+Priority: optional
+Homepage: http://neutron.openstack.org/
+Description: OpenStack virtual network service - Open vSwitch agent
+ Neutron provides an API to dynamically request and configure virtual networks.
+ These networks connect "interfaces" from other OpenStack services (such as
+ vNICs from Nova VMs). The Neutron API supports extensions to provide advanced
+ network capabilities, including QoS, ACLs, and network monitoring.
+ .
+ This package provides the Open vSwitch agent. If you choose to use the Open
+ vSwitch plugin on neutron-server, this agent should run on each compute node.

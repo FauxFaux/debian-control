@@ -1,0 +1,38 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_php/UNDECLARED
+# Hey emacs, this is -*- shell-script -*-
+
+for name in solr ; do
+    find /etc/php -mindepth 3 -maxdepth 3 -name "${name}.ini*" | \
+    sed -Ee "s,.dpkg-(remove|bak|backup)$,," | \
+    grep "/etc/php/[.0-9]*/mods-available/${name}.ini" | \
+    fgrep -v "$(for version in 7.3 ; do echo "/etc/php/${version}/mods-available/${name}.ini"; done)" | \
+    while read conffile; do
+	dpkg-maintscript-helper rm_conffile "${conffile}" -- "$@"
+	for dir in \
+	    "$(dirname $(dirname "${conffile}"))"/mods-available \
+	    "$(dirname $(dirname "${conffile}"))" \
+	    /etc/php;
+	do
+	    if [ -d $dir ]; then
+		rmdir --ignore-fail-on-non-empty $dir
+	    fi
+	done
+    done
+done
+    
+if [ -e /usr/lib/php/php-maintscript-helper ] ; then
+    . /usr/lib/php/php-maintscript-helper
+    
+    for version in 7.3 ; do
+        for name in solr ; do
+            php_invoke enmod "$version" ALL "$name" || exit 1
+	done
+    done
+else
+    for name in solr ; do
+        phpenmod "$name"
+    done
+fi
+# End automatically added section

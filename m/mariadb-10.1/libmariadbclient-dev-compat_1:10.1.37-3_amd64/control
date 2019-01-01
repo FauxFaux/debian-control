@@ -1,0 +1,23 @@
+Package: libmariadbclient-dev-compat
+Source: mariadb-10.1
+Version: 1:10.1.37-3
+Architecture: amd64
+Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Installed-Size: 69
+Depends: libmariadbclient-dev
+Conflicts: libmariadb-client-lgpl-dev-compat, libmariadb-dev-compat, libmysqlclient-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://mariadb.org/
+Description: MariaDB database development files (libmysqlclient compatibility)
+ MariaDB is a fast, stable and true multi-user, multi-threaded SQL database
+ server. SQL (Structured Query Language) is the most popular database query
+ language in the world. The main goals of MariaDB are speed, robustness and
+ ease of use.
+ .
+ This package provides a version of libmysqlclient.so to allow
+ packages to link using -lmysqlclient but end up with a link against
+ libmariadbclient instead. This allows packages designed for
+ MySQL to link against MariaDB's client library instead, while still permitting
+ MySQL's client library to co-exist on users' systems.

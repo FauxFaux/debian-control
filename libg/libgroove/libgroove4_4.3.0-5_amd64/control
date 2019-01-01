@@ -1,0 +1,30 @@
+Package: libgroove4
+Source: libgroove
+Version: 4.3.0-5
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 70
+Depends: libavcodec58 (>= 7:4.0), libavfilter7 (>= 7:4.0), libavformat58 (>= 7:4.0), libavutil56 (>= 7:4.0), libc6 (>= 2.14)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/andrewrk/libgroove
+Description: music player backend
+ This library provides decoding and encoding of audio on a playlist.
+ It is intended to be used as a backend for music player applications, however
+ it is generic enough to be used as a backend for any audio processing utility.
+ .
+ Features:
+  * Uses libav for decoding and encoding.
+  * Add and remove entries on a playlist for gapless playback.
+  * Supports idempotent pause, play, and seek.
+  * Per-playlist-item gain adjustment so you can implement loudness compensation
+    without audio glitches.
+  * Read and write metadata tags.
+  * Extensible sink-based interface. A sink provides resampling and keeps its
+    buffer full. This package contains the raw sink which provides
+    reference-counted raw audio buffers. Other sinks are built on top of this
+    one.
+  * Thread-safe.
+ .
+ This package contains the shared library.

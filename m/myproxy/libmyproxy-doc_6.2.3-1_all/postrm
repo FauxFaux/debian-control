@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+
+
+dpkg-maintscript-helper symlink_to_dir \
+    /usr/share/doc/libmyproxy-doc \
+    libmyproxy-dev 6.0-2~ \
+    libmyproxy-doc -- "$@"

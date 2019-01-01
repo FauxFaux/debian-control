@@ -1,0 +1,22 @@
+Package: bacula-director
+Source: bacula
+Version: 9.4.1-1
+Architecture: amd64
+Maintainer: Debian Bacula Team <pkg-bacula-devel@lists.alioth.debian.org>
+Installed-Size: 990
+Depends: bacula-common (= 9.4.1-1), bacula-director-pgsql (= 9.4.1-1) | bacula-director-mysql (= 9.4.1-1) | bacula-director-sqlite3 (= 9.4.1-1), bsd-mailx | mailx, lsb-base (>= 3.0-6), ucf, libc6 (>= 2.14), libstdc++6 (>= 5)
+Suggests: bacula-doc
+Breaks: bacula-director-mysql (<< 7.4.3+dfsg-7), bacula-director-pgsql (<< 7.4.3+dfsg-7), bacula-director-sqlite3 (<< 7.4.3+dfsg-7)
+Replaces: bacula-director-mysql (<< 7.4.3+dfsg-7), bacula-director-pgsql (<< 7.4.3+dfsg-7), bacula-director-sqlite3 (<< 7.4.3+dfsg-7)
+Section: admin
+Priority: optional
+Homepage: http://www.bacula.org/
+Description: network backup service - Director daemon
+ Bacula is a set of programs to manage backup, recovery and verification of
+ data across a network of computers of different kinds.
+ .
+ The Bacula Director service supervises all the backup, restore, verify and
+ archive operations. It can run as a daemon or as a foreground service which
+ administrators can use to schedule backups and recover files.
+ .
+ This package provides the Bacula Director daemon.

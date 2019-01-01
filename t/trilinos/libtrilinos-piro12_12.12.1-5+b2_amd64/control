@@ -1,0 +1,21 @@
+Package: libtrilinos-piro12
+Source: trilinos (12.12.1-5)
+Version: 12.12.1-5+b2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 4094
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), liblapack3 | liblapack.so.3, libopenmpi3, libstdc++6 (>= 5.2), libtrilinos-epetra12, libtrilinos-epetraext12, libtrilinos-globipack12, libtrilinos-nox12, libtrilinos-optipack12, libtrilinos-rtop12, libtrilinos-rythmos12, libtrilinos-stokhos12, libtrilinos-stratimikos12, libtrilinos-teuchos12, libtrilinos-thyra12
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://trilinos.org
+Description: embedded nonlinear analysis package - runtime files
+ Piro is the top-level, unifying package of the Embedded Nonlinear Analysis
+ Capability area. The main purpose of the package is to provide driver classes
+ for the common uses of Trilinos nonlinear analysis tools. These drivers all
+ can be constructed similarly, with a ModelEvaluator and a ParameterList, to
+ make it simple to switch between different types of analysis. They also all
+ inherit from the same base classes (reponse-only model evaluators) so that the
+ resulting analysis can in turn driven by non-intrusive analysis routines.
+ .
+ This package contains the dynamic libraries.

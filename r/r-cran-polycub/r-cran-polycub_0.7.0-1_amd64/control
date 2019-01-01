@@ -1,0 +1,24 @@
+Package: r-cran-polycub
+Version: 0.7.0-1
+Architecture: amd64
+Maintainer: Debian R Packages Maintainers <r-pkg-team@alioth-lists.debian.net>
+Installed-Size: 263
+Depends: r-base-core (>= 3.5.1-1), r-api-3.5, r-cran-sp (>= 1.0-11), libc6 (>= 2.4)
+Recommends: r-cran-testthat, r-cran-spatstat, r-cran-statmod
+Suggests: r-cran-lattice, r-cran-mvtnorm, r-cran-cubature
+Section: gnu-r
+Priority: optional
+Homepage: https://cran.r-project.org/package=polyCub
+Description: GNU R Cubature over Polygonal Domains
+ The following methods for cubature (numerical integration)
+ over polygonal domains are currently implemented:
+ the two-dimensional midpoint rule as a simple wrapper around
+ as.im.function() from package 'spatstat' (Baddeley and Turner, 2005),
+ the product Gauss cubature by Sommariva and Vianello (2007),
+ an adaptive cubature for isotropic functions via line integrate()
+ along the boundary (Meyer and Held, 2014),
+ and quasi-exact methods specific to the integration of the
+ bivariate Gaussian density over polygonal and circular domains
+ (based on formulae from the Abramowitz and Stegun (1972) handbook).
+ For cubature over simple hypercubes, the packages 'cubature' and
+ 'R2Cuba' are more appropriate.

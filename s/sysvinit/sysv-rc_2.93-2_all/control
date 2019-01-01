@@ -1,0 +1,18 @@
+Package: sysv-rc
+Source: sysvinit
+Version: 2.93-2
+Architecture: all
+Maintainer: Debian sysvinit maintainers <debian-init-diversity@chiark.greenend.org.uk>
+Installed-Size: 115
+Pre-Depends: init-system-helpers (>= 1.25~)
+Depends: insserv (>> 1.12.0-10), startpar, sysvinit-utils (>= 2.86.ds1-62)
+Recommends: lsb-base (>= 3.2-14)
+Breaks: systemd (<< 215)
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://savannah.nongnu.org/projects/sysvinit
+Description: System-V-like runlevel change mechanism
+ This package provides support for the System-V like system
+ for booting, changing runlevels, and shutting down,
+ configured through symbolic links in /etc/rc?.d/.

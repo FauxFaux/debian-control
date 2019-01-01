@@ -1,0 +1,23 @@
+Package: unhide.rb
+Version: 22-4
+Architecture: all
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 32
+Depends: ruby
+Suggests: rkhunter
+Section: admin
+Priority: optional
+Homepage: http://launchpad.net/unhide.rb
+Description: Forensics tool to find processes hidden by rootkits
+ Unhide.rb is a forensics tool to find processes hidden by rootkits.
+ .
+ It looks for active processes in many different ways. Processes found by
+ some means but not others are considered to be "hidden", and are reported
+ to the user.
+ .
+ Unhide.rb is a tentative of rewrite in Ruby of the original Unhide, which
+ is written in C. While being much faster, it does not implement all the
+ diagnostics of the original version. It is also less secure as it cannot
+ be statically compiled.
+ .
+ This package can be used by rkhunter in its daily scans.

@@ -1,0 +1,28 @@
+Package: libtachyon-openmpi-0-dev
+Source: tachyon
+Version: 0.99~b6+dsx-9
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: libtachyon-dev-common (= 0.99~b6+dsx-9), libtachyon-openmpi-0 (= 0.99~b6+dsx-9), libopenmpi-dev
+Provides: libtachyon-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: http://jedi.ks.uiuc.edu/~johns/raytracer/
+Description: Parallel/Multiprocessor Ray Tracing Library - development - OpenMPI flavour
+ Tachyon is a portable, high performance parallel ray tracing system
+ supporting MPI and multithreaded implementations. Tachyon is built as
+ a C callable library, which can be used within applications.
+ .
+ Tachyon implements all of the basic geometric primitives such as
+ triangles, planes, spheres, cylinders, etc. Some of the goals in
+ developing Tachyon were to make it fast and for it to parallelize
+ well. These are what set it apart from more full-featured programs
+ like POV-Ray, Rayshade, and others. Tachyon supports enough features
+ to be an excellent alternative to slower programs for demanding
+ animation and scientific visualization tasks.
+ .
+ This package contains the static libraries and symbolic links that
+ third party developers using the tachyon C library built against
+ OpenMPI will need.

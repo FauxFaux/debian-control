@@ -1,0 +1,20 @@
+Package: nvidia-nonglvnd-vulkan-icd
+Source: nvidia-graphics-drivers
+Version: 390.87-5
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 203
+Depends: nvidia-nonglvnd-vulkan-common, libvulkan1 (>= 1.0.42), libgl1-nvidia-glx (= 390.87-5)
+Suggests: vulkan-utils
+Enhances: libvulkan1
+Conflicts: nvidia-vulkan-icd
+Provides: vulkan-icd
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: NVIDIA Vulkan ICD (non-GLVND variant)
+ Vulkan is a multivendor open standard by the Khronos Group for 3D graphics.
+ .
+ This metapackage provides the NVIDIA installable client driver (ICD) for
+ Vulkan (non-GLVND variant) which supports NVIDIA GPUs.

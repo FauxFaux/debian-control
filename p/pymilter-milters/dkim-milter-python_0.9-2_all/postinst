@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+	if ! id -u dkim-milter-python >/dev/null 2>&1; then
+		adduser --quiet --system --group --home /var/run/dkim-milter-python dkim-milter-python
+	elif [ -n "$2" ]; then
+		addgroup --quiet --system dkim-milter-python
+		usermod -g dkim-milter-python dkim-milter-python
+	fi
+	chown dkim-milter-python:dkim-milter-python /var/log/dkim-milter-python
+	chown dkim-milter-python:dkim-milter-python /var/log/dkim-milter-python/save
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p dkim-milter-python 
+fi
+
+# End automatically added section
+# Automatically added by dh_installinit/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/dkim-milter-python" ]; then
+		update-rc.d dkim-milter-python defaults >/dev/null
+		invoke-rc.d dkim-milter-python start || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0
+

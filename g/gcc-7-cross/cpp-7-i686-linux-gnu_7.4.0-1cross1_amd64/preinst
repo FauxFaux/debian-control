@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove i686-linux-gnu-cpp /usr/bin/i686-linux-gnu-cpp-7
+fi
+
+
+
+exit 0

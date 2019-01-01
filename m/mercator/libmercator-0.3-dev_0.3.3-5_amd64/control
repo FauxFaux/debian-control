@@ -1,0 +1,31 @@
+Package: libmercator-0.3-dev
+Source: mercator
+Version: 0.3.3-5
+Architecture: amd64
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Installed-Size: 109
+Depends: libmercator-0.3-4 (= 0.3.3-5), libwfmath-1.0-dev (>= 1.0.2+dfsg1-0.4)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.worldforge.org/
+Description: WorldForge terrain library - development files
+ Mercator is primarily aimed at terrain for multiplayer online games and
+ forms one of the WorldForge core libraries.
+ It is intended to be used as a terrain library on the client, while a
+ subset of features are useful on the server.
+ .
+ Mercator is designed in such a way that individual tiles can be
+ generated on-the-fly from a very small source data set.  Each tile uses
+ a fast deterministic random number generation to ensure that identical
+ results are produced "anytime, anywhere".  This enables transmission of
+ terrain across low bandwidth links as part of the standard data stream,
+ or server side collision detection with the same terrain that the
+ player sees.
+ .
+ The use of tiles means that there is inherently a large degree of gross
+ control of the shape of the terrain.  Finer control is implemented by
+ allowing geometric modifications - for example, a polygonal area might
+ be flattened, or a crater could be applied.
+ .
+ This package contains the files for developing with the mercator library.

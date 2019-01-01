@@ -1,0 +1,27 @@
+Package: libtfbs-perl
+Source: libtfbs-perl (0.7.1-2)
+Version: 0.7.1-2+b1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 834
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, pdl (>= 1:2.019-5+b1), pdlapi-12, libc6 (>= 2.14), bioperl, libwww-perl, libdbi-perl
+Recommends: libgd-gd2-perl | libgd-gd2-noxpm-perl
+Section: perl
+Priority: optional
+Homepage: http://tfbs.genereg.net
+Description: scanning DNA sequence with a position weight matrix
+ The TFBS perl modules comprise a set of routines to interact with the
+ Transfac and Jaspar databases that describe a special family of proteins,
+ the transcription factors. These bind to genomic DNA to initiate (or
+ prevent) the readout of a gene.  Once multiple binding sites are known
+ for a transcription factor, these are gathered in a single file and are
+ aligned in order to find position-specific characteristica that might
+ be used to predict such binding events in novel DNA sequences.
+ .
+ If you use TFBS in your work, please cite "Lenhard B., Wasserman W.W. (2002)
+ TFBS: Computational framework for transcription factor binding site analysis.
+ Bioinformatics 18:1135-1136".
+ .
+ Note: the TFBS perl module is no longer under active development.  All the
+ functionality can be found in the TFBSTools Bioconductor package; users are
+ highly encouraged to switch.  <http://bioconductor.org/packages/TFBSTools/>

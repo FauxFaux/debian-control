@@ -1,0 +1,20 @@
+Package: sysfsutils
+Version: 2.1.0+repack-5
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 65
+Depends: libc6 (>= 2.7), libsysfs2 (>= 2.1.0+repack)
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Description: sysfs query tool and boot-time setup
+ Sysfs is a virtual file system in Linux kernel 2.5+ that provides a
+ tree of system devices. This package provides the program 'systool' to query
+ it: it can list devices by bus, class, and topology.
+ .
+ In addition this package ships a configuration file /etc/sysfs.conf which
+ allows one to conveniently set sysfs attributes at system bootup (in the init
+ script /etc/init.d/sysfsutils).
+ .
+ If you need sysfs queries in own programs, then you may want to use the
+ libsysfs library directly (package libsysfs-dev).

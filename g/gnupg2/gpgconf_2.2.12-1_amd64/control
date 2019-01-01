@@ -1,0 +1,20 @@
+Package: gpgconf
+Source: gnupg2
+Version: 2.2.12-1
+Architecture: amd64
+Maintainer: Debian GnuPG Maintainers <pkg-gnupg-maint@lists.alioth.debian.org>
+Installed-Size: 750
+Depends: libassuan0 (>= 2.0.1), libc6 (>= 2.25), libgcrypt20 (>= 1.8.0), libgpg-error0 (>= 1.26-2~), libreadline7 (>= 6.0)
+Breaks: gnupg (<< 2.1.21-4), gnupg-agent (<< 2.1.21-4)
+Replaces: gnupg (<< 2.1.21-4), gnupg-agent (<< 2.1.21-4)
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.gnupg.org/
+Description: GNU privacy guard - core configuration utilities
+ GnuPG is GNU's tool for secure communication and data storage.
+ .
+ This package contains core utilities used by different tools in the
+ suite offered by GnuPG.  It can be used to programmatically edit
+ config files for tools in the GnuPG suite, to launch or terminate
+ per-user daemons (if installed), etc.

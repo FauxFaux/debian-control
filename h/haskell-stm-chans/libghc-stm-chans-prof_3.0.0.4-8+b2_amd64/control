@@ -1,0 +1,27 @@
+Package: libghc-stm-chans-prof
+Source: haskell-stm-chans (3.0.0.4-8)
+Version: 3.0.0.4-8+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 474
+Depends: libghc-stm-chans-dev (= 3.0.0.4-8+b2), libghc-base-prof-4.11.1.0-5dd74, libghc-stm-prof-2.4.5.1-e1689
+Provides: libghc-stm-chans-prof-3.0.0.4-a4b8d
+Section: haskell
+Priority: optional
+Homepage: http://code.haskell.org/~wren/
+Description: additional types of channels for STM; profiling libraries
+ Additional types of STM channels:
+  * TBChan: a version of TChan where the queue is bounded in length
+  * TBMChan: a version of TChan where the queue is bounded in length
+    and closeable.
+  * TBMQueue: a version of TQueue where the queue is bounded in length
+    and closeable.
+  * TMChan: a version of TChan where the queue is closeable. This is
+    similar to a TChan (Maybe a) with a monotonicity guarantee that
+    once there's a Nothing there will always be Nothing.
+  * TMQueue: a version of TQueue where the queue is closeable. This is
+    similar to a TQueue (Maybe a) with a monotonicity guarantee that
+    once there's a Nothing there will always be Nothing.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

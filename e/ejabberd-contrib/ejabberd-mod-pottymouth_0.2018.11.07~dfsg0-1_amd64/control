@@ -1,0 +1,16 @@
+Package: ejabberd-mod-pottymouth
+Source: ejabberd-contrib
+Version: 0.2018.11.07~dfsg0-1
+Architecture: amd64
+Maintainer: Ejabberd Packaging Team <ejabberd@packages.debian.org>
+Installed-Size: 48
+Depends: erlang-base (>= 1:17) | erlang-abi-17.0, erlang-base (>= 1:21.1.1+dfsg) | erlang-base-hipe (>= 1:21.1.1+dfsg), ejabberd (= 18.09-2)
+Section: net
+Priority: optional
+Homepage: https://github.com/processone/ejabberd-contrib
+Description: filter for ejabberd messages using blacklists
+ The 'mod_pottymouth' ejabberd module aims to fill the void left by 'mod_shit'
+ which has disappeared from the net. It allows individual whole words of a
+ message to be filtered against a blacklist. It allows multiple blacklists
+ sharded by language. To make use of this module the client must add the
+ xml:lang attribute to the message xml.

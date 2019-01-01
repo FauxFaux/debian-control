@@ -1,0 +1,26 @@
+Package: debug-me-server
+Source: debug-me
+Version: 1.20181208-2
+Architecture: all
+Maintainer: Sean Whitton <spwhitton@spwhitton.name>
+Installed-Size: 61
+Depends: debug-me, lsb-base (>= 3.0-6), adduser, default-mta | mail-transport-agent
+Section: net
+Priority: optional
+Homepage: https://debug-me.branchable.com/
+Description: run a debug-me server for secure remote debugging
+ Debugging a problem over email/irc/BTS is slow, tedious, and
+ hard. The developer needs to see the your problem to understand
+ it. Debug-me aims to make debugging fast, fun, and easy, by letting
+ the developer access your computer remotely, so they can immediately
+ see and interact with the problem. Making your problem their problem
+ gets it fixed fast.
+ .
+ A debug-me session is logged and signed with the developer's GnuPG
+ key, producing a chain of evidence of what they saw and what they
+ did. So the developer's good reputation is leveraged to make debug-me
+ secure.  If you trust a developer to ship software to your computer,
+ you can trust them to debug-me.
+ .
+ This package sets up a debug-me server.  If you don't want to do
+ that, install only the debug-me package.

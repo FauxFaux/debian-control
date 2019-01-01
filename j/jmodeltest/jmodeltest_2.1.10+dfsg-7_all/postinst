@@ -1,0 +1,25 @@
+#!/bin/sh
+set -e
+
+LOGDIR=/var/log/jmodeltest
+
+case "$1" in
+    configure)
+        mkdir -p $LOGDIR
+        chmod 1777 $LOGDIR
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0
+
+

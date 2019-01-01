@@ -1,0 +1,35 @@
+Package: libghc-language-haskell-extract-dev
+Source: haskell-language-haskell-extract (0.2.4-9)
+Version: 0.2.4-9+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 91
+Depends: libghc-base-dev-4.11.1.0-5dd74, libghc-regex-posix-dev-0.95.2-d5be1, libghc-template-haskell-dev-2.13.0.0-87d93, libatomic1 (>= 4.8), libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-language-haskell-extract-doc, libghc-language-haskell-extract-prof
+Provides: libghc-language-haskell-extract-dev-0.2.4-12e34
+Section: haskell
+Priority: optional
+Homepage: http://github.com/finnsson/template-helper
+Description: automatically extract functions from the local code.
+ language-haskell-extract contains some useful helper functions on top of
+ Template Haskell.
+ functionExtractor extracts all functions after a regexp-pattern.
+ .
+ > foo = "test"
+ > boo = "testing"
+ > bar = $(functionExtractor "oo$")
+ .
+ will automagically extract the functions ending with "oo" such as
+ .
+ > bar = [("foo",foo), ("boo",boo)]
+ .
+ This can be useful if you wish to extract all functions beginning with test
+ (for a test-framework) or all functions beginning with wc (for a web service).
+ .
+ functionExtractorMap works like functionsExtractor but applies a function
+ over all function-pairs.
+ This functions is useful if the common return type of the functions is
+ a type class.
+ .
+ This package contains the normal library files.
+Ghc-Package: language-haskell-extract-0.2.4-7buaaU4RZ0FArfZsvbPcgJ

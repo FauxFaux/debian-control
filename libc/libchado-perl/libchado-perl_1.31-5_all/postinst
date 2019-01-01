@@ -1,0 +1,76 @@
+#!/bin/bash
+
+set -e
+trap onexit ERR
+
+function onexit() {
+	EXITCODE=$?
+        if [ $EXITCODE -eq 102 ]; then
+          echo "Database access not correctly configured"
+          echo "Check your configuration and run manually the database update:"
+          echo "cd /usr/share/gmod/chado/"
+	  echo "export GMOD_ROOT=/usr/share/gmod/chado"
+	  echo "export PGPASSFILE=/usr/share/gmod/chado/pgpass"
+	  echo "For a new installation:"
+          echo "make load_schema"
+	  echo "make prepdb"
+          echo "OR"
+          echo "make update to upgrade the schema from a previous install"
+          exit 0
+        fi
+        if [ $EXITCODE -eq 100 ]; then
+          make load_schema
+          make prepdb
+          make clean &> /dev/null
+          rm -f /usr/share/gmod/chado/pgpass
+	  exit 0
+        fi
+        if [ $EXITCODE -eq 101 ]; then
+          make update
+          make clean &> /dev/null
+          rm -f /usr/share/gmod/chado/pgpass
+          exit 0 
+        fi
+    exit $EXITCODE
+}
+
+
+case "$1" in
+    configure)
+	mkdir -p /usr/share/gmod/chado/lib/Bio/Chado/
+        if [ -e /etc/gmod/gmod-chado.conf ]; then
+	  export GMOD_ROOT=/usr/share/gmod/chado
+          . /etc/gmod/gmod-chado.conf
+	  cd /usr/share/gmod/chado
+	  export CHADO_DB_NAME=gmod-chado
+	  CHADOTMP=`mktemp -d`
+	  perl Makefile.PL update GMOD_ROOT=/usr/share/gmod/chado DBNAME=$CHADO_DB_NAME  DBUSER=$DBUSER DBPASS=$DBPASS DBHOST=$DBHOST DBPORT=$DBPORT DBDRIVER=PostgreSQL  SIMPLE=Y RECONFIGURE=1 LOCAL_TMP=$CHADOTMP &> /dev/null
+	  rm -rf $CHADOTMP
+	  export PATH=$PATH:/usr/share/gmod/chado/bin
+	  touch /usr/share/gmod/chado/pgpass
+          chmod 0600 /usr/share/gmod/chado/pgpass
+	  echo "*:*:*:$DBUSER:$DBPASS" > /usr/share/gmod/chado/pgpass
+	  export PGPASSFILE=/usr/share/gmod/chado/pgpass
+	  # Need to detect with testdb if access to db is ok or need to be configured
+	  perl /usr/share/gmod/chado/bin/testdb.pl
+        else
+           echo "Application is not yet configured."
+	   echo "To install or upgrade the database:"
+	   echo " - create a user in the database"
+	   echo " - configure the application"
+	   echo " - perl /usr/share/gmod/chado/Makefile.PL update"
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+

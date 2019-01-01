@@ -1,0 +1,157 @@
+#!/bin/sh
+
+set -e
+
+debian_edu_config="/etc/debian-edu/config"
+
+# Seed the debconf database with the answers for the common packages,
+# in case some of these are installed before the installer scripts
+# are executed. This could fix problems with discover and locales.
+
+print() {
+    # stdout is busy talking to debconf.  Print to stderr
+    echo "$*" 1>&2
+}
+info() {
+    if [ "$debug" != "true" ] ; then
+       print "info: $*"
+    fi
+}
+error() {
+    msg="error: $0: $1"
+    print "$msg"
+}
+
+
+# Make sure we load the profile-specific answers the same way as during
+# the first install.
+if [ ! "$DEBIAN_HAS_FRONTEND" ]; then
+    # Override default values based on the profile in
+    # $debian_edu_config.
+
+    pkglibdir=/usr/lib/debian-edu-install
+    defaults=$pkglibdir/defaults
+
+    if test -r $debian_edu_config ; then
+	print "info: $0: Loading config from $debian_edu_config"
+	. $debian_edu_config
+    else
+	error "Unable to read from $debian_edu_config."
+    fi
+
+    load_defaults() {
+	filename="$defaults.$1"
+	if test -r $filename; then
+	    print "info: Loading defaults from $filename"
+	    if debconf-set-selections $filename ; then
+		:
+	    else
+		error "unable to load defaults from $filename"
+	    fi
+	else
+	    error "unable to read defaults from $filename"
+	fi
+    }
+    load_defaults common
+
+    info "Got profile '$PROFILE'"
+    for value in `echo $PROFILE |sed 's/ /-/g' | sed 's/,-/ /g'`; do
+	info "Testing profile '$value'"
+	case $value in
+	    Workstation)
+		networked=true
+		workstation=true
+		;;
+	    Roaming-Workstation)
+		networked=true
+		workstation=true
+		roaming=true
+		;;
+	    LTSP-Server|Thin-Client-Server)
+		networked=true
+		workstation=true
+		ltspserver=true
+		;;
+	    Main-Server|Server)
+		networked=true
+		server=true
+		;;
+	    Standalone)
+		standalone=true
+		;;
+	    Minimal)
+		networked=true
+		;;
+	    *)
+		error "unknown profile '$profile'"
+		;;
+	esac
+    done
+
+    # Make sure the default values have priority
+    #  1 main-server
+    #  2 ltsp-server
+    #  3 workstation
+    #  4 networked (Common for non-standalone)
+    #  5 standalone
+    #  6 barebone
+    if test "$standalone" = true ; then
+	load_defaults standalone
+    fi
+    if test "$networked" = true ; then
+	load_defaults networked
+    fi
+    if test "$workstation" = true ; then
+	load_defaults workstation
+    fi
+    if test "$ltspserver" = true ; then
+	load_defaults ltsp-server
+    fi
+    if test "$server" = true ; then
+	load_defaults main-server
+    fi
+fi
+
+# Source the debconf confmodule to ensure that the templates are loaded.
+. /usr/share/debconf/confmodule
+
+# get the current version
+new_version="$(cat /usr/lib/debian-edu-install/version)"
+
+if [ -f $debian_edu_config ] ; then
+	# update version number in /etc/debian-edu/config on upgrades
+	sed -i $debian_edu_config -e \
+				"s/^VERSION=.*$/VERSION=\"$new_version\"/"
+fi
+
+# handle preseeding to enable or disable firstboot script, as appropriate.
+firstboot_file=/etc/debian-edu/xdebian-edu-firstboot
+db_get debian-edu-install/run-firstboot
+
+# Override to handle upgrades from the old style firstboot handling
+if [ -h /etc/init.d/xdebian-edu-firstboot.dpkg-old ] && \
+   [ "$(readlink /etc/init.d/xdebian-edu-firstboot.dpkg-old)" = \
+            /usr/lib/debian-edu-install/firstboot ] ; then
+    rm /etc/init.d/xdebian-edu-firstboot.dpkg-old
+    RET=true
+fi
+
+if [ true = "$RET" ] ; then
+	db_set debian-edu-install/run-firstboot false
+	if [ -f "$firstboot_file" ]; then
+		rm -f "$firstboot_file"
+	fi
+elif [ ! -f "$firstboot_file" ]; then
+	touch "$firstboot_file"
+fi
+
+db_stop
+
+# Automatically added by dh_installinit/12
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/xdebian-edu-firstboot" ]; then
+		update-rc.d xdebian-edu-firstboot start 99 2 3 4 5 . >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+

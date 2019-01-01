@@ -1,0 +1,33 @@
+Package: libkf5config-dev-bin
+Source: kconfig
+Version: 5.51.0-1
+Architecture: amd64
+Maintainer: Debian/Kubuntu Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Installed-Size: 159
+Depends: libc6 (>= 2.14), libqt5core5a (>= 5.11.0~rc1), libqt5xml5 (>= 5.8.0~), libstdc++6 (>= 4.1.1)
+Breaks: libkf5config-dev (<< 5.15.0-2~)
+Replaces: libkf5config-dev (<< 5.15.0-2~)
+Section: libdevel
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://projects.kde.org/projects/frameworks/kconfig
+Description: configuration settings framework for Qt -- binary package
+ KConfig provides an advanced configuration system. It is made of two
+ parts: KConfigCore and KConfigGui.
+ .
+ KConfigCore provides access to the configuration files themselves. It
+ features:
+ .
+  - centralized definition: define your configuration in an XML file
+  and use `kconfig_compiler` to generate classes to read and write
+  configuration entries.
+  - lock-down (kiosk) support.
+ .
+ KConfigGui provides a way to hook widgets to the configuration so
+ that they are automatically initialized from the configuration and
+ automatically propagate their changes to their respective
+ configuration files.
+ .
+ This package is part of KDE Frameworks 5.
+ .
+ This package contains the binary files for the libkf5config-dev package.

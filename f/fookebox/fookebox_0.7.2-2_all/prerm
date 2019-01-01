@@ -1,0 +1,37 @@
+#!/bin/sh
+# prerm script for fookebox
+
+set -e
+
+case "$1" in
+	remove)
+		# remove cache
+		rm -rf /var/cache/fookebox/templates/*
+	;;
+	upgrade|deconfigure)
+	;;
+
+	failed-upgrade)
+	;;
+
+	*)
+		echo "prerm called with unknown argument \`$1'" >&2
+		exit 1
+	;;
+esac
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p fookebox 
+else
+	dpkg -L fookebox | grep '\.py$' | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+
+exit 0

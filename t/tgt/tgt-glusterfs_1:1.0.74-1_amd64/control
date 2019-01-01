@@ -1,0 +1,29 @@
+Package: tgt-glusterfs
+Source: tgt
+Version: 1:1.0.74-1
+Architecture: amd64
+Maintainer: Apollon Oikonomopoulos <apoikos@debian.org>
+Installed-Size: 36
+Depends: tgt (= 1:1.0.74-1), glusterfs-common, libc6 (>= 2.4)
+Section: net
+Priority: optional
+Homepage: http://stgt.sourceforge.net/
+Description: Linux SCSI target user-space daemon and tools - GlusterFS support
+ The Linux target framework (tgt) allows a Linux system to provide SCSI
+ devices (targets) over networked SCSI transports.
+ .
+ tgt consists of a user-space daemon and user-space tools currently
+ supporting the following transports:
+ .
+  - iSCSI (SCSI over IP)
+  - iSER (iSCSI over RDMA, using Infiniband)
+ .
+ tgt also supports different storage types for use as backing stores for SCSI
+ Logical Units:
+ .
+  - Plain files and block devices
+  - Ceph/RADOS RBD volumes
+  - GlusterFS volumes
+ .
+ This package enables tgt to use GlusterFS volumes as backing store for SCSI
+ Logical Units.

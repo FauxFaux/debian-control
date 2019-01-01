@@ -1,0 +1,22 @@
+Package: python3.7-dbg
+Source: python3.7
+Version: 3.7.2~rc1-1
+Architecture: amd64
+Maintainer: Matthias Klose <doko@debian.org>
+Installed-Size: 33326
+Depends: python3.7 (= 3.7.2~rc1-1), libpython3.7-dbg (= 3.7.2~rc1-1), libc6 (>= 2.28), libexpat1 (>= 2.1~beta3), zlib1g (>= 1:1.2.0)
+Recommends: gdb
+Suggests: python3-gdbm-dbg, python3-tk-dbg
+Section: debug
+Priority: optional
+Multi-Arch: allowed
+Description: Debug Build of the Python Interpreter (version 3.7)
+ The package holds two things:
+ .
+ - A Python interpreter configured with --pydebug. Dynamically loaded modules
+   are searched as <foo>_d.so first. Third party extensions need a separate
+   build to be used by this interpreter.
+ - Debug information for standard python interpreter and extensions.
+ .
+ See the README.debug for more information.
+Build-Ids: 0979505d3ae9c4bf7d6ce7d69fa1cdcd1c9cf53c 0a1347829bcd63cb6363bbb451321f5f02f58180 0ade4108706478c87e9002fa8a9bc6ab801154a2 0c19cafc1ee6110336ed24c12737ac1c9783b9df 0f1a9f40f9c558a2b7c239d25e4f2d526eeca45e 1b355196718700b86bcc5e0cecfbb8ccba10ff83 1ddc46f80090cab4769d860a23678481412d55e6 1febb3a0fd3a7650aa211181b7fc080e56765131 21a0258a367bd6bf8851fab5e7efccca42748ff4 34a89b1148c7d1259f28b998924e56ee0b19ac39 35af47f19f306588ab7e4014f5b63bb66993aad4 36706d75894f0d9d1389ef10df08db8f643fe889 3dde0806dfd3bd03021225f687e01df1b4442572 48c4e5a430dc646d777ba182749cfd90dce70d82 5b9ed3efa76061b69bb92b412e866f61b064d49d 5d5e6ab39768e579ffa59da34421a2d917681fc9 656b03eb492614af3a49e0702b404d25b18ca9ad 663f73216b29a304c71f1732e7b5aae94d916333 69284d77e7fb37dffbf90dc4ec3fe4ecd0ea6ae4 7dd8ee098f0236e06708ad6f99a30c295e8b9d36 8d879beb41f0178a23cb94c5d497a8eda139c000 909329a08b954e2e32c2082c6452287e605d8933 93b006ccb9313d506d0fa823b9e7e082cc4b4724 95a2d5f29ff4d068b6b5b24e533bc57da7ffa968 9c84057078a4ee56f33f514126902001ca320629 a6aba4d9c78a4c6822cdc8e89e1303415c618587 a8e9194ea5d5b12f42814b02dfb8743dbd013d67 a923698a34fee055be2d043bd583ed1097698516 a9d2003169f4dc29826015194e3026c49fa8cc65 ae2c9b246d1925694ceb08b0e4bd3caaa628c990 b1741693542f3cca21ab624f167cb73ea4770258 b1af6bb12b22241e3f8be4a4c954d10fb60076bd b9882f4279450bcac2e2d3a68500e49317cbdb7a bc6d0104c88447ef3bc5f5ba068fea95b7e349f4 bf794ba3b6c186cd5a1c6d37c2622c78c00d591f c97afeffcc904524bdf9873da78a5ff3a377b357 d43c0555ef404daede0ffcc4063c1d3f7108e6c2 e0dcde46e8901f271a0a0d8884e430e64d7e0572 e84fb9ca235a2c14a884616c58e4437896b6aeff e8db73694b5006d78ca1b244d6c505bad69e6c83 ec42d0543b2f2cf2b76cfd36a0143498d27cf3e5 f115d71dc5a2ccb19d0882fe088b13094f63d74f f25fe60a371d07d6ea27844ff46310fed94d1740 ffaa827a3bf43c09fb92e1530758f46cf4c12047

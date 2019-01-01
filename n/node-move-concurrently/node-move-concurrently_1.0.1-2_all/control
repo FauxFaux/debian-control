@@ -1,0 +1,19 @@
+Package: node-move-concurrently
+Version: 1.0.1-2
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 19
+Depends: nodejs (>= 8~), node-run-queue (>= 1.0.3), node-rimraf (>= 2.5.4), node-fs-write-stream-atomic (>= 1.0.8), node-aproba (>= 1.1.1), node-mkdirp (>= 0.5.1), node-copy-concurrently (>= 1.0.0)
+Section: javascript
+Priority: optional
+Homepage: https://www.npmjs.com/package/move-concurrently
+Description: Move files and directories concurrently
+ Promises of moves of files or directories with rename, falling back to
+ recursive rename/copy on EXDEV errors, with configurable concurrency and win32
+ junction support.
+ .
+ If you `move` across devices or on filesystems that don't support renaming
+ large directories.  That is, situations that result in `rename` returning
+ the `EXDEV` error, then `move` will fallback to copy + delete.
+ .
+ Node.js is an event-based server-side JavaScript engine.

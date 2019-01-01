@@ -1,0 +1,47 @@
+Package: elpa-auto-dictionary
+Source: auto-dictionary-mode
+Version: 1.1-1
+Architecture: all
+Maintainer: Debian Emacsen team <debian-emacsen@lists.debian.org>
+Installed-Size: 70
+Depends: emacsen-common
+Recommends: emacs (>= 46.0)
+Enhances: emacs, emacs25
+Section: lisp
+Priority: optional
+Homepage: https://github.com/nschum/auto-dictionary-mode
+Description: automatic dictionary switcher for Emacs spell checking
+ Auto-dictionary is a minor mode that hooks into Flyspell's on-the-fly spell
+ checking and extends these checks to also detect language.  Auto-dictionary
+ then sets 'ispell-dictionary' to use the detected language.  This package is
+ useful for Emacs users who work in multiple languages (bilingual, multilingual,
+ etc.)
+ .
+ Language detection is per buffer (per document), and auto-dictionary will
+ choose whichever language is used most often.  If that document also contains
+ language x and y, and has slightly more words from language x, but then
+ document is edited until there are a greater number of words from language y,
+ then auto-dictionary will change its pick to language y.  That is to say,
+ auto-dictionary's pick always depends on the current state of the document, and
+ it will only pick one language.  This package does not enable multiple
+ dictionary support for Emacs ispell.
+ .
+ Auto-dictionary supports the following languages:
+   * ca  - Catalan
+   * da  - Dansk (Danish)
+   * de  - Deutsch (German)
+   * el  - νέα ελληνικά (Modern Greek)
+   * en  - English
+   * eo  - Esperanto
+   * es  - Español (Spanish)
+   * fr  - Français (French)
+   * grc - ἑλληνικά (Classical Greek)
+   * hi  - हिन्दी (Hindi)
+   * hu  - Magyar (Hungarian)
+   * nb  - Bokmål (Norwegian)
+   * nn  - Nynorsk (Norwegian)
+   * pt  - Português (Portuguese)
+   * ro  - Românâ, Româneşte (Romanian)
+   * sk  - Slovenčina (Slovak)
+   * sl  - Slovenian (Slovene)
+   * sv  - Svenska (Swedish)

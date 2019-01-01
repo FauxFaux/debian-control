@@ -1,0 +1,22 @@
+Package: openhpi-plugin-ov-rest
+Source: openhpi
+Version: 3.8.0-2
+Architecture: amd64
+Maintainer: Mohan Devarajulu <mohan.devarajulu@hpe.com>
+Installed-Size: 923
+Depends: libc6 (>= 2.14), libcurl4 (>= 7.16.2), libglib2.0-0 (>= 2.31.8), libjson-c3 (>= 0.10), libopenhpi3 (= 3.8.0-2), librabbitmq4 (>= 0.6.0)
+Conflicts: libopenhpi, libopenhpi2
+Breaks: libopenhpi3 (<< 3.8.0-2~)
+Replaces: libopenhpi, libopenhpi2, libopenhpi3 (<< 3.8.0-2~)
+Section: libs
+Priority: optional
+Homepage: http://openhpi.org
+Description: OpenHPI plugin module for HPE's Synergy enclosures
+ OpenHPI is an implementation of the Service Availability Forum's Hardware
+ Platform Interface specification.  (See http://www.saforum.org)  As
+ such, OpenHPI facilitates the development of computer manageability
+ applications which are not tied to a single hardware vendor's products.
+ .
+ This package contains a plugin module that provides hardware information
+ from HPE Synergy enclosures, accessing this information using
+ REST/Json to an Synergy Composer module, over a LAN.

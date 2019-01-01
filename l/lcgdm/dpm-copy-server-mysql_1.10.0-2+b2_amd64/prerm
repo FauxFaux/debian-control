@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+if [ -x "/etc/init.d/dpmcopyd" ]; then
+	invoke-rc.d dpmcopyd stop || exit 1
+fi
+
+if [ "$1" = "remove" ] ; then
+	update-alternatives --remove dpmcopyd /usr/lib/dpm-mysql/dpmcopyd
+fi
+
+

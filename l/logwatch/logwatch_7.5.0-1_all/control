@@ -1,0 +1,21 @@
+Package: logwatch
+Version: 7.5.0-1
+Architecture: all
+Maintainer: Willi Mann <willi@debian.org>
+Installed-Size: 2251
+Depends: perl:any, default-mta | mail-transport-agent
+Recommends: libdate-manip-perl, libsys-cpu-perl, libsys-meminfo-perl
+Section: admin
+Priority: optional
+Homepage: http://www.logwatch.org/
+Description: log analyser with nice output written in Perl
+ Logwatch is a modular log analyser that runs every night
+ and mails you the results. It can also be run from command line.
+ .
+ The output is by service and you can limit the output to one particular
+ service. The subscripts which are responsible for the output, mostly
+ convert the raw log lines in structured format.
+ .
+ Logwatch generally ignores the time component in the output, that means,
+ you will know that the reported event was logged in the requested range of
+ time, but you will have to go to the raw log files to get the exact details.

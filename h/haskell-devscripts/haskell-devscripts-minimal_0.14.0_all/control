@@ -1,0 +1,27 @@
+Package: haskell-devscripts-minimal
+Source: haskell-devscripts
+Version: 0.14.0
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 101
+Depends: dctrl-tools, debhelper (>= 10), dh-buildinfo, ghc, cdbs, html-xml-utils, ghc-haddock
+Suggests: haskell-devscripts
+Breaks: haskell-devscripts (<= 0.10.2.3)
+Replaces: haskell-devscripts (<= 0.10.2.3)
+Section: haskell
+Priority: optional
+Description: Tools to help Debian developers build Haskell packages
+ This package provides a collection of scripts to help build Haskell
+ packages for Debian.  Unlike haskell-utils, this package is not
+ expected to be installed on the machines of end users.
+ .
+ This package is designed to support Cabalized Haskell libraries.  It
+ is designed to build a library for each supported Debian compiler or
+ interpreter, generate appropriate postinst/prerm files for each one,
+ generate appropriate substvars entries for each one, and install the
+ package in the Debian temporary area as part of the build process.
+ .
+ This package doesn't provide functionality for generating coloured
+ documentation and is mostly intended for bootstrapping a new
+ architecture. If you want coloured documentation, use
+ haskell-devscripts.

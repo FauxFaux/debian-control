@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove x86_64-linux-gnux32-cpp /usr/bin/x86_64-linux-gnux32-cpp-6
+fi
+
+
+
+exit 0

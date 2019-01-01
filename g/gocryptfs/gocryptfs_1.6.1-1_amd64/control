@@ -1,0 +1,21 @@
+Package: gocryptfs
+Version: 1.6.1-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 6152
+Depends: libfuse2, libc6 (>= 2.3.2), libssl1.1 (>= 1.1.0)
+Built-Using: golang-1.10 (= 1.10.6-1), golang-github-hanwen-go-fuse (= 0.0~git20181027.c029b69-1), golang-github-jacobsa-crypto (= 0.0~git20171018.0.c73681c+dfsg1-3), golang-github-pkg-xattr (= 0.4.0-1), golang-github-rfjakob-eme (= 1.1-4), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-sync (= 0.0~git20171101.fd80eb9-1), golang-golang-x-sys (= 0.0~git20181026.95b1ffb-1)
+Section: devel
+Priority: optional
+Homepage: https://github.com/rfjakob/gocryptfs
+Description: Encrypted overlay filesystem written in Go
+ gocryptfs is built on top of the excellent go-fuse
+ (https://github.com/hanwen/go-fuse) FUSE library and its
+ LoopbackFileSystem API.
+ .
+ This project was inspired by EncFS and strives to fix its
+ security issues while providing good performance (benchmarks
+ (https://nuetzlich.net/gocryptfs/comparison/#performance)).
+ .
+ For details on the security of gocryptfs see the Security
+ (https://nuetzlich.net/gocryptfs/security/) design document.

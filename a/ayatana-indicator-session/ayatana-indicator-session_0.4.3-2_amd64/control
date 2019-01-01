@@ -1,0 +1,22 @@
+Package: ayatana-indicator-session
+Version: 0.4.3-2
+Architecture: amd64
+Maintainer: Ayatana Packagers <pkg-ayatana-devel@lists.alioth.debian.org>
+Installed-Size: 1333
+Depends: ayatana-indicator-common, gsettings-desktop-schemas, systemd, dconf-gsettings-backend | gsettings-backend, libc6 (>= 2.4), libglib2.0-0 (>= 2.37.3)
+Recommends: yelp
+Suggests: apport, gnome-screensaver | mate-screensaver, mate-indicator-applet | xfce4-indicator-plugin | indicator-renderer, unity-control-center | gnome-control-center | mate-control-center, unity-control-center-signon | gnome-control-center-signon | mate-control-center, lightdm, zenity
+Breaks: indicator-session
+Replaces: indicator-session
+Section: gnome
+Priority: optional
+Homepage: https://github.com/AyatanaIndicators/ayatana-indicator-session
+Description: Ayatana Indicator showing session management, status and user switching
+ This Ayatana Indicator is designed to be placed on the right side of a
+ panel and give the user easy control for changing their instant message
+ status.   Switching to another user.  Starting a guest session.  Or
+ controlling the status of their own session.
+ .
+ It requires some way to be hosted into a panel. For the MATE Panel the
+ appropriate package is mate-indicator-applet. For the Xfce Panel the
+ appropriate package is xfce4-indicator-plugin.

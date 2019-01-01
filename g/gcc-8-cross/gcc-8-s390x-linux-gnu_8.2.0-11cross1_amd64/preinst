@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove s390x-linux-gnu-gcc /usr/bin/s390x-linux-gnu-gcc-8
+    update-alternatives --quiet --remove s390x-linux-gnu-gcov /usr/bin/s390x-linux-gnu-gcov-8
+fi
+
+
+
+exit 0

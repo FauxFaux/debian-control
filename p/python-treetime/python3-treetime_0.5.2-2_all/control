@@ -1,0 +1,40 @@
+Package: python3-treetime
+Source: python-treetime
+Version: 0.5.2-2
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 436
+Depends: python3-biopython, python3-matplotlib, python3-numpy, python3-pandas, python3-scipy, python3:any
+Section: python
+Priority: optional
+Homepage: https://github.com/neherlab/treetime
+Description: inference of time stamped phylogenies and ancestral reconstruction (Python 3)
+ TreeTime provides routines for ancestral sequence reconstruction and the
+ maximum likelihoo inference of molecular-clock phylogenies, i.e., a tree
+ where all branches are scaled such that the locations of terminal nodes
+ correspond to their sampling times and internal nodes are placed at the
+ most likely time of divergence.
+ .
+ TreeTime aims at striking a compromise between sophisticated
+ probabilistic models of evolution and fast heuristics. It implements GTR
+ models of ancestral inference and branch length optimization, but takes
+ the tree topology as given. To optimize the likelihood of time-scaled
+ phylogenies, treetime uses an iterative approach that first infers
+ ancestral sequences given the branch length of the tree, then optimizes
+ the positions of unconstraine d nodes on the time axis, and then repeats
+ this cycle. The only topology optimization are (optional) resolution of
+ polytomies in a way that is most (approximately) consistent with the
+ sampling time constraints on the tree. The package is designed to be
+ used as a stand-alone tool or as a library used in larger phylogenetic
+ analysis workflows.
+ .
+ Features
+  * ancestral sequence reconstruction (marginal and joint maximum
+    likelihood)
+  * molecular clock tree inference (marginal and joint maximum
+    likelihood)
+  * inference of GTR models
+  * rerooting to obtain best root-to-tip regression
+  * auto-correlated relaxed molecular clock (with normal prior)
+ .
+ This package provides the Python 3 module.

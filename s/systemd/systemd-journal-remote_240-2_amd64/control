@@ -1,0 +1,18 @@
+Package: systemd-journal-remote
+Source: systemd
+Version: 240-2
+Architecture: amd64
+Maintainer: Debian systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>
+Installed-Size: 310
+Depends: libc6 (>= 2.14), libcurl3-gnutls (>= 7.16.2), libgnutls30 (>= 3.6.5), libmicrohttpd12 (>= 0.9.50), systemd (= 240-2), adduser
+Breaks: systemd (<< 239-6)
+Replaces: systemd (<< 239-6)
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.freedesktop.org/wiki/Software/systemd
+Description: tools for sending and receiving remote journal logs
+ This package provides tools for sending and receiving remote journal logs:
+  * systemd-journal-remote
+  * systemd-journal-upload
+  * systemd-journal-gatewayd

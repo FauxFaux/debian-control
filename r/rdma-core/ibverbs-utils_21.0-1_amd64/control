@@ -1,0 +1,22 @@
+Package: ibverbs-utils
+Source: rdma-core
+Version: 21.0-1
+Architecture: amd64
+Maintainer: Benjamin Drung <benjamin.drung@cloud.ionos.com>
+Installed-Size: 258
+Depends: libc6 (>= 2.14), libibverbs1 (>= 1.1.6)
+Section: net
+Priority: optional
+Homepage: https://github.com/linux-rdma/rdma-core
+Description: Examples for the libibverbs library
+ libibverbs is a library that allows userspace processes to use RDMA
+ "verbs" as described in the InfiniBand Architecture Specification and
+ the RDMA Protocol Verbs Specification.  iWARP ethernet NICs support
+ RDMA over hardware-offloaded TCP/IP, while InfiniBand is a
+ high-throughput, low-latency networking technology.  InfiniBand host
+ channel adapters (HCAs) and iWARP NICs commonly support direct
+ hardware access from userspace (kernel bypass), and libibverbs
+ supports this when available.
+ .
+ This package contains useful libibverbs1 example programs such as
+ ibv_devinfo, which displays information about InfiniBand devices.

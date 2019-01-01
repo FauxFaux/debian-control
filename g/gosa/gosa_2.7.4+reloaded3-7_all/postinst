@@ -1,0 +1,137 @@
+#!/bin/sh
+# postinst script for gosa
+#
+# see: dh_installdeb(1)
+
+set -e
+
+PATH="/usr/bin:/usr/sbin:/bin:/sbin"
+export PATH
+
+case "$1" in
+	configure)
+	;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+
+	triggered)
+		update-gosa
+		exit 0
+	;;
+
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+		;;
+esac
+
+
+
+# Set ID's
+WEBUSER="www-data"
+WEBGROUP="www-data"
+
+# Create empty inclusion file for apache
+if [ ! -f /etc/gosa/gosa.secrets ]; then
+	touch /etc/gosa/gosa.secrets
+	chmod 600 /etc/gosa/gosa.secrets
+fi
+
+
+# Apache2.2 / drop gosa.conf from deprecated conf.d
+if [ -d /etc/apache2/conf.d ]; then
+
+	# Remove GOsa configuration from conf.d directories, if that still exists...
+	if   [ -L /etc/apache2/conf.d/gosa.conf ]; then
+		rm /etc/apache2/conf.d/gosa.conf
+	elif [ -f /etc/apache2/conf.d/gosa.conf ]; then
+		mv /etc/apache2/conf.d/gosa.conf /etc/apache2/conf.d/gosa.conf.obsolete
+	fi
+
+fi
+
+# Apache2.4 / conf-available
+if [ -d /etc/apache2/conf-available ] ; then
+
+	# Copy GOsa configuration to conf-available directory /etc/apache2/conf-available
+	if [ ! -L /etc/apache2/conf-available/gosa.conf ]; then
+
+		# Remove old instances of this file
+		if [ -f /etc/apache2/conf-available/gosa.conf ]; then
+			echo "Found old gosa apache configuration in /etc/apache2/conf-available/gosa.conf - moving it to /etc/apache2/conf-available/gosa.conf.orig ..."
+			echo "Please check for changes in /etc/apache2/conf-available/gosa.conf.orig if you modified this file!"
+			mv /etc/apache2/conf-available/gosa.conf /etc/apache2/conf-available/gosa.conf.orig
+		fi
+
+		echo "Making /gosa available in /etc/apache2/conf-available"
+
+		# Add GOsa include file
+		ln -s /etc/gosa/gosa-apache.conf /etc/apache2/conf-available/gosa.conf
+	fi
+
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		apache2_invoke enconf gosa
+		apache2_invoke enmod headers
+	fi
+	# Finally restart servers
+	if [ -x "$(which apache2ctl)" ]; then
+		if [ -x "$(which invoke-rc.d)" ]; then
+			invoke-rc.d apache2 reload
+		else
+			/etc/init.d/apache2 reload
+		fi
+	fi
+fi
+
+# for lighttpd...
+if [ -d /etc/lighttpd/conf-available ]; then
+
+	# Copy GOsa configuration to conf-available directories /etc/lighttpd/conf-available
+	if [ ! -L /etc/lighttpd/conf-enabled/99gosa-lighttpd.conf ]; then
+
+		# Remove old instances of this file
+		if [ -f /etc/lighttpd/conf-enabled/99gosa-lighttpd.conf ]; then
+			echo "Found old gosa apache configuration in /etc/lighttpd/conf-enabled - moving it to orig.gosa-lighttpd.conf ..."
+			echo "Please check for changes in /etc/lighttpd/conf-available/orig.99gosa-lighttpd.conf if you modified this file!"
+			mv /etc/lighttpd/conf-enabled/99gosa-lighttpd.conf /etc/lighttpd/conf-available/orig.gosa-lighttpd.conf
+		fi
+
+		echo "Making /gosa available in /etc/lighttpd/conf-enabled/"
+
+		# Add GOsa include file
+		if [ ! -d /etc/lighttpd/conf-enabled/ ] ; then
+		    mkdir -p /etc/lighttpd/conf-enabled
+		fi
+		ln -s /etc/gosa/gosa-lighttpd.conf /etc/lighttpd/conf-enabled/99gosa-lighttpd.conf
+	fi
+
+	# Finally restart servers
+	if [ -x "$(which lighttpd)" ]; then
+		if [ -x "$(which invoke-rc.d)" ]; then
+			invoke-rc.d lighttpd reload
+		else
+			/etc/init.d/lighttpd reload
+		fi
+	fi
+fi
+
+# Add links for safe mode
+if [ ! -d /usr/share/gosa/bin ]; then mkdir -p /usr/share/gosa/bin; fi
+for source in "$(which convert)" "$(which lpstat)"; do
+	if [ -n "$source" ]; then
+		target=/usr/share/gosa/bin/${source##*/}
+		if [ ! -L $target ]; then ln -sf $source $target; fi
+	fi
+done
+
+# Fix permission in /var/(spool|cache)/gosa
+chown root.$WEBGROUP -R /var/spool/gosa
+chmod 770 -R /var/spool/gosa
+chown root.$WEBGROUP -R /var/cache/gosa
+chmod 770 -R /var/cache/gosa
+
+update-gosa
+
+exit 0

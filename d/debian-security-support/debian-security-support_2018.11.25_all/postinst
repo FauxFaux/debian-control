@@ -1,0 +1,69 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+USERNAME=debian-security-support
+LIB_DIR="/var/lib/$USERNAME"
+
+case "$1" in
+configure)
+    # assert user
+
+    if ! getent passwd "$USERNAME" > /dev/null; then
+        adduser \
+            --system --quiet \
+            --home "$LIB_DIR" \
+            --shell /bin/false --group \
+            --gecos "Debian security support check" \
+            "$USERNAME"
+    fi
+
+    if [ "$TMPDIR" ] && [ "$(stat --format=%a "$TMPDIR")" != '1777' ] ; then
+        export TMPDIR='/tmp'
+    fi
+
+    TEMPDIR="$(mktemp --tmpdir --directory debian-security-support.postinst.XXXXX)"
+    trap "rm -rf '$TEMPDIR'" EXIT
+
+    MODES="ended limited"
+
+    # Don't invoke earlyend if an unsupporting version is still running. Closes: #824015
+    found_version="$(dpkg-query -f '${Version}' -W debian-security-support)"
+    if dpkg --compare-versions "2016.03.30" '<=' "$found_version"; then
+        MODES="$MODES earlyend"
+    fi
+
+    for MODE in $MODES ; do
+        OUTPUT="$TEMPDIR/output"
+        su "$USERNAME" --shell /bin/bash --command "
+        check-support-status \
+            --type $MODE \
+            --no-heading \
+            --status-db \"$LIB_DIR/security-support.semaphore\" \
+        " >"$OUTPUT"
+
+        if [ -s "$OUTPUT" ] ; then
+            db_capb escape
+            db_subst debian-security-support/$MODE MESSAGE "$(debconf-escape -e <"$OUTPUT")"
+            db_input critical debian-security-support/$MODE || true
+            db_go
+            db_reset debian-security-support/$MODE
+        fi
+    done
+    ;;
+abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+triggered)
+    ;;
+*)
+    echo "postinst called with unknown argument '$1'"
+    exit 1
+    ;;
+esac
+
+db_stop
+
+
+exit 0

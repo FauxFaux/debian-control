@@ -1,0 +1,20 @@
+Package: cyrus-murder
+Source: cyrus-imapd (2.5.11-1)
+Version: 2.5.11-1+b2
+Architecture: amd64
+Maintainer: Debian Cyrus Team <team+cyrus@tracker.debian.org>
+Installed-Size: 143
+Pre-Depends: dpkg (>= 1.17.14~)
+Depends: cyrus-common (= 2.5.11-1+b2), cyrus-imapd (= 2.5.11-1+b2), cyrus-pop3d (= 2.5.11-1+b2), libc6 (>= 2.15), libsasl2-2, libssl1.1 (>= 1.1.0), libwrap0 (>= 7.6-4~), zlib1g (>= 1:1.1.4)
+Breaks: cyrus-murder-2.4
+Replaces: cyrus-murder-2.4
+Section: mail
+Priority: extra
+Homepage: https://www.cyrusimap.org/
+Description: Cyrus mail system - proxies and aggregator
+ This package contains the Cyrus IMAPd suite murder aggregator system,
+ i.e. IMAP, POP3  and LMTP proxies, and the mupdate mailbox master daemon.
+ It allows for cluster setups where there are many backend Cyrus spools and
+ frontend proxy servers.
+ .
+ For more information, please see the cyrus-common package.

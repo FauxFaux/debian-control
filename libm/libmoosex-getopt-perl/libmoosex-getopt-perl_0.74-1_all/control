@@ -1,0 +1,22 @@
+Package: libmoosex-getopt-perl
+Version: 0.74-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 119
+Depends: perl, libgetopt-long-descriptive-perl, libmoose-perl, libmoosex-role-parameterized-perl (>= 1.01), libnamespace-autoclean-perl, libtry-tiny-perl
+Breaks: libcatalyst-perl (<< 5.90119-1~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/MooseX-Getopt
+Description: Moose extension for processing command line options
+ MooseX::Getopt is a Moose role which provides an alternate constructor for
+ creating objects using parameters passed in from the command line. This module
+ automatically discovers command line parameters by introspecting your class
+ attributes, using the name of your attribute as the command line option. If
+ there is a type constraint defined, it will configure Getopt::Long to handle
+ the option accordingly.
+ .
+ By default, attributes beginning with an underscore are considered private and
+ are not given commandline argument support, unless the attribute's metaclass
+ is set to MooseX::Getopt::Meta::Attribute. You can also use this behaviour to
+ get non-default commandline option names and aliases.

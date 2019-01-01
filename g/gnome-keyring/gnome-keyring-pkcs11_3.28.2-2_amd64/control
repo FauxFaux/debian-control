@@ -1,0 +1,20 @@
+Package: gnome-keyring-pkcs11
+Source: gnome-keyring
+Version: 3.28.2-2
+Architecture: amd64
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Installed-Size: 381
+Depends: libc6 (>= 2.14)
+Breaks: gnome-keyring (<< 3.27.4-2~), libp11-kit-gnome-keyring (<< 3.27.4-2~)
+Replaces: gnome-keyring (<< 3.20.1-3), libp11-kit-gnome-keyring (<< 3.27.4-2~)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://wiki.gnome.org/GnomeKeyring
+Description: GNOME keyring module for the PKCS#11 module loading library
+ gnome-keyring is a daemon in the session, similar to ssh-agent,
+ and other applications can use it to store passwords and other
+ sensitive information.
+ .
+ This package contains a PKCS#11 module that will allow using the GNOME
+ keyring as a certificate database.

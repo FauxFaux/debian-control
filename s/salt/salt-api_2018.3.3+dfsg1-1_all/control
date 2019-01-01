@@ -1,0 +1,19 @@
+Package: salt-api
+Source: salt
+Version: 2018.3.3+dfsg1-1
+Architecture: all
+Maintainer: Debian Salt Team <pkg-salt-team@lists.alioth.debian.org>
+Installed-Size: 72
+Depends: lsb-base (>= 3.0-6), python3-systemd | sysvinit-core, salt-master, python3:any
+Recommends: python3-cherrypy3
+Section: admin
+Priority: optional
+Homepage: http://saltstack.org/
+Description: Generic, modular network access system
+ a modular interface on top of Salt that can provide a variety of entry points
+ into a running Salt system. It can start and manage multiple interfaces
+ allowing a REST API to coexist with XMLRPC or even a Websocket API.
+ .
+ The Salt API system is used to expose the fundamental aspects of Salt control
+ to external sources. salt-api acts as the bridge between Salt itself and
+ REST, Websockets, etc.

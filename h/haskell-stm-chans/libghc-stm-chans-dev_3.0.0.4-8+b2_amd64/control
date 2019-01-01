@@ -1,0 +1,29 @@
+Package: libghc-stm-chans-dev
+Source: haskell-stm-chans (3.0.0.4-8)
+Version: 3.0.0.4-8+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 616
+Depends: libghc-base-dev-4.11.1.0-5dd74, libghc-stm-dev-2.4.5.1-e1689, libatomic1 (>= 4.8), libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-stm-chans-doc, libghc-stm-chans-prof
+Provides: libghc-stm-chans-dev-3.0.0.4-a4b8d
+Section: haskell
+Priority: optional
+Homepage: http://code.haskell.org/~wren/
+Description: additional types of channels for STM
+ Additional types of STM channels:
+  * TBChan: a version of TChan where the queue is bounded in length
+  * TBMChan: a version of TChan where the queue is bounded in length
+    and closeable.
+  * TBMQueue: a version of TQueue where the queue is bounded in length
+    and closeable.
+  * TMChan: a version of TChan where the queue is closeable. This is
+    similar to a TChan (Maybe a) with a monotonicity guarantee that
+    once there's a Nothing there will always be Nothing.
+  * TMQueue: a version of TQueue where the queue is closeable. This is
+    similar to a TQueue (Maybe a) with a monotonicity guarantee that
+    once there's a Nothing there will always be Nothing.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: stm-chans-3.0.0.4-BydeEz1YMAI4c97ZmSq8Ww

@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e 
+
+update-alternatives --quiet \
+  --install /usr/bin/pchrt pchrt /usr/bin/pchrt2 10 \
+  --slave /usr/share/man/man1/pchrt.1.gz pchrt.1.gz /usr/share/man/man1/pchrt2.1.gz
+
+update-alternatives --quiet \
+  --install /usr/bin/ptaskset ptaskset /usr/bin/ptaskset2 10 \
+  --slave /usr/share/man/man1/ptaskset.1.gz ptaskset.1.gz /usr/share/man/man1/ptaskset2.1.gz
+
+for badlink in /usr/man/man1/pchrt.1 /usr/man/man1/ptaskset.1; do
+  if [ -L $badlink ]; then
+    if ! ls -l $(ls -l $badlink | cut -d">" -f2) >/dev/null 2>$1; then
+      rm -f $badlink;
+    fi;
+  fi;
+done
+
+

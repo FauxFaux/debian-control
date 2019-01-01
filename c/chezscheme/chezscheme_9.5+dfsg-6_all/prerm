@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ]; then
+    CHEZ_VERSION=9.5
+    update-alternatives --remove scheme /usr/bin/chezscheme${CHEZ_VERSION}
+    update-alternatives --remove scheme-script /usr/bin/chezscheme${CHEZ_VERSION}
+fi
+
+

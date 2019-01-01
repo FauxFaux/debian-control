@@ -1,0 +1,26 @@
+Package: openstack-tempest-ci-live-booter
+Source: openstack-meta-packages
+Version: 0.24
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 40
+Depends: apache2, apache2-utils, approx, bind9-host, bind9utils, bridge-utils, ipcalc, isc-dhcp-server, live-build, lsb-base, pxelinux, qemu-kvm, qemu-utils, tftpd-hpa
+Section: net
+Priority: optional
+Homepage: http://openstack.alioth.debian.org/
+Description: configures a server to boot a custom live image to test OpenStack
+ The best environment to run OpenStack in order to test it, is a Debian Live
+ system, booted over PXE, which we just "reinstall" by performing an (IPMI)
+ reboot of the server. However, such setup is complicated, and error-prone.
+ This is why this package was designed for: configuring a computer to act as
+ PXE/DHCP/apache to boot that 2nd server.
+ .
+ This package configures the different tools (ie: isc-dhcp-server, tftpd-hpa,
+ apache and son on) with a script. Its intention is *not* to be clean, but to
+ just do the job of configuring for testing OpenStack. It is *not* to be used
+ in production.
+ .
+ This package also contains the necessary scripts to create the Debian Live
+ image using live-build, and the qemu-kvm setup to start a virtual machine
+ that will PXE boot using that live image, so it is easy to test the setup
+ without actual real hardware.

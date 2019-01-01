@@ -1,0 +1,23 @@
+Package: geotiff-bin
+Source: libgeotiff-dfsg
+Version: 1.4.3-1
+Architecture: amd64
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 129
+Depends: libc6 (>= 2.7), libgeotiff2 (>= 1.3.0), libproj13 (>= 4.8.0), libtiff5 (>= 4.0.3)
+Suggests: gdal-bin, libgeotiff-epsg
+Breaks: libgeotiff-dev (<< 1.4.0-4)
+Replaces: libgeotiff-dev (<< 1.4.0-4)
+Section: science
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://geotiff.osgeo.org/
+Description: GeoTIFF (geografic enabled TIFF) library -- tools
+ This C library supports TIFF 6.0 based interchange format for georeferenced
+ raster imagery. The GeoTIFF standard has been developed for reading, and
+ writing geographic meta-information tags on top of TIFF raster.
+ .
+ The GeoTIFF library comes with two utility programs here included:
+ .
+  listgeo - dumps the metadata of a GeoTIFF file.
+  geotifcp - applies metadata to a TIFF file, making it a GeoTIFF file.

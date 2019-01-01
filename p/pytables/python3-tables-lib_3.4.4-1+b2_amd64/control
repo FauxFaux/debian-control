@@ -1,0 +1,35 @@
+Package: python3-tables-lib
+Source: pytables (3.4.4-1)
+Version: 3.4.4-1+b2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 3058
+Depends: python3-numpy (>= 1:1.14.3), python3-numpy-abi9, python3 (<< 3.8), python3 (>= 3.6~), libblosc1, libbz2-1.0, libc6 (>= 2.14), libhdf5-103, liblzo2-2
+Recommends: python3-tables (= 3.4.4-1)
+Section: python
+Priority: optional
+Homepage: http://www.pytables.org
+Description: hierarchical database for Python3 based on HDF5 (extension)
+ PyTables is a package for managing hierarchical datasets and designed
+ to efficiently cope with extremely large amounts of data.
+ .
+ It is built on top of the HDF5 library and the NumPy package. It
+ features an object-oriented interface that, combined with C extensions
+ for the performance-critical parts of the code (generated using
+ Cython), makes it a fast, yet extremely easy to use tool for
+ interactively save and retrieve very large amounts of data. One
+ important feature of PyTables is that it optimizes memory and disk
+ resources so that they take much less space (between a factor 3 to 5,
+ and more if the data is compressible) than other solutions, like for
+ example, relational or object oriented databases.
+ .
+  - Compound types (records) can be used entirely from Python (i.e. it
+    is not necessary to use C for taking advantage of them).
+  - The tables are both enlargeable and compressible.
+  - I/O is buffered, so you can get very fast I/O, specially with
+    large tables.
+  - Very easy to select data through the use of iterators over the
+    rows in tables. Extended slicing is supported as well.
+  - It supports the complete set of NumPy objects.
+ .
+ This package contains the extension built for the Python 3 interpreter.

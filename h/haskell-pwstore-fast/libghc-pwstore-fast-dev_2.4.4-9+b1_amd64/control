@@ -1,0 +1,23 @@
+Package: libghc-pwstore-fast-dev
+Source: haskell-pwstore-fast (2.4.4-9)
+Version: 2.4.4-9+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 283
+Depends: libghc-base-dev-4.11.1.0-5dd74, libghc-base64-bytestring-dev-1.0.0.1-4eea0, libghc-binary-dev-0.8.5.1-24ea6, libghc-byteable-dev-0.1.1-750b1, libghc-bytestring-dev-0.10.8.2-76891, libghc-cryptohash-dev-0.11.9-7cf1d, libghc-random-dev-1.1-1827c, libatomic1 (>= 4.8), libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-pwstore-fast-doc, libghc-pwstore-fast-prof
+Provides: libghc-pwstore-fast-dev-2.4.4-1c41f
+Section: haskell
+Priority: optional
+Homepage: https://github.com/PeterScott/pwstore
+Description: secure password storage
+ To store passwords securely, they should be salted, then hashed with a
+ slow hash function. This library uses PBKDF1-SHA256, and handles all
+ the details. It uses the cryptohash package for speed; if you need a
+ pure Haskell library, pwstore-purehaskell has the exact same API, but
+ uses only pure Haskell. It is about 25 times slower than this package,
+ but still quite usable.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: pwstore-fast-2.4.4-22OSpFXZ02uKjaCkx6WcMS

@@ -1,0 +1,21 @@
+Package: piuparts
+Version: 0.95
+Architecture: all
+Maintainer: piuparts developers team <piuparts-devel@alioth-lists.debian.net>
+Installed-Size: 410
+Depends: piuparts-common (= 0.95), debootstrap (>= 1.0.89~), debsums (>= 2.2.2~), lsb-release, lsof, mount, python-debian, python:any
+Recommends: adequate
+Suggests: schroot, docker.io
+Section: devel
+Priority: optional
+Homepage: https://piuparts.debian.org
+Description: .deb package installation, upgrading, and removal testing tool
+ piuparts tests that .deb packages (as used by Debian) handle
+ installation, upgrading, and removal correctly. It does this by
+ creating a minimal Debian installation in a chroot, and installing,
+ upgrading, and removing packages in that environment, and comparing the
+ state of the directory tree before and after. piuparts reports any
+ files that have been added, removed, or modified during this process.
+ .
+ piuparts is meant as a quality assurance tool for people who create .deb
+ packages to test them before they upload them to the Debian package archive.

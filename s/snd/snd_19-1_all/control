@@ -1,0 +1,20 @@
+Package: snd
+Version: 19-1
+Architecture: all
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 12832
+Recommends: guile, ladspa-plugin, snd-gtk-jack | snd-gtk | snd-nox
+Suggests: snd-doc
+Breaks: snd-gtk-jack (<< 16.1-2), snd-gtk-pulse (<< 16.1-2), snd-nox (<< 16.1-2)
+Replaces: snd-gtk-jack (<< 16.1-2), snd-gtk-pulse (<< 16.1-2), snd-nox (<< 16.1-2)
+Section: sound
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://ccrma.stanford.edu/software/snd/
+Description: Sound file editor
+ Snd is a powerful sound file editor that can be customized and extended using
+ the Scheme programming language.
+ .
+ This package contains the basic infrastructure for the snd packages and
+ the scheme files. You have to install a GUI package as well to actually
+ use snd.

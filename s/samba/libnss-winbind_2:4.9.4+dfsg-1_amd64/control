@@ -1,0 +1,24 @@
+Package: libnss-winbind
+Source: samba
+Version: 2:4.9.4+dfsg-1
+Architecture: amd64
+Maintainer: Debian Samba Maintainers <pkg-samba-maint@lists.alioth.debian.org>
+Installed-Size: 153
+Pre-Depends: dpkg (>= 1.15.6~)
+Depends: samba-common (= 2:4.9.4+dfsg-1), winbind:any (= 2:4.9.4+dfsg-1), libbsd0 (>= 0.0), libc6 (>= 2.14), libwbclient0 (= 2:4.9.4+dfsg-1)
+Suggests: libpam-winbind
+Section: admin
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.samba.org
+Description: Samba nameservice integration plugins
+ Samba is an implementation of the SMB/CIFS protocol for Unix systems,
+ providing support for cross-platform file and printer sharing with
+ Microsoft Windows, OS X, and other Unix systems.  Samba can also function
+ as an NT4-style domain controller, and can integrate with both NT4 domains
+ and Active Directory realms as a member server.
+ .
+ This package provides nss_winbind, a plugin that integrates
+ with a local winbindd server to provide user/group name lookups to the
+ system; and nss_wins, which provides hostname lookups via both the NBNS and
+ NetBIOS broadcast protocols.

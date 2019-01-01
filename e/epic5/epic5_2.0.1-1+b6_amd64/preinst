@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+if [ "$1" = "upgrade" -o "$1" = "install" ]; then
+  install -m 755 -d /etc/epic5
+
+  # this file needs to be preserved, then deleted
+  if [ -e /etc/irc/servers-epic5 ]; then
+    cp /etc/irc/servers-epic5 /etc/epic5/servers
+    rm /etc/irc/servers-epic5 
+  fi
+  # this one we use only if we don't have anything else to use ...
+  if [ ! -e /etc/epic5/servers -a -e /etc/irc/servers ]; then
+    install -m 644 /etc/irc/servers /etc/epic5/servers
+  fi
+fi
+
+
+

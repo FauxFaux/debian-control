@@ -1,0 +1,39 @@
+#!/bin/sh
+set -e
+
+
+
+# This code was taken from nss-mdns:
+
+log() {
+    echo "$*"
+}
+
+remove_nss_entry() {
+    log "Checking NSS setup..."
+    # abort if /etc/nsswitch.conf does not exist
+    if ! [ -e /etc/nsswitch.conf ]; then
+        log "Could not find /etc/nsswitch.conf."
+        return
+    fi
+
+    # check for the "unknown" entry in passwd and group entries
+    (grep '^passwd:\|^group:' /etc/nsswitch.conf  | grep "unknown") && \
+	log "Updating /etc/nsswitch.conf" || \
+	(log "Nothing to update in /etc/nsswitch.conf"; return)
+
+    perl -i -pe '
+        sub remove {
+            my $s = shift;
+            $s =~ s/\s+unknown?//g;
+            return $s;
+        }
+        s/^(passwd:)(.*)/$1.remove($2)/e; s/^(group:)(.*)/$1.remove($2)/e;
+    ' /etc/nsswitch.conf
+}
+
+action="$1"
+
+if [ "$action" = remove ]; then
+    remove_nss_entry
+fi

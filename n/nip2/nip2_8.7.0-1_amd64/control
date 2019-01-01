@@ -1,0 +1,33 @@
+Package: nip2
+Version: 8.7.0-1
+Architecture: amd64
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 14614
+Depends: libatk1.0-0 (>= 1.12.4), libc6 (>= 2.14), libcairo2 (>= 1.2.4), libcdt5, libcgraph6, libfftw3-double3 (>= 3.3.5), libfontconfig1 (>= 2.12.6), libfreetype6 (>= 2.2.1), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.35.9), libgomp1 (>= 4.2.1), libgsf-1-114 (>= 1.14.8), libgsl23 (>= 2.5), libgslcblas0 (>= 2.4), libgtk2.0-0 (>= 2.24.32), libgvc6, libpango-1.0-0 (>= 1.14.0), libpangocairo-1.0-0 (>= 1.14.0), libpangoft2-1.0-0 (>= 1.14.0), libvips42 (>> 8.0.2-1~), libxml2 (>= 2.7.4)
+Recommends: iceweasel | firefox | abrowser | www-browser
+Suggests: libvips-doc, libvips-tools
+Section: graphics
+Priority: optional
+Homepage: http://www.vips.ecs.soton.ac.uk
+Description: spreadsheet-like graphical image manipulation tool
+ nip2 is a graphical front end to the VIPS package.
+ .
+ VIPS is an image processing system designed with efficiency in mind.
+ It is good with large images (ones that larger than the amount of RAM in
+ your machine), and for working with colour.  It can perform many
+ image manipulation tasks much faster than other packages such as
+ ImageMagick and the GIMP and includes some special features such as
+ creating single "mosaic" images from multiple parts.
+ .
+ VIPS consists of two main components: an image processing library
+ with some command-line tools and a spreadsheet-like graphical user
+ interface.  This package supplies the graphical interface.
+ .
+ With nip2, rather than directly editing images, you build
+ relationships between objects in a spreadsheet-like fashion.  When
+ you make a change somewhere, nip2 recalculates the objects affected by
+ that change.  Since it is demand-driven this update is very fast,
+ even for very, very large images.  nip2 is very good at creating
+ pipelines of image manipulation operations.  It is not very good for
+ image editing tasks like touching up photographs.  For that, a tool
+ like the GIMP should be used instead.

@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+if [ !  -z "$(update-alternatives --get-selections 2> /dev/null | grep  mpi-x86_64-linux-gnu)" ]; then
+MPI=`update-alternatives --get-selections | grep mpi-x86_64-linux-gnu | awk '{print $3}' | cut -f5 -d/ `
+else
+MPI=openmpi
+fi
+
+echo "DEBUG: ACTION: postinst $1" 
+
+update-alternatives --install /usr/bin/adios_lint adios /usr/bin/adios_lint.$MPI 50 \
+ 		--slave     /usr/bin/bp2ncd bp2ncd          /usr/bin/bp2ncd.$MPI \
+		--slave	     /usr/bin/bpdump bpdump     /usr/bin/bpdump.$MPI \
+		--slave	     /usr/bin/bpls  bpls           /usr/bin/bpls.$MPI \
+		--slave	     /usr/bin/skeldump  skeldump       /usr/bin/skeldump.$MPI \
+		--slave	     /usr/bin/bp2bp    bp2bp   /usr/bin/bp2bp.$MPI \
+		--slave	     /usr/bin/bpappend bpappend     /usr/bin/bpappend.$MPI \
+		--slave	     /usr/bin/bpgetttime bpgettime    /usr/bin/bpgettime.$MPI \
+		--slave	     /usr/bin/bpsplit  bpsplit    /usr/bin/bpsplit.$MPI
+
+
+
+
+exit 0

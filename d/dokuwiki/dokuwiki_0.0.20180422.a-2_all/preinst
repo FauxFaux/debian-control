@@ -1,0 +1,35 @@
+#!/bin/sh
+# preinst for dokuwiki.
+
+set -e
+
+# Restructure the data tree to the new format introduced in the
+# 2005-07-01 release
+if [ -e "/var/lib/dokuwiki/attic" ] ; then
+	mv /var/lib/dokuwiki/data /var/lib/dokuwiki/data.tmp
+	mkdir /var/lib/dokuwiki/data
+	mv /var/lib/dokuwiki/data.tmp /var/lib/dokuwiki/data/pages
+	mv /var/lib/dokuwiki/attic /var/lib/dokuwiki/data/
+	mv /var/lib/dokuwiki/media /var/lib/dokuwiki/data/
+fi
+
+if [ $1 = "upgrade" ] ; then
+    # Backup the .htaccess file managed by ucf that used to be part
+    # of the package file and would be deleted as a side effect.
+    # Remove useless ucf associations: these files are part of the
+    # package and would get deleted or overwritten before ucf
+    # can do anything.
+    # 
+    # See bug #506100.
+    if [ -f /usr/share/dokuwiki/.htaccess -a ! -f /usr/share/dokuwiki/.htaccess.dist ]
+    then
+        cp /usr/share/dokuwiki/.htaccess /usr/share/dokuwiki/.htaccess.upgrade
+        ucf --purge /usr/share/dokuwiki/.htaccess
+        ucf --purge /var/lib/dokuwiki/data/.htaccess
+        ucf --purge /usr/share/dokuwiki/bin/.htaccess
+        ucf --purge /usr/share/dokuwiki/inc/.htaccess
+        ucf --purge /usr/share/dokuwiki/inc/lang/.htaccess
+    fi
+fi
+
+

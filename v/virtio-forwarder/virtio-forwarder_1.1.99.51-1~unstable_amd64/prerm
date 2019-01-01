@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+# Automatically added by dh_installsystemd/11.5.4
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop 'vio4wd_core_scheduler.service' 'virtio-forwarder.service' >/dev/null || true
+fi
+# End automatically added section
+
+
+# Hardcode path
+pyclean /usr/lib/virtio-forwarder
+set +e

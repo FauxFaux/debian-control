@@ -1,0 +1,15 @@
+Package: librust-parking-lot-core+deadlock-detection-dev
+Source: rust-parking-lot-core
+Version: 0.3.1-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-parking-lot-core-dev (= 0.3.1-1), librust-backtrace-0.3+default-dev (>= 0.3.2-~~), librust-petgraph-0.4+default-dev (>= 0.4.5-~~), librust-thread-id-3+default-dev (>= 3.2.0-~~)
+Provides: librust-parking-lot-core-0+deadlock-detection-dev (= 0.3.1-1), librust-parking-lot-core-0.3+deadlock-detection-dev (= 0.3.1-1), librust-parking-lot-core-0.3.1+deadlock-detection-dev (= 0.3.1-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Advanced API for creating custom synchronization primitives - feature "deadlock_detection"
+ This metapackage enables feature deadlock_detection for the Rust
+ parking_lot_core crate, by pulling in any additional dependencies needed by
+ that feature.

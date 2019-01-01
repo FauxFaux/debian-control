@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=595112#44
+        policy=/etc/selinux/strict/src/policy/file_contexts/misc/pam_mount.fc
+        if [ -z "$2" ] && [ -f ${policy}.dpkg-bak ] ; then
+            md5sum="$(md5sum ${policy} | sed -e 's/ .*//')"
+            old_md5sum="$(dpkg-query -W -f='${Conffiles}' libpam-mount-bin | \
+                sed -n -e "\\' ${policy} ' { s/ obsolete$//; s/.* //; p }")"
+            # On new installs, if the file was preserved on libpam-mount upgrade
+            # by dpkg-maintscript helper, copy it back if the new file has not
+            # been modified yet
+            if [ "$md5sum" = "$old_md5sum" ] ; then
+                mv ${policy}.dpkg-bak ${policy}
+            fi
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

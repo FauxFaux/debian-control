@@ -1,0 +1,35 @@
+Package: libmeep-openmpi12
+Source: meep-openmpi
+Version: 1.7.0-2
+Architecture: amd64
+Maintainer: Thorsten Alteholz <debian@alteholz.de>
+Installed-Size: 1060
+Depends: libatlas3-base, libc6 (>= 2.14), libfftw3-double3 (>= 3.3.5), libgcc1 (>= 1:4.0), libgfortran5 (>= 8), libgsl23 (>= 2.5), libgslcblas0 (>= 2.4), libharminv3 (>= 1.4), libhdf5-openmpi-103 (>= 1.8.14), liblapack3 | liblapack.so.3, libopenmpi3, libquadmath0 (>= 4.6), libstdc++6 (>= 5.2), zlib1g (>= 1:1.1.4)
+Conflicts: libmeep-lam4-12, libmeep-lam4-6, libmeep-lam4-7, libmeep-lam4-8, libmeep-mpi-default12, libmeep-mpi-default6, libmeep-mpi-default7, libmeep-mpi-default8, libmeep-mpich2-12, libmeep-mpich2-6, libmeep-mpich2-7, libmeep-mpich2-8, libmeep-openmpi6, libmeep-openmpi7, libmeep-openmpi8, libmeep10, libmeep12, libmeep6, libmeep7, libmeep8
+Section: libs
+Priority: optional
+Homepage: http://ab-initio.mit.edu/wiki/index.php/Meep
+Description: library for using parallel (OpenMPI) version of meep
+ Meep (or MEEP) is a free finite-difference time-domain (FDTD) simulation
+ software package developed at MIT to model electromagnetic systems.
+ .
+ Its features include:
+   * Simulation in 1d, 2d, 3d, and cylindrical coordinates.
+   * Distributed memory parallelism on any system supporting the MPI standard.
+   * Dispersive (including loss/gain) and nonlinear (Kerr & Pockels) materials.
+     Magnetic permeability and electric/magnetic conductivities.
+   * PML absorbing boundaries and/or perfect conductor and/or Bloch-periodic
+     boundary conditions.
+   * Exploitation of symmetries to reduce the computation size.
+     even/odd mirror symmetries and 90/180 degree rotations.
+   * Complete scriptability - either via a Scheme scripting front-end
+     (as in libctl and MPB), or callable as a C++ library.
+   * Field output in the HDF5 standard scientific data format, supported by
+     many visualization tools.
+   * Arbitrary material and source distributions.
+   * Field analyses including flux spectra, frequency extraction, and energy
+     integrals; completely programmable.
+   * Multi-parameter optimization, root-finding, integration, etcetera
+     (via libctl).
+ .
+ This package contains the MPI version of the library.

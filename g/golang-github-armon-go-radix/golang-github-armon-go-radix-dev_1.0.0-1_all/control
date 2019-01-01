@@ -1,0 +1,24 @@
+Package: golang-github-armon-go-radix-dev
+Source: golang-github-armon-go-radix
+Version: 1.0.0-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Installed-Size: 34
+Section: devel
+Priority: optional
+Homepage: https://github.com/armon/go-radix
+Description: Golang implementation of Radix trees
+ Provides the radix package that implements a radix tree. The package only
+ provides a single Tree implementation, optimized for sparse nodes.
+ .
+ As a radix tree, it provides the following:
+ .
+  - O(k) operations. In many cases, this can be faster than a hash table since
+    the hash function is an O(k) operation, and hash tables have very poor cache
+    locality.
+  - Minimum / Maximum value lookups
+  - Ordered iteration
+ .
+ For an immutable variant, see go-immutable-radix.
+ .
+ This package contains the source.

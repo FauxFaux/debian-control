@@ -1,0 +1,20 @@
+Package: gccgo-8-multilib-x86-64-linux-gnux32
+Source: gcc-8-cross-ports (16)
+Version: 8.2.0-11cross2
+Architecture: amd64
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 112587
+Depends: gcc-8-x86-64-linux-gnux32-base (= 8.2.0-11cross2), gccgo-8-x86-64-linux-gnux32 (= 8.2.0-11cross2), gcc-8-multilib-x86-64-linux-gnux32 (= 8.2.0-11cross2), lib64go13-x32-cross (>= 8.2.0-11cross2), lib32go13-x32-cross (>= 8.2.0-11cross2)
+Breaks: lib32go12 (<< 8-20171209-2), lib64go12-x32-cross (<< 8-20171209-2), libn32go12-x32-cross (<< 8-20171209-2), libx32go12-x32-cross (<< 8-20171209-2)
+Replaces: lib32go12-x32-cross (<< 8-20171209-2), lib64go12-x32-cross (<< 8-20171209-2), libn32go12-x32-cross (<< 8-20171209-2), libx32go12-x32-cross (<< 8-20171209-2)
+Built-Using: gcc-8 (= 8.2.0-11)
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://gcc.gnu.org/
+Description: GNU Go compiler (multilib support)
+ This is the GNU Go compiler, which compiles Go on platforms supported
+ by the gcc compiler.
+ .
+ This is a dependency package, depending on development packages
+ for the non-default multilib architecture(s).

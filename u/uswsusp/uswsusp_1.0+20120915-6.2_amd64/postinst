@@ -1,0 +1,198 @@
+#!/bin/bash
+set -e
+
+# uswsusp.postinst -- postinst script for uswsusp debian package
+#
+# Copyright 2006, 2007	Tim Dijkstra <tim@famdijkstra.org>
+# Copyright 2012	Rodolfo García Peñas <kix@kix.es>
+#  04-2012 Full rewrited
+# Released under GPLv2
+
+. /usr/share/debconf/confmodule
+
+CONFIGNAME=uswsusp.conf
+CONFIGFILE=/etc/$CONFIGNAME
+SWAPOFFSET=/usr/sbin/swap-offset
+
+LOWQ="snapshot_device compute_checksum compress early_writeout image_size suspend_loglevel max_loglevel"
+MEDQ="resume_device encrypt"
+HIGHQ=""
+NOTQ="RSA_key_file shutdown_method resume_offset"
+
+# If we don't have /proc or /sys we can't work, this will probably
+# be a chroot or so.
+function check_filesystems
+{
+	mountpoint -q /sys || {
+		echo "/sys not mounted. Can't create $CONFIGNAME" >> /dev/stderr;
+		exit 0; }
+	mountpoint -q /proc || {
+		echo "/proc not mounted. Can't create $CONFIGNAME" >> /dev/stderr;
+		exit 0; }
+}
+
+
+check_requirements()
+{
+	# Check if we have swap, else exit.
+	db_fget uswsusp/no_swap hit
+	[ "$RET" = "false" ] || exit 0;
+
+	# Check if we have /dev/snapshot, else exit.
+	db_fget uswsusp/no_snapshot hit
+	[ "$RET" = "false" ] || exit 0;
+
+	# Check if filesystems /proc and /sys are mounted
+	check_filesystems
+}
+
+case "$1" in
+	configure)
+		# Check requirements to continue
+		check_requirements
+
+		# We skip calculating offset if the user agreed to continue
+		# without swap
+		db_fget uswsusp/continue_without_swap hit
+		if [ "$RET" != "true" ];
+		then
+			# swap-offset returns only something for a swap file
+			# Effectively we're also resetting offset in case of a partition
+			db_get uswsusp/resume_device
+			dname=$RET
+			db_set uswsusp/resume_offset $($SWAPOFFSET $dname 2> /dev/null | cut -c17-)
+
+			# We have to translate the devid to a device file.
+			if [ "$(awk '$1=="'$dname'" {print $2}' /proc/swaps)" == "file" ];
+			then
+				if ! devid=$(stat -c "%d" $dname);
+				then
+					# It is permissible for swap to be a regular file, which
+					# is typically not available in a chroot (and this script
+					# needs to work in chroots too).
+					echo "The swapfile $dname could not be found, exiting." >&1
+					exit 0
+				fi
+				devnode="/dev/"$(awk '$1=='$(($devid>>8))' && $2=='$(($devid&0x00ff))' {print $4}' /proc/partitions)
+
+				# This shouldn't happen that much...
+				if [ ! -b $devnode ];
+				then
+					echo "You have a strange /dev layout." >&1
+					echo "I couldn't find a node with devid $(($devid>>8)):$(($devid&0x00ff))" >&1
+					exit 0;
+				fi
+
+				db_set uswsusp/resume_device $devnode
+			fi
+		fi
+
+		if [ ! -f $CONFIGFILE -o ! -s $CONFIGFILE ];
+		then
+			echo "# $CONFIGFILE(5) -- Configuration file for s2disk/s2both " > $CONFIGFILE
+		fi
+
+		TMPFILE=`mktemp`
+		cp -f $CONFIGFILE $TMPFILE
+
+		SEDCMD=""
+
+		for I in $MEDQ $LOWQ $HIGHQ $NOTQ; do
+			db_get uswsusp/$I
+			VAL=$RET
+
+			db_metaget uswsusp/$I type
+			TYPE=$RET
+
+			if [ "boolean" = "$TYPE" ];
+			then
+				if [ "$VAL" = "true" ];
+				then
+					VAL="y";
+				else
+					VAL=
+				fi
+			fi
+
+			PATRN="^[[:space:]]*${I//_/ }[[:space:]]*[:=]"
+
+			# If we didn't got a value, we want the hardcoded default, so del
+			if [ -z "$VAL" ];
+			then
+				SEDCMD="$SEDCMD -e '/$PATRN/ d'"
+			# Else, rewrite the value
+			elif eval grep -q -e "'$PATRN'" $CONFIGFILE;
+			then
+				SEDCMD="$SEDCMD -e 's/$PATRN.*$/${I//_/ } = ${VAL//\//\\/}/'"
+			# Or add it
+			else
+				SEDCMD="$SEDCMD -e '$ a ${I//_/ } = $VAL'"
+			fi
+		done
+
+		eval sed $SEDCMD < $CONFIGFILE > $TMPFILE
+		eval cat $TMPFILE > $CONFIGFILE
+		eval rm $TMPFILE
+
+ 		db_get uswsusp/create_RSA_key
+		if [ "$RET" = "true" ]; then
+			db_get uswsusp/RSA_key_bits
+			BITS=$RET
+
+			db_get uswsusp/RSA_key_file
+			KEYFILE=$RET
+
+			db_get uswsusp/RSA_passphrase
+			PASS=$RET
+
+			if [ -n "$BITS" ] && [ -n "$KEYFILE" ] && [ -n "$PASS" ];
+			then
+#				echo "Generating RSA key, this may take a while ..."
+#				suspend-keygen <<EOFa &> /dev/null
+#$BITS
+#$PASS
+#$PASS
+#$KEYFILE
+#EOFa
+				echo "RSA encryption is not supported by uswsusp!!!"
+				echo "Support will be re-enabled soon."
+			else
+				echo "One of the arguments to suspend-keygen was empty!"
+				echo "No key generated!"
+			fi
+			db_reset uswsusp/RSA_passphrase
+			db_reset uswsusp/RSA_passphrase_v
+		fi
+
+		if [ -x /usr/sbin/update-initramfs -a -e /etc/initramfs-tools/initramfs.conf ];
+		then
+			update-initramfs -u;
+		fi
+
+		# Make snapshot device if they choose /dev/snapshot
+		db_get uswsusp/snapshot_device
+		if [ -z "$RET" -a  ! -c /dev/snapshot ];
+		then
+			if [ -x /dev/MAKEDEV ] ; then
+				# Until MAKEDEV knows how to make it ...
+				DEV=`cat /sys/class/misc/snapshot/dev `
+				(cd /dev; ./MAKEDEV snapshot) || mknod /dev/snapshot c ${DEV%:*} ${DEV#*:}
+			else
+				echo "The config file is using snapshot device"
+				echo "But /dev/MAKEDEV do not exists!"
+			fi
+		fi
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+		;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,43 @@
+Package: gpart
+Version: 1:0.3-5
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 80
+Depends: libc6 (>= 2.4)
+Suggests: fdisk | util-linux (<< 2.29.2-3~)
+Section: admin
+Priority: optional
+Homepage: https://github.com/baruch/gpart
+Description: Guess PC disk partition table, find lost partitions
+ Gpart is a tool which tries to guess the primary partition table of a PC-type
+ disk in case the primary partition table in sector 0 is damaged, incorrect or
+ deleted.
+ .
+ It is also good at finding and listing the types, locations, and sizes of
+ inadvertently-deleted partitions, both primary and logical. It gives you the
+ information you need to manually re-create them (using fdisk, cfdisk, sfdisk,
+ etc.).
+ .
+ The guessed table can also be written to a file or (if you firmly believe the
+ guessed table is entirely correct) directly to a disk device.
+ .
+ Currently supported (guessable) filesystem or partition types:
+ .
+  * BeOS filesystem type.
+  * BtrFS filesystem type.
+  * FreeBSD/NetBSD/386BSD disklabel sub-partitioning scheme used on Intel
+    platforms.
+  * Linux second extended filesystem (Ext2).
+  * MS-DOS FAT12, FAT16 and FAT32 "filesystems".
+  * IBM OS/2 High Performance filesystem.
+  * Linux LVM and LVM2 physical volumes.
+  * Linux swap partitions (versions 0 and 1).
+  * The Minix operating system filesystem type.
+  * MS Windows NT/2000 filesystem.
+  * QNX 4.x filesystem.
+  * The Reiser filesystem (version 3.5.X, X > 11).
+  * Sun Solaris on Intel platforms uses a sub-partitioning scheme on PC hard
+    disks similar to the BSD disklabels.
+  * Silicon Graphics journaled filesystem for Linux.
+ .
+ Gpart is useful in recovery actions and forensics investigations.

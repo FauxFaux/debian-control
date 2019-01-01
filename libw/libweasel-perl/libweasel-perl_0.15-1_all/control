@@ -1,0 +1,23 @@
+Package: libweasel-perl
+Version: 0.15-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 114
+Depends: perl, libmodule-runtime-perl, libmoose-perl, libnamespace-autoclean-perl
+Section: perl
+Priority: optional
+Homepage: https://weasel.pm/
+Description: PHP's Mink inspired multi-protocol web-testing library for Perl
+ Weasel abstracts away the differences between the various web-driver
+ protocols, like the Mink project does for PHP.
+ .
+ While heavily inspired by Mink, Weasel aims to improve over it by being
+ extensible, providing not just access to the underlying browser, yet to
+ provide building blocks for further development and abstraction.
+ .
+ Pherkin::Extension::Weasel provides integration with Test::BDD::Cucumber (aka
+ pherkin), for BDD testing.
+ .
+ For the actual page interaction, this module needs a driver to be installed.
+ Currently, that means Weasel::Driver::Selenium2, in Debian packaged as
+ libweasel-driver-selenium2-perl.

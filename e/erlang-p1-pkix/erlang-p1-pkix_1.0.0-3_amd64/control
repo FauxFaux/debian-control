@@ -1,0 +1,27 @@
+Package: erlang-p1-pkix
+Version: 1.0.0-3
+Architecture: amd64
+Maintainer: Ejabberd Packaging Team <ejabberd@packages.debian.org>
+Installed-Size: 283
+Depends: erlang-base (>= 1:19.2) | erlang-abi-17.0, erlang-base (>= 1:21.2.2+dfsg) | erlang-base-hipe (>= 1:21.2.2+dfsg), erlang-crypto (>= 1:21.2.2+dfsg), erlang-public-key (>= 1:21.2.2+dfsg), ca-certificates
+Section: libs
+Priority: optional
+Homepage: https://github.com/processone/pkix
+Description: PKIX certificates management library for Erlang
+ The idea of the library is to simplify certificates configuration in Erlang
+ programs. Typically an Erlang program which needs certificates  (for HTTPS/
+ MQTT/XMPP/etc) provides a bunch of options such as certfile,  chainfile,
+ privkey, etc. The situation becomes even more complicated when a  server
+ supports so called virtual domains because a program is typically  required to
+ match a virtual domain with its certificate. If a user has plenty  of virtual
+ domains it's quickly becoming a nightmare for them to configure all this.
+ The complexity also leads to errors: a single configuration mistake and a
+ program generates obscure log messages, unreadable Erlang tracebacks or,
+ even worse, just silently ignores the errors.
+ Fortunately, the large part of certificates configuration can be automated,
+ reducing a user configuration to something as simple as:
+ .
+ certfiles:
+   - /etc/letsencrypt/live/*/*.pem
+ .
+ The purpose of this library is to do this dirty job under the hood.

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+mkdir -p /usr/share/mira/mhs
+/usr/share/mira/mira-install-sls-rrna.sh /usr/share/mira/rfam_rrna-21-12.sls.gz
+cd /usr/share/mira/mhs
+ln -s -f rfam_rrna-21-12.mhs.gz filter_default_rrna.mhs.gz
+
+

@@ -1,0 +1,30 @@
+Package: libghc-basic-prelude-prof
+Source: haskell-basic-prelude (0.7.0-3)
+Version: 0.7.0-3+b3
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 255
+Depends: libghc-basic-prelude-dev (= 0.7.0-3+b3), libghc-base-prof-4.11.1.0-5dd74, libghc-bytestring-prof-0.10.8.2-76891, libghc-containers-prof-0.5.11.0-e0faa, libghc-filepath-prof-1.4.2-27f5e, libghc-hashable-prof-1.2.7.0-68a88, libghc-text-prof-1.2.3.1-30bbe, libghc-transformers-prof-0.5.5.0-b5d2f, libghc-unordered-containers-prof-0.2.9.0-e9bb1, libghc-vector-prof-0.12.0.1-4d111
+Provides: libghc-basic-prelude-prof-0.7.0-8fd03
+Section: haskell
+Priority: optional
+Homepage: https://github.com/snoyberg/basic-prelude
+Description: enhanced core prelude; profiling libraries
+ The premise of basic-prelude is that there are a lot of very commonly
+ desired features missing from the standard Prelude, such as commonly
+ used operators (<$> and >=>, for instance) and imports for common
+ datatypes (e.g., ByteString and Vector). At the same time, there are
+ lots of other components which are more debatable, such as providing
+ polymorphic versions of common functions.
+ .
+ So basic-prelude is intended to give a common foundation for a number
+ of alternate preludes. The package provides two modules: CorePrelude
+ provides the common ground for other preludes to build on top of, while
+ BasicPrelude exports CorePrelude together with commonly used list
+ functions to provide a drop-in replacement for the standard Prelude.
+ .
+ Users wishing to have an improved Prelude can use BasicPrelude.
+ Developers wishing to create a new prelude should use CorePrelude.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

@@ -1,0 +1,37 @@
+Package: golang-github-alecthomas-repr-dev
+Source: golang-github-alecthomas-repr
+Version: 0.0~git20181024.d37bc2a-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: golang-github-stretchr-testify-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/alecthomas/repr
+Description: Python's repr() for Go
+ The repr package attempts to represent Go values in a form that can be
+ used almost directly in Go source code.
+ .
+ Unfortunately, some values (such as pointers to basic types) cannot
+ be represented directly in Go.  These values will be represented as
+ &<value>, e.g. &23
+ .
+ Example:
+ .
+   type test struct {
+     S string
+     I int
+     A []int
+   }
+ .
+   func main() {
+     repr.Print(&test{
+       S: "String",
+       I: 123,
+       A: []int{1, 2, 3},
+     })
+   }
+ .
+ Outputs
+ .
+   &main.test{S: "String", I: 123, A: []int{1, 2, 3}}

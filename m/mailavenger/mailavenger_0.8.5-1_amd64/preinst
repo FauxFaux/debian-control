@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e 
+DATADIR=/var/lib/mailavenger
+if ! getent passwd avenger >/dev/null; then
+        # Adding system user: avenger.
+        adduser \
+          --system \
+          --disabled-login \
+          --ingroup nogroup \
+	  --home $DATADIR \
+          --gecos "MailAvenger non-smtp user" \
+          --shell /usr/sbin/nologin \
+          avenger  >/dev/null
+fi
+
+

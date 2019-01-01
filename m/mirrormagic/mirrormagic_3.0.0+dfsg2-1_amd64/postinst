@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+# remove old highscore directory, if user wishes it.
+if [ -d /var/lib/games/mirrormagic ]; then
+    . /usr/share/debconf/confmodule
+    db_get mirrormagic/remove_old_highscores
+    if [ "$RET" = "true" ]; then
+	rm -rf /var/lib/games/mirrormagic/*
+	rmdir -p --ignore-fail-on-non-empty /var/lib/games/mirrormagic || true
+    fi
+fi
+
+

@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/bandit bandit /usr/bin/python3-bandit 200
+	update-alternatives --install /usr/bin/bandit-config-generator bandit-config-generator /usr/bin/python3-bandit-config-generator 200
+	update-alternatives --install /usr/bin/bandit-baseline bandit-baseline /usr/bin/python3-bandit-baseline 200
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-bandit 
+fi
+
+# End automatically added section
+
+
+exit 0

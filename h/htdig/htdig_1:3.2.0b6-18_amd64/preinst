@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -e
+
+case "$1" in
+    upgrade)
+        rm -f /etc/cron.weekly/htdig
+    ;;
+
+    install)
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

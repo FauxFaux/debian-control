@@ -1,0 +1,16 @@
+Package: librust-parking-lot-dev
+Source: rust-parking-lot
+Version: 0.6.4-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 178
+Depends: librust-lock-api-0.1+default-dev, librust-parking-lot-core-0.3+default-dev
+Recommends: librust-parking-lot+owning-ref-dev (= 0.6.4-1)
+Suggests: librust-parking-lot+deadlock-detection-dev (= 0.6.4-1), librust-parking-lot+nightly-dev (= 0.6.4-1)
+Provides: librust-parking-lot-0-dev (= 0.6.4-1), librust-parking-lot-0.6-dev (= 0.6.4-1), librust-parking-lot-0.6.4-dev (= 0.6.4-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: More compact and efficient implementations of the standard synchronization primitives - Rust source code
+ This package contains the source for the Rust parking_lot crate, packaged by
+ debcargo for use with cargo and dh-cargo.

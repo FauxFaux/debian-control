@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+configure)
+	update-alternatives --install /usr/bin/wsgen    wsgen    /usr/share/jaxws/bin/wsgen.sh    2000 --slave /usr/share/man/man1/wsgen.1    wsgen.1    /usr/share/jaxws/man/wsgen.1
+	update-alternatives --install /usr/bin/wsimport wsimport /usr/share/jaxws/bin/wsimport.sh 2000 --slave /usr/share/man/man1/wsimport.1 wsimport.1 /usr/share/jaxws/man/wsimport.1
+	;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,27 @@
+Package: xtables-addons-common
+Source: xtables-addons
+Version: 3.2-1
+Architecture: amd64
+Maintainer: Pierre Chifflier <pollux@debian.org>
+Installed-Size: 440
+Depends: libc6 (>= 2.4), libxtables12 (>= 1.6.0+snapshot20161117)
+Recommends: xtables-addons-dkms, unzip, wget
+Suggests: libtext-csv-xs-perl
+Breaks: ipset (<< 6.11~)
+Provides: xtables-addons-common-3.2
+Section: admin
+Priority: extra
+Homepage: http://xtables-addons.sourceforge.net/
+Description: Extensions targets and matches for iptables [tools, libs]
+ Xtables-addons provides extra modules for iptables not present in the
+ kernel, and is the successor of patch-o-matic.
+ Extensions includes new targets like TEE, TARPIT, CHAOS, or modules like
+ geoip and account.
+ .
+ This package provides the userspace libraries for iptables to use extensions
+ in the xtables-addons-modules package.
+ .
+ Note: this package is only useful with a corresponding xtables-addons-dkms
+ package, which you may produce with module-assistant:
+ .
+   module-assistant auto-install xtables-addons-source

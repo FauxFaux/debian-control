@@ -1,0 +1,25 @@
+Package: libghc-echo-doc
+Source: haskell-echo
+Version: 0.1.3-4
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 198
+Depends: haddock-interface-33
+Recommends: ghc-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: https://github.com/RyanGlScott/echo
+Description: Cross-platform library for handling echoing terminal input; documentation
+ The base library exposes the hGetEcho and hSetEcho functions
+ for querying and setting echo status, but unfortunately, neither
+ function works with MinTTY consoles on Windows. This is a serious
+ issue, since hGetEcho and hSetEcho are often used to disable
+ input echoing when a program prompts for a password, so many
+ programs will reveal your password as you type it on MinTTY!
+ .
+ This library provides an alternative interface which works
+ with both MinTTY and other consoles.
+ .
+ This package provides the documentation for a library for the Haskell
+ programming language.
+ See http://www.haskell.org/ for more information on Haskell.

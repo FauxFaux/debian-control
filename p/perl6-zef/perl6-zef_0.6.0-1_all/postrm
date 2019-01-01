@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    remove|upgrade)
+        /usr/share/perl6/rakudo-helper.pl --remove perl6-zef
+    ;;
+ 
+    purge|failed-upgrade|abort-install|abort-upgrade|disappear)
+        # nothing to do
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

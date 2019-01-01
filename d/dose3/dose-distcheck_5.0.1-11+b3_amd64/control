@@ -1,0 +1,19 @@
+Package: dose-distcheck
+Source: dose3 (5.0.1-11)
+Version: 5.0.1-11+b3
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 4273
+Depends: libbz2-1.0, libc6 (>= 2.17), librpm8 (>= 4.14.0+dfsg1), librpmio8 (>= 4.14.0+dfsg1), zlib1g (>= 1:1.1.4), xz-utils
+Breaks: dose3-distcheck (<< 2.9.13)
+Replaces: dose3-distcheck (<< 2.9.13)
+Section: devel
+Priority: optional
+Homepage: http://www.mancoosi.org/software/
+Description: Checks whether dependencies of packages can be satisfied
+ This software checks for every package of a distribution whether it
+ is possible to satisfy its dependencies and conflicts within this
+ distribution. It comes in several versions:
+  - dose-debcheck for Debian packages
+  - dose-rpmcheck for rpm packages
+  - dose-eclipsecheck for OSGi plugins

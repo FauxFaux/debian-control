@@ -1,0 +1,36 @@
+#!/bin/sh
+# postinst script for ocsinventory-reports
+#
+# see: dh_installdeb(1)
+
+set -e
+
+dbconfpath="/etc/ocsinventory/dbconfig.inc.php"
+
+if [ "$1" = "configure" ]; then
+  # create empty /etc/ocsinventory/dbconfig.inc.php if missing
+  if [ ! -e $dbconfpath ]; then
+    cat << EOS > $dbconfpath
+<?php
+
+?>
+EOS
+  fi
+
+  # Allow php to update it
+  chown www-data:www-data $dbconfpath
+fi
+
+# Automatically added by dh_apache2/UNDECLARED
+if true; then
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		for conf in ocsinventory-reports  ; do
+			apache2_invoke enconf $conf  || exit 1
+		done
+	fi
+fi
+# End automatically added section
+
+
+exit 0

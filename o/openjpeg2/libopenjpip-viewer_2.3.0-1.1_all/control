@@ -1,0 +1,23 @@
+Package: libopenjpip-viewer
+Source: openjpeg2
+Version: 2.3.0-1.1
+Architecture: all
+Maintainer: Debian PhotoTools Maintainers <pkg-phototools-devel@lists.alioth.debian.org>
+Installed-Size: 96
+Depends: libopenjpip-dec-server, default-jre | java7-runtime | java8-runtime | java9-runtime | java10-runtime | java11-runtime, jarwrapper (>= 0.5), libxerces2-java
+Suggests: libopenjp2-tools
+Conflicts: openjpip-viewer
+Section: graphics
+Priority: optional
+Homepage: http://www.openjpeg.org
+Description: JPEG 2000 java based viewer for advanced remote JPIP access
+ Java based client to view remote JPEG 2000 using JPIP protocol.
+ This is a simple java viewer to allow:
+ .
+  - Scale up request: Enlarge the window
+  - ROI request: Select a region by mouse click and drag, then click inside the
+    red frame of the selected region
+  - Annotate image with ROI information in XML metadata: Click button "Region
+    Of Interest"
+  - Open a new window presenting an aligned image with a locally stored image:
+    Click button "Image Registration" (Under Construction)

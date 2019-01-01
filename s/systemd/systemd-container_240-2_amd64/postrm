@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    purge)
+        # clean up after manually enabled units in postinst
+        rm -f /etc/systemd/system/multi-user.target.wants/machines.target
+    ;;
+esac
+
+# Automatically added by dh_installdeb/12
+dpkg-maintscript-helper rm_conffile /etc/dbus-1/system.d/org.freedesktop.import1.conf 233-3\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/dbus-1/system.d/org.freedesktop.machine1.conf 233-3\~ -- "$@"
+# End automatically added section
+

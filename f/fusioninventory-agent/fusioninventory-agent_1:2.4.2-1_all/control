@@ -1,0 +1,25 @@
+Package: fusioninventory-agent
+Version: 1:2.4.2-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 1657
+Depends: perl:any, ucf, perl, lsb-base (>= 3.0-6), libnet-cups-perl, libnet-ip-perl, libwww-perl, libparse-edid-perl, libproc-daemon-perl, libuniversal-require-perl, libfile-which-perl, libxml-treepp-perl (>= 0.26), libyaml-perl, libtext-template-perl, libjson-pp-perl, hwdata, libhttp-daemon-perl, libsocket-getaddrinfo-perl
+Recommends: libio-socket-ssl-perl, dmidecode, hdparm, e2fsprogs, fdisk | util-linux (<< 2.29.2-3~), net-tools
+Suggests: smartmontools, read-edid
+Breaks: libfusioninventory-agent-task-deploy-perl (<< 1:2.3.0-1), libfusioninventory-agent-task-esx-perl (<< 1:2.3.0-1), libfusioninventory-agent-task-netdiscovery-perl (<< 1:2.3.0-1), libfusioninventory-agent-task-netinventory-perl (<< 1:2.3.0-1), libfusioninventory-agent-task-network-perl (<< 1:2.3.0-1)
+Section: net
+Priority: optional
+Homepage: http://fusioninventory.org/
+Description: hardware and software inventory tool (client)
+ FusionInventory Agent is an application designed to help a network
+ or system administrator to keep track of the hardware and software
+ configurations of devices.
+ This agent can collect information about from:
+  - the local machine (Inventory)
+  - the network using SNMP
+  - an VMware ESX or vCenter server
+ The agent can be driven from different asset management software
+ including GLPI, Rudder, Uranos, OCSInventory.
+ .
+ The agent can also be used to install new software and configuration
+ changes.

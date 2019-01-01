@@ -1,0 +1,42 @@
+Package: mat
+Version: 0.6.1-5
+Architecture: all
+Maintainer: Debian Privacy Tools Maintainers <pkg-privacy-maintainers@lists.alioth.debian.org>
+Installed-Size: 842
+Depends: python-mutagen, python-pdfrw, python:any (<< 2.8), python:any (>= 2.7~), gir1.2-poppler-0.18, python-gi
+Recommends: gir1.2-gdkpixbuf-2.0, gir1.2-glib-2.0, gir1.2-gtk-3.0, gir1.2-nautilus-3.0, libimage-exiftool-perl, python-gi-cairo, python-nautilus
+Section: python
+Priority: optional
+Homepage: https://mat.boum.org/
+Description: Metadata anonymisation toolkit
+ Metadata consist of information that characterizes data. Metadata are
+ used to provide documentation for data products. In essence, metadata
+ answer who, what, when, where, why, and how about every facet of the
+ data that are being documented.
+ .
+ Metadata within a file can tell a lot about you. Cameras record data
+ about when a picture was taken and what camera was used. Office
+ documents like PDF or Office automatically adds author and company
+ information to documents and spreadsheets.
+ .
+ Maybe you don't want to disclose those information on the web.
+ .
+ MAT only removes metadata from your files, it does not anonymise their
+ content, nor can it handle watermarking, steganography, or any too
+ custom metadata field/system.
+ .
+ If you really want to be anonymous, use file formats that does not contain any
+ metadata, or better: use plain-text.
+ .
+ Formats supported to some extent are:
+    - Portable Network Graphics (PNG)
+    - JPEG (.jpeg, .jpg, ...)
+    - Open Document (.odt, .odx, .ods, ...)
+    - Office Openxml (.docx, .pptx, .xlsx, ...)
+    - Portable Document Fileformat (.pdf)
+    - Tape ARchive (.tar, .tar.bz2, .tar.gz)
+    - ZIP (.zip)
+    - MPEG Audio (.mp3, .mp2, .mp1, .mpa)
+    - Ogg Vorbis (.ogg)
+    - Free Lossless Audio Codec (.flac)
+    - Torrent (.torrent)

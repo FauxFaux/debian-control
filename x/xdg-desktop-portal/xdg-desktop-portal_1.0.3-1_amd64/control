@@ -1,0 +1,29 @@
+Package: xdg-desktop-portal
+Version: 1.0.3-1
+Architecture: amd64
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 961
+Depends: default-dbus-session-bus | dbus-session-bus, fuse, libc6 (>= 2.14), libfuse2 (>= 2.9), libglib2.0-0 (>= 2.45.6)
+Breaks: flatpak (<< 0.10.4-1~)
+Replaces: flatpak (<< 0.10.4-1~)
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/flatpak/xdg-desktop-portal
+Description: desktop integration portal for Flatpak and Snap
+ xdg-desktop-portal provides a portal frontend service for Flatpak, Snap,
+ and possibly other desktop containment/sandboxing frameworks. This service
+ is made available to the sandboxed application, and provides mediated
+ D-Bus interfaces for file access, URI opening, printing and similar
+ desktop integration features.
+ .
+ The implementation of these interfaces is expected to require
+ user confirmation before responding to the sandboxed application's
+ requests. For example, when the sandboxed application ask to open a file,
+ the portal implementation will open an "Open" dialog outside the sandbox,
+ and will only make the selected file available to the sandboxed app if
+ that dialog is confirmed.
+ .
+ xdg-desktop-portal is designed to be desktop-agnostic, and uses a
+ desktop-environment-specific GUI backend such as xdg-desktop-portal-gtk
+ to provide its functionality.

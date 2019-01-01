@@ -1,0 +1,18 @@
+Package: sslsniff
+Source: sslsniff (0.8-8)
+Version: 0.8-8+b1
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 404
+Depends: libboost-filesystem1.67.0, libboost-system1.67.0, libboost-thread1.67.0, libc6 (>= 2.14), libgcc1 (>= 1:3.0), liblog4cpp5v5, libssl1.1 (>= 1.1.0), libstdc++6 (>= 5.2)
+Section: admin
+Priority: optional
+Homepage: https://moxie.org/software/sslsniff/
+Description: SSL/TLS man-in-the-middle attack tool
+ sslsniff is designed to create man-in-the-middle (MITM) attacks for
+ SSL/TLS connections, and dynamically generates certs for the domains
+ that are being accessed on the fly. The new certificates are constructed
+ in a certificate chain that is signed by any certificate that is
+ provided.
+ sslsniff also supports other attacks like null-prefix or OCSP attacks to
+ achieve silent interceptions of connections when possible.

@@ -1,0 +1,25 @@
+Package: libghc-text-short-prof
+Source: haskell-text-short (0.1.2-4)
+Version: 0.1.2-4+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 549
+Depends: libghc-text-short-dev (= 0.1.2-4+b2), libghc-base-prof-4.11.1.0-5dd74, libghc-binary-prof-0.8.5.1-24ea6, libghc-bytestring-prof-0.10.8.2-76891, libghc-deepseq-prof-1.4.3.0-17e4f, libghc-ghc-prim-prof-0.5.2.0-0a259, libghc-hashable-prof-1.2.7.0-68a88, libghc-text-prof-1.2.3.1-30bbe
+Provides: libghc-text-short-prof-0.1.2-d2ef9
+Section: haskell
+Priority: optional
+Homepage: https://github.com/hvr/text-short
+Description: memory-efficient representation of Unicode text strings; profiling libraries
+ This Haskell library provides the 'ShortText' type which is suitable
+ for keeping many short strings in memory. This is similiar to the
+ relationship between 'ShortByteString' and 'ByteString'.
+ .
+ The main differences between 'Text' and 'ShortText' is that
+ 'ShortText' uses UTF-8 instead of UTF-16 internally and 'ShortText'
+ doesn't support zero-copy slicing (thereby saving 2 words).
+ Consequently, the memory footprint of a (boxed) 'ShortText' value is 4
+ words (2 words when unboxed) plus the length of the UTF-8 encoded
+ payload.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

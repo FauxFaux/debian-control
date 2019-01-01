@@ -1,0 +1,26 @@
+Package: uwsgi-plugin-mongo
+Source: uwsgi-plugin-mongo (0.0.3)
+Version: 2.0.17.1+9+0.0.3+b2
+Architecture: amd64
+Maintainer: uWSGI packaging team <pkg-uwsgi-devel@lists.alioth.debian.org>
+Installed-Size: 151
+Depends: libboost-filesystem1.67.0, libboost-system1.67.0, libboost-thread1.67.0, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libmongoclient0 (>= 1.1.3), libstdc++6 (>= 5.2), uwsgi-abi-a411bb8664cd85ae0fd852d2f665558a
+Recommends: mongodb-server
+Breaks: uwsgi-mongodb-plugins
+Replaces: uwsgi-mongodb-plugins
+Provides: uwsgi-mongodb-plugins
+Section: httpd
+Priority: extra
+Homepage: https://uwsgi-docs.readthedocs.io/en/latest/
+Description: MongoDB/GridFS plugins for uWSGI
+ uWSGI presents a complete stack for networked/clustered web applications,
+ implementing message/object passing, caching, RPC and process management.
+ It is designed to be fully modular. This means that different plugins can be
+ used in order to add compatibility with tons of different technology on top of
+ the same core.
+ .
+ This package provides plugins for using MongoDB as uWSGI backend:
+  * emperor_mongodb (Emperor configuration)
+  * gridfs (content storage)
+  * mongodblog (logging)
+  * stats_pusher_mongodb (statistics)

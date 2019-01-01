@@ -1,0 +1,32 @@
+Package: python-datalad
+Source: datalad
+Version: 0.11.1-1
+Architecture: all
+Maintainer: NeuroDebian Team <team@neuro.debian.net>
+Installed-Size: 4320
+Depends: git-annex (>= 6.20180509~) | git-annex-standalone (>= 6.20180509~), patool, python-appdirs, python-fasteners, python-git (>= 2.1.6~), python-humanize, python-iso8601, python-keyrings.alt | python-keyring (<= 8), python-secretstorage, python-keyring, python-mock, python-msgpack, python-pil, python-requests, python-simplejson, python-six (>= 1.8.0), python-tqdm, python-wrapt, python-boto, python-chardet, python:any (<< 2.8), python:any (>= 2.7~)
+Recommends: python-exif, python-github, python-jsmin, python-html5lib, python-httpretty, python-libxmp, python-lzma, python-mutagen, python-nose, python-pyperclip, python-requests-ftp, python-vcr, python-whoosh
+Suggests: python-duecredit, python-bs4, python-numpy
+Provides: python2.7-datalad
+Section: python
+Priority: optional
+Homepage: http://datalad.org
+Description: data files management and distribution platform
+ DataLad is a data management and distribution platform providing
+ access to a wide range of data resources already available online.
+ Using git-annex as its backend for data logistics it provides following
+ facilities built-in or available through additional extensions
+ .
+  - command line and Python interfaces for manipulation of collections of
+    datasets (install, uninstall, update, publish, save, etc.) and
+ separate files/directories (add, get)
+  - extract, aggregate, and search through various sources of metadata
+    (xmp, EXIF, etc; install datalad-neuroimaging for DICOM, BIDS, NIfTI
+    support)
+  - crawl web sites to automatically prepare and update git-annex
+    repositories with content from online websites, S3, etc (install
+    datalad-crawler)
+ .
+ This package installs the module for Python 2, and Recommends install
+ all dependencies necessary for searching and managing datasets, publishing,
+ and testing.  If you need base functionality, install without Recommends.

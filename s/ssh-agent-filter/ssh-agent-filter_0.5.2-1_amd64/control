@@ -1,0 +1,16 @@
+Package: ssh-agent-filter
+Version: 0.5.2-1
+Architecture: amd64
+Maintainer: Timo Weingärtner <timo@tiwe.de>
+Installed-Size: 216
+Depends: openssh-client, libboost-filesystem1.67.0, libboost-iostreams1.67.0, libboost-program-options1.67.0, libboost-system1.67.0, libc6 (>= 2.15), libgcc1 (>= 1:3.0), libnettle6, libstdc++6 (>= 6)
+Recommends: ssh-askpass, whiptail | dialog, zenity
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://git.tiwe.de/ssh-agent-filter.git
+Description: filtering proxy for ssh-agent
+ This package solves the all-or-nothing problem regarding ssh-agent
+ forwarding. It contains:
+  * ssh-agent-filter, the filtering proxy itself
+  * afssh, a wrapper around ssh-agent-filter and ssh

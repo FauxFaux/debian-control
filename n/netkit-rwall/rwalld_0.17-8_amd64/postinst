@@ -1,0 +1,22 @@
+#!/bin/sh -e
+# $Id: rwalld.postinst,v 1.1 1999/11/03 11:15:25 herbert Exp $
+
+case "$1" in
+abort-upgrade | abort-deconfigure | abort-remove)
+	update-inetd --enable walld
+	;;
+configure)
+	if [ -n "$2" ]; then
+		update-inetd --enable walld
+	else
+		update-inetd --remove "walld/1	dgram	rpc/udp	wait	root	/usr/sbin/tcpd	/usr/sbin/rpc.rwalld"
+		update-inetd --group RPC --add "walld/1		dgram	rpc/udp	wait	nobody	/usr/sbin/tcpd	/usr/sbin/rpc.rwalld"
+	fi
+	;;
+*)
+	printf "$0: incorrect arguments: $*\n" >&2
+	exit 1
+	;;
+esac
+
+

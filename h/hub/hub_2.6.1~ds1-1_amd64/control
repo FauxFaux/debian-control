@@ -1,0 +1,29 @@
+Package: hub
+Version: 2.6.1~ds1-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Installed-Size: 5325
+Depends: libc6 (>= 2.3.2), git
+Recommends: xsel | xclip
+Built-Using: golang-1.10 (= 1.10.7-1), golang-github-atotto-clipboard (= 0.1.1-1), golang-github-kballard-go-shellquote (= 0.0~git20150810.0.d8ec1a6-2), golang-github-mattn-go-colorable (= 0.0.9-3), golang-github-mattn-go-isatty (= 0.0.4-1), golang-github-mitchellh-go-homedir (= 0.0~git20161203.0.b8bc1bf-2), golang-github-ogier-pflag (= 0.0~git20160129.0.45c278a-4), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-sys (= 0.0~git20181220.97b4c2a-1), golang-toml (= 0.3.0+git20170626.7.a368813-1), golang-yaml.v2 (= 2.2.2-1)
+Section: net
+Priority: optional
+Homepage: https://github.com/github/hub
+Description: make git easier with GitHub
+ hub is GitHub’s official tool that wraps git in order to extend it
+ with extra functionality that make working with GitHub easier.
+ .
+   $ hub clone rtomayko/tilt
+ .
+   # expands to:
+   $ git clone git://github.com/rtomayko/tilt.git
+ .
+ hub is best aliased as git, so you can type "git <command>" in the shell
+ and get all the usual hub features.
+ .
+ You should place this command in your .bash_profile or other
+ startup script:
+ .
+   eval "$(hub alias -s)"
+ .
+ This package contains the binaries.

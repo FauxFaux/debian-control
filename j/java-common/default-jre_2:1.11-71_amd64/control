@@ -1,0 +1,16 @@
+Package: default-jre
+Source: java-common (0.71)
+Version: 2:1.11-71
+Architecture: amd64
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 6
+Depends: default-jre-headless (= 2:1.11-71), openjdk-11-jre
+Provides: java-runtime, java10-runtime, java11-runtime, java2-runtime, java5-runtime, java6-runtime, java7-runtime, java8-runtime, java9-runtime
+Section: java
+Priority: optional
+Homepage: https://wiki.debian.org/Java/
+Description: Standard Java or Java compatible Runtime
+ This dependency package points to the Java runtime, or Java compatible
+ runtime recommended for this architecture, which is
+ openjdk-11-jre for amd64.
+Cnf-Extra-Commands: java,jexec

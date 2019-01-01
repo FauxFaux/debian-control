@@ -1,0 +1,28 @@
+Package: python-escript-mpi
+Source: python-escript
+Version: 5.2-4
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 13590
+Depends: python2.7, python:any, openmpi-bin, python-numpy, libboost-python1.67.0, libc6 (>= 2.14), libgcc1 (>= 1:4.0), libgomp1 (>= 4.9), libnetcdf-c++4-1 (>= 4.3.0), libopenmpi3, libpython2.7 (>= 2.7), libsiloh5-0, libstdc++6 (>= 5.2)
+Recommends: python-sympy, python-matplotlib, python-scipy
+Suggests: python-pyproj, python-gdal, python-escript-doc
+Section: python
+Priority: optional
+Homepage: https://launchpad.net/escript-finley
+Description: Escript/Finley finite elements Python2 system (OpenMP + MPI)
+ Escript is a programming tool for implementing mathematical models in Python
+ using the finite element method (FEM). Because users do not access the data
+ structures it is very easy to use and scripts can run on desktop computers as
+ well as highly parallel supercomputer without changes. Application areas for
+ escript include earth mantle convection, geophysical inversion, earthquakes,
+ porous media flow, reactive transport, plate subduction, erosion, and tsunamis.
+ .
+ Scripts can be executed in parallel (on varying numbers of threads or nodes)
+ without any special modifications.
+ .
+ Escript now includes the esys.downunder module for 3D inversion of geophysical
+ data sets. The current version supports gravity, magnetic and joint inversion.
+ .
+ This package contains the commands and libraries for Python2 with
+ both OpenMP threading and MPI multiprocess support.

@@ -1,0 +1,18 @@
+Package: console-setup-linux
+Source: console-setup
+Version: 1.188
+Architecture: all
+Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Installed-Size: 1758
+Depends: kbd (>= 0.99-12) | console-tools (>= 1:0.2.3-16), keyboard-configuration (= 1.188), init-system-helpers (>= 1.29~) | initscripts
+Suggests: console-setup
+Conflicts: console-setup-freebsd
+Breaks: console-cyrillic (<= 0.9-11), console-setup (<< 1.71), console-terminus
+Replaces: console-setup (<< 1.71), console-terminus
+Provides: console-terminus
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Description: Linux specific part of console-setup
+ This package includes fonts in psf format and definitions of various
+ 8-bit charmaps.

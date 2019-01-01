@@ -1,0 +1,26 @@
+Package: libghc-mwc-random-prof
+Source: haskell-mwc-random (0.13.6.0-3)
+Version: 0.13.6.0-3+b3
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 1905
+Depends: libghc-mwc-random-dev (= 0.13.6.0-3+b3), libghc-base-prof-4.11.1.0-5dd74, libghc-math-functions-prof-0.2.1.0-9a1ce, libghc-primitive-prof-0.6.4.0-b7b8e, libghc-time-prof-1.8.0.2-2ae9f, libghc-vector-prof-0.12.0.1-4d111
+Provides: libghc-mwc-random-prof-0.13.6.0-c5f23
+Section: haskell
+Priority: optional
+Homepage: https://github.com/bos/mwc-random
+Description: Fast, high quality pseudo random number generation; profiling libraries
+ This package contains code for generating high quality random numbers that
+ follow either a uniform or normal distribution. The generated numbers are
+ suitable for use in statistical applications.
+ .
+ The uniform PRNG uses Marsaglia's MWC256 (also known as MWC8222)
+ multiply-with-carry generator, which has a period of 2^8222 and fares well in
+ tests of randomness. It is also extremely fast, between 2 and 3 times faster
+ than the Mersenne Twister.
+ .
+ Compared to the mersenne-random package, this package has a more convenient
+ API, is faster, and supports more statistical distributions.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

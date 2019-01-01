@@ -1,0 +1,18 @@
+Package: neutron-common
+Source: neutron
+Version: 2:13.0.2-3
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 368
+Depends: adduser, dbconfig-common, debconf, dpkg-dev, python3-mysqldb, python3-neutron (= 2:13.0.2-3), python3-openstackclient, python3-pyparsing (>= 1.5.7), python3-sqlalchemy (>= 1.2.0), sqlite3, debconf (>= 0.5) | debconf-2.0, python3:any
+Provides: neutron-plugin, neutron-plugin-bigswitch, neutron-plugin-brocade, neutron-plugin-cisco, neutron-plugin-hyperv, neutron-plugin-linuxbridge, neutron-plugin-metaplugin, neutron-plugin-ml2, neutron-plugin-nec, neutron-plugin-nicira, neutron-plugin-openvswitch, neutron-plugin-plumgrid, neutron-plugin-ryu
+Section: net
+Priority: optional
+Homepage: http://neutron.openstack.org/
+Description: OpenStack virtual network service - common files
+ Neutron provides an API to dynamically request and configure virtual networks.
+ These networks connect "interfaces" from other OpenStack services (such as
+ vNICs from Nova VMs). The Neutron API supports extensions to provide advanced
+ network capabilities, including QoS, ACLs, and network monitoring.
+ .
+ This package provides the common files.

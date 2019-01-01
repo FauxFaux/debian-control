@@ -1,0 +1,20 @@
+Package: libcollectdclient-dev
+Source: collectd
+Version: 5.8.1-1.2
+Architecture: amd64
+Maintainer: Sebastian Harl <tokkee@debian.org>
+Installed-Size: 172
+Depends: libcollectdclient1 (= 5.8.1-1.2)
+Breaks: collectd-dev (<< 5.2.0-1)
+Replaces: collectd-dev (<< 5.2.0-1)
+Section: libdevel
+Priority: optional
+Homepage: https://collectd.org/
+Description: client library for collectd's control interface (development files)
+ libcollectdclient provides an API to access the control interface provided by
+ the unixsock plugin of collectd, a statistics collection and monitoring
+ daemon. It can be used to access values collected by collectd or dispatch new
+ values and notifications to the daemon. This allows for integration with
+ other applications such as monitoring solutions.
+ .
+ This package contains the header files and the static library.

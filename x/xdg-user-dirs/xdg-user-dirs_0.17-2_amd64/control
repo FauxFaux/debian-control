@@ -1,0 +1,21 @@
+Package: xdg-user-dirs
+Version: 0.17-2
+Architecture: amd64
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Installed-Size: 375
+Depends: libc6 (>= 2.14)
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.freedesktop.org/wiki/Software/xdg-user-dirs
+Description: tool to manage well known user directories
+ xdg-user-dirs is a tool to help manage "well known" user directories
+ like the desktop folder and the music folder. It also handles
+ localization (i.e. translation) of the filenames.
+ .
+ The way it works is that xdg-user-dirs-update is run very early in the
+ login phase. This program reads a configuration file, and a set of
+ default directories. It then creates localized versions of these
+ directories in the users home directory and sets up a config file in
+ $(XDG_CONFIG_HOME)/user-dirs.dirs (XDG_CONFIG_HOME defaults to
+ ~/.config) that applications can read to find these directories.

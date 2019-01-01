@@ -1,0 +1,19 @@
+Package: threadscope
+Version: 0.2.11.1-2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 11894
+Depends: libatk1.0-0 (>= 1.12.4), libatomic1 (>= 4.8), libc6 (>= 2.27), libcairo2 (>= 1.10.0), libffi6 (>= 3.0.4), libfontconfig1 (>= 2.12.6), libfreetype6 (>= 2.2.1), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.31.8), libgmp10, libgtk2.0-0 (>= 2.24.0), libpango-1.0-0 (>= 1.18.0), libpangocairo-1.0-0 (>= 1.14.0), libpangoft2-1.0-0 (>= 1.14.0), zlib1g (>= 1:1.1.4)
+Section: haskell
+Priority: optional
+Homepage: http://hackage.haskell.org/package/threadscope
+Description: graphical thread profiler for Haskell programs
+ Threadscope is a graphical thread profiler for Haskell programs.
+ It parses and displays the content of .eventlog files emitted by the
+ GHC 6.12.1 and later runtimes, showing a timeline of spark creation,
+ spark-to-thread promotions and garbage collections.
+ .
+ This helps debugging the parallel performance of Haskell programs,
+ making easier to check that work is well balanced across the available
+ processors and spot performance issues relating to garbage collection
+ or poor load balancing.

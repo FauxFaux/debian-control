@@ -1,0 +1,42 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p suricata 
+fi
+
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.1
+dpkg-maintscript-helper mv_conffile /etc/suricata/suricata-debian.yaml /etc/suricata/suricata.yaml 3.1-1 suricata -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit/11.5.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/suricata" ]; then
+		update-rc.d suricata defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d suricata $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'suricata.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'suricata.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'suricata.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'suricata.service' >/dev/null || true
+	fi
+fi
+# End automatically added section

@@ -1,0 +1,38 @@
+Package: cyrus-common
+Source: cyrus-imapd (2.5.11-1)
+Version: 2.5.11-1+b2
+Architecture: amd64
+Maintainer: Debian Cyrus Team <team+cyrus@tracker.debian.org>
+Installed-Size: 3729
+Pre-Depends: dpkg (>= 1.17.14~)
+Depends: adduser, db-upgrade-util, db-util, default-mta | mail-transport-agent, gawk, libsasl2-modules, netbase (>= 4.07), debconf (>= 0.5) | debconf-2.0, perl:any, libc6 (>= 2.15), libcom-err2 (>= 1.43.9), libdb5.3, libgssapi-krb5-2 (>= 1.6.dfsg.2), libical3 (>= 3.0.0), libjansson4 (>= 2.3), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.6.dfsg.2), libkrb5support0 (>= 1.7dfsg~beta2), libldap-2.4-2 (>= 2.4.7), libpcre3, libsasl2-2, libsnmp30 (>= 5.7.3+dfsg-4+b1~dfsg), libsqlite3-0 (>= 3.6.0), libssl1.1 (>= 1.1.0), libwrap0 (>= 7.6-4~), libxml2 (>= 2.8.0), libzephyr4, zlib1g (>= 1:1.2.0)
+Recommends: cyrus-imapd | cyrus-pop3d | cyrus-murder | cyrus-nntpd | cyrus-admin | cyrus-caldav
+Suggests: apt-listchanges (>= 2.35), cyrus-admin, cyrus-caldav, cyrus-clients, cyrus-doc, cyrus-imapd, cyrus-murder, cyrus-nntpd, cyrus-pop3d, cyrus-replication, sasl2-bin
+Breaks: cyrus-common-2.2, cyrus-common-2.4 (<< 2.4.17+caldav~beta10-2~)
+Replaces: cyrus-common-2.2, cyrus-common-2.4 (<< 2.4.17+caldav~beta10-2~)
+Section: mail
+Priority: extra
+Homepage: https://www.cyrusimap.org/
+Description: Cyrus mail system - common files
+ Cyrus is an IMAP server designed to handle massive quantities of mail,
+ with a number of features not found in other IMAP implementations,
+ including support for:
+  - running the daemon without root privileges;
+  - POP3 and NNTP in addition to plain IMAP;
+  - CalDAV and CardDAV;
+  - secure IMAP using SSL;
+  - server-side filtering with Sieve;
+  - mail users without login accounts;
+  - simple mail quotas;
+  - virtual domains;
+  - IPv6.
+ .
+ Cyrus doesn't support reading from and storing mail in the
+ standard mail spool. It stores mail in a separate directory in its
+ own MH-like format.
+ .
+ This package contains the common files needed by the other Cyrus
+ components. The cyrus-imapd and/or cyrus-pop3d packages are needed
+ to enable IMAP and POP3 support respectively. cyrus-murder can be
+ used to enable IMAP, POP3 and LMTP proxying. cyrus-replication
+ can be used to provide server replication between two imap servers.

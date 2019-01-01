@@ -1,0 +1,16 @@
+Package: gkrellmd
+Source: gkrellm (2.3.10-2)
+Version: 2.3.10-2+b1
+Architecture: amd64
+Maintainer: Sandro Tosi <morph@debian.org>
+Installed-Size: 226
+Depends: libc6 (>= 2.15), libglib2.0-0 (>= 2.35.9), libsensors5 (>= 1:3.5.0), adduser
+Breaks: gkrellm (<= 2.2.7-8), gkrellm-common (<= 2.2.7-5)
+Replaces: gkrellm-common (<= 2.2.7-5)
+Section: x11
+Priority: optional
+Homepage: http://gkrellm.net/
+Description: GNU Krell Monitors Server
+ Gkrellmd Listens for connections from gkrellm clients. When a gkrellm client
+ connects to a gkrellmd server all builtin monitors collect their data from the
+ server.

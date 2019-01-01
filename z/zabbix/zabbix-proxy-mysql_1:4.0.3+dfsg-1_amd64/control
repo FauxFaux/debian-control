@@ -1,0 +1,27 @@
+Package: zabbix-proxy-mysql
+Source: zabbix
+Version: 1:4.0.3+dfsg-1
+Architecture: amd64
+Maintainer: Dmitry Smirnov <onlyjob@debian.org>
+Installed-Size: 2398
+Depends: libc6 (>= 2.17), libcurl3-gnutls (>= 7.28.0), libevent-2.1-6 (>= 2.1.8-stable), libgnutls30 (>= 3.6.5), libldap-2.4-2 (>= 2.4.7), libmariadb3 (>= 3.0.0), libodbc1 (>= 2.3.1), libopenipmi0, libpcre3, libsnmp30 (>= 5.7.3+dfsg-4+b2~dfsg), libssh2-1 (>= 1.0), libxml2 (>= 2.7.4), zlib1g (>= 1:1.2.0), ucf, fping, adduser, lsb-base
+Recommends: default-mysql-server | virtual-mysql-server
+Suggests: logrotate
+Conflicts: zabbix-proxy-pgsql, zabbix-proxy-sqlite3, zabbix-server-mysql, zabbix-server-pgsql
+Section: net
+Priority: optional
+Homepage: http://zabbix.com
+Description: network monitoring solution - proxy (using MySQL)
+ Zabbix is a server/client network monitoring system with many features.
+ It can be used for:
+ .
+  - high level monitoring of IT services;
+  - centralized monitoring of your servers and applications;
+  - monitoring of SNMP-enabled devices;
+  - performance monitoring (process load, network activity, disk
+    activity, memory usage, OS parameters etc.);
+  - data visualization.
+ .
+ This package provides the software needed to integrate a host as a Zabbix
+ proxy. It collects information from Zabbix agents, temporarily stores it
+ in a MySQL database and then passes it to a Zabbix server.

@@ -1,0 +1,151 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+case "${1}" in
+	configure)
+		db_version 2.0
+
+		db_get gnunet-server/username
+		_USERNAME="${RET:-gnunet}"
+
+		db_get gnunet-server/groupname
+		_GROUPNAME="${RET:-gnunet}"
+
+		db_get gnunet-server/autostart
+		_AUTOSTART="${RET}" # boolean
+
+		db_stop
+
+		CONFIG_FILE="/etc/default/gnunet"
+		
+		# Read default values
+		GNUNET_HOME="/var/lib/gnunet"
+		eval $(grep GNUNET_HOME /etc/gnunet.conf | tr -d '[:blank:]')
+
+		# Creating gnunet group if needed
+		if ! getent group ${_GROUPNAME} > /dev/null
+		then
+			echo -n "Creating new GNUnet group ${_GROUPNAME}:"
+			addgroup --quiet --system ${_GROUPNAME}
+			echo " done."
+		fi
+
+		# Creating gnunet user if needed
+		if ! getent passwd ${_USERNAME} > /dev/null
+		then
+			echo -n "Creating new GNUnet user ${_USERNAME}:"
+			adduser --quiet --system --ingroup ${_GROUPNAME} --home ${GNUNET_HOME} ${_USERNAME}
+			echo " done."
+		fi
+
+		# Add a special secured group
+		GNUNETDNS_GROUP="gnunetdns"
+		
+		# Creating gnunetdns group if needed
+		if ! getent group ${GNUNETDNS_GROUP} > /dev/null
+		then
+			echo -n "Creating new secured GNUnet group ${GNUNETDNS_GROUP}:"
+			addgroup --quiet --system ${GNUNETDNS_GROUP}
+			echo " done."
+		fi
+
+		# this can go away after wheezy
+		if dpkg --compare-versions "$2" le "0.9.3-2" && dpkg --compare-versions "$2" ge "0.9.2-1"; then
+			for file in /usr/bin/gnunet-helper-exit \
+				/usr/bin/gnunet-helper-fs-publish \
+				/usr/bin/gnunet-helper-nat-client \
+				/usr/bin/gnunet-helper-nat-server \
+				/usr/bin/gnunet-helper-transport-wlan \
+				/usr/bin/gnunet-helper-vpn \
+				/usr/bin/gnunet-helper-dns \
+				/usr/bin/gnunet-service-dns
+			do
+				if dpkg-statoverride --list $file >/dev/null 2>&1
+				then
+					dpkg-statoverride --remove $file
+				fi
+			done
+		fi
+		
+		# Update files and directories permissions.
+		# Assuming default values, this *should* not be changed.
+		echo -n "Updating files and directories permissions:"
+		chown -R ${_USERNAME}:${_GROUPNAME} /var/log/gnunetd
+		chown -R ${_USERNAME}:${_GROUPNAME} ${GNUNET_HOME}
+		# Secure access to the data directory
+		chmod 0700 "${GNUNET_HOME}" || true
+		# Restrict access on setuid binaries
+		for file in /usr/bin/gnunet-helper-exit \
+			/usr/bin/gnunet-helper-fs-publish \
+			/usr/bin/gnunet-helper-nat-client \
+			/usr/bin/gnunet-helper-nat-server \
+			/usr/bin/gnunet-helper-transport-wlan \
+			/usr/bin/gnunet-helper-vpn
+		do
+			# only do something when no setting exists
+			if ! dpkg-statoverride --list $file >/dev/null 2>&1 && [ -e $file ]
+			then
+				chown root:${_GROUPNAME} $file
+				chmod 4754 $file
+			fi
+		done
+		if ! dpkg-statoverride --list /usr/bin/gnunet-helper-dns >/dev/null 2>&1 \
+			&& [ -e /usr/bin/gnunet-helper-dns ]
+		then
+			chown root:${GNUNETDNS_GROUP} /usr/bin/gnunet-helper-dns
+			chmod 4754 /usr/bin/gnunet-helper-dns
+		fi
+		if ! dpkg-statoverride --list /usr/bin/gnunet-service-dns >/dev/null 2>&1 \
+			&& [ -e /usr/bin/gnunet-service-dns ]
+		then
+			chown ${_USERNAME}:${GNUNETDNS_GROUP} /usr/bin/gnunet-service-dns
+			chmod 2754 /usr/bin/gnunet-service-dns
+		fi
+		echo  " done."
+
+		# Writing new values to configuration file
+		echo -n "Writing new configuration file:"
+		CONFIG_NEW=$(tempfile)
+
+cat > "${CONFIG_NEW}" <<EOF
+# This file controls the behaviour of the GNUnet init script.
+# It will be parsed as a shell script.
+# please do not edit by hand, use 'dpkg-reconfigure gnunet-server'.
+
+GNUNET_USER=${_USERNAME}
+GNUNET_GROUP=${_GROUPNAME}
+GNUNET_AUTOSTART="${_AUTOSTART}"
+EOF
+
+		cp -f "${CONFIG_NEW}" "${CONFIG_FILE}"
+		echo " done."
+
+		# Cleaning
+		rm -f "${CONFIG_NEW}"
+		echo "All done."
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+# Automatically added by dh_installinit/11.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/gnunet" ]; then
+		update-rc.d gnunet defaults >/dev/null
+		invoke-rc.d gnunet start || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

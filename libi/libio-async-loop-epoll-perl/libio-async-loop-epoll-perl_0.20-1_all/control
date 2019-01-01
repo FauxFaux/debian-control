@@ -1,0 +1,18 @@
+Package: libio-async-loop-epoll-perl
+Version: 0.20-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 33
+Depends: perl, libio-async-perl (>= 0.60), liblinux-epoll-perl (>= 0.012), libstruct-dumb-perl
+Breaks: libio-async-perl (<< 0.33)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/IO-Async-Loop-Epoll
+Description: Perl extension for an event loop using epoll
+ IO::Async::Loop::Epoll is a Perl module that provides an implementation of
+ an event loop that uses the epoll() system call. The epoll system call, which
+ is currently only available on Linux, scales in constant O(1) time. For many
+ open filehandles, you will get significantly better performance using this
+ algorithm.
+ .
+ It uses the IO::Epoll (libio-epoll-perl) module for this functionality.

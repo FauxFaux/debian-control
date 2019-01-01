@@ -1,0 +1,25 @@
+Package: libghc-stmonadtrans-dev
+Source: haskell-stmonadtrans (0.4.3-4)
+Version: 0.4.3-4+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 1150
+Depends: libghc-array-dev-0.5.2.0-03a64, libghc-base-dev-4.11.1.0-5dd74, libghc-mtl-dev-2.2.2-28a8b, libatomic1 (>= 4.8), libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-stmonadtrans-doc, libghc-stmonadtrans-prof
+Provides: libghc-stmonadtrans-dev-0.4.3-356da
+Section: haskell
+Priority: optional
+Homepage: http://hackage.haskell.org/package/STMonadTrans
+Description: monad transformer version of the ST monad
+ This package provides a monad transformer version of the ST monad.
+ .
+ Warning! This monad transformer should not be used with monads that can
+ contain multiple answers, like the list monad. The reason is that the will be
+ duplicated across the different answers and this cause Bad Things to happen
+ (such as loss of referential transparency). Safe monads include the monads
+ State, Reader, Writer, Maybe and combinations of their corresponding monad
+ transformers.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: STMonadTrans-0.4.3-BLPQeQVytvDAmw0w5bw9b9

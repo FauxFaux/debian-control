@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/barbican puppet-module-barbican /usr/share/puppet/modules.available/barbican 500
+fi
+
+
+
+exit 0

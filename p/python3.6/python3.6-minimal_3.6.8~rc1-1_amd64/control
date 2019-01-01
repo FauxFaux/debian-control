@@ -1,0 +1,19 @@
+Package: python3.6-minimal
+Source: python3.6
+Version: 3.6.8~rc1-1
+Architecture: amd64
+Maintainer: Matthias Klose <doko@debian.org>
+Installed-Size: 8989
+Pre-Depends: libc6 (>= 2.28)
+Depends: libpython3.6-minimal (= 3.6.8~rc1-1), libexpat1 (>= 2.1~beta3), zlib1g (>= 1:1.2.0)
+Recommends: python3.6
+Suggests: binfmt-support
+Conflicts: binfmt-support (<< 1.1.2)
+Section: python
+Priority: optional
+Multi-Arch: allowed
+Description: Minimal subset of the Python language (version 3.6)
+ This package contains the interpreter and some essential modules.  It can
+ be used in the boot process for some basic tasks.
+ See /usr/share/doc/python3.6-minimal/README.Debian for a list of the modules
+ contained in this package.

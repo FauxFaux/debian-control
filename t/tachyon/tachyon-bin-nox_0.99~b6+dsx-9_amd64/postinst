@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+VARIANT=nox
+add_variant_alternative () {
+	local variant=$1
+	local priority=$2
+	update-alternatives \
+		--install /usr/bin/tachyon tachyon /usr/bin/tachyon-${variant} $priority \
+		--slave /usr/share/man/man1/tachyon.1.gz tachyon.1.gz /usr/share/man/man1/tachyon-${variant}.1.gz
+	return 0
+	}
+case $VARIANT in
+	nox) add_variant_alternative nox  10 ;;
+	ogl) add_variant_alternative ogl 100 ;;
+	*) echo "unknown variant \'${VARIANT}': skip" >&2 ;;
+esac
+
+exit 0

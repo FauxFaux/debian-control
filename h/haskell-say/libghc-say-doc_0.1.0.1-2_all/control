@@ -1,0 +1,25 @@
+Package: libghc-say-doc
+Source: haskell-say
+Version: 0.1.0.1-2
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 197
+Depends: haddock-interface-33
+Recommends: ghc-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: https://github.com/fpco/say#readme
+Description: send textual messages to a Handle in a thread-friendly way; documentation
+ When writing a line to a Handle,
+ .
+  * Properly handle character encoding settings on the Handle
+  * For reasonably sized messages, ensure that the entire message
+    is written in one chunk to avoid interleaving data with other threads
+  * This includes the trailing newline character
+  * Avoid unnecessary memory allocations and copies
+  * Minimize locking
+  * Provide a simple API
+ .
+ This package provides the documentation for a library for the Haskell
+ programming language.
+ See http://www.haskell.org/ for more information on Haskell.

@@ -1,0 +1,25 @@
+Package: libghc-stateref-dev
+Source: haskell-stateref (0.3-8)
+Version: 0.3-8+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 645
+Depends: libghc-base-dev-4.11.1.0-5dd74, libghc-mtl-dev-2.2.2-28a8b, libghc-stm-dev-2.4.5.1-e1689, libatomic1 (>= 4.8), libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-stateref-doc, libghc-stateref-prof
+Provides: libghc-stateref-dev-0.3-4c277
+Section: haskell
+Priority: optional
+Homepage: http://hackage.haskell.org/package/stateref
+Description: abstraction for things that work like IORef
+ A collection of type-classes generalizing the read/write/modify
+ operations for stateful variables provided by things like IORef,
+ TVar, &c. Note that The interface has changed a bit from the 0.2.*
+ version. "*Ref" functions are now called "*Reference" and new "*Ref"
+ function exist with simpler signatures. The new Ref existential type
+ provides a convenient monad-indexed reference type, and the HasRef
+ class indicates monads for which there is a default reference type
+ for every referent.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: stateref-0.3-5tK7HOHOAaH5QqIANzRa03

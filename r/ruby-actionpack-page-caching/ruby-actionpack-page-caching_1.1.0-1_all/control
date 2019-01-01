@@ -1,0 +1,24 @@
+Package: ruby-actionpack-page-caching
+Version: 1.1.0-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 41
+Depends: ruby | ruby-interpreter, ruby-actionpack (>= 4.0.0)
+Breaks: ruby-actionpack-2.3
+Replaces: ruby-actionpack-2.3
+Section: ruby
+Priority: optional
+Homepage: https://github.com/rails/actionpack-page_caching
+Description: static page caching for Action Pack (removed from core in Rails 4.0)
+ Page caching is an approach to caching where the entire action output of is
+ stored as a HTML file that the web server can serve without going through
+ Action Pack.
+ .
+ This is the fastest way to cache your content as opposed to going dynamically
+ through the process of generating the content. Unfortunately, this incredible
+ speed-up is only available to stateless pages where all visitors are treated
+ the same. Content management systems -- including weblogs and wikis -- have
+ many pages that are a great fit for this approach, but account-based systems
+ where people log in and manipulate their own data are often less likely
+ candidates.
+Ruby-Versions: all

@@ -1,0 +1,16 @@
+Package: cl-plus-ssl
+Version: 20180918.gitb81c113-1
+Architecture: all
+Maintainer: Debian Common Lisp Team <debian-common-lisp@lists.debian.org>
+Installed-Size: 178
+Depends: cl-cffi, cl-trivial-gray-streams, cl-flexi-streams, cl-bordeaux-threads, cl-trivial-garbage, cl-alexandria, cl-trivial-features, libssl1.1
+Recommends: cl-fiveam, cl-usocket
+Section: lisp
+Priority: optional
+Homepage: https://common-lisp.net/project/cl-plus-ssl/
+Description: Common Lisp interface to OpenSSL
+ CL+SSL is portable code based on CFFI and gray streams. It defines its own
+ libssl BIO method, so that SSL I/O can be written over portable Lisp
+ streams instead of bypassing the streams and sending data over Unix file
+ descriptors directly. (But the traditional approach is still used if
+ possible.)

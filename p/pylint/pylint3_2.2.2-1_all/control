@@ -1,0 +1,32 @@
+Package: pylint3
+Source: pylint
+Version: 2.2.2-1
+Architecture: all
+Maintainer: Sandro Tosi <morph@debian.org>
+Installed-Size: 2771
+Depends: python3-astroid (>= 2.0.0), python3-isort (>= 4.2.5), python3-logilab-common (>= 0.19.0), python3-setuptools, python3-mccabe, python3:any
+Recommends: python3-tk
+Suggests: pylint-doc
+Breaks: python3-pylint-django (<< 2.0), python3-pylint-plugin-utils (<< 0.4), python3-pytest-pylint (<< 0.10)
+Section: python
+Priority: optional
+Homepage: http://www.pylint.org/
+Description: Python 3 code static checker and UML diagram generator
+ Pylint is a Python source code analyzer which looks for programming
+ errors, helps enforcing a coding standard and sniffs for some code
+ smells (as defined in Martin Fowler's Refactoring book)
+ .
+ Pylint can be seen as another PyChecker since nearly all tests you
+ can do with PyChecker can also be done with Pylint. However, Pylint
+ offers some more features, like checking length of lines of code,
+ checking if variable names are well-formed according to your coding
+ standard, or checking if declared interfaces are truly implemented,
+ and much more.
+ .
+ Additionally, it is possible to write plugins to add your own checks.
+ .
+ The package also ships the following additional commands:
+ .
+   * pyreverse3: an UML diagram generator
+   * symilar3: an independent similarities checker
+   * epylint3: Emacs and Flymake compatible Pylint

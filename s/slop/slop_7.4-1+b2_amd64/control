@@ -1,0 +1,40 @@
+Package: slop
+Source: slop (7.4-1)
+Version: 7.4-1+b2
+Architecture: amd64
+Maintainer: Antoine Beaupré <anarcat@debian.org>
+Installed-Size: 391
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgl1, libglew2.1 (>= 1.12.0), libglu1-mesa | libglu1, libicu63 (>= 63.1-1~), libstdc++6 (>= 5.2), libx11-6, libxext6, libxrender1
+Section: x11
+Priority: optional
+Homepage: https://github.com/naelstrof/slop
+Description: queries for a selection from the user and prints the region to stdout
+ slop (Select Operation) is an application that queries for a
+ selection from the user and prints the region to stdout. It grabs the
+ mouse and turns it into a crosshair, lets the user click and drag to
+ make a selection (or click on a window) while drawing a pretty box
+ around it, then finally prints the selection's dimensions to stdout.
+ .
+ Features:
+ .
+  * Hovering over a window will cause a selection rectangle to appear
+    over it.
+  * Clicking on a window makes slop return the dimensions of the
+    window.
+  * Clicking and dragging causes a selection rectangle to appear,
+    renders pretty well (compared to scrot). And will return the
+    dimensions of that rectangle in absolute screen coords.
+  * On startup it turns your cursor into a crosshair, then adjusts the
+    cursor into angles as you drag the selection rectangle.
+  * Supports simple arguments:
+    * Change selection rectangle border size.
+    * Select X display.
+    * Set padding size, even negative padding sizes!
+    * Set click tolerance for if you have a shaky mouse.
+    * Set the color of the selection rectangles to match your theme!
+      (Even supports transparency!)
+  * Remove window decorations from selections.
+  * Supports OpenGL hardware acceleration.
+  * Supports textured themes.
+  * Supports programmable shaders.
+  * Supports a magnifying glass.

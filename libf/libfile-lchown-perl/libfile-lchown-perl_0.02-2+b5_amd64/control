@@ -1,0 +1,18 @@
+Package: libfile-lchown-perl
+Source: libfile-lchown-perl (0.02-2)
+Version: 0.02-2+b5
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 42
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.4)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/File-lchown
+Description: module to modify attributes of symlinks without dereferencing them
+ The regular chown system call will dereference a symlink and apply ownership
+ changes to the file at which it points. Some OSes provide system calls that
+ do not dereference a symlink but instead apply their changes directly to the
+ named path, even if that path is a symlink (in much the same way that lstat
+ will return attributes of a symlink rather than the file at which it points).
+ .
+ File::lchown provides a wrapper around those system calls.

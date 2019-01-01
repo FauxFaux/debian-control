@@ -1,0 +1,62 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+  configure)
+    if ! getent passwd gitlab-runner > /dev/null 2>&1 ; then
+        adduser --quiet --system --group --disabled-login --no-create-home --home /var/lib/gitlab-runner gitlab-runner
+    fi
+
+    chmod u+rwX,go-rwx /etc/gitlab-runner
+    if [ -f /etc/gitlab-runner/config.toml ]; then
+        chmod u=rw,go-rwx /etc/gitlab-runner/config.toml
+    fi
+
+    chown gitlab-runner /var/lib/gitlab-runner
+
+    /usr/lib/gitlab-runner/mk-prebuilt-images.sh \
+    || printf "W: please run 'sudo /usr/lib/gitlab-runner/mk-prebuilt-images.sh' to generate Docker image.\n"
+
+    if [ "$(readlink -f /etc/systemd/system/gitlab-runner.service)" = "/lib/systemd/system/gitlab-ci-multi-runner.service" ]; then
+        ## If upgraded from "gitlab-ci-multi-runner" we need to remove broken symlink":
+        rm -rf /etc/systemd/system/gitlab-runner.service
+    fi
+
+## Install .service:
+#    gitlab-ci-multi-runner install --user=gitlab-runner --working-directory=/var/lib/gitlab-runner
+
+#    /usr/share/gitlab-runner/clear-docker-cache || :
+  ;;
+esac
+
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/gitlab-runner" ]; then
+		update-rc.d gitlab-runner defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d gitlab-runner $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'gitlab-runner.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'gitlab-runner.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'gitlab-runner.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'gitlab-runner.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

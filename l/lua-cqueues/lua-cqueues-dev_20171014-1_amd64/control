@@ -1,0 +1,19 @@
+Package: lua-cqueues-dev
+Source: lua-cqueues
+Version: 20171014-1
+Architecture: amd64
+Maintainer: Ondřej Surý <ondrej@debian.org>
+Installed-Size: 1850
+Depends: lua-cqueues (= 20171014-1)
+Provides: lua5.1-cqueues-dev, lua5.2-cqueues-dev, lua5.3-cqueues-dev
+Section: interpreters
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.25thandclement.com/~william/projects/cqueues.html
+Description: event loop for Lua (development package)
+ cqueues is a type of event loop for Lua, except it's not a classic
+ event loop. It doesn't use callbacks—neither as part of the API nor
+ internally—but instead you communicate with an event controller by
+ the yielding and resumption of Lua coroutines using objects that
+ adhere to a simple interface.
+Lua-Versions: 5.1 5.2 5.3

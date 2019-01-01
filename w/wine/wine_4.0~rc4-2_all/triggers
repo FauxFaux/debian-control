@@ -1,0 +1,10 @@
+# update the wine alternatives in "wine.postinst triggered"
+
+# explicit trigger
+interest-noawait wine
+
+# indicates package wine64 installation status changed
+interest-noawait /usr/bin/wine64-stable
+
+# indicates package wine{32|64}-tools installation status changed
+interest-noawait /usr/bin/winegcc-stable

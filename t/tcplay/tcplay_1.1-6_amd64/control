@@ -1,0 +1,20 @@
+Package: tcplay
+Version: 1.1-6
+Architecture: amd64
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 99
+Depends: libc6 (>= 2.14), libdevmapper1.02.1 (>= 2:1.02.97), libgcrypt20 (>= 1.8.0), libgpg-error0 (>= 1.14), libuuid1 (>= 2.16)
+Section: admin
+Priority: optional
+Homepage: https://github.com/bwalex/tc-play
+Description: Free and simple TrueCrypt Implementation based on dm-crypt
+ tcplay is a free (BSD-licensed), pretty much fully featured (including
+ multiple keyfiles, cipher cascades, etc) and stable TrueCrypt implementation.
+ .
+ This implementation supports mapping (opening) both system and normal
+ TrueCrypt volumes, as well as opening hidden volumes and opening an outer
+ volume while protecting a hidden volume. There is also support to create
+ volumes, including hidden volumes, etc.
+ .
+ Since tcplay uses dm-crypt it makes full use of any available hardware
+ encryption/decryption support once the volume has been mapped.

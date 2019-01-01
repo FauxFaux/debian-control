@@ -1,0 +1,24 @@
+Package: musescore-common
+Source: musescore
+Version: 2.3.2+dfsg2-2
+Architecture: all
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 24446
+Depends: musescore-general-soundfont | musescore-general-soundfont-small | fluidr3mono-gm-soundfont (>= 2.315-4~) | musescore-compatible-soundfont
+Breaks: mscore-common (<< 0.9.6+dfsg-1)
+Replaces: mscore-common (<< 0.9.6+dfsg-1)
+Provides: mscore-common
+Section: sound
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://musescore.org/en
+Description: MuseScore (music composition and notation) shared files
+ Demonstration scores and templates, styles, localisations, some
+ plugins for MuseScore, the Open Source (GNU GPL) cross-platform
+ multi-lingual music notation software.
+ .
+ In contrast to earlier versions, no sound font is provided by
+ default, but the Depends ensure a suitable one is installed,
+ normally the compact, full orchestral and band sound, one that
+ is shipped with MuseScore from version 2.2 onwards, or its more
+ limited 2.1 counterpart fluidr3mono-gm-soundfont.

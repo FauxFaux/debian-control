@@ -1,0 +1,22 @@
+#! /bin/sh
+# prerm script for GeneWeb
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# Automatically added by dh_installinit/12
+if [ -x "/etc/init.d/geneweb" ] && [ "$1" = remove ]; then
+	invoke-rc.d geneweb stop || exit 1
+fi
+# End automatically added section
+
+
+# OK, lintian : you won't whine anymore...:-)
+if ( test "$1" = "upgrade" || test "$1" = "remove" ) && test -L /usr/doc/geneweb ; then
+    rm -f /usr/doc/geneweb
+fi
+
+exit 0
+
+

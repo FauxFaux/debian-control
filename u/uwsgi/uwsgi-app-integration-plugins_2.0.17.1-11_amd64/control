@@ -1,0 +1,29 @@
+Package: uwsgi-app-integration-plugins
+Source: uwsgi
+Version: 2.0.17.1-11
+Architecture: amd64
+Maintainer: uWSGI packaging team <pkg-uwsgi-devel@lists.alioth.debian.org>
+Installed-Size: 46
+Depends: uwsgi-plugin-gccgo (= 2.0.17.1-11), uwsgi-plugin-jvm-openjdk-11 (= 2.0.17.1-11), uwsgi-plugin-jwsgi-openjdk-11 (= 2.0.17.1-11), uwsgi-plugin-lua5.1 (= 2.0.17.1-11), uwsgi-plugin-lua5.2 (= 2.0.17.1-11), uwsgi-plugin-mono (= 2.0.17.1-11), uwsgi-plugin-psgi (= 2.0.17.1-11), uwsgi-plugin-python (= 2.0.17.1-11), uwsgi-plugin-python3 (= 2.0.17.1-11), uwsgi-plugin-rack-ruby2.5 (= 2.0.17.1-11), uwsgi-plugin-ring-openjdk-11 (= 2.0.17.1-11), uwsgi-plugin-servlet-openjdk-11 (= 2.0.17.1-11)
+Section: httpd
+Priority: optional
+Homepage: http://projects.unbit.it/uwsgi/
+Description: plugins for integration of uWSGI and application
+ uWSGI presents a complete stack for networked/clustered web applications,
+ implementing message/object passing, caching, RPC and process management.
+ It is designed to be fully modular. This means that different plugins can be
+ used in order to add compatibility with tons of different technology on top of
+ the same core.
+ .
+ This dependency package provides plugins for integration of uWSGI and
+ application:
+  * GNU Go
+  * Java (OpenJDK 11)
+  * JWSGI (OpenJDK 11)
+  * Lua WSAPI (Lua 5.1 and 5.2)
+  * Mono/ASP.NET
+  * Perl PSGI
+  * Python WSGI (Python 2 and 3)
+  * Rack (ruby2.5)
+ .
+ Java and Mono plugins are provided only on supported architectures.

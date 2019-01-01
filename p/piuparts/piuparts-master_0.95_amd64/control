@@ -1,0 +1,20 @@
+Package: piuparts-master
+Source: piuparts
+Version: 0.95
+Architecture: amd64
+Maintainer: piuparts developers team <piuparts-devel@alioth-lists.debian.net>
+Installed-Size: 2320
+Depends: piuparts-common (>= 0.95), piuparts-common (<< 0.95+), adduser, openssh-server, python-debianbts, tango-icon-theme, xz-utils, python-yaml, python (>= 2.7)
+Recommends: apache2 | httpd, ghostscript, python-rpy2, r-base-dev, r-recommended, devscripts, libsoap-lite-perl
+Section: devel
+Priority: optional
+Homepage: https://piuparts.debian.org
+Description: piuparts master components
+ piuparts is meant as a quality assurance tool for people who create .deb
+ packages to test them before they upload them to the Debian package archive.
+ A master/slave piuparts installation is used for testing complete archives
+ as it is done on https://piuparts.debian.org/.
+ .
+ This package provides the piuparts-master, which needs one or more slaves to
+ operate. It also contains piuparts-report to generate web pages with the
+ testing results as well as documentation.

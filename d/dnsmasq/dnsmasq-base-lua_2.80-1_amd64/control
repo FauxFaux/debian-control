@@ -1,0 +1,20 @@
+Package: dnsmasq-base-lua
+Source: dnsmasq
+Version: 2.80-1
+Architecture: amd64
+Maintainer: Simon Kelley <simon@thekelleys.org.uk>
+Installed-Size: 915
+Depends: adduser, libc6 (>= 2.14), libdbus-1-3 (>= 1.9.14), libgmp10, libhogweed4, libidn11 (>= 1.13), liblua5.2-0, libnetfilter-conntrack3, libnettle6 (>= 3.4~), libnfnetlink0
+Recommends: dns-root-data
+Conflicts: dnsmasq-base
+Breaks: dnsmasq (<< 2.63-1~)
+Replaces: dnsmasq (<< 2.63-1~), dnsmasq-base
+Provides: dnsmasq-base
+Section: net
+Priority: optional
+Homepage: http://www.thekelleys.org.uk/dnsmasq/doc.html
+Description: Small caching DNS proxy and DHCP/TFTP server
+ This package contains the dnsmasq executable and documentation, but
+ not the infrastructure required to run it as a system daemon. For
+ that, install the dnsmasq package. This package is an alternative
+ to dnsmasq-base which includes the LUA interpreter.

@@ -1,0 +1,30 @@
+Package: libghc-double-conversion-prof
+Source: haskell-double-conversion (2.0.2.0+ds1-4)
+Version: 2.0.2.0+ds1-4+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 142
+Depends: libghc-double-conversion-dev (= 2.0.2.0+ds1-4+b2), libghc-base-prof-4.11.1.0-5dd74, libghc-bytestring-prof-0.10.8.2-76891, libghc-ghc-prim-prof-0.5.2.0-0a259, libghc-text-prof-1.2.3.1-30bbe
+Provides: libghc-double-conversion-prof-2.0.2.0-ad083
+Section: haskell
+Priority: optional
+Homepage: https://github.com/bos/double-conversion
+Description: fast conversion between double precision floating point and text; profiling libraries
+ A library that performs fast, accurate conversion between double
+ precision floating point and text.
+ .
+ This library is implemented as bindings to the C++
+ double-conversion library written by Florian Loitsch at Google.
+ .
+ The 'Text' versions of these functions are about 30 times faster
+ than the default 'show' implementation for the 'Double' type.
+ .
+ The 'ByteString' versions are /slower/ than the 'Text' versions;
+ roughly half the speed.  (This seems to be due to the cost of
+ allocating 'ByteString' values via malloc.)
+ .
+ As a final note, be aware that the bytestring-show package is
+ about 50% slower than simply using 'show'.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

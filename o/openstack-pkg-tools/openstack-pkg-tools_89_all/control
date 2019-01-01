@@ -1,0 +1,22 @@
+Package: openstack-pkg-tools
+Version: 89
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 545
+Depends: gettext, jq, po-debconf
+Recommends: autopkgtest, madison-lite, pristine-tar
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Description: Tools and scripts for building Openstack packages in Debian
+ This package contains some useful shell scripts and helpers for building the
+ OpenStack packages in Debian, including:
+ .
+  * shared code for maintainer scripts (.config, .postinst, ...).
+  * init script templates to automatically generate init scripts for sysv-rc and
+    systemd.
+  * tools to build backports using sbuild and/or Jenkins based on gbp workflow.
+  * utility to maintain git packaging (to be included in a debian/rules).
+ .
+ Even if this package is maintained in order to build OpenStack packages, it is
+ of a general purpose, and it can be used for building any package.

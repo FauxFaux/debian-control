@@ -1,0 +1,30 @@
+Package: pgpool2
+Version: 4.0.2-1
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <team+postgresql@tracker.debian.org>
+Installed-Size: 3931
+Depends: libpgpool0 (= 4.0.2-1), lsb-base (>= 3.0-3), postgresql-common (>= 26), ucf, libc6 (>= 2.15), libmemcached11, libpam0g (>= 0.99.7.1), libpq5, libssl1.1 (>= 1.1.0)
+Enhances: postgresql
+Conflicts: pgpool
+Replaces: pgpool
+Section: database
+Priority: optional
+Homepage: https://www.pgpool.net/mediawiki/index.php/Main_Page
+Description: connection pool server and replication proxy for PostgreSQL
+ pgpool-II is a middleware that works between PostgreSQL servers and a
+ PostgreSQL database client. It provides the following features:
+ .
+  * Connection Pooling
+  * Replication
+  * Load Balance
+  * Limiting Exceeding Connections
+  * Parallel Query
+ .
+ pgpool-II talks PostgreSQL's backend and frontend protocol, and relays a
+ connection between them. Therefore, a database application (frontend) thinks
+ that pgpool-II is the actual PostgreSQL server, and the server (backend) sees
+ pgpool-II as one of its clients. Because pgpool-II is transparent to both the
+ server and the client, an existing database application can be used with
+ pgpool-II almost without a change to its sources.
+ .
+ This is version 3 of pgpool-II, the second generation of pgpool.

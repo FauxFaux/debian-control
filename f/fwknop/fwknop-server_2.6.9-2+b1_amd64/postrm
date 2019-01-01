@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+# In case the user want to purge all files of the fwknop-server package
+# we must remove manually pid, socket and log files before the main 
+# directories are removed.
+if [ "$1" = "purge" ]; then
+
+	# Handle the /var/run/fwknop directory that contains pid and digest
+	# files
+	if [ -d /var/run/fwknop ]; then
+	    find /var/run/fwknop/ -type f -exec rm {} \;
+	    rmdir /var/run/fwknop
+	fi
+
+fi
+
+# Automatically added by dh_installinit/11.5.1
+if [ "$1" = "purge" ] ; then
+	update-rc.d fwknop-server remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.1
+dpkg-maintscript-helper rm_conffile /etc/init/fwknop-server.conf 2.6.9-2\~ fwknop-server -- "$@"
+# End automatically added section
+
+
+exit 0;

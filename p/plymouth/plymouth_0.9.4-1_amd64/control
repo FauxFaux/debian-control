@@ -1,0 +1,22 @@
+Package: plymouth
+Version: 0.9.4-1
+Architecture: amd64
+Maintainer: Laurent Bigonville <bigon@debian.org>
+Installed-Size: 487
+Depends: init-system-helpers (>= 1.18), initramfs-tools | dracut, lsb-base (>= 3.0-6), systemd (>= 232-8~), udev (>= 232-8~), libc6 (>= 2.14), libdrm2 (>= 2.4.47), libplymouth4 (>= 0.9.4)
+Suggests: desktop-base, plymouth-themes
+Conflicts: console-common
+Breaks: plymouth-drm (<< 0.9.0-6~), plymouth-themes (<< 0.9.0-8~)
+Replaces: plymouth-drm (<< 0.9.0-6~), plymouth-themes (<< 0.9.0-8~)
+Section: misc
+Priority: optional
+Homepage: http://www.freedesktop.org/wiki/Software/Plymouth
+Description: boot animation, logger and I/O multiplexer
+ Plymouth provides a boot-time I/O multiplexing framework - the most obvious
+ use for which is to provide an attractive graphical animation in place of
+ the text messages that normally get shown during boot. (The messages are
+ instead redirected to a logfile for later viewing.) However, in event-driven
+ boot systems Plymouth can also usefully handle user interaction such as
+ password prompts for encrypted file systems.
+ .
+ This package provides the basic framework, enabling a text-mode animation.

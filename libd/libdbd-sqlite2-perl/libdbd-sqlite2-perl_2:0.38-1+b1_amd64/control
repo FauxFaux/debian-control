@@ -1,0 +1,31 @@
+Package: libdbd-sqlite2-perl
+Source: libdbd-sqlite2-perl (2:0.38-1)
+Version: 2:0.38-1+b1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 426
+Depends: perl (>= 5.28.0-3), perl-dbdabi-94, perlapi-5.28.0, libc6 (>= 2.14), libdbi-perl (>= 1.625)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/DBD-SQLite2
+Description: Perl DBI driver with a self-contained RDBMS (SQLite2 version)
+ The DBD::SQLite2 module embeds a small fast embedded SQL database engine
+ called SQLite into a DBI driver, if you want a relational database for your
+ project, but don't want to install a large RDBMS system like MySQL or
+ PostgreSQL, then DBD::SQLite may be just what you need.
+ .
+ SQLite supports the following features:
+ .
+  * Implements a large subset of SQL92
+    See http://www.hwaci.com/sw/sqlite/lang.html for details.
+ .
+  * A complete DB in a single disk file
+    Everything for your database is stored in a single disk file, making it
+    easier to move things around than with DBD::CSV.
+ .
+  * Atomic commit and rollback
+ .
+ The engine is very fast, but for updates/inserts/dml it does perform
+ a global lock on the entire database.  This, obviously, might not be
+ good for multiple user systems.  So beware.  The database also
+ appears to be significantly faster if your transactions are coarse.

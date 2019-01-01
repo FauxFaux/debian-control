@@ -1,0 +1,20 @@
+Package: libghc-system-posix-redirect-prof
+Source: haskell-system-posix-redirect
+Version: 1.1.0.1-1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 78
+Depends: libghc-system-posix-redirect-dev (= 1.1.0.1-1), libghc-base-prof-4.11.1.0-5dd74, libghc-bytestring-prof-0.10.8.2-76891, libghc-unix-prof-2.7.2.2-fe53d
+Provides: libghc-system-posix-redirect-prof-1.1.0.1-12afa
+Section: haskell
+Priority: optional
+Description: toy module to temporarily redirect a program's stdout; profiling libraries
+ Due to the design of POSIX, it is possible to temporarily overload the
+ file descriptors corresponding to stdout and stderr to point to an
+ arbitrary pipe. It is, however, tricky to get right. This module gets
+ it right, as far as such a terrible hack can be made right. It can be
+ used to make misbehaving third-party C libraries stop spewing to
+ standard output.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

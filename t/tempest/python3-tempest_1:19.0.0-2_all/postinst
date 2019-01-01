@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ] ; then
+	update-alternatives --install /usr/bin/check-uuid check-uuid /usr/bin/python3-check-uuid 400
+	update-alternatives --install /usr/bin/skip-tracker skip-tracker /usr/bin/python3-skip-tracker 400
+	update-alternatives --install /usr/bin/tempest tempest /usr/bin/python3-tempest 400
+	update-alternatives --install /usr/bin/tempest-account-generator tempest-account-generator /usr/bin/python3-tempest-account-generator 400
+	update-alternatives --install /usr/bin/verify-tempest-config verify-tempest-config /usr/bin/python3-verify-tempest-config 400
+	update-alternatives --install /usr/bin/subunit-describe-calls subunit-describe-calls /usr/bin/python3-subunit-describe-calls 400
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-tempest 
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p python3-tempest  || true
+fi
+
+# End automatically added section
+
+
+exit 0

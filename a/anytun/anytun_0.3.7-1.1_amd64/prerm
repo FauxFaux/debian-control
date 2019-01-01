@@ -1,0 +1,14 @@
+#!/bin/sh
+# prerm script for anytun
+
+set -e
+
+if [ -x "/etc/init.d/anytun" ] && [ "$1" = remove ]; then
+  if [ -x "`which invoke-rc.d 2>/dev/null`" ]; then
+    invoke-rc.d anytun stop || true
+  else
+    /etc/init.d/anytun stop || true
+  fi
+fi
+
+

@@ -1,0 +1,16 @@
+Package: cockpit-bridge
+Source: cockpit
+Version: 184-1
+Architecture: amd64
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 1005
+Depends: libc6 (>= 2.27), libglib2.0-0 (>= 2.35.9), libjson-glib-1.0-0 (>= 0.16.0), libpolkit-agent-1-0 (>= 0.105), libpolkit-gobject-1-0 (>= 0.104), libssh-4 (>= 0.8.4), libsystemd0, glib-networking
+Breaks: cockpit-dashboard (<< 170.x), cockpit-ws (<< 181.x)
+Replaces: cockpit-dashboard (<< 170.x), cockpit-ws (<< 181.x)
+Provides: cockpit-ssh
+Section: admin
+Priority: optional
+Homepage: https://cockpit-project.org/
+Description: Cockpit bridge server-side component
+ The Cockpit bridge component installed server side and runs commands on
+ the system on behalf of the web based user interface.

@@ -1,0 +1,23 @@
+Package: cl-csv
+Version: 20180712.git3eba29c-1
+Architecture: all
+Maintainer: Debian Common Lisp Team <debian-common-lisp@lists.debian.org>
+Installed-Size: 123
+Depends: cl-iterate, cl-alexandria, cl-interpol
+Conflicts: cl-csv-clsql, cl-csv-data-table
+Replaces: cl-csv-clsql, cl-csv-data-table
+Section: lisp
+Priority: optional
+Homepage: https://github.com/AccelerationNet/cl-csv
+Description: Common Lisp library providing easy CSV reading and writing
+ This Common Lisp library aims to simplify working with CSVs:
+ .
+  * reads/writes CSVs from/to strings, streams and files
+  * support streaming reads (allowing processing very large CSVs, through
+    read-csv's row-fn parameter)
+  * supports custom data formatting
+  * settable quote, separator and quote-escapes
+  * supports multiline quoted data
+  * a test suite
+  * detailed state about the process on error (line number, column number,
+    char index), current collection state

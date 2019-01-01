@@ -1,0 +1,45 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+use Debconf::Client::ConfModule ":all";
+
+
+our $pkg="rocksndiamonds";
+our $game_dir="/usr/share/games/rocksndiamonds";
+
+our $upgrade;
+
+# run shell command
+sub start_cmd(@)
+{
+  print STDERR join " ", @_, "1>&2\n";
+  system @_, "1>&2";
+  if ($?) 
+  {
+    print STDERR "Error code: $?\n";
+    return 0;
+  }
+  return 1;
+}
+
+defined $ARGV[0] and $ARGV[0] =~/upgrade/ and $upgrade=1;
+
+if ($upgrade)
+{
+  my $prev_version;
+  defined $ARGV[1] and
+    ($prev_version)=$ARGV[1]=~/^\s*(.*?)(?:\+dfsg)?-\d+\s*$/;
+
+  if (defined $prev_version and ($prev_version ne "4.1.1.0"))
+  {
+    fset "$pkg/begin", "seen", "false";
+    for (qw(graphics levels music sounds))
+    {
+      -d "$game_dir/$_" and start_cmd "rm", "-fr", "$game_dir/$_";
+    }
+  }
+}
+
+__END__
+

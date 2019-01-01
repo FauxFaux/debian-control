@@ -1,0 +1,48 @@
+#!/bin/sh
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <postinst> `abort-remove'
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+
+case "$1" in
+    configure)
+	if [ -z "$(find /var/lib/command-not-found -mindepth 1)" ]; then
+		echo "You need to run 'update-command-not-found' as root to update the cache."
+	elif dpkg --compare-versions $2 lt 18.04.5~; then
+		echo "Your cache files have been deleted for the upgrade."
+		rm -r /var/cache/command-not-found
+	fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p command-not-found /usr/share/command-not-found
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p command-not-found /usr/share/command-not-found || true
+fi
+
+# End automatically added section
+
+
+exit 0

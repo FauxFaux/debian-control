@@ -1,0 +1,18 @@
+Package: oar-user
+Source: oar
+Version: 2.5.8~rc8-3
+Architecture: amd64
+Maintainer: Pierre Neyron <pierre.neyron@free.fr>
+Installed-Size: 280
+Depends: libc6 (>= 2.3.4), perl:any, libdbi-perl, oar-common (= 2.5.8~rc8-3), oar-user-pgsql (= 2.5.8~rc8-3) | oar-user-mysql (= 2.5.8~rc8-3)
+Recommends: libxml-dumper-perl, libyaml-perl, libyaml-syck-perl
+Suggests: oar-doc, openssh-client, xauth
+Breaks: oar-admin
+Section: utils
+Priority: optional
+Homepage: http://oar.imag.fr/
+Description: OAR batch scheduler user package
+ OAR is a versatile resource and task manager (also called a batch scheduler)
+ for clusters and other computing infrastructures
+ .
+ This package install the submission and query part of the OAR batch scheduler.

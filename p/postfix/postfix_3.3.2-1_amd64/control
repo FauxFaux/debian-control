@@ -1,0 +1,20 @@
+Package: postfix
+Version: 3.3.2-1
+Architecture: amd64
+Maintainer: LaMont Jones <lamont@debian.org>
+Installed-Size: 4200
+Depends: libc6 (>= 2.14), libdb5.3, libicu63 (>= 63.1-1~), libsasl2-2, libssl1.1 (>= 1.1.1), debconf (>= 0.5) | debconf-2.0, netbase, adduser (>= 3.48), dpkg (>= 1.8.3), lsb-base (>= 3.0-6), ssl-cert, cpio, e2fsprogs
+Recommends: python3
+Suggests: procmail, postfix-mysql, postfix-pgsql, postfix-ldap, postfix-pcre, postfix-lmdb, postfix-sqlite, sasl2-bin, libsasl2-modules, dovecot-common, resolvconf, postfix-cdb, mail-reader, ufw, postfix-doc
+Conflicts: mail-transport-agent, smail
+Replaces: mail-transport-agent
+Provides: mail-transport-agent
+Section: mail
+Priority: optional
+Homepage: http://www.postfix.org
+Description: High-performance mail transport agent
+ Postfix is Wietse Venema's mail transport agent that started life as an
+ alternative to the widely-used Sendmail program.  Postfix attempts to
+ be fast, easy to administer, and secure, while at the same time being
+ sendmail compatible enough to not upset existing users. Thus, the outside
+ has a sendmail-ish flavor, but the inside is completely different.

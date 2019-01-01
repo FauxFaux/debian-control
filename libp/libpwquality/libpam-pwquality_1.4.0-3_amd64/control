@@ -1,0 +1,21 @@
+Package: libpam-pwquality
+Source: libpwquality
+Version: 1.4.0-3
+Architecture: amd64
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Installed-Size: 40
+Depends: libc6 (>= 2.4), libpam0g (>= 1.1.1), libpwquality1 (>= 1.1.0), libpam-runtime
+Section: admin
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/libpwquality/libpwquality
+Description: PAM module to check password strength
+ libpwquality's purpose is to provide common functions for password
+ quality checking and also scoring them based on their apparent randomness. The
+ library also provides a function for generating random passwords with good
+ pronounceability.
+ .
+ This module can be plugged into the password stack of a given service to
+ provide some plug-in strength-checking for passwords. The code was originaly
+ based on pam_cracklib module and the module is backwards compatible with its
+ options.

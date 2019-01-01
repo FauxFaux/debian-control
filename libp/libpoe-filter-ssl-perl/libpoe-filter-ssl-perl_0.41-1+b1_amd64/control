@@ -1,0 +1,23 @@
+Package: libpoe-filter-ssl-perl
+Source: libpoe-filter-ssl-perl (0.41-1)
+Version: 0.41-1+b1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 105
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.4), libssl1.1 (>= 1.1.0), libhttp-message-perl, libnet-ssleay-perl (>= 1.65), libpoe-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/POE-Filter-SSL
+Description: module to make SSL in POE easy and flexible
+ POE::Filter::SSL allows one to secure connections of POE::Wheel::ReadWrite
+ with OpenSSL by a POE::Filter object, and behaves (beside of SSLing) as
+ POE::Filter::Stream.
+ .
+ POE::Filter::SSL can be added, switched and removed during runtime, for
+ example if you want to initiate SSL (see the SSL on an established
+ connection example in SYNOPSIS) on an already established connection. You
+ are able to combine POE::Filter::SSL with other filters, for example have
+ a HTTPS server together with POE::Filter::HTTPD.
+ .
+ POE::Filter::SSL is based on Net::SSLeay, but got two XS functions which
+ Net::SSLeay is missing.

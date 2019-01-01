@@ -1,0 +1,15 @@
+Package: spf-milter-python
+Source: pymilter-milters
+Version: 0.9-2
+Architecture: all
+Maintainer: Scott Kitterman <scott@kitterman.com>
+Installed-Size: 60
+Depends: python:any, python-milter (>= 0.9.3), python-spf (>= 2.0), lsb-base, adduser
+Suggests: postfix (>= 2.3) | sendmail (>= 8.13)
+Section: mail
+Priority: optional
+Homepage: https://github.com/sdgathman/milter/
+Description: RFC 7208 compliant SPF Milter for Sendmail and Postfix
+ A Python mail filter to add Received-SPF headers and reject forged mail.
+ Rejection policy is configured via sendmail access file. Updated for RFC
+ 4408/7208 compliance.

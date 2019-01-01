@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+
+MRSUSER=mrs-dba
+DATADIR=/var/lib/mrs
+
+case "$1" in
+	configure)
+
+		if ! getent passwd $MRSUSER > /dev/null ; then
+			echo "Creating $MRSUSER user..."
+			adduser --system --group --quiet --home $DATADIR \
+				--no-create-home --disabled-login --force-badname $MRSUSER
+		fi
+		
+		# creating directories, should also set permissions
+		
+		install -d -o$MRSUSER -g$MRSUSER -m775 $DATADIR
+		install -d -o$MRSUSER -g$MRSUSER -m775 $DATADIR/blast-cache
+		install -d -o$MRSUSER -g$MRSUSER -m775 $DATADIR/mrs
+		install -d -o$MRSUSER -g$MRSUSER -m775 $DATADIR/raw
+		install -d -o$MRSUSER -g$MRSUSER -m775 /var/log/mrs
+		
+		if [ -x "/etc/init.d/mrs" ]; then
+			update-rc.d mrs defaults >/dev/null
+		fi
+
+	;;
+esac
+
+

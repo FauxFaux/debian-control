@@ -1,0 +1,28 @@
+Package: elpa-folding
+Source: folding-mode-el
+Version: 0+20170925.1538-1
+Architecture: all
+Maintainer: Debian Emacsen team <debian-emacsen@lists.debian.org>
+Installed-Size: 254
+Depends: emacsen-common
+Recommends: emacs (>= 46.0)
+Enhances: emacs, emacs25
+Section: lisp
+Priority: optional
+Homepage: https://github.com/jaalto/project-emacs--folding-mode
+Description: folding-editor minor mode for Emacs
+ This package provides an Emacs minor mode for folding (hiding) custom
+ regions.  It also provides an Isearch interface to the folds.  Folds
+ can be nested hierarchically.
+ .
+ Folding-mode is similar to a general-purpose Outline-mode or to
+ Org-mode.  It can CLOSE a fold so that only initial special marker
+ and optional fold name/comment are visible, or it can ENTER a fold so
+ that all text outside of the target fold is hidden.
+ .
+ The upstream maintainers of folding-mode do not recommend exclusively
+ relying on folding-mode for code layout and navigation.  Hideshow and
+ Imenu are more appropriate for folding code at a per-function() level
+ of granularity.  In particular Imenu is more useful for this because
+ it parses function indexes.  Folding mode is most useful for dividing
+ code into broad operations and for organising stubs while prototyping.

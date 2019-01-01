@@ -1,0 +1,14 @@
+Package: librust-encode-unicode+ascii-dev
+Source: rust-encode-unicode
+Version: 0.3.5-2
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-encode-unicode-dev (= 0.3.5-2), librust-ascii-0.10-dev (<< 0.10.1-~~) | librust-ascii-0.9-dev | librust-ascii-0.8-dev
+Provides: librust-encode-unicode-0+ascii-dev (= 0.3.5-2), librust-encode-unicode-0.3+ascii-dev (= 0.3.5-2), librust-encode-unicode-0.3.5+ascii-dev (= 0.3.5-2)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: UTF-8 and UTF-16 char types, methods, for char, u8 and u16 - feature "ascii"
+ This metapackage enables feature ascii for the Rust encode_unicode crate, by
+ pulling in any additional dependencies needed by that feature.

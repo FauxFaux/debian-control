@@ -1,0 +1,25 @@
+Package: libmtp-runtime
+Source: libmtp
+Version: 1.1.13-1.1
+Architecture: amd64
+Maintainer: Alessio Treglia <alessio@debian.org>
+Installed-Size: 67
+Depends: libmtp-common, libmtp9 (= 1.1.13-1.1), libc6 (>= 2.4)
+Enhances: libmtp9
+Breaks: libmtp8 (= 1.0.6-3)
+Replaces: libmtp8 (= 1.0.6-3)
+Section: libs
+Priority: optional
+Homepage: http://libmtp.sourceforge.net/
+Description: Media Transfer Protocol (MTP) runtime tools
+ libmtp is a library for communicating with MTP aware devices in POSIX
+ compliant operating systems.  It implements MTP Basic, the subset
+ proposed for standardization.
+ .
+ The Media Transfer Protocol (commonly referred to as MTP) is a devised
+ set of custom extensions to support the transfer of music files on
+ USB digital audio players and movie files on USB portable media players.
+ .
+ This package provides mtp-probe, a program to probe newly connected
+ device interfaces from userspace to determine if they are MTP devices,
+ used for udev rules.

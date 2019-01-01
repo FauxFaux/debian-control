@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p regina-normal 
+fi
+
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p regina-normal /usr/share/regina-normal
+fi
+
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper symlink_to_dir /usr/share/regina-normal/examples ../doc/regina-normal/examples 5.1-4\~ -- "$@"
+dpkg-maintscript-helper dir_to_symlink /usr/share/doc/regina-normal/examples ../../regina-normal/examples 5.1-4\~ -- "$@"
+# End automatically added section

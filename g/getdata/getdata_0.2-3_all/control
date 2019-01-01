@@ -1,0 +1,25 @@
+Package: getdata
+Version: 0.2-3
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 65
+Depends: perl:any
+Recommends: perl-doc
+Suggests: biomaj
+Section: science
+Priority: optional
+Homepage: http://debian-med.alioth.debian.org
+Description: management of external databases
+ Many scientific communities share the problem of regularly updating
+ external databases. With every update, also various tasks need to
+ be performed for the update of indices that need to be recreated.
+ This work depends on the tools that are available locally and is
+ not always completely simple.
+ .
+ This package provides the getData Perl script, which in some not
+ so complicated manner performs the invocation to wget to download
+ data and then knows how to perform the indexing. There is only
+ a hash table to be filled with the commands to be executed.
+ Maintainers of scientific packages that are strongly coupled to
+ public datasets are invited to add a runtime dependency to this
+ package and add instructions for getData to follow.

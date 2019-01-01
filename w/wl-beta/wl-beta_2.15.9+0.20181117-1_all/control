@@ -1,0 +1,40 @@
+Package: wl-beta
+Version: 2.15.9+0.20181117-1
+Architecture: all
+Maintainer: Tatsuya Kinoshita <tats@debian.org>
+Installed-Size: 3581
+Depends: emacsen-common (>= 2.0.8), emacs-nox | emacs | emacsen, semi (>= 1.14.6+0.20100125), flim (>= 1:1.14.6), apel (>= 10.7), dpkg (>= 1.15.4) | install-info
+Suggests: gnupg, easypg, gnutls-bin, openssl, starttls, x-face-el, w3m-el, mule-ucs, bbdb, im, bitmap-mule, namazu2, maildir-utils, notmuch, bogofilter | bsfilter | spamassassin, mu-cite, mhc
+Conflicts: wanderlust2, wl, xbase (<< 3.3.2.3a-2)
+Replaces: wanderlust2, wl
+Provides: imap-client, mail-reader, news-reader, wl
+Section: lisp
+Priority: optional
+Homepage: https://github.com/wanderlust/wanderlust
+Description: mail/news reader supporting IMAP for emacsen (development version)
+ Wanderlust is a mail/news management system on emacsen.  It supports
+ IMAP4rev1 (RFC2060), NNTP, POP and local message files.
+ .
+ The main features of Wanderlust:
+ .
+  - Pure elisp implementation.
+  - Supports IMAP4rev1, NNTP, POP (POP3/APOP), MH and Maildir format.
+  - Unified access method to messages based on Mew-like Folder Specification.
+  - Mew-like Key-bind and mark handling.
+  - Manages unread messages.
+  - Interactive thread display.
+  - Folder Mode shows the list of subscribed folders.
+  - Message Cache, Disconnected Operation.
+  - MH-like FCC. (Fcc: %Backup and Fcc: $Backup is allowed).
+  - MIME compliant (by SEMI).
+  - Transmission of news and mail are unified by Message transmitting draft.
+  - Graphical list of folders.
+  - View a part of message without retrieving the whole message (IMAP4).
+  - Server-side message look up (IMAP4). Multi-byte characters are allowed.
+  - Virtual Folders.
+  - Supports compressed folder using common archiving utilities.
+  - Old articles in folders are automatically removed/archived (Expiration).
+  - Automatic re-file.
+  - Template function makes it convenient to send fixed form messages.
+ .
+ This package provides a development snapshot version of Wanderlust.

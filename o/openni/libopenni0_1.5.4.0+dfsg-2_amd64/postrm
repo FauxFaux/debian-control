@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper mv_conffile /etc/openni/modules.xml /var/lib/ni/modules.xml 1.5.4.0-7~ libopenni0 -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/openni/licenses.xml /var/lib/ni/licenses.xml 1.5.4.0-7~ libopenni0 -- "$@"
+
+case "$1" in
+  purge)
+    rm -f /var/lib/ni/modules.xml 2>/dev/null
+    rm -f /var/lib/ni/licenses.xml 2>/dev/null
+    ;;
+esac
+
+
+
+exit 0

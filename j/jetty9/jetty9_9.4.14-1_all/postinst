@@ -1,0 +1,79 @@
+#!/bin/sh
+set -e
+
+JETTY_USER=jetty
+JETTY_GROUP=jetty
+
+case "$1" in
+    configure)
+	# Install the default page if no root context exist
+	if [ ! -f /var/lib/jetty9/webapps/root.war ]; then
+		mkdir -p /var/lib/jetty9/webapps/root
+		if [ -z "$(ls -A /var/lib/jetty9/webapps/root)" ]; then
+			cp /usr/share/jetty9/default-root/* /var/lib/jetty9/webapps/root
+		fi
+	fi
+
+	if ! id jetty > /dev/null 2>&1 ; then
+	    adduser --system --home /usr/share/jetty9 --no-create-home \
+		--group --disabled-password --shell /bin/false \
+		$JETTY_USER
+	fi
+	chown -Rh jetty:adm /var/cache/jetty9 /var/log/jetty9 /var/lib/jetty9
+	chmod 750 /var/log/jetty9
+
+	# Authorize user jetty to open privileged ports via authbind.
+	JETTY_UID="`id -u $JETTY_USER`"
+	if [ ! -f "/etc/authbind/byuid/$JETTY_UID" ]; then
+		if [ ! -d "/etc/authbind/byuid" ]; then
+			mkdir -p /etc/authbind/byuid
+			chmod 755 /etc/authbind
+			chmod 755 /etc/authbind/byuid
+		fi
+		echo '0.0.0.0/0:1,1023' >/etc/authbind/byuid/$JETTY_UID
+		echo '::/0,1-1023' >>/etc/authbind/byuid/$JETTY_UID
+		chown $JETTY_USER:$JETTY_GROUP /etc/authbind/byuid/$JETTY_UID
+		chmod 700 /etc/authbind/byuid/$JETTY_UID
+	fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+	echo "$0 called with unknown argument \`$1'" >&2
+	exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/jetty9" ]; then
+		update-rc.d jetty9 defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d jetty9 $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'jetty9.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'jetty9.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'jetty9.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'jetty9.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

@@ -1,0 +1,24 @@
+Package: libastro-fits-cfitsio-perl
+Source: libastro-fits-cfitsio-perl (1.12-1)
+Version: 1.12-1+b1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 1357
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.14), libcfitsio7 (>= 3.450~)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Astro-FITS-CFITSIO
+Description: Perl extension for using the cfitsio library
+ Astro::Fits::Cfitsio is a Perl interface to William Pence's cfitsio
+ subroutine library. For more information on cfitsio, see
+ http://heasarc.gsfc.nasa.gov/fitsio.
+ .
+ This module attempts to provide a wrapper for nearly every cfitsio routine,
+ while retaining as much cfitsio behavior as possible. As such, one should
+ be aware that it is still somewhat low-level, in the sense that handing an
+ array which is not the correct size to a routine like fits_write_img()
+ may cause SIGSEGVs.
+ .
+ The goal is to eventually use these routines to build a more Perl-like
+ interface to many common tasks such as reading and writing of images and
+ ASCII and binary tables.

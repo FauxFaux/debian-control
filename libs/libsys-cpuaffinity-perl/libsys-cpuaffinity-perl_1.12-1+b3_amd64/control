@@ -1,0 +1,31 @@
+Package: libsys-cpuaffinity-perl
+Source: libsys-cpuaffinity-perl (1.12-1)
+Version: 1.12-1+b3
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 151
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.6)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Sys-CpuAffinity
+Description: module to set CPU affinity for processes
+ The details of getting and setting process CPU affinities varies greatly from
+ system to system. Even among the different flavors of Unix there is very
+ little in the way of a common interface to CPU affinities. The existing tools
+ and libraries for setting CPU affinities are not very standardized, so that a
+ technique for setting CPU affinities on one system may not work on another
+ system with the same architecture.
+ .
+ Sys::CpuAffinity seeks to do one thing and do it well: manipulate CPU
+ affinities through a common interface on as many systems as possible, by any
+ means necessary.
+ .
+ The module is composed of several subroutines, each one implementing a
+ different technique to perform a CPU affinity operation. A technique might
+ try to import a Perl module, run an external program that might be installed
+ on your system, or invoke some C code to access your system libraries.
+ Usually, a technique is applicable to only a single or small group of
+ operating systems, and on any particular system, the vast majority of
+ techniques would fail. Regardless of your particular system and
+ configuration, it is hoped that at least one of the techniques will work and
+ you will be able to get and set the CPU affinities of your processes.

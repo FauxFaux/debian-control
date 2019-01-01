@@ -1,0 +1,23 @@
+Package: psl-make-dafsa
+Source: libpsl
+Version: 0.20.2-2
+Architecture: all
+Maintainer: Tim Rühsen <tim.ruehsen@gmx.de>
+Installed-Size: 41
+Depends: python3:any
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/rockdaboot/libpsl
+Description: Create a binary DAFSA from a Public Suffix List
+ libpsl permits the use of an optimized binary representation of the
+ Public Suffix List (PSL).  This format is a deterministic acyclic
+ finite state automaton, or DAFSA.
+ .
+ It is primarily used for building a new version of the publicsuffix
+ package, but could also be used by anyone else looking to match
+ printable US ASCII strings.
+ .
+ This package contains a Python script to convert a standard PSL into
+ a DAFSA, either in C source code form, or in a specialized mmap-able
+ binary format.

@@ -1,0 +1,20 @@
+Package: ironic-api
+Source: ironic
+Version: 1:11.1.0-4
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 124
+Depends: adduser, ironic-common (= 1:11.1.0-4), python3-openstackclient, q-text-as-data, debconf (>= 0.5) | debconf-2.0, lsb-base (>= 3.0.6)
+Section: net
+Priority: optional
+Homepage: https://github.com/openstack/ironic
+Description: bare metal hypervisor API for OpenStack - API server
+ Ironic provision bare metal machines instead of virtual machines. It is a fork
+ of the Nova Baremetal driver. It is best thought of as a bare metal hypervisor
+ API and a set of plugins which interact with the bare metal hypervisors. By
+ default, it will use PXE and IPMI in concert to provision and turn on/off
+ machines, but Ironic also supports vendor-specific plugins which may implement
+ additional functionality.
+ .
+ This package provides the Ironic API server. The ironic-api service provides a
+ RESTful API that supports JSON and XML.

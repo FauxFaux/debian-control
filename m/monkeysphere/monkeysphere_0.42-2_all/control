@@ -1,0 +1,23 @@
+Package: monkeysphere
+Version: 0.42-2
+Architecture: all
+Maintainer: Debian Privacy Tools Maintainers <pkg-privacy-maintainers@lists.alioth.debian.org>
+Installed-Size: 273
+Depends: adduser, gnupg, libcrypt-openssl-rsa-perl, libdigest-sha-perl, lockfile-progs | procmail
+Recommends: agent-transfer, cron-daemon, netcat-openbsd | netcat | socat, openssh-client, ssh-askpass
+Suggests: monkeysphere-validation-agent
+Enhances: openssh-client, openssh-server
+Section: net
+Priority: optional
+Homepage: http://web.monkeysphere.info/
+Description: leverage the OpenPGP web of trust for SSH and TLS authentication
+ SSH key-based authentication is tried-and-true, but it lacks a true
+ Public Key Infrastructure for key certification, revocation and
+ expiration.  Monkeysphere is a framework that uses the OpenPGP web of
+ trust for these PKI functions.  It can be used in both directions:
+ for users to get validated host keys, and for hosts to authenticate
+ users.  Current monkeysphere SSH tools are designed to integrate
+ with the OpenSSH implementation of the Secure Shell protocol.
+ .
+ Monkeysphere can also be used by a validation agent to validate TLS
+ connections (e.g. https).

@@ -1,0 +1,21 @@
+Package: gem-plugin-v4l2
+Source: gem
+Version: 1:0.94~pre1-1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 234
+Depends: libc6 (>= 2.15), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), libv4l-0 (>= 0.5.0), libxrender1, libxxf86vm1, zlib1g (>= 1:1.1.4), gem (>= 1:0.94~pre1-1), gem (<< 1:0.94~pre1+1~)
+Suggests: v4l2loopback-dkms | v4l2loopback-modules
+Provides: gem-plugin-record, gem-plugin-video
+Section: graphics
+Priority: optional
+Homepage: https://gem.iem.at/
+Description: Graphics Environment for Multimedia - V4L2 output support
+ Gem is a loadable library for Pure Data (Pd), which adds OpenGL graphics
+ rendering and animation to Pd.  Pd is a graphical programming language and
+ computer music system.
+ .
+ This package provides video input and output using V4L2.
+ .
+ For video output, you might want to use a loopback device, for which you will
+ have to install the v4l2loopback kernel module as well.

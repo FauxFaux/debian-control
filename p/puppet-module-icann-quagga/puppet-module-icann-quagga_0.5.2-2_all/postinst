@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/quagga puppet-module-quagga /usr/share/puppet/modules.available/icann-quagga 500
+fi
+
+
+
+exit 0

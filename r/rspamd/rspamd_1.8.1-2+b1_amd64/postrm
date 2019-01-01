@@ -1,0 +1,41 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "purge" ] ; then
+	update-rc.d rspamd remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/rspamd/logging.conf 0.6.11\~ rspamd -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/rspamd/options.conf 0.6.11\~ rspamd -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/rspamd/workers.conf 0.6.11\~ rspamd -- "$@"
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.3
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'rspamd.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'rspamd.service' >/dev/null || true
+		deb-systemd-helper unmask 'rspamd.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+case "$1" in
+    purge)
+      rm -rf /var/lib/rspamd
+      rm -rf /var/log/rspamd
+      rm -rf /run/rspamd
+      exit 0;;
+    remove|upgrade|disappear|failed-upgrade|abort-*)
+      exit 0;;
+    *)
+      echo "postrm called with unknown argument \`$1'" >&2
+      exit 1;;
+esac

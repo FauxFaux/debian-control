@@ -1,0 +1,29 @@
+Package: golang-github-hanwen-go-fuse-dev
+Source: golang-github-hanwen-go-fuse
+Version: 0.0~git20181027.c029b69-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 649
+Depends: golang-any, golang-golang-x-sys-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/hanwen/go-fuse
+Description: Native Go bindings for the FUSE kernel module
+ This package offers native Go bindings for FUSE, and has several features:
+ .
+  * High speed: as fast as libfuse using the gc compiler for single
+    threaded loads.
+ .
+  * Supports in-process mounting of different FileSystems onto
+    subdirectories of the FUSE mount.
+ .
+  * Supports 3 interfaces for writing filesystems:
+    - PathFileSystem: define filesystems in terms path names.
+    - NodeFileSystem: define filesystems in terms of inodes.
+    - RawFileSystem: define filesystems in terms of FUSE's raw
+      wire protocol.
+ .
+  * Both NodeFileSystem and PathFileSystem support manipulation of true
+    hardlinks.
+ .
+ The package also includes two fleshed out examples, zipfs and unionfs.

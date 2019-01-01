@@ -1,0 +1,23 @@
+Package: fwknop-server
+Source: fwknop (2.6.9-2)
+Version: 2.6.9-2+b1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 248
+Depends: libc6 (>= 2.15), libfko3 (= 2.6.9-2+b1), libpcap0.8 (>= 0.9.8), iptables, lsb-base (>= 3.0-6)
+Suggests: fwknop-apparmor-profile
+Section: admin
+Priority: extra
+Homepage: http://www.cipherdyne.com/fwknop/
+Description: FireWall KNock OPerator server side - C version
+ The FireWall KNock OPerator implements an authorization scheme called
+ Single Packet Authorization (SPA), based on Netfilter and libpcap.
+ .
+ Its main application is to protect services such as OpenSSH with
+ an additional layer of security in order to make the exploitation of
+ vulnerabilities (both 0-day and unpatched code) much more difficult.
+ .
+ The authorization server passively listens for authorization packets via
+ libpcap, thus preventing any connections from being processed on the
+ traditional port. Access to a protected service is only granted after a
+ valid encrypted and non-replayed packet is detected.

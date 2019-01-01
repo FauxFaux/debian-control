@@ -1,0 +1,30 @@
+Package: libmath-prime-util-perl
+Version: 0.73-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 1253
+Depends: libmath-prime-util-gmp-perl (>= 0.50), perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.14)
+Recommends: libmath-bigint-gmp-perl, libmath-prime-util-gmp-perl (>= 0.51)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Math-Prime-Util
+Description: utilities related to prime numbers, including fast sieves and factoring
+ Math::Prime::Util is a set of perl utilities related to prime
+ numbers. These include multiple sieving methods, is_prime,
+ prime_count, nth_prime, approximations and bounds for the prime_count
+ and nth prime, next_prime and prev_prime, factoring utilities, and
+ more.
+ .
+ The default sieving and factoring are intended to be (and currently are) the
+ fastest on CPAN, including Math::Prime::XS, Math::Prime::FastSieve,
+ Math::Factor::XS, Math::Prime::TiedArray, Math::Big::Factors,
+ Math::Factoring, and Math::Primality (when the GMP module is available). For
+ numbers in the 10-20 digit range, it is often orders of magnitude faster.
+ Typically it is faster than Math::Pari for 64-bit operations.
+ .
+ All operations support both Perl UV's (32-bit or 64-bit) and bignums. It
+ requires no external software for big number support, as there are Perl
+ implementations included that solely use Math::BigInt and Math::BigFloat.
+ However, performance will be improved for most big number functions by
+ installing Math::Prime::Util::GMP, and is definitely recommended if you do
+ many bignum operations. Also look into Math::Pari as an alternative.

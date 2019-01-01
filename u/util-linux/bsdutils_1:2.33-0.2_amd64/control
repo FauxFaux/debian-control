@@ -1,0 +1,18 @@
+Package: bsdutils
+Source: util-linux (2.33-0.2)
+Version: 1:2.33-0.2
+Architecture: amd64
+Essential: yes
+Maintainer: LaMont Jones <lamont@debian.org>
+Installed-Size: 297
+Pre-Depends: libc6 (>= 2.14), libsystemd0
+Recommends: bsdmainutils
+Breaks: bash-completion (<< 1:2.1-4.1~)
+Replaces: bash-completion (<< 1:2.1-4.1~)
+Section: utils
+Priority: required
+Multi-Arch: foreign
+Description: basic utilities from 4.4BSD-Lite
+ This package contains the bare minimum of BSD utilities needed for a
+ Debian system: logger, renice, script, scriptreplay, and wall. The
+ remaining standard BSD utilities are provided by bsdmainutils.

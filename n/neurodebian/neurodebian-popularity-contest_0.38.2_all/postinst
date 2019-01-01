@@ -1,0 +1,59 @@
+#!/bin/bash -e
+
+# following to be duplicated within postrm as well, but may be with
+# "Removing" message
+popcon_conf=/etc/popularity-contest.conf
+nd_popcon_conf=/etc/popularity-contest.d/neurodebian.conf
+remove_neurodebian_popcon_pre161() {
+	# Adjust popularity-contest.conf
+	if [ -e "$popcon_conf" ] \
+	   && grep -q "http://neuro.debian.net/cgi-bin/popcon-submit.cgi" $popcon_conf; then
+		#echo "Removing NeuroDebian url for Popularity Contest submissions."
+		# First remove any explicit mentioning and then empty additions
+		sed -i -e 's,http://neuro.debian.net/cgi-bin/popcon-submit.cgi,,g' \
+			   -e '/SUBMITURLS+=" *"/d' \
+			   -e '/SUBMITURLS="$SUBMITURLS *"/d' \
+			"$popcon_conf"
+	fi
+}
+
+add_neurodebian_popcon_pre161() {
+	# Adjust main popularity-contest configuration file.  Should be
+	# used only with older versions of the popularity contest.
+	if [ -e "$popcon_conf" ]; then
+		# Fix dashism missing += operator
+		if grep -q 'SUBMITURLS+="' "$popcon_conf"; then
+			echo "Adjusting addition of new entries in $popcon_conf for dash."
+			sed -i -e 's,SUBMITURLS+=",SUBMITURLS="$SUBMITURLS,g' "$popcon_conf"
+		fi
+		if ! grep -q 'SUBMITURLS.*neuro.debian.net' "$popcon_conf"; then
+			echo "Adding NeuroDebian url for Popularity Contest submissions."
+			echo -e 'SUBMITURLS="$SUBMITURLS http://neuro.debian.net/cgi-bin/popcon-submit.cgi"' >> "$popcon_conf"
+		fi
+	fi
+}
+
+add_neurodebian_popcon_161() {
+	# 1.60 introduced encryption and a way to provide multiple keys to
+	# encrypt submissions to multiple servers.
+
+	# "Installation" is taken care of through installing files under
+	# /etc/popularity-contest.d, so no additional actions necessary here
+	:
+}
+
+popcon_version=$(dpkg -l popularity-contest | tail -n 1 | awk '{print $3;}')
+
+if [ "$1" = "configure" -o "$1" = "abort-upgrade" ]; then
+	if dpkg --compare-versions $popcon_version lt 1.61; then
+		add_neurodebian_popcon_pre161
+	else
+		# Assure that we have no "old" settings for submission if
+		# previous version of our package was old
+		if [ "$1" = "configure" ] && [ -z "$2" ] && dpkg --compare-versions "$2" lt 0.33; then
+			remove_neurodebian_popcon_pre161 || :
+		fi
+	fi
+fi
+
+

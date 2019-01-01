@@ -1,0 +1,17 @@
+#!/bin/bash
+# The first version of mgetty-doc shipped with a real doc dir
+# rather than a link to mgetty
+REAL_DOC="1.1.14-1"
+case "$1" in
+  upgrade)
+  if /usr/bin/dpkg --compare-versions $2 lt $REAL_DOC &&
+    test -L /usr/doc/mgetty-docs &&
+    expr "`ls -ld /usr/doc/mgetty-docs`" : '.* /usr/doc/mgetty-docs -> mgetty$' >/dev/null
+  then
+    echo "Removing obsolete /usr/doc/mgetty-docs symlink."
+    rm -f /usr/doc/mgetty-docs
+  fi
+  ;;
+esac
+
+

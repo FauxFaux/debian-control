@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_perl6_maintscript/UNDECLARED
+case "$1" in
+    remove|upgrade)
+        /usr/share/perl6/rakudo-helper.pl --remove perl6-readline
+    ;;
+ 
+    purge|failed-upgrade|abort-install|abort-upgrade|disappear)
+        # nothing to do
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+# End automatically added section

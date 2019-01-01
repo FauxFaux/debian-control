@@ -1,0 +1,106 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper dir_to_symlink \
+	/usr/share/openstack-dashboard/static /var/lib/openstack-dashboard/static 2:9.0.0~rc1-2 openstack-dashboard -- "$@"
+
+if [ "$1" = "configure" ] ; then
+	. /usr/share/debconf/confmodule
+
+	### Create a new horizon user ###
+	adduser --system \
+		--home /var/lib/horizon \
+		--quiet \
+		--disabled-password \
+		--group horizon
+
+	### Handle the secret key stuff ###
+	mkdir -p /var/lib/openstack-dashboard/secret-key
+	chown www-data:www-data /var/lib/openstack-dashboard/secret-key
+
+	
+	## Copy Horizon's local_settings.py in /etc and make the symlink to it
+	mkdir -p /etc/openstack-dashboard
+	DASHBOARD_LOCAL_SETTINGS='/etc/openstack-dashboard/local_settings.py'
+	if ! [ -f "$DASHBOARD_LOCAL_SETTINGS" ] ; then
+		cp /usr/share/openstack-dashboard/local_settings.py $DASHBOARD_LOCAL_SETTINGS
+	fi
+	if [ -f "$DASHBOARD_LOCAL_SETTINGS" ] && grep -q 'django.utils.log.NullHandler' $DASHBOARD_LOCAL_SETTINGS; then
+		sed -i 's/django.utils.log.NullHandler/logging.NullHandler/g' $DASHBOARD_LOCAL_SETTINGS
+	fi
+
+	# IMPORTANT: We can't ship the symlink if the local_settings.py doesn't exist,
+	# because if Python 3 isn't installed, and we install Horizon at the same time,
+	# then we get this:
+	# running python rtupdate hooks for python3.6...
+	# [Errno 2] No such file or directory: '/usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.py'
+	# error running python rtupdate hook openstack-dashboard
+	# dpkg: error processing package python3 (--configure):
+	#  installed python3 package post-installation script subprocess returned error exit status 4
+	#
+	# Instead, we have to make the symlink dynamically like this,
+	# after the local_settings.py file exists in /etc/openstack-dashboard
+	if ! [ -L /usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.py ] ; then
+		ln -sf /etc/openstack-dashboard/local_settings.py /usr/share/openstack-dashboard/openstack_dashboard/local/local_settings.py
+	fi
+
+	# Handle the ALLOWED_HOSTS directive with debconf
+	db_get horizon/allowed-hosts
+	if [ -n "${RET}" ] ; then
+		if echo x"${RET}" | grep -q '*' ; then
+			sed -i "s/^[# \t]*ALLOWED_HOSTS[\t ]*=.*/ALLOWED_HOSTS = \[ '"'*'"' \]/" /etc/openstack-dashboard/local_settings.py
+		else
+			# Refrmat the output as: ALLOWED_HOSTS = [ 'host1.example.com', 'host2.example.com' ]
+			ALLOWED_HOSTS="ALLOWED_HOSTS = \["
+			for i in $(echo ${RET} | sed -e 's/ //g' -e "s|'||g" -e 's|"||g' | tr , \\n) ; do
+				ALLOWED_HOSTS="${ALLOWED_HOSTS} '${i}',"
+			done
+			ALLOWED_HOSTS="${ALLOWED_HOSTS} \]"
+			sed -i "s/^[# \t]*ALLOWED_HOSTS[\t ]*=.*/${ALLOWED_HOSTS}/" /etc/openstack-dashboard/local_settings.py
+		fi
+	fi
+
+	# Manage upgrade of /usr/share/openstack-dashboard/static to sylink
+	if [ -L /usr/share/openstack-dashboard/static ]; then
+		if ! [ $(readlink -s /usr/share/openstack-dashboard/static) = /var/lib/openstack-dashboard/static ]; then
+			ln -fs /var/lib/openstack-dashboard/static /usr/share/openstack-dashboard/static
+		fi
+	else
+		ln -fs /var/lib/openstack-dashboard/static /usr/share/openstack-dashboard/static
+	fi
+
+	# Compress the JS and CSS with python-compressor and python-lesscpy
+	/usr/share/openstack-dashboard/manage.py collectstatic --clear --noinput
+	/usr/share/openstack-dashboard/manage.py compress --force
+	if [ -f /var/lib/openstack-dashboard/secret-key/.secret_key_store ]; then
+		rm /var/lib/openstack-dashboard/secret-key/.secret_key_store
+	fi
+	chown -R www-data /var/lib/openstack-dashboard/secret-key /var/lib/openstack-dashboard/static
+	db_stop
+fi
+
+if [ "$1" = "triggered" ] ; then
+	if [ -x /usr/share/openstack-dashboard/manage.py ] ; then
+		/usr/share/openstack-dashboard/manage.py collectstatic --clear --noinput
+		/usr/share/openstack-dashboard/manage.py compress --force
+	fi
+	if [ -f /var/lib/openstack-dashboard/secret-key/.secret_key_store ]; then
+		rm /var/lib/openstack-dashboard/secret-key/.secret_key_store
+	fi
+	chown -R www-data /var/lib/openstack-dashboard/secret-key /var/lib/openstack-dashboard/static
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p openstack-dashboard /usr/share/openstack-dashboard
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p openstack-dashboard /usr/share/openstack-dashboard || true
+fi
+
+# End automatically added section
+
+
+exit 0

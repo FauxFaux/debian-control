@@ -1,0 +1,20 @@
+Package: nvidia-opencl-icd
+Source: nvidia-graphics-drivers
+Version: 390.87-5
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 15713
+Depends: nvidia-opencl-common, ocl-icd-libopencl1 | nvidia-libopencl1 | libopencl1, nvidia-alternative (= 390.87-5), libcuda1 (= 390.87-5), libnvidia-compiler (= 390.87-5), libc6 (>= 2.2.5), libnvidia-fatbinaryloader (>= 367.44)
+Enhances: libopencl1
+Provides: opencl-icd
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: NVIDIA OpenCL installable client driver (ICD)
+ OpenCL (Open Computing Language) is a multivendor open standard for
+ general-purpose parallel programming of heterogeneous systems that include
+ CPUs, GPUs and other processors.
+ .
+ This package provides the NVIDIA installable client driver (ICD) for OpenCL
+ which supports NVIDIA GPUs. This ICD supports OpenCL 1.x only.

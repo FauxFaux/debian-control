@@ -1,0 +1,32 @@
+Package: libavfilter-extra7
+Source: ffmpeg
+Version: 7:4.1-1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 3296
+Depends: libass9 (>= 1:0.13.6), libavcodec58 (= 7:4.1-1), libavformat58 (= 7:4.1-1), libavutil56 (= 7:4.1-1), libbs2b0, libc6 (>= 2.27), libflite1 (>= 1.4-release-9~), libfontconfig1 (>= 2.12.6), libfreetype6 (>= 2.2.1), libfribidi0 (>= 0.19.2), liblensfun1 (>= 0.3.2), liblilv-0-0 (>= 0.14.2~dfsg0), libmysofa0 (>= 0.6~), libpostproc55 (= 7:4.1-1), librubberband2, libswresample3 (= 7:4.1-1), libswscale5 (= 7:4.1-1), libtesseract4, libva2 (>= 1.7.3), libvidstab1.1, libzmq5 (>= 3.2.3+dfsg)
+Conflicts: libavfilter7
+Provides: libavfilter-extra, libavfilter7 (= 7:4.1-1)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://ffmpeg.org/
+Description: FFmpeg library with extra media filters - runtime files
+ FFmpeg is the leading multimedia framework, able to decode, encode, transcode,
+ mux, demux, stream, filter and play pretty much anything that humans and
+ machines have created. It supports the most obscure ancient formats up to the
+ cutting edge.
+ .
+ This library provides a generic audio/video filtering framework containing
+ several filters, sources and sinks.
+ .
+ This package replaces the libavfilter6 package and contains the
+ following additional filters:
+ .
+  * Lens correction using Lensfun
+  * Optical Character Recognition (uses Tesseract)
+  * SOFAlizer (Spatially Oriented Format for Acoustics, uses netcdf)
+ .
+ Because this package links against libraries that are licensed under
+ Apache License 2.0, the resulting binaries are distributed under the
+ GPL version 3 or later.

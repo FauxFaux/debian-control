@@ -1,0 +1,21 @@
+Package: dlt-tools
+Source: dlt-daemon
+Version: 2.17.0-3
+Architecture: amd64
+Maintainer: Aigars Mahinovs <aigarius@debian.org>
+Installed-Size: 338
+Depends: libc6 (>= 2.27), libdbus-1-3 (>= 1.9.14), libdlt2, libsystemd0, zlib1g (>= 1:1.1.4)
+Suggests: dlt-daemon
+Section: libs
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://at.projects.genivi.org/wiki/display/PROJ/Diagnostic+Log+and+Trace
+Description: Diagnostic Log and Trace (DLT) (documentation)
+ This component provides a log and trace interface, based on the standardised
+ protocol specified in the AUTOSAR standard 4.0 DLT. This software can be used
+ by GENIVI components and other applications as logging facility.
+ .
+ This package includes tools to connect to and experiment with DLT daemon.
+ Most usefully this includes 'dlt-receive' to connect to a (remote) DLT server
+ and save all logs to a DLT file and 'dlt-system' that injects system logs
+ into the DLT server

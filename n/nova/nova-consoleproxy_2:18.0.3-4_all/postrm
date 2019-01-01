@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" ] ; then
+	rm -f /var/log/nova/nova-*proxy.log*
+	rm -f /etc/default/nova-consoleproxy
+fi
+
+
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "purge" ] ; then
+	update-rc.d nova-xenvncproxy remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "purge" ] ; then
+	update-rc.d nova-spicehtml5proxy remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "purge" ] ; then
+	update-rc.d nova-novncproxy remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.5.3
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

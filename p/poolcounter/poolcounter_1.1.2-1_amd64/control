@@ -1,0 +1,15 @@
+Package: poolcounter
+Version: 1.1.2-1
+Architecture: amd64
+Maintainer: MediaWiki packaging team <mediawiki-debian@lists.wikimedia.org>
+Installed-Size: 52
+Depends: libc6 (>= 2.10), libevent-2.1-6 (>= 2.1.8-stable), adduser
+Section: web
+Priority: optional
+Homepage: https://www.mediawiki.org/wiki/PoolCounter
+Description: network daemon which provides mutex-like functionality
+ PoolCounter is a network daemon which provides mutex-like functionality,
+ with a limited wait queue length. If too many servers try to do the same
+ thing at the same time, the wait queue overflows and some configurable
+ action might be taken by subsequent clients, such as displaying an error
+ message or using a stale cache entry.

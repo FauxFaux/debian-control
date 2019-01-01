@@ -1,0 +1,26 @@
+Package: nmh
+Version: 1.7.1-3
+Architecture: amd64
+Maintainer: Alexander Zangerl <az@debian.org>
+Installed-Size: 8355
+Depends: libc6 (>= 2.15), libcurl4 (>= 7.16.2), libdb5.3, liblockfile1 (>= 1.0), libsasl2-2, libssl1.1 (>= 1.1.0), libtinfo6 (>= 6), netbase (>= 3.16-1), mime-support, sensible-utils
+Recommends: default-mta | mail-transport-agent
+Suggests: exmh, mh-e, mh-book, par, libmime-tools-perl, libmailtools-perl
+Conflicts: mh
+Replaces: mh
+Provides: mail-reader, mh
+Section: mail
+Priority: optional
+Description: set of electronic mail handling programs
+ This is the nmh mail user agent (reader/sender), a command-line based mail
+ reader that is powerful and extensible.  nmh is an excellent choice for
+ people who receive and process a lot of mail.
+ .
+ Unlike most mail user agents, nmh is not a single program, rather it is a
+ set of programs that are run from the shell.  This allows the user to
+ utilize the full power of the Unix shell in coordination with nmh.  Various
+ front-ends are available, such as mh-e (an emacs mode), xmh, and exmh (X11
+ clients).
+ .
+ nmh was originally based on MH version 6.8.3, and is intended to be a
+ (mostly) compatible drop-in replacement for MH.

@@ -1,0 +1,17 @@
+Package: kdump-tools
+Source: makedumpfile
+Version: 1:1.6.4-3
+Architecture: amd64
+Maintainer: Louis Bouchard <louis.bouchard@ubuntu.com>
+Installed-Size: 109
+Depends: debconf (>= 0.5) | debconf-2.0, kexec-tools, makedumpfile, debconf, bsdmainutils, lsb-base (>= 3.0-6), file, ucf, linux-base
+Recommends: initramfs-tools-core
+Section: devel
+Priority: optional
+Description: scripts and tools for automating kdump (Linux crash dumps)
+ kdump-tools provides an init script and a configuration script for
+ automating the use of kdump.  It uses the makedumpfile utility to
+ reduce the size of the /proc/vmcore file based on user preferences.
+ .
+ After installing, please see /usr/share/doc/kdump-tools/README.Debian
+ for information on enabling and configuring kdump.

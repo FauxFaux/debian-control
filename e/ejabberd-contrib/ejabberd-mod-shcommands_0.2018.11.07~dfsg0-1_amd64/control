@@ -1,0 +1,37 @@
+Package: ejabberd-mod-shcommands
+Source: ejabberd-contrib
+Version: 0.2018.11.07~dfsg0-1
+Architecture: amd64
+Maintainer: Ejabberd Packaging Team <ejabberd@packages.debian.org>
+Installed-Size: 24
+Depends: erlang-base (>= 1:17) | erlang-abi-17.0, erlang-base (>= 1:21.1.1+dfsg) | erlang-base-hipe (>= 1:21.1.1+dfsg), ejabberd (= 18.09-2)
+Section: net
+Priority: optional
+Homepage: https://github.com/processone/ejabberd-contrib
+Description: execute shell commands via XMPP (dangerous!)
+ WARNING: USE THIS MODULE AT YOUR OWN RISK !!!
+ This module allows ejabberd administrators to remotely execute shell commands
+ which could compromise both the ejabberd server and the whole machine.
+ .
+ This module provides the ejabberd server administrator a method to remotely
+ execute shell commands through the ejabberd server.
+ .
+ It provides a page in the ejabberd Web Admin which only the administrators of
+ the whole server can access.
+ .
+ Three types of commands are possible:
+  * ejabberd_ctl: makes a call to ejabberd_ctl;
+  * erlang shell: executes an erlang command;
+  * system shell: executes a command on the system shell.
+ The result of the execution will be shown.
+ .
+ In the system shell, only non-interactive commands will work correctly,
+ for example this will work:
+  ps -all
+ Don't use commands that start an interactive mode:
+ DON'T TRY THIS: top
+ DON'T TRY THIS: vim readme.txt
+ .
+ This module does not check if the commands are dangerous or problematic,
+ so this module is only recommended for experienced ejabberd and Erlang/OTP
+ administrators. USE THIS MODULE AT YOUR OWN RISK !!!

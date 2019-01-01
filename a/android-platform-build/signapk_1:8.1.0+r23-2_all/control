@@ -1,0 +1,17 @@
+Package: signapk
+Source: android-platform-build
+Version: 1:8.1.0+r23-2
+Architecture: all
+Maintainer: Android Tools Maintainers <android-tools-devel@lists.alioth.debian.org>
+Installed-Size: 37
+Depends: default-jre | java10-runtime | java11-runtime, jarwrapper (>= 0.5), libapksig-java, libbcpkix-java, libbcprov-java
+Section: devel
+Priority: optional
+Homepage: https://android.googlesource.com/platform/build
+Description: Command line tool for signing Android ZIP/JAR/APK
+ signapk is a command line tool for signing ZIP files, including JARs,
+ APKs, and Over-The-Air (OTA) updates, in a way compatible with
+ Android's mincrypt verifier, using EC or RSA keys and SHA1 or
+ SHA-256. The tool can additionally sign APKs using APK Signature
+ Scheme v2. It is the standard tool used to sign APK and JAR files
+ distributed as part of Android ROMs.

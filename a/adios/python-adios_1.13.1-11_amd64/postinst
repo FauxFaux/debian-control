@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+
+if [ !  -z "$(update-alternatives --get-selections 2> /dev/null | grep  mpi-x86_64-linux-gnu)" ]; then
+MPI=`update-alternatives --get-selections | grep mpi-x86_64-linux-gnu | awk '{print $3}' | cut -f5 -d/ `
+else
+MPI=openmpi
+fi
+
+update-alternatives \
+    --install /usr/lib/python2.7/dist-packages/adios_mpi/adios_mpi.x86_64-linux-gnu.so python-adios-x86_64-linux-gnu \
+              /usr/lib/python2.7/dist-packages/adios_${MPI}/adios_mpi.x86_64-linux-gnu.so 50 
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p python-adios 
+fi
+
+# End automatically added section
+
+
+exit 0

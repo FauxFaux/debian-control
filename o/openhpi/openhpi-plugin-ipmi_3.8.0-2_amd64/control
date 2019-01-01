@@ -1,0 +1,21 @@
+Package: openhpi-plugin-ipmi
+Source: openhpi
+Version: 3.8.0-2
+Architecture: amd64
+Maintainer: Mohan Devarajulu <mohan.devarajulu@hpe.com>
+Installed-Size: 283
+Depends: libc6 (>= 2.14), libglib2.0-0 (>= 2.31.8), libopenhpi3 (= 3.8.0-2), libopenipmi0 (>= 2.0.7), openipmi (>= 2.0.7)
+Conflicts: libopenhpi, libopenhpi2
+Breaks: libopenhpi3 (<< 3.8.0-2~)
+Replaces: libopenhpi, libopenhpi2, libopenhpi3 (<< 3.8.0-2~)
+Section: libs
+Priority: optional
+Homepage: http://openhpi.org
+Description: OpenHPI plugin module for OpenIPMI
+ OpenHPI is an implementation of the Service Availability Forum's Hardware
+ Platform Interface specification.  (See http://www.saforum.org)  As
+ such, OpenHPI facilitates the development of computer manageability
+ applications which are not tied to a single hardware vendor's products.
+ .
+ This package contains a plugin module that accesses hardware information
+ through the OpenIPMI library.

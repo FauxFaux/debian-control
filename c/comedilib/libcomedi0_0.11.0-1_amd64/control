@@ -1,0 +1,26 @@
+Package: libcomedi0
+Source: comedilib
+Version: 0.11.0-1
+Architecture: amd64
+Maintainer: Gudjon I. Gudjonsson <gudjon@gudjon.org>
+Installed-Size: 540
+Depends: libboost-program-options1.67.0, libc6 (>= 2.15), libgcc1 (>= 1:3.0), libgsl23 (>= 2.5), libgslcblas0 (>= 2.4), libstdc++6 (>= 5.2), adduser
+Recommends: udev
+Section: libs
+Priority: optional
+Homepage: http://www.comedi.org
+Description: Library for Comedi
+ Comedilib is a library for using Comedi, a driver interface for data
+ acquisition hardware.  Comedi supports a wide variety of ISA and PCI
+ devices that contain analog-to-digital converters, digital-to-analog
+ converters, digital input/output, counters and timers.  The full list
+ of support devices can be found in the libcomedi-dev documentation.
+ .
+ This package contains the shared library component of Comedilib.  In
+ general, this package will be automatically installed as a dependency
+ of application or other library packages.
+ .
+ In order to effectively use this package, you need to have compiled
+ and installed the Comedi kernel modules.  The source for Comedi is
+ available in the comedi-source package, which also contains
+ instructions on how to compile and install the modules.

@@ -1,0 +1,19 @@
+Package: systemd-coredump
+Source: systemd
+Version: 240-2
+Architecture: amd64
+Maintainer: Debian systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>
+Installed-Size: 242
+Depends: libacl1 (>= 2.2.51-8), libc6 (>= 2.14), libdw1 (>= 0.158), libelf1 (>= 0.131), systemd (= 240-2), adduser
+Conflicts: core-dump-handler
+Breaks: systemd (<< 229-2)
+Replaces: core-dump-handler, systemd (<< 229-2)
+Provides: core-dump-handler
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.freedesktop.org/wiki/Software/systemd
+Description: tools for storing and retrieving coredumps
+ This package provides systemd tools for storing and retrieving coredumps:
+  * systemd-coredump
+  * coredumpctl

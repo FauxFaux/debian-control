@@ -1,0 +1,17 @@
+Package: libacme-damn-perl
+Source: libacme-damn-perl (0.08-1)
+Version: 0.08-1+b3
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.4)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Acme-Damn
+Description: Perl module to unbless objects
+ Acme::Damn provides a way to reverse the bless operation, which takes a
+ variable and associates it with a given class. One can use this module
+ to return the original reference; that is, prior to calling bless on it.
+ .
+ After using 'damn()' or custom aliases thereof, the blessed Perl object
+ reference becomes a simple data type.

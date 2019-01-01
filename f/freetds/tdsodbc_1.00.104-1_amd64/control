@@ -1,0 +1,21 @@
+Package: tdsodbc
+Source: freetds
+Version: 1.00.104-1
+Architecture: amd64
+Maintainer: Steve Langasek <vorlon@debian.org>
+Installed-Size: 489
+Depends: libc6 (>= 2.17), libgmp10, libgnutls30 (>= 3.5.6), libgssapi-krb5-2 (>= 1.14+dfsg), libhogweed4, libnettle6, odbcinst1debian2 (>= 2.3.1), debconf (>= 0.5) | debconf-2.0, freetds-common
+Recommends: libodbc1
+Conflicts: freetds0, libct0
+Breaks: libiodbc2 (<< 3.52.7-3~), odbcinst1debian2 (<< 2.2.14p2-3), unixodbc (<< 2.2.14p2-3)
+Replaces: freetds0, libct0, libct1
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.freetds.org/
+Description: ODBC driver for connecting to MS SQL and Sybase SQL servers
+ FreeTDS is an implementation of the Tabular DataStream protocol, used for
+ connecting to MS SQL and Sybase servers over TCP/IP.
+ .
+ This package includes the ODBC driver for FreeTDS, for use with
+ UnixODBC or iODBC.

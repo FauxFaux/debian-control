@@ -1,0 +1,26 @@
+Package: golang-github-tdewolff-minify-dev
+Source: golang-github-tdewolff-minify
+Version: 2.3.8-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Installed-Size: 266
+Depends: golang-github-dustin-go-humanize-dev, golang-github-fsnotify-fsnotify-dev, golang-github-matryer-try-dev, golang-github-spf13-pflag-dev, golang-github-tdewolff-parse-dev (>= 2.3.5~), golang-github-tdewolff-test-dev (>= 1.0.0-2~)
+Section: devel
+Priority: optional
+Homepage: https://github.com/tdewolff/minify
+Description: Go minifiers for web formats
+ github.com/tdewolff/minify is a minifier package written in Go.
+ It provides HTML5, CSS3, JS, JSON, SVG and XML minifiers and an interface
+ to implement any other minifier.
+ .
+ Minification is the process of removing bytes from a file (such as
+ whitespace) without changing its output and therefore shrinking
+ its size and speeding up transmission over the Internet and possibly
+ parsing.  The implemented minifiers are high performance and streaming,
+ which implies O(n).
+ .
+ The core functionality associates mimetypes with minification functions,
+ allowing embedded resources (like CSS or JS within HTML files) to be
+ minified as well. Users can add new implementations that are triggered
+ based on a mimetype (or pattern), or redirect to an external command
+ (like ClosureCompiler, UglifyCSS, ...)

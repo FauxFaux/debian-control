@@ -1,0 +1,24 @@
+Package: krb5-kdc
+Source: krb5
+Version: 1.16.2-1
+Architecture: amd64
+Maintainer: Sam Hartman <hartmans@debian.org>
+Installed-Size: 554
+Depends: debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.15), libcom-err2 (>= 1.43.9), libgssapi-krb5-2 (>= 1.6.dfsg.2), libgssrpc4 (>= 1.6.dfsg.2), libk5crypto3 (>= 1.14+dfsg), libkadm5srv-mit11 (>= 1.15~beta1), libkdb5-9 (>= 1.13.1+dfsg-1), libkeyutils1 (>= 1.4), libkrb5-3 (= 1.16.2-1), libkrb5support0 (>= 1.13~alpha1+dfsg), libverto1 (>= 0.2.4), krb5-config, krb5-user, lsb-base (>= 3.0-6), libverto-libev1 | libverto-libevent1
+Suggests: krb5-kpropd, krb5-admin-server, krb5-kdc-ldap (= 1.16.2-1)
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://web.mit.edu/kerberos/
+Description: MIT Kerberos key server (KDC)
+ Kerberos is a system for authenticating users and services on a network.
+ Kerberos is a trusted third-party service.  That means that there is a
+ third party (the Kerberos server) that is trusted by all the entities on
+ the network (users and services, usually called "principals").
+ .
+ This is the MIT reference implementation of Kerberos V5.
+ .
+ This package contains the Kerberos key server (KDC).  The KDC manages all
+ authentication credentials for a Kerberos realm, holds the master keys
+ for the realm, and responds to authentication requests.  This package
+ should be installed on both master and slave KDCs.

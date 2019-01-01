@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p lyx-common /usr/share/lyx
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p lyx-common /usr/share/lyx || true
+fi
+
+# End automatically added section
+# Automatically added by dh_installtex/1
+##
+## postinst-tex
+##
+## postinst snippets for everything TeX related
+## simply call update-texmf-config triggers
+##
+## Authors:
+##       Norbert Preining <preining@logic.at>
+##
+#
+
+case "$1" in
+    configure|abort-upgrade|abort-remove|abort-deconfigure)
+        update-texmf-config 
+    ;;
+esac
+
+# End automatically added section

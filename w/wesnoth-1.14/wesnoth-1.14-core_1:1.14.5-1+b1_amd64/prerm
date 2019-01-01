@@ -1,0 +1,22 @@
+#!/bin/sh
+# prerm script for wesnoth-1.14-core
+# Copyright 2010 by Rhonda D'Vine <rhonda@debian.org>
+# Licensed under MIT
+
+set -e
+
+setup_alternatives()
+{
+	update-alternatives --remove wesnoth /usr/games/wesnoth-1.14
+}
+
+
+case "$1" in
+	remove)
+		setup_alternatives
+	;;
+esac
+
+
+
+exit 0

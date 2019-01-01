@@ -1,0 +1,15 @@
+Package: librust-quickcheck+use-logging-dev
+Source: rust-quickcheck
+Version: 0.7.2-2
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-quickcheck-dev (= 0.7.2-2), librust-env-logger-0.6-dev | librust-env-logger-0.5-dev, librust-log-0.4+default-dev
+Provides: librust-quickcheck-0+use-logging-dev (= 0.7.2-2), librust-quickcheck-0.7+use-logging-dev (= 0.7.2-2), librust-quickcheck-0.7.2+use-logging-dev (= 0.7.2-2)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/BurntSushi/quickcheck
+Description: Automatic property based testing with shrinking - feature "use_logging"
+ This metapackage enables feature use_logging for the Rust quickcheck crate, by
+ pulling in any additional dependencies needed by that feature.

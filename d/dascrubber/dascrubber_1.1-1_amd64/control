@@ -1,0 +1,19 @@
+Package: dascrubber
+Version: 1.1-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 1183
+Depends: libc6 (>= 2.7)
+Suggests: daligner, dazzdb
+Section: science
+Priority: optional
+Homepage: https://dazzlerblog.wordpress.com/
+Description: alignment-based scrubbing pipeline for DNA sequencing reads
+ The Dazzler Scrubbing Suite produces a set of edited reads that are guaranteed
+ to
+  * be continuous stretches of the underlying genome (i.e. no unremoved
+    adapters and not chimers)
+  * have no very low quality stretches (i.e. the error rate never exceeds some
+    reasonable maximum, 20% or so in the case of Pacbio data).
+ Its secondary goal is to do so with the minimum removal of data and splitting
+ of reads.

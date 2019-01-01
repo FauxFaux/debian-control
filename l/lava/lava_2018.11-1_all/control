@@ -1,0 +1,21 @@
+Package: lava
+Version: 2018.11-1
+Architecture: all
+Maintainer: Debian LAVA team <pkg-linaro-lava-devel@lists.alioth.debian.org>
+Installed-Size: 74
+Depends: lava-server (>= 2018.11-1), lava-server-doc, lava-dispatcher (>= 2018.11-1), lava-coordinator, lava-dev, lavacli, lavapdu-client, ntp | ntpdate, tftpd-hpa, sudo, telnet, debootstrap (>= 1.0.86~), openssh-client, lxc (>= 1:2.0.6), rsync, bridge-utils
+Recommends: lavapdu-daemon, schroot, img2simg, simg2img, docker.io
+Section: metapackages
+Priority: optional
+Homepage: https://www.lavasoftware.org/
+Description: Linaro Automated Validation Architecture metapackage
+ LAVA is a continuous integration system for deploying operating
+ systems onto physical and virtual hardware for running tests.
+ Tests can be simple boot testing, bootloader testing and system
+ level testing, although extra hardware may be required for some
+ system tests. Results are tracked over time and data can be
+ exported for further analysis.
+ .
+ This metapackage brings in all LAVA components on a single
+ machine. Some suggested packages may not be available for all
+ architectures.

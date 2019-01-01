@@ -1,0 +1,28 @@
+Package: git-el
+Source: git
+Version: 1:2.20.1-1
+Architecture: all
+Maintainer: Gerrit Pape <pape@smarden.org>
+Installed-Size: 814
+Depends: git (>= 1:1.7.4.1-2~), emacs | emacsen
+Recommends: elpa-magit
+Breaks: git (<< 1:1.7.4.1-2~)
+Replaces: git (<< 1:1.7.4.1-2~)
+Section: vcs
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://git-scm.com/
+Description: fast, scalable, distributed revision control system (emacs support)
+ Git is popular version control system designed to handle very large
+ projects with speed and efficiency; it is used for many high profile
+ open source projects, most notably the Linux kernel.
+ .
+ Git falls in the category of distributed source code management tools.
+ Every Git working directory is a full-fledged repository with full
+ revision tracking capabilities, not dependent on network access or a
+ central server.
+ .
+ This transitional package provides two modules that previously could be
+ used for integration with Emacs: git.el and git-blame.el. Now the
+ modules print an error message with instructions that users can use to
+ migrate to Emacs's VC-mode backend for Git or Magit.

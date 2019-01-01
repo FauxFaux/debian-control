@@ -1,0 +1,26 @@
+Package: erlang-base
+Source: erlang
+Version: 1:21.2.2+dfsg-1
+Architecture: amd64
+Maintainer: Debian Erlang Packagers <pkg-erlang-devel@lists.alioth.debian.org>
+Installed-Size: 13289
+Depends: procps, adduser, libc6 (>= 2.14), libsystemd0, libtinfo6 (>= 6)
+Recommends: libsctp1 (>= 1.0.18+dfsg), erlang-crypto (= 1:21.2.2+dfsg-1), erlang-syntax-tools (= 1:21.2.2+dfsg-1)
+Suggests: erlang-tools (= 1:21.2.2+dfsg-1), erlang, erlang-manpages, erlang-doc
+Conflicts: erlang (<< 1:21.2.2+dfsg-1), erlang-base-hipe, erlang-doc (>> 1:21.2.2+dfsg-999), erlang-doc (<< 1:21.2.2+dfsg), erlang-doc-html (<< 1:13.b.4), erlang-manpages (<= 1:11.b.1-2)
+Breaks: rabbitmq-server (<< 3.7.7)
+Replaces: erlang (<< 1:21.2.2+dfsg-1), erlang-base-hipe, erlang-dev (<< 1:21.2.2+dfsg-1), erlang-doc (>> 1:21.2.2+dfsg-999), erlang-doc (<< 1:21.2.2+dfsg), erlang-doc-html (<< 1:13.b.4), erlang-examples (<< 1:21.2.2+dfsg-1), erlang-manpages (<= 1:11.b.1-2), erlang-mode (<< 1:12.b.1-dfsg-2), erlang-nox (<< 1:21.2.2+dfsg-1), erlang-src (<< 1:21.2.2+dfsg-1), erlang-typer (<< 1:20.0+dfsg), erlang-x11 (<< 1:21.2.2+dfsg-1)
+Provides: erlang-abi-17.0
+Section: interpreters
+Priority: optional
+Homepage: http://www.erlang.org/
+Description: Erlang/OTP virtual machine and base applications
+ This package contains the Erlang/OTP runtime implementation, which is
+ configured and built without HiPE support (compiles to byte-code only),
+ and minimal set of Erlang applications:
+  compiler - compiles Erlang code to byte-code;
+  erts - the Erlang runtime system application;
+  kernel - code necessary to run the Erlang runtime system itself;
+  ose - code for Enea OSE operating system;
+  sasl - the system architecture support libraries application;
+  stdlib - modules for manipulating lists, strings, files etc.

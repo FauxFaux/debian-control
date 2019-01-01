@@ -1,0 +1,23 @@
+Package: obfs4proxy
+Source: obfs4proxy (0.0.7-4)
+Version: 0.0.7-4+b1
+Architecture: amd64
+Maintainer: Debian Privacy Tools Maintainers <pkg-privacy-maintainers@lists.alioth.debian.org>
+Installed-Size: 4949
+Depends: libc6 (>= 2.3.2)
+Built-Using: golang-1.10 (= 1.10.5-1), golang-ed25519-dev (= 0~20140907.d2b94fd-4), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-net-dev (= 1:0.0+git20180124.0ed95ab+dfsg-2), golang-goptlib (= 0.6-3), golang-siphash-dev (= 1.0.0-2)
+Section: net
+Priority: optional
+Description: pluggable transport proxy for Tor, implementing obfs4
+ obfs4proxy is a tool that attempts to circumvent censorship by
+ transforming the Tor traffic between the client and the bridge. This way
+ censors, who usually monitor traffic between the client and the bridge, will
+ see innocent-looking transformed traffic instead of the actual Tor traffic.
+ .
+ obfs4proxy implements the obfuscation protocols obfs2, obfs3, and obfs4.
+ .
+ It is written in Go and is compliant with the Tor pluggable transports
+ specification, and its modular architecture allows it to support multiple
+ pluggable transports.
+ .
+ This package contains both the client and the bridge in a single program.

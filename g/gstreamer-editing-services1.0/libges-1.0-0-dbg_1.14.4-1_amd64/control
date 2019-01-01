@@ -1,0 +1,33 @@
+Package: libges-1.0-0-dbg
+Source: gstreamer-editing-services1.0
+Version: 1.14.4-1
+Architecture: amd64
+Maintainer: Maintainers of GStreamer packages <gstreamer-editing-services1.0@packages.debian.org>
+Installed-Size: 1243
+Depends: libges-1.0-0 (= 1.14.4-1)
+Section: debug
+Priority: extra
+Homepage: https://gstreamer.freedesktop.org
+Description: GStreamer editing services (debug symbols)
+ The GStreamer multimedia framework and the accompanying NLE set of
+ plugins for non-linear editing offer all the building blocks for:
+ * Decoding and encoding to a wide variety of formats, through all the
+   available GStreamer plugins.
+ * Easily choosing segments of streams and arranging them through time
+   through the NLE set of plugins.
+ But all those building blocks only offer stream-level access, which
+ results in developers who want to write non-linear editors to write a
+ consequent amount of code to get to the level of non-linear editing
+ notions which are closer and more meaningful for the end-user
+ (and therefore the application).
+ .
+ The GStreamer Editing Services (GES) aims to fill the gap between
+ GStreamer/NLE and the application developer by offering a series
+ of classes to simplify the creation of many kind of editing-related
+ applications.
+ .
+ This package contains unstripped shared libraries. It is provided primarily
+ to provide a backtrace with names in a debugger, this makes it somewhat
+ easier to interpret core dumps. The libraries are installed in
+ /usr/lib/debug and are automatically used by gdb.
+Build-Ids: c82540367631e80f0f8a3b534ba48a0f6aa64d01 cb58e00c6fbbf65bfb3b6c3db50516a2177e4ca0

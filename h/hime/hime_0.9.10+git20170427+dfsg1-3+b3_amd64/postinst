@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+set -u
+
+ua_remove () {
+    update-alternatives --remove xinput-$1 /etc/X11/xinit/xinput.d/$2;
+}
+
+case "$1" in
+    configure)
+        if [ $# -ge 2 ] && [ x$2 != x ]; then
+            if dpkg --compare-versions "$2" lt 0.9.10+git20150916+dfsg1-3~; then
+                ua_remove all_ALL hime
+                ua_remove zh_CN   hime
+                ua_remove zh_TW   hime
+            fi
+        fi
+        ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+
+
+exit 0

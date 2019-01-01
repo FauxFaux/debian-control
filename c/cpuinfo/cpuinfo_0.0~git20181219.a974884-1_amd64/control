@@ -1,0 +1,43 @@
+Package: cpuinfo
+Version: 0.0~git20181219.a974884-1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 74
+Depends: libc6 (>= 2.4), libcpuinfo0 (= 0.0~git20181219.a974884-1)
+Section: science
+Priority: optional
+Homepage: https://github.com/pytorch/cpuinfo
+Description: CPU INFOrmation library (binary utilities)
+ cpuinfo is a library to detect essential for performance optimization
+ information about host CPU.
+ .
+ Features
+ .
+   - **Cross-platform** availability:
+     - Linux, Windows, macOS, Android, and iOS operating systems
+     - x86, x86-64, ARM, and ARM64 architectures
+   - Modern **C/C++ interface**
+     - Thread-safe
+     - No memory allocation after initialization
+     - No exceptions thrown
+   - Detection of **supported instruction sets**, up to AVX512 (x86) and
+     ARMv8.3 extensions
+   - Detection of SoC and core information:
+     - **Processor (SoC) name**
+     - Integrated **GPU name** (Android/iOS only)
+     - Vendor, **microarchitecture**, and ID (**MIDR** on ARM, **CPUID**
+       leaf 1 EAX value on x86) for each CPU core
+   - Detection of **cache information**:
+     - Cache type (instruction/data/unified), size and line size
+     - Cache associativity
+     - Cores and logical processors (hyper-threads) sharing the cache
+   - Detection of **topology information** (relative between logical
+     processors, cores, and processor packages)
+   - Well-tested **production-quality** code:
+     - 60+ mock tests based on data from real devices
+     - Includes work-arounds for common bugs in hardware and OS kernels
+     - Supports systems with heterogenous cores, such as **big.LITTLE**
+       and Max.Med.Min
+   - Permissive **open-source** license (Simplified BSD)
+ .
+ This package ships with several binary utilities.

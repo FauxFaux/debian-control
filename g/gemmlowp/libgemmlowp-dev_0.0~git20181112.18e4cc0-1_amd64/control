@@ -1,0 +1,24 @@
+Package: libgemmlowp-dev
+Source: gemmlowp
+Version: 0.0~git20181112.18e4cc0-1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 2848
+Section: libdevel
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/google/gemmlowp
+Description: small self-contained low-precision GEMM library
+ This is not a full linear algebra library, only a GEMM library: it only does
+ general matrix multiplication ("GEMM").
+ .
+ Its performance goals differ from typical GEMM performance goals in the
+ following ways:
+ 1. It cares not only about speed, but also about minimizing power usage.
+    It specifically cares about charge usage in mobile/embedded devices.
+ 2. Most GEMMs are optimized primarily for large dense matrix sizes (>= 1000).
+    It does care about large sizes, but it also cares specifically about the
+    typically smaller matrix sizes encountered in various mobile applications.
+ .
+ Keep in mind (previous section) that gemmlowp itself is a pure-headers-only
+ library.

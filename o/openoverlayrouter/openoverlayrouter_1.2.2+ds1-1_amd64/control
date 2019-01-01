@@ -1,0 +1,20 @@
+Package: openoverlayrouter
+Version: 1.2.2+ds1-1
+Architecture: amd64
+Maintainer: Debian IoT Maintainers <debian-iot-maintainers@lists.alioth.debian.org>
+Installed-Size: 414
+Depends: libc6 (>= 2.15), libconfuse2 (>= 3.2.1~), libxml2 (>= 2.7.4), libzmq5 (>= 3.2.3+dfsg)
+Section: misc
+Priority: optional
+Homepage: http://openoverlayrouter.org/
+Description: deploy programmable overlay networks
+ The OpenOverlayRouter (OOR) project aims to deliver a flexible and modular
+ open-source implementation to deploy programmable overlay networks. It
+ leverages on encapsulating overlay-specific packets into underlay-compatible
+ packets at the edges of the instantiated overlay and route them over the
+ physical underlying infrastructure. In order to do so, it maps overlay
+ identifiers to underlay locators and keeps those mappings updated over
+ time. In the current version, OOR uses the LISP protocol for the
+ control-plane (e.g. mapping retrieval and updating, etc), NETCONF/YANG for
+ the management-plane (e.g. overlay identifiers provisioning, etc) and can
+ use both LISP and VXLAN-GPE headers for encapsulation.

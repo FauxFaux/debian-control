@@ -1,0 +1,26 @@
+Package: norsnet
+Version: 1.0.17-4
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 208
+Depends: profnet-norsnet
+Recommends: blast2, librg-utils-perl, profphd, profbval
+Suggests: pp-popularity-contest
+Section: science
+Priority: optional
+Homepage: https://www.rostlab.org/owiki/index.php/Norsnet
+Description: tool to identify unstructured loops in proteins
+ NORSnet can distinguish between very long contiguous segments with
+ non-regular secondary structure (NORS regions) and well-folded proteins.
+ .
+ NORSnet was trained on predicted information rather than on experimental data.
+ This allows NORSnet to reach into regions in sequence space that are not
+ covered by specialized disorder predictors.  One disadvantage of this approach
+ is that it is not optimal for the identification of the "average" disordered
+ region.
+ .
+ NORSnet takes the following input, further described on norsnet(1):
+  * a protein sequence in a FASTA file
+  * secondary structure and solvent accessibility prediction by prof(1)
+  * an HSSP file
+  * flexible/rigid residues prediction by profbval(1)

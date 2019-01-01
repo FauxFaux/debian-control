@@ -1,0 +1,21 @@
+Package: libdata-swap-perl
+Source: libdata-swap-perl (0.08-1)
+Version: 0.08-1+b3
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 41
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.14)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Data-Swap
+Description: Perl module to swap type and contents of variables
+ The Data::Swap module allows you to swap the contents of two referenced
+ variables, even if they have different types.
+ .
+ The main application is to change the base type of an object after it has
+ been created, for example for dynamic loading of data structures:
+ .
+  swap $self, bless $replacement, $newclass;
+ .
+ This module additionally contain the function "deref" which acts like a
+ generic list-dereferencing operator.

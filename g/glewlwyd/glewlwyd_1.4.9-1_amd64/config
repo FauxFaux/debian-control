@@ -1,0 +1,58 @@
+#!/bin/sh
+
+set -e
+#set -x
+
+. /usr/share/debconf/confmodule
+
+db_input medium glewlwyd/config_type || true
+db_go || true
+
+db_get glewlwyd/config_type
+if [ "$RET" = "Personalized" ]; then
+
+  dbc_dbtypes="sqlite3, mysql"
+  
+  . /usr/share/dbconfig-common/dpkg/config
+  dbc_go glewlwyd "$@" || true
+  
+  db_input medium glewlwyd/config_external_url || true
+  db_go || true
+  db_get glewlwyd/config_external_url
+  EXTERNAL_URL=$RET
+
+  db_input medium glewlwyd/config_reset_pwd || true
+  db_go || true
+  
+  db_get glewlwyd/config_reset_pwd
+  if [ "$RET" = "true" ]; then
+    db_input medium glewlwyd/config_reset_pwd_host || true
+    db_go || true
+    
+    db_input medium glewlwyd/config_reset_pwd_from || true
+    db_go || true
+    
+    db_input medium glewlwyd/config_reset_pwd_subject || true
+    db_go || true
+    
+  fi
+  db_input medium glewlwyd/config_jwt_alg || true
+  db_go || true
+  
+  db_get glewlwyd/config_jwt_alg
+  JWT_ALG="$RET"
+  
+  db_input medium glewlwyd/config_jwt_key_size || true
+  db_go || true
+  
+  if [ "$JWT_ALG" = "SHA" ]; then
+    db_input medium glewlwyd/config_jwt_secret || true
+    db_go || true
+  else 
+    db_input medium glewlwyd/config_jwt_generate_key || true
+    db_go || true
+  fi
+  
+fi
+
+

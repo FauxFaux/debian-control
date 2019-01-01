@@ -1,0 +1,23 @@
+Package: libghc-stateref-prof
+Source: haskell-stateref (0.3-8)
+Version: 0.3-8+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 506
+Depends: libghc-stateref-dev (= 0.3-8+b2), libghc-base-prof-4.11.1.0-5dd74, libghc-mtl-prof-2.2.2-28a8b, libghc-stm-prof-2.4.5.1-e1689
+Provides: libghc-stateref-prof-0.3-4c277
+Section: haskell
+Priority: optional
+Homepage: http://hackage.haskell.org/package/stateref
+Description: abstraction for things that work like IORef; profiling libraries
+ A collection of type-classes generalizing the read/write/modify
+ operations for stateful variables provided by things like IORef,
+ TVar, &c. Note that The interface has changed a bit from the 0.2.*
+ version. "*Ref" functions are now called "*Reference" and new "*Ref"
+ function exist with simpler signatures. The new Ref existential type
+ provides a convenient monad-indexed reference type, and the HasRef
+ class indicates monads for which there is a default reference type
+ for every referent.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

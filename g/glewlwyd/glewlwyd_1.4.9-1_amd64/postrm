@@ -1,0 +1,83 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ -f /usr/share/dbconfig-common/dpkg/postrm ]; then
+  . /usr/share/dbconfig-common/dpkg/postrm
+  dbc_go glewlwyd "$@"
+fi
+
+if [ "$1" = "remove" ]; then
+  if [ -x "/usr/bin/deb-systemd-helper" ]; then
+    deb-systemd-helper mask glewlwyd.service >/dev/null
+  fi
+fi
+
+if [ "$1" = "purge" ]; then
+  if [ -d "/etc/glewlwyd/" ]; then
+    rm -f /etc/glewlwyd/glewlwyd.conf || true
+    rm -f /etc/glewlwyd/glewlwyd-db.conf || true
+    rm -f /etc/glewlwyd/private-rsa.key || true
+    rm -f /etc/glewlwyd/public-rsa.pem || true
+    rm -f /etc/glewlwyd/private-ecdsa.key || true
+    rm -f /etc/glewlwyd/public-ecdsa.pem || true
+    rmdir /etc/glewlwyd/ || true
+  fi
+  
+  if [ -f "/etc/dbconfig-common/glewlwyd.conf" ]; then
+    rm -f /etc/dbconfig-common/glewlwyd.conf || true
+  fi
+  
+  if [ -f "/var/log/glewlwyd.log" ]; then
+    rm -f /var/log/glewlwyd.log || true
+  fi
+  
+  if [ -f "/var/lib/dbconfig-common/sqlite3/glewlwyd/glewlwyd" ]; then
+    rm -f /var/lib/dbconfig-common/sqlite3/glewlwyd/glewlwyd || true
+  fi
+  
+  if [ -d "/var/lib/dbconfig-common/sqlite3/glewlwyd/" ]; then
+    rmdir /var/lib/dbconfig-common/sqlite3/glewlwyd/ || true
+  fi
+  
+  if [ -x "$(command -v deluser)" ]; then
+     deluser --quiet --system glewlwyd > /dev/null || true
+  else
+     echo >&2 "not removing glewlwyd system account because deluser command was not found"
+  fi
+  
+  db_purge
+
+  if which ucf >/dev/null 2>&1; then
+    ucf --purge /etc/glewlwyd/glewlwyd-db.conf
+    ucfr --purge glewlwyd /etc/glewlwyd/glewlwyd-db.conf
+  fi
+fi
+
+# Automatically added by dh_installsystemd/11.5.4
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.4
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'glewlwyd.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'glewlwyd.service' >/dev/null || true
+		deb-systemd-helper unmask 'glewlwyd.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.5.4
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

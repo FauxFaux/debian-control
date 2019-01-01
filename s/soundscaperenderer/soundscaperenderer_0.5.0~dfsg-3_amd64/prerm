@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+set -e 
+
+
+. /usr/share/soundscaperenderer-common/ssr-maintainerscript
+
+case "$1" in
+    (remove|deconfigure|upgrade)
+        ssr_delalternatives /usr/share/soundscaperenderer/alternatives .qt
+    ;;
+
+    (failed-upgrade)
+    ;;
+
+    (*)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+exit 0

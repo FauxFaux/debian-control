@@ -1,0 +1,24 @@
+Package: libcyrus-imap-perl
+Source: cyrus-imapd (2.5.11-1)
+Version: 2.5.11-1+b2
+Architecture: amd64
+Maintainer: Debian Cyrus Team <team+cyrus@tracker.debian.org>
+Installed-Size: 962
+Pre-Depends: dpkg (>= 1.17.14~)
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.15), libdb5.3, libsasl2-2, libssl1.1 (>= 1.1.0), zlib1g (>= 1:1.1.4)
+Breaks: libcyrus-imap-perl22, libcyrus-imap-perl24 (<< 2.4.17+caldav~beta10-2~)
+Replaces: libcyrus-imap-perl22, libcyrus-imap-perl24 (<< 2.4.17+caldav~beta10-2~)
+Section: perl
+Priority: extra
+Homepage: https://www.cyrusimap.org/
+Description: Interface to Cyrus imap client imclient library
+ The Cyrus::IMAP module provides an interface to the Cyrus imclient
+ library.  These are primarily useful for implementing cyradm operations
+ within a Perl script; there are easier ways to implement general client
+ operations, although they may be more limited in terms of authentication
+ options when talking to a Cyrus imapd.
+ .
+ The modules that compose Cyrus::SIEVE are also included, but they are
+ undocumented upstream.
+ .
+ For more information, please see the cyrus-common package.

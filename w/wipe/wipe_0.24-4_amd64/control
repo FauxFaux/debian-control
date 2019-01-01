@@ -1,0 +1,21 @@
+Package: wipe
+Version: 0.24-4
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 94
+Depends: libc6 (>= 2.15)
+Section: utils
+Priority: optional
+Homepage: https://github.com/berke/wipe
+Description: secure file deletion
+ Recovery of supposedly erased data from magnetic media is easier than
+ what many people would like to believe. A technique called Magnetic
+ Force Microscopy (MFM) allows any moderately funded opponent to recover
+ the last two or three layers of data written to disk. Wipe repeatedly
+ writes special patterns to the files to be destroyed, using the fsync()
+ call and/or the O_SYNC bit to force disk access.
+ .
+ Wipe can permanently delete data in hard disks and flash drives (caution!
+ several writes can damage solid medias).
+ .
+ This program is useful in anti-forensics and security activities.

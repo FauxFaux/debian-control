@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "purge" ] ; then
+	if su cyphesis -s /bin/sh -c "psql -c \"\" template1" >/dev/null 2>&1; then
+		su cyphesis -s /bin/sh -c "dropdb --if-exists --no-password cyphesis" >/dev/null 2>&1
+		su postgres -s /bin/sh -c "dropuser --if-exists --no-password cyphesis" >/dev/null 2>&1
+	fi
+	rm -rf /var/log/cyphesis/
+	rm -rf /run/cyphesis/
+fi
+
+# Automatically added by dh_installinit/11.4.1
+if [ "$1" = "purge" ] ; then
+	update-rc.d cyphesis-cpp remove >/dev/null
+fi
+# End automatically added section
+

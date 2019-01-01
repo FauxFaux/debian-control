@@ -1,0 +1,17 @@
+Package: elogind
+Version: 239.3-4+debian1
+Architecture: amd64
+Maintainer: Debian Ecosystem Init Diversity Team <debian-init-diversity@chiark.greenend.org.uk>
+Installed-Size: 1829
+Pre-Depends: debconf
+Depends: libacl1 (>= 2.2.51-8), libc6 (>= 2.28), libselinux1 (>= 2.0.65), libudev1 (>= 183), libelogind0 (= 239.3-4+debian1), lsb-base (>= 3.1), dbus (>= 1.9.14)
+Recommends: policykit-1
+Conflicts: systemd
+Provides: logind
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/elogind/elogind
+Description: user, seat and session management daemon
+ elogind is a session management daemon extracted from systemd project's
+ "logind"

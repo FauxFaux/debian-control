@@ -1,0 +1,26 @@
+Package: smalr
+Version: 1.1+dfsg-2
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 102
+Depends: cython, python-h5py, python-numpy, python-pbcore, python:any (<< 2.8), python:any (>= 2.7~), samtools, bwa (>= 0.7), r-base-core (>= 3.0), r-cran-seqinr
+Section: science
+Priority: optional
+Homepage: https://github.com/fanglab/SMALR
+Description: interrogation of the methylation status of nucleotide sequencing reads
+ The SMALR package conducts single-molecule level interrogation of the
+ methylation status of single-molecule real-time (SMRT) sequencing reads.
+ There are two protocols available for use within the pipeline, SMsn and SMp.
+  * SMsn: Single-molecule, single nucleotide analysis
+    Each motif site on each sequencing molecule is assessed for methylation
+    status. This is designed for use with short (~250bp) sequencing library
+    preps, where the long read lengths of SMRT reads enables multiple passes
+    over each motif site. The reliability of the SMsn scores increases with
+    more passes (i.e. higher single-molecule coverage).
+  * SMp: Single-molecule, motif-pooled analysis
+    All motif sites on a sequencing molecule are pooled together and the
+    molecule-wide methylation status for the given motif is assessed. This is
+    designed for use with long (10Kb+) sequencing library preps, where each
+    single long subread can span many distinct motif sites. The reliability of
+    the SMp scores increases with increasing number of distinct motif sites
+    contained in the subread.

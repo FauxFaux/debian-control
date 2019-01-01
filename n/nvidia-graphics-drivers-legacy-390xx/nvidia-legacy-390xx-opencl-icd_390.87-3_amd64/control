@@ -1,0 +1,20 @@
+Package: nvidia-legacy-390xx-opencl-icd
+Source: nvidia-graphics-drivers-legacy-390xx
+Version: 390.87-3
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 15616
+Depends: nvidia-opencl-common, ocl-icd-libopencl1 | nvidia-libopencl1 | libopencl1, nvidia-legacy-390xx-alternative (= 390.87-3), libnvidia-legacy-390xx-cuda1 (= 390.87-3), libnvidia-legacy-390xx-compiler (= 390.87-3), libc6 (>= 2.2.5), libnvidia-legacy-390xx-fatbinaryloader (>= 367.44)
+Enhances: libopencl1
+Provides: opencl-icd
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: NVIDIA OpenCL installable client driver (ICD) (390xx legacy version)
+ OpenCL (Open Computing Language) is a multivendor open standard for
+ general-purpose parallel programming of heterogeneous systems that include
+ CPUs, GPUs and other processors.
+ .
+ This package provides the NVIDIA installable client driver (ICD) for OpenCL
+ which supports NVIDIA GPUs. This ICD supports OpenCL 1.x only.

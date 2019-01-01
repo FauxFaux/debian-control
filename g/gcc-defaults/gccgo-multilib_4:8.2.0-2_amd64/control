@@ -1,0 +1,15 @@
+Package: gccgo-multilib
+Source: gcc-defaults (1.180)
+Version: 4:8.2.0-2
+Architecture: amd64
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 6
+Depends: cpp (>= 4:8.2.0-2), gcc-multilib (>= 4:8.2.0-2), gccgo (>= 4:8.2.0-2), gccgo-8-multilib (>= 8.2.0-8~)
+Section: devel
+Priority: optional
+Description: Go compiler, based on the GCC backend (multilib files)
+ This is the GNU Go compiler, which compiles Go on platforms supported by
+ the gcc compiler. It uses the gcc backend to generate optimized code.
+ .
+ A dependency package on architectures with multilib support; the package
+ contains dependencies for the non-default multilib architecture(s).

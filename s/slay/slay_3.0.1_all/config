@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# Ask questions... IF NECESSARY
+if test -n "$2"
+then
+ if dpkg --compare-versions $2 lt 1.2.7 || test ! -e /etc/slay_mode \
+	 -o $1 = reconfigure
+ then
+  db_input low slay/punish || true
+  db_input low slay/butthead || true
+  db_go
+  if test $1 = reconfigure -a -e /etc/slay_mode
+  then
+   rm /etc/slay_mode
+   # this is an extremely ugly hack
+  fi
+ fi
+fi

@@ -1,0 +1,29 @@
+Package: xemacs21-nomule
+Source: xemacs21
+Version: 21.4.24-7
+Architecture: amd64
+Maintainer: Mark Brown <broonie@debian.org>
+Installed-Size: 6625
+Depends: xemacs21-support (= 21.4.24-7), xemacs21-bin (= 21.4.24-7), libc6 (>= 2.14), libcompfaceg1, libdb5.3, libgpm2 (>= 1.20.7), libice6 (>= 1:1.0.0), libjpeg62-turbo (>= 1.3.1), libldap-2.4-2 (>= 2.4.7), libncurses6 (>= 6), libpng16-16 (>= 1.6.2-1), libsm6, libtiff5 (>= 4.0.3), libtinfo6 (>= 6), libx11-6, libxaw7, libxext6, libxmu6, libxpm4, libxt6, zlib1g (>= 1:1.1.4), xemacs21-basesupport (>= 2003.04.23-1), emacsen-common (>= 3.0.0)
+Conflicts: xemacs21-gnome-nomule
+Provides: emacsen, info-browser, mail-reader, news-reader, www-browser, xemacs21
+Section: editors
+Priority: optional
+Homepage: http://www.xemacs.org/
+Description: highly customizable text editor -- Non-mule binary
+ XEmacs is a full fledged programming language with a mail reader,
+ news reader, info browser, web browser, calendar, specialized editor
+ for more programming languages and other formats than most people
+ encounter in a lifetime, and much more.
+ .
+ This package contains the actual binary used to run XEmacs.  It
+ depends on the xemacs21-support package for lisp and etc files, and
+ the xemacs21-bin package for supporting binaries.  This binary does
+ not have any of the mule stuff compiled into it.  It should be faster
+ than the xemacs21-mule and xemacs21-mule-canna-wnn packages because
+ it does not contain the fairly large bit of code for either the
+ display or input of non-European characters.
+ .
+ This package actually contains one of the three xemacs binaries
+ available.  They are xemacs21-nomule, xemacs21-mule and
+ xemacs21-mule-canna-wnn.

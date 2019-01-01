@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+dirs='tuareg-mode scala-mode ruby-mode js-mode'
+
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+    for i in $dirs; do
+        if [ -f /usr/share/yasnippet-snippets/"$i"/.yas-parents ]; then
+            rm /usr/share/yasnippet-snippets/"$i"/.yas-parents
+        fi
+        if [ -d /usr/share/yasnippet-snippets/"$i" ]; then
+            rmdir /usr/share/yasnippet-snippets/"$i"
+        fi
+    done
+fi
+
+
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper symlink_to_dir /usr/share/yasnippet-snippets/cider-repl-mode clojure-mode 0.2-1\~ yasnippet-snippets -- "$@"
+dpkg-maintscript-helper symlink_to_dir /usr/share/yasnippet-snippets/enh-ruby-mode ruby-mode 0.2-1\~ yasnippet-snippets -- "$@"
+dpkg-maintscript-helper symlink_to_dir /usr/share/yasnippet-snippets/ensime-mode scala-mode 0.2-1\~ yasnippet-snippets -- "$@"
+dpkg-maintscript-helper symlink_to_dir /usr/share/yasnippet-snippets/js2-mode js-mode 0.2-1\~ yasnippet-snippets -- "$@"
+dpkg-maintscript-helper symlink_to_dir /usr/share/yasnippet-snippets/typerex-mode tuareg-mode 0.2-1\~ yasnippet-snippets -- "$@"
+# End automatically added section
+
+
+exit 0

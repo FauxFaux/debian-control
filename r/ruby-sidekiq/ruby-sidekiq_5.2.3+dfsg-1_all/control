@@ -1,0 +1,21 @@
+Package: ruby-sidekiq
+Version: 5.2.3+dfsg-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 883
+Depends: libjs-bootstrap, ruby | ruby-interpreter, ruby-celluloid (>= 0.16.0), ruby-concurrent, ruby-connection-pool (<< 3.0), ruby-connection-pool (>= 2.2.2~), ruby-json, ruby-redis (>= 3.3.5~), ruby-redis-namespace (<< 2.0), ruby-redis-namespace (>= 1.5.2), ruby-rack-protection (>= 1.5.0)
+Section: ruby
+Priority: optional
+Homepage: http://sidekiq.org
+Description: Simple, efficient background processing for Ruby
+ Sidekiq uses threads to handle many jobs at the same time in the
+ same process.  It does not require Rails but will integrate tightly with
+ Rails 3/4 to make background processing dead simple.
+ .
+ Sidekiq is compatible with Resque.  It uses the exact same
+ message format as Resque so it can integrate into an existing Resque
+ processing farm.
+ .
+ You can have Sidekiq and Resque run side-by-side at the same time and
+ use the Resque client to enqueue jobs in Redis to be processed by Sidekiq.
+Ruby-Versions: all

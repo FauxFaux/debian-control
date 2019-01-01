@@ -1,0 +1,19 @@
+Package: libnss-systemd
+Source: systemd
+Version: 240-2
+Architecture: amd64
+Maintainer: Debian systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>
+Installed-Size: 388
+Depends: libc6 (>= 2.28), systemd (= 240-2)
+Section: admin
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.freedesktop.org/wiki/Software/systemd
+Description: nss module providing dynamic user and group name resolution
+ nss-systemd is a plug-in module for the GNU Name Service Switch (NSS)
+ functionality of the GNU C Library (glibc), providing UNIX user and group name
+ resolution for dynamic users and groups allocated through the DynamicUser=
+ option in systemd unit files. See systemd.exec(5) for details on this
+ option.
+ .
+ Installing this package automatically adds the module to /etc/nsswitch.conf.

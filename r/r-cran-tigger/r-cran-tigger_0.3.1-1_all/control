@@ -1,0 +1,53 @@
+Package: r-cran-tigger
+Version: 0.3.1-1
+Architecture: all
+Maintainer: Debian R Packages Maintainers <r-pkg-team@alioth-lists.debian.net>
+Installed-Size: 2319
+Depends: r-base-core (>= 3.5.1-1), r-api-3.5, r-cran-ggplot2 (>= 2.0.0), r-cran-alakazam (>= 0.2.11), r-cran-dplyr (>= 0.7.0), r-cran-doparallel, r-cran-foreach, r-cran-gridextra, r-cran-gtools, r-cran-iterators, r-cran-lazyeval, r-cran-rlang, r-cran-shazam (>= 0.1.10), r-cran-stringi, r-cran-tidyr
+Suggests: r-cran-knitr, r-cran-testthat
+Section: gnu-r
+Priority: optional
+Homepage: https://cran.r-project.org/package=tigger
+Description: Infers new Immunoglobulin alleles from Rep-Seq Data
+ Summary: Infers the V genotype of an individual from immunoglobulin (Ig)
+ repertoire-sequencing (Rep-Seq) data, including detection of any novel
+ alleles. This information is then used to correct existing V allele calls
+ from among the sample sequences.
+ .
+ High-throughput sequencing of B cell immunoglobulin receptors is
+ providing unprecedented insight into adaptive immunity. A key step in
+ analyzing these data involves assignment of the germline V, D and J gene
+ segment alleles that comprise each immunoglobulin sequence by matching
+ them against a database of known V(D)J alleles. However, this process
+ will fail for sequences that utilize previously undetected alleles,
+ whose frequency in the population is unclear.
+ .
+ TIgGER is a computational method that significantly improves V(D)J
+ allele assignments by first determining the complete set of gene segments
+ carried by an individual (including novel alleles) from V(D)J-rearrange
+ sequences. TIgGER can then infer a subject’s genotype from these
+ sequences, and use this genotype to correct the initial V(D)J allele
+ assignments.
+ .
+ The application of TIgGER continues to identify a surprisingly high
+ frequency of novel alleles in humans, highlighting the critical need
+ for this approach. TIgGER, however, can and has been used with data
+ from other species.
+ .
+ Core Abilities:
+  * Detecting novel alleles
+  * Inferring a subject’s genotype
+  * Correcting preliminary allele calls
+ .
+ Required Input
+  * A table of sequences from a single individual, with columns containing
+    the following:
+    -   V(D)J-rearranged nucleotide sequence (in IMGT-gapped format)
+    -   Preliminary V allele calls
+    -   Preliminary J allele calls
+    -   Length of the junction region
+  * Germline Ig sequences in IMGT-gapped fasta format (e.g., as those
+    downloaded from IMGT/GENE-DB)
+ .
+ The former can be created through the use of IMGT/HighV-QUEST and
+ Change-O.

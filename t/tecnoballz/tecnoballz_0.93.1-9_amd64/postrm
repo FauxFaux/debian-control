@@ -1,0 +1,15 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+    purge)
+	# Remove high score file.
+	rm -f /var/games/tecnoballz/tecnoballz.hi
+    ;;
+esac
+
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper symlink_to_dir /usr/share/doc/tecnoballz /usr/share/doc/tecnoballz-data 0.93.1-8\~ -- "$@"
+# End automatically added section
+

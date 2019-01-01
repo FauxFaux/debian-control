@@ -1,0 +1,16 @@
+Package: rrdcached
+Source: rrdtool (1.7.0-1)
+Version: 1.7.0-1+b3
+Architecture: amd64
+Maintainer: Debian RRDtool Team <pkg-rrdtool-maint@lists.alioth.debian.org>
+Installed-Size: 283
+Depends: libc6 (>= 2.14), libcairo2 (>= 1.2.4), libdbi1 (>= 0.8.4), libglib2.0-0 (>= 2.12.0), libpango-1.0-0 (>= 1.14.0), libpangocairo-1.0-0 (>= 1.14.0), libpng16-16 (>= 1.6.2-1), librrd8 (>= 1.7.0), libxml2 (>= 2.6.27), lsb-base
+Section: utils
+Priority: optional
+Homepage: http://oss.oetiker.ch/rrdtool/
+Description: data caching daemon for RRDtool
+ RRDCacheD is a daemon that receives updates to existing RRD files, accumulates
+ them and, if enough have been received or a defined time has passed, writes
+ the updates to the RRD file. The daemon was written with big setups in mind.
+ Those setups usually run into I/O related problems. RRDCacheD's goal is to
+ alleviate these problems.

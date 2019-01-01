@@ -1,0 +1,21 @@
+Package: arpon
+Version: 3.0-ng+dfsg1-3
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 96
+Depends: libc6 (>= 2.15), libdumbnet1 (>= 1.8), libnet1 (>= 1.1.2.1), libpcap0.8 (>= 1.0.0), lsb-base
+Section: net
+Priority: optional
+Homepage: http://arpon.sourceforge.net
+Description: Versatile ARP defense daemon
+ ArpON can defend a host against some ARP attacks such as ARP spoofing, ARP
+ cache poisoning and ARP poison routing.  Attackers can use these techniques to
+ redirect traffic in local networks and execute Man in the Middle (MITM)
+ attacks.
+ .
+ ArpON runs as a daemon in user space.  When enabled on an interface, it
+ disables some aspects of Address Resolution Protocol (ARP) handling by the
+ Linux kernel and instead handles ARP messages itself and maintains the ARP
+ neighbor cache.  It has three modes of operation to support different ways of
+ assigning IPv4 addresses in the local network: statically, dynamically using
+ DHCP or a combination of both.

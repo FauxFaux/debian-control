@@ -1,0 +1,23 @@
+Package: dalvik-exchange
+Source: android-platform-dalvik
+Version: 8.1.0+r23-2
+Architecture: all
+Maintainer: Android Tools Maintainers <android-tools-devel@lists.alioth.debian.org>
+Installed-Size: 1063
+Depends: default-jre-headless (>= 1:1.6) | java6-runtime-headless, libandroid-23-java (>= 6.0.1+r72-3~), proguard-cli
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://android.googlesource.com/platform/dalvik
+Description: Manipulate Dalvik eXchange format and produce dex files
+ Dalvik is a process virtual machine in Google's Android operating system that
+ executes applications written for Android.
+ .
+ dalvik-exchange is the tool that takes in class
+ files and reformulates them for consumption in the VM. It also does a few other
+ things.
+ .
+ This program is officially named "dx" but in order to avoid naming conflict
+ with OpenDX in Debian it is renamed to "dalvik-exchange".
+ .
+ This package also provides the "mainDexClasses" program.

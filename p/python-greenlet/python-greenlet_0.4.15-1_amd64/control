@@ -1,0 +1,22 @@
+Package: python-greenlet
+Version: 0.4.15-1
+Architecture: amd64
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 56
+Depends: libc6 (>= 2.14), python (<< 2.8), python (>= 2.7~), python:any (<< 2.8), python:any (>= 2.7~)
+Suggests: python-greenlet-doc, python-greenlet-dev, python-greenlet-dbg
+Conflicts: python-codespeak-lib (<< 1.0)
+Provides: python2.7-greenlet
+Section: python
+Priority: optional
+Homepage: http://pypi.python.org/pypi/greenlet
+Description: Lightweight in-process concurrent programming
+ The greenlet package is a spin-off of Stackless, a version of CPython that
+ supports micro-threads called "tasklets". Tasklets run pseudo-concurrently
+ (typically in a single or a few OS-level threads) and are synchronized with
+ data exchanges on "channels".
+ .
+ greenlet is the standalone package derived from the py lib, and is used by
+ several non-blocking IO packages as a more flexible alternative to Python's
+ built in coroutines.
+Python-Version: 2.7

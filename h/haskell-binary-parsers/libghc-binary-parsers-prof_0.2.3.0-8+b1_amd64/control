@@ -1,0 +1,25 @@
+Package: libghc-binary-parsers-prof
+Source: haskell-binary-parsers (0.2.3.0-8)
+Version: 0.2.3.0-8+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 1347
+Depends: libghc-binary-parsers-dev (= 0.2.3.0-8+b1), libghc-base-prof-4.11.1.0-5dd74, libghc-binary-prof-0.8.5.1-24ea6, libghc-bytestring-prof-0.10.8.2-76891, libghc-bytestring-lexing-prof-0.5.0.2-95b88, libghc-scientific-prof-0.3.6.2-1d842
+Provides: libghc-binary-parsers-prof-0.2.3.0-7eb50
+Section: haskell
+Priority: optional
+Homepage: https://github.com/winterland1989/binary-parsers
+Description: parsec-/attoparsec-style parsing combinators; profiling libraries
+ This package extends binary with parsec/attoparsec style parsing
+ combinators. It's useful when you want to deal with various binary
+ format, and it's very fast. You can now write more complex Binary
+ instances using comprehensive combinators, with serialisation
+ packages like blaze-texual.
+ .
+ Binary's Get monad is designed to perform best on non-backtracking
+ cases, but it still provides fast backtracking support via
+ Alternative instance, it's overall an excellent alternative to
+ attoparsec if you only deal with ByteString.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

@@ -1,0 +1,29 @@
+#! /bin/bash
+#
+# Debian prerm script for Python x.y hierarchical modules
+# Written by Gregor Hoffleit <flight@debian.org>
+# Extended by Matthias Klose <doko@debian.org>
+#
+
+set -e
+
+PACKAGE=`basename $0 | sed -e 's/\.[^.]*$//'`
+
+dpkg --listfiles $PACKAGE |
+	awk '$0~/\.py$/ {print $0"c\n" $0"o"}' |
+	xargs rm -f >&2
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p wireshark-dev 
+else
+	dpkg -L wireshark-dev | grep '\.py$' | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+

@@ -1,0 +1,68 @@
+#!/bin/sh
+
+set -e
+
+# If /tmp/ZABBIX_PACKAGE_DEBUG file exists then enable debugging of this script.
+#if [ -e /tmp/ZABBIX_PACKAGE_DEBUG ]; then
+#    set -x
+#fi
+
+if [ "$1" = "configure" ]; then
+    # Does the user 'zabbix' exist?
+    if ! getent passwd zabbix > /dev/null 2>&1 ; then
+        # Not yet. Create it.
+        adduser --quiet --system --group --disabled-login --no-create-home --home /nonexistent zabbix
+    fi
+
+    chown zabbix:zabbix /var/log/zabbix-server -R
+fi
+
+# Automatically added by dh_installsystemd/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create zabbix-server.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_ucf/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	ucf "/usr/share/zabbix-server-mysql/zabbix_server.conf" "/etc/zabbix/zabbix_server.conf"
+	ucfr zabbix-server-mysql "/etc/zabbix/zabbix_server.conf"
+fi
+# End automatically added section
+# Automatically added by dh_ucf/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+	ucf "/usr/share/zabbix-server-mysql/zabbix" "/etc/sudoers.d/zabbix"
+	ucfr zabbix-server-mysql "/etc/sudoers.d/zabbix"
+fi
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.4
+dpkg-maintscript-helper rm_conffile /etc/default/zabbix-server 1:2.2.7\+dfsg-2\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installinit/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/zabbix-server" ]; then
+		update-rc.d zabbix-server defaults >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'zabbix-server.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'zabbix-server.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'zabbix-server.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'zabbix-server.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

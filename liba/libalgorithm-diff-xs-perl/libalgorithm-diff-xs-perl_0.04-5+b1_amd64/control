@@ -1,0 +1,18 @@
+Package: libalgorithm-diff-xs-perl
+Source: libalgorithm-diff-xs-perl (0.04-5)
+Version: 0.04-5+b1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 47
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.14), libalgorithm-diff-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Algorithm-Diff-XS
+Description: module to find differences between files (XS accelerated)
+ Algorithm::Diff::XS is a Perl diff utility module based on Joe Schaefer's
+ excellent but not very well-known Algorithm::LCS module, with a drop-in
+ interface identical to Algorithm::Diff.
+ .
+ Note that only the LCSidx function is optimized in XS at the moment, which
+ means only compact_diff will get significantly faster for large data sets,
+ while diff and sdiff will run in identical speed as Algorithm::Diff.

@@ -1,0 +1,46 @@
+Package: python-parso
+Source: parso
+Version: 0.3.1-1
+Architecture: all
+Maintainer: Piotr Ożarowski <piotr@debian.org>
+Installed-Size: 311
+Depends: python:any (<< 2.8), python:any (>= 2.7~)
+Section: python
+Priority: optional
+Homepage: https://github.com/davidhalter/parso
+Description: Python parser that supports error recovery
+ Parso is a Python parser that supports error recovery and round-trip parsing
+ for different Python versions (in multiple Python versions). Parso is also able
+ to list multiple syntax errors in your Python file.
+ .
+ Parso has been battle-tested by jedi. It was pulled out of jedi to be useful
+ for other projects as well.
+ .
+ Parso consists of a small API to parse Python and analyse the syntax tree.
+ .
+ A simple example:
+ .
+  >>> import parso
+  >>> module = parso.parse('hello + 1', version="3.6")
+  >>> expr = module.children[0]
+  >>> expr
+  PythonNode(arith_expr, [<Name: hello@1,0>, <Operator: +>, <Number: 1>])
+  >>> print(expr.get_code())
+  hello + 1
+  >>> name = expr.children[0]
+  >>> name
+  <Name: hello@1,0>
+  >>> name.end_pos
+  (1, 5)
+  >>> expr.end_pos
+  (1, 9)
+ .
+ To list multiple issues:
+ .
+  >>> grammar = parso.load_grammar()
+  >>> module = grammar.parse('foo +\nbar\ncontinue')
+  >>> error1, error2 = grammar.iter_errors(module)
+  >>> error1.message
+  'SyntaxError: invalid syntax'
+  >>> error2.message
+  "SyntaxError: 'continue' not properly in loop"

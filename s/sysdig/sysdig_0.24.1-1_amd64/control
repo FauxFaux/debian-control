@@ -1,0 +1,23 @@
+Package: sysdig
+Version: 0.24.1-1
+Architecture: amd64
+Maintainer: Evgeni Golov <evgeni@debian.org>
+Installed-Size: 7034
+Depends: libb64-0d (>= 1.2), libc6 (>= 2.15), libcurl4 (>= 7.18.2), libelf1 (>= 0.131), libgcc1 (>= 1:3.0), libjq1 (>= 1.5), libjsoncpp1 (>= 1.7.4), libluajit-5.1-2 (>= 2.0.4+dfsg), libncurses6 (>= 6), libssl1.1 (>= 1.1.0), libstdc++6 (>= 7), libtbb2, libtinfo6 (>= 6), zlib1g (>= 1:1.2.6)
+Recommends: sysdig-dkms
+Section: admin
+Priority: optional
+Homepage: https://www.sysdig.org/
+Description: system-level exploration and troubleshooting tool
+ Sysdig instruments your physical and virtual machines at the OS level
+ by installing into the Linux kernel and capturing system calls and
+ other OS events. Then, using sysdig's command line interface, you can
+ filter and decode these events in order to extract useful information
+ and statistics.
+ .
+ Sysdig can be used to inspect live systems in real-time, or to generate
+ trace files that can be analyzed at a later stage.
+ .
+ This package contains the tool to inspect trace files. If you want to
+ inspect a live system, you also need to install the according kernel
+ module, shipped in the package sysdig-dkms.

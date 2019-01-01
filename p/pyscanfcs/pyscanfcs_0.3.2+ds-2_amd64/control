@@ -1,0 +1,19 @@
+Package: pyscanfcs
+Version: 0.3.2+ds-2
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 730
+Depends: python3 (<< 3.8), python3 (>= 3.7~), python3-astropy, python3-matplotlib, python3-multipletau, python3-numpy, python3-scipy, python3-skimage, python3-wxgtk4.0, python3:any, libc6 (>= 2.4)
+Section: python
+Priority: optional
+Homepage: https://fcs-analysis.github.io/PyScanFCS/
+Description: scientific tool for perpendicular line scanning FCS
+ When a membrane is scanned perpendicularly to its surface,
+ the fluorescence signal originating from the membrane itself
+ must be separated from the signal of the surrounding medium for
+ an FCS analysis. PyScanFCS interactively extracts the fluctuating
+ fluorescence signal from such measurements and applies a multiple-tau
+ algorithm. The obtained correlation curves can be evaluated using PyCorrFit.
+ .
+ Package provides the Python module pyscanfcs and its graphical user interface.
+ The graphical user interface is written in wxPython.

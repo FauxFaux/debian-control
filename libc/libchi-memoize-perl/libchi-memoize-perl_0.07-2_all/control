@@ -1,0 +1,26 @@
+Package: libchi-memoize-perl
+Version: 0.07-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 37
+Depends: perl, libchi-perl, libhash-moreutils-perl, libmoo-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CHI-Memoize
+Description: memoization implementation backed by CHI
+ CHI::Memoize is an implementation of the memoization technique using CHI.
+ Memoize caches the inputs and outputs of a function, if the function is called
+ again with the same inputs, CHI::Memoize intervenes and provides the cached
+ result. For slow functions, time is saved, at the expence of space.
+ .
+ CHI::Memoize provides the same facility as Memoize|Memoize, but backed by
+ CHI|CHI. This means, among other things, that you can:
+ .
+  * specify expiration times (expires_in) and conditions (expire_if)
+  * memoize to different backends, e.g. File, Memcached, DBI, or to multilevel
+    caches
+  * handle arbitrarily complex function arguments (via CHI key serialization)
+ .
+ For a bit of history and motivation, see
+ .
+ http://www.openswartz.com/2012/05/06/memoize-revisiting-a-twelve-year-old-api

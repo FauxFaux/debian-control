@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+tools='javaws itweb-settings policyeditor'
+
+if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ]; then
+    for tool in $tools; do
+        update-alternatives --remove $tool /usr/share/icedtea-web/bin/$tool
+    done
+fi
+
+

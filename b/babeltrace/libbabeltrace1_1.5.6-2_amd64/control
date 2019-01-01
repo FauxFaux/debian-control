@@ -1,0 +1,20 @@
+Package: libbabeltrace1
+Source: babeltrace
+Version: 1.5.6-2
+Architecture: amd64
+Maintainer: Jon Bernard <jbernard@debian.org>
+Installed-Size: 548
+Depends: libc6 (>= 2.22), libdw1 (>= 0.126), libelf1 (>= 0.131), libglib2.0-0 (>= 2.31.8), libpopt0 (>= 1.14), libuuid1 (>= 2.16)
+Breaks: libbabeltrace-ctf1 (<< 1.5.3-2~)
+Replaces: libbabeltrace-ctf1 (<< 1.5.3-2~)
+Provides: libbabeltrace-ctf1 (= 1.5.6-2)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.efficios.com/babeltrace
+Description: Babeltrace conversion libraries
+ Babeltrace provides trace reading and writing libraries, as well as a trace
+ converter. Plugins can be created for any trace format to allow its conversion
+ to/from any other supported format.
+ .
+ This package provides the babeltrace trace reading and conversion library.

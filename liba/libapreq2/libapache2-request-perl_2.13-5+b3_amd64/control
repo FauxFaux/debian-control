@@ -1,0 +1,21 @@
+Package: libapache2-request-perl
+Source: libapreq2 (2.13-5)
+Version: 2.13-5+b3
+Architecture: amd64
+Maintainer: Steinar H. Gunderson <sesse@debian.org>
+Installed-Size: 344
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libapr1 (>= 1.2.7), libapreq2-3 (= 2.13-5+b3), libaprutil1 (>= 1.2.7+dfsg), libc6 (>= 2.14), libapache2-mod-perl2 (>= 1.99.23-1), libapache2-mod-apreq2 (= 2.13-5+b3)
+Section: perl
+Priority: optional
+Description: generic Apache request library - Perl modules
+ The generic Apache request library (APR) contains modules for manipulating
+ client request data with the Apache API from Perl and C. Functionality
+ includes:
+ .
+  - parsing of application/x-www-form-urlencoded data
+  - parsing of multipart/form-data
+  - parsing of HTTP Cookies
+ .
+ This package contains the Perl bindings, which are simply a thin XS layer on
+ top of libapreq, making them a lighter and faster alternative to CGI.pm and
+ CGI::Cookie.

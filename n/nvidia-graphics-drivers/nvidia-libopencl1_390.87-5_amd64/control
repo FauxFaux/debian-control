@@ -1,0 +1,28 @@
+Package: nvidia-libopencl1
+Source: nvidia-graphics-drivers
+Version: 390.87-5
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 242
+Depends: libc6 (>= 2.2.5)
+Recommends: nvidia-opencl-icd | opencl-icd
+Conflicts: libopencl1
+Breaks: nvidia-opencl-dev (<= 5.0.35-6)
+Replaces: libopencl1
+Provides: libopencl-1.1-1, libopencl-1.2-1, libopencl-2.0-1, libopencl1
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: NVIDIA OpenCL ICD Loader library
+ OpenCL (Open Computing Language) is a multivendor open standard for
+ general-purpose parallel programming of heterogeneous systems that include
+ CPUs, GPUs and other processors.
+ .
+ The OpenCL installable client driver loader (ICD Loader) acts as a dispatcher
+ between an OpenCL application and one (or more) installable client drivers
+ (ICD) that can be from any vendor. At least one ICD (and the corresponding
+ hardware) is required to run OpenCL applications.
+ .
+ This package contains the ICD Loader library provided by NVIDIA. This library
+ supports OpenCL 1.x and 2.0 only.

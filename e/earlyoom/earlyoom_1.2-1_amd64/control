@@ -1,0 +1,15 @@
+Package: earlyoom
+Version: 1.2-1
+Architecture: amd64
+Maintainer: Yangfl <mmyangfl@gmail.com>
+Installed-Size: 69
+Depends: lsb-base (>= 3.2-14), libc6 (>= 2.17)
+Section: admin
+Priority: optional
+Homepage: https://github.com/rfjakob/earlyoom
+Description: Early OOM Daemon
+ Earlyoom is an userspace OOM-killer which can avoid the system to get into
+ unresponsive state caused by swapping, which is most likely to occur when a
+ large swap is present and memory is tight. It checks the amount of available
+ memory and swap periodically, and when both are below a preconfigured value,
+ it kills the largest process.

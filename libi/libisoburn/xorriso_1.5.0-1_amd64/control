@@ -1,0 +1,42 @@
+Package: xorriso
+Source: libisoburn
+Version: 1.5.0-1
+Architecture: amd64
+Maintainer: Debian Libburnia packagers <pkg-libburnia-devel@lists.alioth.debian.org>
+Installed-Size: 330
+Depends: libburn4 (>= 1.5.0), libc6 (>= 2.3.4), libisoburn1 (= 1.5.0-1), libisofs6 (>= 1.5.0), libjte1, libreadline7 (>= 6.0), zlib1g (>= 1:1.1.4)
+Suggests: xorriso-tcltk, jigit, cdck
+Section: otherosfs
+Priority: optional
+Homepage: http://libburnia-project.org
+Description: command line ISO-9660 and Rock Ridge manipulation tool
+ xorriso is a command line and dialog application, which creates, loads,
+ manipulates, and writes ISO-9660 file system images with Rock Ridge
+ extensions.
+ .
+ It maps file objects from POSIX compliant file systems into Rock Ridge
+ enhanced ISO-9660 file systems and features session-wise manipulation
+ of such file systems. It can load the management information of existing
+ ISO images and write the resulting session to optical medium or as
+ file system objects.
+ .
+ Supported optical media types:
+  - CD-R, CD-RW
+  - DVD-R, DVD-R DL, DVD-RW, DVD+R, DVD+R DL, DVD+RW, DVD-RAM
+  - BD-R, BD-RE
+ .
+ Some interesting features:
+  - Emulation of the mkisofs and cdrecord programs.
+  - Data backup and restore capabilities - compression, ACLs, and filters.
+  - Isohybrid MBR with partition offset - features booting ISOLINUX from
+    USB sticks, or from other devices that appear to PC-BIOS as hard disks.
+    The images carry a conventional partition table for a USB stick;
+    the first partition reports the size of the ISO image, but starts at a
+    non-zero address. It is nevertheless still mountable.
+  - Jigdo Template Export - jigdo representation of the resulting ISO-9660
+    image, generated on the fly.
+ .
+ Test suite:
+  xorriso source code comes with a release engineering test-suite called
+  `releng', which aims to cover most of the functionality of the xorriso
+  and the underlying libraries of libburn, libisofs, and libisoburn.

@@ -1,0 +1,41 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    purge)
+        userdel isso || true
+        rm -rf /var/lib/isso
+    ;;
+
+    remove|failed-upgrade|abort-install|abort-upgrade|disappear|upgrade)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "purge" ] ; then
+	update-rc.d isso remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.3
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'isso.service' 'isso.socket' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'isso.service' 'isso.socket' >/dev/null || true
+		deb-systemd-helper unmask 'isso.service' 'isso.socket' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

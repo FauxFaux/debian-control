@@ -1,0 +1,31 @@
+Package: uwsgi-plugins-all
+Source: uwsgi
+Version: 2.0.17.1-11
+Architecture: amd64
+Maintainer: uWSGI packaging team <pkg-uwsgi-devel@lists.alioth.debian.org>
+Installed-Size: 46
+Depends: uwsgi-app-integration-plugins (= 2.0.17.1-11), uwsgi-infrastructure-plugins (= 2.0.17.1-11), uwsgi-plugin-asyncio-python (= 2.0.17.1-11), uwsgi-plugin-asyncio-python3 (= 2.0.17.1-11), uwsgi-plugin-fiber (= 2.0.17.1-11), uwsgi-plugin-gevent-python (= 2.0.17.1-11), uwsgi-plugin-greenlet-python (= 2.0.17.1-11), uwsgi-plugin-rbthreads (= 2.0.17.1-11), uwsgi-plugin-tornado-python (= 2.0.17.1-11)
+Section: httpd
+Priority: optional
+Homepage: http://projects.unbit.it/uwsgi/
+Description: all available plugins for uWSGI
+ uWSGI presents a complete stack for networked/clustered web applications,
+ implementing message/object passing, caching, RPC and process management.
+ It is designed to be fully modular. This means that different plugins can be
+ used in order to add compatibility with tons of different technology on top of
+ the same core.
+ .
+ This dependency package provides all available plugins for uWSGI:
+  * infrastructure
+    - HTTP serving, RPC, etc.
+  * application integration
+    - PSGI, Rack, WSGI, etc.
+  * coroutines
+    - Fiber (ruby2.5)
+    - gevent (Python 2)
+    - greenlet (Python 2)
+    - asyncio (Python 3, and Python 2 when Trollius is available)
+    - Ruby native threads (ruby2.5)
+    - tornado (Python 2)
+ .
+ Greenlet and gevent plugin is provided only on supported architectures.

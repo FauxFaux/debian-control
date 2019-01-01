@@ -1,0 +1,25 @@
+Package: openvswitch-common
+Source: openvswitch
+Version: 2.10.0+2018.08.28+git.8ca7c82b7d+ds1-10
+Architecture: amd64
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 6352
+Depends: openssl, python-six, python3:any, libatomic1 (>= 4.8), libc6 (>= 2.14), libssl1.1 (>= 1.1.0)
+Suggests: ethtool
+Breaks: openvswitch-switch (<< 2.10.0+2018.08.28+git.8ca7c82b7d+ds1), openvswitch-test (<< 2.8.0), openvswitch-testcontroller (<< 2.8.0), openvswitch-vtep (<< 2.10.0+2018.08.28+git.8ca7c82b7d+ds1), ovn-central (<< 2.8.0), ovn-common (<< 2.8.0), ovn-controller-vtep (<< 2.8.0), ovn-docker (<< 2.8.0), ovn-host (<< 2.8.0)
+Replaces: openvswitch-switch (<< 2.10.0+2018.08.28+git.8ca7c82b7d+ds1), openvswitch-test (<< 2.8.0), openvswitch-testcontroller (<< 2.8.0), openvswitch-vtep (<< 2.10.0+2018.08.28+git.8ca7c82b7d+ds1), ovn-central (<< 2.8.0), ovn-common (<< 2.8.0), ovn-controller-vtep (<< 2.8.0), ovn-docker (<< 2.8.0), ovn-host (<< 2.8.0)
+Provides: openvswitch-test, ovn-common, ovn-docker
+Section: net
+Priority: optional
+Homepage: http://openvswitch.org/
+Description: Open vSwitch common components
+ Open vSwitch is a production quality, multilayer, software-based,
+ Ethernet virtual switch. It is designed to enable massive network
+ automation through programmatic extension, while still supporting
+ standard management interfaces and protocols (e.g. NetFlow, IPFIX,
+ sFlow, SPAN, RSPAN, CLI, LACP, 802.1ag). In addition, it is designed
+ to support distribution across multiple physical servers similar to
+ VMware's vNetwork distributed vswitch or Cisco's Nexus 1000V.
+ .
+ openvswitch-common provides components required by both openvswitch-switch
+ and openvswitch-testcontroller.

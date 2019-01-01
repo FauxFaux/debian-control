@@ -1,0 +1,25 @@
+#!/bin/sh -e
+
+kill_innd() {
+    if [ -x /etc/init.d/inn2 ]; then
+	invoke-rc.d inn2 stop
+    fi
+}
+
+case "$1" in
+    remove|deconfigure|failed-upgrade)
+	kill_innd
+    ;;
+
+    upgrade)
+    ;;
+
+    *)
+    echo "$0 called with unknown argument '$1'" >&2
+    exit 1
+    ;;
+esac
+
+
+
+exit 0

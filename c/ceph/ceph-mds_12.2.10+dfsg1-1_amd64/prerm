@@ -1,0 +1,31 @@
+#!/bin/sh
+# vim: set noet ts=8:
+
+set -e
+
+case "$1" in
+	remove)
+		invoke-rc.d ceph stop mds || {
+			RESULT=$?
+			if [ $RESULT != 100 ]; then
+				exit $RESULT
+			fi
+		}
+	;;
+	*)
+	;;
+esac
+
+# Automatically added by dh_installdeb/12
+dpkg-maintscript-helper rm_conffile /etc/init/ceph-mds-all-starter.conf 10.2.5-1\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/ceph-mds-all.conf 10.2.5-1\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/ceph-mds.conf 10.2.5-1\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_systemd_start/12
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop 'ceph-mds.target' >/dev/null || true
+fi
+# End automatically added section
+
+
+exit 0

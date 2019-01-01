@@ -1,0 +1,66 @@
+#!/bin/sh
+# postinst script for icinga2-bn
+
+set -e
+
+is_fresh_install()
+{
+    if [ -z "$2" ] ; then
+        return 0
+    fi
+    return 1
+}
+
+enable_default_features() {
+    FIX_VERSION="0.0.5+icingasnap201312070000"
+    if is_fresh_install $@ \
+       || dpkg --compare-versions "$2" lt "$FIX_VERSION"; then
+        echo "enabling default icinga2 features"
+        icinga2 feature enable checker notification mainlog
+    fi
+    # handle new default features here in the future
+}
+
+case "$1" in
+    configure)
+        # enable default features
+        enable_default_features $@
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_systemd_enable/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'icinga2.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'icinga2.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'icinga2.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'icinga2.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/icinga2" ]; then
+		update-rc.d icinga2 defaults >/dev/null
+		invoke-rc.d icinga2 start || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

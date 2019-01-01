@@ -1,0 +1,29 @@
+Package: libbatik-java
+Source: batik
+Version: 1.10-2
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 9060
+Depends: java-wrappers, libjaxp1.3-java, libxalan2-java (>= 2.7.2), libxml-commons-external-java, libxmlgraphics-commons-java
+Recommends: default-jre
+Suggests: librhino-java
+Breaks: elki (<= 0.6.5), libfop-java (<< 2.0)
+Section: java
+Priority: optional
+Homepage: https://xmlgraphics.apache.org/batik/
+Description: xml.apache.org SVG Library
+ Batik is a toolkit for applications or applets that want to use images
+ in the Scalable Vector Graphics (SVG) format for various purposes, such
+ as viewing, generation or manipulation.
+ .
+ Batik provides several modules to be used in applications:
+  * A SVG generator module, usable to export graphics into the SVG format.
+  * A SVG processor and SVG Viewing component for integrating SVG viewing.
+  * A module to convert SVG to various formats, such as raster images
+    (JPEG, PNG or Tiff) and PS, PDF.
+ .
+ fop is necessary for PDF output of rasterizer.
+ .
+ rhino is necessary for using the SVG browser, squiggle.
+ .
+ For detailed information, go to http://xml.apache.org/batik/

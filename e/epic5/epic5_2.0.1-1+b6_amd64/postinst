@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+update-alternatives --install /usr/bin/irc irc /usr/bin/epic5 19 \
+                    --slave /usr/share/man/man1/irc.1.gz irc.1 \
+                            /usr/share/man/man1/epic5.1.gz
+update-alternatives --install /etc/epic5/default.irc epic5-default.irc \
+                              /etc/epic5/epic5.irc 19
+
+# Automatically added by dh_installmenu/11.5.1
+if [ "$1" = "configure" ] && [ -x "`which update-menus 2>/dev/null`" ]; then
+	update-menus
+fi
+# End automatically added section
+

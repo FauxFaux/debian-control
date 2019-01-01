@@ -1,0 +1,25 @@
+Package: libblis-pthread-dev
+Source: blis
+Version: 0.5.0-1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 11741
+Depends: libblis1-pthread (= 0.5.0-1)
+Conflicts: libblis-openmp-dev, libblis-serial-dev
+Provides: libblas.so
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/flame/blis
+Description: BLAS-like Library Instantiation Software Framework
+ BLIS is a portable software framework for instantiating high-performance
+ BLAS-like dense linear algebra libraries. The framework was designed to
+ isolate essential kernels of computation that, when optimized, immediately
+ enable optimized implementations of most of its commonly used and
+ computationally intensive operations. BLIS is written in ISO C99 and available
+ under a new/modified/3-clause BSD license. While BLIS exports a new BLAS-like
+ API, it also includes a BLAS compatibility layer which gives application
+ developers access to BLIS implementations via traditional BLAS routine calls.
+ An object-based API is also available for more experienced users.
+ .
+ The package contains pthread version of development files.

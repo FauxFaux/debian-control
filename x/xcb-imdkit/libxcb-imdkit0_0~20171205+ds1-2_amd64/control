@@ -1,0 +1,20 @@
+Package: libxcb-imdkit0
+Source: xcb-imdkit
+Version: 0~20171205+ds1-2
+Architecture: amd64
+Maintainer: Debian Input Method Team <debian-input-method@lists.debian.org>
+Installed-Size: 568
+Depends: libc6 (>= 2.14), libxcb-util0 (>= 0.3.8), libxcb1
+Section: libs
+Priority: optional
+Homepage: https://gitlab.com/fcitx/xcb-imdkit
+Description: XIM protocol implementation in XCB
+ xcb-imdkit is an implementation of XIM protocol in XCB.
+ Comparing with the implementation of IMDkit with Xlib and
+ xim inside Xlib, it has less memory foot print, better performance
+ and safer on malformed client.
+ .
+ It doesn't have complete protocol support though since some part of
+ the protocol is never used.
+ .
+ This package provides shared library of xcb-imdkit.

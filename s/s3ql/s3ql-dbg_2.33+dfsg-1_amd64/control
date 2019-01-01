@@ -1,0 +1,39 @@
+Package: s3ql-dbg
+Source: s3ql
+Version: 2.33+dfsg-1
+Architecture: amd64
+Maintainer: Nikolaus Rath <Nikolaus@rath.org>
+Installed-Size: 1319
+Depends: s3ql (= 2.33+dfsg-1), libc6 (>= 2.14), libsqlite3-0 (>= 3.6.23)
+Recommends: python3-dbg, python3-llfuse-dbg, python3-apsw-dbg, python3-crypto-dbg
+Breaks: s3ql (<< 2.14+dfsg-1)
+Replaces: s3ql (<< 2.14+dfsg-1)
+Section: debug
+Priority: optional
+Multi-Arch: same
+Homepage: https://bitbucket.org/nikratio/s3ql/
+Description: Full-featured file system for online data storage (debugging symbols)
+ S3QL is a file system that stores all its data online using storage
+ services like Google Storage, Amazon S3 or OpenStack. S3QL
+ effectively provides a hard disk of dynamic, infinite capacity that
+ can be accessed from any computer with internet access.
+ .
+ S3QL is a standard conforming, full featured UNIX file system that is
+ conceptually indistinguishable from any local file
+ system. Furthermore, S3QL has additional features like compression,
+ encryption, data de-duplication, immutable trees and snapshotting
+ which make it especially suitable for online backup and archival.
+ .
+ In addition to accessing online storage services directoly, S3QL can
+ also store its data underneath a regular mount point. This enables
+ the use of S3QL with e.g. NFS, CIFS or sftp servers.
+ .
+ S3QL is designed to favor simplicity and elegance over performance
+ and feature-creep. Care has been taken to make the source code as
+ readable and serviceable as possible. Solid error detection and error
+ handling have been included from the very first line, and S3QL comes
+ with extensive automated test cases.
+ .
+ This package contains the debugging symbols as well as the extension
+ built for the Python 3 debug interpreter.
+Build-Ids: 43c2a79ab7504ff468f13c198ef673396b2995d8

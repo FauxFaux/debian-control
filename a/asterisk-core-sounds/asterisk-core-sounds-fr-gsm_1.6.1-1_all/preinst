@@ -1,0 +1,9 @@
+#! /bin/sh -e
+
+# The alternatives are now handled by asterisk-core-sounds-fr
+if [ "$1" = "upgrade" ] && dpkg --compare-versions "$2" le 1.4.21-1; then
+    update-alternatives --remove asterisk-prompt-fr    /usr/share/asterisk/sounds/fr_CA_f_June
+    update-alternatives --remove asterisk-prompt-fr-ca /usr/share/asterisk/sounds/fr_CA_f_June
+fi
+
+

@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+
+# work around "#700670 - 'old-postrm upgrade' removes /usr/share/doc/cltl/*
+#   after the new package was unpacked"
+# by disabling the offending line
+if dpkg --compare-versions "$2" lt-nl "1.0.27" ; then
+	if [ -f /var/lib/dpkg/info/cltl.postrm ]; then
+		echo "Disabling buggy code in old postrm script..."
+		sed -ir '8{\%^rm -rf /usr/share/doc/cltl/\*\s*$%{s/^/#/}}' /var/lib/dpkg/info/cltl.postrm
+	fi
+fi
+
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/emacs/site-start.d/60cltl.el 1.0.30\~ -- "$@"
+# End automatically added section
+

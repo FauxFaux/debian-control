@@ -1,0 +1,30 @@
+Package: elastalert
+Version: 0.1.29-2
+Architecture: all
+Maintainer: Sophie Brun <sophie@freexian.com>
+Installed-Size: 320
+Depends: python-aws-requests-auth, python-blist, python-boto3, python-configparser, python-croniter, python-dateutil, python-elasticsearch, python-envparse, python-exotel, python-jira, python-jsonschema, python-mock, python-requests, python-simplejson, python-staticconf, python-stomp, python-texttable, python-twilio, python-yaml, python:any (<< 2.8), python:any (>= 2.7~)
+Suggests: elastalert-doc
+Section: python
+Priority: optional
+Homepage: https://github.com/Yelp/elastalert
+Description: easy and flexible alerting with Elasticsearch
+ This package contains a simple framework for alerting on anomalies, spikes, or
+ other patterns of interest from data in Elasticsearch.
+ .
+ ElastAlert works with all versions of Elasticsearch.
+ .
+ If you have data being written into Elasticsearch in near real time and want to
+ be alerted when that data matches certain patterns, ElastAlert is the tool for
+ you.
+ .
+ ElastAlert is designed to be reliable, highly modular, and easy to set up and
+ configure.
+ .
+ It works by combining Elasticsearch with two types of components, rule types
+ and alerts.  Elasticsearch is periodically queried and the data is passed to
+ the rule type, which determines when a match is found. When a match occurs, it
+ is given to one or more alerts, which take action based on the match.
+ .
+ This is configured by a set of rules, each of which defines a query, a rule
+ type, and a set of alerts.  .

@@ -1,0 +1,20 @@
+Package: postfix-sqlite
+Source: postfix
+Version: 3.3.2-1
+Architecture: amd64
+Maintainer: LaMont Jones <lamont@debian.org>
+Installed-Size: 376
+Depends: libc6 (>= 2.2.5), libsqlite3-0 (>= 3.5.9), postfix (= 3.3.2-1)
+Replaces: postfix (<< 3.1.3-7~)
+Section: mail
+Priority: optional
+Homepage: http://www.postfix.org
+Description: SQLite map support for Postfix
+ Postfix is Wietse Venema's mail transport agent that started life as an
+ alternative to the widely-used Sendmail program.  Postfix attempts to
+ be fast, easy to administer, and secure, while at the same time being
+ sendmail compatible enough to not upset existing users. Thus, the outside
+ has a sendmail-ish flavor, but the inside is completely different.
+ .
+ This provides support for SQLite maps in Postfix. If you plan to use
+ SQLite maps with Postfix, you need this.

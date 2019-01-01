@@ -1,0 +1,24 @@
+Package: slrnpull
+Source: slrn
+Version: 1.0.3+dfsg-3
+Architecture: amd64
+Maintainer: Moritz Muehlenhoff <jmm@debian.org>
+Installed-Size: 261
+Pre-Depends: debconf (>= 0.5) | debconf-2.0
+Depends: libc6 (>= 2.15), libgnutls-openssl27 (>= 3.0-0), libgnutls30 (>= 3.5.0), libslang2 (>= 2.2.4)
+Suggests: slrn | news-reader
+Section: news
+Priority: optional
+Homepage: http://slrn.sourceforge.net/
+Description: pulls a small newsfeed from an NNTP server
+ Slrnpull pulls a small newsfeed, from an NNTP server, to a local news spool
+ directory. The news spool can be used by news readers (such as slrn), which
+ can read a local news spool without an NNTP server.
+ .
+ In combination with the slrn news reader, slrnpull can provide true
+ offline news reading. You can tell slrnpull to download headers only,
+ mark interesting ones for download with slrn and fetch those article
+ bodies during the next run of slrnpull.
+ .
+ Slrnpull also has the ability to killfile articles so that they will not
+ be downloaded from the server.

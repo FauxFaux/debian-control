@@ -1,0 +1,27 @@
+Package: rkhunter
+Version: 1.4.6-4
+Architecture: all
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 1081
+Pre-Depends: debconf (>= 0.5) | debconf-2.0
+Depends: binutils, file, lsof, net-tools, ucf (>= 0.28), perl:any
+Recommends: bsd-mailx | mailutils | s-nail | mailx, default-mta | mail-transport-agent, e2fsprogs, iproute2, unhide, unhide.rb, wget | curl
+Suggests: liburi-perl, libwww-perl, powermgmt-base
+Section: admin
+Priority: optional
+Homepage: http://rkhunter.sourceforge.net
+Description: rootkit, backdoor, sniffer and exploit scanner
+ Rootkit Hunter scans systems for known and unknown rootkits,
+ backdoors, sniffers and exploits.
+ .
+ It checks for:
+  - SHA256 hash changes;
+  - files commonly created by rootkits;
+  - executables with anomalous file permissions;
+  - suspicious strings in kernel modules;
+  - hidden files in system directories;
+ and can optionally scan within files.
+ .
+ Using rkhunter alone does not guarantee that a system is not
+ compromised. Running additional tests, such as chkrootkit, is
+ recommended.

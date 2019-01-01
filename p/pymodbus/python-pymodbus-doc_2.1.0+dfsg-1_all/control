@@ -1,0 +1,32 @@
+Package: python-pymodbus-doc
+Source: pymodbus
+Version: 2.1.0+dfsg-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 2640
+Depends: libjs-sphinxdoc (>= 1.0), sphinx-rtd-theme-common (>= 0.4.2+dfsg)
+Section: doc
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/riptideio/pymodbus
+Description: full Modbus protocol implementation, documentation
+ Pymodbus is a full Modbus protocol implementation.
+ It is currently supports the following :
+ .
+ Client Features:
+  * Can perform single get/set on discrete and registers
+  * Can perform multiple get/set on discrete and registers
+  * Working on diagnostic/file/pipe/setting/info requests
+  * Can fully scrape a host to be cloned
+ .
+ Server Features:
+  * Can function as a fully implemented TCP/ASCII modbus server
+  * Full server control context
+  * Working on serial communication
+  * Working on functioning as a RTU
+  * Can mimic a server based on the supplied input data
+ .
+ For asynchronous communication, you need python-twisted-core.
+ For serial communication, you need python-serial.
+ .
+ This package provides the documentation and examples.

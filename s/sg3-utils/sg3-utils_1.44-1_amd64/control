@@ -1,0 +1,20 @@
+Package: sg3-utils
+Version: 1.44-1
+Architecture: amd64
+Maintainer: Ritesh Raj Sarraf <rrs@debian.org>
+Installed-Size: 2578
+Depends: libc6 (>= 2.17), libsgutils2-2 (>= 1.43)
+Conflicts: cdwrite, sg-utils
+Replaces: sg-utils
+Section: admin
+Priority: optional
+Homepage: http://sg.danny.cz/sg/
+Description: utilities for devices using the SCSI command set
+ Most OSes have SCSI pass-through interfaces that enable user space programs
+ to send SCSI commands to a device and fetch the response. With SCSI to ATA
+ Translation (SAT) many ATA disks now can process SCSI commands. Typically
+ each utility in this package implements one SCSI command. See the draft
+ standards at www.t10.org for SCSI command definitions plus SAT. ATA
+ commands are defined in the draft standards at www.t13.org . For a mapping
+ between supported SCSI and ATA commands and utility names in this package
+ see the COVERAGE file.

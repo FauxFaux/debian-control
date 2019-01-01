@@ -1,0 +1,19 @@
+Package: dico-module-wordnet
+Source: dico (2.7-1)
+Version: 2.7-1+b1
+Architecture: amd64
+Maintainer: Ritesh Raj Sarraf <rrs@debian.org>
+Installed-Size: 100
+Depends: dicod, libc6 (>= 2.4), libdico2 (>= 2.0.91), wordnet, zlib1g (>= 1:1.1.4)
+Section: text
+Priority: optional
+Homepage: http://puszcza.gnu.org.ua/software/dico/
+Description: RFC 2229 compliant modular dictionary server (WordNet module)
+ GNU Dico is an implementation of the DICT protocol as defined in RFC 2229.
+ It is fully modular: the daemon itself (dicod) provides only the server
+ functionality, and knows nothing about database formats. Actual searches
+ are performed by functions supplied in loadable modules. A single module
+ can serve one or more databases.
+ .
+ This package provides an abstract layer for reading WordNet lexical database
+ files.

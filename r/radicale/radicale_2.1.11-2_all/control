@@ -1,0 +1,30 @@
+Package: radicale
+Version: 2.1.11-2
+Architecture: all
+Maintainer: Jonas Smedegaard <dr@jones.dk>
+Installed-Size: 66
+Depends: adduser, lsb-base, python3, python3-radicale (= 2.1.11-2), init-system-helpers (>= 1.51)
+Recommends: ssl-cert
+Suggests: apache2, apache2-utils, libapache2-mod-proxy-uwsgi, python3-bcrypt, python3-passlib, uwsgi
+Section: web
+Priority: optional
+Homepage: https://radicale.org/
+Description: simple calendar and addressbook server - daemon
+ Radicale is a CalDAV (calendar) and CardDAV (contact) server.
+ .
+ Calendars and address books are available for both local and remote
+ access, possibly limited through authentication policies. They can be
+ viewed and edited by calendar and contact clients on mobile phones or
+ computers.
+ .
+ This package contains the radicale daemon.
+ .
+ Creating encrypted password files require the package apache2-utils.
+ .
+ Stronger password hashes require the packages python3-passlib and
+ python3-bcrypt.
+ .
+ Serving directly with uWSGI
+  requires the package uwsgi.
+ Serving with Apache as front-end and uWSGI as middleware
+ additionally requires the packages apache2 and libapache2-mod-proxy-uwsgi.

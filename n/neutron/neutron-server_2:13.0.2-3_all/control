@@ -1,0 +1,25 @@
+Package: neutron-server
+Source: neutron
+Version: 2:13.0.2-3
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 18
+Depends: neutron-api (= 2:13.0.2-3), neutron-rpc-server (= 2:13.0.2-3)
+Section: net
+Priority: optional
+Homepage: http://neutron.openstack.org/
+Description: OpenStack virtual network service - metapackage for the server
+ Neutron provides an API to dynamically request and configure virtual networks.
+ These networks connect "interfaces" from other OpenStack services (such as
+ vNICs from Nova VMs). The Neutron API supports extensions to provide advanced
+ network capabilities, including QoS, ACLs, and network monitoring.
+ .
+ As the Debian packages switched to Python 3, it isn't possible to run using
+ Eventlet (ie: the standalone neutron-server daemon) if we use SSL, because of
+ defects in python3-eventlet. So the Debian package maitainer decided to switch
+ to uwsgi instead. In this mode, one needs to also run neutron-rpc-server to
+ listen for requests on the message bus (ie: rabbitmq in most cases). For this
+ reason, the neutron-server package has been split into neutron-api and
+ neutron-rpc-server.
+ .
+ Transition package for neutron-server.

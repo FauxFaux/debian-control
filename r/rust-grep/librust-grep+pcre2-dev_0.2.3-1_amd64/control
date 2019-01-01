@@ -1,0 +1,15 @@
+Package: librust-grep+pcre2-dev
+Source: rust-grep
+Version: 0.2.3-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-grep-dev (= 0.2.3-1), librust-grep-pcre2-0.1+default-dev (>= 0.1.2-~~)
+Provides: librust-grep-0+pcre2-dev (= 0.2.3-1), librust-grep-0.2+pcre2-dev (= 0.2.3-1), librust-grep-0.2.3+pcre2-dev (= 0.2.3-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/BurntSushi/ripgrep
+Description: Fast line oriented regex searching as a library - feature "pcre2"
+ This metapackage enables feature pcre2 for the Rust grep crate, by pulling in
+ any additional dependencies needed by that feature.

@@ -1,0 +1,17 @@
+Package: netfilter-persistent
+Source: iptables-persistent
+Version: 1.0.10
+Architecture: all
+Maintainer: Jonathan Wiltshire <jmw@debian.org>
+Installed-Size: 37
+Depends: lsb-base
+Suggests: iptables-persistent
+Breaks: iptables-persistent (<< 1~)
+Replaces: iptables-persistent (<< 1~)
+Section: admin
+Priority: optional
+Description: boot-time loader for netfilter configuration
+ This package provides a loader for netfilter configuration using a
+ plugin-based architecture. It can load, flush and save a running
+ configuration. Extending netfilter-persistent with plugins is trivial and can
+ be done in any language.

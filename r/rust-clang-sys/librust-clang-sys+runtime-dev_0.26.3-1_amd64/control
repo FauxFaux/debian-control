@@ -1,0 +1,14 @@
+Package: librust-clang-sys+runtime-dev
+Source: rust-clang-sys
+Version: 0.26.3-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-clang-sys-dev (= 0.26.3-1), librust-libloading-0.5+default-dev
+Provides: librust-clang-sys-0+runtime-dev (= 0.26.3-1), librust-clang-sys-0.26+runtime-dev (= 0.26.3-1), librust-clang-sys-0.26.3+runtime-dev (= 0.26.3-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Rust bindings for libclang - feature "runtime"
+ This metapackage enables feature runtime for the Rust clang-sys crate, by
+ pulling in any additional dependencies needed by that feature.

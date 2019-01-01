@@ -1,0 +1,20 @@
+Package: python-mpikmeans
+Source: libmpikmeans (1.5+dfsg-5)
+Version: 1.5+dfsg-5+b3
+Architecture: amd64
+Maintainer: Christian Kastner <ckk@debian.org>
+Installed-Size: 102
+Depends: python:any (<< 2.8), python:any (>= 2.7~), libc6 (>= 2.4), libmpikmeans1 (= 1.5+dfsg-5+b3), python-numpy
+Section: python
+Priority: extra
+Homepage: http://mloss.org/software/view/48/
+Description: Python bindings for MPIKmeans
+ This library uses an algorithm that yields the very same solution as standard
+ k-means, even after each iteration. However, it uses triangle inequalities, and
+ is much faster.
+ .
+ Note: MPI here does not refer to the Message Passing Interface; rather, it is
+ an acronym for Max Planck Institute, where this algorithm was developed.
+ .
+ This package contains the Python bindings. Both the old, ctypes-based and the
+ new, Cython-based interfaces are provided.

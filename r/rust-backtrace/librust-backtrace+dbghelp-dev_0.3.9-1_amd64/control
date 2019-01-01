@@ -1,0 +1,15 @@
+Package: librust-backtrace+dbghelp-dev
+Source: rust-backtrace
+Version: 0.3.9-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-backtrace-dev (= 0.3.9-1), librust-winapi-0.3+dbghelp-dev (>= 0.3.3~~), librust-winapi-0.3+default-dev (>= 0.3.3~~), librust-winapi-0.3+minwindef-dev (>= 0.3.3~~), librust-winapi-0.3+processthreadsapi-dev (>= 0.3.3~~), librust-winapi-0.3+std-dev (>= 0.3.3~~), librust-winapi-0.3+winnt-dev (>= 0.3.3~~)
+Provides: librust-backtrace-0+dbghelp-dev (= 0.3.9-1), librust-backtrace-0.3+dbghelp-dev (= 0.3.9-1), librust-backtrace-0.3.9+dbghelp-dev (= 0.3.9-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/alexcrichton/backtrace-rs
+Description: Acquire a stack trace (backtrace) at runtime - feature "dbghelp"
+ This metapackage enables feature dbghelp for the Rust backtrace crate, by
+ pulling in any additional dependencies needed by that feature.

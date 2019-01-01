@@ -1,0 +1,27 @@
+Package: unifont-bin
+Source: unifont
+Version: 1:11.0.03-1
+Architecture: amd64
+Maintainer: Paul Hardy <unifoundry@unifoundry.com>
+Installed-Size: 648
+Depends: xfonts-utils, bdf2psf, fontforge, libc6 (>= 2.7), perl:any, libwx-perl, libgd-perl
+Suggests: unifont, texinfo, texlive
+Section: x11
+Priority: optional
+Homepage: http://unifoundry.com/unifont/
+Description: utilities for manipulating GNU Unifont
+ This is a set of Perl scripts, C programs, and FontForge scripts
+ to manipulate Roman Czyborra's GNU Unifont ".hex" format font
+ files.  GNU Unifont has a Unicode-compatible font structure.
+ These utilities allow editing ".hex" fonts with text and
+ graphical editors, producing final versions of fonts in BDF,
+ PCF, PSF, TrueType SBIT, and TrueType outline formats.
+ .
+ To build the TrueType fonts, install the package 'fontforge'.  To build
+ the PCF fonts, use 'bdftopcf', which is in the 'xfonts-utils' package.
+ To build the PSF font, use 'bdf2psf', which is in the 'console-setup'
+ package.  To obtain the font sources, run 'apt-get source unifont'.
+ .
+ Building the main Unifont TrueType font will require at least 4 GB of
+ main memory.  You only need texlive (~1 GB) if you want to rebuild the
+ unifont.pdf file in doc/ (see doc/Makefile); this is not done by default.

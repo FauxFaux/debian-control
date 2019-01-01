@@ -1,0 +1,39 @@
+Package: libghc-store-doc
+Source: haskell-store
+Version: 0.5.0.1-1
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 2950
+Depends: haddock-interface-33
+Recommends: ghc-doc, libghc-hashable-doc, libghc-hspec-doc, libghc-mono-traversable-doc, libghc-network-doc, libghc-primitive-doc, libghc-store-core-doc, libghc-th-utilities-doc, libghc-unordered-containers-doc, libghc-vector-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: https://github.com/fpco/store
+Description: Fast binary serialization; documentation
+ The 'store' package provides efficient binary serialization. There are a
+ couple features that particularly distinguish it from most prior Haskell
+ serialization libraries:
+ .
+  * Its primary goal is speed. By default, direct machine representations
+    are used for things like numeric values (Int, Double, Word32, etc)
+    and buffers (Text, ByteString, Vector, etc). This means that much of
+    serialization uses the equivalent of memcpy.
+  * Instead of implementing lazy serialization / deserialization involving
+    multiple input / output buffers, peek and poke always work with a
+    single buffer. This buffer is allocated by asking the value for its
+    size before encoding. This simplifies the encoding logic, and allows
+    for highly optimized tight loops.
+  * store can optimize size computations by knowing when some types always
+    use the same number of bytes. This allows for computing the byte size
+    of a `Vector Int32` by just doing `length v * 4`.
+ .
+ It also features:
+ .
+  * Optimized serialization instances for many types from base, vector,
+    bytestring, text, containers, time, template-haskell, and more.
+  * TH and GHC Generics based generation of Store instances for datatypes
+  * TH generation of testcases
+ .
+ This package provides the documentation for a library for the Haskell
+ programming language.
+ See http://www.haskell.org/ for more information on Haskell.

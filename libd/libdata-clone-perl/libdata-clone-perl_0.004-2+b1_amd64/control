@@ -1,0 +1,19 @@
+Package: libdata-clone-perl
+Source: libdata-clone-perl (0.004-2)
+Version: 0.004-2+b1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 56
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.11)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Data-Clone
+Description: Perl module for polymorphic data cloning
+ Data::Clone does data cloning, i.e. copies things recursively. This is smart
+ so that it works with not only non-blessed references, but also with blessed
+ references (i.e. objects). When clone() finds an object, it calls a clone
+ method of the object if the object has a clone, otherwise it makes a surface
+ copy of the object. That is, this module does polymorphic data cloning.
+ .
+ Although there are several modules on CPAN which can clone data, this module
+ has a different cloning policy from almost all of them.

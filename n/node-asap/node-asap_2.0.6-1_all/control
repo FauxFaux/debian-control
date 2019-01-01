@@ -1,0 +1,23 @@
+Package: node-asap
+Version: 2.0.6-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 44
+Depends: nodejs
+Section: javascript
+Priority: optional
+Homepage: https://github.com/kriskowal/asap#readme
+Description: High-priority task queue for Node.js and browsers
+ This module executes a task after the scheduled tasks are over
+ .
+ ASAP strives to schedule events to occur before yielding for IO, reflow, or
+ redrawing. ASAP provides a fast event queue that will execute tasks until it
+ is empty before yielding to the JavaScript engine's underlying event-loop.
+ When a task gets added to a previously empty event queue, ASAP schedules a
+ flush event, preferring for that event to occur before the JavaScript engine
+ has an opportunity to perform IO tasks or rendering, thus making the first
+ task and subsequent tasks semantically indistinguishable. ASAP uses a
+ variety of techniques to preserve this invariant on different versions of
+ browsers and Node.js
+ .
+ Node.js is an event-based server-side JavaScript engine.

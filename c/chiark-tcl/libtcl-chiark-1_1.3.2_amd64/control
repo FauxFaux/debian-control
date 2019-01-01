@@ -1,0 +1,23 @@
+Package: libtcl-chiark-1
+Source: chiark-tcl
+Version: 1.3.2
+Architecture: amd64
+Maintainer: Ian Jackson <ijackson@chiark.greenend.org.uk>
+Installed-Size: 274
+Depends: libc6 (>= 2.14), libcdb1
+Section: interpreters
+Priority: optional
+Multi-Arch: same
+Description: Tcl interfaces for adns, cdb, crypto, etc.
+ Tcl bindings for:
+  * adns (resolver library)
+  * cdb (constant database) plus journalling writable database
+  * crypto: the nettle cryptographic library
+  * hbytes: bytestrings with hex as string representation but efficient
+  * dgram: datagram sockets
+  * tuntap: tun/tap interfaces
+  * maskmap: address masks and maps
+ To make sensible use of these you will need a version of Tcl installed
+ (this package is compatible with at least Tcl 8.0 to 8.4 inclusive).
+ To use the adns and nettle bindings you need to have the
+ appropriate libraries installed too.

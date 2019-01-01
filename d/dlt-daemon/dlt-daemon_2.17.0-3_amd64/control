@@ -1,0 +1,23 @@
+Package: dlt-daemon
+Version: 2.17.0-3
+Architecture: amd64
+Maintainer: Aigars Mahinovs <aigarius@debian.org>
+Installed-Size: 268
+Depends: libc6 (>= 2.14)
+Suggests: dlt-tools
+Section: libs
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://at.projects.genivi.org/wiki/display/PROJ/Diagnostic+Log+and+Trace
+Description: Diagnostic Log and Trace logging daemon
+ This component provides a log and trace interface, based on the standardised
+ protocol specified in the AUTOSAR standard 4.0 DLT. This software can be used
+ by GENIVI components and other applications as logging facility.
+ .
+ The DLT daemon is the central component in GENIVI, which gathers all logs and
+ traces from the DLT user applications. The logs and traces can optionally
+ be directly written to a file in the ECU. The DLT daemon forwards all logs
+ and traces to a connected DLT client. The DLT client can send control
+ messages to the daemon, e.g. to set individual log levels of applications
+ and contexts or get the list of applications and contexts registered in the
+ DLT daemon.

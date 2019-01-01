@@ -1,0 +1,28 @@
+Package: dose-extra
+Source: dose3 (5.0.1-11)
+Version: 5.0.1-11+b3
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 16732
+Depends: libbz2-1.0, libc6 (>= 2.17), librpm8 (>= 4.14.0+dfsg1), librpmio8 (>= 4.14.0+dfsg1), zlib1g (>= 1:1.1.4), xz-utils
+Breaks: ceve (<< 2.9.10)
+Replaces: ceve (<< 2.9.10)
+Provides: ceve
+Section: devel
+Priority: optional
+Homepage: http://www.mancoosi.org/software/
+Description: Extra QA tools from the Dose3-library
+ This package contains extra tools for analyzing meta-data of software
+ packages:
+  - ceve, a general metadata parser supporting different input formats
+    (Debian, rpm, and others) and different output formats.
+  - dose-outdated, a Debian-specific tool for finding packages that are not
+    installable with respect to a package repository, and that can only be
+    made installable again by fixing the package itself.
+  - dose-challenged, a Debian-specific tool for checking which packages
+    will certainly become uninstallable when some existing package is upgraded
+    to a newer version.
+  - dose-deb-coinstall, a Debian-specific tool for checking whether a set of
+    packages can be installed all together.
+ The tools dose-distcheck and dose-builddebcheck are packaged in their
+ own resepective packages.

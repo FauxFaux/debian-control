@@ -1,0 +1,167 @@
+Package: game-data-packager
+Version: 61
+Architecture: all
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Installed-Size: 5805
+Depends: dpkg (>= 1.19.0) | fakeroot, python3-debian, python3-yaml, python3:any
+Recommends: game-data-packager-runtime (>= 61)
+Suggests: arj, binutils, cabextract, cdparanoia, dynamite (>= 0.1.1-2), gcc, gdebi | gdebi-kde, gir1.2-gdkpixbuf-2.0, innoextract (>= 1.5), lgc-pg, lgogdownloader, lhasa | jlha-utils | lzh-archiver, make, p7zip-full, python3-gi, steam, steamcmd, unace-nonfree, unar, unrar, unshield, unzip, vorbis-tools, xdelta, xdelta3
+Breaks: game-data-packager-runtime (<< 61), lgogdownloader (<< 2.26-1~)
+Section: contrib/games
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://wiki.debian.org/Games/GameDataPackager
+Description: Installer for game data files
+ Various games are divided into two logical parts: engine
+ and data. Often the engine and data are licensed in
+ different ways, such that the engine can be distributed
+ in Debian but the data cannot.
+ .
+ game-data-packager is a tool which builds .deb files for game
+ data which cannot be distributed in Debian (such as
+ commercial game data).
+ .
+ At the moment, game-data-packager has support for building .deb
+ files for:
+ .
+  * 3 Skulls of the Toltecs
+  * A Mind Forever Voyaging
+  * Amazon: Guardians of Eden
+  * Arthur: the Quest for Excalibur
+  * Arx Fatalis
+  * Baldur's Gate 1 and 2
+  * Ballyhoo
+  * Bargon Attack
+  * Beavis and Butthead in Virtual Stupidity
+  * The Bizarre Adventures of Woodruff and the Schnibble
+  * The Black Cauldron
+  * Blake Stone and Planet Strike
+  * Blue Force
+  * Border Zone
+  * Castle of Dr. Brain and The Island of Dr. Brain
+  * Broken Sword
+  * Bureaucracy
+  * Chex Quest and Chex Quest 2
+  * Chivalry is Not Dead
+  * Codename: ICEMAN
+  * Commander Keen 4 to 6
+  * Conquests of Camelot: The Search for the Grail
+  * Conquests of the Longbow: The Legend of Robin Hood
+  * Cruise for a Corpse
+  * Cutthroats
+  * Deadline
+  * Descent 1 and 2
+  * The Dig
+  * Discworld 1 and 2
+  * Doom, The Ultimate Doom, Doom 2, The Master Levels for Doom 2, Final Doom
+  * Doom 3 and BFG Edition
+  * Dračí Historie
+  * Dreamweb
+  * Duke Nukem 3D
+  * Dune 2: Battle for Arrakis
+  * EcoQuest 1 and 2
+  * The Elder Scrolls 3: Morrowind
+  * Elvira 1 and 2
+  * Enchanter
+  * Enclosure
+  * Eye of the Beholder 1 and 2
+  * The Feeble Files
+  * Freddy Pharkas: Frontier Pharmacist
+  * Freespace 2
+  * Full Throttle
+  * Future War (Les Voyageurs du Temps)
+  * Gobliiins 1, 2 and 3
+  * Gold Rush!
+  * Grim Fandango
+  * HacX
+  * Hank's Quest
+  * Heretic, Hexen and Hexen 2
+  * Heroes of Might & Magic 3
+  * The Hitchhiker's Guide to the Galaxy
+  * Hollywood Hijinx
+  * Hopkins FBI
+  * Hoyle's Official Book of Games
+  * Hugo's House of Horrors, Hugo 2, Hugo 3
+  * Icewind Dale 1 and 2
+  * Indiana Jones and the Fate of Atlantis
+  * Infidel
+  * Inherit the Earth
+  * James Clavell's Shōgun
+  * Jones in the Fast Lane
+  * Journey: Part One of the Golden Age Trilogy
+  * King's Quest 1 to 7
+  * The Labyrinth of Time
+  * Lands of Lore: The Throne of Chaos
+  * Laura Bow 1 and 2
+  * Leather Goddesses of Phobos 1 and 2
+  * Legend of Kyrandiar 1, 2 and 3
+  * Leisure Suit Larry 1, 2, 3, 5 and 6
+  * LGeneral (Panzer General)
+  * Lost in Time
+  * The Lurking Horror
+  * The Manhole
+  * Manhunter 1 and 2
+  * Maniac Mansion and Day of the Tentacle
+  * Mixed-Up Mother Goose & Mixed-Up Fairy Tales
+  * Monkey Island 1, 2 and 3
+  * Moonmist
+  * Mortville Manor
+  * Myst: Masterpiece Edition
+  * Mystery House
+  * The Neverhood
+  * Nippon Safes Inc.
+  * Nord and Bert Couldn't Make Head or Tail of It
+  * Once Upon A Time: Little Red Riding Hood
+  * Pajama Sam series
+  * Personal Nightmare
+  * Planescape: Torment
+  * Planetfall
+  * Plundered Hearts
+  * Police Quest 1 to 4
+  * Quake, Quake 2, Quake 3 Arena, Quake 4, Enemy Territory: Quake Wars
+  * Quest For Glory 1, 2 and 3
+  * Rex Nebular and the Cosmic Gender Bender
+  * Ringworld 1 and 2
+  * Rise of the Triad
+  * Rodney's Funscreen
+  * Sam & Max Hit the Road
+  * Seastalker
+  * Sfinx
+  * The Lost Files of Sherlock Holmes: The Case of the Serrated Scalpel
+  * The Lost Files of Sherlock Holmes: The Case of the Rose Tattoo
+  * Sherlock: The Riddle of the Crown Jewels
+  * Simon the Sorcerer 1, 2 and Puzzle Pack
+  * Slater & Charlie Go Camping
+  * Soltys
+  * Sorcerer
+  * Space Quest 1 to 6
+  * Spellbreaker
+  * Star Wars Jedi Knight 2: Jedi Outcast and Jedi Academy
+  * Starcross
+  * Stationfall
+  * Strife
+  * Suspect
+  * Suspended
+  * Syndicate
+  * Super 3D Noah's Ark
+  * Theme Hospital
+  * Tony Tough and the Night of Roasted Moths
+  * Toonstruck
+  * Touché: The Adventures of the Fifth Musketeer
+  * Transport Tycoon Deluxe
+  * Trinity
+  * Troll's Tale
+  * Tyrian
+  * Ultima VII
+  * Unreal, Unreal Gold and Unreal Tournament (1999)
+  * Urban Runner
+  * Ween: The Prophecy
+  * Winnie the Pooh in the Hundred Acre Wood
+  * Wishbringer
+  * Witness
+  * Wolfenstein 3D, Spear of Destiny and Return to Castle Wolfenstein
+  * Wolfenstein: Enemy Territory
+  * X-COM: UFO Defense
+  * Zork 1, 2 and 3, Beyond Zork, Zork Zero, Return to Zork, Zork: The
+    Undiscovered Underground
+  * Zork Grand Inquisitor and Zork Nemesis

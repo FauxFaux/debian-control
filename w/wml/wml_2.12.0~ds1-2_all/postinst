@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    (configure)
+        :
+    ;;
+    (abort-upgrade|abort-remove|abort-deconfigure)
+        exit 0
+    ;;
+    (*)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+# Replace /usr/lib/wml with symlink to /usr/share/wml
+dir="/usr/lib/wml"
+if [ -d $dir -a ! -L $dir ]; then
+    if rmdir $dir 2>/dev/null; then
+        ln -sf ../share/wml $dir
+    fi
+fi
+
+
+
+exit 0

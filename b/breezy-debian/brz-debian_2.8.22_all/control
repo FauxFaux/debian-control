@@ -1,0 +1,20 @@
+Package: brz-debian
+Source: breezy-debian
+Version: 2.8.22
+Architecture: all
+Maintainer: Debian Bazaar Maintainers <pkg-bazaar-maint@lists.alioth.debian.org>
+Installed-Size: 893
+Depends: brz (>= 3.0.0~bzr7210-1), python3-breezy, python3-debian, python3-apt, python3:any, dpkg-dev, fakeroot, devscripts (>= 2.10.59), patchutils, pristine-tar, quilt, python3-yaml
+Recommends: python3-launchpadlib, libalgorithm-merge-perl, python3-distro-info, python3-dulwich (>= 0.19.9)
+Suggests: python3-lzma
+Enhances: brz
+Provides: brz-buildpackage
+Section: vcs
+Priority: optional
+Description: breezy plugin for Debian package management
+ brz-debian is a plugin for the breezy version control system that helps to
+ automate the task of maintaining Debian packages using breezy. It is similar
+ in intent to cvs-buildpackage, svn-buildpackage and the similar scripts.
+ .
+ It builds a Debian package from a branch, optionally using a separate
+ upstream tarball.

@@ -1,0 +1,32 @@
+Package: libghc-hashmap-dev
+Source: haskell-hashmap (1.3.3-2)
+Version: 1.3.3-2+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 1082
+Depends: libghc-base-dev-4.11.1.0-5dd74, libghc-containers-dev-0.5.11.0-e0faa, libghc-deepseq-dev-1.4.3.0-17e4f, libghc-hashable-dev-1.2.7.0-68a88, libatomic1 (>= 4.8), libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-hashmap-doc, libghc-hashmap-prof
+Provides: libghc-hashmap-dev-1.3.3-accf3
+Section: haskell
+Priority: optional
+Homepage: http://git.auryn.cz/haskell/hashmap/
+Description: persistent containers Map and Set based on hashing
+ An implementation of persistent Map and Set containers based on hashing.
+ The implementation is build on top of Data.IntMap.IntMap and
+ Data.IntSet.IntSet, with very similar API. It uses Hashable class from the
+ hashable package for hashing.
+ .
+ This package can be used as a drop-in replacement for Data.Map and Data.Set
+ modules.
+ .
+ The Map key value is an Data.IntMap.IntMap indexed by the hash value,
+ containing either one (key, value) or a Data.Map.Map key value for all
+ keys with the same hash value.
+ .
+ The Set elem is an Data.IntMap.IntMap indexed by the hash value, containing
+ either one elem or Data.Set.Set elem for all elements with the same hash
+ value.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: hashmap-1.3.3-AuvUjEPo09VJ6RRonF0KvD

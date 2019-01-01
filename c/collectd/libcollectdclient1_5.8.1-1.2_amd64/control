@@ -1,0 +1,19 @@
+Package: libcollectdclient1
+Source: collectd
+Version: 5.8.1-1.2
+Architecture: amd64
+Maintainer: Sebastian Harl <tokkee@debian.org>
+Installed-Size: 193
+Depends: libc6 (>= 2.14), libgcrypt20 (>= 1.8.0)
+Recommends: collectd
+Section: libs
+Priority: optional
+Homepage: https://collectd.org/
+Description: client library for collectd's control interface
+ libcollectdclient provides an API to access the control interface provided by
+ the unixsock plugin of collectd, a statistics collection and monitoring
+ daemon. It can be used to access values collected by collectd or dispatch new
+ values and notifications to the daemon. This allows for integration with
+ other applications such as monitoring solutions.
+ .
+ This package contains the shared library.

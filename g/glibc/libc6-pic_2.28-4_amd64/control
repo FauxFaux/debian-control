@@ -1,0 +1,18 @@
+Package: libc6-pic
+Source: glibc
+Version: 2.28-4
+Architecture: amd64
+Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
+Installed-Size: 9997
+Depends: libc6 (= 2.28-4)
+Conflicts: libc-pic
+Provides: glibc-pic, libc-pic
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.gnu.org/software/libc/libc.html
+Description: GNU C Library: PIC archive library
+ Contains an archive library (ar file) composed of individual shared objects.
+ This is used for creating a library which is a smaller subset of the
+ standard libc shared library. The reduced library is used by debian-installer
+ and may be useful for custom installation media and in embedded systems.

@@ -1,0 +1,26 @@
+Package: python3-glad
+Source: python-glad
+Version: 0.1.27-1
+Architecture: all
+Maintainer: Steffen Moeller <moeller@debian.org>
+Installed-Size: 217
+Depends: python3:any
+Conflicts: python-glad
+Section: graphics
+Priority: optional
+Homepage: https://github.com/Dav1dde/glad
+Description: GL/GLES/EGL/GLX/WGL Loader-Generator (Python 3)
+ This package provides the implementation of what is also available as
+ a webservice on
+  http://glad.dav1d.de/
+ to transform OpenGL specs into an API that one can program against.
+ It uses the official Khronos-XML specs to generate a GL/GLES/EGL/GLX/WGL
+ Loader made for your needs. Glad currently supports the languages C,
+ D and Volt.
+ .
+ The package is not meant for end users and will not be installed
+ by the users of the package that it helped building.  It is a build
+ dependency that is prepared to be integrated with CMake or Conan into
+ the build process.
+ .
+ This package installs the library for Python 3.

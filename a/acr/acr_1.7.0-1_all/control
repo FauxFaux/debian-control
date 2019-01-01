@@ -1,0 +1,35 @@
+Package: acr
+Version: 1.7.0-1
+Architecture: all
+Maintainer: Ruben Pollan <meskio@sindominio.net>
+Installed-Size: 205
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/radare/acr
+Description: autoconf like tool
+ ACR is an autoconf like tool that allows you to create configure scripts for
+ your programs. The main aim of this tool is to teach developers how to create
+ portable builds of their tools, just using generic functions wrapped by acr to
+ generate portable shellscript.
+ .
+ Pros:
+   * Easy to learn / implement.
+   * Faster/smaller final configure script.
+   * Own syntax, not complex m4 macros.
+   * Reverse engineering tool to recover .acr files from the final configure
+     script.
+   * Good documentation and tutorials.
+   * vim syntax highlighting for configure.acr files
+     ($PREFIX/share/acr/vim/install.sh)
+   * Debugging support (-d)
+   * Integrated support for java, bash, perl, Tcl, c, c++, ruby and Python.
+   * Recursive configure script calls.
+   * Progress bar in generation stage.
+ .
+ Cons:
+   * Not recommended for huge projects
+   * Slow script generation parsing huge configuration files
+   * No automake replace. (just type clean makefiles and acr substs)
+   * Not enough tested (only on free operating systems (Open|Net|Free|Dfly)BSD,
+     GNU systems, and Darwin).

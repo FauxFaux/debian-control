@@ -1,0 +1,26 @@
+Package: quake3
+Source: game-data-packager
+Version: 61
+Architecture: all
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Installed-Size: 204
+Depends: game-data-packager-runtime (>= 61), ioquake3, quake3-data | quake3-demo-data (>= 40) | game-data-packager (>= 23)
+Suggests: quake3-team-arena-data
+Section: contrib/games
+Priority: optional
+Homepage: https://wiki.debian.org/Games/GameDataPackager
+Description: Quake III Arena menu entry and launcher scripts
+ This package contains a launcher script and menu entry to play
+ Quake III Arena or Quake III: Team Arena with the ioquake3 engine.
+ .
+ To make this package useful, you will need to create and install the
+ non-distributable quake3-data or quake3-demo-data package, by using
+ the game-data-packager package.
+ .
+ quake3-data requires pak0.pk3 from a Quake III installation or CD-ROM.
+ quake3-demo-data only requires freely downloadable files, but is
+ not necessarily reliable.
+ .
+ game-data-packager (>= 39) can also produce a package for the official
+ expansion pack Quake III: Team Arena. An additional menu entry should appear
+ automatically if that expansion are installed.

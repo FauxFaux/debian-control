@@ -1,0 +1,28 @@
+Package: libspreadsheet-read-perl
+Version: 0.79-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 115
+Depends: perl, libdata-peek-perl (>= 0.48)
+Recommends: libio-stringy-perl, libspreadsheet-parseexcel-perl, libspreadsheet-readsxc-perl, libspreadsheet-xlsx-perl, libtext-csv-perl (>= 1.33), libtext-csv-xs-perl
+Suggests: perl-tk (>= 1:804.033), libtk-tablematrix-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Spreadsheet-Read
+Description: reader for common spreadsheet formats
+ Spreadsheet::Read is a Perl module that tries to transparently read arbitrary
+ spreadsheet files and return its content in a universal manner independent of
+ the parsing module that does the actual spreadsheet scanning.
+ .
+ For older OpenOffice and/or LibreOffice files, this module uses
+ Spreadsheet::ReadSXC (packaged as libspreadsheet-readsxc-perl).
+ .
+ For Microsoft Excel, this module uses Spreadsheet::XLSX (for newer files; see
+ the libspreadsheet-xlsx-perl package) or Spreadsheet::ParseExcel (available
+ in libspreadsheet-parseexcel-perl)
+ .
+ For Comma-Separated Value (CSV) files, this module uses Text::CSV (either the
+ pure perl version in libtext-csv-perl, or, if available, the XS-accelerated
+ version packaged as libtext-csv-xs-perl).
+ .
+ For SquirrelCalc, there is a very simplistic built-in parser.

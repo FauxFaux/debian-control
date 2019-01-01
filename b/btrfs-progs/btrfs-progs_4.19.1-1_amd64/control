@@ -1,0 +1,20 @@
+Package: btrfs-progs
+Version: 4.19.1-1
+Architecture: amd64
+Maintainer: Dimitri John Ledkov <xnox@debian.org>
+Installed-Size: 3295
+Depends: libblkid1 (>= 2.17.2), libc6 (>= 2.8), liblzo2-2, libuuid1 (>= 2.16), zlib1g (>= 1:1.2.0)
+Suggests: duperemove
+Breaks: btrbk (<= 0.25.0), btrfs-tools (<< 4.4.1-1)
+Replaces: btrfs-tools (<< 4.4.1-1)
+Provides: btrfs-tools
+Section: admin
+Priority: optional
+Homepage: http://btrfs.wiki.kernel.org/
+Description: Checksumming Copy on Write Filesystem utilities
+ Btrfs is a new copy on write filesystem for Linux aimed at implementing
+ advanced features while focusing on fault tolerance, repair and easy
+ administration.
+ .
+ This package contains utilities (mkfs, fsck) used to work with btrfs
+ and an utility (btrfs-convert) to make a btrfs filesystem from an ext3.

@@ -1,0 +1,43 @@
+#!/bin/sh
+set -e
+
+# uswsusp.postrm -- postrm script for uswsusp debian package
+#
+# Copyright 2012		Rodolfo García Peñas <kix@kix.es>
+#  04-2012 Full rewrited
+# Released under GPLv2
+
+CONFIGNAME=uswsusp.conf
+CONFIGFILE=/etc/$CONFIGNAME
+KEYFILE=/etc/uswsusp.key
+
+case "$1" in
+	purge)
+		rm -f $CONFIGFILE $KEYFILE
+		;;
+	remove)
+		if [ -x /usr/sbin/update-initramfs -a -e /etc/initramfs-tools/initramfs.conf ]; then
+			update-initramfs -u 1> /dev/null || {
+				echo "Updating your initramfs failed, this is most likely not a problem in uswsusp."
+				echo "Uswsusp will continue to be removed. You MUST however investigate the problem"
+				echo "with update-initramfs, it could lead to an unbootable system."
+				echo "Please run ``update-initramfs -u -v'' to find out what is wrong''"
+			}
+		fi
+		;;
+	disappear|upgrade|failed-upgrade|abort-install|abort-upgrade)
+		;;
+	*)
+		echo "postrm called with unknown argument \`$1'" >&2
+		exit 1
+esac
+
+# Automatically added by dh_installdebconf/11.5.3
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

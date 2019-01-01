@@ -1,0 +1,22 @@
+Package: libpam-mount
+Version: 2.16-9
+Architecture: amd64
+Maintainer: Jochen Sprickerhof <jspricke@debian.org>
+Installed-Size: 201
+Depends: libpam-runtime, libc6 (>= 2.14), libcryptsetup12 (>= 2:1.4), libhx28 (>= 3.22), libmount1 (>= 2.19.1), libpam0g (>= 0.99.7.1), libpcre2-8-0 (>= 10.31), libssl1.1 (>= 1.1.0), libxml2 (>= 2.7.4)
+Recommends: libpam-mount-bin
+Suggests: cifs-utils, davfs2, fuse, lsof, openssl, psmisc, sshfs, xfsprogs, hxtools
+Section: admin
+Priority: optional
+Multi-Arch: same
+Homepage: http://pam-mount.sourceforge.net/
+Description: PAM module that can mount volumes for a user session
+ This module is aimed at environments with central file servers that a
+ user wishes to mount on login and unmount on logout, such as
+ (semi-)diskless stations where many users can login.
+ .
+ The module also supports mounting local filesystems of any kind the
+ normal mount utility supports, with extra code to make sure certain
+ volumes are set up properly because often they need more than just a
+ mount call, such as encrypted volumes. This includes SMB/CIFS, FUSE,
+ dm-crypt and LUKS.

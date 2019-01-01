@@ -1,0 +1,25 @@
+Package: python3-alembic
+Source: alembic
+Version: 1.0.0-2
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 625
+Depends: python3-pkg-resources, python3-dateutil, python3-editor, python3-mako, python3-sqlalchemy (>= 0.9.0), python3:any
+Breaks: alembic (<< 0.8.8-3)
+Section: python
+Priority: optional
+Homepage: https://bitbucket.org/zzzeek/alembic
+Description: lightweight database migration tool for SQLAlchemy - Python 3.x
+ Alembic is a new database migration tool, written by the author
+ of SQLAlchemy. A migration tool offers the following functionality:
+ .
+  * Can emit ALTER statements to a database in order to change the
+    structure of tables and other constructs
+  * Provides a system whereby "migration scripts" may be constructed;
+    each script indicates a particular series of steps that can
+    "upgrade" a target database to a new version, and optionally a
+    series of steps that can "downgrade" similarly, doing the same
+    steps in reverse.
+  * Allows the scripts to execute in some sequential manner.
+ .
+ This package contains the Python 3.x module.

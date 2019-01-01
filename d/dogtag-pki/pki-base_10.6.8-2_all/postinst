@@ -1,0 +1,44 @@
+#!/bin/sh
+set -e
+
+OLD_VERSION=`echo $2 | sed 's/-.*//;s/+git.*//;s/+[0-9][0-9]//'`
+VERSION=`dpkg-query -W pki-base | sed 's/.*\t//;s/-.*//;s/+git.*//;s/+[0-9][0-9]//'`
+
+if [ "$1" = configure ]; then
+    # we've forgot to create pki.version before, do it here
+    # and force recreating it if the version is old enough
+    if dpkg --compare-versions "$2" lt "10.3.5+12-5"; then
+        echo "Configuration-Version: $OLD_VERSION" > /etc/pki/pki.version
+    fi
+
+    # update JAVA_HOME
+    if dpkg --compare-versions "$2" lt "10.6.0~beta2-3"; then
+        if [ -f /etc/default/pki-tomcat ]; then
+            sed -i 's/lib\/jvm\/default-java/share\/pki\/java-home/' \
+            /etc/default/pki-tomcat
+        fi
+        if [ -f /etc/pki/pki-tomcat/tomcat.conf ]; then
+            sed -i 's/lib\/jvm\/default-java/share\/pki\/java-home\"/' \
+            /etc/pki/pki-tomcat/tomcat.conf
+        fi
+    fi
+
+    if [ ! -n "$2" ]; then
+        # On installation create system upgrade tracker
+        echo "Configuration-Version: $VERSION" > /etc/pki/pki.version
+    else
+        # On upgrade run system upgrade
+        echo "Upgrading system at `date`." >> /var/log/pki/pki-upgrade-$VERSION.log 2>&1
+        pki-upgrade --silent >> /var/log/pki/pki-upgrade-$VERSION.log 2>&1
+        echo >> /var/log/pki/pki-upgrade-$VERSION.log 2>&1
+    fi
+fi
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p pki-base 
+fi
+
+# End automatically added section
+

@@ -1,0 +1,28 @@
+Package: rxvt-unicode
+Source: rxvt-unicode (9.22-4)
+Version: 9.22-4+b1
+Architecture: amd64
+Maintainer: Ryan Kavanagh <rak@debian.org>
+Installed-Size: 3339
+Depends: libc6 (>= 2.17), libfontconfig1 (>= 2.12.6), libfreetype6 (>= 2.2.1), libgcc1 (>= 1:4.2), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.12.0), libperl5.28 (>= 5.28.0), libstartup-notification0 (>= 0.2), libx11-6, libxft2 (>> 2.1.1), libxrender1, base-passwd (>= 2.0.3.4), ncurses-base (>= 6.1+20180210-4) | ncurses-term (>= 5.8-1)
+Recommends: fonts-dejavu, fonts-vlgothic | fonts-japanese-gothic
+Conflicts: rxvt-unicode-256color (<< 9.22-2), rxvt-unicode-lite (<< 9.22-2)
+Breaks: aterm (<< 1.0.1dummy), aterm-ml (<< 1.0.1dummy), rxvt (<< 1:2.7.10-7.1~), rxvt-ml (<< 1:2.7.10-7.1~)
+Replaces: aterm (<< 1.0.1dummy), aterm-ml (<< 1.0.1dummy), rxvt (<< 1:2.7.10-7.1~), rxvt-ml (<< 1:2.7.10-7.1~), rxvt-unicode-256color (<< 9.22-2), rxvt-unicode-lite (<< 9.22-2)
+Provides: aterm, rxvt, x-terminal-emulator
+Section: x11
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://software.schmorp.de/pkg/rxvt-unicode.html
+Description: RXVT-like terminal emulator with Unicode and 256-color support
+ rxvt-unicode is a modern, Unicode-aware color xterm replacement that uses
+ significantly less memory than a conventional xterm and many other Unicode
+ supporting terminal emulators.
+ .
+ It supports using multiple fonts at the same time, including Xft fonts, and
+ client-server technology to reduce memory consumption when using multiple
+ windows.
+ .
+ This package is configured with 256-color support, and TERM set to
+ "rxvt-unicode-256color". Any other systems you log into must have this
+ terminfo entry installed!

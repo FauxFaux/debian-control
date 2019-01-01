@@ -1,0 +1,22 @@
+Package: python-pygpu-dbg
+Source: libgpuarray (0.6.9-2)
+Version: 0.6.9-2+b3
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 1819
+Depends: python-dbg (<< 2.8), python-dbg (>= 2.7~), python-dbg:any (<< 2.8), python-dbg:any (>= 2.7~), python-numpy (>= 1:1.14.3), python-numpy-abi9, libc6 (>= 2.14), libgpuarray2, python-numpy-dbg, python-pygpu (= 0.6.9-2+b3)
+Section: debug
+Priority: extra
+Homepage: https://github.com/Theano/libgpuarray
+Description: debug extensions for pygpu (Python 2)
+ libgpuarray provides a ndarray (multi-dimensional array) object which
+ is computed on the GPU. It supports int, single and double precision
+ floats.
+ .
+ libgpuarray supports Nvidia's CUDA interface as well as OpenCL. The
+ Debian packages have been build against OpenCL. However, the source
+ package could be rebuild locally also for CUDA (which is non-free)
+ without changes, if that's needed.
+ .
+ This package provides the debug extensions for Python 2.
+Build-Ids: 1e0ee6afbdf6f206850cd0cf45b91ed75f67955b 31a35bc0125908c748baa2a106aea38ea51617f3 b541fa510f353d62104016b0eeb769b472fd6098 d764cf44bbef0beedd25a19637e75d112e974955

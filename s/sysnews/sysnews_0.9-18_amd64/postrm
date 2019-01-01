@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+
+
+# Remove news items and directory on purge.
+if [ "$1" = purge -a -d /var/lib/sysnews ]; then
+	rm -rf /var/lib/sysnews
+fi

@@ -1,0 +1,23 @@
+Package: python3-lz4tools
+Source: lz4tools
+Version: 1.3.1.1-1
+Architecture: amd64
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 291
+Depends: python3 (<< 3.8), python3 (>= 3.6~), python3:any, libc6 (>= 2.14)
+Section: python
+Priority: optional
+Homepage: https://github.com/darkdragn/lz4tools
+Description: Tools for working with LZ4 compression algorithm.
+ LZ4 is lossless compression algorithm, providing compression speed > 500 MB/s
+ per core, scalable with multi-cores CPU. It features an extremely fast
+ decoder, with speed in multiple GB/s per core, typically reaching RAM speed
+ limits on multi-core systems.
+ .
+ Speed can be tuned dynamically, selecting an "acceleration" factor which
+ trades compression ratio for faster speed. On the other end, a high
+ compression derivative, LZ4_HC, is also provided, trading CPU time for
+ improved compression ratio. All versions feature the same decompression speed.
+ .
+ LZ4 is also compatible with dictionary compression, and can ingest any input
+ file as dictionary, including those created by Zstandard Dictionary Builder.

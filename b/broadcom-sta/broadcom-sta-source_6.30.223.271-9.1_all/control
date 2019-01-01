@@ -1,0 +1,24 @@
+Package: broadcom-sta-source
+Source: broadcom-sta
+Version: 6.30.223.271-9.1
+Architecture: all
+Maintainer: Eduard Bloch <blade@debian.org>
+Installed-Size: 2187
+Depends: debhelper (>= 8), make, xz-utils
+Recommends: module-assistant
+Section: non-free/kernel
+Priority: optional
+Homepage: http://www.broadcom.com/support/802.11/linux_sta.php
+Description: Source for the Broadcom STA Wireless driver
+ Broadcom STA is a binary-only device driver to support the following IEEE
+ 802.11a/b/g/n wireless network cards: BCM4311-, BCM4312-, BCM4313-,
+ BCM4321-, BCM4322-, BCM43142-, BCM43224-, BCM43225-, BCM43227-, BCM43228-,
+ BCM4331-, BCM4360-, and BCM4352-based hardware.
+ .
+ This package provides the source code for the wl kernel modules. It makes use
+ of kernel-package or module-assistant build systems. The alternative
+ broadcom-sta-dkms package can be installed instead and might be easier to use
+ with simple system configurations.
+ .
+ The wireless-tools package is also required in order to make use of these
+ modules.  Kernel source or headers are required to compile these modules.

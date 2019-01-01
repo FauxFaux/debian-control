@@ -1,0 +1,46 @@
+Package: cppcheck-gui
+Source: cppcheck
+Version: 1.86-1
+Architecture: amd64
+Maintainer: Joachim Reichel <reichel@debian.org>
+Installed-Size: 3358
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgl1, libpcre3, libqt5core5a (>= 5.11.0~rc1), libqt5gui5 (>= 5.2.0~alpha1), libqt5printsupport5 (>= 5.0.2), libqt5widgets5 (>= 5.11.0~rc1), libstdc++6 (>= 5.2), libtinyxml2-6a (>= 5.0.0)
+Suggests: python3, clang
+Section: devel
+Priority: optional
+Homepage: http://sourceforge.net/p/cppcheck/wiki/Home/
+Description: tool for static C/C++ code analysis (GUI)
+ Cppcheck is a command-line tool that tries to detect bugs that your
+ C/C++ compiler doesn't see. It is versatile, and can check non-standard
+ code including various compiler extensions, inline assembly code, etc.
+ Its internal preprocessor can handle includes, macros, and several
+ preprocessor commands. While Cppcheck is highly configurable,
+ you can start using it just by giving it a path to the source code.
+ .
+ It includes checks for:
+  * pointers to out-of-scope auto variables;
+  * assignment of auto variables to an effective parameter of a function;
+  * out-of-bounds errors in arrays and STL;
+  * missing class constructors;
+  * variables not initialized by a constructor;
+  * use of memset, memcpy, etcetera on a class;
+  * non-virtual destructors for base classes;
+  * operator= not returning a constant reference to itself;
+  * use of deprecated functions (mktemp, gets, scanf);
+  * exceptions thrown in destructors;
+  * memory leaks in class or function variables;
+  * C-style pointer cast in C++ code;
+  * redundant if;
+  * misuse of the strtol or sprintf functions;
+  * unsigned division or division by zero;
+  * unused functions and struct members;
+  * passing parameters by value;
+  * misuse of signed char variables;
+  * unusual pointer arithmetic (such as "abc" + 'd');
+  * dereferenced null pointers;
+  * incomplete statements;
+  * misuse of iterators when iterating through a container;
+  * dereferencing of erased iterators;
+  * use of invalidated vector iterators/pointers
+ .
+ This package contains the graphical user interface for cppcheck.

@@ -1,0 +1,22 @@
+Package: python3-geotiepoints
+Source: python-geotiepoints
+Version: 1.1.7-1
+Architecture: amd64
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 343
+Depends: python3-dask, python3-numpy (>= 1:1.16.0~rc1), python3-pandas, python3-scipy, python3-xarray, python3 (<< 3.8), python3 (>= 3.7~), python3-numpy-abi9, python3:any, libc6 (>= 2.14)
+Recommends: python3-h5py
+Section: python
+Priority: optional
+Homepage: https://github.com/pytroll/python-geotiepoints
+Description: Interpolation of geographic tiepoints in Python
+ Python-geotiepoints is a Python module that interpolates (and extrapolates
+ if needed) geographical tiepoints into a larger geographical grid.
+ This is useful when the full resolution lon/lat grid is needed while only
+ a lower resolution grid of tiepoints was provided.
+ .
+ Some helper functions are provided to accommodate for satellite data, but
+ the package should be generic enough to be used for any kind of data.
+ .
+ In addition python-geotiepoints provides a fast multilinear interpolation
+ of regular gridded data using Cython.

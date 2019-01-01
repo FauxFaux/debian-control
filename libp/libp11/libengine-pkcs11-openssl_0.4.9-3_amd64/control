@@ -1,0 +1,26 @@
+Package: libengine-pkcs11-openssl
+Source: libp11
+Version: 0.4.9-3
+Architecture: amd64
+Maintainer: Debian OpenSC Maintainers <pkg-opensc-maint@lists.alioth.debian.org>
+Installed-Size: 104
+Depends: p11-kit, libc6 (>= 2.14), libssl1.1 (>= 1.1.1)
+Conflicts: libopensc-openssl
+Breaks: libengine-pkcs11-openssl1.1 (<< 0.4.9-2)
+Replaces: libengine-pkcs11-openssl1.1 (<< 0.4.9-2), libopensc-openssl
+Provides: libengine-pkcs11-openssl1.1, libopensc-openssl
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/OpenSC/libp11
+Description: OpenSSL engine for PKCS#11 modules
+ With this engine for OpenSSL you can use OpenSSL library
+ and command line tools with any PKCS#11 implementation as
+ backend for the crypto operations.
+ .
+ Engine_pkcs11 was developed for smart cards, and mostly
+ for the OpenSC PKCS#11 module, but it should work fine with
+ any PKCS#11 implementation.
+ .
+ Engine_pkcs11 is a spin off from OpenSC and replaced
+ libopensc-openssl.

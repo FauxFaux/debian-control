@@ -1,0 +1,62 @@
+Package: msort
+Source: msort (8.53-2.2)
+Version: 8.53-2.2+b2
+Architecture: amd64
+Maintainer: Bartosz Fenski <fenio@debian.org>
+Installed-Size: 209
+Depends: libc6 (>= 2.14), libicu63 (>= 63.1-1~), libtre5, libuninum5
+Suggests: msort-gui
+Section: utils
+Priority: optional
+Homepage: http://www.billposer.org/Software/msort.html
+Description: utility for sorting records in complex ways
+ msort is a program for sorting files in sophisticated ways. It was originally
+ developed for alphabetizing dictionaries of "exotic" languages, for which it
+ has been extensively used, but is useful for many other purposes. msort differs
+ from typical sort utilities in providing greater flexibility in parsing the
+ input into records and identifying key fields and greater control over the
+ sort order. Its main distinctive features are:
+ .
+  o Msort can be used as a command-line program or via a graphical user
+    interface that is helpful not only to those who find a complicated command
+    line difficult to deal with but also to those unfamiliar with the finer
+    points of sorting.
+  o Records need not be single lines of text but may be delimited in a number
+    of ways.
+  o Key fields may be selected by position in the record (counting from the
+    beginning or the end), by character ranges (e.g. the key consists of the
+    fourth through eighth characters), or by matching a regular expression to
+    a tag.
+  o For each key an arbitrary sort order may be specified. Msort also
+    understands locales.
+  o For each key an effectively unlimited number of multigraphs (sequences
+    of characters to be treated as a single unit for purposes of sorting,
+    "collating elements" in Unicode parlance) of effectively unlimited length
+    may be defined.
+  o In addition to the usual lexicographic and numerical comparisons, msort
+    supports hybrid lexicographic-numeric comparison (for things like filenames
+    and section headings, so that, e.g., 2a will precede 10b), random
+    comparison, and ordering by angle, date, time, month name, domain name,
+    email address, ISO8601 date-time, and string length.
+  o Numbers may be in just about any known number system, e.g. Chinese or
+    Devanagari.
+  o For each key a distinct set of characters may be excluded from
+    consideration when sorting in any combination of initial, final, and
+    medial position in the key field.
+  o For each key a distinct set of regular expression substitutions may be
+    defined. These provide the means to make names like McCarthy sort before
+    MacCawley, as if McCarthy were spelled MacCarthy as well as to handle the
+    rare cases in which a single character is treated for purposes of sorting
+    as a sequence, such as German "eszet" sign, which is traditionally sorted
+    as if it were ss.
+  o Lexicographic keys may be reversed, allowing the construction of reverse
+    dictionaries.
+  o Any or all keys may be optional. For optional keys, the user may specify
+    how records missing the key field should compare to records in which the
+    key field is present.
+  o A choice of sorting algorithms with different properties is provided.
+ .
+ msort understands UTF-8 Unicode. Unicode may be used anywhere that text is
+ entered: in the text to be sorted, in sort order and exclusion definitions,
+ as a field or record separator, or as a field tag. Full Unicode
+ case-folding is available.

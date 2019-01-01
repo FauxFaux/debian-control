@@ -1,0 +1,25 @@
+Package: pacemaker-resource-agents
+Source: pacemaker
+Version: 1.1.19-2
+Architecture: all
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Installed-Size: 249
+Depends: resource-agents
+Breaks: pacemaker (<< 1.1.14-2~)
+Replaces: pacemaker (<< 1.1.14-2~)
+Section: admin
+Priority: optional
+Homepage: https://www.clusterlabs.org/
+Description: cluster resource manager general resource agents
+ At its core, Pacemaker is a distributed finite state
+ machine capable of co-ordinating the startup and recovery of inter-related
+ services across a set of machines.
+ .
+ Pacemaker understands many different resource types (OCF, SYSV, systemd) and
+ can accurately model the relationships between them (colocation, ordering).
+ .
+ It can even use technology such as Docker to automatically isolate the
+ resources managed by the cluster.
+ .
+ This package contains Pacemaker resource agents not requiring access
+ to the cluster stack, thus also usable by the remote daemon.

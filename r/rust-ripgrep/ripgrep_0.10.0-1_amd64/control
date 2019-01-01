@@ -1,0 +1,28 @@
+Package: ripgrep
+Source: rust-ripgrep
+Version: 0.10.0-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 4165
+Depends: libc6 (>= 2.18), libgcc1 (>= 1:4.2)
+Section: utils
+Priority: optional
+Multi-Arch: allowed
+Homepage: https://github.com/BurntSushi/ripgrep
+Description: Recursively searches directories for a regex pattern
+ ripgrep is a line-oriented search tool that recursively searches your current
+ directory for a regex pattern while respecting your gitignore rules. ripgrep is
+ similar to other popular search tools like The Silver Searcher, ack and grep.
+ .
+ ripgrep is generally faster than both The Silver Searcher and GNU grep. It
+ defaults to recursive directory search and won't search files ignored by your
+ `.gitignore` files. Use ripgrep if you like speed, filtering by default, fewer
+ bugs, and Unicode support.
+ .
+ On the other hand, if you like multiline search, then ripgrep may not quite
+ meet your needs (yet), and it will never support fancy regex features such as
+ backreferences or lookaround
+ .
+ This package contains the following binaries built from the Rust crate
+ "ripgrep":
+  - rg

@@ -1,0 +1,44 @@
+Package: libghc-psqueues-prof
+Source: haskell-psqueues (0.2.7.0-2)
+Version: 0.2.7.0-2+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 1735
+Depends: libghc-psqueues-dev (= 0.2.7.0-2+b2), libghc-base-prof-4.11.1.0-5dd74, libghc-deepseq-prof-1.4.3.0-17e4f, libghc-ghc-prim-prof-0.5.2.0-0a259, libghc-hashable-prof-1.2.7.0-68a88
+Provides: libghc-psqueues-prof-0.2.7.0-a1687
+Section: haskell
+Priority: optional
+Homepage: http://hackage.haskell.org/package/psqueues
+Description: Pure priority search queues; profiling libraries
+ This package provides Priority Search Queues in three different flavors.
+ .
+ * OrdPSQ k p v, which uses the Ord k instance to provide fast insertion,
+ deletion and lookup. This implementation is based on Ralf Hinze's "A Simple
+ Implementation Technique for Priority Search Queues".  Hence, it is similar to
+ the PSQueue library, although it is considerably faster and provides a
+ slightly different API.
+ .
+ * IntPSQ p v is a far more efficient implementation. It fixes the key type
+ to Int and uses a radix tree (like IntMap) with an additional min-heap
+ property.
+ .
+ * HashPSQ k p v is a fairly straightforward extension of IntPSQ: it
+ simply uses the keys' hashes as indices in the IntPSQ. If there are any hash
+ collisions, it uses an OrdPSQ to resolve those. The performance of this
+ implementation is comparable to that of IntPSQ, but it is more widely
+ applicable since the keys are not restricted to Int, but rather to any
+ Hashable datatype.
+ .
+ Each of the three implementations provides the same API, so they can be used
+ interchangeably.
+ .
+ Typical applications of Priority Search Queues include:
+ .
+ * Caches, and more specifically LRU Caches;
+ .
+ * Schedulers;
+ .
+ * Pathfinding algorithms, such as Dijkstra's and A*.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

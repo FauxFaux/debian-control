@@ -1,0 +1,13 @@
+#! /bin/sh -e
+
+
+
+if [ "$1" = "purge" ]; then
+    [ -d /etc/hylafax ] && rm -f /etc/hylafax/pagesizes
+
+    # clear and deregister config file out from ucf database
+    which ucf >/dev/null && ucf --purge /etc/hylafax/pagesizes
+    which ucfr >/dev/null && ucfr --purge hylafax-client /etc/hylafax/pagesizes
+fi
+
+exit 0

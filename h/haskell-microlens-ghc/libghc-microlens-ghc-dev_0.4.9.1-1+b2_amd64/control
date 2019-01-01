@@ -1,0 +1,27 @@
+Package: libghc-microlens-ghc-dev
+Source: haskell-microlens-ghc (0.4.9.1-1)
+Version: 0.4.9.1-1+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 466
+Depends: libghc-array-dev-0.5.2.0-03a64, libghc-base-dev-4.11.1.0-5dd74, libghc-bytestring-dev-0.10.8.2-76891, libghc-containers-dev-0.5.11.0-e0faa, libghc-microlens-dev-0.4.9.1-1f7eb, libghc-transformers-dev-0.5.5.0-b5d2f, libatomic1 (>= 4.8), libc6 (>= 2.14), libgmp10
+Suggests: libghc-microlens-ghc-doc, libghc-microlens-ghc-prof
+Provides: libghc-microlens-ghc-dev-0.4.9.1-c51e4
+Section: haskell
+Priority: optional
+Homepage: http://github.com/aelve/microlens
+Description: microlens + array, bytestring, containers, transformers
+ Use this package instead of microlens if you don't mind depending on
+ all dependencies here – Lens.Micro.GHC reexports everything from
+ Lens.Micro and additionally provides orphan instances of microlens
+ classes for packages coming with GHC (array, bytestring, containers,
+ transformers).
+ .
+ The minor and major versions of microlens-ghc are incremented
+ whenever the minor and major versions of microlens are incremented,
+ so you can depend on the exact version of microlens-ghc without
+ specifying the version of microlens you need.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: microlens-ghc-0.4.9.1-CspPOPI4fSv3qx4diAoixE

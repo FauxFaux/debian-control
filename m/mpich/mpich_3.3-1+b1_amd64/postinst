@@ -1,0 +1,56 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+   configure)
+      # Continue below
+      ;;
+   abort-upgrade|abort-remove|abort-deconfigure)
+      exit 0;
+      ;;
+   *)
+      echo "postinst called with unknown argument \`$1'" >&2
+      exit 0;
+      ;;
+esac
+
+# so, we are running with $1 = configure
+# mpich2 versions before 1.2.1~rc1-1 were using two alternatives where other
+# MPI implementations were using only one, which breaks. Clean up
+# our mess.
+if [ "$2" != "" ] && dpkg --compare-versions "$2" le "1.2.1~rc1-1"; then
+    update-alternatives --remove mpiexec /usr/bin/mpiexec.mpich2
+fi
+if update-alternatives --list mpiexec > /dev/null 2>&1; then
+    # OK, that case sucks. Apparently, we still have a mpiexec alternative, maybe
+    # from a different package (like openmpi). In that case, the only thing we
+    # can do is --remove-all...
+    update-alternatives --remove-all mpiexec
+fi
+
+update-alternatives \
+	--install /usr/bin/mpicc mpi /usr/bin/mpicc.mpich 40 \
+	--slave /usr/bin/mpic++ mpic++ /usr/bin/mpicxx.mpich \
+	--slave /usr/bin/mpicxx mpicxx /usr/bin/mpicxx.mpich \
+	--slave /usr/bin/mpiCC mpiCC /usr/bin/mpicxx.mpich \
+	--slave /usr/bin/mpifort mpifort /usr/bin/mpifort.mpich \
+	--slave /usr/bin/mpif77 mpif77 /usr/bin/mpifort.mpich \
+	--slave /usr/bin/mpif90 mpif90 /usr/bin/mpifort.mpich \
+	--slave /usr/share/man/man1/mpicc.1.gz mpicc.1.gz /usr/share/man/man1/mpicc.mpich.1.gz \
+	--slave /usr/share/man/man1/mpic++.1.gz mpic++.1.gz /usr/share/man/man1/mpicxx.mpich.1.gz \
+	--slave /usr/share/man/man1/mpicxx.1.gz mpicxx.1.gz /usr/share/man/man1/mpicxx.mpich.1.gz \
+	--slave /usr/share/man/man1/mpiCC.1.gz mpiCC.1.gz /usr/share/man/man1/mpicxx.mpich.1.gz \
+	--slave /usr/share/man/man1/mpif77.1.gz mpif77.1.gz /usr/share/man/man1/mpif77.mpich.1.gz \
+	--slave /usr/share/man/man1/mpif90.1.gz mpif90.1.gz /usr/share/man/man1/mpif90.mpich.1.gz \
+	--slave /usr/share/man/man1/mpifort.1.gz mpifort.1.gz /usr/share/man/man1/mpifort.mpich.1.gz 
+
+update-alternatives \
+	--install /usr/bin/mpirun mpirun /usr/bin/mpirun.mpich 40 \
+	--slave /usr/share/man/man1/mpirun.1.gz mpirun.1.gz /usr/share/man/man1/mpirun.mpich.1.gz \
+	--slave /usr/bin/mpiexec mpiexec /usr/bin/mpiexec.mpich \
+	--slave /usr/share/man/man1/mpiexec.1.gz mpiexec.1.gz /usr/share/man/man1/mpiexec.mpich.1.gz
+
+
+
+exit 0

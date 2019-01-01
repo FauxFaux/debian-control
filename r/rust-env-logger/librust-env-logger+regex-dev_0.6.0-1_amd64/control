@@ -1,0 +1,14 @@
+Package: librust-env-logger+regex-dev
+Source: rust-env-logger
+Version: 0.6.0-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-env-logger-dev (= 0.6.0-1), librust-regex-1+default-dev (>= 1.0.3-~~)
+Provides: librust-env-logger-0+regex-dev (= 0.6.0-1), librust-env-logger-0.6+regex-dev (= 0.6.0-1), librust-env-logger-0.6.0+regex-dev (= 0.6.0-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Logging implementation for `log` which is configured via an environment variable - feature "regex"
+ This metapackage enables feature regex for the Rust env_logger crate, by
+ pulling in any additional dependencies needed by that feature.

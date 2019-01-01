@@ -1,0 +1,11 @@
+#! /bin/sh
+
+set -e
+set -u
+webext="form-history-control"
+
+if [ "$1" = "configure" ]; then
+    touch /usr/share/webext/${webext}/manifest.json
+fi
+
+

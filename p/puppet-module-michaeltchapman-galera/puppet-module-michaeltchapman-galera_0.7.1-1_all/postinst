@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/galera puppet-module-galera /usr/share/puppet/modules.available/michaeltchapman-galera 500
+fi
+
+
+
+exit 0

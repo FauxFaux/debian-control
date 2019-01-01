@@ -1,0 +1,27 @@
+Package: pacemaker-remote
+Source: pacemaker
+Version: 1.1.19-2
+Architecture: amd64
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Installed-Size: 208
+Depends: lsb-base (>= 3.0-6), pacemaker-common, pacemaker-resource-agents, libc6 (>= 2.4), libcrmcommon3 (>= 1.1.18~rc3), libcrmservice3 (>= 1.1.18~rc3), libglib2.0-0 (>= 2.16.0), libgnutls30 (>= 3.6.5), liblrmd1 (>= 1.1.9), libqb0 (>= 0.17.1), libstonithd2 (>= 1.1.9)
+Recommends: pacemaker-cli-utils
+Breaks: pacemaker
+Section: admin
+Priority: optional
+Homepage: https://www.clusterlabs.org/
+Description: cluster resource manager proxy daemon for remote nodes
+ At its core, Pacemaker is a distributed finite state
+ machine capable of co-ordinating the startup and recovery of inter-related
+ services across a set of machines.
+ .
+ Pacemaker understands many different resource types (OCF, SYSV, systemd) and
+ can accurately model the relationships between them (colocation, ordering).
+ .
+ It can even use technology such as Docker to automatically isolate the
+ resources managed by the cluster.
+ .
+ This package contains the Pacemaker proxy daemon, which simulates cluster
+ services on a node not running the cluster stack.  Such "remote" nodes can
+ run resources but don't participate in the quorum.  This package is
+ mutually exclusive with Pacemaker proper.

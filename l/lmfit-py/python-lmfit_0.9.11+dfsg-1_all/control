@@ -1,0 +1,60 @@
+Package: python-lmfit
+Source: lmfit-py
+Version: 0.9.11+dfsg-1
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 521
+Depends: python-scipy, python-numpy, python-asteval, python-six (>> 1.10), python-uncertainties, python:any (<< 2.8), python:any (>= 2.7~)
+Suggests: python-lmfit-doc
+Section: python
+Priority: optional
+Homepage: http://lmfit.github.io/lmfit-py/
+Description: Least-Squares Minimization with Constraints (Python 2)
+ The lmfit Python package provides a simple, flexible interface to
+ non-linear optimization or curve fitting problems. The package
+ extends the optimization capabilities of scipy.optimize by replacing
+ floating pointing values for the variables to be optimized with
+ Parameter objects. These Parameters can be fixed or varied, have
+ upper and/or lower bounds placed on its value, or written as an
+ algebraic expression of other Parameters.
+ .
+ The principal advantage of using Parameters instead of simple
+ variables is that the objective function does not have to be
+ rewritten to reflect every change of what is varied in the fit, or
+ what relationships or constraints are placed on the Parameters. This
+ means a scientific programmer can write a general model that
+ encapsulates the phenomenon to be optimized, and then allow user of
+ that model to change what is varied and fixed, what range of values
+ is acceptable for Parameters, and what constraints are placed on the
+ model. The ease with which the model can be changed also allows one
+ to easily test the significance of certain Parameters in a fitting
+ model.
+ .
+ The lmfit package allows a choice of several optimization methods
+ available from scipy.optimize. The default, and by far best tested
+ optimization method used is the Levenberg-Marquardt algorithm from
+ MINPACK-1 as implemented in scipy.optimize.leastsq. This method
+ is by far the most tested and best support method in lmfit, and much
+ of this document assumes this algorithm is used unless explicitly
+ stated. An important point for many scientific analysis is that this
+ is only method that automatically estimates uncertainties and
+ correlations between fitted variables from the covariance matrix
+ calculated during the fit.
+ .
+ A few other optimization routines are also supported, including
+ Nelder-Mead simplex downhill, Powell's method, COBYLA, Sequential
+ Least Squares methods as implemented in scipy.optimize.fmin, and
+ several others from scipy.optimize. In their native form, some of
+ these methods setting allow upper or lower bounds on parameter
+ variables, or adding constraints on fitted variables. By using
+ Parameter objects, lmfit allows bounds and constraints for all of
+ these methods, and makes it easy to swap between methods without
+ hanging the objective function or set of Parameters.
+ .
+ Finally, because the approach derived from MINPACK-1 usin the
+ covariance matrix to determine uncertainties is sometimes questioned
+ (and sometimes rightly so), lmfit supports methods to do a brute
+ force search of the confidence intervals and correlations for sets of
+ parameters.
+ .
+ This is the Python 2 version of the package.

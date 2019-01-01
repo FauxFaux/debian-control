@@ -1,0 +1,71 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] || [ "${1}" = "reconfigure" ] ; then
+	VAR_UG_PKG_NAME=ivulncheck
+        VAR_UG_SHELL='/bin/false'
+        # Create user and groups if they don't exist
+        if ! getent group ${VAR_UG_PKG_NAME} > /dev/null 2>&1 ; then
+                addgroup --quiet --system ${VAR_UG_PKG_NAME}
+        fi
+        if ! getent passwd ${VAR_UG_PKG_NAME} > /dev/null 2>&1 ; then
+                adduser --system \
+                       --home /var/lib/${VAR_UG_PKG_NAME}-api \
+                       --no-create-home \
+                       --quiet \
+                       --disabled-password \
+                       --shell ${VAR_UG_SHELL} \
+                       --group ${VAR_UG_PKG_NAME} ${ADDUSER_PARAM}
+        fi
+
+	if getent group adm >/dev/null 2>&1 ; then
+                install -d -m 0750 -o ivulncheck -g adm /var/log/ivulncheck || true
+        else
+                install -d -m 0750 -o ivulncheck -g root /var/log/ivulncheck || true
+        fi
+
+	a2enmod wsgi || true
+	a2ensite ivulncheck_web.conf || true
+
+	touch /etc/ivulncheck/htpasswd_web || true
+
+        if getent group www-data >/dev/null 2>&1 ; then
+                chmod 640 /etc/ivulncheck/htpasswd_web || true
+                chown root:www-data /etc/ivulncheck/htpasswd_web || true
+        else
+                chmod 644 /etc/ivulncheck/htpasswd_web || true
+        fi
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p ivulncheck-web 
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p ivulncheck-web  || true
+fi
+
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p ivulncheck-web /usr/share/ivulncheck-web
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p ivulncheck-web /usr/share/ivulncheck-web || true
+fi
+
+# End automatically added section
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p ivulncheck-web /usr/share
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p ivulncheck-web /usr/share || true
+fi
+
+# End automatically added section
+
+
+exit 0
+

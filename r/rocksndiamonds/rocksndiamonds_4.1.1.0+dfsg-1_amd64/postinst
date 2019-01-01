@@ -1,0 +1,489 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+
+use File::Temp;
+use File::Basename;
+use Digest::MD5;
+use Debconf::Client::ConfModule ":all";
+
+umask 022;
+our $pkg="rocksndiamonds";
+our $game_dir="/usr/share/games/$pkg";
+our $oldout;
+our %info=
+(
+  'Base games' =>
+  {
+    url =>
+      'http://www.artsoft.org/RELEASES/unix/rocksndiamonds/rocksndiamonds-4.1.1.0.tar.gz',
+    # Valid for 4.1.1.0
+    md5 => '2dc3a273425cc83e39bcdcedfd51d097',
+    topdir => 'rocksndiamonds-4.1.1.0',
+  },
+
+  'Legend Of Zelda' =>
+  {
+    url =>
+      'http://www.artsoft.org/RELEASES/rocksndiamonds/levels/Zelda-1.0.0.zip',
+    md5 => '8e9d7c8e9d7595ac987d879774c488cd',
+    topdir => 'zelda',
+  },
+  
+  'Legend Of Zelda II' =>
+  {
+    url =>
+      'http://artsoft.org/RELEASES/rocksndiamonds/levels/ZeldaII-1.0.0.zip',
+    md5 => 'd8e6449f6ad5e29a07354e0e15290481',
+    topdir => 'zelda2',
+  },
+
+  'Emerald Mine Club' =>
+  {
+    url =>
+      'http://www.artsoft.org/RELEASES/rocksndiamonds/levels/Emerald_Mine_Club-2.1.1.7z',
+    md5 => '11437b4a7a2731449dcd3aff50fa7737',
+    topdir => 'Emerald_Mine_Club',
+  },
+
+  'Contributions 1995 - 2006' =>
+  {
+    url=>
+      'http://www.artsoft.org/RELEASES/rocksndiamonds/levels/Contributions-1.2.0.7z',
+    md5 => '241114637643024fd427d1bf40b82e47',
+    topdir => 'Contributions',
+  },
+
+  'Snake Bite' =>
+  {
+    url =>
+      'http://www.artsoft.org/RELEASES/rocksndiamonds/levels/Snake_Bite-1.0.0.zip',
+    md5 => '52ef211765c995ea40ecb646345fdc2b',
+    topdir => 'Snake_Bite',
+  },
+
+  'BD2K3' =>
+  {
+    url =>
+      'http://www.artsoft.org/RELEASES/rocksndiamonds/levels/BD2K3-1.0.0.zip',
+    md5 => 'ebc8e019fa9a799757d90828e242c206',
+    topdir => 'BD2K3',
+  },
+
+  'BD Dream' =>
+  {
+    url =>
+      'http://www.artsoft.org/RELEASES/rocksndiamonds/levels/Boulder_Dash_Dream-1.0.0.zip',
+    md5 => 'a7d78a41eb13932efce568cedc9b3388',
+    topdir => 'Boulder_Dash_Dream',
+  },
+
+  'Supaplex' =>
+  {
+    url =>
+      'https://www.artsoft.org/RELEASES/rocksndiamonds/levels/Supaplex-2.0.0.7z',
+    md5 => 'e10afed8da549e15be9c0efa3861f321',
+    topdir => 'Supaplex',
+  },
+
+  'DX-Boulderdash' =>
+  {
+    url =>
+      'http://www.artsoft.org/RELEASES/unix/rocksndiamonds/levels/rockslevels-dx-1.0.tar.gz',
+    md5 => 'fbc250f7995c666c1c745dbaf591ce32',
+    topdir => 'levels/DX_Boulderdash',
+  },
+
+  'Sokoban' =>
+  {
+    url =>
+      'http://www.artsoft.org/RELEASES/rocksndiamonds/levels/Sokoban-1.0.0.7z',
+    md5 => '2d34a14fbee9f62a8d8bec9fdb333ec6',
+    topdir => 'Sokoban',
+  },
+
+  'Tutorial Alpha' =>
+  {
+    url =>
+      'http://www.artsoft.org/rocksndiamonds/levels/richardkleber/RnD/r-structure.zip',
+    md5 => '6ad651c8f04994d557c241a790babe16',
+    topdir => 'levels/Tutorials/Tutorial Alpha',
+  },
+
+  'Earth 3120' =>
+  {
+    url =>
+      'http://www.artsoft.org/rocksndiamonds/levels/richardkleber/RnD/earth_3120.zip',
+    md5 => '3e6ada1f672b08df9cb348d54df5c2e0',
+    topdir => 'levels/Richard/Earth 3120',
+    graphics => {
+      requires => 'eem',
+      section => 'Dependency: r-graphics',
+    },
+    sounds => {
+      requires => 'eem',
+      section => 'Dependency: r-sounds',
+    },
+  },
+
+  'Enhanced Emerald Mine' =>
+  {
+    url =>
+      'http://www.artsoft.org/rocksndiamonds/levels/richardkleber/RnD/eem.zip',
+    md5 => 'a5a9c997c702b544026986668b7e7186',
+    topdir => 'levels/Richard',
+    graphics => {
+      requires => 'eem',
+      section => 'Dependency: r-graphics',
+    },
+    sounds => {
+      requires => 'eem',
+      section => 'Dependency: r-sounds',
+    },
+  },
+
+  'Might of Elementals' =>
+  {
+    url =>
+      'http://www.artsoft.org/rocksndiamonds/levels/richardkleber/RnD/might_of_elementals.zip',
+    md5 => '54f647dadcd5aa39db1c836dd03d6af4',
+    topdir => 'levels/Richard',
+  },
+
+  'Secret Command' =>	
+  {
+    url =>
+      'http://www.artsoft.org/rocksndiamonds/levels/richardkleber/RnD/mod_secret_command.zip',
+    md5 => '9d72ad5c4ee4d5fde7868d3ef304182d',
+    topdir => 'levels/Modules/Secret Command',
+  },
+
+  'Natural' =>
+  {
+    url =>
+      'http://www.artsoft.org/rocksndiamonds/levels/richardkleber/RnD/natural.zip',
+    md5 => '11409200f7edd721a9e11dd188604930',
+    topdir => 'levels/Richard/Natural',
+    graphics => {
+      requires => 'natural',
+      section => 'Dependency: r-graphics',
+    },
+    sounds => {
+      requires => 'natural',
+      section => 'Dependency: r-sounds',
+    },
+  },
+
+  'World of Amoeba' =>
+  {
+    url =>
+      'http://www.artsoft.org/rocksndiamonds/levels/richardkleber/RnD/world_of_amoeba.zip',
+    md5 => 'fa264ac9f298afe57f8c78ecea96a369',
+    topdir => 'levels/Richard/World of Amoeba',
+  },
+
+  'Some Levels' =>
+  {
+    url =>
+      'http://www.artsoft.org/rocksndiamonds/levels/richardkleber/RnD/r-old.zip',
+    md5 => '49417b50bf9b954f9691294583176f90',
+    topdir => 'levels/Richard',
+    graphics => {
+      requires => 'vulcano',
+      section => 'Dependency: r-graphics',
+    },
+  },
+
+  'Dependency: r-graphics' =>
+  {
+    url =>
+      'http://www.artsoft.org/rocksndiamonds/levels/richardkleber/RnD/r-graphics.zip',
+    md5 => '174eba719c19243ea46e3010596d3a18',
+    topdir => '',
+  },
+
+  'Dependency: r-sounds' =>
+  {
+    url =>
+      'http://www.artsoft.org/rocksndiamonds/levels/richardkleber/RnD/r-sounds.zip',
+    md5 => '0d18d4b2117be8150d383f6103c9106e',
+    topdir => '',
+  },
+
+  'Walpurgis World' =>
+  {
+    url =>
+      'https://web.archive.org/web/20110101150015/http://home.freeuk.net/jamiecullen/zips/ww_v1-0.zip',
+    md5 => 'd81fdfd41e83124d23bb1fbd343f5e53',
+    topdir => 'Walpurgis World',
+  },
+
+  'Walpurgis Gardens' =>
+  {
+    url =>
+      'https://web.archive.org/web/20110101150015/http://home.freeuk.net/jamiecullen/zips/wg_v1-0.zip',
+    md5 => '5cc90787e89b69275b3662e4bbe5ff2e',
+    topdir => 'Walpurgis Gardens',
+  },
+
+  'Walpurgis Flashbacks' =>
+  {
+    url =>
+      'https://web.archive.org/web/20110101150015/http://home.freeuk.net/jamiecullen/zips/wf_v1-3.zip',
+    md5 => 'fe9066ed9fd2d4600cdb99d210402c4f',
+    topdir => 'Walpurgis Flashbacks',
+  },
+
+  'Earth Shaker' =>
+  {
+    url =>
+      'https://web.archive.org/web/20110101150015/http://home.freeuk.net/jamiecullen/zips/es_b_v1-2.zip',
+    md5 => '88f8c700d6689cda0ad9fe3486307168',
+    topdir => 'Earth Shaker Old Set B',
+  },
+
+  'Earth Shaker Explosions' =>
+  {
+    url =>
+      'https://web.archive.org/web/20110101150015/http://home.freeuk.net/jamiecullen/zips/ese_v1-1.zip',
+    md5 => 'f1efe6f8f88a368744eb0ba99db1df7b',
+    topdir => 'Earth Shaker Explosions',
+  },
+
+  'rnd_jue' =>
+  {
+    url =>
+      'http://www.jb-line.de/hp/rnd_jue-v8.zip',
+    md5 => '330c6eb97cf19f4dbed6e6f21a783c06',
+    topdir => 'rnd_jue',
+  },
+
+);
+
+# execute shell command
+sub cmd_execute(@)
+{
+#     printf "%s\n", join " ", @_;
+    system @_;
+    if ($?)
+    {
+        print join(" ", @_), "\n";
+        print "Error code: $?\n";
+        return 0;
+    }
+    return 1;
+}
+
+# install section
+sub install_section($)
+{
+    my $section=shift;
+
+    unless (exists $info{$section}{url})
+    {
+        print "Unknown key: $section\n";
+        return;
+    }
+
+    my $file=(split /\//, $info{$section}{url})[-1];
+
+    unless (-f "$game_dir/downloads/$file")
+    {
+        unless(cmd_execute("wget -c -P $game_dir/downloads $info{$section}{url}"))
+        {
+            open STDOUT, ">&", $oldout;
+            fset "$pkg/error_download", "seen", "false";
+            input "critical", "$pkg/error_download";
+            go;
+            stop;
+            exit 0;
+        }
+    }
+    install_file("$game_dir/downloads/$file", $section);
+}
+
+# install game data
+sub install_file($$)
+{
+    my $file=shift;
+    my $section=shift;
+
+    my $tempdir=File::Temp::tempdir(CLEANUP=>1);
+
+    my $cmd;
+    if ($section =~ /rnd_jue/)
+    {
+        # fix Windows path names in zip file (required by rnd_jue)
+        cmd_execute "zip -FF $file --out $tempdir/fixed_rnd_jue.zip >/dev/null";
+        $cmd="unzip -q $tempdir/fixed_rnd_jue.zip -d $tempdir";
+    }
+    elsif ($file =~ /zip$/i )
+    {
+        $cmd="unzip -q $file -d $tempdir";
+    }
+    elsif ($file =~ /tar\.gz$/i )
+    {
+        $cmd="tar --no-same-permissions --no-same-owner -xzf $file -C $tempdir";
+    }
+    elsif ($file =~ /7z$/i )
+    {
+        $cmd="7zr x -o$tempdir $file >/dev/null";
+    }
+    else
+    {
+        print "Unknown type of file: $file\n";
+        return;
+    }
+
+    cmd_execute $cmd;
+    cmd_execute "find $tempdir -type d -exec chmod 0755 '{}' '+'";
+    cmd_execute "find $tempdir -type f -exec chmod 0644 '{}' '+'";
+    cmd_execute "chown -R root:root $tempdir";
+
+
+    my $topdir=$info{$section}{topdir};
+    if ($section =~ /Base games/i)
+    {
+        cmd_execute "cp -r $tempdir/$topdir/$_ $game_dir"
+            for (qw(graphics levels music sounds));
+    }
+    elsif ($section =~ /^Dependency:/i)
+    {
+        for (qw(graphics music sounds))
+        {
+            -d "$tempdir/$topdir/$_" and
+                cmd_execute "cp -r $tempdir/$topdir/$_ $game_dir";
+        }
+    }
+    else
+    {
+        -d "$game_dir/levels" or
+            cmd_execute "mkdir $game_dir/levels";
+        -d "$game_dir/levels/$section" and 
+            cmd_execute "rm -fr \"$game_dir/levels/$section\"";
+        cmd_execute "mkdir \"$game_dir/levels/$section\"";
+        cmd_execute "mv -f \"$tempdir/$topdir\"/* \"$game_dir/levels/$section\"";
+
+        # create levelinfo.conf if missing
+        # (required by Enhanced Emerald Mine, Might of Elementals and Some Levels)
+        unless (-e "$game_dir/levels/$section/levelinfo.conf")
+        {
+           open(FH, '>', "$game_dir/levels/$section/levelinfo.conf")
+                or die "Can not open file $game_dir/levels/$section/levelinfo.conf: $!\n";
+            printf FH "file_identifier:  ROCKSNDIAMONDS_LEVELINFO_FILE_VERSION_1.2\n";
+            printf FH "name:             $section\n";
+            printf FH "sort_priority:    500\n";
+            printf FH "level_group:      true\n";
+            close FH;
+        }
+
+        # copy graphics, music and sounds directories if not covered by $topdir
+        # (required by Might of Elementals and Secret Command)
+        if (length $topdir)
+        {
+            for (qw(graphics music sounds))
+                {
+                    -d "$tempdir/$_" and
+                        cmd_execute "cp -r $tempdir/$_/* $game_dir/$_";
+                }
+        }
+
+        # resolve dependencies
+        # (required by Earth 3120, Enhanced Emerald Mine, Natural and Some Levels)
+        for (qw(graphics music sounds))
+        {
+            if (exists $info{$section}{$_})
+            {
+                install_section($info{$section}{$_}{section})
+                    unless (-d "$game_dir/$_/$info{$section}{$_}{requires}");
+            }
+        }
+    }
+
+    cmd_execute 'rm', '-fr', $tempdir;
+}
+
+sub clean_downloads_dir()
+{
+	my $ddir="$game_dir/downloads";
+	opendir my $dd, $ddir
+	    or die "Can not read directory $ddir: $!\n";
+	my @files=map { "$ddir/$_" }grep !/^\./, readdir $dd;
+
+	my %known=map { 
+		$_->{bn}=$_->{url};
+		$_->{bn}=~s/.*\///;
+		($_->{bn}, $_->{md5}) 
+	} values %info;
+
+
+    print "Check directory '$game_dir/downloads':\n" if @files;
+    for my $file(@files)
+    {
+    	my $bn=basename $file;
+        printf STDERR "\t%s ... ", $bn;
+
+        unless (exists $known{$bn})
+        {
+        	print STDERR "removed\n";
+        	unlink $file;
+        	next;
+        }
+
+        my $md5=$known{$bn};
+        my $data;
+        my $mdcounter=Digest::MD5->new;
+        if (open my $fh, '<', $file)
+        {
+            local $/;
+            $data=<$fh>;
+        }
+        $mdcounter->add($data);
+
+        if ($mdcounter->hexdigest ne $md5)
+        {
+            print STDERR "removed\n";
+            unlink $file;
+            next;
+        }
+        print STDERR "ok\n";
+    }
+    cmd_execute "rm -fr $game_dir/$_"
+        for (qw(graphics levels music sounds));
+}
+
+
+if ($ARGV[0] eq 'configure')
+{
+    system 'which update-menus >/dev/null 2>&1';
+    if ($? == 0) 
+    {
+        print STDERR "Update menu\n";
+        system 'update-menus >/dev/null 2>&1';
+    }
+}
+
+# begin warn screen
+exit 0 unless get("$pkg/begin") eq 'true';
+
+# select downloading
+my @sel=split /\s*,\s*/, get("$pkg/select_games");
+
+open $oldout, ">&STDOUT";
+open STDOUT, ">&STDERR";
+
+unless (-d "$game_dir/downloads")
+{
+    unless (mkdir "$game_dir/downloads")
+    {
+        print "Error create dir '$game_dir/downloads': $!\n";
+        exit 0;
+    }
+}
+clean_downloads_dir();
+
+install_section($_)
+    for ('Base games', @sel);
+__END__
+

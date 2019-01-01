@@ -1,0 +1,33 @@
+Package: cyrus-pop3d
+Source: cyrus-imapd (2.5.11-1)
+Version: 2.5.11-1+b2
+Architecture: amd64
+Maintainer: Debian Cyrus Team <team+cyrus@tracker.debian.org>
+Installed-Size: 155
+Pre-Depends: dpkg (>= 1.17.14~)
+Depends: cyrus-common (= 2.5.11-1+b2), libc6 (>= 2.14), libcom-err2 (>= 1.43.9), libsasl2-2, libwrap0 (>= 7.6-4~)
+Conflicts: pop3-server
+Breaks: cyrus-pop3d-2.4
+Replaces: cyrus-pop3d-2.4
+Provides: pop3-server
+Section: mail
+Priority: extra
+Homepage: https://www.cyrusimap.org/
+Description: Cyrus mail system - POP3 support
+ Cyrus is an IMAP server designed to handle massive quantities of mail,
+ with a number of features not found in other IMAP implementations,
+ including support for:
+  - running the daemon without root privileges;
+  - POP3 and NNTP in addition to plain IMAP;
+  - CalDAV and CardDAV;
+  - secure IMAP using SSL;
+  - server-side filtering with Sieve;
+  - mail users without login accounts;
+  - simple mail quotas;
+  - virtual domains;
+  - IPv6.
+ .
+ This package contains the POP3 (Post Office Protocol) portion of the Cyrus
+ IMAPd suite.
+ .
+ For more information, please see the cyrus-common package.

@@ -1,0 +1,42 @@
+Package: libcoap2-bin
+Source: libcoap2
+Version: 4.2.0~rc3-1
+Architecture: amd64
+Maintainer: Debian IoT Maintainers <debian-iot-maintainers@lists.alioth.debian.org>
+Installed-Size: 300
+Depends: libcoap2 (= 4.2.0~rc3-1), libc6 (>= 2.14)
+Conflicts: libcoap-1-0-bin
+Section: libs
+Priority: optional
+Homepage: https://libcoap.net/
+Description: C-Implementation of CoAP - example binaries API version 2
+ The libcoap provides some example binary files to show the usage of a CoAP
+ Server, CoAP Client and a Resource Directory implementation. These examples
+ heavily rely on the libcoap as the core functionality is based there.
+ .
+ This package provides the following example binaries without DTLS functions:
+  * coap-client
+    A command-line client that allows you to interact with CoAP reasources.
+ .
+  * coap-server
+    Simple server that can provide CoAP resources for simple testing cases.
+ .
+  * coap-rd
+    This binary let you simulate various CoAP resources mostly for testing
+    purpose.
+ .
+ This package providesthe following example binaries with DTLS functions:
+  * coap-client-openssl
+    A command-line client that allows you to interact with CoAP reasources
+    based on TLS functions by OpenSSL.
+ .
+  * coap-server-openssl
+    Simple server that can provide CoAP resources for simple testing cases
+    based on TLS functions by OpenSSL.
+ .
+  * coap-rd-openssl
+    This binary let you simulate various CoAP resources mostly for testing
+    purpose based on TLS functions by OpenSSL.
+ .
+ You can use these files without any exception no matter as they named
+ examples. Please see the respectives man pages for usage instructions.

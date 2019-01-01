@@ -1,0 +1,32 @@
+Package: mb2md
+Version: 3.20-9
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 73
+Depends: libtimedate-perl, perl
+Section: mail
+Priority: optional
+Homepage: http://batleth.sapienti-sat.org/projects/mb2md/
+Description: Convert Mbox mailboxes to Maildir format
+ mb2md (mbox to maildir) takes one or more Mbox format mailbox files
+ in a directory and convert them to Maildir format mailboxes.
+ .
+ As the Mbox format has some drawbacks, D. J. Bernstein created the
+ Maildir format when he wrote Qmail. With the Mbox format all mail of
+ a specific folder is stored as one large text file. The Maildir
+ format stores each mail as a separate file. It is a faster and more
+ efficient way to store mail. It works particularly well over NFS,
+ which has a long history of locking-related woes.
+ .
+ The Mbox format is used by many POP3/IMAP servers, most mail servers
+ (MTAs) and mail readers (MUAs). The Maildir format is used by Qmail,
+ Courier-MTA and can be also used as a alternative mail storage format
+ by Postfix and Exim or any MTA which can use procmail as
+ MDA. POP3/IMAP servers which support Maildirs are e.g. Courier IMAP
+ and Dovecot.
+ .
+ mb2md does not only convert Mbox mailbox files into a Maildir but can
+ also convert the /var/spool/mail/$USER mailspool file. It is smart
+ enough to not transfer a dummy message such as the UW IMAPD puts at
+ the start of Mbox mailboxes - and you could add your own search terms
+ into the script to make it ignore other forms of dummy first message.

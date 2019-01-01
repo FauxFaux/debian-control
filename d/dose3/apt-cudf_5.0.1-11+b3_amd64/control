@@ -1,0 +1,26 @@
+Package: apt-cudf
+Source: dose3 (5.0.1-11)
+Version: 5.0.1-11+b3
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 4207
+Depends: aspcud | cudf-solver, perl:any, libbz2-1.0, libc6 (>= 2.17), zlib1g (>= 1:1.1.4)
+Section: admin
+Priority: optional
+Homepage: http://www.mancoosi.org/software/
+Description: CUDF solver integration for APT
+ apt-cudf provides integration among the APT package manager and CUDF solvers,
+ allowing APT to rely on external (CUDF-based) dependency solvers to plan
+ package installation, upgrade, and removal.
+ .
+ CUDF is a distribution-independent, standard format to describe dependency
+ solving scenarios, as faced by package managers in popular package-based
+ GNU/Linux distributions. APT is a well-known package manager for Debian-based
+ distributions, which is able to delegate dependency solving to external
+ solvers, by the means of the External Dependency Solving Protocol (EDSP).
+ .
+ apt-cudf provides the glue between the EDSP protocol and CUDF solvers,
+ enabling any installed CUDF solver to be used as an external solver for APT.
+ .
+ Several CUDF solvers are available in Debian. They all provide the cudf-solver
+ virtual package.

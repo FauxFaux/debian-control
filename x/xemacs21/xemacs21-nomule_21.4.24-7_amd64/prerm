@@ -1,0 +1,26 @@
+#!/bin/sh -e
+set -e
+
+if [ "$1" != "upgrade" ] ; then
+  update-alternatives --remove xemacs21 /usr/bin/xemacs21-nomule
+fi
+
+# Ok we dont' want to deinstall these files when we already have another
+# installed.
+ALREADY=0
+for i in mule nomule mule-canna-wnn gnome-mule gnome-nomule gnome-mule-canna-wnn ; do
+  STAT=`dpkg -s xemacs21-$i 2>/dev/null | perl -ne 'next if $_ !~ m/^Status/; $_ =~ s/^Status:\s*(.*)/$1/; print;'`
+  if [ "nomule" != "$i" -a "$STAT" = "install ok installed" ] ; then
+    ALREADY=1
+  fi
+done
+
+if [ "$ALREADY" = "0" ] ; then
+  /usr/lib/emacsen-common/emacs-remove xemacs21
+fi
+
+if [ -L /usr/doc/xemacs21-nomule ]; then
+	rm -f /usr/doc/xemacs21-nomule
+fi
+
+##

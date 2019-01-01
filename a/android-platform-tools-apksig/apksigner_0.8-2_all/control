@@ -1,0 +1,37 @@
+Package: apksigner
+Source: android-platform-tools-apksig
+Version: 0.8-2
+Architecture: all
+Maintainer: Android Tools Maintainers <android-tools-devel@lists.alioth.debian.org>
+Installed-Size: 314
+Depends: jarwrapper, default-jre-headless (>= 1:1.8) | java8-runtime-headless
+Section: java
+Priority: optional
+Homepage: https://android.googlesource.com/platform/tools/apksig
+Description: command line tool to sign and verify Android APKs
+ apksig is a project which aims to simplify APK signing and checking
+ whether APK's signatures should verify on Android. apksig supports
+ JAR signing (used by Android since day one) and APK Signature Scheme
+ v2 (supported since Android Nougat, API Level 24).
+ .
+ The key feature of apksig is that it knows about differences in APK
+ signature verification logic between different versions of the
+ Android platform. apksig can thus check whether a signed APK is
+ expected to verify on all Android platform versions supported by the
+ APK. When signing an APK, apksig will choose the most appropriate
+ cryptographic algorithms based on the Android platform versions
+ supported by the APK being signed.
+ .
+ apksigner command-line tool offers two operations:
+ .
+  * sign the provided APK so that it verifies on all Android platforms
+ supported by the APK. Run apksigner sign for usage information.
+ .
+  * check whether the provided APK's signatures are expected to verify
+ on all Android platforms supported by the APK. Run apksigner verify
+ for usage information.
+ .
+ The tool determines the range of Android platform versions (API
+ Levels) supported by the APK by inspecting the APK's
+ AndroidManifest.xml. This behavior can be overridden by specifying
+ the range of platform versions on the command-line.

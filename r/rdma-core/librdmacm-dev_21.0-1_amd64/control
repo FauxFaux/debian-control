@@ -1,0 +1,28 @@
+Package: librdmacm-dev
+Source: rdma-core
+Version: 21.0-1
+Architecture: amd64
+Maintainer: Benjamin Drung <benjamin.drung@cloud.ionos.com>
+Installed-Size: 316
+Depends: libibverbs-dev, librdmacm1 (= 21.0-1)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/linux-rdma/rdma-core
+Description: Development files for the librdmacm library
+ librdmacm is a library that allows applications to set up reliable
+ connected and unreliable datagram transfers when using RDMA adapters.
+ It provides a transport-neutral interface in the sense that the same
+ code can be used for both InfiniBand and iWARP adapters.  The
+ interface is based on sockets, but adapted for queue pair (QP) based
+ semantics: communication must use a specific RDMA device, and data
+ transfers are message-based.
+ .
+ librdmacm only provides communication management (connection setup
+ and tear-down) and works in conjunction with the verbs interface
+ provided by libibverbs, which provides the interface used to actually
+ transfer data.
+ .
+ This package is needed to compile programs against librdmacm1.
+ It contains the header files and static libraries (optionally)
+ needed for compiling.

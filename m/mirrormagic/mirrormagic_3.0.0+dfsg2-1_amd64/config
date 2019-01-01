@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+# Delete /var/lib/games/mirrormagic ?
+if [ -d /var/lib/games/mirrormagic ]; then
+
+    # Source debconf library.
+    . /usr/share/debconf/confmodule
+
+    #ask user whether or not to delete
+    db_input high mirrormagic/remove_old_highscores || true
+    db_go
+
+fi

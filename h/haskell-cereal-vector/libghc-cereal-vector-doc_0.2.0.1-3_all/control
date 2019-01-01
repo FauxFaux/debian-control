@@ -1,0 +1,26 @@
+Package: libghc-cereal-vector-doc
+Source: haskell-cereal-vector
+Version: 0.2.0.1-3
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 158
+Depends: haddock-interface-33
+Recommends: ghc-doc, libghc-cereal-doc, libghc-vector-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: https://github.com/acfoltzer/cereal-vector
+Description: Serialize instances for Data.Vector types; documentation
+ Data.Serialize functions for Data.Vector.Generic vectors. Orphan
+ instances are provided for Data.Vector, Data.Vector.Unboxed,
+ Data.Vector.Storable, and Data.Vector.Primitive vectors.
+ .
+ The serialized format is an Int64 representing the length of the
+ vector, followed by the Data.Serialized contents of each element.
+ .
+ Note that the functions in Data.Vector.Storable.UnsafeSerialize
+ perform much better when serialization does not need to account for
+ host endianness and word size.
+ .
+ This package provides the documentation for a library for the Haskell
+ programming language.
+ See http://www.haskell.org/ for more information on Haskell.

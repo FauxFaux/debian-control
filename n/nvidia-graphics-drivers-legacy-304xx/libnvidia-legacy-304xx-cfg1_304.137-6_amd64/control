@@ -1,0 +1,20 @@
+Package: libnvidia-legacy-304xx-cfg1
+Source: nvidia-graphics-drivers-legacy-304xx
+Version: 304.137-6
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 237
+Depends: nvidia-legacy-304xx-alternative (= 304.137-6), libc6 (>= 2.2.5)
+Breaks: libgl1-nvidia-legacy-304xx-glx (<< 304.135-2~)
+Replaces: libgl1-nvidia-legacy-304xx-glx (<< 304.135-2~)
+Provides: libnvidia-cfg1-any
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: NVIDIA binary OpenGL/GLX configuration library (304xx legacy version)
+ The NVIDIA binary driver provides optimized hardware acceleration of
+ OpenGL/GLX applications via a direct-rendering X Server for graphics cards
+ using NVIDIA chip sets.
+ .
+ This package contains the libnvidia-cfg.so.1 runtime library.

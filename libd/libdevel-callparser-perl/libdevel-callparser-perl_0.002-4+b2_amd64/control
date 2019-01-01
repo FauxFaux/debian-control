@@ -1,0 +1,19 @@
+Package: libdevel-callparser-perl
+Source: libdevel-callparser-perl (0.002-4)
+Version: 0.002-4+b2
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 70
+Depends: libdevel-callchecker-perl, libdynaloader-functions-perl, perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.4)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Devel-CallParser
+Description: custom parsing attached to subroutines
+ Devel::CallParser provides a C API, for XS modules, concerned with
+ custom parsing.  It is centred around the function cv_set_call_parser,
+ which allows XS code to attach a magical annotation to a Perl
+ subroutine, resulting in resolvable calls to that subroutine having
+ their arguments parsed by arbitrary C code.  (This is a more
+ conveniently structured facility than the core's PL_keyword_plugin
+ API.)  This module makes cv_set_call_parser and several supporting
+ functions available.

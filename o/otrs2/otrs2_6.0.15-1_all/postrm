@@ -1,0 +1,53 @@
+#!/bin/sh
+
+set -e
+
+CONFIGFILES="/etc/otrs/Kernel/Config.pm /etc/otrs/cron /etc/otrs/fetchmailrc /etc/otrs/database.pm"
+
+. /usr/share/debconf/confmodule
+
+purge_conffile(){
+	if [ -x /usr/bin/ucf ]; then
+		ucf --purge $1
+	fi
+	rm -f $1 $1.dpkg-* $1.ucf-*
+}
+
+if [ -e /usr/share/dbconfig-common/dpkg/postrm ]; then
+	. /usr/share/dbconfig-common/dpkg/postrm
+	dbc_go otrs2 "$@"
+fi
+
+if [ "$1" = purge ]; then
+	for PID in `ps aux|grep "^otrs .*/usr/share/otrs/bin/otrs.Daemon.pl start$"|awk '{print $2;}'`; do
+		kill -9 $PID
+	done
+	deluser otrs || true
+	rm -rf /var/lib/otrs/log /var/lib/otrs/tmp
+	rm -f /var/lib/otrs/Config/Files/ZZZ*.pm
+	rm -f /var/lib/otrs/httpd/htdocs/js/js-cache/*.js
+	rm -f /var/lib/otrs/httpd/htdocs/skins/Agent/*/css-cache/*.css
+	for FILE in $CONFIGFILES; do
+		purge_conffile $FILE
+	done
+	rm -rf /usr/share/otrs
+	rm -rf /run/otrs
+	rm -rf /etc/otrs/Kernel/Config
+	rm -f /etc/cron.d/otrs2
+	if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+		. /usr/share/apache2/apache2-maintscript-helper
+		apache2_invoke disconf otrs2.conf
+	fi
+fi
+
+# Automatically added by dh_installdebconf/12
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+if [ "$1" = purge ]; then
+	db_stop
+fi

@@ -1,0 +1,30 @@
+Package: pdl
+Source: pdl (1:2.019-5)
+Version: 1:2.019-5+b1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 15618
+Pre-Depends: dpkg (>= 1.17.14)
+Depends: libterm-readkey-perl, sensible-utils, perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.23), libgd3 (>= 2.1.0~alpha~), libgfortran5 (>= 8), libgsl23 (>= 2.5), libhdf4-0-alt (>= 4.2r4), libncurses6 (>= 6), libproj13 (>= 4.8.0), libtinfo6 (>= 6)
+Recommends: libterm-readline-gnu-perl | libterm-readline-perl-perl
+Suggests: doc-base, libastro-fits-header-perl, libdevel-repl-perl, libextutils-f77-perl, libfile-map-perl, libgl1-mesa-glx | libgl1, libinline-perl, libinline-c-perl, libmodule-compile-perl, libopengl-perl (>= 0.6702), libpdl-fftw-perl, libpdl-graphics-plplot-perl, libpgplot-perl, netpbm | imagemagick, proj-bin
+Conflicts: r-pdl
+Replaces: r-pdl
+Provides: pdlapi-12
+Section: math
+Priority: optional
+Homepage: http://pdl.perl.org/
+Description: perl data language: Perl extensions for numerics
+ PDL gives standard perl the ability to COMPACTLY
+ store and SPEEDILY manipulate the large N-dimensional data arrays
+ which are the bread and butter of scientific computing.  The idea
+ is to turn perl in to a free, array-oriented, numerical language
+ in the same sense as commercial packages like IDL and MatLab. One
+ can write simple perl expressions to manipulate entire numerical arrays
+ all at once. For example, using PDL the perl variable $a can hold a
+ 1024x1024 floating point image, it only takes 4Mb of memory to store
+ it and expressions like $a=sqrt($a)+2 would manipulate the whole image
+ in a few seconds.
+ .
+ A simple interactive shell (perldl) is provided for command line use
+ together with a module (PDL) for use in perl scripts.

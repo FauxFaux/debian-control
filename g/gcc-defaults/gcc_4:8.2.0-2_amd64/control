@@ -1,0 +1,17 @@
+Package: gcc
+Source: gcc-defaults (1.180)
+Version: 4:8.2.0-2
+Architecture: amd64
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 45
+Depends: cpp (= 4:8.2.0-2), gcc-8 (>= 8.2.0-8~)
+Recommends: libc6-dev | libc-dev
+Suggests: gcc-multilib, make, manpages-dev, autoconf, automake, libtool, flex, bison, gdb, gcc-doc
+Conflicts: gcc-doc (<< 1:2.95.3)
+Provides: c-compiler, gcc-x86-64-linux-gnu (= 4:8.2.0-2)
+Section: devel
+Priority: optional
+Description: GNU C compiler
+ This is the GNU C compiler, a fairly portable optimizing compiler for C.
+ .
+ This is a dependency package providing the default GNU C compiler.

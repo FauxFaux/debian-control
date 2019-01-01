@@ -1,0 +1,24 @@
+Package: dnsutils
+Source: bind9
+Version: 1:9.11.5.P1+dfsg-1
+Architecture: amd64
+Maintainer: Debian DNS Team <team+dns@tracker.debian.org>
+Installed-Size: 719
+Depends: bind9-host | host, libbind9-161 (= 1:9.11.5.P1+dfsg-1), libdns1104 (= 1:9.11.5.P1+dfsg-1), libisc1100 (= 1:9.11.5.P1+dfsg-1), libisccfg163 (= 1:9.11.5.P1+dfsg-1), liblwres161 (= 1:9.11.5.P1+dfsg-1), libc6 (>= 2.14), libcap2 (>= 1:2.10), libcom-err2 (>= 1.43.9), libfstrm0 (>= 0.2.0), libgeoip1, libgssapi-krb5-2 (>= 1.6.dfsg.2), libidn2-0 (>= 2.0.0), libirs161 (>= 1:9.10.6+dfsg), libjson-c3 (>= 0.10), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.6.dfsg.2), liblmdb0 (>= 0.9.6), libprotobuf-c1 (>= 1.0.0), libssl1.1 (>= 1.1.0), libxml2 (>= 2.6.27)
+Suggests: rblcheck
+Breaks: bind9 (<< 1:9.11.2+dfsg-6~)
+Replaces: bind9 (<< 1:9.11.2+dfsg-6)
+Section: net
+Priority: standard
+Homepage: https://www.isc.org/downloads/bind/
+Description: Clients provided with BIND
+ The Berkeley Internet Name Domain (BIND) implements an Internet domain
+ name server.  BIND is the most widely-used name server software on the
+ Internet, and is supported by the Internet Software Consortium, www.isc.org.
+ .
+ This package delivers various client programs related to DNS that are
+ derived from the BIND source tree.
+ .
+  - dig - query the DNS in various ways
+  - nslookup - the older way to do it
+  - nsupdate - perform dynamic updates (See RFC2136)

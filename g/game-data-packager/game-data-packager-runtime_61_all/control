@@ -1,0 +1,31 @@
+Package: game-data-packager-runtime
+Source: game-data-packager
+Version: 61
+Architecture: all
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Installed-Size: 197
+Depends: gir1.2-gtk-3.0, gir1.2-pango-1.0, python3-gi, python3:any
+Breaks: game-data-packager (<< 46~)
+Replaces: game-data-packager (<< 46~)
+Section: contrib/games
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://wiki.debian.org/Games/GameDataPackager
+Description: Launcher for proprietary games
+ Various games are divided into two logical parts: engine
+ and data. Often the engine and data are licensed in
+ different ways, such that the engine can be distributed
+ in Debian but the data cannot.
+ .
+ Some of the games supported by game-data-packager need to be
+ started by a special launcher script that will create symbolic
+ links or do other setup. This package contains those launcher
+ scripts.
+ .
+ The following games currently require this package:
+ .
+  * Doom 2: The Master Levels
+  * Quake series
+  * Unreal
+  * Unreal Gold
+  * Unreal Tournament

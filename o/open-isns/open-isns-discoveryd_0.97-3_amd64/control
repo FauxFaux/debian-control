@@ -1,0 +1,22 @@
+Package: open-isns-discoveryd
+Source: open-isns
+Version: 0.97-3
+Architecture: amd64
+Maintainer: Debian iSCSI Maintainers <open-isns@packages.debian.org>
+Installed-Size: 97
+Depends: open-isns-utils, debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.4), libisns0 (>= 0.96)
+Section: net
+Priority: optional
+Homepage: https://github.com/open-iscsi/open-isns
+Description: Internet Storage Name Service - iSNS discovery daemon
+ Open-iSNS is an implementation of the Internet Storage Name Service
+ (iSNS), according to RFC 4171, which facilitates automated discovery,
+ management, and configuration of iSCSI and Fibre Channel devices on a
+ TCP/IP network.
+ .
+ This package contains the isnsdd discovery daemon, handling all the
+ server communications required to register a node, its portals, and to
+ maintain the registration. In addition, it uses the iSNS State Change
+ Notification framework to learn of new targets or initiators coming
+ online and informs local services (such as the iSCSI initiator daemon)
+ about these changes.

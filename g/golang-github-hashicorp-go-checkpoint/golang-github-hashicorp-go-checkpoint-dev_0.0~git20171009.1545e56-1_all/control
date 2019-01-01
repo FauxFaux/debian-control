@@ -1,0 +1,21 @@
+Package: golang-github-hashicorp-go-checkpoint-dev
+Source: golang-github-hashicorp-go-checkpoint
+Version: 0.0~git20171009.1545e56-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Installed-Size: 34
+Depends: ca-certificates, golang-github-hashicorp-go-cleanhttp-dev, golang-github-hashicorp-go-uuid-dev
+Breaks: golang-defaults (<< 2:1.11~)
+Section: devel
+Priority: optional
+Homepage: https://github.com/hashicorp/go-checkpoint
+Description: Go Checkpoint Client
+ Checkpoint is an internal service at Hashicorp that is used to check version
+ information, broadcoast security bulletins, etc.
+ .
+ Since software making remote calls over the internet without being expressly
+ bidden is not in line with the DFSG, this package has been patched to be
+ disabled by default and is explicit opt-in instead ("CHECKPOINT_ENABLE=1
+ some-software", ie "CHECKPOINT_ENABLE=1 packer build").
+ .
+ This package contains the source.

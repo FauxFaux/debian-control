@@ -1,0 +1,23 @@
+Package: clamtk
+Version: 5.26-1
+Architecture: all
+Maintainer: ClamAV Team <pkg-clamav-devel@lists.alioth.debian.org>
+Installed-Size: 972
+Depends: perl, clamav (>= 0.95), clamav-freshclam (>= 0.95) | clamav-data, libgtk2-perl (>= 2:1.241), libwww-perl, liblocale-gettext-perl, libtext-csv-perl, libjson-perl, liblwp-protocol-https-perl, gnome-icon-theme, cron | cron-daemon | anacron
+Suggests: cabextract, clamtk-gnome
+Enhances: dolphin, konqueror, nemo, thunar
+Breaks: clamtk-kde, nemo-sendto-clamtk, thunar-sendto-clamtk
+Replaces: clamtk-kde, nemo-sendto-clamtk, thunar-sendto-clamtk
+Section: utils
+Priority: optional
+Homepage: https://gitlab.com/dave_m/clamtk
+Description: graphical front-end for ClamAV
+ ClamTk is a graphical front-end for Clam Antivirus.
+ .
+ It is designed to be an easy-to-use, lightweight, on-demand antivirus scanner
+ for Linux systems.
+ .
+ Context menu support for KDE's Plasma Desktop (Dolphin file manager) and
+ Nemo and Thunar sendto is included.  Context menu support for Gnome (Nautilus
+ file manager), but due to additional dependencies required, it is in a
+ separate package: clamtk-gnome.

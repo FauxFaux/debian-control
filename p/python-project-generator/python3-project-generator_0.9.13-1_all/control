@@ -1,0 +1,28 @@
+Package: python3-project-generator
+Source: python-project-generator
+Version: 0.9.13-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 338
+Depends: python3-project-generator-definitions (<< 0.3.0), python3 (>= 3.2), python3-jinja2, python3-xmltodict, python3-yaml, python3:any
+Section: python
+Priority: optional
+Homepage: https://github.com/project-generator/project_generator
+Description: project generators for various embedded tools (IDE)
+ python-project-generator allows one to define an embedded hardware/software
+ project in structured text (using YAML), and then generate IDE (integrated
+ development environment) project files based on the defined rules.
+ .
+ python-project-generator currently generates projects for the following tools:
+ .
+  - CMake (GCC ARM)
+  - CoIDE (GCC ARM)
+  - Eclipse (Makefile with GCC ARM)
+  - IAR
+  - Makefile (ARMCC)
+  - Makefile (GCC ARM)
+  - Sublime Text (Makefile with GCC ARM)
+  - uVision4 and uVision5
+  - Visual Studio (Makefile with GCC ARM)
+ .
+ This package installs the library and `progen` helper script for Python 3.

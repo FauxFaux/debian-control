@@ -1,0 +1,26 @@
+Package: xserver-xorg-video-ati
+Version: 1:18.1.0-1
+Architecture: amd64
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Installed-Size: 361
+Depends: libc6 (>= 2.4), libpciaccess0, xorg-video-abi-24, xserver-xorg-core (>= 2:1.18.99.901), xserver-xorg-video-radeon
+Suggests: xserver-xorg-video-r128, xserver-xorg-video-mach64
+Provides: xorg-driver-video
+Section: x11
+Priority: optional
+Homepage: https://wiki.freedesktop.org/xorg/RadeonFeature/
+Description: X.Org X server -- AMD/ATI display driver wrapper
+ This package provides the 'ati' driver for the AMD/ATI Mach64, Rage128,
+ Radeon, FireGL, FireMV, FirePro and FireStream series. This driver is
+ actually a wrapper that loads one of the 'mach64', 'r128' or 'radeon'
+ sub-drivers depending on the hardware.
+ These sub-drivers are brought through package dependencies.
+ .
+ Users of Rage, Mach, or Radeon boards may remove this package only if
+ they use Driver "r128", "mach64", or "radeon" in /etc/X11/xorg.conf
+ instead of relying on autodetection.
+ .
+ More information about X.Org can be found at:
+ <URL:https://www.X.org>
+ .
+ This package is built from the X.org xf86-video-ati driver module.

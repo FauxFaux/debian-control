@@ -1,0 +1,35 @@
+Package: pki-ocsp
+Source: dogtag-pki
+Version: 10.6.8-2
+Architecture: all
+Maintainer: Debian FreeIPA Team <pkg-freeipa-devel@alioth-lists.debian.net>
+Installed-Size: 382
+Depends: pki-server (>= 10.6.8-2)
+Suggests: pki-ca
+Section: java
+Priority: optional
+Homepage: http://pki.fedoraproject.org
+Description: Certificate System - Online Certificate Status Protocol Manager
+ Certificate System (CS) is an enterprise software system designed
+ to manage enterprise Public Key Infrastructure (PKI) deployments.
+ .
+ The Online Certificate Status Protocol (OCSP) Manager is an optional PKI
+ subsystem that can act as a stand-alone OCSP service.  The OCSP Manager
+ performs the task of an online certificate validation authority by enabling
+ OCSP-compliant clients to do real-time verification of certificates.  Note
+ that an online certificate-validation authority is often referred to as an
+ OCSP Responder.
+ .
+ Although the Certificate Authority (CA) is already configured with an
+ internal OCSP service.  An external OCSP Responder is offered as a separate
+ subsystem in case the user wants the OCSP service provided outside of a
+ firewall while the CA resides inside of a firewall, or to take the load of
+ requests off of the CA.
+ .
+ The OCSP Manager can receive Certificate Revocation Lists (CRLs) from
+ multiple CA servers, and clients can query the OCSP Manager for the
+ revocation status of certificates issued by all of these CA servers.
+ .
+ When an instance of OCSP Manager is set up with an instance of CA, and
+ publishing is set up to this OCSP Manager, CRLs are published to it
+ whenever they are issued or updated.

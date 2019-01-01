@@ -1,0 +1,26 @@
+Package: libghc-semigroupoids-dev
+Source: haskell-semigroupoids (5.2.2-3)
+Version: 5.2.2-3+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 4275
+Depends: libghc-base-dev-4.11.1.0-5dd74, libghc-base-orphans-dev-0.7-66f93, libghc-bifunctors-dev-5.5.3-42456, libghc-comonad-dev-5.0.4-f8103, libghc-containers-dev-0.5.11.0-e0faa, libghc-contravariant-dev-1.4.1-de006, libghc-distributive-dev-0.5.3-f2540, libghc-hashable-dev-1.2.7.0-68a88, libghc-semigroups-dev-0.18.5-df031, libghc-tagged-dev-0.8.5-16742, libghc-template-haskell-dev-2.13.0.0-87d93, libghc-transformers-dev-0.5.5.0-b5d2f, libghc-transformers-compat-dev-0.6.2-90583, libghc-unordered-containers-dev-0.2.9.0-e9bb1, libatomic1 (>= 4.8), libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-semigroupoids-doc, libghc-semigroupoids-prof
+Provides: libghc-semigroupoids-dev-5.2.2-4dfef
+Section: haskell
+Priority: optional
+Homepage: http://github.com/ekmett/semigroupoids
+Description: Haskell 98 semigroupoids: Category sans id
+ A Semigroupoid is a Category without the requirement of identity arrows for
+ every object in the category.
+ .
+ When working with comonads you often have the <*> portion of an Applicative,
+ but not the pure. This was captured in Uustalu and Vene's "Essence of Dataflow
+ Programming" in the form of the ComonadZip class in the days before
+ Applicative. Apply provides a weaker invariant, but for the comonads used for
+ data flow programming (found in the streams package), this invariant is
+ preserved. Applicative function composition forms a semigroupoid.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: semigroupoids-5.2.2-KVG6gsOeDW4CK2B2LlI67

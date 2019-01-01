@@ -1,0 +1,17 @@
+Package: dbconfig-no-thanks
+Source: dbconfig-common
+Version: 2.0.11
+Architecture: all
+Maintainer: Paul Gevers <elbrus@debian.org>
+Installed-Size: 9
+Depends: dbconfig-common (= 2.0.11)
+Conflicts: dbconfig-mysql, dbconfig-pgsql, dbconfig-sqlite, dbconfig-sqlite3
+Section: admin
+Priority: optional
+Description: dbconfig-common bypass
+ If a package relies on the dbconfig-common framework for database setup and
+ maintenance, installing dbconfig-no-thanks instead of one of dbconfig's
+ database-specific packages will block this function. It is intended for cases
+ where the system administrator desires or requires full control of the
+ database or where dbconfig-common makes bad choices, and typically leaves
+ the depending packages non-functional until manually configured.

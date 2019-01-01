@@ -1,0 +1,24 @@
+#!/bin/sh -e
+
+case "$1" in
+    configure)
+        # place the templates in /etc if they're not there ...
+        for file in voice.conf; do
+            if [ ! -f /etc/mgetty/$file ] ; then
+                cp -a /usr/share/mgetty/templates/etc/$file /etc/mgetty/$file;
+            fi;
+        done
+
+	chown -R root:voice /var/spool/voice/incoming /var/spool/voice/messages
+	chmod 755 /var/spool/voice/messages
+	chmod 775 /var/spool/voice/incoming
+	;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+    *)
+	;;
+esac
+
+
+
+exit 0;

@@ -1,0 +1,21 @@
+Package: spfquery
+Source: libspf2 (1.2.10-7)
+Version: 1.2.10-7+b5
+Architecture: amd64
+Maintainer: Magnus Holmgren <holmgren@debian.org>
+Installed-Size: 97
+Depends: libc6 (>= 2.15), libspf2-2 (= 1.2.10-7+b5)
+Conflicts: libmail-spf-query-perl (<< 1:1.999.1-3)
+Section: mail
+Priority: optional
+Homepage: http://www.libspf2.org/
+Description: query SPF (Sender Policy Framework) to validate mail senders
+ The Sender Policy Framework (SPF) is one part of the SPF/SRS protocol
+ pair. SPF allows email systems such as Sendmail, Postfix, Exim,
+ Zmailer and MS Exchange to check SPF records and make sure that the
+ email is authorized by the domain name that it is coming from. This
+ prevents email forgery, commonly used by spammers, scammers and email
+ viruses/worms.
+ .
+ This package contains simple utilities that use libspf2 to test and
+ query SPF records.

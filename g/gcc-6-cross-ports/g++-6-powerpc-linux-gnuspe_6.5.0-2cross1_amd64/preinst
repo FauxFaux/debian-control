@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove powerpc-linux-gnuspe-g++ /usr/bin/powerpc-linux-gnuspe-g++-6
+fi
+
+
+
+exit 0

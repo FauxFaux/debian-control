@@ -1,0 +1,27 @@
+Package: rygel
+Version: 0.36.2-3
+Architecture: amd64
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Installed-Size: 3249
+Depends: libc6 (>= 2.4), libgdk-pixbuf2.0-0 (>= 2.31.1), libgee-0.8-2 (>= 0.8.3), libglib2.0-0 (>= 2.40.0), libgssdp-1.0-3 (>= 0.12.0), libgstreamer-plugins-base1.0-0 (>= 1.0.0), libgstreamer1.0-0 (>= 1.0.0), libgupnp-1.0-4 (>= 0.20.14), libgupnp-av-1.0-2 (>= 0.12.8), libgupnp-dlna-2.0-3 (>= 0.9.4), libmediaart-2.0-0 (>= 1.9.0), librygel-core-2.6-2, librygel-db-2.6-2, librygel-renderer-2.6-2, librygel-server-2.6-2, libsoup2.4-1 (>= 2.44.0), libsqlite3-0 (>= 3.5.9), libxml2 (>= 2.7.4)
+Recommends: dbus-user-session, gstreamer1.0-libav, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-plugins-ugly
+Suggests: rygel-playbin, rygel-preferences, rygel-ruih, rygel-tracker, tumbler
+Section: net
+Priority: optional
+Homepage: https://wiki.gnome.org/Projects/Rygel
+Description: GNOME UPnP/DLNA services
+ Rygel is a home media solution that allows you to easily share audio, video
+ and pictures, and control of media player on your home network. In technical
+ terms it is both a UPnP AV MediaServer and MediaRenderer implemented through
+ a plug-in mechanism. Interoperability with other devices in the market is
+ achieved by conformance to very strict requirements of DLNA and on the fly
+ conversion of media to format that client devices are capable of handling.
+ .
+ This package contains the core of Rygel and following plugins:
+   * media-export: Recursively exports folders and files specified in the
+     user configuration. This plugin supports all types of URIs that
+     gio/gvfs and GStreamer can handle.
+   * external: A MediaServer plugin that exports media hierarchies
+     provided by external applications.
+   * mpris: Export of media players that implement MPRIS2 D-Bus interface,
+     as MediaRenderer devices.

@@ -1,0 +1,28 @@
+Package: tachyon-bin-nox
+Source: tachyon
+Version: 0.99~b6+dsx-9
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 127
+Depends: libtachyon-mt-0 (= 0.99~b6+dsx-9) | libtachyon, libc6 (>= 2.14)
+Breaks: tachyon (<< 0.99~b6)
+Provides: tachyon-bin
+Section: math
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://jedi.ks.uiuc.edu/~johns/raytracer/
+Description: Parallel/Multiprocessor Standalone Ray Tracer - with no X support
+ Tachyon is a portable, high performance parallel ray tracing system
+ supporting MPI and multithreaded implementations. Tachyon is built as
+ a C callable library, which can be used within applications.
+ .
+ Tachyon implements all of the basic geometric primitives such as
+ triangles, planes, spheres, cylinders, etc. Some of the goals in
+ developing Tachyon were to make it fast and for it to parallelize
+ well. These are what set it apart from more full-featured programs
+ like POV-Ray, Rayshade, and others. Tachyon supports enough features
+ to be an excellent alternative to slower programs for demanding
+ animation and scientific visualization tasks.
+ .
+ This package provides a simple scene file parser front-end built upon
+ tachyon but without X support.

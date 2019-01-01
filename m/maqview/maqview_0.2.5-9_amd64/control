@@ -1,0 +1,23 @@
+Package: maqview
+Version: 0.2.5-9
+Architecture: amd64
+Maintainer: Debian-Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 630
+Depends: freeglut3, libc6 (>= 2.15), libgcc1 (>= 1:3.0), libgl1, libglu1-mesa | libglu1, libstdc++6 (>= 5), libx11-6, libxi6
+Section: science
+Priority: optional
+Homepage: http://maq.sourceforge.net/maqview.shtml
+Description: graphical read alignment viewer for short gene sequences
+ Maqview is graphical read alignment viewer. It is specifically designed
+ for the Maq alignment file and allows you to see the mismatches, base
+ qualities and mapping qualities. Maqview is nothing fancy as Consed or
+ GAP, but just a simple viewer for you to see what happens in a
+ particular region.
+ .
+ In comparison to tgap-maq, the text-based read alignment viewer written
+ by James Bonfield, Maqview is faster and takes up much less memory and
+ disk space in indexing. This is possibly because tgap aims to be a
+ general-purpose viewer but Maqview fully makes use of the fact that a
+ Maq alignment file has already been sorted. Maqview is also efficient in
+ viewing and provides a command-line tool to quickly retrieve any region
+ in an Maq alignment file.

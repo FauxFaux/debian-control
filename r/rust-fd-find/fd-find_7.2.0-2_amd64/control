@@ -1,0 +1,33 @@
+Package: fd-find
+Source: rust-fd-find
+Version: 7.2.0-2
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 2259
+Depends: libc6 (>= 2.18), libgcc1 (>= 1:4.2)
+Section: utils
+Priority: optional
+Multi-Arch: allowed
+Homepage: https://github.com/sharkdp/fd
+Description: Simple, fast and user-friendly alternative to find
+ While it does not seek to mirror all of find's powerful functionality,
+ fd provides sensible (opinionated) defaults for 80% of the use cases.
+ .
+ Features:
+ .
+  * Convenient syntax: ‘fd PATTERN’ instead of ‘find -iname '*PATTERN*'’.
+  * Colorized terminal output (similar to ls).
+  * It's fast, often faster than find.
+  * Smart case.
+  * Ignores hidden directories and files, by default.
+  * Ignores patterns from your .gitignore, by default.
+  * Regular expressions.
+  * Unicode-awareness.
+  * Parallel command execution with a syntax similar to GNU Parallel.
+ .
+  Please note: the executable and the associated manpage were renamed
+  from ‘fd’ to ‘fdfind’ because of a file name clash.
+ .
+ This package contains the following binaries built from the Rust crate
+ "fd-find":
+  - fd

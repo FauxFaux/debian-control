@@ -1,0 +1,399 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+. /usr/share/dbconfig-common/dpkg/postinst
+
+# Set permissions for sqlite3 file
+dbc_dbfile_owner="www-data:www-data"
+dbc_dbfile_perms="0640"
+
+dbc_go mailman3-web "$@"
+
+pathfind() {
+    OLDIFS="$IFS"
+    IFS=:
+    for p in $PATH; do
+        if [ -x "$p/$*" ]; then
+            IFS="$OLDIFS"
+            return 0
+        fi
+    done
+    IFS="$OLDIFS"
+    return 1
+}
+
+if [ -e /usr/share/apache2/apache2-maintscript-helper ]; then
+    . /usr/share/apache2/apache2-maintscript-helper
+
+    apache_install() {
+        if [ -d /etc/apache2/conf-available ] && [ ! -e /etc/apache2/conf-available/mailman3.conf ]; then
+            ln -s /etc/mailman3/apache.conf /etc/apache2/conf-available/mailman3.conf
+        fi
+        # Enable proxy_uwsgi module
+        if [ -f /etc/apache2/mods-available/proxy_uwsgi.load ]; then
+            apache2_invoke enmod proxy_uwsgi
+        fi
+        # Enable the configuration
+        apache2_invoke enconf mailman3.conf
+    }
+else
+    apache_install() {
+        return 1
+    }
+fi
+
+if [ -e /usr/share/nginx ]; then
+    nginx_install() {
+        if [ -d /etc/nginx/sites-enabled ] && [ ! -e /etc/nginx/sites-enabled/mailman3 ]; then
+            ln -s /etc/mailman3/nginx.conf /etc/nginx/sites-enabled/mailman3
+            mkdir -p /var/log/nginx/mailman3 && chown www-data:adm /var/log/nginx/mailman3
+        fi
+    }
+else
+    nginx_install() {
+        return 1
+    }
+fi
+
+settings_local_new=
+
+cleanup () {
+    [ "$settings_local_new" ] && rm -f "$settings_local_new"
+}
+
+# All seds are using a vertical pipe "|" as a delimiter because of
+# the potential presence of a slash "/" into some variables, as those
+# filled with a base64 -w0. We thought about using a number sign "#",
+# but sometimes the delimiter follows a variable sign "$", and "$#"
+# might be interpreted by the shell.
+create_config () {
+    trap cleanup EXIT
+    settings_local_new=`tempfile -m 0644`
+    cp -a /usr/share/mailman3-web/settings_local.py.sample $settings_local_new
+    
+    # get database settings from dbconfig-common
+    if [ -f /etc/dbconfig-common/mailman3-web.conf ]; then
+        . /etc/dbconfig-common/mailman3-web.conf
+
+        # Comment out default database settings if dbconfig is used
+        sed -i -e "s|^\(\s\+\)\('ENGINE':\)|\1#\2|" \
+                $settings_local_new
+
+        sed -i -e "s|^\(\s\+'NAME':\s*'\)\S\+\(',\s*\)|\1$dbc_dbname\2|" \
+               -e "s|^\(\s\+'USER':\s*'\)\S\+\(',\s*\)|\1$dbc_dbuser\2|" \
+               -e "s|^\(\s\+'PASSWORD':\s*'\)\S\+\(',\s*\)|\1$dbc_dbpass\2|" \
+               -e "s|^\(\s\+'HOST':\s*'\)\S*\(',\s*\)|\1$dbc_dbserver\2|" \
+                $settings_local_new
+    fi
+
+    case "$dbc_dbtype" in
+        pgsql)
+            sed -i -e "s|^\(\s\+\)#\?\s*\('ENGINE': 'django.db.backends.postgresql_psycopg2',\s*\)$|\1\2|" \
+                    $settings_local_new
+            ;;
+        mysql)
+            sed -i -e "s|^\(\s\+\)#\?\s*\('ENGINE': 'django.db.backends.mysql',\s*\)$|\1\2|" \
+                   -e "s|^\(\s\+\)#\?\s*\('init_command': \"SET sql_mode=.*\",\s*\)$|\1\2|" \
+                    $settings_local_new
+            ;;
+        sqlite3)
+            sed -i -e "s|^\(\s\+\)#\?\s*\('ENGINE': 'django.db.backends.sqlite3',\s*\)$|\1\2|" \
+                   -e "s|^\(\s\+'NAME':\s*'\)\S\+\(',\s*\)|\1$dbc_basepath/$dbc_dbname\2|" \
+                    $settings_local_new
+            ;;
+        "")
+            ;;
+        *)
+            echo "Unsupported database type $dbc_type."
+            exit 1
+            ;;
+    esac
+
+    # Get SECRET_KEY from mailman-web.py if existent
+    [ -f /etc/mailman3/mailman-web.py ] && {
+        secretkey="$(sed -ne "s/^SECRET_KEY = '\(\S\+\)'$/\1/p" \
+            /etc/mailman3/mailman-web.py)"
+    }
+    # If this is the default key, forget it!
+    [ "$secretkey" = "change-this-on-your-production-server" ] && unset secretkey
+    # Generate a new one
+    while [ -z "$secretkey" ]; do
+        secretkey="$(dd if=/dev/urandom bs=1 count=200 2>/dev/null | \
+            base64 -w0 | sed -ne 's|\(.\{48\}\).*|\1|p')"
+    done
+
+    # Get admin mail address from ADMINS from maimlan3-web.py if existent
+    [ -f /etc/mailman3/mailman-web.py ] && {
+        adminmail="$(sed -e '1,/^ADMINS = ($/d' -e '/^)$/,$d' -e \
+            "s|^.*'Mailman Suite Admin'.*'\(\S\+\)').*$|\1|" \
+            /etc/mailman3/mailman-web.py)"
+    }
+
+    # Get MAILMAN_REST_API_PASS from mailman-web.py if existent
+    [ -f /etc/mailman3/mailman-web.py ] && {
+        restapipass="$(sed -ne "s|^MAILMAN_REST_API_PASS = '\(\S\+\)'$|\1|p" \
+            /etc/mailman3/mailman-web.py)"
+    }
+    # If this is the default key, forget it!
+    [ "$restapipass" = "restpass" ] && unset restapipass
+    # Set a new one
+    if [ -z "$archiverkey" ]; then
+        [ -f /etc/mailman3/mailman.cfg ] && {
+            restapipass="$(sed -ne 's|^\s*admin_pass:\s*||p' \
+                /etc/mailman3/mailman.cfg)"
+        }
+    fi
+
+    # Get MAILMAN_ARCHIVER_KEY from mailman-web.py if existent
+    [ -f /etc/mailman3/mailman-web.py ] && {
+        archiverkey="$(sed -ne "s|^MAILMAN_ARCHIVER_KEY = '\(\S\+\)'$|\1|p" \
+            /etc/mailman3/mailman-web.py)"
+    }
+    # If this is the default key, forget it!
+    [ "$archiverkey" = "SecretArchiverAPIKey" ] && unset archiverkey
+    # Generate a new one
+    while [ -z "$archiverkey" ]; do
+        archiverkey="$(dd if=/dev/urandom bs=1 count=200 2>/dev/null \
+            | base64 -w0 | sed -ne 's|\(.\{32\}\).*|\1|p')"
+    done
+
+    db_get mailman3-web/emailname
+    emailname="$RET"
+
+    db_get mailman3-web/superuser-mail
+    su_mail="$RET"
+
+    # Set custom settings in settings_local.py
+    sed -i -e "s|^\(\s*SECRET_KEY\s*=\s*'\)\S\+\('\s*\)$|\1$secretkey\2|" \
+           -e "/^ADMINS = ($/,/^)$/{s|'$adminmail'|'$su_mail'|}" \
+           -e "s|^\(\s*MAILMAN_REST_API_PASS\s*=\s*'\)\S\+\('\s*\)|\1$restapipass\2|" \
+           -e "s|^\(\s*MAILMAN_ARCHIVER_KEY\s*=\s*'\)\S\+\('\s*\)|\1$archiverkey\2|" \
+           -e "s|^\(\s*EMAILNAME\s*=\s*'\)\S\+\('\s*\)|\1$emailname\2|" \
+           $settings_local_new
+
+    # Register new config file
+    ucf --three-way --debconf-ok "$settings_local_new" /etc/mailman3/mailman-web.py
+    ucfr mailman3-web /etc/mailman3/mailman-web.py
+    chmod 0640 /etc/mailman3/mailman-web.py
+    chown root:www-data /etc/mailman3/mailman-web.py
+    rm -f $settings_local_new
+}
+
+su_cmd="su --shell /bin/sh --command"
+django_admin="python3 /usr/bin/django-admin"
+django_admin_args="--verbosity 0 --no-color --pythonpath /usr/share/mailman3-web --settings settings"
+
+init_django () {
+    if pathfind django-admin; then
+        update_django
+        $su_cmd "$django_admin loaddata $django_admin_args first_start" www-data
+    fi
+}
+
+update_django () {
+    if pathfind django-admin; then
+        $su_cmd "$django_admin migrate --no-input $django_admin_args" www-data
+        $su_cmd "$django_admin collectstatic --no-input $django_admin_args" www-data
+        $su_cmd "$django_admin compress $django_admin_args" www-data
+    fi
+}
+
+django_config_site () {
+    db_get mailman3-web/django-site
+    django_site_domain="$RET"
+
+    if [ -n "$django_site_domain" ]; then
+       django_site_domain_old="$($su_cmd "$django_admin shell $django_admin_args \
+           --command \"from django.contrib.sites.models import Site; \
+           print(Site.objects.all()[0].domain)\"" www-data)"
+       django_site_name="$($su_cmd "$django_admin shell $django_admin_args \
+           --command \"import locale; from django.contrib.sites.models import Site; \
+           print(Site.objects.all()[0].name.encode(locale.getpreferredencoding()))\"" www-data)"
+
+       if [ "$django_site_name" = "example.com" ] || \
+          [ "$django_site_name" = "$django_site_domain_old" ]; then
+           # change site name only if it's unchanged so far
+           django_site_name="$django_site_domain"
+       fi
+
+       $su_cmd "$django_admin shell $django_admin_args --command \
+            \"import locale; \
+              from django.contrib.sites.models import Site; \
+              one = Site.objects.all()[0]; \
+              one.domain = '${django_site_domain}'; \
+              one.name = ${django_site_name}.decode(locale.getpreferredencoding()); \
+              one.save()\"" www-data
+    fi
+}
+
+django_create_superuser () {
+    db_get mailman3-web/superuser-name
+    su_name="$RET"
+    db_get mailman3-web/superuser-mail
+    su_mail="$RET"
+    db_get mailman3-web/superuser-password
+    su_password="$RET"
+
+    if [ -n "$su_name" ] && [ -n "$su_mail" ] && [ -n "$su_password" ]; then
+        $su_cmd "$django_admin shell $django_admin_args --command \
+            \"from django.contrib.auth.models import User; \
+              User.objects.filter(username='$su_name').delete(); \
+              User.objects.create_superuser('$su_name', \
+              '$su_mail', '$su_password')\"" www-data
+    fi
+}
+
+upgrade_fixes () {
+    # Rebuild hyperkitty index if upgrading from Python2 packages
+    version="$(dpkg -s $DPKG_MAINTSCRIPT_PACKAGE | sed -n 's/^Version: //p')"
+    if dpkg --compare-versions "$version" le "0+20180916-1"; then
+        $su_cmd "$django_admin rebuild_index --noinput $django_admin_args" www-data
+    fi
+}
+
+case "$1" in
+    configure)
+
+        create_config
+
+        if [ -n "$2" ]; then
+            init_django
+        else
+            update_django
+        fi
+
+        django_config_site
+        django_create_superuser
+
+        upgrade_fixes
+
+        # Handle webserver configuration/restart
+        db_get mailman3-web/configure-webserver
+        webservers="$RET"
+        restart=""
+
+        for webserver in $webservers; do
+            webserver=${webserver%,}
+            case "$webserver" in
+                apache2)
+                    apache_install
+                    ;;
+                nginx)
+                    nginx_install
+                    db_input high mailman3-web/nginx-choice || true
+                    ;;
+            esac
+            pathfind $webserver || continue
+            restart="$restart $webserver"
+        done
+
+        db_get mailman3-web/restart-webserver
+        res="$RET"
+        if [ "$res" = "true" ]; then
+            for webserver in $restart; do
+                webserver=${webserver%,}
+                # Redirection of 3 is needed because Debconf uses it and it might
+                # be inherited by webserver. See bug #446324.
+                if pathfind invoke-rc.d; then
+                    invoke-rc.d $webserver reload 3>/dev/null || true
+                else
+                    /etc/init.d/$webserver reload 3>/dev/null || true
+                fi
+            done
+        fi
+
+        db_stop
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installsystemd/11.4.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create mailman3-web.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.4.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create mailman3-web.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.4.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/mailman3-web" ]; then
+		update-rc.d mailman3-web defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d mailman3-web $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.4.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'mailman3-web.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'mailman3-web.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'mailman3-web.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'mailman3-web.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.4.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'mailman3-web-qcluster.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'mailman3-web-qcluster.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'mailman3-web-qcluster.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'mailman3-web-qcluster.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.4.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		deb-systemd-invoke $_dh_action 'mailman3-web-qcluster.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

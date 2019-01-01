@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "remove" ]; then
+	if which invoke-rc.d >/dev/null 2>&1 ; then
+			invoke-rc.d glewlwyd stop || true
+	else
+			/etc/init.d/glewlwyd stop || true
+	fi
+fi
+
+# Automatically added by dh_installsystemd/11.5.4
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop 'glewlwyd.service' >/dev/null || true
+fi
+# End automatically added section
+

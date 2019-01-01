@@ -1,0 +1,31 @@
+Package: python3-h5py
+Source: h5py
+Version: 2.8.0-3
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 6020
+Depends: python3 (<< 3.8), python3 (>= 3.6~), python3-numpy (>= 1:1.14.3), python3-numpy-abi9, python3-six, python3:any, libc6 (>= 2.14), libhdf5-103
+Suggests: python-h5py-doc
+Section: python
+Priority: optional
+Homepage: http://www.h5py.org/
+Description: general-purpose Python interface to hdf5 (Python 3)
+ HDF5 for Python (h5py) is a general-purpose Python interface to the
+ Hierarchical Data Format library, version 5. HDF5 is a versatile, mature
+ scientific software library designed for the fast, flexible storage of
+ enormous amounts of data.
+ .
+ From a Python programmer's perspective, HDF5 provides a robust way to
+ store data, organized by name in a tree-like fashion. You can create
+ datasets (arrays on disk) hundreds of gigabytes in size, and perform
+ random-access I/O on desired sections. Datasets are organized in a
+ filesystem-like hierarchy using containers called "groups", and accessed
+ using the tradional POSIX /path/to/resource syntax.
+ .
+ H5py provides a simple, robust read/write interface to HDF5 data from
+ Python. Existing Python and Numpy concepts are used for the interface;
+ for example, datasets on disk are represented by a proxy class that
+ supports slicing, and has dtype and shape attributes. HDF5 groups are
+ presented using a dictionary metaphor, indexed by name.
+ .
+ This package provides the modules for Python 3.

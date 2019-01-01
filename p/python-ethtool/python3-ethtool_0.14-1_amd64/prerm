@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+if [ "$1" != "upgrade" ]; then
+  update-alternatives --remove pethtool /usr/sbin/pethtool3
+  update-alternatives --remove pifconfig /usr/sbin/pifconfig3
+fi
+
+

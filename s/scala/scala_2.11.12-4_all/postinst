@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+priority=2111
+basedir=/usr/share/scala-2.11
+
+case "$1" in
+    configure)
+        update-alternatives \
+            --install /usr/bin/scala    scala    $basedir/bin/scala $priority \
+            --slave   /usr/bin/scalac   scalac   $basedir/bin/scalac \
+            --slave   /usr/bin/scaladoc scaladoc $basedir/bin/scaladoc \
+            --slave   /usr/bin/scalap   scalap   $basedir/bin/scalap \
+            --slave   /usr/bin/fsc      fsc      $basedir/bin/fsc \
+            --slave   /usr/share/man/man1/scala.1.gz    scala.1.gz    $basedir/man/man1/scala.1.gz \
+            --slave   /usr/share/man/man1/scalac.1.gz   scalac.1.gz   $basedir/man/man1/scalac.1.gz \
+            --slave   /usr/share/man/man1/scaladoc.1.gz scaladoc.1.gz $basedir/man/man1/scaladoc.1.gz \
+            --slave   /usr/share/man/man1/scalap.1.gz   scalap.1.gz   $basedir/man/man1/scalap.1.gz \
+            --slave   /usr/share/man/man1/fsc.1.gz      fsc.1.gz      $basedir/man/man1/fsc.1.gz
+        ;;
+
+esac
+
+
+
+exit 0

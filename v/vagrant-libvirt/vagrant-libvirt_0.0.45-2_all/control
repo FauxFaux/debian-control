@@ -1,0 +1,28 @@
+Package: vagrant-libvirt
+Version: 0.0.45-2
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 286
+Depends: ruby | ruby-interpreter, ruby-fog-core (>= 1.43.0), ruby-fog-libvirt (>= 0.3.0), ruby-nokogiri (>= 1.6), vagrant
+Recommends: qemu-utils, nfs-kernel-server, libguestfs-tools
+Section: admin
+Priority: optional
+Homepage: https://github.com/vagrant-libvirt/vagrant-libvirt
+Description: Vagrant plugin that adds an Libvirt provider to Vagrant
+ vagrant-libvirt allows Vagrant to control and provision machines via
+ Libvirt toolkit.
+ .
+ It has many relevant features:
+  * Control local Libvirt hypervisors.
+  * Upload box image (qcow2 format) to Libvirt storage pool.
+  * Create volume as COW diff image for domains.
+  * Create private networks.
+  * Create and boot Libvirt domains.
+  * SSH into domains.
+  * Setup hostname and network interfaces.
+  * Provision domains with any built-in Vagrant provisioner.
+  * Synced folder support via rsync, nfs or 9p.
+  * Snapshots via sahara.
+  * Package caching via vagrant-cachier.
+  * Use boxes from other Vagrant providers via vagrant-mutate.
+Ruby-Versions: all

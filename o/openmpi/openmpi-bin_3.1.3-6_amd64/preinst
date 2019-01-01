@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+
+if [  -z "$(update-alternatives --query mpirun-x86_64-linux-gnu 2>&1  > /dev/null)" ]; then 
+  update-alternatives --remove-all mpirun-x86_64-linux-gnu 
+fi
+
+# If corrupt from a previous install
+if [ ! -z "$(update-alternatives --query mpi 2>&1 >  /dev/null)" ]; then
+  rm -f /var/lib/dpkg/alternatives/mpi
+fi
+
+# Delete old non-multi-arch aware mpi 
+if [ ! -z "$(update-alternatives --query mpi 2> /dev/null | grep --silent libmpi)" ]; then
+  update-alternatives --remove-all mpi
+fi
+
+
+
+exit 0

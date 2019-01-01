@@ -1,0 +1,21 @@
+Package: linux-image-4.19.0-1-amd64
+Source: linux-signed-amd64 (4.19.13+1)
+Version: 4.19.13-1
+Architecture: amd64
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 257853
+Depends: kmod, linux-base (>= 4.3~), initramfs-tools (>= 0.120+deb8u2) | linux-initramfs-tool
+Recommends: firmware-linux-free, irqbalance, apparmor
+Suggests: linux-doc-4.19, debian-kernel-handbook, grub-pc | grub-efi-amd64 | extlinux
+Conflicts: linux-image-4.19.0-1-amd64-unsigned
+Breaks: initramfs-tools (<< 0.120+deb8u2), xserver-xorg-input-vmmouse (<< 1:13.0.99)
+Replaces: linux-image-4.19.0-1-amd64-unsigned
+Built-Using: linux (= 4.19.13-1)
+Section: kernel
+Priority: optional
+Homepage: https://www.kernel.org/
+Description: Linux 4.19 for 64-bit PCs (signed)
+ The Linux kernel 4.19 and modules for use on PCs with AMD64, Intel 64 or
+ VIA Nano processors.
+ .
+ The kernel image and modules are signed for use with Secure Boot.

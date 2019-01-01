@@ -1,0 +1,26 @@
+Package: python-keyrings.alt
+Source: keyrings.alt
+Version: 3.1.1-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 92
+Depends: python-crypto, python-six, python:any (<< 2.8), python:any (>= 2.7~)
+Suggests: gir1.2-gnomekeyring-1.0, python-gdata, python-gi, python-keyczar
+Section: python
+Priority: optional
+Homepage: https://github.com/jaraco/keyrings.alt
+Description: alternate backend implementations for python-keyring
+ The Python keyring library provides an easy way to access the system keyring
+ service from Python. It can be used in any application that needs safe
+ password storage.
+ .
+ Keyrings.alt module contains the alternate keyring backend implementations
+ for use with python-keyring, most importantly the file backend which does
+ not need any external services to work.
+ .
+ Keyrings in this package may have security risks or other implications.
+ These backends were extracted from the main keyring project to make them
+ available for those who wish to employ them, but are discouraged for general
+ production use. Include this module and use its backends at your own risk.
+ .
+ This package contains the Python 2 version of keyrings.alt.

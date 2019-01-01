@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/logrotate puppet-module-logrotate /usr/share/puppet/modules.available/rodjek-logrotate 500
+fi
+
+
+
+exit 0

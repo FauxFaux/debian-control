@@ -1,0 +1,17 @@
+Package: debos
+Version: 1.0.0+git20181105.b02e058-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 5969
+Depends: libc6 (>= 2.3.2), libglib2.0-0 (>= 2.37.0), libostree-1-1 (>= 2016.8), busybox | busybox-static, systemd-container, debootstrap, qemu-system-x86, qemu-user-static
+Recommends: bmap-tools, ovmf, bzip2, xz-utils, zip, parted, mount, udev, e2fsprogs, linux-image-amd64
+Built-Using: golang-1.10 (= 1.10.4-2), golang-github-docker-go-units (= 0.3.3-1), golang-github-go-debos-fakemachine (= 0.0~git20181105.9316584-1), golang-github-sjoerdsimons-ostree-go (= 0.0~git20180110.2a7a255-1), golang-github-surma-gocpio (= 1.1.0+git20160926.fcb6877-1), golang-go-flags (= 1.3.0-4), golang-golang-x-sys (= 0.0~git20181026.95b1ffb-1), golang-gopkg-freddierice-go-losetup.v1 (= 0.0~git20170407.fc9adea-1), golang-yaml.v2 (= 2.2.1-1)
+Section: devel
+Priority: optional
+Homepage: https://github.com/go-debos/debos
+Description: Debian OS builder
+ debos is a tool to make creation of various Debian based OS "images"
+ simpler. While most other tools focus on specific use-case, debos is
+ more meant as a toolchain to make comon actions trivial while providing
+ enough rope to do whatever tweaking that might be required behind
+ the scenes.

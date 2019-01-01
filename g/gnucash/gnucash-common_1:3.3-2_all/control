@@ -1,0 +1,24 @@
+Package: gnucash-common
+Source: gnucash
+Version: 1:3.3-2
+Architecture: all
+Maintainer: Dmitry Smirnov <onlyjob@debian.org>
+Installed-Size: 39631
+Depends: dconf-gsettings-backend | gsettings-backend, libjs-jquery
+Recommends: gnucash (>= 1:3.3-2)
+Breaks: gnucash (<< 2.4.0-1~)
+Replaces: gnucash (<< 2.4.0-1~)
+Section: gnome
+Priority: optional
+Homepage: http://www.gnucash.org/
+Description: common files for the financial-accounting software Gnucash
+ Gnucash provides accounting functions suitable for use by small businesses and
+ individuals. It can track finances in multiple accounts, keeping running and
+ reconciled balances. There is support for customer, vendor and employee
+ processing. It has an X based graphical user interface, double entry, a
+ hierarchy of accounts, expense accounts (categories), and can import Quicken
+ QIF files and OFX files.
+ .
+ This package contains the architecture independent parts of Gnucash. It should
+ not be installed directly, but is pulled in automatically by the dependencies
+ of the Gnucash package.

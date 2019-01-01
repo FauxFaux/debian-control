@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] ; then
+	update-alternatives --remove migrate /usr/bin/python2-migrate
+	update-alternatives --remove migrate-repository /usr/bin/python2-migrate-repository
+fi
+
+
+# Automatically added by dh_python2:
+if which pyclean >/dev/null 2>&1; then
+	pyclean -p python-migrate 
+else
+	dpkg -L python-migrate | grep '\.py$' | while read file
+	do
+		rm -f "${file}"[co] >/dev/null
+  	done
+fi
+
+# End automatically added section
+
+
+exit 0

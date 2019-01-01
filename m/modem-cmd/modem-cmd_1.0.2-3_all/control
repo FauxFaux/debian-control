@@ -1,0 +1,16 @@
+Package: modem-cmd
+Version: 1.0.2-3
+Architecture: all
+Maintainer: SZ Lin (林上智) <szlin@debian.org>
+Installed-Size: 26
+Depends: python3-serial (>= 2.6), python3:any, python3
+Section: comm
+Priority: optional
+Homepage: https://github.com/imZack/modem-cmd
+Description: send arbitrary AT commands to your modem
+ modem-cmd can be used to send arbitrary AT commands to a modem device over
+ a serial line.
+ .
+ This means it can be used as a phone dialer:
+ .
+ $ modem-cmd /dev/ttyUSB0 ATDT123456

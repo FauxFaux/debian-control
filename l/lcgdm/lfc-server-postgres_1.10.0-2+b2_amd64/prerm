@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+if [ -x "/etc/init.d/lfcdaemon" ]; then
+	invoke-rc.d lfcdaemon stop || exit 1
+fi
+
+if [ "$1" = "remove" ] ; then
+	update-alternatives --remove lfcdaemon /usr/lib/lfc-postgres/lfcdaemon
+fi
+
+

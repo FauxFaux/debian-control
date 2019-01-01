@@ -1,0 +1,15 @@
+Package: librust-backtrace+object-dev
+Source: rust-backtrace
+Version: 0.3.13-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-backtrace-dev (= 0.3.13-1), librust-object-0.11+default-dev
+Provides: librust-backtrace-0+object-dev (= 0.3.13-1), librust-backtrace-0.3+object-dev (= 0.3.13-1), librust-backtrace-0.3.13+object-dev (= 0.3.13-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/alexcrichton/backtrace-rs
+Description: Acquire a stack trace (backtrace) at runtime - feature "object"
+ This metapackage enables feature object for the Rust backtrace crate, by
+ pulling in any additional dependencies needed by that feature.

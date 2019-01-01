@@ -1,0 +1,14 @@
+Package: librust-lazy-static+spin-dev
+Source: rust-lazy-static
+Version: 1.2.0-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-lazy-static-dev (= 1.2.0-1), librust-spin-0.4+once-dev (>= 0.4.10-~~)
+Provides: librust-lazy-static-1+spin-dev (= 1.2.0-1), librust-lazy-static-1.2+spin-dev (= 1.2.0-1), librust-lazy-static-1.2.0+spin-dev (= 1.2.0-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Macro for declaring lazily evaluated statics in Rust - feature "spin"
+ This metapackage enables feature spin for the Rust lazy_static crate, by
+ pulling in any additional dependencies needed by that feature.

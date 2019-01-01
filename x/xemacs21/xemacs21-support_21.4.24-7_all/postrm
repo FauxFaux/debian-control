@@ -1,0 +1,12 @@
+#!/bin/sh -e
+set -e
+
+OLDDATADIR=/usr/lib/xemacs-21.4.18
+
+test -L ${OLDDATADIR}/etc && rm ${OLDDATADIR}/etc
+test -L ${OLDDATADIR}/lisp && rm ${OLDDATADIR}/lisp
+
+rmdir  /usr/local/lib/xemacs/site-lisp > /dev/null 2>&1 || true 
+rmdir  /usr/local/lib/xemacs > /dev/null 2>&1 || true 
+
+##

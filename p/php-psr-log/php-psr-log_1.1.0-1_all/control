@@ -1,0 +1,28 @@
+Package: php-psr-log
+Version: 1.1.0-1
+Architecture: all
+Maintainer: Debian PHP PEAR Maintainers <pkg-php-pear@lists.alioth.debian.org>
+Installed-Size: 44
+Depends: php-common
+Section: php
+Priority: optional
+Homepage: https://www.php-fig.org/psr/psr-3/
+Description: common interface for logging libraries
+ The main goal is to allow libraries to receive a Psr\Log\LoggerInterface object
+ and write logs to it in a simple and universal way. Frameworks and CMSs that
+ have custom needs MAY extend the interface for their own purpose, but SHOULD
+ remain compatible with this document. This ensures that the third-party
+ libraries an application uses can write to the centralized application logs.
+ .
+ The LoggerInterface exposes eight methods to write logs to the eight RFC 5424
+ levels (debug, info, notice, warning, error, critical, alert, emergency).
+ .
+ A ninth method, log, accepts a log level as first argument. Calling this method
+ with one of the log level constants MUST have the same result as calling the
+ level-specific method. Calling this method with a level not defined by this
+ specification MUST throw a Psr\Log\InvalidArgumentException if the
+ implementation does not know about the level. Users SHOULD NOT use a custom
+ level without knowing for sure the current implementation supports it.
+ .
+ Note that this is not a logger of its own. It is merely an interface that
+ describes a logger. See the specification for more details.

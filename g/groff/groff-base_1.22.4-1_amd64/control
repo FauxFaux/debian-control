@@ -1,0 +1,24 @@
+Package: groff-base
+Source: groff
+Version: 1.22.4-1
+Architecture: amd64
+Maintainer: Colin Watson <cjwatson@debian.org>
+Installed-Size: 3607
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:4.0), libstdc++6 (>= 4.1.1), libuchardet0 (>= 0.0.1)
+Suggests: groff
+Breaks: groff (<< 1.22.4~rc2-2), jgroff (<< 1.17-1), pmake (<< 1.45-7), troffcvt (<< 1.04-14)
+Replaces: groff (<< 1.22.4~rc2-2), jgroff (<< 1.17-1)
+Section: text
+Priority: important
+Multi-Arch: foreign
+Homepage: https://www.gnu.org/software/groff/
+Description: GNU troff text-formatting system (base system components)
+ This package contains the traditional UN*X text formatting tools
+ troff, nroff, tbl, eqn, and pic. These utilities, together with the
+ man-db package, are essential for displaying the on-line manual pages.
+ .
+ groff-base is a stripped-down package containing the necessary components
+ to read manual pages in ASCII, Latin-1, and UTF-8, plus the PostScript
+ device (groff's default). Users who want a full groff installation, with
+ the standard set of devices, fonts, macros, and documentation, should
+ install the groff package.

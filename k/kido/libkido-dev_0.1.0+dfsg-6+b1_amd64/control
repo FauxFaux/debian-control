@@ -1,0 +1,34 @@
+Package: libkido-dev
+Source: kido (0.1.0+dfsg-6)
+Version: 0.1.0+dfsg-6+b1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 1208
+Depends: libkido0.1 (= 0.1.0+dfsg-6+b1), libeigen3-dev, libassimp-dev (>= 3), libfcl-dev, libbullet-dev, libboost-all-dev
+Section: libdevel
+Priority: optional
+Homepage: http://dartsim.github.io/
+Description: Kinematics Dynamics and Optimization Library - development files
+ KIDO is a collaborative, cross-platform, open source library created by the
+ Georgia Tech Graphics Lab and Humanoid Robotics Lab. The library provides data
+ structures and algorithms for kinematic and dynamic applications in robotics
+ and computer animation.
+ KIDO is distinguished by it's accuracy and stability due to its use of
+ generalized coordinates to represent articulated rigid body systems and
+ computation of Lagrange's equations derived from D.Alembert's principle to
+ describe the dynamics of motion.
+ For developers, in contrast to many popular physics engines which view the
+ simulator as a black box, KIDO gives full access to internal kinematic and
+ dynamic quantities, such as the mass matrix, Coriolis and centrifugal forces,
+ transformation matrices and their derivatives. KIDO also provides efficient
+ computation of Jacobian matrices for arbitrary body points and coordinate
+ frames. Contact and collision are handled using an implicit time-stepping,
+ velocity-based LCP (linear-complementarity problem) to guarantee
+ non-penetration, directional friction, and approximated Coulomb friction cone
+ conditions. For collision detection, KIDO uses FCL developed by Willow Garage
+ and the UNC Gamma Lab.
+ KIDO has applications in robotics and computer animation because it features a
+ multibody dynamic simulator and tools for control and motion planning.
+ Multibody dynamic simulation in KIDO is an extension of RTQL8, an open source
+ software created by the Georgia Tech Graphics Lab.
+ This package contains main headers and other tools for development.

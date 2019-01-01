@@ -1,0 +1,24 @@
+Package: lava-lxc-mocker
+Source: lava
+Version: 2018.11-1
+Architecture: all
+Maintainer: Debian LAVA team <pkg-linaro-lava-devel@lists.alioth.debian.org>
+Installed-Size: 98
+Conflicts: lxc
+Replaces: lxc
+Provides: lxc
+Section: net
+Priority: optional
+Homepage: https://www.lavasoftware.org/
+Description: Linaro Automated Validation Architecture LXC Mocker
+ LAVA is a continuous integration system for deploying operating
+ systems onto physical and virtual hardware for running tests.
+ Tests can be simple boot testing, bootloader testing and system
+ level testing, although extra hardware may be required for some
+ system tests. Results are tracked over time and data can be
+ exported for further analysis.
+ .
+ This package contains set of mocker scripts that mocks each of
+ the lxc commands that LAVA uses. It does not support all commands
+ and options that lxc provides, but just the ones that LAVA uses.
+ Test jobs using LXC can then be replicated in Docker.

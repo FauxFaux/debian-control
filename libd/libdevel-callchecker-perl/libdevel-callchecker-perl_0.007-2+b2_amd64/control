@@ -1,0 +1,21 @@
+Package: libdevel-callchecker-perl
+Source: libdevel-callchecker-perl (0.007-2)
+Version: 0.007-2+b2
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 58
+Depends: libb-hooks-op-check-perl, libdynaloader-functions-perl, perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.2.5)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Devel-CallChecker
+Description: custom op checking attached to subroutines
+ Devel::CallChecker makes some new features of the Perl 5.14.0 C API
+ available to XS modules running on older versions of Perl.  The
+ features are centred around the function cv_set_call_checker, which
+ allows XS code to attach a magical annotation to a Perl subroutine,
+ resulting in resolvable calls to that subroutine being mutated at
+ compile time by arbitrary C code.  This module makes
+ cv_set_call_checker and several supporting functions available.  (It is
+ possible to achieve the effect of cv_set_call_checker from XS code on
+ much earlier Perl versions, but it is painful to achieve without the
+ centralised facility.)

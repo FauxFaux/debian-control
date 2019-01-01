@@ -1,0 +1,18 @@
+Package: postgresql-11-partman
+Source: pg-partman
+Version: 4.0.0-1
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <team+postgresql@tracker.debian.org>
+Installed-Size: 4869
+Depends: postgresql-11, python3, python3-psycopg2, libc6 (>= 2.4)
+Section: database
+Priority: optional
+Description: PostgreSQL Partition Manager
+ pg_partman is a PostgreSQL extension to create and manage both time-based and
+ serial-based table partition sets. Sub-partitioning is also supported. Child
+ table & trigger function creation is all managed by the extension itself.
+ Tables with existing data can also have their data partitioned in easily
+ managed smaller batches. Optional retention policy can automatically drop
+ partitions no longer needed. A background worker (BGW) process is included to
+ automatically run partition maintenance without the need of an external
+ scheduler (cron, etc) in most cases.

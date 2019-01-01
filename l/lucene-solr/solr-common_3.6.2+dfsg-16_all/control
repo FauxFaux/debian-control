@@ -1,0 +1,26 @@
+Package: solr-common
+Source: lucene-solr
+Version: 3.6.2+dfsg-16
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 743
+Depends: curl, debconf (>= 1.5), default-jre-headless | java5-runtime-headless | java6-runtime-headless, libjs-jquery, libsolr-java (= 3.6.2+dfsg-16), procps
+Recommends: solr-tomcat (= 3.6.2+dfsg-16) | solr-jetty (= 3.6.2+dfsg-16)
+Suggests: libmariadb-java
+Section: java
+Priority: optional
+Homepage: http://lucene.apache.org
+Description: Enterprise search server based on Lucene3 - common files
+ Solr is an open source enterprise search server based on the Lucene
+ Java search library, with XML/HTTP and JSON APIs, hit highlighting,
+ faceted search, caching, replication, and a web administration
+ interface. It runs in a Java servlet container such as Tomcat.
+ .
+ This package provides the common files for Solr. Install
+ solr-tomcat or solr-jetty to use Solr under Tomcat or Jetty.
+ .
+ This package also contains the dataimporthandler contrib while omitting
+ dataimporthandler-extras, clustering, extraction and velocity due to missing
+ dependencies.
+ .
+ libmysql-java is necessary to connect the dataimporthandler to MySQL.

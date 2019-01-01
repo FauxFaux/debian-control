@@ -1,0 +1,20 @@
+Package: dovecot-sieve
+Source: dovecot
+Version: 1:2.3.4-2
+Architecture: amd64
+Maintainer: Dovecot Maintainers <dovecot@packages.debian.org>
+Installed-Size: 2180
+Depends: dovecot-core (= 1:2.3.4-2), ucf (>= 2.0020), libc6 (>= 2.14)
+Breaks: dovecot-core (<= 1:2.2.13-6), dovecot-imapd (<< 1:2.2.26.0-1~)
+Replaces: dovecot-core (<= 1:2.2.13-6), dovecot-imapd (<< 1:2.2.26.0-1~)
+Section: mail
+Priority: optional
+Homepage: http://dovecot.org/
+Description: secure POP3/IMAP server - Sieve filters support
+ Dovecot is a mail server whose major goals are security and extreme
+ reliability. It tries very hard to handle all error conditions and verify
+ that all data is valid, making it nearly impossible to crash. It supports
+ mbox/Maildir and its own dbox/mdbox formats, and should also be pretty
+ fast, extensible, and portable.
+ .
+ This package provides Sieve filters support for Dovecot.

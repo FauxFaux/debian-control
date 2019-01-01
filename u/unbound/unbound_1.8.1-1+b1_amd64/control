@@ -1,0 +1,20 @@
+Package: unbound
+Source: unbound (1.8.1-1)
+Version: 1.8.1-1+b1
+Architecture: amd64
+Maintainer: unbound packagers <unbound@packages.debian.org>
+Installed-Size: 4093
+Depends: adduser, dns-root-data, lsb-base (>= 3.0-6), openssl, unbound-anchor, libc6 (>= 2.27), libevent-2.1-6 (>= 2.1.8-stable), libfstrm0 (>= 0.2.0), libprotobuf-c1 (>= 1.0.1), libpython3.7 (>= 3.7.0), libssl1.1 (>= 1.1.1), libsystemd0
+Suggests: apparmor
+Enhances: munin-node
+Section: net
+Priority: optional
+Homepage: https://www.unbound.net/
+Description: validating, recursive, caching DNS resolver
+ Unbound is a recursive-only caching DNS server which can perform DNSSEC
+ validation of results. It implements only a minimal amount of authoritative
+ service to prevent leakage to the root nameservers: forward lookups for
+ localhost, reverse for 127.0.0.1 and ::1, and NXDOMAIN for zones served by
+ AS112. Stub and forward zones are supported.
+ .
+ This package contains the unbound daemon.

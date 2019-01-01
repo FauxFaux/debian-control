@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+# Ask user if he wants db migration
+db_input high neutron-fwaas/configure-fwaas || true
+db_go || true
+
+exit 0

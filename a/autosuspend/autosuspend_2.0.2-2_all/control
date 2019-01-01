@@ -1,0 +1,21 @@
+Package: autosuspend
+Version: 2.0.2-2
+Architecture: all
+Maintainer: Python Applications Packaging Team <python-apps-team@lists.alioth.debian.org>
+Installed-Size: 489
+Depends: python3-psutil, python3:any, libjs-sphinxdoc (>= 1.0), sphinx-rtd-theme-common (>= 0.4.2+dfsg)
+Recommends: python3-mpd, python3-requests, python3-lxml, xprintidle, python3-dbus, python3-icalendar, python3-dateutil, python3-tzlocal, python3-requests-file, iputils-ping
+Built-Using: sphinx (= 1.7.9-1)
+Section: utils
+Priority: optional
+Homepage: https://github.com/languitar/autosuspend
+Description: daemon to suspend a system in case of inactivity
+ A daemon to automatically suspend and wake up a system. Inactivity and wake up
+ times are determined by a set of configurable checks. Autosuspend periodically
+ executes these checks, and if none of them indicated activity, the system is
+ suspended and automatically woken up if necessary.
+ .
+ Autosuspend does not depend on X11 and desktop environments and is therefore
+ specifically intended for (home) servers. Most available checks address these
+ usage scenarios. Yet, also the X11 idle time can be used as a check to support
+ graphical use cases.

@@ -1,0 +1,18 @@
+Package: mariadb-plugin-connect
+Source: mariadb-10.3
+Version: 1:10.3.11-3
+Architecture: amd64
+Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Installed-Size: 1541
+Depends: libxml2 (>= 2.7.4), mariadb-server-10.3, unixodbc, libc6 (>= 2.14), libodbc1 (>= 2.3.1), libstdc++6 (>= 5), zlib1g (>= 1:1.2.3.4)
+Conflicts: mariadb-connect-engine-10.0, mariadb-connect-engine-10.1
+Breaks: mariadb-connect-engine-10.0, mariadb-connect-engine-10.1, mariadb-server-10.0, mariadb-server-10.1
+Replaces: mariadb-connect-engine-10.0, mariadb-connect-engine-10.1, mariadb-server-10.0, mariadb-server-10.1
+Section: database
+Priority: optional
+Homepage: https://mariadb.org/
+Description: Connect storage engine for MariaDB
+ Connect engine supports a number of file formats (dbf, xml, txt, bin, etc),
+ connections to ODBC tables and remote MySQL tables, as well as a number of
+ other interesting features.
+ This package contains the Connect plugin for MariaDB.

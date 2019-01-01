@@ -1,0 +1,14 @@
+#!/bin/sh -e
+set -e
+
+# upgrading from version < 20181021-1
+# remove user dqcachelog
+if [ x"$1" = "xupgrade" ]; then
+  if [ x"$2" != "x" ]; then
+    if dpkg --compare-versions "$2" lt '20181021-1'; then
+      deluser --force dqcachelog || :
+    fi
+  fi
+fi
+
+

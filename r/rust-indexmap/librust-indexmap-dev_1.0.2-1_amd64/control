@@ -1,0 +1,22 @@
+Package: librust-indexmap-dev
+Source: rust-indexmap
+Version: 1.0.2-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 190
+Suggests: librust-indexmap+serde-dev (= 1.0.2-1), librust-indexmap+serde-1-dev (= 1.0.2-1)
+Provides: librust-indexmap+default-dev (= 1.0.2-1), librust-indexmap+test-debug-dev (= 1.0.2-1), librust-indexmap+test-low-transition-point-dev (= 1.0.2-1), librust-indexmap-1+default-dev (= 1.0.2-1), librust-indexmap-1+test-debug-dev (= 1.0.2-1), librust-indexmap-1+test-low-transition-point-dev (= 1.0.2-1), librust-indexmap-1-dev (= 1.0.2-1), librust-indexmap-1.0+default-dev (= 1.0.2-1), librust-indexmap-1.0+test-debug-dev (= 1.0.2-1), librust-indexmap-1.0+test-low-transition-point-dev (= 1.0.2-1), librust-indexmap-1.0-dev (= 1.0.2-1), librust-indexmap-1.0.2+default-dev (= 1.0.2-1), librust-indexmap-1.0.2+test-debug-dev (= 1.0.2-1), librust-indexmap-1.0.2+test-low-transition-point-dev (= 1.0.2-1), librust-indexmap-1.0.2-dev (= 1.0.2-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Hash table with consistent order and fast iteration - Rust source code
+ The indexmap is a hash table where the iteration order of the key-value pairs
+ is independent of the hash values of the keys. It has the usual hash table
+ functionality, it preserves insertion order except after removals, and it
+ allows lookup of its elements by either hash table key or numerical index. A
+ corresponding hash set type is also provided.
+ This crate was initially published under the name ordermap, but it was renamed
+ to indexmap.
+ .
+ This package contains the source for the Rust indexmap crate, packaged by
+ debcargo for use with cargo and dh-cargo.

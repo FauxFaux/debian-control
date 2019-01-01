@@ -1,0 +1,23 @@
+Package: strongswan-libcharon
+Source: strongswan
+Version: 5.7.1-1
+Architecture: amd64
+Maintainer: strongSwan Maintainers <pkg-swan-devel@lists.alioth.debian.org>
+Installed-Size: 887
+Depends: libstrongswan (= 5.7.1-1), libc6 (>= 2.14)
+Suggests: libcharon-extra-plugins
+Breaks: strongswan-starter (<= 5.6.1-2)
+Replaces: strongswan-starter (<= 5.6.1-2)
+Section: net
+Priority: optional
+Homepage: http://www.strongswan.org
+Description: strongSwan charon library
+ The strongSwan VPN suite uses the native IPsec stack in the standard
+ Linux kernel. It supports both the IKEv1 and IKEv2 protocols.
+ .
+ This package contains the charon library, used by IKE client like
+ strongswan-charon, strongswan-charon-cmd or strongswan-nm as well as standard
+ plugins:
+   - socket-default
+   - counters
+   - bypass-lan (disabled by default)

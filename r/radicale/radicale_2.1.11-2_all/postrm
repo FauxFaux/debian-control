@@ -1,0 +1,27 @@
+#!/bin/sh
+# postrm script for radicale
+
+set -e
+
+NAME=radicale
+RUNDIR=/run/$NAME
+LOGDIR=/var/log/$NAME
+
+case "$1" in
+  remove)
+	rm -rf $RUNDIR
+	;;
+
+  purge)
+	rm -rf $LOGDIR
+
+	# We do NOT remove the system user.
+	;;
+esac
+
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "purge" ] ; then
+	update-rc.d radicale remove >/dev/null
+fi
+# End automatically added section
+

@@ -1,0 +1,14 @@
+Package: librust-phf-shared+unicase-dev
+Source: rust-phf-shared
+Version: 0.7.23-2
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-phf-shared-dev (= 0.7.23-2), librust-unicase-2+default-dev | librust-unicase-1+default-dev (>= 1.4~~)
+Provides: librust-phf-shared-0+unicase-dev (= 0.7.23-2), librust-phf-shared-0.7+unicase-dev (= 0.7.23-2), librust-phf-shared-0.7.23+unicase-dev (= 0.7.23-2)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Support code shared by PHF libraries - feature "unicase"
+ This metapackage enables feature unicase for the Rust phf_shared crate, by
+ pulling in any additional dependencies needed by that feature.

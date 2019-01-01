@@ -1,0 +1,19 @@
+#!/bin/sh -e
+set -e
+
+# Automatically added by dh_installsystemd/11.5.4
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop 'dirsrv-snmp.service' >/dev/null || true
+fi
+# End automatically added section
+
+
+if [ "$1" = "purge" ]; then
+    # remove all installed instances
+    for FILE in `ls -d $CONFDIR/slapd-* 2>/dev/null | sed -n '/\.removed$/!$'`
+    do
+        if [ -d "$FILE" ] ; then
+            remove-ds -f -i $FILE
+        fi
+    done
+fi

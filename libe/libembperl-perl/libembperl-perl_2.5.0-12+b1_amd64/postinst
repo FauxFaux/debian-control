@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+
+
+
+if [ "$1" = "configure" ]; then
+    if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+        . /usr/share/apache2/apache2-maintscript-helper
+
+        # mod_embperl is not thread-safe, requires the prefork MPM
+        if [ $(a2query -M) != 'prefork' ] ; then
+            if apache2_switch_mpm prefork ; then
+                apache2_invoke enmod zembperl
+            else
+                apache2_msg err "Could not switch to prefork, not enabling mod_embperl (you must use cgi or offline mode to use Embperl)"
+            fi
+        else
+            apache2_invoke enmod zembperl
+        fi
+    fi
+fi
+
+exit 0

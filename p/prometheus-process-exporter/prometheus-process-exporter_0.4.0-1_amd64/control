@@ -1,0 +1,15 @@
+Package: prometheus-process-exporter
+Version: 0.4.0-1
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 7365
+Depends: libc6 (>= 2.3.2)
+Built-Using: golang-1.10 (= 1.10.4-2), golang-github-beorn7-perks (= 0.0~git20160804.0.4c0e845-1), golang-github-prometheus-client-golang (= 0.9.0-1), golang-github-prometheus-client-model (= 0.0.2+git20171117.99fa1f4-1), golang-github-prometheus-common (= 0+git20180518.7600349-1), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-2), golang-procfs (= 0+git20180613.7d6f385-1), golang-protobuf-extensions (= 1.0.0-2), golang-yaml.v2 (= 2.2.1-1)
+Section: net
+Priority: optional
+Homepage: https://github.com/ncabatoff/process-exporter
+Description: Prometheus exporter that exposes process metrics from procfs
+ Some apps are impractical to instrument directly, either because you don't
+ control the code or they're written in a language that isn't easy to
+ instrument with Prometheus. This exporter solves that issue by mining
+ process metrics from procfs.

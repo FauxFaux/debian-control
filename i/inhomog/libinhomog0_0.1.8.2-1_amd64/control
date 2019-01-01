@@ -1,0 +1,20 @@
+Package: libinhomog0
+Source: inhomog
+Version: 0.1.8.2-1
+Architecture: amd64
+Maintainer: Debian Astro Team <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 117
+Depends: libc6 (>= 2.4), libgomp1 (>= 4.9), libgsl23 (>= 2.5), libgslcblas0 (>= 2.4)
+Section: libs
+Priority: optional
+Homepage: https://bitbucket.org/broukema/inhomog
+Description: shared library for kin.backreaction/average scale factor
+ The inhomog library calculates average cosmological expansion.
+ The library provides Raychaudhuri integration of cosmological
+ domain-wise average scale factor evolution using an analytical formula for
+ kinematical backreaction Q_D evolution. The inhomog main program illustrates
+ biscale examples. The library routine lib/Omega_D_precalc.c is callable by
+ RAMSES using ramses-scalav (see Roukema 2018 A&A 610, A51, arXiv:1706.06179).
+ .
+ This package contains inhomog's shared libraries. To compile your
+ own programs with inhomog, you need to install libinhomog-dev.

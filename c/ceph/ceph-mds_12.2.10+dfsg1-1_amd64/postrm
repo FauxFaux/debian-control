@@ -1,0 +1,26 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb/12
+dpkg-maintscript-helper rm_conffile /etc/init/ceph-mds-all-starter.conf 10.2.5-1\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/ceph-mds-all.conf 10.2.5-1\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/init/ceph-mds.conf 10.2.5-1\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_systemd_start/12
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/12
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'ceph-mds.target' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'ceph-mds.target' >/dev/null || true
+		deb-systemd-helper unmask 'ceph-mds.target' >/dev/null || true
+	fi
+fi
+# End automatically added section

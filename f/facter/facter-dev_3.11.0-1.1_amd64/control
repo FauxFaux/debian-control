@@ -1,0 +1,24 @@
+Package: facter-dev
+Source: facter
+Version: 3.11.0-1.1
+Architecture: amd64
+Maintainer: Puppet Package Maintainers <pkg-puppet-devel@lists.alioth.debian.org>
+Installed-Size: 119
+Depends: libfacter3.11.0 (= 3.11.0-1.1)
+Section: admin
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/puppetlabs/facter
+Description: collect and display facts about the system -- development files
+ Facter is Puppet’s cross-platform system profiling library. It discovers and
+ reports per-node facts, which are collected by the Puppet agent and are made
+ available in Puppet manifests as variables. Facter comes with a number of
+ built-in facts providing information about the operating system, hardware, SSH
+ keys, etc., but is also easily extensible through the following interfaces:
+ .
+  * Through custom facts using Facter's Ruby API.
+  * Through `external' facts which can be either executables, or static data
+    files.
+ .
+ This package contains development files allowing 3rd party applications to use
+ facter.

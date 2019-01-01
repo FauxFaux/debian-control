@@ -1,0 +1,15 @@
+Package: librust-packed-simd+coresimd-dev
+Source: rust-packed-simd
+Version: 0.3.1-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-packed-simd-dev (= 0.3.1-1), librust-coresimd-0.1+default-dev
+Provides: librust-packed-simd-0+coresimd-dev (= 0.3.1-1), librust-packed-simd-0.3+coresimd-dev (= 0.3.1-1), librust-packed-simd-0.3.1+coresimd-dev (= 0.3.1-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/rust-lang-nursery/packed_simd
+Description: Portable Packed SIMD vectors - feature "coresimd"
+ This metapackage enables feature coresimd for the Rust packed_simd crate, by
+ pulling in any additional dependencies needed by that feature.

@@ -1,0 +1,24 @@
+Package: multistrap
+Version: 2.2.10
+Architecture: all
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 284
+Depends: perl:any, apt, libconfig-auto-perl, liblocale-gettext-perl, libparse-debian-packages-perl
+Suggests: fakeroot
+Section: admin
+Priority: optional
+Description: multiple repository bootstrap based on apt
+ A debootstrap replacement with multiple repository support,
+ using apt to handle all dependency issues and conflicts.
+ .
+ Multistrap includes support for native and foreign architecture
+ bootstrap environments. Foreign bootstraps only need minimal
+ configuration on the final device. Also supports cleaning up the
+ generated bootstrap filesystem to remove downloaded packages and
+ hooks to modify the files in the bootstrap filesystem after the
+ packages have been unpacked but before being configured.
+ .
+ Unlike debootstrap, multistrap relies on working versions of
+ dpkg and apt outside the final filesystem. If dpkg supports
+ MultiArch, foreign architecture libraries can be installed,
+ where available.

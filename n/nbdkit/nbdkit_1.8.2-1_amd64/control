@@ -1,0 +1,19 @@
+Package: nbdkit
+Version: 1.8.2-1
+Architecture: amd64
+Maintainer: Hilko Bengen <bengen@debian.org>
+Installed-Size: 768
+Depends: libc6 (>= 2.14), libcom-err2 (>= 1.43.9), libcurl3-gnutls (>= 7.16.2), libext2fs2 (>= 1.37), libgnutls30 (>= 3.5.6), liblzma5 (>= 5.1.1alpha+20120614), libselinux1 (>= 1.32), zlib1g (>= 1:1.2.6)
+Suggests: nbdkit-plugin-guestfs, nbdkit-plugin-libvirt, nbdkit-plugin-perl, nbdkit-plugin-python
+Section: admin
+Priority: optional
+Homepage: https://github.com/libguestfs/nbdkit
+Description: toolkit for creating NBD servers
+ NBD is a protocol for accessing block Devices (hard disks and
+ disk-like things) over a network. nbdkit is a multithreaded NBD
+ server with a well-documented, simple plugin API with a stable ABI
+ guarantee that allows for easy creation of "unconventional" block
+ devices.
+ .
+ This package provides the nbdkit binary and a the file, gzip, and xz,
+ plugins.

@@ -1,0 +1,43 @@
+Package: musescore-general-soundfont
+Version: 0.1.3-1
+Architecture: all
+Maintainer: Thorsten Glaser <tg@mirbsd.de>
+Installed-Size: 84507
+Enhances: libfluidsynth1 (>= 1.1.7), musescore (>= 2.2)
+Conflicts: fluidr3mono-gm-soundfont (<< 2.315-5~), musescore-common (<< 2.3.2+dfsg1-1~bpo9)
+Provides: musescore-compatible-soundfont
+Section: sound
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://musescore.org/en/node/269869
+Description: General SoundFont from MuseScore (full version)
+ This is the new standard hard disc space-saving SF3 format
+ soundfont as shipped with MuseScore 2.2 and newer.
+ .
+ MuseScore_General attempts to keep the installed-size footprint
+ low while providing the complete GM (General MIDI) sound set
+ and some extras, although its full version is larger than its
+ antecessor fluidr3mono-gm-soundfont because of the new focus
+ on improving quality. (The small version is, despite restoring
+ stereo samples for some instruments, actually smaller, thanks
+ to numerous optimisations and bugfixes.)
+ .
+ The musescore-general-soundfont package contains everything at
+ best quality; musescore-general-soundfont-small is only a fourth
+ the size (about the same as fluidr3mono-gm-soundfont) while being
+ a drop-in replacement (identical bank configuration) at comparable
+ quality to the full soundfont, missing only the separate ensembles
+ (using identical samples for e.g. first/second violin) and some of
+ the new larger instrument samples.
+ .
+ It can be used with most modern MIDI synthesisers which support
+ the SF3 format, although early implementations (such as the one
+ from MuseScore before release 2.2) had bugs making the resulting
+ sound bad; instead use fluidr3mono-gm-soundfont for those.
+ .
+ As it comes under the MIT licence, it can be used in most settings,
+ but do remember that waveforms generated using this soundfont are
+ “copies or substantial portions of the” soundfont.
+ .
+ This package will be installed into /usr/share/sounds/sf3/ which
+ is the standard Debian location for system-wide SF3 soundfonts.

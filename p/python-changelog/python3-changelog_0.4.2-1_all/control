@@ -1,0 +1,37 @@
+Package: python3-changelog
+Source: python-changelog
+Version: 0.4.2-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 51
+Depends: python3:any, python3-sphinx
+Enhances: python3-sphinx
+Section: python
+Priority: optional
+Homepage: https://bitbucket.org/zzzeek/changelog
+Description: Sphinx extension to generate changelog files (Python 3)
+ This package provides simple Sphinx markup to render changelog displays
+ (this is the Python 3 version of the extension).
+ .
+ Example:
+ .
+  ====================
+  Changelog for 1.5.6
+  ====================
+ .
+  .. changelog::
+      :version: 1.5.6
+      :released: Sun Oct 12 2008
+ .
+      .. change::
+          :tags: general
+          :tickets: 27
+ .
+        Improved the frobnozzle.
+ .
+      .. change::
+          :tags: rendering, tests
+          :pullreq: 8
+          :changeset: a9d7cc0b56c2
+ .
+        Rendering tests now correctly render.

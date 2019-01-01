@@ -1,0 +1,23 @@
+Package: apache2
+Version: 2.4.37-1
+Architecture: amd64
+Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Installed-Size: 594
+Pre-Depends: dpkg (>= 1.17.14)
+Depends: apache2-bin (= 2.4.37-1), apache2-data (= 2.4.37-1), apache2-utils (= 2.4.37-1), lsb-base, mime-support, perl, procps, perl:any
+Recommends: ssl-cert
+Suggests: apache2-doc, apache2-suexec-pristine | apache2-suexec-custom, www-browser
+Conflicts: apache2.2-bin, apache2.2-common
+Breaks: libapache2-mod-md (<< 2.4.33), libapache2-mod-proxy-uwsgi (<< 2.4.33)
+Replaces: apache2.2-bin, apache2.2-common, libapache2-mod-md (<< 2.4.33), libapache2-mod-proxy-uwsgi (<< 2.4.33)
+Provides: httpd, httpd-cgi
+Section: httpd
+Priority: optional
+Homepage: http://httpd.apache.org/
+Description: Apache HTTP Server
+ The Apache HTTP Server Project's goal is to build a secure, efficient and
+ extensible HTTP server as standards-compliant open source software. The
+ result has long been the number one web server on the Internet.
+ .
+ Installing this package results in a full installation, including the
+ configuration files, init scripts and support scripts.

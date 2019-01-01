@@ -1,0 +1,27 @@
+Package: mew-beta-bin
+Source: mew-beta
+Version: 7.0.50~6.8+0.20180710-2
+Architecture: amd64
+Maintainer: Tatsuya Kinoshita <tats@debian.org>
+Installed-Size: 167
+Depends: libc6 (>= 2.7), zlib1g (>= 1:1.1.4)
+Recommends: stunnel4 | stunnel, ca-certificates, ruby, ruby-sqlite3
+Suggests: hyperestraier
+Enhances: gnupg-agent, mew-beta
+Conflicts: mew-beta (<< 4), mew-bin
+Replaces: mew-bin
+Provides: mail-reader, mew-bin, pinentry
+Section: mail
+Priority: optional
+Homepage: http://www.mew.org/
+Description: external commands for Mew (development version)
+ The mew-beta-bin package contains external commands for the mew-beta package.
+ .
+  - mewencode: encode/decode MIME objects
+  - mewl: extract necessary fields from messages stored in folders
+  - incm: incorporate new mails from maildir or mbox to Mew's inbox folder
+  - mewest: update indexes of Hyper Estraier
+  - mew-pinentry: front end of gpg-agent to ask a passphrase to a user
+  - mewstunnel: wrapper script for using stunnel
+  - cmew: create Mew's database file
+  - smew: search related messages from Mew's database file

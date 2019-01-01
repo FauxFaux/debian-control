@@ -1,0 +1,105 @@
+#! /bin/sh
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+# We can back up.
+db_capb backup
+
+# To make backing up easier, we do a lot of the logic outside the state
+# machine.
+
+question1=no
+question2=no
+question3=no
+
+# Useful system information.
+hostname=`hostname --fqdn 2>/dev/null || true`
+domainname=`dnsdomainname 2>/dev/null || true`
+
+# Default news server.
+if [ ! -s /etc/news/server ]; then
+    db_get shared/news/server
+    nntpserver="$RET"
+    if [ -z "$nntpserver" ]; then
+	# Try to guess a good value for the NNTP server.
+	if [ "$domainname" ]; then
+	    nntpserver="news.$domainname"
+	else
+	    nntpserver="$hostname"
+	fi
+    fi
+    db_set shared/news/server "$nntpserver"
+    question1=yes
+fi
+
+# Default mail name.
+if [ ! -s /etc/mailname ]; then
+    db_get trn4/mail-name
+    mailname="$RET"
+    if [ -z "$mailname" ]; then
+	mailname="$hostname"
+    fi
+    db_set trn4/mail-name "$mailname"
+    question2=yes
+elif [ -f /etc/news/whoami ] && [ -f /etc/mailname ]; then
+    # Help out those with other trn packages or previous versions.
+    whoami=`head -n 1 /etc/news/whoami | sed 's/[, ].*//'`
+    mailname=`head -n 1 /etc/mailname | sed 's/[, ].*//'`
+    if [ "$whoami" != "$mailname" ]; then
+	db_subst trn4/whoami-change whoami "$whoami"
+	db_subst trn4/whoami-change mailname "$mailname"
+	question3=yes
+    fi
+fi
+
+# From here on should be fairly generic; copying and pasting this with
+# reference to the above should get you a state machine supporting backing
+# up and unused questions.
+
+state=1
+action=forward
+
+nextstate ()
+{
+    if [ $action = forward ]; then
+	state=$(($state + 1))
+    else
+	state=$(($state - 1))
+    fi
+}
+
+while [ $state != 0 -a $state != 4 ]; do
+    case $state in
+    1)
+	# "What news server should be used for reading and posting news?"
+	if [ "$question1" = no ]; then nextstate; continue; fi
+	db_input medium shared/news/server || true
+	;;
+    2)
+	# "What is your system's mail name?"
+	if [ "$question2" = no ]; then nextstate; continue; fi
+	db_input medium trn4/mail-name || true
+	;;
+    3)
+	# "/etc/news/whoami and /etc/mailname differ"
+	if [ "$question3" = no ]; then nextstate; continue; fi
+	db_input medium trn4/whoami-change || true
+	;;
+    esac
+
+    if db_go; then
+	action=forward
+    else
+	action=back
+    fi
+    nextstate
+done
+
+if [ $state = 0 ]; then
+    exit 1
+else
+    exit 0
+fi

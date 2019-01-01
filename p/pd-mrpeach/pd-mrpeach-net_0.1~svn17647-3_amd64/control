@@ -1,0 +1,26 @@
+Package: pd-mrpeach-net
+Source: pd-mrpeach
+Version: 0.1~svn17647-3
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 313
+Depends: libc6 (>= 2.15), puredata | pd
+Recommends: pd-osc, pd-pddp
+Suggests: pd-slip
+Provides: pd-net
+Section: net
+Priority: optional
+Homepage: https://download.puredata.info/mrpeach
+Description: Pd library for low-level networking
+ This library adds Pure Data (Pd) objects that allow one to build a networking
+ infrastructure within Pd on OSI-Layer 4 (transport layer).
+ The objects use threads to allow for non-blocking network communication within
+ an audio realtime environment.
+  - [tcpreceive], [tcpsend]: unidirectional communication over TCP/IP
+  - [tcpserver], [tcpclient]: bidirectional communication over TCP/IP
+  - [udpreceive], [udpsend]: unidirectional communication over UDP
+  - [udpsndrcv]: bidirectional communication over UDP
+  - [udpsend~], [udpreceive~]: transmit uncompressed signals via UDP
+ Since these objects only send/receive lists of bytes, you will most likely need
+ to add some glue to implement higher-level protocols (and transmit meaningful
+ data).

@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+DEB_HOST_MULTIARCH=x86_64-linux-gnu
+
+SLEPC_VERSION=3.10.1
+SLEPC_VERSION_NUMBER=$( echo ${SLEPC_VERSION} | sed "s/\.//g" )
+SONAME=3.10
+
+# Make alternatives links
+if [ "$1" = "configure" ]; then
+  # alternative slepc version (for given soname), real or complex
+  update-alternatives --install /usr/lib/${DEB_HOST_MULTIARCH}/libslepc.so.${SONAME} libslepc.so.${SONAME} /usr/lib/${DEB_HOST_MULTIARCH}/libslepc_complex.so.${SLEPC_VERSION} ${SLEPC_VERSION_NUMBER}73
+fi
+
+
+

@@ -1,0 +1,27 @@
+Package: libghc-flexible-defaults-prof
+Source: haskell-flexible-defaults (0.0.2-2)
+Version: 0.0.2-2+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 400
+Depends: libghc-flexible-defaults-dev (= 0.0.2-2+b2), libghc-base-prof-4.11.1.0-5dd74, libghc-containers-prof-0.5.11.0-e0faa, libghc-template-haskell-prof-2.13.0.0-87d93, libghc-th-extras-prof-0.0.0.4-159df, libghc-transformers-prof-0.5.5.0-b5d2f
+Provides: libghc-flexible-defaults-prof-0.0.2-3cbb4
+Section: haskell
+Priority: optional
+Homepage: https://github.com/peti/flexible-defaults
+Description: generate default function implementations for complex type classes; profiling libraries
+ Template Haskell code to implement default implementations for
+ type-class functions based on which functions are already implemented.
+ Currently extremely crude but still fairly effective.
+ .
+ When defining a type class with many functions, each of which can be
+ implemented based on arbitrary subsets of the others, the standard
+ default-implementation concept breaks down quite badly.  This library
+ provides a system by which more complex rules can be described for
+ choosing default implementations based on which ones the user
+ supplies.  These implementations can additionally be given
+ "suitability scores", so that when multiple possible choices could be
+ made, the library can choose the "best" one.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

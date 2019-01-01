@@ -1,0 +1,18 @@
+Package: libpam-systemd
+Source: systemd
+Version: 240-2
+Architecture: amd64
+Maintainer: Debian systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>
+Installed-Size: 386
+Depends: libc6 (>= 2.28), libpam0g (>= 0.99.7.1), systemd (= 240-2), libpam-runtime (>= 1.0.1-6), dbus, systemd-shim (>= 10-4~) | systemd-sysv
+Section: admin
+Priority: standard
+Multi-Arch: same
+Homepage: https://www.freedesktop.org/wiki/Software/systemd
+Description: system and service manager - PAM module
+ This package contains the PAM module which registers user sessions in
+ the systemd control group hierarchy for logind.
+ .
+ If in doubt, do install this package.
+ .
+ Packages that depend on logind functionality need to depend on libpam-systemd.

@@ -1,0 +1,31 @@
+Package: python3-datalad
+Source: datalad
+Version: 0.11.1-1
+Architecture: all
+Maintainer: NeuroDebian Team <team@neuro.debian.net>
+Installed-Size: 4320
+Depends: git-annex (>= 6.20180509~) | git-annex-standalone (>= 6.20180509~), patool, python3-appdirs, python3-distutils | libpython3-stdlib (<= 3.6.4~rc1-2), python3-fasteners, python3-git (>= 2.1.6~), python3-humanize, python3-iso8601, python3-keyrings.alt | python3-keyring (<= 8), python3-secretstorage, python3-keyring, python3-mock, python3-msgpack, python3-pil, python3-requests, python3-simplejson, python3-six (>= 1.8.0), python3-tqdm, python3-wrapt, python3-boto, python3-chardet, python3:any
+Recommends: python3-exif, python3-github, python3-jsmin, python3-html5lib, python3-httpretty, python3-libxmp, python3-lzma, python3-mutagen, python3-nose, python3-pyperclip, python3-requests-ftp, python3-vcr, python3-whoosh
+Suggests: python3-duecredit, python3-bs4, python3-numpy, datalad-containers, datalad-crawler, datalad-neuroimaging
+Section: python
+Priority: optional
+Homepage: http://datalad.org
+Description: data files management and distribution platform
+ DataLad is a data management and distribution platform providing
+ access to a wide range of data resources already available online.
+ Using git-annex as its backend for data logistics it provides following
+ facilities built-in or available through additional extensions
+ .
+  - command line and Python interfaces for manipulation of collections of
+    datasets (install, uninstall, update, publish, save, etc.) and
+ separate files/directories (add, get)
+  - extract, aggregate, and search through various sources of metadata
+    (xmp, EXIF, etc; install datalad-neuroimaging for DICOM, BIDS, NIfTI
+    support)
+  - crawl web sites to automatically prepare and update git-annex
+    repositories with content from online websites, S3, etc (install
+    datalad-crawler)
+ .
+ This package installs the module for Python 3, and Recommends install
+ all dependencies necessary for searching and managing datasets, publishing,
+ and testing.  If you need base functionality, install without Recommends.

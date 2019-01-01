@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+install|upgrade)
+  if dpkg --compare-versions "$2" lt-nl 0.3.3-0.1; then
+    rm /etc/cron.daily/snapper /etc/cron.hourly/snapper || true
+  fi
+esac
+
+exit 0

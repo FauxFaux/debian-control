@@ -1,0 +1,20 @@
+Package: open-infrastructure-storage-tools
+Version: 20180915-1
+Architecture: all
+Maintainer: Daniel Baumann <daniel.baumann@progress-linux.org>
+Installed-Size: 125
+Depends: debconf (>= 0.5) | debconf-2.0
+Recommends: ceph-common | ceph-fs-common, apache2 | httpd, fonts-font-awesome, libjs-bootstrap, libjs-jquery, logrotate, jq
+Suggests: ceph-fuse, irker
+Enhances: ceph
+Provides: storage-tools
+Section: admin
+Priority: optional
+Homepage: https://open-infrastructure.net/software/storage-tools
+Description: Additional utilities to manage storage related tasks
+ storage-tools contains the following tools:
+ .
+   * ceph-log: store Ceph cluster log as a logfile
+   * ceph-info: show Ceph cluster information as a HTML page
+   * cephfs-snap: create CephFS snapshots periodically
+   * cephfs-remove-osd: remove a Ceph OSD instance completely

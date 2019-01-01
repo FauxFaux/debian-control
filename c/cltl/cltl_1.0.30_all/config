@@ -1,0 +1,31 @@
+#!/bin/sh 
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+ARCHIVE=/var/cache/cltl/cltl_ht.tgz
+
+okay()
+{
+    test -s ${ARCHIVE} && gzip --test --quiet ${ARCHIVE} > /dev/null 2>&1
+}
+
+if test "$1" = "reconfigure" ; then
+    db_reset cltl/downloading
+fi
+
+case "$1" in
+    configure|reconfigure)
+	if ! okay ; then
+	    db_input medium cltl/downloading || true
+	    db_go || true
+	fi
+	;;
+    *) 
+	echo "config called with invalid option" >&2
+	exit 0
+	;;
+esac
+
+exit 0

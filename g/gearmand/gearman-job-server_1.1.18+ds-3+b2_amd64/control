@@ -1,0 +1,18 @@
+Package: gearman-job-server
+Source: gearmand (1.1.18+ds-3)
+Version: 1.1.18+ds-3+b2
+Architecture: amd64
+Maintainer: Alexandre Mestiashvili <mestia@debian.org>
+Installed-Size: 417
+Pre-Depends: adduser
+Depends: lsb-base, libboost-program-options1.67.0, libc6 (>= 2.14), libevent-2.1-6 (>= 2.1.8-stable), libgcc1 (>= 1:3.0), libhiredis0.14 (>= 0.14.0), libmariadbclient18 (>= 10.1.28), libmemcached11, libpq5, libsqlite3-0 (>= 3.5.9), libstdc++6 (>= 5.2)
+Recommends: memcached
+Section: misc
+Priority: optional
+Homepage: http://launchpad.net/gearmand
+Description: Job server for the Gearman distributed job queue
+ Gearman is a system to farm out work to other machines, dispatching function
+ calls to machines that are better suited to do work, to do work in parallel,
+ to load balance lots of function calls, or to call functions between languages.
+ .
+ This package contains the C reimplementation of the job server daemon

@@ -1,0 +1,25 @@
+Package: systemd-cron
+Version: 1.5.14-2
+Architecture: amd64
+Maintainer: Debian Systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>
+Installed-Size: 139
+Depends: systemd-sysv (>= 229), python3:any, libc6 (>= 2.4)
+Recommends: default-mta | exim4 | mail-transport-agent
+Conflicts: anacron, cron-daemon
+Replaces: anacron, cron
+Provides: anacron, cron-daemon
+Section: admin
+Priority: optional
+Homepage: https://github.com/systemd-cron/systemd-cron
+Description: systemd units to provide cron daemon & anacron functionality
+ Provides systemd units to run cron jobs in /etc/cron.hourly cron.daily
+ cron.weekly and cron.monthly directories, without having cron
+ or anacron installed.
+ It also provides a generator that dynamicaly translate /etc/crontab,
+ /etc/cron.d/* and user cronjobs in systemd units.
+ Please notice this package provide a different set of features
+ than Vixie-cron; trying to remain as simple as possible.
+ By example, to avoid to run process through a wrapper,
+ but have instead systemd run those dirrectly,
+ it only send mails on error, including only a small blurb
+ from the Journal; but doesn't send the full output of processes.

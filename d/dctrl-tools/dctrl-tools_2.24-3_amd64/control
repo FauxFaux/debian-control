@@ -1,0 +1,35 @@
+Package: dctrl-tools
+Version: 2.24-3
+Architecture: amd64
+Maintainer: Rhonda D'Vine <rhonda@debian.org>
+Installed-Size: 421
+Depends: libc6 (>= 2.14)
+Suggests: apt, debtags
+Conflicts: grep-dctrl
+Replaces: grep-dctrl
+Provides: grep-dctrl
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/ajkaijanaho/dctrl-tools
+Description: Command-line tools to process Debian package information
+ Debian package information is generally stored in files having a
+ special file format, dubbed the Debian control file format (the dctrl
+ format), a special case of the record jar file format.  These tools
+ operate on any files conforming in a general sense to that format and
+ are therefore widely applicable whenever those formats are in play.
+ .
+ Included are:
+ .
+   grep-dctrl     - Grep dctrl-format files
+   grep-available - Grep the DPKG available database
+   grep-status    - Grep the DPKG status database
+   grep-aptavail  - Grep the APT available database
+   grep-debtags   - Grep the Debtags package database
+ .
+   sort-dctrl     - Sort dctrl-format files
+ .
+   tbl-dctrl      - Tabulate dctrl-format files
+ .
+   sync-available - Sync the dpkg available database with
+                    the apt database

@@ -1,0 +1,36 @@
+Package: python-beaker
+Source: beaker
+Version: 1.10.0-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 211
+Depends: python-funcsigs, python:any (<< 2.8), python:any (>= 2.7~), python
+Recommends: python-pkg-resources
+Suggests: python-sqlalchemy (>= 0.4), python-pycryptopp | python-crypto, python-pylibmc | python-memcache, python-pymongo, python-redis
+Enhances: python-pylons
+Section: python
+Priority: optional
+Homepage: http://beaker.readthedocs.io
+Description: cache and session library
+ Beaker is a web session and general caching library that includes WSGI
+ middleware for use in web applications.
+ .
+ As a general caching library, Beaker can handle storing for various times any
+ Python object that can be pickled with optional back-ends on a fine-grained
+ basis.
+ .
+ Features:
+  * Fast, robust performance
+  * Multiple reader/single writer lock system to avoid duplicate simultaneous
+    cache creation
+  * Cache back-ends include dbm, file, memory, memcached, and database (using
+    SQLAlchemy for multiple-db vendor support)
+  * Signed cookies to prevent session hijacking/spoofing
+  * Cookie-only sessions to remove the need for a database or file backend
+    (ideal for clustered systems)
+  * Extensible Container object to support new back-ends
+  * Caches can be divided into namespaces (to represent templates, objects,
+    etc.) then keyed for different copies
+  * Create functions for automatic call-backs to create new cache copies after
+    expiration
+  * Fine-grained toggling of back-ends, keys, and expiration per Cache object

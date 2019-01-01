@@ -1,0 +1,26 @@
+Package: caffe-cuda
+Source: caffe-contrib
+Version: 1.0.0+git20180821.99bd997-1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 20
+Depends: caffe-tools-cuda (= 1.0.0+git20180821.99bd997-1), python3-caffe-cuda (= 1.0.0+git20180821.99bd997-1), libcaffe-cuda1 (= 1.0.0+git20180821.99bd997-1), python3-protobuf (>= 3.6.1~)
+Suggests: libcaffe-cuda-dev (= 1.0.0+git20180821.99bd997-1), caffe-doc
+Conflicts: caffe-cpu
+Section: contrib/metapackages
+Priority: optional
+Homepage: http://caffe.berkeleyvision.org
+Description: Fast, open framework for Deep Learning (Meta)
+ Caffe is a deep learning framework made with expression, speed,
+ and modularity in mind. It is developed by the Berkeley AI Research
+ Lab (BAIR) and community contributors.
+ .
+ This metapackage pulls CUDA version of caffe:
+  * caffe-tools-cuda
+  * libcaffe-cuda*
+  * python3-caffe-cuda
+ And suggests these packages:
+  * libcaffe-cuda-dev
+  * caffe-doc
+ .
+ Note, this CUDA version cannot co-exist with the CPU_ONLY version.

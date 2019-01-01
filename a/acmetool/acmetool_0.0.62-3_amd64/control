@@ -1,0 +1,28 @@
+Package: acmetool
+Version: 0.0.62-3
+Architecture: amd64
+Maintainer: Debian Let's Encrypt <team+letsencrypt@tracker.debian.org>
+Installed-Size: 8788
+Depends: libc6 (>= 2.3.2), libcap2 (>= 1:2.10)
+Recommends: dialog
+Built-Using: golang-1.10 (= 1.10.4-2), golang-dbus (= 4.1.0-1), golang-github-alecthomas-units (= 0.0~git20151022.0.2efee85-3), golang-github-coreos-go-systemd (= 17-2), golang-github-hlandau-buildinfo (= 0.0~git20160722.0.b25d4b0-2), golang-github-hlandau-dexlogconfig (= 0.0~git20161112.0.244f29b-1), golang-github-hlandau-goutils (= 0.0~git20160722.0.0cdb66a-2), golang-github-hlandau-xlog (= 1.0.0-1), golang-github-jmhodges-clock (= 1.0-3), golang-github-mattn-go-isatty (= 0.0.3-4), golang-github-mattn-go-runewidth (= 0.0.2+git20170510.3.97311d9-1), golang-github-mitchellh-go-wordwrap (= 0.0~git20150314.0.ad45545-3), golang-github-ogier-pflag (= 0.0~git20160129.0.45c278a-3), golang-github-peterhellberg-link (= 1.0.0-3), golang-github-satori-go.uuid (= 1.2.0-1), golang-github-shiena-ansicolor (= 0.0~git20151119.0.a422bbe-2), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-net-dev (= 1:0.0+git20180124.0ed95ab+dfsg-2), golang-golang-x-sys (= 0.0~git20181026.95b1ffb-1), golang-gopkg-alecthomas-kingpin.v2 (= 2.2.6-1), golang-gopkg-cheggaaa-pb.v1 (= 1.0.25-1), golang-gopkg-hlandau-configurable.v1 (= 1.0.1-4), golang-gopkg-hlandau-easyconfig.v1 (= 1.0.17-2), golang-gopkg-hlandau-service.v2 (= 2.0.16-3), golang-gopkg-hlandau-svcutils.v1 (= 1.0.10-5), golang-gopkg-square-go-jose.v1 (= 1.1.2-1), golang-gopkg-tylerb-graceful.v1 (= 1.2.13-3), golang-x-text (= 0.3.0-2), golang-yaml.v2 (= 2.2.1-1)
+Section: web
+Priority: optional
+Homepage: https://hlandau.github.io/acme
+Description: automatic certificate acquisition tool for Let's Encrypt
+ acmetool is an easy-to-use command line tool for automatically
+ acquiring TLS certificates from ACME (Automated Certificate Management
+ Environment) servers such as Let's Encrypt, designed to flexibly
+ integrate into your webserver setup to enable automatic verification.
+ .
+ acmetool is designed to work like make: you specify what certificates
+ you want, and acmetool obtains certificates as necessary to satisfy
+ those requirements. If the requirements are already satisfied,
+ acmetool doesn't do anything when invoked. Thus, acmetool is
+ ideally suited for use on a cron job; it will do nothing until
+ certificates are near expiry, and then obtain new ones.
+ .
+ acmetool is designed to minimise the use of state and be transparent
+ in the state that it does use. All state, including certificates, is
+ stored in a single directory, by default /var/lib/acme. The schema
+ for this directory is simple, comprehensible and documented.

@@ -1,0 +1,34 @@
+Package: putty-tools
+Source: putty
+Version: 0.70-5
+Architecture: amd64
+Maintainer: Colin Watson <cjwatson@debian.org>
+Installed-Size: 1925
+Depends: libc6 (>= 2.27)
+Suggests: putty-doc
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.chiark.greenend.org.uk/~sgtatham/putty/
+Description: command-line tools for SSH, SCP, and SFTP
+ This package provides four command-line tools from the PuTTY suite that
+ allow various kinds of secure interaction with remote systems.
+ .
+ Plink (PuTTY Link) connects to a remote system via SSH, Telnet, or rlogin,
+ and either starts an interactive session or runs a batch process. It
+ supports the usual SSH features like port forwarding, X11 forwarding,
+ SOCKS, and compression.
+ .
+ PSCP (PuTTY Secure Copy) transfers files securely between systems using an
+ SSH connection. It works with both SSH protocol 1 and protocol 2.
+ .
+ PSFTP (PuTTY SFTP client) transfers files securely between systems using
+ the SSH file transfer protocol, which is specific to SSH protocol 2. In
+ interactive mode its interface is much like the traditional Unix FTP
+ client, although it can also operate in batch mode.
+ .
+ PuTTYgen generates SSH public and private key pairs in any of a number of
+ formats, including those usable by PuTTY, OpenSSH, and ssh.com.
+ .
+ All these utilities can make use of PuTTY's saved sessions where
+ appropriate.

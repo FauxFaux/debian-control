@@ -1,0 +1,16 @@
+Package: djinn
+Version: 2014.9.7-9
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 2428
+Depends: libatomic1 (>= 4.8), libc6 (>= 2.27), libffi6 (>= 3.0.4), libgmp10, libtinfo6 (>= 6)
+Section: haskell
+Priority: optional
+Homepage: http://hackage.haskell.org/package/djinn
+Description: generate Haskell expressions from types
+ Djinn uses a theorem prover for intuitionistic propositional logic to
+ generate a Haskell expression when given a type.
+ .
+ Given a type the program will deduce an expression of this type, if one
+ exists.  If the Djinn says the type is not realizable it is because there
+ is no (total) expression of the given type.

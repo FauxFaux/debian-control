@@ -1,0 +1,36 @@
+#! /bin/sh
+
+set -e
+
+if [ "$1" = "purge" ]; then
+	# delete dangling symlinks
+	test -d /etc/munin/plugins/ && for plugin in $(find /etc/munin/plugins/ -type l); do
+		if [ ! -e $(readlink $plugin) ]; then
+			rm $plugin
+		fi
+	done
+
+	rm -f /var/log/munin/munin-node.log*
+	rm -f /var/log/munin/munin-node-configure.log*
+fi
+
+# Automatically added by dh_installinit/11.5.4
+if [ "$1" = "purge" ] ; then
+	update-rc.d munin-node remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.4
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'munin-node.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'munin-node.service' >/dev/null || true
+		deb-systemd-helper unmask 'munin-node.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

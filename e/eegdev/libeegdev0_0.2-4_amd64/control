@@ -1,0 +1,29 @@
+Package: libeegdev0
+Source: eegdev
+Version: 0.2-4
+Architecture: amd64
+Maintainer: NeuroDebian Team <team@neuro.debian.net>
+Installed-Size: 101
+Depends: libc6 (>= 2.14)
+Recommends: eegdev-plugins-free
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://cnbi.epfl.ch/software/eegdev.html
+Description: Biosignal acquisition device library
+ eegdev is a library that provides a unified interface for accessing various
+ EEG (and other biosignals) acquisition systems. This interface has been
+ designed to be both flexible and efficient. The device specific part is
+ implemented by the mean of plugins which makes adding new device backend
+ fairly easy even if the library does not support them yet officially.
+ .
+ The core library not only provides to users a unified and consistent
+ interfaces to the acquisition device but it also provides many
+ functionalities to the device backends (plugins) ranging from configuration
+ to data casting and scaling making writing new device backend an easy task.
+ .
+ This library is particularly useful to handle the acquisition part of a
+ Brain Computer Interface (BCI) or any realtime multi-electrode acquisition
+ in neurophysiological research.
+ .
+ This package contains the core library

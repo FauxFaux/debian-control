@@ -1,0 +1,24 @@
+Package: mediawiki
+Version: 1:1.31.1-4
+Architecture: all
+Maintainer: Kunal Mehta <legoktm@debian.org>
+Installed-Size: 128434
+Depends: apache2 | httpd, php, php-mysql | php-pgsql | php-sqlite3 | php-mysqlnd, php-common, php-mbstring, php-xml, mime-support, mediawiki-classes (= 1:1.31.1-4)
+Recommends: default-mysql-server | virtual-mysql-server | postgresql-contrib, php-cli, php-apcu, php-intl, php-curl, php-wikidiff2, python3
+Suggests: imagemagick | php-gd, memcached, clamav
+Breaks: fusionforge-plugin-mediawiki (<< 5.2~rc1+1~), mediawiki-extensions (<< 2.8~), mediawiki-extensions-base, mediawiki-extensions-collection (<< 2.8~), mediawiki-extensions-confirmedit, mediawiki-extensions-fckeditor, mediawiki-extensions-geshi, mediawiki-extensions-graphviz (<< 2.8~), mediawiki-extensions-ldapauth (<< 2.8~), mediawiki-extensions-openid (<< 2.8~)
+Replaces: mediawiki-extensions-base, mediawiki-extensions-confirmedit, mediawiki-extensions-geshi
+Provides: mediawiki-extensions-confirmedit, mediawiki-extensions-geshi
+Section: web
+Priority: optional
+Homepage: https://www.mediawiki.org/
+Description: website engine for collaborative work
+ MediaWiki is a wiki engine (a program for creating a collaboratively
+ edited website). It is designed to handle heavy websites containing
+ library-like document collections, and supports user uploads of
+ images/sounds, multilingual content, TOC autogeneration, ISBN links,
+ etc.
+ .
+ Moreover, it keeps track of changes, so users can receive
+ notifications, view diffs and revert edits. This system has many
+ other features and can easily be extended.

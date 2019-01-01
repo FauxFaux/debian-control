@@ -1,0 +1,32 @@
+Package: neurodebian-popularity-contest
+Source: neurodebian
+Version: 0.38.2
+Architecture: all
+Maintainer: NeuroDebian Team <team@neuro.debian.net>
+Installed-Size: 28
+Depends: popularity-contest
+Section: science
+Priority: optional
+Homepage: http://neuro.debian.net
+Description: neuroscience-oriented distribution - popcon integration
+ The NeuroDebian project integrates and maintains a variety of software
+ projects within Debian that are useful for neuroscience (such as AFNI,
+ FSL, PsychoPy, etc.) or generic computation (such as HTCondor,
+ pandas, etc.).
+ .
+ This package is a complement to the generic popularity-contest
+ package to enable anonymous submission of usage statistics to
+ NeuroDebian in addition to the popcon submissions to the underlying
+ distribution (either Debian or Ubuntu) popcon server.
+ .
+ Participating in popcon is important for the following reasons:
+  * Popular packages receive more attention from developers; bugs are
+    fixed faster and updates are provided quicker.
+  * It ensures that support is not dropped for a previous release of
+    Debian or Ubuntu while there are active users.
+  * User statistics may be useful for upstream research software
+    developers seeking funding for continued development.
+ .
+ This requires that popcon is activated for the underlying distribution
+ (Debian or Ubuntu), which can be achieved by running
+ "dpkg-reconfigure popularity-contest" as root.

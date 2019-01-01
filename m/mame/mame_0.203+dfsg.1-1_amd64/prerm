@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_usrlocal/11.5.1
+(
+	while read dir; do
+		rmdir "$dir" 2>/dev/null || true
+	done
+) << DATA
+/usr/local/share/games/mame/artwork
+/usr/local/share/games/mame/cheat
+/usr/local/share/games/mame/crosshair
+/usr/local/share/games/mame/hash
+/usr/local/share/games/mame/roms
+/usr/local/share/games/mame/samples
+/usr/local/share/games/mame
+/usr/local/share/games
+DATA
+# End automatically added section

@@ -1,0 +1,24 @@
+Package: schleuder-cli
+Version: 0.1.0-3
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 54
+Depends: ruby | ruby-interpreter, ruby-thor
+Enhances: schleuder (>= 3.0.0~)
+Section: mail
+Priority: optional
+Homepage: https://schleuder.org
+Description: command line tool to configure schleuder mailing lists
+ Schleuder-cli enables creating, configuring, and deleting schleuder mailing
+ lists, subscriptions, keys, etc.
+ .
+ It uses the Schleuder API, provided by schleuder-api-daemon (part of
+ Schleuder).
+ .
+ Authentication and TLS-verification are mandatory. You need an API-key and the
+ fingerprint of the TLS-certificate of the Schleuder API, respectively. Both
+ should be provided by the API operators.
+ .
+ schleuder-cli does *not* authorize access. Only people who are supposed to have
+ full access to all lists should be allowed to use it on/with your server.
+Ruby-Versions: all

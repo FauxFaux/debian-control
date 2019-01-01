@@ -1,0 +1,22 @@
+Package: libsort-key-top-perl
+Source: libsort-key-top-perl (0.08-3)
+Version: 0.08-3+b1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 81
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.4)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Sort-Key-Top
+Description: Perl module to select and sort top n elements of a list
+ The functions available from this module select the top n elements from a
+ list using several common orderings and custom key extraction procedures.
+ .
+ They are all variations around 'keytopsort { CALC_KEY($_) } $n => @data;'.
+ .
+ In array context, this function calculates the ordering key for every element
+ in @data using the expression inside the block. Then it selects and orders
+ the $n elements with the lower keys when compared lexicographically.
+ .
+ In scalar context, the value returned by the functions on this module is the
+ cutoff value allowing to select nth element from the array.

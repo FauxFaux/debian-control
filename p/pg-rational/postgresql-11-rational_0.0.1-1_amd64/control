@@ -1,0 +1,25 @@
+Package: postgresql-11-rational
+Source: pg-rational
+Version: 0.0.1-1
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <team+postgresql@tracker.debian.org>
+Installed-Size: 76
+Depends: postgresql-11, libc6 (>= 2.4)
+Section: database
+Priority: optional
+Homepage: https://github.com/begriffs/pg_rational
+Description: Precise fractional arithmetic for PostgreSQL
+ pg_rational implements precise fractional arithmetic for PostgreSQL. Perfect
+ for exact arithmetic or user-specified table row ordering. Holds values as big
+ as an integer, with matching precision in the denominator.
+ .
+ Features:
+  * Stores fractions in exactly 64 bits (same size as float)
+  * Written in C for high performance
+  * Detects and halts arithmetic overflow for correctness
+  * Uses native CPU instructions for fast overflow detection
+  * Defers GCD calculation until requested or absolutely required
+  * Supports btree and hash indices
+  * Implements Stern-Brocot trees for finding intermediate points
+  * Coercion from integer/bigint/tuple
+  * Custom aggregate

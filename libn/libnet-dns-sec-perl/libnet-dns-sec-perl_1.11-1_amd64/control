@@ -1,0 +1,20 @@
+Package: libnet-dns-sec-perl
+Version: 1.11-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 132
+Depends: libnet-dns-perl (>= 1.08), perl (>= 5.28.1-3), perlapi-5.28.1, libc6 (>= 2.4), libssl1.1 (>= 1.1.1)
+Breaks: libnet-dns-perl (<< 1.01)
+Section: perl
+Priority: optional
+Homepage: https://www.net-dns.org/
+Description: DNSSEC extension to NET::DNS
+ Net::DNS::SEC implements DNS Resource Record types that are relevant
+ for DNSSEC operations. This package implements RFC4034
+ "Resource Records for the DNS Security Extensions" and RFC2931 "DNS
+ Request and Transaction Signatures ( SIG(0)s )"
+ .
+ It also provides support for SIG0. That later is useful for dynamic
+ updates using key-pairs.
+ .
+ RSA and DSA crypto routines are supported.

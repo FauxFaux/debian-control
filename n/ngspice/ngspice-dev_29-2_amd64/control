@@ -1,0 +1,21 @@
+Package: ngspice-dev
+Source: ngspice
+Version: 29-2
+Architecture: amd64
+Maintainer: Debian Electronics Team <pkg-electronics-devel@alioth-lists.debian.net>
+Installed-Size: 657
+Depends: blt-dev, tclspice (= 29-2)
+Section: libdevel
+Priority: optional
+Homepage: http://ngspice.sourceforge.net
+Description: Spice circuit simulator - development files for ngspice and tclspice
+ NGSpice is a mixed-level/mixed-signal circuit simulator. Its code is based on
+ three open source software packages:
+ Spice3f5, Cider1b1 and Xspice.
+ .
+ Use this package in case you need to compile own Xspice models as a dynamic
+ library with a file extension *.cm. Those files need to be placed into
+ /usr/lib/$(multiarch)/ngspice and will be loaded by the ngspice executable.
+ .
+ This package contains the development header files for libspice and own
+ ngspice dynamic library models.

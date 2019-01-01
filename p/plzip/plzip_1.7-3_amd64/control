@@ -1,0 +1,23 @@
+Package: plzip
+Version: 1.7-3
+Architecture: amd64
+Maintainer: Daniel Baumann <daniel.baumann@progress-linux.org>
+Installed-Size: 120
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), liblz1, libstdc++6 (>= 5.2)
+Provides: lzip-alternative, lzip-compressor, lzip-decompressor
+Section: utils
+Priority: optional
+Homepage: http://www.nongnu.org/lzip/plzip.html
+Description: parallel, lossless data compressor based on the LZMA algorithm
+ Lzip is a lossless data compressor based on the LZMA algorithm, with very safe
+ integrity checking and a user interface similar to the one of gzip or bzip2.
+ Lzip decompresses almost as fast as gzip and compresses better than bzip2,
+ which makes it well suited for software distribution and data archiving.
+ .
+ Plzip is a massively parallel (multi-threaded) version of lzip using the lzip
+ file format; the files produced by plzip are fully compatible with lzip.
+ .
+ Plzip is intended for faster compression/decompression of big files on
+ multiprocessor machines, which makes it specially well suited for distribution
+ of big software files and large scale data archiving. On files big enough,
+ plzip can use hundreds of processors.

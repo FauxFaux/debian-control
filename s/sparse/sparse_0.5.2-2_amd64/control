@@ -1,0 +1,20 @@
+Package: sparse
+Version: 0.5.2-2
+Architecture: amd64
+Maintainer: Uwe Kleine-König <ukleinek@debian.org>
+Installed-Size: 1859
+Depends: libc6 (>= 2.14), libllvm6.0 (>= 1:6.0~svn298832-1~), libxml2 (>= 2.7.4), perl:any, gcc-8
+Suggests: sparse-test-inspect
+Section: devel
+Priority: optional
+Homepage: https://sparse.wiki.kernel.org/
+Description: semantic parser of source files
+ Sparse, the semantic parser, provides a compiler frontend capable of
+ parsing most of ANSI C as well as many GCC extensions, and a collection
+ of sample compiler backends, including a static analyzer also called
+ "sparse". Sparse provides a set of annotations designed to convey
+ semantic information about types, such as what address space pointers
+ point to, or what locks a function acquires or releases.
+ .
+ Sparse can be invoked directly as "sparse" or via the "cgcc" wrapper
+ around the C compiler.

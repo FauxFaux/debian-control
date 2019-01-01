@@ -1,0 +1,43 @@
+#!/bin/sh
+
+set -e
+
+SCOREDIR=/var/games/tecnoballz
+PROG=/usr/games/tecnoballz
+
+case "$1" in
+    configure)
+
+    # tecnoballz is setuid "root:games".
+    if ! dpkg-statoverride --list "$PROG" >/dev/null ; then
+      chown root:games "$PROG"
+      chmod 2755 "$PROG"
+    fi
+
+    # If there is no scorefile, create one
+    if ! [ -f $SCOREDIR/tecnoballz.hi ]; then
+        cp $SCOREDIR/tecnoballz.hi.clean $SCOREDIR/tecnoballz.hi
+    fi
+
+    # The scorefile is writable by the group "games".
+    chown root:games $SCOREDIR
+    chmod 2755 $SCOREDIR
+    chown root:games $SCOREDIR/tecnoballz.hi
+    chmod 0664 $SCOREDIR/tecnoballz.hi
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper symlink_to_dir /usr/share/doc/tecnoballz /usr/share/doc/tecnoballz-data 0.93.1-8\~ -- "$@"
+# End automatically added section
+
+

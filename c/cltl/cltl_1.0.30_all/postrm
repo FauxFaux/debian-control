@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "purge" ];
+then
+	rm -rf /var/cache/cltl
+fi
+
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/emacs/site-start.d/60cltl.el 1.0.30\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installdebconf/11.5.3
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+

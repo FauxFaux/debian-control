@@ -1,0 +1,20 @@
+Package: nodejs-dev
+Source: nodejs
+Version: 10.15.0~dfsg-6
+Architecture: amd64
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 142
+Depends: python, libssl-dev (>= 1.1.1~), libuv1-dev (>= 1.20.0~), libnode-dev
+Suggests: debhelper
+Section: devel
+Priority: optional
+Homepage: http://nodejs.org/
+Description: evented I/O for V8 javascript (debhelper files)
+ Node.js is a platform built on Chrome's JavaScript runtime for easily
+ building fast, scalable network applications. Node.js uses an
+ event-driven, non-blocking I/O model that makes it lightweight and
+ efficient, perfect for data-intensive real-time applications that run
+ across distributed devices.
+ .
+ This package provides the nodejs debhelper tool, which is no longer
+ needed. Plugins should instead declare a build dependency on libnode-dev.

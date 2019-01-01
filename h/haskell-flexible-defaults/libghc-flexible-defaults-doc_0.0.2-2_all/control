@@ -1,0 +1,28 @@
+Package: libghc-flexible-defaults-doc
+Source: haskell-flexible-defaults
+Version: 0.0.2-2
+Architecture: all
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 246
+Depends: haddock-interface-33
+Recommends: ghc-doc, libjs-mathjax
+Section: doc
+Priority: optional
+Homepage: https://github.com/peti/flexible-defaults
+Description: generate default function implementations for complex type classes; documentation
+ Template Haskell code to implement default implementations for
+ type-class functions based on which functions are already implemented.
+ Currently extremely crude but still fairly effective.
+ .
+ When defining a type class with many functions, each of which can be
+ implemented based on arbitrary subsets of the others, the standard
+ default-implementation concept breaks down quite badly.  This library
+ provides a system by which more complex rules can be described for
+ choosing default implementations based on which ones the user
+ supplies.  These implementations can additionally be given
+ "suitability scores", so that when multiple possible choices could be
+ made, the library can choose the "best" one.
+ .
+ This package provides the documentation for a library for the Haskell
+ programming language.
+ See http://www.haskell.org/ for more information on Haskell.

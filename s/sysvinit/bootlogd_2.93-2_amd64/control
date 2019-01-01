@@ -1,0 +1,17 @@
+Package: bootlogd
+Source: sysvinit
+Version: 2.93-2
+Architecture: amd64
+Maintainer: Debian sysvinit maintainers <debian-init-diversity@chiark.greenend.org.uk>
+Installed-Size: 107
+Depends: lsb-base (>= 3.2-14), libc6 (>= 2.15)
+Section: admin
+Priority: optional
+Homepage: http://savannah.nongnu.org/projects/sysvinit
+Description: daemon to log boot messages
+ bootlogd logs all messages printed to the system console during system boot,
+ and records those messages to a logfile.
+ .
+ Note that not all init systems print messages to the system console,
+ so that the logfile may remain empty; this is the case with systemd
+ (the default init system). Try "journalctl -b" instead.

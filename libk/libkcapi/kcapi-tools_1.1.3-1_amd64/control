@@ -1,0 +1,25 @@
+Package: kcapi-tools
+Source: libkcapi
+Version: 1.1.3-1
+Architecture: amd64
+Maintainer: Mathieu Malaterre <malat@debian.org>
+Installed-Size: 106
+Depends: libc6 (>= 2.25), libkcapi1 (>= 1.0.0)
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.chronox.de/libkcapi.html
+Description: Command-line tools for Linux Kernel Crypto API
+ The Linux kernel exports a Netlink interface of type AF_ALG to allow user
+ space to utilize the kernel crypto API. libkcapi uses this Netlink interface
+ and exports easy to use APIs so that a developer does not need to consider the
+ low-level Netlink interface handling.
+ .
+ The library does not implement any cipher algorithms. All consumer requests
+ are sent to the kernel for processing. Results from the kernel crypto API
+ are returned to the consumer via the library API.
+ .
+ The kernel interface and therefore this library can be used by unprivileged
+ processes.
+ .
+ Install this package for the kcapi-dgst, kcapi-enc & kcapi-rng applications

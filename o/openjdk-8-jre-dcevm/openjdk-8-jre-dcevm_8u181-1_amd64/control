@@ -1,0 +1,19 @@
+Package: openjdk-8-jre-dcevm
+Version: 8u181-1
+Architecture: amd64
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 13014
+Depends: openjdk-8-jre-headless, libc6 (>= 2.14)
+Section: java
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/dcevm/dcevm
+Description: Alternative VM for OpenJDK 8 with enhanced class redefinition
+ The Dynamic Code Evolution Virtual Machine (DCE VM) is a modification of
+ the Java HotSpot VM that allows unlimited redefinition of loaded classes
+ at runtime. The current hotswapping mechanism of the HotSpot VM allows
+ only changing method bodies. This enhanced VM allows adding and removing
+ fields and methods as well as changes to the super types of a class.
+ .
+ This alternative VM is enabled by adding the -dcevm option when invoking
+ the java command.

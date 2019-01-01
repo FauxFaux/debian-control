@@ -1,0 +1,32 @@
+Package: libghc-double-conversion-dev
+Source: haskell-double-conversion (2.0.2.0+ds1-4)
+Version: 2.0.2.0+ds1-4+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 200
+Depends: libdouble-conversion-dev, libghc-base-dev-4.11.1.0-5dd74, libghc-bytestring-dev-0.10.8.2-76891, libghc-ghc-prim-dev-0.5.2.0-0a259, libghc-text-dev-1.2.3.1-30bbe, libatomic1 (>= 4.8), libc6 (>= 2.2.5), libdouble-conversion1 (>= 2.0.0), libgcc1 (>= 1:3.0), libgmp10, libstdc++6 (>= 4.1.1)
+Suggests: libghc-double-conversion-doc, libghc-double-conversion-prof
+Provides: libghc-double-conversion-dev-2.0.2.0-ad083
+Section: haskell
+Priority: optional
+Homepage: https://github.com/bos/double-conversion
+Description: fast conversion between double precision floating point and text
+ A library that performs fast, accurate conversion between double
+ precision floating point and text.
+ .
+ This library is implemented as bindings to the C++
+ double-conversion library written by Florian Loitsch at Google.
+ .
+ The 'Text' versions of these functions are about 30 times faster
+ than the default 'show' implementation for the 'Double' type.
+ .
+ The 'ByteString' versions are /slower/ than the 'Text' versions;
+ roughly half the speed.  (This seems to be due to the cost of
+ allocating 'ByteString' values via malloc.)
+ .
+ As a final note, be aware that the bytestring-show package is
+ about 50% slower than simply using 'show'.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: double-conversion-2.0.2.0-9Y8pFwgFX7R1dpoNSGJHLI

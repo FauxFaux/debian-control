@@ -1,0 +1,37 @@
+Package: libconfig-model-dpkg-perl
+Version: 2.120
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 614
+Depends: perl, libapt-pkg-perl, libarray-intspan-perl, libconfig-model-backend-yaml-perl, libconfig-model-perl (>= 2.122), libexporter-lite-perl, liblog-log4perl-perl, libmouse-perl, libparse-recdescent-perl, libsoftware-licensemoreutils-perl, libtext-autoformat-perl, libtext-levenshtein-damerau-perl, liburi-perl, libwww-perl, libyaml-perl, licensecheck, lintian, perl (>= 5.15.1) | libmodule-corelist-perl
+Recommends: libconfig-model-tkui-perl
+Enhances: devscripts
+Section: perl
+Priority: optional
+Description: editor for Dpkg source files with validation
+ This package provides Config::Model::Dpkg, a plugin for Config::Model
+ and cme. Once this package is installed, cme is able to handle dpkg
+ source file.
+ .
+ For instance, the command 'cme edit dpkg' provides a graphical editor
+ for most files of a package source.
+ .
+ The command 'cme check dpkg' provide a command line that will check the
+ package file, a bit like lintian. But this command must be run in the
+ source package directory and can be run before building the package.
+ .
+ Likewise, the command 'cme fix dpkg' will fix most of the warnings
+ found by the command above.
+ .
+ The command 'cme update dpkg' will update debian/copyright file
+ from the content of the package source file.
+ .
+ If the recommended package libconfig-model-tkui-perl is installed,
+ you can run 'cme edit dpkg' to edit your package files with a GUI.
+ .
+ You can also run cme with a more restricted scope with:
+  * cme edit|check|fix dpkg-control
+  * cme edit|check|fix dpkg-copyright
+ .
+ For best results, you should install the latest available version
+ of libmodule-corelist-perl.

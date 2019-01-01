@@ -1,0 +1,32 @@
+Package: nxagent
+Source: nx-libs
+Version: 2:3.5.99.17-1
+Architecture: amd64
+Maintainer: Debian Remote Maintainers <debian-remote@lists.debian.org>
+Installed-Size: 4878
+Depends: libnx-x11-6 (= 2:3.5.99.17-1), libxcomp3 (= 2:3.5.99.17-1), libxcompshad3 (= 2:3.5.99.17-1), x11-xkb-utils, libc6 (>= 2.27), libjpeg62-turbo (>= 1.3.1), libpixman-1-0 (>= 0.13.2), libpng16-16 (>= 1.6.2-1), libx11-6 (>= 2:1.4.99.1), libxcomposite1 (>= 1:0.3-1), libxdmcp6, libxext6, libxfixes3, libxfont2 (>= 1:2.0.1), libxinerama1, libxml2 (>= 2.7.4), libxpm4, libxrender1, zlib1g (>= 1:1.1.4)
+Recommends: xfonts-base, xkb-data
+Breaks: libxcompext3 (<< 2:3.5.99.3~), nxauth
+Replaces: libxcompext3, nxauth
+Section: x11
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/ArcticaProject/nx-libs/
+Description: Nested Xserver (aka NX Agent) supporting the NX compression protocol
+ NX is a software suite which implements very efficient
+ compression of the X11 protocol. This increases performance when
+ using X applications over a network, especially a slow one.
+ .
+ nxagent is a nested Xserver providing NX transport of X sessions. The
+ application is based on the well known Xnest "nested" server. nxagent,
+ like Xnest, is an X server for its own clients, and at the same time, an
+ X client for a system's local X server.
+ .
+ The main scope of nxagent is to eliminate X round-trips or transform
+ them into asynchronous replies. nxagent works together with nxproxy.
+ nxproxy itself does not make any effort to minimize round-trips
+ by itself, this is demanded of nxagent.
+ .
+ Being an X server, nxagent is able to resolve all the property/atoms related
+ requests locally, ensuring that the most common source of round-trips are
+ nearly reduced to zero.

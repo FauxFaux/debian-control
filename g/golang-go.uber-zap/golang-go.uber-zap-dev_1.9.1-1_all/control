@@ -1,0 +1,25 @@
+Package: golang-go.uber-zap-dev
+Source: golang-go.uber-zap
+Version: 1.9.1-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 565
+Depends: golang-github-apex-log-dev, golang-github-pkg-errors-dev, golang-github-stretchr-testify-dev, golang-go.uber-atomic-dev, golang-go.uber-multierr-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/uber-go/zap
+Description: Blazing fast, structured, leveled logging in Go
+ Package zap provides fast, structured, leveled logging.
+ .
+ For applications that log in the hot path, reflection-based
+ serialization and string formatting are prohibitively expensive,
+ they're CPU-intensive and make many small allocations. Put
+ differently, using json.Marshal and fmt.Fprintf to log tons of
+ interface{} makes your application slow.
+ .
+ Zap takes a different approach. It includes a reflection-free,
+ zero-allocation JSON encoder, and the base Logger strives to avoid
+ serialization overhead and allocations wherever possible. By
+ building the high-level SugaredLogger on that foundation, zap lets
+ users choose when they need to count every allocation and when
+ they'd prefer a more familiar, loosely typed API.

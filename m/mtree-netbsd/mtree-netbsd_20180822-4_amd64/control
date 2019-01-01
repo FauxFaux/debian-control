@@ -1,0 +1,20 @@
+Package: mtree-netbsd
+Version: 20180822-4
+Architecture: amd64
+Maintainer: John Goerzen <jgoerzen@complete.org>
+Installed-Size: 107
+Depends: libc6 (>= 2.14), libmd0 (>= 0.0.0)
+Section: utils
+Priority: optional
+Homepage: http://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/pkgtools/mtree/README.html
+Description: Validates directory tree against specification
+ The mtree utility compares a file hierarchy against a specification,
+ creates a specification for a file hierarchy, or modifies a specification.
+ This specification can be controlled by the user, but typically includes
+ file/directory/symlink names, ownership information, permission bits, and
+ so forth.  It may optionally also include various hashes, such as SHA-256
+ or MD5.
+ .
+ This mtree utility can understand its own files, as well as those generated
+ by the FreeBSD mtree (in Debian as fmtree in freebsd-buildutils and
+ freebsd-glue) and bsdtar/libarchive.

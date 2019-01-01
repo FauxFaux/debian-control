@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+ 
+CONFIGFILE=/etc/masonrc
+
+. /usr/share/debconf/confmodule
+
+# Load config file, if it exists.
+if [ -e $CONFIGFILE ]; then
+	. $CONFIGFILE || true
+	# Store values from config file into
+	# debconf db.
+	db_set mason/newrulepolicy "$NEWRULEPOLICY"
+	db_set mason/defaultpolicy "$DEFAULTPOLICY"
+fi
+
+db_input medium mason/newrulepolicy || true
+db_input medium mason/defaultpolicy || true
+db_go || true

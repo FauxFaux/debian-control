@@ -1,0 +1,21 @@
+Package: libsbuild-perl
+Source: sbuild
+Version: 0.77.1-2
+Architecture: all
+Maintainer: sbuild maintainers <sbuild@packages.debian.org>
+Installed-Size: 478
+Depends: apt, dpkg-dev, libdpkg-perl (>= 1.18.14), libexception-class-perl, libfilesys-df-perl, libmime-lite-perl, gnupg (>= 2.1), perl
+Recommends: schroot (>= 1.6.0), autopkgtest (>= 4.0.4)
+Suggests: libwww-perl, default-mta | mail-transport-agent
+Replaces: sbuild (<= 0.58.4-1)
+Section: perl
+Priority: optional
+Description: Library for building Debian binary packages from Debian sources
+ The sbuild suite of programs (wanna-build, buildd and sbuild) are
+ used to build binary packages from source packages.  The wanna-build
+ database tracks packages which require building; buildd schedules
+ work from information it gets from the wanna-build database; sbuild
+ does the actual package building.
+ .
+ This package contains the core library modules used by these
+ programs.

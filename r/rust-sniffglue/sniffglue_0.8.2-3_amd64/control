@@ -1,0 +1,20 @@
+Package: sniffglue
+Source: rust-sniffglue
+Version: 0.8.2-3
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 2695
+Depends: libc6 (>= 2.18), libgcc1 (>= 1:4.2), libpcap0.8 (>= 1.0.0), libseccomp2 (>= 0.0.0~20120605)
+Section: net
+Priority: optional
+Multi-Arch: allowed
+Description: Secure multithreaded packet sniffer
+ sniffglue is a network sniffer written in rust. Network packets are parsed
+ concurrently using a thread pool to utilize all cpu cores. Project goals are
+ that you can run sniffglue securely on untrusted networks and that it must not
+ crash when processing packets. The output should be as useful as possible by
+ default.
+ .
+ This package contains the following binaries built from the Rust crate
+ "sniffglue":
+  - sniffglue

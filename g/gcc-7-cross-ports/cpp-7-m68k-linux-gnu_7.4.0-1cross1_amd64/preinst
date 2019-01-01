@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove m68k-linux-gnu-cpp /usr/bin/m68k-linux-gnu-cpp-7
+fi
+
+
+
+exit 0

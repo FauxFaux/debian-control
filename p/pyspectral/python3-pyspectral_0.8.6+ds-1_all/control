@@ -1,0 +1,31 @@
+Package: python3-pyspectral
+Source: pyspectral
+Version: 0.8.6+ds-1
+Architecture: all
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 888
+Depends: python3-appdirs, python3-dask, python3-geotiepoints, python3-h5py, python3-numpy, python3-requests, python3-scipy, python3-six, python3-yaml, python3-docutils, python3:any
+Recommends: python3-matplotlib, python3-tqdm
+Suggests: python3-pandas, python3-pyspectral-doc, python3-trollsift, python3-xlrd
+Section: python
+Priority: optional
+Homepage: https://github.com/pytroll/pyspectral
+Description: Reading and manipulaing satellite sensor spectral responses
+ Reading and manipulaing satellite sensor spectral responses and the
+ solar spectrum, to perform various corrections to VIS and NIR band data.
+ .
+ Given a passive sensor on a meteorological satellite PySpectral
+ provides the relative spectral response (rsr) function(s) and offer
+ some basic operations like convolution with the solar spectrum to
+ derive the in band solar flux, for instance.
+ .
+ The focus is on imaging sensors like AVHRR, VIIRS, MODIS, ABI, AHI,
+ OLCI and SEVIRI. But more sensors are included and if others are
+ needed they can be easily added. With PySpectral it is possible to
+ derive the reflective and emissive parts of the signal observed in any
+ NIR band around 3-4 microns where both passive terrestrial emission
+ and solar backscatter mix the information received by the satellite.
+ Furthermore PySpectral allows correcting true color imagery for the
+ background (climatological) atmospheric signal due to Rayleigh
+ scattering of molecules, absorption by atmospheric gases and aerosols,
+ and Mie scattering of aerosols.

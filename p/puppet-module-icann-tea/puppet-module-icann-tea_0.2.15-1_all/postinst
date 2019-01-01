@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/tea puppet-module-tea /usr/share/puppet/modules.available/icann-tea 500
+fi
+
+
+
+exit 0

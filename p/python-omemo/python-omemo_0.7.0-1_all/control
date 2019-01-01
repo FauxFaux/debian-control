@@ -1,0 +1,24 @@
+Package: python-omemo
+Version: 0.7.0-1
+Architecture: all
+Maintainer: Debian XMPP Maintainers <pkg-xmpp-devel@lists.alioth.debian.org>
+Installed-Size: 131
+Depends: python-cryptography (>= 1.7.1), python-doubleratchet, python-hkdf, python-nacl, python-protobuf, python-x3dh, python:any (<< 2.8), python:any (>= 2.7~)
+Section: python
+Priority: optional
+Homepage: https://pypi.org/project/OMEMO/
+Description: Python 2 implementation of the OMEMO protocol
+ This python library offers an open implementation of the OMEMO Multi-End
+ Message and Object Encryption protocol as specified here.
+ .
+ Goals of this implementation are:
+ .
+  * Do not use libsignal but offer a solid alternative to it
+  * Stay away from GPL (not possible until we move away from libsignals
+    wireformat)
+  * Be flexible to changes that might happen to the OMEMO protocol
+  * Keep the structure close to the spec
+  * Provide the parts of the protocol (X3DH, Double Ratchet) as own
+    repositories
+ .
+ This package provides the Python 2.7 module.

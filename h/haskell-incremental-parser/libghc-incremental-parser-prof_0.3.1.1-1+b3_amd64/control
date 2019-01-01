@@ -1,0 +1,23 @@
+Package: libghc-incremental-parser-prof
+Source: haskell-incremental-parser (0.3.1.1-1)
+Version: 0.3.1.1-1+b3
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 557
+Depends: libghc-incremental-parser-dev (= 0.3.1.1-1+b3), libghc-base-prof-4.11.1.0-5dd74, libghc-monoid-subclasses-prof-0.4.6-bcfc8
+Provides: libghc-incremental-parser-prof-0.3.1.1-473b2
+Section: haskell
+Priority: optional
+Homepage: http://patch-tag.com/r/blamario/incremental-parser/wiki/
+Description: generic incremental parsers; profiling libraries
+ Incremental parsers can provide partial results from partial input.
+ This parser library is implemented using the concept of Brzozowski
+ derivatives, tweaked and optimized to work with any monoidal input
+ type. Lists, ByteString, and Text are supported out of the box, as
+ well as any other data type for which the monoid-subclasses package
+ defines instances.  If the parser result is also a monoid, the
+ parser can provide it incrementally, before the complete input is
+ parsed.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

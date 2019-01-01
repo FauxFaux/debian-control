@@ -1,0 +1,16 @@
+Package: sssd-ad
+Source: sssd
+Version: 1.16.3-3
+Architecture: amd64
+Maintainer: Debian SSSD Team <pkg-sssd-devel@alioth-lists.debian.net>
+Installed-Size: 342
+Depends: libsss-idmap0 (= 1.16.3-3), sssd-ad-common (= 1.16.3-3), sssd-common (= 1.16.3-3), sssd-krb5-common (= 1.16.3-3), libbasicobjects0 (>= 0.4.0), libc6 (>= 2.28), libcollection4 (>= 0.4.0), libcom-err2 (>= 1.43.9), libdhash1 (>= 0.4.0), libini-config5 (>= 0.4.0), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.6.dfsg.2), libldap-2.4-2 (>= 2.4.7), libldb1 (>= 0.9.21), libpopt0 (>= 1.14), libref-array1 (>= 0.4.0), libsasl2-2, libsmbclient (>= 2:4.0.3+dfsg1), libtalloc2 (>= 2.0.4~git20101213), libtevent0 (>= 0.9.9), samba-libs (>= 2:4.9.2+dfsg)
+Suggests: adcli
+Breaks: sssd (<< 1.10.0~beta2-1)
+Replaces: sssd (<< 1.10.0~beta2-1)
+Section: utils
+Priority: optional
+Homepage: https://pagure.io/SSSD/sssd/
+Description: System Security Services Daemon -- Active Directory back end
+ Provides the Active Directory back end that the SSSD can utilize to fetch
+ identity data from and authenticate against an Active Directory server.

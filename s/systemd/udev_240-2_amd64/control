@@ -1,0 +1,17 @@
+Package: udev
+Source: systemd
+Version: 240-2
+Architecture: amd64
+Maintainer: Debian systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>
+Installed-Size: 8178
+Depends: libacl1 (>= 2.2.51-8), libblkid1 (>= 2.24), libc6 (>= 2.28), libkmod2 (>= 5~), libselinux1 (>= 2.1.9), adduser, libudev1 (= 240-2), lsb-base (>= 3.0-6), util-linux (>= 2.27.1)
+Conflicts: hal
+Breaks: ifplugd (<< 0.28-19.1~), ifupdown (<< 0.8.5~), joystick (<< 1:1.4.9-1~), systemd (<< 233-4)
+Replaces: systemd (<< 233-4)
+Section: admin
+Priority: important
+Multi-Arch: foreign
+Homepage: https://www.freedesktop.org/wiki/Software/systemd
+Description: /dev/ and hotplug management daemon
+ udev is a daemon which dynamically creates and removes device nodes from
+ /dev/, handles hotplug events and loads drivers at boot time.

@@ -1,0 +1,14 @@
+Package: librust-env-logger+humantime-dev
+Source: rust-env-logger
+Version: 0.6.0-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-env-logger-dev (= 0.6.0-1), librust-humantime-1+default-dev (>= 1.1-~~)
+Provides: librust-env-logger-0+humantime-dev (= 0.6.0-1), librust-env-logger-0.6+humantime-dev (= 0.6.0-1), librust-env-logger-0.6.0+humantime-dev (= 0.6.0-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Logging implementation for `log` which is configured via an environment variable - feature "humantime"
+ This metapackage enables feature humantime for the Rust env_logger crate, by
+ pulling in any additional dependencies needed by that feature.

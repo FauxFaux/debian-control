@@ -1,0 +1,102 @@
+#!/bin/bash
+
+set -e
+
+# some shorthands for sanity
+en="/etc/icinga"
+enc="/etc/icinga/objects/"
+usn="/usr/share/icinga"
+
+. /usr/share/debconf/confmodule
+if [ -n "$ICINGADEBUG" ]; then
+  echo "now debugging $0 $@"
+  set -x
+fi
+
+# location of the default apache configuration for icinga
+apacheconf=$en/apache2.conf
+# location of the default htpasswd authentication file.
+htpw=$en/htpasswd.users
+
+setperm() {
+    local user="$1"
+    local group="$2"
+    local mode="$3"
+    local file="$4"
+    shift 4
+    # only do something when no setting exists
+    if ! dpkg-statoverride --list "$file" >/dev/null 2>&1; then
+      chown "$user":"$group" "$file"
+      chmod "$mode" "$file"
+    fi
+}
+
+case "$1" in
+  configure)
+    if ! getent passwd nagios > /dev/null ; then
+      echo 'Adding system-user for nagios' 1>&2
+      adduser --system --group --home /var/lib/nagios \
+              --disabled-login --force-badname nagios > /dev/null
+    fi
+
+	db_get icinga/adminpassword
+	admpass="$RET"
+
+    # register apache2.conf via ucf:
+    ucf --debconf-ok /usr/share/icinga/apache2.conf $apacheconf
+
+    COMMON_STATE=$(dpkg-query -f '${Status}' -W 'apache2.2-common' 2>/dev/null | awk '{print $3}' || true)
+
+    # NEW method for Apache >= 2.4
+    if [ -e /usr/share/apache2/apache2-maintscript-helper ]; then
+        . /usr/share/apache2/apache2-maintscript-helper
+
+        apache2_invoke enmod cgi
+        apache2_invoke enconf icinga
+
+        # remove OLD Apache 2.2 link
+        [ -L /etc/apache2/conf.d/icinga.conf ] && rm /etc/apache2/conf.d/icinga.conf
+
+        # OLD methods for Apache < 2.4
+    elif [ "$COMMON_STATE" = "installed" ] || [ "$COMMON_STATE" = "unpacked" ] ; then
+
+        # create symlink if not existing
+        [ -f /etc/apache2/conf.d/icinga.conf ] || ln -vs $apacheconf /etc/apache2/conf.d/icinga.conf
+
+        if [ -f /etc/init.d/apache2 ] ; then
+            if [ -x "$(which invoke-rc.d 2>/dev/null)" ]; then
+                invoke-rc.d apache2 reload 3>/dev/null || true
+            else
+                /etc/init.d/apache2 reload 3>/dev/null || true
+            fi
+        fi
+    fi  
+
+	# we reset the password every run, so if it exists we're running
+	# after being specifically given a password and can unconditionally set it.
+	# XXX there's no way of setting the pw w/out giving it on the cmdline? wtf?
+	if [ -n "$admpass" ]; then
+		touch "$htpw"
+        #unfortunatly that method only works with 2.4
+        if htpasswd 2>&1 | grep -q ' -i'; then
+            echo "$admpass" | htpasswd -i "$htpw" icingaadmin
+        else 
+            htpasswd -b "$htpw" icingaadmin "$admpass"
+        fi
+    fi
+
+	# everything went well, so now let's reset the password
+	db_set icinga/adminpassword ""
+	db_set icinga/adminpassword-repeat ""
+	# ... done with debconf here
+	db_stop
+    ;;
+  abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+  *)
+    echo "postinst called with unknown argument \$1'" >&2
+    exit 1
+    ;;
+esac
+
+

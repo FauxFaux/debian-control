@@ -1,0 +1,24 @@
+Package: lemonldap-ng-uwsgi-app
+Source: lemonldap-ng
+Version: 2.0.1+ds-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 102
+Depends: liblemonldap-ng-handler-perl (= 2.0.1+ds-1), uwsgi-plugin-psgi
+Recommends: libhttp-parser-xs-perl, nginx-extras | nginx
+Section: web
+Priority: optional
+Homepage: https://lemonldap-ng.org/
+Description: Lemonldap::NG uWSGI server
+ Lemonldap::NG is a complete Web-SSO system that can run with reverse-proxies
+ or directly on application webservers. It can be used in conjunction with
+ OpenID-Connect, CAS and SAML systems as identity or service provider. It can
+ also be used as proxy between those federation systems.
+ .
+ It manages both authentication and authorization and provides headers for
+ accounting. So you can have a full AAA protection. Authorization are built by
+ associating a regular expression and a rule. Regular expression is applied on
+ the requested URL and the rule calculates if the user is authorized.
+ .
+ Lemonldap::NG uWSGI server provides a replacement to Lemonldap::NG FastCGI
+ server, using uWSGI instead of Plack FCGI.

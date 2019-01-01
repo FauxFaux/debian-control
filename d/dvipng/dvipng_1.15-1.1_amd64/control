@@ -1,0 +1,23 @@
+Package: dvipng
+Version: 1.15-1.1
+Architecture: amd64
+Maintainer: Varun Hiremath <varun@debian.org>
+Installed-Size: 173
+Depends: libc6 (>= 2.14), libfreetype6 (>= 2.2.1), libgd3 (>= 2.1.0~alpha~), libkpathsea6, libpng16-16 (>= 1.6.2-1), zlib1g (>= 1:1.1.4), texlive-base-bin, ghostscript
+Section: utils
+Priority: optional
+Homepage: http://www.nongnu.org/dvipng/
+Description: convert DVI files to PNG graphics
+ dvipng makes PNG graphics from DVI files as obtained from TeX
+ and its relatives.  It is intended to produce anti-aliased
+ screen-resolution images as fast as is possible.  This makes
+ dvipng suitable for generating large amounts of images
+ on-the-fly.
+ .
+ dvipng does not read the postamble, so it can be started before TeX
+ finishes.  It can read options interactively through stdin,
+ and all options are usable. One can even change the input file through
+ this interface.
+ .
+ dvipng supports PK, VF, PostScript Type1, and TrueType fonts, color
+ specials and simple PostScript inclusion specials.

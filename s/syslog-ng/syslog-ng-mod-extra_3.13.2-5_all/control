@@ -1,0 +1,37 @@
+Package: syslog-ng-mod-extra
+Source: syslog-ng
+Version: 3.13.2-5
+Architecture: all
+Maintainer: syslog-ng maintainers <syslog-ng-maintainers@alioth-lists.debian.net>
+Installed-Size: 80
+Depends: syslog-ng-mod-json (>= 3.13.2-5), syslog-ng-mod-json (<< 3.13.2-5.1~)
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.syslog-ng.org/
+Description: Enhanced system logging daemon (extra plugins)
+ syslog-ng is an enhanced log daemon, supporting a wide range of input
+ and output methods: syslog, unstructured text, message queues,
+ databases (SQL and NoSQL alike) and more.
+ .
+ Key features:
+ .
+  * receive and send RFC3164 and RFC5424 style syslog messages
+  * work with any kind of unstructured data
+  * receive and send JSON formatted messages
+  * classify and structure logs with builtin parsers (csv-parser(),
+    db-parser(), etc.)
+  * normalize, crunch and process logs as they flow through the system
+  * hand on messages for further processing using message queues (like
+    AMQP), files or databases (like PostgreSQL or MongoDB).
+ .
+ This package collects all the small plugins, which does not worth to have
+ a whole package. This package contains:
+ .
+  * windows event log parser
+  * tag parser
+  * Graylog2 destination
+  * default Network source driver
+  * Load balancer destination
+  * osquery destination
+  * ewmm (Enterprise wide messaging model) destination and parser

@@ -1,0 +1,33 @@
+Package: libghc-xmlhtml-dev
+Source: haskell-xmlhtml (0.2.5.2-6)
+Version: 0.2.5.2-6+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 8408
+Depends: libghc-base-dev-4.11.1.0-5dd74, libghc-blaze-builder-dev-0.4.1.0-75fbe, libghc-blaze-html-dev-0.9.1.1-b095e, libghc-blaze-markup-dev-0.8.2.1-6e196, libghc-bytestring-dev-0.10.8.2-76891, libghc-containers-dev-0.5.11.0-e0faa, libghc-parsec-dev-3.1.13.0-e94f4, libghc-text-dev-1.2.3.1-30bbe, libghc-unordered-containers-dev-0.2.9.0-e9bb1, libatomic1 (>= 4.8), libc6 (>= 2.14), libgmp10
+Suggests: libghc-xmlhtml-doc, libghc-xmlhtml-prof
+Provides: libghc-xmlhtml-dev-0.2.5.2-44cd4
+Section: haskell
+Priority: optional
+Homepage: https://github.com/snapframework/xmlhtml
+Description: XML parser and renderer with HTML 5 quirks mode
+ Contains renderers and parsers for both XML and HTML 5 document
+ fragments, which share data structures so that it's easy to work with
+ both. Document fragments are bits of documents, which are not
+ constrained by some of the high-level structure rules (in particular,
+ they may contain more than one root element).
+ .
+ Note that this is not a compliant HTML 5 parser. Rather, it is a
+ parser for HTML 5 compliant documents. It does not implement the HTML
+ 5 parsing algorithm, and should generally be expected to perform
+ correctly only on documents that you trust to conform to HTML 5. This
+ is not a suitable library for implementing web crawlers or other
+ software that will be exposed to documents from outside sources. The
+ result is also not the HTML 5 node structure, but rather something
+ closer to the physical structure. For example, omitted start tags are
+ not inserted (and so, their corresponding end tags must also be
+ omitted).
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: xmlhtml-0.2.5.2-4ejvXlZNvtw7yFYd81uQRR

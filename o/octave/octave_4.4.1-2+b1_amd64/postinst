@@ -1,0 +1,32 @@
+#!/bin/sh
+#
+# postinst script for the Debian GNU/Linux octave packages
+
+set -e
+
+
+
+rebuild_pkg_database () {
+    # Invoke /usr/bin/octave explicitly to build the system package cache.
+    # Ensures that our instance of octave has its package cache updated
+    # correctly, rather than whichever octave happens to be first in $PATH.
+    /usr/bin/octave --silent --no-history --no-init-file --no-window-system \
+                    --eval "pkg ('rebuild');"
+}
+
+case "$1" in
+    configure)
+        rebuild_pkg_database
+        ;;
+
+    triggered)
+        rebuild_pkg_database
+        ;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        ;;
+esac
+
+exit 0

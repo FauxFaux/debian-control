@@ -1,0 +1,35 @@
+Package: graphicsmagick-libmagick-dev-compat
+Source: graphicsmagick
+Version: 1.4~hg15873-1
+Architecture: all
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 100
+Depends: libgraphicsmagick1-dev, libgraphicsmagick++1-dev, libgraphics-magick-perl
+Conflicts: libmagick++-dev, libmagick++6-dev, libmagick++9-dev, libmagick-dev, libmagick6-dev, libmagick9-dev, libmagickcore-dev, perlmagick
+Replaces: libmagick++-dev, libmagick++6-dev, libmagick++9-dev, libmagick-dev, libmagick6-dev, libmagick9-dev, libmagickcore-dev, perlmagick
+Provides: libmagick++-dev, libmagick-dev, perlmagick
+Section: graphics
+Priority: optional
+Homepage: http://www.graphicsmagick.org/
+Description: image processing libraries providing ImageMagick interface
+ GraphicsMagick provides libraries in several programming languages to read,
+ write and manipulate image files across a large number of formats, from the
+ widely used jpeg, tiff, bmp or xpm to special-purpose formats such as fits or
+ image formats found on some photo CDs. There are functions for finegrained
+ image processing tasks, as well as conversion routines between the various
+ image formats.
+ .
+ The GraphicsMagick libraries are a fork of ImageMagick and therefore offer
+ programming interfaces that are mostly compatible. While there might be
+ small differences, experience tells that many programs only use a compatible
+ subset and build fine with either GraphicsMagick or ImageMagick.
+ .
+ While GraphicsMagick uses different names for libraries, classes, and
+ helper applications in order to coexist with ImageMagick, this package
+ intends to minimise porting efforts by exporting the GraphicsMagick
+ interface with the usual ImageMagick names. Note that this package only
+ tries to provide build-time compatibility. Run-time libraries of
+ ImageMagick and GraphicsMagick are incompatible and cannot be interchanged.
+ .
+ This package includes compatibility wrappers for the C, C++, and Perl
+ libraries.

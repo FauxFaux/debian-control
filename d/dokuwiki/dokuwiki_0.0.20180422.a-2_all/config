@@ -1,0 +1,260 @@
+#!/usr/bin/perl -w
+
+use strict;
+use Debconf::Client::ConfModule ':all';
+use Debconf::Log ':all';
+
+# Preliminaries
+version('2.0');
+my $capb=capb('backup');
+debug "developer" => "Capb returned $capb";
+
+# Put a sentinel exit at the top of the stack to pull us out if the user
+# decides to back *right* out of the script.
+push(my @STATESTACK, "exit");
+
+# The initial state.
+my $STATE="configure_webserver";
+
+# The mechanics of this system are quite simple.  If the state subroutine
+# returns the name of a state, we move to that state.  Else we take the
+# previous state off the stack and run that one again.
+#
+# Every possible state should be represented by a subroutine of the same
+# name, which returns either the name of the next state to be called, or
+# undef if we're to go back.
+while ($STATE ne "exit") {
+	no strict 'refs';
+	my $NEXTSTATE = &$STATE;
+	use strict;
+
+	if ($NEXTSTATE) {
+                # Do not pile the current state when looping back to itself
+                # (case of a failed step)
+                if ($STATE ne $NEXTSTATE) {
+        		push(@STATESTACK, $STATE);
+                }
+	} else {
+		$NEXTSTATE = pop(@STATESTACK);
+	}
+	$STATE=$NEXTSTATE;
+}
+
+# All done!
+
+sub configure_webserver
+{
+	input("medium", "dokuwiki/system/configure-webserver");
+	my @ret = go();
+	if ($ret[0] == 30) {
+		return undef;
+	}
+        @ret = get("dokuwiki/system/configure-webserver");
+        if ($ret[1] eq "")
+        {
+                # No webserver chosen, no need to ask whether or not to restart it
+                return "docroot";
+        }
+        else
+        {
+                return "restart_webserver";
+        }
+}
+
+sub restart_webserver
+{
+        input("medium", "dokuwiki/system/restart-webserver");
+        my @ret = go();
+        if ($ret[0] == 30) {
+                return undef;
+        } else {
+                return "docroot";
+        }
+}
+
+sub docroot
+{
+	input("low", "dokuwiki/system/documentroot");
+	my @ret = go();
+	if ($ret[0] == 30) {
+		return undef;
+	} else {
+		return "accessible";
+	}
+}
+
+sub accessible
+{
+	input("medium", "dokuwiki/system/accessible");
+	my @ret = go();
+	if ($ret[0] == 30) {
+		return undef;
+	}
+	@ret = get("dokuwiki/system/accessible");
+	if ($ret[1] eq "local network") {
+		return "localnet";
+	} else {
+		return "purgepages";
+	}
+}
+
+sub localnet
+{
+	input("high", "dokuwiki/system/localnet");
+	my @ret = go();
+	if ($ret[0] == 30) {
+		return undef;
+	} else {
+		return "purgepages";
+	}
+}
+
+sub purgepages
+{
+	input("high", "dokuwiki/system/purgepages");
+	my @ret = go();
+	if ($ret[0] == 30) {
+		return undef;
+	} else {
+		return "writeconf";
+	}
+}
+
+sub writeconf
+{
+	input("medium", "dokuwiki/system/writeconf");
+	my @ret = go();
+	if ($ret[0] == 30) {
+		return undef;
+	} else {
+		return "writeplugins";
+	}
+}
+
+sub writeplugins
+{
+	input("medium", "dokuwiki/system/writeplugins");
+	my @ret = go();
+	if ($ret[0] == 30) {
+		return undef;
+	} else {
+		return "wikititle";
+	}
+}
+
+sub wikititle
+{
+	input("medium", "dokuwiki/wiki/title");
+	my @ret = go();
+	if ($ret[0] == 30) {
+		return undef;
+	} else {
+		return "license";
+	}
+}
+
+sub license
+{
+        input("medium", "dokuwiki/wiki/license");
+        my @ret = go();
+        if ($ret[0] == 30) {
+                return undef;
+        } else {
+                return "acl";
+        }
+}
+
+sub acl
+{
+	input("low", "dokuwiki/wiki/acl");
+	my @ret = go();
+	if ($ret[0] == 30) {
+		return undef;
+	} elsif (get("dokuwiki/wiki/acl") eq "true") {
+		return "superuser";
+	} else {
+                return "exit";
+        }
+}
+
+sub superuser
+{
+        # Do not prompt if their is already a passwd file
+        if (-e "/var/lib/dokuwiki/acl/users.auth.php") {
+                return "policy";
+        }
+	input("medium", "dokuwiki/wiki/superuser");
+	my @ret = go();
+	if ($ret[0] == 30) {
+		return undef;
+        } elsif (get("dokuwiki/wiki/superuser") eq "") {
+                return "policy";
+	} else {
+		return "fullname";
+	}
+}
+
+sub  fullname
+{
+        input("medium", "dokuwiki/wiki/fullname");
+        input("medium", "dokuwiki/wiki/email");
+	my @ret = go();
+	if ($ret[0] == 30) {
+		return undef;
+	} else {
+		return "password";
+	}
+}
+
+sub password
+{
+	my @ret = input("high", "dokuwiki/wiki/password");
+	input("high", "dokuwiki/wiki/confirm");
+        my $skipped = 0;
+        if ($ret[0] == 30) {
+                # debconf is configured to skip even high priority questions;
+                # this is insane but we will have to set a default password
+                # nonetheless
+                $skipped = 1;
+        }
+	@ret = go();
+        if ($skipped && get("dokuwiki/wiki/password") eq "")
+        {
+                set("dokuwiki/wiki/password", "fix-your-debconf-settings");
+                set("dokuwiki/wiki/confirm", "fix-your-debconf-settings");
+        }
+	if ($ret[0] == 30) {
+		return undef;
+        } elsif (get("dokuwiki/wiki/password") ne get("dokuwiki/wiki/confirm")) {
+                return "failpass";
+	} else {
+                return "policy";
+        }
+}
+
+sub failpass
+{
+	input("high", "dokuwiki/wiki/failpass");
+	my @ret = go();
+	if ($ret[0] == 30) {
+		return undef;
+	} else {
+                return "password";
+        }
+}
+
+sub policy
+{
+        # Do not prompt is their is already an ACL file
+        if (-e "/var/lib/dokuwiki/acl/acl.auth.php")
+        {
+                return "exit";
+        }
+	input("low", "dokuwiki/wiki/policy");
+	my @ret = go();
+	if ($ret[0] == 30) {
+		return undef;
+	} else {
+                return "exit";
+        }
+}

@@ -1,0 +1,16 @@
+Package: librust-lock-api+owning-ref-dev
+Source: rust-lock-api
+Version: 0.1.5-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-lock-api-dev (= 0.1.5-1), librust-owning-ref-0.4+default-dev
+Provides: librust-lock-api-0+owning-ref-dev (= 0.1.5-1), librust-lock-api-0.1+owning-ref-dev (= 0.1.5-1), librust-lock-api-0.1.5+owning-ref-dev (= 0.1.5-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Wrappers to create fully-featured Mutex and RwLock types - feature "owning_ref"
+ Compatible with no_std.
+ .
+ This metapackage enables feature owning_ref for the Rust lock_api crate, by
+ pulling in any additional dependencies needed by that feature.

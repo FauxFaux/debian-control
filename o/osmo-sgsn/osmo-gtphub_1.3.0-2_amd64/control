@@ -1,0 +1,21 @@
+Package: osmo-gtphub
+Source: osmo-sgsn
+Version: 1.3.0-2
+Architecture: amd64
+Maintainer: Debian Mobcom Maintainers <Debian-mobcom-maintainers@lists.alioth.debian.org>
+Installed-Size: 110
+Depends: libc-ares2 (>= 1.7.1), libc6 (>= 2.14), libgtp3 (>= 1.1.0), libosmo-sigtran0 (>= 0.8.1), libosmocore11 (>= 0.11.0), libosmogsm10 (>= 0.11.0), libosmovty4 (>= 0.10.2), libtalloc2 (>= 2.0.4~git20101213)
+Section: net
+Priority: optional
+Homepage: https://osmocom.org/projects/osmosgsn/wiki/OsmoSGSN
+Description: Proxy for GTP traffic between multiple SGSNs and GGSNs
+ This package is part of osmo-sgsn and provides a proxy for GTP traffic
+ between multiple SGSNs and GGSNs.
+ .
+ The SGSN implements
+  - the Gb interface to the BSS's (like the OsmoPCU or an ip.access nanoBTS)
+  - the Gp interface with its GTP protocol to one or more Gateway GPRS Support
+    Node (GGSN) like OsmoGGSN.
+  - the IuPS interface with its RANAP protocol to onre or more RNCs or HNB-GWs
+    like OsmoHNBGW
+  - the GSUP Interface/Protocol towards OsmoHLR

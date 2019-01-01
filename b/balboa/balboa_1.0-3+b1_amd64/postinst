@@ -1,0 +1,50 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = configure ]; then
+    if ! getent passwd balboa >/dev/null; then
+        adduser \
+            --system --group --home /var/lib/balboa balboa
+    fi
+    touch /var/log/balboa.log
+    if ! dpkg-statoverride --list /var/log/balboa.log >/dev/null 2>&1; then
+        dpkg-statoverride \
+            --quiet --update \
+            --add balboa balboa 0640 /var/log/balboa.log
+    fi
+    install -d -obalboa -gbalboa -m750 /var/run/balboa
+    install -d -obalboa -gbalboa -m750 /var/lib/balboa
+    install -d -obalboa -gbalboa -m750 /var/lib/balboa/db
+fi
+
+# Automatically added by dh_installsystemd/12
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'balboa.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'balboa.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'balboa.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'balboa.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/12
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		deb-systemd-invoke $_dh_action 'balboa.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

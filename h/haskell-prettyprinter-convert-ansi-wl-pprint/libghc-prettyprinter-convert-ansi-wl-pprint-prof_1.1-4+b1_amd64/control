@@ -1,0 +1,25 @@
+Package: libghc-prettyprinter-convert-ansi-wl-pprint-prof
+Source: haskell-prettyprinter-convert-ansi-wl-pprint (1.1-4)
+Version: 1.1-4+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 98
+Depends: libghc-prettyprinter-convert-ansi-wl-pprint-dev (= 1.1-4+b1), libghc-ansi-terminal-prof-0.8.1-cd08b, libghc-ansi-wl-pprint-prof-0.6.8.2-d222d, libghc-base-prof-4.11.1.0-5dd74, libghc-prettyprinter-prof-1.2.1-76b00, libghc-prettyprinter-ansi-terminal-prof-1.1.1.2-689af, libghc-text-prof-1.2.3.1-30bbe
+Provides: libghc-prettyprinter-convert-ansi-wl-pprint-prof-1.1-10111
+Section: haskell
+Priority: optional
+Homepage: https://github.com/quchen/prettyprinter
+Description: convert documents between ansi-wl-pprint and prettyprinter; profiling libraries
+ This package defines a converter from the old ansi-wl-pprint document
+ type to the new prettyprinter one. Its purpose is making packages
+ that only generate ansi-wl-pprint data available to the prettyprinter
+ ecosystem.
+ .
+ Note the difference to the prettyprinter-compat-ansi-wl-pprint
+ package, which does not convert any data, and instead provides an API
+ that mimics ansi-wl-pprint, while secretly being prettyprinter-based
+ behind the curtains. This package on the other hand does a proper
+ conversion.
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

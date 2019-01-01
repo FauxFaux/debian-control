@@ -1,0 +1,20 @@
+Package: default-jre-headless
+Source: java-common (0.71)
+Version: 2:1.11-71
+Architecture: amd64
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 20
+Depends: openjdk-11-jre-headless, java-common
+Suggests: default-jre
+Replaces: openjdk-6-jre-headless (<< 6b23~pre8-2~)
+Provides: java-runtime-headless, java10-runtime-headless, java11-runtime-headless, java2-runtime-headless, java5-runtime-headless, java6-runtime-headless, java7-runtime-headless, java8-runtime-headless, java9-runtime-headless
+Section: java
+Priority: optional
+Homepage: https://wiki.debian.org/Java/
+Description: Standard Java or Java compatible Runtime (headless)
+ This dependency package points to the Java runtime, or Java compatible
+ runtime recommended for this architecture, which is
+ openjdk-11-jre-headless for amd64.
+ .
+ The package is used as dependency for packages not needing a
+ graphical display during runtime.

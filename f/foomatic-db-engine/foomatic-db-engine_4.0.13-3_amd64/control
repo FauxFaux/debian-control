@@ -1,0 +1,23 @@
+Package: foomatic-db-engine
+Version: 4.0.13-3
+Architecture: amd64
+Maintainer: Debian Printing Group <debian-printing@lists.debian.org>
+Installed-Size: 798
+Depends: cups-filters (>= 1.0.42) | foomatic-filters, wget | curl, perl, libc6 (>= 2.4), libxml2 (>= 2.7.4)
+Recommends: cups, cups-client, foomatic-db-compressed-ppds | foomatic-db
+Suggests: foomatic-db-gutenprint, netcat
+Section: text
+Priority: optional
+Homepage: http://www.openprinting.org/
+Description: OpenPrinting printer support - programs
+ Foomatic is a printing system designed to make it easier to set up
+ common printers for use with Debian (and other operating systems).
+ It provides the "glue" between a print spooler (like CUPS or lpr) and
+ your actual printer, by telling your computer how to process files
+ sent to the printer.
+ .
+ This package contains the architecture-dependent programs needed to
+ set up and maintain the foomatic system.  You will also need one or
+ more database packages.  The foomatic-db package includes drivers for
+ most common printers using Ghostscript as the print processor, as
+ well as some common glue code used in other filter systems.

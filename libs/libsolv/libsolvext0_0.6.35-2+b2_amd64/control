@@ -1,0 +1,37 @@
+Package: libsolvext0
+Source: libsolv (0.6.35-2)
+Version: 0.6.35-2+b2
+Architecture: amd64
+Maintainer: Mike Gabriel <sunweaver@debian.org>
+Installed-Size: 295
+Depends: libbz2-1.0, libc6 (>= 2.14), libdb5.3, libexpat1 (>= 2.0.1), liblzma5 (>= 5.1.1alpha+20120614), librpm8 (>= 4.14.0+dfsg1), librpmio8 (>= 4.14.0+dfsg1), libsolv0 (>= 0.6.35), zlib1g (>= 1:1.2.3.3)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/openSUSE/libsolv
+Description: dependency solver using a satisfiability algorithm (extensions)
+ This dependency solver code in this package is based on two major, but
+ independent, blocks:
+ .
+ 1. Using a dictionary approach to store and retrieve package
+    and dependency information.
+ 2. Using satisfiability, a well known and researched topic, for
+    resolving package dependencies.
+ .
+ Search the internet  for 'sat solver' to get links to the theory behind it.
+ .
+ Supported package formats:
+   - rpm/rpm5
+   - deb
+   - Arch Linux
+   - haiku
+ .
+ Supported repository formats:
+   - rpmmd (primary, filelists, comps, deltainfo/presto, updateinfo)
+   - susetags, suse product formats
+   - mandriva/mageia (synthesis, info, files)
+   - Arch Linux
+   - red carpet helix format
+   - haiku
+ .
+ This package contains the libsolv extension library.

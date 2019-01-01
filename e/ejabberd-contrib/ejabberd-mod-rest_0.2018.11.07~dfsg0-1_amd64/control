@@ -1,0 +1,17 @@
+Package: ejabberd-mod-rest
+Source: ejabberd-contrib
+Version: 0.2018.11.07~dfsg0-1
+Architecture: amd64
+Maintainer: Ejabberd Packaging Team <ejabberd@packages.debian.org>
+Installed-Size: 43
+Depends: erlang-base (>= 1:17) | erlang-abi-17.0, erlang-base (>= 1:21.1.1+dfsg) | erlang-base-hipe (>= 1:21.1.1+dfsg), ejabberd (= 18.09-2)
+Section: net
+Priority: optional
+Homepage: https://github.com/processone/ejabberd-contrib
+Description: HTTP interface to POST arbitrary stanzas to ejabberd
+ This is an ejabberd module that adds an HTTP handler that allows HTTP
+ clients to literally post arbitrary message stanzas to ejabberd. Those
+ stanzas then get shoved through ejabberd's router just like any other
+ stanza.
+ .
+ This module can also be used as a frontend to execute ejabberd commands.

@@ -1,0 +1,40 @@
+Package: babeld
+Version: 1.8.3-1
+Architecture: amd64
+Maintainer: Stéphane Glondu <glondu@debian.org>
+Installed-Size: 159
+Depends: lsb-base, libc6 (>= 2.15)
+Suggests: ahcpd
+Section: net
+Priority: optional
+Homepage: http://www.pps.univ-paris-diderot.fr/~jch/software/babel/
+Description: loop-free distance-vector routing protocol
+ Babel is a distance-vector routing protocol for IPv6 and IPv4 with
+ fast convergence properties, described in RFC 6126. It was designed
+ to be robust and efficient on both wireless mesh networks and
+ classical wired networks. Babel has extremely modest memory and CPU
+ requirements. Unlike most routing protocols, which route either IPv4
+ or IPv6 but not both at the same time, Babel is a hybrid IPv6 and
+ IPv4 protocol: a single update packet can carry both IPv6 and IPv4
+ routes (this is similar to how multi-protocol BGP works). This makes
+ Babel particularly efficient on dual (IPv6 and IPv4) networks. This
+ implementation also includes a radio frequency-aware variant of
+ Babel.
+ .
+ Babel has the following features:
+  * it is a distance-vector protocol;
+  * it is a proactive protocol, but with adaptative (reactive)
+    features;
+  * it senses link quality for computing route metrics using a variant
+    of the ETX algorithm;
+  * it uses a feasibility condition that guarantees the absence of
+    loops (the feasibility condition is taken from EIGRP and is
+    somewhat less strict than the one in AODV);
+  * it uses sequence numbers to make old routes feasible again (like
+    DSDV and AODV, but unlike EIGRP);
+  * it speeds up convergence by reactively requesting a new sequence
+    number (like AODV, and to a certain extent EIGRP, but unlike
+    DSDV);
+  * it allows redistributed external routes to be injected into the
+    routing domain at multiple points (like EIGRP, but unlike DSDV and
+    AODV).

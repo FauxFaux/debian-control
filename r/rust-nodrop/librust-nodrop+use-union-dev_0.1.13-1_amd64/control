@@ -1,0 +1,16 @@
+Package: librust-nodrop+use-union-dev
+Source: rust-nodrop
+Version: 0.1.13-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-nodrop-dev (= 0.1.13-1), librust-nodrop-union-0.1+default-dev (>= 0.1.8-~~)
+Provides: librust-nodrop-0+use-union-dev (= 0.1.13-1), librust-nodrop-0.1+use-union-dev (= 0.1.13-1), librust-nodrop-0.1.13+use-union-dev (= 0.1.13-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Wrapper type to inhibit drop (destructor) - feature "use_union"
+ Use std::mem::ManuallyDrop instead!
+ .
+ This metapackage enables feature use_union for the Rust nodrop crate, by
+ pulling in any additional dependencies needed by that feature.

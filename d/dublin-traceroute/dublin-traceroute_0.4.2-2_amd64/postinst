@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -eu
+
+SETCAP=/sbin/setcap
+TARGET=/usr/bin/dublin-traceroute
+
+if [ "$(uname -s)" = "Linux" ]; then
+	if [ -x $SETCAP ]; then
+		$SETCAP cap_net_raw=ep $TARGET
+	else
+		echo "setcap(8) not installed. You will have to use sudo to run $TARGET"
+	fi
+else
+	echo "setcap(8) not available. You will have to use sudo to run $TARGET"
+fi
+
+
+
+exit 0

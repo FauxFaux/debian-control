@@ -1,0 +1,20 @@
+Package: openstack-proxy-node
+Source: openstack-meta-packages
+Version: 0.24
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 11
+Pre-Depends: openstack-cloud-identity
+Depends: aodh-api, aodh-evaluator, aodh-notifier, ceilometer-agent-central, glance, heat-api, heat-api-cfn, heat-engine, neutron-dhcp-agent, neutron-l3-agent, neutron-metadata-agent, neutron-plugin-openvswitch, neutron-plugin-openvswitch-agent | neutron-openvswitch-agent, neutron-server, nova-api, nova-conductor, nova-consoleauth, nova-consoleproxy, nova-placement-api, nova-scheduler, openstack-dashboard-apache, openstack-pkg-tools
+Section: net
+Priority: optional
+Homepage: http://openstack.alioth.debian.org/
+Description: Metapackage to install an Openstack proxy node
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ This metapackage will install a proxy node server, or management / API node,
+ composed of: Nova-API, Nova-Scheduler, Glance, Keystone, Neutron (using
+ OpenVSwitch) RabbitMQ, Memcached, and openstack-dashboard.

@@ -1,0 +1,51 @@
+Package: ruby-vcr
+Version: 4.0.0-1
+Architecture: all
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 213
+Depends: ruby | ruby-interpreter
+Section: ruby
+Priority: optional
+Homepage: https://relishapp.com/vcr/vcr/docs
+Description: Record and replay HTTP interactions (Ruby library)
+ Record your test suite's HTTP interactions and replay them during future test
+ runs for fast, deterministic, accurate tests.
+ .
+  * Automatically records and replays your HTTP interactions with minimal
+    setup/configuration code.
+  * Supports and works with the HTTP stubbing facilities of multiple libraries.
+    Currently, the following are supported:
+    * WebMock
+    * Typhoeus
+    * Faraday
+    * Excon
+  * Supports multiple HTTP libraries:
+    * Patron (when using WebMock)
+    * Curb (when using WebMock -- only supports Curl::Easy at the moment)
+    * HTTPClient (when using WebMock)
+    * em-http-request (when using WebMock)
+    * Net::HTTP (when using WebMock)
+    * Typhoeus (Typhoeus::Hydra, but not Typhoeus::Easy or Typhoeus::Multi)
+    * Excon
+    * Faraday
+    * And of course any library built on Net::HTTP, such as Mechanize, HTTParty
+      or Rest Client
+  * Request matching is configurable based on HTTP method, URI, host, path, body
+    and headers, or you can easily implement a custom request matcher to handle
+    any need.
+  * The same request can receive different responses in different tests--just
+    use different cassettes.
+  * The recorded requests and responses are stored on disk in a serialization
+    format of your choice (currently YAML and JSON are built in, and you can
+    easily implement your own custom serializer) and can easily be inspected and
+    edited.
+  * Dynamic responses are supported using ERB.
+  * Optionally re-records cassettes on a configurable regular interval to keep
+    them fresh and current.
+  * Disables all HTTP requests that you don't explicitly allow.
+  * Simple Cucumber integration is provided using tags.
+  * Includes convenient RSpec macros and integration with RSpec 2 metadata.
+  * Known to work well with many popular Ruby libraries including RSpec 1 & 2,
+    Cucumber, Test::Unit, Capybara, Mechanize, Rest Client and HTTParty.
+  * Includes Rack and Faraday middleware.
+Ruby-Versions: all

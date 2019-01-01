@@ -1,0 +1,28 @@
+Package: baresip-ffmpeg
+Source: baresip
+Version: 0.6.0-1
+Architecture: amd64
+Maintainer: Debian VoIP Team <pkg-voip-maintainers@lists.alioth.debian.org>
+Installed-Size: 130
+Depends: libavcodec58 (>= 7:4.0), libavdevice58 (>= 7:4.0), libavformat58 (>= 7:4.0), libavutil56 (>= 7:4.0), libc6 (>= 2.4), libswscale5 (>= 7:4.0), libx265-165 (>= 2.9), baresip-core (= 0.6.0-1)
+Enhances: baresip-core
+Section: comm
+Priority: optional
+Homepage: http://www.creytiv.com/baresip.html
+Description: portable and modular SIP user-agent - FFmpeg codecs and formats
+ A modular SIP user-agent with support for audio and video, and many
+ IETF standards such as SIP, SDP, RTP/RTCP, STUN, TURN, and ICE.
+ .
+ Supports both IPv4 and IPv6, and the following features.
+  * Audio codecs: AMR, G.711, G.722, G.726, GSM, L16, MPA, OPUS.
+  * Video codecs: H.263, H.264, H.265, MPEG4, VP8, VP9.
+  * Audio drivers: Alsa, GStreamer, JACK, OSS, Portaudio, sndio.
+  * Video sources: FFmpeg avformat, Video4Linux2, X11 Grabber.
+  * Video outputs: SDL2, X11, DirectFB.
+  * NAT Traversal: STUN, TURN, ICE, NATBD, NAT-PMP, PCP.
+  * Media encryption: SRTP, DTLS-SRTP.
+  * DNS Service Discovery: Avahi.
+  * Telemetry messaging: MQTT.
+  * Control interfaces: JSON-over-TCP.
+ .
+ This package integrates FFmpeg codecs and formats with baresip.

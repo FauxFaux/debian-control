@@ -1,0 +1,18 @@
+Package: gccgo-7-multilib
+Source: gcc-7
+Version: 7.4.0-2
+Architecture: amd64
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 105320
+Depends: gcc-7-base (= 7.4.0-2), gccgo-7 (= 7.4.0-2), gcc-7-multilib (= 7.4.0-2), lib32go11 (>= 7.4.0-2), libx32go11 (>= 7.4.0-2)
+Breaks: lib32go11 (<< 7.2.0-18), lib64go11 (<< 7.2.0-18), libn32go11 (<< 7.2.0-18), libx32go11 (<< 7.2.0-18)
+Replaces: lib32go11 (<< 7.2.0-18), lib64go11 (<< 7.2.0-18), libn32go11 (<< 7.2.0-18), libx32go11 (<< 7.2.0-18)
+Section: devel
+Priority: optional
+Homepage: http://gcc.gnu.org/
+Description: GNU Go compiler (multilib support)
+ This is the GNU Go compiler, which compiles Go on platforms supported
+ by the gcc compiler.
+ .
+ This is a dependency package, depending on development packages
+ for the non-default multilib architecture(s).

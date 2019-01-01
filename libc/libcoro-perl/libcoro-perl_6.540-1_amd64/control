@@ -1,0 +1,31 @@
+Package: libcoro-perl
+Version: 6.540-1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 500
+Depends: perl (>= 5.28.1-3), perlapi-5.28.1, libc6 (>= 2.4), libanyevent-perl, libcommon-sense-perl, libguard-perl
+Recommends: libev-perl, libevent-perl, libio-aio-perl, libnet-http-perl
+Section: perl
+Priority: optional
+Multi-Arch: same
+Homepage: https://metacpan.org/release/Coro
+Description: Perl framework implementing coroutines
+ Coro is a collection of modules which manages continuations in general, most
+ often in the form of cooperative threads (also called coros, or simply "coro"
+ in the documentation). They do not actually execute at the same time, even on
+ machines with multiple processors.
+ .
+ The specific flavor of thread offered by this module also guarantees you that
+ it will not switch between threads unless necessary. It switches at easily-
+ identified points in your program, so locking and parallel access are rarely
+ an issue, making threaded programming much safer and easier than using other
+ threading models.
+ .
+ Coro provides a full shared address space, which makes communication between
+ threads very easy. A parallel matrix multiplication benchmark runs over 300
+ times faster on a single core than perl's ithreads on a quad core using all
+ four cores.
+ .
+ This version of Coro has been patched by the Debian Project to provide
+ compatibility with Perl 5.22 and Perl 5.24. Please send bug reports to
+ Debian (<https://www.debian.org/Bugs/>) and not the original author.

@@ -1,0 +1,13 @@
+Package: libx32atomic1
+Source: gcc-8
+Version: 8.2.0-13
+Architecture: amd64
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 43
+Depends: gcc-8-base (= 8.2.0-13), libc6-x32 (>= 2.16)
+Section: libs
+Priority: optional
+Homepage: http://gcc.gnu.org/
+Description: support library providing __atomic built-in functions (x32)
+ library providing __atomic built-in functions. When an atomic call cannot
+ be turned into lock-free instructions, GCC will make calls into this library.

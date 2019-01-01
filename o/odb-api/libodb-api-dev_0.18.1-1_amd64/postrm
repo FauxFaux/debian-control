@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_fortran_mod/UNDECLARED
+multiarch="x86_64-linux-gnu"
+base="gfortran-mod-15"
+cmplr="gfortran-8"
+
+if test -f /usr/lib/$multiarch/fortran/$base ; then 
+  rmdir --ignore-fail-on-non-empty --parents /usr/lib/$multiarch/fortran/$base
+
+  # clear cruft from old bug if present
+  rm -f /usr/lib/$multiarch/fortran/$base/$base
+  
+fi
+if test  ! -d /usr/lib/$multiarch/fortran/$base ; then 
+   rm -f /usr/lib/$multiarch/fortran/$cmplr
+fi
+
+# End automatically added section

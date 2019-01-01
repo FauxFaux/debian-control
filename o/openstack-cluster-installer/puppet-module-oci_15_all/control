@@ -1,0 +1,22 @@
+Package: puppet-module-oci
+Source: openstack-cluster-installer
+Version: 15
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 130
+Depends: openstack-puppet-modules
+Section: net
+Priority: optional
+Homepage: https://salsa.debian.org/openstack-team/debian/openstack-cluster-installer
+Description: automatic PXE and puppet-master installer for OpenStack - puppet module
+ OCI (OpenStack Cluster Installer) is a software to provision an OpenStack
+ cluster automatically. This package install a provisioning machine, which
+ consists of a DHCP server, a PXE boot server, and a puppet-master.
+ .
+ Once computers in the cluster boot for the first time, a Debian live system
+ is served by OCI, to act as a discovery image. This live system then reports
+ the hardware features back to OCI. The computers can then be installed with
+ Debian from that live system, configured with a puppet-agent that will connect
+ to the puppet-master of OCI. OpenStack is then provisionned in these machines.
+ .
+ This package contains the puppet module.

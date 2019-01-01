@@ -1,0 +1,24 @@
+Package: libapache2-mod-php7.3
+Source: php7.3
+Version: 7.3.0-2
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 4606
+Depends: libmagic1, mime-support, php7.3-cli, php7.3-common (= 7.3.0-2), php7.3-json, php7.3-opcache, tzdata, ucf, apache2-api-20120211, apache2-bin (>= 2.4.16), libargon2-1 (>= 0~20171227), libc6 (>= 2.27), libpcre2-8-0 (>= 10.32), libsodium23 (>= 1.0.14), libssl1.1 (>= 1.1.0), libxml2 (>= 2.8.0), zlib1g (>= 1:1.1.4)
+Recommends: apache2
+Suggests: php-pear
+Provides: libapache2-mod-php, phpapi-20180731
+Section: httpd
+Priority: optional
+Homepage: http://www.php.net/
+Description: server-side, HTML-embedded scripting language (Apache 2 module)
+ This package provides the PHP module for the Apache 2 webserver (as
+ found in the apache2-mpm-prefork package).  Please note that this package
+ ONLY works with Apache's prefork MPM, as it is not compiled thread-safe.
+ .
+ The following extensions are built in: Core date filter hash libxml openssl
+ pcre Reflection session sodium SPL standard zlib.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.

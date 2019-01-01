@@ -1,0 +1,26 @@
+#!/bin/sh
+set -e
+
+case $1 in
+    upgrade)
+        # clean up after old versions, unless the admin chose urxvtcd
+        if ! update-alternatives --query x-terminal-emulator | grep -q \
+                '^Value: /usr/bin/urxvtcd$'; then
+            update-alternatives --remove x-terminal-emulator /usr/bin/urxvtcd
+        fi
+        if dpkg --compare-versions $2 lt 9.22-2; then
+            # Drop rxvt alternative: no longer needed and we provide the symlink
+            if update-alternatives --list rxvt >/dev/null; then
+                update-alternatives --remove-all rxvt
+            fi
+        fi
+    ;;
+    install)
+        # Drop rxvt alternative: no longer needed and we provide the symlink
+        if update-alternatives --list rxvt >/dev/null; then
+            update-alternatives --remove-all rxvt
+        fi
+;;
+esac
+
+

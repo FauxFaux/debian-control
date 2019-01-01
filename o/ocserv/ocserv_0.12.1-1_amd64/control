@@ -1,0 +1,28 @@
+Package: ocserv
+Version: 0.12.1-1
+Architecture: amd64
+Maintainer: Aron Xu <aron@debian.org>
+Installed-Size: 749
+Depends: dbus, lsb-base, ssl-cert, libc6 (>= 2.17), libev4 (>= 1:4.04), libgeoip1, libgnutls30 (>= 3.5.9), libgssapi-krb5-2 (>= 1.14+dfsg), libhttp-parser2.8 (>= 2.1), liblz4-1 (>= 0.0~r130), libnettle6, libnl-3-200 (>= 3.2.7), libnl-route-3-200 (>= 3.2.7), liboath0 (>= 1.8.0), libpam0g (>= 0.99.7.1), libpcl1, libprotobuf-c1 (>= 1.0.1), libradcli4, libreadline7 (>= 6.0), libseccomp2 (>= 0.0.0~20120605), libsystemd0, libtalloc2 (>= 2.0.4~git20101213), libtasn1-6 (>= 4.12), libwrap0 (>= 7.6-4~)
+Recommends: ca-certificates
+Suggests: gnutls-bin
+Section: net
+Priority: optional
+Homepage: http://www.infradead.org/ocserv/
+Description: OpenConnect VPN server compatible with Cisco AnyConnect VPN
+ OpenConnect server (ocserv) is an SSL VPN server. Its purpose is to be a
+ secure, small, fast and configurable VPN server. It implements the OpenConnect
+ SSL VPN protocol, and has also (currently experimental) compatibility with
+ clients using the AnyConnect SSL VPN protocol. The OpenConnect VPN protocol
+ uses the standard IETF security protocols such as TLS 1.2, and Datagram TLS to
+ provide the secure VPN service. The server is implemented primarily for the
+ GNU/Linux platform but its code is designed to be portable to other UNIX
+ variants as well.
+ .
+ Ocserv's main feature is isolation of the VPN users from the main VPN server
+ process. Each authenticated user is assigned an unprivileged worker process,
+ and a networking (tun) device. That not only eases the control of the resources
+ of each user or group of users, but also prevents privilege escalation due to
+ any bug on the VPN handling (worker) server. Each VPN user can be authenticated
+ using password, PAM, public key (in a smart card or not) or any combination of
+ methods.

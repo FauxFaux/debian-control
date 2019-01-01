@@ -1,0 +1,20 @@
+Package: lxc
+Version: 1:3.1.0-1
+Architecture: amd64
+Maintainer: pkg-lxc <pkg-lxc-devel@lists.alioth.debian.org>
+Installed-Size: 2411
+Depends: liblxc1 (= 1:3.1.0-1), debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.27), libcap2 (>= 1:2.10), libgnutls30 (>= 3.6.5), libseccomp2 (>= 0.0.0~20120605), libselinux1 (>= 1.32), lsb-base (>= 3.0-6)
+Recommends: bridge-utils, debootstrap, dirmngr, dnsmasq-base, gnupg, iproute2, nftables | iptables, libpam-cgfs, lxcfs (>= 3.0.2-1), lxc-templates (>= 3.0.2-1), openssl, rsync, uidmap
+Suggests: apparmor, btrfs-progs, lvm2, python3-lxc
+Section: admin
+Priority: optional
+Homepage: https://linuxcontainers.org/
+Description: Linux Containers userspace tools
+ Containers are insulated areas inside a system, which have their own namespace
+ for filesystem, network, PID, IPC, CPU and memory allocation and which can be
+ created using the Control Group and Namespace features included in the Linux
+ kernel.
+ .
+ This package provides the lxc-* tools, which can be used to start a single
+ daemon in a container, or to boot an entire "containerized" system, and to
+ manage and debug your containers.

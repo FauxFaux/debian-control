@@ -1,0 +1,36 @@
+#!/bin/sh -e
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+# Find good value for RUNFROM
+if [ -f /etc/news/sn/debian-config ]
+then
+	. /etc/news/sn/debian-config
+fi
+if [ -z "$RUNFROM" ]
+then
+	db_get sn/runfrom
+	RUNFROM=$RET
+fi
+
+if [ ! -z "$RUNFROM" ]
+then
+	db_set sn/runfrom "$RUNFROM"
+fi
+
+# Find good value for onlylocal
+if grep -q "^#-- sn:" /etc/hosts.allow || grep -q "^#-- sn:" /etc/hosts.deny
+then
+	db_set sn/onlylocal true
+else
+	db_set sn/onlylocal false
+fi
+
+db_beginblock
+db_input high sn/runfrom || true
+db_input high sn/onlylocal || true
+db_endblock
+db_go
+

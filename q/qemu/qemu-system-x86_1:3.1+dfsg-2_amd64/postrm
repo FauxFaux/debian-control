@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+dpkg-maintscript-helper rm_conffile /etc/init.d/qemu-system-x86 1:2.2+dfsg-3~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/qemu/target-x86_64.conf 1:2.4+dfsg-1~ -- "$@"
+[ -d /etc/qemu ] && rmdir /etc/qemu 2>/dev/null || :

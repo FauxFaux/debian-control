@@ -1,0 +1,24 @@
+Package: uim
+Source: uim (1:1.8.8-3)
+Version: 1:1.8.8-3+b2
+Architecture: amd64
+Maintainer: HIGUCHI Daisuke (VDR dai) <dai@debian.org>
+Installed-Size: 202
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: libc6 (>= 2.15), libuim-scm0 (>= 1:1.5.7), libuim8 (>= 1:1.7.0), uim-data (>= 1:1.8.8-3), uim-plugins (>= 1:1.8.8-3)
+Recommends: wordlist, im-config, uim-gtk2.0 (>= 1:1.8.8-3), uim-qt5 (>= 1:1.8.8-3), uim-gtk3 (>= 1:1.8.8-3), uim-xim (>= 1:1.8.8-3), uim-fep (>= 1:1.8.8-3)
+Suggests: uim-mozc | uim-anthy | uim-skk
+Breaks: libuim-data (<< 1:1.8.6+gh20161003.0.d63dadd-5~), uim-anthy (<< 1:1.8.6+gh20161003.0.d63dadd-5~), uim-common (<< 1:1.8.6+gh20161003.0.d63dadd-5~), uim-skk (<< 1:1.8.6+gh20161003.0.d63dadd-5~), uim-utils (<< 1:1.8.6+gh20161003.0.d63dadd-5~)
+Replaces: libuim-data (<< 1:1.8.6+gh20161003.0.d63dadd-5~), uim-anthy (<< 1:1.8.6+gh20161003.0.d63dadd-5~), uim-common (<< 1:1.8.6+gh20161003.0.d63dadd-5~), uim-skk (<< 1:1.8.6+gh20161003.0.d63dadd-5~), uim-utils (<< 1:1.8.6+gh20161003.0.d63dadd-5~)
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/uim/uim/wiki
+Description: Universal Input Method - main binary package
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package is a package designed to install the basic uim infrastructure.

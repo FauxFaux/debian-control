@@ -1,0 +1,19 @@
+Package: libomp5-7
+Source: llvm-toolchain-7
+Version: 1:7.0.1-3
+Architecture: amd64
+Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
+Installed-Size: 1884
+Depends: libc6 (>= 2.14)
+Conflicts: libomp-x.y
+Breaks: libomp5 (<< 44)
+Replaces: libomp-x.y
+Provides: libomp-x.y
+Section: devel
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.llvm.org/
+Description: LLVM OpenMP runtime
+ The runtime is the part of the OpenMP implementation that your code is
+ linked against, and that manages the multiple threads in an OpenMP program
+ while it is executing.

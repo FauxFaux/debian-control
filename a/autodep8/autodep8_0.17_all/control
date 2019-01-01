@@ -1,0 +1,23 @@
+Package: autodep8
+Version: 0.17
+Architecture: all
+Maintainer: Debian CI team <team+ci@tracker.debian.org>
+Installed-Size: 53
+Depends: dctrl-tools, python3
+Section: devel
+Priority: optional
+Description: DEP-8 test control file generator
+ autodep8 will detect well-known types of packages and generate
+ DEP-8-compliant test control files for them. It can be used by DEP-8
+ implementations to support implicit test control files.
+ .
+ Currently supported packages types:
+  - Ruby packages using gem2deb/gem2deb-test-runner
+  - Perl packages
+  - Python packages
+  - NodeJS packages
+  - Kernel module packages using DKMS
+  - R packages
+  - Emacs Lisp ELPA packages
+  - Go packages
+  - Octave-Forge packages

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+## Directory <=> symlink update / remove symlinks and empty directories:
+find /usr/share/civicrm -xdev -type l -delete
+find /usr/share/civicrm -xdev -type d -empty -delete
+## -printf 'removed %p\n'
+
+

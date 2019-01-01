@@ -1,0 +1,23 @@
+Package: fever
+Version: 1.0.2-2
+Architecture: amd64
+Maintainer: Sascha Steinbiss <satta@debian.org>
+Installed-Size: 9525
+Depends: libc6 (>= 2.3.2)
+Recommends: suricata
+Built-Using: go-md2man (= 1.0.8+ds-1), golang-1.10 (= 1.10.5-1), golang-blackfriday (= 1.5.1+git20180428.11635eb-1), golang-fsnotify (= 1.4.7-2), golang-github-buger-jsonparser (= 0.0~git20170705.0.9addec9-2), golang-github-dcso-bloom (= 0.2.2-1), golang-github-dcso-fluxline (= 0.0~git20181026.4f8ed83-1), golang-github-garyburd-redigo (= 0.0~git20150901.0.d8dbe4d-2), golang-github-hashicorp-hcl (= 0.0~git20170509.0.392dba7-1), golang-github-jinzhu-inflection (= 0.0~git20170102.0.1c35d90-2), golang-github-magiconair-properties (= 1.8.0-1), golang-github-mitchellh-go-homedir (= 0.0~git20161203.0.b8bc1bf-2), golang-github-mitchellh-mapstructure (= 1.1.2-1), golang-github-neowaylabs-wabbit (= 0.0~git20180530.0.d089945-1), golang-github-pborman-uuid (= 1.1-1), golang-github-pelletier-go-toml (= 1.2.0-1), golang-github-showmax-go-fqdn (= 0.0~git20160909.2501cdd-1), golang-github-spf13-afero (= 1.1.1-1), golang-github-spf13-cast (= 1.2.0-2), golang-github-spf13-cobra (= 0.0.3-1), golang-github-spf13-jwalterweatherman (= 0.0~git20180109.7c0cea3-1), golang-github-spf13-pflag (= 1.0.3-1), golang-github-spf13-viper (= 1.2.1-1), golang-github-streadway-amqp (= 0.0~git20150820.0.f4879ba-6), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-sys (= 0.0~git20181026.95b1ffb-1), golang-gopkg-mgo.v2 (= 2016.08.01-5), golang-gopkg-pg.v5 (= 5.3.3-3), golang-logrus (= 1.0.6-1), golang-x-text (= 0.3.0-2), golang-yaml.v2 (= 2.2.1-1)
+Section: net
+Priority: optional
+Homepage: https://github.com/DCSO/fever
+Description: fast, extensible, versatile event router for Suricata's EVE-JSON format
+ The Fast, Extensible, Versatile Event Router (FEVER) is a tool for fast
+ processing of events from Suricata's JSON EVE output. What is meant by
+ 'processing' is defined by a number of modular components, for example
+ facilitating fast ingestion into a database. Other processors implement
+ collection, aggregation and forwarding of various metadata (e.g.
+ aggregated and raw flows, passive DNS data, etc.) as well as performance
+ metrics.
+ .
+ It is meant to be used in front of (or as a replacement for) general-purpose
+ log processors like Logstash to increase event throughput as observed on
+ sensors that see a lot of traffic.

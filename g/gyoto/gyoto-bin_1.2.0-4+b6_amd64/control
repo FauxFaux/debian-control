@@ -1,0 +1,29 @@
+Package: gyoto-bin
+Source: gyoto (1.2.0-4)
+Version: 1.2.0-4+b6
+Architecture: amd64
+Maintainer: Debian Astronomy Maintainers <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 349
+Depends: libboost-mpi1.67.0, libboost-serialization1.67.0, libc6 (>= 2.14), libcfitsio7 (>= 3.450~), libgcc1 (>= 1:3.0), libgyoto6, libopenmpi3, libstdc++6 (>= 5.2), libxerces-c3.2
+Recommends: mpi-default-bin
+Breaks: gyoto (<< 1.1.0~)
+Replaces: gyoto (<< 1.1.0~)
+Section: science
+Priority: extra
+Multi-Arch: allowed
+Homepage: http://gyoto.obspm.fr
+Description: General relativistic ray-tracing command-line interface
+ Gyoto is a framework for computing geodesics in curved
+ space-times. The gyoto utility program uses this framework to compute
+ images of astronomical objects in the vicinity of compact objects
+ (e.g. black-holes). Such images are distorted by strong gravitational
+ lensing. The gyoto program takes a scenery description in XML format,
+ computes this scenery using relativistic ray-tracing, and saves the
+ result in FITS format.
+ .
+ This package contains the `gyoto' command-line utility. More complex
+ uses of the Gyoto framework can be achieved using the yorick-gyoto,
+ python-gyoto or python3-gyoto packages. Gyoto can be extended with
+ plug-ins (see libgyoto6-dev).
+ .
+ MPI parallelization requires the mpi-default-bin package.

@@ -1,0 +1,26 @@
+Package: libhibernate-validator-java
+Version: 4.3.4-1
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 520
+Depends: libgeronimo-validation-1.0-spec-java, libjaxb-api-java (>= 2.3.0), libjboss-logging-java
+Suggests: libgeronimo-jpa-2.0-spec-java, libjoda-time-java (>= 2.10), libjsoup-java (>= 1.10.2)
+Section: java
+Priority: optional
+Homepage: http://validator.hibernate.org
+Description: Hibernate Validator
+ Hibernate Validator aims at defining and checking a domain model
+ level constraints. It supports custom constraints definitions as well
+ as full internationalization. Annotations are used to define
+ constraints on object level. The validation mechanism can be executed
+ in different layers in your application without having to duplicate
+ any of these rules (presentation layer, data access layer, Database
+ schema).
+ .
+ Hibernate Validator integrates with Hibernate by applying the
+ constraints on the database schema (DDL generation) and by checking
+ entity validity before Hibernate inserts or updates instances. You
+ can use Hibernate Validator with any Java Persistence provider, not
+ only Hibernate, although you will not be able to use automatic DDL
+ alteration for constraint generation outside of Hibernate
+ EntityManager.

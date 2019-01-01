@@ -1,0 +1,103 @@
+#!/bin/sh
+
+set -e
+
+# Read gitlab_user from gitlab-common.conf
+if [ -f /etc/gitlab-common/gitlab-common.conf ]; then
+  . /etc/gitlab-common/gitlab-common.conf
+else
+  echo "Failed to find /etc/gitlab-common/gitlab-common.conf."
+  exit 1
+fi
+gitaly_ruby_home=/usr/share/gitaly/ruby
+
+# Make gitlab user owner of .bundle for gitaly
+chown ${gitlab_user}: /var/lib/gitlab/gitaly-ruby.bundle
+# Regenerate Gemfile.lock
+cd ${gitaly_ruby_home}
+runuser -u ${gitlab_user} -- sh -c "touch Gemfile.lock && \
+truncate -s 0 Gemfile.lock"
+runuser -u ${gitlab_user} -- sh -c "bundle install --local"
+if ! runuser -u ${gitlab_user} -- sh -c 'bundle --local --quiet'; then
+  if [ "$1" = "triggered" ]; then
+    # probably triggered in the middle of an system upgrade; ignore failure
+    # but abort here
+    echo "#########################################################################"
+    echo "# Failed to detect gitaly dependencies; if you are in the middle of an #"
+    echo "# upgrade, this is probably fine, there will be another attempt later.  #"
+    echo "#                                                                       #"
+    echo "# If you are NOT in the middle of an upgrade, there is probably a real  #"
+    echo "# issue. Please report a bug.                                           #"
+    echo "#########################################################################"
+    exit 0
+  else
+    # something is really broken
+    exit 1
+  fi
+fi
+
+case $1 in
+    configure)
+      service_path=/etc/systemd/system/gitaly.service.d
+      mkdir -p ${service_path}
+      if [ -e ${service_path}/override.conf ]; then
+        echo "${service_path}/override.conf already exist"
+        # Make sure only gitlab user is updated
+        sed -i "s/^ *User=.*/User=${gitlab_user}/" ${service_path}/override.conf
+      else
+        printf "[Service]\nUser=${gitlab_user}\n" > ${service_path}/override.conf
+      fi
+    ;;
+
+    triggered)
+    # Already handled
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installsystemd/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# In case this system is running systemd, we need to ensure that all
+	# necessary tmpfiles (if any) are created before starting.
+	if [ -d /run/systemd/system ] ; then
+		systemd-tmpfiles --create gitaly.conf >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/gitaly" ]; then
+		update-rc.d gitaly defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d gitaly $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'gitaly.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'gitaly.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'gitaly.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'gitaly.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

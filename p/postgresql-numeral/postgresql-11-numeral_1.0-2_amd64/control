@@ -1,0 +1,19 @@
+Package: postgresql-11-numeral
+Source: postgresql-numeral
+Version: 1.0-2
+Architecture: amd64
+Maintainer: Christoph Berg <myon@debian.org>
+Installed-Size: 252
+Depends: libc6 (>= 2.14), postgresql-11
+Section: database
+Priority: optional
+Homepage: https://github.com/ChristophBerg/postgresql-numeral
+Description: numeral datatypes for PostgreSQL
+ This module provides numeric data types for PostgreSQL that use
+ numerals (words instead of digits) for input and output.
+ .
+  * numeral: English numerals (one, two, three, four, ...),
+    short scale (10^9 = trillion)
+  * zahl: German numerals (eins, zwei, drei, vier, ...),
+    long scale (10^9 = Milliarde)
+  * roman: Roman numerals (I, II, III, IV, ...)

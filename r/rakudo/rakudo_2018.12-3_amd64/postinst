@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        do_recompile=true
+        if [ -f /var/lib/perl6/previous-compiler-id ]; then
+            this_compiler_id=$(/usr/share/perl6/rakudo-helper.pl --compiler-id)
+            previous_compiler_id=$(cat /var/lib/perl6/previous-compiler-id)
+            if [ "$this_compiler_id" = "$previous_compiler_id" ]; then
+                do_recompile=false
+            fi
+            rm -f /var/lib/perl6/previous-compiler-id
+        fi
+
+        if [ "$do_recompile" = true ]; then
+            /usr/share/perl6/rakudo-helper.pl --reinstall-all
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+        # nothing to do
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+exit 0

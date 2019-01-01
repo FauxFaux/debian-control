@@ -1,0 +1,18 @@
+Package: libpam-snapper
+Source: snapper
+Version: 0.8.1-1
+Architecture: amd64
+Maintainer: Hideki Yamane <henrich@debian.org>
+Installed-Size: 54
+Depends: snapper, libbtrfs0 (>= 4.16.1), libc6 (>= 2.14), libdbus-1-3 (>= 1.9.14), libpam0g (>= 0.99.7.1)
+Section: admin
+Priority: optional
+Homepage: http://snapper.io/
+Description: PAM module for Linux filesystem snapshot management tool
+ Snapper is a tool for Linux filesystem snapshot management. Apart from the
+ obvious creation and deletion of snapshots, it can compare snapshots and revert
+ differences between snapshots. In simple terms, this allows root and non-root
+ users to view older versions of files and revert changes.
+ .
+ This package contains the PAM library for snapper, which allows the
+ administrator to take snapshots when an user logs in or out of the system.

@@ -1,0 +1,61 @@
+#!/bin/sh
+
+set -e
+
+print_config(){
+	cat << EOF
+dbname="$dbname"
+dbserver="$dbserver"
+dbport="$dbport"
+dbuser="$dbuser"
+dbpass="$dbpass"
+dbtype="$dbtype"
+EOF
+}
+
+get_config(){
+	set +e
+
+	DSN=$(su otrs -s /bin/sh -c "/usr/share/otrs/bin/otrs.Console.pl Maint::Config::Dump DatabaseDSN")
+	TYPE=$(echo $DSN | awk -F: '{ print $2 }')
+	DSNOPTIONS=$(echo $DSN | awk -F: '{ print $3 }')
+	eval $DSNOPTIONS
+
+	case $TYPE in
+		Pq)
+			dbtype="pgqsl"
+			dbname=${dbname:-otrs}
+		;;
+		mysql)
+			dbtype="mysql"
+			dbname=${database:-otrs}
+		;;
+	esac
+
+	dbserver=${host:-localhost}
+	dbuser=$(su otrs -s /bin/sh -c "/usr/share/otrs/bin/otrs.Console.pl Maint::Config::Dump DatabaseUser")
+	dbuser=${dbuser:-otrs}
+	dbpass=$(su otrs -s /bin/sh -c "/usr/share/otrs/bin/otrs.Console.pl Maint::Config::Dump DatabasePw")
+
+	print_config > $TMPFILE
+	set -e
+}
+
+
+. /usr/share/debconf/confmodule
+dbc_dbtypes="mysql, pgsql"
+
+TMPFILE=$(mktemp)
+if [ -f "/etc/otrs/Kernel/Config.pm" ]; then
+	get_config
+fi
+
+dbc_dbuser="otrs"
+dbc_authmethod_user="ident"
+dbc_first_version="2.0.4p01-10"
+dbc_load_include="sh:$TMPFILE"
+
+if [ -f /usr/share/dbconfig-common/dpkg/config ]; then
+	. /usr/share/dbconfig-common/dpkg/config
+	dbc_go otrs2 "$@"
+fi

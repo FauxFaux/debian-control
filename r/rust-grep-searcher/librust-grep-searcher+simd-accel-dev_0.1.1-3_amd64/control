@@ -1,0 +1,15 @@
+Package: librust-grep-searcher+simd-accel-dev
+Source: rust-grep-searcher
+Version: 0.1.1-3
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-grep-searcher-dev (= 0.1.1-3), librust-bytecount-0.4+generic-simd-dev, librust-encoding-rs-0.8+simd-accel-dev (>= 0.8.6-~~)
+Provides: librust-grep-searcher-0+simd-accel-dev (= 0.1.1-3), librust-grep-searcher-0.1+simd-accel-dev (= 0.1.1-3), librust-grep-searcher-0.1.1+simd-accel-dev (= 0.1.1-3)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/BurntSushi/ripgrep
+Description: Fast line oriented regex searching as a library - feature "simd-accel"
+ This metapackage enables feature simd-accel for the Rust grep-searcher crate,
+ by pulling in any additional dependencies needed by that feature.

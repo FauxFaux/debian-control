@@ -1,0 +1,27 @@
+#! /bin/sh
+set -e
+
+write_cache()
+{
+if [ -x `which gtk-update-icon-cache` ]; then
+    if ! gtk-update-icon-cache --force --quiet /usr/share/icons/mate; then
+        echo "WARNING: icon cache generation failed"
+    fi
+fi
+}
+
+if [ "$1" = "triggered" ]; then
+    write_cache
+    exit 0
+fi
+
+write_cache
+
+# Automatically added by dh_icons/11.5
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if which update-icon-caches >/dev/null 2>&1 ; then
+		update-icon-caches /usr/share/icons/mate /usr/share/icons/menta
+	fi
+fi
+# End automatically added section
+

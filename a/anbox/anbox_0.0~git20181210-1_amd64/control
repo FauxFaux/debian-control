@@ -1,0 +1,31 @@
+Package: anbox
+Version: 0.0~git20181210-1
+Architecture: amd64
+Maintainer: Shengjing Zhu <zhsj@debian.org>
+Installed-Size: 2560
+Depends: iptables, libegl1, libgles2, libboost-atomic1.67.0, libboost-chrono1.67.0, libboost-date-time1.67.0, libboost-filesystem1.67.0, libboost-iostreams1.67.0, libboost-log1.67.0, libboost-program-options1.67.0, libboost-regex1.67.0 (>= 1.67.0-10), libboost-serialization1.67.0, libboost-system1.67.0, libboost-thread1.67.0, libc6 (>= 2.17), libgcc1 (>= 1:4.2), liblxc1 (>= 3.0.2), libprotobuf-lite17, libsdl2-2.0-0 (>= 2.0.8), libsdl2-image-2.0-0 (>= 2.0.2), libstdc++6 (>= 6), libsystemd0 (>= 221), lxc (>= 1:3.0.0)
+Recommends: dbus-user-session
+Built-Using: properties-cpp (= 0.0.1~bzr17+repack1-3)
+Section: contrib/utils
+Priority: optional
+Homepage: https://anbox.io
+Description: Android in a box
+ Anbox is a container-based approach to boot a full Android system on a
+ regular GNU/Linux system.
+ .
+ In other words: Anbox will let you run Android on your Linux system
+ without the slowness of virtualization.
+ .
+ Anbox uses Linux namespaces (user, pid, uts, net, mount, ipc) to run a
+ full Android system in a container and provide Android applications on any
+ GNU/Linux-based platform.
+ .
+ The Android inside the container has no direct access to any hardware. All
+ hardware access is going through the anbox daemon on the host. It reuses
+ what Android implemented within the QEMU-based emulator for OpenGL ES
+ accelerated rendering. The Android system inside the container uses
+ different pipes to communicate with the host system and sends all hardware
+ access commands through these.
+ .
+ This package needs Android kernel modules and rootfs image, see
+ /usr/share/doc/anbox/README.Debian for information.

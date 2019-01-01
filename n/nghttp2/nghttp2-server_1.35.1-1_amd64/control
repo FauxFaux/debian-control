@@ -1,0 +1,17 @@
+Package: nghttp2-server
+Source: nghttp2
+Version: 1.35.1-1
+Architecture: amd64
+Maintainer: Tomasz Buchert <tomasz@debian.org>
+Installed-Size: 259
+Depends: libnghttp2-14 (= 1.35.1-1), lsb-base, libc-ares2 (>= 1.7.0), libc6 (>= 2.14), libev4 (>= 1:4.04), libgcc1 (>= 1:3.0), libjansson4 (>= 2.0.1), libjemalloc1 (>= 2.1.1), libssl1.1 (>= 1.1.0), libstdc++6 (>= 6), libsystemd0, libxml2 (>= 2.6.27), zlib1g (>= 1:1.1.4)
+Breaks: nghttp2 (<< 1.3.4-2~)
+Replaces: nghttp2 (<< 1.3.4-2~)
+Section: httpd
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://nghttp2.org/
+Description: server implementing HTTP/2 protocol
+ This is a standalone server implementing the HTTP/2 protocol with
+ HTTP/1.1 fallback for clients that do not support it. It can be used
+ to serve files from a local directory.

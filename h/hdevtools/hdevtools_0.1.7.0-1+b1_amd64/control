@@ -1,0 +1,30 @@
+Package: hdevtools
+Source: hdevtools (0.1.7.0-1)
+Version: 0.1.7.0-1+b1
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 62088
+Depends: libatomic1 (>= 4.8), libc6 (>= 2.27), libffi6 (>= 3.0.4), libgmp10, libtinfo6 (>= 6), ghc (>= 8.4.4+dfsg1), ghc (<< 8.4.4+dfsg1+)
+Section: devel
+Priority: optional
+Homepage: http://hackage.haskell.org/package/hdevtools
+Description: GHC powered daemon for fast Haskell development
+ hdevtools is a backend for text editor plugins, to allow for things such as
+ syntax and type checking of Haskell code, and retrieving type information, all
+ directly from within your text editor.
+ .
+ The advantage that hdevtools has over ghc-mod is that it runs silently
+ in a persistent background process, and therefore is able to keeps all of your
+ Haskell modules and dependent libraries loaded in memory. This way, when you
+ change only a single source file, only it needs to be reloaded and rechecked,
+ instead of having to reload everything.
+ .
+ This makes hdevtools very fast for checking syntax and type errors (runs
+ just as fast as the ":reload" command in GHCi).
+ .
+ In fact, syntax and type checking is so fast, that you can safely enable auto
+ checking on every save. Even for huge projects, checking is nearly instant.
+ .
+ In addition to checking Haskell source code for errors, `hdevtools` has tools
+ for getting info about identifiers, and getting type information for snippets
+ of code.

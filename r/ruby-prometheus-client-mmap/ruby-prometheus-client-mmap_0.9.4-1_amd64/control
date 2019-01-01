@@ -1,0 +1,17 @@
+Package: ruby-prometheus-client-mmap
+Version: 0.9.4-1
+Architecture: amd64
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 166
+Depends: ruby (>= 1:2.5~0), libc6 (>= 2.14), libgmp10, libruby2.5 (>= 2.5.0~preview1), ruby (<< 1:2.6~)
+Section: ruby
+Priority: optional
+Homepage: https://gitlab.com/gitlab-org/prometheus-client-mmap
+Description: suite of instrumentation metric primitives
+ These instrumentation metric primitives can be exposed through a web services
+ interface. Intended to be used together with a Prometheus server.
+ .
+ This Prometheus library is fork of Prometheus Ruby Client that uses mmap'ed
+ files to share metrics from multiple processes. This allows efficient metrics
+ processing for Ruby web apps running in multiprocess setups like Unicorn.
+Ruby-Versions: ruby2.5

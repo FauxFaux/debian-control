@@ -1,0 +1,18 @@
+Package: nvidia-driver-libs
+Source: nvidia-graphics-drivers
+Version: 390.87-5
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 206
+Depends: libgl1-nvidia-glvnd-glx (= 390.87-5), nvidia-egl-icd (= 390.87-5)
+Recommends: nvidia-driver-libs-i386, libopengl0 | libopengl0-glvnd-nvidia, libglx-nvidia0 (= 390.87-5), libgles-nvidia1 (= 390.87-5), libgles-nvidia2 (= 390.87-5), libnvidia-cfg1 (= 390.87-5), nvidia-vulkan-icd (= 390.87-5)
+Conflicts: libegl1-glvnd-nvidia, libgl1-glvnd-nvidia-glx, libgldispatch0-nvidia, libgles1-glvnd-nvidia, libgles2-glvnd-nvidia, libglvnd0-nvidia, libglx0-glvnd-nvidia, libopengl0-glvnd-nvidia
+Breaks: libegl1-nvidia, libgl1-nvidia-glx, nvidia-driver-libs-nonglvnd, nvidia-nonglvnd-vulkan-icd
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: NVIDIA metapackage (OpenGL/GLX/EGL/GLES libraries)
+ This metapackage depends on the NVIDIA binary libraries
+ that provide optimized hardware acceleration of
+ OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server.

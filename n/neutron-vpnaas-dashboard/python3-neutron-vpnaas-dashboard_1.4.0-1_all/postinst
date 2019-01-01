@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	/usr/share/openstack-dashboard/manage.py collectstatic --clear --noinput
+	/usr/share/openstack-dashboard/manage.py compress --force
+	if [ -f /var/lib/openstack-dashboard/secret-key/.secret_key_store ]; then
+		rm /var/lib/openstack-dashboard/secret-key/.secret_key_store
+	fi
+	chown -R www-data /var/lib/openstack-dashboard/secret-key /var/lib/openstack-dashboard/static
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-neutron-vpnaas-dashboard 
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p python3-neutron-vpnaas-dashboard  || true
+fi
+
+# End automatically added section
+

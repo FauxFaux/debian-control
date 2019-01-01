@@ -1,0 +1,23 @@
+Package: python3-asgiref
+Source: python-asgiref
+Version: 2.3.2-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 52
+Depends: python3-async-timeout, python3:any
+Breaks: python3-asgi-ipc (<< 2), python3-asgi-redis (<< 2), python3-daphne (<< 2), python3-django-channels (<< 2)
+Section: python
+Priority: optional
+Homepage: https://github.com/django/asgiref/
+Description: ASGI in-memory channel layer (Python3 version)
+ ASGI (Asynchronous Server Gateway Interface) is a standard for Python
+ asynchronous web apps and servers to communicate with each other, and
+ positioned as an asynchronous successor to WSGI.
+ .
+ It includes ASGI base libraries, such as:
+ .
+  * Sync-to-async and async-to-sync function wrappers, asgiref.sync
+  * Server base classes, asgiref.server
+  * A WSGI-to-ASGI adapter, in asgiref.wsgi
+ .
+ This package contains the Python 3 version of the library.

@@ -1,0 +1,22 @@
+Package: wine-development
+Version: 3.21-2
+Architecture: all
+Maintainer: Debian Wine Party <debian-wine@lists.debian.org>
+Installed-Size: 191
+Depends: wine64-development (>= 3.21-2) | wine32-development (>= 3.21-2), wine64-development (<< 3.21-2.1~) | wine32-development (<< 3.21-2.1~)
+Suggests: q4wine, winbind, winetricks, playonlinux, wine-binfmt, dosbox (>= 0.74-4.2~)
+Breaks: wine1.6 (<< 1:1.8.4ubuntu1~), wine1.6-i386 (<< 1:1.8.4ubuntu1~)
+Replaces: wine1.6 (<< 1:1.8.4ubuntu1~), wine1.6-i386 (<< 1:1.8.4ubuntu1~)
+Provides: wine
+Built-Using: khronos-api (= 4.6+git20180514-1), unicode-data (= 11.0.0-1)
+Section: otherosfs
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.winehq.org
+Description: Windows API implementation - standard suite
+ Wine is a free MS-Windows API implementation.
+ This is still a work in progress and many applications may still not work.
+ .
+ This package provides essential wrappers and convenience tools for the
+ standard Wine components. It also employs the Debian alternatives system to
+ provide the usual command names, e.g. "wine" instead of "wine-development".

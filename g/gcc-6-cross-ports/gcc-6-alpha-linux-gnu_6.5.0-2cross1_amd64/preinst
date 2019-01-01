@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove alpha-linux-gnu-gcc /usr/bin/alpha-linux-gnu-gcc-6
+    update-alternatives --quiet --remove alpha-linux-gnu-gcov /usr/bin/alpha-linux-gnu-gcov-6
+fi
+
+
+
+exit 0

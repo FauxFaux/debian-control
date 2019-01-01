@@ -1,0 +1,28 @@
+Package: libjdo-api-java
+Version: 3.1-3
+Architecture: all
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Installed-Size: 248
+Depends: libgeronimo-jta-1.2-spec-java
+Section: java
+Priority: optional
+Homepage: http://db.apache.org/jdo/
+Description: Implementation of JSR 243: Java Data Objects 3.1
+ Java Data Objects (JDO) is a standard way to access persistent data in
+ databases, using plain old Java objects (POJO) to represent persistent data.
+ The approach separates data manipulation (done by accessing Java data members
+ in the Java domain objects) from database manipulation (done by calling the
+ JDO interface methods). This separation of concerns leads to a high degree of
+ independence of the Java view of data from the database view of the data.
+ .
+ Interfaces are defined for the user's view of persistence:
+  - PersistenceManager: the component responsible for the life cycle of
+    persistent instances, Query factory, and Transaction access
+  - Query: the component responsible for querying the datastore and returning
+    persistent instances or values
+  - Transaction: the component responsible for initiating and completing
+    transactions
+ .
+ JDO is being developed as a Java Specification Request in the Java Community
+ Process. The original JDO 1.0 is JSR-12 http://www.jcp.org/en/jsr/detail?id=12
+ and the current JDO 2.0 is JSR-243 http://www.jcp.org/en/jsr/detail?id=243

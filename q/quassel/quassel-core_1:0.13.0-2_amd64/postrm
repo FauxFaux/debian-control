@@ -1,0 +1,56 @@
+#!/bin/sh
+# postrm script for quassel-core
+
+set -e
+
+# configure some variables
+QUASSEL_GROUP=quassel
+QUASSEL_USER=quasselcore
+
+case "$1" in
+	purge)
+		echo "Deleting $QUASSEL_USER user ..."
+		if which deluser > /dev/null; then
+			deluser --quiet --system $QUASSEL_USER
+		fi
+
+		echo "Deleting $QUASSEL_GROUP group ..."
+		if which delgroup > /dev/null; then
+			delgroup --quiet --system $QUASSEL_GROUP
+		fi
+
+		echo "Deleting /var/cache/quassel ..."
+		rm -rf /var/lib/quassel
+		echo "Deleting /var/log/quassel ..."
+                rm -rf /var/log/quassel
+		;;
+	remove)
+		;;
+	upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+		;;
+	*)
+		echo "postrm called with unknown argument \`$1'" >&2
+		exit 1
+		;;
+esac
+
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "purge" ] ; then
+	update-rc.d quasselcore remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/11.5.3
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'quasselcore.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'quasselcore.service' >/dev/null || true
+		deb-systemd-helper unmask 'quasselcore.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

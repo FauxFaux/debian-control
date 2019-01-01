@@ -1,0 +1,16 @@
+Package: dkim-milter-python
+Source: pymilter-milters
+Version: 0.9-2
+Architecture: all
+Maintainer: Scott Kitterman <scott@kitterman.com>
+Installed-Size: 56
+Depends: python:any, python-milter (>= 0.9.3), python-dkim (>= 0.4), python-authres (>= 0.2), lsb-base, adduser
+Suggests: postfix (>= 2.3) | sendmail (>= 8.13)
+Section: mail
+Priority: optional
+Homepage: https://github.com/sdgathman/milter/
+Description: Domain Keys Identified Mail Milter for Sendmail and Postfix
+ A simple Python mail filter for creating and verifying Domain Keys Identified
+ Mail (DKIM) signatures.  While not as featureful as some other
+ implementations, like dkimpy-milter or opendkim, because it is written in
+ Python, it is a good choice for experimentation and customization.

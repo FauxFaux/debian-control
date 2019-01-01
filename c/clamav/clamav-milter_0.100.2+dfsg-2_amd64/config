@@ -1,0 +1,480 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+# This conf script is capable of backing up
+db_version 2.0
+db_capb backup
+
+to_lower()
+{
+  word="$1"
+  lcword=$(echo "$word" | tr A-Z a-z)
+  echo "$lcword"
+}
+
+is_true()
+{
+  var="$1"
+  lcvar=$(to_lower "$var")
+  [ 'true' = "$lcvar" ] || [ 'yes' = "$lcvar" ] || [ 1 = "$lcvar" ]
+  return $?
+}
+
+is_false()
+{
+  var="$1"
+  lcvar=$(to_lower "$var")
+  [ 'false' = "$lcvar" ] || [ 'no' = "$lcvar" ] || [ 0 = "$lcvar" ]
+  return $?
+}
+
+ucf_cleanup()
+{
+  # This only does something if I've fucked up before
+  # Not entirely impossible :(
+
+  configfile=$1
+
+  if [ `grep "$configfile" /var/lib/ucf/hashfile | wc -l` -gt 1 ]; then
+    grep -v "$configfile" /var/lib/ucf/hashfile > /var/lib/ucf/hashfile.tmp
+    grep "$configfile" /var/lib/ucf/hashfile | tail -n 1  >> /var/lib/ucf/hashfile.tmp
+    mv /var/lib/ucf/hashfile.tmp /var/lib/ucf/hashfile
+  fi
+}
+
+add_to_ucf()
+{
+  configfile=$1
+  ucffile=$2
+
+  if ! grep -q "$configfile" /var/lib/ucf/hashfile; then
+    md5sum $configfile >> /var/lib/ucf/hashfile
+    cp $configfile $ucffile
+  fi
+}
+
+ucf_upgrade_check()
+{
+  configfile=$1
+  sourcefile=$2
+  ucffile=$3
+
+  if [ -f "$configfile" ]; then
+    add_to_ucf $configfile $ucffile
+    ucf --three-way --debconf-ok "$sourcefile" "$configfile"
+  else
+    [ -d /var/lib/ucf/cache ] || mkdir -p /var/lib/ucf/cache
+    pathfind restorecon && restorecon /var/lib/ucf/cache
+    cp $sourcefile $configfile
+    add_to_ucf $configfile $ucffile
+  fi
+}
+
+slurp_config()
+{
+  CLAMAVCONF="$1"
+  
+  if [ -e "$CLAMAVCONF" ]; then
+    for variable in `egrep -a -v '^[[:space:]]*(#|$)' "$CLAMAVCONF" | awk '{print $1}'`; do
+      case "$variable" in
+        DatabaseMirror)
+        if [ -z "$DatabaseMirror" ]; then
+          for i in `grep -a ^$variable $CLAMAVCONF | awk '{print $2}'`; do
+            value="$value $i"
+          done
+        else
+          continue
+        fi
+        ;;
+        DatabaseCustomURL)
+        if [ -z "$DatabaseCustomURL" ]; then
+          for i in `grep -a ^$variable $CLAMAVCONF | awk '{print $2}'`; do
+            value="$value $i"
+          done
+        else
+          continue
+        fi
+        ;;
+        IncludePUA)
+        if [ -z "$IncludePUA" ]; then
+          for i in `grep -a ^$variable $CLAMAVCONF | awk '{print $2}'`; do
+            value="$i $value"
+          done
+        else
+          continue
+        fi
+        ;;
+        ExcludePUA)
+        if [ -z "$ExcludePUA" ]; then
+          for i in `grep -a ^$variable $CLAMAVCONF | awk '{print $2}'`; do
+            value="$i $value"
+          done
+        else
+          continue
+        fi
+        ;;
+        ExtraDatabase)
+        if [ -z "$ExtraDatabase" ]; then
+          for i in `grep -a ^$variable $CLAMAVCONF | awk '{print $2}'`; do
+            value="$value $i"
+          done
+        else
+          continue
+        fi
+        ;;
+        VirusEvent|OnUpdateExecute|OnErrorExecute|RejectMsg)
+        value=`grep -a ^$variable $CLAMAVCONF | head -n1 | sed -e s/$variable\ //`
+        ;;
+        *)
+        value=`grep -a "^$variable[[:space:]]" $CLAMAVCONF | head -n1 | awk '{print $2}'`
+        ;;
+      esac
+      if [ -z "$value" ]; then 
+        export "$variable"="true"
+      elif [ "$value" != "$variable" ]; then
+        export "$variable"="$value"
+      else
+        export "$variable"="true"
+      fi
+      unset value
+    done
+  fi
+}
+
+pathfind() {
+  OLDIFS="$IFS"
+  IFS=:
+  for p in $PATH; do
+    if [ -x "$p/$*" ]; then
+      IFS="$OLDIFS"
+      return 0
+    fi
+  done
+  IFS="$OLDIFS"
+  return 1
+}
+
+set_debconf_value()
+{
+prog=$1
+name=$2
+eval variable="\$${name}"
+if [ -n "$variable" ]; then
+  db_set clamav-$prog/$name "$variable" || true
+fi
+}
+
+make_dir()
+{
+  DIR=$1
+  if [ -d "$DIR" ]; then
+    return 0;
+  fi
+  [ -n "$User" ] || User=clamav
+  mkdir -p -m 0755 "$DIR"
+  chown "$User" "$DIR"
+  pathfind restorecon && restorecon "$DIR"
+}
+
+# Debconf Functions
+
+isdigit ()
+{
+  case $1 in
+    [[:digit:]]*)
+    ISDIGIT=1
+    ;;
+    *)
+    ISDIGIT=0
+    ;;
+  esac
+}
+
+inputdigit ()
+{
+  ISDIGIT=0
+  while [ "$ISDIGIT" = '0' ]; do
+    db_input "$1" "$2" || true
+    if ! db_go; then
+      return 30
+    fi
+    db_get $2 || true
+    isdigit $RET
+    if [ "$ISDIGIT" = '0' ]; then
+      db_input critical clamav-base/numinfo || true
+      db_go
+    fi
+  done
+  return 0
+}
+
+StateGeneric()
+{
+  PRIO=$1
+  QUESTION=$2
+  NEXT=$3
+  LAST=$4
+
+  db_input $PRIO $QUESTION || true
+  if db_go; then
+    STATE=$NEXT
+  else
+    STATE=$LAST
+  fi
+}
+
+StateGenericDigit()
+{
+  PRIO=$1
+  QUESTION=$2
+  NEXT=$3
+  LAST=$4
+
+  inputdigit $PRIO $QUESTION || true
+  if db_go; then
+    STATE=$NEXT
+  else
+    STATE=$LAST
+  fi
+}
+
+
+CLAMAVMILTERCONF='/etc/clamav/clamav-milter.conf'
+
+slurp_config "$CLAMAVMILTERCONF"
+
+
+# Store conf file values as debconf answers - make sure user changes made 
+# outside of debconf are preserved
+set_debconf_value milter MilterSocket
+set_debconf_value milter FixStaleSocket
+set_debconf_value milter MilterSocketGroup
+set_debconf_value milter MilterSocketMode
+if [ -n "$User" ]; then
+  db_set clamav-milter/User "$User" || true
+  if ! [ "$User" = 'root' ]; then
+    AddGroups=`groups "$User" | awk -F ':' '{print $2}' | sed -e s/"$User"//`
+  fi
+  if [ -n "$AddGroups" ]; then
+    db_set clamav-milter/AddGroups "$AddGroups" || true
+  fi
+fi
+set_debconf_value milter ReadTimeout
+set_debconf_value milter Foreground
+set_debconf_value milter Chroot
+if [ -n "$PidFile" ]; then
+  db_set clamav-milter/PidFile "$PidFile" || true
+fi
+set_debconf_value milter TemporaryDirectory
+if [ -n "$ClamdSocket" ]; then
+  db_set clamav-milter/ClamdSocket "$ClamdSocket" || true
+fi
+set_debconf_value milter LocalNet
+set_debconf_value milter Whitelist
+set_debconf_value milter OnInfected
+set_debconf_value milter OnFail
+set_debconf_value milter RejectMsg
+set_debconf_value milter AddHeader
+set_debconf_value milter LogFile
+set_debconf_value milter LogFileUnlock
+set_debconf_value milter LogFileMaxSize
+set_debconf_value milter LogTime
+set_debconf_value milter LogSyslog
+set_debconf_value milter LogFacility
+set_debconf_value milter LogVerbose
+set_debconf_value milter LogInfected
+set_debconf_value milter LogClean
+if [ -n "$MaxFileSize" ]; then
+  MaxFileSize="`echo $MaxFileSize | sed -e s/M//g`"
+else
+  MaxFileSize=25
+fi
+db_set clamav-milter/MaxFileSize "$MaxFileSize" || true
+set_debconf_value milter SupportMultipleRecipients
+set_debconf_value milter LogRotate
+
+
+# States
+
+StateDebconf()
+{
+  db_input medium clamav-milter/debconf || true
+  if ! db_go; then
+    STATE="End"
+  else
+    db_get clamav-milter/debconf || true
+    if [ "$RET" = "false" ]; then
+      STATE="End"
+    else
+      STATE="User"
+    fi
+  fi
+}
+
+StateUser()
+{
+  db_input medium clamav-milter/User || true
+  if db_go; then
+    db_metaget clamav-milter/User value
+    if [ "$RET" = "" ]; then
+      db_set clamav-milter/User "clamav" || true
+    fi
+    STATE="AddGroups"
+  else
+    STATE="Debconf"
+  fi
+}
+
+StateMilterSocketGroup()
+{
+  db_input low clamav-milter/MilterSocketGroup || true
+  if db_go; then
+    db_metaget clamav-milter/MilterSocketGroup value
+    if [ "$RET" = "" ]; then
+      db_set clamav-milter/MilterSocketGroup "clamav" || true
+    fi
+    STATE="MilterSocketMode"
+  else
+    STATE="MilterSocket"
+  fi
+}
+
+StateLogFile()
+{
+  db_input low clamav-milter/LogFile || true
+  if db_go; then
+    db_metaget clamav-milter/LogFile value
+    if [ "$RET" = "" ]; then
+      db_set clamav-milter/LogFile "/var/log/clamav/clamav-milter.log" || true
+      STATE="LogFileUnlock"
+    elif [ "$RET" = 'none' ]; then
+      db_set clamav-milter/LogFile "" || true
+      STATE="LogSyslog"
+    else
+      STATE="LogFileUnlock"
+    fi
+  else
+    STATE="AddHeader"
+  fi
+}
+
+# To many options to configure at configure
+if [ "$1" = "reconfigure" ]; then
+  STATE="Init"
+elif [ -n "$2" ]; then
+  if [ -z "$User" ]; then
+    STATE="User"
+  fi
+else
+  STATE="End"
+fi
+
+[ -z "$STATE" ] && STATE='End'
+
+# This is the statemachine that controls execution. All the 'real' work is 
+# performed by subfunctions above. 
+
+while [ "$STATE" != "End" ]; do
+  case "$STATE" in
+    "Init")
+    StateDebconf
+    ;;
+    "User")
+    StateUser
+    ;;
+    "AddGroups")
+    StateGeneric medium clamav-milter/AddGroups MilterSocket User
+    ;;
+    "MilterSocket")
+    StateGeneric low clamav-milter/MilterSocket MilterSocketGroup AddGroups
+    ;;
+    "MilterSocketGroup")
+    StateMilterSocketGroup
+    ;;
+    "MilterSocketMode")
+    StateGenericDigit low clamav-milter/MilterSocketMode FixStaleSocket MilterSocketGroup
+    ;;
+    "FixStaleSocket")
+    StateGeneric low clamav-milter/FixStaleSocket ReadTimeout MilterSocketMode
+    ;;
+    "ReadTimeout")
+    StateGenericDigit low clamav-milter/ReadTimeout Foreground FixStaleSocket
+    ;;
+    "Foreground")
+    StateGeneric low clamav-milter/Foreground Chroot ReadTimeout
+    ;;
+    "Chroot")
+    StateGeneric low clamav-milter/Chroot PidFile Foreground
+    ;;
+    "PidFile")
+    StateGeneric low clamav-milter/PidFile TemporaryDirectory Chroot
+    ;;
+    "TemporaryDirectory")
+    StateGeneric low clamav-milter/TemporaryDirectory ClamdSocket PidFile
+    ;;
+    "ClamdSocket")
+    StateGeneric low clamav-milter/ClamdSocket LocalNet TemporaryDirectory
+    ;;
+    "LocalNet")
+    StateGeneric low clamav-milter/LocalNet Whitelist ClamdSocket
+    ;;
+    "Whitelist")
+    StateGeneric low clamav-milter/Whitelist OnInfected LocalNet
+    ;;
+    "OnInfected")
+    StateGeneric low clamav-milter/OnInfected OnFail Whitelist
+    ;;
+    "OnFail")
+    StateGeneric low clamav-milter/OnFail RejectMsg OnInfected
+    ;;
+    "RejectMsg")
+    StateGeneric low clamav-milter/RejectMsg AddHeader OnFail
+    ;;
+    "AddHeader")
+    StateGeneric low clamav-milter/AddHeader LogFile RejectMsg
+    ;;
+    "LogFile")
+    StateLogFile
+    ;;
+    "LogFileUnlock")
+    StateGeneric low clamav-milter/LogFileUnlock LogFileMaxSize LogFile
+    ;;
+    "LogFileMaxSize")
+    StateGenericDigit low clamav-milter/LogFileMaxSize LogTime LogFileUnlock
+    ;;
+    "LogTime")
+    StateGeneric low clamav-milter/LogTime LogSyslog LogFileMaxSize
+    ;;
+    "LogSyslog")
+    StateGeneric low clamav-milter/LogSyslog LogFacility LogTime
+    ;;
+    "LogFacility")
+    StateGeneric low clamav-milter/LogFacility LogVerbose LogSyslog
+    ;;
+    "LogVerbose")
+    StateGeneric low clamav-milter/LogVerbose LogInfected LogFacility
+    ;;
+    "LogInfected")
+    StateGeneric low clamav-milter/LogInfected LogClean LogVerbose
+    ;;
+    "LogClean")
+    StateGeneric low clamav-milter/LogClean MaxFileSize LogInfected
+    ;;
+    "MaxFileSize")
+    StateGenericDigit low clamav-milter/MaxFileSize SupportMultipleRecipients LogClean
+    ;;
+    "SupportMultipleRecipients")
+    StateGeneric low clamav-milter/SupportMultipleRecipients LogRotate MaxFileSize
+    ;;
+    "LogRotate")
+    StateGeneric low clamav-milter/LogRotate End SupportMultipleRecipients
+    ;;
+  esac
+done
+db_stop || true
+exit 0
+

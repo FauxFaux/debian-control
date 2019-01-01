@@ -1,0 +1,78 @@
+#! /bin/sh
+# postinst script for diaspora-installer
+# copied from postinst script for hplip
+# $Id: hplip.postinst,v 1.1 2005/10/15 21:39:04 hmh Exp $
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+case "$1" in
+    configure)
+        # Source varibales
+	. /etc/diaspora/diaspora-common.conf
+	cd ${diaspora_home}
+        # Download diaspora from github
+        . /usr/lib/diaspora-common/scripts/diaspora-download.sh
+	cd ${diaspora_home}
+        echo "Setting up environment varibales..."
+	. /usr/lib/diaspora-common/scripts/set-env-diaspora.sh
+	export RAILS_ENV=$RAILS_ENV BUNDLE_WITH=${BUNDLE_WITH} DB_NAME=${DB_NAME} ENVIRONMENT_URL=$ENVIRONMENT_URL
+
+        echo "Installing latest version of bundler..."
+	gem install bundler
+
+	echo "Installing gems with rubygems ..."
+	su ${diaspora_user} -s /bin/sh -c "mkdir -p ~/vendor/bundle"
+	su ${diaspora_user} -s /bin/sh -c "touch ~/Gemfile.lock && truncate -s 0 ~/Gemfile.lock"
+	su ${diaspora_user} -s /bin/sh -c "bundle install --path vendor/bundle --with ${BUNDLE_WITH} --without development test"
+        # Fix permissions (see #847286, #866862)
+	su ${diaspora_user} -s /bin/sh -c "find ${diaspora_user_home}/vendor/bundle -type f -exec chmod go-w {} \;"
+
+	# Initialize database
+        /usr/lib/diaspora-common/scripts/initdb.sh
+
+	echo "Precompiling assets..."
+	su diaspora -s /bin/sh -c 'bundle exec rake tmp:cache:clear assets:precompile'
+        # preinst creates backup (to be able to remove files removed upstream)
+        echo "Remove backup..."
+        rm -rf ${diaspora_home}/.backup.*
+
+        # Starting diaspora
+        service diaspora start
+
+	# Running final rake tasks
+	. /usr/lib/diaspora-common/scripts/rake-tasks.sh
+        ;;
+
+        abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+
+        *)
+            echo "postinst called with unknown argument \`$1'" >&2
+            exit 1
+        ;;
+esac
+
+
+
+
+exit 0

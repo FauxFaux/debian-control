@@ -1,0 +1,10 @@
+#! /bin/sh -e
+
+if [ "$1" = purge ]
+then
+  # These are not handled by dpkg(8) itself since that would result in
+  # spurious `directory not empty so not removed' warnings.
+  rm -rf /etc/apsfilter /var/lib/apsfilter
+fi
+
+

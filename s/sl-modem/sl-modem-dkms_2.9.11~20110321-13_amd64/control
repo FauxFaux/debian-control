@@ -1,0 +1,22 @@
+Package: sl-modem-dkms
+Source: sl-modem
+Version: 2.9.11~20110321-13
+Architecture: amd64
+Maintainer: أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@users.sourceforge.net>
+Installed-Size: 820
+Depends: dkms (>= 2.1.0.0)
+Recommends: linux-headers-686-pae | linux-headers-amd64 | linux-headers-generic
+Breaks: sl-modem-source (<< 2.9.11~20110321-7)
+Replaces: sl-modem-source (<< 2.9.11~20110321-7)
+Section: non-free/kernel
+Priority: optional
+Homepage: https://linmodems.technion.ac.il/packages/smartlink/
+Description: SmartLink software modem driver - module building source
+ This package contains source code for the low-level drivers for the
+ software modems produced by Smart Link Ltd. It supports PCI and USB models.
+ .
+ In addition to this package, you will need the package sl-modem-daemon
+ which implements the application part of the driver.
+ .
+ Module packages can be built for the custom kernel package either by hand or
+ using DKMS.

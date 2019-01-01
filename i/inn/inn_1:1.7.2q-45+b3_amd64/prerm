@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+# delete the pid file if INN is dead, or the init script may fail later
+PIDFILE="/run/innd/innd.pid"
+if [ -f $PIDFILE ]; then
+  INNPID=$(cat $PIDFILE)
+  kill -s 0 $INNPID 2> /dev/null || rm -f $PIDFILE
+fi
+
+# Stop the socket on removal so innd is not restarted via socket activation
+if [ "$1" = remove -a -d /run/systemd/system/ ]; then
+  deb-systemd-invoke stop inn.socket > /dev/null || true
+fi
+
+# Automatically added by dh_installinit/11.5.1
+if [ -x "/etc/init.d/inn" ] && [ "$1" = remove ]; then
+	invoke-rc.d inn stop || exit 1
+fi
+# End automatically added section
+
+

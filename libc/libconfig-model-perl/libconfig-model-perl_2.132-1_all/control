@@ -1,0 +1,42 @@
+Package: libconfig-model-perl
+Version: 2.132-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 1237
+Depends: perl, libboolean-perl, libcarp-assert-more-perl, libfile-homedir-perl, libhash-merge-perl, libjson-perl, liblist-moreutils-perl, liblog-log4perl-perl, libmouse-perl, libmousex-nativetraits-perl, libmousex-strictconstructor-perl, libparse-recdescent-perl, libpath-tiny-perl (>= 0.070), libpod-pom-perl, libregexp-common-perl
+Recommends: bash-completion, cme, fuse, libconfig-model-tkui-perl, libfuse-perl, libtext-levenshtein-damerau-perl
+Suggests: libconfig-model-dpkg-perl, libconfig-model-openssh-perl, libterm-readline-perl-perl | libterm-readline-gnu-perl
+Breaks: libconfig-model-approx-perl (<< 1.011-1), libconfig-model-dpkg-perl (<< 2.118), libconfig-model-itself-perl (<< 2.016), libconfig-model-systemd-perl (<< 0.238.2-1), libconfig-model-tkui-perl (<< 1.366-1)
+Section: perl
+Priority: optional
+Homepage: https://github.com/dod38fr/config-model/wiki
+Description: module for describing and editing configuration data
+ Config::Model is a Perl framework that enables project developers to provide
+ an interactive configuration system for their software. It supports various
+ frontend interfaces (graphical, curses-based or plain terminal) to users. It
+ handles configuration files semantically rather than syntactically, meaning
+ that developers can specify the structure and constraints of the data along
+ with a mechanism to read and write the files.
+ .
+ Using the structure and constraint information, Config::Model will generate
+ interactive configuration editors that include help and data validation. It
+ is equally simple to use graphical (via Tk) interfaces as well as curses-
+ and ReadLine-based terminal interfaces.
+ .
+ Config::Model also provides a facility to help configuration data upgrade
+ that can be triggered during package upgrades.
+ .
+ Config::Model provides configuration model and editor for:
+  - popularity-contest
+  - fstab (/etc/fstab)
+  - multistrap
+ .
+ Other configuration editors are available with other libconfig-model-*-perl
+ packages.
+ .
+ Depending on which suggested or recommended modules are installed,
+ Config::Model provides several user interfaces:
+  - shell-like interface (with any of lib-term-readlin-*-perl)
+  - virtual file system where each config parameter is mapped to a file
+   (with fuse package)
+  - graphical user interface (with libconfig-model-tkui-perl)

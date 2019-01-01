@@ -1,0 +1,21 @@
+Package: openpgp-applet
+Version: 1.1-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 924
+Depends: perl, gnupg (>= 2.1.18-8~), libdatetime-perl, libfile-sharedir-perl, libglib-perl, libgnupg-interface-perl, libgtk3-perl, libgtk3-simplelist-perl, libintl-perl, liblist-moreutils-perl, liblocale-gettext-perl, libmoo-perl (>= 0.50), libmodule-pluggable-perl, libnamespace-autoclean-perl, seahorse
+Recommends: pinentry-gnome3 | pinentry-x11
+Section: x11
+Priority: optional
+Homepage: https://openpgp-applet-team.pages.debian.net/
+Description: GNOME applet for OpenPGP text encryption
+ OpenPGP Applet is a graphical frontend on top of GnuPG.
+ .
+ It allows encryption and decryption of the clipboard's content either
+ with public key cryptography, or with a symmetric cipher using a passphrase.
+ Creating and verifying clear text signatures is also supported.
+ .
+ Note: OpenPGP Applet does not handle passphrase input. Since it also does not
+ offer terminal interaction unless explicitly run from there, it relies in
+ practice on GnuPG agent to be running and configured to use a passphrase entry
+ dialog, such as pinentry-gnome3.

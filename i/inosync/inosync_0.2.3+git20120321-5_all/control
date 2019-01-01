@@ -1,0 +1,19 @@
+Package: inosync
+Version: 0.2.3+git20120321-5
+Architecture: all
+Maintainer: Carsten Leonhardt <leo@debian.org>
+Installed-Size: 26
+Depends: python (>= 2.5), python-pyinotify (>= 0.8.7), rsync
+Section: utils
+Priority: optional
+Homepage: https://github.com/hollow/inosync
+Description: notification-based directory synchronization daemon
+ The inosync daemon uses the inotify service available in recent Linux
+ kernels to monitor and synchronize changes within directories to
+ remote nodes using rsync.
+ .
+ System administrators have relied on cron+rsync for years to
+ constantly synchronize files and directories to remote machines. It
+ is not feasible to let authors wait for their content to get
+ synchronized every x hours with regard to the enormous pace of
+ articles and podcasts nowadays.

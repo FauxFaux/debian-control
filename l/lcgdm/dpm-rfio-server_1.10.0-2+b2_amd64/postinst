@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/dpm-rfiod" ]; then
+		update-rc.d dpm-rfiod defaults-disabled >/dev/null
+		invoke-rc.d dpm-rfiod start || exit 1
+	fi
+fi
+
+

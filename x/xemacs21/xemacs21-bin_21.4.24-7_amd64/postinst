@@ -1,0 +1,24 @@
+#!/bin/sh -e
+set -e
+
+update-alternatives --remove xemacs21 /usr/bin/xemacs-21.1-p2-mule
+update-alternatives --remove xemacs21 /usr/bin/xemacs-21.1-p2-nomule
+update-alternatives --remove xemacs21 /usr/bin/xemacs-21.1-p2-mule-canna-wnn
+
+update-alternatives --install /usr/bin/movemail movemail /usr/lib/xemacs-21.4.24/x86_64-linux-gnu/movemail 10
+
+update-alternatives --install /usr/bin/mmencode mmencode /usr/lib/xemacs-21.4.24/x86_64-linux-gnu/mmencode 10
+
+for i in b2m etags gnuclient gnuattach gnudoit rcs-checkin ellcc ; do
+  update-alternatives --install /usr/bin/$i $i /usr/bin/$i.xemacs21 40 --slave /usr/share/man/man1/$i.1.gz $i.1.gz /usr/share/man/man1/$i.xemacs21.1.gz
+done
+
+# remove ootags stuff.  oops. (Bug 159469)
+update-alternatives --remove ootags /usr/bin/ootags.xemacs21
+update-alternatives --remove ctags /usr/bin/ctags.xemacs21
+
+# setup gnuclient as an alternative making it easy to switch the link to it.
+#update-alternatives --install /usr/bin/xemacs xemacs /usr/bin/gnuclient.xemacs21 -20
+#update-alternatives --install /usr/bin/xemacs21 xemacs21 /usr/bin/gnuclient.xemacs21 -50
+
+

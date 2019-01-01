@@ -1,0 +1,33 @@
+#!/bin/sh -e
+#
+# preinst script for the Debian GNU/Linux libgretl(0,1)-dev package
+#
+# Written and GPL'ed by Dirk Eddelbuettel <edd@debian.org>   
+
+case "$1" in
+
+    install|upgrade)     
+        # We want to remove previous versions' documentation directory
+	# if it actually is a directory (i.e. up to 0.96-2)
+	test -d /usr/share/doc/libgretl0-dev \
+	     -a ! -h /usr/share/doc/libgretl0-dev \
+	    && rm -rf /usr/share/doc/libgretl0-dev
+	# Dang, made the same mistake in 1.0-* packages
+	test -d /usr/share/doc/libgretl1-dev \
+	     -a ! -h /usr/share/doc/libgretl1-dev \
+	    && rm -rf /usr/share/doc/libgretl1-dev
+	;;
+
+    abort-upgrade)
+        ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        ;;
+
+esac
+
+
+
+exit 0                 
+

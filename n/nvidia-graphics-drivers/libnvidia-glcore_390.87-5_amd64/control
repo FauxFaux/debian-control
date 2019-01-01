@@ -1,0 +1,22 @@
+Package: libnvidia-glcore
+Source: nvidia-graphics-drivers
+Version: 390.87-5
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 28825
+Depends: libc6 (>= 2.2.5)
+Conflicts: libgl1-nvidia-glx-390.87, libnvidia-glcore-390.87
+Breaks: libgl1-nvidia-glx (<< 355.11-5)
+Replaces: libgl1-nvidia-glx (<< 355.11-5)
+Provides: libnvidia-glcore-390.87
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: NVIDIA binary OpenGL/GLX core libraries
+ The NVIDIA binary driver provides optimized hardware acceleration of
+ OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
+ for graphics cards using NVIDIA chip sets.
+ .
+ This package contains the private core libraries used by the NVIDIA
+ implementation of OpenGL and GLX.

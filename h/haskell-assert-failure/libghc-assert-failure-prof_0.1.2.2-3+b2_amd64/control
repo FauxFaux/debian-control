@@ -1,0 +1,24 @@
+Package: libghc-assert-failure-prof
+Source: haskell-assert-failure (0.1.2.2-3)
+Version: 0.1.2.2-3+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 67
+Depends: libghc-assert-failure-dev (= 0.1.2.2-3+b2), libghc-base-prof-4.11.1.0-5dd74, libghc-pretty-show-prof-1.7-4cef4, libghc-text-prof-1.2.3.1-30bbe
+Provides: libghc-assert-failure-prof-0.1.2.2-f3bc7
+Section: haskell
+Priority: optional
+Homepage: https://github.com/Mikolaj/assert-failure
+Description: syntactic sugar improving 'assert' and 'error'; profiling libraries
+ This library contains syntactic sugar that makes it easier
+ to write simple contracts with 'assert' and 'error'
+ and report the values that violate contracts.
+ The original 'assert' function is here re-exported for convenience.
+ .
+ Note that for most of these functions to have any effect, assertions
+ need to be enabled, e.g., by including in .cabal file the following line:
+ .
+ ghc-options: -fno-ignore-asserts
+ .
+ This package provides a library for the Haskell programming language, compiled
+ for profiling.  See http://www.haskell.org/ for more information on Haskell.

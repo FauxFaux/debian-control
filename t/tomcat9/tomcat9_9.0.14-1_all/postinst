@@ -1,0 +1,106 @@
+#!/bin/sh
+#
+# Post installation script for Tomcat
+#
+
+set -e
+
+TOMCAT_USER="tomcat"
+TOMCAT_GROUP="tomcat"
+
+CONFFILES="tomcat-users.xml web.xml server.xml logging.properties context.xml catalina.properties jaspic-providers.xml"
+
+case "$1" in
+    configure)
+	# Create the tomcat user as defined in /usr/lib/sysusers.d/tomcat9.conf
+	systemd-sysusers
+
+	# Install the configuration files
+	for conffile in $CONFFILES;
+	do
+		ucf --debconf-ok --three-way /usr/share/tomcat9/etc/$conffile /etc/tomcat9/$conffile
+
+		# Configuration files should not be modifiable by the tomcat user, as this can be
+		# a security issue (an attacker may insert code in a webapp and rewrite the tomcat
+		# configuration) but those files should be readable by tomcat, so we set the group
+		# to tomcat.
+		if [ -f "/etc/tomcat9/$conffile" ]; then
+			chown root:$TOMCAT_GROUP /etc/tomcat9/$conffile
+			chmod 640 /etc/tomcat9/$conffile
+		fi
+	done
+
+	# Install /etc/logrotate.d/tomcat9
+	ucf --debconf-ok --three-way /usr/share/tomcat9/logrotate.template /etc/logrotate.d/tomcat9
+
+	# Install /etc/default/tomcat9
+	ucf --debconf-ok --three-way /usr/share/tomcat9/default.template /etc/default/tomcat9
+
+	# Install the policy files for the security manager. These files should not be modifiable
+	# by the tomcat user. Only diverge from default permissions for known Debian files.
+	chown root:$TOMCAT_GROUP /etc/tomcat9/policy.d
+	for policyfile in 01system.policy 02debian.policy 03catalina.policy 04webapps.policy 50local.policy;
+	do
+		if [ -f "/etc/tomcat9/policy.d/$policyfile" ]; then
+			chown root:$TOMCAT_GROUP /etc/tomcat9/policy.d/$policyfile
+			chmod 640 /etc/tomcat9/policy.d/$policyfile
+		fi
+	done
+
+	# Grant the tomcat group read/write access to /var/lib/tomcat9/lib. This allows
+	# a non-root administrator in the tomcat group to add jar files to the classpath
+	# (for example database drivers).
+	chown -Rh $TOMCAT_USER:$TOMCAT_GROUP /var/lib/tomcat9/lib
+
+	# Grant the tomcat group read/write access to the /etc/tomcat9/Catalina directory
+	# to write the hosts/contexts configuration files.
+	chown -Rh root:$TOMCAT_GROUP /etc/tomcat9/Catalina
+	chmod 775 /etc/tomcat9/Catalina
+
+	# Grant read/write access to tomcat to the webapps directory (needed for extracting
+	# war files and for deploying webapps by non-root administrators in the tomcat group).
+	chown -Rh $TOMCAT_USER:$TOMCAT_GROUP /var/lib/tomcat9/webapps
+	chmod 775 /var/lib/tomcat9/webapps
+
+	# Grant read/write access to tomcat to the log and cache directories
+	chown -Rh $TOMCAT_USER:$TOMCAT_GROUP /var/log/tomcat9/ /var/cache/tomcat9/
+	chmod 750 /var/log/tomcat9/ /var/cache/tomcat9/
+    ;;
+esac
+
+# Install the default root webapp if there isn't one already
+if [ ! -d /var/lib/tomcat9/webapps/ROOT ]; then
+    cp -r /usr/share/tomcat9-root/default_root /var/lib/tomcat9/webapps/ROOT
+fi
+
+# Automatically added by dh_installsystemd/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'tomcat9.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'tomcat9.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'tomcat9.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'tomcat9.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		deb-systemd-invoke $_dh_action 'tomcat9.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

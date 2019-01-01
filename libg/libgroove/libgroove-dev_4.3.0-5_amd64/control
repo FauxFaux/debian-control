@@ -1,0 +1,30 @@
+Package: libgroove-dev
+Source: libgroove
+Version: 4.3.0-5
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 119
+Depends: libgroove4 (= 4.3.0-5)
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/andrewrk/libgroove
+Description: audio dispatching library (development files)
+ This C library provides an sink-based API for decoding and encoding audio.
+ It is intended to be used as a backend for music player applications, however
+ it may also be used as a backend for any audio processing utility.
+ .
+ Features:
+  * Uses libav for decoding and encoding.
+  * Add and remove entries on a playlist for gapless playback.
+  * Supports idempotent pause, play, and seek.
+  * Per-playlist-item gain adjustment so you can implement loudness compensation
+    without audio glitches.
+  * Read and write metadata tags.
+  * Extensible sink-based interface. A sink provides resampling and keeps its
+    buffer full. This package contains the raw sink which provides
+    reference-counted raw audio buffers. Other sinks are built on top of this
+    one.
+  * Thread-safe.
+ .
+ This package contains the development files.

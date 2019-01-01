@@ -1,0 +1,25 @@
+Package: fcitx-dbus-status
+Version: 2016062301-2
+Architecture: amd64
+Maintainer: Debian Input Method Team <debian-input-method@lists.debian.org>
+Installed-Size: 30
+Depends: fcitx, dbus, libc6 (>= 2.4)
+Section: utils
+Priority: optional
+Homepage: https://github.com/clear-code/fcitx-dbus-status
+Description: Addon for Fcitx to set/get/monitor IM statuses via D-Bus
+ fcitx-dbus-status addon provides DBus interface such as
+ org.fcitx.Fcitx.Status, and provides Get/Set/Changed methods on it.
+ By accessing these interfaces, you can monitor or control status of
+ input method with external command line tool such as dbus-send. As a
+ typical use case, you can set "katakana" mode in the following
+ example for fcitx-mozc.
+ .
+ dbus-send \
+  --dest=org.fcitx.Fcitx \
+  --type=method_call \
+  --print-reply \
+  /Status \
+  org.fcitx.Fcitx.Status.Set \
+  string:"mozc-composition-mode" \
+  string:"katakana"

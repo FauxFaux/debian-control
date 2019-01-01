@@ -1,0 +1,19 @@
+Package: libpmix2
+Source: pmix
+Version: 3.1.0~rc2-1
+Architecture: amd64
+Maintainer: Alastair McKinstry <mckinstry@debian.org>
+Installed-Size: 1617
+Depends: libc6 (>= 2.17), libevent-2.1-6 (>= 2.1.8-stable), libevent-pthreads-2.1-6 (>= 2.1.8-stable), zlib1g (>= 1:1.2.0), libhwloc-plugins
+Breaks: libopenmpi3 (<< 3.1.2), libpmix-dev (<< 2.1.0~rc1-2)
+Replaces: libopenmpi3 (<< 3.1.2), libpmix-dev (<< 2.1.0~rc1-2)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/pmix/pmix
+Description: Process Management Interface (Exascale) library
+ This is the OpenMPI implementation of the Process Management Interface (PMI)
+ Exascale API. PMIx aims to retain transparent compatibility with the existing
+ PMI-1 and PMI-2 definitions, and any future PMI releases; Support
+ the Instant On initiative for rapid startup of applications at exascale
+ and beyond.

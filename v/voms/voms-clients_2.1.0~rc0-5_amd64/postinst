@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+
+
+
+update-alternatives --install /usr/bin/voms-proxy-init \
+  voms-proxy-init /usr/bin/voms-proxy-init2 50 \
+  --slave /usr/share/man/man1/voms-proxy-init.1.gz voms-proxy-init-man \
+  /usr/share/man/man1/voms-proxy-init2.1.gz
+update-alternatives --install /usr/bin/voms-proxy-info \
+  voms-proxy-info /usr/bin/voms-proxy-info2 50 \
+  --slave /usr/share/man/man1/voms-proxy-info.1.gz voms-proxy-info-man \
+  /usr/share/man/man1/voms-proxy-info2.1.gz
+update-alternatives --install /usr/bin/voms-proxy-destroy \
+  voms-proxy-destroy /usr/bin/voms-proxy-destroy2 50 \
+  --slave /usr/share/man/man1/voms-proxy-destroy.1.gz voms-proxy-destroy-man \
+  /usr/share/man/man1/voms-proxy-destroy2.1.gz

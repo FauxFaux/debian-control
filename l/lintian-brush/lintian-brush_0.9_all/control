@@ -1,0 +1,16 @@
+Package: lintian-brush
+Version: 0.9
+Architecture: all
+Maintainer: Jelmer Vernooĳ <jelmer@debian.org>
+Installed-Size: 119
+Depends: python3-breezy (>= 3.0.0~bzr7199-1), python3-debian, python3-dulwich (>= 0.19.7), python3:any
+Recommends: lintian, dos2unix, gpg
+Section: devel
+Priority: optional
+Description: automatically fix lintian problems
+ This package contains a set of scripts that can automatically fix more than 30
+ common lintian issues in Debian packages.
+ .
+ It comes with a wrapper script that invokes the scripts, updates
+ the changelog (if desired) and commits each change to
+ version control.

@@ -1,0 +1,22 @@
+Package: libinline-python-perl
+Source: libinline-python-perl (0.56-1)
+Version: 0.56-1+b1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 136
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.4), libpython2.7 (>= 2.7), libinline-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Inline-Python
+Description: module to write Perl subs and classes in Python
+ The Inline::Python module allows one to write Perl subroutines in Python. One
+ doesn't have to use any funky techniques for sharing most types of data
+ between the two languages, either. Inline::Python comes with its own data
+ translation service. It converts any Python structures it knows about into
+ Perl structures, and vice versa.
+ .
+ Inline::Python sets up an in-process Python interpreter, runs the code, and
+ then examines Python's symbol table for things to bind to Perl. The process
+ of interrogating the Python interpreter for globals only occurs the first
+ time the Python code is run. The namespace is cached, and subsequent calls
+ use the cached version.

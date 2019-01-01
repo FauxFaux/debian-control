@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+set -e
+
+if [ ${DEBUG} ] ; then set -x ; fi
+
+# We also update rules.json if this is an upgrade
+if [ -n "$2" ] ; then
+	node /usr/lib/nodejs/tldjs/bin/update.js
+fi
+
+
+
+exit 0

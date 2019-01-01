@@ -1,0 +1,20 @@
+Package: python3-line-profiler
+Source: python-line-profiler
+Version: 2.1-2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 286
+Depends: python3 (<< 3.8), python3 (>= 3.6~), python3-ipython, python3:any, libc6 (>= 2.4)
+Section: python
+Priority: optional
+Homepage: https://github.com/rkern/line_profiler
+Description: line-by-line profiling for Python
+ LineProfiler can be given functions to profile, and it will time the execution
+ of each individual line inside those functions. In a typical workflow, one
+ only cares about line timings of a few functions because wading through the
+ results of timing every single line of code would be overwhelming. However,
+ LineProfiler does need to be explicitly told what functions to profile.
+ .
+ If you are using IPython, there is an implementation of an %lprun magic
+ command which will let you specify functions to profile and a statement to
+ execute.

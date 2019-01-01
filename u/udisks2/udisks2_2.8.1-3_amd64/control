@@ -1,0 +1,25 @@
+Package: udisks2
+Version: 2.8.1-3
+Architecture: amd64
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 2361
+Depends: dbus, libblockdev-part2, libblockdev-swap2, libblockdev-loop2, libblockdev-fs2, libpam-systemd, parted, udev, libacl1 (>= 2.2.51-8), libatasmart4 (>= 0.13), libblockdev-utils2 (>= 2.20), libblockdev2 (>= 2.20), libc6 (>= 2.7), libglib2.0-0 (>= 2.50), libgudev-1.0-0 (>= 165), libmount1 (>= 2.26.2), libpolkit-agent-1-0 (>= 0.99), libpolkit-gobject-1-0 (>= 0.101), libsystemd0 (>= 209), libudisks2-0 (>= 2.8.1)
+Recommends: exfat-utils, dosfstools, e2fsprogs, eject, libblockdev-crypto2, ntfs-3g, policykit-1
+Suggests: btrfs-progs, f2fs-tools, mdadm, libblockdev-mdraid2, nilfs-tools, reiserfsprogs, xfsprogs, udftools, udisks2-bcache, udisks2-btrfs, udisks2-lvm2, udisks2-vdo, udisks2-zram
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://www.freedesktop.org/wiki/Software/udisks
+Description: D-Bus service to access and manipulate storage devices
+ The udisks daemon serves as an interface to system block devices,
+ implemented via D-Bus. It handles operations such as querying, mounting,
+ unmounting, formatting, or detaching storage devices such as hard disks
+ or USB thumb drives.
+ .
+ This package also provides the udisksctl utility, which can be used to
+ trigger these operations from the command line (if permitted by
+ PolicyKit).
+ .
+ Creating or modifying file systems such as XFS, RAID, or LUKS encryption
+ requires that the corresponding mkfs.* and admin tools are installed, such as
+ dosfstools for VFAT, xfsprogs for XFS, or cryptsetup for LUKS.

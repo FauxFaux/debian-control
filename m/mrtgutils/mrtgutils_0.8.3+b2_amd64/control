@@ -1,0 +1,20 @@
+Package: mrtgutils
+Source: mrtgutils (0.8.3)
+Version: 0.8.3+b2
+Architecture: amd64
+Maintainer: Luciano Bello <luciano@debian.org>
+Installed-Size: 88
+Depends: libc6 (>= 2.14)
+Suggests: mrtg, mrtgutils-sensors
+Section: net
+Priority: optional
+Description: Utilities to generate statistics for mrtg
+ MRTGutils is a collection of simple utilities to generate output useful for
+ mrtg. Many of the existing mrtg setups use shell or perl scripts to gather
+ output. On busy systems, these scripts can generate a lot of extra load. These
+ (small) C programs can return the given statistics more efficiently.
+ .
+ This package provides the following binaries that return:
+  - mrtg-load: the current load average (5-minute average)
+  - mrtg-ip-acct: the number of IP packets that have traversed an interface
+  - mrtg-apache: the number of hits to a Apache web site

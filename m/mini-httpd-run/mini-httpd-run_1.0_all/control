@@ -1,0 +1,17 @@
+Package: mini-httpd-run
+Version: 1.0
+Architecture: all
+Maintainer: Dmitry Bogatov <KAction@gnu.org>
+Installed-Size: 35
+Depends: mini-httpd, runit (>= 2.1.2-7), runit-helper, sysuser-helper (<< 1.4)
+Section: admin
+Priority: optional
+Homepage: https://salsa.debian.org/iu-guest/mini-httpd-run
+Description: Small HTTP server (Runit integration)
+ mini-httpd implements all basic features of a HTTPD, including: GET,HEAD,POST
+ methods, common MIME types, basic authentication, virtual hosting, CGI,
+ directory listing, trailing-slash redirection, standard logging, custom error
+ pages etc. It also can be configured to do SSL and IPv6.
+ .
+ This package contains scripts to run mini-httpd under Runit
+ supervision system.

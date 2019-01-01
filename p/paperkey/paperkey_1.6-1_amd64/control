@@ -1,0 +1,29 @@
+Package: paperkey
+Version: 1.6-1
+Architecture: amd64
+Maintainer: Peter Palfrader <weasel@debian.org>
+Installed-Size: 58
+Depends: libc6 (>= 2.14)
+Recommends: gnupg
+Enhances: gnupg
+Section: utils
+Priority: optional
+Homepage: http://www.jabberwocky.com/software/paperkey/
+Description: extract just the secret information out of OpenPGP secret keys
+ A reasonable way to achieve a long term backup of OpenPGP (GnuPG, PGP,
+ etc) keys is to print them out on paper.  The reasoning behind this is
+ that paper and ink has amazingly long retention qualities - far longer
+ than the magnetic or optical means that are generally used to back up
+ computer data.
+ .
+ Due to metadata and redundancy, OpenPGP secret keys are significantly
+ larger than just the "secret bits".  In fact, the secret key contains
+ a complete copy of the public key.  Since the public key generally
+ doesn't need to be escrowed (most people have many copies of it on
+ various keyservers, web pages, etc), only extracting the secret parts
+ can be a real advantage.
+ .
+ Paperkey extracts just those secret bytes and prints them.  To
+ reconstruct, you re-enter those bytes (whether by hand or via OCR) and
+ paperkey can use them to transform your existing public key into a
+ secret key.

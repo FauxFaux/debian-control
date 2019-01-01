@@ -1,0 +1,21 @@
+Package: openhpi-plugin-slave
+Source: openhpi
+Version: 3.8.0-2
+Architecture: amd64
+Maintainer: Mohan Devarajulu <mohan.devarajulu@hpe.com>
+Installed-Size: 100
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libglib2.0-0 (>= 2.31.8), libopenhpi3 (= 3.8.0-2), libstdc++6 (>= 5.2)
+Conflicts: libopenhpi, libopenhpi2
+Breaks: libopenhpi3 (<< 3.8.0-2~)
+Replaces: libopenhpi, libopenhpi2, libopenhpi3 (<< 3.8.0-2~)
+Section: libs
+Priority: optional
+Homepage: http://openhpi.org
+Description: OpenHPI plugin module for slave plugin
+ OpenHPI is an implementation of the Service Availability Forum's Hardware
+ Platform Interface specification.  (See http://www.saforum.org)  As
+ such, OpenHPI facilitates the development of computer manageability
+ applications which are not tied to a single hardware vendor's products.
+ .
+ This package contains a plugin module that provides hardware information
+ from some other daemon running on a different hardware.

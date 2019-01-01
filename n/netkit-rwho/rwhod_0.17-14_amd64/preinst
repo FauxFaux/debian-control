@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+# $Id: rwhod.preinst,v 1.2 1999/11/14 22:32:47 herbert Exp $
+
+# If we're upgrading from and old version of netstd, make sure that we stop
+# their rwhod server if it's running.
+if [ "$1" = install -a -x /etc/init.d/netstd_misc -a -x /usr/sbin/rwhod ]; then
+	start-stop-daemon --stop --quiet --oknodo --exec /usr/sbin/rwhod
+fi
+
+

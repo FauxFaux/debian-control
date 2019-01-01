@@ -1,0 +1,23 @@
+Package: ltsp-server
+Source: ltsp
+Version: 5.18.12-1
+Architecture: all
+Maintainer: Debian LTSP Maintainers <team+ltsp@tracker.debian.org>
+Installed-Size: 937
+Depends: debconf (>= 0.5) | debconf-2.0, debconf-utils, debootstrap (>= 1.0.30), gettext-base, iproute2 | iproute | freebsd-net-tools, lsb-release, openssh-client, tcpd
+Recommends: gnupg, nbd-server (>= 1:2.9.25-2), openbsd-inetd | inet-superserver, openssh-server, squashfs-tools, dnsmasq (>= 2.41) | tftpd-hpa | atftpd
+Suggests: audiooss, mate-desktop-environment | gnome-session | x-session-manager | x-window-manager, dnsmasq | isc-dhcp-server | dhcp3-server, ldm-server, libasound2-plugins, ltspfs, pulseaudio, qemu-user-static, sdm, x11-utils, xauth
+Conflicts: ltsp-utils
+Breaks: ltsp-docs
+Replaces: ltsp-docs, ltsp-utils
+Section: misc
+Priority: optional
+Homepage: http://ltsp.org
+Description: basic LTSP server environment
+ This is the basic environment including the minimal features necessary to
+ build an LTSP environment.
+ .
+ It also recommends services needed for thin-clients to boot and mount
+ filesystems over the network.
+ .
+ LTSP stands for 'Linux Terminal Server Project'.

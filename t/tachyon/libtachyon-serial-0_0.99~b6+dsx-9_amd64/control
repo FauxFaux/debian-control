@@ -1,0 +1,30 @@
+Package: libtachyon-serial-0
+Source: tachyon
+Version: 0.99~b6+dsx-9
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 191
+Depends: libc6 (>= 2.22), libjpeg62-turbo (>= 1.3.1), libpng16-16 (>= 1.6.2-1), zlib1g (>= 1:1.1.4)
+Suggests: tachyon-doc
+Provides: libtachyon
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://jedi.ks.uiuc.edu/~johns/raytracer/
+Description: Parallel/Multiprocessor Ray Tracing Library - runtime - serial flavour
+ Tachyon is a portable, high performance parallel ray tracing system
+ supporting MPI and multithreaded implementations. Tachyon is built as
+ a C callable library, which can be used within applications.
+ .
+ Tachyon implements all of the basic geometric primitives such as
+ triangles, planes, spheres, cylinders, etc. Some of the goals in
+ developing Tachyon were to make it fast and for it to parallelize
+ well. These are what set it apart from more full-featured programs
+ like POV-Ray, Rayshade, and others. Tachyon supports enough features
+ to be an excellent alternative to slower programs for demanding
+ animation and scientific visualization tasks.
+ .
+ This package provides the shared library required to run third party
+ program compiled against the tachyon C library built for serial platforms.
+ To compile your own programs you also need to install the concomitant
+ libtachyon-serial-0-dev package.

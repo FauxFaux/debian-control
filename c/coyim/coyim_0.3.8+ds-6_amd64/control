@@ -1,0 +1,24 @@
+Package: coyim
+Version: 0.3.8+ds-6
+Architecture: amd64
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 17269
+Depends: libatk1.0-0 (>= 1.12.4), libc6 (>= 2.3.2), libcairo-gobject2 (>= 1.10.0), libcairo2 (>= 1.10.0), libgdk-pixbuf2.0-0 (>= 2.25.2), libglib2.0-0 (>= 2.39.4), libgtk-3-0 (>= 3.21.5), libpango-1.0-0 (>= 1.29.4), libpangocairo-1.0-0 (>= 1.22.0)
+Recommends: tor
+Built-Using: golang-1.10 (= 1.10.7-1), golang-dbus (= 4.1.0-1), golang-github-dhowett-go-plist (= 0.0~git20160708.0.fec78c8-2), golang-github-gotk3-gotk3 (= 0.0~GOTK3~0~2~0+git20170418.0.96d4110-3), golang-github-hydrogen18-stalecucumber (= 0.0~git20161112.0.1e918be-2), golang-github-kardianos-osext (= 0.0~git20170510.0.ae77be6-6), golang-github-miekg-dns (= 1.0.4+ds-1), golang-github-thecreeper-go-notify (= 0.0~git20160203.0.b5cd147-4), golang-github-twstrike-gotk3adapter (= 0.0~git20170505.0.901a95d+ds-3), golang-github-twstrike-otr3 (= 0.0~git20161015.0.744856d-2), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-net-dev (= 1:0.0+git20181201.351d144+dfsg-2), golang-golang-x-sys (= 0.0~git20181220.97b4c2a-1), golang-x-text (= 0.3.0-2)
+Section: net
+Priority: optional
+Homepage: https://coy.im
+Description: safe and secure XMPP chat client
+ CoyIM is a chat client using the XMPP protocol. It is built upon
+ https://github.com/agl/xmpp-client and https://github.com/twstrike/otr3.
+ It adds a graphical user interface and tries to be safe and secure by default.
+ The authors' ambition is that it should be possible for even the most
+ high-risk people on the planet to safely use CoyIM, without having to make
+ any configuration changes.
+ .
+ To do this, OTR is enabled by default, Tor is used by default, and the Tor
+ Onion Service will be used for a server if it is known. Also, TLS and TLS
+ certificates are used to verify the connection - no configuration necessary.
+ The implementation is written in the Go language, to avoid many common types
+ of vulnerabilities that come from using unsafe languages.

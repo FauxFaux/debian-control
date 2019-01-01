@@ -1,0 +1,55 @@
+#!/bin/sh
+#
+# post-install script for the Debian GNU/Linux posh package
+#
+# $Id: ash.postinst,v 1.7 2001/09/28 22:43:57 herbert Exp $
+
+set -e
+
+check_divert() {
+	div=$(dpkg-divert --package posh --list $2)
+	distrib=${4:-$2.distrib}
+	if [ "$1" = true ]; then
+		if [ -z "$div" ]; then
+			dpkg-divert --package posh --divert $distrib --add $2
+			cp -dp $2 $distrib
+			ln -sf $3 $2
+		fi
+	else
+		if [ -n "$div" ] && [ -z "${div%%*by posh}" ]; then
+			mv $distrib $2
+			dpkg-divert --package posh --remove $2
+		fi
+	fi
+}
+
+unset debconf || true
+if [ -f /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	debconf=yes
+fi
+
+if [ -n "$2" ]
+then
+	src=/usr/share/man/man1/sh.1.gz
+	dst=/usr/share/man/man1/sh.distrib.1.gz
+	div=$(dpkg-divert --package posh --list $src)
+	if [ -n "$div" ] && [ -z "${div%%*by posh}" ]; then
+		distrib=${div% by posh}
+		distrib=${distrib##* to }
+		[ -f $distrib ] || distrib=$dst
+		mv $distrib $src
+		dpkg-divert --package posh --remove $src
+		check_divert true $src posh.1.gz $dst
+			
+	fi
+fi
+
+if [ $debconf ]; then
+	db_get posh/sh
+	check_divert "$RET" /bin/sh posh
+	check_divert "$RET" /usr/share/man/man1/sh.1.gz posh.1.gz \
+		/usr/share/man/man1/sh.distrib.1.gz
+fi
+
+if [ "$1" = "configure" ] && test -x /usr/bin/update-menus; then update-menus ; fi

@@ -1,0 +1,33 @@
+Package: python-openslide-examples
+Source: openslide-python
+Version: 1.1.1-4
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 843
+Depends: python-flask | python3-flask, libjs-jquery, python-openslide | python3-openslide
+Section: python
+Priority: optional
+Homepage: http://openslide.org
+Description: Python examples for python-openslide and python3-openslide
+ OpenSlide is a C library that provides a simple interface to read whole-slide
+ images also known as virtual slides.
+ .
+ Whole-slide images, also known as virtual slides, are large, high resolution
+ images used in digital pathology. Reading these images using standard image
+ tools or libraries is a challenge because these tools are typically designed
+ for images that can comfortably be uncompressed into RAM or a swap file.
+ Whole-slide images routinely exceed RAM sizes, often occupying tens of
+ gigabytes when uncompressed. Additionally, whole-slide images are typically
+ multi-resolution, and only a small amount of image data might be needed at a
+ particular resolution.
+ .
+ This library currently supports:
+  - Aperio (.svs, .tif)
+  - Hamamatsu (.vms, .vmu, .ndpi)
+  - Leica (.scn)
+  - MIRAX (.mrxs)
+  - Sakura (.svslide)
+  - Trestle (.tif)
+  - Generic tiled TIFF (.tif)
+ .
+ This package contains the Python examples for OpenSlide Python bindings.

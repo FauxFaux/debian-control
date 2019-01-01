@@ -1,0 +1,25 @@
+#!/bin/sh
+# preinst script for dicod
+#
+# see: dh_installdeb(1)
+
+set -e
+
+case "$1" in
+  install|upgrade)
+    adduser --quiet --system --home /var/lib/dicod --no-create-home \
+            --group dicod || true
+  ;;
+
+  abort-upgrade)
+  ;;
+
+  *)
+      echo "preinst called with unknown argument \`$1'" >&2
+      exit 1
+  ;;
+esac
+
+
+
+exit 0

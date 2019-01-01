@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+action="$1"
+oldversion="$2"
+
+test -e /usr/share/debconf/confmodule && {
+  . /usr/share/debconf/confmodule
+    db_version 2.0
+}
+
+umask 022
+
+db_get terminatorx/suid_bin
+suid="$RET"
+
+if ! dpkg-statoverride --list /usr/bin/terminatorX > /dev/null ; then
+       if [ "$suid" = "false" ] ; then
+               chmod 0755 /usr/bin/terminatorX
+       elif [ "$suid" = "true" ] ; then
+               chmod 4755 /usr/bin/terminatorX
+       fi
+fi
+
+db_stop
+
+

@@ -1,0 +1,19 @@
+Package: memdump
+Version: 1.01-8
+Architecture: amd64
+Maintainer: Debian Security Tools <team+pkg-security@tracker.debian.org>
+Installed-Size: 44
+Depends: libc6 (>= 2.4)
+Suggests: lime-forensics
+Section: admin
+Priority: optional
+Homepage: http://www.porcupine.org/forensics/tct.html
+Description: utility to dump memory contents to standard output
+ Program which dumps system memory to the standard output stream, skipping over
+ holes in memory maps. By default, the program dumps the contents of physical
+ memory.
+ .
+ This program will not work if CONFIG_STRICT_DEVMEM is enabled in kernel. Since
+ 2.6 version, several kernels are enabling this option by default.
+ .
+ memdump is useful in security tests and forensics investigations.

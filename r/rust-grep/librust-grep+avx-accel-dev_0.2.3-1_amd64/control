@@ -1,0 +1,15 @@
+Package: librust-grep+avx-accel-dev
+Source: rust-grep
+Version: 0.2.3-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-grep-dev (= 0.2.3-1), librust-grep-searcher-0.1+avx-accel-dev (>= 0.1.1-~~)
+Provides: librust-grep-0+avx-accel-dev (= 0.2.3-1), librust-grep-0.2+avx-accel-dev (= 0.2.3-1), librust-grep-0.2.3+avx-accel-dev (= 0.2.3-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/BurntSushi/ripgrep
+Description: Fast line oriented regex searching as a library - feature "avx-accel"
+ This metapackage enables feature avx-accel for the Rust grep crate, by pulling
+ in any additional dependencies needed by that feature.

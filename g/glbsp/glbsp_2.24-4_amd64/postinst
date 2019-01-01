@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "abort-upgrade" ] || [ "$1" = "configure" ]
+then
+  update-alternatives \
+  --install /usr/bin/bsp bsp /usr/bin/glbsp 20 \
+  --slave /usr/share/man/man1/bsp.1.gz bsp.1.gz /usr/share/man/man1/glbsp.1.gz
+fi
+
+
+
+exit 0

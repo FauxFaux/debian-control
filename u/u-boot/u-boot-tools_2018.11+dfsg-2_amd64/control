@@ -1,0 +1,18 @@
+Package: u-boot-tools
+Source: u-boot
+Version: 2018.11+dfsg-2
+Architecture: amd64
+Maintainer: Vagrant Cascadian <vagrant@debian.org>
+Installed-Size: 549
+Depends: libc6 (>= 2.14)
+Recommends: device-tree-compiler
+Breaks: u-boot (<< 2010.12-2), uboot-envtools (<< 20081215-3~), uboot-mkimage (<= 0.4build1)
+Replaces: u-boot (<< 2010.12-2), uboot-envtools (<< 20081215-3~), uboot-mkimage (<= 0.4build1)
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.denx.de/wiki/U-Boot/
+Description: companion tools for Das U-Boot bootloader
+ This package includes the mkimage program, which allows generation of U-Boot
+ images in various formats, and the fw_printenv and fw_setenv programs to read
+ and modify U-Boot's environment.

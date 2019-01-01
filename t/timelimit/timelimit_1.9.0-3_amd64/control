@@ -1,0 +1,15 @@
+Package: timelimit
+Version: 1.9.0-3
+Architecture: amd64
+Maintainer: Peter Pentchev <roam@debian.org>
+Installed-Size: 49
+Depends: libc6 (>= 2.4)
+Section: utils
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://devel.ringlet.net/sysutils/timelimit/
+Description: simple utility to limit a process's absolute execution time
+ The timelimit utility executes a command and terminates the spawned process
+ after a given time with a given signal.  A "warning" signal is sent first,
+ then, after a timeout, a "kill" signal, similar to the way init(8) operates
+ on shutdown.

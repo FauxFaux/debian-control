@@ -1,0 +1,23 @@
+Package: kakoune
+Version: 2018.10.27-1
+Architecture: amd64
+Maintainer: Peter Pentchev <roam@debian.org>
+Installed-Size: 3244
+Depends: libc6 (>= 2.15), libgcc1 (>= 1:3.0), libncursesw6 (>= 6), libstdc++6 (>= 5.2), libtinfo6 (>= 6)
+Section: editors
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://kakoune.org/
+Description: Vim-inspired, selection-oriented code editor
+ Kakoune is a code editor heavily inspired by Vim; as such most of its
+ commands are similar to vi’s ones, and it shares Vi’s "keystrokes as
+ a text editing language" model.  Kakoune can operate in two modes, normal
+ and insertion.  In insertion mode, keys are directly inserted into
+ the current buffer.  In normal mode, keys are used to manipulate
+ the current selection and to enter insertion mode.  Kakoune has a strong
+ focus on interactivity, most commands provide immediate and incremental
+ results, while still being competitive (as in keystroke count) with Vim.
+ Kakoune works on selections, which are oriented, inclusive range of
+ characters; selections have an anchor and a cursor character.
+ Most commands move both of them, except when extending selection where
+ the anchor character stays fixed and the cursor one moves around.

@@ -1,0 +1,105 @@
+#!/bin/sh
+# postinst script for open-isns-discoveryd
+
+. /usr/share/debconf/confmodule
+
+set -e
+
+start=0
+
+case "$1" in
+    configure)
+        db_get open-isns-discoveryd/isns-server
+        if [ -n "$RET" ] ; then
+            start=1
+            SERVER_PUBKEY=""
+            OWNKEY=""
+            SERVER="$RET"
+            RET=""
+            db_get open-isns-discoveryd/server-pubkey || true
+            if [ -n "$RET" ] && [ -f "$RET" ] ; then
+                SERVER_PUBKEY="$RET"
+            fi
+            RET=""
+            db_get open-isns-discvoeryd/own-key || true
+            if [ -n "$RET" ] && [ -f "$RET" ] ; then
+                OWNKEY="$RET"
+            fi
+            # Only install keys if no previous keys exist, but only
+            # install them we'll end up with both keys.
+            if [ -n "$SERVER_PUBKEY" ] && ( [ -n "$OWNKEY" ] || [ -f /etc/isns/auth_key ] ) && [ ! -e /etc/isns/server_key.pub ] ; then
+                cp -a "$SERVER_PUBKEY" /etc/isns/server_key.pub
+                chown root:root /etc/isns/server_key.pub
+                chmod 0644 /etc/isns/server_key.pub
+            fi
+            if [ -f /etc/isns/server_key.pub ] && [ -n "$OWNKEY" ] && [ ! -e /etc/isns/auth_key ] ; then
+                cp -a "$OWNKEY" /etc/isns/auth_key
+                chown root:root /etc/isns/auth_key
+                chmod 0600 /etc/isns/auth_key
+            fi
+            # Modify configuration file (config script determines
+            # if we should or not)
+            RET=false
+            db_get open-isns-discoveryd/isns-server-override || true
+            if [ "$RET" = true ] ; then
+                sed -i 's~^[[:space:]]*#*[[:space:]]*ServerAddress[[:space:]]*=.*~ServerAddress  = '"$SERVER"'~' /etc/isns/isnsdd.conf
+                db_set open-isns-discoveryd/isns-server-override false
+            fi
+        else
+            # test if ServerAddress is properly configured; if so, start/restart
+            # the server
+            RET="$(grep -E '^[[:space:]]*ServerAddress[[:space:]]*=' /etc/isns/isnsdd.conf | cut -d= -f2- | cut -d# -f1 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+            if [ -n "$RET" ] ; then
+                start=1
+            fi
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_systemd_enable/11.4.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'isnsdd.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'isnsdd.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'isnsdd.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'isnsdd.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.4.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/isnsdd" ]; then
+		update-rc.d isnsdd defaults >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+
+
+# Start isnsdd, but only if the user specified a remote server,
+# because otherwise it won't work. Close fd 3 (used by debconf)
+# to make sure that it's not left open by the daemon on
+# sysvinit systems.
+if [ $start -eq 1 ] && [ -x "/etc/init.d/isnsdd" ] ; then
+    if [ -n "$2" ] ; then
+        invoke-rc.d isnsdd restart 3>&-
+    else
+        invoke-rc.d isnsdd start 3>&-
+    fi
+fi
+
+exit 0

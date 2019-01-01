@@ -1,0 +1,17 @@
+Package: clang-tidy-6.0
+Source: llvm-toolchain-6.0
+Version: 1:6.0.1-9.2
+Architecture: amd64
+Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
+Installed-Size: 26001
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.4), libllvm6.0 (= 1:6.0.1-9.2), libstdc++6 (>= 5.2), python, libclang-common-6.0-dev, clang-tools-6.0, python-yaml
+Breaks: clang-6.0 (<< 1:6.0~svn250696-1), clang-modernize-6.0
+Replaces: clang-6.0 (<< 1:6.0~svn250696-1), clang-modernize-6.0
+Section: devel
+Priority: optional
+Homepage: https://www.llvm.org/
+Description: clang-based C++ linter tool
+ Provide an extensible framework for diagnosing and fixing typical programming
+ errors, like style violations, interface misuse, or bugs that can be deduced
+ via static analysis. clang-tidy is modular and provides a convenient interface
+ for writing new checks.

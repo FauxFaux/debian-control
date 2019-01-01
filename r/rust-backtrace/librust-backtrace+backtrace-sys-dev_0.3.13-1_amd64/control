@@ -1,0 +1,15 @@
+Package: librust-backtrace+backtrace-sys-dev
+Source: rust-backtrace
+Version: 0.3.13-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-backtrace-dev (= 0.3.13-1), librust-backtrace-sys-0.1+default-dev (>= 0.1.17-~~)
+Provides: librust-backtrace-0+backtrace-sys-dev (= 0.3.13-1), librust-backtrace-0.3+backtrace-sys-dev (= 0.3.13-1), librust-backtrace-0.3.13+backtrace-sys-dev (= 0.3.13-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/alexcrichton/backtrace-rs
+Description: Acquire a stack trace (backtrace) at runtime - feature "backtrace-sys"
+ This metapackage enables feature backtrace-sys for the Rust backtrace crate, by
+ pulling in any additional dependencies needed by that feature.

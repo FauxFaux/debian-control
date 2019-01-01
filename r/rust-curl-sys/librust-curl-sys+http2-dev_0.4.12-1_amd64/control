@@ -1,0 +1,14 @@
+Package: librust-curl-sys+http2-dev
+Source: rust-curl-sys
+Version: 0.4.12-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-curl-sys-dev (= 0.4.12-1), librust-libnghttp2-sys-0.1+default-dev
+Provides: librust-curl-sys-0+http2-dev (= 0.4.12-1), librust-curl-sys-0.4+http2-dev (= 0.4.12-1), librust-curl-sys-0.4.12+http2-dev (= 0.4.12-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Native bindings to the libcurl library - feature "http2"
+ This metapackage enables feature http2 for the Rust curl-sys crate, by pulling
+ in any additional dependencies needed by that feature.

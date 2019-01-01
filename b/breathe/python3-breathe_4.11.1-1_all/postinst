@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+  update-alternatives \
+    --install /usr/bin/breathe-apidoc \
+    breathe-apidoc \
+    /usr/bin/python3-breathe-apidoc \
+    2
+fi
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-breathe 
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p python3-breathe  || true
+fi
+
+# End automatically added section
+

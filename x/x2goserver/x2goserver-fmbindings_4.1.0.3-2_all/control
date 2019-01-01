@@ -1,0 +1,32 @@
+Package: x2goserver-fmbindings
+Source: x2goserver
+Version: 4.1.0.3-2
+Architecture: all
+Maintainer: Debian Remote Maintainers <debian-remote@lists.debian.org>
+Installed-Size: 77
+Depends: desktop-file-utils, x2goserver (<< 4.1.0.3-2.1~), x2goserver (>= 4.1.0.3-2), xdg-utils
+Section: x11
+Priority: optional
+Homepage: http://wiki.x2go.org
+Description: X2Go Server (file manager bindings)
+ X2Go is a server based computing environment with
+   - session resuming
+   - low bandwidth support
+   - session brokerage support
+   - client-side mass storage mounting support
+   - client-side printing support
+   - audio support
+   - authentication by smartcard and USB stick
+ .
+ x2goserver-fmbindings contains generic MIME type information for X2Go's
+ local folder sharing. It can be used with all freedesktop.org compliant
+ desktop shells.
+ .
+ However, this package will be superseded by other, more specific destkop
+ binding components, if installed and being used with the corresponding
+ desktop shell:
+ .
+   - under LXDE by x2golxdebindings
+   - under GNOMEv2 by x2gognomebindings
+   - under MATE by x2gomatebindings
+   - under KDE4/5 by plasma-widget-x2go

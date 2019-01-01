@@ -1,0 +1,28 @@
+Package: open-iscsi
+Version: 2.0.874-7.1
+Architecture: amd64
+Maintainer: Debian iSCSI Maintainers <open-iscsi@packages.debian.org>
+Installed-Size: 1403
+Pre-Depends: debconf | debconf-2.0
+Depends: udev, debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.14), libisns0 (>= 0.96-4~), libmount1 (>= 2.24.2), lsb-base (>= 3.0-6)
+Recommends: busybox | busybox-static
+Section: net
+Priority: optional
+Homepage: http://www.open-iscsi.com/
+Description: iSCSI initiator tools
+ Open-iSCSI is a high-performance, transport independent, multi-platform
+ implementation of the RFC3720 Internet Small Computer Systems Interface
+ (iSCSI).
+ .
+ Open-iSCSI is partitioned into user and kernel parts, where the kernel
+ portion implements the iSCSI data path (i.e. iSCSI Read and iSCSI Write).
+ The userspace contains the entire control plane:
+  * Configuration Manager;
+  * iSCSI Discovery;
+  * Login and Logout processing;
+  * Connection level error processing;
+  * Nop-In and Nop-Out handling;
+  * (in the future) Text processing, iSNS, SLP, Radius, etc.
+ .
+ This package includes a daemon, iscsid, and a management utility,
+ iscsiadm.

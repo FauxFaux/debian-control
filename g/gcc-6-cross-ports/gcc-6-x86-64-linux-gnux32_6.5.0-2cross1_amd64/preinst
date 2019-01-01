@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] || [ "$1" = "configure" ]; then
+    update-alternatives --quiet --remove x86_64-linux-gnux32-gcc /usr/bin/x86_64-linux-gnux32-gcc-6
+    update-alternatives --quiet --remove x86_64-linux-gnux32-gcov /usr/bin/x86_64-linux-gnux32-gcov-6
+fi
+
+
+
+exit 0

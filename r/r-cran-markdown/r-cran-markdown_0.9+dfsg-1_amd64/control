@@ -1,0 +1,27 @@
+Package: r-cran-markdown
+Version: 0.9+dfsg-1
+Architecture: amd64
+Maintainer: Debian R Packages Maintainers <r-pkg-team@alioth-lists.debian.net>
+Installed-Size: 277
+Depends: r-base-core (>= 3.5.1-2), r-api-3.5, r-cran-mime (>= 0.3), libc6 (>= 2.14)
+Suggests: r-cran-knitr, r-cran-rcurl
+Section: gnu-r
+Priority: optional
+Homepage: https://cran.r-project.org/package=markdown
+Description: GNU R package providing R bindings to the Sundown Markdown rendering library
+ Provides R bindings to the Sundown Markdown rendering library by
+ Vicent Marti
+ e.a., based upon work by Natacha Porté. Markdown is a plain-text
+     formatting syntax that can be converted to XHTML or other formats.
+ .
+ The R function `markdownToHTML` renders a markdown file to HTML. Options
+ controlling HTML output and supported markdown extensions can be
+ optionally specified.
+ .
+ The package also exports the underlying Sundown C extension API which
+ enables creating and calling custom renderers using the
+ `renderMarkdown` function.
+ .
+ Please note: the rmarkdown package (with leading r) converts R Markdown
+ documents into even more formats, by using pandoc; the CRAN rmarkdown
+ package is a newer and enhanced version of this markdown package.

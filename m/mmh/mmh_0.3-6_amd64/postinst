@@ -1,0 +1,47 @@
+#!/bin/sh
+set -eu
+chown root:mail /usr/bin/mh/mmh-inc
+chmod g+s /usr/bin/mh/mmh-inc
+
+install_alternatives () {
+    MHBIN='/usr/bin/mh'
+    MAN1='/usr/share/man/man1'
+    MAN5='/usr/share/man/man5'
+    MAN7='/usr/share/man/man7'
+    MAN8='/usr/share/man/man8'
+    COMPDIR='/usr/share/bash-completion/completions'
+
+    BINS='ali anno burst comp dist flist flists folder folders forw
+    fnext fprev inc mark mhbuild mhl mhlist mhmail mhparam mhpath mhpgp
+    mhsign mhstore next new packf pick prev prompter rcvdist rcvpack
+    rcvstore refile repl rmf rmm scan send sendfiles show slocal spost
+    unseen sortm whatnow whom'
+
+    set -- --install "${MHBIN}/mh" mh "${MHBIN}/mmh" 0
+    set -- "$@" --slave "${MAN1}/mh.1mh.gz" "mh.1mh.gz" "${MAN1}/mmh.1mh.gz"
+    for bin in ${BINS} ; do # deliberately no quotes
+        set -- "$@" \
+            --slave "${MHBIN}/${bin}" "${bin}" "${MHBIN}/mmh-${bin}" \
+            --slave "${COMPDIR}/${bin}" "bashcomplete-${bin}" "${COMPDIR}/mmh-${bin}"
+        if [ "${bin}" != spost ] ; then
+            set -- "$@" --slave "${MAN1}/${bin}.1mh.gz"     \
+                                "${bin}.1mh.gz"             \
+                                "${MAN1}/mmh-${bin}.1mh.gz"
+        fi
+    done
+    for man in mh-alias mh-format mh-mail mh-profile ; do
+        set -- "$@" --slave "${MAN5}/${man}.5mh.gz" "${man}.5mh.gz" "${MAN5}/mmh-${man}.5mh.gz"
+    done
+    for man in mh-chart mh-draft mh-sequence; do
+        set -- "$@" --slave "${MAN7}/${man}.7mh.gz" "${man}.7mh.gz" "${MAN7}/mmh-${man}.7mh.gz"
+    done
+    for man in ap dp fmtdump spost ; do
+        set -- "$@" --slave "${MAN8}/${man}.8mh.gz" "${man}.8mh.gz" "${MAN8}/mmh-${man}.8mh.gz"
+    done
+    update-alternatives "$@"
+
+    unset MHBIN MAN1 MAN5 MAN7 MAN8 COMPDIR
+}
+install_alternatives; unset -f install_alternatives
+
+

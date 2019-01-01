@@ -1,0 +1,14 @@
+Package: disorderfs
+Version: 0.5.5-1
+Architecture: amd64
+Maintainer: Reproducible builds folks <reproducible-builds@lists.alioth.debian.org>
+Installed-Size: 73
+Depends: fuse, libc6 (>= 2.14), libfuse2 (>= 2.9), libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2)
+Section: utils
+Priority: optional
+Homepage: https://reproducible-builds.org/
+Description: FUSE filesystem that introduces non-determinism
+ disorderfs is an overlay FUSE filesystem that introduces non-determinism
+ into filesystem metadata.  For example, it can randomize the order
+ in which directory entries are read.  This is useful for detecting
+ non-determinism in the build process.

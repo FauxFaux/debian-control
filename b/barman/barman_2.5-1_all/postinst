@@ -1,0 +1,40 @@
+#!/bin/sh
+# postinst script for barman
+
+set -e
+
+case "$1" in
+    configure)
+        if ! getent passwd barman > /dev/null
+	then
+            adduser --system --quiet --home /var/lib/barman --no-create-home \
+                    --gecos "Backup and Recovery Manager for PostgreSQL" \
+                    --shell /bin/bash --group barman
+        fi
+        for dir in /var/lib/barman /var/log/barman
+        do
+            mkdir -p $dir
+            chown barman:barman $dir
+            chmod 750 $dir
+        done
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p barman 
+fi
+
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,29 @@
+Package: libboost-coroutine1.67-dev
+Source: boost1.67
+Version: 1.67.0-11
+Architecture: amd64
+Maintainer: Debian Boost Team <team+boost@tracker.debian.org>
+Installed-Size: 2165
+Depends: libboost1.67-dev (= 1.67.0-11), libboost-context1.67-dev (= 1.67.0-11), libboost-coroutine1.67.0 (= 1.67.0-11)
+Conflicts: libboost-coroutine1.54-dev, libboost-coroutine1.55-dev, libboost-coroutine1.57-dev, libboost-coroutine1.58-dev, libboost-coroutine1.60-dev, libboost-coroutine1.61-dev, libboost-coroutine1.62-dev, libboost-coroutine1.63-dev, libboost-coroutine1.65-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.boost.org/libs/coroutine/
+Description: provides a sort of cooperative multitasking on a single thread
+ This package forms part of the Boost C++ Libraries collection.
+ .
+ Boost.Coroutine provides templates for generalized subroutines which
+ allow multiple entry points for suspending and resuming execution at
+ certain locations. It preserves the local state of execution and
+ allows re-entering subroutines more than once (useful if state must
+ be kept across function calls).
+ .
+ Coroutines can be viewed as a language-level construct providing a
+ special kind of control flow.
+ .
+ In contrast to threads, which are pre-emptive, coroutine switches are
+ cooperative (programmer controls when a switch will happen). The
+ kernel is not involved in the coroutine switches.
+ .
+ The implementation uses Boost.Context for context switching.

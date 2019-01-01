@@ -1,0 +1,20 @@
+Package: dpm-copy-server-mysql
+Source: lcgdm (1.10.0-2)
+Version: 1.10.0-2+b2
+Architecture: amd64
+Maintainer: Mattias Ellert <mattias.ellert@physics.uu.se>
+Installed-Size: 814
+Depends: libdpm1 (= 1.10.0-2+b2), adduser, libc6 (>= 2.15), libcgsi-gsoap1, libglobus-common0 (>= 17), libglobus-ftp-client2 (>= 7), libglobus-gass-copy2 (>= 8), libgsoap-2.8.60, liblcgdm1, libmariadbclient18 (>= 10.1.28), finger
+Conflicts: dpm-mysql-copyd (<< 1.8.1.2-2~)
+Replaces: dpm-mysql-copyd (<< 1.8.1.2-2~)
+Provides: dpm-mysql-copyd
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://glite.web.cern.ch/glite/
+Description: DPM copy server with MySQL database backend
+ The LCG Disk Pool Manager (DPM) creates a storage element from a set
+ of disks. It provides several interfaces for storing and retrieving
+ data such as RFIO and SRM version 1, version 2 and version 2.2.
+ This package provides a DPM copy server that uses MySQL as its
+ database backend.

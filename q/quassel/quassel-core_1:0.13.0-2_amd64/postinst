@@ -1,0 +1,70 @@
+#!/bin/sh -e
+# postinst script for quassel-core
+
+set -e
+
+# some variables
+QUASSEL_GROUP=quassel
+QUASSEL_USER=quasselcore
+QUASSEL_HOME=/var/lib/quassel
+QUASSEL_LOG=/var/log/quassel
+QUASSEL_CERT=$QUASSEL_HOME/quasselCert.pem
+
+# create group
+echo "Creating $QUASSEL_GROUP group ..."
+addgroup --quiet --system $QUASSEL_GROUP
+
+# create user
+echo "Creating $QUASSEL_USER user ..."
+adduser --quiet --system --ingroup $QUASSEL_GROUP \
+--home $QUASSEL_HOME --no-create-home $QUASSEL_USER
+
+if [ ! -d $QUASSEL_HOME ] ; then
+  # create $HOME
+  echo "Creating $QUASSEL_HOME directory ..."
+  mkdir -p $QUASSEL_HOME
+  chown $QUASSEL_USER:$QUASSEL_GROUP $QUASSEL_HOME
+fi
+
+if [ ! -d $QUASSEL_LOG ] ; then
+  echo "Creating $QUASSEL_LOG directory ..."
+  mkdir -p $QUASSEL_LOG
+  chown $QUASSEL_USER:$QUASSEL_GROUP $QUASSEL_LOG
+fi
+
+# generate a SSL certificate for 18 months (support time) + 6 months (development time)
+# this covers the worst case scenario of earliest possible install + no whatsoever
+# updates while support time frame. otherwise the key will be regenerated
+# FIXME: Not over-writing existing certs, but need to (someday) replace old certs
+if [ ! -e $QUASSEL_CERT ] ; then
+  echo "Generating SSL certificate as $QUASSEL_CERT ..."
+  ( umask 0027 && runuser -u $QUASSEL_USER -- openssl req -x509 -nodes -batch -days 680 -newkey rsa \
+    -keyout $QUASSEL_CERT -out $QUASSEL_CERT )
+fi
+
+# Automatically added by dh_systemd_enable/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'quasselcore.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'quasselcore.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'quasselcore.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'quasselcore.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/quasselcore" ]; then
+		update-rc.d quasselcore defaults >/dev/null
+		invoke-rc.d quasselcore start || exit
+	fi
+fi
+# End automatically added section
+

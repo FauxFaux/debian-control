@@ -1,0 +1,23 @@
+Package: python3-biomaj3-download
+Source: biomaj3-download
+Version: 3.0.18-1
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 212
+Depends: python3-biomaj3-core, python3-biomaj3-zipkin, python3-consul, python3-flask, python3-humanfriendly, python3-pika, python3-prometheus-client, python3-protobuf, python3-pycurl, python3-redis, python3-requests, python3-yaml, python3:any (>= 3.3.2-2~)
+Suggests: python3-gunicorn, mongodb, redis-server
+Section: python
+Priority: optional
+Homepage: https://github.com/genouest/biomaj-download
+Description: BioMAJ download management library
+ BioMAJ downloads remote data banks, checks their status and applies
+ transformation workflows, with consistent state, to provide ready-to-use
+ data for biologists and bioinformaticians. For example, it can transform
+ original FASTA files into BLAST indexes. It is very flexible and its
+ post-processing facilities can be extended very easily.
+ .
+ BioMAJ3 is a rewrite of BioMAJ v1.x, see online documentation for migration.
+ .
+ This package contains the library and microservice to manage downloads
+ in BioMAJ3
+Python-Egg-Name: biomaj-download

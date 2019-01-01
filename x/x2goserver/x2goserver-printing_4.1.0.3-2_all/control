@@ -1,0 +1,33 @@
+Package: x2goserver-printing
+Source: x2goserver
+Version: 4.1.0.3-2
+Architecture: all
+Maintainer: Debian Remote Maintainers <debian-remote@lists.debian.org>
+Installed-Size: 94
+Depends: adduser, x2goserver (<< 4.1.0.3-2.1~), x2goserver (>= 4.1.0.3-2)
+Suggests: cups-x2go
+Breaks: x2goprint
+Replaces: x2goprint
+Section: x11
+Priority: optional
+Homepage: http://wiki.x2go.org
+Description: X2Go Server (printing support)
+ X2Go is a server based computing environment with
+   - session resuming
+   - low bandwidth support
+   - session brokerage support
+   - client-side mass storage mounting support
+   - client-side printing support
+   - audio support
+   - authentication by smartcard and USB stick
+ .
+ The X2Go Server printing package provides client-side printing support
+ for X2Go.
+ .
+ This package has to be installed on X2Go Servers that shall be able to
+ pass X2Go print jobs on to the X2Go client.
+ .
+ This package co-operates with the cups-x2go CUPS backend. If CUPS server
+ and X2Go Server are hosted on different machines, then make sure you
+ install this package on the X2Go Server/s (and the cups-x2go package on
+ the CUPS server).

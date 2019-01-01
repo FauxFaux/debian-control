@@ -1,0 +1,15 @@
+Package: librust-maxminddb+mmap-dev
+Source: rust-maxminddb
+Version: 0.12.0-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-maxminddb-dev (= 0.12.0-1), librust-memmap-0.7+default-dev
+Provides: librust-maxminddb-0+mmap-dev (= 0.12.0-1), librust-maxminddb-0.12+mmap-dev (= 0.12.0-1), librust-maxminddb-0.12.0+mmap-dev (= 0.12.0-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/oschwald/maxminddb-rust
+Description: Reading MaxMind DB format used by GeoIP2 and GeoLite2 - feature "mmap"
+ This metapackage enables feature mmap for the Rust maxminddb crate, by pulling
+ in any additional dependencies needed by that feature.

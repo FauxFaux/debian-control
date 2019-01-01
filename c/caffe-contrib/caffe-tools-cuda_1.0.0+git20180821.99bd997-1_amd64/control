@@ -1,0 +1,21 @@
+Package: caffe-tools-cuda
+Source: caffe-contrib
+Version: 1.0.0+git20180821.99bd997-1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 13544
+Depends: libcaffe-cuda1 (= 1.0.0+git20180821.99bd997-1), libboost-filesystem1.67.0, libboost-system1.67.0, libboost-thread1.67.0, libc6 (>= 2.27), libcudart9.1, libcurand9.1, libgcc1 (>= 1:3.0), libgflags2.2, libgoogle-glog0v5, libhdf5-103, libleveldb1v5, libopencv-core3.2, libopencv-imgcodecs3.2, libopencv-imgproc3.2, libprotobuf17, libstdc++6 (>= 5.2)
+Conflicts: caffe-tools-cpu
+Section: contrib/science
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://caffe.berkeleyvision.org
+Description: Tools for fast, open framework for Deep Learning (CUDA)
+ Caffe is a deep learning framework made with expression, speed,
+ and modularity in mind. It is developed by the Berkeley AI Research
+ Lab (BAIR) and community contributors.
+ .
+ It contains caffe executables, configured with CUDA.
+ .
+ Issue this command at the root of caffe source tree for a unit test:
+   $ caffe-gtest --gtest_shuffle

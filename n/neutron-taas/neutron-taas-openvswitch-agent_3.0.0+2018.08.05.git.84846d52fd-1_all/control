@@ -1,0 +1,33 @@
+Package: neutron-taas-openvswitch-agent
+Source: neutron-taas
+Version: 3.0.0+2018.08.05.git.84846d52fd-1
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 28
+Depends: neutron-common (>= 2:12.0.0), python3-neutron-taas (= 3.0.0+2018.08.05.git.84846d52fd-1), lsb-base (>= 3.0.6)
+Section: net
+Priority: optional
+Homepage: http://github.com/openstack/tap-as-a-service
+Description: OpenStack virtual network service - Tap-as-a-Service agent
+ Neutron provides an API to dynamically request and configure virtual networks.
+ These networks connect "interfaces" from other OpenStack services (such as
+ vNICs from Nova VMs). The Neutron API supports extensions to provide advanced
+ network capabilities, including QoS, ACLs, and network monitoring.
+ .
+ Tap-as-a-Service (TaaS) is an extension to the OpenStack network service
+ (Neutron). It provides remote port mirroring capability for tenant virtual
+ networks.
+ .
+ Port mirroring involves sending a copy of packets entering and/or leaving one
+ port to another port, which is usually different from the original
+ destinations of the packets being mirrored.
+ .
+ This service has been primarily designed to help tenants (or the cloud
+ administrator) debug complex virtual networks and gain visibility into their
+ VMs, by monitoring the network traffic associated with them. TaaS honors
+ tenant boundaries and its mirror sessions are capable of spanning across
+ multiple compute and network nodes. It serves as an essential infrastructure
+ component that can be utilized for supplying data to a variety of network
+ analytics and security applications (e.g. IDS).
+ .
+ This package provides the Tap-as-a-Service agent for Open vSwitch.

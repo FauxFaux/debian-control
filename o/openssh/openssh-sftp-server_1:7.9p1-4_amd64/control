@@ -1,0 +1,38 @@
+Package: openssh-sftp-server
+Source: openssh
+Version: 1:7.9p1-4
+Architecture: amd64
+Maintainer: Debian OpenSSH Maintainers <debian-ssh@lists.debian.org>
+Installed-Size: 122
+Depends: openssh-client (= 1:7.9p1-4), libc6 (>= 2.26)
+Recommends: openssh-server | ssh-server
+Enhances: openssh-server, ssh-server
+Breaks: openssh-server (<< 1:6.5p1-5)
+Replaces: openssh-server (<< 1:6.5p1-5)
+Section: net
+Priority: optional
+Homepage: http://www.openssh.com/
+Description: secure shell (SSH) sftp server module, for SFTP access from remote machines
+ This is the portable version of OpenSSH, a free implementation of
+ the Secure Shell protocol as specified by the IETF secsh working
+ group.
+ .
+ Ssh (Secure Shell) is a program for logging into a remote machine
+ and for executing commands on a remote machine.
+ It provides secure encrypted communications between two untrusted
+ hosts over an insecure network. X11 connections and arbitrary TCP/IP
+ ports can also be forwarded over the secure channel.
+ It can be used to provide applications with a secure communication
+ channel.
+ .
+ This package provides the SFTP server module for the SSH server. It
+ is needed if you want to access your SSH server with SFTP. The SFTP
+ server module also works with other SSH daemons like dropbear.
+ .
+ OpenSSH's sftp and sftp-server implement revision 3 of the SSH filexfer
+ protocol described in:
+ .
+  http://www.openssh.com/txt/draft-ietf-secsh-filexfer-02.txt
+ .
+ Newer versions of the draft will not be supported, though some features
+ are individually implemented as extensions.

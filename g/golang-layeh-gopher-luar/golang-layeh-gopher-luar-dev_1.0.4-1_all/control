@@ -1,0 +1,31 @@
+Package: golang-layeh-gopher-luar-dev
+Source: golang-layeh-gopher-luar
+Version: 1.0.4-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Installed-Size: 95
+Depends: golang-github-yuin-gopher-lua-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/layeh/gopher-luar
+Description: Simplifies data passing between Go and GopherLua
+ A gopher-luar simplifies data passing to and from GopherLua.
+ .
+ This package provides the library for converting and passing the data
+ types between Go and GopherLua.
+ .
+ Go type values are converted to GopherLua type:
+  * Boolean values are converted to lua.LBool.
+  * Numeric values are converted to lua.LNumber.
+  * String values are converted to lua.LString.
+  * A nil value is converted to lua.LNil.
+  * Functions are converted to *lua.LFunction.
+  * Arrays, channels, maps, pointers, slices, and structs are all
+    converted to *lua.LUserData.
+ .
+ GopherLua type values are converted to Go type:
+  * lua.LBool values are converted to bool.
+  * lua.LNumber values are converted to float64.
+  * lua.LString values are converted to string.
+  * lua.LNil can be converted to any channel, func, interface, map,
+    pointer, slice, unsafe pointer, or uintptr value.

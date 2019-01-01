@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "install" ] && [ -z "$2" ]; then
+	if [ -e /run/ntpdate.dhcp ]; then
+		mkdir -p /run/ntpsec
+		cp /run/ntpdate.dhcp /run/ntpsec/
+	fi
+elif [ "$1" = "install" -o "$1" = "upgrade" ] && [ -n "$2" ] &&
+   dpkg --compare-versions "$2" le-nl "1.1.0+dfsg1-2~"; then
+
+	if [ -e /run/ntpdate.dhcp ]; then
+		mkdir -p /run/ntpsec
+		mv -n /run/ntpdate.dhcp /run/ntpsec/
+		rm -f /run/ntpdate.dhcp
+	fi
+fi
+
+# Automatically added by dh_installdeb/11.5.4
+dpkg-maintscript-helper mv_conffile /etc/default/ntpdate /etc/default/ntpsec-ntpdate 1.1.0\+dfsg1-2\~ ntpsec-ntpdate -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/dhcp/dhclient-exit-hooks.d/ntpdate /etc/dhcp/dhclient-exit-hooks.d/ntpsec-ntpdate 1.1.0\+dfsg1-2\~ ntpsec-ntpdate -- "$@"
+dpkg-maintscript-helper mv_conffile /etc/network/if-up.d/ntpdate /etc/network/if-up.d/ntpsec-ntpdate 1.1.0\+dfsg1-2\~ ntpsec-ntpdate -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/logcheck/ignore.d.server/ntpdate 1.1.0\+dfsg1-2\~ ntpsec-ntpdate -- "$@"
+# End automatically added section
+

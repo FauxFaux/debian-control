@@ -1,0 +1,32 @@
+Package: dbconfig-common
+Version: 2.0.11
+Architecture: all
+Maintainer: Paul Gevers <elbrus@debian.org>
+Installed-Size: 1545
+Depends: ucf, debconf (>= 0.5) | debconf-2.0
+Suggests: dbconfig-mysql | dbconfig-pgsql | dbconfig-sqlite | dbconfig-sqlite3 | dbconfig-no-thanks
+Breaks: bandwidthd-pgsql (<< 2.0.1+cvs20090917-9~)
+Section: admin
+Priority: optional
+Description: framework that helps packages to manage databases
+ This package contains the core of the dbconfig-common framework. This
+ framework presents a policy and implementation for managing various databases
+ used by applications included in Debian packages.
+ .
+ It can:
+  - support MySQL/MariaDB, PostgreSQL, and SQLite based applications;
+  - create or remove databases and database users;
+  - access local or remote databases;
+  - upgrade/modify databases when upstream changes database structure;
+  - generate config files in many formats with the database info;
+  - import configs from packages previously managing databases on their own;
+  - prompt users with a set of normalized, pre-translated questions;
+  - handle failures gracefully, with an option to retry;
+  - do all the hard work automatically;
+  - work for package maintainers with little effort on their part;
+  - work for local admins with little effort on their part;
+  - comply with an agreed upon set of standards for behavior;
+  - do absolutely nothing if that is the whim of the local admin;
+  - perform all operations from within the standard flow of
+    package management (no additional skill is required of the local
+    admin).

@@ -1,0 +1,27 @@
+Package: courier-imap
+Source: courier (0.78.0-2)
+Version: 4.18.1+0.78.0-2+b3
+Architecture: amd64
+Maintainer: Markus Wanner <markus@bluegap.ch>
+Installed-Size: 557
+Depends: courier-base (= 0.78.0-2+b3), debconf | debconf-2.0, default-mta | mail-transport-agent, sysvinit-utils (>= 2.88dsf-50) | init-d-script, courier-authlib (>= 0.66.4-5~), libc6 (>= 2.15), libcourier-unicode4 (>= 1.4), libfam0, libgdbm6 (>= 1.16), libidn11 (>= 1.13)
+Suggests: courier-doc, imap-client
+Conflicts: imap-server
+Breaks: courier-imap-ssl (<< 4.16.2+0.75.0-1~)
+Replaces: courier-imap-ssl (<< 4.16.2+0.75.0-1~), imap-server
+Provides: imap-server
+Section: mail
+Priority: optional
+Homepage: http://www.courier-mta.org/
+Description: Courier mail server - IMAP server
+ The Courier mail transfer agent (MTA) is an integrated mail/groupware
+ server based on open commodity protocols, such as ESMTP, IMAP, POP3, LDAP,
+ TLS, and HTTP. Courier provides ESMTP, IMAP, POP3, webmail, and mailing list
+ services within a single, consistent, framework.
+ .
+ This package provides an IMAP server that accesses email stored in Maildirs
+ format mailboxes. This server has an extremely small footprint and provides
+ shared and virtual shared folders.
+ .
+ IMAP over TLS is handled by the regular IMAP daemon in conjunction
+ with the TLS wrapper.

@@ -1,0 +1,23 @@
+Package: osmo-gbproxy
+Source: osmo-sgsn
+Version: 1.3.0-2
+Architecture: amd64
+Maintainer: Debian Mobcom Maintainers <Debian-mobcom-maintainers@lists.alioth.debian.org>
+Installed-Size: 118
+Depends: libc6 (>= 2.14), libosmocore11 (>= 0.11.0), libosmogb6 (>= 0.10.2), libosmogsm10 (>= 0.11.0), libosmovty4 (>= 0.10.2), libtalloc2 (>= 2.0.4~git20101213)
+Recommends: osmo-sgsn
+Conflicts: osmocom-gbproxy
+Section: net
+Priority: optional
+Homepage: https://osmocom.org/projects/osmosgsn/wiki/OsmoSGSN
+Description: GPRS Gb Interface Proxy
+ The purpose of the Gb proxy is to aggregate the Gb links of multiple
+ BSS's and present them in one Gb link to the SGSN.
+ .
+ The SGSN implements
+  - the Gb interface to the BSS's (like the OsmoPCU or an ip.access nanoBTS)
+  - the Gp interface with its GTP protocol to one or more Gateway GPRS Support
+    Node (GGSN) like OsmoGGSN.
+  - the IuPS interface with its RANAP protocol to onre or more RNCs or HNB-GWs
+    like OsmoHNBGW
+  - the GSUP Interface/Protocol towards OsmoHLR

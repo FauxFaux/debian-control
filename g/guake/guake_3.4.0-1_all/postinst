@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+
+	configure)
+		glib-compile-schemas /usr/share/guake/data/
+	;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+	;;
+
+esac
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p guake 
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p guake  || true
+fi
+
+# End automatically added section
+
+
+exit 0

@@ -1,0 +1,19 @@
+Package: ionit
+Version: 0.2-1
+Architecture: all
+Maintainer: Benjamin Drung <benjamin.drung@cloud.ionos.com>
+Installed-Size: 41
+Depends: python3-yaml | python3-ruamel.yaml, python3-jinja2, python3:any
+Section: utils
+Priority: optional
+Homepage: https://github.com/bdrung/ionit
+Description: Render configuration files from Jinja templates
+ ionit is a simple and small configuration templating tool. It collects a
+ context and renders Jinja templates in a given directory. The context can be
+ either static JSON or YAML files or dynamic Python files. Python files can also
+ define functions passed through to the rendering.
+ .
+ ionit comes with an early boot one shot service that is executed before the
+ networking service which allows one to generate configurations files for the
+ networking and other services before they are started. In this regard, ionit
+ can act as tiny stepbrother of cloud-init.

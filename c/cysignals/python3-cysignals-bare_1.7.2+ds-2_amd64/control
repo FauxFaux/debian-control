@@ -1,0 +1,21 @@
+Package: python3-cysignals-bare
+Source: cysignals
+Version: 1.7.2+ds-2
+Architecture: amd64
+Maintainer: Jerome Benoit <calculus@rezozer.net>
+Installed-Size: 1065
+Depends: python3 (<< 3.8), python3 (>= 3.6~), python3:any (>= 3.6~), libc6 (>= 2.14)
+Recommends: cysignals-tools
+Suggests: python-cysignals-doc (= 1.7.2+ds-2)
+Conflicts: python3-cysignals-pari
+Provides: python3-cysignals
+Section: python
+Priority: optional
+Homepage: https://github.com/sagemath/cysignals
+Description: interrupt and signal handling for Cython -- Python 3 - bare
+ Since Cython optimizes for speed, Cython normally does not check
+ for interrupts. The cysignals package provides mechanisms to handle
+ interrupts (and other signals and errors) in Cython code.
+ .
+ This package installs the library for Python 3; this very library
+ was not built against the PARI/GP library.

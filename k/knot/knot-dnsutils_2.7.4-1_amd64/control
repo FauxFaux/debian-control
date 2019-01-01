@@ -1,0 +1,29 @@
+Package: knot-dnsutils
+Source: knot
+Version: 2.7.4-1
+Architecture: amd64
+Maintainer: knot packagers <knot@packages.debian.org>
+Installed-Size: 247
+Depends: libdnssec6 (= 2.7.4-1), libknot8 (= 2.7.4-1), libzscanner2 (= 2.7.4-1), libc6 (>= 2.17), libfstrm0 (>= 0.2.0), libgnutls30 (>= 3.5.6), libidn2-0 (>= 2.0.0), libprotobuf-c1 (>= 1.0.1)
+Section: net
+Priority: optional
+Homepage: https://www.knot-dns.cz/
+Description: Clients provided with Knot DNS (kdig, knslookup, knsupdate)
+ Knot DNS is a fast, authoritative only, high performance, feature
+ full and open source name server.
+ .
+ Knot DNS is developed by CZ.NIC Labs, the R&D department of .CZ
+ registry and hence is well suited to run anything from the root
+ zone, the top-level domain, to many smaller standard domain names.
+ .
+ This package delivers various client programs related to DNS that are
+ derived from the Knot DNS source tree.
+ .
+  - kdig - query the DNS in various ways
+  - knsupdate - perform dynamic updates (See RFC2136)
+ .
+ Those clients were designed to be 1:1 compatible with BIND dnsutils,
+ but they provide some enhancements, which are documented in respective
+ manpages.
+ .
+ WARNING: knslookup is not provided as it is considered obsolete.

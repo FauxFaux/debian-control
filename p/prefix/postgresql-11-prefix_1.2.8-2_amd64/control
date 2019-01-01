@@ -1,0 +1,18 @@
+Package: postgresql-11-prefix
+Source: prefix
+Version: 1.2.8-2
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <pkg-postgresql-public@lists.alioth.debian.org>
+Installed-Size: 119
+Depends: libc6 (>= 2.14), postgresql-11
+Section: database
+Priority: optional
+Description: Prefix Range module for PostgreSQL
+ This PostgreSQL module provides the prefix_range datatype, allowing to
+ index searches such as finding the longest prefix matching a telephone
+ number, having prefixes in a table and telephone number as a parameter:
+ .
+  select * from prefixes where prefix @> '0100091234';
+ .
+ The prefix column has to be of type prefix_range, and any text field
+ can get indexed by the provided GiST opclass.

@@ -1,0 +1,19 @@
+Package: libttfautohint1
+Source: ttfautohint
+Version: 1.8.2-1
+Architecture: amd64
+Maintainer: Debian Fonts Task Force <pkg-fonts-devel@lists.alioth.debian.org>
+Installed-Size: 289
+Depends: libc6 (>= 2.14), libfreetype6 (>= 2.2.1), libharfbuzz0b (>= 0.9.11)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.freetype.org/ttfautohint/
+Description: Automatic font hiner - library
+ This project provides a library which takes a TrueType font as the input,
+ removes its bytecode instructions (if any), and returns a new font where all
+ glyphs are bytecode hinted using the information given by FreeType's
+ autohinting module. The idea is to provide the excellent quality of the
+ autohinter on platforms which don't use FreeType.
+ .
+ This package provides a ttfautohint library.

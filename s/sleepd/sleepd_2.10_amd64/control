@@ -1,0 +1,19 @@
+Package: sleepd
+Version: 2.10
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 86
+Depends: libc6 (>= 2.15), libglib2.0-0 (>= 2.22.0), libupower-glib3 (>= 0.99.0), lsb-base
+Recommends: pm-utils, upower
+Conflicts: apm-sleep
+Replaces: apm-sleep
+Provides: apm-sleep
+Section: admin
+Priority: optional
+Homepage: http://kitenet.net/~joey/code/sleepd/
+Description: puts an inactive or low battery laptop to sleep
+ This is a daemon to put a laptop to sleep if it is not being used or
+ if the battery is low.
+ .
+ It supports UPower, APM, and ACPI, although external programs must be used
+ to actually put the system to sleep.

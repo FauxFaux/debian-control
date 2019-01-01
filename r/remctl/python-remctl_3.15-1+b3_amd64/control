@@ -1,0 +1,21 @@
+Package: python-remctl
+Source: remctl (3.15-1)
+Version: 3.15-1+b3
+Architecture: amd64
+Maintainer: Russ Allbery <rra@debian.org>
+Installed-Size: 88
+Depends: libc6 (>= 2.4), libremctl1 (>= 3.1), python (<< 2.8), python (>= 2.7~), python:any (<< 2.8), python:any (>= 2.7~)
+Provides: python2.7-remctl
+Section: python
+Priority: optional
+Homepage: https://www.eyrie.org/~eagle/software/remctl/
+Description: Python extension for Kerberos-authenticated command execution
+ remctl is a client/server protocol for executing specific commands on a
+ remote system with Kerberos authentication.  The allowable commands must
+ be listed in a server configuration file, and the executable run on the
+ server may be mapped to any command name.  Each command is also
+ associated with an ACL containing a list of Kerberos principals
+ authorized to run that command.
+ .
+ This package contains the Python remctl extension, which provides native
+ Python bindings for the libremctl client library.

@@ -1,0 +1,20 @@
+Package: libparse-debianchangelog-perl
+Version: 1.2.0-13
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 157
+Depends: perl, libcgi-pm-perl | perl (<< 5.19), libclass-accessor-perl, libio-string-perl, liblocale-gettext-perl, libtimedate-perl
+Suggests: libhtml-parser-perl, libhtml-template-perl, libxml-simple-perl
+Section: perl
+Priority: optional
+Homepage: http://www.djpig.de/software/
+Description: parse Debian changelogs and output them in other formats
+ Parse::DebianChangelog is a replacement for the very limited
+ dpkg-parsechangelog. It can be used either via the parsechangelog
+ command line script or as Perl module.
+ .
+ Currently supported output formats:
+  * original dpkg-parsechangelog output format
+  * similar format with multiple stanzas instead of one
+  * XML
+  * HTML (customizable via HTML::Template templates).

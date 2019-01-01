@@ -1,0 +1,21 @@
+Package: librte-bpf18.11
+Source: dpdk
+Version: 18.11-3
+Architecture: amd64
+Maintainer: Debian DPDK Maintainers <pkg-dpdk-devel@lists.alioth.debian.org>
+Installed-Size: 105
+Depends: libbsd0 (>= 0.0), libc6 (>= 2.14), libelf1 (>= 0.131), libnuma1 (>= 2.0.11), librte-cmdline18.11 (>= 16.04), librte-eal18.11 (>= 17.05), librte-ethdev18.11 (>= 16.07~rc1), librte-kvargs18.11 (>= 16.04), librte-mbuf18.11 (>= 16.04), librte-mempool18.11 (>= 16.07~rc1), librte-net18.11 (>= 16.11), librte-ring18.11 (>= 16.04)
+Conflicts: libdpdk0
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://dpdk.org/doc/guides/prog_guide/bpf_lib.html
+Description: Data Plane Development Kit (librte-bpf runtime library)
+ DPDK is a set of libraries for fast packet processing. Applications run
+ in user-space and communicate directly with dedicated network interfaces.
+ .
+ This package contains the runtime libraries for librte_bpf.
+ .
+ The DPDK provides an BPF library that gives the ability to load and
+ execute Enhanced Berkeley Packet Filter (eBPF) bytecode within user-space
+ dpdk application.

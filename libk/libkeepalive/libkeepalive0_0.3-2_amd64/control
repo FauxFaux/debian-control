@@ -1,0 +1,24 @@
+Package: libkeepalive0
+Source: libkeepalive
+Version: 0.3-2
+Architecture: amd64
+Maintainer: Thorsten Alteholz <debian@alteholz.de>
+Installed-Size: 29
+Depends: libc6 (>= 2.2.5)
+Section: libs
+Priority: optional
+Homepage: http://libkeepalive.sourceforge.net/
+Description: enable tcp keepalive support in programs using shared libraries
+ Many systems provide the ability to keep tcp connections alive, so they
+ aren't reset by peers or by routers because of inactivity.
+ .
+ Even if this feature is present, only a few programs correctly implement
+ the code to use it. If your favourite foo-client is not written with
+ support for tcp keepalive, you'll continue to see your connection reset.
+ .
+ libkeepalive library provides a way to enable tcp keepalive support in
+ any program that uses shared libraries (e.g.: glibc shared object) to
+ perform network operations. Using the preload method, you will be able to
+ intercept normal program execution and to inject the code needed to enable
+ the keepalive routines, everything done without modifying the original
+ binary file and with no need to gain root privileges.

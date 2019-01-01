@@ -1,0 +1,29 @@
+#!/bin/sh
+# prerm script for gosa
+#
+# see: dh_installdeb(1)
+
+set -e
+
+case "$1" in
+	remove|purge)
+		# remove symlinks created in postinst
+		for symlink in convert lpstat; do
+			if [ -h /usr/share/gosa/bin/$symlink ]; then
+				rm /usr/share/gosa/bin/$symlink
+			fi
+		done
+		rmdir --ignore-fail-on-non-empty /usr/share/gosa/bin
+	;;
+	deconfigure|upgrade|failed-upgrade)
+		:
+	;;
+	*)
+		echo "prerm called with unknown argument \`$1'" >&2
+		exit 1
+	;;
+esac
+
+
+
+exit 0

@@ -1,0 +1,27 @@
+Package: trafficserver
+Version: 8.0.1-1
+Architecture: amd64
+Maintainer: Aron Xu <aron@debian.org>
+Installed-Size: 12941
+Depends: libbrotli1 (>= 0.6.0), libc6 (>= 2.17), libcap2 (>= 1:2.10), libcurl4 (>= 7.16.2), libgcc1 (>= 1:3.4), libgeoip1, libhwloc5 (>= 1.11.11), libluajit-5.1-2 (>= 2.0.4+dfsg), liblzma5 (>= 5.1.1alpha+20110809), libncursesw6 (>= 6), libpcre3, libssl1.1 (>= 1.1.1), libstdc++6 (>= 6), libtcl8.6 (>= 8.6.0), libtinfo6 (>= 6), libunwind8, zlib1g (>= 1:1.2.0), lsb-base (>= 3.2-14), adduser, perl
+Suggests: trafficserver-experimental-plugins (= 8.0.1-1)
+Breaks: trafficserver-experimental-plugins (<< 8.0.0~), trafficserver-plugin-conf-remap (<< 3.2~)
+Replaces: trafficserver-experimental-plugins (<< 8.0.0~), trafficserver-plugin-conf-remap (<< 3.2~)
+Provides: trafficserver-plugin-conf-remap
+Section: web
+Priority: optional
+Homepage: http://trafficserver.apache.org/
+Description: fast, scalable and extensible HTTP/1.1 and HTTP/2.0 compliant caching proxy server
+ This package provides the Apache Traffic Server, a fast, scalable reverse
+ proxy server which may operate as forward proxy as well. Apache Traffic Server
+ supports:
+ .
+   * Caching: improve response time while reducing server load and bandwidth
+     needs by caching and reusing frequently-requested web pages, images, and
+     web service calls.
+   * Proxying: add keep-alive, filter or anonymize content requests, or add
+     load balancing by adding a proxy layer.
+   * Scaling: handle 10s of thousands of requests per second on modern SMP
+     hardware.
+   * Extensions: use the API to do anything from modifying HTTP headers to
+     handling ESI requests to writing your own cache algorithm.

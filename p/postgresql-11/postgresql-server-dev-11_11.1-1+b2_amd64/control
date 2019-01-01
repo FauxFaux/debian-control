@@ -1,0 +1,20 @@
+Package: postgresql-server-dev-11
+Source: postgresql-11 (11.1-1)
+Version: 11.1-1+b2
+Architecture: amd64
+Maintainer: Debian PostgreSQL Maintainers <pkg-postgresql-public@lists.alioth.debian.org>
+Installed-Size: 5035
+Depends: clang-7, libpq-dev (>= 11~~), llvm-7-dev, postgresql-common (>= 142~), libc6 (>= 2.4)
+Breaks: postgresql-server-dev-all (<< 181~)
+Section: libdevel
+Priority: optional
+Homepage: http://www.postgresql.org/
+Description: development files for PostgreSQL 11 server-side programming
+ Header files for compiling SSI code to link into PostgreSQL's backend; for
+ example, for C functions to be called from SQL.
+ .
+ This package also contains the Makefiles necessary for building add-on
+ modules of PostgreSQL, which would otherwise have to be built in the
+ PostgreSQL source-code tree.
+ .
+ PostgreSQL is an object-relational SQL database management system.

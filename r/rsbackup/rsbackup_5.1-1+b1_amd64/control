@@ -1,0 +1,21 @@
+Package: rsbackup
+Source: rsbackup (5.1-1)
+Version: 5.1-1+b1
+Architecture: amd64
+Maintainer: Debian rsbackup maintainers <rsbackup-maint@lists.alioth.debian.org>
+Installed-Size: 869
+Depends: libboost-filesystem1.67.0, libboost-system1.67.0, libc6 (>= 2.27), libgcc1 (>= 1:3.0), libsqlite3-0 (>= 3.7.15), libstdc++6 (>= 5.2), rsync
+Recommends: openssh-server, openssh-client
+Section: admin
+Priority: optional
+Homepage: http://www.greenend.org.uk/rjk/rsbackup/
+Description: rsync-based backup utility
+ Backups are stored as complete filesystem trees on a (perhaps
+ external) hard disk.  Multiple backups use hard links between
+ identical files to save space.
+ .
+ Backups may be taken from multiple machines (over SSH) and stored to
+ multiple disks.
+ .
+ Backups may be made automatically, i.e. without relying on the
+ operator to remember to make a backup.

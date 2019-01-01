@@ -1,0 +1,37 @@
+Package: openmpi-bin
+Source: openmpi
+Version: 3.1.3-6
+Architecture: amd64
+Maintainer: Alastair McKinstry <mckinstry@debian.org>
+Installed-Size: 469
+Depends: libc6 (>= 2.8), libevent-2.1-6 (>= 2.1.8-stable), libevent-pthreads-2.1-6 (>= 2.1.8-stable), libhwloc5 (>= 1.11.12), libopenmpi3, zlib1g (>= 1:1.1.4), openmpi-common (>= 3.1.3-6), openssh-client | ssh-client
+Recommends: libopenmpi-dev
+Suggests: gfortran
+Conflicts: openmpi-bin
+Breaks: libopenmpi-dev (<< 3.0.1~rc2-2)
+Replaces: libopenmpi-dev (<< 3.0.1~rc2-2)
+Section: net
+Priority: optional
+Homepage: https://www.open-mpi.org/
+Description: high performance message passing library -- binaries
+ Open MPI is a project combining technologies and resources from several other
+ projects (FT-MPI, LA-MPI, LAM/MPI, and PACX-MPI) in order to build the best
+ MPI library available. A completely new MPI-3.1 compliant implementation, Open
+ MPI offers advantages for system and software vendors, application developers
+ and computer science researchers.
+ .
+ Features:
+  * Full MPI-3.1 standards conformance
+  * Thread safety and concurrency
+  * Dynamic process spawning
+  * High performance on all platforms
+  * Reliable and fast job management
+  * Network and process fault tolerance
+  * Support network heterogeneity
+  * Single library supports all networks
+  * Run-time instrumentation
+  * Many job schedulers supported
+  * Internationalized error messages
+  * Component-based design, documented APIs
+ .
+ This package contains the Open MPI utility programs.

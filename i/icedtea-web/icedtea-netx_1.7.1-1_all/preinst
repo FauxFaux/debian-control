@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    upgrade)
+        if [ -n "$2" ]; then
+            # Remove the old alternatives
+            for tool in javaws itweb-settings; do
+                for java_version in 6 7 8; do
+                    if [ -n "$(update-alternatives --list $tool 2>/dev/null | grep ^/usr/lib/jvm/java-$java_version-openjdk)" ]; then
+                        update-alternatives --remove $tool $(update-alternatives --list $tool 2>/dev/null | grep ^/usr/lib/jvm/java-$java_version-openjdk) || true
+                    fi
+                done
+            done
+        fi
+        ;;
+esac
+
+
+
+exit 0

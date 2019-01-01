@@ -1,0 +1,20 @@
+Package: libhash-storediterator-perl
+Source: libhash-storediterator-perl (0.008-2)
+Version: 0.008-2+b1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 48
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.2.5)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Hash-StoredIterator
+Description: Perl module for accessing a hashes internal iterator
+ Hash::StoredIterator gives access to get, set, and init the iterator inside
+ a hash. This allows one to store the current iterator, use
+ each/keys/values/etc, and then restore the iterator, this helps to ensure
+ that nobody interacts badly with other users of the iterator.
+ .
+ In perl all hashes have an internal iterator. This iterator is used by the
+ each() function, as well as by keys() and values(). Because these all share
+ use of the same iterator, they tend to interact badly with eachother when
+ nested.

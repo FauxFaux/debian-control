@@ -1,0 +1,21 @@
+Package: multipath-tools-boot
+Source: multipath-tools
+Version: 0.7.9-2
+Architecture: all
+Maintainer: Debian DM Multipath Team <team+linux-blocks@tracker.debian.org>
+Installed-Size: 54
+Depends: debconf (>= 0.5) | debconf-2.0, initramfs-tools | linux-initramfs-tool, lsb-base (>= 3.0-6), multipath-tools (>= 0.7.9-2), multipath-tools (<< 0.7.9-2.1~)
+Breaks: multipath-tools (<< 0.5.0+git1.656f8865-6), multipath-tools-initramfs (<< 1.0.1+nmu1)
+Replaces: multipath-tools (<< 0.5.0+git1.656f8865-6), multipath-tools-initramfs (<< 1.0.1+nmu1)
+Section: admin
+Priority: optional
+Homepage: http://christophe.varoqui.free.fr/
+Description: Support booting from multipath devices
+ This package contains the necessary support for booting from a multipath
+ device:
+ .
+  * copy over multipath.conf and persistent bindings if necessary
+  * load the necessary kernel modules
+  * detect multipath block devices
+ .
+ Don't install this package if you're not booting from a multipath device.

@@ -1,0 +1,42 @@
+Package: chiark-utils-bin
+Source: chiark-utils
+Version: 6.0.3
+Architecture: amd64
+Maintainer: Ian Jackson <ijackson@chiark.greenend.org.uk>
+Installed-Size: 234
+Depends: libc6 (>= 2.14)
+Recommends: libc6 (>= 2.17), libgmp10, libnettle6
+Suggests: libx11-6, libxmu6
+Section: utils
+Priority: extra
+Description: chiark system administration utilities
+ This package contains a number of small administration scripts used
+ by chiark.greenend.org.uk and other systems belonging to the Sinister
+ Greenend Organisation.  Currently featuring only:
+ .
+ with-lock-ex: a simple tool for acquiring a lockfile before running
+ another program or script.
+ .
+ summer: a tool for reporting complete details about a filesystem tree
+ in a parseable format, including checksums.
+ .
+ xbatmon-simple: a very simple X client for displaying battery
+ charge status.
+ .
+ xduplic-copier: a very simple X client for typing into multiple windows
+ at once.
+ .
+ watershed: a utility for saving on superfluous executions of an
+ idempotent command.  (This is the same utility as shipped separately
+ in Ubuntu's udev, but with slightly different defaults and a
+ different install location.)
+ .
+ rcopy-repeatedly: a utility for repeatedly copying a file from one
+ host to another, to keep a copy constantly up to date.
+ .
+ acctdump: for reading process accounting files.
+ .
+ summer and watershed require the installation of the Recommended
+ crypto libraries; xbatmon-simple needs the Suggested X libraries.
+ .
+ cgi-fcgi-interp: for use with cgi-fcgi as a #! interpreter

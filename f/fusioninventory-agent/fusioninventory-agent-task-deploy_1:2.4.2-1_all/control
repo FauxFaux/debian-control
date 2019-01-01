@@ -1,0 +1,19 @@
+Package: fusioninventory-agent-task-deploy
+Source: fusioninventory-agent
+Version: 1:2.4.2-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 182
+Depends: fusioninventory-agent (>= 1:2.4.2-1), libjson-pp-perl, liburi-perl, libfile-copy-recursive-perl, libdigest-sha-perl, libparallel-forkmanager-perl
+Breaks: libfusioninventory-agent-task-deploy-perl (<< 1:2.3.0-1)
+Replaces: libfusioninventory-agent-task-deploy-perl (<< 1:2.3.0-1)
+Section: net
+Priority: optional
+Homepage: http://fusioninventory.org/
+Description: software deployment support for FusionInventory
+ With this module, FusionInventory can accept software deployment
+ request from an GLPI server with the FusionInventory plugin.
+ This module uses SSL certificate to authentificate the server.
+ .
+ If the P2P option is turned on, the agent will looks for peer in its
+ network to reduce the bandwidth usage with the primary server.

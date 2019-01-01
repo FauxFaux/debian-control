@@ -1,0 +1,28 @@
+Package: libosmium2-dev
+Source: libosmium
+Version: 2.15.0-1
+Architecture: amd64
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 1787
+Depends: libboost-dev, libbz2-dev, libexpat1-dev, libprotozero-dev (>= 1.6.3), zlib1g-dev
+Suggests: libosmium2-doc
+Conflicts: libosmium-dev
+Replaces: libosmium-dev
+Provides: libgdalcpp-dev, libosmium-dev
+Section: libdevel
+Priority: optional
+Homepage: https://osmcode.org/libosmium/
+Description: C++ framework for working with OSM data files
+ The Osmium library has extensive support for all types of OSM entities: nodes,
+ ways, relations, and changesets. It allows reading from and writing to OSM
+ files in XML and PBF formats, including change files and full history files.
+ Osmium can store OSM data in memory and on disk in various formats and using
+ various indexes. Its easy to use handler interface allows you to quickly write
+ data filtering and conversion functions. Osmium can create WKT, WKB, OGR, GEOS
+ and GeoJSON geometries for easy conversion into many GIS formats and it can
+ assemble multipolygons from ways and relations.
+ .
+ Osmium is a header-only library, so there is nothing to compile to build it.
+ Just include the header files you need.
+ .
+ This package contains the Osmium library headers.

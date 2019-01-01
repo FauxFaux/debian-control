@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" != "upgrade" ]; then
+update-alternatives --remove adios-mpi.pc /usr/lib/x86_64-linux-gnu/pkgconfig/adios-mpich.pc 
+fi
+
+
+
+exit 0

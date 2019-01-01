@@ -1,0 +1,22 @@
+Package: libldb1
+Source: ldb
+Version: 2:1.5.1+really1.4.3-1
+Architecture: amd64
+Maintainer: Debian Samba Maintainers <pkg-samba-maint@lists.alioth.debian.org>
+Installed-Size: 514
+Depends: libc6 (>= 2.14), libldap-2.4-2 (>= 2.4.7), liblmdb0 (>= 0.9.9), libtalloc2 (>= 2.0.4~git20101213), libtdb1 (>= 1.3.14), libtevent0 (>= 0.9.9)
+Breaks: ldb-tools (<< 1.1.30~), libldb0, libsamdb0 (<< 4.0.0~alpha17~git20110724.dfsg1-1), python-samba (<< 2:4.7.0~), samba (<< 2:4.7.0~), samba-dsdb-modules (<< 2:4.7.0~), samba-libs (<< 2:4.7.0~), samba-testsuite (<< 2:4.7.0~)
+Replaces: libldb0
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://ldb.samba.org/
+Description: LDAP-like embedded database - shared library
+ ldb is a LDAP-like embedded database built on top of TDB.
+ .
+ It provides a fast database with an LDAP-like API designed
+ to be used within an application. In some ways it can be seen as a
+ intermediate solution between key-value pair databases and a real LDAP
+ database.
+ .
+ This package contains the shared library file.

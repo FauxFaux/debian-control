@@ -1,0 +1,27 @@
+Package: plip
+Version: 1.4.3~b+dfsg-2
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 303
+Depends: python-future, python-lxml, python-numpy, python:any (<< 2.8), python:any (>= 2.7~), python-openbabel
+Suggests: pymol
+Section: python
+Priority: optional
+Homepage: https://projects.biotec.tu-dresden.de/plip-web/plip/
+Description: fully automated protein-ligand interaction profiler
+ The Protein-Ligand Interaction Profiler (PLIP) is a tool to analyze
+ and visualize protein-ligand interactions in PDB files.
+ .
+ Features include:
+  * Detection of eight different types of noncovalent interactions
+  * Automatic detection of relevant ligands in a PDB file
+  * Direct download of PDB structures from wwPDB server if valid
+    PDB ID is given
+  * Processing of custom PDB files containing protein-ligand complexes
+    (e.g. from docking)
+  * No need for special preparation of a PDB file, works out of the box
+  * Atom-level interaction reports in rST and XML formats for easy parsing
+  * Generation of PyMOL session files (.pse) for each pairing, enabling easy
+    preparation of images for publications and talks
+  * Rendering of preview image for each ligand and its interactions
+    with the protein

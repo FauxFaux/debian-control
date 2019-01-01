@@ -1,0 +1,23 @@
+Package: osmo-mgw
+Version: 1.4.0-1
+Architecture: amd64
+Maintainer: Debian Mobcom Maintainers <Debian-mobcom-maintainers@lists.alioth.debian.org>
+Installed-Size: 147
+Depends: libc6 (>= 2.17), libosmocore11 (>= 0.11.0), libosmogsm10 (>= 0.10.2), libosmonetif6 (>= 0.2.0), libosmovty4 (>= 0.10.2), libtalloc2 (>= 2.0.4~git20101213)
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://osmocom.org/projects/osmo-mgw
+Description: Osmocom's Media Gateway for 2G and 3G circuit-switched mobile networks
+ OsmoMGW, the Osmocom Media Gateway, is a Media Gateway for handling user
+ plane (voice) traffic in cellular networks.
+ .
+ OsmoMGW supports the IETF MGCP (Media Gateway Control Protocol) for
+ control from Call Agents, such as those present in OsmoBSC and OsmoMSC.
+ .
+ At the moment (October 2017), OsmoMGW only implements RTP proxy / RTP
+ bridge type endpoints, to each of which two RTP connections can be
+ established.
+ .
+ OsmoMGW is the generalized version of an earlier much more special-purpose
+ implementation called osmo-bsc_mgcp.

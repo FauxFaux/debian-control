@@ -1,0 +1,25 @@
+Package: aptly
+Version: 1.3.0+ds1-2
+Architecture: amd64
+Maintainer: Sebastien Delafond <seb@debian.org>
+Installed-Size: 15476
+Depends: bzip2, xz-utils, gnupg1, gpgv1, libc6 (>= 2.3.2)
+Suggests: graphviz
+Built-Using: golang-1.10 (= 1.10.4-2), golang-github-aleksi-pointer (= 1.0.0+git20180620.11deede-1), golang-github-awalterschulze-gographviz (= 2.0+git20180607.da5c847-1), golang-github-aws-aws-sdk-go (= 1.12.79+dfsg-1), golang-github-disposaboy-jsonconfigreader (= 0.0~git20171218.5ea4d0d-1), golang-github-gin-contrib-sse (= 0.0~git20170109.0.22d885f-1), golang-github-gin-gonic-gin (= 1.3.0+dfsg1-2), golang-github-go-ini-ini (= 1.32.0-2), golang-github-golang-snappy (= 0.0+git20160529.d9eb7a3-2), golang-github-jlaffaye-ftp (= 0.0~git20170707.0.a05056b-1), golang-github-jmespath-go-jmespath (= 0.2.2-2), golang-github-kjk-lzma (= 1.0.0-5), golang-github-mattn-go-isatty (= 0.0.3-4), golang-github-mattn-go-runewidth (= 0.0.2+git20170510.3.97311d9-1), golang-github-mattn-go-shellwords (= 1.0.3-1), golang-github-mkrautz-goar (= 0.0~git20150919.282caa8-1), golang-github-mxk-go-flowrate (= 0.0~git20140419.0.cca7078-1), golang-github-ncw-swift (= 0.0~git20180327.b2a7479-1), golang-github-pborman-uuid (= 1.1-1), golang-github-pkg-errors (= 0.8.0+git20180311.816c908-1), golang-github-smira-commander (= 0.0~git20140515.f408b00-1), golang-github-smira-flag (= 0.0~git20170926.695ea5e-1), golang-github-smira-go-aws-auth (= 0.0~git20160320.0070896-1), golang-github-smira-go-ftp-protocol (= 0.0~git20140829.066b75c-2), golang-github-smira-go-xz (= 0.0~git20150414.0c531f0-2), golang-github-ugorji-go-codec (= 1.1.1-1), golang-github-wsxiaoys-terminal (= 0.0~git20160513.0.0940f3f-1), golang-go.crypto (= 1:0.0~git20180614.a8fb68e-1), golang-golang-x-sys (= 0.0~git20180510.7dfd129-1), golang-goleveldb (= 0.0~git20170725.0.b89cc31-2), golang-gopkg-cheggaaa-pb.v1 (= 1.0.25-1), golang-gopkg-go-playground-validator.v8 (= 8.18.1-1), golang-gopkg-h2non-filetype.v1 (= 1.0.5+ds1-2), golang-goprotobuf (= 0.0~git20170808.0.1909bc2-2), golang-yaml.v2 (= 2.2.1-1)
+Section: utils
+Priority: optional
+Homepage: http://www.aptly.info
+Description: Swiss army knife for Debian repository management - main package
+ It offers several features making it easy to manage Debian package
+ repositories:
+ .
+  - make mirrors of remote Debian/Ubuntu repositories, limiting by
+    components/architectures
+  - take snapshots of mirrors at any point in time, fixing state of
+    repository at some moment of time
+  - publish snapshot as Debian repository, ready to be consumed by apt
+  - controlled update of one or more packages in snapshot from upstream
+    mirror, tracking dependencies
+  - merge two or more snapshots into one
+ .
+ This is the main package, it contains the aptly command-line utility.

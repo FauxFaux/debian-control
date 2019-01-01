@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_perl6_maintscript/UNDECLARED
+case "$1" in
+    configure)
+        /usr/share/perl6/rakudo-helper.pl --install perl6-readline
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+        # nothing to do
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+# End automatically added section

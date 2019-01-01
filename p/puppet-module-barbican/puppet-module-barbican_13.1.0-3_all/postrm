@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "remove" ] || [ "${1}" = "disappear" ]; then
+	update-alternatives --remove puppet-module-barbican /usr/share/puppet/modules.available/barbican
+fi
+
+
+
+exit 0

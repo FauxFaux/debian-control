@@ -1,0 +1,21 @@
+Package: avahi-dnsconfd
+Source: avahi (0.7-4)
+Version: 0.7-4+b1
+Architecture: amd64
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 93
+Depends: libavahi-common3 (>= 0.6.16), libc6 (>= 2.15), libdaemon0 (>= 0.10), avahi-daemon (>= 0.6.31-3~), lsb-base (>= 3.0-6)
+Recommends: resolvconf
+Section: net
+Priority: optional
+Homepage: http://avahi.org/
+Description: Avahi DNS configuration tool
+ Avahi is a fully LGPL framework for Multicast DNS Service Discovery.
+ It allows programs to publish and discover services and hosts
+ running on a local network with no specific configuration. For
+ example you can plug into a network and instantly find printers to
+ print to, files to look at and people to talk to.
+ .
+ This tool listens on the network for announced DNS servers and passes
+ them to resolvconf so it can use them. This is very useful on autoconfigured
+ IPv6 networks.

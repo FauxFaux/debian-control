@@ -1,0 +1,447 @@
+#!/bin/sh
+# vim:ts=2:sw=2:et
+
+set -e
+
+case "$1" in
+  configure)
+    if [ -z "$2" ]; then
+      # Changed in 1.1.5-1 for new installs (we used to start at S50
+      # and stop at K50)  We now start at S50 and stop at K19 so we
+      # start after services which may be used and stop before them.
+      update-rc.d freeradius start 50 2 3 4 5 . stop 19 0 1 6 . >/dev/null
+
+      for file in radius.log radwtmp; do
+        [ ! -f "/var/log/freeradius/${file}" ] && install -o freerad -g freerad -m 644 /dev/null /var/log/freeradius/${file}
+      done
+
+      action="start"
+    else
+      action="restart"
+    fi
+
+    if [ -z "$2" ] || dpkg --compare-versions "$2" lt 3.0.12+dfsg-2; then
+      # Set up initial permissions on all the freeradius directories
+      chown -R freerad:adm /var/log/freeradius
+      chown -R freerad:freerad /etc/freeradius
+      chmod 2750 /etc/freeradius
+      find /etc/freeradius -type f -exec chmod 640 '{}' \;
+    fi
+
+    if dpkg --compare-versions "$2" lt 3.0.12+dfsg-2; then
+      # Get rid of any dpkg statoverrides installed by earlier freeradius
+      # packages (as opposed to the system administrator).
+      cat <<'EOT' | grep --invert-match --fixed-strings --file=- /var/lib/dpkg/statoverride > /var/lib/dpkg/statoverride-new
+root freerad 640 /etc/freeradius/experimental.conf
+root freerad 640 /etc/freeradius/sql.conf
+root freerad 640 /etc/freeradius/huntgroups
+root freerad 640 /etc/freeradius/hints
+root freerad 640 /etc/freeradius/clients.conf
+root freerad 640 /etc/freeradius/attrs.pre-proxy
+freerad freerad 755 /var/run/freeradius
+root freerad 640 /etc/freeradius/acct_users
+freerad freerad 2751 /etc/freeradius/sites-enabled
+root freerad 640 /etc/freeradius/attrs.access_reject
+freerad freerad 2751 /etc/freeradius/certs
+root freerad 640 /etc/freeradius/preproxy_users
+freerad freerad 750 /var/log/freeradius
+freerad freerad 2751 /etc/freeradius
+root freerad 640 /etc/freeradius/proxy.conf
+root freerad 640 /etc/freeradius/attrs
+root freerad 640 /etc/freeradius/policy.txt
+root freerad 640 /etc/freeradius/ldap.attrmap
+root freerad 640 /etc/freeradius/attrs.accounting_response
+root freerad 640 /etc/freeradius/radiusd.conf
+freerad freerad 2751 /etc/freeradius/sites-available
+root freerad 640 /etc/freeradius/attrs.access_challenge
+root freerad 640 /etc/freeradius/eap.conf
+root freerad 644 /etc/freeradius/dictionary
+root freerad 640 /etc/freeradius/policy.conf
+EOT
+      mv /var/lib/dpkg/statoverride-new /var/lib/dpkg/statoverride
+    fi
+
+    if dpkg --compare-versions "$2" lt 3.0.16+dfsg-3; then
+      chmod 2750 /etc/freeradius
+    fi
+
+    # Create links for default sites, but only if this is an initial
+    # install or an upgrade from before there were links; users may
+    # want to remove them...
+    if [ -z "$2" ] || dpkg --compare-versions "$2" lt 2.0.4+dfsg-4; then
+      for site in default inner-tunnel; do
+        if test ! -h /etc/freeradius/3.0/sites-enabled/$site && \
+           test ! -e /etc/freeradius/3.0/sites-enabled/$site; then
+          ln -s ../sites-available/$site /etc/freeradius/3.0/sites-enabled/$site
+        fi
+      done
+    fi
+
+    invoke-rc.d freeradius $action || true
+    ;;
+
+  abort-upgrade)
+    invoke-rc.d freeradius restart || true
+    ;;
+
+  abort-remove)
+    invoke-rc.d freeradius start || true
+    ;;
+esac
+
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/otppasswd.sample 1.1.5-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/demoCA/cacert.pem 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/demoCA/index.txt 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/demoCA/index.txt.old 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/demoCA/serial 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/demoCA/serial.old 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/cert-clt.der 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/cert-clt.p12 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/cert-clt.pem 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/cert-srv.der 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/cert-srv.p12 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/cert-srv.pem 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/dh 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/newcert.pem 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/newreq.pem 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/random 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/README 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/root.der 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/root.p12 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/certs/root.pem 2.0.0-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/otp.conf 2.1.8+dfsg-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/snmp.conf 2.1.8+dfsg-1~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/acct_users 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/attrs 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/attrs.access_challenge 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/attrs.access_reject 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/attrs.accounting_response 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/attrs.pre-proxy 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/clients.conf 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/eap.conf 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/experimental.conf 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/hints 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/huntgroups 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/ldap.attrmap 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/acct_unique 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/always 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/attr_filter 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/attr_rewrite 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/cache 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/chap 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/checkval 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/counter 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/cui 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/detail 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/detail.example.com 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/detail.log 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/dhcp_sqlippool 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/digest 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/dynamic_clients 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/echo 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/etc_group 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/exec 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/expiration 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/expr 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/files 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/inner-eap 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/ippool 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/krb5 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/ldap 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/linelog 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/logintime 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/mac2ip 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/mac2vlan 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/mschap 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/ntlm_auth 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/opendirectory 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/otp 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/pam 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/pap 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/passwd 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/perl 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/policy 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/preprocess 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/radrelay 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/radutmp 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/realm 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/redis 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/rediswho 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/replicate 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/smbpasswd 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/smsotp 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/soh 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/sql_log 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/sqlcounter_expire_on_login 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/sradutmp 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/unix 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/modules/wimax 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/policy.conf 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/policy.txt 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/preproxy_users 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/proxy.conf 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/README 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/buffered-sql 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/coa 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/control-socket 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/copy-acct-to-home-server 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/decoupled-accounting 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/default 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/dhcp 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/dhcp.relay 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/dynamic-clients 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/example 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/inner-tunnel 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/originate-coa 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/proxy-inner-tunnel 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/robust-proxy-accounting 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/soh 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/status 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/virtual.example.com 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sites-available/vmps 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sql.conf 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/sqlippool.conf 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/templates.conf 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/freeradius/users 3.0.12+dfsg-2~ freeradius -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/init/freeradius.conf 3.0.16+dfsg-4~ freeradius -- "$@"
+# End automatically added section
+
+
+case "$1" in
+  configure)
+    # After removing conffiles (in the DEBHELPER part above), delete all
+    # directories underneath /etc/freeradius which are now empty.
+    find /etc/freeradius -type d -empty -delete
+    ;;
+esac
+
+exit 0

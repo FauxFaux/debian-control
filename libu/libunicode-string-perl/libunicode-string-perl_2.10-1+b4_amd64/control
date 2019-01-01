@@ -1,0 +1,22 @@
+Package: libunicode-string-perl
+Source: libunicode-string-perl (2.10-1)
+Version: 2.10-1+b4
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 615
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.4)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Unicode-String
+Description: Older Perl modules for Unicode string manipulation
+ This package provides Unicode::String, which manipulates strings of
+ characters in various Unicode representations, and Unicode::CharName,
+ which maps Unicode characters to official character names.
+ .
+ These modules predate native Unicode support inside Perl.  Normally, the
+ integrated Perl Unicode support and modules such as Encode should be used
+ instead of these modules.  They are provided primarily for their
+ additional utility functions and to support other Perl code with
+ dependencies on these modules.  Be aware that Unicode::CharName only
+ includes Unicode characters up to Unicode 4.1 and the character name
+ tables included with Perl are more complete.

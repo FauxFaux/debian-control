@@ -1,0 +1,27 @@
+Package: python-roswtf
+Source: ros-ros-comm
+Version: 1.14.3+ds1-3
+Architecture: all
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 118
+Depends: python:any (<< 2.8), python:any (>= 2.7~), python-rosservice, python-rosmsg, python-rospkg, python-rosgraph-msgs, python-roslaunch, python-rosnode, python-roslib, python-paramiko
+Section: python
+Priority: optional
+Multi-Arch: allowed
+Homepage: https://wiki.ros.org/ros_comm
+Description: Tool for diagnosing issues with a running Robot OS system - Python 2
+ This package is part of Robot OS (ROS). roswtf looks for many, many
+ things, and the list is always growing. There are two categories of
+ things that it looks for: file-system issues and online/graph issues.
+ .
+ For file-system issues, roswtf looks at your environment variables, package
+ configurations, stack configurations, and more. It can also take in a
+ roslaunch file and attempt to find any potential configuration issues in it,
+ such as packages that haven't been built properly.
+ .
+ For online issues, roswtf examines the state of your current graph and tries
+ to find any potential issues. These issues might be unresponsive nodes,
+ missing connections between nodes, or potential machine-configuration issues
+ with roslaunch.
+ .
+ This package contains the Python 2 library.

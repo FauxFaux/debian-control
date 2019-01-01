@@ -1,0 +1,31 @@
+Package: ekg2
+Source: ekg2 (1:0.4~pre+20120506.1-16)
+Version: 1:0.4~pre+20120506.1-16+b1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 6
+Depends: ekg2-core (= 1:0.4~pre+20120506.1-16+b1), ekg2-ui-ncurses (= 1:0.4~pre+20120506.1-16+b1), ekg2-jabber (= 1:0.4~pre+20120506.1-16+b1)
+Suggests: ekg2-gnupg, ekg2-scripting-python, ekg2-scripting-perl, ekg2-ui-gtk
+Section: net
+Priority: optional
+Homepage: http://ekg2.org/
+Description: instant messenger and IRC client for UNIX systems
+ EKG2 is an open source instant messenger program for UNIX systems. The program
+ has a plugin-based structure, and supports multiple protocols, currently
+ Jabber, ICQ, Gadu-Gadu, IRC, RivChat, PolChat, NNTP and RSS.
+ .
+ The program has many useful features. Here is a list - unless specified they
+ are included in the ekg2-core package.
+   - irssi-like ncurses interface, with mouse support [ekg2-ui-ncurses]
+   - experimental GTK+ interface [ekg2-ui-gtk]
+   - spell checking [ekg2-ui-ncurses]
+   - jogger.pl blog update support
+   - a simple CAPTCHA (autoresponder)
+   - Python and Perl scripting [ekg2-scripting-python, ekg2-scripting-perl]
+   - launching shell commands on certain events
+   - encryption support (SIM, GnuPG) [ekg2-core, ekg2-gnupg]
+   - logging to SQLite, plain text or XML files
+   - sending SMs (using an external program such as sms-pl)
+   - mail checking
+ .
+ This is a metapackage which depends on a set of commonly used EKG2 packages.

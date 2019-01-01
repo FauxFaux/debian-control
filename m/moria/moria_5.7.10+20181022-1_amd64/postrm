@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+# Originally shamelessly stolen from Joey Hess' bsdgames-2.12-9
+
+SCORESFILE="/var/games/moria/scores.dat"
+
+# Remove high score files on purge.
+if [ "$1" = "purge" ]; then
+	rm -f $SCORESFILE
+	rmdir /var/games/moria /var/games 2>/dev/null || true 
+fi
+
+# Automatically added by dh_installmenu/11.4.1
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+# End automatically added section
+

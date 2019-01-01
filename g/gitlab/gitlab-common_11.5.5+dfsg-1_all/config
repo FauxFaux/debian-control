@@ -1,0 +1,22 @@
+#!/bin/sh
+# config maintainer script for gitlab
+
+CONFIGFILE=/etc/gitlab-common/gitlab-common.conf
+ 
+set -e
+
+# source debconf stuffs
+. /usr/share/debconf/confmodule
+
+# Load config file, if it exists.
+  if [ -e $CONFIGFILE ]; then
+      . $CONFIGFILE || true
+
+      # Store values from config file into
+      # debconf db.
+      db_set gitlab-common/user "$gitlab_user"
+  fi
+
+# Do you want to change gitlab user?
+db_input high gitlab-common/user || true
+db_go

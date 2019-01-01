@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# This is a template file for libmpich-dev.postinst, since it will be processed
+# by debian/rules. The update-alternatives command below needs the path to the
+# lib*.so files, which depends on the multiarch triplet. This can be gotten
+# from dpkg-architecture, but to avoid dependence on dpkg-dev, we instead
+# determine it at package build-time, and include a processed version of this
+# file as the libmpich-dev.postinst, where the variable triplet has been replaced
+# by its appropriate value, depending on the build host architecture.
+
+set -e
+
+case "$1" in
+   configure)
+      # Continue below
+      ;;
+   abort-upgrade|abort-remove|abort-deconfigure)
+      exit 0;
+      ;;
+   *)
+      echo "postinst called with unknown argument \`$1'" >&2
+      exit 0;
+      ;;
+esac
+
+#echo "DEBUG: postinst in libmpich-dev "
+
+
+update-alternatives \
+	--install /usr/include/x86_64-linux-gnu/mpi mpi-x86_64-linux-gnu /usr/include/x86_64-linux-gnu/mpich 40 \
+	--slave /usr/lib/x86_64-linux-gnu/libmpi.so libmpi.so-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/libmpich.so \
+	--slave /usr/lib/x86_64-linux-gnu/libmpi++.so libmpi++.so-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/libmpichcxx.so \
+	--slave /usr/lib/x86_64-linux-gnu/libmpicxx.so libmpicxx.so-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/libmpichcxx.so \
+	--slave /usr/lib/x86_64-linux-gnu/libmpifort.so libmpifort.so-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/libmpichfort.so \
+	--slave /usr/lib/x86_64-linux-gnu/libmpif77.so libmpif77.so-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/libmpichfort.so \
+	--slave /usr/lib/x86_64-linux-gnu/libmpif90.so libmpif90.so-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/libmpichfort.so \
+	--slave /usr/lib/x86_64-linux-gnu/pkgconfig/mpi.pc mpi.pc-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/pkgconfig/mpich.pc \
+	--slave /usr/lib/x86_64-linux-gnu/pkgconfig/mpi-c.pc mpi-c.pc-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/pkgconfig/mpich-c.pc \
+	--slave /usr/lib/x86_64-linux-gnu/pkgconfig/mpi-cxx.pc mpi-cxx.pc-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/pkgconfig/mpich-cxx.pc \
+	--slave /usr/lib/x86_64-linux-gnu/pkgconfig/mpi-fort.pc mpi-fort.pc-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/pkgconfig/mpich-fort.pc
+
+
+
+exit 0

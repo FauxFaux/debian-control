@@ -1,0 +1,30 @@
+Package: libusageenvironment3
+Source: liblivemedia
+Version: 2018.11.26-1
+Architecture: amd64
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Installed-Size: 41
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstdc++6 (>= 5)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.live555.com/liveMedia/
+Description: multimedia RTSP streaming library (UsageEnvironment classes)
+ The live555.com streaming media code is a set of C++ libraries for multimedia
+ streaming, using open standard protocols (RTP/RTCP, RTSP, SIP). These
+ libraries can be used to build applications to stream, receive and process
+ MPEG, H.263+ or JPEG video, several audio codecs, and can easily be extended
+ to support additional codecs. They can also be used to build basic RTSP (Real
+ Time Streaming Protocol) or SIP (Session Initiation Protocol) clients and
+ servers.
+ .
+ This package contains the UsageEnvironment library. The "UsageEnvironment" and
+ "TaskScheduler" classes are used for scheduling deferred events, for assigning
+ handlers for asynchronous read events, and for outputting error/warning
+ messages. Also, the "HashTable" class defines the interface to a generic hash
+ table, used by the rest of the code.
+ .
+ These are all abstract base classes; they must be subclassed for use in an
+ implementation. These subclasses can exploit the particular properties of the
+ environment in which the program will run - e.g., its GUI and/or scripting
+ environment.

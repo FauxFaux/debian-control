@@ -1,0 +1,30 @@
+Package: python3-certbot
+Source: python-certbot
+Version: 0.28.0-1
+Architecture: all
+Maintainer: Debian Let's Encrypt <team+letsencrypt@tracker.debian.org>
+Installed-Size: 1209
+Depends: python3-acme (>= 0.26.0~), python3-requests (>= 2.4.3), python3-configargparse (>= 0.10.0), python3-configobj, python3-cryptography (>= 1.2), python3-josepy, python3-mock, python3-parsedatetime (>= 1.3), python3-pkg-resources, python3-rfc3339, python3-tz, python3-zope.component, python3-zope.interface, python3:any
+Recommends: certbot
+Suggests: python-certbot-doc
+Breaks: python-certbot-apache (<< 0.20.0), python-certbot-nginx (<< 0.20.0), python-letsencrypt (<= 0.6.0)
+Replaces: python-letsencrypt
+Section: python
+Priority: optional
+Homepage: https://certbot.eff.org/
+Description: main library for certbot
+ The objective of Certbot, Let's Encrypt, and the ACME (Automated
+ Certificate Management Environment) protocol is to make it possible
+ to set up an HTTPS server and have it automatically obtain a
+ browser-trusted certificate, without any human intervention. This is
+ accomplished by running a certificate management agent on the web
+ server.
+ .
+ This agent is used to:
+ .
+   - Automatically prove to the Let's Encrypt CA that you control the website
+   - Obtain a browser-trusted certificate and set it up on your web server
+   - Keep track of when your certificate is going to expire, and renew it
+   - Help you revoke the certificate if that ever becomes necessary.
+ .
+ This package contains the main libraries.

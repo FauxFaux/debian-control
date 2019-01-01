@@ -1,0 +1,25 @@
+Package: python3-dask
+Source: dask
+Version: 1.0.0+dfsg-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 2754
+Depends: python3:any, python3-toolz
+Recommends: python3-cloudpickle, python3-numpy, python3-pandas, python3-partd, python3-requests
+Suggests: ipython, python-dask-doc, python3-bcolz, python3-blosc, python3-boto, python3-distributed (>= 1.21), python3-graphviz, python3-h5py, python3-psutil, python3-scipy, python3-skimage, python3-sklearn, python3-sqlalchemy, python3-tables
+Section: python
+Priority: optional
+Homepage: https://github.com/dask/dask
+Description: Minimal task scheduling abstraction for Python 3
+ Dask is a flexible parallel computing library for analytics,
+ containing two components.
+ .
+ 1. Dynamic task scheduling optimized for computation. This is similar
+ to Airflow, Luigi, Celery, or Make, but optimized for interactive
+ computational workloads.
+ 2. "Big Data" collections like parallel arrays, dataframes, and lists
+ that extend common interfaces like NumPy, Pandas, or Python iterators
+ to larger-than-memory or distributed environments. These parallel
+ collections run on top of the dynamic task schedulers.
+ .
+ This contains the Python 3 version.

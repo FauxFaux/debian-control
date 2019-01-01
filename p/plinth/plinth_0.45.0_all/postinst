@@ -1,0 +1,104 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+daemonuser=plinth
+daemongroup=plinth
+
+# Due to a change in sudo, now it runs PAM modules even on password-less
+# invocations. This leads to plinth not being able to run root privileges. This
+# is because of our own restrictions in /etc/security/access.conf. Since Plinth
+# is locked out after upgrade, we need to do this in postinst.
+sed -i 's+-:ALL EXCEPT root fbx (admin) (sudo):ALL+-:ALL EXCEPT root fbx plinth (admin) (sudo):ALL+' /etc/security/access.conf
+
+case "$1" in
+    configure)
+        addgroup --system --quiet plinth
+        adduser --system --quiet --ingroup plinth --no-create-home --home /var/lib/plinth plinth
+        chown -R plinth: /var/lib/plinth /var/log/plinth
+
+        if [ ! -e '/var/lib/freedombox/is-freedombox-disk-image' ]; then
+            umask 377
+            cat /dev/urandom | base64 | head -c16 > /var/lib/plinth/firstboot-wizard-secret
+            chown plinth:plinth /var/lib/plinth/firstboot-wizard-secret
+            db_subst plinth/firstboot_wizard_secret secret $(cat /var/lib/plinth/firstboot-wizard-secret)
+            db_input high plinth/firstboot_wizard_secret || true
+            db_go
+        fi
+        ;;
+esac
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p plinth 
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p plinth  || true
+fi
+
+# End automatically added section
+# Automatically added by dh_installdeb/11.5.4
+dpkg-maintscript-helper rm_conffile /etc/plinth/modules-enabled/lib 0.4.3-1\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/plinth/modules-enabled/expert_mode 0.4.3-1\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/plinth/modules-enabled/packages 0.5-1\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/plinth/modules-enabled/xmpp 0.13.0\+ds-1\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/plinth/modules-enabled/apps 0.15.1\+ds-2\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/plinth/modules-enabled/owncloud 0.15.1\+ds-2\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/plinth/modules-enabled/system 0.15.1\+ds-2\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/plinth/modules-enabled/disks 0.15.3\+ds-1\~ -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/plinth/modules-enabled/udiskie 0.39.0\~ -- "$@"
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'freedombox-udiskie.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'freedombox-udiskie.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'freedombox-udiskie.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'freedombox-udiskie.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'plinth.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'plinth.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'plinth.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'plinth.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		deb-systemd-invoke $_dh_action 'freedombox-udiskie.service' 'plinth.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

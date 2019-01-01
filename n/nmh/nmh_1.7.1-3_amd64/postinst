@@ -1,0 +1,26 @@
+#!/bin/sh
+# offer mhmail as alternative for the mail/mailx/Mail commands
+set -e
+
+# if necessary: ie. if not present at all, or with the wrong man suffix
+if [ "$1" = "configure" ] ; then
+		CURRENT=`update-alternatives --display mailx` || true
+		if ! echo "$CURRENT" | grep -q mhmail \
+						|| echo "$CURRENT" | grep -q mhmail.1.gz ;
+		then
+
+				mhm=/usr/bin/mh/mhmail
+				bindir=/usr/bin
+				mandir=/usr/share/man/man1
+				
+				update-alternatives --install $bindir/mailx mailx $mhm 25 \
+														--slave $bindir/mail mail $mhm \
+														--slave $bindir/Mail Mail $mhm \
+														--slave $mandir/mailx.1.gz mailx.1.gz $mandir/mhmail.1mh.gz \
+														--slave $mandir/mail.1.gz mail.1.gz $mandir/mhmail.1mh.gz \
+														--slave $mandir/Mail.1.gz Mail.1.gz $mandir/mhmail.1mh.gz
+		fi
+fi
+		
+
+

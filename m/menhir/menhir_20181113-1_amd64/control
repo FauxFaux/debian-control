@@ -1,0 +1,21 @@
+Package: menhir
+Version: 20181113-1
+Architecture: amd64
+Maintainer: Debian OCaml Maintainers <debian-ocaml-maint@lists.debian.org>
+Installed-Size: 2807
+Depends: libc6 (>= 2.17)
+Suggests: menhir-doc
+Section: ocaml
+Priority: optional
+Homepage: http://gallium.inria.fr/~fpottier/menhir/
+Description: Parser generator for OCaml
+ Menhir is a LR(1) parser generator for the OCaml programming language.
+ It is mostly compatible with the ocamlyacc parser generator provided with
+ the OCaml system, and has the following enhancements over ocamlyacc:
+  * it accepts LR(1) grammars,
+  * it offers parameterized nonterminal symbols as well as a library of
+    standard definitions,
+  * it explains conflicts in terms of the grammar,
+  * it allows grammar specifications to be split over multiple files and
+    parametrized by OCaml modules,
+  * it produces reentrant parsers.

@@ -1,0 +1,21 @@
+Package: runit-init
+Source: runit
+Version: 2.1.2-19
+Architecture: amd64
+Maintainer: Dmitry Bogatov <KAction@debian.org>
+Installed-Size: 110
+Depends: runit (= 2.1.2-19), runit-helper (>= 2.7.3), libc6 (>= 2.4), getty-run, sysv-rc, initscripts
+Conflicts: systemd-sysv, sysvinit-core, upstart
+Replaces: runit (<< 2.1.2-10~), systemd-sysv, sysvinit-core, upstart
+Section: admin
+Priority: optional
+Homepage: http://smarden.org/runit/
+Description: system-wide service supervision (as init system)
+ runit is a collection of tools to provide system-wide service supervision
+ and to manage services.  Contrary to sysv init, it not only cares about
+ starting and stopping services, but also supervises the service daemons
+ while they are running.  Amongst other things, it provides a reliable
+ interface to send signals to service daemons without the need for pid-files,
+ and a log facility with automatic log file rotation and disk space limits.
+ .
+ This package provides /sbin/init, that boots your system and starts runit.

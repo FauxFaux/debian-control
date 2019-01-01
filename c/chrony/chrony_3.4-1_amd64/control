@@ -1,0 +1,28 @@
+Package: chrony
+Version: 3.4-1
+Architecture: amd64
+Maintainer: Vincent Blut <vincent.debian@free.fr>
+Installed-Size: 491
+Depends: adduser, iproute2, lsb-base, ucf, libc6 (>= 2.27), libcap2 (>= 1:2.10), libedit2 (>= 2.11-20080614), libnettle6 (>= 3.4~), libseccomp2 (>= 2.2.3-3~)
+Suggests: dnsutils
+Conflicts: ntp, time-daemon
+Replaces: time-daemon
+Provides: time-daemon
+Section: net
+Priority: optional
+Homepage: https://chrony.tuxfamily.org
+Description: Versatile implementation of the Network Time Protocol
+ It consists of a pair of programs:
+ .
+ chronyd:  This is a daemon which runs in background on the system.
+ It obtains measurements (e.g. via the network) of the system's offset
+ relative to other systems and adjusts the system time accordingly. For
+ isolated systems, the user can periodically enter the correct time by
+ hand (using 'chronyc'). In either case 'chronyd' determines the rate
+ at which the computer gains or loses time, and compensates for this.
+ Chronyd implements the NTP protocol and can act as either a client or
+ a server.
+ .
+ chronyc: This is a command-line driven control and monitoring program.
+ An administrator can use this to fine-tune various parameters within
+ the daemon, add or delete servers etc whilst the daemon is running.

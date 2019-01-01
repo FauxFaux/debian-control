@@ -1,0 +1,25 @@
+Package: python3-prometheus-client
+Source: python-prometheus-client
+Version: 0.5.0+1-1
+Architecture: all
+Maintainer: Christopher Baines <mail@cbaines.net>
+Installed-Size: 145
+Depends: python3-decorator (>= 4.0.10-1), python3:any
+Section: python
+Priority: optional
+Homepage: https://github.com/prometheus/client_python
+Description: Python 3 client for the Prometheus monitoring system
+ This library provides an API for exporting metrics from a Python 3 application
+ It provides classes for the metric types, and an HTTP server to expose the
+ metrics to Prometheus.
+ .
+ When using Linux, the process CPU, RAM, file descriptor usage and start time
+ will also be exported.
+ .
+ Along with the HTTP server to expose metrics, you can also write the metrics
+ to a text file to be exported by the prometheus-node-exporter, or push them to
+ the prometheus-pushgateway.
+ .
+ This library also includes support for re-exporting Graphite metrics to
+ Prometheus, custom collectors to proxy metrics for other systems and a parser
+ for the Prometheus text format.

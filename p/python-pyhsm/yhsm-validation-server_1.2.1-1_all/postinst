@@ -1,0 +1,48 @@
+#!/bin/sh
+#
+# see: dh_installdeb(1)
+#
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <postinst> `abort-remove'
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+
+set -e
+
+if [ "x$1" = "xconfigure" ]; then
+    adduser --quiet --system --group --home /var/cache/yubikey-val --no-create-home --disabled-password --system yhsm-valsrv
+
+    # yhsm-valsrv needs to be in the 'dialout' group to access /dev/ttyACM*
+    adduser --quiet yhsm-valsrv dialout
+fi
+
+invoke-rc.d yhsm-validation-server restart
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p yhsm-validation-server 
+fi
+
+# End automatically added section
+# Automatically added by dh_installinit/11.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/yhsm-validation-server" ]; then
+		update-rc.d yhsm-validation-server defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d yhsm-validation-server $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+

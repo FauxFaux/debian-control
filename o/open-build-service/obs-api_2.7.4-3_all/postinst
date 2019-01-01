@@ -1,0 +1,70 @@
+#!/bin/sh -e
+
+# Add obsapi user and group to run the passenger RubyApp
+if ! getent group obsapi > /dev/null; then
+            addgroup --system --quiet obsapi
+fi
+if ! getent passwd obsapi > /dev/null; then
+    adduser --system --quiet \
+        --ingroup obsapi --shell /bin/false \
+        --no-create-home --home /nonexistent obsapi
+    usermod -c "User for build service api/webui" obsapi
+fi
+
+# Place api and repo url on index page
+if [ ! -f /usr/share/obs/overview/index.html ] ; then
+  FQHOSTNAME=`hostname -f`
+
+  sed -e "s,___API_URL___,https://$FQHOSTNAME,g" \
+      -e "s,___REPO_URL___,http://$FQHOSTNAME:82,g" \
+        /usr/share/obs/overview/overview.html.TEMPLATE > /usr/share/obs/overview/index.html
+fi
+
+# Config secret.key
+if [ ! -e "/usr/share/obs/api/config/secret.key" ]; then
+  rm -f /usr/share/obs/api/config/secret.key
+fi
+
+SECRET_KEY="/etc/obs/api/config/secret.key"
+if [ ! -e "$SECRET_KEY" ]; then
+  touch $SECRET_KEY
+  chmod 0640 $SECRET_KEY
+  chown obsapi:www-data $SECRET_KEY
+    ( dd if=/dev/urandom bs=256 count=1 2>/dev/null |sha256sum| cut -d\  -f 1 >$SECRET_KEY )
+    ln -s $SECRET_KEY /usr/share/obs/api/config/secret.key
+else
+  # cope with upgrades here to ensure that obsapi user own the key.
+  chmod 0640 $SECRET_KEY
+  chown obsapi:www-data $SECRET_KEY
+fi
+
+# Generate log files
+  touch /var/log/obs/access.log
+  touch /var/log/obs/backend_access.log
+  touch /var/log/obs/delayed_job.log
+  touch /var/log/obs/error.log
+  touch /var/log/obs/lastevents.access.log
+  touch /var/log/obs/production.log
+  touch /var/log/obs/production.searchd.log
+  touch /var/log/obs/production.searchd.query.log
+  touch /var/log/obs/production.sphinx.pid
+  touch /var/log/obs/clockworkd.clock.output
+
+# Config Database with dbconfig-common
+. /usr/share/debconf/confmodule
+. /usr/share/dbconfig-common/dpkg/postinst.mysql
+dbc_generate_include=template:/etc/obs/api/config/database.yml
+dbc_generate_include_args="-o template_infile=/usr/share/obs/api/config/database.yml.example"
+dbc_generate_include_owner=www-data
+dbc_go obs-api $@
+
+echo "OBS api installed. Please see /usr/share/doc/obs-api/README.Debian for the rest of setup."
+
+# Automatically added by dh_installinit/11.4.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/obsapidelayed" ]; then
+		update-rc.d obsapidelayed defaults >/dev/null || exit 1
+	fi
+fi
+# End automatically added section
+

@@ -1,0 +1,25 @@
+Package: python3-macaroonbakery
+Source: py-macaroon-bakery
+Version: 1.2.1-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 392
+Depends: python3-nacl (>= 1.1.2), python3-protobuf (>= 3.0.0), python3-pymacaroons (>= 0.12.0), python3-requests (>= 2.18.1), python3-rfc3339 (>= 1.0), python3-six (<< 2.0), python3-six (>= 1.11.0), python3:any (>= 3.5~)
+Section: python
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/go-macaroon-bakery/py-macaroon-bakery
+Description: Higher-level macaroon operations for Python 3
+ Macaroons, like cookies, are a form of bearer credential.  Unlike opaque
+ tokens, macaroons embed caveats that define specific authorization
+ requirements for the target service, the service that issued the root
+ macaroon and which is capable of verifying the integrity of macaroons it
+ receives.
+ .
+ Macaroons allow for delegation and attenuation of authorization.  They are
+ simple and fast to verify, and decouple authorization policy from the
+ enforcement of that policy.
+ .
+ The macaroonbakery library builds on pymacaroons to allow working with
+ macaroons at a higher level, such as by automatically gathering discharge
+ macaroons for third-party caveats from their corresponding services.

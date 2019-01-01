@@ -1,0 +1,26 @@
+Package: pilon
+Version: 1.23+dfsg-1
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 480
+Depends: default-jre | java-runtime, java-wrappers, libhtsjdk-java, libcommons-lang-java, scala-library
+Conflicts: pilon-non-free
+Replaces: pilon-non-free
+Section: science
+Priority: optional
+Homepage: https://github.com/broadinstitute/pilon/wiki
+Description: automated genome assembly improvement and variant detection tool
+ Pilon is a software tool which can be used to:
+  * Automatically improve draft assemblies
+  * Find variation among strains, including large event detection
+ Pilon requires as input a FASTA file of the genome along with one or more
+ BAM files of reads aligned to the input FASTA file. Pilon uses read
+ alignment analysis to identify inconsistencies between the input genome and
+ the evidence in the reads. It then attempts to make improvements to the
+ input genome, including:
+  * Single base differences
+  * Small indels
+  * Larger indel or block substitution events
+  * Gap filling
+  * Identification of local misassemblies, including optional opening
+    of new gaps

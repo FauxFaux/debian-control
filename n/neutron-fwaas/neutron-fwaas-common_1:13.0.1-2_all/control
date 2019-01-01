@@ -1,0 +1,19 @@
+Package: neutron-fwaas-common
+Source: neutron-fwaas
+Version: 1:13.0.1-2
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 115
+Depends: adduser, debconf, neutron-common, python3-neutron-fwaas (= 1:13.0.1-2), debconf (>= 0.5) | debconf-2.0
+Breaks: python3-neutron-fwaas (<< 1:9.0.0~)
+Replaces: python3-neutron-fwaas (<< 1:9.0.0~)
+Section: net
+Priority: optional
+Homepage: https://github.com/openstack/neutron-fwaas
+Description: OpenStack Firewall as a Service - common files
+ Neutron provides an API to dynamically request and configure virtual networks.
+ These networks connect "interfaces" from other OpenStack services (such as
+ vNICs from Nova VMs). The Neutron API supports extensions to provide advanced
+ network capabilities, including QoS, ACLs, and network monitoring.
+ .
+ This package contains common files for the Neutron load balancer.

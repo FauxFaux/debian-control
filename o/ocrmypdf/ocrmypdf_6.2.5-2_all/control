@@ -1,0 +1,32 @@
+Package: ocrmypdf
+Version: 6.2.5-2
+Architecture: all
+Maintainer: Sean Whitton <spwhitton@spwhitton.name>
+Installed-Size: 363
+Depends: ghostscript (>= 9.18~dfsg~), icc-profiles-free, liblept5, python3-pil, python3-pkg-resources, python3-reportlab, python3-ruffus (>= 2.7), qpdf (>= 7.0.0), tesseract-ocr, zlib1g, python3-cffi-backend-api-min (<= 9729), python3-cffi-backend-api-max (>= 9729), python3-defusedxml, python3-img2pdf (>= 0.2.1), python3-pypdf2 (>= 1.26), python3:any
+Recommends: unpaper
+Suggests: ocrmypdf-doc, python-watchdog, img2pdf
+Section: graphics
+Priority: optional
+Homepage: https://github.com/jbarlow83/OCRmyPDF
+Description: add an OCR text layer to PDF files
+ OCRmyPDF generates a searchable PDF/A file from a regular PDF
+ containing only images, allowing it to be searched.
+ .
+ It uses the Tesseract OCR engine and so supports all the languages
+ that Tesseract does.
+ .
+ Some other main features:
+ .
+   * Places OCR text accurately below the image to ease copy / paste
+   * Keeps the exact resolution of the original embedded images
+   * When possible, inserts OCR information as a lossless operation
+     without rendering vector information
+   * Keeps file size about the same
+   * If requested deskews and/or cleans the image before performing OCR
+   * Validates input and output files
+   * Provides debug mode to enable easy verification of the OCR results
+   * Processes pages in parallel when more than one CPU core is
+     available
+   * Battle-tested on thousands of PDFs, a test suite and continuous
+     integration.

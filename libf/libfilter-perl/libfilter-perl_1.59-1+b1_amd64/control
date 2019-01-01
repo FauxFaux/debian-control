@@ -1,0 +1,25 @@
+Package: libfilter-perl
+Source: libfilter-perl (1.59-1)
+Version: 1.59-1+b1
+Architecture: amd64
+Maintainer: Colin Watson <cjwatson@debian.org>
+Installed-Size: 207
+Depends: libc6 (>= 2.4), perl (>= 5.28.0-3), perlapi-5.28.0
+Recommends: cpp
+Suggests: libcompress-zlib-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Filter/
+Description: Perl source filters
+ Source filters alter the program text of a module before Perl sees it, much
+ as a C preprocessor alters the source text of a C program before the
+ compiler sees it.
+ .
+ This package contains a number of source filters, including:
+ .
+   exec and sh: pipe the source file through an external command
+   cpp: pipe the source file through the C preprocessor
+   decrypt: example of simple (though weak!) source obfuscation
+   tee: copy filtered source to a file (debugging aid)
+ .
+ A substantial amount of documentation and examples is also included.

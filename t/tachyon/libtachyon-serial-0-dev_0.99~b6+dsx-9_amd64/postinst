@@ -1,0 +1,39 @@
+#!/bin/sh
+set -e
+add_libvariant_dev_alternative () {
+	local libvariant=$1
+	local libpriority=$2
+	update-alternatives --quiet \
+		--install \
+			/usr/lib/x86_64-linux-gnu/libtachyon.so.0 \
+			libtachyon.so.0 \
+			/usr/lib/x86_64-linux-gnu/libtachyon-${libvariant}.so.0 $libpriority \
+		--slave /usr/lib/x86_64-linux-gnu/libtachyon.so \
+			libtachyon.so \
+			/usr/lib/x86_64-linux-gnu/libtachyon-${libvariant}.so \
+		--slave /usr/lib/x86_64-linux-gnu/libtachyon.so.0.0.0 \
+			libtachyon.so.0.0.0 \
+			/usr/lib/x86_64-linux-gnu/libtachyon-${libvariant}.so.0.0.0
+	return 0
+	}
+for LIBVARIANT in serial; do
+			case $LIBVARIANT in
+			serial)         LIBPRIORITY=10 ;;
+			mt-openmp)      LIBPRIORITY=110 ;;
+			mt-thr)         LIBPRIORITY=150 ;;
+			mpich-openmp)   LIBPRIORITY=210 ;;
+			mpich-thr)      LIBPRIORITY=250 ;;
+			mpich)          LIBPRIORITY=290 ;;
+			openmpi-openmp) LIBPRIORITY=310 ;;
+			openmpi-thr)    LIBPRIORITY=350 ;;
+			openmpi)        LIBPRIORITY=390 ;;
+				*) echo "unknown library variant \'${LIBVARIANT}': skip" >&2 ;;
+			esac
+	add_libvariant_dev_alternative $LIBVARIANT $LIBPRIORITY
+done
+# Automatically added by dh_installdeb/12
+dpkg-maintscript-helper dir_to_symlink /usr/share/doc/libtachyon-serial-0-dev /usr/share/doc/libtachyon-dev-common 0.99\~b6\+dsx-5\~ -- "$@"
+dpkg-maintscript-helper symlink_to_dir /usr/share/doc/libtachyon-serial-0-dev /usr/share/doc/libtachyon-dev-common 0.99\~b6\+dsx-8\~ -- "$@"
+# End automatically added section
+
+exit 0

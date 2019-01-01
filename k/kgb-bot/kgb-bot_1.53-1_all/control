@@ -1,0 +1,18 @@
+Package: kgb-bot
+Version: 1.53-1
+Architecture: all
+Maintainer: Debian KGB Maintainers <kgb-bot@packages.debian.org>
+Installed-Size: 171
+Depends: perl:any, adduser, libipc-run-perl, libjson-xs-perl, libmonkey-patch-perl, libnet-ip-perl, libpoe-component-irc-perl, libpoe-component-server-soap-perl, libpoe-component-sslify-perl, libpoe-perl, libproc-pid-file-perl, lsb-base, libschedule-ratelimiter-perl, libyaml-perl, kgb-client (= 1.53-1), git
+Suggests: polygen, libfile-which-perl
+Section: devel
+Priority: optional
+Homepage: https://salsa.debian.org/kgb-team/kgb/wikis/home
+Description: IRC collaboration bot
+ KGB is an IRC bot, helping people work together by notifying an IRC channel
+ when a commit occurs.
+ .
+ It supports multiple repositories/IRC channels and is fully configurable.
+ .
+ This package contains the server-side daemon, kgb-bot, which is responsible
+ for relaying commit notifications to IRC.

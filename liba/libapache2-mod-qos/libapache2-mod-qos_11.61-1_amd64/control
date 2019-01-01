@@ -1,0 +1,26 @@
+Package: libapache2-mod-qos
+Version: 11.61-1
+Architecture: amd64
+Maintainer: Sergey B Kirpichev <skirpichev@gmail.com>
+Installed-Size: 818
+Depends: libapr1 (>= 1.2.7), libaprutil1 (>= 1.2.7+dfsg), libc6 (>= 2.14), libpcre3, libpng16-16 (>= 1.6.2-1), libssl1.1 (>= 1.1.0), zlib1g (>= 1:1.1.4), apache2-api-20120211, apache2-bin (>= 2.4.16)
+Section: httpd
+Priority: optional
+Homepage: http://mod-qos.sourceforge.net/
+Description: quality of service module for the apache2
+ This is a quality of service module (QoS) for the Apache web server
+ implementing control mechanisms that can provide different priority
+ to different HTTP requests.
+ .
+ It may be used to determine which requests should be served and which
+ shouldn't in order to avoid resource oversubscription. The module
+ collects different attributes such as the request URL, HTTP request
+ and response headers, the IP source address, the HTTP response code,
+ history data (user session and on per source IP address basis), the
+ number of concurrent requests to the server (total or requests having
+ similar attributes), the number of concurrent TCP connections (total
+ or from a single source IP), and so forth.
+ .
+ Counteractive measures to enforce the defined rules are: request
+ blocking, dynamic timeout adjustment, request delay, response
+ throttling, and dropping of TCP connections.

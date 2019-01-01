@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    remove|purge)
+        if command -v dictdconfig # update dictd's DB
+        then
+            dictdconfig -w
+        fi
+        if dpkg -s dictd 2> /dev/null|grep -qe '^Status:.*installed'
+        then
+            invoke-rc.d dictd stop
+            invoke-rc.d dictd start
+        fi
+        exit 0
+    ;;
+
+
+    upgrade|abort-upgrade|abort-remove|abort-deconfigure|in-favour|removing)
+        exit 0
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+
+esac
+
+
+
+exit 0

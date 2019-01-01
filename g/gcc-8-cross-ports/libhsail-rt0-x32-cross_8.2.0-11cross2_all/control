@@ -1,0 +1,17 @@
+Package: libhsail-rt0-x32-cross
+Source: gcc-8-cross-ports (16)
+Version: 8.2.0-11cross2
+Architecture: all
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Installed-Size: 48
+Depends: gcc-8-cross-base-ports (= 8.2.0-11cross2), libc6-x32-cross (>= 2.28)
+Built-Using: gcc-8 (= 8.2.0-11)
+Section: devel
+Priority: optional
+Homepage: http://gcc.gnu.org/
+Description: HSAIL runtime library
+ This library implements the agent-side runtime functionality required
+ to run HSA finalized programs produced by the BRIG frontend.
+ .
+ The library contains both the code required to run kernels on the agent
+ and also functions implementing more complex HSAIL instructions.

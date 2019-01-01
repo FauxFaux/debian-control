@@ -1,0 +1,18 @@
+Package: liblxc1
+Source: lxc
+Version: 1:3.1.0-1
+Architecture: amd64
+Maintainer: pkg-lxc <pkg-lxc-devel@lists.alioth.debian.org>
+Installed-Size: 882
+Depends: libc6 (>= 2.27), libcap2 (>= 1:2.10), libgnutls30 (>= 3.6.5), libseccomp2 (>= 2.1.0), libselinux1 (>= 1.32), cgroupfs-mount | systemd
+Breaks: lxc (<< 1:3.0.2-1~exp+1)
+Section: libs
+Priority: optional
+Homepage: https://linuxcontainers.org/
+Description: Linux Containers userspace tools (library)
+ Containers are insulated areas inside a system, which have their own namespace
+ for filesystem, network, PID, IPC, CPU and memory allocation and which can be
+ created using the Control Group and Namespace features included in the Linux
+ kernel.
+ .
+ This package contains the shared library.

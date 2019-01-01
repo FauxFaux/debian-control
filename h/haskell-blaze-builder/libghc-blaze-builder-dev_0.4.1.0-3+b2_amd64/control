@@ -1,0 +1,24 @@
+Package: libghc-blaze-builder-dev
+Source: haskell-blaze-builder (0.4.1.0-3)
+Version: 0.4.1.0-3+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 783
+Depends: libghc-base-dev-4.11.1.0-5dd74, libghc-bytestring-dev-0.10.8.2-76891, libghc-deepseq-dev-1.4.3.0-17e4f, libghc-text-dev-1.2.3.1-30bbe, libatomic1 (>= 4.8), libc6 (>= 2.14), libgmp10
+Suggests: libghc-blaze-builder-doc, libghc-blaze-builder-prof
+Provides: libghc-blaze-builder-dev-0.4.1.0-75fbe
+Section: haskell
+Priority: optional
+Homepage: http://github.com/lpsmith/blaze-builder
+Description: abstraction of buffered output of byte streams
+ This library provides an abstraction of buffered output of byte streams and
+ several convenience functions to exploit it. For example, it allows one to
+ efficiently serialize Haskell values to lazy bytestrings with a large average
+ chunk size. The large average chunk size allows one to make good use of cache
+ prefetching in later processing steps (e.g. compression) and reduces the
+ system call overhead when writing the resulting lazy bytestring to a file or
+ sending it over the network.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: blaze-builder-0.4.1.0-Fg2MopjzK6R9nXOkgQYDHB

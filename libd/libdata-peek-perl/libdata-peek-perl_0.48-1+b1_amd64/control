@@ -1,0 +1,24 @@
+Package: libdata-peek-perl
+Source: libdata-peek-perl (0.48-1)
+Version: 0.48-1+b1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 77
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.4)
+Suggests: perltidy
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Data-Peek
+Description: module providing low-level manipulation of Perl data
+ Data::Peek is a module that allows for low-level manipulation of Perl data
+ structures, particularly for displaying the internal representation of given
+ Perl variables.
+ .
+ In particular, it allows one to look at a scalar value to determine whether it
+ contains a string (PV), integer (IV or UV) or floating point number (NV); the
+ reference count of that scalar (REFCOUNT) and other flags (such as whether the
+ string is UTF-8).
+ .
+ This module can also create triple variables, which are similar to the dual
+ variables provided by Scalar::Util - they have two or three values, and the
+ value which is returned depends on the context in which it is used.

@@ -1,0 +1,22 @@
+Package: orthanc-imagej
+Version: 1.2+dfsg-1
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 51
+Depends: default-jre (>= 2:1.8) | java8-runtime, imagej, libjson-simple-java
+Recommends: orthanc
+Section: science
+Priority: optional
+Homepage: http://www.orthanc-server.com/static.php?page=imagej
+Description: ImageJ plugin to import images from Orthanc
+ This ImageJ plugin allows ImageJ to browse the content of an Orthanc
+ server, then import 2D/3D DICOM images from Orthanc into ImageJ.
+ Orthanc is a lightweight, RESTful DICOM server for healthcare and
+ medical research.
+ .
+ This plugin simplifies the indexation of DICOM images if using
+ ImageJ (e.g. for quality control of DICOM modalities, or for
+ pedagogical use). There is also no need to carry on any complex
+ network configuration, since the plugin directly uses the REST
+ API of Orthanc. This makes its installation and its use
+ quite straightforward.

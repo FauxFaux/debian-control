@@ -1,0 +1,21 @@
+Package: libghc-system-fileio-prof
+Source: haskell-system-fileio (0.3.16.4-2)
+Version: 0.3.16.4-2+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 581
+Depends: libghc-system-fileio-dev (= 0.3.16.4-2+b2), libghc-base-prof-4.11.1.0-5dd74, libghc-bytestring-prof-0.10.8.2-76891, libghc-system-filepath-prof-0.4.14-0ce56, libghc-text-prof-1.2.3.1-30bbe, libghc-time-prof-1.8.0.2-2ae9f, libghc-unix-prof-2.7.2.2-fe53d
+Provides: libghc-system-fileio-prof-0.3.16.4-ea754
+Section: haskell
+Priority: optional
+Homepage: https://github.com/fpco/haskell-filesystem
+Description: consistent filesystem interaction across GHC versions; profiling libraries
+ This is a small wrapper around the "directory", "unix", and "Win32"
+ packages, for use with "system-filepath". It provides a consistent
+ API to the various versions of these packages distributed with
+ different versions of GHC.
+ .
+ In particular, this library supports working with POSIX files that
+ have paths which can't be decoded in the current locale encoding.
+ .
+ This package contains the libraries compiled with profiling enabled.

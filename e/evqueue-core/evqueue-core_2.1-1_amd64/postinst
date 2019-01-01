@@ -1,0 +1,48 @@
+#!/bin/bash
+
+set -e
+
+if [ "$1" = "configure" ]; then
+	if ! getent group evqueue > /dev/null 2>&1 ; then
+		addgroup --system --quiet evqueue
+	fi
+	
+	if ! getent passwd evqueue > /dev/null 2>&1 ; then
+		adduser --quiet --system --disabled-login --ingroup evqueue --home /var/run/evqueue/ --no-create-home evqueue
+	fi
+
+	chown evqueue:evqueue /usr/share/evqueue-core/plugins
+	chown evqueue:evqueue /usr/share/evqueue-core/plugins/notifications
+	
+	. /usr/share/debconf/confmodule
+	db_get evqueue-core/hostname
+	sed --in-place -e "s/#\?[ ]*mysql.host[ ]*=.*/mysql.host=$RET/" /etc/evqueue.conf
+
+	db_get evqueue-core/user
+	sed --in-place -e "s/#\?[ ]*mysql.user[ ]*=.*/mysql.user=$RET/" /etc/evqueue.conf
+
+	db_get evqueue-core/password
+	sed --in-place -e "s/#\?[ ]*mysql.password[ ]*=.*/mysql.password=$RET/" /etc/evqueue.conf
+
+	db_get evqueue-core/database
+	sed --in-place -e "s/#\?[ ]*mysql.database[ ]*=.*/mysql.database=$RET/" /etc/evqueue.conf
+
+	if service --status-all | grep -Fq 'rsyslog'; then	
+		service rsyslog restart
+	fi
+fi
+
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/evqueue" ]; then
+		update-rc.d evqueue defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d evqueue $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+

@@ -1,0 +1,23 @@
+Package: libgl1-nvidia-glvnd-glx
+Source: nvidia-graphics-drivers
+Version: 390.87-5
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 356
+Depends: libgl1 (>= 0.2.999) | libgl1-glvnd-nvidia-glx, libglx-nvidia0 (= 390.87-5)
+Provides: libgl1-nvidia-glx-any
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: NVIDIA binary OpenGL/GLX library (GLVND variant)
+ The NVIDIA binary driver provides optimized hardware acceleration of
+ OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
+ for graphics cards using NVIDIA chip sets.
+ .
+ See the description of the nvidia-driver package
+ or /usr/share/doc/libgl1-nvidia-glvnd-glx/README.txt.gz
+ for a complete list of supported GPUs and PCI IDs.
+ .
+ This metapackage depends on the NVIDIA binary OpenGL/GLX implementation using
+ GLVND and the corresponding GLVND loader library.

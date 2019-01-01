@@ -1,0 +1,15 @@
+Package: ejabberd-mod-message-log
+Source: ejabberd-contrib
+Version: 0.2018.11.07~dfsg0-1
+Architecture: amd64
+Maintainer: Ejabberd Packaging Team <ejabberd@packages.debian.org>
+Installed-Size: 27
+Depends: erlang-base (>= 1:17) | erlang-abi-17.0, erlang-base (>= 1:21.1.1+dfsg) | erlang-base-hipe (>= 1:21.1.1+dfsg), ejabberd (= 18.09-2)
+Section: net
+Priority: optional
+Homepage: https://github.com/processone/ejabberd-contrib
+Description: writes a line for each message to a log file
+ This module writes a line for each sent or received message to a log file.
+ Each line mentions the sender's JID and the recipient's JID, and also the
+ message type (e.g., "normal", "chat", or "groupchat").  Carbon copies are
+ marked as such.

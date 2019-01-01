@@ -1,0 +1,22 @@
+Package: libxen-dev
+Source: xen
+Version: 4.11.1~pre.20180911.5acdd26fdc+dfsg-5
+Architecture: amd64
+Maintainer: Debian Xen Team <pkg-xen-devel@lists.alioth.debian.org>
+Installed-Size: 3785
+Depends: libxenmisc4.11 (= 4.11.1~pre.20180911.5acdd26fdc+dfsg-5), libxencall1 (= 4.11.1~pre.20180911.5acdd26fdc+dfsg-5), libxendevicemodel1 (= 4.11.1~pre.20180911.5acdd26fdc+dfsg-5), libxenevtchn1 (= 4.11.1~pre.20180911.5acdd26fdc+dfsg-5), libxenforeignmemory1 (= 4.11.1~pre.20180911.5acdd26fdc+dfsg-5), libxengnttab1 (= 4.11.1~pre.20180911.5acdd26fdc+dfsg-5), libxenstore3.0 (= 4.11.1~pre.20180911.5acdd26fdc+dfsg-5), libxentoolcore1 (= 4.11.1~pre.20180911.5acdd26fdc+dfsg-5), libxentoollog1 (= 4.11.1~pre.20180911.5acdd26fdc+dfsg-5)
+Section: libdevel
+Priority: optional
+Description: Public headers and libs for Xen
+ This package contains the public headers and static libraries for Xen.
+ .
+ The libxenlight library is intended as a common base for all Xen toolstack
+ developers.  The libxlutil library contains additional helpers which may
+ be useful to toolstack developers.
+ .
+ The libxenstore library allows userspace processes to interact with
+ the XenStore database.  Command line tools for accessing xenstore are
+ provided is via the xenstore-utils package.
+ .
+ Most of the other included libraries are internal, and intended for
+ use by the Xen toolstack, rather than directly.

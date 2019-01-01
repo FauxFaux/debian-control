@@ -1,0 +1,15 @@
+Package: csync2
+Version: 2.0-22-gce67c55-1
+Architecture: amd64
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Installed-Size: 382
+Depends: libc6 (>= 2.14), libgnutls30 (>= 3.5.6), librsync1 (>= 0.9.6), netbase (>= 4.25)
+Recommends: sqlite3, openbsd-inetd | inet-superserver
+Suggests: openssl
+Section: admin
+Priority: optional
+Homepage: https://github.com/LINBIT/csync2
+Description: cluster synchronization tool
+ CSYNC2 synchronizes files in a cluster using the rsync-algorithm.
+ It maintains a database of modified files so it is able to handle
+ deletion of files and file modification conflicts.

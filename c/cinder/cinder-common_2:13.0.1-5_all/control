@@ -1,0 +1,22 @@
+Package: cinder-common
+Source: cinder
+Version: 2:13.0.1-5
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 355
+Depends: adduser, dbconfig-common, debconf, python3-cinder (= 2:13.0.1-5), sqlite3, debconf (>= 0.5) | debconf-2.0, python3:any
+Section: net
+Priority: optional
+Homepage: https://github.com/openstack/cinder
+Description: OpenStack block storage system - common files
+ Cinder is a block Storage-as-a-Service system for the OpenStack cloud
+ computing suite. It re-implements the features of Nova-volume, which it
+ directly replaces.
+ .
+ Cinder uses LVM partitions of your volume servers in order to provide iSCSI
+ permanent block storage devices for your virtual machines running on Nova.
+ It also has back-end drivers for many hardware and software storage solutions
+ like Ceph, NFS, Net-APP, etc.
+ .
+ This package contains common files and configuration that are
+ needed by all the daemon packages of Cinder.

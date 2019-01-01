@@ -1,0 +1,21 @@
+Package: fragmaster
+Version: 1.7-8
+Architecture: all
+Maintainer: Agustin Martin Domingo <agmartin@debian.org>
+Installed-Size: 162
+Depends: texlive-base-bin, texlive-latex-base, texlive-latex-recommended, texlive-extra-utils, texlive-font-utils, ghostscript, perl:any
+Section: tex
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://gitlab.com/agmartin/fragmaster
+Description: use of psfrag constructs with pdflatex
+ psfrag is a LaTeX package which allows one to replace text elements in
+ included EPS graphics by arbitrary LaTeX output. Because psfrag uses
+ Postscript for making the replacements, in principle you can't use
+ psfrag with pdflatex which doesn't have any interfaces to postscript.
+ .
+ This package contains the Perl script fragmaster that produces a new
+ EPS from your original EPS which already contains all those psfrag
+ replacements. This new EPS graphic actually can be converted to PDF
+ including all replacements. The resulting "encapsulated" PDF then can
+ be used with pdflatex.

@@ -1,0 +1,18 @@
+Package: libpam-ssh
+Version: 2.1+ds1-4
+Architecture: amd64
+Maintainer: Jerome Benoit <calculus@rezozer.net>
+Installed-Size: 191
+Depends: libc6 (>= 2.25), libpam0g (>= 0.99.7.1), libssl1.1 (>= 1.1.0), libpam-runtime (>= 1.0.1-6)
+Recommends: openssh-client | ssh-client, libpam-tmpdir
+Section: admin
+Priority: optional
+Homepage: http://pam-ssh.sourceforge.net
+Description: Authenticate using SSH keys
+ This pluggable authentication module (PAM) provides single sign-on
+ using secure shell (SSH) keys:
+ - during authentication, the user types a SSH passphrase and is authenticated
+   if the passphrase successfully decrypts the user's SSH private keys;
+ - in session phase, a ssh-agent process is started and decrypted keys are
+   added, and thus the user can SSH to other hosts that accept key
+   authentication without typing more passwords for the entire session.

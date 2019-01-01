@@ -1,0 +1,20 @@
+Package: librust-tar+default-dev
+Source: rust-tar
+Version: 0.4.20-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-tar-dev (= 0.4.20-1), librust-xattr-0.2+default-dev
+Provides: librust-tar-0+default-dev (= 0.4.20-1), librust-tar-0.4+default-dev (= 0.4.20-1), librust-tar-0.4.20+default-dev (= 0.4.20-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/alexcrichton/tar-rs
+Description: Rust implementation of a TAR file reader and writer - feature "default"
+ This library does not currently handle compression, but it is abstract over all
+ I/O readers and writers. Additionally, great lengths are taken to ensure that
+ the entire contents are never required to be entirely resident in memory all at
+ once.
+ .
+ This metapackage enables feature default for the Rust tar crate, by pulling in
+ any additional dependencies needed by that feature.

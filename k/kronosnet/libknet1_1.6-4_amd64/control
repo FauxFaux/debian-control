@@ -1,0 +1,24 @@
+Package: libknet1
+Source: kronosnet
+Version: 1.6-4
+Architecture: amd64
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Installed-Size: 332
+Depends: libbz2-1.0, libc6 (>= 2.17), liblz4-1 (>= 0.0~r130), liblzma5 (>= 5.1.1alpha+20110809), liblzo2-2, libnspr4 (>= 2:4.9-2~), libnss3 (>= 2:3.13.4-2~), libssl1.1 (>= 1.1.0), zlib1g (>= 1:1.1.4)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://kronosnet.org/
+Description: kronosnet core switching implementation
+ Kronosnet, often referred to as knet, is a network
+ abstraction layer designed for High Availability use cases, where redundancy,
+ security, fault tolerance and fast fail-over are the core requirements of
+ your application.
+ .
+ Kronosnet is the new underlying network protocol for Linux HA components
+ (Corosync), that features ability to use multiple links between nodes,
+ active/active and active/passive link failover policies, automatic link
+ recovery, FIPS compliant encryption (nss and/or openssl), automatic PMTUd and
+ in general better performances compared to the old network protocol.
+ .
+ This package contains libraries that are used by libknet clients.

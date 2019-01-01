@@ -1,0 +1,27 @@
+Package: python3-django-test-without-migrations
+Source: django-test-without-migrations
+Version: 0.6-5
+Architecture: all
+Maintainer: Herbert Parentes Fortes Neto <hpfn@debian.org>
+Installed-Size: 41
+Depends: python3-django, python3:any
+Section: python
+Priority: optional
+Homepage: https://pypi.python.org/pypi/django-test-without-migrations
+Description: Disable migrations when running your tests (Python 3)
+ Test Without Migrations is a manage.py test command extension.
+ .
+ The Django 1.7 and 1.8 migration backend demands that you
+ create a migration every time you change a model.
+ .
+ This can be inconvenient when you’re just trying to explore
+ your models code.
+ .
+ In older Django versions, with South you could use the
+ SOUTH_TEST_MIGRATIONS settings to tell Django to simply create
+ all model tables without running migrations.
+ .
+ This app adds this capability to Django by extending the
+ 'manage.py test' command with a –nomigrations option.
+ .
+ Test Without Migrations works with Django 1.7+.

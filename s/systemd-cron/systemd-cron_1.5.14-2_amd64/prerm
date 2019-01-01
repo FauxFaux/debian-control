@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "remove" ]; then
+    deb-systemd-invoke stop cron-update.path
+fi
+
+# Automatically added by dh_installsystemd/11.5.3
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop 'cron.target' >/dev/null || true
+fi
+# End automatically added section
+

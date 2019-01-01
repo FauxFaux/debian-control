@@ -1,0 +1,22 @@
+Package: libbsd-arc4random-perl
+Source: libbsd-arc4random-perl (1.50-6)
+Version: 1.50-6+b6
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 49
+Depends: libbsd0 (>= 0.0), libc6 (>= 2.4), perl (>= 5.28.0-3), perlapi-5.28.0
+Section: perl
+Priority: optional
+Homepage: https://www.mirbsd.org/a4rp5bsd.htm
+Description: CPAN's BSD::arc4random -- Perl bindings for arc4random
+ The BSD::arc4random module provides a Perl API for the arc4random(3)
+ suite of functions and a few natively implemented functions.
+ .
+ Exposed functions are: have_kintf (ability to push entropy back to
+ the kernel); arc4random, arc4random_bytes, arc4random_uniform, the
+ RANDOM variable (get entropy); arc4random_stir (next time used, some
+ entropy from the kernel is first requested); arc4random_addrandom
+ (add user data to SRNG state); arc4random_push[bk] (push user data
+ to kernel RNG if supported; add kernel data or, if not supported,
+ user data to SRNG); the ability to "tie" variables to this module
+ for retrieving and storing entropy (e.g. in $RANDOM).

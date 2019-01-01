@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+. /usr/share/debconf/confmodule
+blis_pri=37
+
+update-alternatives --install /usr/lib/x86_64-linux-gnu/libblas64.so \
+                    libblas64.so-x86_64-linux-gnu \
+                    /usr/lib/x86_64-linux-gnu/libblis64.so \
+                    $blis_pri \
+                    --slave /usr/include/x86_64-linux-gnu/cblas64.h \
+                    cblas64.h-x86_64-linux-gnu \
+                    /usr/include/x86_64-linux-gnu/cblas64-blis.h
+
+
+exit 0

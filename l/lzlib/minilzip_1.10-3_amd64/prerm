@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+	remove|upgrade|deconfigure)
+		# lzip-alternative
+		update-alternatives --quiet --remove lzip /usr/bin/lzip.minilzip
+
+		# lzip-compressor
+		update-alternatives --quiet --remove lzip-compressor /usr/bin/lzip.minilzip
+
+		# lzip-decompressor
+		update-alternatives --quiet --remove lzip-decompressor /usr/bin/lzip.minilzip
+		;;
+
+	failed-upgrade)
+
+		;;
+
+	*)
+		echo "prerm called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+
+
+exit 0

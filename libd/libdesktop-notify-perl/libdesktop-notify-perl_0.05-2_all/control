@@ -1,0 +1,22 @@
+Package: libdesktop-notify-perl
+Version: 0.05-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 31
+Depends: perl, libnet-dbus-perl, libclass-accessor-perl
+Recommends: notification-daemon
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Desktop-Notify
+Description: Perl module which communicates with the Desktop Notifications framework
+ This module provides a Perl interface to the Desktop Notifications framework.
+ .
+ The framework allows applications to display pop-up notifications on an X
+ desktop.  This is implemented with two components: a daemon that displays the
+ notifications, and a client library used by applications to send notifications
+ to the daemon.  These components communicate through the DBus message bus
+ protocol.
+ .
+ This module serves the same purpose as libnotify, in an object-oriented Perl
+ interface.  It is not, however, an interface to libnotify itself, but a
+ separate implementation of the specification using Net::DBus.

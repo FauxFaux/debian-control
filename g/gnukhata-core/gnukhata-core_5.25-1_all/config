@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+# source debconf stuffs
+. /usr/share/debconf/confmodule
+
+if [ -f /usr/share/dbconfig-common/dpkg/config ]; then
+   . /usr/share/dbconfig-common/dpkg/config
+
+   dbc_dbtypes="pgsql"
+   dbc_dbname="gkdata"
+   dbc_dbuser="gkadmin"
+
+   dbc_go gnukhata-core $@
+fi
+

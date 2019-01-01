@@ -1,0 +1,21 @@
+Package: libtty-dev
+Source: termrec
+Version: 0.18-1
+Architecture: amd64
+Maintainer: Adam Borowski <kilobyte@angband.pl>
+Installed-Size: 36
+Depends: libtty1 (= 0.18-1)
+Section: libdevel
+Priority: optional
+Homepage: http://angband.pl/termrec.html
+Description: terminal/ttyrec library -- development
+ libtty is a library for handling terminal output.  It is kind of "reverse
+ curses" -- it is on the receiving end of tty data, accepting vt100 codes
+ and managing a virtual terminal.  It lacks input handling thus is unfit
+ for a real terminal emulator, but includes functions for storing a history
+ of frames to handle a "video" recording.
+ .
+ A second part of the library provides ways to read/write/edit ttyrec/-like
+ files, including transparent compression or streaming them from network.
+ .
+ This package contains the library headers.

@@ -1,0 +1,23 @@
+#! /bin/sh
+
+set -e
+
+
+
+EDUTHEME="buster"
+
+# Make buster the default for Buster via triggers;
+# see debian-edu-artwork-buster.triggers
+# Set plymouth default theme only for Debian Edu installations.
+
+case "$1" in
+	configure)
+		update-debian-edu-artwork-$EDUTHEME configure
+	;;
+	triggered)
+		update-debian-edu-artwork-$EDUTHEME configure
+		if [ -f /etc/plymouth/plymouthd.conf ] && [ -f /etc/debian-edu/config ] && which plymouth-set-default-theme > /dev/null ; then
+			plymouth-set-default-theme -R debian-edu-${EDUTHEME}
+		fi
+	;;
+esac

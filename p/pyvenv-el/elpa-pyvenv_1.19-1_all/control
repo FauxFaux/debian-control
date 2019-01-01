@@ -1,0 +1,20 @@
+Package: elpa-pyvenv
+Source: pyvenv-el
+Version: 1.19-1
+Architecture: all
+Maintainer: Debian Emacsen team <debian-emacsen@lists.debian.org>
+Installed-Size: 51
+Depends: emacsen-common, virtualenv
+Recommends: emacs (>= 46.0), virtualenvwrapper
+Enhances: emacs, emacs25
+Section: lisp
+Priority: optional
+Homepage: https://github.com/jorgenschaefer/pyvenv
+Description: Python virtual environment interface
+ This is a simple global minor mode which will replicate the changes
+ done by virtualenv activation inside Emacs.
+ .
+ The main entry points are `pyvenv-activate', which queries the user
+ for a virtual environment directory to activate, and
+ `pyvenv-workon', which queries for a virtual environment in
+ $WORKON_HOME (from virtualenvwrapper.sh).

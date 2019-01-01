@@ -1,0 +1,79 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ -f /usr/share/dbconfig-common/dpkg/config ]; then
+    dbc_dbtypes="sqlite3, pgsql, mysql"
+    dbc_basepath="/var/lib/mailman3/web"
+    dbc_dbname="mailman3web"
+    dbc_dbuser="mailman3web"
+    . /usr/share/dbconfig-common/dpkg/config
+    dbc_go mailman3-web "$@"
+
+    db_get mailman3-web/database-type || true
+    res="$RET"
+    if [ "$res" = "sqlite3" ]; then
+        dbc_dbname="mailman3web.db"
+        db_set mailman3-web/db/dbname "$dbc_dbname"
+    fi
+fi
+
+get_config_option () {
+    option="$1"
+    [ -f /etc/mailman3/mailman-web.py ] || return
+    sed -n -e "s/\s*$option\s*=\s*'\(.*\)'\s*$/\1/p" \
+        /etc/mailman3/mailman-web.py
+}
+
+su_cmd="su --shell /bin/sh --command"
+django_admin="python3 /usr/bin/django-admin"
+django_admin_args="--verbosity 0 --no-color --pythonpath /usr/share/mailman3-web --settings settings"
+
+# set django_site
+
+db_get mailman3/django-site && django_site="$RET"
+
+if [ -f /usr/share/mailman3-web/manage.py ] && \
+   [ -f /etc/mailman3/mailman-web.py ]; then
+    # Try to get django_site from the Django project. Fails at initial
+    # installation due to missing database. That's why the result of
+    # django-admin is only taken if command was successfull.
+    if django_site_tmp="$($su_cmd "$django_admin shell $django_admin_args \
+       --command \"from django.contrib.sites.models import Site; \
+       print Site.objects.all()[0].domain\"" www-data 2>/dev/null)"; then
+        django_site="$django_site_tmp"
+    fi
+elif [ -z "$django_site" ]; then
+    if [ -f /etc/mailname ]; then
+        django_site="$(cat /etc/mailname)"
+    fi
+fi
+[ -n "$django_site" ] && db_set mailman3-web/django-site "$django_site"
+
+# set emailname
+
+db_get mailman3-web/emailname && emailname="$RET"
+
+if [ -f /etc/mailman3/mailman-web.py ]; then
+    emailname="$(get_config_option EMAILNAME)"
+elif [ -z "$emailname" ]; then
+    if [ -n "$django_site" ]; then
+        emailname="$django_site"
+    elif [ -f /etc/mailname ]; then
+        emailname="$(cat /etc/mailname)"
+    fi
+fi
+[ -n "$emailname" ] && db_set mailman3-web/emailname "$emailname"
+
+db_beginblock
+db_input medium mailman3-web/django-site || true
+db_input medium mailman3-web/emailname || true
+db_input medium mailman3-web/superuser-name || true
+db_input medium mailman3-web/superuser-mail || true
+db_input medium mailman3-web/superuser-password || true
+db_input medium mailman3-web/configure-webserver || true
+db_input medium mailman3-web/restart-webserver || true
+db_endblock
+db_go

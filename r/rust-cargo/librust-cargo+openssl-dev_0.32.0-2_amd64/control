@@ -1,0 +1,15 @@
+Package: librust-cargo+openssl-dev
+Source: rust-cargo
+Version: 0.32.0-2
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-cargo-dev (= 0.32.0-2), librust-openssl-0.10+default-dev (>= 0.10.11-~~)
+Provides: librust-cargo-0+openssl-dev (= 0.32.0-2), librust-cargo-0.32+openssl-dev (= 0.32.0-2), librust-cargo-0.32.0+openssl-dev (= 0.32.0-2)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://crates.io
+Description: Package manager for Rust - feature "openssl"
+ This metapackage enables feature openssl for the Rust cargo crate, by pulling
+ in any additional dependencies needed by that feature.

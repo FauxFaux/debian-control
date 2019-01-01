@@ -1,0 +1,48 @@
+#!/bin/sh
+# config script for open-isns-discoveryd
+
+. /usr/share/debconf/confmodule
+
+set -e
+
+manual_edit=0
+if [ -f /etc/isns/isnsdd.conf ] ; then
+    # Detect if a ServerAddress setting is present, because if we are
+    # run as configure only, not reconfigure, we don't want to override
+    # settings the user changed manually in the configuration file.
+    orig_server="$(grep -E '^[[:space:]]*ServerAddress[[:space:]]*=' /etc/isns/isnsdd.conf | cut -d= -f2- | cut -d# -f1 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+    RET=""
+    db_get open-isns-discoveryd/isns-server || true
+    if [ -n "$RET" ] && [ -n "$orig_server" ] && [ x"$RET" != x"$orig_server" ] ; then
+        manual_edit=1
+    fi
+fi
+
+db_input high open-isns-discoveryd/isns-server || true
+if ! [ -f /etc/isns/server_key.pub ] ; then
+    db_input high open-isns-discoveryd/server-pubkey || true
+fi
+if ! [ -f /etc/isns/auth_key ] ; then
+    db_input high open-isns-discoveryd/own-key       || true
+fi
+db_go || true
+
+RET=""
+db_get open-isns-discoveryd/isns-server || true
+if [ -z "$RET" ] && [ $manual_edit -eq 0 ] ; then
+    # No server name specified, so show a message that the daemon
+    # won't be started in postinst.
+    db_set open-isns-discoveryd/isns-server-override false
+    db_input high open-isns-discoveryd/no-start || true
+    db_go || true
+else
+    # Determine if we want to update the server address in the
+    # configuration file
+    if [ $1 = "reconfigure" ] || [ $manual_edit -eq 0 ] ; then
+        db_set open-isns-discoveryd/isns-server-override true
+    else
+        db_set open-isns-discoveryd/isns-server-override false
+    fi
+fi
+
+exit 0

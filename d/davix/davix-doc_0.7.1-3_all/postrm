@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+
+
+dpkg-maintscript-helper dir_to_symlink \
+    /usr/share/doc/davix/html/_static/css \
+    ../../../../sphinx_rtd_theme/static/css \
+    0.6.5 davix-doc -- "$@"
+
+dpkg-maintscript-helper dir_to_symlink \
+    /usr/share/doc/davix/html/_static/fonts \
+    ../../../../sphinx_rtd_theme/static/fonts \
+    0.6.5 davix-doc -- "$@"
+
+dpkg-maintscript-helper dir_to_symlink \
+    /usr/share/doc/davix/html/_static/js \
+    ../../../../sphinx_rtd_theme/static/js \
+    0.6.5 davix-doc -- "$@"

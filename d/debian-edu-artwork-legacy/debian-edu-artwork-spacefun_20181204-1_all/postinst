@@ -1,0 +1,19 @@
+#! /bin/sh
+
+set -e
+
+
+
+EDUTHEME="spacefun"
+
+case "$1" in
+	configure)
+		update-debian-edu-artwork-$EDUTHEME configure
+	;;
+	triggered)
+		update-debian-edu-artwork-$EDUTHEME configure
+		if [ -f /etc/plymouth/plymouthd.conf ] && [ -f /etc/debian-edu/config ] && which plymouth-set-default-theme > /dev/null ; then
+			plymouth-set-default-theme -R debian-edu-${EDUTHEME}
+		fi
+	;;
+esac

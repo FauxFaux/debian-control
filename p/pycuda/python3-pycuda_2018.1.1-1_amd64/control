@@ -1,0 +1,33 @@
+Package: python3-pycuda
+Source: pycuda
+Version: 2018.1.1-1
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 3491
+Depends: libboost-python1.62.0, libboost-thread1.62.0, libc6 (>= 2.14), libcuda1 (>= 340), libcurand9.1, libgcc1 (>= 1:3.0), libstdc++6 (>= 5.2), python3-numpy (>= 1:1.14.3), python3-numpy-abi9, python3 (<< 3.8), python3 (>= 3.6~), python3-appdirs (>= 1.4.0), python3-decorator (>= 3.2.0), python3-mako, python3-pytools, python3:any, nvidia-cuda-toolkit
+Recommends: python-pycuda-doc
+Suggests: python3-pytest, python3-opengl, python3-matplotlib, python3-pycuda-dbg
+Replaces: python-pycuda-headers
+Section: contrib/python
+Priority: optional
+Homepage: http://mathema.tician.de/software/pycuda
+Description: Python 3 module to access Nvidia‘s CUDA parallel computation API
+ PyCUDA lets you access Nvidia‘s CUDA parallel computation API from Python.
+ Several wrappers of the CUDA API already exist–so what’s so special about
+ PyCUDA?
+  * Object cleanup tied to lifetime of objects. This idiom, often called
+    RAII in C++, makes it much easier to write correct, leak- and crash-free
+    code.  PyCUDA knows about dependencies, too, so (for example) it won’t
+    detach from a context before all memory allocated in it is also freed.
+  * Convenience. Abstractions like pycuda.driver.SourceModule and
+    pycuda.gpuarray.GPUArray make CUDA programming even more convenient than
+    with Nvidia’s C-based runtime.
+  * Completeness. PyCUDA puts the full power of CUDA’s driver API at your
+    disposal, if you wish.
+  * Automatic Error Checking. All CUDA errors are automatically translated
+    into Python exceptions.
+  * Speed. PyCUDA’s base layer is written in C++, so all the niceties
+    above are virtually free.
+  * Helpful Documentation.
+ .
+ This package contains Python 3 modules.

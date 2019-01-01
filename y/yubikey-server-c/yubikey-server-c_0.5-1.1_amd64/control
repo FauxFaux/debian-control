@@ -1,0 +1,18 @@
+Package: yubikey-server-c
+Version: 0.5-1.1
+Architecture: amd64
+Maintainer: Tollef Fog Heen <tfheen@debian.org>
+Installed-Size: 44
+Depends: libc6 (>= 2.14), libgcrypt20 (>= 1.8.0), libmicrohttpd12 (>= 0.9.50), libpq5, libyubikey0 (>= 1.5)
+Section: admin
+Priority: optional
+Description: Yubikey validation server
+ Yubikeys are USB tokens that act like keyboards and generate one-time
+ passwords.  The tokens are produced and sold by Yubico
+ .
+ This is a server that checks the validity of those OTP tokens.  There
+ are servers written in Java and PHP, while this one is written in C
+ .
+ It implements the server side of the API as described on
+ http://www.yubico.com/developers/api/ and can be used with any client
+ that implements the same API.

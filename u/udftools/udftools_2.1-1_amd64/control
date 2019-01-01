@@ -1,0 +1,22 @@
+Package: udftools
+Version: 2.1-1
+Architecture: amd64
+Maintainer: Pali Rohár <pali.rohar@gmail.com>
+Installed-Size: 412
+Depends: libc6 (>= 2.14), libreadline7 (>= 6.0)
+Recommends: udev
+Suggests: dvd+rw-tools, udfclient
+Section: otherosfs
+Priority: optional
+Homepage: https://github.com/pali/udftools
+Description: tools for UDF filesystems and DVD/CD-R(W) drives
+ This package contains a number of user-space tools related to
+ creating filesystems in the UDF (Universal Disk Format), which is
+ primarily used for DVDs, but sometimes also CD-ROMs and HDDs:
+ .
+  mkudffs - Format a device, creating an empty UDF filesystem
+  udflabel - show or change UDF filesystem label
+  udfinfo - show information about UDF filesystem
+  wrudf - Maintains a UDF filesystem
+  cdrwtool - Low-level drive management (e.g. set writing speed, format)
+  pktsetup - Set up a packet writing device (/dev/pktcdvd0) for a drive

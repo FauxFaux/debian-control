@@ -1,0 +1,28 @@
+Package: sra-toolkit
+Source: sra-sdk (2.9.3+dfsg-1)
+Version: 2.9.3+dfsg-1+b1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 9306
+Depends: libbz2-1.0, libc6 (>= 2.14), libfuse2 (>= 2.6), libhdf5-103, libkdf5-2, libmagic1 (>= 5.12), libmbedcrypto3 (>= 2.13), libmbedtls12 (>= 2.13), libmbedx509-0 (>= 2.0), libncbi-vdb2, libncbi-wvdb2, libstdc++6 (>= 5.2), libsz2, libxml2 (>= 2.6.27), zlib1g (>= 1:1.2.2)
+Recommends: med-config (>= 2.1)
+Section: science
+Priority: optional
+Homepage: https://github.com/ncbi/sra-tools/
+Description: utilities for the NCBI Sequence Read Archive
+ Tools for reading the SRA archive, generally by converting individual runs
+ into some commonly used format such as fastq.
+ .
+ The textual dumpers "sra-dump" and "vdb-dump" are provided in this
+ release as an aid in visual inspection. It is likely that their
+ actual output formatting will be changed in the near future to a
+ stricter, more formalized representation[s]. PLEASE DO NOT RELY UPON
+ THE OUTPUT FORMAT SEEN IN THIS RELEASE.
+ .
+ The "help" information will be improved in near future releases, and
+ the tool options will become standardized across the set. More documentation
+ will also be provided documentation on the NCBI web site.
+ .
+ Tool options may change in the next release. Version 1 tool options
+ will remain supported wherever possible in order to preserve
+ operation of any existing scripts.

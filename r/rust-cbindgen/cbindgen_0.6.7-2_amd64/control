@@ -1,0 +1,30 @@
+Package: cbindgen
+Source: rust-cbindgen
+Version: 0.6.7-2
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 3983
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:3.0), libstd-rust-1.31 (>= 1.31.0+dfsg1)
+Section: utils
+Priority: optional
+Multi-Arch: allowed
+Description: Generates C bindings from Rust code
+ cbindgen can be used to generate C bindings for Rust code.
+ It is currently being developed to support creating bindings for
+ WebRender (by Mozilla for Firefox), but has been designed to support
+ any project.
+ .
+ Features:
+ .
+  * Builds bindings for a crate, its mods, its dependent crates, and their mods
+  * Only the necessary types for exposed functions are given bindings
+  * Can specify annotations for controlling some aspects of binding
+  * Support for generic structs and unions
+  * Support for exporting constants and statics
+  * Customizable formatting, can be used in C or C++ projects
+  * Support for generating #ifdef's for #[cfg] attributes
+  * Support for #[repr(sized)] tagged enum's
+ .
+ This package contains the following binaries built from the Rust crate
+ "cbindgen":
+  - cbindgen

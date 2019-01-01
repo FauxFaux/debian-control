@@ -1,0 +1,25 @@
+Package: libpseudo
+Source: pseudo
+Version: 1.9.0+git20180920-1
+Architecture: amd64
+Maintainer: Andrej Shadura <andrewsh@debian.org>
+Installed-Size: 342
+Depends: libc6 (>= 2.4)
+Breaks: pseudo (<< 1.7.5-3~)
+Replaces: pseudo (<< 1.7.5-3~)
+Section: utils
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.yoctoproject.org/software-item/pseudo/
+Description: advanced tool for simulating superuser privileges
+ The pseudo utility offers a way to run commands in a virtualized "root"
+ environment, allowing ordinary users to run commands which give the
+ illusion of creating device nodes, changing file ownership, and otherwise doing
+ things necessary for creating distribution packages or filesystems.
+ .
+ Pseudo has a lot of similarities to fakeroot but is a new implementation
+ that improves on the problems seen using fakeroot. Pseudo is now
+ extensively used by Poky as a replacement to fakeroot but can also be
+ used standalone in many other use cases.
+ .
+ This package contains the LD_PRELOAD libraries.

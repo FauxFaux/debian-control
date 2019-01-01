@@ -1,0 +1,17 @@
+Package: libcloudflare-client-perl
+Version: 0.55.4-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: perl, libindirect-perl, libjson-maybexs-perl, libkavorka-perl, liblwp-protocol-https-perl (>= 6.02), libmoose-perl, libmoosex-strictconstructor-perl, libnamespace-autoclean-perl, libreadonly-perl, libthrowable-perl, libtype-tiny-perl, libwww-perl (>= 6.02)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/CloudFlare-Client
+Description: object-orientated interface to the CloudFlare client API
+ CloudFlare::Client provides an object-orientated interface to the CloudFlare
+ client API, as described at https://www.cloudflare.com/docs/client-api.html
+ .
+ API actions are mapped to methods of the same name and arguments are passed in
+ as a hash with keys as given in the docs. Successful API calls return the
+ response section from the upstream JSON API. Failures for whatever reason
+ throw exceptions under the CloudFlare::Client::Exception:: namespace.

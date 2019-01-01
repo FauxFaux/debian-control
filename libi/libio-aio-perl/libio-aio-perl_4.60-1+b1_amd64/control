@@ -1,0 +1,45 @@
+Package: libio-aio-perl
+Source: libio-aio-perl (4.60-1)
+Version: 4.60-1+b1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 296
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.14), libcommon-sense-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/IO-AIO
+Description: asynchronous IO module for Perl
+ IO::AIO module implements asynchronous I/O using whatever means your
+ operating system supports. It is implemented as an interface to the libeio
+ library: http://software.schmorp.de/pkg/libeio.html.
+ .
+ Asynchronous means that operations that can normally block your program
+ (e.g. reading from disk) will be done asynchronously: the operation
+ will still block, but you can do something else in the meantime. This
+ is extremely useful for programs that need to stay interactive even
+ when doing heavy I/O (GUI programs, high performance network servers
+ etc.), but can also be used to easily do operations in parallel that are
+ normally done sequentially, e.g. stat'ing many files, which is much faster
+ on a RAID volume or over NFS when you do a number of stat operations
+ concurrently.
+ .
+ While most of this works on all types of file descriptors (for
+ example sockets), using these functions on file descriptors that
+ support nonblocking operation (again, sockets, pipes etc.) is
+ very inefficient. Use an event loop for that (such as the L<EV>
+ module): IO::AIO will naturally fit into such an event loop itself.
+ .
+ In this version, a number of threads are started that execute your
+ requests and signal their completion. You don't need thread support
+ in perl, and the threads created by this module will not be visible
+ to perl. In the future, this module might make use of the native aio
+ functions available on many operating systems. However, they are often
+ not well-supported or restricted (GNU/Linux doesn't allow them on normal
+ files currently, for example), and they would only support aio_read and
+ aio_write, so the remaining functionality would have to be implemented
+ using threads anyway.
+ .
+ Although the module will work in the presence of other (Perl-) threads,
+ it is currently not reentrant in any way, so use appropriate locking
+ yourself, always call poll_cb from within the same thread, or never
+ call poll_cb (or other aio_ functions) recursively.

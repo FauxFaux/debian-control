@@ -1,0 +1,32 @@
+Package: libghc-ixset-typed-dev
+Source: haskell-ixset-typed (0.4-1)
+Version: 0.4-1+b3
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 739
+Depends: libghc-base-dev-4.11.1.0-5dd74, libghc-containers-dev-0.5.11.0-e0faa, libghc-deepseq-dev-1.4.3.0-17e4f, libghc-safecopy-dev-0.9.4.1-5b384, libghc-syb-dev-0.7-eee7c, libghc-template-haskell-dev-2.13.0.0-87d93, libatomic1 (>= 4.8), libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-ixset-typed-doc, libghc-ixset-typed-prof
+Provides: libghc-ixset-typed-dev-0.4-6c9fa
+Section: haskell
+Priority: optional
+Homepage: http://hackage.haskell.org/package/ixset-typed
+Description: efficient relational queries on Haskell sets
+ This Haskell package provides a data structure of sets that are indexed by
+ potentially multiple indices.
+ .
+ Sets can be created, modified, and queried in various ways.
+ .
+ The package is a variant of the ixset package. The ixset package makes use of
+ run-time type information to find a suitable index on a query, resulting in
+ possible run-time errors when no suitable index exists. In ixset-typed, the
+ types of all indices available or tracked in the type system.  Thus,
+ ixset-typed should be safer to use than ixset, but in turn requires more GHC
+ extensions.
+ .
+ At the moment, the two packages are relatively compatible. As a consequence of
+ the more precise types, a few manual tweaks are necessary when switching from
+ one to the other, but the interface is mostly the same.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: ixset-typed-0.4-IWHyGkZZOuzK18FIsVzNlu

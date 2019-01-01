@@ -1,0 +1,17 @@
+Package: librust-ena+petgraph-dev
+Source: rust-ena
+Version: 0.11.0-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-ena-dev (= 0.11.0-1), librust-petgraph-0.4+default-dev (>= 0.4.5-~~)
+Provides: librust-ena-0+petgraph-dev (= 0.11.0-1), librust-ena-0.11+petgraph-dev (= 0.11.0-1), librust-ena-0.11.0+petgraph-dev (= 0.11.0-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Homepage: https://github.com/nikomatsakis/ena
+Description: Rust implementation of union-find - feature "petgraph"
+ Based on code from rustc.
+ .
+ This metapackage enables feature petgraph for the Rust ena crate, by pulling in
+ any additional dependencies needed by that feature.

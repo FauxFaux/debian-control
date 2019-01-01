@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+if [ "$1" != "upgrade" ]; then
+  update-alternatives --remove pchrt /usr/bin/pchrt3
+  update-alternatives --remove ptaskset /usr/bin/ptaskset3
+fi
+
+

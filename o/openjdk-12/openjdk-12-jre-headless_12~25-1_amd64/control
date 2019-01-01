@@ -1,0 +1,19 @@
+Package: openjdk-12-jre-headless
+Source: openjdk-12
+Version: 12~25-1
+Architecture: amd64
+Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Installed-Size: 187792
+Depends: ca-certificates-java, java-common (>= 0.28), libcups2, liblcms2-2 (>= 2.2+git20110628), libjpeg62-turbo (>= 1.3.1), libfontconfig1, libnss3 (>= 2:3.17.1), util-linux (>= 2.26.2-4), libasound2 (>= 1.0.16), libc6 (>= 2.27), libfreetype6 (>= 2.3.5), libgcc1 (>= 1:4.0), libpcsclite1 (>= 1.3.0), libstdc++6 (>= 4.1.1), libx11-6, libxext6, libxi6, libxrender1, libxtst6, zlib1g (>= 1:1.1.4)
+Suggests: libnss-mdns, fonts-dejavu-extra, fonts-ipafont-gothic, fonts-ipafont-mincho, fonts-wqy-microhei | fonts-wqy-zenhei, fonts-indic
+Conflicts: openjdk-11-jdk-headless (<< 11~18-2), oracle-java11-installer
+Breaks: clojure1.8 (<= 1.8.0-7ubuntu1~)
+Replaces: openjdk-11-jdk-headless (<< 11~18-2)
+Provides: java-runtime-headless, java10-runtime-headless, java11-runtime-headless, java2-runtime-headless, java5-runtime-headless, java6-runtime-headless, java7-runtime-headless, java8-runtime-headless, java9-runtime-headless
+Section: java
+Priority: optional
+Multi-Arch: same
+Homepage: http://openjdk.java.net/
+Description: OpenJDK Java runtime, using Hotspot JIT (headless)
+ Minimal Java runtime - needed for executing non GUI Java programs,
+ using Hotspot JIT.

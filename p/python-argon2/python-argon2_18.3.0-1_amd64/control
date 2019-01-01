@@ -1,0 +1,26 @@
+Package: python-argon2
+Version: 18.3.0-1
+Architecture: amd64
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 125
+Depends: python (<< 2.8), python (>= 2.7~), python-cffi-backend-api-min (<= 9729), python-cffi-backend-api-max (>= 9729), python-enum34, python-six, python:any (<< 2.8), python:any (>= 2.7~), libargon2-1 (>= 0~20171227), libc6 (>= 2.4)
+Suggests: python-argon2-doc (= 18.3.0-1)
+Section: python
+Priority: optional
+Homepage: https://argon2-cffi.readthedocs.io/
+Description: Argon2 password hashing library - Python 2.x Module
+ Argon2 is a password-hashing function that can be used to hash passwords
+ for credential storage, key derivation, or other applications.
+ .
+ There are two main versions of Argon2: Argon2i and Argon2d.
+ Argon2i is the safest against side-channel attacks, while Argon2d provides
+ the highest resistance against GPU cracking attacks.
+ .
+ Argon2i and Argon2d are parametrized by:
+  * A time cost, which defines the amount of computation realized and
+    therefore the execution time, given in number of iterations
+  * A memory cost, which defines the memory usage, given in kibibytes
+  * A parallelism degree, which defines the number of parallel threads
+ .
+ This module provides argon2 hashing primitives for the Python programming
+ language.

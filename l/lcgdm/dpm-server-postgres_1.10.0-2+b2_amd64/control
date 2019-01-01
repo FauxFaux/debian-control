@@ -1,0 +1,20 @@
+Package: dpm-server-postgres
+Source: lcgdm (1.10.0-2)
+Version: 1.10.0-2+b2
+Architecture: amd64
+Maintainer: Mattias Ellert <mattias.ellert@physics.uu.se>
+Installed-Size: 340
+Depends: libdpm1 (= 1.10.0-2+b2), adduser, libc6 (>= 2.15), liblcgdm1, libpq5, libuuid1 (>= 2.16), finger, postgresql-client
+Conflicts: dpm-postgres (<< 1.8.1.2-2~)
+Replaces: dpm-postgres (<< 1.8.1.2-2~)
+Provides: dpm-postgres
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://glite.web.cern.ch/glite/
+Description: Disk Pool Manager (DPM) server with postgres database backend
+ The LCG Disk Pool Manager (DPM) creates a storage element from a set
+ of disks. It provides several interfaces for storing and retrieving
+ data such as RFIO and SRM version 1, version 2 and version 2.2.
+ This package provides a DPM server that uses postgres as its database
+ backend.

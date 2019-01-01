@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        # cleanup empty directories
+        [ -n "$2" ] && dpkg --compare-versions "$2" le 2.16-7~ &&
+            [ -d /etc/selinux/strict/src/policy/file_contexts/misc ] &&
+            rmdir -p --ignore-fail-on-non-empty /etc/selinux/strict/src/policy/file_contexts/misc
+
+        ;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+
+*)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+;;
+esac
+
+pam-auth-update --package
+
+# Automatically added by dh_installdeb/11.4.1
+dpkg-maintscript-helper rm_conffile /etc/selinux/strict/src/policy/file_contexts/misc/pam_mount.fc 2.16-7\~ libpam-mount -- "$@"
+# End automatically added section
+
+
+exit 0

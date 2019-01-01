@@ -1,0 +1,13 @@
+#! /bin/sh
+
+
+
+set -e
+
+if [ "$1" = "upgrade" -a -f /etc/init.d/perdition ]; then
+    if [ -f /etc/init.d/perdition ]; then
+        invoke-rc.d perdition stop
+    fi
+fi      
+        
+exit 0  

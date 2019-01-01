@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -e
+
+remove_cell0_database (){
+	dump_timestamp=$(date +"%Y-%m-%d-%H-%M-%S")
+	if [ "${dbc_dbtype}" = "mysql" ]; then
+		# Drop nova_cell0 database
+		echo "===> nova-common: Dumping ${dbc_dbname}_cell0 database to /var/tmp/nova-common.${dbc_dbname}_cell0.${dump_timestamp}.mysql"
+		mysqldump -h ${dbc_dbserver} -u ${dbc_dbadmin} -p${dbc_dbadmpass} ${dbc_dbname}_cell0 > /var/tmp/nova-common.${dbc_dbname}_cell0.${dump_timestamp}.mysql
+		echo "===> nova-common: Revoking all privileges from '${dbc_dbuser}'@'${dbc_dballow}' for ${dbc_dbname}_cell0"
+		echo "REVOKE ALL PRIVILEGES ON ${dbc_dbname}_cell0.* FROM '${dbc_dbuser}'@'${dbc_dballow}';" | mysql -h ${dbc_dbserver} -u ${dbc_dbadmin} -p${dbc_dbadmpass}
+		echo "===> nova-common: Droping database ${dbc_dbname}_cell0"
+		echo "DROP DATABASE ${dbc_dbname}_cell0" | mysql -h ${dbc_dbserver} -u ${dbc_dbadmin} -p${dbc_dbadmpass}
+	elif [ "$nova_database_type" = "sqlite3" ]; then
+		echo "===> nova-common: Creation of database in sqlite3 is not currently supported. If you've created manually, delete also manually."
+	else
+		echo "===> nova-common: Database configuration available only for mysql currently. If you've created database manually, delete also manually."
+	fi
+}
+
+if [ "${1}" = "remove" ] && [ -r /usr/share/debconf/confmodule ] && [ -r /usr/share/dbconfig-common/dpkg/prerm ] ; then
+	. /usr/share/debconf/confmodule
+	db_get nova/configure_db || true
+	if [ "$RET" = "true" ] ; then
+		. /usr/share/dbconfig-common/dpkg/prerm
+		dbc_go nova-common $@
+		if [ "$dbc_remove" = "true" ]; then
+			remove_cell0_database
+		fi
+	fi
+fi
+
+
+
+exit 0

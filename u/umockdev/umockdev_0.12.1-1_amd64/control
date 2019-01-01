@@ -1,0 +1,23 @@
+Package: umockdev
+Version: 0.12.1-1
+Architecture: amd64
+Maintainer: Martin Pitt <mpitt@debian.org>
+Installed-Size: 152
+Depends: libc6 (>= 2.17), libglib2.0-0 (>= 2.32.0), libumockdev0 (>= 0.8)
+Section: devel
+Priority: optional
+Homepage: https://github.com/martinpitt/umockdev/
+Description: record/mock hardware devices for bug reports and regression tests
+ umockdev mocks hardware devices for creating unit tests for libraries and
+ programs that handle Linux hardware devices.
+ .
+ This package provides tools to record the properties and behaviour of
+ particular devices, and to run a program or test suite under a test bed with
+ the previously recorded devices loaded.
+ .
+ Right now this covers sysfs, uevents, basic support for /dev devices, and
+ recording/mocking usbdevfs ioctls (for PtP/MTP devices).
+ .
+ With this you can simulate particular hardware in virtual environments up to
+ some degree, without needing any particular privileges or disturbing the whole
+ system.

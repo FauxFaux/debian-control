@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = purge ]; then
+
+    #
+    # remove backup files
+    #
+    if [ -e /usr/lib/shotwell-video-thumbnailer.org ] ; then
+	rm -f /usr/lib/shotwell-video-thumbnailer.org
+    fi
+fi
+
+

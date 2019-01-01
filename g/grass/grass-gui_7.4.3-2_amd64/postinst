@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+
+# Automatically added by dh_python2:
+if which pycompile >/dev/null 2>&1; then
+	pycompile -p grass-gui /usr/lib/grass74/gui
+fi
+
+# End automatically added section
+
+
+# Switch directories to symlinks (#776349)
+if dpkg-maintscript-helper supports dir_to_symlink 2>/dev/null; then
+  dpkg-maintscript-helper dir_to_symlink \
+    /usr/lib/grass64/etc/gui/icons /usr/share/grass64/etc/gui/icons 7.0.0~rc1-1~exp1~ -- "$@"
+
+  dpkg-maintscript-helper dir_to_symlink \
+    /usr/lib/grass64/etc/gui/images /usr/share/grass64/etc/gui/images 7.0.0~rc1-1~exp1~ -- "$@"
+
+  dpkg-maintscript-helper dir_to_symlink \
+    /usr/lib/grass64/bwidget/images /usr/share/grass64/bwidget/images 7.0.0~rc1-1~exp1~ -- "$@"
+fi

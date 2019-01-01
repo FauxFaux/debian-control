@@ -1,0 +1,14 @@
+Package: librust-cargo-metadata+backtrace-dev
+Source: rust-cargo-metadata
+Version: 0.6.4-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-cargo-metadata-dev (= 0.6.4-1), librust-error-chain-0.12+backtrace-dev
+Provides: librust-cargo-metadata+default-dev (= 0.6.4-1), librust-cargo-metadata-0+backtrace-dev (= 0.6.4-1), librust-cargo-metadata-0+default-dev (= 0.6.4-1), librust-cargo-metadata-0.6+backtrace-dev (= 0.6.4-1), librust-cargo-metadata-0.6+default-dev (= 0.6.4-1), librust-cargo-metadata-0.6.4+backtrace-dev (= 0.6.4-1), librust-cargo-metadata-0.6.4+default-dev (= 0.6.4-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Structured access to the output of `cargo metadata` - feature "backtrace"
+ This metapackage enables feature backtrace for the Rust cargo_metadata crate,
+ by pulling in any additional dependencies needed by that feature.

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+JYTHON_DISTDIR=/usr/share/jython/Lib/site-packages
+PKG=stilts
+
+case "$1" in
+     remove|upgrade|deconfigure)
+	 rm -f "${JYTHON_DISTDIR}/${PKG}\$py.class"
+	 ;;
+     failed-upgrade)
+	 exit 0
+	 ;;
+     *)
+	 echo "prerm called with unknown argument '$1'" >&2
+	 exit 1
+	 ;;
+esac
+
+

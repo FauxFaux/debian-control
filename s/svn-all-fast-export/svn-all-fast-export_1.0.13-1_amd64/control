@@ -1,0 +1,21 @@
+Package: svn-all-fast-export
+Version: 1.0.13-1
+Architecture: amd64
+Maintainer: Stuart Prescott <stuart@debian.org>
+Installed-Size: 301
+Depends: git, libapr1 (>= 1.2.7), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libqt5core5a (>= 5.11.0~rc1), libstdc++6 (>= 5.2), libsvn1 (>= 1.9)
+Section: devel
+Priority: optional
+Homepage: https://github.com/svn-all-fast-export/svn2git
+Description: fast-import based converter to convert repos from Subversion to git
+ svn-all-fast-export is a tool to convert Subversion repositories to git.
+ .
+ This tool takes a copy of the Subversion repository (not just a checkout)
+ plus a rules file that specifies how the conversion should be performed and
+ produces a bare git repository. Using regular expressions, the rules file
+ specifies how the Subversion branches and tags should be created in the git
+ repository. Example rule files are included in
+ /usr/share/doc/svn-all-fast-export/examples
+ .
+ An authors file that maps the old svn accounts to the full authors names and
+ email addresses can also be provided to make the history look much prettier.

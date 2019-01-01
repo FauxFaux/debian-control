@@ -1,0 +1,18 @@
+Package: python3-pytest-arraydiff
+Source: pytest-arraydiff
+Version: 0.3-1
+Architecture: all
+Maintainer: Debian Python Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 44
+Depends: python3-numpy, python3-pytest (>= 2.8), python3-six, python3:any
+Section: python
+Priority: optional
+Homepage: https://github.com/astropy/pytest-arraydiff
+Description: Pytest plugin to generate and compare data arrays
+ The basic idea is that you can write a test that generates a Numpy array
+ (or other related objects depending on the format). You can then either
+ run the tests in a mode to generate reference files from the arrays, or
+ you can run the tests in comparison mode, which will compare the results
+ of the tests to the reference ones within some tolerance. At the moment,
+ the supported file formats for the reference files are plaint text and
+ FITS.

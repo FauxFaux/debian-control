@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/arched" ]; then
+		update-rc.d arched defaults-disabled >/dev/null
+		invoke-rc.d arched start || exit 1
+	fi
+fi
+# End automatically added section
+
+
+dpkg-maintscript-helper rm_conffile /etc/default/arched 5.4.2-2 -- "$@"

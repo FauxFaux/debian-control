@@ -1,0 +1,24 @@
+Package: gdl-mpfit
+Source: mpfit
+Version: 1.85+2017.01.03-3
+Architecture: all
+Maintainer: Debian Astro Team <debian-astro-maintainers@lists.alioth.debian.org>
+Installed-Size: 771
+Depends: gnudatalanguage (>= 0.9.5)
+Section: science
+Priority: optional
+Homepage: https://cow.physics.wisc.edu/~craigm/idl/fitting.html
+Description: Robust non-linear least squares curve fitting for GDL
+ These GDL routines provide a robust and relatively fast way to perform
+ least-squares curve and surface fitting. The algorithms are translated from
+ MINPACK-1, which is a rugged minimization routine found on Netlib, and
+ distributed with permission. This algorithm is more desirable than CURVEFIT
+ because it is generally more stable and less likely to crash than the
+ brute-force approach taken by CURVEFIT, which is based upon Numerical
+ Recipes.
+ .
+ MPFIT has additional capabilities not found in CURVEFIT. Model parameters can
+ be "frozen" (that is, held constant during the fitting process). Simple
+ boundary constraints can be imposed on parameter values, which can be helpful
+ to keep parameters from becoming negative, for example. Please see the
+ documentation for the PARINFO keyword if you wish to use this facility.

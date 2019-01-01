@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+update-alternatives --install /usr/lib/x86_64-linux-gnu/liblapack.so \
+                    liblapack.so-x86_64-linux-gnu \
+                    /usr/lib/x86_64-linux-gnu/lapack/liblapack.so 20 \
+                    --slave /usr/lib/x86_64-linux-gnu/liblapack.a \
+                    liblapack.a-x86_64-linux-gnu \
+                    /usr/lib/x86_64-linux-gnu/lapack/liblapack.a \
+                    --slave /usr/lib/x86_64-linux-gnu/pkgconfig/lapack.pc \
+                    lapack.pc-x86_64-linux-gnu \
+                    /usr/lib/x86_64-linux-gnu/pkgconfig/lapack-netlib.pc
+
+
+
+exit 0

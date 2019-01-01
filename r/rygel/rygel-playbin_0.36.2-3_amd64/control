@@ -1,0 +1,24 @@
+Package: rygel-playbin
+Source: rygel
+Version: 0.36.2-3
+Architecture: amd64
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Installed-Size: 577
+Depends: gstreamer1.0-plugins-good, rygel (= 0.36.2-3), libc6 (>= 2.4), libglib2.0-0 (>= 2.40.0), libgstreamer1.0-0 (>= 1.0.0), librygel-core-2.6-2, librygel-renderer-2.6-2, librygel-renderer-gst-2.6-2
+Enhances: rygel
+Conflicts: rygel-gst-renderer (<< 0.8.3-1~)
+Replaces: rygel-gst-renderer (<< 0.8.3-1~)
+Section: net
+Priority: optional
+Homepage: https://wiki.gnome.org/Projects/Rygel
+Description: GNOME UPnP/DLNA services - GStreamer Media Renderer plugin
+ Rygel is a home media solution that allows you to easily share audio, video
+ and pictures, and control of media player on your home network. In technical
+ terms it is both a UPnP AV MediaServer and MediaRenderer implemented through
+ a plug-in mechanism. Interoperability with other devices in the market is
+ achieved by conformance to very strict requirements of DLNA and on the fly
+ conversion of media to format that client devices are capable of handling.
+ .
+ This package contains the Playbin plugin which is a MediaRenderer plugin.
+ With this installed Rygel can render (view/play) media locally from
+ other network resources (MediaServers) through GStreamer playbin2.

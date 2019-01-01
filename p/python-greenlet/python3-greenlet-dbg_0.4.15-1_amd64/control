@@ -1,0 +1,24 @@
+Package: python3-greenlet-dbg
+Source: python-greenlet
+Version: 0.4.15-1
+Architecture: amd64
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Installed-Size: 368
+Depends: libc6 (>= 2.14), python3-greenlet (= 0.4.15-1), python3-dbg (<< 3.8), python3-dbg (>= 3.6~)
+Provides: python3.6-greenlet-dbg, python3.7-greenlet-dbg
+Section: debug
+Priority: optional
+Homepage: http://pypi.python.org/pypi/greenlet
+Description: Lightweight in-process concurrent programming - debugging symbols (python3)
+ The greenlet package is a spin-off of Stackless, a version of CPython that
+ supports micro-threads called "tasklets". Tasklets run pseudo-concurrently
+ (typically in a single or a few OS-level threads) and are synchronized with
+ data exchanges on "channels".
+ .
+ greenlet is the standalone package derived from the py lib, and is used by
+ several non-blocking IO packages as a more flexible alternative to Python's
+ built in coroutines.
+ .
+ This is the debugging symbols for greenlet.
+Build-Ids: 0c09bd4c521d48a775d01be6cc23b48232332865 5c777ca951a3cd7062762ccf044f09c36aae5b4b
+Python-Version: 3.6, 3.7

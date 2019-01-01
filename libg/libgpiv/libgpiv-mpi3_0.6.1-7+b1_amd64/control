@@ -1,0 +1,28 @@
+Package: libgpiv-mpi3
+Source: libgpiv (0.6.1-7)
+Version: 0.6.1-7+b1
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 239
+Depends: libgpiv3-common (= 0.6.1-7+b1), libc6 (>= 2.7), libfftw3-double3 (>= 3.3.5), libglib2.0-0 (>= 2.35.9), libgomp1 (>= 4.9), libgsl23 (>= 2.5), libgslcblas0 (>= 2.4), libhdf5-103, libpng16-16 (>= 1.6.2-1)
+Conflicts: libgpiv3
+Section: libs
+Priority: optional
+Homepage: http://libgpiv.sourceforge.net/
+Description: library for Particle Image Velocimetry (PIV) - MPI version
+ This library contains functions for evaluating images from a fluid
+ flow by means of Particle Image Velocimetry (PIV).
+ .
+ PIV is a way to film the wind or liquid flows. It uses a sequence of
+ at least two images that are recorded with a well controlled
+ separation time in-between. Tracer particles that are resident in the
+ fluid may be illuminated by a light source, mostly a laser, that has
+ been re-shaped into a sheet of light. In this way, the average
+ displacement and the deformation of the image texture is
+ obtained. Applying this analyses on small samples of the images on a
+ (rectangular) grid results into an instantaneous velocity field of
+ the fluid flow. PIV may also be applied for other purposes, like
+ deformations and vibrations of solid surfaces.
+ .
+ This package contains the parallelized library using Message Passing
+ Interface (MPI).

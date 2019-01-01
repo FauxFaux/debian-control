@@ -1,0 +1,55 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" != "upgrade" ]; then
+	rm -rf /var/lib/ntpsec/ntpviz
+	rmdir /var/log/ntpsec 2> /dev/null || true
+fi
+
+if [ "$1" = "purge" ]; then
+	# This intentionally allows for deinstalled (i.e. removed, but not
+	# purged) ntpsec, as it does not remove /var/log/ntpsec until it is
+	# purged.  Those files would be owned by the ntpsec user and group.
+	if ! LANG=C dpkg -s ntpsec 2> /dev/null | \
+	     grep -qE "^Status: (deinstall|hold|install)"; then
+		deluser --system --quiet ntpsec || true
+	fi
+fi
+
+# Automatically added by dh_installdeb/11.5.4
+dpkg-maintscript-helper mv_conffile /etc/ntp.d/ntpviz.conf /etc/ntpsec/ntp.d/ntpviz.conf 1.1.0\+dfsg1-2\~ ntpsec-ntpviz -- "$@"
+# End automatically added section
+# Automatically added by dh_systemd_start/11.5.4
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/11.5.4
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'ntploggps.timer' 'ntplogtemp.timer' 'ntpviz-daily.timer' 'ntpviz-weekly.timer' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'ntploggps.timer' 'ntplogtemp.timer' 'ntpviz-daily.timer' 'ntpviz-weekly.timer' >/dev/null || true
+		deb-systemd-helper unmask 'ntploggps.timer' 'ntplogtemp.timer' 'ntpviz-daily.timer' 'ntpviz-weekly.timer' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_apache2/UNDECLARED
+if [ "$1" = "purge" ] ; then
+	if true; then
+		if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+			. /usr/share/apache2/apache2-maintscript-helper
+
+			for conf in ntpsec-ntpviz  ; do
+				apache2_invoke disconf $conf  || exit 1
+			done
+		fi
+	fi
+fi
+# End automatically added section
+

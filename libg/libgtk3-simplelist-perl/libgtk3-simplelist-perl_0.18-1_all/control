@@ -1,0 +1,25 @@
+Package: libgtk3-simplelist-perl
+Version: 0.18-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 45
+Depends: perl, libgtk3-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Gtk3-SimpleList
+Description: Perl simple interface to GTK+ 3's complex MVC list widget
+ Gtk3 has a powerful, but complex MVC (Model, View, Controller) system used to
+ implement list and tree widgets. Gtk3::SimpleList automates the complex setup
+ work and allows you to treat the list model as a more natural list of lists
+ structure.
+ .
+ After creating a new Gtk3::SimpleList object with the desired columns you may
+ set the list data with a simple Perl array assignment. Rows may be added or
+ deleted with all of the normal array operations. You can treat the data
+ member of the list simplelist object as an array reference, and manipulate
+ the list data with perl's normal array operators.
+ .
+ A mechanism has also been put into place allowing columns to be Perl scalars.
+ The scalar is converted to text through Perl's normal mechanisms and then
+ displayed in the list. This same mechanism can be expanded by defining
+ arbitrary new column types before calling the new function.

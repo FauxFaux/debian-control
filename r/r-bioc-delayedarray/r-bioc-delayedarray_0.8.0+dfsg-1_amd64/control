@@ -1,0 +1,20 @@
+Package: r-bioc-delayedarray
+Version: 0.8.0+dfsg-1
+Architecture: amd64
+Maintainer: Debian R Packages Maintainers <r-pkg-team@alioth-lists.debian.net>
+Installed-Size: 1945
+Depends: r-base-core (>= 3.5.1-1), r-api-3.5, r-cran-matrixstats, r-bioc-biocgenerics (>= 0.27.1), r-bioc-s4vectors (>= 0.19.15), r-bioc-iranges (>= 2.11.17), r-bioc-biocparallel, libc6 (>= 2.4)
+Recommends: r-cran-runit, r-bioc-genefilter
+Suggests: r-cran-matrix, r-bioc-summarizedexperiment, r-cran-knitr
+Section: gnu-r
+Priority: optional
+Homepage: https://bioconductor.org/packages/DelayedArray/
+Description: BioConductor delayed operations on array-like objects
+ Wrapping an array-like object (typically an on-disk object) in
+ a DelayedArray object allows one to perform common array operations
+ on it without loading the object in memory. In order to reduce memory
+ usage and optimize performance, operations on the object are either
+ delayed or executed using a block processing mechanism. Note that this
+ also works on in-memory array-like objects like DataFrame objects
+ (typically with Rle columns), Matrix objects, and ordinary arrays and
+ data frames.

@@ -1,0 +1,26 @@
+Package: libtrilinos-shylu-dev
+Source: trilinos (12.12.1-5)
+Version: 12.12.1-5+b2
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 167
+Depends: libtrilinos-shylu12 (= 12.12.1-5+b2), trilinos-dev
+Suggests: trilinos-doc
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: http://trilinos.org
+Description: solving sparse linear systems - development files
+ ShyLU is a package for solving sparse linear systems. It can be used either as
+ a preconditioner, or as a solver. Currently, it is recommended as an Ifpack
+ preconditioner. ShyLU uses a hybrid direct/iterative approach based on Schur
+ complements. The goal is to provide robustness similar to sparse direct
+ solvers, but memory usage more similar to preconditioned iterative solvers.
+ ShyLU was designed as a node-level solver. It can use both MPI and threads in
+ several ways. ShyLU was designed (a) to solve difficult but medium-size
+ problems, and (b) to be used as a subdomain solver or smoother for very large
+ problems within an iterative scheme. It is a purely algebraic method so can be
+ used as a black-box solver. ShyLU has been particularly successful in
+ electrical circuit simulation (Xyce).
+ .
+ This package provides headers.

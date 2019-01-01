@@ -1,0 +1,20 @@
+Package: grub-efi-amd64-signed
+Version: 1+2.02+dfsg1+9
+Architecture: amd64
+Maintainer: GRUB Maintainers <pkg-grub-devel@alioth-lists.debian.net>
+Installed-Size: 3611
+Built-Using: grub2 (= 2.02+dfsg1-9)
+Section: admin
+Priority: optional
+Description: GRand Unified Bootloader, version 2 (amd64 UEFI signed by Debian)
+ GRUB is a portable, powerful bootloader.  This version of GRUB is based on a
+ cleaner design than its predecessors, and provides the following new features:
+ .
+  - Scripting in grub.cfg using BASH-like syntax.
+  - Support for modern partition maps such as GPT.
+  - Modular generation of grub.cfg via update-grub.  Packages providing GRUB
+    add-ons can plug in their own script rules and trigger updates by invoking
+    update-grub.
+ .
+ This package contains the binaries signed by the Debian UEFI CA to be used by
+ shim-signed.

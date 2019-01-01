@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit/11.5.3
+if [ -x "/etc/init.d/nordugrid-arc-inforeg" ]; then
+	invoke-rc.d nordugrid-arc-inforeg stop || exit 1
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.3
+if [ -x "/etc/init.d/nordugrid-arc-slapd" ]; then
+	invoke-rc.d nordugrid-arc-slapd stop || exit 1
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.5.3
+if [ -x "/etc/init.d/nordugrid-arc-ldap-infosys" ]; then
+	invoke-rc.d nordugrid-arc-ldap-infosys stop || exit 1
+fi
+# End automatically added section

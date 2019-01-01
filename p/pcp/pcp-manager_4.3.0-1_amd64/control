@@ -1,0 +1,23 @@
+Package: pcp-manager
+Source: pcp
+Version: 4.3.0-1
+Architecture: amd64
+Maintainer: PCP Development Team <pcp@groups.io>
+Installed-Size: 254
+Depends: libatomic1 (>= 4.8), libc6 (>= 2.27), libgcc1 (>= 1:3.0), libpcp3, libstdc++6 (>= 5.2), pcp (= 4.3.0-1)
+Section: utils
+Priority: extra
+Homepage: https://pcp.io
+Description: Performance Co-Pilot (PCP) manager daemon
+ An optional daemon (pmmgr) that manages a collection of pmlogger and
+ pmie daemons, for a set of discovered local and remote hosts running
+ the performance metrics collection daemon (pmcd).  It ensures these
+ daemons are running when appropriate, and manages their log rotation
+ needs (which are particularly complex in the case of pmlogger).
+ .
+ The base PCP package provides comparable functionality through cron
+ scripts which predate this daemon but do still provide effective and
+ efficient log management services.
+ .
+ The pcp-manager package aims to aggressively enable new PCP features
+ and as a result may not be suited to all production environments.

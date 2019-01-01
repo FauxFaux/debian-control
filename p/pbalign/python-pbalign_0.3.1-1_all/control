@@ -1,0 +1,20 @@
+Package: python-pbalign
+Source: pbalign
+Version: 0.3.1-1
+Architecture: all
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 233
+Depends: python-pbcommand, python-pbcore, python-pysam, python:any (<< 2.8), python:any (>= 2.7~), blasr (>= 5.3+0)
+Recommends: python-pbh5tools, hdf5-tools
+Suggests: bowtie2, gmap, pbalign-doc
+Section: python
+Priority: optional
+Homepage: https://github.com/PacificBiosciences/pbalign
+Description: map Pacific Biosciences reads to reference DNA sequences (Python2)
+ pbalign aligns PacBio reads to reference sequences, filters aligned
+ reads according to user-specific filtering criteria, and converts the
+ output to either the SAM format or PacBio Compare HDF5 (e.g., .cmp.h5)
+ format.
+ .
+ pbalign is part of the SMRTAnalysis suite. This package provides the
+ Python library backend.

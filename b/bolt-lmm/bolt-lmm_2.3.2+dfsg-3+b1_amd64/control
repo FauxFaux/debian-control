@@ -1,0 +1,35 @@
+Package: bolt-lmm
+Source: bolt-lmm (2.3.2+dfsg-3)
+Version: 2.3.2+dfsg-3+b1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 925
+Depends: libboost-iostreams1.67.0, libboost-program-options1.67.0, libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgfortran5 (>= 8), libgomp1 (>= 4.9), liblapack3 | liblapack.so.3, libnlopt0 (>= 2.2.4), libopenblas-base, libstdc++6 (>= 5.2), zlib1g (>= 1:1.1.4)
+Suggests: bolt-lmm-doc
+Section: science
+Priority: optional
+Homepage: https://data.broadinstitute.org/alkesgroup/BOLT-LMM/
+Description: Efficient large cohorts genome-wide Bayesian mixed-model association testing
+ The BOLT-LMM software package currently consists of two main algorithms, the
+ BOLT-LMM algorithm for mixed model association testing, and the BOLT-REML
+ algorithm for variance components analysis (i.e., partitioning of
+ SNP-heritability and estimation of genetic correlations).
+ .
+ The BOLT-LMM algorithm computes statistics for testing association between
+ phenotype and genotypes using a linear mixed model. By default, BOLT-LMM
+ assumes a Bayesian mixture-of-normals prior for the random effect attributed
+ to SNPs other than the one being tested. This model generalizes the standard
+ infinitesimal mixed model used by previous mixed model association methods,
+ providing an opportunity for increased power to detect associations while
+ controlling false positives. Additionally, BOLT-LMM applies algorithmic
+ advances to compute mixed model association statistics much faster than
+ eigendecomposition-based methods, both when using the Bayesian mixture model
+ and when specialized to standard mixed model association.
+ .
+ The BOLT-REML algorithm estimates heritability explained by genotyped SNPs and
+ genetic correlations among multiple traits measured on the same set of
+ individuals. BOLT-REML applies variance components analysis to perform these
+ tasks, supporting both multi-component modeling to partition SNP-heritability
+ and multi-trait modeling to estimate correlations. BOLT-REML applies a Monte
+ Carlo algorithm that is much faster than eigendecomposition-based methods for
+ variance components analysis at large sample sizes.

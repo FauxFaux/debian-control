@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e 
+
+update-alternatives --quiet \
+  --install /usr/sbin/pethtool pethtool /usr/sbin/pethtool3 20 \
+  --slave /usr/share/man/man8/pethtool.8.gz pethtool.8.gz /usr/share/man/man8/pethtool3.8.gz
+
+update-alternatives --quiet \
+  --install /usr/sbin/pifconfig pifconfig /usr/sbin/pifconfig3 20 \
+  --slave /usr/share/man/man8/pifconfig.8.gz pifconfig.8.gz /usr/share/man/man8/pifconfig3.8.gz
+  
+for badlink in /usr/man/man8/pifconfig.8 /usr/man/man8/pethtool.8; do
+  if [ -L $badlink ]; then
+    if ! ls -l $(ls -l $badlink | cut -d">" -f2) >/dev/null 2>&1; then
+      rm -f $badlink; fi; fi; done
+
+

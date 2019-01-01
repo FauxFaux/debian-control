@@ -1,0 +1,19 @@
+Package: quake2-server
+Source: game-data-packager
+Version: 61
+Architecture: all
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Installed-Size: 170
+Depends: adduser, lsb-base (>= 3.0-6), quake2-full-data | quake2-demo-data | game-data-packager (>= 34), yamagi-quake2-core | quake2-engine-server, python3:any
+Suggests: quake2-groundzero-data, quake2-reckoning-data
+Section: contrib/games
+Priority: optional
+Homepage: https://wiki.debian.org/Games/GameDataPackager
+Description: dedicated server for Quake II
+ This package contains a launcher script and init script to run a
+ Quake II server automatically, with any suitable engine.
+ .
+ To make this package useful, you will need to create and install some
+ non-distributable packages by using the game-data-packager package:
+ either quake2-full-data or quake2-demo-data. Creating quake2-full-data
+ requires data files from a Quake II installation or CD-ROM.

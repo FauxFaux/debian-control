@@ -1,0 +1,30 @@
+Package: libcuda1
+Source: nvidia-graphics-drivers
+Version: 390.87-5
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 10026
+Pre-Depends: nvidia-legacy-check (>= 343)
+Depends: nvidia-support, nvidia-alternative (= 390.87-5), libnvidia-fatbinaryloader (= 390.87-5), libc6 (>= 2.2.5)
+Recommends: nvidia-kernel-dkms (= 390.87-5) | nvidia-kernel-390.87, nvidia-smi, nvidia-persistenced, libcuda1-i386
+Suggests: nvidia-cuda-mps, nvidia-kernel-dkms (>= 390.87) | nvidia-kernel-source (>= 390.87)
+Provides: libcuda-5.0-1, libcuda-5.5-1, libcuda-6.0-1, libcuda-6.5-1, libcuda-7.0-1, libcuda-7.5-1, libcuda-8.0-1, libcuda-9.0-1, libcuda-9.1-1, libcuda1-any
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com/CUDA
+Description: NVIDIA CUDA Driver Library
+ The Compute Unified Device Architecture (CUDA) enables NVIDIA
+ graphics processing units (GPUs) to be used for massively parallel
+ general purpose computation.
+ .
+ This package contains the CUDA Driver API library for low-level CUDA
+ programming.
+ .
+ Supported NVIDIA devices include GPUs starting from GeForce 8 and Quadro FX
+ series, as well as the Tesla computing processors.
+ .
+ Please see the nvidia-kernel-dkms or
+ nvidia-kernel-source packages
+ for building the kernel module required by this package.
+ This will provide nvidia-kernel-390.87.

@@ -1,0 +1,29 @@
+Package: android-libboringssl-dev
+Source: android-platform-external-boringssl
+Version: 8.1.0+r23-2
+Architecture: amd64
+Maintainer: Android Tools Maintainers <android-tools-devel@lists.alioth.debian.org>
+Installed-Size: 1206
+Depends: android-libboringssl (= 8.1.0+r23-2)
+Section: libdevel
+Priority: optional
+Homepage: https://android.googlesource.com/platform/external/boringssl
+Description: Google's internal fork of OpenSSL for the Android SDK - devel
+ The Android SDK builds against a static version of BoringSSL,
+ Google's internal fork of OpenSSL.  This package should never be used
+ for anything but Android SDK packages that already depend on it.
+ .
+ BoringSSL arose because Google used OpenSSL for many years in various
+ ways and, over time, built up a large number of patches that were
+ maintained while tracking upstream OpenSSL. As Google’s product
+ portfolio became more complex, more copies of OpenSSL sprung up and
+ the effort involved in maintaining all these patches in multiple
+ places was growing steadily.
+ .
+ This is the Android AOSP fork of BoringSSL which is designed to be
+ used by Android and its SDK.  BoringSSL is only ever statically linked
+ into apps, and pinned to a commit version.  Upstream has no official
+ releases of BoringSSL on its own, so it must be included separately
+ for each project that uses it.
+ .
+ This package contains the development files.

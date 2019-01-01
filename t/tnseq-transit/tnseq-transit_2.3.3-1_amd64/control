@@ -1,0 +1,28 @@
+Package: tnseq-transit
+Version: 2.3.3-1
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 35976
+Depends: python-pkg-resources, python:any (<< 2.8), python:any (>= 2.7~), python-numpy, python-scipy, python-pil, python-matplotlib, python-wxgtk3.0, bwa
+Breaks: transit
+Replaces: transit
+Provides: transit
+Section: science
+Priority: optional
+Homepage: http://saclab.tamu.edu/essentiality/transit/
+Description: statistical calculations of essentiality of genes or genomic regions
+ This is a software that can be used to analyze Tn-Seq datasets. It
+ includes various statistical calculations of essentiality of genes or
+ genomic regions (including conditional essentiality between 2
+ conditions). These methods were developed and tested as a collaboration
+ between the Sassetti lab (UMass) and the Ioerger lab (Texas A&M)
+ .
+ TRANSIT is capable of analyzing TnSeq libraries constructed with Himar1
+ or Tn5 datasets.
+ .
+ TRANSIT assumes you have already done pre-processing of raw sequencing
+ files (.fastq) and extracted read counts into a .wig formatted file.
+ The .wig file should contain the counts at all sites where an insertion
+ could take place (including sites with no reads). For Himar1 datasets
+ this is all TA sites in the genome. For Tn5 datasets this would be all
+ nucleotides in the genome.

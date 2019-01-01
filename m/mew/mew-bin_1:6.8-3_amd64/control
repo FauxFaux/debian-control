@@ -1,0 +1,27 @@
+Package: mew-bin
+Source: mew
+Version: 1:6.8-3
+Architecture: amd64
+Maintainer: Tatsuya Kinoshita <tats@debian.org>
+Installed-Size: 164
+Depends: libc6 (>= 2.7), zlib1g (>= 1:1.1.4)
+Recommends: stunnel4 | stunnel, ca-certificates, ruby, ruby-sqlite3
+Suggests: hyperestraier
+Enhances: gnupg-agent, mew
+Conflicts: mew (<< 1:4), mew-beta-bin
+Replaces: mew-beta-bin
+Provides: mail-reader, pinentry
+Section: mail
+Priority: optional
+Homepage: http://www.mew.org/
+Description: external commands for Mew
+ The mew-bin package contains external commands for the mew package.
+ .
+  - mewencode: encode/decode MIME objects
+  - mewl: extract necessary fields from messages stored in folders
+  - incm: incorporate new mails from maildir or mbox to Mew's inbox folder
+  - mewest: update indexes of Hyper Estraier
+  - mew-pinentry: front end of gpg-agent to ask a passphrase to a user
+  - mewstunnel: wrapper script for using stunnel
+  - cmew: create Mew's database file
+  - smew: search related messages from Mew's database file

@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+	configure)
+		adduser --system --ingroup audio --home /var/lib/roard --quiet roard || true
+	;;
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+	;;
+esac
+
+# Automatically added by dh_installinit/11.4.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/roaraudio" ]; then
+		update-rc.d roaraudio defaults >/dev/null
+		invoke-rc.d roaraudio start || exit 1
+	fi
+fi
+# End automatically added section
+
+
+exit 0

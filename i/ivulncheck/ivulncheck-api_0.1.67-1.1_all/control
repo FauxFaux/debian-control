@@ -1,0 +1,33 @@
+Package: ivulncheck-api
+Source: ivulncheck
+Version: 0.1.67-1.1
+Architecture: all
+Maintainer: Gaetan Egger <gaetan.egger@infomaniak.com>
+Installed-Size: 602
+Depends: adduser, apache2, bzr, ca-certificates, curl, libapache2-mod-wsgi-py3, madison-lite, mongodb-server, python3-apt, python3-flask, python3-pymongo, rsync, wget, python3:any
+Section: admin
+Priority: optional
+Homepage: https://salsa.debian.org/gegger-guest/ivulncheck
+Description: reports cluster security vulnerabilities and fixes - API
+ Ivulncheck is a security tool to centralize the search of vulnerabilities and
+ fixes concerning packages on a cluster. It leverages already existing tools
+ and services such as debsecan and the Debian and Ubuntu CVE trackers to create
+ a centralized database of known vulnerabilities and updates.
+ .
+ A tiny Ivulncheck agent shell script must be deployed on each node of the
+ cluster to report its existing deployed packages (only Ubuntu and Debian are
+ supported). Then, several commands can be executed to search vulnerabilities
+ and determine available security updates. Four main sources are used :
+ .
+  * debsecan for Debian hosts.
+  * ubuntu-cve-tracker for Ubuntu hosts.
+  * CVE-Search for custom installed application (manually configuration
+    needed).
+  * madison-lite (to complete missing fixes due to possibly outdated sources,
+    missing sources or non referenced vulnerabilities).
+ .
+ Eventually, you can get information (installed packages, monitored hosts,
+ known vulnerabilities an available fixes) directly from the API, or through
+ a web interface that provides a graphical rendering of the information.
+ .
+ This package contains the REST API server.

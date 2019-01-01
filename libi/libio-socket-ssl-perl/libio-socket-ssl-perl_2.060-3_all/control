@@ -1,0 +1,22 @@
+Package: libio-socket-ssl-perl
+Version: 2.060-3
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 535
+Depends: libnet-ssleay-perl (>= 1.85-2~), libssl1.1 (>= 1.1.1), netbase, perl
+Recommends: libnet-libidn-perl | libnet-idn-encode-perl | liburi-perl, perl (>= 5.15.6) | libsocket-perl | libsocket6-perl, perl (>= 5.19.8) | libio-socket-ip-perl (>= 0.20) | libio-socket-inet6-perl
+Suggests: ca-certificates
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/IO-Socket-SSL
+Description: Perl module implementing object oriented interface to SSL sockets
+ This module is a true drop-in replacement for IO::Socket::INET that
+ uses SSL to encrypt data before it is transferred to a remote server
+ or client.  IO::Socket::SSL supports all the extra features that one
+ needs to write a full-featured SSL client or server application:
+ multiple SSL contexts, cipher selection, certificate verification, and
+ SSL version selection.  As an extra bonus, it works perfectly with
+ mod_perl.
+ .
+ IO::Socket::SSL uses IPv6 if libio-socket-ip-perl (>= 0.20) or
+ libio-socket-inet6-perl is installed.

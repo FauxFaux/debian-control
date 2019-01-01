@@ -1,0 +1,29 @@
+Package: icinga-core
+Source: icinga (1.14.2+ds-3)
+Version: 1.14.2+ds-3+b1
+Architecture: amd64
+Maintainer: Debian Nagios Maintainer Group <pkg-nagios-devel@lists.alioth.debian.org>
+Installed-Size: 803
+Depends: icinga-common (= 1.14.2+ds-3), libc6 (>= 2.14), libperl5.28 (>= 5.28.0), zlib1g (>= 1:1.1.4)
+Suggests: nagios-nrpe-plugin
+Replaces: icinga
+Section: net
+Priority: optional
+Homepage: https://www.icinga.com/
+Description: host and network monitoring system - core files
+ Icinga is a modular monitoring framework for hosts, services, and
+ networks, based on the Nagios project. It is designed to be easy to
+ understand and modify to fit any need.
+ .
+ Features include:
+  * monitoring of network services via ping, SMTP, POP3, HTTP, NNTP, or
+    TCP port
+  * plugin interface to allow for user-developed service checks;
+  * contact notifications when problems occur and get resolved (via
+    email, pager, or user-defined method)
+  * support for proactive problem resolution (handlers can be defined to
+    be run during service or host events)
+  * web output: current status, notifications, problem history, log
+    file, etc.
+ .
+ This package provides the core of Icinga without the web front-end.

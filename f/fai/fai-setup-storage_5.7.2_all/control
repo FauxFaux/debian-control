@@ -1,0 +1,23 @@
+Package: fai-setup-storage
+Source: fai
+Version: 5.7.2
+Architecture: all
+Maintainer: Thomas Lange <lange@debian.org>
+Installed-Size: 307
+Depends: perl, e2fsprogs, libparse-recdescent-perl, liblinux-lvm-perl, parted
+Recommends: lvm2, mdadm
+Suggests: dmsetup, cryptsetup, dosfstools, jfsutils, ntfs-3g, reiserfsprogs, xfsprogs
+Section: admin
+Priority: optional
+Homepage: https://fai-project.org
+Description: automatically prepare storage devices
+ Using FAI disk_config files, setup-storage computes effective
+ partition and volume sizes and executes the necessary commands
+ to configure storage devices. It manages disk drives as well
+ as RAID and LVM volumes. It handles all file systems supported
+ by parted(8) as well as ntfs but is flexible enough to be
+ extended to further types as well. Once the storage devices
+ are prepared, an appropriate fstab(5) file is generated.
+ .
+ This package provides the setup-storage utility as separate
+ package so it can be used independent from FAI as well.

@@ -1,0 +1,25 @@
+Package: python3-yamlordereddictloader
+Source: python-yamlordereddictloader
+Version: 0.4.0-1
+Architecture: all
+Maintainer: Steffen Moeller <moeller@debian.org>
+Installed-Size: 23
+Depends: python3:any, python3-yaml
+Section: python
+Priority: optional
+Homepage: https://github.com/fmenabe/python-yamlordereddictloader
+Description: loader and dump for PyYAML keeping keys order
+ This module provide a loader and a dumper for PyYAML allowing to keep
+ items order when loading a file (by putting them in OrderedDict objects)
+ and to manage OrderedDict objects when dumping to a file.
+ .
+ The loader is based on stackoverflow topic (thanks to Eric Naeseth):
+  http://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts#answer-5121963
+ .
+ This package installs the library for Python 3 and is already DEPRECATED:
+ the Phynix/yamlloader project provide an improved version of this library
+ with unit tests, performance improvements (by providing access to the
+ C implementation of PyYAML) and is more actively developed. You should
+ use it!
+ .
+ This package is a dependency for python-airr.

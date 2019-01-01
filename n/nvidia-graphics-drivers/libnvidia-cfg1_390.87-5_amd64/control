@@ -1,0 +1,20 @@
+Package: libnvidia-cfg1
+Source: nvidia-graphics-drivers
+Version: 390.87-5
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 401
+Depends: nvidia-alternative (= 390.87-5), libc6 (>= 2.2.5)
+Breaks: libgl1-nvidia-glx (<< 355.11-5)
+Replaces: libgl1-nvidia-glx (<< 355.11-5)
+Provides: libnvidia-cfg1-any
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: NVIDIA binary OpenGL/GLX configuration library
+ The NVIDIA binary driver provides optimized hardware acceleration of
+ OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server
+ for graphics cards using NVIDIA chip sets.
+ .
+ This package contains the libnvidia-cfg.so.1 runtime library.

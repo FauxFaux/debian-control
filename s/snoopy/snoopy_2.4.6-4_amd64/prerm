@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+PRELOAD="/etc/ld.so.preload"
+LIBNAME="libsnoopy.so"
+
+[ -n "$SNOOPYDEBUG" ] && set -x
+
+case "$1" in
+    remove|upgrade|deconfigure)
+        # remove $LIBNAME from $PRELOAD (if present)
+        if grep -vqs "/${LIBNAME}$" $PRELOAD ; then
+            # the file remains non-empty if $LIBNAME is removed
+            TEMPFILE=`mktemp`
+            grep -v "/${LIBNAME}$" $PRELOAD > "$TEMPFILE"
+            mv -f "$TEMPFILE" $PRELOAD
+        else
+            rm -f $PRELOAD
+        fi
+        ;;
+    failed-upgrade)
+        ;;
+    *)
+        echo >&2 "prerm called with unknown argument $1"
+    ;;
+esac
+
+

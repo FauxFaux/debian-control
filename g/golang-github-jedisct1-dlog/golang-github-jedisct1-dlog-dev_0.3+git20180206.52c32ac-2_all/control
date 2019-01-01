@@ -1,0 +1,28 @@
+Package: golang-github-jedisct1-dlog-dev
+Source: golang-github-jedisct1-dlog
+Version: 0.3+git20180206.52c32ac-2
+Architecture: all
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Installed-Size: 23
+Depends: golang-github-hashicorp-go-syslog-dev
+Section: devel
+Priority: optional
+Homepage: https://github.com/jedisct1/dlog
+Description: Super simple logger for Go
+ Go's standard logger is fairly limited. As result, kazilion alternatives
+ loggers have been written.
+ .
+ All of these are wonderful. They can make your logs look colorful and
+ pretty, buffer things in complicated ways, format data for ElasticSearch,
+ and more.
+ .
+ Cool, but all I wanted is something super dumb, that just exposes
+ log.Info(), log.Error() and a couple other standard levels.
+ .
+ I don't need a super flexible kitchen sink. Just something super basic
+ and trivial to use. I just want it to handle different log levels, and
+ be able to write simple logs to stderr, to a local file, to syslog and
+ to the Windows event log.
+ .
+ So, here's one more logging library for Go. The dumbest of them
+ all. Enjoy.

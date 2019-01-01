@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/swift puppet-module-swift /usr/share/puppet/modules.available/swift 500
+	chmod +x /etc/facter/facts.d/swift_blockdevs_names_to_uuid.sh
+fi
+
+
+
+exit 0

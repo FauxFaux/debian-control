@@ -1,0 +1,27 @@
+Package: python3-amp
+Source: amp
+Version: 0.6.1-1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 3109
+Depends: python3-ase (>= 3.14.0~), python3-scipy, python3 (<< 3.8), python3 (>= 3.6~), python3-numpy (>= 1:1.14.3), python3-numpy-abi9, python3:any (>= 3.5~), libc6 (>= 2.14), libgcc1 (>= 1:4.0), libgfortran5 (>= 8), libquadmath0 (>= 4.6)
+Recommends: python3-matplotlib
+Section: science
+Priority: optional
+Homepage: https://bitbucket.org/andrewpeterson/amp
+Description: Atomistic Machine-learning Package (python 3)
+ Amp is an open-source package designed to easily bring machine-learning to
+ atomistic calculations. This project is being developed at Brown University in
+ the School of Engineering, primarily by Andrew Peterson and Alireza Khorshidi,
+ and is released under the GNU General Public License. Amp allows for the
+ modular representation of the potential energy surface, allowing the user to
+ specify or create descriptor and regression methods.
+ .
+ Amp is designed to integrate closely with the Atomic Simulation Environment
+ (ASE). As such, the interface is in pure python, although several
+ compute-heavy parts of the underlying code also have fortran versions to
+ accelerate the calculations. The close integration with ASE means that any
+ calculator that works with ASE ─ including EMT, GPAW, DACAPO, VASP, NWChem,
+ and Gaussian ─ can easily be used as the parent method.
+ .
+ This package provides the python 3 modules.

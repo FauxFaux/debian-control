@@ -1,0 +1,52 @@
+Package: msxpertsuite
+Version: 5.7.1-1
+Architecture: amd64
+Maintainer: The Debichem Group <debichem-devel@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: msxpertsuite-massxpert (>= 5.7.1), msxpertsuite-massxpert (<< 5.7.1A~), msxpertsuite-minexpert (>= 5.7.1), msxpertsuite-minexpert (<< 5.7.1A~)
+Suggests: msxpertsuite-doc
+Section: science
+Priority: optional
+Homepage: https://www.msxpertsuite.org/
+Description: mass spectrometry software suite - metapackage
+ msXpertSuite provides programs to model linear (bio-) polymer
+ chemistries, simulate mass spectral data, analyse and data-mine mass.
+ It is the successor of GNU polyXmass, first, and then of massXpert.
+ .
+ The massXpert and mineXpert programs allow the following:
+ .
+ massXpert:
+  - making brand new polymer chemistry definitions;
+  - using the definitions to perform easy calculations in a desktop
+    calculator-like manner;
+  - performing sophisticated polymer sequence editing and simulations;
+  - perform m/z list comparisons;
+ .
+  Chemical simulations encompass cleavage (either chemical or
+  enzymatic), gas-phase fragmentations, chemical modification of any
+  monomer in the polymer sequence, cross-linking of monomers in the
+  sequence, arbitrary mass searches, calculation of the isotopic
+  pattern...
+ .
+ mineXpert:
+  - Open mass spectrometry data files (mzML, mzXML, asc, xy, ...);
+  - Calculate and display the TIC chromatogram;
+  - For mobility data, calculate and display a mz=f(dt) color map;
+  - Integrate the data from the TIC chromatogram or color map
+    - to mass spectrum;
+    - to drift spectrum;
+    - back to TIC chromatogram (XIC chromatogram);
+    - reverse operations;
+    - to single TIC intensity value
+      (for mass spectral intensity comparisons);
+  - Model centroids peaks into mass spectra using either the
+    Gaussian model or the Lorentzian model;
+  - Export the data to text files;
+  - Slice a big initial file into smaller chunks for easier mining;
+  - Define how mining activity is recorded on disk for later use;
+  - Convert mzML files into a private (albeit open) mass spectrometry
+    format that allows better performance (based on SQLite3).
+ .
+ This package depends on both massXpert and mineXpert packages and thus will
+ install both of them. To install only one of the packages, install the
+ corresponding msxpertsuite-massxpert or msxpertsuite-minexpert package.

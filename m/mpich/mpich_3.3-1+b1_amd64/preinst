@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+
+case "$1" in
+   configure)
+      # Continue below
+      ;;
+   abort-upgrade|abort-remove|abort-deconfigure)
+      exit 0;
+      ;;
+   *)
+      echo "postinst called with unknown argument \`$1'" >&2
+      exit 0;
+      ;;
+esac
+
+# If corrupt from a previous install
+if [ ! -z "$(update-alternatives --query mpi 2>&1 >  /dev/null)" ]; then
+  rm -f /var/lib/dpkg/alternatives/mpi
+fi
+
+# Delete old non-multi-arch aware mpi 
+if [ ! -z "$(update-alternatives --query mpi 2> /dev/null | grep --silent libmpi)" ]; then
+  update-alternatives --remove-all mpi
+fi
+
+
+
+exit 0

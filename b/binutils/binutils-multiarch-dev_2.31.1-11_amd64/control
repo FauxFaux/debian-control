@@ -1,0 +1,19 @@
+Package: binutils-multiarch-dev
+Source: binutils
+Version: 2.31.1-11
+Architecture: amd64
+Maintainer: Matthias Klose <doko@debian.org>
+Installed-Size: 13
+Depends: binutils-dev (= 2.31.1-11), binutils-multiarch (= 2.31.1-11)
+Replaces: binutils-multiarch (<< 2.24-5)
+Section: devel
+Priority: optional
+Homepage: https://www.gnu.org/software/binutils/
+Description: GNU binary utilities that support multi-arch targets (BFD development files)
+ This package includes header files, static and shared libraries necessary
+ to build programs which use the GNU BFD library for multi-arch targets,
+ which is part of binutils. Note that building Debian packages which depend
+ on the shared libbfd is Not Allowed.
+ .
+ NORMAL USERS SHOULD NOT INSTALL THIS PACKAGE.  It's meant only for those
+ requiring support for reading info from binaries from other architectures.

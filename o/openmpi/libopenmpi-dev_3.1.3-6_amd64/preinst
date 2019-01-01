@@ -1,0 +1,41 @@
+#!/bin/sh
+
+set -e
+
+# mpicc seemed to be used as a master alternative by some MPI package. But
+# currently, all MPI packages have the mpicc alternative installed as a slave
+# link. We remove the link here in order to resolve bugs #531184 and #532910.
+
+update-alternatives --quiet --remove-all mpicc >/dev/null 2>&1 || true
+
+# Similarly, see #886644
+update-alternatives --quiet --remove-all mpiCC >/dev/null 2>&1 || true
+
+# If corrupt from a previous install
+if [ ! -z "$(update-alternatives --query mpi 2>&1 >  /dev/null)" ]; then
+    rm -f /var/lib/dpkg/alternatives/mpi
+    rm -f /var/lib/dpkg/alternatives/mpi-x86_64-linux-gnu
+else
+    # Splitting mpi and mpi-$MULTIARCH  requires this
+    if [ ! -z "$(update-alternatives --query mpi 2> /dev/null | grep mpi-fort.pc)" ]; then
+	update-alternatives --quiet --remove-all mpi >/dev/null 2>&1 
+	update-alternatives --quiet --remove-all mpi-x86_64-linux-gnu >/dev/null 2>&1 
+    fi
+fi
+
+# This may be left hanging on the upgrade to multi-arch.
+rm -f /usr/lib/libpmix.so
+
+# Automatically added by dh_fortran_mod/UNDECLARED
+multiarch="x86_64-linux-gnu"
+base="gfortran-mod-15"
+cmplr="gfortran-8"
+
+mkdir -p /usr/lib/$multiarch/fortran/$base
+ln -sf /usr/lib/$multiarch/fortran/$base /usr/lib/$multiarch/fortran/$cmplr
+
+
+# End automatically added section
+
+
+exit 0

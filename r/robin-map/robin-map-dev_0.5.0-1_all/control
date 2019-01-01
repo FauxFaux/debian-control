@@ -1,0 +1,23 @@
+Package: robin-map-dev
+Source: robin-map
+Version: 0.5.0-1
+Architecture: all
+Maintainer: Matteo F. Vescovi <mfv@debian.org>
+Installed-Size: 118
+Section: libdevel
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/Tessil/robin-map
+Description: C++ implementation of a fast hash map and hash set
+ The robin-map library is a C++ implementation of a fast hash map and
+ hash set using open-addressing and linear robin hood hashing with
+ backward shift deletion to resolve collisions.
+ .
+ Four classes are provided: tsl::robin_map, tsl::robin_set,
+ tsl::robin_pg_map and  tsl::robin_pg_set.
+ The first two are faster and use a power of two growth policy,
+ the last two use a prime growth policy instead and are able to cope
+ better with a poor hash function.
+ Use the prime version if there is a chance of repeating patterns in
+ the lower bits of your hash (e.g. you are storing pointers with an
+ identity hash function).

@@ -1,0 +1,35 @@
+Package: libopenal1
+Source: openal-soft
+Version: 1:1.19.1-1
+Architecture: amd64
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Installed-Size: 946
+Depends: libopenal-data (= 1:1.19.1-1), libatomic1 (>= 4.8), libc6 (>= 2.27), libsndio7.0 (>= 1.1.0)
+Recommends: libasound2 (>= 1.0.16), libpulse0 (>= 0.99.1)
+Suggests: libportaudio2 (>= 19+svn20101113)
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://kcat.strangesoft.net/openal.html
+Description: Software implementation of the OpenAL audio API (shared library)
+ OpenAL, the Open Audio Library, is a joint effort to create an open,
+ vendor-neutral, cross-platform API for interactive, primarily spatialized
+ audio. OpenAL's primary audience are application developers and desktop
+ users that rely on portable standards like OpenGL, for games and other
+ multimedia applications.
+ .
+ This library is meant as a compatible update/replacement to the OpenAL Sample
+ Implementation (the SI). The SI has been unmaintained for quite a while, and
+ would require a lot of work to clean up. This is a fork the old Windows version
+ to attempt an accelerated ALSA version of an OpenAL implementation.
+ .
+ OpenAL Soft supports mono, stereo, 4-channel, 5.1, 6.1, and 7.1 output, as
+ opposed to the SI's 4-channel max (though it did have some provisions for 6
+ channel, this was not 5.1, and was seemingly a "late" addition). OpenAL Soft
+ does not support the Vorbis and MP3 extensions, however those were considered
+ deprecated even in the SI. It does, though, support some of the newer
+ extensions like AL_EXT_FLOAT32 and AL_EXT_MCFORMATS for multi-channel and
+ floating-point formats, as well as ALC_EXT_EFX for environmental audio effects,
+ and others.
+ .
+ This package installs the OpenAL Soft shared library.

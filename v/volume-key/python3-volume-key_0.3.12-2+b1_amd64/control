@@ -1,0 +1,19 @@
+Package: python3-volume-key
+Source: volume-key (0.3.12-2)
+Version: 0.3.12-2+b1
+Architecture: amd64
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Installed-Size: 100
+Depends: python3 (<< 3.8), python3 (>= 3.7~), python3:any, libc6 (>= 2.14), libglib2.0-0 (>= 2.18.0), libnspr4 (>= 2:4.9-2~), libnss3 (>= 2:3.13.4-2~), libpython3.7 (>= 3.7.0), libvolume-key1 (>= 0.3.9)
+Provides: python3.7-volume-key
+Section: python
+Priority: optional
+Homepage: https://pagure.io/volume_key
+Description: Python 3 bindings for volume-key
+ This package provides Python3 bindings for the volume-key library.
+ .
+ The main goal of the software is to allow restoring access to an encrypted
+ hard drive if the primary user forgets the passphrase.  The encryption key
+ back up can also be useful for extracting data after a hardware or software
+ failure that corrupts the header of the encrypted volume, or to access the
+ company data after an employee leaves abruptly.

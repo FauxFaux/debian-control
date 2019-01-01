@@ -1,0 +1,26 @@
+Package: libopenjp2-tools
+Source: openjpeg2
+Version: 2.3.0-1.1
+Architecture: amd64
+Maintainer: Debian PhotoTools Maintainers <pkg-phototools-devel@lists.alioth.debian.org>
+Installed-Size: 411
+Depends: libc6 (>= 2.14), liblcms2-2 (>= 2.2+git20110628), libopenjp2-7 (>= 2.3.0), libpng16-16 (>= 1.6.2-1), libtiff5 (>= 4.0.3), zlib1g (>= 1:1.1.4)
+Section: graphics
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.openjpeg.org
+Description: command-line tools using the JPEG 2000 library
+ This package provides with command-line tools allowing for conversions between
+ several formats and also provides tools for encoding and decoding
+ motion-jpeg2000 video formats:
+ .
+  - opj_decompress: decodes j2k, jp2, and jpt files to pgm, ppm, pnm,
+                  pgx, and bmp.
+  - opj_compress: encodes pnm, pgm, pgx, bmp, and ppm files to j2k,
+                  and jp2.
+  - opj_dump: dump information contains in j2k and jp2.
+  - index_create: create jp2 with JPIP index file from a j2k file.
+  - frames_to_mj2: convert YUV video streams to mj2 format.
+  - mj2_to_frames: convert mj2 video streams to YUV format.
+  - wrap_j2k_in_mj2: wrap j2k codestreams into mj2 format.
+  - extract-j2k-from_mj2: extract j2k codestreams from the mj2 format.

@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# This is the rerm script for the Debian GNU/Linux rcconf package
+# Written by Atsushi Kamoshida <kamop@debian.org>
+#
+
+set -e
+
+case "$1" in
+    remove|upgrade|purge)
+        if [ -e /usr/bin/rcconf ]; then
+            rm /usr/bin/rcconf
+        fi
+        ;;
+    *)
+        ;;
+esac
+
+exit 0

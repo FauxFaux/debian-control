@@ -1,0 +1,20 @@
+Package: agent-transfer
+Source: monkeysphere
+Version: 0.42-2
+Architecture: amd64
+Maintainer: Debian Privacy Tools Maintainers <pkg-privacy-maintainers@lists.alioth.debian.org>
+Installed-Size: 52
+Depends: gnupg-agent (>= 2.1.0), libassuan0 (>= 2.0.1), libc6 (>= 2.14), libgcrypt20 (>= 1.8.0), libgpg-error0 (>= 1.14)
+Recommends: openssh-client, pinentry-curses | pinentry
+Enhances: openssh-client, openssh-server
+Section: net
+Priority: optional
+Homepage: http://web.monkeysphere.info/
+Description: copy a secret key from GnuPG's gpg-agent to OpenSSH's ssh-agent
+ agent-transfer is a simple utility to extract a secret key from
+ GnuPG's gpg-agent and send it to a running ssh-agent.  This is useful
+ for those who prefer the runtime semantics and behavior of OpenSSH's
+ ssh-agent, but whose secret keys are held in long-term storage by
+ GnuPG's gpg-agent.
+ .
+ This tool comes from the monkeysphere project.

@@ -1,0 +1,71 @@
+#!/bin/sh
+# postrm script for open-isns-discoveryd
+
+. /usr/share/debconf/confmodule
+
+set -e
+
+case "$1" in
+    purge)
+        if [ -f /etc/isns/auth_key ] ; then
+            db_reset open-isns-discoveryd/purge-auth-key || true
+            db_input critical open-isns-discoveryd/purge-auth-key || true
+            db_go || true
+            RET=""
+            db_get open-isns-discoveryd/purge-auth-key || true
+            if [ x"$RET" != x"false" ] ; then
+                rm -f /etc/isns/auth_key
+            fi
+        fi
+        if [ -f /etc/isns/server_key.pub ] ; then
+            db_reset open-isns-discoveryd/purge-server-key-pub || true
+            db_input critical open-isns-discoveryd/purge-server-key-pub || true
+            db_go || true
+            RET=""
+            db_get open-isns-discoveryd/purge-server-key-pub || true
+            if [ x"$RET" != x"false" ] ; then
+                rm -f /etc/isns/server_key.pub
+            fi
+        fi
+        if [ -d /etc/isns ] ; then
+            rmdir --ignore-fail-on-non-empty /etc/isns
+        fi
+    ;;
+
+    remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit/11.4.1
+if [ "$1" = "purge" ] ; then
+	update-rc.d isnsdd remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/11.4.1
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'isnsdd.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'isnsdd.service' >/dev/null || true
+		deb-systemd-helper unmask 'isnsdd.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installdebconf/11.4.1
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section
+
+
+exit 0

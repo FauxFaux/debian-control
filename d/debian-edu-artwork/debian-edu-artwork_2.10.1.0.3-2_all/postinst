@@ -1,0 +1,39 @@
+#! /bin/sh
+
+set -e
+
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/X11/Xsession.d/25debian-edu-artwork 0.902-1 -- "$@"
+dpkg-maintscript-helper rm_conffile /etc/gdm3/greeter.gsettings 0.0.39-1 -- "$@"
+# End automatically added section
+
+
+case "$1" in
+	configure)
+		if dpkg --compare-versions "$2" lt-nl "0.902-1~"; then
+			# remove deprecated diversion (bug #715153)
+			dpkg-divert --package debian-edu-artwork \
+			            --remove /usr/share/gdm/defaults.conf
+			dpkg-divert --package debian-edu-artwork \
+			            --rename --remove /etc/gdm3/greeter.gsettings
+			# remove deprecated diversion (bug #847279)
+			dpkg-divert --package debian-edu-artwork \
+			            --rename --remove /usr/share/kde4/apps/plasma-desktop/init/10-desktop-base.js
+			# remove deprecated diversion (now managed by alternatives)
+			dpkg-divert --package debian-edu-artwork \
+			            --rename --remove /usr/share/images/desktop-base/login-background.svg
+			# remove deprecated diversion (gdm3 background image configuration dropped)
+			dpkg-divert --package debian-edu-artwork \
+			            --remove /usr/share/gnome-shell/theme/gnome-shell.css
+			if [ -h /usr/share/images/desktop-base/debian-edu-pxe.png ] ; then
+				rm -f /usr/share/images/desktop-base/debian-edu-pxe.png
+			fi
+			if [ -h /usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/20-desktop-base-edu.js ] ; then
+				rm -f /usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/20-desktop-base-edu.js
+			fi
+			if [ -h /usr/share/gnome-shell/theme/gnome-shell.css ] ; then
+				rm -f /usr/share/gnome-shell/theme/gnome-shell.css
+			fi
+		fi
+	;;
+esac

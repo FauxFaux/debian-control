@@ -1,0 +1,23 @@
+Package: libc++abi1-7
+Source: llvm-toolchain-7
+Version: 1:7.0.1-3
+Architecture: amd64
+Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
+Installed-Size: 280
+Depends: libc6 (>= 2.18), libgcc1 (>= 1:3.0)
+Conflicts: libc++abi-x.y
+Breaks: libc++abi1 (<< 44)
+Replaces: libc++abi-x.y
+Provides: libc++abi-x.y
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.llvm.org/
+Description: LLVM low level support for a standard C++ library
+ libc++abi is another implementation of low level support for a standard C++
+ library.
+ .
+ Features and Goals
+ .
+   * Correctness as defined by the C++ standards.
+   * Provide a portable sublayer to ease the porting of libc++

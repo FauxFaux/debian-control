@@ -1,0 +1,15 @@
+Package: sssd-krb5
+Source: sssd
+Version: 1.16.3-3
+Architecture: amd64
+Maintainer: Debian SSSD Team <pkg-sssd-devel@alioth-lists.debian.net>
+Installed-Size: 53
+Depends: sssd-common (= 1.16.3-3), sssd-krb5-common (= 1.16.3-3), libc6 (>= 2.4), libcom-err2 (>= 1.43.9), libdhash1 (>= 0.4.0), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.6.dfsg.2), libpcre3, libtalloc2 (>= 2.0.4~git20101213)
+Breaks: sssd (<< 1.10.0~beta2-1)
+Replaces: sssd (<< 1.10.0~beta2-1)
+Section: utils
+Priority: optional
+Homepage: https://pagure.io/SSSD/sssd/
+Description: System Security Services Daemon -- Kerberos back end
+ Provides the Kerberos back end that the SSSD can utilize authenticate
+ against a Kerberos server.

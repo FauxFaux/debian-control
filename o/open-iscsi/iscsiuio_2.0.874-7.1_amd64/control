@@ -1,0 +1,26 @@
+Package: iscsiuio
+Source: open-iscsi
+Version: 2.0.874-7.1
+Architecture: amd64
+Maintainer: Debian iSCSI Maintainers <open-iscsi@packages.debian.org>
+Installed-Size: 240
+Depends: udev, libc6 (>= 2.22)
+Enhances: open-iscsi
+Section: net
+Priority: optional
+Homepage: http://www.open-iscsi.com/
+Description: iSCSI offloading daemon for QLogic devices
+ Open-iSCSI is a high-performance, transport independent, multi-platform
+ implementation of the RFC3720 Internet Small Computer Systems Interface
+ (iSCSI).
+ .
+ This package contains the userspace offloading daemon, for use with
+ QLogic (formerly Broadcom) NetXtreme II hardware, as supported by the
+ 'bnx2' and 'bnx2x' drivers, in conjunction with the 'bnx2i' driver.
+ .
+ The following network controllers are supported:
+  bnx2:  BCM5706, BCM5708, BCM5709 devices
+  bnx2x: BCM57710, BCM57711, BCM57711E, BCM57712, BCM57712E, BCM57800,
+         BCM57810, BCM57840
+ .
+ This package is required to offload iSCSI onto these devices.

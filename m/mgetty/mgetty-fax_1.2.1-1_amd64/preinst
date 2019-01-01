@@ -1,0 +1,24 @@
+#!/bin/sh
+
+action=$1
+version=$2
+
+case $action in
+  upgrade|install )
+    if [ -n "$version" ] && dpkg --compare-versions "$version" lt 1.1.28-1
+    then
+      # Log files should go in /var/log/mgetty
+      if [ -f /var/log/acct.log ]; then
+	  echo "Moving /var/log/acct.log to /var/log/mgetty..."
+	  mv /var/log/acct.log /var/log/mgetty/
+      fi
+      if [ -f /var/log/faxrunqd.log ]; then
+	  echo "Moving /var/log/faxrunqd.log to /var/log/mgetty..."
+	  mv /var/log/faxrunqd.log /var/log/mgetty/
+      fi
+    fi
+  ;;
+esac
+
+
+

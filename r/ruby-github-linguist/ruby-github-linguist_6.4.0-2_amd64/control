@@ -1,0 +1,33 @@
+Package: ruby-github-linguist
+Version: 6.4.0-2
+Architecture: amd64
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 3987
+Depends: ruby (>= 1:2.5~0), ruby-charlock-holmes (>= 0.7.6~), ruby-escape-utils (>= 1.2~), ruby-mime-types (>= 1.19~), ruby-rugged (>= 0.25.1~), libc6 (>= 2.4), libgmp10, libruby2.5 (>= 2.5.0~preview1), ruby (<< 1:2.6~)
+Breaks: gitaly (<< 0.129.0+debian~), gitlab (<< 11.5.3+dfsg~)
+Section: ruby
+Priority: optional
+Homepage: https://github.com/github/linguist
+Description: detection and highlight of the programming language of source code
+ Language detection: ruby-github-linguist defines a list of all languages
+ known to GitHub in a yaml file. In order for a file to be highlighted, a
+ language and a lexer must be defined there.
+ .
+ Syntax Highlighting: The actual syntax highlighting is handled by the
+ Pygments wrapper, ruby-pygments.rb. It also provides a Lexer abstraction that
+ determines which highlighter should be used on a file.
+ .
+ Stats: The Language stats bar that you see on every repository is built by
+ aggregating the languages of each file in that repository. The top language in
+ the graph determines the project's primary language.
+ .
+ Ignore vendored files: Checking other code into your git repo is a common
+ practice. But this often inflates your project's language stats and may even
+ cause your project to be labeled as another language. ruby-github-linguist is
+ able to identify some of these files and directories and exclude them.
+ .
+ Generated file detection: Not all plain text files are true source files.
+ Generated files like minified js and compiled CoffeeScript can be detected and
+ excluded from language stats. As an extra bonus, these files are suppressed in
+ diffs.
+Ruby-Versions: ruby2.5

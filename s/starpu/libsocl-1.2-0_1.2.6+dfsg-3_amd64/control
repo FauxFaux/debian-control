@@ -1,0 +1,23 @@
+Package: libsocl-1.2-0
+Source: starpu
+Version: 1.2.6+dfsg-3
+Architecture: amd64
+Maintainer: Samuel Thibault <sthibault@debian.org>
+Installed-Size: 114
+Depends: libc6 (>= 2.14), libstarpu-1.2-5 (>= 1.2.5+dfsg~) | libstarpu-any-1.2-5
+Conflicts: libsocl-contrib-1.2-0
+Provides: libsocl-any-1.2-0
+Section: libs
+Priority: optional
+Multi-Arch: same
+Homepage: http://starpu.gforge.inria.fr/
+Description: Task scheduler for heterogeneous multicore machines
+ StarPU is a runtime system that offers support for heterogeneous
+ multicore machines. While many efforts are devoted to design efficient
+ computation kernels for those architectures (e.g. to implement BLAS
+ kernels on GPUs or on Cell's SPUs), StarPU not only takes care of
+ offloading such kernels (and implementing data coherency across
+ the machine), but it also makes sure the kernels are executed as
+ efficiently as possible.
+ .
+ This package contains an OpenCL-compatible library interface to StarPU.

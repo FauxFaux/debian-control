@@ -1,0 +1,18 @@
+Package: golang-github-shibukawa-configdir-dev
+Source: golang-github-shibukawa-configdir
+Version: 0.0~git20170330.e180dbd-1
+Architecture: all
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Installed-Size: 28
+Section: devel
+Priority: optional
+Homepage: https://github.com/shibukawa/configdir
+Description: multi platform library of configuration directories for Golang
+ This library helps to get regular directories for configuration files
+ or cache files according to the target operationg system's conventions.
+ .
+ On Linux and BSD systems it assumes the following:
+ .
+ System level configuration folder: ${XDG_CONFIG_DIRS} (/etc/xdg)
+ User level configuration folder:   ${XDG_CONFIG_HOME} (${HOME}/.config)
+ User level cache folder:           ${XDG_CACHE_HOME}  (${HOME}/.cache)

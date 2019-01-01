@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+test $DEBIAN_SCRIPT_DEBUG && set -v -x
+
+case "$1" in
+  configure|upgrade)
+
+  echo "creating iocard group..."
+  getent group iocard >/dev/null || addgroup --system iocard
+  ;;
+
+  abort-upgrade|abort-remove|abort-deconfigure)
+  ;;
+
+  *)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+  ;;
+esac
+
+
+
+exit 0

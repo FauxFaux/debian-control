@@ -1,0 +1,35 @@
+Package: moap
+Version: 0.2.7-2
+Architecture: all
+Maintainer: Julien Lavergne <julien.lavergne@gmail.com>
+Installed-Size: 7297
+Depends: python:any (<< 2.8), python:any (>= 2.7~), python-librdf
+Recommends: python-genshi, python-cheetah, python-twisted-core, python-yahoo, exuberant-ctags
+Suggests: brz | bzr, cvs, darcs, git, git-svn, subversion
+Section: devel
+Priority: optional
+Homepage: http://thomas.apestaart.org/moap/trac/
+Description: Swiss army knife for project maintainers and developers
+ moap aims to help in keeping you in the flow of maintaining, developing and
+ releasing your project, automating whatever tasks can be automated.
+ .
+ Features:
+ Parse DOAP files and:
+  * submit releases to Freshmeat
+  * send out release announcement mails
+  * create iCal and RSS release feeds from DOAP file(s)
+  * template them using Genshi or Cheetah
+  * look up project home page rank on Google and Yahoo for given queries
+ .
+ Version control tools:
+  * currently supports Bazaar, CVS, Darcs, Git, SVN
+  * maintain ignore lists
+  * prepare ChangeLog entry based on local diff, using ctags
+  * check in based on ChangeLog entry
+  * show diff based on last ChangeLog entry
+ .
+ Bug tracker tools:
+  * show individual bugs and queries from trac and bugzilla
+ .
+  * get list of contributors from ChangeLog
+  * bash completion

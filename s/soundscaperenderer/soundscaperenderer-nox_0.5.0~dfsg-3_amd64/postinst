@@ -1,0 +1,15 @@
+#! /bin/sh
+
+set -e
+
+
+
+. /usr/share/soundscaperenderer-common/ssr-maintainerscript
+
+## remove dangling alternatives
+update-alternatives --quiet --remove ssr-nfc-hoa /usr/bin/ssr-nfc-hoa.nox
+
+ssr_addalternatives /usr/share/soundscaperenderer-nox/alternatives .nox 30
+
+exit 0
+

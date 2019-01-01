@@ -1,0 +1,23 @@
+Package: libghc-system-fileio-dev
+Source: haskell-system-fileio (0.3.16.4-2)
+Version: 0.3.16.4-2+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 606
+Depends: libghc-base-dev-4.11.1.0-5dd74, libghc-bytestring-dev-0.10.8.2-76891, libghc-system-filepath-dev-0.4.14-0ce56, libghc-text-dev-1.2.3.1-30bbe, libghc-time-dev-1.8.0.2-2ae9f, libghc-unix-dev-2.7.2.2-fe53d, libatomic1 (>= 4.8), libc6 (>= 2.14), libgmp10
+Suggests: libghc-system-fileio-doc, libghc-system-fileio-prof
+Provides: libghc-system-fileio-dev-0.3.16.4-ea754
+Section: haskell
+Priority: optional
+Homepage: https://github.com/fpco/haskell-filesystem
+Description: consistent filesystem interaction across GHC versions
+ This is a small wrapper around the "directory", "unix", and "Win32"
+ packages, for use with "system-filepath". It provides a consistent
+ API to the various versions of these packages distributed with
+ different versions of GHC.
+ .
+ In particular, this library supports working with POSIX files that
+ have paths which can't be decoded in the current locale encoding.
+ .
+ This package contains the normal library files.
+Ghc-Package: system-fileio-0.3.16.4-7iDo3bNozMjF4W6dN0IGRH

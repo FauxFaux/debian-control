@@ -1,0 +1,21 @@
+Package: python-numexpr-dbg
+Source: numexpr
+Version: 2.6.9-1
+Architecture: amd64
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 1518
+Depends: python-dbg (<< 2.8), python-dbg (>= 2.7~), python-dbg:any (<< 2.8), python-dbg:any (>= 2.7~), python-numpy (>= 1:1.16.0~rc1), python-numpy-abi9, libc6 (>= 2.27), libgcc1 (>= 1:3.0), libstdc++6 (>= 4.1.1), python-numexpr (= 2.6.9-1), python-numpy-dbg
+Section: debug
+Priority: optional
+Homepage: https://github.com/pydata/numexpr
+Description: Fast numerical array expression evaluator for Python and NumPy (debug ext)
+ Numexpr package evaluates multiple-operator array expressions many
+ times faster than NumPy can. It accepts the expression as a string,
+ analyzes it, rewrites it more efficiently, and compiles it to faster
+ Python code on the fly. It's the next best thing to writing the
+ expression in C and compiling it with a specialized just-in-time
+ (JIT) compiler, i.e. it does not require a compiler at runtime.
+ .
+ This package contains the extension built for the Python 2 debug
+ interpreter.
+Build-Ids: f48e1c999c9bbf2e8820985804bd50676509563e

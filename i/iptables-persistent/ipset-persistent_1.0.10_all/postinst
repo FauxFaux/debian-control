@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+case "$1" in
+configure)
+    db_get ipset-persistent/autosave_done || true
+    if [ "x$RET" != "xtrue" ]; then
+        db_get ipset-persistent/autosave || true
+        if [ "x$RET" = "xtrue" ]; then
+            if which ipset > /dev/null ; then
+                if ipset list > /dev/null; then
+                    ipset save > /etc/iptables/ipsets
+                else
+                    echo "IPset: Unable to save sets (module not loadable or other problem)"
+                fi
+            fi
+        fi
+
+        db_set ipset-persistent/autosave_done true || true
+    fi
+
+;;
+esac
+
+

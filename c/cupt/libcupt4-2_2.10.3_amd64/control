@@ -1,0 +1,30 @@
+Package: libcupt4-2
+Source: cupt
+Version: 2.10.3
+Architecture: amd64
+Maintainer: Eugene V. Lyubimkin <jackyf@debian.org>
+Installed-Size: 1965
+Depends: libc6 (>= 2.27), libgcc1 (>= 1:3.4), libgcrypt20 (>= 1.8.0), libstdc++6 (>= 6), libcupt-common (>= 2.10.3)
+Recommends: libcupt4-2-downloadmethod-curl | libcupt4-2-downloadmethod-wget, bzip2, gpgv, ed
+Suggests: cupt, lzma, xz-utils, debdelta (>= 0.31), dpkg-dev, dpkg-repack
+Breaks: dpkg (<< 1.17.11~), gpgv (<< 2~)
+Section: libs
+Priority: optional
+Homepage: https://wiki.debian.org/Cupt
+Description: flexible package manager -- runtime library
+ This is a Cupt library implementing high-level package manager for Debian and
+ derivatives. It's written with flexibility and reliability in mind and uses
+ dpkg as the back-end.
+ .
+ Provides:
+  - parsing and manipulating configuration info;
+  - parsing indexes metadata info;
+  - version strings comparison;
+  - inspection of the binary and source package' versions;
+  - parsing and querying info about installed packages;
+  - parsing and working with relations and relation expressions;
+  - download manager and downloaders for some schemes;
+  - problem resolver;
+  - worker for modifying system state.
+ .
+ See also description of 'cupt' package for more information.

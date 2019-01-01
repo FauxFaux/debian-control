@@ -1,0 +1,18 @@
+Package: nvidia-legacy-390xx-driver-libs
+Source: nvidia-graphics-drivers-legacy-390xx
+Version: 390.87-3
+Architecture: amd64
+Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+Installed-Size: 109
+Depends: libgl1-nvidia-legacy-390xx-glvnd-glx (= 390.87-3), nvidia-legacy-390xx-egl-icd (= 390.87-3)
+Recommends: nvidia-legacy-390xx-driver-libs-i386, libopengl0 | libopengl0-glvnd-nvidia, libglx-nvidia-legacy-390xx0 (= 390.87-3), libgles-nvidia-legacy-390xx1 (= 390.87-3), libgles-nvidia-legacy-390xx2 (= 390.87-3), libnvidia-legacy-390xx-cfg1 (= 390.87-3), nvidia-legacy-390xx-vulkan-icd (= 390.87-3)
+Conflicts: libegl1-glvnd-nvidia, libgl1-glvnd-nvidia-glx, libgldispatch0-nvidia, libgles1-glvnd-nvidia, libgles2-glvnd-nvidia, libglvnd0-nvidia, libglx0-glvnd-nvidia, libopengl0-glvnd-nvidia
+Breaks: libegl1-nvidia-legacy-390xx, libgl1-nvidia-legacy-390xx-glx, nvidia-legacy-390xx-driver-libs-nonglvnd, nvidia-legacy-390xx-nonglvnd-vulkan-icd
+Section: non-free/libs
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.nvidia.com
+Description: NVIDIA metapackage (OpenGL/GLX/EGL/GLES libraries) (390xx legacy version)
+ This metapackage depends on the NVIDIA binary libraries
+ that provide optimized hardware acceleration of
+ OpenGL/GLX/EGL/GLES applications via a direct-rendering X Server.

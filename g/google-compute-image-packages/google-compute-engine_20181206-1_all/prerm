@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installsystemd/12
+if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
+	deb-systemd-invoke stop 'google-accounts-daemon.service' 'google-clock-skew-daemon.service' 'google-instance-setup.service' 'google-network-daemon.service' 'google-shutdown-scripts.service' 'google-startup-scripts.service' >/dev/null || true
+fi
+# End automatically added section

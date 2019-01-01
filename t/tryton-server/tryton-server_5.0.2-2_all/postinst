@@ -1,0 +1,157 @@
+#!/bin/sh
+
+set -e
+
+TRYTON_USER="tryton"
+TRYTON_OLDCONFFILE="/etc/trytond.conf"
+TRYTON_CONFDIR="/etc/tryton"
+TRYTON_CONFFILE="${TRYTON_CONFDIR}/trytond.conf"
+TRYTON_LOGCONFFILE="${TRYTON_CONFDIR}/trytond_log.conf"
+TRYTON_CONFFILEPRE34="${TRYTON_CONFDIR}/trytond.conf.pre34"
+TRYTON_LOGDIR="/var/log/tryton"
+TRYTON_HOMEDIR="/var/lib/tryton"
+
+case "${1}" in
+	configure)
+		# Creating system user
+		adduser --home "${TRYTON_HOMEDIR}" --no-create-home --quiet --system --group "${TRYTON_USER}"
+
+		# Creating home directory (also used for storage of attachments)
+		mkdir -p "${TRYTON_HOMEDIR}"
+		chown "${TRYTON_USER}":"${TRYTON_USER}" "${TRYTON_HOMEDIR}"
+
+		# Creating log directory
+		mkdir -p "${TRYTON_LOGDIR}"
+		chown "${TRYTON_USER}":adm "${TRYTON_LOGDIR}"
+
+		# Setting ownership and permissions on configuration file
+		# trytond uses internal defaults, if it cannot read the
+		# configuration file.
+		for _ITEM in "${TRYTON_CONFFILE}" "${TRYTON_LOGCONFFILE}"
+		do
+			if ! dpkg-statoverride --list "${_ITEM}" > /dev/null 2>&1
+			then
+				chown "${TRYTON_USER}":"${TRYTON_USER}" "${_ITEM}"
+				chmod 0440 "${_ITEM}"
+			fi
+		done
+
+		# Migration from 3.2 to 3.4: backup old configuration to new configuration location
+		if [ -e "$TRYTON_OLDCONFFILE" ]; then
+			mv -f "${TRYTON_OLDCONFFILE}" "${TRYTON_CONFFILEPRE34}"
+		fi
+
+		# Restricting access to home and log directories for security reasons (private information)
+		for _DIRECTORY in "${TRYTON_HOMEDIR}" "${TRYTON_LOGDIR}"
+		do
+			if ! dpkg-statoverride --list "${_DIRECTORY}" > /dev/null 2>&1
+			then
+				chmod 0750 "${_DIRECTORY}"
+			fi
+		done
+
+		# Add the tryton user to the ssl-cert group on fresh installs
+		if [ -z "$2" ]; then
+			if getent group ssl-cert > /dev/null 2>&1
+			then
+				adduser --quiet "${TRYTON_USER}" ssl-cert
+			fi
+		fi
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`{$1}'" >&2
+		exit 1
+		;;
+esac
+
+# Automatically added by dh_systemd_enable/12
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'tryton-server.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'tryton-server.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'tryton-server.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'tryton-server.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p tryton-server 
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p tryton-server  || true
+fi
+
+# End automatically added section
+# Automatically added by dh_installinit/12
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/tryton-server" ]; then
+		update-rc.d tryton-server defaults 21 >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d tryton-server $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/12
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/tryton-server-cron" ]; then
+		update-rc.d tryton-server-cron defaults-disabled >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d tryton-server-cron $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit/12
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/tryton-server-worker" ]; then
+		update-rc.d tryton-server-worker defaults-disabled >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d tryton-server-worker $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/12
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'tryton-server.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'tryton-server.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'tryton-server.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'tryton-server.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

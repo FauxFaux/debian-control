@@ -1,0 +1,24 @@
+Package: libapache2-mod-shib
+Source: shibboleth-sp
+Version: 3.0.3+dfsg1-1
+Architecture: amd64
+Maintainer: Debian Shib Team <pkg-shibboleth-devel@lists.alioth.debian.org>
+Installed-Size: 241
+Depends: libshibsp-plugins (= 3.0.3+dfsg1-1), shibboleth-sp-utils (= 3.0.3+dfsg1-1), apache2-api-20120211, apache2-bin (>= 2.4.16), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libgssapi-krb5-2 (>= 1.6.dfsg.2), libshibsp8 (>= 3.0.3+dfsg1), libstdc++6 (>= 5.2), libxerces-c3.2, libxmltooling8
+Recommends: apache2 (>= 2.4.6-4~) | httpd
+Breaks: libapache2-mod-shib2 (<< 3~)
+Replaces: libapache2-mod-shib2 (<< 3~)
+Section: httpd
+Priority: optional
+Homepage: http://shibboleth.net/
+Description: Federated web single sign-on system (Apache module)
+ The Shibboleth System is a standards based software
+ package for web single sign-on across or within organizational boundaries.
+ It supports authorization and attribute exchange using the OASIS SAML 2.0
+ protocol.  Shibboleth allows sites to make informed authorization decisions
+ for individual access of protected online resources while allowing users to
+ establish their identities with their local authentication systems.
+ .
+ This package contains the Shibboleth Apache module for service providers
+ (web servers providing resources protected by Shibboleth) and the
+ supporting shibd daemon.

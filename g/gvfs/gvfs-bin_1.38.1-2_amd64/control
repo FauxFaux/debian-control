@@ -1,0 +1,22 @@
+Package: gvfs-bin
+Source: gvfs
+Version: 1.38.1-2
+Architecture: amd64
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Installed-Size: 42
+Depends: gvfs-common (= 1.38.1-2), libglib2.0-bin
+Suggests: gvfs
+Section: oldlibs
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://wiki.gnome.org/Projects/gvfs
+Description: userspace virtual filesystem - deprecated command-line tools
+ gvfs is a userspace virtual filesystem where mounts run as separate
+ processes which you talk to via D-Bus. It also contains a gio module
+ that seamlessly adds gvfs support to all applications using the gio
+ API. It also supports exposing the gvfs mounts to non-gio applications
+ using fuse.
+ .
+ This package contains deprecated command-line tools such as gvfs-copy
+ and gvfs-rename. Please use the gio(1) tool in the libglib2.0-bin
+ package instead.

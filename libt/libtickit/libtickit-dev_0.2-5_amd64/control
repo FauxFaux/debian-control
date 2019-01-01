@@ -1,0 +1,43 @@
+Package: libtickit-dev
+Source: libtickit
+Version: 0.2-5
+Architecture: amd64
+Maintainer: James McCoy <jamessan@debian.org>
+Installed-Size: 493
+Depends: libtickit1 (= 0.2-5), libtermkey-dev, libunibilium-dev
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.leonerd.org.uk/code/libtickit/
+Description: Terminal Interface Construction KIT (development files)
+ This library provides an abstracted mechanism for building interactive
+ full-screen terminal programs. It provides a full set of output drawing
+ functions, and handles keyboard and mouse input events.
+ .
+ Using this library, applications can
+ .
+  * Divide the terminal into a hierarchy of nested, possibly-overlapping
+    rectangular windows
+  * Render output content and react to input events independently in any
+    window region
+  * Use fully Unicode-aware string content, including non-BMP, full-width
+    and combining characters
+  * Draw line-art using Unicode box-drawing characters in a variety of
+    styles
+  * Operate synchronously or asynchronously via file descriptors, or
+    abstractly via byte buffers
+  * Recognise arbitrary keyboard input, including modifiers*
+  * Make use of multiple terminals, if available, from a single
+    application
+ .
+ The following terminal features are supported (depending on terminal support):
+ .
+  * Many rendering attributes; bold, italics, underline, reverse,
+  * strike-though, alternate font
+  * 256 and 24-bit (16 million) colours
+  * Mouse including mouse wheel and recognition of position reporting greater
+  * than 224 columns
+  * Arbitrary scrolling regions
+ .
+ This package contains the header files and libraries needed for developing
+ with libtickit.

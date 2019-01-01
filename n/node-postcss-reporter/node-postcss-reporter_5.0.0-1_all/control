@@ -1,0 +1,20 @@
+Package: node-postcss-reporter
+Version: 5.0.0-1
+Architecture: all
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Installed-Size: 26
+Depends: nodejs, node-chalk (>= 2.0.1), node-lodash (>= 4.17.4), node-log-symbols (>= 2.0.0), node-postcss (>= 6.0.8)
+Section: javascript
+Priority: optional
+Homepage: https://github.com/postcss/postcss-reporter
+Description: Log PostCSS messages in the console
+ A PostCSS plugin to `console.log()` the messages (warnings, etc.) registered
+ by other PostCSS plugins.
+ .
+ As of PostCSS 4.1, a single PostCSS process can accumulate messages from all
+ of the plugins it uses. Most of these messages are warnings. Presumably,
+ plugin authors want you to see those messages. So this plugin exists to read
+ the accumulated messages (or messages from only the plugins you've specified),
+ format them, and print them to the console.
+ .
+ Node.js is an event-based server-side JavaScript engine.

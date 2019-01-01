@@ -1,0 +1,24 @@
+Package: liblingua-en-nameparse-perl
+Version: 1.38-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 94
+Depends: perl, libparse-recdescent-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Lingua-EN-NameParse
+Description: module for parsing a person's name in free text
+ Lingua::EN::NameParse takes as input a person or persons name in
+ free format text such as,
+ .
+  Mr AB & M/s CD MacNay-Smith
+  MR J.L. D'ANGELO
+  Estate Of The Late Lieutenant Colonel AB Van Der Heiden
+ .
+ and attempts to parse it. If successful, the name is broken
+ down into components and useful functions can be performed such as:
+ .
+  converting upper or lower case values to name case (Mr AB MacNay   )
+  creating a personalised greeting or salutation     (Dear Mr MacNay )
+  extracting the names individual components         (Mr,AB,MacNay   )
+  determining the type of format the name is in      (Mr_A_Smith     )

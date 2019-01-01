@@ -1,0 +1,29 @@
+Package: kicad-libraries
+Source: kicad
+Version: 5.0.2+dfsg1-1
+Architecture: all
+Maintainer: Debian Electronics Team <pkg-electronics-devel@alioth-lists.debian.net>
+Installed-Size: 211
+Depends: kicad-footprints, kicad-symbols, kicad-templates
+Suggests: kicad-packages3d
+Breaks: kicad-common (<< 5.0.0~rc1+dfsg1-1~)
+Replaces: kicad-common (<< 5.0.0~rc1+dfsg1-1~)
+Provides: kicad-common
+Section: metapackages
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.kicad-pcb.org
+Description: Virtual package providing common used libraries by kicad
+ This package contains dependencies on the component libraries (schematics
+ and footprints), and also on the templates that are used in KiCad.
+ .
+ If you prefer to control the installation of the dependent packages
+  * kicad-footprint
+  * kicad-symbols
+  * kicad-templates
+ you should not install kicad-libraries and install one or more of the above
+ packages.
+ .
+ Note! 3D model libraries are not set as a dependency due the installation
+ size of this package, if you want to use the 3D models you need to install
+ kicad-packages3d separately.

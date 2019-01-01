@@ -1,0 +1,27 @@
+Package: libblas-dev
+Source: lapack
+Version: 3.8.0-2
+Architecture: amd64
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Installed-Size: 1030
+Depends: libblas3 (= 3.8.0-2)
+Suggests: liblapack-doc
+Breaks: libatlas-base-dev (<< 3.10.3-4~), libopenblas-dev (<< 0.2.20+ds-3~)
+Provides: libblas.so
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: http://www.netlib.org/lapack/
+Description: Basic Linear Algebra Subroutines 3, static library
+ This package is a binary incompatible upgrade to the blas-dev
+ package. Several minor changes to the C interface have been
+ incorporated.
+ .
+ BLAS (Basic Linear Algebra Subroutines) is a set of efficient
+ routines for most of the basic vector and matrix operations.
+ They are widely used as the basis for other high quality linear
+ algebra software, for example lapack and linpack.  This
+ implementation is the Fortran 77 reference implementation found
+ at netlib.
+ .
+ This package contains a static version of the library.

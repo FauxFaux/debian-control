@@ -1,0 +1,23 @@
+Package: libcache-memcached-libmemcached-perl
+Version: 0.04001-2
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 49
+Depends: perl, libmemcached-libmemcached-perl, libtask-weaken-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Cache-Memcached-libmemcached
+Description: cache interface to Memcached::libmemcached
+ Cache::Memcached::libmemcached is the Cache::Memcached compatible interface to
+ libmemcached, a C library to interface with memcached.
+ .
+ Cache::Memcached::libmemcached is built on top of Memcached::libmemcached.
+ While Memcached::libmemcached aims to port libmemcached API to perl,
+ Cache::Memcached::libmemcached attempts to be API compatible with
+ Cache::Memcached, so it can be used as a drop-in replacement.
+ .
+ Cache::Memcached::libmemcached inherits from Memcached::libmemcached. While you
+ are free to use the Memcached::libmemcached specific methods directly on the
+ object, doing so will mean that your code is no longer compatible with the
+ original Cache::Memcached API therefore losing some of the portability in case
+ you want to replace it with some other package.

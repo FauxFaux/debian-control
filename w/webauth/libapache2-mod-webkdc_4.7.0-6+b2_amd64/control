@@ -1,0 +1,22 @@
+Package: libapache2-mod-webkdc
+Source: webauth (4.7.0-6)
+Version: 4.7.0-6+b2
+Architecture: amd64
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Installed-Size: 255
+Depends: apache2-api-20120211, apache2-bin (>= 2.4.16), libc6 (>= 2.14), libwebauth12 (>= 4.7.0)
+Breaks: libapache2-webkdc (<< 4.2.0)
+Replaces: libapache2-webkdc (<< 4.2.0)
+Section: httpd
+Priority: optional
+Homepage: https://webauth.stanford.edu/
+Description: Apache modules for a WebAuth authentication KDC
+ WebAuth is a cookie-based web authentication system built on top of
+ Kerberos.  It relies on a central authentication server that handles all
+ user authentication for a domain and creates user authentication
+ credentials for any web server that needs strong authentication.
+ .
+ This package contains the Apache module for the central authentication
+ server for a particular site.  Only one such server is needed; all web
+ servers that use WebAuth will talk to this server to obtain and verify
+ authentication credentials.

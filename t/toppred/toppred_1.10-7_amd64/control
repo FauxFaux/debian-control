@@ -1,0 +1,27 @@
+Package: toppred
+Version: 1.10-7
+Architecture: amd64
+Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
+Installed-Size: 151
+Depends: libc6 (>= 2.4), libgd3 (>= 2.1.0~alpha~), libpng16-16 (>= 1.6.2-1), zlib1g (>= 1:1.1.4)
+Section: science
+Priority: optional
+Homepage: https://github.com/bioinfo-center-pasteur-fr/toppred
+Description: transmembrane topology prediction
+ Toppred is a program to determine the topology of a transmembrane
+ protein based on G. von Heijne algorithm.
+ .
+ Each sequence from seq data in fasta format is processed, and toppred
+ generate the Hydrophobycity profile of the sequence, and the
+ corresponding hydrophobycities values in the file sequence-ID.hydro.
+ .
+ Furthermore, the predicted topologies are represented as png images.
+ Each topology is stored in file sequence-ID-number.png
+ .
+ The hydrophobicity profile is computed using a window formed by a core
+ rectangular window of size n, flanked by 2 triangular windows of size q.
+ NB rectangular and triangular mean that the ponderation values inside
+ those windows are respectively constant and variable.
+ .
+ This program is a new implementation of the original toppred program,
+ based on G. von Heijne algorithm

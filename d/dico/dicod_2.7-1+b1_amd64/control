@@ -1,0 +1,26 @@
+Package: dicod
+Source: dico (2.7-1)
+Version: 2.7-1+b1
+Architecture: amd64
+Maintainer: Ritesh Raj Sarraf <rrs@debian.org>
+Installed-Size: 704
+Pre-Depends: adduser
+Depends: m4, libc6 (>= 2.15), libdico2 (>= 2.7), libgsasl7 (>= 1.1), libldap-2.4-2 (>= 2.4.7), libltdl7 (>= 2.4.6), libpam0g (>= 0.99.7.1), libpcre3, zlib1g (>= 1:1.1.4), lsb-base (>= 3.0-6)
+Suggests: dico-doc
+Conflicts: dico-module-dictorg, dico-module-outline, dictd
+Replaces: dico-module-dictorg, dico-module-outline, dictd
+Provides: dict-server
+Section: text
+Priority: optional
+Homepage: http://puszcza.gnu.org.ua/software/dico/
+Description: RFC 2229 compliant modular dictionary server
+ GNU Dico is an implementation of the DICT protocol as defined in RFC 2229.
+ It is fully modular: the daemon itself (dicod) provides only the server
+ functionality, and knows nothing about database formats. Actual searches
+ are performed by functions supplied in loadable modules. A single module
+ can serve one or more databases.
+ .
+ This package contains the dicod server, in addition to the following plugins:
+  * ldap: provides LDAP support
+  * substr: provides a substring search strategy
+  * stratall: provides the 'all' search strategy

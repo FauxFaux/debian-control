@@ -1,0 +1,31 @@
+Package: python-empy
+Source: empy
+Version: 3.3.2-2
+Architecture: all
+Maintainer: Jose Luis Rivero <jrivero@osrfoundation.org>
+Installed-Size: 289
+Depends: python:any (<< 2.8), python:any (>= 2.7~)
+Conflicts: python3-empy (<= 3.3-8)
+Provides: python2.7-empy
+Section: python
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.alcyone.com/software/empy/
+Description: templating system for Python (Python 2)
+ EmPy is a system for embedding Python expressions and statements
+ in template text; it takes an EmPy source file, processes it, and
+ produces output.
+ This is accomplished via expansions, which are special signals
+ to the EmPy system and are set off by a special prefix (by default
+ the at sign, '@').  EmPy can expand arbitrary Python expressions
+ and statements in this way, as well as a variety of special forms.
+ Textual data not explicitly delimited in this way is sent unaffected
+ to the output, allowing Python to be used in effect as a markup
+ language.
+ Also supported are "hook" callbacks, recording and playback via
+ diversions, and dynamic, chainable filters.
+ The system is highly configurable via command line options and
+ embedded commands.
+ .
+ This is the Python 2 version of the package. This version installs
+ the empy executable under the name "empy"

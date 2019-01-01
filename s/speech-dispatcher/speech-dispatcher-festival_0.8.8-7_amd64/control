@@ -1,0 +1,26 @@
+Package: speech-dispatcher-festival
+Source: speech-dispatcher
+Version: 0.8.8-7
+Architecture: amd64
+Maintainer: Debian TTS Team <tts-project@lists.alioth.debian.org>
+Installed-Size: 162
+Depends: festival, festival-freebsoft-utils (>= 0.6), speech-dispatcher (>= 0.6), libc6 (>= 2.4), libdotconf0 (>= 1.0.13), libglib2.0-0 (>= 2.12.0), libltdl7 (>= 2.4.6), libsndfile1 (>= 1.0.20)
+Recommends: sound-icons
+Breaks: speech-dispatcher (<< 0.8)
+Replaces: speech-dispatcher (<< 0.8)
+Section: sound
+Priority: optional
+Homepage: http://devel.freebsoft.org/speechd
+Description: Festival support for Speech Dispatcher
+ Speech Dispatcher provides a device independent layer for speech synthesis.
+ It supports various software and hardware speech synthesizers as
+ backends and provides a generic layer for synthesizing speech and
+ playing back PCM data via those different backends to applications.
+ .
+ Various high level concepts like enqueueing vs. interrupting speech and
+ application specific user configurations are implemented in a device
+ independent way, therefore freeing the application programmer from
+ having to yet again reinvent the wheel.
+ .
+ This package contains dependencies on packages necessary for running Speech
+ Dispatcher with Festival.

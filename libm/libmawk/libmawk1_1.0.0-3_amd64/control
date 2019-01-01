@@ -1,0 +1,21 @@
+Package: libmawk1
+Source: libmawk
+Version: 1.0.0-3
+Architecture: amd64
+Maintainer: Debian Electronics Team <pkg-electronics-devel@lists.alioth.debian.org>
+Installed-Size: 608
+Depends: libc6 (>= 2.14)
+Section: libs
+Priority: optional
+Homepage: http://repo.hu/projects/libmawk
+Description: embeddable mawk lib
+ Libmawk is a fork of the popular awk implementation mawk, and aims to be
+ the lightweight script language programmers embed in their application.
+ .
+ This implementation also supports some minor extensions over mawk:
+  - dynamic awk function calls from awk scripts (by name in string)
+  - dynamic variables (access variable by name in string)
+  - include "scriptname.awk"
+ .
+ Besides the shared object, an lmawk binary is also installed, which is
+ command-line-compatible with mawk but provides all those extra features.

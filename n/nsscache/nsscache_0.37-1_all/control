@@ -1,0 +1,20 @@
+Package: nsscache
+Version: 0.37-1
+Architecture: all
+Maintainer: Jamie Wilkinson <jaq@debian.org>
+Installed-Size: 582
+Depends: python:any (<< 2.8), python:any (>= 2.7~), python-pycurl, python-ldap
+Recommends: libnss-cache | libnss-db
+Section: admin
+Priority: optional
+Homepage: https://github.com/google/nsscache
+Description: asynchronously synchronise local NSS databases with remote directory services
+ Synchronises local NSS caches, such as those served by the
+ libnss-cache module, against remote directory services, such as
+ LDAP, or prebuild cache files from an HTTP server. This can be
+ used alongside the libnss-cache package to keep user account
+ information, groups, netgroups, and automounts up to date.
+ .
+ Use of nsscache and libnss-cache eliminates the need for using a
+ cache daemon such as nscd with networked NSS modules such as
+ libnss-ldap.

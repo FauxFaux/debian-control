@@ -1,0 +1,120 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        if ! id schleuder >/dev/null 2>&1; then
+            adduser --system --group --gecos "Schleuder GPG-enabled mailing list manager" \
+                    --no-create-home --home /var/lib/schleuder schleuder >/dev/null
+        fi
+        
+        # Ensure sane permissions.
+        #
+        # Don't use recursive chmod to prevent root escalation on systems with fs.protected_hardlinks=0.
+        # See bugs #889060 and #889488 for details.
+
+        # The config dir needs to be writable by the schleuder user, for example to store certificates
+        # during 'schleuder install'.
+        chown schleuder /etc/schleuder
+
+        # The configs should be writable by the root user, and readable by the schleuder user.
+        chown root:schleuder /etc/schleuder/schleuder.yml /etc/schleuder/list-defaults.yml
+
+        # Ensure the configs aren't world-readable.
+        # TODO: Move secrets into separate config?
+        chmod 0640 /etc/schleuder/schleuder.yml /etc/schleuder/list-defaults.yml
+
+        # The following dirs might contain sensitive data; ensure, these aren't word-readable as well.
+        chmod 0750 /var/lib/schleuder /var/log/schleuder
+        # Both dirs should be owned by the schleuder user and group.
+        chown schleuder:schleuder /var/lib/schleuder /var/log/schleuder
+
+        # We need to differentiate between a first time install versus an upgrade, as Active Record by
+        # default dumps the schema if running migrations.
+        # This would lead to a fatal error while migrating, as the schleuder user is not allowed to write
+        # into '/var/lib/ruby/vendor_ruby/schleuder/db'.
+        if [ -z "$2" ] || dpkg --compare-versions "$2" lt 3.0; then
+            SCHEMA=""
+        else
+            SCHEMA="SCHEMA=/dev/null"
+        fi
+        
+        # 'schleuder install' will set up the database and/or run migrations.
+        # This needs to be done in any case.
+        runuser -u schleuder -- sh -c "$SCHEMA schleuder install >/dev/null"
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+# Automatically added by dh_usrlocal/11.4.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ]; then
+(
+	default_mode=0755
+	default_user=root
+	default_group=root
+	if [ -e /etc/staff-group-for-usr-local ]; then
+		default_mode=02775
+		default_group=staff
+	fi
+	while read line; do
+		set -- $line
+		dir="$1"; mode="$2"; user="$3"; group="$4"
+		if [ "$mode" = "default" ]; then
+			mode="$default_mode"
+			user="$default_user"
+			group="$default_group"
+		fi
+		if [ ! -e "$dir" ]; then
+			if mkdir "$dir" 2>/dev/null; then
+				if chown "$user":"$group" "$dir" ; then
+					chmod "$mode" "$dir" || true
+				fi
+			fi
+		fi
+	done
+) << DATA
+/usr/local/lib default
+/usr/local/lib/schleuder default
+/usr/local/lib/schleuder/filters default
+DATA
+fi
+# End automatically added section
+# Automatically added by dh_installinit/11.4.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/schleuder-api-daemon" ]; then
+		update-rc.d schleuder-api-daemon defaults >/dev/null
+		if [ -n "$2" ]; then
+			_dh_action=restart
+		else
+			_dh_action=start
+		fi
+		invoke-rc.d schleuder-api-daemon $_dh_action || exit 1
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/11.4.1
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	# This will only remove masks created by d-s-h on package removal.
+	deb-systemd-helper unmask 'schleuder-api-daemon.service' >/dev/null || true
+
+	# was-enabled defaults to true, so new installations run enable.
+	if deb-systemd-helper --quiet was-enabled 'schleuder-api-daemon.service'; then
+		# Enables the unit on first installation, creates new
+		# symlinks on upgrades if the unit file has changed.
+		deb-systemd-helper enable 'schleuder-api-daemon.service' >/dev/null || true
+	else
+		# Update the statefile to add new symlinks (if any), which need to be
+		# cleaned up on purge. Also remove old symlinks.
+		deb-systemd-helper update-state 'schleuder-api-daemon.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+

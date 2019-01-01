@@ -1,0 +1,20 @@
+Package: libcrypt-u2f-server-perl
+Source: libcrypt-u2f-server-perl (0.43-1)
+Version: 0.43-1+b1
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 88
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.4), libu2f-server0 (>= 0.0.0), libjson-xs-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Crypt-U2F-Server
+Description: Perl module to register and authenticate U2F compatible devices
+ Universal 2nd Factor (U2F) is an open authentication standard that strengthens
+ and simplifies two-factor authentication using specialized USB or NFC devices
+ based on similar security technology found in smart cards.
+ .
+ Crypt::U2F::Server module implements the server side of U2F authentication
+ through Yubico's C library.
+ .
+ Prefer to use Crypt::U2F::Server::Simple since Crypt::U2F::Server is a very low
+ level wrapper around the original C library.

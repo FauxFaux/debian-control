@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+DEB_HOST_MULTIARCH=x86_64-linux-gnu
+
+PETSC_VERSION=3.9.4
+PETSC_VERSION_NUMBER=$( echo ${PETSC_VERSION} | sed "s/\.//g" )
+SONAME=3.9
+
+# Make alternatives links
+if [ "$1" = "configure" ]; then
+  # alternative petsc version (for given soname), real or complex
+  update-alternatives --install /usr/lib/${DEB_HOST_MULTIARCH}/libpetsc.so.${SONAME} libpetsc.so.${SONAME} /usr/lib/${DEB_HOST_MULTIARCH}/libpetsc_real.so.${PETSC_VERSION} ${PETSC_VERSION_NUMBER}77
+fi
+
+

@@ -1,0 +1,22 @@
+Package: postfixadmin
+Version: 3.2-4
+Architecture: all
+Maintainer: Norman Messtorff <normes@normes.org>
+Installed-Size: 3839
+Depends: debconf (>= 0.5), dbconfig-common, wwwconfig-common, apache2 | lighttpd | httpd, libapache2-mod-php | php-cgi | php-fpm | php, php-imap, php-mysql | php-mysqlnd | php-pgsql | php-sqlite3, php-mbstring, default-mysql-client | postgresql-client | mariadb-client
+Recommends: postfix-mysql | postfix-pgsql, virtual-mysql-server | postgresql | sqlite (>= 3.12.0), mariadb-server, zendframework, dovecot-core | courier-authlib-mysql | courier-authlib-postgresql, php-cli
+Section: admin
+Priority: optional
+Homepage: http://postfixadmin.sourceforge.net
+Description: Virtual mail hosting interface for Postfix
+ Postfixadmin is a web interface to manage virtual users and domains
+ for a Postfix mail transport agent. It supports Virtual mailboxes,
+ aliases, forwarders and vacation.
+ .
+ Postfixadmin allows administrators to delegate account handling
+ to domain administrators and allows users to login and change their own
+ settings (e.g. forwarders, vacation, passwords etc).
+ .
+ It provides easy integration into dovecot, courier or cyrus.
+ .
+ Postfixadmin is written in PHP.

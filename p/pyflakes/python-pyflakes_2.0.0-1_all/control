@@ -1,0 +1,22 @@
+Package: python-pyflakes
+Source: pyflakes
+Version: 2.0.0-1
+Architecture: all
+Maintainer: Python Applications Packaging Team <python-apps-team@lists.alioth.debian.org>
+Installed-Size: 259
+Depends: python-pkg-resources, python:any (<< 2.8), python:any (>= 2.7~)
+Recommends: pyflakes
+Breaks: pyflakes (<< 1.0.0-2~), python-flake8 (<< 3.5.0)
+Replaces: pyflakes (<< 1.0.0-2~)
+Section: python
+Priority: optional
+Homepage: https://launchpad.net/pyflakes
+Description: passive checker of Python 2 programs - Python modules
+ Pyflakes is program to analyze Python programs and detect various
+ errors. It works by parsing the source file, not importing it, so it
+ is safe to use on modules with side effects. It's also much faster.
+ .
+ Unlike PyLint, Pyflakes checks only for logical errors in programs;
+ it does not perform any checks on style.
+ .
+ This is the Python 2 library version.

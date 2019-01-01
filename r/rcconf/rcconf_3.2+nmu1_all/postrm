@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# This is the postrm script for the Debian GNU/Linux rcconf package
+# Written by Atsushi Kamoshida <kamop@debian.org>
+#
+
+set -e
+
+case "$1" in
+  remove)
+    ;;
+  purge)
+#    if [ -f /var/lib/rcconf/services ]; then
+#      rm /var/lib/rcconf/services
+#    fi
+    rm -rf /var/lib/rcconf
+    ;;
+esac
+
+exit 0

@@ -1,0 +1,70 @@
+Package: hobbit-plugins
+Version: 20181101
+Architecture: all
+Maintainer: Christoph Berg <myon@debian.org>
+Installed-Size: 323
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: xymon-client (>= 4.3.17-2~)
+Recommends: binutils, dctrl-tools, libfile-slurp-perl, libsort-naturally-perl, libyaml-tiny-perl, lsb-release, lsof, sudo (>= 1.7.2p1-1)
+Suggests: bzr, cciss-vol-status, debsums, ethtool, fping, git, hddtemp, ipmitool, iproute2 | net-tools, libdbd-pg-perl, libfile-which-perl, libipc-run-perl, liblist-moreutils-perl, libnet-dns-perl, libnet-tftp-perl, libpoe-component-irc-perl, libtimedate-perl, libxml-twig-perl, mercurial, ntp, nvidia-smi, smartmontools, subversion
+Enhances: aptitude, backuppc, dphys-config, mailman, postfix
+Section: net
+Priority: optional
+Homepage: http://xymon.sourceforge.net/
+Description: plugins for the Xymon network monitor
+ This package provides plugins for the Xymon network monitor.
+ (Formerly called Hobbit.)
+ .
+ Included client plugins:
+  * apt - check for outstanding updates (uses aptitude and dctrl-tools
+    if installed)
+  * backuppc - check for errors reported by BackupPC servers (needs
+    backuppc and sudo)
+  * cciss - check hardware RAIDs in HP ProLiant servers (needs
+    cciss-vol-status and sudo)
+  * cntrk - check the size of the Netfilter Connection Tracking table.
+    (needs libfile-slurp-perl)
+  * dirtyetc - check for conffiles which are modified compared to
+    Debian's defaults but should not be (needs sudo and debsums,
+    supports dphys-config)
+  * dirtyvcs - check for dirty VCS working copies (supports Git,
+    Mercurial, Bzr and Subversion, needs appropriate VCS packages
+    and libfile-which-perl installed)
+  * dnsq - checks for working DNS on clients (needs libnet-dns-perl
+    and libfile-slurp-perl)
+  * entropy - check kernel entropy pool size
+  * ipmi - read IPMI sensors and event log (needs ipmitool)
+  * libs - check for running processes with upgraded libraries (needs
+    binutils, lsof, sudo, libyaml-tiny-perl, libfile-slurp-perl and
+    libsort-naturally-perl)
+  * mailman - checks the existence of Mailman shunt files and aged
+    queue files. (needs sudo)
+  * mdstat - check for failed or resyncing RAID devices
+  * mq - check (postfix's) mail queue (needs libtimedate-perl)
+  * misc - meta plugin for running series of scripts (needs
+    libipc-run-perl)
+  * net - check network interface states (needs libfile-which-perl,
+    libfile-slurp-perl, libipc-run-perl, libyaml-tiny-perl, either
+    iproute2 or net-tools and optionally ethtool).
+  * ntpq - check the ntpd daemon synchronization status (needs ntp)
+  * postgres - statistics graphs for PostgreSQL databases (needs
+    libdbd-pg-perl)
+  * sftbnc - check if the local Postfix MTA has soft_bounce enabled.
+  * temp - simple temperature monitor (needs libfile-which-perl and
+    libyaml-tiny-perl; depending on the hardware to monitor it optionally
+    also needs hddtemp, smartmontools, libxml-twig-perl, nvidia-smi
+    (non-free), sudo)
+ .
+ Included server plugins:
+  * aptdiff - monitor list of installed packages in host pools
+  * conn6 - check IPv6 connectivity (needs fping)
+  * ircbot - relay status changes to IRC (needs
+    libpoe-component-irc-perl)
+  * pgbouncer - monitor pool usage and traffic
+  * tftp - checks TFTP servers by downloading a file from them
+    (needs libnet-tftp-perl)
+ .
+ Helper software:
+  * Hobbit.pm: Perl module for writing plugins
+  * xynagios: adaptor for running Nagios plugins with Xymon (needs
+    libipc-run-perl)

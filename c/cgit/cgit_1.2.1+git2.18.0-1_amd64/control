@@ -1,0 +1,31 @@
+Package: cgit
+Version: 1.2.1+git2.18.0-1
+Architecture: amd64
+Maintainer: Debian cgit Maintainers <team+cgit@tracker.debian.org>
+Installed-Size: 1623
+Depends: libc6 (>= 2.28), liblua5.1-0, zlib1g (>= 1:1.2.0)
+Recommends: apache2 (>= 2.4.6-4~) | httpd
+Suggests: python3, python3-docutils, python3-markdown, python3-pygments | highlight
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://git.zx2c4.com/cgit/
+Description: hyperfast web frontend for git repositories written in C
+ This is an attempt to create a fast web interface for the Git SCM, using a
+ built-in cache to decrease server I/O pressure.
+ .
+ Features:
+  * basic repository browsing (logs, diffs, trees...)
+  * caching of generated HTML
+  * cloneable URLs (implements dumb HTTP transport)
+  * commit feeds (atom format)
+  * discovery of Git repositories
+  * on-the-fly archives for tags and commits
+  * plugin support for e.g. syntax highlighting
+  * side-by-side diffs
+  * simple time/author statistics
+  * simple virtual hosting support (macro expansion)
+  * understands GitWeb project-lists
+  * understands gitweb.owner in Git config files
+  * has extensive filtering framework using scripts or a built-in Lua
+    interpreter

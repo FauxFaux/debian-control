@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+SLEPC4PY_VERSION=3.10.0
+SLEPC4PY_VERSION_NUMBER=$( echo ${SLEPC4PY_VERSION} | sed "s/\.//g" )
+
+# Make alternatives links
+if [ "$1" = "configure" ]; then
+  # alternative slepc4py version, real or complex
+  update-alternatives --install /usr/lib/python3/dist-packages/slepc4py slepc4py /usr/lib/python3/dist-packages/slepc4py_complex ${SLEPC4PY_VERSION_NUMBER}73 \
+    --slave /usr/lib/python3/dist-packages/slepc4py-${SLEPC4PY_VERSION}.egg-info slepc4py.egg-info /usr/lib/python3/dist-packages/slepc4py_complex-${SLEPC4PY_VERSION}.egg-info
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-slepc4py-complex 
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p python3-slepc4py-complex  || true
+fi
+
+# End automatically added section
+

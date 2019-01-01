@@ -1,0 +1,18 @@
+Package: ruby-hiredis
+Version: 0.6.1-2
+Architecture: amd64
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Installed-Size: 73
+Depends: ruby (>= 1:2.5~0), libc6 (>= 2.4), libgmp10, libhiredis0.14 (>= 0.14.0), libruby2.5 (>= 2.5.0~preview1), ruby (<< 1:2.6~)
+Suggests: redis-server
+Section: ruby
+Priority: optional
+Homepage: https://github.com/redis/hiredis-rb
+Description: Redis driver for Ruby using Hiredis
+ ruby-hiredis provides a Ruby extension that wraps Hiredis. Both the synchronous
+ connection API and a separate protocol reader are supported. It is primarily
+ intended to speed up parsing multi bulk replies.
+ .
+ Hiredis is a minimalistic C client library for the Redis database, a
+ persistent key-value database with support for atomically manipulating and
+ querying data structures such as lists and sets.

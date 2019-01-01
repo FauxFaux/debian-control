@@ -1,0 +1,18 @@
+Package: dm-writeboost-dkms
+Source: dm-writeboost
+Version: 2.2.10-1
+Architecture: all
+Maintainer: Dmitry Smirnov <onlyjob@debian.org>
+Installed-Size: 138
+Depends: dkms (>= 2.1.0.0)
+Recommends: kmod, dmsetup, writeboost
+Section: kernel
+Priority: optional
+Homepage: https://github.com/akiradeveloper/dm-writeboost
+Description: log-structured caching for Linux
+ dm-writeboost is an OS-level IO controller that builds logs from in-coming
+ writes (data and metadata) and then writes the logs sequentially similar
+ to log-structured filesystem. As a further extension, dm-writeboost
+ supports read-caching which also writes data sequentially.
+ .
+ This package provides DKMS kernel module for Linux Kernel 3.10+.

@@ -1,0 +1,20 @@
+Package: liblinux-pid-perl
+Source: liblinux-pid-perl (0.04-1)
+Version: 0.04-1+b6
+Architecture: amd64
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 40
+Depends: perl (>= 5.28.0-3), perlapi-5.28.0, libc6 (>= 2.2.5)
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Linux-Pid
+Description: wrapper around the getpid() and getppid() C functions
+ Perl already returns the PID and PPID in variables and builtins. Linux::Pid
+ forces perl to call the underlying C functions getpid() and getppid().
+ .
+ This is useful with multithreaded programs. Linux' C library, using the Linux
+ thread model, returns different values of the PID and the PPID from different
+ threads.
+ .
+ A known consumer of this functionality is Apache2::SizeLimit (in
+ libapache2-mod-perl2).

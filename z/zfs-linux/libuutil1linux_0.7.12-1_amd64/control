@@ -1,0 +1,22 @@
+Package: libuutil1linux
+Source: zfs-linux
+Version: 0.7.12-1
+Architecture: amd64
+Maintainer: Debian ZFS on Linux maintainers <pkg-zfsonlinux-devel@alioth-lists.debian.net>
+Installed-Size: 150
+Depends: libc6 (>= 2.14), libuuid1 (>= 2.16), zlib1g (>= 1:1.1.4)
+Breaks: libuutil1
+Replaces: libuutil1
+Section: contrib/libs
+Priority: optional
+Homepage: http://www.zfsonlinux.org/
+Description: Solaris userland utility library for Linux
+ This library provides a variety of glue functions for ZFS on Linux:
+  * libspl: The Solaris Porting Layer userland library, which provides APIs
+    that make it possible to run Solaris user code in a Linux environment
+    with relatively minimal modification.
+  * libavl: The Adelson-Velskii Landis balanced binary tree manipulation
+    library.
+  * libefi: The Extensible Firmware Interface library for GUID disk
+    partitioning.
+  * libshare: NFS, SMB, and iSCSI service integration for ZFS.

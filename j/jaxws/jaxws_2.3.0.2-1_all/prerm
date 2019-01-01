@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ]; then
+	update-alternatives --remove wsgen    /usr/share/jaxws/bin/wsgen.sh
+	update-alternatives --remove wsimport /usr/share/jaxws/bin/wsimport.sh
+fi
+
+

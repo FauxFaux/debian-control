@@ -1,0 +1,21 @@
+Package: mariadb-client-core-10.3
+Source: mariadb-10.3
+Version: 1:10.3.11-3
+Architecture: amd64
+Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Installed-Size: 26251
+Depends: mariadb-common (>= 1:10.3.11-3), libaio1 (>= 0.3.93), libc6 (>= 2.28), libncurses6 (>= 6), libpcre3, libreadline5 (>= 5.2), libssl1.1 (>= 1.1.1), libstdc++6 (>= 5.2), libsystemd0, libtinfo6 (>= 6), zlib1g (>= 1:1.2.0)
+Conflicts: mysql-client-5.5, mysql-client-5.6, mysql-client-5.7, virtual-mysql-client-core
+Breaks: mariadb-client-10.0 (<< 10.0.24-6~), mariadb-client-core-10.0, mariadb-client-core-10.1, mariadb-client-core-10.2, mariadb-client-core-5.5, mysql-client-core-5.5, mysql-client-core-5.6, mysql-client-core-5.7
+Replaces: mariadb-client-10.0 (<< 10.0.24-6~), mariadb-client-core-10.0, mariadb-client-core-10.1, mariadb-client-core-10.2, mariadb-client-core-5.5, mysql-client-core-5.5, mysql-client-core-5.6, mysql-client-core-5.7, virtual-mysql-client-core
+Provides: virtual-mysql-client-core
+Section: database
+Priority: optional
+Homepage: https://mariadb.org/
+Description: MariaDB database core client binaries
+ MariaDB is a fast, stable and true multi-user, multi-threaded SQL database
+ server. SQL (Structured Query Language) is the most popular database query
+ language in the world. The main goals of MariaDB are speed, robustness and
+ ease of use.
+ .
+ This package includes the core client files, as used by Akonadi.

@@ -1,0 +1,68 @@
+#!/bin/sh
+
+set -e
+
+CONFFILE="/etc/default/storage-tools"
+
+. /usr/share/debconf/confmodule
+
+if [ -e "${CONFFILE}" ]
+then
+	. ${CONFFILE} || true
+
+	db_set open-infrastructure-storage-tools/ceph-log "${CEPH_LOG}"
+	db_set open-infrastructure-storage-tools/ceph-info "${CEPH_INFO}"
+
+	db_set open-infrastructure-storage-tools/cephfs-snap "${CEPHFS_SNAP}"
+	db_set open-infrastructure-storage-tools/cephfs-snap-directories "${CEPHFS_SNAP_DIRECTORIES}"
+
+	db_set open-infrastructure-storage-tools/cephfs-snap-hourly "${CEPHFS_SNAP_HOURLY}"
+	db_set open-infrastructure-storage-tools/cephfs-snap-daily "${CEPHFS_SNAP_DAILY}"
+	db_set open-infrastructure-storage-tools/cephfs-snap-weekly "${CEPHFS_SNAP_WEEKLY}"
+	db_set open-infrastructure-storage-tools/cephfs-snap-monthly "${CEPHFS_SNAP_MONTHLY}"
+	db_set open-infrastructure-storage-tools/cephfs-snap-yearly "${CEPHFS_SNAP_YEARLY}"
+
+	db_set open-infrastructure-storage-tools/irc "${IRK_TARGETS}"
+fi
+
+db_settitle open-infrastructure-storage-tools/title
+db_input low open-infrastructure-storage-tools/ceph-log || true
+db_go
+
+db_settitle open-infrastructure-storage-tools/title
+db_input low open-infrastructure-storage-tools/ceph-info || true
+db_go
+
+db_settitle open-infrastructure-storage-tools/title
+db_input low open-infrastructure-storage-tools/cephfs-snap || true
+db_go
+
+db_settitle open-infrastructure-storage-tools/title
+db_input low open-infrastructure-storage-tools/cephfs-snap-directories || true
+db_go
+
+db_settitle open-infrastructure-storage-tools/title
+db_input low open-infrastructure-storage-tools/cephfs-snap-hourly || true
+db_go
+
+db_settitle open-infrastructure-storage-tools/title
+db_input low open-infrastructure-storage-tools/cephfs-snap-daily || true
+db_go
+
+db_settitle open-infrastructure-storage-tools/title
+db_input low open-infrastructure-storage-tools/cephfs-snap-weekly || true
+db_go
+
+db_settitle open-infrastructure-storage-tools/title
+db_input low open-infrastructure-storage-tools/cephfs-snap-monthly || true
+db_go
+
+db_settitle open-infrastructure-storage-tools/title
+db_input low open-infrastructure-storage-tools/cephfs-snap-yearly || true
+db_go
+
+db_settitle open-infrastructure-storage-tools/title
+db_input low open-infrastructure-storage-tools/irc || true
+db_go
+
+db_stop

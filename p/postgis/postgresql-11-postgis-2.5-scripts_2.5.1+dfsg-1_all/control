@@ -1,0 +1,26 @@
+Package: postgresql-11-postgis-2.5-scripts
+Source: postgis
+Version: 2.5.1+dfsg-1
+Architecture: all
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Installed-Size: 22414
+Depends: perl:any
+Recommends: postgresql-11-postgis-2.5
+Conflicts: postgresql-11-postgis-2.2-scripts, postgresql-11-postgis-2.3-scripts, postgresql-11-postgis-2.4-scripts
+Breaks: postgresql-11-postgis-scripts (<< 2.2.2+dfsg-3~)
+Replaces: postgresql-11-postgis-scripts (<< 2.2.2+dfsg-3~)
+Provides: postgresql-11-postgis-scripts, postgresql-postgis-scripts
+Section: misc
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://postgis.net/
+Description: Geographic objects support for PostgreSQL 11 -- SQL scripts
+ PostGIS adds support for geographic objects to the PostgreSQL
+ object-relational database. In effect, PostGIS "spatially enables"
+ the PostgreSQL server, allowing it to be used as a backend spatial
+ database for geographic information systems (GIS), much like ESRI's
+ SDE or Oracle's Spatial extension. PostGIS follows the OpenGIS
+ "Simple Features Specification for SQL".
+ .
+ This package contains the SQL scripts for installing PostGIS in a PostgreSQL
+ 11 database, and for upgrading from earlier PostGIS versions.

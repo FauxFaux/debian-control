@@ -1,0 +1,71 @@
+#!/bin/bash -e
+
+clean_var_lib() {
+  echo "Purging active file and history data..."
+  rm -f /var/lib/news/active* /var/lib/news/history* \
+    /var/lib/news/newsgroups
+  if [ -d /var/lib/news/ ]; then
+    rmdir --ignore-fail-on-non-empty /var/lib/news/
+  fi
+}
+
+clean_var_run() {
+  rm -rf /run/innd/
+}
+
+remove_logs() {
+  echo "Removing files in /var/log/news and /run/innd..."
+  rm -f /var/lib/news/{.news.daily,active.old}
+  [ -e /var/log/news/ ] || return 0
+  rm -rf /var/log/news/OLD/
+  rm -f /var/log/news/{expire.log,log,errlog,unwanted.log}
+  : > /var/log/news/news.crit
+  : > /var/log/news/news.err
+  : > /var/log/news/news.notice
+}
+
+case "$1" in
+    remove)
+    ;;
+
+    purge)
+    clean_var_lib
+    clean_var_run
+    remove_logs
+
+    # We do not remove /var/spool/news because that might
+    # take a lot of time. Most of the time it is on a seperate
+    # disk anyway and it is faster to do a mkfs on it..
+    echo "Remove the news spool in /var/spool/news yourself!"
+    ;;
+
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    *)
+    echo "postrm called with unknown argument '$1'" >&2
+    exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit/11.5.1
+if [ "$1" = "purge" ] ; then
+	update-rc.d inn remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/11.5.1
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'inn.service' 'inn.socket' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'inn.service' 'inn.socket' >/dev/null || true
+		deb-systemd-helper unmask 'inn.service' 'inn.socket' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+

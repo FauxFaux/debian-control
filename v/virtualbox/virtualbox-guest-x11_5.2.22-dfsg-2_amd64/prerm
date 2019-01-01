@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+ARCH=`dpkg --print-architecture`
+
+case "$1" in
+	remove)
+            update-alternatives --remove x86_64-linux-gnu_gl_conf /usr/lib/virtualbox/additions/00vboxvideo.conf
+            update-alternatives --remove x86_64-linux-gnu_egl_conf /usr/lib/virtualbox/additions/00vboxvideo.conf
+            update-alternatives --remove i386-linux-gnu_gl_conf /usr/lib/virtualbox/additions/00vboxvideo.conf
+            update-alternatives --remove i386-linux-gnu_egl_conf /usr/lib/virtualbox/additions/00vboxvideo.conf
+	    ldconfig
+	;;
+
+esac
+## Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper rm_conffile /etc/init.d/virtualbox-guest-x11 5.0.12-dfsg-2\~ -- "$@"
+# End automatically added section
+#

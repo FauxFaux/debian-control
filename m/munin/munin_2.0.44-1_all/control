@@ -1,0 +1,31 @@
+Package: munin
+Version: 2.0.44-1
+Architecture: all
+Maintainer: Munin Debian Maintainers <team+munin@tracker.debian.org>
+Installed-Size: 657
+Depends: perl, lsb-base (>= 4.1), cron | cron-daemon | systemd-sysv, fonts-dejavu-core, libdate-manip-perl, libdigest-md5-perl, libfile-copy-recursive-perl, libhtml-template-perl, libio-socket-inet6-perl, liblog-log4perl-perl, librrds-perl, libstorable-perl, libtime-hires-perl, liburi-perl, munin-common (>= 2.0.44-1), rrdtool
+Recommends: munin-node, munin-doc, libcgi-fast-perl
+Suggests: www-browser, httpd, libnet-ssleay-perl, libapache2-mod-fcgid
+Breaks: munin-doc (<< 2.0.37-3)
+Replaces: munin-doc (<< 2.0.37-3)
+Section: net
+Priority: optional
+Homepage: http://munin-monitoring.org
+Description: network-wide graphing framework (grapher/gatherer)
+ Munin is a highly flexible and powerful solution used to create graphs of
+ virtually everything imaginable throughout your network, while still
+ maintaining a rattling ease of installation and configuration.
+ .
+ This package contains the grapher/gatherer. You will only need one instance of
+ it in your network. It will periodically poll all the nodes in your network
+ it's aware of for data, which it in turn will use to create graphs and HTML
+ pages, suitable for viewing with your graphical web browser of choice.
+ .
+ It is also able to alert you if any value is outside of a preset boundary,
+ useful if you want to be alerted if a filesystem is about to grow full, for
+ instance.  You can do this by making Munin run an arbitrary command when you
+ need to be alert it, or make use of the intrinsic Nagios support.
+ .
+ Munin is written in Perl, and relies heavily on Tobi Oetiker's excellent
+ RRDtool. To see a real example of Munin in action, you can follow a link
+ from <http://munin-monitoring.org/> to a live installation.

@@ -1,0 +1,16 @@
+Package: pdudaemon
+Version: 0.0.7-1
+Architecture: all
+Maintainer: Matt Hart <matt@mattface.org>
+Installed-Size: 134
+Depends: python3-hid, python3-paramiko, python3-pexpect, python3-requests, python3-serial, python3-systemd, python3:any
+Section: net
+Priority: optional
+Homepage: http://github.com/pdudaemon
+Description: daemon for controlling PDUs
+ Pdudaemon provides a standard way of controlling power controllers,
+ which can either be local devices or networked PDUs. On top of that it ensures
+ the control commands to the PDU are executed sequentially to avoid issues with
+ many PDUs in handling multiple parallel requests.
+ .
+ This package provides the daemon

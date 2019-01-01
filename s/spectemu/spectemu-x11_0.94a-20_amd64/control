@@ -1,0 +1,30 @@
+Package: spectemu-x11
+Source: spectemu
+Version: 0.94a-20
+Architecture: amd64
+Maintainer: Colin Watson <cjwatson@debian.org>
+Installed-Size: 266
+Depends: spectemu-common (= 0.94a-20), spectrum-roms, libc6 (>= 2.7), libreadline7 (>= 6.0), libx11-6, libxext6
+Conflicts: xspectemu
+Replaces: xspectemu
+Provides: xspectemu
+Section: contrib/otherosfs
+Priority: optional
+Description: Fast 48k ZX Spectrum Emulator for X11
+ xspect is the X11 version of Spectemu which emulates the 48k ZX
+ Spectrum, which uses the Z80 microprocessor.
+ .
+ It emulates the Z80 processor as well as the 48k Spectrum's other
+ hardware: keyboard, screen, sound, tape I/O. The emulation is very
+ close to the real thing, but it is still quite fast (It was reported
+ to be working well on a laptop with 486 at 25MHz!). On the other hand,
+ the user interface is not the best.
+ .
+ Features include:
+    - Sound support through Linux kernel sound-card driver.
+    - Snapshot saving and loading (.Z80 and .SNA format)
+    - Tape emulation: loading from tape files (.TAP and .TZX format)
+    - Optional quick loading of tapes.
+    - Saving to tape files.
+    - Separate utility to save tape files to real tape
+    - Configurable with config files and from command line

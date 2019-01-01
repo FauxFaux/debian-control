@@ -1,0 +1,23 @@
+Package: libmariadb-dev-compat
+Source: mariadb-10.3
+Version: 1:10.3.11-3
+Architecture: amd64
+Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Installed-Size: 75
+Depends: libmariadb-dev (= 1:10.3.11-3)
+Conflicts: libmariadb-client-lgpl-dev-compat, libmariadbclient-dev-compat, libmysqlclient-dev
+Breaks: libmariadb-client-lgpl-dev-compat, libmariadbclient-dev-compat, libmysqlclient-dev
+Replaces: libmariadb-client-lgpl-dev-compat, libmariadbclient-dev-compat, libmysqlclient-dev
+Provides: libmariadb-client-lgpl-dev-compat, libmariadbclient-dev-compat
+Section: libdevel
+Priority: optional
+Multi-Arch: same
+Homepage: https://mariadb.org/
+Description: MariaDB Connector/C, compatibility symlinks
+ MariaDB is a fast, stable and true multi-user, multi-threaded SQL database
+ server. SQL (Structured Query Language) is the most popular database query
+ language in the world. The main goals of MariaDB are speed, robustness and
+ ease of use.
+ .
+ This package includes compatibility symlinks to allow sources expecting the
+ MySQL client libraries to be built against MariaDB Connector/C.

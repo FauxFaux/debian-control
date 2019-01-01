@@ -1,0 +1,18 @@
+Package: openstack-dashboard-apache
+Source: horizon
+Version: 3:14.0.0-5
+Architecture: all
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Installed-Size: 43
+Depends: apache2 (>= 2.4), debconf, libapache2-mod-wsgi-py3 (>= 2.3), openstack-dashboard, debconf (>= 0.5) | debconf-2.0
+Section: net
+Priority: optional
+Homepage: https://horizon.openstack.org
+Description: web application to control an OpenStack cloud - Apache support
+ The OpenStack Dashboard is a web application to control an OpenStack
+ cloud. It connects to OpenStack services such as Nova, Swift, or Keystone
+ using the OpenStack REST API just as you would with the command line
+ clients.
+ .
+ This package includes the configuration files to use within Apache. If you
+ wish to configure Apache yourself, use only openstack-dashboard.

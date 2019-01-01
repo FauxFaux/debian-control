@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+getent group lfcmgr > /dev/null || \
+    addgroup --quiet --system lfcmgr
+
+getent passwd lfcmgr > /dev/null || \
+    adduser --quiet --system --home /var/lib/lfc --shell /bin/sh \
+    --ingroup lfcmgr --disabled-password --disabled-login \
+    --gecos "LFC manager" lfcmgr
+
+chown lfcmgr:lfcmgr /var/log/lfc-dli
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/lfc-dli" ]; then
+		update-rc.d lfc-dli defaults-disabled >/dev/null
+		invoke-rc.d lfc-dli start || exit 1
+	fi
+fi
+
+

@@ -1,0 +1,21 @@
+Package: graphite-api
+Version: 1.1.3-5
+Architecture: all
+Maintainer: Debian Graphite Group <team+debian-graphite-team@tracker.debian.org>
+Installed-Size: 848
+Depends: python3-cairocffi, python3-flask, python3-pyparsing, python3-six, python3-structlog, python3-tz, python3-tzlocal, python3-yaml, python3:any, libjs-sphinxdoc (>= 1.0), sphinx-rtd-theme-common (>= 0.4.2+dfsg), adduser
+Suggests: gunicorn3 | uwsgi-plugin-python3 | libapache2-mod-wsgi-py3
+Section: web
+Priority: optional
+Homepage: https://github.com/brutasse/graphite-api/
+Description: Enterprise Scalable Realtime Graphing (API-only frontend)
+ Graphite consists of a storage backend and a web-based visualization
+ frontend. Client applications send streams of numeric time-series
+ data to the Graphite backend (called carbon), where it gets stored in
+ fixed-size database files similar in design to RRD.
+ .
+ Graphite-API is an alternative to Graphite-web, without any built-in
+ dashboard. Its role is solely to fetch metrics from a time-series
+ database and rendering graphs or JSON data out of these time
+ series. It is meant to be consumed by any of the numerous Graphite
+ dashboard applications.

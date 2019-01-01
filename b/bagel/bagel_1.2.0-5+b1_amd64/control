@@ -1,0 +1,41 @@
+Package: bagel
+Source: bagel (1.2.0-5)
+Version: 1.2.0-5+b1
+Architecture: amd64
+Maintainer: Debichem Team <debichem-devel@lists.alioth.debian.org>
+Installed-Size: 110525
+Depends: libblas3 | libblas.so.3, libboost-regex1.67.0 (>= 1.67.0-10), libboost-serialization1.67.0, libboost-test1.67.0, libc6 (>= 2.14), libgcc1 (>= 1:4.0), liblapack3 | liblapack.so.3, libmpich12, libstdc++6 (>= 6), libxc5 (>= 3.0.0)
+Breaks: bagel-data
+Replaces: bagel-data
+Section: science
+Priority: optional
+Homepage: http://www.nubakery.org/
+Description: Computational Chemistry Package
+ BAGEL (Brilliantly Advanced General Electronic-structure Library) is a
+ computational chemistry package aimed at large-scale parallel
+ computations.  It specializes on highgly accurate methods and includes
+ density-fitting and relativistic effects for most of the methods it
+ implements.
+ .
+ It can compute energies and gradients for the following methods:
+  * Hartree-Fock (HF)
+  * Density-Functional Theory (DFT)
+  * Second-order Moeller-Plesset perturbation theory (MP2)
+  * Complete active space SCF (CASSCF)
+  * Complete active space second order perturbation theory (CASPT2)
+  * Extended multistate CASPT2 (XMS-CASPT2)
+ .
+ Additionally, it can compute energies for the following methods:
+  * Configuration-interaction singles (CIS)
+  * Full configuration-interaction (FCI)
+  * Multi-state internally contracted multireference configuration-interaction
+    (ic-MRCI)
+  * N-electron valence-state second order perturbation theory (NEVPT2)
+  * Active-space decomposition (ASD) for dimers and for multiple sites via
+    density matrix renormalization group (ASD-DMRG)
+ .
+ BAGEL is able to optimize stationary geometries and conical intersections and
+ to compute vibrational frequencies.
+ .
+ BAGEL does not include a disk interface, so computations need to fit in
+ memory.

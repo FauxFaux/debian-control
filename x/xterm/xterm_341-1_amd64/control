@@ -1,0 +1,34 @@
+Package: xterm
+Version: 341-1
+Architecture: amd64
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Installed-Size: 2206
+Depends: xbitmaps, libc6 (>= 2.15), libfontconfig1 (>= 2.12.6), libfreetype6 (>= 2.2.1), libice6 (>= 1:1.0.0), libtinfo6 (>= 6), libutempter0 (>= 1.1.5), libx11-6, libxaw7, libxft2 (>> 2.1.1), libxinerama1, libxmu6, libxpm4, libxt6
+Recommends: x11-utils
+Suggests: xfonts-cyrillic
+Provides: x-terminal-emulator
+Section: x11
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://invisible-island.net/xterm/xterm.html
+Description: X terminal emulator
+ xterm is a terminal emulator for the X Window System.  It provides DEC VT102
+ and Tektronix 4014 compatible terminals for programs that cannot use the
+ window system directly.  This version implements ISO/ANSI colors and most of
+ the control sequences used by DEC VT220 terminals.
+ .
+ This package provides four commands: xterm, which is the traditional
+ terminal emulator; uxterm, which is a wrapper around xterm that is
+ intelligent about locale settings (especially those which use the UTF-8
+ character encoding), but which requires the luit program from the x11-utils
+ package; koi8rxterm, a wrapper similar to uxterm for locales that use the
+ KOI8-R character set; and lxterm, a simple wrapper that chooses which of the
+ previous commands to execute based on the user's locale settings.
+ .
+ A complete list of control sequences supported by the X terminal emulator
+ is provided in /usr/share/doc/xterm.
+ .
+ The xterm program uses bitmap images provided by the xbitmaps package.
+ .
+ Those interested in using koi8rxterm will likely want to install the
+ xfonts-cyrillic package as well.

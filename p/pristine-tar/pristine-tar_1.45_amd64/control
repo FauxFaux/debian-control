@@ -1,0 +1,25 @@
+Package: pristine-tar
+Version: 1.45
+Architecture: amd64
+Maintainer: Tomasz Buchert <tomasz@debian.org>
+Installed-Size: 550
+Depends: tar (>= 1.27-3), xdelta, xdelta3, perl, libbz2-1.0, libc6 (>= 2.14), zlib1g (>= 1:1.1.4)
+Recommends: bzip2, pbzip2, xz-utils (>= 5.0)
+Section: utils
+Priority: optional
+Homepage: http://kitenet.net/~joey/code/pristine-tar/
+Description: regenerate pristine tarballs
+ pristine-tar can regenerate a pristine upstream tarball using only a small
+ binary delta file and a revision control checkout of the upstream branch.
+ .
+ The package also includes a pristine-gz command, which can regenerate a
+ pristine .gz file, a pristine-bz2 for .bz2 files, and a pristine-xz for .xz
+ files.
+ .
+ The delta file is designed to be checked into revision control along-side
+ the upstream branch, thus allowing Debian packages to be built entirely
+ using sources in revision control, without the need to keep copies of
+ upstream tarballs.
+ .
+ An optional upstream signature may be attached to tarballs for verification
+ by, for example, dpkg-source(1).

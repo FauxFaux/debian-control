@@ -1,0 +1,23 @@
+Package: chkboot
+Version: 1.2-2
+Architecture: all
+Maintainer: Baptiste BEAUPLAT <lyknode@cilg.org>
+Installed-Size: 44
+Suggests: zenity, x11-utils
+Section: utils
+Priority: optional
+Homepage: https://github.com/grazzolini/chkboot
+Description: detection of malicious changes for boot files
+ chkboot is a set of scripts that will display a notification (console or
+ graphical) when boot files are tempered with.
+ .
+ This tool is indented to be used on encrypted disks. In order to get the
+ operating system to run, parts of the boot process must remains un-encrypted.
+ chkboot checks that those files have not changed between reboots.
+ .
+ Since the scripts and the data they generate are stored on the encrypted part
+ of the disk, any attempts to modify the boot partition between reboots will be
+ detected.
+ .
+ Please note that this tool is not effective against rootkit that hides every
+ boot files modifications or prevents chkboot from functioning properly.

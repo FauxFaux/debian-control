@@ -1,0 +1,23 @@
+Package: libnet-remctl-perl
+Source: remctl (3.15-1)
+Version: 3.15-1+b3
+Architecture: amd64
+Maintainer: Russ Allbery <rra@debian.org>
+Installed-Size: 156
+Depends: libc6 (>= 2.2.5), libremctl1 (>= 3.1), perl (>= 5.28.0-3), perlapi-5.28.0
+Section: perl
+Priority: optional
+Multi-Arch: same
+Homepage: https://www.eyrie.org/~eagle/software/remctl/
+Description: Perl client for Kerberos-authenticated command execution
+ remctl is a client/server protocol for executing specific commands on a
+ remote system with Kerberos authentication.  The allowable commands must
+ be listed in a server configuration file, and the executable run on the
+ server may be mapped to any command name.  Each command is also
+ associated with an ACL containing a list of Kerberos principals
+ authorized to run that command.
+ .
+ This package contains the Net::Remctl Perl library, which provides native
+ Perl bindings for the libremctl client library.  It also contains the
+ Net::Remctl::Backend module, which assists in writing remctl backends in
+ Perl.

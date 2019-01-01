@@ -1,0 +1,25 @@
+Package: debci-collector
+Source: debci
+Version: 1.14
+Architecture: all
+Maintainer: Debian CI team <team+ci@tracker.debian.org>
+Installed-Size: 33
+Depends: debci (= 1.14)
+Recommends: rabbitmq-server
+Section: devel
+Priority: optional
+Homepage: http://ci.debian.net/
+Description: continuous integration system for Debian (collector daemon)
+ debci will scan the Debian archive for packages that contain DEP-8 compliant
+ test suites, and run those test suites whenever a new version of the package,
+ or of any package in its dependency chain (modulo the base system), is
+ available.
+ .
+ The requests are distributed to worker machines through AMQP queues. You need
+ rabbitmq-server for this; but it is also possible to run RabbitMQ on a
+ different server than debci, in which case you do not need to install that
+ recommendation.
+ .
+ This package provides the collector daemon, which will receive test results
+ published by debci worker hosts, store them centrally, and generate the static
+ HTML files for the debci user interface.

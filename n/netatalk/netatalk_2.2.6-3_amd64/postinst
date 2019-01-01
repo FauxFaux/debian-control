@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit/11.5.4
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -x "/etc/init.d/netatalk" ]; then
+		update-rc.d netatalk defaults >/dev/null
+		invoke-rc.d netatalk start || exit 1
+	fi
+fi
+# End automatically added section

@@ -1,0 +1,29 @@
+Package: libghc-enummapset-th-dev
+Source: haskell-enummapset-th (0.6.1.1-4)
+Version: 0.6.1.1-4+b2
+Architecture: amd64
+Maintainer: Debian Haskell Group <pkg-haskell-maintainers@lists.alioth.debian.org>
+Installed-Size: 1717
+Depends: libghc-base-dev-4.11.1.0-5dd74, libghc-containers-dev-0.5.11.0-e0faa, libghc-deepseq-dev-1.4.3.0-17e4f, libghc-semigroups-dev-0.18.5-df031, libghc-template-haskell-dev-2.13.0.0-87d93, libatomic1 (>= 4.8), libc6 (>= 2.2.5), libgmp10
+Suggests: libghc-enummapset-th-doc, libghc-enummapset-th-prof
+Provides: libghc-enummapset-th-dev-0.6.1.1-12cf1
+Section: haskell
+Priority: optional
+Homepage: https://github.com/tsurucapital/enummapset-th
+Description: TH-generated EnumSet/EnumMap wrappers around IntSet/IntMap
+ This package wraps IntSet and IntMap from containers, and provides
+ fast sets and maps keyed on any data type with a well-behaved Enum
+ instance. Useful for derived Enums, newtype'd Ints, or any data type
+ that can be packed into an Int: just implement fromEnum and toEnum.
+ .
+ The boilerplate is generated using Template Haskell, so unlike
+ enummapset it's easier to maintain and keep up-to-date with
+ containers. On the downside, it's less portable.
+ .
+ Note that "Data.EnumMap.Lazy" and "Data.EnumMap.Strict" provide distinct
+ newtype wrappers, and their respective 'Functor' instances behave as
+ expected, unlike that of IntMap which is alway lazy.
+ .
+ This package provides a library for the Haskell programming language.
+ See http://www.haskell.org/ for more information on Haskell.
+Ghc-Package: enummapset-th-0.6.1.1-IjQYXtEVB8r1FoWPDAq7hx

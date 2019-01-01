@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "${1}" = "configure" ] ; then
+	update-alternatives --install /usr/share/puppet/modules/cinder puppet-module-cinder /usr/share/puppet/modules.available/cinder 500
+fi
+
+
+
+exit 0

@@ -1,0 +1,21 @@
+Package: bzr-git
+Version: 0.6.13+bzr1649-3
+Architecture: all
+Maintainer: Debian Bazaar Maintainers <pkg-bazaar-maint@lists.alioth.debian.org>
+Installed-Size: 575
+Depends: bzr (<< 2.8.0), bzr (>= 2.5~), python-dulwich (>= 0.18.2~), python (<< 2.8), python (>= 2.7), python:any (>= 2.6.6-7~)
+Recommends: python-tdb
+Suggests: bzr-fastimport
+Enhances: bzr, git, loggerhead
+Provides: git-remote-bzr
+Section: vcs
+Priority: optional
+Homepage: http://bazaar-vcs.org/BzrForeignBranches/Git
+Description: Bazaar plugin providing Git integration
+ This is a plugin for Bazaar that adds the ability to use Git repositories,
+ both local and remote (git://, git+ssh:// and http://). It integrates with the
+ regular Bazaar UI, and provides a new Bazaar subcommand `git-import` which
+ imports all branches from a Git repository.
+ .
+ An experimental remote helper for Git that can push to and
+ fetch from Bazaar branches is also provided.

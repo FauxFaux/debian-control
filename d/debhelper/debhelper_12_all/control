@@ -1,0 +1,20 @@
+Package: debhelper
+Version: 12
+Architecture: all
+Maintainer: Debhelper Maintainers <debhelper@packages.debian.org>
+Installed-Size: 1591
+Depends: autotools-dev, dh-autoreconf (>= 17~), dh-strip-nondeterminism (>= 0.028~), dpkg (>= 1.18.0~), dpkg-dev (>= 1.18.2~), dwz, file (>= 3.23), libdpkg-perl (>= 1.17.14), man-db, po-debconf, perl
+Suggests: dh-make
+Breaks: cmake (<< 3.9~), dh-systemd (<< 1.38), meson (<< 0.40.0~)
+Replaces: dh-systemd (<< 1.38)
+Provides: debhelper-compat (= 9), debhelper-compat (= 10), debhelper-compat (= 11), debhelper-compat (= 12), dh-sequence-dwz, dh-sequence-installinitramfs, dh-sequence-systemd
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Description: helper programs for debian/rules
+ A collection of programs that can be used in a debian/rules file to
+ automate common tasks related to building Debian packages. Programs
+ are included to install various files into your package, compress
+ files, fix file permissions, integrate your package with the Debian
+ menu system, debconf, doc-base, etc. Most Debian packages use debhelper
+ as part of their build process.

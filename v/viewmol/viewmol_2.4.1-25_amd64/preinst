@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+# rename locale/en_US to en (from 2.4.1-12)
+if [ "$1" = "upgrade" ]; then
+    if dpkg --compare-versions "$2" lt-nl 2.4.1-12; then
+	if [ -d /etc/viewmol/locale/en_US/ ] && [ ! -d /etc/viewmol/locale/en/ ]; then
+		echo "Moving /etc/viewmol/locale/en_US/ to .../en"
+		mv /etc/viewmol/locale/en_US /etc/viewmol/locale/en
+	fi
+    fi
+fi
+
+
+

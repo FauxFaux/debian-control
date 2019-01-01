@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" ]; then
+    rm -rf /lib/opendkim
+    rm -rf /lib/systemd/system/opendkim.service
+fi
+
+# Automatically added by dh_installinit/11.5.3
+if [ "$1" = "purge" ] ; then
+	update-rc.d opendkim remove >/dev/null
+fi
+# End automatically added section
+# Automatically added by dh_systemd_enable/11.5.3
+if [ "$1" = "remove" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper mask 'opendkim.service' >/dev/null || true
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'opendkim.service' >/dev/null || true
+		deb-systemd-helper unmask 'opendkim.service' >/dev/null || true
+	fi
+fi
+# End automatically added section
+
+
+exit 0

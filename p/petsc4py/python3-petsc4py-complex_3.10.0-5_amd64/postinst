@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+PETSC4PY_VERSION=3.10.0
+PETSC4PY_VERSION_NUMBER=$( echo ${PETSC4PY_VERSION} | sed "s/\.//g" )
+
+# Make alternatives links
+if [ "$1" = "configure" ]; then
+  # alternative petsc4py version, real or complex
+  update-alternatives --install /usr/lib/python3/dist-packages/petsc4py petsc4py /usr/lib/python3/dist-packages/petsc4py_complex ${PETSC4PY_VERSION_NUMBER}73 \
+    --slave /usr/lib/python3/dist-packages/petsc4py-${PETSC4PY_VERSION}.egg-info petsc4py.egg-info /usr/lib/python3/dist-packages/petsc4py_complex-${PETSC4PY_VERSION}.egg-info
+fi
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p python3-petsc4py-complex 
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p python3-petsc4py-complex  || true
+fi
+
+# End automatically added section
+

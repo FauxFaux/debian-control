@@ -1,0 +1,18 @@
+Package: python3-mailman-hyperkitty
+Source: mailman-hyperkitty
+Version: 1.1.0-9
+Architecture: all
+Maintainer: Debian Mailman Team <pkg-mailman-hackers@lists.alioth.debian.org>
+Installed-Size: 63
+Depends: mailman3, python3-requests, python3-zope.interface, ucf, debconf (>= 0.5) | debconf-2.0, python3-pkg-resources, python3:any
+Recommends: mailman3-web | python3-django-hyperkitty
+Section: python
+Priority: optional
+Homepage: https://gitlab.com/mailman/mailman-hyperkitty
+Description: Mailman3 plugin to archive emails with HyperKitty
+ Mailman3 allows emails sent to its mailing lists to be archived by
+ any software provided that there is a plugin (loadable by Mailman3) designed
+ to communicate with it properly.
+ .
+ This module contains a Mailman3 archiver plugin which sends emails
+ to HyperKitty, the official Mailman3 web archiver.

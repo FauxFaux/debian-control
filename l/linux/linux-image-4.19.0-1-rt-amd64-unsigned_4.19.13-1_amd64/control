@@ -1,0 +1,20 @@
+Package: linux-image-4.19.0-1-rt-amd64-unsigned
+Source: linux
+Version: 4.19.13-1
+Architecture: amd64
+Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
+Installed-Size: 257166
+Depends: kmod, linux-base (>= 4.3~), initramfs-tools (>= 0.120+deb8u2) | linux-initramfs-tool
+Recommends: firmware-linux-free, irqbalance, apparmor
+Suggests: linux-doc-4.19, debian-kernel-handbook, grub-pc | grub-efi-amd64 | extlinux
+Conflicts: linux-image-4.19.0-1-rt-amd64
+Breaks: initramfs-tools (<< 0.120+deb8u2), xserver-xorg-input-vmmouse (<< 1:13.0.99)
+Replaces: linux-image-4.19.0-1-rt-amd64
+Section: kernel
+Priority: optional
+Homepage: https://www.kernel.org/
+Description: Linux 4.19 for 64-bit PCs, PREEMPT_RT
+ The Linux kernel 4.19 and modules for use on PCs with AMD64, Intel 64 or
+ VIA Nano processors.
+ .
+ This kernel includes the PREEMPT_RT realtime patch set.

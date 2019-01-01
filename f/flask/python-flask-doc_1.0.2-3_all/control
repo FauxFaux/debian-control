@@ -1,0 +1,26 @@
+Package: python-flask-doc
+Source: flask
+Version: 1.0.2-3
+Architecture: all
+Maintainer: Piotr Ożarowski <piotr@debian.org>
+Installed-Size: 3311
+Depends: libjs-sphinxdoc (>= 1.0)
+Recommends: python-flask
+Section: doc
+Priority: optional
+Homepage: http://flask.pocoo.org/
+Description: micro web framework based on Werkzeug and Jinja2 - documentation
+ Flask is a micro web framework for Python based on Werkzeug, Jinja 2 and good
+ intentions. A minimal Flask application looks like that:
+ .
+   from flask import Flask
+   app = Flask(__name__)
+ .
+   @app.route("/")
+   def hello():
+       return "Hello World!"
+ .
+   if __name__ == '__main__':
+       app.run()
+ .
+ This package contains the documentation for Flask.

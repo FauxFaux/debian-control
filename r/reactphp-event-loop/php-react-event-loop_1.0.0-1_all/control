@@ -1,0 +1,19 @@
+Package: php-react-event-loop
+Source: reactphp-event-loop
+Version: 1.0.0-1
+Architecture: all
+Maintainer: Teckids Debian Task Force <tdtf@lists.teckids.org>
+Installed-Size: 115
+Depends: php-common
+Suggests: php-event
+Section: php
+Priority: optional
+Homepage: https://github.com/reactphp/event-loop
+Description: ReactPHP's core reactor event loop for evented I/O
+ This library implements a central event loop for asynchronous
+ applications written in ReactPHP.
+ .
+ In order for async based libraries to be interoperable, they need to use
+ the same event loop.  This component provides a common LoopInterface that
+ any library can target.  This allows them to be used in the same loop, with
+ one single run() call that is controlled by the user.

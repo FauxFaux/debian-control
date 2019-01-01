@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+# Splitting mpi and mpi-$MULTIARCH  requires this
+if [ ! -z "$(update-alternatives --query mpi 2> /dev/null | grep --silent mpi-fort.pc)" ]; then
+    update-alternatives --quiet --remove-all mpi >/dev/null 2>&1 
+    update-alternatives --quiet --remove-all mpi-x86_64-linux-gnu >/dev/null 2>&1 
+fi
+
+
+
+exit 0

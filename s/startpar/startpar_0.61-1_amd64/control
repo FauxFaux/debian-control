@@ -1,0 +1,16 @@
+Package: startpar
+Version: 0.61-1
+Architecture: amd64
+Maintainer: Debian sysvinit maintainers <debian-init-diversity@chiark.greenend.org.uk>
+Installed-Size: 59
+Depends: libc6 (>= 2.15)
+Suggests: insserv, sysv-rc
+Breaks: sysvinit-utils (<< 2.88dsf-52)
+Replaces: sysvinit-utils (<< 2.88dsf-52)
+Section: admin
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://savannah.nongnu.org/projects/sysvinit
+Description: run processes in parallel and multiplex their output
+ Used by the sysv-rc boot system executor to run init.d scripts in parallel
+ while making sure the script output is not completely messed up.

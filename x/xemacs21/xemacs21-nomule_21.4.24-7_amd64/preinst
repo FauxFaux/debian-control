@@ -1,0 +1,12 @@
+#!/bin/sh -e
+set -e
+
+# update-alternatives --auto xemacs21
+
+# echo 'I apologize if I\'ve just blown away a site setup alternative.'
+# echo 'But due to problems in previous xemacs21 packages this seems'
+# echo 'like the only solution.'
+
+update-alternatives --remove xemacs21 /usr/bin/xemacs-21.1-p2-mule
+update-alternatives --remove xemacs21 /usr/bin/xemacs-21.1-p2-nomule
+update-alternatives --remove xemacs21 /usr/bin/xemacs-21.1-p2-mule-canna-wnn

@@ -1,0 +1,15 @@
+Package: virtio-forwarder
+Version: 1.1.99.51-1~unstable
+Architecture: amd64
+Maintainer: Frik Botha <frik.botha@netronome.com>
+Installed-Size: 313
+Depends: libc6 (>= 2.27), libprotobuf-c1 (>= 1.0.1), librte-eal18.11 (>= 18.11), librte-ethdev18.11 (>= 18.11), librte-mbuf18.11 (>= 16.04), librte-mempool18.11 (>= 16.07~rc1), librte-vhost18.11 (>= 17.05), libzmq5 (>= 3.2.3+dfsg), dpdk, python, python-zmq, python-protobuf
+Section: net
+Priority: optional
+Homepage: https://github.com/Netronome/virtio-forwarder
+Description: SR-IOV virtual function to virtio packet forwarder
+ virtio-forwarder is a userspace networking application that forwards
+ bi-directional traffic between SR-IOV virtual functions and virtio networking
+ devices in QEMU virtual machines. virtio-forwarder implements a virtio backend
+ driver using the DPDK’s vhost-user library and services designated VFs by
+ means of the DPDK poll mode driver (PMD) mechanism.

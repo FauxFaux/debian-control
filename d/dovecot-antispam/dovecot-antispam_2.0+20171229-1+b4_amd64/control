@@ -1,0 +1,19 @@
+Package: dovecot-antispam
+Source: dovecot-antispam (2.0+20171229-1)
+Version: 2.0+20171229-1+b4
+Architecture: amd64
+Maintainer: Ron Lee <ron@debian.org>
+Installed-Size: 71
+Depends: libc6 (>= 2.14), dovecot-imapd, dovecot-abi-2.3.abiv4
+Suggests: crm114
+Section: mail
+Priority: optional
+Homepage: http://johannes.sipsolutions.net/Projects/dovecot-antispam
+Description: Dovecot plugins for training spam filters
+ dovecot-antispam watches designated spam folders and trains mail as spam or
+ not-spam when it moves in or out of those folders respectively.
+ .
+ dovecot-antispam supports dspam, crm114, and generic training by mailing spam
+ and non-spam to training addresses.  For crm114, it supports folders for the
+ additional "unsure" classification, and trains when moving from there to spam
+ or normal folders.

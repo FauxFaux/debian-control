@@ -1,0 +1,33 @@
+#! /bin/sh
+# postinst script for xdvik-ja
+#
+# see: dh_installdeb(1)
+
+set -e
+
+case "$1" in
+    configure|reconfigure)
+        if ( dpkg-divert --list /usr/bin/xdvi.nonja | egrep -q ' by xdvik-ja$' ); then
+            if [ -f /usr/bin/xdvi -a -f /usr/bin/xdvi.nonja ]; then
+                rm -f /usr/bin/xdvi
+            fi
+            dpkg-divert --package xdvik-ja --remove --rename \
+                --divert /usr/bin/xdvi.nonja /usr/bin/xdvi
+        fi
+        if ( update-alternatives --list xdvi.bin | egrep -q 'xdvi-ja.real' );then
+            update-alternatives --remove xdvi.bin /usr/bin/xdvi-ja.real
+        fi
+        update-alternatives --install /usr/bin/xdvi.bin xdvi.bin \
+            /usr/bin/pxdvi-xaw 35
+        ;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+
+
+exit 0

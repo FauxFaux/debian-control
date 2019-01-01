@@ -1,0 +1,14 @@
+Package: librust-libgit2-sys+curl-sys-dev
+Source: rust-libgit2-sys
+Version: 0.7.10-1
+Architecture: amd64
+Maintainer: Debian Rust Maintainers <pkg-rust-maintainers@alioth-lists.debian.net>
+Installed-Size: 6
+Depends: librust-libgit2-sys-dev (= 0.7.10-1), librust-curl-sys-0.4+default-dev (>= 0.4.10-~~)
+Provides: librust-libgit2-sys-0+curl-sys-dev (= 0.7.10-1), librust-libgit2-sys-0.7+curl-sys-dev (= 0.7.10-1), librust-libgit2-sys-0.7.10+curl-sys-dev (= 0.7.10-1)
+Section: rust
+Priority: optional
+Multi-Arch: same
+Description: Native bindings to the libgit2 library - feature "curl-sys"
+ This metapackage enables feature curl-sys for the Rust libgit2-sys crate, by
+ pulling in any additional dependencies needed by that feature.

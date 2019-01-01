@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installdeb/11.5.3
+dpkg-maintscript-helper symlink_to_dir /usr/share/yasnippet-snippets/cider-repl-mode clojure-mode 0.2-1\~ yasnippet-snippets -- "$@"
+dpkg-maintscript-helper symlink_to_dir /usr/share/yasnippet-snippets/enh-ruby-mode ruby-mode 0.2-1\~ yasnippet-snippets -- "$@"
+dpkg-maintscript-helper symlink_to_dir /usr/share/yasnippet-snippets/ensime-mode scala-mode 0.2-1\~ yasnippet-snippets -- "$@"
+dpkg-maintscript-helper symlink_to_dir /usr/share/yasnippet-snippets/js2-mode js-mode 0.2-1\~ yasnippet-snippets -- "$@"
+dpkg-maintscript-helper symlink_to_dir /usr/share/yasnippet-snippets/typerex-mode tuareg-mode 0.2-1\~ yasnippet-snippets -- "$@"
+# End automatically added section
+# Automatically added by dh_elpa/UNDECLARED
+if [ -e /var/lib/emacsen-common/state/package/installed/emacsen-common -a -x /usr/lib/emacsen-common/emacs-package-remove ] ; then
+	/usr/lib/emacsen-common/emacs-package-remove --prerm elpa-yasnippet-snippets
+fi
+# End automatically added section

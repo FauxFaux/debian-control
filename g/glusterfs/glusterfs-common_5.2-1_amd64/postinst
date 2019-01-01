@@ -1,0 +1,75 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+	configure)
+		mkdir -p /var/log/glusterfs
+		chown root:root /var/log/glusterfs
+		chmod 0755 /var/log/glusterfs
+		getent group gluster >/dev/null 2>&1 || addgroup --system gluster
+		adduser --system --no-create-home --home /var/lib/glusterd --quiet gluster --ingroup gluster || true
+	;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+
+	*)
+		echo "postinst called with unknown argument \`$1'" >&2
+		exit 1
+	;;
+esac
+
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p glusterfs-common /usr/lib/x86_64-linux-gnu/glusterfs/5.2/xlator/features/glupy
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p glusterfs-common /usr/lib/x86_64-linux-gnu/glusterfs/5.2/xlator/features/glupy || true
+fi
+
+# End automatically added section
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p glusterfs-common /usr/lib/x86_64-linux-gnu/glusterfs/python/syncdaemon
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p glusterfs-common /usr/lib/x86_64-linux-gnu/glusterfs/python/syncdaemon || true
+fi
+
+# End automatically added section
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p glusterfs-common /usr/lib/x86_64-linux-gnu/glusterfs/glusterfind
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p glusterfs-common /usr/lib/x86_64-linux-gnu/glusterfs/glusterfind || true
+fi
+
+# End automatically added section
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p glusterfs-common /usr/lib/x86_64-linux-gnu/glusterfs/events
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p glusterfs-common /usr/lib/x86_64-linux-gnu/glusterfs/events || true
+fi
+
+# End automatically added section
+
+# Automatically added by dh_python3:
+if which py3compile >/dev/null 2>&1; then
+	py3compile -p glusterfs-common 
+fi
+if which pypy3compile >/dev/null 2>&1; then
+	pypy3compile -p glusterfs-common  || true
+fi
+
+# End automatically added section
+
+
+exit 0

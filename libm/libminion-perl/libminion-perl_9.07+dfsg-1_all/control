@@ -1,0 +1,22 @@
+Package: libminion-perl
+Version: 9.07+dfsg-1
+Architecture: all
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Installed-Size: 544
+Depends: perl, libmojolicious-perl (>= 8.03), libjs-bootstrap, libjs-d3, libjs-moment, fonts-font-awesome
+Suggests: libmojo-pg-perl
+Section: perl
+Priority: optional
+Homepage: https://metacpan.org/release/Minion
+Description: job queue for Mojolicious
+ Minion is a job queue for the Mojolicious real-time web framework, with
+ support for multiple named queues, priorities, delayed jobs, job
+ dependencies, job results, retries with backoff, statistics, distributed
+ workers, parallel processing, autoscaling, resource leak protection and
+ multiple backends (such as PostgreSQL).
+ .
+ Job queues allow you to process time and/or computationally intensive tasks
+ in background processes, outside of the request/response lifecycle. Among
+ those tasks you'll commonly find image resizing, spam filtering, HTTP
+ downloads, building tarballs, warming caches and basically everything else
+ you can imagine that's not super fast.
